@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.5.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Ye Zhaoliang">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="gnuplot是一种科学绘图的开源软件，比origin强上不少。
+而gnuplot的核心就是这个plot。">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/blog/2015/05/26/gnuplotde-he-xin-shi-plot/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin="anonymous">
+    
+
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.min.e8d4d5fd376e67b34452ebe1cae16341.css">
+
+  
+
+  
+
+
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon-32.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/blog/2015/05/26/gnuplotde-he-xin-shi-plot/">
+
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="twitter:site" content="@jueqingsizhe66">
+  <meta property="twitter:creator" content="@jueqingsizhe66">
+  
+  <meta property="og:site_name" content="Macro Life">
+  <meta property="og:url" content="/blog/2015/05/26/gnuplotde-he-xin-shi-plot/">
+  <meta property="og:title" content="gnuplot的核心是plot | Macro Life">
+  <meta property="og:description" content="gnuplot是一种科学绘图的开源软件，比origin强上不少。
+而gnuplot的核心就是这个plot。"><meta property="og:image" content="/img/icon-192.png">
+  <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2015-05-26T23:48:15&#43;08:00">
+    
+    <meta property="article:modified_time" content="2015-05-26T23:48:15&#43;08:00">
+  
+
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>gnuplot的核心是plot | Macro Life</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0 compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">Macro Life</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav mr-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#hero"><span>Demo</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>博客</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>项目</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#featured"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/about/"><span>About</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/courses/"><span>课程</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/archives"><span>Archives</span></a>
+        </li>
+
+        
+        
+
+      
+      </ul>
+      <ul class="navbar-nav ml-auto">
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+        </li>
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>gnuplot的核心是plot</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    May 26, 2015
+  </span>
+  
+
+  
+
+  
+
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/categories/gnuplot/">gnuplot</a></span>
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <p>gnuplot是一种科学绘图的开源软件，比origin强上不少。
+而<a href="http://orgmode.org/worg/org-contrib/babel/languages/ob-doc-gnuplot.html" target="_blank">gnuplot的核心就是这个plot</a>。</p>
+
+<p>数据表：</p>
+
+<p>注意 #+tblname:字段是emacs的org-mode可以识别的,可以通过#+begin_src 的:var data=data-table来引用这张表的数据。</p>
+
+<pre><code class="language-sh">#+tblname: data-table
+| x | y1 | y2 |
+|---+----+----|
+| 0 |  3 |  6 |
+| 1 |  4 |  7 |
+| 2 |  5 |  8 |
+</code></pre>
+
+<p>另外，本文一直会使用的引用emacs的babal_gnuplot在gnuplot当中的运用#begin_src gnuplot :var data=data-table :exports code :file foo.png分别代表的意思是</p>
+
+<pre><code class="language-sh">+ :var data=data-table
+When data is to be plotted from a table, it is helpful to use a heading right above the table in the form #+tblname=data-table, where &quot;data-table&quot; is replaced with some short name to identify the table to gnuplot.
++ :exports {code, results, both, none}
+When the code is run and the document exported (e.g. to HTML or \LaTeX PDF), what should appear? Just the code block itself? Only the produced output (in this case a plot of some sort)? Both the code and the accompanying results? Or nothing?
++ :file foo.{png,eps,etc.}
+This option specifies where the resulting output should be put. If no option is given, a gnuplot window will open with the resultant plot. NOTE: Certain plot options may not output properly to gnuplot directly and thus must have the :file filename option in the header. If the error &quot;Code block produced no output&quot; recurs, try outputting to a file instead of directly to gnuplot.
+</code></pre>
+
+<p>另外一个不需要记住的Named tics的写法如下</p>
+
+<ul>
+<li><p>为了增加刻度标注</p>
+
+<pre><code class="language-gnuplot">
+set xtics (&quot;Tic 1&quot; -1, &quot;Tic 2&quot; 10, &quot;Tic 3&quot; 1001)
+</code></pre></li>
+
+<li><p>为了增加可读性</p>
+
+<pre><code class="language-gnuplot">You can rotate tic marks for increased readability by specifying an angle at which to rotate their labels. Here is the syntax (substitute any angle value for -45):
+set xtics rotate by -45
+set ytics rotate by -45
+</code></pre></li>
+
+<li><p>为了阻止双轴</p>
+
+<pre><code class="language-sh">The gnuplot default is for tics to show up on both sides and the top and bottom of the graph. In other words, the tics on the left y-axis and bottom x-axis are &quot;mirrored&quot; to the opposing side of the plot borders. Stop this (tics only on left/bottom) by using:
+
+set xtics nomirror
+set ytics nomirror
+</code></pre></li>
+</ul>
+
+<h1 id="步入正题-plot-the-core-of-the-gnuplot">步入正题  Plot &ndash; the core of the gnuplot</h1>
+
+<h2 id="plot-what">plot what?</h2>
+
+<p>function.</p>
+
+<pre><code class="language-gnuplot">f(x) = x**2
+plot f(x)
+</code></pre>
+
+<p>data.</p>
+
+<pre><code class="language-gnuplot">plot data using x:y
+</code></pre>
+
+<h2 id="plot-how">plot how?</h2>
+
+<pre><code class="language-gnuplot">plot data u 1:2 with lines
+</code></pre>
+
+<p>主要包括以下几种类型
++ points(p)
++ dots(d)
++ lines(l)
++ linespoints(lp)
++ impulses(i)
++ steps
++ boxes</p>
+
+<p>当然你也可以使用(&ndash;&gt; 表示简写为)
++ lineweight &ndash;&gt; lw
++ with &ndash;&gt; w</p>
+
+<h2 id="call-it-what">call it what?</h2>
+
+<p>###你也可以给一张图加上title标题</p>
+
+<pre><code class="language-gnuplot">plot data u 1:2 w lines lw 2 title 'Data Set 1'
+</code></pre>
+
+<h3 id="你也可以忽略一个plot的key-使用notitle">你也可以忽略一个plot的key，使用notitle</h3>
+
+<pre><code class="language-gnuplot">plot data u 1:2 w lines notitle, \
+     data u 1:3 w points title 'Data Set 2', \
+     data u 1:4 w lp title 'Data Set 3', \
+     data u 1:5 w bars notitle
+</code></pre>
+
+<p>这是一个相当重要的技巧。多组数据一起打印的时候，不需要打印所有的标题，这时候notitle特别有效，能让显示的时候特别清晰。</p>
+
+<h2 id="any-more">any more?</h2>
+
+<p>###想要多张图放在一起？</p>
+
+<pre><code class="language-gnuplot">f(x)=x**2
+g(x)=x**3
+h(x)=sqrt(x)
+plot f(x),g(x),h(x)
+
+</code></pre>
+
+<p>###想要打印一个表格？</p>
+
+<pre><code class="language-gnuplot">plot data u 1:2 w lines, data u 1:3 w points, \
+data u 1:4 w lp
+
+</code></pre>
+
+<h1 id="很多例子">很多例子</h1>
+
+<p>注意这边的 #+begin_src  #+end_src 是我在gnuplot的orgmode开启bable模式时候使用，具体你可以看一下<a href="http://www.cnblogs.com/qlwy/archive/2012/06/15/2551034.html" target="_blank">如何在gnuplot使用org-mode</a></p>
+
+<h2 id="第一个函数打印">第一个函数打印</h2>
+
+<pre><code class="language-gnuplot">#+begin_src gnuplot :exports code :file gnuplot.png
+reset
+
+set title &quot;Putting it All Together&quot;
+
+set xlabel &quot;X&quot;
+set xrange [-8:8]
+set xtics -8,2,8
+
+
+set ylabel &quot;Y&quot;
+set yrange [-20:70]
+set ytics -20,10,70
+
+f(x) = x**2
+g(x) = x**3
+h(x) = 10*sqrt(abs(x))
+
+plot f(x) w lp lw 1, g(x) w p lw 2, h(x) w l lw 3
+#+end_src
+
+</code></pre>
+
+<p>#+results:
+<img src="/images/gnuplot.png" alt="gnuplot" /></p>
+
+<h2 id="basic-plot的数据表">basic-plot的数据表</h2>
+
+<pre><code class="language-sh">#+tblname:basic-plot
+|   x |         y1 |         y2 |
+|-----+------------+------------|
+| 0.1 |      0.425 |      0.375 |
+| 0.2 |     0.3125 |     0.3375 |
+| 0.3 | 0.24999993 | 0.28333338 |
+| 0.4 |      0.275 |    0.28125 |
+| 0.5 |       0.26 |       0.27 |
+| 0.6 | 0.25833338 | 0.24999993 |
+| 0.7 | 0.24642845 | 0.23928553 |
+| 0.8 |    0.23125 |     0.2375 |
+| 0.9 | 0.23333323 |  0.2333332 |
+|   1 |     0.2225 |       0.22 |
+
+</code></pre>
+
+<h2 id="gnuplot中的打印basic-plot">gnuplot中的打印basic-plot</h2>
+
+<pre><code class="language-gnuplot">#+begin_src gnuplot :var data=basic-plot :exports code :file table.png
+set title &quot;Putting it All Together&quot;
+
+set xlabel &quot;X&quot;
+set xrange [0:1]
+set xtics 0,0.1,1
+
+set ylabel &quot;Y&quot;
+set yrange [0.2:0.5]
+set ytics 0.2,0.05,0.5
+plot data u 1:2 w p lw 2 title 'x vs. y1', \
+     data u 1:3 w lp lw 1 title 'x vx. y2'
+#+end_src
+</code></pre>
+
+<p>##xtics数据表</p>
+
+<pre><code class="language-sh">#+tblname:xtics
+| Date      | Distance |
+|-----------+----------|
+| 8/25/2010 |      3.2 |
+| 8/29/2010 |      3.0 |
+| 9/1/2010  |      2.4 |
+| 9/2/2010  |      2.5 |
+| 9/5/2010  |      2.3 |
+| 9//2010   |      2.0 |
+
+</code></pre>
+
+<h2 id="gnuplot的gnuplot打印">gnuplot的gnuplot打印</h2>
+
+<pre><code class="language-gnuplot">#+begin_src gnuplot :var data=xtics :exports code :file time.png
+  reset
+
+  set title &quot;Running Stats&quot;
+  set xlabel &quot;Date&quot;
+  set xtics rotate by -45
+  set yrange [1:5]
+  set ylabel &quot;Distance (mi)&quot;
+  plot data u 2:xticlabels(1) w lp lw 2 notitle
+#+end_src
+
+</code></pre>
+
+<p>#+results:
+<img src="/images/time.png" alt="time" /></p>
+
+<h2 id="表格加上标题">表格加上标题</h2>
+
+<pre><code class="language-sh">#+CAPTION: 表格的标题
+| 1 | one                          |
+| 2 | two                          |
+| 3 | This is a long chunk of text |
+| 4 | four                         |
+</code></pre>
+
+<pre><code class="language-sh">|   | &lt;6&gt;    |
+|---+--------|
+| 1 | one    |
+| 2 | two    |
+| 3 | This=&gt; |
+| 4 | four   |
+</code></pre>
+
+<h2 id="表格的特殊使用-用于统计">表格的特殊使用  用于统计</h2>
+
+<pre><code class="language-sh">| 数量 | 单价 |  总额 |
+|------+------+-------|
+|    2 | 3.55 |   6.9 |
+|    4 | 4.34 | 17.36 |
+|    5 | 3.44 |  17.2 |
+|    5 |  5.6 |   28. |
+#+TBLFM: $3=$1*$2
+
+</code></pre>
+
+<h2 id="named-xtics-数据表">named-xtics 数据表</h2>
+
+<pre><code class="language-sh">#+caption: time-history
+#+tblname: named-xtics
+| tic name | x-value | Dead (y) | Live(l) |
+|----------+---------+----------+---------|
+| Civil    |    1861 |     0.62 |    0.63 |
+| WWI      |    1914 |      9.8 |     9.9 |
+| WWII     |    1939 |       24 |      25 |
+| Nam      |    1955 |      1.5 |     1.6 |
+| Gulf     |    1990 |     0.04 |    0.05 |
+</code></pre>
+
+<pre><code class="language-gnuplot">#+begin_src gnuplot :var data=named-xtics :exports code :file named.png
+reset
+
+set yrange [0:25]
+set ylabel &quot;Deaths (MM)&quot;
+
+set xtics (&quot;1850&quot; 1850, &quot;2010&quot; 2010)
+set xrange [1850:2010]
+set xlabel &quot;Wars in Time&quot;
+
+set title 'War Deaths'
+  
+plot data using 2:3:xticlabels(1) w p lw 3 t 'set1',\
+     data u 2:4:xticlabels(1) title 'Set2'
+#+end_src
+</code></pre>
+
+<p>#+results:
+<img src="/images/named.png" alt="named-xtics" /></p>
+
+<h2 id="multi-axes数据表">multi-axes数据表</h2>
+
+<pre><code class="language-sh">#+tblname:multi-axes
+| Date      |  Time | Distance |
+|-----------+-------+----------|
+| 8/25/2010 | 17:14 |      3.2 |
+| 8/29/2010 | 14:00 |      2.4 |
+| 9/1/2010  | 15:13 |      2.5 |
+| 9/2/2010  | 13:45 |      2.3 |
+| 9/5/2010  | 13:20 |      2.0 |
+| 9//2010   | 16:35 |      2.8 |
+
+</code></pre>
+
+<pre><code class="language-gnuplot">#+begin_src gnuplot :var data=multi-axes :exports code :file multi.png
+  reset
+
+  set title &quot;Running Stats&quot;
+  set size ratio square
+  set key box linestyle -1
+
+  set xlabel &quot;Date&quot;
+  set xtics nomirror rotate by -45
+
+  set yrange [9:21]
+  set ylabel &quot;Time (min)--Red&quot;
+  set ytics nomirror
+
+  set y2range [1.5:3.5]
+  set y2label &quot;Distance (mi)--Green&quot;
+  set y2tics 0,0.5,3.5
+
+  set style data points
+  plot data u 2:xticlabels(1) axis x1y1 lw 3 title 'Time', \
+       data u 3:xticlabels(1) axis x1y2 lw 3 title 'Distance'
+#+end_src
+</code></pre>
+
+<p>#+results:
+<img src="/images/multi.png" alt="multi-axes" /></p>
+
+<h2 id="diff-scales数据表">diff-scales数据表</h2>
+
+<pre><code class="language-sh">#+tblname:diff-scales
+| tic name |    x-loc |  Pop |
+|   10k BC | -10000 1 |      |
+|          |    -9000 |    3 |
+|          |    -8000 |    5 |
+|          |    -7000 |    7 |
+|          |    -6000 |   10 |
+|          |    -5000 |   15 |
+|          |    -4000 |   20 |
+|          |    -3000 |   25 |
+|          |    -2000 |   35 |
+|          |    -1000 |   50 |
+|          |     -500 |  100 |
+|     AD 1 |        1 |  200 |
+|     1000 |     1000 |  310 |
+|     1750 |     1750 |  791 |
+|     1800 |     1800 |  978 |
+|     1850 |     1850 | 1262 |
+|     1900 |     1900 | 1650 |
+|     \'50 |     1950 | 2519 |
+|          |     1955 | 2756 |
+|          |     1960 | 2982 |
+|          |     1965 | 3335 |
+|          |     1970 | 3692 |
+|     \'75 |     1975 | 4068 |
+|          |     1980 | 4435 |
+|          |     1985 | 4831 |
+|          |     1990 | 5263 |
+|          |     1995 | 5674 |
+|          |     2000 | 6070 |
+|     2005 |     2005 | 6454 |
+</code></pre>
+
+<pre><code class="language-gnuplot">#+begin_src gnuplot :var data=diff-scales :exports code :file scales.png
+  reset
+
+  set xrange [ -10000 : 1 ]
+  set yrange [ 0 : 7000 ]
+  set xlabel &quot;Time&quot;
+
+  set multiplot
+
+  set size 0.275,1
+  set origin 0.0,0.0
+  set lmargin 10
+  set rmargin 0
+  set ylabel &quot;Population (MM)&quot;
+  set ytics nomirror
+  plot data using 2:3:xticlabels(1) with lines lw 3 notitle
+
+  set origin 0.275,0.0
+  set size 0.15,1
+  set format y &quot;&quot;
+  set noytics
+  set lmargin 0
+  set rmargin 0
+  set xrange [2 : 1750]
+  set ylabel &quot;&quot;
+  plot data using 2:3:xticlabels(1) with lines lw 3 notitle
+
+  set origin 0.425,0.0
+  set size 0.575,1
+  set format y &quot;&quot;
+  set noytics
+  set lmargin 0
+  set rmargin 2
+  set xrange [1751 : 2005]
+  set ylabel &quot;&quot;
+  plot data using 2:3:xticlabels(1) with lines lw 3 notitle
+
+  set nomultiplot
+#+end_src
+</code></pre>
+
+<p>#+results:
+<img src="/images/scales.png" alt="scales" /></p>
+
+<h2 id="broken-axis-数据表">broken-axis 数据表</h2>
+
+<pre><code class="language-sh">#+tblname: broken-axis
+|  tic name | x-loc | Pre | Post |
+| 10,000 BC |  1600 |   1 |      |
+|           |  1650 |  15 |      |
+|      AD 1 |  1700 | 200 |      |
+|      1750 |  1750 |     |  791 |
+|      1800 |  1800 |     |  978 |
+|      1850 |  1850 |     | 1262 |
+|      1900 |  1900 |     | 1650 |
+|      \'50 |  1950 |     | 2519 |
+|           |  1955 |     | 2756 |
+|           |  1960 |     | 2982 |
+|           |  1965 |     | 3335 |
+|           |  1970 |     | 3692 |
+|      \'75 |  1975 |     | 4068 |
+|           |  1980 |     | 4435 |
+|           |  1985 |     | 4831 |
+|           |  1990 |     | 5263 |
+|           |  1995 |     | 5674 |
+|           |  2000 |     | 6070 |
+|      2005 |  2005 |     | 6454 |
+
+</code></pre>
+
+<pre><code class="language-gnuplot">#+begin_src gnuplot :var data=broken-axis :exports code :file broken.png
+  reset
+
+  A=1725
+  B=1600
+  C=2010
+  D=0
+  E=6500
+
+  xoff=.005*(C-B)
+  yoff=.02*(E-D)
+
+  set arrow 1 from A-xoff, D to A+xoff, D nohead lw 2 lc rgb &quot;#ffffff&quot; front
+  set arrow 2 from A-xoff, E to A+xoff, E nohead lw 2 lc rgb &quot;#ffffff&quot; front
+  set arrow 3 from A-xoff-xoff, D-yoff to A+xoff-xoff, D+yoff nohead front
+  set arrow 4 from A-xoff+xoff, D-yoff to A+xoff+xoff, D+yoff nohead front
+  set arrow 5 from A-xoff-xoff, E-yoff to A+xoff-xoff, E+yoff nohead front
+  set arrow 6 from A-xoff+xoff, E-yoff to A+xoff+xoff, E+yoff nohead front
+
+  set xrange [B:C]
+  set yrange [D:E]
+
+  set xlabel 'Time'
+  set ylabel 'Population (MM)'
+  set title 'World Population'
+
+  plot data u 2:3:xticlabels(1) w l lw 3 notitle, data u 2:4:xticlabels(1) w l lw 3 lc 1 notitle
+
+#+end_src
+</code></pre>
+
+<p><img src="/images/broken.png" alt="broken" /></p>
+    </div>
+
+    
+
+
+
+
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/blog/2015/05/26/gnuplotde-he-xin-shi-plot/&amp;text=gnuplot%e7%9a%84%e6%a0%b8%e5%bf%83%e6%98%afplot" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/blog/2015/05/26/gnuplotde-he-xin-shi-plot/&amp;t=gnuplot%e7%9a%84%e6%a0%b8%e5%bf%83%e6%98%afplot" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=gnuplot%e7%9a%84%e6%a0%b8%e5%bf%83%e6%98%afplot&amp;body=/blog/2015/05/26/gnuplotde-he-xin-shi-plot/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/blog/2015/05/26/gnuplotde-he-xin-shi-plot/&amp;title=gnuplot%e7%9a%84%e6%a0%b8%e5%bf%83%e6%98%afplot" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=gnuplot%e7%9a%84%e6%a0%b8%e5%bf%83%e6%98%afplot%20/blog/2015/05/26/gnuplotde-he-xin-shi-plot/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/blog/2015/05/26/gnuplotde-he-xin-shi-plot/&amp;title=gnuplot%e7%9a%84%e6%a0%b8%e5%bf%83%e6%98%afplot" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="portrait mr-3" src="/authors/admin/avatar_hu52a603635ecebd45650b162dadabb4e5_12861_250x250_fill_q90_lanczos_center.jpg" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/">Ye Zhaoliang</a></h5>
+      <h6 class="card-subtitle">Phd of PHD</h6>
+      <p class="card-text">My research interests include distributed robotics, mobile computing and programmable matter.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/jueqingsizhe66" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.co.uk/citations?user=sIwtMXoAAAAJ" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/jueqingsizhe66" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+    
+    <script src="/js/mathjax-config.js"></script>
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js" integrity="sha256-aYTdUrn6Ow1DDgh5JTc3aDGnnju48y/1c8s1dgkYPQ8=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/r.min.js"></script>
+        
+      
+
+      
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
+      
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    <script id="dsq-count-scr" src="https://https-jueqingsizhe66-github-io.disqus.com/count.js" async></script>
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.d6bd04fdad2ad213aa8111c5a3b72fc5.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

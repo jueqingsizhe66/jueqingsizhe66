@@ -1,0 +1,1568 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.5.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Ye Zhaoliang">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/blog/2015/05/11/jsdom14-19jie-bi-ji-dai-ma-april1th/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin="anonymous">
+    
+
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.min.e8d4d5fd376e67b34452ebe1cae16341.css">
+
+  
+
+  
+
+
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon-32.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/blog/2015/05/11/jsdom14-19jie-bi-ji-dai-ma-april1th/">
+
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="twitter:site" content="@jueqingsizhe66">
+  <meta property="twitter:creator" content="@jueqingsizhe66">
+  
+  <meta property="og:site_name" content="Macro Life">
+  <meta property="og:url" content="/blog/2015/05/11/jsdom14-19jie-bi-ji-dai-ma-april1th/">
+  <meta property="og:title" content="JSDOM14-19节笔记代码April1th | Macro Life">
+  <meta property="og:description" content=""><meta property="og:image" content="/img/icon-192.png">
+  <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2015-05-11T14:58:44&#43;08:00">
+    
+    <meta property="article:modified_time" content="2015-05-11T14:58:44&#43;08:00">
+  
+
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>JSDOM14-19节笔记代码April1th | Macro Life</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0 compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">Macro Life</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav mr-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#hero"><span>Demo</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>博客</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>项目</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#featured"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/about/"><span>About</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/courses/"><span>课程</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/archives"><span>Archives</span></a>
+        </li>
+
+        
+        
+
+      
+      </ul>
+      <ul class="navbar-nav ml-auto">
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+        </li>
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>JSDOM14-19节笔记代码April1th</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    May 11, 2015
+  </span>
+  
+
+  
+
+  
+
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/categories/jsdom/">JSDom</a></span>
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <p>续先前的JSDOM1-15:<a href="http://www.rupeng.com/forum/thread-45297-1-1.html" target="_blank">http://www.rupeng.com/forum/thread-45297-1-1.html</a></p>
+
+<p>21:图片移动，脱离文档流的案例</p>
+
+<p>脱离文档流： 对象.style.position=&lsquo;absolute&rsquo;;
+新建了一个图片控件，并让其在页面中随鼠标移动。</p>
+
+<pre><code class="language-html">&lt;Html&gt;
+&lt;Head&gt;
+&lt;Title&gt; Let bird fly&lt;/Title&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+
+onload=function()
+{
+/*
+document.onmousemove=function()
+{
+var imObj = document.getElementById('im');
+//脱离文档流
+
+imObj.style.position='absolute';
+imObj.style.left=window.event.clientX+'px';
+imObj.style.top=window.event.clientY+'px';
+};
+*/
+document.getElementById('ak').onmouseover=function()
+{
+if(!document.getElementById('im1'))
+{
+var imgObj=document.createElement('img');
+imgObj='im1';
+imgObj.src='bird.png';
+//脱离文档流
+imgObj.style.position='absolute';
+imgObj.style.left=this.offsetLeft+'px';
+imgObj.style.top=this.offsetTop+this.offsetHeight+'px';
+}
+};
+};
+&lt;/script&gt;
+
+&lt;/Head&gt;
+
+&lt;Body&gt;
+&lt;img id=&quot;im&quot; src=&quot;bird.png&quot;/&gt;
+
+&lt;A id=&quot;ak&quot; href=&quot;http://www.baidu.com&quot;&gt;百度&lt;/A&gt;
+&lt;/Body&gt;
+&lt;/Html&gt;
+</code></pre>
+
+<p>22： 四个案例</p>
+
+<p>案例1：一个列表框进行动态属性的赋值 并获取点击对象的值
+                  注意：setAttribute and gettAttribute的用法
+                           循环添加所有表格的点击事件
+案例2：产生一个登陆界面
+                  注意：innerText和innerHTML的配合使用 ，设置控件的内容
+                           为了增加用户的体验感觉checkbox一般设置对象.style.cursor=pointer
+                            createElement 和appendChild的配合使用
+案例3: 小图变大图
+                   注意：JSON数据库的创建
+                             循环的显示小图片
+                             图片的onmouseover and onmouseout事件的响应
+                              层的style.display=none;的意思是不显示该层
+案例4:   搜索框
+                   注意：onfocus  and onblur(鼠标焦点离开的事件）
+                            一般会使用设置为gray，文本框为&rsquo;请输入搜索内容&rsquo;; 使用的时候设置为black，并且文本框为空。</p>
+
+<pre><code class="language-html">&lt;Html&gt;
+  &lt;Head&gt;
+    &lt;Title&gt; When click the button ,then generate the div&lt;/Title&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+      // 学会添加层
+      //数据库 包含照片信息  其中左边的key是小照片，右边是大照片信息
+       var datasPic = {
+        &quot;mv/1-1.jpg&quot;: [&quot;mv/1.jpg&quot;, &quot;小丽&quot;, &quot;163cm&quot;],
+        &quot;mv/2-1.jpg&quot;: [&quot;mv/2.jpg&quot;, &quot;小红&quot;, &quot;165cm&quot;],
+        &quot;mv/3-1.jpg&quot;: [&quot;mv/3.jpg&quot;, &quot;小花&quot;, &quot;150cm&quot;]
+        };
+
+
+        //案例1：一个列表框进行动态属性的赋值 并获取点击对象的值
+      onload=function()
+      {
+        //点击列表 产生分数来！！
+        var tds=document.getElementById('nameRank').getElementsByTagName('td');
+        for(var i=0;i&lt;tds.length;i++)
+        {
+          tds[i].setAttribute('score',(i+1)*20);
+          tds[i].onclick=function()
+          {
+            alert(this.getAttribute('score'));
+          };
+        }
+
+        //案例2：产生一个登陆界面
+        document.getElementById('generate').onclick=function()
+        {
+          //创建一个层
+          var dvObj=document.createElement('div');
+          dvObj.id='dv';
+          dvObj.style.width='300px';
+          dvObj.style.height='200px';
+          dvObj.style.marginBottom='200px';
+          dvObj.style.border='1px solid yellow';
+          document.body.appendChild(dvObj);
+
+          //c创建两个P标签
+          var P1= document.createElement('p');
+          //本想着添加标签来着
+          P1.innerText='用户名:';
+          var name=document.createElement('input');
+          name.type='text';
+          P1.appendChild(name);
+
+          //第二个标签
+          var P2 = document.createElement('p');
+          //妙用innerHTML保持对齐！
+          P2.innerHTML='密 码:';
+          var pwd=document.createElement('input');
+          pwd.type='password';
+          P2.appendChild(pwd);
+
+          //复选框
+
+          var chk = document.createElement('input');
+          chk.type = 'checkbox';
+          chk.id = 'chkPwd';
+          var labelChk = document.createElement('label');
+          labelChk.innerText = '记住我的登录状态';
+          labelChk.setAttribute('for', chk.id); //设置属性
+          labelChk.style.cursor = 'pointer';//设置鼠标的样式 编程手的样式
+          var pObj3 = document.createElement('p');
+          pObj3.appendChild(chk);
+          pObj3.appendChild(labelChk);
+
+          //登陆和取消按钮
+          var btnLogin = document.createElement('input');
+          btnLogin.type = 'submit';
+          btnLogin.value = '登录';
+          btnLogin.marginRight='10px'
+          var btnEsc = document.createElement('input');
+          btnEsc.type = 'button';
+          btnEsc.value = '取消';
+          var pObj4 = document.createElement('p');
+          pObj4.appendChild(btnLogin);
+          pObj4.appendChild(btnEsc);
+
+
+
+          //添加控件
+          dvObj.appendChild(P1);
+          dvObj.appendChild(P2);
+          dvObj.appendChild(pObj3);
+          dvObj.appendChild(pObj4);
+
+        }
+
+
+      //案例3: 小图变大图
+      //0 先有了json数据库
+      //1 也可以先加载小图
+
+      //2
+        var dvSObj=document.getElementById('dvSmall');
+        //先把小图给显示出来
+        for(var key in datasPic)
+          {
+            var imObj=document.createElement('img');
+            imObj.src=key;
+            imObj.setAttribute('userKey',key);
+            imObj.style.marginRight='10px';//目的是添加右间距/
+            dvSObj.appendChild(imObj);
+            //添加小图的鼠标的到来事件
+            imObj.onmouseover=function()
+            {
+              var arrs=datasPic[this.getAttribute('userKey')];
+              document.getElementById('dvBig').style.display='block';
+              document.getElementById('imBig').src=arrs[0];
+              document.getElementById('spName').innerText=arrs[1];
+              document.getElementById('spHeight').innerText=arrs[2];
+            };
+            //添加小图的鼠标的 离开事件
+            imObj.onmouseout=function()
+            {
+              document.getElementById('dvBig').style.display='none';
+            };
+          }
+
+          //案例4:   搜索框
+          //获得焦点的事件
+          document.getElementById('searchValue').onfocus=function()
+          {
+            if(this.style.color=='gray'&amp;&amp; this.value=='请输入搜索词')
+              {
+                this.style.color='black';
+                this.value='';
+                
+              }
+          }
+          //失去焦点的事件
+          document.getElementById('searchValue').onblur=function()
+          {
+            if(this.value=='')
+              {
+                this.style.color='gray';
+                this.value='请搜索搜索关键词';
+              }
+          }
+
+      };
+
+    &lt;/script&gt;
+  &lt;/Head&gt;
+
+  &lt;Body&gt;
+    &lt;Table border=&quot;1&quot; id=&quot;nameRank&quot;&gt;
+      &lt;Tr&gt;
+        &lt;Td&gt;第一名&lt;/Td&gt;
+        &lt;Td&gt;第二名&lt;/Td&gt;
+        &lt;Td&gt;第三名&lt;/Td&gt;
+        &lt;Td&gt;第四名&lt;/Td&gt;
+        &lt;Td&gt;第五名&lt;/Td&gt;
+      &lt;/Tr&gt;
+      &lt;/Table&gt;
+
+      &lt;Input type=&quot;button&quot; id=&quot;generate&quot; value=&quot;登陆栏&quot;/&gt;
+
+      &lt;Div id=&quot;dvSmall&quot;&gt;
+
+      &lt;/Div&gt;
+
+      &lt;!--display:none 表示不显示 也就是刚开始不会显示div层--&gt;
+      &lt;Div id=&quot;dvBig&quot; style=&quot;background-Color:orange; border:1px solid yellow; width:200px;display:none;&quot;&gt;
+          大头像:&lt;br/&gt;
+          &lt;Img id=&quot;imBig&quot; src=&quot;#&quot; alt=&quot;如果没有图片 You will see me&quot;/&gt;
+          姓名:&lt;Span id=&quot;spName&quot;&gt;&lt;/Span&gt;&lt;br/&gt;
+          升高:&lt;Span id=&quot;spHeight&quot;&gt;&lt;/Span&gt;&lt;br/&gt;
+
+      &lt;/Div&gt;
+
+      &lt;Div id=&quot;search&quot;&gt;
+        &lt;Input type='text' value=&quot;请输入搜索词&quot; id=&quot;searchValue&quot; style=&quot;color:gray&quot;/&gt;
+        &lt;/Div&gt;
+  &lt;/Body&gt;
+&lt;/Html&gt;
+</code></pre>
+
+<p>23 表格的提交的两种触发方式</p>
+
+<p>submit按钮的click()
+form的submit()
+区别：
+            调用submit按钮的点击事件click();
+            这种情况下 如果onsubmit被赋值了，比如
+        //处理click的提交事件  type=subomit的click()事件会触发 onsubmit监听器
+        if(document.getElementById(&lsquo;searchValue&rsquo;).value==&lsquo;Please input the search value&rsquo;)
+          {
+            document.getElementById(&lsquo;fm&rsquo;).onsubmit=function()
+            {
+              return false;
+            };
+复制代码</p>
+
+<pre><code>        那么submit按钮 失去作用，即使再输入内容 也没用！！
+        document.getElementById('sm').click(); 也就是click()的调用需要经过onsubmit的匿名函数过程。
+        submit()不会触发 onsubmit的匿名函数，即使文本框没有内容也直接提交。
+        直接达到高层的表单form，进行提交，
+</code></pre>
+
+<pre><code class="language-html">&lt;Html&gt;
+  &lt;Head&gt;
+    &lt;Title&gt; Test onclick() and onsubmit() &lt;/Title&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+      onload=function()
+      {
+        document.getElementById('searchValue').onfocus=function()
+        {
+           if(this.style.color=='gray'&amp;&amp;this.value=='Please input the search value') 
+             {
+               this.value='';
+               this.style.color='black';
+             }
+        }
+        document.getElementById('searchValue').onblur=function()
+        {
+            if(this.value=='')
+              {
+                this.value='Please input the search value';
+                this.style.color='gray';
+              }
+        }
+
+        //处理click的提交事件  type=subomit的click()事件会触发 onsubmit监听器
+        if(document.getElementById('searchValue').value=='Please input the search value')
+          {
+            document.getElementById('fm').onsubmit=function()
+            {
+              return false;
+            };
+          }
+          document.getElementById('dv').onclick=function()
+          {
+            //点击层的 时候调用submit的点击事件
+            //这种情况下 即使再输入内容 也没用！！
+        //    document.getElementById('sm').click();
+            //submit不会触发 onsubmit的匿名函数
+            //直接达到高层的表单form，进行提交，
+            document.getElementById('fm').submit();
+          }
+          document.getElementById('sm').onclick=function()
+          {
+            //this.click();
+            document.getElementById('sm').click();
+          }
+
+      }
+    &lt;/script&gt;
+  &lt;/Head&gt;
+    
+  &lt;Body&gt;
+    &lt;Form action=&quot;http://www.baidu.com&quot; method=&quot;get&quot; id=&quot;fm&quot;&gt;
+      &lt;Input type=&quot;text&quot; name=&quot;name&quot; value=&quot;Please input the search value&quot; id=&quot;searchValue&quot; style=&quot;width:300px;height:20px;color:gray;
+      border:1px solid red&quot;/&gt; 
+      &lt;Input type=&quot;submit&quot; name=&quot;name&quot; value=&quot;baidu&quot; id=&quot;sm&quot;/&gt;
+      &lt;Div id=&quot;dv&quot; style=&quot;width:300px;height:200px;background-color:green;&quot;&gt;
+        &lt;/Div&gt;
+      &lt;/Form&gt;
+  &lt;/Body&gt;
+&lt;/Html&gt;
+</code></pre>
+
+<p>24：正则表达式</p>
+
+<pre><code>   如果有了// 单句注释符，那么new RegExp('')就可以不用了
+   注意1： test函数类似于java的match函数
+               exec函数类似于java的matches函数。
+</code></pre>
+
+<p>三个功能： 1：找到六位数字
+                 2：确认文本框的内容是否为邮箱，若是为红色
+                 3：替换操作，支持链式替换 *.replace().replace&hellip;.</p>
+
+<pre><code class="language-html">&lt;Html&gt;
+  &lt;Head&gt;
+    &lt;Title&gt; Test Regex Expression &lt;/Title&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+      var testString='12345';
+
+      //1 网页字节数较多 不推荐
+      var reg= new RegExp('\\d{5}');
+      alert(reg.test(testString)); 
+      //2 网页字节数较少 推荐  增加体验性
+
+      var reg=/\d{5}/; //  //类似.Net的 @（）可以直接使用正则表达式 而不需要考虑具体的语言
+      alert(reg.test(testString));
+
+      
+    &lt;/script&gt;
+
+    &lt;script type=&quot;text/javascript&quot;&gt;
+
+      //获得所有匹配的内容
+      var msg='昌平:102206,平和:363708,中国电信:10000';
+      var reg=/\d{6}/g;
+      var result;
+      while(result=reg.exec(msg))
+        {
+          alert(result);
+        }
+    &lt;/script&gt;
+
+
+
+    &lt;script type=&quot;text/javascript&quot;&gt;
+      onload=function()
+      {
+        document.getElementById('email').onblur=function()
+        {
+          // di第一个错误  A-Z 写成了a-z
+          // 第二个错误  var reg =  写成了 var=reg=
+          var reg=/^[\d\w_.-]+@[\d\w]+([.][a-zA-Z]+){1,2}$/;
+          //var reg=/^[0-9a-zA-Z_.-]+@[0-9a-zA-Z]+([.][a-zA-Z]+){1,2}$/;
+          if(reg.test(this.value))
+            {
+              this.style.backgroundColor='red';
+              alert('邮箱');
+            }
+        }
+      }
+    &lt;/script&gt;
+
+    &lt;script type=&quot;text/javascript&quot;&gt;
+      
+      var msg = '   去掉左右空格    ';
+      //注意// 不需要用 单引号括起来
+      msg = msg.replace(/^\s+/,'').replace(/\s+$/,'');
+      alert('==='+msg+'===');
+    &lt;/script&gt;
+  &lt;/Head&gt;
+
+  &lt;Body&gt;
+      &lt;Input type=&quot;text&quot; id=&quot;email&quot; name=&quot;&quot; value=&quot;&quot;/&gt;
+  &lt;/Body&gt;
+&lt;/Html&gt;
+</code></pre>
+
+<p>25:测试键盘的keyCode</p>
+
+<pre><code>  注意如果不放在onload中调用控件没有效果，为undefined
+</code></pre>
+
+<pre><code class="language-html">&lt;Html&gt;
+  &lt;Head&gt;
+    &lt;Title&gt;Test Tab Shift &lt;/Title&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+      //window.event.keyCode=
+
+      //如果不放在onload中是没有效果
+      onload=function()
+      {
+        var texts=document.getElementsByName('name');
+        for(var i=0;i&lt;texts.length;i++)
+        {
+          texts[i].onkeydown=function()
+          {
+            //alert(window.event.keyCode);
+            //让enete键具备 tab的工呢过
+            if(window.event.keyCode==13)
+              {
+                //IE可以实现
+                window.event.keyCode=9;
+                //google如何实现
+              }
+          };
+        }
+      };
+      
+    &lt;/script&gt;
+  &lt;/Head&gt;
+
+  &lt;Body&gt;
+    &lt;input type=&quot;text&quot; name=&quot;name&quot; value=&quot;&quot;/&gt;
+    &lt;input type=&quot;text&quot; name=&quot;name&quot; value=&quot;&quot;/&gt;
+    &lt;input type=&quot;text&quot; name=&quot;name&quot; value=&quot;&quot;/&gt;
+    &lt;input type=&quot;text&quot; name=&quot;name&quot; value=&quot;&quot;/&gt;
+    &lt;input type=&quot;text&quot; name=&quot;name&quot; value=&quot;&quot;/&gt;
+    &lt;input type=&quot;text&quot; name=&quot;name&quot; value=&quot;&quot;/&gt;
+    &lt;input type=&quot;text&quot; name=&quot;name&quot; value=&quot;&quot;/&gt;
+    &lt;input type=&quot;text&quot; name=&quot;name&quot; value=&quot;&quot;/&gt;
+  &lt;/Body&gt;
+&lt;Html&gt;
+</code></pre>
+
+<p>26:测试密码的强弱</p>
+
+<p>密码强弱等级协定：
+         1：初始的密码等级为0
+         2：当只出现数字或者只出现字母或者只出现特殊字符则密码等级加1
+         3： 如果数字、字母、特殊字符 三者有两种出现 则再加上1<br />
+         4： 如果都出现  在原先基础上再加1
+         5： 如果位数小于6 － 1  所有最少应该是0</p>
+
+<p>第一：获取文本框的内容</p>
+
+<p>第二：进行函数的级别验证
+第三：设置表格的背景颜色</p>
+
+<p>注意1   if(msg.match(/[^\d\w]/)) //既不是数字也不是字母
+注意2  在进行 新的级别的设置时候需要循环把表格背景颜色设置为white</p>
+
+<pre><code class="language-javascript">for(var i=0;i&lt;tds.length;i++)
+             {
+               tds[i].style.backgroundColor='white';
+             }
+</code></pre>
+
+<p>具体实验如下:</p>
+
+<pre><code class="language-html">&lt;Html&gt;
+  &lt;Head&gt;
+    &lt;Title&gt; Test the strong week and medium of the password &lt;/Title&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+
+      /*
+         1：初始的密码等级为0
+         2：当只出现数字或者只出现字母或者只出现特殊字符则密码等级加1
+         3： 如果数字、字母、特殊字符 三者有两种出现 则再加上1   
+         4： 如果都出现  在原先基础上再加1 
+         5： 如果位数小于6 － 1  所有最少应该是0
+      */
+
+     function getPasswordLevel(msg)
+     {
+       var level=0;
+       if(msg.match(/\d/))
+         {
+           level++; //如果匹配数字则加上1
+         }
+        if(msg.match(/\w/))
+          {
+            level++; //如果也找到字母
+          }
+        if(msg.match(/[^\d\w]/)) //既不是数字也不是字母
+           {
+            level++;
+           }
+        if(msg.length&lt;=6)
+          {
+            level--;
+          }
+          return level;
+     }
+
+     onload=function()
+     {
+       document.getElementById('password').onkeyup=function()
+       {
+         var tds=document.getElementById('tr1').getElementsByTagName('td');
+         if(this.value.length&gt;0) //value的值的长度
+           {
+             for(var i=0;i&lt;tds.length;i++)
+             {
+               tds[i].style.backgroundColor='white';
+             }
+              var r =getPasswordLevel(this.value); 
+              if(r &lt;=1)
+                {
+                  tds[0].style.backgroundColor='red';
+                }
+              else if(r ==2)
+                {
+                  tds[0].style.backgroundColor='yellow';
+                  tds[1].style.backgroundColor='yellow';
+                }
+              else if(r ==3)
+                {
+                  tds[0].style.backgroundColor='blue';
+                  tds[1].style.backgroundColor='blue';
+                  tds[2].style.backgroundColor='blue';
+                }
+
+           }
+       }
+     }
+    &lt;/script&gt;
+  &lt;/Head&gt;
+  &lt;Body&gt;
+
+    &lt;Input type=&quot;text&quot; id=&quot;password&quot; value=&quot;&quot; name=&quot;&quot;&gt;
+    &lt;Table id=&quot;tb&quot;&gt;
+      &lt;Tr id=&quot;tr1&quot;&gt;
+        &lt;Td&gt;弱&lt;/Td&gt;
+        &lt;Td&gt;中&lt;/Td&gt;
+        &lt;Td&gt;强&lt;/Td&gt;
+      &lt;/Tr&gt;
+      &lt;/Table&gt;
+  &lt;/Body&gt;
+&lt;/Html&gt;
+</code></pre>
+
+<p>27:百度搜索</p>
+
+<p>功能1： 输入一个字可以出现智能提示板（暂时是指调用JSON的数据  而不是数据库的内容）
+功能2：可以获取智能提示板的内容，并鼠标扫过的时候出现红色 离开为白色  点击则把该对象内容附到搜索框中</p>
+
+<p>注意点: 能力校验（暂时不太清楚 userAgent)</p>
+
+<p>具体实现如下：</p>
+
+<pre><code class="language-html">&lt;Html&gt;
+  &lt;Head&gt;
+    &lt;Title&gt;Test Search by Baidu &lt;/Title&gt;
+  &lt;/Head&gt;
+  &lt;style type=&quot;text/css&quot;&gt;
+    #main
+    {
+      width:250px;
+      height:200px;
+      margin-left:200px;
+      margin-top:300px;
+      background-color:green;
+    }
+  &lt;/style&gt;
+
+  &lt;script type=&quot;text/javascript&quot;&gt;
+    onload=function()
+    {
+      var keyWords = {
+          &quot;小明&quot;: [&quot;小明是谁&quot;, &quot;小明很机智&quot;, &quot;小明滚出去&quot;],
+          &quot;地主&quot;: [&quot;斗地主&quot;, &quot;地主还有没有&quot;, &quot;地主就是土豪&quot;],
+          &quot;挖&quot;: [&quot;挖掘机&quot;, &quot;挖掘机技术那加强&quot;, &quot;挖土豆&quot;],
+          &quot;我&quot;: [&quot;我爱北京&quot;, &quot;我爱北京天安门&quot;, &quot;我是苍&quot;],
+          &quot;苍&quot;:[&quot;苍天大地&quot;,&quot;苍老师是大家的&quot;,&quot;苍天有井独自空&quot;],
+          &quot;平&quot;:[&quot;平凡的世界&quot;,&quot;平白无故&quot;,&quot;平常&quot;]
+      };
+
+      function funShow()
+      {
+        //如果在数据库中存在的话  则创建一个层
+        if(keyWords[this.value])
+          {
+            //create the div
+            if(document.getElementById('dv'))
+              {
+                //不是 直接'dv'
+                document.body.removeChild(document.getElementById('dv'));
+              }
+            //开始创建
+              var divObj=document.createElement('div');
+              divObj.id='dv';
+              divObj.width='300px';
+              //不要少了  脱离文档流，才可以重新设置坐标
+              divObj.style.position='absolute';
+              divObj.style.border='1px solid purple';
+              divObj.style.left=this.offsetLeft+'px';
+              //divObj.style.left=tihs.offsetLeft+'px';
+              divObj.style.top=this.offsetHeight+this.offsetTop+'px';
+              document.body.appendChild(divObj);
+
+              for(var i=0; i&lt; keyWords[this.value].length;i++)
+              {
+                var pObj=document.createElement('p');
+                pObj.innerHTML=keyWords[this.value][i];
+                pObj.style.margin='5px';
+                divObj.appendChild(pObj);
+                pObj.onmouseover=function()
+                {
+                  this.style.backgroundColor='red';
+                  this.style.cursor='pointer';
+                }
+                pObj.onmouseout=function()
+                {
+                  this.style.backgroundColor='';
+                };
+                //增加了点击的事件
+                pObj.onclick=function()
+                {
+                  //alert(this.value);
+                  document.getElementById('searchValue').value=this.innerText;
+                }
+              }
+          }
+        }
+            //firefox下检测状态改变只能用oninput,且需要用addEventListener来注册事件。
+            if (/msie/i.test(navigator.userAgent))    //ie浏览器
+            {
+                document.getElementById('searchValue').onpropertychange = funShow;
+            }
+            else {//非ie浏览器，比如Firefox
+                document.getElementById('searchValue').addEventListener(&quot;input&quot;, funShow, false);
+            }
+
+
+    }
+  &lt;/script&gt;
+
+  &lt;Body&gt;
+    &lt;Div id=&quot;main&quot; &gt;
+      &lt;Input type=&quot;text&quot; name=&quot;&quot; id=&quot;searchValue&quot; value=&quot;&quot;/&gt;
+      &lt;Input type=&quot;button&quot; name=&quot;&quot; id=&quot;tijiao&quot; value=&quot;Baidu It&quot;/&gt;
+    &lt;/Div&gt;
+  &lt;/Body&gt;
+&lt;/Html&gt;
+</code></pre>
+
+<p>28：JS常用习惯</p>
+
+<p>多用js内部的函数
+少用全局变量
+利用数据结构来定义对象
+尽可能使用switch代替else-if语句
+减少字节数，增加用户体验</p>
+
+<p>29：FireFox(FF)和IE的一些不同点</p>
+
+<p>IE:innerText    FF:textContent
+IE:srcElement(事件源）   FF：target
+IE:attachEvent   FF:addEventListener   来绑定事件
+<a href="http://www.360doc.com/content/09/0319/12/16915_2855107.shtml" target="_blank">http://www.360doc.com/content/09/0319/12/16915_2855107.shtml</a></p>
+
+<p>JQuery是一个好东西，主要目的是为了统一不同浏览器使用DOM的不同点，屏蔽了不友好的功能！ 这也是下阶段的学习目标。</p>
+    </div>
+
+    
+
+
+
+
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/blog/2015/05/11/jsdom14-19jie-bi-ji-dai-ma-april1th/&amp;text=JSDOM14-19%e8%8a%82%e7%ac%94%e8%ae%b0%e4%bb%a3%e7%a0%81April1th" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/blog/2015/05/11/jsdom14-19jie-bi-ji-dai-ma-april1th/&amp;t=JSDOM14-19%e8%8a%82%e7%ac%94%e8%ae%b0%e4%bb%a3%e7%a0%81April1th" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=JSDOM14-19%e8%8a%82%e7%ac%94%e8%ae%b0%e4%bb%a3%e7%a0%81April1th&amp;body=/blog/2015/05/11/jsdom14-19jie-bi-ji-dai-ma-april1th/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/blog/2015/05/11/jsdom14-19jie-bi-ji-dai-ma-april1th/&amp;title=JSDOM14-19%e8%8a%82%e7%ac%94%e8%ae%b0%e4%bb%a3%e7%a0%81April1th" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=JSDOM14-19%e8%8a%82%e7%ac%94%e8%ae%b0%e4%bb%a3%e7%a0%81April1th%20/blog/2015/05/11/jsdom14-19jie-bi-ji-dai-ma-april1th/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/blog/2015/05/11/jsdom14-19jie-bi-ji-dai-ma-april1th/&amp;title=JSDOM14-19%e8%8a%82%e7%ac%94%e8%ae%b0%e4%bb%a3%e7%a0%81April1th" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="portrait mr-3" src="/authors/admin/avatar_hu52a603635ecebd45650b162dadabb4e5_12861_250x250_fill_q90_lanczos_center.jpg" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/">Ye Zhaoliang</a></h5>
+      <h6 class="card-subtitle">Phd of PHD</h6>
+      <p class="card-text">My research interests include distributed robotics, mobile computing and programmable matter.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/jueqingsizhe66" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.co.uk/citations?user=sIwtMXoAAAAJ" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/jueqingsizhe66" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+    
+    <script src="/js/mathjax-config.js"></script>
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js" integrity="sha256-aYTdUrn6Ow1DDgh5JTc3aDGnnju48y/1c8s1dgkYPQ8=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/r.min.js"></script>
+        
+      
+
+      
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
+      
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    <script id="dsq-count-scr" src="https://https-jueqingsizhe66-github-io.disqus.com/count.js" async></script>
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.d6bd04fdad2ad213aa8111c5a3b72fc5.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

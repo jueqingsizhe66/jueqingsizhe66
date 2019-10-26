@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.5.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Ye Zhaoliang">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="针对一台全新的电脑，安装java开发的maven私服，记录如下，并在IDEA中进行测试。
+
+涉及到javase安装，maven安装，nexus私服安装，nexus本地配置，nexus界面介绍">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/blog/2017/02/10/javakai-fa-nexussi-fu-da-jian/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin="anonymous">
+    
+
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.min.e8d4d5fd376e67b34452ebe1cae16341.css">
+
+  
+
+  
+
+
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon-32.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/blog/2017/02/10/javakai-fa-nexussi-fu-da-jian/">
+
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="twitter:site" content="@jueqingsizhe66">
+  <meta property="twitter:creator" content="@jueqingsizhe66">
+  
+  <meta property="og:site_name" content="Macro Life">
+  <meta property="og:url" content="/blog/2017/02/10/javakai-fa-nexussi-fu-da-jian/">
+  <meta property="og:title" content="java开发nexus私服搭建 | Macro Life">
+  <meta property="og:description" content="针对一台全新的电脑，安装java开发的maven私服，记录如下，并在IDEA中进行测试。
+
+涉及到javase安装，maven安装，nexus私服安装，nexus本地配置，nexus界面介绍"><meta property="og:image" content="/img/icon-192.png">
+  <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2017-02-10T00:04:33&#43;08:00">
+    
+    <meta property="article:modified_time" content="2017-02-10T00:04:33&#43;08:00">
+  
+
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>java开发nexus私服搭建 | Macro Life</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0 compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">Macro Life</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav mr-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#hero"><span>Demo</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>博客</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>项目</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#featured"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/about/"><span>About</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/courses/"><span>课程</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/archives"><span>Archives</span></a>
+        </li>
+
+        
+        
+
+      
+      </ul>
+      <ul class="navbar-nav ml-auto">
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+        </li>
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>java开发nexus私服搭建</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Feb 10, 2017
+  </span>
+  
+
+  
+
+  
+
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/categories/javabasic/">JavaBasic</a></span>
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <p>针对一台全新的电脑，安装java开发的maven私服，记录如下，并在IDEA中进行测试。</p>
+
+<p>涉及到javase安装，maven安装，nexus私服安装，nexus本地配置，nexus界面介绍</p>
+
+<ol>
+<li>安装JAVA jdk ,下载<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank">javaSE安装包</a>,注意JDK和JRE不要放在同一文件夹下</li>
+<li>配置JAVA_HOME为JDk目录，并添加JDK的bin目录(%JAVA_HOME%\bin)到path中
+<img src="/images/java/nexus/java.png" alt="java" /></li>
+<li>下载<a href="http://maven.apache.org/" target="_blank">maven</a>,并解压缩，配置MAVEN_HOME为maven的根目录，并添加%MAVEN_HOME%\bin到path
+中
+<img src="/images/java/nexus/home.png" alt="home" />
+<img src="/images/java/nexus/bin.png" alt="bin" />
+<img src="/images/java/nexus/java.png" alt="mvn" /></li>
+</ol>
+
+<p>显示了<code>mvn -v</code>,也就表示装完了maven
+4. 下载<a href="https://www.sonatype.com/download-oss-sonatype" target="_blank">nexus2.14</a>,在windows下使用管理员身份打开cmd，并cd到nexus的bin目录，进行安装</p>
+
+<pre><code>nexus install
+nexus start
+</code></pre>
+
+<p>注意一定得配置bin\jsw\wrapper.conf的java bin信息，否则出错。
+<img src="/images/java/nexus/wrapper.png" alt="wrapper" /></p>
+
+<p>出现的错误为无法启动，
+<img src="/images/java/nexus/success.png" alt="success" /></p>
+
+<hr/>
+
+<p>做完前面的几步之后只是，把配置环境弄完了，还得进行私服镜像配置。
+首先打开nexus私服页面，使用<code>http://localhost:8089/nexus/#welcome</code></p>
+
+<p><img src="/images/java/nexus/nexus.png" alt="nexus" /></p>
+
+<p>默认的登陆密码是
+    账号：admin
+    密码：admin123</p>
+
+<p>登陆完的界面
+<img src="/images/java/nexus/repositories.png" alt="login" /></p>
+
+<p>配置中心仓库:</p>
+
+<p>中心仓库设置download remote indexes为真，为设置本地私服提供源。
+<img src="/images/java/nexus/central.png" alt="central" /></p>
+
+<p>配置了release和snapshot仓库
+<img src="/images/java/nexus/release.png" alt="release" />
+<img src="/images/java/nexus/snapshot.png" alt="snapshot" /></p>
+
+<p>然后配置了第三方插件
+<img src="/images/java/nexus/third.png" alt="third" /></p>
+
+<p><strong>进入最关键的public Repositories设置</strong></p>
+
+<p><img src="/images/java/nexus/public.png" alt="public" /></p>
+
+<p>有时候可以使用试用Scheduled Tasks观看库的index是否正常进行。
+<img src="/images/java/nexus/schedule.png" alt="scheduled" /></p>
+
+<hr/>
+
+<h2 id="imp">镜像私服配置</h2>
+
+<p>maven中的settings.xml登陆私服的账户密码设置
+<img src="/images/java/nexus/user.png" alt="user" /></p>
+
+<pre><code>  &lt;servers&gt;
+    &lt;server&gt; 
+        &lt;id&gt;nexus-release&lt;/id&gt;
+        &lt;username&gt;admin&lt;/username&gt;
+        &lt;password&gt;admin123&lt;/password&gt;
+    &lt;/server&gt; 
+
+
+    &lt;server&gt; 
+        &lt;id&gt;nexus-snapshot&lt;/id&gt;
+        &lt;username&gt;admin&lt;/username&gt;
+        &lt;password&gt;admin123&lt;/password&gt;
+    &lt;/server&gt; 
+
+
+    &lt;server&gt; 
+        &lt;id&gt;nexus&lt;/id&gt;
+        &lt;username&gt;admin&lt;/username&gt;
+        &lt;password&gt;admin123&lt;/password&gt;
+    &lt;/server&gt; 
+      &lt;!-- server
+     | Specifies the authentication information to use when connecting to a particular server, identified by
+     | a unique name within the system (referred to by the 'id' attribute below).
+     |
+     | NOTE: You should either specify username/password OR privateKey/passphrase, since these pairings are
+     |       used together.
+     |
+    &lt;server&gt;
+      &lt;id&gt;deploymentRepo&lt;/id&gt;
+      &lt;username&gt;repouser&lt;/username&gt;
+      &lt;password&gt;repopwd&lt;/password&gt;
+    &lt;/server&gt;
+    --&gt;
+
+    &lt;!-- Another sample, using keys to authenticate.
+    &lt;server&gt;
+      &lt;id&gt;siteServer&lt;/id&gt;
+      &lt;privateKey&gt;/path/to/private/key&lt;/privateKey&gt;
+      &lt;passphrase&gt;optional; leave empty if not used.&lt;/passphrase&gt;
+    &lt;/server&gt;
+    --&gt;
+  &lt;/servers&gt;
+
+
+</code></pre>
+
+<p><strong>镜像配置</strong></p>
+
+<p>注意url链接的端口设置</p>
+
+<pre><code>
+&lt;mirrors&gt;
+&lt;mirror&gt;
+    &lt;id&gt;nexus&lt;/id&gt;
+    &lt;mirrorOf&gt;*&lt;/mirrorOf&gt;
+    &lt;url&gt;http://localhost:8089/nexus/content/groups/public/&lt;/url&gt;
+&lt;/mirror&gt;
+&lt;/mirrors&gt;
+&lt;profiles&gt;
+&lt;profile&gt;
+    &lt;id&gt;nexus&lt;/id&gt;
+&lt;repositories&gt;
+    &lt;repository&gt;
+        &lt;id&gt;central&lt;/id&gt;
+        &lt;url&gt;http://central&lt;/url&gt;
+        &lt;releases&gt;&lt;enabled&gt;true&lt;/enabled&gt;&lt;/releases&gt;
+        &lt;snapshots&gt;&lt;enabled&gt;true&lt;/enabled&gt;&lt;/snapshots&gt;
+    &lt;/repository&gt;
+&lt;/repositories&gt;
+&lt;pluginRepositories&gt;
+    &lt;pluginRepository&gt;
+        &lt;id&gt;central&lt;/id&gt;
+        &lt;url&gt;http://central&lt;/url&gt;
+        &lt;releases&gt;&lt;enabled&gt;true&lt;/enabled&gt;&lt;/releases&gt;
+        &lt;snapshots&gt;&lt;enabled&gt;true&lt;/enabled&gt;&lt;/snapshots&gt;
+    &lt;/pluginRepository&gt;
+&lt;/pluginRepositories&gt;
+&lt;/profile&gt;
+&lt;/profiles&gt;
+&lt;activeProfiles&gt;
+    &lt;activeProfile&gt;nexus&lt;/activeProfile&gt;
+&lt;/activeProfiles&gt;
+
+
+
+</code></pre>
+
+<p>在maven中一般是需要设置下载控件jar包放在哪里,在没有私服的情况下，我一般
+可以在setting.xml中设置localRepository</p>
+
+<pre><code>   | Default: ${user.home}/.m2/repository
+  &lt;localRepository&gt;/path/to/local/repo&lt;/localRepository&gt;
+
+</code></pre>
+
+<p>当然IDEA在导入项目或者新建项目的时候都会提醒Environment Variable,设置一下setting和local repository
+(类似的思路需要在myeclipse配置)
+<img src="/images/java/nexus/setting.png" alt="impo" />
+而私服nexus的存放地点，在nexus界面的时候就已经设置好了，所以也得在每台电脑操作一遍(<font color="red">一定不能错</font>)。</p>
+
+<p>镜像的话，就不会执行maven的<code>mvn install</code>等命令还一直向外部仓库访问链接，结果是访问的链接
+都是本地的，可看下节测试。</p>
+
+<h2 id="ida">IDEA测试镜像私服</h2>
+现在只能通过这个激活了，下载license server
+![license][20]
+
+测试结果如下:
+`mvn site`
+
+![idea][23]
+
+```
+INFO] artifact org.springframework:spring-beans: checking for updates from nexus
+[INFO] artifact org.springframework:spring-context: checking for updates from nexus
+[INFO] artifact org.springframework:spring-context-support: checking for updates from nexus
+[INFO] artifact org.springframework:spring-core: checking for updates from nexus
+[INFO] artifact org.springframework:spring-expression: checking for updates from nexus
+[INFO] artifact org.springframework:spring-instrument: checking for updates from nexus
+[INFO] artifact org.springframework:spring-instrument-tomcat: checking for updates from nexus
+[INFO] artifact org.springframework:spring-jdbc: checking for updates from nexus
+[INFO] artifact org.springframework:spring-jms: checking for updates from nexus
+[INFO] artifact org.springframework:spring-orm: checking for updates from nexus
+[INFO] artifact org.springframework:spring-oxm: checking for updates from nexus
+```
+
+<h2 id="result">结论</h2>
+
+<p>整个配置过程有效，测试通过，进一步可以参考<a href="http://vdisk.weibo.com/s/za2TN71LdL1tl" target="_blank">maven实战 许晓斌</a>,里面包含了maven的坐标空间概念等，详细介绍了
+maven系统的各个组成和集成测试环境的搭建。</p>
+
+<p>可以拓展阅读<a href="http://blog.csdn.net/c1481118216/article/category/6250182" target="_blank">java blog</a>
+三个有用工具包:</p>
+
+<ul>
+<li><a href="https://github.com/venusdrogon/feilong-platform" target="_blank">飞龙 javase javaee(国产)</a></li>
+<li><a href="http://feilong-core.mydoc.io/?t=149471" target="_blank">飞龙特别用心的手册</a></li>
+<li><a href="https://github.com/venusdrogon/feilong-core/wiki/install" target="_blank">可以玩玩feilong-platform平台的安装 以及mvn site产生好看的javadoc</a></li>
+<li><a href="https://github.com/looly/hutool" target="_blank">Hutool javase(国产)</a></li>
+<li><a href="http://www.hutool.cn/apidocs/" target="_blank">hutool API手册</a>  <a href="http://hutool.mydoc.io/" target="_blank">Hutool Wiki</a></li>
+<li><a href="http://ibeetl.com/guide/#beetl" target="_blank">闲大赋 beetl 好用的模板引擎(国产)</a></li>
+<li><a href="http://cn.vuejs.org/" target="_blank">vue.js火热的前端js框架(国产)</a></li>
+</ul>
+    </div>
+
+    
+
+
+
+
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/blog/2017/02/10/javakai-fa-nexussi-fu-da-jian/&amp;text=java%e5%bc%80%e5%8f%91nexus%e7%a7%81%e6%9c%8d%e6%90%ad%e5%bb%ba" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/blog/2017/02/10/javakai-fa-nexussi-fu-da-jian/&amp;t=java%e5%bc%80%e5%8f%91nexus%e7%a7%81%e6%9c%8d%e6%90%ad%e5%bb%ba" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=java%e5%bc%80%e5%8f%91nexus%e7%a7%81%e6%9c%8d%e6%90%ad%e5%bb%ba&amp;body=/blog/2017/02/10/javakai-fa-nexussi-fu-da-jian/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/blog/2017/02/10/javakai-fa-nexussi-fu-da-jian/&amp;title=java%e5%bc%80%e5%8f%91nexus%e7%a7%81%e6%9c%8d%e6%90%ad%e5%bb%ba" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=java%e5%bc%80%e5%8f%91nexus%e7%a7%81%e6%9c%8d%e6%90%ad%e5%bb%ba%20/blog/2017/02/10/javakai-fa-nexussi-fu-da-jian/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/blog/2017/02/10/javakai-fa-nexussi-fu-da-jian/&amp;title=java%e5%bc%80%e5%8f%91nexus%e7%a7%81%e6%9c%8d%e6%90%ad%e5%bb%ba" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="portrait mr-3" src="/authors/admin/avatar_hu52a603635ecebd45650b162dadabb4e5_12861_250x250_fill_q90_lanczos_center.jpg" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/">Ye Zhaoliang</a></h5>
+      <h6 class="card-subtitle">Phd of PHD</h6>
+      <p class="card-text">My research interests include distributed robotics, mobile computing and programmable matter.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/jueqingsizhe66" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.co.uk/citations?user=sIwtMXoAAAAJ" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/jueqingsizhe66" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+    
+    <script src="/js/mathjax-config.js"></script>
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js" integrity="sha256-aYTdUrn6Ow1DDgh5JTc3aDGnnju48y/1c8s1dgkYPQ8=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/r.min.js"></script>
+        
+      
+
+      
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
+      
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    <script id="dsq-count-scr" src="https://https-jueqingsizhe66-github-io.disqus.com/count.js" async></script>
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.d6bd04fdad2ad213aa8111c5a3b72fc5.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

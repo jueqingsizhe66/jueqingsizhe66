@@ -1,0 +1,1538 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.5.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Ye Zhaoliang">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="TurbSim,是NREL提供的一个小的开源工具， 用于产生湍流风，设置的时候可能对于不同模型会有不同的参数，基于范本进行了一番分析。当然测试文件在TurbSim的Test文件下的inp文件夹下。
+
+如果对那些湍流模型做一个对比，那样是否可以更加清晰的看出不同呢？
+于是就有了下面的shell分析脚本。
+
+TurbSim产生的风力机一圈的入流截面模型（仅仅一个截面，全场是因为捕捉了很多个截面）
+
+">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/blog/2015/08/10/turbsim-8ge-tuan-liu-mo-xing-de-dui-bi/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin="anonymous">
+    
+
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.min.e8d4d5fd376e67b34452ebe1cae16341.css">
+
+  
+
+  
+
+
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon-32.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/blog/2015/08/10/turbsim-8ge-tuan-liu-mo-xing-de-dui-bi/">
+
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="twitter:site" content="@jueqingsizhe66">
+  <meta property="twitter:creator" content="@jueqingsizhe66">
+  
+  <meta property="og:site_name" content="Macro Life">
+  <meta property="og:url" content="/blog/2015/08/10/turbsim-8ge-tuan-liu-mo-xing-de-dui-bi/">
+  <meta property="og:title" content="TurbSim 8个湍流模型的对比 | Macro Life">
+  <meta property="og:description" content="TurbSim,是NREL提供的一个小的开源工具， 用于产生湍流风，设置的时候可能对于不同模型会有不同的参数，基于范本进行了一番分析。当然测试文件在TurbSim的Test文件下的inp文件夹下。
+
+如果对那些湍流模型做一个对比，那样是否可以更加清晰的看出不同呢？
+于是就有了下面的shell分析脚本。
+
+TurbSim产生的风力机一圈的入流截面模型（仅仅一个截面，全场是因为捕捉了很多个截面）
+
+"><meta property="og:image" content="/img/icon-192.png">
+  <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2015-08-10T01:00:47&#43;08:00">
+    
+    <meta property="article:modified_time" content="2015-08-10T01:00:47&#43;08:00">
+  
+
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>TurbSim 8个湍流模型的对比 | Macro Life</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0 compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">Macro Life</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav mr-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#hero"><span>Demo</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>博客</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>项目</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#featured"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/about/"><span>About</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/courses/"><span>课程</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/archives"><span>Archives</span></a>
+        </li>
+
+        
+        
+
+      
+      </ul>
+      <ul class="navbar-nav ml-auto">
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+        </li>
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>TurbSim 8个湍流模型的对比</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Aug 10, 2015
+  </span>
+  
+
+  
+
+  
+
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/categories/fast/">Fast</a></span>
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <p><a href="https://nwtc.nrel.gov/TurbSim" target="_blank">TurbSim</a>,是NREL提供的一个小的开源工具， 用于产生湍流风，设置的时候可能对于不同模型会有不同的参数，基于范本进行了一番分析。当然测试文件在TurbSim的Test文件下的inp文件夹下。</p>
+
+<p>如果对那些湍流模型做一个对比，那样是否可以更加清晰的看出不同呢？
+于是就有了下面的shell分析脚本。</p>
+
+<p>TurbSim产生的风力机一圈的入流截面模型（仅仅一个截面，全场是因为捕捉了很多个截面）</p>
+
+<p><img src="/images/fast/turbsim.png" alt="Turbsim" /></p>
+
+<h2 id="shell解析脚本">Shell解析脚本</h2>
+
+<pre><code class="language-sh">#!/bin/bash - 
+#===============================================================================
+#
+#          FILE: a.sh
+# 
+#         USAGE: ./a.sh 
+# 
+#   DESCRIPTION: 
+# 
+#       OPTIONS: ---
+#  REQUIREMENTS: ---
+#          BUGS: ---
+#         NOTES: ---
+#        AUTHOR: Ye Zhaoliang (), zhaoturkkey@163.com
+#  ORGANIZATION: YZL
+#       CREATED: 2015年08月10日 00:26
+#      REVISION:  ---
+#===============================================================================
+
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME:  _repeat1
+#   DESCRIPTION:  优化版本
+#    PARAMETERS:  
+#       RETURNS:  
+#-------------------------------------------------------------------------------
+_repeat1()
+{
+    #@ 使用方式： _repeat 要重复的字符串  重复次数
+    #@  Usage : _repeat string number
+    _REPEAT1=$1  #set and not empty, or unlimit recycle
+    while [[ ${#_REPEAT1} -lt $2 ]]
+    do
+        _REPEAT1=$_REPEAT1$_REPEAT1$_REPEAT1 ## 3次优化
+    done
+    _REPEAT1=${_REPEAT1:0:$2} ##Trim到我们需要的长度
+}
+
+alert() #@ Description    产生一个方框的注释
+{       #@ Usage    alert &quot;话语&quot;
+    _repeat1 &quot;${2:-#}&quot; $(( ${#1} + 8 )) ## ${2:-#} 如果$2未定义则使用#
+    printf '%s\n' &quot;$_REPEAT1&quot; ## \a=BEL
+    printf '%2.2s %s %2.2s\n' &quot;$_REPEAT1&quot; &quot;$1&quot; &quot;$_REPEAT1&quot; ## \a=BEL
+    printf '%s\n' &quot;$_REPEAT1&quot;
+}
+
+
+#alert &quot;Do you really want to delete all the files?&quot;
+
+
+## RandSeed1 在不同湍流模型配置的不同
+{
+alert  &quot;RandSeed1&quot; 
+grep -n &quot;RandSeed1&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
+alert  &quot;RandSeed2&quot; 
+grep -n &quot;RandSeed2&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
+alert  &quot;WrBHHTP&quot; 
+grep -n &quot;WrBHHTP&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
+alert  &quot;WrFHHTP&quot; 
+grep -n &quot;WrFHHTP&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
+alert  &quot;WrADHH&quot; 
+grep -n &quot;WrADHH&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
+alert  &quot;WrADFF&quot; 
+grep -n &quot;WrADFF&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
+alert  &quot;WrBLFF&quot; 
+grep -n &quot;WrBLFF&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
+alert  &quot;WrADTWR&quot; 
+grep -n &quot;WrADTWR&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
+alert  &quot;WrFMTFF&quot; 
+grep -n &quot;WrFMTFF&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
+alert  &quot;WrACT&quot; 
+grep -n &quot;WrACT&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
+alert  &quot;NumGrid_Z&quot; 
+grep -n &quot;NumGrid_Z&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
+alert  &quot;NumGrid_Y&quot; 
+grep -n &quot;NumGrid_Y&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
+alert  &quot;HubHt&quot; 
+grep -n &quot;HubHt&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
+alert  &quot;GridHeight&quot; 
+grep -n &quot;GridHeight&quot; *.inp|awk -F: '{print $1,$3}'|sed '/HubHt/d'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
+alert  &quot;GridWidth&quot; 
+grep -n &quot;GridWidth&quot; *.inp|awk -F: '{print $1,$3}'|sed '/HubHt/d'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
+alert  &quot;VFlowAng&quot; 
+grep -n &quot;VFlowAng&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
+alert  &quot;HFlowAng&quot; 
+grep -n &quot;HFlowAng&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
+alert  &quot;TurbModel&quot; 
+grep -n &quot;TurbModel&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
+alert  &quot;IECstandard&quot; 
+grep -n &quot;IECstandard&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
+alert  &quot;IECturbc&quot; 
+grep -n &quot;IECturbc&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
+alert  &quot;IEC_WindType&quot; 
+grep -n &quot;IEC_WindType&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
+alert  &quot;ETMc&quot; 
+grep -n &quot;ETMc&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
+alert  &quot;WindProfileType&quot; 
+grep -n &quot;WindProfileType&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
+alert  &quot;RefHt&quot; 
+grep -n &quot;RefHt&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
+alert  &quot;URef&quot; 
+grep -n &quot;URef&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
+alert  &quot;ZJetMax&quot; 
+grep -n &quot;ZJetMax&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
+alert  &quot;PLExp&quot; 
+grep -n &quot;PLExp&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
+alert  &quot;Z0&quot; 
+grep -n &quot;Z0&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
+alert  &quot;RICH_NO&quot; 
+grep -n &quot;RICH_NO&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
+alert  &quot;ZI&quot; 
+grep -n &quot;ZI&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
+alert  &quot;PC_UW&quot; 
+grep -n &quot;PC_UW&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
+alert  &quot;PC_UV&quot; 
+grep -n &quot;PC_UV&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
+alert  &quot;PC_VW&quot; 
+grep -n &quot;PC_VW&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
+alert  &quot;CohExp&quot; 
+grep -n &quot;CohExp&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
+alert  &quot;CTEventPath&quot; 
+grep -n &quot;CTEventPath&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
+alert  &quot;CTEventFile&quot; 
+grep -n &quot;CTEventFile&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
+alert  &quot;Randomize&quot; 
+grep -n &quot;Randomize&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
+alert  &quot;DistScl&quot; 
+grep -n &quot;DistScl&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
+alert  &quot;CTLy&quot; 
+grep -n &quot;CTLy&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
+alert  &quot;CTLz&quot; 
+grep -n &quot;CTLz&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
+alert  &quot;CTStartTime&quot; 
+grep -n &quot;CTStartTime&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
+} &gt; summary.out
+
+</code></pre>
+
+<h3 id="改进">改进</h3>
+
+<ol>
+<li>去除无用的Turbulence and Boundary</li>
+
+<li><p>增加了对GridWidth and GridHeight的处理</p>
+
+<pre><code>grep -n &quot;GridHeight&quot; *.inp|awk -F: '{print $1,$3}'|sed '/HubHt/d'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
+grep -n &quot;GridWidth&quot; *.inp|awk -F: '{print $1,$3}'|sed '/HubHt/d'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
+
+</code></pre></li>
+</ol>
+
+<p>3.</p>
+
+<h2 id="shell产生的结果如下">shell产生的结果如下：</h2>
+
+<pre><code>#################
+## RandSeed1 ##
+#################
+GPLLJ        234516
+HYDRO_TIDAL  2318573
+Kaimal_15    123456
+Kaimal       123456
+KHtest       123456
+smooth       4433456
+vonKarm_15   123456
+vonKarm      123456
+#################
+## RandSeed2 ##
+#################
+GPLLJ        789012
+HYDRO_TIDAL  RANLUX
+Kaimal_15    789012
+Kaimal       789012
+KHtest       &quot;RanLux&quot;
+smooth       &quot;RanLux&quot;
+vonKarm_15   789012
+vonKarm      789012
+###############
+## WrBHHTP ##
+###############
+GPLLJ        False
+HYDRO_TIDAL  False
+Kaimal_15    False
+Kaimal       False
+KHtest       False
+smooth       True
+vonKarm_15   False
+vonKarm      False
+###############
+## WrFHHTP ##
+###############
+GPLLJ        True
+HYDRO_TIDAL  True
+Kaimal_15    False
+Kaimal       False
+KHtest       False
+smooth       False
+vonKarm_15   True
+vonKarm      True
+##############
+## WrADHH ##
+##############
+GPLLJ        False
+HYDRO_TIDAL  True
+Kaimal_15    False
+Kaimal       False
+KHtest       False
+smooth       False
+vonKarm_15   True
+vonKarm      True
+##############
+## WrADFF ##
+##############
+GPLLJ        True
+HYDRO_TIDAL  False
+Kaimal_15    False
+Kaimal       False
+KHtest       False
+smooth       False
+vonKarm_15   False
+vonKarm      False
+##############
+## WrBLFF ##
+##############
+GPLLJ        False
+HYDRO_TIDAL  True
+Kaimal_15    False
+Kaimal       False
+KHtest       True
+smooth       True
+vonKarm_15   False
+vonKarm      False
+###############
+## WrADTWR ##
+###############
+GPLLJ        False
+HYDRO_TIDAL  False
+Kaimal_15    False
+Kaimal       False
+KHtest       False
+smooth       False
+vonKarm_15   False
+vonKarm      False
+###############
+## WrFMTFF ##
+###############
+GPLLJ        False
+HYDRO_TIDAL  False
+Kaimal_15    True
+Kaimal       True
+KHtest       False
+smooth       False
+vonKarm_15   False
+vonKarm      False
+#############
+## WrACT ##
+#############
+GPLLJ        True
+HYDRO_TIDAL  False
+Kaimal_15    False
+Kaimal       False
+KHtest       True
+smooth       True
+vonKarm_15   False
+vonKarm      False
+#################
+## NumGrid_Z ##
+#################
+GPLLJ        5
+HYDRO_TIDAL  5
+Kaimal_15    5
+Kaimal       5
+KHtest       5
+smooth       5
+vonKarm_15   5
+vonKarm      5
+#################
+## NumGrid_Y ##
+#################
+GPLLJ        5
+HYDRO_TIDAL  5
+Kaimal_15    5
+Kaimal       5
+KHtest       5
+smooth       5
+vonKarm_15   5
+vonKarm      5
+#############
+## HubHt ##
+#############
+GPLLJ        90.00
+HYDRO_TIDAL  10
+Kaimal_15    37.00
+Kaimal       37.00
+KHtest       37.00
+smooth       84.00
+vonKarm_15   37.00
+vonKarm      37.00
+##################
+## GridHeight ##
+##################
+GPLLJ        80.00
+HYDRO_TIDAL  9.00
+Kaimal_15    30.00
+Kaimal       30.00
+KHtest       50.00
+smooth       70.00
+vonKarm_15   30.00
+vonKarm      30.00
+#################
+## GridWidth ##
+#################
+GPLLJ        600.0
+GPLLJ        90.0
+GPLLJ        80.00
+HYDRO_TIDAL  600
+HYDRO_TIDAL  40
+HYDRO_TIDAL  9.00
+Kaimal_15    600.0
+Kaimal_15    55.8
+Kaimal_15    30.00
+Kaimal       600.0
+Kaimal       55.8
+Kaimal       30.00
+KHtest       600.0
+KHtest       100.0
+KHtest       50.00
+smooth       600.0
+smooth       100.0
+smooth       70.00
+vonKarm_15   600.0
+vonKarm_15   55.8
+vonKarm_15   30.00
+vonKarm      600.0
+vonKarm      55.8
+vonKarm      30.00
+################
+## VFlowAng ##
+################
+GPLLJ        0
+HYDRO_TIDAL  0
+Kaimal_15    5
+Kaimal       5
+KHtest       0
+smooth       0
+vonKarm_15   5
+vonKarm      0
+################
+## HFlowAng ##
+################
+GPLLJ        0
+HYDRO_TIDAL  0
+Kaimal_15    10
+Kaimal       10
+KHtest       0
+smooth       0
+vonKarm_15   10
+vonKarm      0
+#################
+## TurbModel ##
+#################
+GPLLJ        &quot;GP_LLJ&quot;
+HYDRO_TIDAL  &quot;TIDAL&quot;
+Kaimal_15    &quot;IECKAI&quot;
+Kaimal       &quot;IECKAI&quot;
+KHtest       &quot;NWTCUP&quot;
+smooth       &quot;SMOOTH&quot;
+vonKarm_15   &quot;IECVKM&quot;
+vonKarm      &quot;IECVKM&quot;
+###################
+## IECstandard ##
+###################
+GPLLJ        1
+HYDRO_TIDAL  &quot;1-ED3&quot;
+Kaimal_15    &quot;1-ED2&quot;
+Kaimal       1
+KHtest       1
+smooth       1
+vonKarm_15   1
+vonKarm      1
+################
+## IECturbc ##
+################
+GPLLJ        &quot;A&quot;
+HYDRO_TIDAL  &quot;A&quot;
+Kaimal_15    &quot;18.0&quot;
+Kaimal       &quot;C&quot;
+KHtest       &quot;KHtest&quot;
+smooth       &quot;A&quot;
+vonKarm_15   16.0
+vonKarm      &quot;A&quot;
+####################
+## IEC_WindType ##
+####################
+GPLLJ        NTM
+HYDRO_TIDAL  &quot;NTM&quot;
+Kaimal_15    NTM
+Kaimal       NTM
+KHtest       NTM
+smooth       NTM
+vonKarm_15   NTM
+vonKarm      NTM
+############
+## ETMc ##
+############
+GPLLJ        default
+HYDRO_TIDAL  default
+Kaimal_15    default
+Kaimal       default
+KHtest       default
+smooth       default
+vonKarm_15   default
+vonKarm      default
+#######################
+## WindProfileType ##
+#######################
+GPLLJ        default
+HYDRO_TIDAL  &quot;H2L&quot;
+Kaimal_15    default
+Kaimal       default
+KHtest       default
+smooth       default
+vonKarm_15   default
+vonKarm      default
+#############
+## RefHt ##
+#############
+GPLLJ        85.00
+HYDRO_TIDAL  18
+Kaimal_15    10.00
+Kaimal       10.00
+KHtest       37.00
+smooth       84.00
+vonKarm_15   10.00
+vonKarm      10.00
+############
+## URef ##
+############
+GPLLJ        12.0
+HYDRO_TIDAL  18
+HYDRO_TIDAL  1.2
+Kaimal_15    15.0
+Kaimal       6.0
+KHtest       13.0
+smooth       17.0
+vonKarm_15   15.0
+vonKarm      6.0
+###############
+## ZJetMax ##
+###############
+GPLLJ        350
+HYDRO_TIDAL  default
+Kaimal_15    350
+Kaimal       350
+KHtest       350
+smooth       350
+vonKarm_15   350
+vonKarm      260
+#############
+## PLExp ##
+#############
+GPLLJ        default
+HYDRO_TIDAL  default
+Kaimal_15    default
+Kaimal       default
+KHtest       default
+smooth       1.527
+vonKarm_15   default
+vonKarm      default
+##########
+## Z0 ##
+##########
+GPLLJ        default
+HYDRO_TIDAL  default
+Kaimal_15    default
+Kaimal       default
+KHtest       default
+smooth       default
+vonKarm_15   default
+vonKarm      default
+###############
+## RICH_NO ##
+###############
+GPLLJ        0.05
+HYDRO_TIDAL  0.05
+Kaimal_15    0.05
+Kaimal       0.05
+KHtest       0.02
+smooth       0.05
+vonKarm_15   0.05
+vonKarm      0.05
+##########
+## ZI ##
+##########
+GPLLJ        default
+HYDRO_TIDAL  default
+Kaimal_15    default
+Kaimal       default
+KHtest       default
+smooth       default
+vonKarm_15   default
+vonKarm      default
+#############
+## PC_UW ##
+#############
+GPLLJ        default
+HYDRO_TIDAL  default
+Kaimal_15    default
+Kaimal       default
+KHtest       default
+smooth       default
+vonKarm_15   default
+vonKarm      default
+#############
+## PC_UV ##
+#############
+GPLLJ        default
+HYDRO_TIDAL  default
+Kaimal_15    default
+Kaimal       default
+KHtest       default
+smooth       default
+vonKarm_15   default
+vonKarm      default
+#############
+## PC_VW ##
+#############
+GPLLJ        default
+HYDRO_TIDAL  default
+Kaimal_15    default
+Kaimal       default
+KHtest       default
+smooth       default
+vonKarm_15   default
+vonKarm      default
+##############
+## CohExp ##
+##############
+GPLLJ        default
+HYDRO_TIDAL  default
+Kaimal_15    default
+Kaimal       default
+KHtest       default
+smooth       default
+vonKarm_15   default
+vonKarm      default
+###################
+## CTEventPath ##
+###################
+GPLLJ        &quot;.\EventData&quot;
+HYDRO_TIDAL  &quot;/home/lkilcher/work/nwtc/turbsim/trunk/Test/EventData/&quot;
+Kaimal_15    &quot;.\EventData&quot;
+Kaimal       &quot;.\EventData&quot;
+KHtest       &quot;.\EventData&quot;
+smooth       &quot;.\EventData&quot;
+vonKarm_15   &quot;.\EventData&quot;
+vonKarm      &quot;.\EventData&quot;
+###################
+## CTEventFile ##
+###################
+GPLLJ        LES
+HYDRO_TIDAL  &quot;Random&quot;
+Kaimal_15    random
+Kaimal       random
+KHtest       &quot;les&quot;
+smooth       &quot;les&quot;
+vonKarm_15   random
+vonKarm      random
+#################
+## Randomize ##
+#################
+GPLLJ        true
+HYDRO_TIDAL  true
+HYDRO_TIDAL  1.0
+HYDRO_TIDAL  0.5
+HYDRO_TIDAL  0.5
+Kaimal_15    true
+Kaimal       true
+KHtest       true
+smooth       true
+vonKarm_15   true
+vonKarm      true
+###############
+## DistScl ##
+###############
+GPLLJ        1.0
+HYDRO_TIDAL  1.0
+Kaimal_15    1.0
+Kaimal       1.0
+KHtest       1.0
+smooth       1.0
+vonKarm_15   1.0
+vonKarm      1.0
+############
+## CTLy ##
+############
+GPLLJ        0.5
+HYDRO_TIDAL  0.5
+Kaimal_15    0.5
+Kaimal       0.5
+KHtest       0.5
+smooth       0.5
+vonKarm_15   0.5
+vonKarm      0.5
+############
+## CTLz ##
+############
+GPLLJ        0.5
+HYDRO_TIDAL  0.5
+Kaimal_15    0.5
+Kaimal       0.5
+KHtest       0.5
+smooth       0.5
+vonKarm_15   0.5
+vonKarm      0.5
+###################
+## CTStartTime ##
+###################
+GPLLJ        30.0
+HYDRO_TIDAL  30.0
+Kaimal_15    30.0
+Kaimal       30.0
+KHtest       0.0
+smooth       10.0
+vonKarm_15   30.0
+vonKarm      30.0
+</code></pre>
+
+<p>进一步的细节可以参考<a href="https://nwtc.nrel.gov/system/files/TurbSim.pdf" target="_blank">Turbsim UserGuide</a></p>
+    </div>
+
+    
+
+
+
+
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/blog/2015/08/10/turbsim-8ge-tuan-liu-mo-xing-de-dui-bi/&amp;text=TurbSim%208%e4%b8%aa%e6%b9%8d%e6%b5%81%e6%a8%a1%e5%9e%8b%e7%9a%84%e5%af%b9%e6%af%94" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/blog/2015/08/10/turbsim-8ge-tuan-liu-mo-xing-de-dui-bi/&amp;t=TurbSim%208%e4%b8%aa%e6%b9%8d%e6%b5%81%e6%a8%a1%e5%9e%8b%e7%9a%84%e5%af%b9%e6%af%94" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=TurbSim%208%e4%b8%aa%e6%b9%8d%e6%b5%81%e6%a8%a1%e5%9e%8b%e7%9a%84%e5%af%b9%e6%af%94&amp;body=/blog/2015/08/10/turbsim-8ge-tuan-liu-mo-xing-de-dui-bi/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/blog/2015/08/10/turbsim-8ge-tuan-liu-mo-xing-de-dui-bi/&amp;title=TurbSim%208%e4%b8%aa%e6%b9%8d%e6%b5%81%e6%a8%a1%e5%9e%8b%e7%9a%84%e5%af%b9%e6%af%94" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=TurbSim%208%e4%b8%aa%e6%b9%8d%e6%b5%81%e6%a8%a1%e5%9e%8b%e7%9a%84%e5%af%b9%e6%af%94%20/blog/2015/08/10/turbsim-8ge-tuan-liu-mo-xing-de-dui-bi/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/blog/2015/08/10/turbsim-8ge-tuan-liu-mo-xing-de-dui-bi/&amp;title=TurbSim%208%e4%b8%aa%e6%b9%8d%e6%b5%81%e6%a8%a1%e5%9e%8b%e7%9a%84%e5%af%b9%e6%af%94" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="portrait mr-3" src="/authors/admin/avatar_hu52a603635ecebd45650b162dadabb4e5_12861_250x250_fill_q90_lanczos_center.jpg" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/">Ye Zhaoliang</a></h5>
+      <h6 class="card-subtitle">Phd of PHD</h6>
+      <p class="card-text">My research interests include distributed robotics, mobile computing and programmable matter.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/jueqingsizhe66" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.co.uk/citations?user=sIwtMXoAAAAJ" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/jueqingsizhe66" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+    
+    <script src="/js/mathjax-config.js"></script>
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js" integrity="sha256-aYTdUrn6Ow1DDgh5JTc3aDGnnju48y/1c8s1dgkYPQ8=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/r.min.js"></script>
+        
+      
+
+      
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
+      
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    <script id="dsq-count-scr" src="https://https-jueqingsizhe66-github-io.disqus.com/count.js" async></script>
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.d6bd04fdad2ad213aa8111c5a3b72fc5.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
