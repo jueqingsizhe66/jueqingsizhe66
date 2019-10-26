@@ -35,7 +35,7 @@ Standard Prelude包含着基本的Preude加载的模块，类，函数等，相�
 现在终于发现haskell的类型类其实就是抽象类或者比抽象类更抽象的接口类，通过class来定义(在java中无论是抽象类还是实体类都使用class,现在haskell区分来class定义抽象类或者接口类,date定义实体类)">
 
   
-  <link rel="alternate" hreflang="en-us" href="/blog/2015/05/21/haskell-common-type-signature-synopsis/">
+  <link rel="alternate" hreflang="en-us" href="https://jueqingsizhe66.github.io/blog/2015/05/21/haskell-common-type-signature-synopsis/">
 
   
 
@@ -103,7 +103,7 @@ Standard Prelude包含着基本的Preude加载的模块，类，函数等，相�
   <link rel="icon" type="image/png" href="/img/icon-32.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="/blog/2015/05/21/haskell-common-type-signature-synopsis/">
+  <link rel="canonical" href="https://jueqingsizhe66.github.io/blog/2015/05/21/haskell-common-type-signature-synopsis/">
 
   
   
@@ -119,14 +119,14 @@ Standard Prelude包含着基本的Preude加载的模块，类，函数等，相�
   <meta property="twitter:creator" content="@jueqingsizhe66">
   
   <meta property="og:site_name" content="Macro Life">
-  <meta property="og:url" content="/blog/2015/05/21/haskell-common-type-signature-synopsis/">
+  <meta property="og:url" content="https://jueqingsizhe66.github.io/blog/2015/05/21/haskell-common-type-signature-synopsis/">
   <meta property="og:title" content="Haskell common type signature(synopsis) | Macro Life">
   <meta property="og:description" content="Haskell是一门很深的(deep)语言，需要经常去考究，下面有一些渠道可以
 经常去查阅类型的推理过程。
 
 Standard Prelude包含着基本的Preude加载的模块，类，函数等，相当具体。
-现在终于发现haskell的类型类其实就是抽象类或者比抽象类更抽象的接口类，通过class来定义(在java中无论是抽象类还是实体类都使用class,现在haskell区分来class定义抽象类或者接口类,date定义实体类)"><meta property="og:image" content="/img/icon-192.png">
-  <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
+现在终于发现haskell的类型类其实就是抽象类或者比抽象类更抽象的接口类，通过class来定义(在java中无论是抽象类还是实体类都使用class,现在haskell区分来class定义抽象类或者接口类,date定义实体类)"><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
+  <meta property="twitter:image" content="https://jueqingsizhe66.github.io/img/icon-192.png"><meta property="og:locale" content="en-us">
   
     
       <meta property="article:published_time" content="2015-05-21T10:54:48&#43;08:00">
@@ -502,6 +502,7 @@ Standard Prelude包含着基本的Preude加载的模块，类，函数等，相�
     
     May 21, 2015
   </span>
+
   
 
   
@@ -517,8 +518,8 @@ Standard Prelude包含着基本的Preude加载的模块，类，函数等，相�
   <span class="middot-divider"></span>
   <span class="article-categories">
     <i class="fas fa-folder mr-1"></i><a href="/categories/haskell/">Haskell</a></span>
-  
 
+  
 </div>
 
     
@@ -541,6 +542,20 @@ Standard Prelude包含着基本的Preude加载的模块，类，函数等，相�
 
 
 
+
+
+<span class="article-metadata" >Reading time: 7 minutes and    45 seconds with 1708 words. </span>
+    <aside>
+        <nav id="TableOfContents">
+<ul>
+<li><a href="#一个问题-我们必须为要进行比较的不同类型使用不同名字的函数-这很低效且令人厌烦-如果能够只使用">一个问题：我们必须为要进行比较的不同类型使用不同名字的函数。这很低效且令人厌烦。如果能够只使用 ==</a>
+<ul>
+<li><a href="#类型类定义一组函数-这些函数依赖于所给定的数据的类型可以有不同的实现-类型类看上去可能像面向对象编程中的对象-但是它们确实很不相同">类型类定义一组函数，这些函数依赖于所给定的数据的类型可以有不同的实现。类型类看上去可能像面向对象编程中的对象，但是它们确实很不相同。</a></li>
+</ul></li>
+<li><a href="#numeric-类型">Numeric 类型</a></li>
+</ul>
+</nav>
+    </aside>
   <div class="article-container">
 
     <div class="article-style">
@@ -643,7 +658,7 @@ Data.List.sort 来排序。</p>
       
       
       <li>
-        <a href="https://twitter.com/intent/tweet?url=/blog/2015/05/21/haskell-common-type-signature-synopsis/&amp;text=Haskell%20common%20type%20signature%28synopsis%29" target="_blank" rel="noopener" class="share-btn-twitter">
+        <a href="https://twitter.com/intent/tweet?url=https://jueqingsizhe66.github.io/blog/2015/05/21/haskell-common-type-signature-synopsis/&amp;text=Haskell%20common%20type%20signature%28synopsis%29" target="_blank" rel="noopener" class="share-btn-twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -656,7 +671,7 @@ Data.List.sort 来排序。</p>
       
       
       <li>
-        <a href="https://www.facebook.com/sharer.php?u=/blog/2015/05/21/haskell-common-type-signature-synopsis/&amp;t=Haskell%20common%20type%20signature%28synopsis%29" target="_blank" rel="noopener" class="share-btn-facebook">
+        <a href="https://www.facebook.com/sharer.php?u=https://jueqingsizhe66.github.io/blog/2015/05/21/haskell-common-type-signature-synopsis/&amp;t=Haskell%20common%20type%20signature%28synopsis%29" target="_blank" rel="noopener" class="share-btn-facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
@@ -669,7 +684,7 @@ Data.List.sort 来排序。</p>
       
       
       <li>
-        <a href="mailto:?subject=Haskell%20common%20type%20signature%28synopsis%29&amp;body=/blog/2015/05/21/haskell-common-type-signature-synopsis/" target="_blank" rel="noopener" class="share-btn-email">
+        <a href="mailto:?subject=Haskell%20common%20type%20signature%28synopsis%29&amp;body=https://jueqingsizhe66.github.io/blog/2015/05/21/haskell-common-type-signature-synopsis/" target="_blank" rel="noopener" class="share-btn-email">
           <i class="fas fa-envelope"></i>
         </a>
       </li>
@@ -682,7 +697,7 @@ Data.List.sort 来排序。</p>
       
       
       <li>
-        <a href="https://www.linkedin.com/shareArticle?url=/blog/2015/05/21/haskell-common-type-signature-synopsis/&amp;title=Haskell%20common%20type%20signature%28synopsis%29" target="_blank" rel="noopener" class="share-btn-linkedin">
+        <a href="https://www.linkedin.com/shareArticle?url=https://jueqingsizhe66.github.io/blog/2015/05/21/haskell-common-type-signature-synopsis/&amp;title=Haskell%20common%20type%20signature%28synopsis%29" target="_blank" rel="noopener" class="share-btn-linkedin">
           <i class="fab fa-linkedin-in"></i>
         </a>
       </li>
@@ -695,7 +710,7 @@ Data.List.sort 来排序。</p>
       
       
       <li>
-        <a href="https://web.whatsapp.com/send?text=Haskell%20common%20type%20signature%28synopsis%29%20/blog/2015/05/21/haskell-common-type-signature-synopsis/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+        <a href="https://web.whatsapp.com/send?text=Haskell%20common%20type%20signature%28synopsis%29%20https://jueqingsizhe66.github.io/blog/2015/05/21/haskell-common-type-signature-synopsis/" target="_blank" rel="noopener" class="share-btn-whatsapp">
           <i class="fab fa-whatsapp"></i>
         </a>
       </li>
@@ -708,7 +723,7 @@ Data.List.sort 来排序。</p>
       
       
       <li>
-        <a href="https://service.weibo.com/share/share.php?url=/blog/2015/05/21/haskell-common-type-signature-synopsis/&amp;title=Haskell%20common%20type%20signature%28synopsis%29" target="_blank" rel="noopener" class="share-btn-weibo">
+        <a href="https://service.weibo.com/share/share.php?url=https://jueqingsizhe66.github.io/blog/2015/05/21/haskell-common-type-signature-synopsis/&amp;title=Haskell%20common%20type%20signature%28synopsis%29" target="_blank" rel="noopener" class="share-btn-weibo">
           <i class="fab fa-weibo"></i>
         </a>
       </li>
@@ -747,7 +762,7 @@ Data.List.sort 来排序。</p>
     
 
     <div class="media-body">
-      <h5 class="card-title"><a href="/">Ye Zhaoliang</a></h5>
+      <h5 class="card-title"><a href="https://jueqingsizhe66.github.io/">Ye Zhaoliang</a></h5>
       <h6 class="card-subtitle">Engineer of offshore wind turbine technique research</h6>
       <p class="card-text">My research interests include distributed energy, wind turbine power generation technique , Computational fluid dynamic and programmable matter.</p>
       <ul class="network-icon" aria-hidden="true">
@@ -966,7 +981,7 @@ Data.List.sort 来排序。</p>
   
 
   <p class="powered-by">
-    
+    &copy;2019 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

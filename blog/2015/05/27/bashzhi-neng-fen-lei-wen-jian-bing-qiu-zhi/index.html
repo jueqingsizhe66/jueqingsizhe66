@@ -35,7 +35,7 @@ shell编成的目的减少unix相关系统的管理员的人物
 下面介绍主要是bash语法，以及有bash语法调用awk，sed，grep等linux底下强大的工具实现一个文件智能分类，并对相应文件夹取平均。">
 
   
-  <link rel="alternate" hreflang="en-us" href="/blog/2015/05/27/bashzhi-neng-fen-lei-wen-jian-bing-qiu-zhi/">
+  <link rel="alternate" hreflang="en-us" href="https://jueqingsizhe66.github.io/blog/2015/05/27/bashzhi-neng-fen-lei-wen-jian-bing-qiu-zhi/">
 
   
 
@@ -103,7 +103,7 @@ shell编成的目的减少unix相关系统的管理员的人物
   <link rel="icon" type="image/png" href="/img/icon-32.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="/blog/2015/05/27/bashzhi-neng-fen-lei-wen-jian-bing-qiu-zhi/">
+  <link rel="canonical" href="https://jueqingsizhe66.github.io/blog/2015/05/27/bashzhi-neng-fen-lei-wen-jian-bing-qiu-zhi/">
 
   
   
@@ -119,14 +119,14 @@ shell编成的目的减少unix相关系统的管理员的人物
   <meta property="twitter:creator" content="@jueqingsizhe66">
   
   <meta property="og:site_name" content="Macro Life">
-  <meta property="og:url" content="/blog/2015/05/27/bashzhi-neng-fen-lei-wen-jian-bing-qiu-zhi/">
+  <meta property="og:url" content="https://jueqingsizhe66.github.io/blog/2015/05/27/bashzhi-neng-fen-lei-wen-jian-bing-qiu-zhi/">
   <meta property="og:title" content="Bash智能分类文件并求值 | Macro Life">
   <meta property="og:description" content="Bash是linux底下的一种shell实现，可以方便linux用户进行系统管理。他的核心就是
 调用最有效的命令组合形成更加强大完美的管理和应用程序,这也是unix的哲学,通过调用between programs的关系来get its power而不是通过自己的程序。
 shell编成的目的减少unix相关系统的管理员的人物
 
-下面介绍主要是bash语法，以及有bash语法调用awk，sed，grep等linux底下强大的工具实现一个文件智能分类，并对相应文件夹取平均。"><meta property="og:image" content="/img/icon-192.png">
-  <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
+下面介绍主要是bash语法，以及有bash语法调用awk，sed，grep等linux底下强大的工具实现一个文件智能分类，并对相应文件夹取平均。"><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
+  <meta property="twitter:image" content="https://jueqingsizhe66.github.io/img/icon-192.png"><meta property="og:locale" content="en-us">
   
     
       <meta property="article:published_time" content="2015-05-27T10:36:24&#43;08:00">
@@ -502,6 +502,7 @@ shell编成的目的减少unix相关系统的管理员的人物
     
     May 27, 2015
   </span>
+
   
 
   
@@ -517,8 +518,8 @@ shell编成的目的减少unix相关系统的管理员的人物
   <span class="middot-divider"></span>
   <span class="article-categories">
     <i class="fas fa-folder mr-1"></i><a href="/categories/linux/">Linux</a></span>
-  
 
+  
 </div>
 
     
@@ -541,6 +542,28 @@ shell编成的目的减少unix相关系统的管理员的人物
 
 
 
+
+
+<span class="article-metadata" >Reading time: 20 minutes and    5 seconds with 4420 words. </span>
+    <aside>
+        <nav id="TableOfContents">
+<ul>
+<li><a href="#无用的分号命令">无用的分号命令</a></li>
+<li><a href="#特殊的点号">特殊的点号</a></li>
+<li><a href="#关于大括号和小括号的区别">关于大括号和小括号的区别</a></li>
+<li><a href="#中括号用于判断">中括号用于判断</a></li>
+<li><a href="#关于-单括号和双中括号的区别">关于 单括号和双中括号的区别</a>
+<ul>
+<li><a href="#两者的主要区别如下">两者的主要区别如下：</a></li>
+</ul></li>
+<li><a href="#双中括号和双小括号">双中括号和双小括号</a></li>
+<li><a href="#find跳过指定目录">find跳过指定目录</a></li>
+<li><a href="#unix-tutorial-for-beginner-www-ee-surrey-ac-uk-teaching-unix"><a href="www.ee.surrey.ac.uk/Teaching/Unix" target="_blank">Unix Tutorial for Beginner</a></a></li>
+<li><a href="#常用的bash命令学习-http-vbird-dic-ksu-edu-tw-linux-basic-0320bash-php"><a href="http://vbird.dic.ksu.edu.tw/linux_basic/0320bash.php" target="_blank">常用的bash命令学习</a></a></li>
+<li><a href="#一个综合性的案例">一个综合性的案例</a></li>
+</ul>
+</nav>
+    </aside>
   <div class="article-container">
 
     <div class="article-style">
@@ -1026,7 +1049,7 @@ plotCp
       
       
       <li>
-        <a href="https://twitter.com/intent/tweet?url=/blog/2015/05/27/bashzhi-neng-fen-lei-wen-jian-bing-qiu-zhi/&amp;text=Bash%e6%99%ba%e8%83%bd%e5%88%86%e7%b1%bb%e6%96%87%e4%bb%b6%e5%b9%b6%e6%b1%82%e5%80%bc" target="_blank" rel="noopener" class="share-btn-twitter">
+        <a href="https://twitter.com/intent/tweet?url=https://jueqingsizhe66.github.io/blog/2015/05/27/bashzhi-neng-fen-lei-wen-jian-bing-qiu-zhi/&amp;text=Bash%e6%99%ba%e8%83%bd%e5%88%86%e7%b1%bb%e6%96%87%e4%bb%b6%e5%b9%b6%e6%b1%82%e5%80%bc" target="_blank" rel="noopener" class="share-btn-twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -1039,7 +1062,7 @@ plotCp
       
       
       <li>
-        <a href="https://www.facebook.com/sharer.php?u=/blog/2015/05/27/bashzhi-neng-fen-lei-wen-jian-bing-qiu-zhi/&amp;t=Bash%e6%99%ba%e8%83%bd%e5%88%86%e7%b1%bb%e6%96%87%e4%bb%b6%e5%b9%b6%e6%b1%82%e5%80%bc" target="_blank" rel="noopener" class="share-btn-facebook">
+        <a href="https://www.facebook.com/sharer.php?u=https://jueqingsizhe66.github.io/blog/2015/05/27/bashzhi-neng-fen-lei-wen-jian-bing-qiu-zhi/&amp;t=Bash%e6%99%ba%e8%83%bd%e5%88%86%e7%b1%bb%e6%96%87%e4%bb%b6%e5%b9%b6%e6%b1%82%e5%80%bc" target="_blank" rel="noopener" class="share-btn-facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
@@ -1052,7 +1075,7 @@ plotCp
       
       
       <li>
-        <a href="mailto:?subject=Bash%e6%99%ba%e8%83%bd%e5%88%86%e7%b1%bb%e6%96%87%e4%bb%b6%e5%b9%b6%e6%b1%82%e5%80%bc&amp;body=/blog/2015/05/27/bashzhi-neng-fen-lei-wen-jian-bing-qiu-zhi/" target="_blank" rel="noopener" class="share-btn-email">
+        <a href="mailto:?subject=Bash%e6%99%ba%e8%83%bd%e5%88%86%e7%b1%bb%e6%96%87%e4%bb%b6%e5%b9%b6%e6%b1%82%e5%80%bc&amp;body=https://jueqingsizhe66.github.io/blog/2015/05/27/bashzhi-neng-fen-lei-wen-jian-bing-qiu-zhi/" target="_blank" rel="noopener" class="share-btn-email">
           <i class="fas fa-envelope"></i>
         </a>
       </li>
@@ -1065,7 +1088,7 @@ plotCp
       
       
       <li>
-        <a href="https://www.linkedin.com/shareArticle?url=/blog/2015/05/27/bashzhi-neng-fen-lei-wen-jian-bing-qiu-zhi/&amp;title=Bash%e6%99%ba%e8%83%bd%e5%88%86%e7%b1%bb%e6%96%87%e4%bb%b6%e5%b9%b6%e6%b1%82%e5%80%bc" target="_blank" rel="noopener" class="share-btn-linkedin">
+        <a href="https://www.linkedin.com/shareArticle?url=https://jueqingsizhe66.github.io/blog/2015/05/27/bashzhi-neng-fen-lei-wen-jian-bing-qiu-zhi/&amp;title=Bash%e6%99%ba%e8%83%bd%e5%88%86%e7%b1%bb%e6%96%87%e4%bb%b6%e5%b9%b6%e6%b1%82%e5%80%bc" target="_blank" rel="noopener" class="share-btn-linkedin">
           <i class="fab fa-linkedin-in"></i>
         </a>
       </li>
@@ -1078,7 +1101,7 @@ plotCp
       
       
       <li>
-        <a href="https://web.whatsapp.com/send?text=Bash%e6%99%ba%e8%83%bd%e5%88%86%e7%b1%bb%e6%96%87%e4%bb%b6%e5%b9%b6%e6%b1%82%e5%80%bc%20/blog/2015/05/27/bashzhi-neng-fen-lei-wen-jian-bing-qiu-zhi/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+        <a href="https://web.whatsapp.com/send?text=Bash%e6%99%ba%e8%83%bd%e5%88%86%e7%b1%bb%e6%96%87%e4%bb%b6%e5%b9%b6%e6%b1%82%e5%80%bc%20https://jueqingsizhe66.github.io/blog/2015/05/27/bashzhi-neng-fen-lei-wen-jian-bing-qiu-zhi/" target="_blank" rel="noopener" class="share-btn-whatsapp">
           <i class="fab fa-whatsapp"></i>
         </a>
       </li>
@@ -1091,7 +1114,7 @@ plotCp
       
       
       <li>
-        <a href="https://service.weibo.com/share/share.php?url=/blog/2015/05/27/bashzhi-neng-fen-lei-wen-jian-bing-qiu-zhi/&amp;title=Bash%e6%99%ba%e8%83%bd%e5%88%86%e7%b1%bb%e6%96%87%e4%bb%b6%e5%b9%b6%e6%b1%82%e5%80%bc" target="_blank" rel="noopener" class="share-btn-weibo">
+        <a href="https://service.weibo.com/share/share.php?url=https://jueqingsizhe66.github.io/blog/2015/05/27/bashzhi-neng-fen-lei-wen-jian-bing-qiu-zhi/&amp;title=Bash%e6%99%ba%e8%83%bd%e5%88%86%e7%b1%bb%e6%96%87%e4%bb%b6%e5%b9%b6%e6%b1%82%e5%80%bc" target="_blank" rel="noopener" class="share-btn-weibo">
           <i class="fab fa-weibo"></i>
         </a>
       </li>
@@ -1130,7 +1153,7 @@ plotCp
     
 
     <div class="media-body">
-      <h5 class="card-title"><a href="/">Ye Zhaoliang</a></h5>
+      <h5 class="card-title"><a href="https://jueqingsizhe66.github.io/">Ye Zhaoliang</a></h5>
       <h6 class="card-subtitle">Engineer of offshore wind turbine technique research</h6>
       <p class="card-text">My research interests include distributed energy, wind turbine power generation technique , Computational fluid dynamic and programmable matter.</p>
       <ul class="network-icon" aria-hidden="true">
@@ -1349,7 +1372,7 @@ plotCp
   
 
   <p class="powered-by">
-    
+    &copy;2019 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

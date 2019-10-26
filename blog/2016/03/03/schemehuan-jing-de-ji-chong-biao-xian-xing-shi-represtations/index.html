@@ -31,7 +31,7 @@
   <meta name="description" content="scheme的解释器的构造，都需要enviroment类型的参与，environment类型的抽象确是影响到语言的具体性能。">
 
   
-  <link rel="alternate" hreflang="en-us" href="/blog/2016/03/03/schemehuan-jing-de-ji-chong-biao-xian-xing-shi-represtations/">
+  <link rel="alternate" hreflang="en-us" href="https://jueqingsizhe66.github.io/blog/2016/03/03/schemehuan-jing-de-ji-chong-biao-xian-xing-shi-represtations/">
 
   
 
@@ -99,7 +99,7 @@
   <link rel="icon" type="image/png" href="/img/icon-32.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="/blog/2016/03/03/schemehuan-jing-de-ji-chong-biao-xian-xing-shi-represtations/">
+  <link rel="canonical" href="https://jueqingsizhe66.github.io/blog/2016/03/03/schemehuan-jing-de-ji-chong-biao-xian-xing-shi-represtations/">
 
   
   
@@ -115,10 +115,10 @@
   <meta property="twitter:creator" content="@jueqingsizhe66">
   
   <meta property="og:site_name" content="Macro Life">
-  <meta property="og:url" content="/blog/2016/03/03/schemehuan-jing-de-ji-chong-biao-xian-xing-shi-represtations/">
+  <meta property="og:url" content="https://jueqingsizhe66.github.io/blog/2016/03/03/schemehuan-jing-de-ji-chong-biao-xian-xing-shi-represtations/">
   <meta property="og:title" content="scheme环境的几种表现形式-represtations | Macro Life">
-  <meta property="og:description" content="scheme的解释器的构造，都需要enviroment类型的参与，environment类型的抽象确是影响到语言的具体性能。"><meta property="og:image" content="/img/icon-192.png">
-  <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
+  <meta property="og:description" content="scheme的解释器的构造，都需要enviroment类型的参与，environment类型的抽象确是影响到语言的具体性能。"><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
+  <meta property="twitter:image" content="https://jueqingsizhe66.github.io/img/icon-192.png"><meta property="og:locale" content="en-us">
   
     
       <meta property="article:published_time" content="2016-03-03T02:05:32&#43;08:00">
@@ -494,6 +494,7 @@
     
     Mar 3, 2016
   </span>
+
   
 
   
@@ -509,8 +510,8 @@
   <span class="middot-divider"></span>
   <span class="article-categories">
     <i class="fas fa-folder mr-1"></i><a href="/categories/scheme/">scheme</a></span>
-  
 
+  
 </div>
 
     
@@ -533,6 +534,24 @@
 
 
 
+
+
+<span class="article-metadata" >Reading time: 7 minutes and    21 seconds with 1619 words. </span>
+    <aside>
+        <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#增加一个-has-binding-实现">增加一个<code>has-binding</code> 实现</a></li>
+<li><a href="#拓展一个列表输入的功能-extend-env">拓展一个列表输入的功能<code>extend-env*</code></a></li>
+</ul></li>
+<li><a href="#结论">结论</a></li>
+</ul></li>
+</ul>
+</nav>
+    </aside>
   <div class="article-container">
 
     <div class="article-style">
@@ -899,7 +918,7 @@ empty-env  is '()
       
       
       <li>
-        <a href="https://twitter.com/intent/tweet?url=/blog/2016/03/03/schemehuan-jing-de-ji-chong-biao-xian-xing-shi-represtations/&amp;text=scheme%e7%8e%af%e5%a2%83%e7%9a%84%e5%87%a0%e7%a7%8d%e8%a1%a8%e7%8e%b0%e5%bd%a2%e5%bc%8f-represtations" target="_blank" rel="noopener" class="share-btn-twitter">
+        <a href="https://twitter.com/intent/tweet?url=https://jueqingsizhe66.github.io/blog/2016/03/03/schemehuan-jing-de-ji-chong-biao-xian-xing-shi-represtations/&amp;text=scheme%e7%8e%af%e5%a2%83%e7%9a%84%e5%87%a0%e7%a7%8d%e8%a1%a8%e7%8e%b0%e5%bd%a2%e5%bc%8f-represtations" target="_blank" rel="noopener" class="share-btn-twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -912,7 +931,7 @@ empty-env  is '()
       
       
       <li>
-        <a href="https://www.facebook.com/sharer.php?u=/blog/2016/03/03/schemehuan-jing-de-ji-chong-biao-xian-xing-shi-represtations/&amp;t=scheme%e7%8e%af%e5%a2%83%e7%9a%84%e5%87%a0%e7%a7%8d%e8%a1%a8%e7%8e%b0%e5%bd%a2%e5%bc%8f-represtations" target="_blank" rel="noopener" class="share-btn-facebook">
+        <a href="https://www.facebook.com/sharer.php?u=https://jueqingsizhe66.github.io/blog/2016/03/03/schemehuan-jing-de-ji-chong-biao-xian-xing-shi-represtations/&amp;t=scheme%e7%8e%af%e5%a2%83%e7%9a%84%e5%87%a0%e7%a7%8d%e8%a1%a8%e7%8e%b0%e5%bd%a2%e5%bc%8f-represtations" target="_blank" rel="noopener" class="share-btn-facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
@@ -925,7 +944,7 @@ empty-env  is '()
       
       
       <li>
-        <a href="mailto:?subject=scheme%e7%8e%af%e5%a2%83%e7%9a%84%e5%87%a0%e7%a7%8d%e8%a1%a8%e7%8e%b0%e5%bd%a2%e5%bc%8f-represtations&amp;body=/blog/2016/03/03/schemehuan-jing-de-ji-chong-biao-xian-xing-shi-represtations/" target="_blank" rel="noopener" class="share-btn-email">
+        <a href="mailto:?subject=scheme%e7%8e%af%e5%a2%83%e7%9a%84%e5%87%a0%e7%a7%8d%e8%a1%a8%e7%8e%b0%e5%bd%a2%e5%bc%8f-represtations&amp;body=https://jueqingsizhe66.github.io/blog/2016/03/03/schemehuan-jing-de-ji-chong-biao-xian-xing-shi-represtations/" target="_blank" rel="noopener" class="share-btn-email">
           <i class="fas fa-envelope"></i>
         </a>
       </li>
@@ -938,7 +957,7 @@ empty-env  is '()
       
       
       <li>
-        <a href="https://www.linkedin.com/shareArticle?url=/blog/2016/03/03/schemehuan-jing-de-ji-chong-biao-xian-xing-shi-represtations/&amp;title=scheme%e7%8e%af%e5%a2%83%e7%9a%84%e5%87%a0%e7%a7%8d%e8%a1%a8%e7%8e%b0%e5%bd%a2%e5%bc%8f-represtations" target="_blank" rel="noopener" class="share-btn-linkedin">
+        <a href="https://www.linkedin.com/shareArticle?url=https://jueqingsizhe66.github.io/blog/2016/03/03/schemehuan-jing-de-ji-chong-biao-xian-xing-shi-represtations/&amp;title=scheme%e7%8e%af%e5%a2%83%e7%9a%84%e5%87%a0%e7%a7%8d%e8%a1%a8%e7%8e%b0%e5%bd%a2%e5%bc%8f-represtations" target="_blank" rel="noopener" class="share-btn-linkedin">
           <i class="fab fa-linkedin-in"></i>
         </a>
       </li>
@@ -951,7 +970,7 @@ empty-env  is '()
       
       
       <li>
-        <a href="https://web.whatsapp.com/send?text=scheme%e7%8e%af%e5%a2%83%e7%9a%84%e5%87%a0%e7%a7%8d%e8%a1%a8%e7%8e%b0%e5%bd%a2%e5%bc%8f-represtations%20/blog/2016/03/03/schemehuan-jing-de-ji-chong-biao-xian-xing-shi-represtations/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+        <a href="https://web.whatsapp.com/send?text=scheme%e7%8e%af%e5%a2%83%e7%9a%84%e5%87%a0%e7%a7%8d%e8%a1%a8%e7%8e%b0%e5%bd%a2%e5%bc%8f-represtations%20https://jueqingsizhe66.github.io/blog/2016/03/03/schemehuan-jing-de-ji-chong-biao-xian-xing-shi-represtations/" target="_blank" rel="noopener" class="share-btn-whatsapp">
           <i class="fab fa-whatsapp"></i>
         </a>
       </li>
@@ -964,7 +983,7 @@ empty-env  is '()
       
       
       <li>
-        <a href="https://service.weibo.com/share/share.php?url=/blog/2016/03/03/schemehuan-jing-de-ji-chong-biao-xian-xing-shi-represtations/&amp;title=scheme%e7%8e%af%e5%a2%83%e7%9a%84%e5%87%a0%e7%a7%8d%e8%a1%a8%e7%8e%b0%e5%bd%a2%e5%bc%8f-represtations" target="_blank" rel="noopener" class="share-btn-weibo">
+        <a href="https://service.weibo.com/share/share.php?url=https://jueqingsizhe66.github.io/blog/2016/03/03/schemehuan-jing-de-ji-chong-biao-xian-xing-shi-represtations/&amp;title=scheme%e7%8e%af%e5%a2%83%e7%9a%84%e5%87%a0%e7%a7%8d%e8%a1%a8%e7%8e%b0%e5%bd%a2%e5%bc%8f-represtations" target="_blank" rel="noopener" class="share-btn-weibo">
           <i class="fab fa-weibo"></i>
         </a>
       </li>
@@ -1003,7 +1022,7 @@ empty-env  is '()
     
 
     <div class="media-body">
-      <h5 class="card-title"><a href="/">Ye Zhaoliang</a></h5>
+      <h5 class="card-title"><a href="https://jueqingsizhe66.github.io/">Ye Zhaoliang</a></h5>
       <h6 class="card-subtitle">Engineer of offshore wind turbine technique research</h6>
       <p class="card-text">My research interests include distributed energy, wind turbine power generation technique , Computational fluid dynamic and programmable matter.</p>
       <ul class="network-icon" aria-hidden="true">
@@ -1222,7 +1241,7 @@ empty-env  is '()
   
 
   <p class="powered-by">
-    
+    &copy;2019 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

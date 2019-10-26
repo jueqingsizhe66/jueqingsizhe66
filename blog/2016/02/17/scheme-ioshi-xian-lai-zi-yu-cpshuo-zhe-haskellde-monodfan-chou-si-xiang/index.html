@@ -31,7 +31,7 @@
   <meta name="description" content="scheme中IO的实现类似于CPS在原来函数的基础上增加了一个控制变量。">
 
   
-  <link rel="alternate" hreflang="en-us" href="/blog/2016/02/17/scheme-ioshi-xian-lai-zi-yu-cpshuo-zhe-haskellde-monodfan-chou-si-xiang/">
+  <link rel="alternate" hreflang="en-us" href="https://jueqingsizhe66.github.io/blog/2016/02/17/scheme-ioshi-xian-lai-zi-yu-cpshuo-zhe-haskellde-monodfan-chou-si-xiang/">
 
   
 
@@ -99,7 +99,7 @@
   <link rel="icon" type="image/png" href="/img/icon-32.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="/blog/2016/02/17/scheme-ioshi-xian-lai-zi-yu-cpshuo-zhe-haskellde-monodfan-chou-si-xiang/">
+  <link rel="canonical" href="https://jueqingsizhe66.github.io/blog/2016/02/17/scheme-ioshi-xian-lai-zi-yu-cpshuo-zhe-haskellde-monodfan-chou-si-xiang/">
 
   
   
@@ -115,10 +115,10 @@
   <meta property="twitter:creator" content="@jueqingsizhe66">
   
   <meta property="og:site_name" content="Macro Life">
-  <meta property="og:url" content="/blog/2016/02/17/scheme-ioshi-xian-lai-zi-yu-cpshuo-zhe-haskellde-monodfan-chou-si-xiang/">
+  <meta property="og:url" content="https://jueqingsizhe66.github.io/blog/2016/02/17/scheme-ioshi-xian-lai-zi-yu-cpshuo-zhe-haskellde-monodfan-chou-si-xiang/">
   <meta property="og:title" content="scheme IO实现来自于CPS或者haskell的monod范畴思想 | Macro Life">
-  <meta property="og:description" content="scheme中IO的实现类似于CPS在原来函数的基础上增加了一个控制变量。"><meta property="og:image" content="/img/icon-192.png">
-  <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
+  <meta property="og:description" content="scheme中IO的实现类似于CPS在原来函数的基础上增加了一个控制变量。"><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
+  <meta property="twitter:image" content="https://jueqingsizhe66.github.io/img/icon-192.png"><meta property="og:locale" content="en-us">
   
     
       <meta property="article:published_time" content="2016-02-17T10:58:46&#43;08:00">
@@ -494,6 +494,7 @@
     
     Feb 17, 2016
   </span>
+
   
 
   
@@ -509,8 +510,8 @@
   <span class="middot-divider"></span>
   <span class="article-categories">
     <i class="fas fa-folder mr-1"></i><a href="/categories/scheme/">scheme</a></span>
-  
 
+  
 </div>
 
     
@@ -533,6 +534,21 @@
 
 
 
+
+
+<span class="article-metadata" >Reading time: 2 minutes and    3 seconds with 452 words. </span>
+    <aside>
+        <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#original-style">original style</a></li>
+<li><a href="#cps-style">cps style</a></li>
+<li><a href="#其他io语法">其他IO语法</a></li>
+</ul></li>
+</ul>
+</nav>
+    </aside>
   <div class="article-container">
 
     <div class="article-style">
@@ -686,7 +702,7 @@
       
       
       <li>
-        <a href="https://twitter.com/intent/tweet?url=/blog/2016/02/17/scheme-ioshi-xian-lai-zi-yu-cpshuo-zhe-haskellde-monodfan-chou-si-xiang/&amp;text=scheme%20IO%e5%ae%9e%e7%8e%b0%e6%9d%a5%e8%87%aa%e4%ba%8eCPS%e6%88%96%e8%80%85haskell%e7%9a%84monod%e8%8c%83%e7%95%b4%e6%80%9d%e6%83%b3" target="_blank" rel="noopener" class="share-btn-twitter">
+        <a href="https://twitter.com/intent/tweet?url=https://jueqingsizhe66.github.io/blog/2016/02/17/scheme-ioshi-xian-lai-zi-yu-cpshuo-zhe-haskellde-monodfan-chou-si-xiang/&amp;text=scheme%20IO%e5%ae%9e%e7%8e%b0%e6%9d%a5%e8%87%aa%e4%ba%8eCPS%e6%88%96%e8%80%85haskell%e7%9a%84monod%e8%8c%83%e7%95%b4%e6%80%9d%e6%83%b3" target="_blank" rel="noopener" class="share-btn-twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -699,7 +715,7 @@
       
       
       <li>
-        <a href="https://www.facebook.com/sharer.php?u=/blog/2016/02/17/scheme-ioshi-xian-lai-zi-yu-cpshuo-zhe-haskellde-monodfan-chou-si-xiang/&amp;t=scheme%20IO%e5%ae%9e%e7%8e%b0%e6%9d%a5%e8%87%aa%e4%ba%8eCPS%e6%88%96%e8%80%85haskell%e7%9a%84monod%e8%8c%83%e7%95%b4%e6%80%9d%e6%83%b3" target="_blank" rel="noopener" class="share-btn-facebook">
+        <a href="https://www.facebook.com/sharer.php?u=https://jueqingsizhe66.github.io/blog/2016/02/17/scheme-ioshi-xian-lai-zi-yu-cpshuo-zhe-haskellde-monodfan-chou-si-xiang/&amp;t=scheme%20IO%e5%ae%9e%e7%8e%b0%e6%9d%a5%e8%87%aa%e4%ba%8eCPS%e6%88%96%e8%80%85haskell%e7%9a%84monod%e8%8c%83%e7%95%b4%e6%80%9d%e6%83%b3" target="_blank" rel="noopener" class="share-btn-facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
@@ -712,7 +728,7 @@
       
       
       <li>
-        <a href="mailto:?subject=scheme%20IO%e5%ae%9e%e7%8e%b0%e6%9d%a5%e8%87%aa%e4%ba%8eCPS%e6%88%96%e8%80%85haskell%e7%9a%84monod%e8%8c%83%e7%95%b4%e6%80%9d%e6%83%b3&amp;body=/blog/2016/02/17/scheme-ioshi-xian-lai-zi-yu-cpshuo-zhe-haskellde-monodfan-chou-si-xiang/" target="_blank" rel="noopener" class="share-btn-email">
+        <a href="mailto:?subject=scheme%20IO%e5%ae%9e%e7%8e%b0%e6%9d%a5%e8%87%aa%e4%ba%8eCPS%e6%88%96%e8%80%85haskell%e7%9a%84monod%e8%8c%83%e7%95%b4%e6%80%9d%e6%83%b3&amp;body=https://jueqingsizhe66.github.io/blog/2016/02/17/scheme-ioshi-xian-lai-zi-yu-cpshuo-zhe-haskellde-monodfan-chou-si-xiang/" target="_blank" rel="noopener" class="share-btn-email">
           <i class="fas fa-envelope"></i>
         </a>
       </li>
@@ -725,7 +741,7 @@
       
       
       <li>
-        <a href="https://www.linkedin.com/shareArticle?url=/blog/2016/02/17/scheme-ioshi-xian-lai-zi-yu-cpshuo-zhe-haskellde-monodfan-chou-si-xiang/&amp;title=scheme%20IO%e5%ae%9e%e7%8e%b0%e6%9d%a5%e8%87%aa%e4%ba%8eCPS%e6%88%96%e8%80%85haskell%e7%9a%84monod%e8%8c%83%e7%95%b4%e6%80%9d%e6%83%b3" target="_blank" rel="noopener" class="share-btn-linkedin">
+        <a href="https://www.linkedin.com/shareArticle?url=https://jueqingsizhe66.github.io/blog/2016/02/17/scheme-ioshi-xian-lai-zi-yu-cpshuo-zhe-haskellde-monodfan-chou-si-xiang/&amp;title=scheme%20IO%e5%ae%9e%e7%8e%b0%e6%9d%a5%e8%87%aa%e4%ba%8eCPS%e6%88%96%e8%80%85haskell%e7%9a%84monod%e8%8c%83%e7%95%b4%e6%80%9d%e6%83%b3" target="_blank" rel="noopener" class="share-btn-linkedin">
           <i class="fab fa-linkedin-in"></i>
         </a>
       </li>
@@ -738,7 +754,7 @@
       
       
       <li>
-        <a href="https://web.whatsapp.com/send?text=scheme%20IO%e5%ae%9e%e7%8e%b0%e6%9d%a5%e8%87%aa%e4%ba%8eCPS%e6%88%96%e8%80%85haskell%e7%9a%84monod%e8%8c%83%e7%95%b4%e6%80%9d%e6%83%b3%20/blog/2016/02/17/scheme-ioshi-xian-lai-zi-yu-cpshuo-zhe-haskellde-monodfan-chou-si-xiang/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+        <a href="https://web.whatsapp.com/send?text=scheme%20IO%e5%ae%9e%e7%8e%b0%e6%9d%a5%e8%87%aa%e4%ba%8eCPS%e6%88%96%e8%80%85haskell%e7%9a%84monod%e8%8c%83%e7%95%b4%e6%80%9d%e6%83%b3%20https://jueqingsizhe66.github.io/blog/2016/02/17/scheme-ioshi-xian-lai-zi-yu-cpshuo-zhe-haskellde-monodfan-chou-si-xiang/" target="_blank" rel="noopener" class="share-btn-whatsapp">
           <i class="fab fa-whatsapp"></i>
         </a>
       </li>
@@ -751,7 +767,7 @@
       
       
       <li>
-        <a href="https://service.weibo.com/share/share.php?url=/blog/2016/02/17/scheme-ioshi-xian-lai-zi-yu-cpshuo-zhe-haskellde-monodfan-chou-si-xiang/&amp;title=scheme%20IO%e5%ae%9e%e7%8e%b0%e6%9d%a5%e8%87%aa%e4%ba%8eCPS%e6%88%96%e8%80%85haskell%e7%9a%84monod%e8%8c%83%e7%95%b4%e6%80%9d%e6%83%b3" target="_blank" rel="noopener" class="share-btn-weibo">
+        <a href="https://service.weibo.com/share/share.php?url=https://jueqingsizhe66.github.io/blog/2016/02/17/scheme-ioshi-xian-lai-zi-yu-cpshuo-zhe-haskellde-monodfan-chou-si-xiang/&amp;title=scheme%20IO%e5%ae%9e%e7%8e%b0%e6%9d%a5%e8%87%aa%e4%ba%8eCPS%e6%88%96%e8%80%85haskell%e7%9a%84monod%e8%8c%83%e7%95%b4%e6%80%9d%e6%83%b3" target="_blank" rel="noopener" class="share-btn-weibo">
           <i class="fab fa-weibo"></i>
         </a>
       </li>
@@ -790,7 +806,7 @@
     
 
     <div class="media-body">
-      <h5 class="card-title"><a href="/">Ye Zhaoliang</a></h5>
+      <h5 class="card-title"><a href="https://jueqingsizhe66.github.io/">Ye Zhaoliang</a></h5>
       <h6 class="card-subtitle">Engineer of offshore wind turbine technique research</h6>
       <p class="card-text">My research interests include distributed energy, wind turbine power generation technique , Computational fluid dynamic and programmable matter.</p>
       <ul class="network-icon" aria-hidden="true">
@@ -1009,7 +1025,7 @@
   
 
   <p class="powered-by">
-    
+    &copy;2019 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

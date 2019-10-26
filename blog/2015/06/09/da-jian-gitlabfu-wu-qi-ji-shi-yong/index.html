@@ -42,7 +42,7 @@ Haskell开发的Darcs
 我们就可以让很多内部的人员(局域网)使用了，gitlab正是为一堆比较懒的人设计的基于git的平台搭建。">
 
   
-  <link rel="alternate" hreflang="en-us" href="/blog/2015/06/09/da-jian-gitlabfu-wu-qi-ji-shi-yong/">
+  <link rel="alternate" hreflang="en-us" href="https://jueqingsizhe66.github.io/blog/2015/06/09/da-jian-gitlabfu-wu-qi-ji-shi-yong/">
 
   
 
@@ -110,7 +110,7 @@ Haskell开发的Darcs
   <link rel="icon" type="image/png" href="/img/icon-32.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="/blog/2015/06/09/da-jian-gitlabfu-wu-qi-ji-shi-yong/">
+  <link rel="canonical" href="https://jueqingsizhe66.github.io/blog/2015/06/09/da-jian-gitlabfu-wu-qi-ji-shi-yong/">
 
   
   
@@ -126,7 +126,7 @@ Haskell开发的Darcs
   <meta property="twitter:creator" content="@jueqingsizhe66">
   
   <meta property="og:site_name" content="Macro Life">
-  <meta property="og:url" content="/blog/2015/06/09/da-jian-gitlabfu-wu-qi-ji-shi-yong/">
+  <meta property="og:url" content="https://jueqingsizhe66.github.io/blog/2015/06/09/da-jian-gitlabfu-wu-qi-ji-shi-yong/">
   <meta property="og:title" content="搭建gitlab服务器及使用 | Macro Life">
   <meta property="og:description" content="现在有很多的公开的代码服务器
 比如最为出名的是github
@@ -139,8 +139,8 @@ Haskell开发的Darcs
 
 
 然而，很多时候我们并不想把所有的东西都公开，于是想有一个私有的云平台，这样
-我们就可以让很多内部的人员(局域网)使用了，gitlab正是为一堆比较懒的人设计的基于git的平台搭建。"><meta property="og:image" content="/img/icon-192.png">
-  <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
+我们就可以让很多内部的人员(局域网)使用了，gitlab正是为一堆比较懒的人设计的基于git的平台搭建。"><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
+  <meta property="twitter:image" content="https://jueqingsizhe66.github.io/img/icon-192.png"><meta property="og:locale" content="en-us">
   
     
       <meta property="article:published_time" content="2015-06-09T19:22:07&#43;08:00">
@@ -516,6 +516,7 @@ Haskell开发的Darcs
     
     Jun 9, 2015
   </span>
+
   
 
   
@@ -531,8 +532,8 @@ Haskell开发的Darcs
   <span class="middot-divider"></span>
   <span class="article-categories">
     <i class="fas fa-folder mr-1"></i><a href="/categories/git/">git</a></span>
-  
 
+  
 </div>
 
     
@@ -555,6 +556,39 @@ Haskell开发的Darcs
 
 
 
+
+
+<span class="article-metadata" >Reading time: 7 minutes and    43 seconds with 1701 words. </span>
+    <aside>
+        <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#参考链接">参考链接</a>
+<ul>
+<li><a href="#开始安装">开始安装</a></li>
+</ul></li>
+<li><a href="#安装完毕-进行ssh配置的注意点">安装完毕，进行ssh配置的注意点</a>
+<ul>
+<li><a href="#问题是rakegemes-rb里的一个block-有问题-提醒rake-is-not-the-part-of-the-gem">问题是rakegemes.rb里的一个block 有问题，提醒rake is not the part of the gem</a></li>
+</ul></li>
+<li><a href="#开始使用">开始使用</a>
+<ul>
+<li><a href="#我在网页上创建了一个项目">我在网页上创建了一个项目</a></li>
+<li><a href="#测试是否走通了">测试是否走通了</a></li>
+<li><a href="#reate-repository-创建仓库">reate Repository（创建仓库）</a></li>
+<li><a href="#对于已存在git项目">对于已存在Git项目：</a></li>
+</ul></li>
+<li><a href="#多用户问题">多用户问题</a>
+<ul>
+<li><a href="#注意验证用户">注意验证用户</a></li>
+<li><a href="#我的目录分门别类-目的是一个项目一个文件夹">我的目录分门别类(目的是一个项目一个文件夹)</a></li>
+<li><a href="#我的一次使用提交">我的一次使用提交</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+    </aside>
   <div class="article-container">
 
     <div class="article-style">
@@ -758,7 +792,7 @@ To git@127.0.1.1:xinran/latex-chines-english.git
       
       
       <li>
-        <a href="https://twitter.com/intent/tweet?url=/blog/2015/06/09/da-jian-gitlabfu-wu-qi-ji-shi-yong/&amp;text=%e6%90%ad%e5%bb%bagitlab%e6%9c%8d%e5%8a%a1%e5%99%a8%e5%8f%8a%e4%bd%bf%e7%94%a8" target="_blank" rel="noopener" class="share-btn-twitter">
+        <a href="https://twitter.com/intent/tweet?url=https://jueqingsizhe66.github.io/blog/2015/06/09/da-jian-gitlabfu-wu-qi-ji-shi-yong/&amp;text=%e6%90%ad%e5%bb%bagitlab%e6%9c%8d%e5%8a%a1%e5%99%a8%e5%8f%8a%e4%bd%bf%e7%94%a8" target="_blank" rel="noopener" class="share-btn-twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -771,7 +805,7 @@ To git@127.0.1.1:xinran/latex-chines-english.git
       
       
       <li>
-        <a href="https://www.facebook.com/sharer.php?u=/blog/2015/06/09/da-jian-gitlabfu-wu-qi-ji-shi-yong/&amp;t=%e6%90%ad%e5%bb%bagitlab%e6%9c%8d%e5%8a%a1%e5%99%a8%e5%8f%8a%e4%bd%bf%e7%94%a8" target="_blank" rel="noopener" class="share-btn-facebook">
+        <a href="https://www.facebook.com/sharer.php?u=https://jueqingsizhe66.github.io/blog/2015/06/09/da-jian-gitlabfu-wu-qi-ji-shi-yong/&amp;t=%e6%90%ad%e5%bb%bagitlab%e6%9c%8d%e5%8a%a1%e5%99%a8%e5%8f%8a%e4%bd%bf%e7%94%a8" target="_blank" rel="noopener" class="share-btn-facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
@@ -784,7 +818,7 @@ To git@127.0.1.1:xinran/latex-chines-english.git
       
       
       <li>
-        <a href="mailto:?subject=%e6%90%ad%e5%bb%bagitlab%e6%9c%8d%e5%8a%a1%e5%99%a8%e5%8f%8a%e4%bd%bf%e7%94%a8&amp;body=/blog/2015/06/09/da-jian-gitlabfu-wu-qi-ji-shi-yong/" target="_blank" rel="noopener" class="share-btn-email">
+        <a href="mailto:?subject=%e6%90%ad%e5%bb%bagitlab%e6%9c%8d%e5%8a%a1%e5%99%a8%e5%8f%8a%e4%bd%bf%e7%94%a8&amp;body=https://jueqingsizhe66.github.io/blog/2015/06/09/da-jian-gitlabfu-wu-qi-ji-shi-yong/" target="_blank" rel="noopener" class="share-btn-email">
           <i class="fas fa-envelope"></i>
         </a>
       </li>
@@ -797,7 +831,7 @@ To git@127.0.1.1:xinran/latex-chines-english.git
       
       
       <li>
-        <a href="https://www.linkedin.com/shareArticle?url=/blog/2015/06/09/da-jian-gitlabfu-wu-qi-ji-shi-yong/&amp;title=%e6%90%ad%e5%bb%bagitlab%e6%9c%8d%e5%8a%a1%e5%99%a8%e5%8f%8a%e4%bd%bf%e7%94%a8" target="_blank" rel="noopener" class="share-btn-linkedin">
+        <a href="https://www.linkedin.com/shareArticle?url=https://jueqingsizhe66.github.io/blog/2015/06/09/da-jian-gitlabfu-wu-qi-ji-shi-yong/&amp;title=%e6%90%ad%e5%bb%bagitlab%e6%9c%8d%e5%8a%a1%e5%99%a8%e5%8f%8a%e4%bd%bf%e7%94%a8" target="_blank" rel="noopener" class="share-btn-linkedin">
           <i class="fab fa-linkedin-in"></i>
         </a>
       </li>
@@ -810,7 +844,7 @@ To git@127.0.1.1:xinran/latex-chines-english.git
       
       
       <li>
-        <a href="https://web.whatsapp.com/send?text=%e6%90%ad%e5%bb%bagitlab%e6%9c%8d%e5%8a%a1%e5%99%a8%e5%8f%8a%e4%bd%bf%e7%94%a8%20/blog/2015/06/09/da-jian-gitlabfu-wu-qi-ji-shi-yong/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+        <a href="https://web.whatsapp.com/send?text=%e6%90%ad%e5%bb%bagitlab%e6%9c%8d%e5%8a%a1%e5%99%a8%e5%8f%8a%e4%bd%bf%e7%94%a8%20https://jueqingsizhe66.github.io/blog/2015/06/09/da-jian-gitlabfu-wu-qi-ji-shi-yong/" target="_blank" rel="noopener" class="share-btn-whatsapp">
           <i class="fab fa-whatsapp"></i>
         </a>
       </li>
@@ -823,7 +857,7 @@ To git@127.0.1.1:xinran/latex-chines-english.git
       
       
       <li>
-        <a href="https://service.weibo.com/share/share.php?url=/blog/2015/06/09/da-jian-gitlabfu-wu-qi-ji-shi-yong/&amp;title=%e6%90%ad%e5%bb%bagitlab%e6%9c%8d%e5%8a%a1%e5%99%a8%e5%8f%8a%e4%bd%bf%e7%94%a8" target="_blank" rel="noopener" class="share-btn-weibo">
+        <a href="https://service.weibo.com/share/share.php?url=https://jueqingsizhe66.github.io/blog/2015/06/09/da-jian-gitlabfu-wu-qi-ji-shi-yong/&amp;title=%e6%90%ad%e5%bb%bagitlab%e6%9c%8d%e5%8a%a1%e5%99%a8%e5%8f%8a%e4%bd%bf%e7%94%a8" target="_blank" rel="noopener" class="share-btn-weibo">
           <i class="fab fa-weibo"></i>
         </a>
       </li>
@@ -862,7 +896,7 @@ To git@127.0.1.1:xinran/latex-chines-english.git
     
 
     <div class="media-body">
-      <h5 class="card-title"><a href="/">Ye Zhaoliang</a></h5>
+      <h5 class="card-title"><a href="https://jueqingsizhe66.github.io/">Ye Zhaoliang</a></h5>
       <h6 class="card-subtitle">Engineer of offshore wind turbine technique research</h6>
       <p class="card-text">My research interests include distributed energy, wind turbine power generation technique , Computational fluid dynamic and programmable matter.</p>
       <ul class="network-icon" aria-hidden="true">
@@ -1081,7 +1115,7 @@ To git@127.0.1.1:xinran/latex-chines-english.git
   
 
   <p class="powered-by">
-    
+    &copy;2019 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

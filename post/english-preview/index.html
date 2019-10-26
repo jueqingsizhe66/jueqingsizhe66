@@ -32,7 +32,7 @@
 We&rsquo;ll start with creating a new site with a very basic template.">
 
   
-  <link rel="alternate" hreflang="en-us" href="/post/english-preview/">
+  <link rel="alternate" hreflang="en-us" href="https://jueqingsizhe66.github.io/post/english-preview/">
 
   
 
@@ -100,7 +100,7 @@ We&rsquo;ll start with creating a new site with a very basic template.">
   <link rel="icon" type="image/png" href="/img/icon-32.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="/post/english-preview/">
+  <link rel="canonical" href="https://jueqingsizhe66.github.io/post/english-preview/">
 
   
   
@@ -116,11 +116,11 @@ We&rsquo;ll start with creating a new site with a very basic template.">
   <meta property="twitter:creator" content="@jueqingsizhe66">
   
   <meta property="og:site_name" content="Macro Life">
-  <meta property="og:url" content="/post/english-preview/">
+  <meta property="og:url" content="https://jueqingsizhe66.github.io/post/english-preview/">
   <meta property="og:title" content="[English] Creating a New Theme | Macro Life">
   <meta property="og:description" content="Introduction This tutorial will show you how to create a simple theme in Hugo. I assume that you are familiar with HTML, the bash command line, and that you are comfortable using Markdown to format content. I&rsquo;ll explain how Hugo uses templates and how you can organize your templates to create a theme. I won&rsquo;t cover using CSS to style your theme.
-We&rsquo;ll start with creating a new site with a very basic template."><meta property="og:image" content="/img/icon-192.png">
-  <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
+We&rsquo;ll start with creating a new site with a very basic template."><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
+  <meta property="twitter:image" content="https://jueqingsizhe66.github.io/img/icon-192.png"><meta property="og:locale" content="en-us">
   
     
       <meta property="article:published_time" content="2017-08-31T15:43:48&#43;08:00">
@@ -151,7 +151,7 @@ We&rsquo;ll start with creating a new site with a very basic template."><meta pr
   "@type": "BlogPosting",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "/post/english-preview/"
+    "@id": "https://jueqingsizhe66.github.io/post/english-preview/"
   },
   "headline": "[English] Creating a New Theme",
   
@@ -168,7 +168,7 @@ We&rsquo;ll start with creating a new site with a very basic template."><meta pr
     "name": "Macro Life",
     "logo": {
       "@type": "ImageObject",
-      "url": "/img/icon-512.png"
+      "url": "https://jueqingsizhe66.github.io/img/icon-512.png"
     }
   },
   "description": "Introduction This tutorial will show you how to create a simple theme in Hugo. I assume that you are familiar with HTML, the bash command line, and that you are comfortable using Markdown to format content. I\u0026rsquo;ll explain how Hugo uses templates and how you can organize your templates to create a theme. I won\u0026rsquo;t cover using CSS to style your theme.\nWe\u0026rsquo;ll start with creating a new site with a very basic template."
@@ -541,6 +541,7 @@ We&rsquo;ll start with creating a new site with a very basic template."><meta pr
     
     Aug 31, 2017
   </span>
+
   
 
   
@@ -549,6 +550,7 @@ We&rsquo;ll start with creating a new site with a very basic template."><meta pr
   <span class="middot-divider"></span>
   <span class="article-reading-time">
     34 min read
+
   </span>
   
 
@@ -561,8 +563,8 @@ We&rsquo;ll start with creating a new site with a very basic template."><meta pr
   <span class="middot-divider"></span>
   <span class="article-categories">
     <i class="fas fa-folder mr-1"></i><a href="/categories/english/">English</a></span>
-  
 
+  
 </div>
 
     
@@ -585,6 +587,89 @@ We&rsquo;ll start with creating a new site with a very basic template."><meta pr
 
 
 
+
+
+<span class="article-metadata" >Reading time: 33 minutes and    38 seconds with 7402 words. </span>
+    <aside>
+        <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#some-definitions">Some Definitions</a>
+<ul>
+<li><a href="#skins">Skins</a></li>
+<li><a href="#the-home-page">The Home Page</a></li>
+<li><a href="#site-configuration-file">Site Configuration File</a></li>
+<li><a href="#content">Content</a>
+<ul>
+<li><a href="#front-matter">Front Matter</a></li>
+<li><a href="#markdown">Markdown</a></li>
+</ul></li>
+<li><a href="#template-files">Template Files</a>
+<ul>
+<li><a href="#single-template">Single Template</a></li>
+<li><a href="#list-template">List Template</a></li>
+<li><a href="#partial-template">Partial Template</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#create-a-new-site">Create a New Site</a>
+<ul>
+<li><a href="#generate-the-html-for-the-new-site">Generate the HTML For the New Site</a></li>
+<li><a href="#test-the-new-site">Test the New Site</a></li>
+</ul></li>
+<li><a href="#create-a-new-theme">Create a New Theme</a>
+<ul>
+<li><a href="#create-a-skeleton">Create a Skeleton</a></li>
+<li><a href="#update-the-configuration-file-to-use-the-theme">Update the Configuration File to Use the Theme</a></li>
+<li><a href="#generate-the-site">Generate the Site</a>
+<ul>
+<li><a href="#the-home-page-1">The Home Page</a></li>
+<li><a href="#the-magic-of-static">The Magic of Static</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#the-theme-development-cycle">The Theme Development Cycle</a>
+<ul>
+<li><a href="#purge-the-public-directory">Purge the public/ Directory</a></li>
+<li><a href="#hugo-s-watch-option">Hugo&rsquo;s Watch Option</a></li>
+<li><a href="#live-reload">Live Reload</a></li>
+<li><a href="#development-commands">Development Commands</a></li>
+</ul></li>
+<li><a href="#update-the-home-page-template">Update the Home Page Template</a>
+<ul>
+<li><a href="#make-a-static-home-page">Make a Static Home Page</a>
+<ul>
+<li><a href="#live-reload-1">Live Reload</a></li>
+</ul></li>
+<li><a href="#build-a-dynamic-home-page">Build a &ldquo;Dynamic&rdquo; Home Page</a>
+<ul>
+<li><a href="#create-new-posts">Create New Posts</a></li>
+</ul></li>
+<li><a href="#list-and-single-templates">List and Single Templates</a></li>
+<li><a href="#add-content-to-the-homepage">Add Content to the Homepage</a></li>
+<li><a href="#add-content-to-the-posts">Add Content to the Posts</a>
+<ul>
+<li><a href="#update-the-template-file">Update the Template File</a></li>
+</ul></li>
+<li><a href="#linking-to-content">Linking to Content</a></li>
+<li><a href="#create-a-post-listing">Create a Post Listing</a></li>
+</ul></li>
+<li><a href="#creating-top-level-pages">Creating Top Level Pages</a></li>
+<li><a href="#sharing-templates">Sharing Templates</a>
+<ul>
+<li><a href="#create-the-header-and-footer-partials">Create the Header and Footer Partials</a></li>
+<li><a href="#update-the-home-page-template-to-use-the-partials">Update the Home Page Template to Use the Partials</a></li>
+<li><a href="#update-the-default-single-template-to-use-the-partials">Update the Default Single Template to Use the Partials</a></li>
+</ul></li>
+<li><a href="#add-date-published-to-posts">Add “Date Published” to Posts</a>
+<ul>
+<li><a href="#add-date-published-to-the-template">Add “Date Published” to the Template</a></li>
+<li><a href="#don-t-repeat-yourself">Don&rsquo;t Repeat Yourself</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+    </aside>
   <div class="article-container">
 
     <div class="article-style">
@@ -1713,7 +1798,7 @@ $ vi themes/zafta/layouts/_default/single.html
       
       
       <li>
-        <a href="https://twitter.com/intent/tweet?url=/post/english-preview/&amp;text=[English]%20Creating%20a%20New%20Theme" target="_blank" rel="noopener" class="share-btn-twitter">
+        <a href="https://twitter.com/intent/tweet?url=https://jueqingsizhe66.github.io/post/english-preview/&amp;text=[English]%20Creating%20a%20New%20Theme" target="_blank" rel="noopener" class="share-btn-twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -1726,7 +1811,7 @@ $ vi themes/zafta/layouts/_default/single.html
       
       
       <li>
-        <a href="https://www.facebook.com/sharer.php?u=/post/english-preview/&amp;t=[English]%20Creating%20a%20New%20Theme" target="_blank" rel="noopener" class="share-btn-facebook">
+        <a href="https://www.facebook.com/sharer.php?u=https://jueqingsizhe66.github.io/post/english-preview/&amp;t=[English]%20Creating%20a%20New%20Theme" target="_blank" rel="noopener" class="share-btn-facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
@@ -1739,7 +1824,7 @@ $ vi themes/zafta/layouts/_default/single.html
       
       
       <li>
-        <a href="mailto:?subject=[English]%20Creating%20a%20New%20Theme&amp;body=/post/english-preview/" target="_blank" rel="noopener" class="share-btn-email">
+        <a href="mailto:?subject=[English]%20Creating%20a%20New%20Theme&amp;body=https://jueqingsizhe66.github.io/post/english-preview/" target="_blank" rel="noopener" class="share-btn-email">
           <i class="fas fa-envelope"></i>
         </a>
       </li>
@@ -1752,7 +1837,7 @@ $ vi themes/zafta/layouts/_default/single.html
       
       
       <li>
-        <a href="https://www.linkedin.com/shareArticle?url=/post/english-preview/&amp;title=[English]%20Creating%20a%20New%20Theme" target="_blank" rel="noopener" class="share-btn-linkedin">
+        <a href="https://www.linkedin.com/shareArticle?url=https://jueqingsizhe66.github.io/post/english-preview/&amp;title=[English]%20Creating%20a%20New%20Theme" target="_blank" rel="noopener" class="share-btn-linkedin">
           <i class="fab fa-linkedin-in"></i>
         </a>
       </li>
@@ -1765,7 +1850,7 @@ $ vi themes/zafta/layouts/_default/single.html
       
       
       <li>
-        <a href="https://web.whatsapp.com/send?text=[English]%20Creating%20a%20New%20Theme%20/post/english-preview/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+        <a href="https://web.whatsapp.com/send?text=[English]%20Creating%20a%20New%20Theme%20https://jueqingsizhe66.github.io/post/english-preview/" target="_blank" rel="noopener" class="share-btn-whatsapp">
           <i class="fab fa-whatsapp"></i>
         </a>
       </li>
@@ -1778,7 +1863,7 @@ $ vi themes/zafta/layouts/_default/single.html
       
       
       <li>
-        <a href="https://service.weibo.com/share/share.php?url=/post/english-preview/&amp;title=[English]%20Creating%20a%20New%20Theme" target="_blank" rel="noopener" class="share-btn-weibo">
+        <a href="https://service.weibo.com/share/share.php?url=https://jueqingsizhe66.github.io/post/english-preview/&amp;title=[English]%20Creating%20a%20New%20Theme" target="_blank" rel="noopener" class="share-btn-weibo">
           <i class="fab fa-weibo"></i>
         </a>
       </li>
@@ -1817,7 +1902,7 @@ $ vi themes/zafta/layouts/_default/single.html
     
 
     <div class="media-body">
-      <h5 class="card-title"><a href="/">Ye Zhaoliang</a></h5>
+      <h5 class="card-title"><a href="https://jueqingsizhe66.github.io/">Ye Zhaoliang</a></h5>
       <h6 class="card-subtitle">Engineer of offshore wind turbine technique research</h6>
       <p class="card-text">My research interests include distributed energy, wind turbine power generation technique , Computational fluid dynamic and programmable matter.</p>
       <ul class="network-icon" aria-hidden="true">
@@ -2049,7 +2134,7 @@ $ vi themes/zafta/layouts/_default/single.html
   
 
   <p class="powered-by">
-    
+    &copy;2019 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

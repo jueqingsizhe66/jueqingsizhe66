@@ -33,7 +33,7 @@ It is not so important,but a good tools to record the grammer
 of the language.目的就是如何更简洁地定义语法。">
 
   
-  <link rel="alternate" hreflang="en-us" href="/blog/2016/02/26/some-notations-in-the-design-of-the-language/">
+  <link rel="alternate" hreflang="en-us" href="https://jueqingsizhe66.github.io/blog/2016/02/26/some-notations-in-the-design-of-the-language/">
 
   
 
@@ -101,7 +101,7 @@ of the language.目的就是如何更简洁地定义语法。">
   <link rel="icon" type="image/png" href="/img/icon-32.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="/blog/2016/02/26/some-notations-in-the-design-of-the-language/">
+  <link rel="canonical" href="https://jueqingsizhe66.github.io/blog/2016/02/26/some-notations-in-the-design-of-the-language/">
 
   
   
@@ -117,12 +117,12 @@ of the language.目的就是如何更简洁地定义语法。">
   <meta property="twitter:creator" content="@jueqingsizhe66">
   
   <meta property="og:site_name" content="Macro Life">
-  <meta property="og:url" content="/blog/2016/02/26/some-notations-in-the-design-of-the-language/">
+  <meta property="og:url" content="https://jueqingsizhe66.github.io/blog/2016/02/26/some-notations-in-the-design-of-the-language/">
   <meta property="og:title" content="Some notations in the design of the language | Macro Life">
   <meta property="og:description" content="What does it mean by Kleene star? What can it be used for?
 It is not so important,but a good tools to record the grammer
-of the language.目的就是如何更简洁地定义语法。"><meta property="og:image" content="/img/icon-192.png">
-  <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
+of the language.目的就是如何更简洁地定义语法。"><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
+  <meta property="twitter:image" content="https://jueqingsizhe66.github.io/img/icon-192.png"><meta property="og:locale" content="en-us">
   
     
       <meta property="article:published_time" content="2016-02-26T15:35:17&#43;08:00">
@@ -498,6 +498,7 @@ of the language.目的就是如何更简洁地定义语法。"><meta property="o
     
     Feb 26, 2016
   </span>
+
   
 
   
@@ -513,8 +514,8 @@ of the language.目的就是如何更简洁地定义语法。"><meta property="o
   <span class="middot-divider"></span>
   <span class="article-categories">
     <i class="fas fa-folder mr-1"></i><a href="/categories/scheme/">scheme</a></span>
-  
 
+  
 </div>
 
     
@@ -537,6 +538,32 @@ of the language.目的就是如何更简洁地定义语法。"><meta property="o
 
 
 
+
+
+<span class="article-metadata" >Reading time: 11 minutes and    48 seconds with 2599 words. </span>
+    <aside>
+        <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#几个基本字符">几个基本字符</a>
+<ul>
+<li><a href="#nonterminal-symbols">Nonterminal Symbols</a></li>
+<li><a href="#terminal-symbols">Terminal Symbols:</a></li>
+<li><a href="#production-the-rules">Production(The rules)</a></li>
+</ul></li>
+<li><a href="#语义推导-syntactic-derivation-练习">语义推导(Syntactic derivation)练习</a></li>
+<li><a href="#结论">结论</a></li>
+<li><a href="#subst采用kleene-star进行书写">subst采用kleene star进行书写</a></li>
+<li><a href="#define-datatype的运用">define-datatype的运用</a>
+<ul>
+<li><a href="#lc-exp-和s-list的具体实现">Lc-Exp 和S-list的具体实现</a></li>
+<li><a href="#expression-和-expval的具体定义和实现">expression 和 expval的具体定义和实现</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+    </aside>
   <div class="article-container">
 
     <div class="article-style">
@@ -1014,7 +1041,7 @@ expression的具体定义是</p>
       
       
       <li>
-        <a href="https://twitter.com/intent/tweet?url=/blog/2016/02/26/some-notations-in-the-design-of-the-language/&amp;text=Some%20notations%20in%20the%20design%20of%20the%20language" target="_blank" rel="noopener" class="share-btn-twitter">
+        <a href="https://twitter.com/intent/tweet?url=https://jueqingsizhe66.github.io/blog/2016/02/26/some-notations-in-the-design-of-the-language/&amp;text=Some%20notations%20in%20the%20design%20of%20the%20language" target="_blank" rel="noopener" class="share-btn-twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -1027,7 +1054,7 @@ expression的具体定义是</p>
       
       
       <li>
-        <a href="https://www.facebook.com/sharer.php?u=/blog/2016/02/26/some-notations-in-the-design-of-the-language/&amp;t=Some%20notations%20in%20the%20design%20of%20the%20language" target="_blank" rel="noopener" class="share-btn-facebook">
+        <a href="https://www.facebook.com/sharer.php?u=https://jueqingsizhe66.github.io/blog/2016/02/26/some-notations-in-the-design-of-the-language/&amp;t=Some%20notations%20in%20the%20design%20of%20the%20language" target="_blank" rel="noopener" class="share-btn-facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
@@ -1040,7 +1067,7 @@ expression的具体定义是</p>
       
       
       <li>
-        <a href="mailto:?subject=Some%20notations%20in%20the%20design%20of%20the%20language&amp;body=/blog/2016/02/26/some-notations-in-the-design-of-the-language/" target="_blank" rel="noopener" class="share-btn-email">
+        <a href="mailto:?subject=Some%20notations%20in%20the%20design%20of%20the%20language&amp;body=https://jueqingsizhe66.github.io/blog/2016/02/26/some-notations-in-the-design-of-the-language/" target="_blank" rel="noopener" class="share-btn-email">
           <i class="fas fa-envelope"></i>
         </a>
       </li>
@@ -1053,7 +1080,7 @@ expression的具体定义是</p>
       
       
       <li>
-        <a href="https://www.linkedin.com/shareArticle?url=/blog/2016/02/26/some-notations-in-the-design-of-the-language/&amp;title=Some%20notations%20in%20the%20design%20of%20the%20language" target="_blank" rel="noopener" class="share-btn-linkedin">
+        <a href="https://www.linkedin.com/shareArticle?url=https://jueqingsizhe66.github.io/blog/2016/02/26/some-notations-in-the-design-of-the-language/&amp;title=Some%20notations%20in%20the%20design%20of%20the%20language" target="_blank" rel="noopener" class="share-btn-linkedin">
           <i class="fab fa-linkedin-in"></i>
         </a>
       </li>
@@ -1066,7 +1093,7 @@ expression的具体定义是</p>
       
       
       <li>
-        <a href="https://web.whatsapp.com/send?text=Some%20notations%20in%20the%20design%20of%20the%20language%20/blog/2016/02/26/some-notations-in-the-design-of-the-language/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+        <a href="https://web.whatsapp.com/send?text=Some%20notations%20in%20the%20design%20of%20the%20language%20https://jueqingsizhe66.github.io/blog/2016/02/26/some-notations-in-the-design-of-the-language/" target="_blank" rel="noopener" class="share-btn-whatsapp">
           <i class="fab fa-whatsapp"></i>
         </a>
       </li>
@@ -1079,7 +1106,7 @@ expression的具体定义是</p>
       
       
       <li>
-        <a href="https://service.weibo.com/share/share.php?url=/blog/2016/02/26/some-notations-in-the-design-of-the-language/&amp;title=Some%20notations%20in%20the%20design%20of%20the%20language" target="_blank" rel="noopener" class="share-btn-weibo">
+        <a href="https://service.weibo.com/share/share.php?url=https://jueqingsizhe66.github.io/blog/2016/02/26/some-notations-in-the-design-of-the-language/&amp;title=Some%20notations%20in%20the%20design%20of%20the%20language" target="_blank" rel="noopener" class="share-btn-weibo">
           <i class="fab fa-weibo"></i>
         </a>
       </li>
@@ -1118,7 +1145,7 @@ expression的具体定义是</p>
     
 
     <div class="media-body">
-      <h5 class="card-title"><a href="/">Ye Zhaoliang</a></h5>
+      <h5 class="card-title"><a href="https://jueqingsizhe66.github.io/">Ye Zhaoliang</a></h5>
       <h6 class="card-subtitle">Engineer of offshore wind turbine technique research</h6>
       <p class="card-text">My research interests include distributed energy, wind turbine power generation technique , Computational fluid dynamic and programmable matter.</p>
       <ul class="network-icon" aria-hidden="true">
@@ -1337,7 +1364,7 @@ expression的具体定义是</p>
   
 
   <p class="powered-by">
-    
+    &copy;2019 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
