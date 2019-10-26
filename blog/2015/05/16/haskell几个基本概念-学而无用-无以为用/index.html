@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.5.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Nelson Bighetti">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="
+模式匹配
+= &#43;起着一种模式匹配，=不要翻译成等于 最好翻译为如果匹配前面&#43; 则他的值为后面.-&gt; 也起着一种类型的模式匹配。
+分支
+|在创建函数的时候 体现着一种分支的效果。
+if-else  这其实是一种控制语句，不能说Haskell放掉了控制语句，而应该是循环语句。
+一切都是函数。
+根据monad的内置结构，函数可以组合生成类似于数学的组合函数（埋藏内部的lambda结构）
+">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/blog/2015/05/16/haskell%E5%87%A0%E4%B8%AA%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5-%E5%AD%A6%E8%80%8C%E6%97%A0%E7%94%A8-%E6%97%A0%E4%BB%A5%E4%B8%BA%E7%94%A8/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin="anonymous">
+    
+
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.min.e8d4d5fd376e67b34452ebe1cae16341.css">
+
+  
+
+  
+
+
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon-32.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/blog/2015/05/16/haskell%E5%87%A0%E4%B8%AA%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5-%E5%AD%A6%E8%80%8C%E6%97%A0%E7%94%A8-%E6%97%A0%E4%BB%A5%E4%B8%BA%E7%94%A8/">
+
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="og:site_name" content="Macro Life">
+  <meta property="og:url" content="/blog/2015/05/16/haskell%E5%87%A0%E4%B8%AA%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5-%E5%AD%A6%E8%80%8C%E6%97%A0%E7%94%A8-%E6%97%A0%E4%BB%A5%E4%B8%BA%E7%94%A8/">
+  <meta property="og:title" content="Haskell几个基本概念--学而无用--无以为用 | Macro Life">
+  <meta property="og:description" content="
+模式匹配
+= &#43;起着一种模式匹配，=不要翻译成等于 最好翻译为如果匹配前面&#43; 则他的值为后面.-&gt; 也起着一种类型的模式匹配。
+分支
+|在创建函数的时候 体现着一种分支的效果。
+if-else  这其实是一种控制语句，不能说Haskell放掉了控制语句，而应该是循环语句。
+一切都是函数。
+根据monad的内置结构，函数可以组合生成类似于数学的组合函数（埋藏内部的lambda结构）
+"><meta property="og:image" content="/img/icon-192.png">
+  <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2015-05-16T21:11:50&#43;08:00">
+    
+    <meta property="article:modified_time" content="2015-05-16T21:11:50&#43;08:00">
+  
+
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>Haskell几个基本概念--学而无用--无以为用 | Macro Life</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0 compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">Macro Life</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav mr-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#hero"><span>Demo</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>博客</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>项目</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#featured"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/about/"><span>About</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/courses/"><span>课程</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/archives"><span>Archives</span></a>
+        </li>
+
+        
+        
+
+      
+      </ul>
+      <ul class="navbar-nav ml-auto">
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+        </li>
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>Haskell几个基本概念--学而无用--无以为用</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    May 16, 2015
+  </span>
+  
+
+  
+
+  
+
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/categories/haskell/">Haskell</a></span>
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <ol>
+<li>模式匹配
+= +起着一种模式匹配，=不要翻译成等于 最好翻译为如果匹配前面+ 则他的值为后面.-&gt; 也起着一种类型的模式匹配。</li>
+<li>分支
+|在创建函数的时候 体现着一种分支的效果。
+if-else  这其实是一种控制语句，不能说Haskell放掉了控制语句，而应该是循环语句。</li>
+<li>一切都是函数。
+根据monad的内置结构，函数可以组合生成类似于数学的组合函数（埋藏内部的lambda结构）</li>
+</ol>
+
+<h3 id="函数只是关系的表示-可以说它是过程-变换-运动-从泛函的角度解释">函数只是关系的表示，可以说它是过程、变换、运动（从泛函的角度解释）</h3>
+
+<p>本来函数式变成是不考虑空间的， 而面向对象则是引入不必要的空间问题，来挂上函数，最终都是为了实现函数变换或者函数过程，或者统称为运动。
+假如宇宙存在根节点，越靠近根节点的肯定越抽象，我们现在是工作在底层的具象节点下。
+&gt; 面向对象属于分解，函数编程属于组合。有以为 利，通过面向对象我们将一分解为多个，数量多了，“有”，而函数编程则是将多个组合成一个，数量少了  ，“无”，无才能用，只有忽略事物内部的细节，我们才 能用它，否则陷入细节迷失方向。换句话说：数学分数考得好，不代表在实际中用数学用的好，牛    顿没有发明几何学，但是用了几何学，创造了微积分，用它们推导 出万有引力；爱因斯坦用了非几何学推导了相对论。</p>
+
+<p>###从有至无方为用，有乃分，无乃合，宇宙的起点源于无</p>
+
+<p>学习是一种分解能力，使用是一种组合能力，这是两种不同的能力。
+&gt; 再看看老子道德经的一段：三十幅共一毂，当其无，有车之用。埏埴以为器，当其无，有器之用。凿户牖以为室，当其无，有室之用。故有之以为利，无之   以为用。
+这段话意思是：三十根棍子做成的圆轱辘，只有忽视圆轱辘内部这种结构，着眼于圆轱辘外部，才会发现它原来是可以做车的轮子这一用处，两个轱辘与车    架组合成一辆车。比如门窗，只有忽视其内部如何结构的构建，才会从外部想到用它在房间组合中。</p>
+
+<h3 id="树形结构抽象细节">树形结构抽象细节</h3>
+
+<p>我们之所以使用树形结构，用一个根节点代表其聚合群体，用组长代表所有组员，用名字代表人的全部，等等这些组合抽象的办法就是让我们大脑去除大量   对象内部的细节，用一个符号代替它们，这样我们才能基于这个树的根节点再组合成新的树形结构。</p>
+
+<h2 id="范畴理论-交际的互联网">范畴理论-交际的互联网</h2>
+
+<p>范畴理论(Category)总是鼓励我们从对象内部细节中转移开来，在范畴理论中 一个对象是一个抽象模糊的实体，你所有需要知道的只是它如何和其他对象交互(关系)，它是怎么使用箭头和其他对象连接的，这就是为什么互联网搜索引擎 Google Baidu等能够通过分析链入和链出的链接来排名网站一样。</p>
+
+<h2 id="无以为用-组合思想">无以为用&ndash;组合思想</h2>
+
+<p>归根到底，还是“无以为用”这个范畴的组合本质很多人都没有搞清楚。</p>
+
+<ul>
+<li>只有忘记对象的细节才能用好它。两个原因总结一下：
+
+<ul>
+<li>首先，首先人脑短时记忆有限，如果大量对象内部细节占据大脑，而我们需要从对象外部组合它们，    这些细节是干扰。</li>
+<li>其次，范畴也认为组合对象只要将对象看成模糊实体，注重它们之间关系。</li>
+</ul></li>
+<li>忘记学习对象的细节才能用好它，无以为用，事物的制造者都不一定能用好它，除非事先有目标制造它。
+因此，学并不能致用，数理化学得好不一定用得好，博士给老板打工，老板赚大头。因为他把你的学问用处发挥了。自己学自己用因为智力限制也不可能。</li>
+<li>中国教育的典型
+在学生阶段,中国学生数理化很好，但是毕业后诺贝尔奖获得者几乎没有，世界自然科学领军人物很少，那些高考状元 学神都哪儿去了？学得好不      一定用得好，中国教育制度是以学习能力评价学生，各种考试充斥大量 知识细节，让学生耗费18年于这些可能以后无用的细节中，最终他们已经没有智力      空间来思考如何使用这些大量的知识细节了。中国教育制度存在严重的本质错 误。
+面向对象的分解能力是强，但是组合能力很弱！
+实际上从函数运算的角度，不存在单纯的“值”，1应该是=&amp; gt;1，或者说，所谓的常量值也是函数，只是每次不管输入什么都输出同样的结果。这样世界就只有运算，值是没必&gt;要的，更没有状态。但这是神的视角，而一 旦人开始思考时，由于不具备神的无限的能力，只能在每个瞬间试图去把握世界，就看到了值和状态以及状态呈现时的context/stage/&gt;舞台。但人希 望能像神一样去理解世界，就只好从这每个瞬间呈现的一切中去寻找变与不变的东西，当他们历尽艰辛找到“不变”的“变换”时就迫不及待地将之命名为定律。</li>
+</ul>
+
+<p>关于上述思想，计算机邀请Haskell带领领略（Haskell可以学习，但是需要投入很多时间，坚持&hellip;）</p>
+
+<ul>
+<li><a href="http://www.zhihu.com/question/20193745" target="_blank">综合性帖子</a></li>
+<li><a href="http://www.jdon.com/47271" target="_blank">这边也有一些课程介绍</a></li>
+<li><a href="dev.stephendiehl.com/hask/" target="_blank"> What I Wish I Knew When Learning Haskell 2.2 ( Stephen Diehl )</a></li>
+<li><a href="https://acm.wustl.edu/functional/haskell.php" target="_blank">How to learn haskell</a></li>
+
+<li><p><a href="http://learnyouahaskell.com/chapters" target="_blank">相当棒的趣味指南</a></p>
+
+<h3 id="从现实世界走入计算机-经过计算机思考-再从计算机走出现实世界-这就是-函数式思维-http-www-jdon-com-45608">从现实世界走入计算机，经过计算机思考，再从计算机走出现实世界，这就是<a href="http://www.jdon.com/45608" target="_blank"> 函数式思维</a>。</h3>
+
+<p>函数的context引入了时间的关系。<a href="http://www.jdon.com/45608" target="_blank"> 我们思考逻辑的时候，定义已经是确定的了。也正因为是确定的，才可以逻辑思考</a>。
+函数不存在状态，所以计算机加入了一个特殊的东西：时钟。值++时间=状态++，在可以忽视时序问题时，可以直接有值=状态。忽视时序问题，就相当于我们平时说的异步。若果单单使用锁，只是一种耗费资源手段。而我们看到无论是唤醒线程，还是延时读取，都是依赖时钟
+##+ 小结：</p></li>
+</ul>
+
+<p><img src="/images/desk.jpg" alt="桌子" />
+一张桌子为案例，分解思维的人看到后首先想到这张桌子由什么构成，长宽高和材质，这些都是桌子的内部细节；而组合思维的人看到后，环顾四周，看看其处于什么环境，如果放在教室中，他判断这是一张课桌，如果放在食堂，他判断这是一张饭桌。</p>
+
+<pre><code class="language-sh">从这个例子可以看出组合是从行为（运动、变化、时间）角度看待 世界的，“课桌”、“饭桌”中的“课”和“饭”在这里是动词，意为“上课用”、“吃饭用”的意思，“用”是动词，同一个桌子出现在不同的环境中发挥不同的 作用。而分解思维只研究空间，只研究桌子的空间结构是什么，甚至不研究为什么是四条腿，为什么每条腿长度相同，分解思维根本不考虑这些，不用考虑任何桌子 之外的世界，在分解思维中没有万有引力、没有地面的水平、没有书房和餐厅，只有空间，分解只考虑空间的组成结构。看来分解和组合是相互依存的，分解时研究 的是空间，组合时研究的是行为，把桌子放进餐厅的意义是期待使用它吃饭这样一种运动。 
+</code></pre>
+
+<p>范畴英文是Category，也是++分类++的意思，打个比喻，Google能根据哪些网站引用你的网站这个外部信息进行PageRank评分，从而对你的网站权重进行排序，这个道理和我们评价一个人有些类似，看一个不认识的人怎么样，那就看看他交往的什么朋友，什么环境，近墨者黑，人以群分，物以类聚，这些都是从事物所在的分类类别中判断其价值，而不是从事物内部细节。（评判个人的价值标准跟不同的人在一起，意味着你的价值不一样.）</p>
+
+<h3 id="monad-隐藏lambda">monad 隐藏lambda</h3>
+
+<p>Monad是一种结构，这种结构能够将一个值放入一个可计算的上下文中。因为Lambda是一个和上下文环境有关的表达式，所以，这里对Monad的上下文理解就比较容易。
+monad是从范畴论引入， 范畴其实就是一个集合，只不过对这个集合有一些约束定义，如果 熟悉业务建模的人可能对这种思维方式不陌生，经常我们会对抽象的事物进行定义，数学上基本就是用集合概念，实际上从罗素悖论拯救了数学开始，数学离不开集合，对于一个国家社会，个人与社会也是不同的概念，社会是一个++集合++概念，从++集合角度++考虑问题和从<strong>个人元素角度</strong>考虑问题是两种截然不同的思路，如果你平时注 重这种区别，你可能会有两种人生观。祝你脑洞大开。</p>
+
+<h3 id="函数式替代sql">函数式替代sql？</h3>
+
+<p><a href="http://www.jdon.com/44842" target="_blank">函数的逻辑性</a>与关系数据库的是一致的，而逻辑在不同语言之间是自然贯穿的，也就是说若果所有都用函数来表达的，可以使sql消失，那么由于sql引发的问题自然就消失。
+数据库 = 一个集合,这就是面向集合，mongodb就是这样的思想</p>
+    </div>
+
+    
+
+
+
+
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/blog/2015/05/16/haskell%E5%87%A0%E4%B8%AA%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5-%E5%AD%A6%E8%80%8C%E6%97%A0%E7%94%A8-%E6%97%A0%E4%BB%A5%E4%B8%BA%E7%94%A8/&amp;text=Haskell%e5%87%a0%e4%b8%aa%e5%9f%ba%e6%9c%ac%e6%a6%82%e5%bf%b5--%e5%ad%a6%e8%80%8c%e6%97%a0%e7%94%a8--%e6%97%a0%e4%bb%a5%e4%b8%ba%e7%94%a8" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/blog/2015/05/16/haskell%E5%87%A0%E4%B8%AA%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5-%E5%AD%A6%E8%80%8C%E6%97%A0%E7%94%A8-%E6%97%A0%E4%BB%A5%E4%B8%BA%E7%94%A8/&amp;t=Haskell%e5%87%a0%e4%b8%aa%e5%9f%ba%e6%9c%ac%e6%a6%82%e5%bf%b5--%e5%ad%a6%e8%80%8c%e6%97%a0%e7%94%a8--%e6%97%a0%e4%bb%a5%e4%b8%ba%e7%94%a8" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Haskell%e5%87%a0%e4%b8%aa%e5%9f%ba%e6%9c%ac%e6%a6%82%e5%bf%b5--%e5%ad%a6%e8%80%8c%e6%97%a0%e7%94%a8--%e6%97%a0%e4%bb%a5%e4%b8%ba%e7%94%a8&amp;body=/blog/2015/05/16/haskell%E5%87%A0%E4%B8%AA%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5-%E5%AD%A6%E8%80%8C%E6%97%A0%E7%94%A8-%E6%97%A0%E4%BB%A5%E4%B8%BA%E7%94%A8/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/blog/2015/05/16/haskell%E5%87%A0%E4%B8%AA%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5-%E5%AD%A6%E8%80%8C%E6%97%A0%E7%94%A8-%E6%97%A0%E4%BB%A5%E4%B8%BA%E7%94%A8/&amp;title=Haskell%e5%87%a0%e4%b8%aa%e5%9f%ba%e6%9c%ac%e6%a6%82%e5%bf%b5--%e5%ad%a6%e8%80%8c%e6%97%a0%e7%94%a8--%e6%97%a0%e4%bb%a5%e4%b8%ba%e7%94%a8" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=Haskell%e5%87%a0%e4%b8%aa%e5%9f%ba%e6%9c%ac%e6%a6%82%e5%bf%b5--%e5%ad%a6%e8%80%8c%e6%97%a0%e7%94%a8--%e6%97%a0%e4%bb%a5%e4%b8%ba%e7%94%a8%20/blog/2015/05/16/haskell%E5%87%A0%E4%B8%AA%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5-%E5%AD%A6%E8%80%8C%E6%97%A0%E7%94%A8-%E6%97%A0%E4%BB%A5%E4%B8%BA%E7%94%A8/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/blog/2015/05/16/haskell%E5%87%A0%E4%B8%AA%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5-%E5%AD%A6%E8%80%8C%E6%97%A0%E7%94%A8-%E6%97%A0%E4%BB%A5%E4%B8%BA%E7%94%A8/&amp;title=Haskell%e5%87%a0%e4%b8%aa%e5%9f%ba%e6%9c%ac%e6%a6%82%e5%bf%b5--%e5%ad%a6%e8%80%8c%e6%97%a0%e7%94%a8--%e6%97%a0%e4%bb%a5%e4%b8%ba%e7%94%a8" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="portrait mr-3" src="/authors/admin/avatar_hu52a603635ecebd45650b162dadabb4e5_12861_250x250_fill_q90_lanczos_center.jpg" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/">Nelson Bighetti</a></h5>
+      <h6 class="card-subtitle">Professor of Artificial Intelligence</h6>
+      <p class="card-text">My research interests include distributed robotics, mobile computing and programmable matter.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/GeorgeCushen" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.co.uk/citations?user=sIwtMXoAAAAJ" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/gcushen" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js" integrity="sha256-aYTdUrn6Ow1DDgh5JTc3aDGnnju48y/1c8s1dgkYPQ8=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/r.min.js"></script>
+        
+      
+
+      
+      
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    <script id="dsq-count-scr" src="https://yezhaoliang.disqus.com/count.js" async></script>
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.d6bd04fdad2ad213aa8111c5a3b72fc5.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,1724 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.5.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Nelson Bighetti">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="这是EOPL一个最为基本的解释器，后面的解释器都在此基础上进行改造，所以
+得理解各个部分，并知道如何使用和改造。最终告诉的是解释器如何解释表达式(每一种语言的表达式)。
+解释器解释表达式的问题。">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/blog/2016/02/25/first-interpreter-from-eopl/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin="anonymous">
+    
+
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.min.e8d4d5fd376e67b34452ebe1cae16341.css">
+
+  
+
+  
+
+
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon-32.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/blog/2016/02/25/first-interpreter-from-eopl/">
+
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="og:site_name" content="Macro Life">
+  <meta property="og:url" content="/blog/2016/02/25/first-interpreter-from-eopl/">
+  <meta property="og:title" content="First Interpreter from EOPL | Macro Life">
+  <meta property="og:description" content="这是EOPL一个最为基本的解释器，后面的解释器都在此基础上进行改造，所以
+得理解各个部分，并知道如何使用和改造。最终告诉的是解释器如何解释表达式(每一种语言的表达式)。
+解释器解释表达式的问题。"><meta property="og:image" content="/img/icon-192.png">
+  <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2016-02-25T11:20:09&#43;08:00">
+    
+    <meta property="article:modified_time" content="2016-02-25T11:20:09&#43;08:00">
+  
+
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>First Interpreter from EOPL | Macro Life</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0 compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">Macro Life</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav mr-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#hero"><span>Demo</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>博客</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>项目</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#featured"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/about/"><span>About</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/courses/"><span>课程</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/archives"><span>Archives</span></a>
+        </li>
+
+        
+        
+
+      
+      </ul>
+      <ul class="navbar-nav ml-auto">
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+        </li>
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>First Interpreter from EOPL</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Feb 25, 2016
+  </span>
+  
+
+  
+
+  
+
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/categories/scheme/">scheme</a></span>
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <p>这是EOPL一个最为基本的解释器，后面的解释器都在此基础上进行改造，所以
+得理解各个部分，并知道如何使用和改造。最终告诉的是解释器如何解释表达式(每一种语言的表达式)。
+<strong>解释器解释表达式的问题</strong>。</p>
+
+<ul>
+<li><a href="#1">1. 测试Interpreter程序</a></li>
+<li><a href="#2">2. 测试结果</a></li>
+<li><a href="#3">3. 反思结果</a>
+
+<ul>
+<li><a href="#3.1">3.1 非expressions部分</a></li>
+<li><a href="#3.2">3.2 expressions部分</a></li>
+</ul></li>
+<li><a href="#4">4. 是解决问题，还是抽象问题？科学性何在?</a>
+
+<ul>
+<li><a href="#4.1">4.1 科学性问题何在？</a></li>
+<li><a href="#4.2">4.2 一个解释器该解决哪些问题？</a></li>
+<li><a href="#4.3">4.3 抽象的目的是什么</a></li>
+</ul></li>
+<li><a href="#5">5.一个解释器的具体实现</a>
+
+<ul>
+<li><a href="#5.1">5.1 语言前端表现形式</a> lang</li>
+<li><a href="#5.2">5.2 语言数据结构</a> data-structures</li>
+<li><a href="#5.3">5.3 语言中间阶段</a> environments</li>
+<li><a href="#5.4">5.4 语言核心阶段</a> interpreter</li>
+<li><a href="#5.5">5.5 语言的初始化</a> drscheme-init</li>
+<li><a href="#5.6">5.6 语言的测试程序</a> tests</li>
+<li><a href="#5.7">5.7 语言前端封装测试</a>Top</li>
+</ul></li>
+</ul>
+
+<hr />
+
+<h2 id="1"> 1. 测试Interpreter程序</h2>
+
+<pre><code>
+;;测试一个
+(run-tests! run equal-answer? 
+   '(
+      (positive &quot;11&quot; 11)
+    ))
+
+;;测试二个
+(run-tests! run-fn equal-answer? 
+   '(
+     (positive &quot;11&quot; 11)   
+     (if-eval-test-true &quot;if zero?(-(11,11)) then 3 else 4&quot; 3)
+    ))
+   
+</code></pre>
+
+<h2 id="2"> 2. 测试结果</h2>
+
+<ul>
+<li><p>one test: positive</p>
+
+<pre><code>test: positive
+correct
+
+no bugs found
+
+</code></pre></li>
+
+<li><p>two tests:positive if-else</p>
+
+<pre><code>test: positive
+correct
+
+test: if-eval-test-true
+correct
+
+no bugs found
+</code></pre></li>
+</ul>
+
+<h2 id="3"> 3. 反思结果</h2>
+
+<p>结果测试很理想并没有错误，并且可以在test中不断增加判断语句。
+而run-test的解析分为两个部分</p>
+
+<ul>
+<li>expressions 这部分的工作主要是value-of</li>
+<li>非expressions  这部分的主要工作就是sligen通过the-grammer的定义进行解析</li>
+</ul>
+
+<h3 id="3.1"> 3.1 非expressions部分</h3>
+
+<p>这部分需要配合value-of的define-datatype进行对应的变化，且看the-grammer代码</p>
+
+<pre><code class="language-scheme">
+  (define the-grammar
+    '((program (expression) a-program)
+
+      (expression (number) const-exp)
+      (expression
+        (&quot;-&quot; &quot;(&quot; expression &quot;,&quot; expression &quot;)&quot;)
+        diff-exp)
+      
+      (expression
+       (&quot;zero?&quot; &quot;(&quot; expression &quot;)&quot;)
+       zero?-exp)
+
+      (expression
+       (&quot;if&quot; expression &quot;then&quot; expression &quot;else&quot; expression)
+       if-exp)
+
+      (expression (identifier) var-exp)
+
+      (expression
+       (&quot;let&quot; identifier &quot;=&quot; expression &quot;in&quot; expression)
+       let-exp)   
+
+      ))
+</code></pre>
+
+<p>可以看到if,then,else都被当作不变的地方，而其中三个expressions被传动到value-of做进一步的解析。</p>
+
+<h3 id="3.2"> 3. expressions部分</h3>
+
+<p>继续看value-of的部分，则是对if-exp,var-exp,let-exp,letrec-exp,diff-exp,zerp?-exp?等进行解析的过程。</p>
+
+<pre><code class="language-scheme">
+(define value-of
+    (lambda (exp env)
+      (cases expression exp
+
+        (const-exp (num) (num-val num))
+
+        (var-exp (var) (apply-env env var))
+
+        (diff-exp (exp1 exp2)
+          (let ((val1 (value-of exp1 env))
+                (val2 (value-of exp2 env)))
+            (let ((num1 (expval-&gt;num val1))
+                  (num2 (expval-&gt;num val2)))
+              (num-val
+                (- num1 num2)))))
+
+        (zero?-exp (exp1)
+          (let ((val1 (value-of exp1 env)))
+            (let ((num1 (expval-&gt;num val1)))
+              (if (zero? num1)
+                (bool-val #t)
+                (bool-val #f)))))
+              
+        (if-exp (exp1 exp2 exp3)
+          (let ((val1 (value-of exp1 env)))
+            (if (expval-&gt;bool val1)
+              (value-of exp2 env)
+              (value-of exp3 env))))
+
+        (let-exp (var exp1 body)       
+          (let ((val1 (value-of exp1 env)))
+            (value-of body
+              (extend-env var val1 env))))
+
+        )))
+</code></pre>
+
+<p>可以参考<a href="http://jueqingsizhe66.github.io/blog/2016/02/19/the-implementation-of-define-datetype/" target="_blank">cases的实现</a>,以及<a href="http://jueqingsizhe66.github.io/blog/2016/02/23/casesde-zuo-yong/" target="_blank">cases的作用</a>
+当然<a href="http://jueqingsizhe66.github.io/blog/2016/02/09/its-a-dead-program-dot-how-to-let-it-alive/#1" target="_blank">TLS</a>也提供了比如*const,*application等的定义</p>
+
+<pre><code class="language-scheme">;第一大部分 定义好整体框架
+(define value
+ (lambda (e)
+  (meaning e (quote ()))))
+(define meaning
+ (lambda (e table)
+  ((expression-to-action e) e table))
+</code></pre>
+
+<p>其中的<code>(expression-to-action)</code>就会产生对应的<code>*const*,*identifier*,*lambda*
+,*cond*,*quote*,*application*</code>以及<a href="http://jueqingsizhe66.github.io/blog/2016/02/09/its-a-dead-program-dot-how-to-let-it-alive/#2" target="_blank">TSS</a>中新增加的<code>*set*,*define*,*let*</code>。</p>
+
+<p>这两个部分是比较有趣的地方，规范了语言的前端部分，犹如左右手交换来交换去和penrose-stair<img src="/images/penrose-stair.png" alt="penrose-stair" />
+,进一步可以看看<a href="http://df.xq0510.blog.163.com/blog/static/16013465820108704920944/" target="_blank">盗墓笔记(inception)的评述</a></p>
+
+<h2 id="4"> 4. 是解决问题，还是抽象问题？科学性何在?</h2>
+
+<p>科学进步的每一步发展，不是通过不断抽象来直觉抽取出进步，而是通过直觉发现问题，在利用抽象的方式进行求解，从而获得进步。
+而抽象其实就是通过<strong>interface</strong>和<strong>implementation</strong>来进行，</p>
+
+<ul>
+<li>interface的定义就是通过<a href="http://jueqingsizhe66.github.io/blog/2016/02/19/the-implementation-of-define-datetype/" target="_blank">define-datatype</a>进行，</li>
+<li>implementation则是通过cases进行。</li>
+</ul>
+
+<h3 id="4.1">4.1 科学性问题何在？</h3>
+
+<p>现象和本质的探寻，透过现象看到本质，现象的产生都有其内在的原理，科学关注的是内在的本质联系。
+scheme这门语言可以透过不断的抽象，产生许许多多的语言，但是这些语言层是否真的对科学问题有帮助，
+这是值得怀疑的地方！科学必须要有怀疑！科学必须找寻问题所在，从而探索产生原因（持保留意见）。</p>
+
+<h3 id="4.2">4.2 一个解释器该解决哪些问题？</h3>
+
+<p>最基本的我觉得应该有两个：</p>
+
+<ul>
+<li>词法解析问题
+解决我输入的字符串，该如何由scan&amp;parse进行解析</li>
+<li>语义解析问题
+解决我得到的表达式(expression),它怎么由value-of进行解析，到底是const-exp,var-exp,proc-exp,let-exp等</li>
+</ul>
+
+<p>其实语言系列的表达主要有</p>
+
+<ol>
+<li>imperative language(C,fortran)</li>
+<li>functional programming language(Lisp,ML,Haskell,Scheme)</li>
+<li>message passing language(OOP: Java,C++,)</li>
+</ol>
+
+<p>他们在解析程序的过程中都离不开上述的两个基本问题的解析，他们也被叫做<strong>前端(front-end)</strong>。<img src="/images/lisp/front-end.png" alt="front-end" /></p>
+
+<p>而任何语言如果仅仅有这个value的过程，而不会产生任何的effects，
+比如：</p>
+
+<ul>
+<li>print</li>
+<li>read</li>
+<li>modify the memory state or file system</li>
+</ul>
+
+<p>那就太没有意思了，所以语言的完成需要他拓充到操作系统的处理、IO处理、显示处理，增加它的趣味性，而不是一味的解决问题（持保留意见）</p>
+
+<ul>
+<li>词法解析使我们获得从字符串到对应的语言的const-exp等的exp形式</li>
+<li>语义解析部分则是我们对const-exp等的具体实现部分</li>
+</ul>
+
+<p>所以本质上来说这两点也是抽象的组成部分（<a href="http://jueqingsizhe66.github.io/blog/2016/02/15/data-representation-the-same-interface-with-different-implementation/" target="_blank">接口和实现</a>）,所以本质上解决解释器的实现问题，其实就是<strong>如何抽象的问题?</strong>。</p>
+
+<h3 id="4.3">4.3 抽象的目的是什么？</h3>
+
+<p>在于解决现实出现的科学问题。
+也就是这些问题都能够被设定的接口和实现通过递归进行解释，并最终获得结果(result or outcome)。</p>
+
+<p>而为什么要绕来绕去的谈这些问题呢？ 因为interpreter的实现过程本质也是递归的思想，在不断规约到一个结论。</p>
+
+<h2 id="5">5. 一个解释器的具体实现</h2>
+
+<p>参考EOPL第三章.</p>
+
+<p>一般过程是先思考新语言的表现形式lang.scm，设定几个数据类型放入data-structures.scm中,
+然后我们需要给这两个阶段设定bridge，也就是环境封装.这样我们就可以写一个解释器interpreter,解释并获得最终结果。
+简而言之，其实我们就是想看看计算机是如何解释我们输入的这句话，具体就是<a href="https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-35.html#%_sec_5.5" target="_blank"><strong>解释器如何解析输入的表达式</strong></a></p>
+
+<ol>
+<li>语言<a href="#5.1">前端表现形式</a> lang</li>
+<li>语言<a href="#5.2">数据结构</a> data-structures</li>
+<li>语言<a href="#5.3">中间阶段</a> environments</li>
+<li>语言<a href="#5.4">核心阶段</a> interpreter</li>
+<li>语言的<a href="#5.5">初始化</a> drscheme-init</li>
+<li>语言的<a href="#5.6">测试程序</a> tests</li>
+<li>语言<a href="#5.7">前端封装测试</a>Top</li>
+</ol>
+
+<h3 id="5.1">5.1 前端表现形式</h3>
+
+<p>保存为lang.scm</p>
+
+<p>该阶段的主要目的就是定义新生成的语言该是如何使用的？也就是语法部分。</p>
+
+<pre><code class="language-scheme">
+(module lang
+
+  ;; grammar for the LET language
+
+  (lib &quot;eopl.ss&quot; &quot;eopl&quot;)                
+  
+  (require &quot;drscheme-init.scm&quot;)
+  
+  (provide (all-defined-out))
+
+  ;;;;;;;;;;;;;;;; grammatical specification ;;;;;;;;;;;;;;;;
+  
+  (define the-lexical-spec
+    '((whitespace (whitespace) skip)
+      (comment (&quot;%&quot; (arbno (not #\newline))) skip)
+      (identifier
+       (letter (arbno (or letter digit &quot;_&quot; &quot;-&quot; &quot;?&quot;)))
+       symbol)
+      (number (digit (arbno digit)) number)
+      (number (&quot;-&quot; digit (arbno digit)) number)
+      ))
+  
+  (define the-grammar
+    '((program (expression) a-program)
+
+      (expression (number) const-exp)
+      (expression
+        (&quot;-&quot; &quot;(&quot; expression &quot;,&quot; expression &quot;)&quot;)
+        diff-exp)
+      
+      (expression
+       (&quot;zero?&quot; &quot;(&quot; expression &quot;)&quot;)
+       zero?-exp)
+
+      (expression
+       (&quot;if&quot; expression &quot;then&quot; expression &quot;else&quot; expression)
+       if-exp)
+
+      (expression (identifier) var-exp)
+
+      (expression
+       (&quot;let&quot; identifier &quot;=&quot; expression &quot;in&quot; expression)
+       let-exp)   
+
+      ))
+  
+  ;;;;;;;;;;;;;;;; sllgen boilerplate ;;;;;;;;;;;;;;;;
+  
+  (sllgen:make-define-datatypes the-lexical-spec the-grammar)
+  
+  (define show-the-datatypes
+    (lambda () (sllgen:list-define-datatypes the-lexical-spec the-grammar)))
+  
+  (define scan&amp;parse
+    (sllgen:make-string-parser the-lexical-spec the-grammar))
+  
+  (define just-scan
+    (sllgen:make-string-scanner the-lexical-spec the-grammar))
+  
+  )
+</code></pre>
+
+<h3 id="5.2">5.2 数据结构</h3>
+
+<p>保存为data-structures.scm</p>
+
+<p>该阶段的主要目的就是定义对应的类型该具有什么样的接口，这些接口的实现部分在第四部分有具体的体现。
+这部分就是程序的<strong>类型接口的转换部分</strong>。</p>
+
+<pre><code class="language-scheme">
+(module data-structures (lib &quot;eopl.ss&quot; &quot;eopl&quot;)
+
+  ;; data structures for let-lang.
+
+  (provide (all-defined-out))               ; too many things to list
+
+;;;;;;;;;;;;;;;; expressed values ;;;;;;;;;;;;;;;;
+
+;;; an expressed value is either a number, a boolean or a procval.
+
+  (define-datatype expval expval?
+    (num-val
+      (value number?))
+    (bool-val
+      (boolean boolean?)))
+
+;;; extractors:
+
+  ;; expval-&gt;num : ExpVal -&gt; Int
+  ;; Page: 70
+  (define expval-&gt;num
+    (lambda (v)
+      (cases expval v
+	(num-val (num) num)
+	(else (expval-extractor-error 'num v)))))
+
+  ;; expval-&gt;bool : ExpVal -&gt; Bool
+  ;; Page: 70
+  (define expval-&gt;bool
+    (lambda (v)
+      (cases expval v
+	(bool-val (bool) bool)
+	(else (expval-extractor-error 'bool v)))))
+
+  (define expval-extractor-error
+    (lambda (variant value)
+      (eopl:error 'expval-extractors &quot;Looking for a ~s, found ~s&quot;
+	variant value)))
+
+;;;;;;;;;;;;;;;; environment structures ;;;;;;;;;;;;;;;;
+
+;; example of a data type built without define-datatype
+
+  (define empty-env-record
+    (lambda () 
+      '()))
+
+  (define extended-env-record
+    (lambda (sym val old-env)
+      (cons (list sym val) old-env)))
+  
+  (define empty-env-record? null?)
+  
+  (define environment?
+    (lambda (x)
+      (or (empty-env-record? x)
+          (and (pair? x)
+               (symbol? (car (car x)))
+               (expval? (cadr (car x)))
+               (environment? (cdr x))))))
+
+  (define extended-env-record-&gt;sym
+    (lambda (r)
+      (car (car r))))
+
+  (define extended-env-record-&gt;val
+    (lambda (r)
+      (cadr (car r))))
+
+  (define extended-env-record-&gt;old-env
+    (lambda (r)
+      (cdr r)))
+
+)
+</code></pre>
+
+<h3 id="5.3">5.3 中间阶段</h3>
+
+<p>保存为environments.scm</p>
+
+<p>该阶段的主要目的是为了解释当遇到一些变量或者之后的解释器的lambda（将在下一个版本解释器体现），如何保存下来
+，并供对应程序使用。</p>
+
+<pre><code class="language-scheme">(module environments (lib &quot;eopl.ss&quot; &quot;eopl&quot;) 
+  
+  ;; builds environment interface, using data structures defined in
+  ;; data-structures.scm. 
+
+  (require &quot;data-structures.scm&quot;)
+
+  (provide init-env empty-env extend-env apply-env)
+
+;;;;;;;;;;;;;;;; initial environment ;;;;;;;;;;;;;;;;
+  
+  ;; init-env : () -&gt; Env
+  ;; usage: (init-env) = [i=1, v=5, x=10]
+  ;; (init-env) builds an environment in which i is bound to the
+  ;; expressed value 1, v is bound to the expressed value 5, and x is
+  ;; bound to the expressed value 10.
+  ;; Page: 69
+
+  (define init-env 
+    (lambda ()
+      (extend-env 
+       'i (num-val 1)
+       (extend-env
+        'v (num-val 5)
+        (extend-env
+         'x (num-val 10)
+         (empty-env))))))
+
+;;;;;;;;;;;;;;;; environment constructors and observers ;;;;;;;;;;;;;;;;
+
+  (define empty-env
+    (lambda ()
+      (empty-env-record)))
+  
+  (define empty-env? 
+    (lambda (x)
+      (empty-env-record? x)))
+
+  (define extend-env
+    (lambda (sym val old-env)
+      (extended-env-record sym val old-env)))
+
+  (define apply-env
+    (lambda (env search-sym)
+      (if (empty-env? env)
+	(eopl:error 'apply-env &quot;No binding for ~s&quot; search-sym)
+	(let ((sym (extended-env-record-&gt;sym env))
+	      (val (extended-env-record-&gt;val env))
+	      (old-env (extended-env-record-&gt;old-env env)))
+	  (if (eqv? search-sym sym)
+	    val
+	    (apply-env old-env search-sym))))))
+
+  )
+</code></pre>
+
+<h3 id="5.4">5.4 核心阶段</h3>
+
+<p>保存为interp.scm</p>
+
+<p>该阶段的主要目的就是编写针对第3阶段生成的var-exp、const-exp等expval的解析，算是核心部分，最终的结果的产生地，
+后面的几个阶段只不过是针对这部分内容做了一些前端的准备，算是死门，而这部分和前面的词法解析、类型转换接口算是一个语言的生门部分。</p>
+
+<pre><code class="language-scheme">
+(module interp (lib &quot;eopl.ss&quot; &quot;eopl&quot;)
+  
+  ;; interpreter for the LET language.  The \commentboxes are the
+  ;; latex code for inserting the rules into the code in the book.
+  ;; These are too complicated to put here, see the text, sorry.
+
+  (require &quot;drscheme-init.scm&quot;)
+
+  (require &quot;lang.scm&quot;)
+  (require &quot;data-structures.scm&quot;)
+  (require &quot;environments.scm&quot;)
+
+  (provide value-of-program value-of)
+
+;;;;;;;;;;;;;;;; the interpreter ;;;;;;;;;;;;;;;;
+
+  ;; value-of-program : Program -&gt; ExpVal
+  ;; Page: 71
+  (define value-of-program 
+    (lambda (pgm)
+      (cases program pgm
+        (a-program (exp1)
+          (value-of exp1 (init-env))))))
+
+  ;; value-of : Exp * Env -&gt; ExpVal
+  ;; Page: 71
+  (define value-of
+    (lambda (exp env)
+      (cases expression exp
+
+        (const-exp (num) (num-val num))
+
+        (var-exp (var) (apply-env env var))
+
+        (diff-exp (exp1 exp2)
+          (let ((val1 (value-of exp1 env))
+                (val2 (value-of exp2 env)))
+            (let ((num1 (expval-&gt;num val1))
+                  (num2 (expval-&gt;num val2)))
+              (num-val
+                (- num1 num2)))))
+
+        (zero?-exp (exp1)
+          (let ((val1 (value-of exp1 env)))
+            (let ((num1 (expval-&gt;num val1)))
+              (if (zero? num1)
+                (bool-val #t)
+                (bool-val #f)))))
+              
+        (if-exp (exp1 exp2 exp3)
+          (let ((val1 (value-of exp1 env)))
+            (if (expval-&gt;bool val1)
+              (value-of exp2 env)
+              (value-of exp3 env))))
+
+        (let-exp (var exp1 body)       
+          (let ((val1 (value-of exp1 env)))
+            (value-of body
+              (extend-env var val1 env))))
+
+        )))
+
+
+  )
+
+</code></pre>
+
+<h3 id="5.5">5.5 初始化</h3>
+
+<p>保存为drscheme-init.scm</p>
+
+<p>该阶段主要目的是编写测试需要的套件，提供测试是否成功的判断标准。</p>
+
+<pre><code class="language-scheme">
+;; drscheme-init.scm - compatibility file for DrScheme
+;; usage: (require &quot;drscheme-init.scm&quot;)
+
+;;; makes structs printable, and provides basic functionality for
+;;; testing.  This includes pretty-printing and tracing.
+
+
+(module drscheme-init mzscheme
+
+  ;; show the contents of define-datatype values
+  (print-struct #t)
+
+  (require (lib &quot;pretty.ss&quot;))
+  (provide (all-from (lib &quot;pretty.ss&quot;)))
+
+  (require (lib &quot;trace.ss&quot;))
+  (provide (all-from (lib &quot;trace.ss&quot;)))
+
+  (provide make-parameter)
+
+  (provide 
+   run-experiment
+   run-tests!
+   stop-after-first-error
+   run-quietly
+   )
+  
+  ;; safely apply procedure fn to a list of args.
+  ;; if successful, return (cons #t val)
+  ;; if eopl:error is invoked, returns (cons #f string), where string is the
+  ;; format string generated by eopl:error.  If somebody manages to raise a 
+  ;; value other than an exception, then the raised value is reported.
+  
+  (define apply-safely
+    (lambda (proc args)
+      (with-handlers ([(lambda (exn) #t)      ; catch any error
+                       (lambda (exn)          ; evaluate to a failed test result
+                         (cons #f 
+                               (if (exn? exn)
+                                   (exn-message exn)
+                                   exn)))])  
+        (let ([actual (apply proc args)])
+          (cons #t actual)))))
+
+  ;; run-experiment :
+  ;;  ((a ...) -&gt; b) * (a ...) * b * (b * b -&gt; bool)
+  ;;  -&gt; (cons bool b)
+  
+  ;; usage: (run-experiment fn args correct-answer equal-answer?)
+  ;; Applies fn to args.  Compares the result to correct-answer. 
+  ;; Returns (cons bool b) where bool indicates whether the
+  ;; answer is correct.
+
+  (define run-experiment
+    (lambda (fn args correct-answer equal-answer?)
+      (let*
+          ((result (apply-safely fn args))
+           ;; ans is either the answer or the args to eopl:error
+           (error-thrown? (not (car result)))
+           (ans (cdr result)))
+          
+        (cons
+         (if (eqv? correct-answer 'error)
+             error-thrown?
+             (equal-answer? ans correct-answer))
+         ans))))
+  
+  (define stop-after-first-error (make-parameter #f))
+  (define run-quietly (make-parameter #t))
+   
+  ;; run-tests! : (arg -&gt; outcome) * (any * any -&gt; bool) * (list-of test)
+  ;;             -&gt; unspecified
+
+  ;; where:
+  ;; test ::= (name arg outcome)
+  ;; outcome ::= ERROR | any
+  
+  ;; usage: (run-tests! run-fn equal-answer? tests)
+
+  ;; for each item in tests, apply run-fn to the arg.  Check to see if
+  ;; the outcome is right, comparing values using equal-answer?.
+
+  ;; print a log of the tests.
+
+  ;; at the end, print either &quot;no bugs found&quot; or the list of tests
+  ;; failed. 
+  
+  ;; Normally, run-tests! will recover from any error and continue to
+  ;; the end of the test suite.  This behavior can be altered by
+  ;; setting (stop-after-first-error #t).
+
+  (define (run-tests! run-fn equal-answer? tests)
+    (let ((tests-failed '()))
+      (for-each
+       (lambda (test-item)
+         (let ((name (car test-item))
+               (pgm (cadr test-item))
+               (correct-answer (caddr test-item)))
+           (printf &quot;test: ~a~%&quot; name)
+           (let* ((result
+                   (run-experiment
+		     run-fn (list pgm) correct-answer equal-answer?))
+                  (correct? (car result))
+                  (actual-answer (cdr result)))
+             (if (or
+                   (not correct?)
+                   (not (run-quietly)))
+               (begin
+                 (printf &quot;~a~%&quot; pgm)
+                 (printf &quot;correct outcome: ~a~%&quot; correct-answer)
+                 (printf &quot;actual outcome:  &quot;)
+                 (pretty-display actual-answer)))
+             (if correct?
+                 (printf &quot;correct~%~%&quot;)
+                 (begin
+                   (printf &quot;incorrect~%~%&quot;)
+                   ;; stop on first error if stop-after-first? is set:
+                   (if (stop-after-first-error)
+                       (error name &quot;incorrect outcome detected&quot;)) 
+                   (set! tests-failed
+                         (cons name tests-failed)))))))
+       tests)
+      (if (null? tests-failed)
+          (printf &quot;no bugs found~%&quot;)
+          (printf &quot;incorrect answers on tests: ~a~%&quot;
+            (reverse tests-failed)))))
+
+  )  
+  
+  
+</code></pre>
+
+<h3 id="5.6">5.6 测试程序</h3>
+
+<p>保存为tests.scm</p>
+
+<p>该阶段的主要目的就是编写测试语句，包括常量、变量、表达式、if、diff、let等语句的使用。</p>
+
+<pre><code class="language-scheme">(module tests mzscheme
+  
+  (provide test-list)
+
+  ;;;;;;;;;;;;;;;; tests ;;;;;;;;;;;;;;;;
+  
+  (define test-list
+    '(
+  
+      ;; simple arithmetic
+      (positive-const &quot;11&quot; 11)
+      (negative-const &quot;-33&quot; -33)
+      (simple-arith-1 &quot;-(44,33)&quot; 11)
+  
+      ;; nested arithmetic
+      (nested-arith-left &quot;-(-(44,33),22)&quot; -11)
+      (nested-arith-right &quot;-(55, -(22,11))&quot; 44)
+  
+      ;; simple variables
+      (test-var-1 &quot;x&quot; 10)
+      (test-var-2 &quot;-(x,1)&quot; 9)
+      (test-var-3 &quot;-(1,x)&quot; -9)
+      
+      ;; simple unbound variables
+      (test-unbound-var-1 &quot;foo&quot; error)
+      (test-unbound-var-2 &quot;-(x,foo)&quot; error)
+  
+      ;; simple conditionals
+      (if-true &quot;if zero?(0) then 3 else 4&quot; 3)
+      (if-false &quot;if zero?(1) then 3 else 4&quot; 4)
+      
+      ;; test dynamic typechecking
+      (no-bool-to-diff-1 &quot;-(zero?(0),1)&quot; error)
+      (no-bool-to-diff-2 &quot;-(1,zero?(0))&quot; error)
+      (no-int-to-if &quot;if 1 then 2 else 3&quot; error)
+
+      ;; make sure that the test and both arms get evaluated
+      ;; properly. 
+      (if-eval-test-true &quot;if zero?(-(11,11)) then 3 else 4&quot; 3)
+      (if-eval-test-false &quot;if zero?(-(11, 12)) then 3 else 4&quot; 4)
+      
+      ;; and make sure the other arm doesn't get evaluated.
+      (if-eval-test-true-2 &quot;if zero?(-(11, 11)) then 3 else foo&quot; 3)
+      (if-eval-test-false-2 &quot;if zero?(-(11,12)) then foo else 4&quot; 4)
+
+      ;; simple let
+      (simple-let-1 &quot;let x = 3 in x&quot; 3)
+
+      ;; make sure the body and rhs get evaluated
+      (eval-let-body &quot;let x = 3 in -(x,1)&quot; 2)
+      (eval-let-rhs &quot;let x = -(4,1) in -(x,1)&quot; 2)
+
+      ;; check nested let and shadowing
+      (simple-nested-let &quot;let x = 3 in let y = 4 in -(x,y)&quot; -1)
+      (check-shadowing-in-body &quot;let x = 3 in let x = 4 in x&quot; 4)
+      (check-shadowing-in-rhs &quot;let x = 3 in let x = -(x,1) in x&quot; 2)
+
+      ))
+  )
+</code></pre>
+
+<h3 id="5.7">5.7 前端封装测试</h3>
+
+<p>保存为top.scm</p>
+
+<p>该阶段的目的就是测试这个新的解释器语言到底有没有用？他是否能够解释从tests中导入的
+程序片段？是否测试通过。</p>
+
+<pre><code class="language-scheme">(module top (lib &quot;eopl.ss&quot; &quot;eopl&quot;)
+  
+  ;; top level module.  Loads all required pieces.
+  ;; Run the test suite with (run-all).
+
+  (require &quot;drscheme-init.scm&quot;)
+  (require &quot;data-structures.scm&quot;)  ; for expval constructors
+  (require &quot;lang.scm&quot;)             ; for scan&amp;parse
+  (require &quot;interp.scm&quot;)           ; for value-of-program
+  (require &quot;tests.scm&quot;)            ; for test-list
+  
+  ;; since this is the top-level module, we don't really need to
+  ;; provide anything, but we do so just in case.  
+
+  (provide run run-all)
+
+  (provide test-all)
+
+  (define (test-all) (run-all))
+
+  ;; here are some other things that could be provided:
+
+  ;;   (provide (all-defined-out))
+  ;;   (provide (all-from &quot;interp.scm&quot;))
+  ;;   (provide (all-from &quot;lang.scm&quot;))
+  
+  ;;;;;;;;;;;;;;;; interface to test harness ;;;;;;;;;;;;;;;;
+  
+  ;; run : String -&gt; ExpVal
+  ;; Page: 71
+  (define run
+    (lambda (string)
+      (value-of-program (scan&amp;parse string))))
+  
+  ;; run-all : () -&gt; unspecified
+  
+  ;; runs all the tests in test-list, comparing the results with
+  ;; equal-answer?  
+
+  (define run-all
+    (lambda ()
+      (run-tests! run equal-answer? test-list)))
+  
+  (define equal-answer?
+    (lambda (ans correct-ans)
+      (equal? ans (sloppy-&gt;expval correct-ans))))
+  
+  (define sloppy-&gt;expval 
+    (lambda (sloppy-val)
+      (cond
+        ((number? sloppy-val) (num-val sloppy-val))
+        ((boolean? sloppy-val) (bool-val sloppy-val))
+        (else
+         (eopl:error 'sloppy-&gt;expval 
+                     &quot;Can't convert sloppy value to expval: ~s&quot;
+                     sloppy-val)))))
+    
+  ;; run-one : symbol -&gt; expval
+
+  ;; (run-one sym) runs the test whose name is sym
+  
+  (define run-one
+    (lambda (test-name)
+      (let ((the-test (assoc test-name test-list)))
+        (cond
+          ((assoc test-name test-list)
+           =&gt; (lambda (test)
+                (run (cadr test))))
+          (else (eopl:error 'run-one &quot;no such test: ~s&quot; test-name))))))
+ 
+  ;; (run-all)
+  
+  )
+
+
+</code></pre>
+
+<hr />
+    </div>
+
+    
+
+
+
+
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/blog/2016/02/25/first-interpreter-from-eopl/&amp;text=First%20Interpreter%20from%20EOPL" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/blog/2016/02/25/first-interpreter-from-eopl/&amp;t=First%20Interpreter%20from%20EOPL" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=First%20Interpreter%20from%20EOPL&amp;body=/blog/2016/02/25/first-interpreter-from-eopl/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/blog/2016/02/25/first-interpreter-from-eopl/&amp;title=First%20Interpreter%20from%20EOPL" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=First%20Interpreter%20from%20EOPL%20/blog/2016/02/25/first-interpreter-from-eopl/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/blog/2016/02/25/first-interpreter-from-eopl/&amp;title=First%20Interpreter%20from%20EOPL" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="portrait mr-3" src="/authors/admin/avatar_hu52a603635ecebd45650b162dadabb4e5_12861_250x250_fill_q90_lanczos_center.jpg" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/">Nelson Bighetti</a></h5>
+      <h6 class="card-subtitle">Professor of Artificial Intelligence</h6>
+      <p class="card-text">My research interests include distributed robotics, mobile computing and programmable matter.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/GeorgeCushen" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.co.uk/citations?user=sIwtMXoAAAAJ" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/gcushen" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js" integrity="sha256-aYTdUrn6Ow1DDgh5JTc3aDGnnju48y/1c8s1dgkYPQ8=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/r.min.js"></script>
+        
+      
+
+      
+      
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    <script id="dsq-count-scr" src="https://yezhaoliang.disqus.com/count.js" async></script>
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.d6bd04fdad2ad213aa8111c5a3b72fc5.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

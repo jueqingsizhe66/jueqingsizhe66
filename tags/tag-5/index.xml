@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>tag-5 | Macro Life</title>
+    <link>/tags/tag-5/</link>
+      <atom:link href="/tags/tag-5/index.xml" rel="self" type="application/rss+xml" />
+    <description>tag-5</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 30 Aug 2011 16:01:23 +0800</lastBuildDate>
+    <image>
+      <url>/img/icon-192.png</url>
+      <title>tag-5</title>
+      <link>/tags/tag-5/</link>
+    </image>
+    
+    <item>
+      <title>Syntax Highlighting</title>
+      <link>/post/syntax-highlighting/</link>
+      <pubDate>Tue, 30 Aug 2011 16:01:23 +0800</pubDate>
+      <guid>/post/syntax-highlighting/</guid>
+      <description>&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;function helloWorld () {
+  alert(&amp;quot;Hello, World!&amp;quot;)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class HelloWorld {
+  public static void main(String[] args) {
+    System.out.println(&amp;quot;Hello, World!&amp;quot;);
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-kotlin&#34;&gt;package hello
+
+fun main(args: Array&amp;lt;String&amp;gt;) {
+  println(&amp;quot;Hello World!&amp;quot;)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#include &amp;lt;stdio.h&amp;gt;
+
+/* Hello */
+int main(void){
+  printf(&amp;quot;Hello, World!&amp;quot;);
+  return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;// &#39;Hello World!&#39; program 
+ 
+#include &amp;lt;iostream&amp;gt;
+ 
+int main(){
+  std::cout &amp;lt;&amp;lt; &amp;quot;Hello World!&amp;quot; &amp;lt;&amp;lt; std::endl;
+  return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cs&#34;&gt;using System;
+class HelloWorld{
+  public static void Main(){ 
+    System.Console.WriteLine(&amp;quot;Hello, World!&amp;quot;);
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;html&amp;gt;
+&amp;lt;body&amp;gt;
+  Hello, World!
+&amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main
+import fmt &amp;quot;fmt&amp;quot;
+
+func main() 
+{
+   fmt.Printf(&amp;quot;Hello, World!\n&amp;quot;);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;object HelloWorld with Application {
+  Console.println(&amp;quot;Hello, World!&amp;quot;);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;&amp;lt;?php
+  echo &#39;Hello, World!&#39;;
+?&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;print(&amp;quot;Hello, World!&amp;quot;) 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(defn hello-world
+  &amp;quot;A function print &#39;Hello world&#39;.&amp;quot;
+  []
+  (prn &amp;quot;Hello world&amp;quot;))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go-html-template&#34;&gt;&amp;lt;!DOCTYPE html&amp;gt;
+&amp;lt;html&amp;gt;
+&amp;lt;head&amp;gt;
+  &amp;lt;title&amp;gt;{{ .Title }}&amp;lt;/title&amp;gt;
+&amp;lt;/head&amp;gt;
+&amp;lt;body&amp;gt;
+  &amp;lt;h1&amp;gt;{{ .Title }}&amp;lt;/h1&amp;gt;
+  {{ .Content }}
+&amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go-html-template&#34;&gt;{{ partial &amp;quot;header.html&amp;quot; . }}
+
+  &amp;lt;h1&amp;gt;posts&amp;lt;/h1&amp;gt;
+  {{ range first 10 .Data.Pages }}
+    {{ if eq .Type &amp;quot;post&amp;quot;}}
+      &amp;lt;h2&amp;gt;&amp;lt;a href=&amp;quot;{{ .Permalink }}&amp;quot;&amp;gt;{{ .Title }}&amp;lt;/a&amp;gt;&amp;lt;/h2&amp;gt;
+    {{ end }}
+  {{ end }}
+
+  &amp;lt;h1&amp;gt;pages&amp;lt;/h1&amp;gt;
+  {{ range .Data.Pages }}
+    {{ if or (eq .Type &amp;quot;page&amp;quot;) (eq .Type &amp;quot;about&amp;quot;) }}
+      &amp;lt;h2&amp;gt;&amp;lt;a href=&amp;quot;{{ .Permalink }}&amp;quot;&amp;gt;{{ .Type }} - {{ .Title }} - {{ .RelPermalink }}&amp;lt;/a&amp;gt;&amp;lt;/h2&amp;gt;
+    {{ end }}
+  {{ end }}
+
+{{ partial &amp;quot;footer.html&amp;quot; . }}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Detect the language&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;package hello
+
+fun main(args: Array&amp;lt;String&amp;gt;) {
+  println(&amp;quot;Hello World!&amp;quot;)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;?php
+  echo &#39;Hello, World!&#39;;
+?&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;By &lt;code&gt;{{&amp;lt; highlight go-html-template &amp;quot;linenos=table,hl_lines=1 3-7,linenostart=199&amp;quot; &amp;gt;}}..{{&amp;lt; / highlight &amp;gt;}}&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go-html-template&#34; data-lang=&#34;go-html-template&#34;&gt;&lt;span style=&#34;display:block;width:100%;background-color:#3c3d38&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;199
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;200
+&lt;/span&gt;&lt;span style=&#34;display:block;width:100%;background-color:#3c3d38&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;201
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:block;width:100%;background-color:#3c3d38&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;202
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:block;width:100%;background-color:#3c3d38&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;203
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:block;width:100%;background-color:#3c3d38&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;204
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:block;width:100%;background-color:#3c3d38&#34;&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;205
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;206
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go-html-template&#34; data-lang=&#34;go-html-template&#34;&gt;&lt;span style=&#34;display:block;width:100%;background-color:#3c3d38&#34;&gt;&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;section&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;id&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;main&amp;#34;&lt;/span&gt;&amp;gt;
+&lt;/span&gt;  &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt;&amp;gt;
+&lt;span style=&#34;display:block;width:100%;background-color:#3c3d38&#34;&gt;   &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;h1&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;id&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;title&amp;#34;&lt;/span&gt;&amp;gt;&lt;span style=&#34;color:#75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;.Title&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;}}&lt;/span&gt;&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;h1&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;span style=&#34;display:block;width:100%;background-color:#3c3d38&#34;&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;range&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;.Data.Pages&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;}}&lt;/span&gt;
+&lt;/span&gt;&lt;span style=&#34;display:block;width:100%;background-color:#3c3d38&#34;&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;.Render&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;summary&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;}}&lt;/span&gt;
+&lt;/span&gt;&lt;span style=&#34;display:block;width:100%;background-color:#3c3d38&#34;&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;end&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;}}&lt;/span&gt;
+&lt;/span&gt;&lt;span style=&#34;display:block;width:100%;background-color:#3c3d38&#34;&gt;  &amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;section&lt;/span&gt;&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

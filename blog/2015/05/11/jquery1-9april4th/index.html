@@ -1,0 +1,2161 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.5.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Nelson Bighetti">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/blog/2015/05/11/jquery1-9april4th/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin="anonymous">
+    
+
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.min.e8d4d5fd376e67b34452ebe1cae16341.css">
+
+  
+
+  
+
+
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon-32.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/blog/2015/05/11/jquery1-9april4th/">
+
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="og:site_name" content="Macro Life">
+  <meta property="og:url" content="/blog/2015/05/11/jquery1-9april4th/">
+  <meta property="og:title" content="JQuery1-9April4th | Macro Life">
+  <meta property="og:description" content=""><meta property="og:image" content="/img/icon-192.png">
+  <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2015-05-11T14:58:44&#43;08:00">
+    
+    <meta property="article:modified_time" content="2015-05-11T14:58:44&#43;08:00">
+  
+
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>JQuery1-9April4th | Macro Life</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0 compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">Macro Life</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav mr-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#hero"><span>Demo</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>博客</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>项目</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#featured"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/about/"><span>About</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/courses/"><span>课程</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/archives"><span>Archives</span></a>
+        </li>
+
+        
+        
+
+      
+      </ul>
+      <ul class="navbar-nav ml-auto">
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+        </li>
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>JQuery1-9April4th</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    May 11, 2015
+  </span>
+  
+
+  
+
+  
+
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/categories/jquery/">jQuery</a></span>
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <p>1: jquery的加载顺序</p>
+
+<p>IE中会有不同点
+结论：jquery中使用$(function(){})即可！其他知道即可</p>
+
+<pre><code class="language-html">&lt;Html&gt;
+  &lt;Head&gt;
+    &lt;script type=&quot;text/javascript&quot; src=&quot;jquery-2.1.3.js&quot;&gt;
+    &lt;/script&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+
+      //javascript
+      //第四个加载
+      //在IE中居然无法加载！！！
+      //需要等待页面完全加载完毕才会触发
+      onload=function()
+      {
+        //console的作用就是在浏览器的控制台 打印出结果
+        console.log('javascript\'s onload');
+        alert('javascript window.onload js ok 4');
+      };
+      //window object change into jQuery object
+      //第五个加载
+      $(window).load(function(){
+        console.log('window onload');
+        alert('$(window).load No 5');
+      });
+
+//第二个加载
+      $(function()
+        {
+          console.log('dom ready='+$('#span').html());
+          alert('$(function(){}niming hanshu! 2');
+        });
+
+
+      //Dom object change into Jquery Object
+      // 很是奇怪 第一个加载
+      //可以多次触发
+      $(document).ready(function(){
+        console.log('document ready')
+        alert('$(document).ready Ok 1');
+      });
+
+      // THe most common  and most convininet
+      //jQuery(function(){})
+           //第三个加载  跟第二个一样的  按照前后顺序进行布置
+      jQuery(function()
+       {
+        console.log('dom ready='+$('#span').html());
+        alert(' jQuery(function(){}niming hanshu 3!')
+       });
+
+       function init()
+       {
+         console.log('body init');
+       }
+
+    &lt;/script&gt;
+
+  &lt;/Head&gt;
+  &lt;Body onload=&quot;init()&quot;&gt;
+    
+    &lt;Span id=&quot;span&quot;&gt; Rupeng!&lt;/Span&gt;
+  &lt;/Body&gt;
+&lt;/Html&gt;
+</code></pre>
+
+<p>2：Map 和each函数的使用
+map：用于修改
+each：用于遍历</p>
+
+<p>map:  value index
+each:  key  value</p>
+
+<pre><code>&lt;Html&gt;
+  &lt;Head&gt;
+    &lt;script type=&quot;text/javascript&quot; src=&quot;jquery-2.1.3.js&quot;&gt;&lt;/script&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+      
+       var arr=[1,2,4,5,6];
+       $.map(arr,function()
+             {
+               alert('element'+arguments[1]+'=='+arguments[0]);
+             });
+        //namely  ,we can write below
+        $.map(arr,function(ele,index)
+              {
+                alert('element'+index+'=='+ele);
+              });
+
+        //return a  new array ==2*old_array
+              var newArray=$.map(arr,function(ele,index)
+               {
+                 return ele*2;
+               })
+
+        //$.map is similar to lisp's (map ...) 
+        // so we can get the two properties of array with $.map function
+
+        //print new array
+        alert(newArray);   
+
+
+        var newArray2=$.map(arr,function(ele,index){
+          return index&gt;2?ele*2:ele;
+        })
+
+        alert(newArray2);
+
+
+    &lt;/script&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+      var dic={&quot;name&quot;:&quot;xiaoming&quot;,&quot;age&quot;:3,&quot;gender&quot;:&quot;1&quot;};
+      //each 主要用于遍历    map主要用于修改
+      $.each(dic,function(key,value)
+             {
+               alert(key+'=='+value);
+             })
+    &lt;/script&gt;
+  &lt;/Head&gt;
+&lt;/Html&gt;
+</code></pre>
+
+<p>3:jquery和jsDom的互转</p>
+
+<p>1：jsDom -&gt; jquery       把jsDom对象放在$()括号中即可
+2： jquery -&gt; jsDom
+     两种方法
+         a:  $().get(0)
+         b: $()[0]</p>
+
+<pre><code class="language-html">&lt;Html&gt;
+  &lt;Head&gt;
+    &lt;Title&gt; Test the transformation between jQuery and Dom &lt;/Title&gt;
+    &lt;script type=&quot;text/javascript&quot; src=&quot;jquery-2.1.3.js&quot;&gt;&lt;/script&gt;
+
+    &lt;script type=&quot;text/javascript&quot; &gt;
+    
+    
+      $(function(){
+
+  /*
+        document.getElementById('btn').onclick=function()
+        {
+          var dvObj=document.getElementById('dv');
+          //方法1  Dom
+          //dvObj.style.backgroundColor='black'; 
+         
+          //方法2 jQuery 方法
+           //Dom object change into jQuery
+//          var dvObjJquery=$(dvObj);
+//          dvObjJquery.css('backgroundColor','yellow');
+
+          // 把jquery对象转回到Dom对象
+          var dvObjJquery=$(dvObj);
+          //1  转回去dom的方法1
+//          var dvObjAgain=dvObjJquery[0]; 
+          //2  转回去dom的方法2
+          var dvObjAgain=dvObjJquery.get(0); 
+           dvObjAgain.style.backgroundColor='black'; 
+
+        
+
+        }
+   */       
+
+        //1  省略了  等号
+        //2  省略了   Dom长长的函数名调用
+        //2  取而代之的是简易的jQuery语法  利用链式法则
+        $('#btn').click(function()
+                        {
+                          $('#dv').css('backgroundColor','purple');
+                        });
+      })
+    &lt;/script&gt;
+  &lt;/Head&gt;
+
+  &lt;Body&gt;
+    &lt;Input type=&quot;button&quot; id=&quot;btn&quot; value=&quot;changeColor&quot;/&gt;
+    &lt;Div id=&quot;dv&quot; style=&quot;width:300px; height:200px; background-color:green&quot;&gt;
+      hello
+      &lt;/Div&gt;
+  &lt;/Body&gt;
+&lt;/Html&gt;
+</code></pre>
+
+<p>4多重选择器
+注意：中间不能有空格  否则没有反应 这是需要注意的
+          text() 类似于jsDom的innerText()
+          html()类似于 innerHtml()</p>
+
+<pre><code class="language-html">&lt;Html&gt;
+  &lt;Head&gt;
+    &lt;script type=&quot;text/javascript&quot; src=&quot;jquery-2.1.3.js&quot;&gt;&lt;/script&gt;
+
+    &lt;script type=&quot;text/javascript&quot;&gt;
+//      alert('hello')
+      $(function()
+        {
+          $('#btn').click(function(){
+//            alert('hello');
+//            $('#cls').text('This is  a  layer');  // class selector
+
+
+            //$('div#cls').css('backgroundColor','yellow');  // label with Id selector
+//            $('div #cls').css('backgroundColor','yellow'); //中间不能有空格  否则没有反应 这是需要注意的
+//   同样的标签加上lei也不是不能加上空格
+
+
+            $('div#cls').text('InnerText方式添加');
+            $('div#cls').html('&lt;H1&gt;InnerHTML方式添加&lt;/H1&gt;');
+
+            //标签选择器的隐式编程   隐式循环！ 这是一个jQuery的一个好处 implicit cycle
+            $('p').text('Set all the p the value');
+    
+          });
+        });
+    &lt;/script&gt;
+
+    &lt;style type=&quot;text/css&quot;&gt;
+       #cls
+       {
+         width:300px;
+         height:200px;
+         background-color:green;
+       }
+    &lt;/style&gt;
+  &lt;/Head&gt;
+
+  &lt;Body&gt;
+    &lt;input type=&quot;button&quot; id=&quot;btn&quot; value=&quot;change&quot;/&gt;
+    &lt;div id=&quot;cls&quot;&gt;
+
+    &lt;/div&gt;
+    &lt;p class=&quot;name&quot;&gt;&lt;/p&gt;
+    &lt;p class=&quot;name&quot;&gt;&lt;/p&gt;
+    &lt;p class=&quot;name&quot;&gt;&lt;/p&gt;
+    &lt;p class=&quot;name&quot;&gt;&lt;/p&gt;
+    &lt;p class=&quot;name&quot;&gt;&lt;/p&gt;
+    &lt;p class=&quot;name&quot;&gt;&lt;/p&gt;
+    &lt;p class=&quot;name&quot;&gt;&lt;/p&gt;
+    &lt;p class=&quot;name&quot;&gt;&lt;/p&gt;
+  &lt;/Body&gt;
+&lt;/Html&gt;
+</code></pre>
+
+<p>5： 选择器  过滤器的使用
+:first   first()
+:last   last()
+:eq()
+:lt()
+:gt()</p>
+
+<p>注意：可不敢再把siblings()漏掉了！</p>
+
+<pre><code class="language-html">&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;  test  the start mark&lt;/title&gt;
+    &lt;script type=&quot;text/javascript&quot; src=&quot;jquery-2.1.3.js&quot;&gt;&lt;/script&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+      $(function(){
+        //注意是tr  行
+        $('#tb tr:first').css('backgroundColor','green').css('fontSize','50px');
+        $('#tb tr:last').css('color','black');
+        // 0-3之间  0 1 2 3
+        $('#tb tr:gt(0):lt(3)').css('fontSize','25px');
+        $('#tb tr:odd').css('backgroundColor','yellow');
+
+        $('#tb tr').click(function(){
+          //可不敢再犯这种错误了！ ！ siblings()  加上括号
+          $(this).css('backgroundColor','red').siblings().css('backgroundColor','gray');
+        })
+      })
+    &lt;/script&gt;
+
+    
+   &lt;style type=&quot;text/css&quot;&gt;
+      .cls
+      {
+        background-color:black;
+      }
+      td
+      {
+        border:1px solid red;
+      }
+    &lt;/style&gt;
+  &lt;/head&gt;
+
+  &lt;body&gt;
+    &lt;table id=&quot;tb&quot; style=&quot;width:2\450px;height:20px;text-align:center; font-size:14px ;border:1px solid black;cursor:pointer&quot;&gt;
+      &lt;tr&gt;
+        &lt;td&gt;Name&lt;/td&gt;
+        &lt;td&gt;Mark&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;Chairman Mao&lt;/td&gt;
+        &lt;td&gt;89&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;Chairman Hu&lt;/td&gt;
+        &lt;td&gt;79&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;Chairman Deng&lt;/td&gt;
+        &lt;td&gt;99&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;Chairman Xi&lt;/td&gt;
+        &lt;td&gt;98&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;Chairman jiang&lt;/td&gt;
+        &lt;td&gt;76&lt;/td&gt;
+      &lt;/tr&gt;
+
+    &lt;/table&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>6：相对容器 和绝对容器</p>
+
+<p>$(&lsquo;p div&rsquo;)  绝对容器  p的后代
+$(&lsquo;div&rsquo;,&lsquo;p&rsquo;)  相对容器   所有在p标签中的 div
+参考点不一样</p>
+
+<p>注意
+          //$(&lsquo;this&rsquo;).siblings.css(&lsquo;backgroundColor&rsquo;,&ldquo;);//可不敢再犯这个错误
+          //this不需要加上单引号
+          //为什么无法直接行t添加上 颜色？ 因为真正在表面显示的是td
+          //$(this).siblings().css(&lsquo;backgroundColor&rsquo;,&ldquo;);</p>
+
+<pre><code class="language-html">
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;  test  the start mark&lt;/title&gt;
+    &lt;script type=&quot;text/javascript&quot; src=&quot;jquery-2.1.3.js&quot;&gt;&lt;/script&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+      $(function(){
+
+        //绝对定位
+        // $('div p')表示div下的p元素
+        //相对定位
+        //相对div元素的p标签
+        //$('p','div') 表示在div层中的p元素
+
+        $('#tb tr').click(function(){
+          //$('this').siblings.css('backgroundColor','');//可不敢再犯这个错误
+          //this不需要加上单引号
+          //为什么无法直接行t添加上 颜色？ 因为真正在表面显示的是td
+          //$(this).siblings().css('backgroundColor','');
+
+          $('td',$(this).siblings()).css('backgroundColor','');
+          $('td:even',$(this)).css('backgroundColor','red');
+          $('td:odd',$(this)).css('backgroundColor','yellow');
+        });
+
+        //学习了.hover(,) 函数的使用方式
+        //来的时候是第一个参数
+        //去的时候是第二个参数
+        $('tr').hover(function(){
+          $(this).find('td').addClass('hover');
+        },function(){
+          $(this).find('td').removeClass('hover');
+        });
+
+
+        //l列的追踪
+        $('td').hover(function(){
+          var $index=$(this).index();
+          $(this).addClass('hover');
+          $('td:nth-child('+($index+1)+')').addClass('hover');
+        },function(){
+          $('#tb tr').children().removeClass('hover');
+        });
+        alert('Total rows:'+$('#tb tr').length);
+
+
+      })
+    &lt;/script&gt;
+
+    
+   &lt;style type=&quot;text/css&quot;&gt;
+     .hover
+     {
+       color:#fff;
+       background-color:gray;
+     }
+      .cls
+      {
+        background-color:black;
+      }
+      td
+      {
+        border:1px solid red;
+      }
+    &lt;/style&gt;
+  &lt;/head&gt;
+
+  &lt;body&gt;
+    &lt;table id=&quot;tb&quot; style=&quot;width:2\450px;height:20px;text-align:center; font-size:14px ;border:1px solid black;cursor:pointer&quot;&gt;
+      &lt;tr&gt;
+        &lt;td&gt;First&lt;/td&gt;
+        &lt;td&gt;Second&lt;/td&gt;
+        &lt;td&gt;Third&lt;/td&gt;
+        &lt;td&gt;Fourth&lt;/td&gt;
+        &lt;td&gt;Fifth&lt;/td&gt;
+        &lt;td&gt;Sixth&lt;/td&gt;
+        &lt;td&gt;Seventh&lt;/td&gt;
+        &lt;td&gt;eighth&lt;/td&gt;
+        &lt;td&gt;nineth&lt;/td&gt;
+        &lt;td&gt;tenth&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;First&lt;/td&gt;
+        &lt;td&gt;Second&lt;/td&gt;
+        &lt;td&gt;Third&lt;/td&gt;
+        &lt;td&gt;Fourth&lt;/td&gt;
+        &lt;td&gt;Fifth&lt;/td&gt;
+        &lt;td&gt;Sixth&lt;/td&gt;
+        &lt;td&gt;Seventh&lt;/td&gt;
+        &lt;td&gt;eighth&lt;/td&gt;
+        &lt;td&gt;nineth&lt;/td&gt;
+        &lt;td&gt;tenth&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;First&lt;/td&gt;
+        &lt;td&gt;Second&lt;/td&gt;
+        &lt;td&gt;Third&lt;/td&gt;
+        &lt;td&gt;Fourth&lt;/td&gt;
+        &lt;td&gt;Fifth&lt;/td&gt;
+        &lt;td&gt;Sixth&lt;/td&gt;
+        &lt;td&gt;Seventh&lt;/td&gt;
+        &lt;td&gt;eighth&lt;/td&gt;
+        &lt;td&gt;nineth&lt;/td&gt;
+        &lt;td&gt;tenth&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;First&lt;/td&gt;
+        &lt;td&gt;Second&lt;/td&gt;
+        &lt;td&gt;Third&lt;/td&gt;
+        &lt;td&gt;Fourth&lt;/td&gt;
+        &lt;td&gt;Fifth&lt;/td&gt;
+        &lt;td&gt;Sixth&lt;/td&gt;
+        &lt;td&gt;Seventh&lt;/td&gt;
+        &lt;td&gt;eighth&lt;/td&gt;
+        &lt;td&gt;nineth&lt;/td&gt;
+        &lt;td&gt;tenth&lt;/td&gt;
+      &lt;/tr&gt;
+
+    &lt;/table&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>一个有趣的分页</p>
+
+<p>奇巧淫技</p>
+
+<pre><code class="language-html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;
+
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
+&lt;head&gt;
+    &lt;title&gt;&lt;/title&gt;
+    &lt;style type=&quot;text/css&quot;&gt;
+   .page
+   {
+       margin:5px;
+   }
+   .hover
+   {
+       background-color:#00f;
+       color:#fff;
+       cursor:hand;
+   }
+    &lt;/style&gt;
+
+     &lt;script src=&quot;jquery-2.1.3.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+     &lt;script type=&quot;text/javascript&quot;&gt;
+
+         $(document).ready(function () {
+           //实际的效果是在先前的表格中进行隐藏和显示的小伎俩！ 奇巧淫技
+           //get the rows
+             var $rows = $('table tbody tr').length;
+          // get the show lines  页面行数
+             var $pagesize = 2;
+          //总页数
+             var $pagecount = Math.ceil($rows / $pagesize);
+          //创建一个层
+             var $div = $('&lt;div id=&quot;pages&quot;&gt;&lt;/div&gt;');
+          //在层中加入page
+             for (var i = 0; i &lt; $pagecount; i++) {
+               //把创建的东西加入到层中
+                 $('&lt;span class=&quot;page&quot;&gt;' + (i + 1) + '&lt;/span&gt;').appendTo($div);
+             }
+             $div.appendTo('table');
+
+             //appendd the hover
+             //设置页面的数字的悬浮效果
+             $('.page').hover(function () {
+                 $(this).addClass('hover');
+             }, function () {
+                 $(this).removeClass('hover');
+             });
+
+             //增加了页面行的点击隐藏的事件
+             $('table tbody tr').click(function(){
+               $(this).hide();
+
+             })
+             //隐藏所有行
+             $('table tbody tr').hide();
+             //获得所有的tr行对象
+             var tr = $('table tbody tr');
+             for (var i = 0; i &lt; $pagecount - 1; i++) {
+                 $(tr[i]).show();
+             }
+
+             //设置页面的点击事件 效果
+             $('span').click(function () {
+                 $('table tbody tr').hide();
+                 for (i = ($(this).text() - 1) * $pagesize; i &lt;= $(this).text() * $pagesize - 1; i++) {
+                     $(tr[i]).show();
+                 }
+             })
+         });
+     &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;table border=&quot;1&quot; width=&quot;200px&quot;&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;ID&lt;/th&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Mark&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;100&lt;/td&gt;&lt;td&gt;Steven&lt;/td&gt;&lt;td&gt;100&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;101&lt;/td&gt;&lt;td&gt;Mike&lt;/td&gt;&lt;td&gt;70&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;102&lt;/td&gt;&lt;td&gt;Robot&lt;/td&gt;&lt;td&gt;80&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;103&lt;/td&gt;&lt;td&gt;Perry&lt;/td&gt;&lt;td&gt;100&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;104&lt;/td&gt;&lt;td&gt;Lion&lt;/td&gt;&lt;td&gt;90&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;105&lt;/td&gt;&lt;td&gt;Andy&lt;/td&gt;&lt;td&gt;85&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+
+&lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>一个小练习： 东西部篮球队</p>
+
+<p>注意：
+       //可不敢再犯这个错误   1  逗号写成了句话   2： siblings后直接街上css的参数
+          //$(this).css(&lsquo;backgroundColor&rsquo;.&lsquo;red&rsquo;).siblings()&lsquo;backgroundColor&rsquo;,&ldquo;);</p>
+
+<pre><code>      //由此错误可得到一个结论
+      // jQuery分成两个部分一个是获得Dom对象  紧接着是设置CSS样式！
+      // 也就是js其实就是把这两个部分按照链条一样一对一对的串起来了
+      //一个Dom一个Css  然后再一个Dom 一个CSS
+</code></pre>
+
+<pre><code class="language-html">&lt;Html&gt;
+  &lt;Head&gt;
+    &lt;Meta charset=&quot;utf-8&quot;&gt;
+    &lt;script type=&quot;text/javascript&quot; src=&quot;jquery-2.1.3.js&quot;&gt;&lt;/script&gt;
+
+    &lt;script type=&quot;text/javascript&quot;&gt;
+      $(function(){
+        $('ol li').mouseover(function(){
+          //可不敢再犯这个错误   1  逗号写成了句话   2： siblings后直接街上css的参数
+          //$(this).css('backgroundColor'.'red').siblings()'backgroundColor','');
+
+          //由此错误可得到一个结论
+          // jQuery分成两个部分一个是获得Dom对象  紧接着是设置CSS样式！
+          // 也就是js其实就是把这两个部分按照链条一样一对一对的串起来了
+          //一个Dom一个Css  然后再一个Dom 一个CSS
+          $(this).css('backgroundColor','red').siblings().css('backgroundColor','');
+        });
+        $('ol li').click(function()
+           {
+
+             //第一种写法
+//             $(this).prevAll().css('backgroundColor','blue');
+//             $(this).nextAll().css('backgroundColor','yellow');
+
+             //第二种写法
+             //end的作用就是从前面所有 又跳回到$(this)的作用！！关键点是end() 这样才可以帮助我们就你行链式编程
+             $(this).prevAll().css('backgroundColor','blue').end().nextAll().css('backgroundColor','yellow');
+           })
+      });
+    &lt;/script&gt;
+
+  &lt;/Head&gt;
+
+  &lt;Body&gt;
+    &lt;Ol id=&quot;east&quot;&gt;
+      &lt;Li&gt;亚特兰大 老鹰&lt;/Li&gt;
+      &lt;Li&gt;芝加哥 公牛&lt;/Li&gt;
+      &lt;Li&gt;波士顿 凯尔特人&lt;/Li&gt;
+      &lt;Li&gt;夏洛特 黄蜂&lt;/Li&gt;
+      &lt;Li&gt;克利夫兰 骑士&lt;/Li&gt;
+      &lt;Li&gt;布鲁克林 篮网&lt;/Li&gt;
+      &lt;Li&gt;迈阿密 热火&lt;/Li&gt;
+      &lt;Li&gt;底特律 活塞&lt;/Li&gt;
+      &lt;Li&gt;纽约 尼克斯&lt;/Li&gt;
+      &lt;Li&gt;奥兰多 魔术&lt;/Li&gt;
+      &lt;Li&gt;印第安纳 步行者&lt;/Li&gt;
+      &lt;Li&gt;费城 76人&lt;/Li&gt;
+      &lt;Li&gt;华盛顿 奇才&lt;/Li&gt;
+      &lt;Li&gt;密尔沃基 雄鹿&lt;/Li&gt;
+      &lt;Li&gt;多伦多 猛龙&lt;/Li&gt;
+    &lt;/Ol&gt;
+    &lt;Ol id=&quot;west&quot;&gt;
+      &lt;Li&gt;金州 勇士&lt;/Li&gt;
+      &lt;Li&gt;丹佛 掘金&lt;/Li&gt;
+      &lt;Li&gt;达拉斯 小牛&lt;/Li&gt;
+      &lt;Li&gt;洛杉矶 快船&lt;/Li&gt;
+      &lt;Li&gt;明尼苏达 森林狼&lt;/Li&gt;
+      &lt;Li&gt;休斯顿 火箭&lt;/Li&gt;
+      &lt;Li&gt;洛杉矶 湖人&lt;/Li&gt;
+      &lt;Li&gt;奥克兰陈马成 雷霆&lt;/Li&gt;
+      &lt;Li&gt;孟菲斯 灰熊&lt;/Li&gt;
+      &lt;Li&gt;菲尼克斯 太阳&lt;/Li&gt;
+      &lt;Li&gt;波特兰 开拓者&lt;/Li&gt;
+      &lt;Li&gt;新奥尔良 鹈鹕&lt;/Li&gt;
+      &lt;Li&gt;萨克拉门托 国王&lt;/Li&gt;
+      &lt;Li&gt;犹他 爵士&lt;/Li&gt;
+      &lt;Li&gt;圣安东尼奥 马刺&lt;/Li&gt;
+    &lt;/Ol&gt;
+    &lt;Ul id=&quot;other&quot;&gt;
+      &lt;Li&gt;步行者&lt;/Li&gt;
+      &lt;Li&gt;山猫&lt;/Li&gt;
+    &lt;/Ul&gt;
+  &lt;/Body&gt;
+&lt;/Html&gt;
+</code></pre>
+
+<p>7：过滤器的练习</p>
+
+<p>注意：
+   even和odd选择器     index从0开始。</p>
+
+<pre><code class="language-html">&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;  test  the start mark&lt;/title&gt;
+    &lt;script type=&quot;text/javascript&quot; src=&quot;jquery-2.1.3.js&quot;&gt;&lt;/script&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+      $(function(){
+        $('#btnFirst').click(function(){
+          $('div:first').css('backgroundColor','green').siblings().css('backgroundColor','blue');
+        });
+        $('#btnFirst2').click(function(){
+          $('div').first().css('backgroundColor','red').siblings().css('backgroundColor','blue');
+        });
+        $('#Last').click(function(){
+          $('div:last').css('backgroundColor','purple').siblings().css('backgroundColor','blue');
+        });
+        $('#Last2').click(function(){
+          $('div').last().css('backgroundColor','red').siblings().css('backgroundColor','blue');
+        });
+
+        $('#eq2').click(function(){
+          $('div:eq(2)').css('backgroundColor','black').siblings().css('backgroundColor','blue');
+        });
+        $('#lt2').click(function(){
+          //范围性内容 不能用siblings
+          //$('div:lt(2)').css('backgroundColor','black').siblings().css('backgroundColor','blue');
+          $('div:lt(2)').css('backgroundColor','black');
+        });
+        $('#gt2').click(function(){
+        // $('div:gt(2)').css('backgroundColor','red').siblings().css('backgroundColor','blue');
+          $('div:gt(2)').css('backgroundColor','red');
+        });
+        //下标从0开始  index 所以表面上even是第一个元素 
+        $('#even2').click(function(){
+         // $('div:even').css('backgroundColor','red').siblings().css('backgroundColor','blue');
+          $('div:even').css('backgroundColor','red');
+        });
+        $('#odd2').click(function(){
+          //$('div:odd').css('backgroundColor','red').siblings().css('backgroundColor','blue');
+          $('div:odd').css('backgroundColor','red');
+        });
+        // 当然也是可以组合起来  $('div:gt(3):lt(2)')
+        // $('div:not(.cls)')
+        $('#olivenot').click(function(){
+          //必须加上. 句话才是有效的
+          $('div:not(.cls)').css('backgroundColor','yellow');
+        });
+      $('#header1').click(function(){
+        $('h1,h2,h3,h4,h5,h6').css('backgroundColor','gray');
+      });
+      $('#header2').click(function(){
+        $(':header').css('backgroundColor','yellow');
+      });
+
+
+
+      });
+    &lt;/script&gt;
+    &lt;style type=&quot;text/css&quot;&gt;
+      div
+      {
+        width:150px;
+        height:30px;
+        margin-bottom:10px;
+        background-color:blue;
+      }
+      td
+      {
+        border:1px solid red;
+      }
+      .cls
+      {
+           background-color:olive;
+      }
+    &lt;/style&gt;
+  &lt;/head&gt;
+
+
+  &lt;body&gt;
+    &lt;Input type=&quot;button&quot; id=&quot;btnFirst&quot; value=&quot;divColorToGreenFirst&quot;/&gt;
+    &lt;Input type=&quot;button&quot; id=&quot;btnFirst2&quot; value=&quot;divColorToGreenFirst2&quot;/&gt;
+    &lt;Input type=&quot;button&quot; id=&quot;Last&quot; value=&quot;divColorToGreenLast&quot;/&gt;
+    &lt;Input type=&quot;button&quot; id=&quot;Last2&quot; value=&quot;divColorToGreenLast2&quot;/&gt;
+    &lt;Input type=&quot;button&quot; id=&quot;gt2&quot; value=&quot;divColorToGreenGreater2&quot;/&gt;
+    &lt;Input type=&quot;button&quot; id=&quot;eq2&quot; value=&quot;divColorToGreenEqual2&quot;/&gt;
+    &lt;Input type=&quot;button&quot; id=&quot;lt2&quot; value=&quot;divColorToGreenLess2&quot;/&gt;
+    &lt;Input type=&quot;button&quot; id=&quot;even2&quot; value=&quot;divColorToGreenEven&quot;/&gt;
+    &lt;Input type=&quot;button&quot; id=&quot;odd2&quot; value=&quot;divColorToGreenOdd&quot;/&gt;
+    &lt;Input type=&quot;button&quot; id=&quot;olivenot&quot; value=&quot;not olive&quot;/&gt;
+    &lt;Input type=&quot;button&quot; id=&quot;header1&quot; value=&quot;header1&quot;/&gt;
+    &lt;Input type=&quot;button&quot; id=&quot;header2&quot; value=&quot;header2&quot;/&gt;
+    &lt;Div&gt;&lt;/Div&gt;
+    &lt;Div&gt;&lt;/Div&gt;
+    &lt;Div class=&quot;cls&quot;&gt;&lt;/Div&gt;
+    &lt;Div&gt;&lt;/Div&gt;
+    &lt;Div&gt;&lt;/Div&gt;
+
+    &lt;H1&gt;Header 1&lt;/H1&gt;
+    &lt;H2&gt;Header 2&lt;/H2&gt;
+    &lt;H3&gt;Header 3&lt;/H3&gt;
+    &lt;H4&gt;Header 4&lt;/H4&gt;
+    &lt;H5&gt;Header 5&lt;/H5&gt;
+    &lt;H6&gt;Header 6&lt;/H6&gt;
+      
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>一个有趣的slideup and down 小案例：</p>
+
+<pre><code class="language-html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;
+
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
+&lt;head&gt;
+    &lt;title&gt;&lt;/title&gt;
+    &lt;style type=&quot;text/css&quot;&gt;
+    &lt;/style&gt;
+     &lt;script src=&quot;jquery-2.1.3.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+     &lt;script type=&quot;text/javascript&quot;&gt;
+         $(document).ready(function () {
+             $('#message1').css({ 'backgroundColor': '#f00', 'text-align': 'center','width':'200px' }).hide();
+             $(&quot;#message2&quot;).css({ 'backgroundColor': 'gray', 'text-align': 'center','width': '200px' }).click(function () {
+                 $(this).slideUp();
+                 $(&quot;#message1&quot;).slideDown();
+             });
+         });
+     &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p id=&quot;message1&quot;&gt;Welome to My Blog&lt;/p&gt;
+
+&lt;p id=&quot;message2&quot;&gt;Welcome to My Facebook&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>8： 评分和addClass</p>
+
+<p>.end()断链的使用，之所以要断链也是因为返回来的是集合，而不是原先的对象
+注意：
+      //测试开关灯
+      //隐含着规律是：jquery获得的都是集合的元素
+    //做判断一定得是 $(function(){})里面中</p>
+
+<p>五角星是直接输入，而不是通过图片</p>
+
+<pre><code class="language-html">&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;  test  the start mark&lt;/title&gt;
+    &lt;script type=&quot;text/javascript&quot; src=&quot;jquery-2.1.3.js&quot;&gt;&lt;/script&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+
+      // 测试评分
+      $(function(){
+        $('#tb td').mouseover(function(){
+            //$(this).prevall().css('backgroundcolor','red');
+            $(this).text('○').prevall().text('○').end().nextall().text('☆');
+        });
+        $('#tb td').mouseout(function()
+        {
+          $('#tb td').text('☆');
+        });
+      });
+    &lt;/script&gt;
+
+    
+    &lt;script type=&quot;text/javascript&quot;&gt;
+      //测试开关灯
+      //隐含着规律是：jquery获得的都是集合的元素
+    //做判断一定得是 $(function(){})里面中
+    $(function(){
+      if($('#btn').length&gt;0)
+        {
+          alert('存在id=#tb的标签');
+        }else
+        {
+          alert('不存在id=#tb的标签');
+        }
+        $('#btnopen').click(function(){
+          $('body').addclass('cls');
+        });
+        $('#btnclose').click(function(){
+          $('body').removeclass('cls');
+        });
+        $('#btncloseopen').click(function(){
+          if($('body').hasclass('cls'))
+            {
+                $('body').removeclass('cls');
+            }else
+            {
+                $('body').addclass('cls');
+
+            }
+        });
+        $('#btncloseopen2').click(function(){
+            $('body').toggleclass('cls');
+        });
+
+    });
+
+
+    &lt;/script&gt;
+    &lt;style type=&quot;text/css&quot;&gt;
+      .cls
+      {
+        background-color:black;
+      }
+      td
+      {
+        border:1px solid red;
+      }
+    &lt;/style&gt;
+  &lt;/head&gt;
+
+  &lt;body&gt;
+    &lt;table id=&quot;tb&quot; style=&quot;width:250px;height:20px;text-align:center; font-size:20px ;border:1px solid black;cursor:pointer&quot;&gt;
+      &lt;tr&gt;
+        &lt;td&gt;☆&lt;/td&gt;
+        &lt;td&gt;☆&lt;/td&gt;
+        &lt;td&gt;☆&lt;/td&gt;
+        &lt;td&gt;☆&lt;/td&gt;
+        &lt;td&gt;☆&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/table&gt;
+    &lt;input type='button' name=&quot;hello&quot; value=&quot;hello&quot; id=&quot;btn&quot;/&gt;
+    &lt;input type='button' name=&quot;open&quot; value=&quot;turn on the light&quot; id=&quot;btnopen&quot;/&gt;
+    &lt;input type='button' name=&quot;close&quot; value=&quot;turn off the light&quot; id=&quot;btnclose&quot;/&gt;
+    &lt;input type='button' name=&quot;openclose&quot; value=&quot;turn off|on the light&quot; id=&quot;btncloseopen&quot;/&gt;
+    &lt;input type='button' name=&quot;openclose2&quot; value=&quot;turn off|on the light2&quot; id=&quot;btncloseopen2&quot;/&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>两个综合实验：</p>
+
+<p>case1: 数组 练习join()
+append()
+sort()
+splice()
+hover()悬停事件
+concat()</p>
+
+<pre><code class="language-html">&lt;Html&gt;
+  &lt;Head&gt;
+    &lt;Title&gt;  test  the start mark&lt;/Title&gt;
+    &lt;script type=&quot;text/javascript&quot; src=&quot;jquery-2.1.3.js&quot;&gt;&lt;/script&gt;
+
+    &lt;!--1 touppercase--&gt;
+    &lt;style type=&quot;text/css&quot;&gt;
+      .hover
+      {
+          background-color:red;
+          font-size:24px;
+      }
+    &lt;/style&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+      $(function(){
+        //核心：touppercase
+        // Good!  Let the array become beautiful
+        var namePostion=$('#names'); 
+        var Member=['basket','foot','tennis','running','pingpong','net'];
+        // map() 迭代数组中每个元素  并为每个元素分别调用一次回调函数
+        Member =$.map(Member,function(value,index){
+          return(index+1+'.'+value.toUpperCase());
+        });
+        $.each(Member,function(index,value){
+          namePostion.append($('&lt;Li class=&quot;sport&quot;&gt;'+value+'&lt;/Li&gt;'));
+        });
+
+        //使用了悬停事件
+        $('.sport').hover(function(){
+           //   alert('ok');
+              $(this).addClass('hover');
+        },function(){
+              $(this).removeClass('hover');
+           //   alert('byel');
+        });
+
+      })
+    &lt;/script&gt;
+    &lt;!--2 grep--&gt;
+    &lt;style type=&quot;text/css&quot;&gt;
+      #All
+      {
+        background-color:green;
+
+      }
+      #Part
+      {
+        background-color:gray;
+      }
+    &lt;/style&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+      $(function(){
+        var Member=['basket','foot','tennis','running','pingpong','net'];
+        //一定要注意在p和#All不要加入空格
+        // join通过&lt;br&gt;来划分数组中的元素
+        $('p#All').append(Member.join('&lt;br/&gt;'));
+        //grep() 分析数组的所有元素，把不想要的元素过滤掉。
+        Member = $.grep(Member,function(value){
+          return value.length &gt; 6;
+        });
+        $('p#Part').append(Member.join('&lt;br/&gt;'));
+      });
+
+
+    &lt;/script&gt;
+
+    &lt;!--3 join sort--&gt;
+
+    &lt;style type=&quot;text/css&quot;&gt;
+      
+      .All
+      {
+        background-color:red;
+      }
+      .Part
+      {
+        background-color:gray;
+      }
+      .AllNumber
+      {
+        background-color:blue;
+      }
+      .PartNumber
+      {
+        background-color:lime;
+      }
+    &lt;/style&gt;
+
+
+
+    &lt;script type=&quot;text/javascript&quot;&gt;
+      $(function(){
+        var Member=['basket','foot','tennis','running','pingpong','net'];
+        //重复的一个练习
+        $('p.All').append(Member.join('&lt;Br&gt;'));
+        $('p.Part').append(Member.sort().join('&lt;/Br&gt;'));
+
+        var Number1 = [12,43,2,34,6,34];
+        $('p.AllNumber').append(Number1.join('&lt;Br/&gt;'));
+
+        // a b 两个值 进行比较  大的那个放在后排
+        Number1 =  Number1.sort(function(a,b){
+          return a-b;
+        });
+        $('p.partNumber').append(Number1.join('&lt;Br/&gt;'));
+        
+      });
+
+    &lt;/script&gt;
+
+    &lt;!--4 splice--&gt;
+    &lt;style type=&quot;text/css&quot;&gt;
+     
+      .Part1
+      {
+        background-color:lime;
+      }
+
+      .Remain
+      {
+        background-color:red;
+      }
+    &lt;/style&gt;
+
+
+
+    &lt;script type=&quot;text/javascript&quot;&gt;
+
+      $(function(){
+        var Member=['basket','foot','tennis','running','pingpong','net'];
+        //第一个参数为索引开始   第二个参数为删除的个数     splice作用返回前两个成员到Filter数组
+        var Filter=Member.splice(0,2);
+        $('p.Part1').append(Filter.join('&lt;Br/&gt;'));
+        $('p.Remain').append(Member.join('&lt;Br/&gt;'));
+      })
+
+    &lt;/script&gt;
+
+    &lt;!--5  concat --&gt;
+    &lt;style type=&quot;text/css&quot;&gt;
+    
+      .First
+      {
+        background-color:lime;
+      }
+      .Last
+      {
+        background-color:gray;
+      }
+      .Whole
+      {
+        background-color:red;
+      }
+    &lt;/style&gt;
+
+
+
+    &lt;script type=&quot;text/javascript&quot;&gt;
+      $(function(){
+        var first=['basket','foot','tennis'];
+        var last=['running','pingpong','net'];
+        $('p.First').append(first.join('&lt;Br/&gt;'));
+        $('p.Last').append(last.join('&lt;Br/&gt;'));
+        var whole=first.concat(last);
+        $('p.Whole').append(whole.join('&lt;Br/&gt;'));
+      });
+
+    &lt;/script&gt;
+
+
+    &lt;!--6  Json sort--&gt;
+    &lt;style type=&quot;text/css&quot;&gt;
+      .All1
+      {
+        background-color:green;
+      }
+
+    
+    &lt;/style&gt;
+
+
+
+    &lt;script type=&quot;text/javascript&quot;&gt;
+      $(function(){
+        var students=[{Name:'Qianqian',Role:'Administrator',Age:'45'},
+          {Name:'Lilei',Role:'Programmer',Age:'15'},
+          {Name:'Dongyuliang',Role:'Seller',Age:'25'},
+          {Name:'LiFeng',Role:'manager',Age:'25'},
+          {Name:'zhaoli',Role:'Architector',Age:'35'}
+        ];
+
+        //有点类似 Java中的treeset的作用  需要设置一个比较器
+        students=students.sort(function(studnetA,studentB){
+          if(studnetA.name&gt;studentB.name){
+            return 1;
+          }else if(studnetA.name &lt; studentB.name)
+          {
+            return -1;
+          }else
+          {
+            return 0;
+          }
+        });
+        $.each(students,function(index,value){
+          $('p.All1').append('&lt;Tr&gt;&lt;Td&gt;&gt;'+value.Name+'&lt;/Td&gt;&lt;Td&gt;'+value.Role+'&lt;/Td&gt;&lt;Td&gt;'+value.Age+'&lt;/Td&gt;&lt;/Tr&gt;');
+        });
+      });
+
+    &lt;/script&gt;
+
+  &lt;/Head&gt;
+
+  &lt;Body&gt;
+    &lt;p id=&quot;names&quot;&gt;&lt;/P&gt;
+
+    &lt;hr/&gt;
+    &lt;H3&gt; Member Name&lt;/H3&gt;
+    &lt;P id=&quot;All&quot;&gt;&lt;/P&gt;
+    &lt;H3&gt; Part Name&lt;/H3&gt;
+    &lt;P id=&quot;Part&quot;&gt;&lt;/P&gt;
+    &lt;Hr/&gt;
+
+    &lt;H3&gt;Not sort string array&lt;/H3&gt;
+    &lt;P class=&quot;All&quot;&gt;&lt;/P&gt;
+    &lt;H3&gt; sort string array&lt;/H3&gt;
+    &lt;P class=&quot;Part&quot;&gt;&lt;/P&gt;
+    &lt;H3&gt;Not sort number&lt;/H3&gt;
+    &lt;P class=&quot;AllNumber&quot;&gt;&lt;/P&gt;
+    &lt;H3&gt; sort number&lt;/H3&gt;
+    &lt;P class=&quot;PartNumber&quot;&gt;&lt;/P&gt;
+
+    &lt;Hr/&gt;
+    &lt;H3&gt;get the  Filer array&lt;/H3&gt;
+    &lt;P class=&quot;Part1&quot;&gt;&lt;/P&gt;
+    &lt;H3&gt;get the remain array&lt;/H3&gt;
+    &lt;P class=&quot;Remain&quot;&gt;&lt;/P&gt;
+
+    &lt;Hr/&gt;
+    &lt;H3&gt;Get the First part&lt;/H3&gt;
+    &lt;P class=&quot;First&quot;&gt;&lt;/P&gt;
+    &lt;H3&gt;Get the Last part&lt;/H3&gt;
+    &lt;P class=&quot;Last&quot;&gt;&lt;/P&gt;
+    &lt;H3&gt;Get the Whole part&lt;/H3&gt;
+    &lt;P class=&quot;Whole&quot;&gt;&lt;/P&gt;
+
+
+    &lt;Hr&gt;
+    &lt;H3&gt;Member Info&lt;/H3&gt;
+    &lt;P class=&quot;All1&quot;&gt;&lt;/P&gt;
+
+
+  &lt;/Body&gt;
+
+&lt;/Html&gt;
+</code></pre>
+
+<p>case2: 事件触发</p>
+
+<p>bind()
+unbind()
+trigger()
+多类的设置 class=&rdquo;  &ldquo;</p>
+
+<pre><code class="language-html">&lt;Html&gt;
+  &lt;Head&gt;
+    &lt;Title&gt;  test  the common jQuery event &lt;/Title&gt;
+    &lt;script type=&quot;text/javascript&quot; src=&quot;jquery-2.1.3.js&quot;&gt;&lt;/script&gt;
+
+
+    &lt;!--1  trigger   bind  unbind--&gt;
+    &lt;style type=&quot;text/css&quot;&gt;
+      .Red
+      {
+          color:red;
+      }
+      .Green
+      {
+        color:green;
+      }
+      .unbind
+      {
+        color:lime
+      }
+      .buttons
+      {
+        width:150px;
+        height:20px;
+        margin:5px;
+        border:2px solid;
+        float:left;
+        font-weight:bold;
+        background-color:gray;
+      }
+      .Down
+      {
+        color:green;
+      }
+      .Up
+      {
+        color:red;
+      }
+      .Over
+      {
+        color:lime;
+      }
+      .Mouses
+      {
+        width:150px;
+        height:20px;
+        margin:5px;
+        border:2px solid;
+        float:left;
+        font-weight:bold;
+        background-color:gray;
+      }
+
+    &lt;/style&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+      //可不敢再犯这个错误
+      //$('.button').bind('click',function(){
+    $(function(){
+       $('.buttons').bind('click',function(){
+        alert('You have clicked '+$(this).text()); //innerText()
+        // trigger without click !!!  automated;
+      //可不敢再犯这个错误
+        //$(.Green).trigger('click');
+       // $('.Green').trigger('click');
+
+       // unbindf test
+        $('.Unbind').bind('click',function(){
+          alert('You have clicked the'+$(this).text()+'&lt;Br/&gt;After that the button will unbind the click event!');
+          $('.Unbind').unbind('click');
+
+        })
+      });
+       
+      //mouse event
+      $('.Mouses').bind('mousedown',function(){
+          alert('your mouse have been pressed down'+$(this).text());
+      });
+
+      $('.Mouses').bind('mouseup',function(){
+          alert('your mouse have been pressed up'+$(this).text());
+      });
+
+      $('.Mouses').bind('mouseover',function(){
+          alert('your mouse have been pressed over'+$(this).text());
+      });
+
+
+      //focus test
+      $('#btn').focus(function(){
+        alert('ol');
+        $('#btn').html('&lt;Font color=&quot;red&quot;&gt;&lt;Strong&gt;Focus&lt;/Strong&gt;&lt;/Font&gt;');
+      });
+      $('#btn').blur(function(){
+        alert('fuck');
+        $('#btn').html('&lt;Font color=&quot;gray&quot;&gt;&lt;Italic&gt;Focus&lt;/Italic&gt;&lt;/Font&gt;');
+      });
+
+       
+    });
+    &lt;/script&gt;
+
+
+
+  &lt;/Head&gt;
+
+  &lt;Body&gt;
+    &lt;H3&gt;Test bind and trigger&lt;/H3&gt;
+    &lt;!--Multiple classes !!!　Take Note--&gt;
+    &lt;Span class=&quot;Red buttons&quot;&gt;Red&lt;/Span&gt;
+    &lt;Span class=&quot;Green buttons&quot;&gt;Green&lt;/Span&gt;
+    &lt;Span class=&quot;Unbind buttons&quot;&gt;Unbind it&lt;/Span&gt;
+    &lt;Br/&gt;
+    &lt;hr/&gt;
+    &lt;Br/&gt;
+    &lt;H3&gt;Test bind and trigger&lt;/H3&gt;
+    &lt;!--Multiple classes !!!　Take Note--&gt;
+    &lt;Span class=&quot;Mouses Down&quot;&gt;Mouse Down&lt;/Span&gt;
+    &lt;Span class=&quot;Mouses Up&quot;&gt;Mouse Up&lt;/Span&gt;
+    &lt;Span class=&quot;Mouses Over&quot;&gt;Mouse over&lt;/Span&gt;
+
+    &lt;Br/&gt;
+    &lt;hr/&gt;
+    &lt;Br/&gt;
+    &lt;H3&gt;Test focus and blur&lt;/H3&gt;
+    &lt;!--     Input cannot  html  --&gt;
+    &lt;Input type=&quot;text&quot; name=&quot;mouse&quot; id=&quot;btn&quot; values=&quot;focus&quot;/&gt;
+
+    &lt;/Div&gt;
+    
+
+
+  &lt;/Body&gt;
+
+&lt;/Html&gt;
+</code></pre>
+    </div>
+
+    
+
+
+
+
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/blog/2015/05/11/jquery1-9april4th/&amp;text=JQuery1-9April4th" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/blog/2015/05/11/jquery1-9april4th/&amp;t=JQuery1-9April4th" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=JQuery1-9April4th&amp;body=/blog/2015/05/11/jquery1-9april4th/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/blog/2015/05/11/jquery1-9april4th/&amp;title=JQuery1-9April4th" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=JQuery1-9April4th%20/blog/2015/05/11/jquery1-9april4th/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/blog/2015/05/11/jquery1-9april4th/&amp;title=JQuery1-9April4th" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="portrait mr-3" src="/authors/admin/avatar_hu52a603635ecebd45650b162dadabb4e5_12861_250x250_fill_q90_lanczos_center.jpg" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/">Nelson Bighetti</a></h5>
+      <h6 class="card-subtitle">Professor of Artificial Intelligence</h6>
+      <p class="card-text">My research interests include distributed robotics, mobile computing and programmable matter.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/GeorgeCushen" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.co.uk/citations?user=sIwtMXoAAAAJ" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/gcushen" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js" integrity="sha256-aYTdUrn6Ow1DDgh5JTc3aDGnnju48y/1c8s1dgkYPQ8=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/r.min.js"></script>
+        
+      
+
+      
+      
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    <script id="dsq-count-scr" src="https://yezhaoliang.disqus.com/count.js" async></script>
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.d6bd04fdad2ad213aa8111c5a3b72fc5.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

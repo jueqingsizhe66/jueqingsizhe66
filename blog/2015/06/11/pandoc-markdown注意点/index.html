@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.5.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Nelson Bighetti">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="pandoc是markdown升级版工具，用于制作幻灯片相当好用，然而使用过程需要注意以下几点。">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/blog/2015/06/11/pandoc-markdown%E6%B3%A8%E6%84%8F%E7%82%B9/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin="anonymous">
+    
+
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.min.e8d4d5fd376e67b34452ebe1cae16341.css">
+
+  
+
+  
+
+
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon-32.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/blog/2015/06/11/pandoc-markdown%E6%B3%A8%E6%84%8F%E7%82%B9/">
+
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="og:site_name" content="Macro Life">
+  <meta property="og:url" content="/blog/2015/06/11/pandoc-markdown%E6%B3%A8%E6%84%8F%E7%82%B9/">
+  <meta property="og:title" content="pandoc markdown注意点 | Macro Life">
+  <meta property="og:description" content="pandoc是markdown升级版工具，用于制作幻灯片相当好用，然而使用过程需要注意以下几点。"><meta property="og:image" content="/img/icon-192.png">
+  <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2015-06-11T12:30:13&#43;08:00">
+    
+    <meta property="article:modified_time" content="2015-06-11T12:30:13&#43;08:00">
+  
+
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>pandoc markdown注意点 | Macro Life</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0 compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">Macro Life</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav mr-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#hero"><span>Demo</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>博客</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>项目</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#featured"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/about/"><span>About</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/courses/"><span>课程</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/archives"><span>Archives</span></a>
+        </li>
+
+        
+        
+
+      
+      </ul>
+      <ul class="navbar-nav ml-auto">
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+        </li>
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>pandoc markdown注意点</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Jun 11, 2015
+  </span>
+  
+
+  
+
+  
+
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/categories/markdown/">markdown</a></span>
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <p>pandoc是markdown升级版工具，用于制作幻灯片相当好用，然而使用过程需要注意以下几点。</p>
+
+<ol>
+<li>markdown文件  # 大标题不能跟上文本   ## 二标题才可以跟文本，且是一张幻灯
+片。</li>
+<li>org文件使用 &mdash;&mdash;&mdash;来强制执行创建新的幻灯片</li>
+</ol>
+
+<h2 id="markdown">markdown</h2>
+
+<pre><code class="language-sh">% Ye Zhaoliang
+% Openfoam Introduction
+% 11th June,2015
+
+# Openfoam简介
+
+## 1求解器(Solver 数值结算)
+
+  openfoam采用c++编写的类库，开源免费。所以可以把它当作一种类似于String的基本类来使用。
+ openfoam框架从使用级别来看主要分为两类：
+
+    - 流体计算
+    - 化学反应
+    - 换热
+    - 结构动力学
+    - 电磁场
+    - 金融评估等
+
+## 2工具(Utility)
+
+    - 前处理
+      + 建模
+      + 网格
+      + 边界条件
+    - 后处理
+      + 计算结果显示
+
+## cavity case
+
+cavity case的文件夹简介（等价于fluent的.cas,只不过fluent集成为一个文件，openfoam是一个文件夹)
+
+# 这便使用代码快包裹
+├── 0 (初始条件文件夹)
+│   ├── p
+│   └── U
+├── constant
+│   ├── polyMesh(网格文件夹)
+│   │   └── blockMeshDict
+│   └── transportProperties(流体物性参数 传热物性参数)
+└── system
+    ├── controlDict(控制字典)
+    ├── fvSchemes(离散格式 更高级的运用)
+    └── fvSolution(求解方法)
+
+# 运用的三个级别[%]
+
+## 三个级别
+
+- [ ] 直接利用解释器(替代商业求解器 初始点)
+- [ ] 自定义求解器(关注点)
+      + 根据自己的求解流程组合求解器(类库调用)
+      + 不需要关心对流项和扩散项是如何离散的
+      + 也不需要关心湍流模型
+- [ ] 更高级的运用:编写离散格式
+
+## 自定义求解器
+
+    按照自己的_求解流程_编写求解。
+
+##不关心
+
+    + 离散格式(时间项和对流项)
+    + 大型代数方程的求解，如何加速等。
+
+## 传热求解
+
+这边使用代码快包裹
+    开始
+    |
+    初始值
+    |
+    -----------------&lt;------------------------------
+    |                                              |
+    用CFD进行室内温度计算                          |
+    |                   |                          ^
+    辐射传热计算Qri  导热计算Qcdi                  |
+    |                   |                          |
+    由热平衡求新的对流传热量Qcvi^(m+1)             |
+    |                                              |
+    收敛条件 --------&gt;-----------------------------|
+    |
+    结束
+
+## 自定义离散格式
+
+   针对于研究离散格式和代数求解器的用户
+   目的： 创造更高效更精确的离散方法
+   操作： 修改finiteVolumn...
+          尤其是对流项。openfoam 提供了NVD和TVD的模板（40以上）
+          对流项离散依然是一种研究方向。
+
+## cavity源码文件的主要构成部分
+
+   +  location
+     - &quot;system&quot;
+     - &quot;constant&quot;
+     - &quot;0&quot;
+   + class
+     - dictionary
+     - volVectorField
+     - volScalarField
+
+##
+
+   + object
+     - dictionary
+       + fvschemes对象
+       + fvsolution对象
+       + controldict对象
+       + blockmeshdict
+       + transportproperties
+     - volVectorField
+       + U对象
+     - volScalarField
+       + p对象
+
+
+
+</code></pre>
+
+<h2 id="org-mode">org-mode</h2>
+
+<pre><code class="language-sh">* Openfoam简介
+  openfoam采用c++编写的类库，开源免费。所以可以把它当作一种类似于String的基本类来使用。
+
+ openfoam框架从使用级别来看主要分为两类：
+----------
+** 1求解器(Solver 数值结算)
+    - 流体计算
+    - 化学反应
+    - 换热
+    - 结构动力学
+    - 电磁场
+    - 金融评估等
+** 2工具(Utility)
+    - 前处理
+      + 建模
+      + 网格
+      + 边界条件
+    - 后处理
+      + 计算结果显示
+
+----------------------
+** cavity case
+cavity case的文件夹简介（等价于fluent的.cas,只不过fluent集成为一个文件，openfoam是一个文件夹)
+
+#+begin_src sh
+├── 0 (初始条件文件夹)
+│   ├── p
+│   └── U
+├── constant
+│   ├── polyMesh(网格文件夹)
+│   │   └── blockMeshDict
+│   └── transportProperties(流体物性参数 传热物性参数)
+└── system
+    ├── controlDict(控制字典)
+    ├── fvSchemes(离散格式 更高级的运用)
+    └── fvSolution(求解方法)
+#+end_src 
+
+
+* 运用的三个级别[%]
+
+- [ ] 直接利用解释器(替代商业求解器 初始点)
+- [ ] 自定义求解器(关注点)
+
+      + 根据自己的求解流程组合求解器(类库调用)
+      + 不需要关心对流项和扩散项是如何离散的
+      + 也不需要关心湍流模型
+
+- [ ] 更高级的运用:编写离散格式
+
+---------
+** 自定义求解器
+    按照自己的_求解流程_编写求解。
+
+** 不关心
+    + 离散格式(时间项和对流项)
+    + 大型代数方程的求解，如何加速等。
+
+----------
+** 传热求解
+#+begin_src sh
+    开始
+    |
+    初始值
+    |
+    -----------------&lt;------------------------------
+    |                                              |
+    用CFD进行室内温度计算                          |
+    |                   |                          ^
+    辐射传热计算Qri  导热计算Qcdi                  |
+    |                   |                          |
+    由热平衡求新的对流传热量Qcvi^(m+1)             |
+    |                                              |
+    收敛条件 --------&gt;-----------------------------|
+    |
+    结束
+#+end_src
+--------------------------------
+** 自定义离散格式
+
+   针对于研究离散格式和代数求解器的用户
+   目的： 创造更高效更精确的离散方法
+   操作： 修改finiteVolumn...
+          尤其是对流项。openfoam 提供了NVD和TVD的模板（40以上）
+          对流项离散依然是一种研究方向。
+
+-------
+** cavity源码文件的主要组成部分
+
+   +  location
+     - &quot;system&quot;
+     - &quot;constant&quot;
+     - &quot;0&quot;
+  
+   + class
+     - dictionary
+     - volVectorField
+     - volScalarField
+-----------
+   + object
+     - dictionary
+       + fvschemes对象
+       + fvsolution对象
+       + controldict对象
+       + blockmeshdict
+       + transportproperties
+     - volVectorField
+       + U对象
+     - volScalarField
+       + p对象
+
+
+</code></pre>
+    </div>
+
+    
+
+
+
+
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/blog/2015/06/11/pandoc-markdown%E6%B3%A8%E6%84%8F%E7%82%B9/&amp;text=pandoc%20markdown%e6%b3%a8%e6%84%8f%e7%82%b9" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/blog/2015/06/11/pandoc-markdown%E6%B3%A8%E6%84%8F%E7%82%B9/&amp;t=pandoc%20markdown%e6%b3%a8%e6%84%8f%e7%82%b9" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=pandoc%20markdown%e6%b3%a8%e6%84%8f%e7%82%b9&amp;body=/blog/2015/06/11/pandoc-markdown%E6%B3%A8%E6%84%8F%E7%82%B9/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/blog/2015/06/11/pandoc-markdown%E6%B3%A8%E6%84%8F%E7%82%B9/&amp;title=pandoc%20markdown%e6%b3%a8%e6%84%8f%e7%82%b9" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=pandoc%20markdown%e6%b3%a8%e6%84%8f%e7%82%b9%20/blog/2015/06/11/pandoc-markdown%E6%B3%A8%E6%84%8F%E7%82%B9/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/blog/2015/06/11/pandoc-markdown%E6%B3%A8%E6%84%8F%E7%82%B9/&amp;title=pandoc%20markdown%e6%b3%a8%e6%84%8f%e7%82%b9" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="portrait mr-3" src="/authors/admin/avatar_hu52a603635ecebd45650b162dadabb4e5_12861_250x250_fill_q90_lanczos_center.jpg" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/">Nelson Bighetti</a></h5>
+      <h6 class="card-subtitle">Professor of Artificial Intelligence</h6>
+      <p class="card-text">My research interests include distributed robotics, mobile computing and programmable matter.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/GeorgeCushen" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.co.uk/citations?user=sIwtMXoAAAAJ" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/gcushen" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js" integrity="sha256-aYTdUrn6Ow1DDgh5JTc3aDGnnju48y/1c8s1dgkYPQ8=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/r.min.js"></script>
+        
+      
+
+      
+      
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    <script id="dsq-count-scr" src="https://yezhaoliang.disqus.com/count.js" async></script>
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.d6bd04fdad2ad213aa8111c5a3b72fc5.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

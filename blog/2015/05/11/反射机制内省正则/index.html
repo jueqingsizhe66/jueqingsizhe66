@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.5.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Nelson Bighetti">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/blog/2015/05/11/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6%E5%86%85%E7%9C%81%E6%AD%A3%E5%88%99/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin="anonymous">
+    
+
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.min.e8d4d5fd376e67b34452ebe1cae16341.css">
+
+  
+
+  
+
+
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon-32.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/blog/2015/05/11/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6%E5%86%85%E7%9C%81%E6%AD%A3%E5%88%99/">
+
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="og:site_name" content="Macro Life">
+  <meta property="og:url" content="/blog/2015/05/11/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6%E5%86%85%E7%9C%81%E6%AD%A3%E5%88%99/">
+  <meta property="og:title" content="反射机制内省正则 | Macro Life">
+  <meta property="og:description" content=""><meta property="og:image" content="/img/icon-192.png">
+  <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2015-05-11T14:58:46&#43;08:00">
+    
+    <meta property="article:modified_time" content="2015-05-11T14:58:46&#43;08:00">
+  
+
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>反射机制内省正则 | Macro Life</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0 compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">Macro Life</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav mr-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#hero"><span>Demo</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>博客</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>项目</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#featured"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/about/"><span>About</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/courses/"><span>课程</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/archives"><span>Archives</span></a>
+        </li>
+
+        
+        
+
+      
+      </ul>
+      <ul class="navbar-nav ml-auto">
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+        </li>
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>反射机制内省正则</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    May 11, 2015
+  </span>
+  
+
+  
+
+  
+
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/categories/javabasic/">JavaBasic</a></span>
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <p>2：反射机制
+不行，则逆着来.
+类（Class）
+三种方式</p>
+
+<pre><code class="language-java">//Test class
+                //*************************************************************
+                //第一种方式获得类
+                System.out.println(&quot;//*************************************************************&quot;);
+                Class clazz1 = Person.class;
+                //第二种方式获得类
+                System.out.println(&quot;第一种方式获得类&quot;+clazz1.getName());
+                Person personClass = new Person();
+                Class clazz2 = personClass.getClass();
+                System.out.println(&quot;第二种方式获得类&quot;+clazz1.getName());
+                //第三种方式获得类
+                try
+                {
+                        Class clazz3 = Class.forName(&quot;com.reflect.test.Person&quot;);
+                        System.out.println(&quot;第三种方式获得类&quot;+clazz1.getName());
+                        System.out.println(&quot;三种类方式都是同一个类！因为类只加载一次&quot;+(clazz2==clazz1)+(clazz2==clazz3));
+                        System.out.println(&quot;包的名字&quot;+clazz3.getPackage().getName());
+                        System.out.println(&quot;简单类名字（不带包）&quot;+clazz3.getSimpleName());
+
+                        System.out
+                                        .println(&quot;------------------------------通过Class对象获得类的构造函数---------------------&quot;);
+                        Constructor[] constructors = clazz3.getConstructors();
+                        for (Constructor constructor : constructors) {
+                                System.out.println(constructor);
+                        }
+
+                        System.out.println(&quot;------------------通过Class对象获得类的字段----------------&quot;);
+                        Field[] fields = clazz3.getDeclaredFields();
+                        for (Field field : fields) {
+                                System.out.println(field);
+                        }
+
+                        System.out.println(&quot;--------通过Class对象获得类的方法----------&quot;);
+
+                        Method[] methods = clazz3.getMethods();// 返回所有的public 方法,包括父类声明的public方法
+                        for (Method method : methods) {
+                                System.out.println(method);
+                        }
+
+                } catch (ClassNotFoundException e1)
+                {
+                        // TODO Auto-generated catch block
+                        e1.printStackTrace();
+                }
+</code></pre>
+
+<p>java
+最主要的是Class.forName();</p>
+
+<p>字段</p>
+
+<p>设置字段的属性，并使用创建的对象调用方法.</p>
+
+<pre><code class="language-java">//*************************************************************
+                //TestField  测试字段开始
+                //*************************************************************
+                System.out.println(&quot;//*************************************************************&quot;);
+                try
+                {
+                        /**
+                         *  打印出所有字段
+                         *  
+                         *  字段类的一个特点设置
+                         */
+                        Field[] fields = clazz.getDeclaredFields();
+                        for(Field temp : fields)
+                        {
+                                System.out.println(temp);
+                        }
+                        Person personLiMing = (Person) clazz.newInstance();
+                        /**
+                         * 测试添加一个名字的字段
+                         */
+                        //Field nameField = clazz.getField(&quot;Name&quot;); //会报异常
+                        //Field nameField = clazz.getDeclaredField(&quot;name&quot;); //注意区分大小写
+                        Field nameField = clazz.getDeclaredField(&quot;Name&quot;);
+                        //一定得设置？
+                        nameField.setAccessible(true);
+                        nameField.set(personLiMing,&quot;李明&quot;);
+                        
+                        Object o = nameField.get(personLiMing);
+                        System.out.println(o);
+                        personLiMing.sayHi();
+                } catch (InstantiationException | IllegalAccessException e)
+                {
+                        // TODO Auto-generated catch block
+                        System.out.println(&quot;创建新的实例异常&quot;);
+                }catch( NoSuchFieldException | SecurityException e)
+                {
+                        System.out.println(&quot;没有那个字段&quot;);
+                }
+</code></pre>
+
+<p>java</p>
+
+<p>构造函数</p>
+
+<p>主要作用：产生对象</p>
+
+<pre><code class="language-java">/**
+                 *  分为两个部分测试构造函数 
+                 *  1：  有参的 ，注意有参的时候String.class int.class
+                 *  2：  无参的
+                 */
+                //TestConstructor
+                /**
+                 * 打印所有的类的构造函数
+                 */
+                try
+                {
+                        Constructor con1 = clazzConstructor.getDeclaredConstructor();
+                        
+                        Object o = con1.newInstance();
+                        
+                        Person personWanghao = (Person)o;
+                        personWanghao.sayHi();
+                        
+                        System.out.println(&quot;------------------------&quot;);
+                        
+                        Constructor&lt;Person&gt; con2 = clazzConstructor.getDeclaredConstructor(String.class,int.class);
+                        Object o2 = con2.newInstance(&quot;汪峰&quot;,22);
+                        //很浅显的道理  只有构造函数可以新建对象！！上面的代码正是
+                        //体现如此！        
+                        Person personWangfeng = (Person)o2;
+                        personWangfeng.sayHi();
+                        
+                } catch (NoSuchMethodException | SecurityException e)
+                {
+                        // TODO Auto-generated catch block
+                        System.out.println(&quot;获取构造函数异常&quot;);
+                }catch (InstantiationException | IllegalAccessException
+                                | IllegalArgumentException | InvocationTargetException e)
+                {
+                        // TODO Auto-generated catch block
+                        System.out.println(&quot;通过构造函数创建实例异常&quot;);
+                }
+               
+</code></pre>
+
+<p>java</p>
+
+<p>方法</p>
+
+<p>Invoke函数，调用对象的方法</p>
+
+<pre><code class="language-java">//*************************************************************
+                //TestMethod
+                /**
+                 *  开始测试 所有Person类的普通方法
+                 *  
+                 *  方法类的一个特点，方法对应具体的参数！类似于构造函数
+                 *  都需要考虑重载的问题
+                 */
+                System.out.println(&quot;//*************************************************************&quot;);
+                System.out.println(&quot;开始测试 所有Person类的普通方法---------&quot;);
+                Method[] methods = clazzMethod.getDeclaredMethods();
+                
+                for(Method temp: methods)
+                {
+                        System.out.println(temp);
+                }
+                
+                //测试Person的sayHi方法
+                try
+                {
+                        Method sayHi = clazzMethod.getDeclaredMethod(&quot;sayHi&quot;);
+                        //Method singSong = clazz.getDeclaredMethod(&quot;singSong&quot;);
+                        
+                        Object o = clazzMethod.newInstance();
+                        
+                        Person personPig = (Person)o;
+                        personPig.sayHi();
+                        System.out.println(&quot;通过普通方法1 进行Invoke1！！！&quot;);
+
+                        sayHi.invoke(o);
+                        System.out.println(&quot;通过普通方法1 进行Invoke2！！！&quot;);
+                        //反射的感觉有点像，逆着来的感觉
+                        //通过方法调用对象！！并执行某个动作！
+                        //而不是通过对象调用方法执行某个动作
+                        sayHi.invoke(personPig);
+
+                        Class returnType = sayHi.getReturnType();
+                        System.out.println(&quot;Person类 sayHi的返回值类型&quot;+returnType);
+                        
+                        int modifies = sayHi.getModifiers();
+                        //private 的值为0   public的值为1
+                        System.out.println(&quot;是private?:&quot;+Modifier.isPrivate(modifies));
+                        System.out.println(modifies);
+                        
+                        /**
+                         *  必须隐藏 ！否则下面的无法执行！ 有对应的参数  需要设置上 参数才可以
+                         *  否则找不到 singSong() 无参的函数
+                         */
+                /*        Method singSong = clazzMethod.getDeclaredMethod(&quot;singSong&quot;);
+                        System.out.println(singSong);*/
+                        
+                        Method singSong2 = clazzMethod.getDeclaredMethod(&quot;singSong&quot;, String.class);
+                        Person personDandan = new Person(&quot;淡淡&quot;,22);
+                        singSong2.invoke(personDandan, &quot;好汉歌&quot;);
+                        System.out.println(singSong2.getReturnType());
+                        
+                        //System.out.println(&quot;Person类singSong的返回值类型&quot;+clazz.getDeclaredMethod(&quot;singSong&quot;).getReturnType());
+                } catch (NoSuchMethodException | SecurityException e)
+                {
+                        // TODO Auto-generated catch block
+                        System.out.println(&quot;没有对应的方法&quot;+e.getMessage());
+                }catch (InstantiationException | IllegalAccessException e)
+                {
+                        // TODO Auto-generated catch block
+                        System.out.println(&quot;获取实例异常&quot;+e.getMessage());
+                }catch (IllegalArgumentException | InvocationTargetException e)
+                {
+                        // TODO Auto-generated catch block
+                        System.out.println(&quot;Invoke异常&quot;+e.getMessage());
+                }
+</code></pre>
+
+<p>一个餐厅的菜单实例：</p>
+
+<p>通过一个food接口，创建多样菜单，并且易于拓展性。</p>
+
+<pre><code class="language-java">Food.properties:
+Apple=com.reflect.test.food.Apple
+Banana=com.reflect.test.food.Banana
+HongShaoRou=com.reflect.test.food.HongShaoRou
+QingJiaoRouSi=com.reflect.test.food.QingJiaoRouSi
+SuanTaiChaoRou=com.reflect.test.food.SuanTaiChaoRou
+TangCuLiYu=com.reflect.test.food.TangCuLiYu
+XiaoChaoRou=com.reflect.test.food.XiaoChaoRou
+</code></pre>
+
+<p>Food接口：</p>
+
+<pre><code class="language-java">package com.reflect.test.food;
+
+public interface Food {
+
+        String getFoodName();
+
+}
+</code></pre>
+
+<p>依次创建各个食物：（类似方法）
+红烧肉：</p>
+
+<pre><code class="language-java">package com.reflect.test.food;
+
+public class HongShaoRou implements Food {
+
+        public static final String foodName = &quot;红烧肉&quot;;
+
+        @Override
+        public String getFoodName() {
+        return foodName;
+        }
+
+}
+</code></pre>
+
+<p>青椒肉丝：</p>
+
+<pre><code class="language-java">package com.reflect.test.food;
+
+public class QingJiaoRouSi implements Food {
+
+        public static final String foodName = &quot;青椒肉丝&quot;;
+
+        @Override
+        public String getFoodName() {
+                return foodName;
+        }
+
+}
+</code></pre>
+
+<p>。。。。
+餐厅类的实现：</p>
+
+<pre><code class="language-java">/**
+* 情景 : 有一家餐厅,时常更换菜品 , 客人进店时向客人展示所有的菜品,
+* 要求开发一个扩充性好的程序,就是更换菜品时只需要做一些简单的配置就可以
+* 
+* 反射基本上 自己自学 看的    视频没怎么听
+
+*/
+package com.reflect.test;
+
+import java.util.ArrayList;
+
+
+/**
+*  通过下面的餐厅类  很方便的通过Food接口 
+*  添加更多的新菜！ 只要你有新定义一个  食物.java 然后在
+*  food.properties添加一个键值对即可
+*/
+
+
+
+/**
+* @author    叶昭良
+* @time      2015年3月3日下午4:44:15
+* @version   com.reflect.testRestaurant V1.0
+*/
+import com.reflect.test.food.*;
+
+import java.util.*;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
+
+public class Restaurant 
+{
+
+        /**
+         * @param args
+         */
+        //没有想到用list表来接数据（一定要有集合的概念）
+        private List&lt;Food&gt;  foods = new ArrayList&lt;Food&gt;();
+        
+        //定义一个init函数 用于在构造函数内部 调用，并初始化菜单！准备开张 开店铺
+        public Restaurant()
+        {
+        }
+        public void init()
+        {
+                try
+                {
+                        InputStream is = Restaurant.class.getResourceAsStream(&quot;food.properties&quot;);
+                        Properties prop = new Properties();
+                        /**
+                         *  要知道 food.properties 的key-value的写法
+                         *  Prop对象就是一个map对象
+                         *  先前只写上一个值是错误的！ 必须写上
+                         *  Apple=com.reflect.test.food.Apple
+                         */
+                        //必须加在src底下
+                        //prop.load(new FileInputStream(&quot;food.properties&quot;));
+                        try
+                        {
+                                prop.load(is);
+                        } catch (IOException e)
+                        {
+                                // TODO Auto-generated catch block
+                                e.printStackTrace();
+                        }
+                        Collection  coll1 = prop.values();
+                        for(Object foodClassName:coll1)
+                        {
+                                Class temp;
+                        
+                                temp = Class.forName((String)(foodClassName));
+                                
+                                Food food = (Food)temp.newInstance();
+                                foods.add(food);
+                        }
+                }catch (ClassNotFoundException e)
+                {
+                        // TODO Auto-generated catch block
+                        System.out.println(&quot;未找到对应的类&quot;);
+                }catch (InstantiationException e)
+                {
+                        // TODO Auto-generated catch block
+                        System.out.println(&quot;产生实例的异常&quot;);
+                } catch (IllegalAccessException e)
+                {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                }
+                
+        }
+        public void showFoods()
+        {
+                for(Food temp:foods)
+                {
+                        //Food接口创建的一个唯一接口方法
+                        System.out.println(temp.getFoodName());
+                }
+        }
+        public static void main(String[] args)
+        {
+                // TODO Auto-generated method stub
+                //开了一家店
+                Restaurant res = new Restaurant();
+                System.out.println(&quot;欢饮各位宾客的到来-- 鞭炮响起&quot;);
+                System.out.println(&quot;******************************&quot;);
+                res.showFoods();
+        }
+
+}
+</code></pre>
+
+<p>3：内省</p>
+
+<p>在满足javaBean规范的类中，在不清楚字段的前提下，通过getter &amp;setter获得所有的字段，一般和反射联合使用。</p>
+
+<p>Javabean 其实就是满足规范，具体规范是有</p>
+
+<p>私有变量
+Getter andsetter方法
+至少有一个无参构造函数</p>
+
+<p>然后可以通过 类 Introspector 来获取某个对象的 BeanInfo 信息，然后通过 BeanInfo 来获取属性的描述器（ PropertyDescriptor ），通过这个属性描述器就可以获取某个属性对应的 getter/setter 方法，然后我们就可以通过反射机制来调用这些方法。javabean的实例对象称之为值对象（ValueObject）,因为这些bean中通常只有一些信息字段和存储方法，没有功能性方法。
+分为两种情况，只是设置或者得到某个具体的字段</p>
+
+<p>两外一种是获得所有的字段。</p>
+
+<pre><code class="language-java">/**
+* 
+*/
+package com.introspect.test;
+
+import java.beans.BeanInfo;
+import java.beans.IntrospectionException;
+import java.beans.Introspector;
+import java.beans.PropertyDescriptor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
+/**
+* @author    叶昭良
+* @time      2015年3月3日下午6:34:08
+* @version   com.introspect.testTestStudentIntrospect V1.0
+*/
+public class TestStudentIntrospect
+{
+
+        /**
+         * @param args
+         */
+        public static void main(String[] args)
+        {
+                // TODO Auto-generated method stub
+                Student wangxiuyan = new Student();//new Student(&quot;001&quot;,&quot;王秀艳&quot;,30);
+                String fieldName=&quot;Age&quot;;
+                //通过javabeans--&gt;具体某个属性---&gt; 通过反射获取方法！ --&gt;再调用方法
+                getProperty(wangxiuyan, fieldName);
+                setProperty(wangxiuyan, fieldName);
+                getProperties(wangxiuyan, fieldName);
+        
+        }
+        private static void getProperties(Student stu,String fieldName)
+        {
+                try
+                {
+                        BeanInfo  beanInfo = Introspector.getBeanInfo(stu.getClass());
+                        PropertyDescriptor[] pro = beanInfo.getPropertyDescriptors();
+                        for(PropertyDescriptor temp : pro)
+                        {
+                                if(temp.getName().equals(fieldName))
+                                {
+                                        Method methodx = temp.getReadMethod();
+
+                                        System.out.println(methodx.invoke(stu)); 
+                                        
+                                }
+                        }
+                } catch (IntrospectionException e)
+                {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                }catch (IllegalAccessException | IllegalArgumentException
+                                | InvocationTargetException e)
+                {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                }
+                
+        }
+        
+        private static void getProperty(Student stu,String fieldName)
+        {
+                try
+                {
+                        PropertyDescriptor pro = new PropertyDescriptor(fieldName, Student.class);
+                        Method methodx = pro.getReadMethod(); //
+                        Object ojx = methodx.invoke(stu);
+                        System.out.println(ojx);
+                } catch (IntrospectionException  e)
+                {
+                        // TODO Auto-generated catch block
+                        System.out.println(&quot;属性描述获取失败&quot;);
+                }catch(IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
+                {
+                        System.out.println(&quot;invoke调用失败！&quot;);
+                }
+                
+        }
+        private static void setProperty(Student stu,String fieldName)
+        {
+                try
+                {
+                        PropertyDescriptor pro = new PropertyDescriptor(fieldName, Student.class);
+                        Method methodx = pro.getWriteMethod(); //
+                        methodx.invoke(stu,8);
+                        System.out.println(stu.getAge());
+                } catch (IntrospectionException  e)
+                {
+                        // TODO Auto-generated catch block
+                        System.out.println(&quot;属性描述获取失败&quot;);
+                }catch(IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
+                {
+                        System.out.println(&quot;invoke调用失败！&quot;);
+                }        
+        }
+
+}
+</code></pre>
+
+<p>ORM的实现在：<a href="http://www.rupeng.com/forum/thread-44526-1-1.html" target="_blank">http://www.rupeng.com/forum/thread-44526-1-1.html</a></p>
+
+<p>4：正则表达式</p>
+
+<p>字符串内置函数：</p>
+
+<p>String的split、replace、replaceAll函数。</p>
+
+<p>在正则表达式中$表示在另一个字符串中获取正则表达式字符串匹配的小组号，$1表示第一个。。</p>
+
+<pre><code>          \1 表示在同一个匹配正则表达式获得第一个匹配项(\2则表示在同一个匹配正则表达式获得第二个引用的匹配项)
+</code></pre>
+
+<pre><code class="language-java">//字符串测试
+System.out.println(&quot;fdasfsd&quot;.indexOf('d'));
+
+        System.out.println(&quot;fdasfsd&quot;.lastIndexOf('d'));
+
+        String[] temp =&quot;sdfddfdsgsdfddg&quot;.split(&quot;([a-z])\\1+&quot;);
+        for(String p : temp)
+        {
+        System.out.println(p);
+        }
+
+        System.out.println(&quot;sdfddfdsgsdfddg&quot;.replaceAll(&quot;([a-z])\\1+&quot;,&quot;*&quot;));
+
+        System.out.println(&quot;sdfddfdsgsdfddg&quot;.replaceAll(&quot;([a-z])\\1+&quot;,&quot;$1&quot;));
+</code></pre>
+
+<p>Pattern&amp;Matcher组合</p>
+
+<pre><code class="language-java">//工作中的  正则获取方式
+                System.out.println(&quot;2020&quot;.matches(&quot;\\d{3,10}&quot;));
+                
+                String pat = &quot;Welcome to china to have a pinny lunch ! Start the lesson&quot;;
+                Pattern p = Pattern.compile(&quot;\\b[a-z]{5}\\b&quot;);
+                Matcher m = p.matcher(pat);
+                while(m.find())
+                {
+                        System.out.println(m.group());
+                }
+</code></pre>
+
+<p>常见的存储结构：</p>
+
+<p>|&mdash;&ndash;顺序存储结构 特点是借助于数据元素的相对存储位置来表示数据元素之间的逻辑结构；
+|&mdash;&ndash;链式存储结构 特点是借助于指示数据元素地址的指针表示数据元素之间的逻辑结构。
+|&mdash;&ndash;散列存储结构 顺序+算列。
+|&mdash;&ndash;索引存储结构 顺序+索引。</p>
+
+<p>常见的逻辑结构：
+对数据及其关系的抽象逻辑描述，对立与计算机，与机器实现无关。
+根据定义的关系不同，数据的逻辑结构分为四种：
+|&mdash;&ndash;集合结构。数据元素之间未定义任何关的松散集合。
+|&mdash;&ndash;线性结构。数据元素之间定义了次序关系的集合（全序集合），描述的是1对1关系。
+|&mdash;&ndash;树形结构。数据元素之间定义了层次关系的集合（偏序集合），描述的是1对多关系。
+|&mdash;&ndash;图状结构。数据元素之间定义了网状关系的集合，描述的是多对多关系。</p>
+
+<p>数据结构，就是相互之间存在一种或多种特定关系的数据元素的集合。可以简单表示为：数据结构 = 数据 + 关系。同一数据元素集合，所定一的关系不同，构成不同的数据结构。 数据结构包括逻辑结构和存储结构两个方面</p>
+    </div>
+
+    
+
+
+
+
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/blog/2015/05/11/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6%E5%86%85%E7%9C%81%E6%AD%A3%E5%88%99/&amp;text=%e5%8f%8d%e5%b0%84%e6%9c%ba%e5%88%b6%e5%86%85%e7%9c%81%e6%ad%a3%e5%88%99" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/blog/2015/05/11/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6%E5%86%85%E7%9C%81%E6%AD%A3%E5%88%99/&amp;t=%e5%8f%8d%e5%b0%84%e6%9c%ba%e5%88%b6%e5%86%85%e7%9c%81%e6%ad%a3%e5%88%99" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=%e5%8f%8d%e5%b0%84%e6%9c%ba%e5%88%b6%e5%86%85%e7%9c%81%e6%ad%a3%e5%88%99&amp;body=/blog/2015/05/11/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6%E5%86%85%E7%9C%81%E6%AD%A3%E5%88%99/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/blog/2015/05/11/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6%E5%86%85%E7%9C%81%E6%AD%A3%E5%88%99/&amp;title=%e5%8f%8d%e5%b0%84%e6%9c%ba%e5%88%b6%e5%86%85%e7%9c%81%e6%ad%a3%e5%88%99" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=%e5%8f%8d%e5%b0%84%e6%9c%ba%e5%88%b6%e5%86%85%e7%9c%81%e6%ad%a3%e5%88%99%20/blog/2015/05/11/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6%E5%86%85%E7%9C%81%E6%AD%A3%E5%88%99/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/blog/2015/05/11/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6%E5%86%85%E7%9C%81%E6%AD%A3%E5%88%99/&amp;title=%e5%8f%8d%e5%b0%84%e6%9c%ba%e5%88%b6%e5%86%85%e7%9c%81%e6%ad%a3%e5%88%99" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="portrait mr-3" src="/authors/admin/avatar_hu52a603635ecebd45650b162dadabb4e5_12861_250x250_fill_q90_lanczos_center.jpg" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/">Nelson Bighetti</a></h5>
+      <h6 class="card-subtitle">Professor of Artificial Intelligence</h6>
+      <p class="card-text">My research interests include distributed robotics, mobile computing and programmable matter.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/GeorgeCushen" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.co.uk/citations?user=sIwtMXoAAAAJ" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/gcushen" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js" integrity="sha256-aYTdUrn6Ow1DDgh5JTc3aDGnnju48y/1c8s1dgkYPQ8=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/r.min.js"></script>
+        
+      
+
+      
+      
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    <script id="dsq-count-scr" src="https://yezhaoliang.disqus.com/count.js" async></script>
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.d6bd04fdad2ad213aa8111c5a3b72fc5.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

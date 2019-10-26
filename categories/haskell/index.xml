@@ -1,0 +1,2155 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Haskell | Macro Life</title>
+    <link>/categories/haskell/</link>
+      <atom:link href="/categories/haskell/index.xml" rel="self" type="application/rss+xml" />
+    <description>Haskell</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 29 May 2015 14:59:44 +0800</lastBuildDate>
+    <image>
+      <url>/img/icon-192.png</url>
+      <title>Haskell</title>
+      <link>/categories/haskell/</link>
+    </image>
+    
+    <item>
+      <title>Haskell在脑海里的踪迹</title>
+      <link>/blog/2015/05/29/haskell%E5%9C%A8%E8%84%91%E6%B5%B7%E9%87%8C%E7%9A%84%E8%B8%AA%E8%BF%B9/</link>
+      <pubDate>Fri, 29 May 2015 14:59:44 +0800</pubDate>
+      <guid>/blog/2015/05/29/haskell%E5%9C%A8%E8%84%91%E6%B5%B7%E9%87%8C%E7%9A%84%E8%B8%AA%E8%BF%B9/</guid>
+      <description>&lt;p&gt;基于范畴理论，在每一个范畴里面都包含一个objects和fmap关系，利用functor映射到不同的category。
+可以继续思考的是一个fmap:(*-&amp;gt;*)
+一个fmap是可以充当形参的，因为他正如在一个&lt;a href=&#34;https://www.haskell.org/onlinereport/list.html#sect17.3&#34; target=&#34;_blank&#34;&gt;List module&lt;/a&gt;中
+一个一个的破折号和箭头构成的map关系被放进List这个category中。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;module List ( 
+    elemIndex, elemIndices,
+    find, findIndex, findIndices,
+    nub, nubBy, delete, deleteBy, (\\), deleteFirstsBy,
+    union, unionBy, intersect, intersectBy,
+    intersperse, transpose, partition, group, groupBy,
+    inits, tails, isPrefixOf, isSuffixOf,
+    mapAccumL, mapAccumR,
+    sort, sortBy, insert, insertBy, maximumBy, minimumBy,
+    genericLength, genericTake, genericDrop,
+    genericSplitAt, genericIndex, genericReplicate,
+    zip4, zip5, zip6, zip7,
+    zipWith4, zipWith5, zipWith6, zipWith7,
+    unzip4, unzip5, unzip6, unzip7, unfoldr,
+
+    -- ...and what the Prelude exports
+    -- []((:), []), -- This is built-in syntax
+    map, (++), concat, filter,
+    head, last, tail, init, null, length, (!!),
+    foldl, foldl1, scanl, scanl1, foldr, foldr1, scanr, scanr1,
+    iterate, repeat, replicate, cycle,
+    take, drop, splitAt, takeWhile, dropWhile, span, break,
+    lines, words, unlines, unwords, reverse, and, or,
+    any, all, elem, notElem, lookup,
+    sum, product, maximum, minimum, concatMap, 
+    zip, zip3, zipWith, zipWith3, unzip, unzip3
+    ) where
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;我们所看到&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;data  Bool  =  False | True deriving 
+                             (Read, Show, Eq, Ord, Enum, Bounded)
+data Int = -65532|...|-1|0|1|2|...|65532
+data Integer = ...-2|-1|0|1|2|3|4|...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;从这边我们可以看到False ，True， 1，2，3，4&amp;hellip;.叫做Data constructor
+而Bool,Integer叫做Type Constructor,所以你完全可以把类型当作数据，而这个类型包含表达式、函数、数据。&lt;/p&gt;
+
+&lt;p&gt;类也包含
++ 原子类型 Integer  Char   Integer-&amp;gt;Char(functions mapping from Integer to Char)
++ 结构类型 [Integer] 数字列表 (Integer,Char)数字字符tuple&lt;/p&gt;
+
+&lt;p&gt;比如：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;1::Int
+inc::Integer-&amp;gt;Integer
+[1]::[Integer]
+(&#39;b&#39;,4)::[Char,Integer]
+
+::可以读作 has type类型为
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;我们也会看到很多类的继承&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;  class Foo a =&amp;gt; Bar a where ...
+  
+  instance (Eq a, Show a) =&amp;gt; Foo [a] where ...
+  
+  instance Num a =&amp;gt; Bar [a] where ...
+
+
+  class (Eq a) =&amp;gt; Ord a where
+    (&amp;lt;),(&amp;lt;=),(&amp;gt;=),(&amp;gt;)::a-&amp;gt;a-&amp;gt;Bool
+    max,min          ::a-&amp;gt;a-&amp;gt;a
+    ----此时Eq叫做Ord的子类
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;其实更多的可以参考&lt;a href=&#34;https://www.haskell.org/onlinereport/standard-prelude.html#sect8.2&#34; target=&#34;_blank&#34;&gt;Haskell 98 Report&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;当然你事先得知道类的定义&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;class cx =&amp;gt; C u where { cbody }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;class 方法被叫做haskell里的顶层声明。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;而有一些比较有趣的lambda转换&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;\x-&amp;gt;\y-&amp;gt;(+) x  y ---&amp;gt;  \x y -&amp;gt; (+) x  y
+
+(x+) --&amp;gt; \y-&amp;gt;x+y
+(+y) --&amp;gt; \x-&amp;gt;x+y
+(+)  --&amp;gt; \x y -&amp;gt; x+y
+
+(.) :: (b-&amp;gt;c) -&amp;gt;(a-b)-&amp;gt;(a-&amp;gt;c)
+f.g  = \x-&amp;gt; f (g x)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在你编写函数的时候：
+一个数据组和可以变为(x:xs) == x+xs完整的数据组和 ，只不过x代表这个数据组和的head部分，而xs表示tail部分
+而如果 s@(x:xs) 其中的s代表就是整个数据组和了，这是一个不错的技巧。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;f (x:xs) = x❌xs
+f s@(x:xs) = x:s
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;当然你也可能遇到Wild-cards情况&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;head (x:_) = x
+head (_:xs) = xs
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;另外一个分支关于模式匹配的相似效果是case定义
+f p11 &amp;hellip; p1k = e1
+&amp;hellip;
+f pn1 &amp;hellip; pnk = en
+其中pij是模式组合，&lt;/p&gt;
+
+&lt;p&gt;如果你使用case进行书写&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;f x1 x2 ... xk = case (x1,...,xk) of (p11,...,p1k) -&amp;gt; e1
+                                        ...
+                                      (pn1,...,pnk)-&amp;gt;en
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;比如下面：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;--采用模式匹配方式
+take _ [] = []
+take 0 [] = []
+take n (x:xs) = x:take (n-1) xs
+
+
+--采用case方式
+take m ys = case (m,ys) of
+    (0,_) -&amp;gt; []
+    (_,[]) -&amp;gt; []
+    (n,x:xs) -&amp;gt; x:take (n-1) xs
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;一个比较重要的functor的定义，因为它用于范畴之间的链接，主要是一个Functor类的实现和fmap函数的定义&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;class Functor f where
+    fmap :: (a-&amp;gt;b) -&amp;gt; f a-&amp;gt;f b
+
+
+对应的Functor实例是
+instance Functor Tree where
+    fmap f (Leaf x) = Leaf (f x)
+    fmap f (Branch t1 t2) = Branch (f t1) (f t2)
+
+之所以写上这个你会发现，我们使用
+Date Tree a= Leaf a| Branch a a
+只是定义了类型，但是该类型（或者说大点，叫做范畴）并没有定义fmap，基本上所有的calss类型定义完之后都需要使用instance Functor进行fmap的
+定义,这样对象和映射的组合才够成了范畴。
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这也是为什么他比较重要，因为我们可能一直在用，但是并未知晓。当然上面需要特别注意的是实例声明额时候使用的是Tree，而不是Tree a.
+也就是haskell和c++\java不同的是类型变量和methods的定义是分开的。
+Haskell类类似于java的interface，定义的是一个协议，而不是一个定义一个对象本身。而且最重要的一个区别是haskell没有访问控制
+修饰符比如public 、private。取而代之的是使用module模块系统用来隐藏和显示一个类的组成。&lt;/p&gt;
+
+&lt;p&gt;其实写到这边，模块系统你可能有所理解，当然模式匹配在函数定义中也是训练的很多，参考&lt;a href=&#34;http://jueqingsizhe66.github.io/blog/2015/05/21/haskellku-wen-dang-jie-gou/&#34; target=&#34;_blank&#34;&gt;Haskell库文档结构&lt;/a&gt;
+但是关于instance，你接触、练习还是有点少，所以这部分内容可以继续探索，包括IOMonad（一个新的IO范畴，可以当做一种抽象数据类型）
+也包括图形化的制作等。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>伟大的范畴理论</title>
+      <link>/blog/2015/05/21/%E4%BC%9F%E5%A4%A7%E7%9A%84%E8%8C%83%E7%95%B4%E7%90%86%E8%AE%BA/</link>
+      <pubDate>Thu, 21 May 2015 20:56:51 +0800</pubDate>
+      <guid>/blog/2015/05/21/%E4%BC%9F%E5%A4%A7%E7%9A%84%E8%8C%83%E7%95%B4%E7%90%86%E8%AE%BA/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://yogsototh.github.io/Category-Theory-Presentation/&#34; target=&#34;_blank&#34;&gt;范畴理论&lt;/a&gt;是数学上的一种新的语言和框架结构.
+对于程序员来说，它是另一种思考方式，一种极度有效的方式来提取规律(Extremely
+efficient for generalization)
+Programming is doing Math.编成的工作其实就是数学的工作。&lt;/p&gt;
+
+&lt;p&gt;范畴是一种表达事物(things) 和路径(ways)  to go between things.
+这可以参考&lt;a href=&#34;http://think-like-a-git.net/&#34; target=&#34;_blank&#34;&gt;thinking like a git&lt;/a&gt;，因为他也是一种基于范畴理论，
+而延伸出来的实际产物，方便程序员对于development的管理。&lt;/p&gt;
+
+&lt;p&gt;A Category C is defined by:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Objects ob(C),&lt;/li&gt;
+&lt;li&gt;Morphisms hom(C),&lt;/li&gt;
+&lt;li&gt;a Composition law (∘)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Functor : (ob-&amp;gt;ob)
+&lt;img src=&#34;http://yogsototh.github.io/Category-Theory-Presentation/categories/img/mp/functor.png&#34; alt=&#34;Functor part1&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Functor : (hom-&amp;gt;hom)
+&lt;img src=&#34;http://yogsototh.github.io/Category-Theory-Presentation/categories/img/mp/functor-morphism.png&#34; alt=&#34;Functor part2&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Endofunctors:
+&lt;img src=&#34;http://yogsototh.github.io/Category-Theory-Presentation/categories/img/mp/functor-morphism.png&#34; alt=&#34;自指&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://yogsototh.github.io/Category-Theory-Presentation/categories/img/fractalcat.jpg&#34; alt=&#34;一只可爱的猫&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;categories-and-functors-form-a-category-cat&#34;&gt;Categories and functors form a category: Cat&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ob(Cat) are categories&lt;/li&gt;
+&lt;li&gt;hom(Cat) are functors&lt;/li&gt;
+&lt;li&gt;∘ is functor composition&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;a-haskell-functor-is-a-type-f-which-belong-to-the-type-class-functor-thus-instantiate-fmap-a-b-f-a-f-b&#34;&gt;A Haskell Functor is a type F :: * -&amp;gt; * which belong to the type class Functor ; thus instantiate fmap :: (a -&amp;gt; b) -&amp;gt; (F a -&amp;gt; F b).&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;F: ob(Hask)→ob(Hask)&lt;/li&gt;
+&lt;li&gt;&amp;amp; fmap: hom(Hask)→hom(Hask)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;the-couple-f-fmap-is-a-hask-s-functor-if-for-any-x-f-a&#34;&gt;The couple (F,fmap) is a Hask&amp;rsquo;s functor if for any x :: F a:&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;fmap id x = x
+fmap (f.g) x= (fmap f . fmap g) x
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+    <item>
+      <title>HaskellWiki</title>
+      <link>/blog/2015/05/21/haskellwiki/</link>
+      <pubDate>Thu, 21 May 2015 13:01:13 +0800</pubDate>
+      <guid>/blog/2015/05/21/haskellwiki/</guid>
+      <description>&lt;p&gt;一些常用的资料查询地。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.haskell.org/haskellwiki/Category:Tutorials&#34; target=&#34;_blank&#34;&gt;130 tutorials&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.haskell.org/haskellwiki/Category:Mathematics&#34; target=&#34;_blank&#34;&gt;46 articles on mathematicas&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.haskell.org/haskellwiki/Category:FAQ&#34; target=&#34;_blank&#34;&gt;46 FAQ topics&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.haskell.org/haskellwiki/Category:Community&#34; target=&#34;_blank&#34;&gt;186 articles on other Haskell communities&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://stackoverflow.com/questions/tagged?tagnames=haskell&#34; target=&#34;_blank&#34;&gt;Stackoverflow:more than 10,000 problems discussed&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.reddit.com/r/haskell/&#34; target=&#34;_blank&#34;&gt;Reddit:类似于google group (more than 10,000 subbscribers)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://hackage.haskell.org/packages/archive/pkg-list.html&#34; target=&#34;_blank&#34;&gt;Hackage 最终的收集网址&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.haskell.org/hoogle/&#34; target=&#34;_blank&#34;&gt;Hoogle:Haskell字典&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Haskell库文档结构</title>
+      <link>/blog/2015/05/21/haskell%E5%BA%93%E6%96%87%E6%A1%A3%E7%BB%93%E6%9E%84/</link>
+      <pubDate>Thu, 21 May 2015 12:27:42 +0800</pubDate>
+      <guid>/blog/2015/05/21/haskell%E5%BA%93%E6%96%87%E6%A1%A3%E7%BB%93%E6%9E%84/</guid>
+      <description>&lt;pre&gt;&lt;code&gt;/src
+Folder for source-code
+Setup.hs
+Haskell build script
+app.cabal
+Cabal build script
+README
+Informative text file
+LICENCE
+Software licence statement
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;下面是我的建立过程:&lt;/p&gt;
+
+&lt;h2 id=&#34;1新建一个hello文件夹-在hello文件夹新建一个src&#34;&gt;1新建一个HELLO文件夹,在HELLO文件夹新建一个src&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;mkdir HELLO
+cd HELLO
+mdkir src
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;2-main-hs-在src内新建一个main-hs&#34;&gt;2 main.hs  在src内新建一个main.hs&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;module Main where
+
+import Control.Monad
+
+main=do
+  putStrLn &amp;quot;Quit? y/n&amp;quot;
+  ans &amp;lt;- getLine
+  when (ans /= &amp;quot;y&amp;quot;) $ do
+       putStrLn &amp;quot;not quiting&amp;quot;
+       main
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;3-cabal-init&#34;&gt;3 cabal init&lt;/h2&gt;
+
+&lt;p&gt;Return to the* top* directory, and run cabal init.
+It helps you fill out the following information:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Package name&lt;/li&gt;
+&lt;li&gt;Package version&lt;/li&gt;
+&lt;li&gt;License&lt;/li&gt;
+&lt;li&gt;Author name&lt;/li&gt;
+&lt;li&gt;Maintainer email&lt;/li&gt;
+&lt;li&gt;Project homepage URL&lt;/li&gt;
+&lt;li&gt;Project synopsis&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Build type&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;cabal init
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/CGenie/haskell-snake/blob/master/snake.cabal&#34; target=&#34;_blank&#34;&gt;一个填写模板&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;至此现在你的文件结构应该是&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ tree
+.
+|-- HELLO.cabal
+|-- LICENSE
+|-- Setup.hs
+`-- src
+    `-- Main.hs
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;现在你就可以分享你的程序，而如果你要安装，则可以继续看下面简单操作&lt;/p&gt;
+
+&lt;p&gt;Run +cabal install+ at the project directory
+然后就会把你的执行程序放在~/.cabal/bin中了&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;cabal install
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;一定要注意 修改HELLO.cabal中的main-is,不要注释他，默认是注释
+并且填入src的主文件名 Main.hs&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;
+
+executable HELLO
+  -- .hs or .lhs file containing the Main module.
+   main-is: Main.hs            一定要补好，否则cabal install 失败
+  
+  -- Modules included in this executable, other than Main.
+  -- other-modules:       
+  
+  -- Other library packages from which modules are imported.
+  build-depends:       base ==4.6.*
+  
+  -- Directories containing source files.
+  hs-source-dirs:      src
+  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;结果是：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cabal install
+Resolving dependencies...
+Configuring HELLO-1.0.0...
+Building HELLO-1.0.0...
+Preprocessing executable &#39;HELLO&#39; for HELLO-1.0.0...
+[1 of 1] Compiling Main             ( src/Main.hs, dist/build/HELLO/HELLO-tmp/Main.o )
+Linking dist/build/HELLO/HELLO ...
+Installing executable(s) in /home/javazhao/.cabal/bin
+Installed HELLO-1.0.0
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;此时的文档结构如下:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;$ tree
+.
+|-- dist
+|   |-- build
+|   |   |-- autogen
+|   |   |   |-- cabal_macros.h
+|   |   |   `-- Paths_HELLO.hs
+|   |   `-- HELLO
+|   |       |-- HELLO
+|   |       `-- HELLO-tmp
+|   |           |-- Main.hi
+|   |           `-- Main.o
+|   |-- package.conf.inplace
+|   `-- setup-config
+|-- HELLO.cabal
+|-- LICENSE
+|-- Setup.hs
+`-- src
+    `-- Main.hs
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;一些额外知识：&lt;/p&gt;
+
+&lt;p&gt;Open up Main.hs and add some documentation
+&amp;ndash; | is the syntax for documenting function type signature, type declaration, or class declaration,记住&amp;ndash;和|中间有一个空格&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;module Main where
+
+-- |This is the main function
+main :: IO()
+main = do
+  putStrLn &amp;quot;What&#39;s your name?&amp;quot;
+  name &amp;lt;- getLine
+  putStrLn (&amp;quot;Hi &amp;quot; ++ name)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后就可以使用Haddock(前提是你运行了cabal install,这样你的文件夹下才有dist)
+Haddock is a documentation engine&lt;/p&gt;
+
+&lt;p&gt;首先需要安装alex：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;cabal install alex
+Linking dist/build/alex/alex ...
+Installing executable(s) in /home/javazhao/.cabal/bin
+Installed alex-3.1.4
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后安装happy&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;cabal install happy
+
+Linking dist/build/happy/happy ...
+Installing executable(s) in /home/javazhao/.cabal/bin
+Installed happy-1.19.5
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最后安装haddock：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;cabal install haddock
+Linking dist/build/haddock/haddock ...
+Installing library in /home/javazhao/.cabal/lib/haddock-2.13.2.1/ghc-7.6.3
+Installing executable(s) in /home/javazhao/.cabal/bin
+Registering haddock-2.13.2.1...
+Installed haddock-2.13.2.1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最后运行结果&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt; cabal haddock --executables
+$ cabal haddock --executables 
+Running Haddock for HELLO-1.0.0...
+Preprocessing executable &#39;HELLO&#39; for HELLO-1.0.0...
+Warning: The documentation for the following packages are not installed. No
+links will be generated to these packages: base-4.6.0.1, rts-1.0,
+ghc-prim-0.3.0.0, integer-gmp-0.5.0.0
+Haddock coverage:
+  50% (  1 /  2) in &#39;Main&#39;
+Warning: Main: could not find link destinations for:
+    GHC.Types.IO
+Documentation created: dist/doc/html/HELLO/HELLO/index.html
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后你的文档就会存在dist/doc/html/HELLO/HELLO/index.html
+这其实就是官网的那些类库网页的的产生方式.&lt;/p&gt;
+
+&lt;p&gt;最终的文档结构：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ tree
+.
+|-- dist
+|   |-- build
+|   |   |-- autogen
+|   |   |   |-- cabal_macros.h
+|   |   |   `-- Paths_HELLO.hs
+|   |   `-- HELLO
+|   |       |-- HELLO
+|   |       `-- HELLO-tmp
+|   |           |-- Main.hi
+|   |           `-- Main.o
+|   |-- doc
+|   |   `-- html
+|   |       `-- HELLO
+|   |           `-- HELLO
+|   |               |-- doc-index.html
+|   |               |-- frames.html
+|   |               |-- haddock-util.js
+|   |               |-- HELLO.haddock
+|   |               |-- hslogo-16.png
+|   |               |-- index-frames.html
+|   |               |-- index.html
+|   |               |-- Main.html
+|   |               |-- mini_Main.html
+|   |               |-- minus.gif
+|   |               |-- ocean.css
+|   |               |-- plus.gif
+|   |               `-- synopsis.png
+|   |-- package.conf.inplace
+|   `-- setup-config
+|-- HELLO.cabal
+|-- LICENSE
+|-- Setup.hs
+`-- src
+    `-- Main.hs
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;一个提醒-https-www-haskell-org-haddock-doc-html-markup-html-id564988&#34;&gt;&lt;a href=&#34;https://www.haskell.org/haddock/doc/html/markup.html#id564988&#34; target=&#34;_blank&#34;&gt;一个提醒&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;以后写代码的时候，一定要注意标注&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;使用&amp;ndash; |&lt;/li&gt;
+&lt;li&gt;使用{- -} 针对快注释&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.haskell.org/haddock/doc/html/index.html&#34; target=&#34;_blank&#34;&gt;一个链接关于haddock的用户指南&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Haskell common type signature(synopsis)</title>
+      <link>/blog/2015/05/21/haskell-common-type-signaturesynopsis/</link>
+      <pubDate>Thu, 21 May 2015 10:54:48 +0800</pubDate>
+      <guid>/blog/2015/05/21/haskell-common-type-signaturesynopsis/</guid>
+      <description>&lt;p&gt;Haskell是一门很深的(deep)语言，需要经常去考究，下面有一些渠道可以
+经常去查阅类型的推理过程。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.haskell.org/onlinereport/standard-prelude.html&#34; target=&#34;_blank&#34;&gt;Standard Prelude&lt;/a&gt;包含着基本的Preude加载的模块，类，函数等，相当具体。
+现在终于发现haskell的&lt;a href=&#34;http://zhiwei.li/text/2011/04/real-world-haskell-%E7%AC%AC%E5%85%AD%E7%AB%A0-%E4%BD%BF%E7%94%A8%E7%B1%BB%E5%9E%8B%E7%B1%BB/&#34; target=&#34;_blank&#34;&gt;类型类&lt;/a&gt;其实就是抽象类或者比抽象类更抽象的接口类，通过class来定义(在java中无论是抽象类还是实体类都使用class,现在haskell区分来class定义抽象类或者接口类,date定义实体类)&lt;/p&gt;
+
+&lt;p&gt;必须经常去查查这些函数的实现&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://downloads.haskell.org/~ghc/latest/docs/html/libraries/base/Data-Char.html&#34; target=&#34;_blank&#34;&gt;Data.Char&lt;/a&gt; 100多个&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://downloads.haskell.org/~ghc/latest/docs/html/libraries/base/Data-List.html&#34; target=&#34;_blank&#34;&gt;Data.List&lt;/a&gt; 200多个&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://downloads.haskell.org/~ghc/6.12.2/docs/html/libraries/containers-0.3.0.0/Data-Map.html&#34; target=&#34;_blank&#34;&gt;Data.Map&lt;/a&gt; 200多个&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://downloads.haskell.org/~ghc/6.4.1/docs/html/libraries/base/Data-Set.html&#34; target=&#34;_blank&#34;&gt;Data.Set&lt;/a&gt;  100多个&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;还有其他350种以上这种类型。。。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&#34;一个问题-我们必须为要进行比较的不同类型使用不同名字的函数-这很低效且令人厌烦-如果能够只使用&#34;&gt;一个问题：我们必须为要进行比较的不同类型使用不同名字的函数。这很低效且令人厌烦。如果能够只使用 ==&lt;/h1&gt;
+
+&lt;p&gt;来比较任何东西将方便很多。== 在实现像 /=
+这样的泛型函数也很有用，几乎对任何事物都有效。有了一个可以比较任意事物的函数，我们可以让自己的代码更通用：如果一段代码只是需要比较一些事物，它就应该可以接受任意数据类型，编译器知道如何比较它们。并且，如果后来增加了新的数据类型，已有的代码不需要进行修改。&lt;/p&gt;
+
+&lt;h2 id=&#34;类型类定义一组函数-这些函数依赖于所给定的数据的类型可以有不同的实现-类型类看上去可能像面向对象编程中的对象-但是它们确实很不相同&#34;&gt;类型类定义一组函数，这些函数依赖于所给定的数据的类型可以有不同的实现。类型类看上去可能像面向对象编程中的对象，但是它们确实很不相同。&lt;/h2&gt;
+
+&lt;p&gt;让我们用类型类来解决本章前面的相等性测试的难题。首先，必须定义类型类本身。我们想要一个函数，它接受两个相同类型的参数并返回一个Bool值来表示两个参数是否相等。我们不关心参数的类型是什么，只是需要这种类型的两个项。这是我们的类型类的第一个定义：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;— file: ch06/eqclasses.hs
+class BasicEq a where
+   isEqual :: a -&amp;gt; a -&amp;gt; Bool
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这里声明了一个名为BasicEq的类型类，用字母a表示实例的类型。这个类型类的实例是任何实现了其中所定义的函数的类型。这个类型类定义了一个函数。这个函数取两个参数－都是这种实例的类型－并且返回一个Bool值。&lt;/p&gt;
+
+&lt;p&gt;Haskell的类型类被设计来做这些事情。
+Haskell中定义类型类的关键字是 class。不幸的是这可能会让来自面向对象编程的人们搞混，因为我们所说的并不是一回事！
+第一行里面参数名a是任意选择的。可以用任何名字。关键点是，在函数中要列出类型时，必须用实例的名字。
++ &lt;a href=&#34;http://zhiwei.li/text/2011/04/real-world-haskell-%E7%AC%AC%E5%85%AD%E7%AB%A0-%E4%BD%BF%E7%94%A8%E7%B1%BB%E5%9E%8B%E7%B1%BB/&#34; target=&#34;_blank&#34;&gt;一些数值算子&lt;/a&gt;：&lt;/p&gt;
+
+&lt;h1 id=&#34;numeric-类型&#34;&gt;Numeric 类型&lt;/h1&gt;
+
+&lt;p&gt;Haskell有一组非常强大的数字类型。从快速的32位或64位整数到任意精度的有理数都可以使用。你可能已经知道了像这样的操作符可以对所有这些类型使用。这个特性是用类型类实现的。作为附加的好处，它允许你定义自己的数字类型，并把它作为Haskell中的一等公民。&lt;/p&gt;
+
+&lt;p&gt;在开始讨论数字类型时，先查看下这些类型本身。表6-1
+“Numeric类型精选”描述了Haskell中最常用的数字类型。注意还有些其他的数字类型可用，用来实现与C交互等特定用途。&lt;/p&gt;
+
+&lt;p&gt;###Table 6.1. Numeric 类型精选&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/images/rwh61.png&#34; alt=&#34;table6-1&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;这些是相当多不同的数字类型。有一些像相加这样的操作，可以用在所有这些类型上。还有其他的入
+asin，只用在浮点数类型上。表6－2“Numeric函数和常量精选”里总结了操作不同数字类型的函数，表6-3
+“Numeric类的类型类实例”将类型与它们相应的类型类进行匹配。在读这个表时，记住Haskell的操作符只是函数： (+) 2 3 或者
+2 + 3 结果都一样。按照习惯，把操作符作为函数时，写在括号里。&lt;/p&gt;
+
+&lt;p&gt;###Table 6.2. “Numeric函数和常量精选”&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/images/rwh62.png&#34; alt=&#34;table6-2&#34; /&gt;
+&lt;img src=&#34;/images/rwh621.png&#34; alt=&#34;table6-2-1&#34; /&gt;
+&lt;img src=&#34;/images/rwh622.png&#34; alt=&#34;table6-2-2&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/images/rwh63.png&#34; alt=&#34;table6-3&#34; /&gt;
+经常需要在数字类型之间进行转换。表6-2
+“”列出了很多可以用来做转换的函数。然而如何在任意两个类型间进行转换并不总是显而易见的。表6-4“在Numeric类型间转换”提供了如何在不同类型间转换的信息。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/images/rwh64.png&#34; alt=&#34;table6-4&#34; /&gt;
+可以用 round, ceiling 或者 floor 替代 truncate。&lt;/p&gt;
+
+&lt;p&gt;在“扩展实例：Numeric类型”一节有其他的例子演示如何使用这些数字类型类。
+相等性，顺序性，及比较我们已经说过了算术操作符如 + 可以用在所有不同的数字上。但是Haskell里还有些更加广泛的操作符。最明显的当然是相等性测试： == 和
+/=。这些操作符定义在 Eq 类里。&lt;/p&gt;
+
+&lt;p&gt;还有 &amp;gt;= 和 &amp;lt;= 这样的比较操作符。它们在 Ord
+类型类中声明。它们在单独的类型类中，是因为有些类型如Handle，可以做相等性测试，但是没有办法表达特定的顺序。所有Ord的实例都可以用
+Data.List.sort 来排序。&lt;/p&gt;
+
+&lt;p&gt;几乎所有的Haskell类型都是Eq的实例，并且大部分是Ord的实例。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Haskell-one-line</title>
+      <link>/blog/2015/05/21/haskell-one-line/</link>
+      <pubDate>Thu, 21 May 2015 10:28:55 +0800</pubDate>
+      <guid>/blog/2015/05/21/haskell-one-line/</guid>
+      <description>&lt;p&gt;Haskell have many beautiful features,such as monad(combination),so we can
+write very elegant code(compact code).&lt;/p&gt;
+
+&lt;p&gt;Reference &lt;a href=&#34;http://www.shuklan.com/haskell/lec08.html#/0/17&#34; target=&#34;_blank&#34;&gt;Here&lt;/a&gt;
+verbose:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;
+module Main where
+
+import System.IO
+
+main = do
+  theInput &amp;lt;- readFile &amp;quot;input.txt&amp;quot;
+  putStrLn (countLines theInput)
+
+countLines :: String -&amp;gt; String
+countLines str = (show (length (lines str)))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;elegant:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;module Main where
+
+import System.IO
+
+main = readFile &amp;quot;input.txt&amp;quot; &amp;gt;&amp;gt;= print.length.lines
+	      
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;function-application-http-shuklan-com-haskell-lec06-html-0-13&#34;&gt;&lt;a href=&#34;http://shuklan.com/haskell/lec06.html#/0/13&#34; target=&#34;_blank&#34;&gt;Function Application&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;verbose:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;not (odd 4)
+not $ odd 4
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;elegant:
+The . Function
+It composes functions in a readable manner&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;
+f(g(h(k(x)))) is ugly
+(f.g.h.k)(x) is pretty
+ (not.odd) 4
+ (length.head.words) &amp;quot;University of Virginia&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上面写的elegant风格都可以叫做point-free风格，它使用Monad的结合律，&lt;/p&gt;
+
+&lt;p&gt;比如下面转换一般代码到point-free风格的方法：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;f x = 5 + 8/x
+f x = (+) 5 (8/x)
+f x = (+) 5 ((/) 8 x)
+f x = ((+) 5) ((/) 8 x)
+f x = ((+) 5) (((/) 8) x)
+f x = ((+) 5).(((/) 8)) x
+
+f= ((+) 5).((/) 8)
+f= (5+).(8/)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;另一个常用的转换写法：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;add a b = a+ b  ---&amp;gt; add =(+)
+f s =length (head (words s)) ---&amp;gt; f= length.head.words
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Add later&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>One-parameter-Or-many-parameters?</title>
+      <link>/blog/2015/05/21/one-parameter-or-many-parameters/</link>
+      <pubDate>Thu, 21 May 2015 00:12:30 +0800</pubDate>
+      <guid>/blog/2015/05/21/one-parameter-or-many-parameters/</guid>
+      <description>&lt;p&gt;I have a &lt;strong&gt;question&lt;/strong&gt; about how to call the function when
+we see the type declartion.我有一个关于阅读函数声明时候，如何调用函数的疑问。
+比如:&lt;/p&gt;
+
+&lt;dl&gt;
+&lt;dt&gt;It is one parameter, but it must be a tuple with three tuple elements&lt;/dt&gt;
+&lt;/dl&gt;
+
+&lt;dl&gt;
+&lt;dt&gt;it must be a tuple with three tuple elements&lt;/dt&gt;
+&lt;/dl&gt;
+
+&lt;p&gt;::Double-&amp;gt;Double-&amp;gt;Double
+&lt;strong&gt;What does it mean?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;areAsceneding :: Integer-&amp;gt;Integer-&amp;gt;Integer-&amp;gt;Bool
+areAsceneding a b c=a&amp;lt;b &amp;amp;&amp;amp; b&amp;lt;c
+
+areasceneding 1 2 3
+--get true
+areasceneding 1 4 2
+--get false
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Actually ,multiply parameter can changed into one parameter method by
+currying!!&lt;/p&gt;
+
+&lt;p&gt;You must care about the () means tuple data structure.
+[] means list  data structure.&lt;/p&gt;
+
+&lt;h2 id=&#34;绑定binding-http-www-jdon-com-idea-haskell-html&#34;&gt;&lt;a href=&#34;http://www.jdon.com/idea/haskell.html&#34; target=&#34;_blank&#34;&gt;绑定Binding&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;　　Haskell使用=实现绑定，前面我们说=是引用透明的案例，是一种数学意义，实际是将两者绑定了。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;x = 2                   -- 两个连字符号表示注解
+
+y = 3                   --    
+main = let z = x + y    -- let 引入一个本地绑定
+       in print z       -- 程序将打印 5
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Binding名称不能大写，绑定可以定义一个或多个参数的函数，函数和参数使用空格，这是Haskell区别其他语言的简洁之处：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;add arg1 arg2 = arg1 + arg2 -- 定义函数add
+five = add 2 3 -- 调用函数add
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;　　括号可以包装复合表达式：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;bad = print add 2 3 -- error! (打印只能有一个参数)
+main = print (add 2 3) -- ok, 使用一个参数5作为打印参数
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;变量是不可变的&#34;&gt;变量是不可变的&lt;/h2&gt;
+
+&lt;p&gt;　　与命令式语言变量不同,Haskell绑定变量 不可变的：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;x = 5
+x = 6 -- 错误, 不能再绑定x,但是在let中则是不一样
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;类型有下面几种：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Bool - 有两个元素： True 或 False&lt;/li&gt;
+&lt;li&gt;Char - unicode符合集合&lt;/li&gt;
+&lt;li&gt;Int - 固定大小整数&lt;/li&gt;
+&lt;li&gt;Integer - 无限大小整数&lt;/li&gt;
+&lt;li&gt;Double - IEEE 浮点数字&lt;/li&gt;
+&lt;li&gt;type1 -&amp;gt; type2 - 一个输入类型type1 到输出类型 type2的函数&lt;/li&gt;
+&lt;li&gt;(type1, type2, &amp;hellip;, typeN) - 类型数组tuple&lt;/li&gt;
+&lt;li&gt;() - 零数组tuple, 称为unit (类似C的void); 这个类型只有一个值：空。&lt;/li&gt;
+&lt;li&gt;[Char]-&amp;gt; means  list pk tuple.&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>Haskell-someImportantResource</title>
+      <link>/blog/2015/05/20/haskell-someimportantresource/</link>
+      <pubDate>Wed, 20 May 2015 22:38:05 +0800</pubDate>
+      <guid>/blog/2015/05/20/haskell-someimportantresource/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;The most important is:&lt;a href=&#34;hackage.haskell.org&#34; target=&#34;_blank&#34;&gt;Hackage-haskell-Official&lt;/a&gt;
+Maintains a central repository of open source Hakell libraries called Hackage.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://www.haskell.org/hoogle&#34; target=&#34;_blank&#34;&gt;The hoogle-the haskell dictionary&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://haskell.org/haskelwiki/Applications_and_libraries&#34; target=&#34;_blank&#34;&gt;The hackage-wiki&lt;/a&gt;
+contains a section dedicated to information about particular Haskell libraries&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;rwh.readthedocs.org/en/latest&#34; target=&#34;_blank&#34;&gt;一个中文Real-world-haskell翻译&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;使用Cabal，一个命令行的安装工具，类似vim的bundles Install，ubuntu的apt-get install, redhat的yum install *等，来安装
+你需要的haskell的包和依赖
+比如 安装HTTP library&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;cabal install HTTP
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;cabal四个阶段：&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;fetches 获取&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;configures 配置&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;compiles 编译&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;installs 安装&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;所以安装HTTP库（一般库也是一样)&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Refresh the list
+Download the recent list of packages&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;cabal update
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Install the package
+find any package from Hackage&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;cabal install HTTP
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Use
+Cabal takes care of installing the package. The library can now be imported&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;---new file.hs
+import Network.HTTP
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;使用&lt;a href=&#34;hackage.haskell.org/packages/HTTP&#34; target=&#34;_blank&#34;&gt;hackage.haskell.org/packages/HTTP&lt;/a&gt;查看HTTP的使用方式
+可以查看这个网页下的 Modules Network 包含着一些相关的函数。
+比如我们点击，Network.HTTP就会给我们一个详细的函数使用说明的网页，他接受什么类型，返回什么类型。
+SimpleHTTP 接受一个Request 对象，然后返回一个IO Monad。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;Prelude Network.HTTP&amp;gt; import Network.HTTP
+Prelude Network.HTTP&amp;gt; :t simpleHTTP
+simpleHTTP
+:: HStream ty =&amp;gt;
+Request ty -&amp;gt; IO (Network.Stream.Result (Response ty))
+Prelude Network.HTTP&amp;gt; let myRequest=getRequest &amp;quot;http://www.baidu.com&amp;quot;
+Prelude Network.HTTP&amp;gt; simpleHTTP myRequest &amp;gt;&amp;gt;= getResponseBody 
+就会得到很多的内容！！！
+&amp;gt;&amp;gt;=是什么玩意！！
+Prelude Network.HTTP&amp;gt; :t (&amp;gt;&amp;gt;=)
+(&amp;gt;&amp;gt;=) :: Monad m =&amp;gt; m a -&amp;gt; (a -&amp;gt; m b) -&amp;gt; m b
+&amp;gt;&amp;gt;=其实就是网络编程的bind操作（绑定端口）
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Actually, go to &lt;a href=&#34;https://wiki.haskell.org/Haskell&#34; target=&#34;_blank&#34;&gt;https://wiki.haskell.org/Haskell&lt;/a&gt;, you will get resources you want.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Thinking about the dot symbol in haskell</title>
+      <link>/blog/2015/05/20/thinking-about-the-dot-symbol-in-haskell/</link>
+      <pubDate>Wed, 20 May 2015 17:30:36 +0800</pubDate>
+      <guid>/blog/2015/05/20/thinking-about-the-dot-symbol-in-haskell/</guid>
+      <description>&lt;p&gt;In haskell you can use () to embrace the function into an application&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;not odd 4   --&amp;gt;error
+not (odd 4) --&amp;gt;right
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;you can also use $ (called a function application),it makes functions right
+associative.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;not $ odd 4
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;but more pretty and elegant method is use .&lt;/p&gt;
+
+&lt;p&gt;It composes functions in a readable manner
+f(g(h(k(x)))) is ugly
+(f.g.h.k)(x) is pretty&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;(not.odd) 4
+(length.head.words) &amp;quot;university of NCEPU&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Haskell&amp;rsquo;s all functions
++ Data.List
++ Data.Char
++ Data.Map
++ Data.Set
+&amp;hellip;..and more than 350 others&lt;/p&gt;
+
+&lt;h3 id=&#34;in-the-data-list-module&#34;&gt;In the Data.List module:&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;Main Data.List&amp;gt; concat [&amp;quot;under&amp;quot;,&amp;quot;stand&amp;quot;,&amp;quot;ing&amp;quot;]
+&amp;quot;understanding&amp;quot;
+Main Data.List&amp;gt; any (==0) [1,1,1,1,1,0,0]
+True
+Main Data.List&amp;gt; sort &amp;quot;helo&amp;quot;
+&amp;quot;ehlo&amp;quot;
+
+--And over 200 more!
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;also-there-are-data-char&#34;&gt;Also there are Data.Char&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;Main Data.List&amp;gt; import Data.Char
+Main Data.List Data.Char&amp;gt; isNumber &#39;h&#39;
+False
+Main Data.List Data.Char&amp;gt; toUpper &#39;t&#39;
+Main Data.List Data.Char&amp;gt; Data.List.map ord [&#39;A&#39;..&#39;F&#39;]
+[65,66,67,68,69,70]
+
+--and over 100 more!
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;there-are-also-some-in-data-map&#34;&gt;There are also some in Data.Map&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;
+Main Data.List Data.Char&amp;gt; import Data.Map
+Main Data.List Data.Char Data.Map&amp;gt; let m = fromList[(&amp;quot;CS&amp;quot;,&amp;quot;Computer Science&amp;quot;),(&amp;quot;TLS&amp;quot;,&amp;quot;The Little Scheme&amp;quot;),(&amp;quot;TSS&amp;quot;,&amp;quot;The Season Scheme&amp;quot;)]
+Main Data.List Data.Char Data.Map&amp;gt; m
+fromList [(&amp;quot;CS&amp;quot;,&amp;quot;Computer Science&amp;quot;),(&amp;quot;TLS&amp;quot;,&amp;quot;The Little Scheme&amp;quot;),(&amp;quot;TSS&amp;quot;,&amp;quot;The Season Scheme&amp;quot;)]
+Main Data.List Data.Char Data.Map&amp;gt; keys m
+[&amp;quot;CS&amp;quot;,&amp;quot;TLS&amp;quot;,&amp;quot;TSS&amp;quot;]
+
+
+Main Data.List Data.Char Data.Map&amp;gt; Data.Map.lookup &amp;quot;CS&amp;quot; m
+Just &amp;quot;Computer Science&amp;quot;
+
+and over 200 more!!!!
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;we-can-continue-see-data-set&#34;&gt;We can continue see Data.Set&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;
+Main Data.List Data.Char Data.Map Data.Set&amp;gt; let a =Data.Set.fromList[1..58]
+Main Data.List Data.Char Data.Map Data.Set&amp;gt; let b =Data.Set.fromList[53..100]
+Main Data.List Data.Char Data.Map Data.Set&amp;gt; Data.Set.intersection a b
+fromList [53,54,55,56,57,58]
+
+Main Data.List Data.Char Data.Map Data.Set&amp;gt; Data.Set.findMax $ Data.Set.union a b
+100
+
+--and even 100 more
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;There are one problem: Some function multiple definition in the Data.List and Data.Map,So take note!&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Solve the strong passwd&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;
+strong x = length x &amp;gt; 14
+           &amp;amp;&amp;amp; any isLower x
+           &amp;amp;&amp;amp; any isUpper x
+            &amp;amp;&amp;amp; any isDigit x
+
+
+-- Designed by Jared Candelaria
+
+--import Data.Char
+
+strong :: String -&amp;gt; Bool
+strong password = all ($ password) requirements
+    where
+        requirements = [minLength 15, 
+                        any isUpper, 
+                        any isLower, 
+                        any isDigit]
+        minLength n str = n &amp;lt;= length str
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+    <item>
+      <title>HaskellModule</title>
+      <link>/blog/2015/05/20/haskellmodule/</link>
+      <pubDate>Wed, 20 May 2015 13:49:57 +0800</pubDate>
+      <guid>/blog/2015/05/20/haskellmodule/</guid>
+      <description>&lt;p&gt;Reference &lt;a href=&#34;http://www.shuklan.com/haskell/lec05.html#/0/21&#34; target=&#34;_blank&#34;&gt;Here&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;模块化，这样才能方便构建较大型的项目，解决更加复杂的问题。
+其中MyData.hs是模块文件
+注意，模块中添加类型时候使用(..);
+添加函数时候直接使用函数名
+TestMyData.hs是测试模块文件&lt;/p&gt;
+
+&lt;p&gt;##基本语法结构：
+module MyData
+(  类型(..) &amp;hellip;.
+   函数名 &amp;hellip;)
+where
+类型声明 &amp;hellip;
+函数声明 &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;注意 MyData.hs一定是和module后面的MyData一样的！&lt;/p&gt;
+
+&lt;h2 id=&#34;调用方式&#34;&gt;调用方式&lt;/h2&gt;
+
+&lt;p&gt;import MyData&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;MyData.hs&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;module MyData
+(MetricUnit(..),
+    ImperialUnit(..),
+    Measurement(..),
+    convert
+) where
+-- How to use this module
+-- new File Test.hs  
+--    import MyData
+--    reportMeasurement :: Measurement-&amp;gt;String
+--    reportMeasurement (MyData.MetricMeasurement x u)
+--    = (show  x) ++ &amp;quot; &amp;quot; ++ (show u)
+--    reportMesuarement m
+--    =reportMeasurement (convert m)
+-- N.B. If there are another file use Meter type,it will fail
+-- 1
+data MetricUnit = Meter|Liter|KiloGram deriving (Show,Eq)
+-- 2
+data ImperialUnit = Yard
+                    | Gallon
+                    | Pound 
+                    deriving (Show,Eq)
+-- 3
+data Measurement = MetricMeasurement Double MetricUnit
+                    | ImperialMeasurement Double ImperialUnit
+                   deriving (Show)   --If not,it will not show,Only
+                            --in the type defition,but not function
+
+-- 4
+convert :: Measurement-&amp;gt; Measurement
+-- Take attention for the () brace
+convert (MetricMeasurement x u)
+        | u == Meter  = ImperialMeasurement (1.0936*x) Yard
+        | u == Liter  = ImperialMeasurement (0.2642*x) Gallon
+        | u == KiloGram = ImperialMeasurement (2.2046*x) Pound
+--wrong!
+--        | u == &amp;quot;Meter&amp;quot;  = ImperialMeasurement (1.0936*x) Yard
+--        | u == &amp;quot;Liter&amp;quot;  = ImperialMeasurement (0.2642*x) Gallon
+--        | u == &amp;quot;KiloGram&amp;quot; = ImperialMeasurement (2.2046*x) Pound
+convert (ImperialMeasurement x u)
+        | u == Yard  = MetricMeasurement (0.9144*x) Meter
+        | u == Gallon  = MetricMeasurement (3.7854*x) Liter
+        | u == Pound = MetricMeasurement (0.4536*x) KiloGram
+
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;TestMyData.hs
+  &lt;em&gt;注意，一定不要把Measurement-写成了  Mesuarement等错误的文字&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;import MyData
+reportMeasurement :: Measurement-&amp;gt;String
+reportMeasurement (MyData.MetricMeasurement x u)
+                = (show x) ++ &amp;quot; &amp;quot; ++ (show u)
+reportMeasurement m =reportMeasurement (convert m)
+--reportMeasurement (MyData.ImperialMeasurement x u)
+--                = (show x) ++ &amp;quot; &amp;quot; ++ (show u)
+---if imperial    let m = MetricMeasuremnt 2 Meter ...
+
+
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;运行结果&#34;&gt;运行结果&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;--Main&amp;gt; reportMeasurement (convert (ImperialMeasurement 5 Pound))
+--&amp;quot;2.268 KiloGram&amp;quot;
+ 
+*Main&amp;gt; let m = ImperialMeasurement 5 Pound
+*Main&amp;gt; reportMeasurement m
+&amp;quot;2.268 KiloGram&amp;quot;
+
+*Main&amp;gt; reportMeasurement (MetricMeasurement 5 Meter)
+&amp;quot;5.0 Meter&amp;quot;
+
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+    <item>
+      <title>vim-haskell</title>
+      <link>/blog/2015/05/18/vim-haskell/</link>
+      <pubDate>Mon, 18 May 2015 14:04:37 +0800</pubDate>
+      <guid>/blog/2015/05/18/vim-haskell/</guid>
+      <description>&lt;p&gt;Haskell vim可以通过vimbar 安装到vim中。vimball是一个vim插件，可以很方便地帮你安装vba格式的插件。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://blog.csdn.net/fudesign2008/article/details/7297949&#34; target=&#34;_blank&#34;&gt;直接用vim打开vba格式的文件，输入:so %即可安装&lt;/a&gt;，然后:q退出。&lt;/p&gt;
+
+&lt;p&gt;删除插件也很方便，直接在vim里输入:RmVimball 插件名&lt;/p&gt;
+
+&lt;p&gt;不用安装vimBall(vim7.3之后 自带)&lt;/p&gt;
+
+&lt;p&gt;方法1：&lt;a href=&#34;http://projects.haskell.org/haskellmode-vim/vimfiles/haskellmode-20101118.vba&#34; target=&#34;_blank&#34;&gt;Haskell vimmode安装文件下载&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;方法2：使用bundles&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt; Bundle &#39;https://github.com/jueqingsizhe66/haskellmode-vim&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;安装说明
+1. vim vbafiles
+2. :so %;
+3. &lt;a href=&#34;http://projects.haskell.org/haskellmode-vim/&#34; target=&#34;_blank&#34;&gt;configure vimrc&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;都需要配置docdir和browser，doc如果没有去windows底下的haskell phamtom拷贝一份&lt;/p&gt;
+
+&lt;p&gt;windows:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;let g:haddock_browser=&amp;quot;E:\Program\ Files\Mozilla Firefox\firefox.exe&amp;quot;
+let g:haddock_docdir=&amp;quot;C:\Program\ Files\Haskell\ Platform\2014.2.0.0\doc\html&amp;quot; 
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ubuntu :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;
+let g:haddock_browser=&amp;quot;/usr/bin/opera&amp;quot;
+let g:haddock_docdir=&amp;quot;/home/happycamp-of-lisp/doc&amp;quot;
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;最后建议还是emacs漂亮一些！&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>加法之后也需减法</title>
+      <link>/blog/2015/05/17/%E5%8A%A0%E6%B3%95%E4%B9%8B%E5%90%8E%E4%B9%9F%E9%9C%80%E5%87%8F%E6%B3%95/</link>
+      <pubDate>Sun, 17 May 2015 22:46:35 +0800</pubDate>
+      <guid>/blog/2015/05/17/%E5%8A%A0%E6%B3%95%E4%B9%8B%E5%90%8E%E4%B9%9F%E9%9C%80%E5%87%8F%E6%B3%95/</guid>
+      <description>&lt;p&gt;老子道德经说&lt;a href=&#34;http://www.jdon.com/46727&#34; target=&#34;_blank&#34;&gt;道生一，一生二，二生三，三生万物&lt;/a&gt;，这句话符合构造定律Constructal Law.&lt;/p&gt;
+
+&lt;p&gt;学习过&lt;a href=&#34;http://www.cnblogs.com/haippy/archive/2012/06/04/2535197.html&#34; target=&#34;_blank&#34;&gt;git&lt;/a&gt;的人知道(可以参考&lt;a href=&#34;http://www.berlinix.com/it/git.php&#34; target=&#34;_blank&#34;&gt;git入门&lt;/a&gt;)，git体现的本质其实就是分支的思想,他就像是一块一块的&lt;a href=&#34;http://www.programblings.com/2008/06/07/the-illustrated-guide-to-recovering-lost-commits-with-git/&#34; target=&#34;_blank&#34;&gt;积木&lt;/a&gt;一样。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://think-like-a-git.net/&#34; target=&#34;_blank&#34;&gt;Thinking like a git&lt;/a&gt;教会我们 Facebook其实也是范畴的集合&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/images/tree.png&#34; alt=&#34;十分漂亮的树形图&#34; /&gt;
+&lt;img src=&#34;/images/city.jpg&#34; alt=&#34;城市的树形图&#34; /&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Haskell的IO main</title>
+      <link>/blog/2015/05/17/haskell%E7%9A%84io-main/</link>
+      <pubDate>Sun, 17 May 2015 21:48:03 +0800</pubDate>
+      <guid>/blog/2015/05/17/haskell%E7%9A%84io-main/</guid>
+      <description>&lt;p&gt;main在Haskell充当类似c系列语言的exe文件的头函数
+main对应的类型是&lt;a href=&#34;http://learnyoua.haskell.sg/content/zh-tw/ch09/input-and-output.html&#34; target=&#34;_blank&#34;&gt;IO Something&lt;/a&gt;
+比如下列源码：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;main = do 
+    putStrLn &amp;quot;Hello Hello&amp;quot; 
+    putStrLn &amp;quot;Hello, what&#39;s your name?&amp;quot; 
+    name &amp;lt;- getLine 
+    putStrLn $ &amp;quot;Read this carefully, because this is your future: &amp;quot; ++  name 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Windows 输出：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;c:\&amp;gt;ghc --make hello.hs -o Hello 
+[1 of 1] Compiling Main             ( hello.hs, hello.o ) 
+Linking Hello.exe ... 
+
+c:\&amp;gt;Hello.exe 
+Hello Hello 
+Hello, what&#39;s your name? 
+yezhaoliang 
+Read this carefully, because this is your future: yezhaoliang 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Ubuntu 输出:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;root at javazhao-N53SM [21:52:10ä��午] in /home/happycamp-of-lisp on git:develop+?
+$ ghc --make hello12.hs -o hello12
+[1 of 1] Compiling Main ( hello12.hs, hello12.o )
+Linking hello12 ...
+
+root at javazhao-N53SM [21:52:25ä��午] in /home/happycamp-of-lisp on git:develop+?
+$ ./hello12
+Hello Hello
+Hello, what&#39;s your name?
+yezhaoliang
+Read this carefully, because this is your future: yezhaoliang
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Haskell天生的具备跨平台的特点&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>The greatest weapons</title>
+      <link>/blog/2015/05/17/the-greatest-weapons/</link>
+      <pubDate>Sun, 17 May 2015 19:01:59 +0800</pubDate>
+      <guid>/blog/2015/05/17/the-greatest-weapons/</guid>
+      <description>&lt;p&gt;Everything in Haskell has a Type
+Here are some Type declarations.&lt;/p&gt;
+
+&lt;p&gt;These are your greatest weapons.&lt;/p&gt;
+
+&lt;p&gt;head :: [a] -&amp;gt; a &amp;ndash; gets the first element of a list&lt;/p&gt;
+
+&lt;p&gt;tail :: [a] -&amp;gt; [a] &amp;ndash; gets everything but the first element&lt;/p&gt;
+
+&lt;p&gt;last :: [a] -&amp;gt; a &amp;ndash; gets the last element of a list&lt;/p&gt;
+
+&lt;p&gt;init :: [a] -&amp;gt; [a] &amp;ndash; gets everything but the last element&lt;/p&gt;
+
+&lt;p&gt;(++) :: [a] -&amp;gt; [a] -&amp;gt; [a] &amp;ndash; concatenates two lists together&lt;/p&gt;
+
+&lt;p&gt;(:) :: a -&amp;gt; [a] -&amp;gt; [a] &amp;ndash; prepends an element to a list&lt;/p&gt;
+
+&lt;p&gt;fst  :: (a,b) -&amp;gt; a &amp;ndash; gets the first element of a tuple&lt;/p&gt;
+
+&lt;p&gt;snd  :: (a,b) -&amp;gt; b &amp;ndash; gets the second element of a tuple&lt;/p&gt;
+
+&lt;p&gt;(!!) :: [a]-&amp;gt;Int a&lt;/p&gt;
+
+&lt;h3 id=&#34;数学中λ-calculus的表示法为&#34;&gt;数学中λ-calculus的表示法为：&lt;/h3&gt;
+
+&lt;ol&gt;
+&lt;li&gt;λx.t&lt;/li&gt;
+&lt;li&gt;λx[t]&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;“λ”不具有任何特殊意思，标识着其表达式中的可取一数值x带入。
+t是表达式（例如x+3、x^2+2x+1等）。&lt;/p&gt;
+
+&lt;h3 id=&#34;代入数值p的表示法为&#34;&gt;代入数值p的表示法为：&lt;/h3&gt;
+
+&lt;ol&gt;
+&lt;li&gt;(λx.t)p&lt;/li&gt;
+&lt;li&gt;(λx[t])p&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&#34;lisp-scheme的λ表示法与数值代入&#34;&gt;Lisp|scheme的λ表示法与数值代入：&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scheme&#34;&gt;(lambda (x) (+ x 1))
+((lambda (x) (+ x 1) 10))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;haskell&#34;&gt;Haskell：&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;\x -&amp;gt; x+1
+(\x -&amp;gt; x+1)10
+
+Prelude&amp;gt; map (\x-&amp;gt;x+1) [1..10]
+[2,3,4,5,6,7,8,9,10,11]
+
+\ para1 para2-&amp;gt;(return value) 
+\ (para1,para2) -&amp;gt; (return value)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;lambda-calculus&#34;&gt;Lambda Calculus&lt;/h3&gt;
+
+&lt;p&gt;前面提到了Haskell是基于&lt;strong&gt;Lambda Calculus&lt;/strong&gt;的，所以在学习Haskell之前，我们有必要了解一下Lambda Caculus的一些基本的内容，方便我们后面正式介绍Haskell。其实，Lambda Calculus是所有函数式语言的基础，要学习FP，最好都了解一下Lambda Calculus。下面对Lambda Calculus做一个简单的介绍：&lt;/p&gt;
+
+&lt;h4 id=&#34;基本的语法-lambda-calculus的核心是表达式-expression-用fp语言写的程序执行的过程-本质上就是对表达式求值的过程&#34;&gt;基本的语法：Lambda Calculus的核心是表达式(Expression)，用FP语言写的程序执行的过程，本质上就是对表达式求值的过程&lt;/h4&gt;
+
+&lt;p&gt;expression := variable | function | application
+funciton := λvariable.expression (.前面部分为定义(definition)，后面部分为函数体(body))
+application := expression expression&lt;/p&gt;
+
+&lt;p&gt;另外一种表述方法:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;&amp;lt;expr&amp;gt; ::= &amp;lt;identifier&amp;gt; 
+&amp;lt;expr&amp;gt; ::= lambda &amp;lt;identifier-list&amp;gt;. &amp;lt;expr&amp;gt; 
+&amp;lt;expr&amp;gt; ::= (&amp;lt;expr&amp;gt; &amp;lt;expr&amp;gt;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;前两条语法用于生成lambda表达式（lambda函数），如：
+lambda x y. x + y
+haskell里面为了简洁起见用“\”来代替希腊字母lambda，它们形状比较相似。故而上面的定义也可以写成：
+\ x y. x + y&lt;/p&gt;
+
+&lt;h4 id=&#34;变量的bound与free&#34;&gt;变量的bound与free:&lt;/h4&gt;
+
+&lt;p&gt;λx.xy →x is bound, y is free&lt;/p&gt;
+
+&lt;h4 id=&#34;表达式化简-reduction-的基本法则&#34;&gt;表达式化简（Reduction)的基本法则:&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;α−reduction: λx.E→λy.E[y/x]
+β−reduction:((λx.E)z)→E[z/x]
+η−reduction(if x is not free in E): λx.(Ex)→E
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Alpha转换公理：例如，“lambda x y. x + y”转换为“lambda a b. a + b”。换句话说，函数的参数起什么名字没有关系，可以随意替换，只要函数体里面对参数的使用的地方也同时注意相应替换掉就是了。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Beta转换公理：例如，“(lambda x y. x + y) 2 3”转换为“2 + 3”。这个就更简单了，也就是说，当把一个lambda函数用到参数身上时，只需用实际的参数来替换掉其函数体中的相应变量即可。&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://mindhacks.cn/2006/10/15/cantor-godel-turing-an-eternal-golden-diagonal/&#34; target=&#34;_blank&#34;&gt;软件工程里面的一条黄金定律：“任何问题都可以通过增加一个间接层来解决&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;变量替换&#34;&gt;变量替换&lt;/h4&gt;
+
+&lt;p&gt;[y/x]E →  substitute  all occurrences of x in E to y&lt;/p&gt;
+
+&lt;p&gt;以上是Lambda Calculus的一些基础知识，读者朋友现在不理解没有关系，等后面讲到Haskell中相关的部分就可以理解了。对于抑制不住自已的好奇心的朋友，可以在这里：&lt;a href=&#34;http://en.wikipedia.org/wiki/Lambda_calculus&#34; target=&#34;_blank&#34;&gt;http://en.wikipedia.org/wiki/Lambda_calculus&lt;/a&gt;做进一步的了解。&lt;/p&gt;
+
+&lt;p&gt;在之前做的&lt;a href=&#34;http://jueqingsizhe66.github.io/blog/2015/05/17/cong-lambdadao-simple-plus-complexjie-shi-qi-zai-dao-shu-xing-chou-xiang/&#34; target=&#34;_blank&#34;&gt;lambda的推导&lt;/a&gt;其实都只是针对单个参数，包括&lt;a href=&#34;http://shuklan.com/haskell/lec03.html#/0/15&#34; target=&#34;_blank&#34;&gt;Haskell也是强调单参数的调用&lt;/a&gt;，如果多惨数那就是用curry来解决(funny多参数)
+关于多参数的lambda推到比较少见，但是多参数都是可以通过curry实现。&lt;/p&gt;
+
+&lt;p&gt;比如Haskell的实现:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;Prelude&amp;gt; :type take
+take :: Int -&amp;gt; [a] -&amp;gt; [a]
+Prelude&amp;gt; let takeFive = take 5
+Prelude&amp;gt; :type takeFive
+takeFive :: [a] -&amp;gt; [a]
+Prelude&amp;gt; takeFive [1..]
+[1,2,3,4,5]
+	   
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+    <item>
+      <title>Haskell几个基本概念--学而无用--无以为用</title>
+      <link>/blog/2015/05/16/haskell%E5%87%A0%E4%B8%AA%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5-%E5%AD%A6%E8%80%8C%E6%97%A0%E7%94%A8-%E6%97%A0%E4%BB%A5%E4%B8%BA%E7%94%A8/</link>
+      <pubDate>Sat, 16 May 2015 21:11:50 +0800</pubDate>
+      <guid>/blog/2015/05/16/haskell%E5%87%A0%E4%B8%AA%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5-%E5%AD%A6%E8%80%8C%E6%97%A0%E7%94%A8-%E6%97%A0%E4%BB%A5%E4%B8%BA%E7%94%A8/</guid>
+      <description>&lt;ol&gt;
+&lt;li&gt;模式匹配
+= +起着一种模式匹配，=不要翻译成等于 最好翻译为如果匹配前面+ 则他的值为后面.-&amp;gt; 也起着一种类型的模式匹配。&lt;/li&gt;
+&lt;li&gt;分支
+|在创建函数的时候 体现着一种分支的效果。
+if-else  这其实是一种控制语句，不能说Haskell放掉了控制语句，而应该是循环语句。&lt;/li&gt;
+&lt;li&gt;一切都是函数。
+根据monad的内置结构，函数可以组合生成类似于数学的组合函数（埋藏内部的lambda结构）&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;函数只是关系的表示-可以说它是过程-变换-运动-从泛函的角度解释&#34;&gt;函数只是关系的表示，可以说它是过程、变换、运动（从泛函的角度解释）&lt;/h3&gt;
+
+&lt;p&gt;本来函数式变成是不考虑空间的， 而面向对象则是引入不必要的空间问题，来挂上函数，最终都是为了实现函数变换或者函数过程，或者统称为运动。
+假如宇宙存在根节点，越靠近根节点的肯定越抽象，我们现在是工作在底层的具象节点下。
+&amp;gt; 面向对象属于分解，函数编程属于组合。有以为 利，通过面向对象我们将一分解为多个，数量多了，“有”，而函数编程则是将多个组合成一个，数量少了  ，“无”，无才能用，只有忽略事物内部的细节，我们才 能用它，否则陷入细节迷失方向。换句话说：数学分数考得好，不代表在实际中用数学用的好，牛    顿没有发明几何学，但是用了几何学，创造了微积分，用它们推导 出万有引力；爱因斯坦用了非几何学推导了相对论。&lt;/p&gt;
+
+&lt;p&gt;###从有至无方为用，有乃分，无乃合，宇宙的起点源于无&lt;/p&gt;
+
+&lt;p&gt;学习是一种分解能力，使用是一种组合能力，这是两种不同的能力。
+&amp;gt; 再看看老子道德经的一段：三十幅共一毂，当其无，有车之用。埏埴以为器，当其无，有器之用。凿户牖以为室，当其无，有室之用。故有之以为利，无之   以为用。
+这段话意思是：三十根棍子做成的圆轱辘，只有忽视圆轱辘内部这种结构，着眼于圆轱辘外部，才会发现它原来是可以做车的轮子这一用处，两个轱辘与车    架组合成一辆车。比如门窗，只有忽视其内部如何结构的构建，才会从外部想到用它在房间组合中。&lt;/p&gt;
+
+&lt;h3 id=&#34;树形结构抽象细节&#34;&gt;树形结构抽象细节&lt;/h3&gt;
+
+&lt;p&gt;我们之所以使用树形结构，用一个根节点代表其聚合群体，用组长代表所有组员，用名字代表人的全部，等等这些组合抽象的办法就是让我们大脑去除大量   对象内部的细节，用一个符号代替它们，这样我们才能基于这个树的根节点再组合成新的树形结构。&lt;/p&gt;
+
+&lt;h2 id=&#34;范畴理论-交际的互联网&#34;&gt;范畴理论-交际的互联网&lt;/h2&gt;
+
+&lt;p&gt;范畴理论(Category)总是鼓励我们从对象内部细节中转移开来，在范畴理论中 一个对象是一个抽象模糊的实体，你所有需要知道的只是它如何和其他对象交互(关系)，它是怎么使用箭头和其他对象连接的，这就是为什么互联网搜索引擎 Google Baidu等能够通过分析链入和链出的链接来排名网站一样。&lt;/p&gt;
+
+&lt;h2 id=&#34;无以为用-组合思想&#34;&gt;无以为用&amp;ndash;组合思想&lt;/h2&gt;
+
+&lt;p&gt;归根到底，还是“无以为用”这个范畴的组合本质很多人都没有搞清楚。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;只有忘记对象的细节才能用好它。两个原因总结一下：
+
+&lt;ul&gt;
+&lt;li&gt;首先，首先人脑短时记忆有限，如果大量对象内部细节占据大脑，而我们需要从对象外部组合它们，    这些细节是干扰。&lt;/li&gt;
+&lt;li&gt;其次，范畴也认为组合对象只要将对象看成模糊实体，注重它们之间关系。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;忘记学习对象的细节才能用好它，无以为用，事物的制造者都不一定能用好它，除非事先有目标制造它。
+因此，学并不能致用，数理化学得好不一定用得好，博士给老板打工，老板赚大头。因为他把你的学问用处发挥了。自己学自己用因为智力限制也不可能。&lt;/li&gt;
+&lt;li&gt;中国教育的典型
+在学生阶段,中国学生数理化很好，但是毕业后诺贝尔奖获得者几乎没有，世界自然科学领军人物很少，那些高考状元 学神都哪儿去了？学得好不      一定用得好，中国教育制度是以学习能力评价学生，各种考试充斥大量 知识细节，让学生耗费18年于这些可能以后无用的细节中，最终他们已经没有智力      空间来思考如何使用这些大量的知识细节了。中国教育制度存在严重的本质错 误。
+面向对象的分解能力是强，但是组合能力很弱！
+实际上从函数运算的角度，不存在单纯的“值”，1应该是=&amp;amp; gt;1，或者说，所谓的常量值也是函数，只是每次不管输入什么都输出同样的结果。这样世界就只有运算，值是没必&amp;gt;要的，更没有状态。但这是神的视角，而一 旦人开始思考时，由于不具备神的无限的能力，只能在每个瞬间试图去把握世界，就看到了值和状态以及状态呈现时的context/stage/&amp;gt;舞台。但人希 望能像神一样去理解世界，就只好从这每个瞬间呈现的一切中去寻找变与不变的东西，当他们历尽艰辛找到“不变”的“变换”时就迫不及待地将之命名为定律。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;关于上述思想，计算机邀请Haskell带领领略（Haskell可以学习，但是需要投入很多时间，坚持&amp;hellip;）&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.zhihu.com/question/20193745&#34; target=&#34;_blank&#34;&gt;综合性帖子&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.jdon.com/47271&#34; target=&#34;_blank&#34;&gt;这边也有一些课程介绍&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;dev.stephendiehl.com/hask/&#34; target=&#34;_blank&#34;&gt; What I Wish I Knew When Learning Haskell 2.2 ( Stephen Diehl )&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://acm.wustl.edu/functional/haskell.php&#34; target=&#34;_blank&#34;&gt;How to learn haskell&lt;/a&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://learnyouahaskell.com/chapters&#34; target=&#34;_blank&#34;&gt;相当棒的趣味指南&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;从现实世界走入计算机-经过计算机思考-再从计算机走出现实世界-这就是-函数式思维-http-www-jdon-com-45608&#34;&gt;从现实世界走入计算机，经过计算机思考，再从计算机走出现实世界，这就是&lt;a href=&#34;http://www.jdon.com/45608&#34; target=&#34;_blank&#34;&gt; 函数式思维&lt;/a&gt;。&lt;/h3&gt;
+
+&lt;p&gt;函数的context引入了时间的关系。&lt;a href=&#34;http://www.jdon.com/45608&#34; target=&#34;_blank&#34;&gt; 我们思考逻辑的时候，定义已经是确定的了。也正因为是确定的，才可以逻辑思考&lt;/a&gt;。
+函数不存在状态，所以计算机加入了一个特殊的东西：时钟。值++时间=状态++，在可以忽视时序问题时，可以直接有值=状态。忽视时序问题，就相当于我们平时说的异步。若果单单使用锁，只是一种耗费资源手段。而我们看到无论是唤醒线程，还是延时读取，都是依赖时钟
+##+ 小结：&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;/images/desk.jpg&#34; alt=&#34;桌子&#34; /&gt;
+一张桌子为案例，分解思维的人看到后首先想到这张桌子由什么构成，长宽高和材质，这些都是桌子的内部细节；而组合思维的人看到后，环顾四周，看看其处于什么环境，如果放在教室中，他判断这是一张课桌，如果放在食堂，他判断这是一张饭桌。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;从这个例子可以看出组合是从行为（运动、变化、时间）角度看待 世界的，“课桌”、“饭桌”中的“课”和“饭”在这里是动词，意为“上课用”、“吃饭用”的意思，“用”是动词，同一个桌子出现在不同的环境中发挥不同的 作用。而分解思维只研究空间，只研究桌子的空间结构是什么，甚至不研究为什么是四条腿，为什么每条腿长度相同，分解思维根本不考虑这些，不用考虑任何桌子 之外的世界，在分解思维中没有万有引力、没有地面的水平、没有书房和餐厅，只有空间，分解只考虑空间的组成结构。看来分解和组合是相互依存的，分解时研究 的是空间，组合时研究的是行为，把桌子放进餐厅的意义是期待使用它吃饭这样一种运动。 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;范畴英文是Category，也是++分类++的意思，打个比喻，Google能根据哪些网站引用你的网站这个外部信息进行PageRank评分，从而对你的网站权重进行排序，这个道理和我们评价一个人有些类似，看一个不认识的人怎么样，那就看看他交往的什么朋友，什么环境，近墨者黑，人以群分，物以类聚，这些都是从事物所在的分类类别中判断其价值，而不是从事物内部细节。（评判个人的价值标准跟不同的人在一起，意味着你的价值不一样.）&lt;/p&gt;
+
+&lt;h3 id=&#34;monad-隐藏lambda&#34;&gt;monad 隐藏lambda&lt;/h3&gt;
+
+&lt;p&gt;Monad是一种结构，这种结构能够将一个值放入一个可计算的上下文中。因为Lambda是一个和上下文环境有关的表达式，所以，这里对Monad的上下文理解就比较容易。
+monad是从范畴论引入， 范畴其实就是一个集合，只不过对这个集合有一些约束定义，如果 熟悉业务建模的人可能对这种思维方式不陌生，经常我们会对抽象的事物进行定义，数学上基本就是用集合概念，实际上从罗素悖论拯救了数学开始，数学离不开集合，对于一个国家社会，个人与社会也是不同的概念，社会是一个++集合++概念，从++集合角度++考虑问题和从&lt;strong&gt;个人元素角度&lt;/strong&gt;考虑问题是两种截然不同的思路，如果你平时注 重这种区别，你可能会有两种人生观。祝你脑洞大开。&lt;/p&gt;
+
+&lt;h3 id=&#34;函数式替代sql&#34;&gt;函数式替代sql？&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://www.jdon.com/44842&#34; target=&#34;_blank&#34;&gt;函数的逻辑性&lt;/a&gt;与关系数据库的是一致的，而逻辑在不同语言之间是自然贯穿的，也就是说若果所有都用函数来表达的，可以使sql消失，那么由于sql引发的问题自然就消失。
+数据库 = 一个集合,这就是面向集合，mongodb就是这样的思想&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>language limits the world of you</title>
+      <link>/blog/2015/05/16/language-limits-the-world-of-you/</link>
+      <pubDate>Sat, 16 May 2015 16:17:39 +0800</pubDate>
+      <guid>/blog/2015/05/16/language-limits-the-world-of-you/</guid>
+      <description>&lt;ol&gt;
+&lt;li&gt;语言可以削尖我们的思维。&lt;/li&gt;
+&lt;li&gt;语言也会限制我们的世界。&lt;/li&gt;
+&lt;li&gt;好的语言一定会影响你的思维方式,haskell,scheme,lisp&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Language shapes the way we think, and determines what we can think about.
+   Benjamin Lee Whorf&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;The limits of my language mean the limits of my world.
+   Ludwig Wittgenstein&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;A language that doesn’t affect the way you think about programming, is not worth knowing.
+Alan Perlis&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;##Who uses Haskell?
++ AT&amp;amp;T : automate form processing
++ Bank of America Merril Lynch  : data transformation and loading
++ Bump :   Haskell-based server
++ Facebook :   manipulating PHP code base
++ Google :   internal IT infrastructure
++ MITRE :   cryptographic protocol analysis
++ NVIDIA :    in-house tools
++ Qualcomm, Inc  :   generate Lua bindings&lt;/p&gt;
+
+&lt;h2 id=&#34;types&#34;&gt;Types&lt;/h2&gt;
+
+&lt;p&gt;Every function in haskell has a Type signature.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;foo :: Int -&amp;gt; String
+	    
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I don&amp;rsquo;t know what foo means,but I know what it does!&lt;/p&gt;
+
+&lt;p&gt;Haskell引进了很多模块化思想，比如module,import导包的，下面的这些书都可以在
+&lt;a href=&#34;http://vdisk.weibo.com/&#34; target=&#34;_blank&#34;&gt;新浪微盘&lt;/a&gt;找到:
+###书籍
+- Book1: Books for Learning Haskell
+- Book2: Learn You a Haskell for Great Good! (&lt;em&gt;Important&lt;/em&gt;)
+- Book3: Real World Haskell(&lt;em&gt;Important&lt;/em&gt;)
+- Book4: Beginning Haskell
+- Book5: Thinking Functionally with Haskell
+- Book6: Parallel and Concurrent Programming in Haskell
+- Book7: Programming in Haskell
+- Book8: Haskell: The Craft of Functional Programming (&lt;em&gt;Important&lt;/em&gt;)
+- Book9: The Haskell School of Music
+- Book10:Developing Web Applications with Haskell and Yesod&lt;/p&gt;
+
+&lt;p&gt;##Functional:
+* Haskell, Lisp, ML, Scheme, Erlang
+Focuses on the high-level &lt;em&gt;&amp;ldquo;what&amp;rdquo;&lt;/em&gt;(Math thinking)
+##Imperative:
+*  C++, Java, Python, Pascal
+Focuses on the low-level &lt;em&gt;&amp;ldquo;how&amp;rdquo;&lt;/em&gt;(Computer Thinking)
+&lt;a href=&#34;http://shuklan.com/haskell/lec01.html#/0/30&#34; target=&#34;_blank&#34;&gt;Haskell Learning Center&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Haskell笔记</title>
+      <link>/blog/2015/05/16/haskell%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Sat, 16 May 2015 14:30:22 +0800</pubDate>
+      <guid>/blog/2015/05/16/haskell%E7%AC%94%E8%AE%B0/</guid>
+      <description>&lt;p&gt;2001年，出生于荷兰的计算机大师、图灵奖获得者&lt;strong&gt;EdsgerW.Dijkstra&lt;/strong&gt;给德州大学预算委员会写信，力劝不要将计算机入门课程改为Java。不幸的是，学校最终还是用Java课程替换了Haskell。Haskell真的不行了？国内有些人的&lt;a href=&#34;http://www.vaikan.com/why-haskell-is-worth-learning/&#34; target=&#34;_blank&#34;&gt;评论&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Haskell:函数式编程语言&lt;/li&gt;
+&lt;li&gt;Java  : 命令编程语言
+尽管Haskell不完美，但仍然比Java好几个数量级，Java就是一个大杂烩(它是通过大范围的广告和销售员夸张的宣传才达到它的商业接受)。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;如果别人问你Haskell能够做什么？
+一个能够编程的编程语言，高级函数编程语言&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;如果别人问你Haskell和scheme有什么区别？
+比scheme更强调类型理论，但是相对scheme由于对于type theory的过度追求
+反而更加难于编程&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;如果别人问你haskell-如何实现冒泡法-直接排序-快速排序&#34;&gt;如果别人问你Haskell 如何实现冒泡法  直接排序  快速排序？&lt;/h3&gt;
+
+&lt;h4 id=&#34;冒泡排序&#34;&gt;冒泡排序&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;
+sort1 [x] = [x]
+sort1 (x:x1:xs)  {-选取了一个x1temp 值  x当做首数，x1:temp-}
+    | x&amp;gt;x1 = x1:sort1 (x:xs)
+    | otherwise = x:sort1 (x1:xs)
+mpsort [] = []
+mpsort x = let tmp = sort1 x in
+           mpsort (init tmp) ++ [(last tmp)] 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;直接排序&#34;&gt;直接排序&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;import Data.List
+selectsort::[Int] -&amp;gt; [Int]
+selectsort [] = []
+selectsort [x] = [x]
+selectsort xs = minimum xs : selectsort ( delete ( minimum xs )  xs) 
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;快速排序1&#34;&gt;快速排序1&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;
+quicksort :: (Ord a) =&amp;gt; [a] -&amp;gt; [a]   
+quicksort [] = []   
+quicksort (x:xs) =   
+  let smallerSorted = quicksort [a | a &amp;lt;- xs, a &amp;lt;= x]  
+      biggerSorted = quicksort [a | a &amp;lt;- xs, a &amp;gt; x]   
+  in smallerSorted ++ [x] ++ biggerSorted
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;快速排序2&#34;&gt;快速排序2&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;quicksort :: (Ord a) =&amp;gt; [a] -&amp;gt; [a]     
+quicksort [] = []     
+quicksort (x:xs) =      
+    let smallerSorted = quicksort (filter (&amp;lt;=x) xs) 
+        biggerSorted = quicksort (filter (&amp;gt;x) xs)    
+    in  smallerSorted ++ [x] ++ biggerSorted
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;如果别人问你递归是如何实现的&#34;&gt;如果别人问你递归是如何实现的？&lt;/h3&gt;
+
+&lt;h3 id=&#34;如果别人问你如何构造fibonaaci数&#34;&gt;如果别人问你如何构造Fibonaaci数？&lt;/h3&gt;
+
+&lt;h3 id=&#34;如果别人问你-是什么意思&#34;&gt;如果别人问你::  =&amp;gt; -&amp;gt;是什么意思？&lt;/h3&gt;
+
+&lt;dl&gt;
+&lt;dt&gt;a表示人意的类型 &amp;mdash;&amp;mdash;&amp;mdash;泛形 &amp;mdash;多态函数挂钩。。。。&lt;/dt&gt;
+&lt;/dl&gt;
+
+&lt;dl&gt;
+&lt;dt&gt;a表示人意的类型 &amp;mdash;&amp;mdash;&amp;mdash;泛形 &amp;mdash;多态函数挂钩。。。。&lt;/dt&gt;
+&lt;/dl&gt;
+
+&lt;dl&gt;
+&lt;dt&gt;a表示人意的类型 &amp;mdash;&amp;mdash;&amp;mdash;泛形 &amp;mdash;多态函数挂钩。。。。&lt;/dt&gt;
+&lt;/dl&gt;
+
+&lt;dl&gt;
+&lt;dt&gt;a表示人意的类型 &amp;mdash;&amp;mdash;&amp;mdash;泛形 &amp;mdash;多态函数挂钩。。。。&lt;/dt&gt;
+&lt;/dl&gt;
+
+&lt;dl&gt;
+&lt;dt&gt;a表示人意的类型 &amp;mdash;&amp;mdash;&amp;mdash;泛形 &amp;mdash;多态函数挂钩。。。。&lt;/dt&gt;
+&lt;/dl&gt;
+
+&lt;dl&gt;
+&lt;dt&gt;&amp;mdash;泛形 &amp;mdash;多态函数挂钩。。。。&lt;/dt&gt;
+&lt;/dl&gt;
+
+&lt;p&gt;::  读作他的类型为   （类似 !! 从list去除 第几个元素   &amp;lt;- 属于  &lt;code&gt;elem&lt;/code&gt;是什么的元素   &lt;code&gt;mod&lt;/code&gt; 可以和什么除。。&lt;/p&gt;
+
+&lt;h3 id=&#34;如果有人问你如何用haskell编写函数&#34;&gt;如果有人问你如何用haskell编写函数？&lt;/h3&gt;
+
+&lt;p&gt;他和scheme有很大的不同，scheme用的是(define)
+而haskell用的是模式匹配，比如下面的求最大值的程序&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;maximum&#39; :: (Ord a) =&amp;gt; [a] -&amp;gt; a   
+maximum&#39; [] = error &amp;quot;maximum of empty list&amp;quot;   
+maximum&#39; [x] = x   
+maximum&#39; (x:xs)    
+    | x &amp;gt; maxTail = x   
+    | otherwise = maxTail   
+    where maxTail = maximum&#39; xs
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;如果别人叫你简化上面的maximum程序&#34;&gt;如果别人叫你简化上面的maximum程序&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;maximum&#39; :: (Ord a) =&amp;gt; [a] -&amp;gt; a   
+maximum&#39; [] = error &amp;quot;maximum of empty list&amp;quot;   
+maximum&#39; [x] = x   
+maximum&#39; (x:xs) = max x (maximum&#39; xs) 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;如果别人问你haskell到底长成啥子样子&#34;&gt;如果别人问你Haskell到底长成啥子样子？&lt;/h3&gt;
+
+&lt;p&gt;你会告诉他他涨起来真的是一节一节的，一段一段的，有棱有角&lt;/p&gt;
+
+&lt;h3 id=&#34;如果有人问你replicate-3-5是如何实现的&#34;&gt;如果有人问你replicate 3 5是如何实现的？&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;replicate&#39; :: (Num i, Ord i) =&amp;gt; i -&amp;gt; a -&amp;gt; [a]   
+replicate&#39; n x   
+| n &amp;lt;= 0    = []   
+| otherwise = x:replicate&#39; (n-1) x
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;如果有人问你take是如何实现的呢-drop&#34;&gt;如果有人问你take是如何实现的呢？ drop?&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;take&#39; :: (Num i, Ord i) =&amp;gt; i -&amp;gt; [a] -&amp;gt; [a]   
+take&#39; n _   
+| n &amp;lt;= 0   = []   
+take&#39; _ []     = []   
+take&#39; n (x:xs) = x : take&#39; (n-1) xs
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;如果有人问你-下划线表示什么意思&#34;&gt;如果有人问你_ 下划线表示什么意思？&lt;/h3&gt;
+
+&lt;p&gt;_ 代表任意东西&lt;/p&gt;
+
+&lt;h3 id=&#34;如果有人问你reverse如何实现&#34;&gt;如果有人问你reverse如何实现？&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;reverse&#39; :: [a] -&amp;gt; [a]   
+reverse&#39; [] = []   
+reverse&#39; (x:xs) = reverse&#39; xs ++ [x]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;如果有人问你repeat如何实现&#34;&gt;如果有人问你repeat如何实现？&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;repeat&#39; :: a -&amp;gt; [a]   
+repeat&#39; x = x:repeat&#39; x
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;如果有人做了一个tuple-想要用zip产生更多tuples&#34;&gt;如果有人做了一个tuple ，想要用zip产生更多tuples？&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;zip&#39; :: [a] -&amp;gt; [b] -&amp;gt; [(a,b)]   
+zip&#39; _ [] = []   
+zip&#39; [] _ = []   
+zip&#39; (x:xs) (y:ys) = (x,y):zip&#39; xs ys
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;如果有人问你mod的类似函数-elem的实现&#34;&gt;如果有人问你mod的类似函数  elem的实现？&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;elem&#39; :: (Eq a) =&amp;gt; a -&amp;gt; [a] -&amp;gt; Bool   
+elem&#39; a [] = False   
+elem&#39; a (x:xs)   
+| a == x    = True   
+| otherwise = a `elem&#39;` xs
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;如果有人问你typeclass有哪里类&#34;&gt;如果有人问你typeclass有哪里类？&lt;/h3&gt;
+
+&lt;p&gt;利用 type 自己查去&lt;/p&gt;
+
+&lt;h3 id=&#34;如果有人问你haskell有没有类似scheme的lambda函数&#34;&gt;如果有人问你Haskell有没有类似scheme的lambda函数？&lt;/h3&gt;
+
+&lt;p&gt;告诉他有，而且更加直接，虽然刚开始书写起来不方便&lt;/p&gt;
+
+&lt;p&gt;scheme版的lambda:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    (lambda (x y)
+       (+ x y))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Haskell版的lambda:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    (\y -&amp;gt; y + 3）
+    其中\后面跟着参数  -&amp;gt;后面跟着函数体
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;18-如果有人问haskell有没有存在高阶函数&#34;&gt;18.如果有人问haskell有没有存在高阶函数？&lt;/h3&gt;
+
+&lt;p&gt;有 。 map ,filter&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;map (\y-&amp;gt; y+3) [3,5,6]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;19-如果有人问你flip有什么含义&#34;&gt;19.如果有人问你flip有什么含义？&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;let f x  y = x / y
+Prelude&amp;gt; map (f 2) [1,2,3]
+[2.0,1.0,0.6666666666666666]
+Prelude&amp;gt; map (flip f 2) [1,2,3]
+[0.5,1.0,1.5]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;20-如何有人问-如何运行-2048&#34;&gt;20. 如何有人问 如何运行 2048&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;$ runhaskell putchar_test.hs 
+use runhaskell to run the *.hs programme
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;21-如果有人问haskell实现递归的自然表达式&#34;&gt;21. 如果有人问haskell实现递归的自然表达式？&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;quicksort (x:xs) =
+elem&#39; a (x:xs) 
+
+zip&#39; (x:xs) (y:ys) = (x,y):zip&#39; xs ys
+reverse&#39; (x:xs) = reverse&#39; xs ++ [x]
+
+take&#39; n (x:xs) = x : take&#39; (n-1) xs
+maximum&#39; (x:xs) = max x (maximum&#39; xs)
+maximum&#39; (x:xs)   
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;你可以看见每一个形式都有函数名,函数使用方式,函数的参数表&lt;br /&gt;
+这是一种&lt;strong&gt;模式&lt;/strong&gt;,因为Haskell使用函数的时候，先写出函数，然后空格 写出变量 紧接着其他可选变量
+所以你也函数匹配模式 也应该是这样来写
+基于这种思想，你重新回过头看函数定义，你会发现还真的是这样额？！
+从函数的定义知道他的用法，这就是Haskell与众不同的一点。&lt;/p&gt;
+
+&lt;h3 id=&#34;22-如果有人问如何写出阶乘形式&#34;&gt;22. 如果有人问如何写出阶乘形式？&lt;/h3&gt;
+
+&lt;p&gt;告诉他用函数，告诉他用函数匹配，告诉他用递归。。。。。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;factorial :: (Integral a) =&amp;gt; a -&amp;gt; a   
+factorial 0 = 1   
+factorial n = n * factorial (n - 1) 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;23-如果别人问你haskell如何新建一中类型&#34;&gt;23. 如果别人问你Haskell如何新建一中类型？&lt;/h3&gt;
+
+&lt;p&gt;暂时不太懂
+但是我知道 Haskell使用 data来定义类别
+julia使用type来定义&lt;/p&gt;
+
+&lt;h3 id=&#34;24-如果别人问你monads-是什么玩意&#34;&gt;24. 如果别人问你monads 是什么玩意？&lt;/h3&gt;
+
+&lt;p&gt;其实这个是更加深层次的运用Haskell,在scheme也有. 比如IO monad,可以想象为一种抽象数据类型。&lt;/p&gt;
+
+&lt;h3 id=&#34;25-如果别人问你如何学习haskell&#34;&gt;25. 如果别人问你如何学习haskell？&lt;/h3&gt;
+
+&lt;p&gt;告诉他有一篇文章叫做 如此有趣的学习Haskell
+Haskell趣學指南   &lt;a href=&#34;http://learnyouahaskell-zh-tw.csie.org/zh-cn/chapters.html&#34; target=&#34;_blank&#34;&gt;http://learnyouahaskell-zh-tw.csie.org/zh-cn/chapters.html&lt;/a&gt;
+还不错 ，这个教程&lt;/p&gt;
+
+&lt;p&gt;学习Haskell ，要是你能够对于空格特别敏感，会对你有所好处，因为很多地方都是用空格分开
+而不是（）  [] 之类的。空格有实际意义，分开不同的字段&lt;/p&gt;
+
+&lt;h3 id=&#34;26-如果别人问你-有什么意义&#34;&gt;26. 如果别人问你 | 有什么意义？&lt;/h3&gt;
+
+&lt;p&gt;分类说明&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;bmiTell :: (RealFloat a) =&amp;gt; a -&amp;gt; a -&amp;gt; String   
+bmiTell weight height   
+    | weight / height ^ 2 &amp;lt;= 18.5 = &amp;quot;You&#39;re underweight, you emo, you!&amp;quot;   
+    | weight / height ^ 2 &amp;lt;= 25.0 = &amp;quot;You&#39;re supposedly normal. Pffft, I bet you&#39;re ugly!&amp;quot;   
+    | weight / height ^ 2 &amp;lt;= 30.0 = &amp;quot;You&#39;re fat! Lose some weight, fatty!&amp;quot;   
+    | otherwise                   = &amp;quot;You&#39;re a whale, congratulations!&amp;quot;
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;每一个函数定义的时候，在Haskell看来只是其中的一种模式，一个模式下可以有很多的分类，如果他找不到模式
+就说找不到，所以定义的时候，尽可能的完善定义。
+比如下面的lucky函数 和sayMe 函数
+lucky函数:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;lucky :: (Integral a) =&amp;gt; a -&amp;gt; String   
+lucky 7 = &amp;quot;LUCKY NUMBER SEVEN!&amp;quot;   
+lucky x = &amp;quot;Sorry, you&#39;re out of luck, pal!&amp;quot; 
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;sayme函数:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sayMe :: (Integral a) =&amp;gt; a -&amp;gt; String   
+sayMe 1 = &amp;quot;One!&amp;quot;   
+sayMe 2 = &amp;quot;Two!&amp;quot;   
+sayMe 3 = &amp;quot;Three!&amp;quot;   
+sayMe 4 = &amp;quot;Four!&amp;quot;   
+sayMe 5 = &amp;quot;Five!&amp;quot;   
+sayMe x = &amp;quot;Not between 1 and 5&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;27-如果别人叫你简化bmitell函数&#34;&gt;27. 如果别人叫你简化bmiTell函数&lt;/h3&gt;
+
+&lt;p&gt;使用where&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;bmiTell :: (RealFloat a) =&amp;gt; a -&amp;gt; a -&amp;gt; String   
+bmiTell weight height   
+    | bmi &amp;lt;= 18.5 = &amp;quot;You&#39;re underweight, you emo, you!&amp;quot;   
+    | bmi &amp;lt;= 25.0 = &amp;quot;You&#39;re supposedly normal. Pffft, I bet you&#39;re ugly!&amp;quot;   
+    | bmi &amp;lt;= 30.0 = &amp;quot;You&#39;re fat! Lose some weight, fatty!&amp;quot;   
+    | otherwise   = &amp;quot;You&#39;re a whale, congratulations!&amp;quot;   
+    where bmi = weight / height ^ 2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;28-如果别人问你-where可以跟多少个变量&#34;&gt;28. 如果别人问你 where可以跟多少个变量 ？&lt;/h3&gt;
+
+&lt;p&gt;跟他说 很多个。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;bmiTell :: (RealFloat a) =&amp;gt; a -&amp;gt; a -&amp;gt; String   
+bmiTell weight height   
+    | bmi &amp;lt;= skinny = &amp;quot;You&#39;re underweight, you emo, you!&amp;quot;   
+    | bmi &amp;lt;= normal = &amp;quot;You&#39;re supposedly normal. Pffft, I bet you&#39;re ugly!&amp;quot;   
+    | bmi &amp;lt;= fat    = &amp;quot;You&#39;re fat! Lose some weight, fatty!&amp;quot;   
+    | otherwise     = &amp;quot;You&#39;re a whale, congratulations!&amp;quot;   
+    where bmi = weight / height ^ 2   
+          skinny = 18.5   
+          normal = 25.0   
+          fat = 30.0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;函数在 where 绑定中定义的名字只对本函数可见，因此我们不必担心它会污染其他函数的命名空间。注意，其中的名字
+都是一列垂直排开，如果不这样规范，Haskell 就搞不清楚它们在哪个地方了&lt;/p&gt;
+
+&lt;h3 id=&#34;29-如果有人问你-where当中可以使用模式匹配吗&#34;&gt;29. 如果有人问你 where当中可以使用模式匹配吗？&lt;/h3&gt;
+
+&lt;p&gt;可以。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;where bmi = weight / height ^ 2   
+(skinny, normal, fat) = (18.5, 25.0, 30.0) 
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;30-如果别人叫你写一个show类型的函数&#34;&gt;30. 如果别人叫你写一个show类型的函数？&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;tell :: (Show a) =&amp;gt; [a] -&amp;gt; String   
+tell [] = &amp;quot;The list is empty&amp;quot;   
+tell (x:[]) = &amp;quot;The list has one element: &amp;quot; ++ show x   
+tell (x:y:[]) = &amp;quot;The list has two elements: &amp;quot; ++ show x ++ &amp;quot; and &amp;quot; ++ show y   
+tell (x:y:_) = &amp;quot;This list is long. The first two elements are: &amp;quot; ++ show x ++ &amp;quot; and &amp;quot; ++ show y  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这个函数顾及了空 List，单元素 List，双元素 List 以及较长的 List，所以这个函数很安全。(x:[]) 与 (x:y:[]) 也可以写作 [x] 和 &lt;a href=&#34;有了语法糖，我们不必多加括号&#34; target=&#34;_blank&#34;&gt;x,y&lt;/a&gt;。不过 (x:y:_)这样的模式就不行了，因为它匹配的 List 长度不固定。&lt;/p&gt;
+
+&lt;h3 id=&#34;31-如果别人问你int-和integer的区别&#34;&gt;31. 如果别人问你Int 和Integer的区别？&lt;/h3&gt;
+
+&lt;p&gt;Int 有上下线  Integer没有&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Prelude&amp;gt; minBound :: Int
+-9223372036854775808
+Prelude&amp;gt; min
+min       minBound  minimum
+Prelude&amp;gt; minBound  :: Integer 
+
+&amp;lt;interactive&amp;gt;:247:1:
+    No instance for (Bounded Integer) arising from a use of `minBound&#39;
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;32-如果别人问你char-and-char-的区别&#34;&gt;32. 如果别人问你char and [char] 的区别？&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;Prelude&amp;gt; :t &#39;a&#39;
+&#39;a&#39; :: Char
+Prelude&amp;gt; :t &amp;quot;a&amp;quot;
+&amp;quot;a&amp;quot; :: [Char]
+Prelude&amp;gt; :t &amp;quot;dfasdf&amp;quot;
+&amp;quot;dfasdf&amp;quot; :: [Char]
+Prelude&amp;gt; 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;33-如果别人问你变量有类型-那么函数是不是也有类型&#34;&gt;33. 如果别人问你变量有类型，那么函数是不是也有类型？&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;removeNonUppercase :: [Char] -&amp;gt; [Char]   
+removeNonUppercase st = [ c | c &amp;lt;- st, c `elem` [&#39;A&#39;..&#39;Z&#39;]]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;removeNonUppercase 的类型为 [Char]-&amp;gt;[Char]，从它的参数和回传值的类型上可以看出，
+它将一个字串映射为另一个字串。[Char] 与 String 是等价的，但使用 String 会更清晰：
+removeNonUppercase :: String -&amp;gt; String。编译器会自动检测出它的类型，我们还是标明了
+它的类型声明。要是多个参数的函数该怎样？如下便是一个将三个整数相加的简单函数
+参数之间由 -&amp;gt; 分隔，而与回传值之间并无特殊差异&lt;/p&gt;
+
+&lt;h3 id=&#34;34-如果别人问你有没有比较好用的编程工具&#34;&gt;34. 如果别人问你有没有比较好用的编程工具？&lt;/h3&gt;
+
+&lt;p&gt;告诉他Haskell！&lt;/p&gt;
+
+&lt;p&gt;该如何学习？
+告诉他安装 ghci,并且在软件中输入 :brower  就能观察到很多的类型
+并且支持tab键。
+:brower 会列出内置函数的 类型，以及他的基本使用方法&lt;/p&gt;
+
+&lt;h3 id=&#34;35-如果别人问你高阶函数是如何定义&#34;&gt;35. 如果别人问你高阶函数是如何定义？&lt;/h3&gt;
+
+&lt;p&gt;高阶函数&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;map f lst --将lst按照函数f映射得到一个新的数列
+map :: (a-&amp;gt;b) -&amp;gt; [a] -&amp;gt;
+map f [] = []
+map f (x:xs) = f x : map f xs
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;36-如果别人问你如何使用-brower-提供的函数类型&#34;&gt;36. 如果别人问你如何使用 :brower 提供的函数类型？&lt;/h3&gt;
+
+&lt;p&gt;比如：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;36.1
+Prelude&amp;gt; :t product 
+product :: Num a =&amp;gt; [a] -&amp;gt; a
+Prelude&amp;gt; product [3,5,2]
+30
+36.2
+readFile :: FilePath -&amp;gt; IO String
+
+Prelude&amp;gt; readFile &amp;quot;/tmp/a.txt&amp;quot;
+&amp;quot;fdsf&amp;quot;
+Prelude&amp;gt; let  d=readFile &amp;quot;/tmp/a.txt&amp;quot;
+Prelude&amp;gt; d
+&amp;quot;fdsf&amp;quot;
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;37-如果别人问你如何切断一个数组在某个位置&#34;&gt;37.  如果别人问你如何切断一个数组在某个位置？&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;splitAt :: Int -&amp;gt; [a] -&amp;gt; ([a], [a])
+Prelude&amp;gt; splitAt 3 [3,5,6,2,3,6,3]
+([3,5,6],[2,3,6,3])
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;38-如果别人问你为什么你这样使用subtract&#34;&gt;38.  如果别人问你为什么你这样使用subtract?&lt;/h3&gt;
+
+&lt;p&gt;告诉他，我是看着定义来使用的。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;subtract :: Num a =&amp;gt; a -&amp;gt; a -&amp;gt; a
+Prelude&amp;gt; subtract 20 3
+-17
+Prelude&amp;gt; subtract [30,3] [3,3]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;39-如果别人问你-zip相关的函数&#34;&gt;39.  如果别人问你 zip相关的函数？&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;    Prelude&amp;gt; unzip [(3,4)]
+    ([3],[4])
+    Prelude&amp;gt; unzip [(3,4),(3,7)]
+    ([3,3],[4,7])
+    Prelude&amp;gt; unzip [(3,4),(3,7),(7,4)]
+    ([3,3,7],[4,7,4])
+    Prelude&amp;gt; unzip [(3,4),(3,7),(7,4),(8,9)]
+    ([3,3,7,8],[4,7,4,9])
+    Prelude&amp;gt; unzip [((3,4),(3,7)),((7,4),(8,9))]
+    ([(3,4),(7,4)],[(3,7),(8,9)])
+
+    unzip3 :: [(a, b, c)] -&amp;gt; ([a], [b], [c])
+
+    Prelude&amp;gt; unzip3 [(3,6,3)]
+    ([3],[6],[3])
+    Prelude&amp;gt; unzip3 [(3,6,3),(3,5,9)]
+    ([3,3],[6,5],[3,9])
+    Prelude&amp;gt; unzip3 [(3,6,3),(3,5,9),(8,9,0)]
+    ([3,3,8],[6,5,9],[3,9,0])
+    Prelude&amp;gt; unzip3 [(3,6,3,5),(3,5,9,3),(8,9,0,6)]
+
+    &amp;lt;interactive&amp;gt;:172:9:
+        Couldn&#39;t match expected type `(a0, b0, c0)&#39;
+                    with actual type `(t0, t1, t2, t3)&#39;
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;40-如果别人问你un相关的函数&#34;&gt;40. 如果别人问你un相关的函数？&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;Prelude&amp;gt; unlines [&amp;quot;ds&amp;quot;,&amp;quot;dfsf&amp;quot;]
+&amp;quot;ds\ndfsf\n&amp;quot;
+until :: (a -&amp;gt; Bool) -&amp;gt; (a -&amp;gt; a) -&amp;gt; a -&amp;gt; a
+unwords :: [String] -&amp;gt; String
+Prelude&amp;gt; unwords [&amp;quot;dsf&amp;quot;,&amp;quot;fdsf&amp;quot;]
+&amp;quot;dsf fdsf&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;41-如果比人问你如何使用-sin等三角函数&#34;&gt;41. 如果比人问你如何使用 sin等三角函数？&lt;/h3&gt;
+
+&lt;p&gt;转换为弧度制&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Prelude&amp;gt; sin (45/180*pi)
+0.7071067811865475
+Prelude&amp;gt; sin (45*pi/180)
+0.7071067811865475
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;42-如果别人问你haskell针对字符的函数&#34;&gt;42. 如果别人问你Haskell针对字符的函数？&lt;/h3&gt;
+
+&lt;p&gt;Haskell中预定义的针对字符的函数有:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;   isAscii, isLatin1, isControl, isPrint, isSpace, isUpper, isLower,
+   isAlpha, isDigit, isOctDigit, isHexDigit, isAlphaNum,
+   digitToInt, intToDigit,
+   toUpper, toLower,
+   ord, chr,等
+   
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ord将字母转换为数字, chr反之.&lt;/p&gt;
+
+&lt;h3 id=&#34;43-如果别人问你构造数组的几种方式&#34;&gt;43. 如果别人问你构造数组的几种方式？&lt;/h3&gt;
+
+&lt;p&gt;数列是通过[]来进行描述的&lt;/p&gt;
+
+&lt;h4 id=&#34;43-1-数组构造&#34;&gt;43.1 数组构造&lt;/h4&gt;
+
+&lt;p&gt;数列是用[]和(:)构造的, []是一个空的数列, x:xs的含义是元素x附加到数列xs的前面组成一个更长的数列.
+比如, 1:[] 等于[1], 2:3:1:[]等于[2,3,1], 运算符(:)是从右向左运算的. 所有的数列都可以看作是从[]开始,
+将各元素用(:)附到上面形成的. 在实际编程中有一些简记法可以快速地构造数列.&lt;/p&gt;
+
+&lt;h4 id=&#34;43-2-列举法&#34;&gt;43.2 列举法&lt;/h4&gt;
+
+&lt;p&gt;将数列的元素一一列举, 比如: [1,2,3], [&amp;lsquo;A&amp;rsquo;,&amp;lsquo;B&amp;rsquo;,&amp;rsquo;d&amp;rsquo;], [[1,2], [4,5,6]]等等,
+数列的类型用&amp;rdquo;[元素类型]&amp;ldquo;来表示, 这几个例子的类型依次为: [Int], [Char], [[Int]].&lt;/p&gt;
+
+&lt;h4 id=&#34;43-3-范围法&#34;&gt;43.3 范围法&lt;/h4&gt;
+
+&lt;p&gt;适用于构造等差数列, 比如: [1..5]等于[1,2,3,4,5], [&amp;lsquo;a&amp;rsquo;..&amp;rsquo;d&amp;rsquo;]等于[&amp;lsquo;a&amp;rsquo;,&amp;lsquo;b&amp;rsquo;,&amp;lsquo;c&amp;rsquo;,&amp;rsquo;d&amp;rsquo;]等于&amp;rdquo;abcd&amp;rdquo;因为type String=[Char].
+默认的等差为1, 也可以给出前两个元素指定等差, 比如: [2,4..8]等于[2,4,6,8], [2,4..7]等于[2,4,6], [2.5,4..9.5]等于
+[2.5,4.0,5.5,7.0,8.5,10.0].&lt;/p&gt;
+
+&lt;h3 id=&#34;43-3-描述法&#34;&gt;43.3 描述法&lt;/h3&gt;
+
+&lt;p&gt;描述法给出数列中元素取值的范围以及所满足的条件, 与数学中集合的描述法是一样的. 例如:
+[3*x+2| x&amp;lt;-[3,6,9]] &amp;ndash;记号&amp;rdquo;&amp;lt;-&amp;ldquo;表示属于,x依次取3,6,9,代入3*x+2,得到数列[11,20,29]
+[x*x| x&amp;lt;-[1..9], x `rem` 3==1] &amp;ndash;给出x的范围,还限定x除3余1
+[(x,y)|x&amp;lt;-[1,2,3],y&amp;lt;-[x..3]] &amp;ndash;等于 [(1,1),(1,2),(1,3),(2,2),(2,3),(3,3)]&lt;/p&gt;
+
+&lt;h3 id=&#34;44-如果别人跟你说haskell可以write-poet&#34;&gt;44. 如果别人跟你说Haskell可以write poet?&lt;/h3&gt;
+
+&lt;p&gt;第一次语文  数学   计算机的结合&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Prelude&amp;gt;  let nouns = [&amp;quot;he&amp;quot;,&amp;quot;she&amp;quot;,&amp;quot;I&amp;quot;]
+Prelude&amp;gt; let adjectives=[&amp;quot;lazy&amp;quot;,&amp;quot;handsome&amp;quot;,&amp;quot;something&amp;quot;]
+Prelude&amp;gt; [adjective ++ &amp;quot; &amp;quot; ++ noun | adjective &amp;lt;-adjectives ,noun&amp;lt;-nouns]
+[&amp;quot;lazy he&amp;quot;,&amp;quot;lazy she&amp;quot;,&amp;quot;lazy I&amp;quot;,&amp;quot;handsome he&amp;quot;,&amp;quot;handsome she&amp;quot;,&amp;quot;handsome I&amp;quot;,&amp;quot;something he&amp;quot;,&amp;quot;something she&amp;quot;,&amp;quot;something I&amp;quot;]
+
+*Main&amp;gt; let nouns = [&amp;quot;he&amp;quot;,&amp;quot;she&amp;quot;,&amp;quot;I&amp;quot;]
+*Main&amp;gt; let adjectives=[&amp;quot;lazy&amp;quot;,&amp;quot;handsome&amp;quot;,&amp;quot;something&amp;quot;]
+*Main&amp;gt; [adjective ++ &amp;quot; &amp;quot; ++ noun | adjective &amp;lt;-adjectives ,noun&amp;lt;-nouns]
+[&amp;quot;lazy he&amp;quot;,&amp;quot;lazy she&amp;quot;,&amp;quot;lazy I&amp;quot;,&amp;quot;handsome he&amp;quot;,&amp;quot;handsome she&amp;quot;,&amp;quot;handsome I&amp;quot;,&amp;quot;something he&amp;quot;,&amp;quot;something she&amp;quot;,&amp;quot;something I&amp;quot;]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;###45. 如果别人跟你说Haskell可以跟几何并轨？
+第一次和几何的触碰&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Prelude&amp;gt;  let triangels=[(a,b,c)|c&amp;lt;-[1..10],b&amp;lt;-[1..c],a&amp;lt;-[1..b],c^2==a^2+b^2,a+b+c==24]
+Prelude&amp;gt; triangels 
+[(6,8,10)]
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;46-如果别人问你haskell的cabal是什么&#34;&gt;46. 如果别人问你Haskell的cabal是什么？&lt;/h3&gt;
+
+&lt;p&gt;类似于ubuntu的apt-get&lt;br /&gt;
+scilab  的atoms
+python的 easy_install  或者pip
+redhat 的yum&lt;/p&gt;
+
+&lt;h3 id=&#34;47-如果别人问你有几个基本的typeclass&#34;&gt;47. 如果别人问你有几个基本的TypeClass?&lt;/h3&gt;
+
+&lt;p&gt;类型类是haskell中站在较高位置的语言认识。几种基本的类型类包括Eq,Ord,Show,Read,Enum等。&lt;/p&gt;
+
+&lt;h4 id=&#34;47-1-eq&#34;&gt;47.1 Eq&lt;/h4&gt;
+
+&lt;p&gt;包含可判断相等性的类型。提供实现的函数是 == 和 /=。所以，
+只要一个函数有Eq类的类型限制，那么它就必定在定义中用到了 == 和 /=&lt;/p&gt;
+
+&lt;h4 id=&#34;47-2-ord&#34;&gt;47.2 Ord&lt;/h4&gt;
+
+&lt;p&gt;包含可比较大小的类型。除了函数以外，我们目前所谈到的所有类型都属于 Ord 类。Ord 包中包含了
+&amp;lt;, &amp;gt;, &amp;lt;=, &amp;gt;= 之类用于比较大小的函数。compare 函数取两个
+Ord 类中的相同类型的值作参数，回传比较的结果。这个结果是如下三种类型之一：GT, LT, EQ。&lt;/p&gt;
+
+&lt;h4 id=&#34;47-3-show&#34;&gt;47.3 Show&lt;/h4&gt;
+
+&lt;p&gt;的成员为可用字串表示的类型。目前为止，除函数以外的所有类型都是 Show 的成员。
+操作 Show Typeclass，最常用的函数表示 show。它可以取任一Show的成员类型并将其转为字串&lt;/p&gt;
+
+&lt;h4 id=&#34;47-4-read&#34;&gt;47.4 Read&lt;/h4&gt;
+
+&lt;p&gt;是与 Show 相反的 Typeclass。read 函数可以将一个字串转为 Read 的某成员类型。&lt;/p&gt;
+
+&lt;h4 id=&#34;47-5-enum&#34;&gt;47.5 Enum&lt;/h4&gt;
+
+&lt;p&gt;的成员都是连续的类型 &amp;ndash; 也就是可枚举。Enum 类存在的主要好处就在于我们可以在 Range 中用到它的成员类型：
+每个值都有后继子 (successer) 和前置子 (predecesor)，分别可以通过 succ 函数和 pred 函数得到。
+该 Typeclass 包含的类型有：(), Bool, Char, Ordering, Int, Integer, Float 和 Double。&lt;/p&gt;
+
+&lt;h4 id=&#34;47-6-bounded&#34;&gt;47.6 Bounded&lt;/h4&gt;
+
+&lt;p&gt;的成员都有一个上限和下限。&lt;/p&gt;
+
+&lt;h4 id=&#34;47-7-num&#34;&gt;47.7 Num&lt;/h4&gt;
+
+&lt;p&gt;Num 是表示数字的 Typeclass，它的成员类型都具有数字的特征。检查一个数字的类型：&lt;/p&gt;
+
+&lt;h4 id=&#34;47-8-integral&#34;&gt;47.8 Integral&lt;/h4&gt;
+
+&lt;p&gt;同样是表示数字的 Typeclass。Num 包含所有的数字：实数和整数。而 Integral 仅包含整数，其中的成员类型有 Int 和 Integer。&lt;/p&gt;
+
+&lt;h4 id=&#34;47-9-floating&#34;&gt;47.9 Floating&lt;/h4&gt;
+
+&lt;p&gt;仅包含浮点类型：Float 和 Double。
+可以用一张图来表示：
+&lt;img src=&#34;/images/classes.gif&#34; alt=&#34;类图&#34; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;48-我想用haskell产生一个三角形&#34;&gt;48. 我想用Haskell产生一个三角形&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;let triangels=[(a,b,c)|c&amp;lt;-[1..10],b&amp;lt;-[1..10],a&amp;lt;-[1..10]]
+let righttriangels=[(a,b,c)|c&amp;lt;-[1..10],b&amp;lt;-[1..c],a&amp;lt;-[1..b],a^2+b^2==c^2]
+let righttriangelsc=[(a,b,c)|c&amp;lt;-[1..10],b&amp;lt;-[1..c],a&amp;lt;-[1..b],a^2+b^2==c^2,a+b+c==24]
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;49-如果别人问你如何表示数学的集合&#34;&gt;49. 如果别人问你如何表示数学的集合？&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;Prelude&amp;gt; [x*2|x &amp;lt;- [1..10]]
+[2,4,6,8,10,12,14,16,18,20]
+Prelude&amp;gt; [x*2|x&amp;lt;- [1..10],x*2 &amp;gt;=12 ]
+[12,14,16,18,20]
+Prelude&amp;gt; [x | x &amp;lt;- [50..100], x `mod` 7 ==3]
+[52,59,66,73,80,87,94]
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;50-如果别人问你-代表什么东西&#34;&gt;50. 如果别人问你!! 代表什么东西？&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;[3, 5,6] !!2
+*Main&amp;gt; [3, 5,6] !!2
+6
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;51-几个常用的数组提取函数&#34;&gt;51. 几个常用的数组提取函数？&lt;/h4&gt;
+
+&lt;p&gt;并且是从0开始的
+常用几个list函数&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;*Main&amp;gt; head [5,6,4]
+5
+*Main&amp;gt; last [5,6,4]
+4
+*Main&amp;gt; tail [5,6,4]
+[6,4]
+*Main&amp;gt; init [5,6,6,43,6]
+[5,6,6,43]
+
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;length  null  reverse  take等函数  具体说一下take&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;*Main&amp;gt; take 4 [5,6,7,4,3,8]
+[5,6,7,4]
+*Main&amp;gt; take 3 [5,6,7,4,3,8]
+[5,6,7]
+*Main&amp;gt; take 2 [5,6,7,4,3,8]
+[5,6]
+*Main&amp;gt; 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;同理类似的drop&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

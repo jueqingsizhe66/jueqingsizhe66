@@ -1,0 +1,1910 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.5.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Nelson Bighetti">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/blog/2015/05/11/2%E6%9C%8827%E6%97%A5java%E5%91%A8%E6%9C%AB%E7%8F%AD%E8%AF%95%E9%A2%98/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin="anonymous">
+    
+
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.min.e8d4d5fd376e67b34452ebe1cae16341.css">
+
+  
+
+  
+
+
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon-32.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/blog/2015/05/11/2%E6%9C%8827%E6%97%A5java%E5%91%A8%E6%9C%AB%E7%8F%AD%E8%AF%95%E9%A2%98/">
+
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="og:site_name" content="Macro Life">
+  <meta property="og:url" content="/blog/2015/05/11/2%E6%9C%8827%E6%97%A5java%E5%91%A8%E6%9C%AB%E7%8F%AD%E8%AF%95%E9%A2%98/">
+  <meta property="og:title" content="2月27日Java周末班试题 | Macro Life">
+  <meta property="og:description" content=""><meta property="og:image" content="/img/icon-192.png">
+  <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2015-05-11T14:58:41&#43;08:00">
+    
+    <meta property="article:modified_time" content="2015-05-11T14:58:41&#43;08:00">
+  
+
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>2月27日Java周末班试题 | Macro Life</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0 compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">Macro Life</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav mr-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#hero"><span>Demo</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>博客</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>项目</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#featured"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/about/"><span>About</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/courses/"><span>课程</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/archives"><span>Archives</span></a>
+        </li>
+
+        
+        
+
+      
+      </ul>
+      <ul class="navbar-nav ml-auto">
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+        </li>
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>2月27日Java周末班试题</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    May 11, 2015
+  </span>
+  
+
+  
+
+  
+
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/categories/javabasic/">JavaBasic</a></span>
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <p>0105班Java周末班试题（JDBC 9-16）
+阶段性考试（考试6个小时，讲评+重写6个小时）：
+记录完成每个题所需要的时长。
+第一题、SQL题
+表格见图片附件
+题目：编写SQL语句完成下面的功能：
+条件查询：
+1. 在GRADE表中查找80-90份的学生学号和分数
+2. 在GRADE 表中查找课程编号为003学生的平均分
+3. 在GRADE 表中查询学习各门课程的人数
+4. 查询所有姓张的学生的学号和姓名
+5. 查询分数在80-90分的学生的学号、姓名、分数
+6. 查询学习了’C语言’课程的学生学号、姓名和分数
+第二题
+不参考、不对照任何老师、同学的代码编写JDBCUtils。并记录写完需要的时间。
+第三题
+编写手机号码查询归属地案例。并记录写完需要的时间</p>
+
+<p><img src="第一题表格.png" alt="" /></p>
+
+<p>考试未通过，中途出去，fail;</p>
+
+<p>第一题：
+费时：4个小时左右
+表设计阶段：</p>
+
+<pre><code class="language-mysql">;;;创建一个考试数据库
+create database exam;  
+use exam;
+````
+
+
+
+错误分析： 
+curriculum是一个基础表！ 连接grade表！Grade表连接student_info表 ，认为student_info存在外键
+经过折腾：认为student_info没有外键，而grade表存在两个外键
+
+
+
+Curriculum 表的设计：
+curriculum_no 课程编号 :
+
+</code></pre>
+
+<p>mysql
+    varchar(20)not null auto_increment primary key,
+    ;;后来思考 int改变为varchar(20)因为也许会出现非数字
+corriculum_name课程名称   varchar(20) not null default ‘’
+Credit学分 ： real(5,2) not null default 0.0<br />
+    ;;;(real默认是double类型)</p>
+
+<pre><code>
+其间遇到无法显示汉字的情况：
+1：数据库级别修改
+修改数据库级别，命令如下：use edu(换成你要修改的数据库名，在这里我的数据库为edu),，然后执行命令：
+</code></pre>
+
+<p>mysql
+alter database exam character set utf-8;
+或者
+SET NAMES &lsquo;utf8&rsquo;;</p>
+
+<pre><code>
+2：数据表级别的修改
+</code></pre>
+
+<p>mysql
+ALTER TABLE table_name DEFAULT CHARSET utf8;</p>
+
+<pre><code>3: 发现经过这两个大小修改还是不行,于是也对字段进行修改
+</code></pre>
+
+<p>mysql
+alter table curriculum modify curriculum_no varchar(20) character set utf8
+alter table curriculum modify curriculum_name varchar(20) character set utf8;</p>
+
+<pre><code>但是依然不行！！说明之前插入的只好清空，再插入一遍， 然后就可以了
+
+
+
+grade表的设计：
+
+
+此表的设计一波三折，在添加外键的时候多次出现错误，下面先给出错误的，再列出正确的添加方式
+
+
+错误分析表：
+</code></pre>
+
+<p>mysql
+stu_no 学号：  varchar(20) not null auto_increment primary key,
+  ;;后来思考 int改变为varchar(20)因为也许会出现非数字
+课程编号  curriculum_no : int not null, foreign key(curriculum_no) references Curriculum</p>
+
+<p>(Curriculum_no) on delete restrict on update cascade
+Score 分数 :    real(5,2) not null default 0.0</p>
+
+<pre><code>外键知识：
+1.MYSQL在建外键后,会自动建一个同名的索引,引入外键的缺点是会使速度和性能下降
+
+在创建表的时候添加外键：
+</code></pre>
+
+<p>mysql
+create table grade(
+   stu_no varchar(20) not null default &ldquo;,
+    curriculum varchar(20) not null default &ldquo;,constraint hello foreign key
+     (curriculum) references curriculum(curriculum_no) on delete restrict
+     on update cascade,
+    stu_score real(5,2) not null default 0.00);</p>
+
+<pre><code>
+在创建表后天添加外键：
+添加一个叫hello的外键：
+</code></pre>
+
+<p>mysql
+alter table grade add constraint hello foreign key(stu_curriculum_no) ref
+erences curriculum(curriculum_no) on delete restrict on update cascade;</p>
+
+<pre><code>
+查看grade表信息：
+</code></pre>
+
+<p>mysql
+| grade | CREATE TABLE <code>grade</code> (
+  <code>stu_no</code> varchar(20) NOT NULL,
+  <code>stu_curriculum_no</code> varchar(20) NOT NULL DEFAULT &ldquo;,
+  <code>stu_score</code> double(5,2) NOT NULL DEFAULT &lsquo;0.00&rsquo;,
+  PRIMARY KEY (<code>stu_no</code>),
+  KEY <code>hello</code> (<code>stu_curriculum_no</code>),
+  CONSTRAINT <code>hello</code> FOREIGN KEY (<code>stu_curriculum_no</code>) REFERENCES <code>curriculum</code> (
+<code>curriculum_no</code>) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 |</p>
+
+<pre><code>其中Key hello (stu_curriculum_no) 就是所谓的索引，一般可以这样
+查看表索引  show index from grade;
+删除表索引  alter table grade drop index hello 
+
+删除表中的外键：
+ALTER TABLE grade DROP FOREIGN KEY fk_member;
+当然一般在删除的时候需要
+show create table grade 这样可以查看 CONSTRAINT后的名字  比如fk_memeber在本例中就是hello        
+
+后来再次思考，grade表不可能有主键，因为学号可能多次出现在不同记录中！于是删除主键
+alter table grade drop primary key;
+（添加主键的方式：alter table table_test add primary key(id);）
+
+
+我再次新建一张表grade1目的是测试，在同一个库中的确不能存在两个相同的外键名，否则报错，
+下面我用hello1则是通过。（应该是此原因）
+</code></pre>
+
+<p>mysql
+create table grade1(
+     stuno varchar(20) not null default &ldquo;,
+    curi varchar(20) not null default &ldquo;,constraint hello1 foreign key
+     (curi) references curriculum(curriculum_no),
+     score real(5,2) not null default 0.00);</p>
+
+<pre><code>ERROR 1022 (23000): Can't write; duplicate key in table 'grade'的解决方案：外键名字改成没用过的就可以（整个数据库exam范围内）
+下面再次新建一张表grade2 ,目的是测试不同表是不是可以使用字段名字相同的充当外键，当然是没问题啦！
+因为在设计表的时候，曾经怕如果curi改为curriculum_no会不会报错的问题。所以就一起尝试了
+
+</code></pre>
+
+<p>mysql
+create table grade2(
+     stu_no varchar(20) not null default &ldquo;,
+    curi varchar(20) not null default &ldquo;,constraint hello2 foreign key
+     (curi) references curriculum(curriculum_no) on delete restrict on update
+    cascade,
+     score real(5,2) not null default 0.00);</p>
+
+<pre><code>现在先把grade表放在一边 ，待会设计完student_info表之后再聊grade表的事情。
+
+Student_info表的设计
+
+
+不合理的设计（主键同时是外键，不好）：
+学号 student_no : int  not null auto_increment primary key, foreign key(student_no) references 
+
+
+grade on grade(student_no) on delete restrict on update cascade,（后来修改为 主键！因为一个表即为
+
+
+主键和外键叠加不好！！ 同时让grade的stu_no 也增加一个外键  连接到student_info表）
+姓名  stu_name  : varchar(20) not null default ‘’,
+性别  stu_sex    : char(2)  not null default ‘男‘，
+出生年月 stu_date (stu_birth): date not null default ‘1990-01-04’
+家庭住址 stu_family (stu_addr): varchar(20) not null default ‘’,
+备注     stu_note : varchar(30) not null default ‘’,
+
+
+
+然后再次回到grade表，添加外键，
+
+</code></pre>
+
+<p>mysql
+alter table grade add constraint fuck foreign key(stu_no) references stud
+ent_info(stu_no) ;
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint f
+ails (<code>exam</code>.<code>#sql-167c_1</code>, CONSTRAINT <code>fuck</code> FOREIGN KEY (<code>stu_no</code>) REFERENCES
+<code>student_info</code> (<code>stu_no</code>))</p>
+
+<pre><code>报错了！！！为什么？ 
+原来在非空表的情况不能添加外键
+于是： delete from grade;
+
+</code></pre>
+
+<p>mysql
+alter table grade add constraint pig foreign key(stu_no) references
+    student_info(stu_no) on delete restrict on update cascade;</p>
+
+<pre><code>
+最终我的grade表的结构：
+
+</code></pre>
+
+<p>mysql
+| grade | CREATE TABLE <code>grade</code> (
+  <code>stu_no</code> varchar(20) NOT NULL DEFAULT &ldquo;,
+  <code>curriculum</code> varchar(20) NOT NULL DEFAULT &ldquo;,
+  <code>stu_score</code> double(5,2) NOT NULL DEFAULT &lsquo;0.00&rsquo;,
+  KEY <code>hello</code> (<code>curriculum</code>),
+  KEY <code>pig</code> (<code>stu_no</code>),
+  CONSTRAINT <code>hello</code> FOREIGN KEY (<code>curriculum</code>) REFERENCES <code>curriculum</code> (<code>curric
+ulum_no</code>) ON UPDATE CASCADE,
+  CONSTRAINT <code>pig</code> FOREIGN KEY (<code>stu_no</code>) REFERENCES <code>student_info</code> (<code>stu_no</code>) O
+N UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 |</p>
+
+<pre><code>
+
+
+其实经过前面n过程的之后，你会发现这几张表在你的脑海中特别清晰：
+1.学生的
+2.成绩的
+3.课程的
+
+
+
+最终的结果是：
+
+
+curriculum表的设计：
+</code></pre>
+
+<p>mysql
+create table curriculum(
+    curriculum_no int not null auto_increment primary key,
+    curriculum_name varchar(20) not null default &ldquo;,
+    curriculum_credit real(5,2) not null  default 0.0);</p>
+
+<pre><code>curriculum表的数据添加：
+</code></pre>
+
+<p>mysql
+insert into curriculum(curriculum_no,curriculum_name,curriculum_credit) v
+alues(&lsquo;0002&rsquo;,&lsquo;C语言&rsquo;,3.0);</p>
+
+<p>insert into curriculum &lt;curriculum_no,curriculum_name,curriculum_credit)
+values (&lsquo;0001&rsquo;,&lsquo;计算机基础&rsquo;,2.2);
+insert into curriculum (curriculum_no,curriculum_name,curriculum_credit) values(&lsquo;0003&rsquo;,&lsquo;编译原理&rsquo;,2.5);
+insert into curriculum (curriculum_no,curriculum_name,curriculum_credit) values(&lsquo;0004&rsquo;,&lsquo;错做系统&rsquo;,3.5);</p>
+
+<pre><code>
+
+student_info表的设计：
+</code></pre>
+
+<p>mysql
+create table student_info(
+     stu_no varchar(20) not null default &ldquo; primary key,
+     stu_name varchar(20) not  null default &ldquo;,
+    stu_sex char(4) not null default &lsquo;男&rsquo;,
+     stu_birth date not null default &lsquo;1990-01-07&rsquo;,
+     stu_addr varchar(20) not null default &ldquo;,
+     stu_note varchar(30));</p>
+
+<pre><code>student_info表的数据添加：
+</code></pre>
+
+<p>mysql
+insert into student_info (stu_no,stu_name,stu_sex,stu_birth,stu_addr) val
+ues(&lsquo;0001&rsquo;,&lsquo;张三&rsquo;,&lsquo;男&rsquo;,1989-05-17,&lsquo;北京&rsquo;);</p>
+
+<p>insert into student_info (stu_no,stu_name,stu_sex,stu_birth,stu<em>addr,stu</em>
+note) values(&lsquo;0002&rsquo;,&lsquo;李四&rsquo;,&lsquo;女&rsquo;,1990-06-22,&lsquo;内蒙古&rsquo;,&lsquo;此女子性格刁蛮&rsquo;);</p>
+
+<p>insert into student_info(stu_no,stu_name,stu_sex,stu_birth,stu_addr) valu
+es(&lsquo;0003&rsquo;,&lsquo;王五&rsquo;,&lsquo;男&rsquo;,1992-02-18,&lsquo;江西&rsquo;);</p>
+
+<pre><code>
+grade表的设计
+</code></pre>
+
+<p>mysql
+create table grade3(
+    stu_no varchar(20) not null default &ldquo;,constraint pig34 foreign key(stu_n
+o) references student_info(stu_no) on delete restrict on update cascade,
+     curriculum varchar(20) not null default &ldquo;,constraint hellodff foreign ke
+y(curriculum) references curriculum(curriculum_no) on delete restrict on update
+cascade,
+    stu_score real(5,2) not null default 0.00);</p>
+
+<pre><code>grade表的数据添加（截取部分）：
+</code></pre>
+
+<p>mysql
+insert into grade values(&lsquo;0002&rsquo;,&lsquo;0001&rsquo;,75),(&lsquo;0002&rsquo;,&lsquo;0002&rsquo;,60),(&lsquo;0002&rsquo;,&lsquo;00
+03&rsquo;,79),(&lsquo;0002&rsquo;,&lsquo;0004&rsquo;,76);
+insert into grade(stu_no,curriculum,stu_score) values(&lsquo;0003&rsquo;,&lsquo;0002&rsquo;,78);
+注意了：如果外键表的0003没有的话，则无法添加0003，并报错！很正常，因为外键表student_info没有！！</p>
+
+<pre><code>
+
+
+
+题目结果：
+</code></pre>
+
+<p>mysql
+mysql&gt; select * from grade;
++&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;&mdash;+&mdash;&mdash;&mdash;&ndash;+
+| stu_no | curriculum | stu_score |
++&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;&mdash;+&mdash;&mdash;&mdash;&ndash;+
+| 0001   | 0001       |     80.00 |
+| 0001   | 0002       |     85.00 |
+| 0001   | 0003       |     90.00 |
+| 0001   | 0004       |     92.00 |
+| 0002   | 0001       |     75.00 |
+| 0002   | 0002       |     60.00 |
+| 0002   | 0003       |     79.00 |
+| 0002   | 0004       |     76.00 |
+| 0003   | 0001       |     80.00 |
+| 0003   | 0002       |     78.00 |
+| 0003   | 0003       |     97.00 |
+| 0003   | 0004       |     86.00 |
++&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;&mdash;+&mdash;&mdash;&mdash;&ndash;+
+12 rows in set (0.00 sec)</p>
+
+<pre><code>1. 在GRADE表中查找80-90份的学生学号和分数
+</code></pre>
+
+<p>mysql
+mysql&gt; select stu_no as 学好 ,stu_score as 分数 from grade where stu_score&gt;80.0
+and stu_score&lt;90.0;
++&mdash;&mdash;+&mdash;&mdash;-+
+| 学好 | 分数  |
++&mdash;&mdash;+&mdash;&mdash;-+
+| 0001 | 85.00 |
+| 0003 | 86.00 |
++&mdash;&mdash;+&mdash;&mdash;-+
+2 rows in set (0.00 sec)</p>
+
+<pre><code>
+
+
+2. 在GRADE 表中查找课程编号为003学生的平均分
+</code></pre>
+
+<p>mysql
+mysql&gt; select avg(stu_score) from grade where curriculum=&lsquo;0003&rsquo;;
++&mdash;&mdash;&mdash;&mdash;&mdash;-+
+| avg(stu_score) |
++&mdash;&mdash;&mdash;&mdash;&mdash;-+
+|      88.666667 |
++&mdash;&mdash;&mdash;&mdash;&mdash;-+
+1 row in set (0.04 sec)</p>
+
+<pre><code>
+
+
+
+3. 在GRADE 表中查询学习各门课程的人数
+
+</code></pre>
+
+<p>mysql
+mysql&gt; select count(<em>),curriculum from grade group by curriculum;
++&mdash;&mdash;&mdash;-+&mdash;&mdash;&mdash;&mdash;+
+| count(</em>) | curriculum |
++&mdash;&mdash;&mdash;-+&mdash;&mdash;&mdash;&mdash;+
+|        3 | 0001       |
+|        3 | 0002       |
+|        3 | 0003       |
+|        3 | 0004       |
++&mdash;&mdash;&mdash;-+&mdash;&mdash;&mdash;&mdash;+
+4 rows in set (0.00 sec)</p>
+
+<pre><code>
+
+
+
+4. 查询所有姓张的学生的学号和姓名
+</code></pre>
+
+<p>mysql
+mysql&gt; select stu_no 学号,stu_name 姓名  from student_info where stu_name like &lsquo;
+张%&lsquo;;
++&mdash;&mdash;+&mdash;&mdash;+
+| 学号 | 姓名 |
++&mdash;&mdash;+&mdash;&mdash;+
+| 0001 | 张三 |
++&mdash;&mdash;+&mdash;&mdash;+
+1 row in set (0.00 sec)</p>
+
+<pre><code>
+
+
+
+5. 查询分数在80-90分的学生的学号、姓名、分数
+</code></pre>
+
+<p>mysql
+mysql&gt; select s.stu_no 学号,s.stu_name 姓名,g.curriculum 课程,g.stu_score 分数 f
+rom grade g
+    -&gt; left join student_info s on g.stu_no=s.stu_no;
++&mdash;&mdash;+&mdash;&mdash;+&mdash;&mdash;+&mdash;&mdash;-+
+| 学号 | 姓名 | 课程 | 分数  |
++&mdash;&mdash;+&mdash;&mdash;+&mdash;&mdash;+&mdash;&mdash;-+
+| 0001 | 张三 | 0001 | 80.00 |
+| 0001 | 张三 | 0002 | 85.00 |
+| 0001 | 张三 | 0003 | 90.00 |
+| 0001 | 张三 | 0004 | 92.00 |
+| 0002 | 李四 | 0001 | 75.00 |
+| 0002 | 李四 | 0002 | 60.00 |
+| 0002 | 李四 | 0003 | 79.00 |
+| 0002 | 李四 | 0004 | 76.00 |
+| 0003 | 王五 | 0001 | 80.00 |
+| 0003 | 王五 | 0002 | 78.00 |
+| 0003 | 王五 | 0003 | 97.00 |
+| 0003 | 王五 | 0004 | 86.00 |
++&mdash;&mdash;+&mdash;&mdash;+&mdash;&mdash;+&mdash;&mdash;-+
+12 rows in set (0.00 sec)</p>
+
+<pre><code>进一步求解：
+
+</code></pre>
+
+<p>mysql
+mysql&gt; select s.stu_no 学号,s.stu_name 姓名,c.curriculum_name 课程名称,g.stu_sco
+re 分数 from grade g
+    -&gt; left join student_info s on g.stu_no=s.stu_no
+    -&gt; left join curriculum c on g.curriculum=c.curriculum_no;
++&mdash;&mdash;+&mdash;&mdash;+&mdash;&mdash;&mdash;&mdash;+&mdash;&mdash;-+
+| 学号 | 姓名 | 课程名称   | 分数  |
++&mdash;&mdash;+&mdash;&mdash;+&mdash;&mdash;&mdash;&mdash;+&mdash;&mdash;-+
+| 0001 | 张三 | 计算机基础 | 80.00 |
+| 0001 | 张三 | C语言      | 85.00 |
+| 0001 | 张三 | 编译原理   | 90.00 |
+| 0001 | 张三 | 操作系统   | 92.00 |
+| 0002 | 李四 | 计算机基础 | 75.00 |
+| 0002 | 李四 | C语言      | 60.00 |
+| 0002 | 李四 | 编译原理   | 79.00 |
+| 0002 | 李四 | 操作系统   | 76.00 |
+| 0003 | 王五 | 计算机基础 | 80.00 |
+| 0003 | 王五 | C语言      | 78.00 |
+| 0003 | 王五 | 编译原理   | 97.00 |
+| 0003 | 王五 | 操作系统   | 86.00 |
++&mdash;&mdash;+&mdash;&mdash;+&mdash;&mdash;&mdash;&mdash;+&mdash;&mdash;-+
+12 rows in set (0.00 sec)</p>
+
+<p>mysql&gt; select s.stu_no 学号,s.stu_name 姓名,c.curriculum_name 课程名称,g.stu_sco
+re 分数 from grade g
+    -&gt; left join student_info s on g.stu_no=s.stu_no
+    -&gt; left join curriculum c on g.curriculum=c.curriculum_no
+    -&gt; where g.stu_score&gt;80 and g.stu_score&lt;90;
++&mdash;&mdash;+&mdash;&mdash;+&mdash;&mdash;&mdash;-+&mdash;&mdash;-+
+| 学号 | 姓名 | 课程名称 | 分数  |
++&mdash;&mdash;+&mdash;&mdash;+&mdash;&mdash;&mdash;-+&mdash;&mdash;-+
+| 0001 | 张三 | C语言    | 85.00 |
+| 0003 | 王五 | 操作系统 | 86.00 |
++&mdash;&mdash;+&mdash;&mdash;+&mdash;&mdash;&mdash;-+&mdash;&mdash;-+
+2 rows in set (0.00 sec)</p>
+
+<pre><code>
+
+
+6. 查询学习了’C语言’课程的学生学号、姓名和分数
+
+</code></pre>
+
+<p>mysql
+mysql&gt; select s.stu_no 学号,s.stu_name 姓名,c.curriculum_name 课程名称,g.stu_sco
+re 分数 from grade g
+    -&gt; left join curriculum c on g.curriculum=c.curriculum_no
+    -&gt; left join student_info s on g.stu_no=s.stu_no
+    -&gt; where c.curriculum_name=&lsquo;c语言&rsquo;;
++&mdash;&mdash;+&mdash;&mdash;+&mdash;&mdash;&mdash;-+&mdash;&mdash;-+
+| 学号 | 姓名 | 课程名称 | 分数  |
++&mdash;&mdash;+&mdash;&mdash;+&mdash;&mdash;&mdash;-+&mdash;&mdash;-+
+| 0001 | 张三 | C语言    | 85.00 |
+| 0002 | 李四 | C语言    | 60.00 |
+| 0003 | 王五 | C语言    | 78.00 |
++&mdash;&mdash;+&mdash;&mdash;+&mdash;&mdash;&mdash;-+&mdash;&mdash;-+
+3 rows in set (0.00 sec)</p>
+
+<pre><code>
+
+7. 查询学习了’C语言’课程的学生学号、姓名和分数 并排序
+</code></pre>
+
+<p>mysql
+mysql&gt; select s.stu_no 学号,s.stu_name 姓名,c.curriculum_name 课程名称,g.stu_sco
+re 分数 from grade g
+    -&gt; left join curriculum c on g.curriculum=c.curriculum_no
+    -&gt; left join student_info s on g.stu_no=s.stu_no
+    -&gt; where c.curriculum_name=&lsquo;c语言&rsquo;
+    -&gt; order by g.stu_score;
++&mdash;&mdash;+&mdash;&mdash;+&mdash;&mdash;&mdash;-+&mdash;&mdash;-+
+| 学号 | 姓名 | 课程名称 | 分数  |
++&mdash;&mdash;+&mdash;&mdash;+&mdash;&mdash;&mdash;-+&mdash;&mdash;-+
+| 0002 | 李四 | C语言    | 60.00 |
+| 0003 | 王五 | C语言    | 78.00 |
+| 0001 | 张三 | C语言    | 85.00 |
++&mdash;&mdash;+&mdash;&mdash;+&mdash;&mdash;&mdash;-+&mdash;&mdash;-+
+3 rows in set (0.00 sec)</p>
+
+<pre><code>
+
+
+
+第二题：
+费时：3个小时（重写5遍）
+http://www.rupeng.com/forum/thread-44516-1-1.html
+sql_properties：
+
+</code></pre>
+
+<p>mysqlDriver=com.mysql.jdbc.Driver
+connectDatabase=jdbc:mysql://localhost/study?seUnicode=true&amp;characterEncoding=UTF8
+userName=root
+Password=root</p>
+
+<pre><code>JDBCUtils:
+</code></pre>
+
+<p>java
+package com.jdbc.test;</p>
+
+<p>/**
+* @author    叶昭良
+* @time      2015年2月19日下午10:41:37
+*                        10:55     14min
+* @version   com.jdbc.testrewrite4 V1.0
+<em>/
+import java.util.</em>;
+import java.sql.<em>;
+import java.io.</em>;
+public class rewrite4
+{
+        private final static String mysqlDriver;
+        private final static String connectDatabase;
+        private final static String userName;
+        private final static String Password;</p>
+
+<pre><code>    static
+    {
+            Properties prop = new Properties();
+            InputStream in = rewrite4.class.getResourceAsStream(&quot;sql.properties&quot;);
+            try
+            {
+                    prop.load(in);
+                    mysqlDriver = prop.getProperty(&quot;mysqlDriver&quot;);
+                    connectDatabase = prop.getProperty(&quot;connectDatabase&quot;);
+                    userName = prop.getProperty(&quot;userName&quot;);
+                    Password = prop.getProperty(&quot;Password&quot;);
+            } catch (IOException e)
+            {
+                    // TODO Auto-generated catch block
+                    throw new RuntimeException(&quot;配置文件加载失败&quot;);
+            }
+            try
+            {
+                    Class.forName(mysqlDriver);
+            } catch (ClassNotFoundException e)
+            {
+                    // TODO Auto-generated catch block
+                    throw new RuntimeException(&quot;mysql驱动加载失败&quot;);
+            }
+    }
+    public static Connection createConnection()
+    {
+            Connection conn = null;
+            try
+            {
+                    conn = DriverManager.getConnection(connectDatabase);
+            } catch (SQLException e)
+            {
+                    // TODO Auto-generated catch block
+                    throw new RuntimeException(&quot;未能正确创建连接&quot;);
+            }
+            return conn;
+
+    }
+    public static int executeUpdate(String sql,Object... param) throws SQLException
+    {
+            Connection conn = rewrite4.createConnection();
+            return rewrite4.executeUpdate(conn,sql, param);
+    }
+    public static int executeUpdate(Connection conn,String sql,Object... param) throws SQLException
+    {
+            PreparedStatement ps = null;
+            int row = 1;
+            try
+            {
+                    ps = conn.prepareStatement(sql);
+                    for(Object par:param)
+                    {
+                            ps.setObject(row, par);
+                            row++;
+                    }                
+                    return ps.executeUpdate();
+            }finally
+            {
+                    rewrite4.closeQuietly(ps);
+            }
+
+    }
+
+    public static ResultSet executeQuery(String sql,Object... param) throws SQLException
+    {
+            Connection conn = rewrite4.createConnection();
+            return rewrite4.executeQuery(conn, sql, param);
+    }
+    public static ResultSet executeQuery(Connection conn,String sql,Object... param) throws SQLException
+    {
+            ResultSet  rs = null;
+            PreparedStatement ps = null;
+
+            ps = conn.prepareStatement(sql);
+            int row =1;
+            for(Object par:param)
+            {
+                    ps.setObject(row, par);
+                    row++;
+            }
+            rs = ps.executeQuery();
+            return rs;
+
+    }
+    public static void closeQuietly(Connection conn)
+    {
+            if(conn != null)
+            {
+                    try
+                    {
+                            conn.close();
+                    } catch (SQLException e)
+                    {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                    }
+            }
+    }
+    public static void closeQuietly(Statement stmt)
+    {
+            if(stmt != null)
+            {
+                    try
+                    {
+                            stmt.close();
+                    } catch (SQLException e)
+                    {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                    }
+            }
+    }
+    public static void closeQuietly(ResultSet rs)
+    {
+            if(rs != null)
+            {
+                    try
+                    {
+                            rs.close();
+                    } catch (SQLException e)
+                    {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                    }
+            }
+    }
+    public static void closeAll(ResultSet rs)
+    {
+            if(rs != null)
+            {
+                    try
+                    {
+                            rs.close();
+                    } catch (SQLException e)
+                    {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                    }
+            }
+    }
+
+    public static void rollback(Connection conn)
+    {
+            if(conn != null)
+            {
+                    try
+                    {
+                            conn.rollback();
+                    } catch (SQLException e)
+                    {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                    }
+            }
+    }
+</code></pre>
+
+<p>}</p>
+
+<pre><code>
+
+第三题：
+费时1个小时左右
+
+</code></pre>
+
+<p>java
+/**
+*
+*/
+package com.jdbc.test;</p>
+
+<p>/**
+* @author    叶昭良
+* @time      2015年2月18日下午3:49:22
+*                        下午5:00左右
+* @version   com.jdbc.testphoneCheck V1.0
+<em>/
+import java.io.</em>;
+import java.sql.*;
+import java.util.Scanner;</p>
+
+<p>public class phoneCheck
+{</p>
+
+<pre><code>    /**
+     * @param args
+     */
+</code></pre>
+
+<p>/**
+* ID,MobileNumber,MobileArea,MobileType,AreaCode,PostCode,0
+        连接成功
+        总共添加了300105条数据.耗时：64712
+*/
+        private static void load()
+        {
+                //导入csv数据，利用BufferedInputStream
+          InputStream is = null;
+          InputStreamReader isr = null;
+          BufferedReader bis = null; //一行一行读入数据</p>
+
+<pre><code>      Connection conn = null;
+      PreparedStatement ps = null;
+            int len = 0;
+            int i = 0;
+            long startms = System.currentTimeMillis();
+            try
+            {
+                    is = new FileInputStream(&quot;e://phone.csv&quot;);
+                isr = new InputStreamReader(is);
+                    bis = new BufferedReader(isr);
+
+                    System.out.println(bis.readLine());
+                    //第一行字段舍去
+                    String apple=  null;
+                    String[] applePiles = null;
+                    //第一次测试  字符串的行读入
+</code></pre>
+
+<p>/*                        System.out.println(bis.readLine());
+                        System.out.println(bis.readLine());*/
+                        /<em>apple =bis.readLine();
+                        //字符串的一次失误！！ 导致插入失败！！＂＂是默认存在的　必须删掉
+                        apple = apple.replaceAll(&rdquo;\&ldquo;&rdquo;, &ldquo;&rdquo;);
+                        //第二次测试 字符串分隔
+                        String[] splitArray = apple.split(&ldquo;,&rdquo;);
+                        for(String apple1 :splitArray)
+                        {
+                                System.out.println(apple1);
+                        }</em>/
+                        conn = JDBCUtils.createConnection();
+                        conn.setAutoCommit(false);</p>
+
+<pre><code>                    String sql = &quot;insert into phone(MobileNumber,MobileArea,MobileType,Area&quot;
+                                    + &quot;Code,PostCode) values(?,?,?,?,?);&quot;;
+                    ps = conn.prepareStatement(sql);
+                    /**
+                     * 370中国电信
+                            371中国电信
+                            之后 报错 ，可能是为空的原因 
+                     */
+                    while((apple=bis.readLine()) != null)
+                    {
+                            apple = apple.replaceAll(&quot;\&quot;&quot;, &quot;&quot;);
+                            applePiles = apple.split(&quot;,&quot;);
+
+                            ps.clearParameters();
+                            //ps.setInt(1, Integer.parseInt(applePiles[1].equalsIgnoreCase(&quot;&quot;)?&quot;1111&quot;:applePiles[4]));
+                            //ps.setInt(1, Integer.parseInt(applePiles[1]));
+                            ps.setString(1, applePiles[1]);
+                            ps.setString(2, applePiles[2]);
+                            //System.out.println(i+applePiles[3]+applePiles[4]);
+                            ps.setString(3, applePiles[3]);
+</code></pre>
+
+<p>//                                ps.setInt(4, Integer.parseInt(applePiles[4]));//.equalsIgnoreCase(&ldquo;&rdquo;)?&ldquo;1111&rdquo;:applePiles[4]));
+//                                ps.setInt(5, Integer.parseInt(applePiles[5]));//.equalsIgnoreCase(&ldquo;&rdquo;)?&ldquo;1111&rdquo;:applePiles[4]));
+                                ps.setString(4, applePiles[4]);
+                                ps.setString(5, applePiles[5]);
+                                ps.addBatch();</p>
+
+<pre><code>                            i++;
+                            //每个2000步之后进行提交一次 到数据库
+                            if(i%2000==0)
+                            {
+                                    ps.executeBatch();
+                            }
+                    }
+                    //提交 最后的几百步
+                    ps.executeBatch();
+                    conn.commit();
+                    long endMs = System.currentTimeMillis();
+                    System.out.println(&quot;总共添加了&quot;+i+&quot;条数据&quot;+&quot;.耗时：&quot;+(endMs-startms));
+            }catch(IOException e)
+            {
+                    throw new RuntimeException(&quot;读取文件异常&quot;);
+            }catch(SQLException e)
+            {
+                    try
+                    {
+                            conn.rollback();
+                    } catch (SQLException e1)
+                    {
+                            // TODO Auto-generated catch block
+                            e1.printStackTrace();
+                    } //又忘记了
+                    throw new RuntimeException(&quot;数据库插入异常！&quot;);
+
+            }finally
+            {
+                    //用完之后记得差屁股
+                    JDBCUtils.closeQuietly(ps);
+                    JDBCUtils.closeQuietly(conn);
+            }
+    }
+
+    public static void checkPhoneNumber(String PhoneNumber)
+    {
+
+
+            PhoneNumber = &quot;%&quot;+PhoneNumber+&quot;%&quot;;
+            String sql = &quot;select * from phone where MobileNumber like ?&quot;;
+            ResultSet rs  = null;
+            try
+            {
+                    rs = JDBCUtils.executeQuery(sql, PhoneNumber);
+                    if(!rs.next())
+                    {
+                            System.out.println(&quot;当前版本没有&quot;+PhoneNumber+&quot;的信息&quot;);
+</code></pre>
+
+<p>//                                return;
+                        }
+                        //rs.next();
+                        System.out.println(PhoneNumber+&ldquo;手机号来自&rdquo;+rs.getString(&ldquo;MobileArea&rdquo;)+rs.getString(&ldquo;MobileType&rdquo;));
+                } catch (SQLException e)
+                {
+                        // TODO Auto-generated catch block
+                        return;
+                }finally
+                {
+                        //用完之后就差屁股
+                        JDBCUtils.closeAll(rs);
+                }</p>
+
+<pre><code>    }
+    public static void main(String[] args)
+    {
+            // TODO Auto-generated method stub
+            //导入一次即可
+            //load();
+            while(true)
+            {
+                    System.out.println(&quot;请输入手机号(至少7位)&quot;);
+                    Scanner sc = new Scanner(System.in);
+                    String PhoneNumber = sc.nextLine();
+
+                    if(PhoneNumber.equalsIgnoreCase(&quot;exit&quot;)||PhoneNumber.equalsIgnoreCase(&quot;quit&quot;))
+                    {
+                            return;
+                    }
+                    PhoneNumber = PhoneNumber.substring(0,7);
+                    checkPhoneNumber(PhoneNumber);
+            }
+
+    }
+</code></pre>
+
+<p>}</p>
+
+<pre><code>加上对话框的设计：
+
+</code></pre>
+
+<p>java
+/**
+*
+*/
+package com.jdbc.test;</p>
+
+<p>import java.sql.ResultSet;
+import java.sql.SQLException;</p>
+
+<p>import com.rupeng.gtk4j.GTK;
+import com.rupeng.gtk4j.IGCallBack;</p>
+
+<p>/**
+* @author    叶昭良
+* @time      2015年2月22日下午7:48:03
+* @version   com.jdbc.testPhoneCheckUpdate V1.0
+<em>/
+import GTKEncapsulate.</em>;
+public class PhoneCheckUpdate
+{</p>
+
+<pre><code>    /**
+     * @param args
+     */
+    private static  OOLabel olLabel;
+    private static  OOEntry oeCerti;
+    private static OOButton obClick;
+    private static OOBox obBox;
+    private static OOWindow owPig;
+    public PhoneCheckUpdate()
+    {
+            olLabel = new  OOLabel(&quot;请输入电话的前六位：&quot;);
+            oeCerti = new OOEntry();
+            oeCerti.setTextMaxLength(6);
+            oeCerti.setText(&quot;151010&quot;);
+
+            obBox = new OOBox();
+            obClick = new OOButton(&quot;查询&quot;);
+            owPig = new OOWindow();
+            owPig.setWidgetSize(200, 50);
+            //show
+            owPig.show();
+            owPig.setExitAfterDestroy(true);
+            olLabel.show();
+            oeCerti.show();
+            obBox.show();
+            obClick.show();
+
+            //contains
+            owPig.add(obBox);        
+            obBox.add(olLabel);
+            obBox.add(oeCerti);
+            obBox.add(obClick);
+
+            //添加事件
+            obClick.addClickedListener(new IGCallBack()
+            {
+
+                    @Override
+                    public void execute(int instance, int eventData, Object object)
+                    {
+                            // TODO Auto-generated method stub
+                            String text= oeCerti.getText();
+                            OOMessageDialog omd = new OOMessageDialog(checkPhoneNumber(text));
+                            omd.run();
+                            omd.destroy();
+
+                    }
+            });
+    }
+    private static String checkPhoneNumber(String PhoneNumber)
+    {
+
+
+            PhoneNumber = &quot;%&quot;+PhoneNumber+&quot;%&quot;;
+            String sql = &quot;select * from phone where MobileNumber like ?&quot;;
+            ResultSet rs  = null;
+            try
+            {
+                    rs = JDBCUtils.executeQuery(sql, PhoneNumber);
+                    if(!rs.next())
+                    {
+                            System.out.println(&quot;当前版本没有&quot;+PhoneNumber+&quot;的信息&quot;);
+                            return &quot;当前版本没有&quot;+PhoneNumber+&quot;的信息&quot;;
+</code></pre>
+
+<p>//                                return;
+                        }
+                        //rs.next();
+                        System.out.println(PhoneNumber+&ldquo;手机号来自&rdquo;+rs.getString(&ldquo;MobileArea&rdquo;)+rs.getString(&ldquo;MobileType&rdquo;));
+                        return PhoneNumber+&ldquo;手机号来自&rdquo;+rs.getString(&ldquo;MobileArea&rdquo;)+rs.getString(&ldquo;MobileType&rdquo;);</p>
+
+<pre><code>            } catch (SQLException e)
+            {
+                    // TODO Auto-generated catch block
+                    return null;
+            }finally
+            {
+                    //用完之后就差屁股
+                    JDBCUtils.closeAll(rs);
+            }
+
+    }
+    public static void main(String[] args)
+    {
+            // TODO Auto-generated method stub
+            GTK.gtk_init();
+            PhoneCheckUpdate pcu = new PhoneCheckUpdate();
+
+            GTK.gtk_main();
+    }
+</code></pre>
+
+<p>}
+```</p>
+    </div>
+
+    
+
+
+
+
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/blog/2015/05/11/2%E6%9C%8827%E6%97%A5java%E5%91%A8%E6%9C%AB%E7%8F%AD%E8%AF%95%E9%A2%98/&amp;text=2%e6%9c%8827%e6%97%a5Java%e5%91%a8%e6%9c%ab%e7%8f%ad%e8%af%95%e9%a2%98" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/blog/2015/05/11/2%E6%9C%8827%E6%97%A5java%E5%91%A8%E6%9C%AB%E7%8F%AD%E8%AF%95%E9%A2%98/&amp;t=2%e6%9c%8827%e6%97%a5Java%e5%91%a8%e6%9c%ab%e7%8f%ad%e8%af%95%e9%a2%98" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=2%e6%9c%8827%e6%97%a5Java%e5%91%a8%e6%9c%ab%e7%8f%ad%e8%af%95%e9%a2%98&amp;body=/blog/2015/05/11/2%E6%9C%8827%E6%97%A5java%E5%91%A8%E6%9C%AB%E7%8F%AD%E8%AF%95%E9%A2%98/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/blog/2015/05/11/2%E6%9C%8827%E6%97%A5java%E5%91%A8%E6%9C%AB%E7%8F%AD%E8%AF%95%E9%A2%98/&amp;title=2%e6%9c%8827%e6%97%a5Java%e5%91%a8%e6%9c%ab%e7%8f%ad%e8%af%95%e9%a2%98" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=2%e6%9c%8827%e6%97%a5Java%e5%91%a8%e6%9c%ab%e7%8f%ad%e8%af%95%e9%a2%98%20/blog/2015/05/11/2%E6%9C%8827%E6%97%A5java%E5%91%A8%E6%9C%AB%E7%8F%AD%E8%AF%95%E9%A2%98/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/blog/2015/05/11/2%E6%9C%8827%E6%97%A5java%E5%91%A8%E6%9C%AB%E7%8F%AD%E8%AF%95%E9%A2%98/&amp;title=2%e6%9c%8827%e6%97%a5Java%e5%91%a8%e6%9c%ab%e7%8f%ad%e8%af%95%e9%a2%98" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="portrait mr-3" src="/authors/admin/avatar_hu52a603635ecebd45650b162dadabb4e5_12861_250x250_fill_q90_lanczos_center.jpg" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/">Nelson Bighetti</a></h5>
+      <h6 class="card-subtitle">Professor of Artificial Intelligence</h6>
+      <p class="card-text">My research interests include distributed robotics, mobile computing and programmable matter.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/GeorgeCushen" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.co.uk/citations?user=sIwtMXoAAAAJ" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/gcushen" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js" integrity="sha256-aYTdUrn6Ow1DDgh5JTc3aDGnnju48y/1c8s1dgkYPQ8=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/r.min.js"></script>
+        
+      
+
+      
+      
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    <script id="dsq-count-scr" src="https://yezhaoliang.disqus.com/count.js" async></script>
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.d6bd04fdad2ad213aa8111c5a3b72fc5.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

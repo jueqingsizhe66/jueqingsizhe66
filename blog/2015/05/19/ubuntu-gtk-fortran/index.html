@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.5.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Nelson Bighetti">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Fortran：一门古老的计算机数值科学计算语言,1950.
+
+Fortran的强项就是数值计算，图形编程是一个鸡肋所在，但是有时候又需要做一些图形的展示，借助于GTK&#43; project可以方便我们达到目的.
+
+GTK是c语言编写的源程序，运用到fortran需要相应的库转换,在github上找到一个gtk-fortran库.下面是ubuntu上面的搭建过程(windows 未实现,可以参考 gtk&#43;makefile)">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/blog/2015/05/19/ubuntu-gtk-fortran/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin="anonymous">
+    
+
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.min.e8d4d5fd376e67b34452ebe1cae16341.css">
+
+  
+
+  
+
+
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon-32.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/blog/2015/05/19/ubuntu-gtk-fortran/">
+
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="og:site_name" content="Macro Life">
+  <meta property="og:url" content="/blog/2015/05/19/ubuntu-gtk-fortran/">
+  <meta property="og:title" content="Ubuntu gtk-fortran | Macro Life">
+  <meta property="og:description" content="Fortran：一门古老的计算机数值科学计算语言,1950.
+
+Fortran的强项就是数值计算，图形编程是一个鸡肋所在，但是有时候又需要做一些图形的展示，借助于GTK&#43; project可以方便我们达到目的.
+
+GTK是c语言编写的源程序，运用到fortran需要相应的库转换,在github上找到一个gtk-fortran库.下面是ubuntu上面的搭建过程(windows 未实现,可以参考 gtk&#43;makefile)"><meta property="og:image" content="/img/icon-192.png">
+  <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2015-05-19T17:03:25&#43;08:00">
+    
+    <meta property="article:modified_time" content="2015-05-19T17:03:25&#43;08:00">
+  
+
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>Ubuntu gtk-fortran | Macro Life</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0 compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">Macro Life</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav mr-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#hero"><span>Demo</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>博客</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>项目</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#featured"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/about/"><span>About</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/courses/"><span>课程</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/archives"><span>Archives</span></a>
+        </li>
+
+        
+        
+
+      
+      </ul>
+      <ul class="navbar-nav ml-auto">
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+        </li>
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>Ubuntu gtk-fortran</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    May 19, 2015
+  </span>
+  
+
+  
+
+  
+
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/categories/fortran/">fortran</a></span>
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <p>Fortran：一门古老的<a href="http://micro.ustc.edu.cn/Fortran/ZJDing/" target="_blank">计算机数值科学计算语言</a>,1950.</p>
+
+<p>Fortran的强项就是数值计算，图形编程是一个鸡肋所在，但是有时候又需要做一些图形的展示，借助于<a href="http://www.gtk.org/" target="_blank">GTK+ project</a>可以方便我们达到目的.</p>
+
+<p>GTK是c语言编写的源程序，运用到fortran需要相应的库转换,在github上找到一个<a href="https://github.com/jueqingsizhe66/gtk-fortran" target="_blank">gtk-fortran库</a>.下面是ubuntu上面的搭建过程(windows 未实现,可以参考 gtk+makefile)</p>
+
+<h2 id="ubuntu-搭建">Ubuntu 搭建</h2>
+
+<h3 id="环境搭建">环境搭建</h3>
+
+<p>GTK3+是跨平台的，既可以在windows上使用，也可以在linux上使用
+下面的代码可以直接打包进一个gtk.sh文件，直接运行sh gtk.sh进行安装</p>
+
+<pre><code class="language-sh">#1 刚装好的Ubuntu系统中已经有GCC了，但是这个GCC几乎什么文件都不能编译，因为缺少一些必须的头文件，所以要安装build-essential这个软件包
+sudo apt-get install build-essential
+#2 安装GTK/GNOME开发环境  需要下载一系列的安装包，时间比较长
+sudo apt-get install gnome-devel gnome-devel-docs 
+#3 用于在编译GTK程序时自动找出头文件及库文件位置　　
+sudo apt-get install pkg-config
+#4安装 devhelp GTK文档查看程序 
+sudo apt-get install devhelp
+#5安装 gtk/glib 的API参考手册及其它帮助文档 
+sudo apt-get install libglib2.0-doc libgtk2.0-doc
+#6  安装基于GTK的界面GTK是开发Gnome窗口的c/c++语言图形库
+sudo apt-get install glade libglade2-dev
+##或者sudo apt-get install glade-gnome glade-common glade-doc 
+#7安装gtk3.0 或者 将gtk+3.0所需的所有文件统通下载安装完毕 (安装时间较长)
+sudo apt-get install libgtk3*
+
+## 查看信息
+# 查看 2.x 版本 
+#pkg-config --modversion gtk+-3.0 
+# 查看pkg-config的版本
+#$pkg-config -version 
+#查看是否安装了gtk 
+#pkg-config --list-all | grep gtk 
+</code></pre>
+
+<p>这个流程做完了，就可以进行gtk测试,当然仅仅是c语言的测试</p>
+
+<h3 id="测试文件">测试文件</h3>
+
+<pre><code class="language-c">//Helloworld.c
+
+#include &lt;gtk/gtk.h&gt;  
+
+int main(int argc,char *argv[])  
+{  
+    GtkWidget    *window;  
+    GtkWidget    *label;  
+
+    gtk_init(&amp;argc,&amp;argv);  
+
+    /* create the main, top level, window */  
+    window = gtk_window_new(GTK_WINDOW_TOPLEVEL);  
+
+    /* give it the title */  
+    gtk_window_set_title(GTK_WINDOW(window),&quot;Hello World&quot;);  
+
+    /* connect the destroy signal of the window to gtk_main_quit 
+     * when the window is about to be destroyed we get a notification and 
+     * stop the main GTK+ loop 
+     */  
+    g_signal_connect(window,&quot;destroy&quot;,G_CALLBACK(gtk_main_quit),NULL);  
+
+    /* create the &quot;Hello, World&quot; label */  
+    label = gtk_label_new(&quot;GTK可以运行了！&quot;);  
+
+    /* and insert it into the main window */  
+    gtk_container_add(GTK_CONTAINER(window),label);  
+
+    /* make sure that everything, window and label, are visible */  
+    gtk_widget_show_all(window);  
+
+    /* start the main loop, and let it rest until the application is closed */  
+    gtk_main();  
+
+    return 0;  
+}
+
+</code></pre>
+
+<h3 id="编译">编译</h3>
+
+<pre><code class="language-sh">gcc -o Helloworld Helloworld.c `pkg-config --cflags --libs gtk+-3.0`
+</code></pre>
+
+<h3 id="运行">运行</h3>
+
+<pre><code class="language-sh">./Helloworld
+
+</code></pre>
+
+<p>如果你得到一个小窗口&rdquo;GTK可以运行了&rdquo; 证明你的gtk环境是正确的。</p>
+
+<p>然后我们开始进一步配置gtk-fortran</p>
+
+<ol>
+<li>下载
+<a href="https://github.com/jueqingsizhe66/gtk-fortran" target="_blank">https://github.com/jueqingsizhe66/gtk-fortran</a></li>
+
+<li><p>编译</p>
+
+<pre><code class="language-sh">mkdir build
+cd build
+
+在gtk-fortran目录下：/home/happycamp-of-fortran/gtk-fortran/build
+cmake ..
+make 
+make install
+
+</code></pre></li>
+</ol>
+
+<p>会得到如下结果:</p>
+
+<pre><code class="language-sh">Install the project...
+-- Install configuration: &quot;release&quot;
+-- Installing: /usr/local/lib/libgtk-2-fortran.a
+-- Installing: /usr/local/lib/libgtk-2-fortran.so.0.1
+-- Installing: /usr/local/lib/libgtk-2-fortran.so
+-- Installing: /usr/local/include/gtk-2-fortran/atk.mod
+-- Installing: /usr/local/include/gtk-2-fortran/cairo.mod
+-- Installing: /usr/local/include/gtk-2-fortran/gdk.mod
+-- Installing: /usr/local/include/gtk-2-fortran/gdk_pixbuf.mod
+-- Installing: /usr/local/include/gtk-2-fortran/g.mod
+-- Installing: /usr/local/include/gtk-2-fortran/gtk.mod
+-- Installing: /usr/local/include/gtk-2-fortran/gtk_hl.mod
+-- Installing: /usr/local/include/gtk-2-fortran/gtk_hl_container.mod
+-- Installing: /usr/local/include/gtk-2-fortran/gtk_hl_button.mod
+-- Installing: /usr/local/include/gtk-2-fortran/gtk_hl_entry.mod
+-- Installing: /usr/local/include/gtk-2-fortran/gtk_hl_tree.mod
+-- Installing: /usr/local/include/gtk-2-fortran/gtk_hl_menu.mod
+-- Installing: /usr/local/include/gtk-2-fortran/gtk_hl_combobox.mod
+-- Installing: /usr/local/include/gtk-2-fortran/gtk_hl_spin_slider.mod
+-- Installing: /usr/local/include/gtk-2-fortran/gtk_hl_chooser.mod
+-- Installing: /usr/local/include/gtk-2-fortran/gtk_hl_dialog.mod
+-- Installing: /usr/local/include/gtk-2-fortran/gtk_hl_progress.mod
+-- Installing: /usr/local/include/gtk-2-fortran/gtk_hl_accelerator.mod
+-- Installing: /usr/local/include/gtk-2-fortran/gtk_hl_infobar.mod
+-- Installing: /usr/local/include/gtk-2-fortran/gtk_hl_assistant.mod
+-- Installing: /usr/local/include/gtk-2-fortran/gtk_hl_misc.mod
+-- Installing: /usr/local/include/gtk-2-fortran/gtk_draw_hl.mod
+-- Installing: /usr/local/include/gtk-2-fortran/gdk_pixbuf_hl.mod
+-- Installing: /usr/local/include/gtk-2-fortran/gtk_sup.mod
+-- Installing: /usr/local/include/gtk-2-fortran/pango.mod
+-- Installing: /usr/local/include/gtk-2-fortran/gdk_events.mod
+-- Installing: /usr/local/include/gtk-2-fortran/gtk_os_dependent.mod
+-- Installing: /usr/local/bin/gtk-2-fortran-modscan
+-- Installing: /usr/local/share/gtk-fortran/gtk-2-fortran-index.csv
+-- Installing: /usr/local/share/gtk-fortran/gtk-2-enumerators.lis
+-- Installing: /usr/local/lib/pkgconfig/gtk-2-fortran.pc
+-- Installing: /usr/local/share/man/man1/gtk-2-fortran-modscan.1
+</code></pre>
+
+<p>3: 测试软件
+然后你就会发现
+cd 到 /home/happycamp-of-fortran/gtk-fortran/examples
+然后</p>
+
+<pre><code class="language-sh">root at javazhao-N53SM [19:27:20ä��午] in /home/happycamp-of-fortran/gtk-fortran/examples on git:master?
+$ gfortran gtkhello2.f90 -o gtkhello2 `pkg-config --cflags --libs gtk-2-fortran` 
+
+就可以了. 一定记住加入的是gtk-2-fortran 这个库。而不是gtk+-2.0或者gtk+-3.0,这两个库是针对c语言的。
+$ ./gtkhello2 
+
+
+</code></pre>
+    </div>
+
+    
+
+
+
+
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/blog/2015/05/19/ubuntu-gtk-fortran/&amp;text=Ubuntu%20gtk-fortran" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/blog/2015/05/19/ubuntu-gtk-fortran/&amp;t=Ubuntu%20gtk-fortran" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Ubuntu%20gtk-fortran&amp;body=/blog/2015/05/19/ubuntu-gtk-fortran/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/blog/2015/05/19/ubuntu-gtk-fortran/&amp;title=Ubuntu%20gtk-fortran" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=Ubuntu%20gtk-fortran%20/blog/2015/05/19/ubuntu-gtk-fortran/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/blog/2015/05/19/ubuntu-gtk-fortran/&amp;title=Ubuntu%20gtk-fortran" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="portrait mr-3" src="/authors/admin/avatar_hu52a603635ecebd45650b162dadabb4e5_12861_250x250_fill_q90_lanczos_center.jpg" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/">Nelson Bighetti</a></h5>
+      <h6 class="card-subtitle">Professor of Artificial Intelligence</h6>
+      <p class="card-text">My research interests include distributed robotics, mobile computing and programmable matter.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/GeorgeCushen" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.co.uk/citations?user=sIwtMXoAAAAJ" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/gcushen" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js" integrity="sha256-aYTdUrn6Ow1DDgh5JTc3aDGnnju48y/1c8s1dgkYPQ8=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/r.min.js"></script>
+        
+      
+
+      
+      
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    <script id="dsq-count-scr" src="https://yezhaoliang.disqus.com/count.js" async></script>
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.d6bd04fdad2ad213aa8111c5a3b72fc5.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

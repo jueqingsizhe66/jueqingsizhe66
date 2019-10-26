@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.5.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Nelson Bighetti">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/blog/2015/05/11/1%E6%9C%8828%E6%97%A5java%E7%8F%AD%E7%AC%94%E8%AE%B0%E6%8F%90%E4%BA%A4%E5%B8%96/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin="anonymous">
+    
+
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.min.e8d4d5fd376e67b34452ebe1cae16341.css">
+
+  
+
+  
+
+
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon-32.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/blog/2015/05/11/1%E6%9C%8828%E6%97%A5java%E7%8F%AD%E7%AC%94%E8%AE%B0%E6%8F%90%E4%BA%A4%E5%B8%96/">
+
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="og:site_name" content="Macro Life">
+  <meta property="og:url" content="/blog/2015/05/11/1%E6%9C%8828%E6%97%A5java%E7%8F%AD%E7%AC%94%E8%AE%B0%E6%8F%90%E4%BA%A4%E5%B8%96/">
+  <meta property="og:title" content="1月28日Java班笔记提交帖 | Macro Life">
+  <meta property="og:description" content=""><meta property="og:image" content="/img/icon-192.png">
+  <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2015-05-11T14:58:40&#43;08:00">
+    
+    <meta property="article:modified_time" content="2015-05-11T14:58:40&#43;08:00">
+  
+
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>1月28日Java班笔记提交帖 | Macro Life</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0 compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">Macro Life</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav mr-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#hero"><span>Demo</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>博客</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>项目</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#featured"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/about/"><span>About</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/courses/"><span>课程</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/archives"><span>Archives</span></a>
+        </li>
+
+        
+        
+
+      
+      </ul>
+      <ul class="navbar-nav ml-auto">
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+        </li>
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>1月28日Java班笔记提交帖</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    May 11, 2015
+  </span>
+  
+
+  
+
+  
+
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/categories/javabasic/">JavaBasic</a></span>
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <p>第一部分：笔记
+引用杨老师笔记，的确经典
+1、GTK命名规则
+     1）一般以gtk_开头
+     2）gtk_widget_代表这个函数可以应用于GtkWidget及所有子类。gtk_container<em>代表这个函数可以应用于GtkContainer及所有子类。
+     3）gtk</em>***_new，创建一个控件并且返回它的标识(编号)。
+     4）gtk_AAA_get_BBB，从AAA类型的控件的标识获得控件的BBB属性的值；gtk_AAA_set_BBB，设置指定标识的类型为AAA的控件的BBB属性的值</p>
+
+<p>分析上述结论：
+     a.        的确原始的gtk程序都是以gtk_开头的  ，而现在com.rupeng.gtk4j.*，则是利用GTK这个类封装起来这些方法。
+     b.        一般的规律都是gtk_widget_开头表示继承GtkWidget及所有子类，所以需要有一张GTK的总体继承图
+       看 总体继承图.gif
+      说明：也就是说在思考widget的时候，一般接着思考Container、Entry、Label,针对Container有需要思考Bin\Box\Grid\Fixed，针对Bin有需要接着思      考Window|NoteBook|,ScrolledWindow|Button,针对Window有需要接着思考Dialog</p>
+
+<pre><code> c. 之所以是gtk_***_new_*** 是因为***既可以代表 gtk_window_new  也可以代表gtk_progress_bar_new                   gtk_check_box_new   gtk_button_new_with_label   gtk_toggle_button_new等。
+     d.  Gtk_AAA_get|set_BBB   其实AAA一般代表控件   BBB一般代表属性，也可以代表地方  比如  gtk_screen_get_width()   gtk_entry_set_max_length   gtk_widget_set_visible()
+ Gtk_tool_item_set_toolkit_item   AAA也可以有两个_连接。
+</code></pre>
+
+<ol>
+<li><p>GTK的使用框架：
+             //初始化
+            GTK.gtk_init();
+            //建立窗口  设置成static int window变量
+            window = GTK.gtk_window_new(GTK.GTK_WINDOW_TOPLEVEL);
+            //设置窗口名称
+            GTK.gtk_window_set_title(window, &ldquo;计算器v1.0&rdquo;);
+            //添加窗口
+            GTK.gtk_widget_show(window);</p>
+
+<pre><code>        //关闭对话框
+        GTK.g_signal_connect(window, &quot;destroy&quot;, new IGCallBack() 
+        {
+                @Override
+                public void execute(int instance, int eventData, Object object)
+                {
+                        // TODO 自动生成的方法存根
+                        GTK.gtk_main_quit();
+                }
+        }, null);
+
+        //网格布局  盒子布局   固定布局。。。 当前选择网格布局
+    int houseGrid = GTK.gtk_grid_new();
+    //载入控件
+    //省略 一万行代码。。。。
+
+    //载入到windows当中
+        GTK.gtk_container_add(window, houseGrid);
+        //启动循环
+        GTK.gtk_main();
+</code></pre></li>
+
+<li><p>GTK.gtk_container_add(window,box1) ;在一个main中只能使用一次gtk_container_add..</p></li>
+
+<li><p>CheckBox
+int gtk_check_button_new_with_label(String label)
+CheckButton继承自ToggleButton
+所以可以使用 void gtk_toggle_button_set_active(int toggle_button, boolean is_active) 设置是否选中
+boolean gtk_toggle_button_get_active(int toggle_button) 获得是否选中</p></li>
+</ol>
+
+<p>5.gtk_entry_new
+基本的文本框设置
+使用void gtk_label_set_text(int label, String str)修改Label的文本内容
+void gtk_entry_set_max_length(int entry, int max)设置输入框最大的宽度
+void gtk_entry_set_text(int entry, String text)设置输入框的文本
+String gtk_entry_get_text(int entry)获得输入框的文本值</p>
+
+<p>密码文本框设置：
+void gtk_entry_set_visibility(int entry,boolean visible)当把visible设置为false的时候输入的内容都会显示成 gtk_entry_set_invisible_char(int entry,char inv_char)设置的字符。用于实现密码框</p>
+
+<p>第二部分： 作业</p>
+
+<p>case1: 固定布局的测试</p>
+
+<p>/**
+* @author 叶昭良
+* @version  v1.0
+*/
+import com.rupeng.gtk4j.GTK;
+import com.rupeng.gtk4j.IGCallBack;
+//import com.rupeng.gtk4j.Utils;
+public class TestGtkWidgetFixedLayout
+{</p>
+
+<pre><code>    /**
+     * @param args
+     */
+    public static void main(String[] args)
+    {
+            // TODO 自动生成的方法存根
+            GTK.gtk_init();
+        int window = GTK.gtk_window_new(GTK.GTK_WINDOW_TOPLEVEL); // 原来还有个POPUP估计是右键菜单
+        GTK.gtk_widget_show(window);
+
+        GTK.gtk_window_set_title(window, &quot;霜雪&quot;); // widget下没有 只有在window下有。
+       // GTK.gtk_window_set_position(window, GTK.GTK_WIN_POS_CENTER);
+
+        GTK.gtk_window_set_position(window, GTK.GTK_WIN_POS_CENTER_ALWAYS);
+        //GTK.gtk_window_set_resizable(window, true);  //默认可以拉伸
+        // 默认的窗口可以最大化， GTK.gtk_widget_set_maximize(widget)
+
+        //新建了一个文本框
+        int entry1  = GTK.gtk_entry_new();
+        GTK.gtk_widget_show(entry1);
+        //新建了一个button 
+        int button1 = GTK.gtk_button_new_with_label(&quot;click me&quot;);
+        GTK.gtk_widget_show(button1);
+
+        //新建了一个标签
+        int label1 =  GTK.gtk_label_new(&quot;请输入：&quot;);
+        GTK.gtk_widget_show(label1);
+
+        // 安静的关闭对话框
+        GTK.g_signal_connect(window, &quot;destroy&quot;, new IGCallBack()
+        {
+                @Override
+                public void execute(int instance, int eventData, Object object)
+                {
+                        // TODO 自动生成的方法存根
+                        GTK.gtk_main_quit();
+                }
+        }, null);
+
+        //int box1= GTK.gtk_box_new(GTK., spacing)
+        //新加了一个house  用来整租给文本框 +button+label
+        int house = GTK.gtk_fixed_new();
+        GTK.gtk_fixed_put(house, entry1,0,0);
+        GTK.gtk_fixed_put(house,button1,50,0);
+        GTK.gtk_fixed_put(house,label1,0,100); //很难适应屏幕大小！！所以一般很少用
+        GTK.gtk_widget_show(house);
+
+        GTK.gtk_container_add(window,house);
+
+        GTK.gtk_main();
+    }
+</code></pre>
+
+<p>}
+复制代码</p>
+
+<p>case2 盒子布局的测试</p>
+
+<p>/**
+* @author 叶昭良
+* @version  v1.0
+*/
+import java.awt.AWTException;
+import java.awt.Robot;</p>
+
+<p>import com.rupeng.gtk4j.GTK;
+import com.rupeng.gtk4j.IGCallBack;
+//import com.rupeng.gtk4j.Utils;
+public class TestGtkWidgetBoxLayout
+{</p>
+
+<pre><code>    /**
+     * @param args
+     */
+    public static void main(String[] args)
+    {
+            // TODO 自动生成的方法存根
+            GTK.gtk_init();
+        int window = GTK.gtk_window_new(GTK.GTK_WINDOW_TOPLEVEL); // 原来还有个POPUP估计是右键菜单
+        GTK.gtk_widget_show(window);
+
+        GTK.gtk_window_set_title(window, &quot;霜雪&quot;); // widget下没有 只有在window下有。
+       // GTK.gtk_window_set_position(window, GTK.GTK_WIN_POS_CENTER);
+
+        GTK.gtk_window_set_position(window, GTK.GTK_WIN_POS_CENTER_ALWAYS);
+        //GTK.gtk_window_set_resizable(window, true);  //默认可以拉伸
+        // 默认的窗口可以最大化， GTK.gtk_widget_set_maximize(widget)
+
+        //新建了一个文本框
+        int entry1  = GTK.gtk_entry_new();
+        GTK.gtk_widget_show(entry1);
+        //新建了一个button 
+        int button1 = GTK.gtk_button_new_with_label(&quot;click me&quot;);
+        GTK.gtk_widget_show(button1);
+
+        //新建了一个标签
+        int label1 =  GTK.gtk_label_new(&quot;请输入：&quot;);
+        int label2 =  GTK.gtk_label_new(&quot;&quot;);
+        int label3 =  GTK.gtk_label_new(&quot;&quot;);
+
+        // 显示标签
+        GTK.gtk_widget_show(label1);
+        GTK.gtk_widget_show(label2);
+        GTK.gtk_widget_show(label3);
+        // 安静的关闭对话框
+        GTK.g_signal_connect(window, &quot;destroy&quot;, new IGCallBack()
+        {
+                @Override
+                public void execute(int instance, int eventData, Object object)
+                {
+                        // TODO 自动生成的方法存根
+                        GTK.gtk_main_quit();
+                }
+        }, null);
+
+        //int box1= GTK.gtk_box_new(GTK., spacing)
+        //新加了一个house  用来整租给文本框 +button+label
+        // gtk_box_new 的第一个参数 一般是两种赋值方式GTK.GTK_ORIENTATION_HORIZONTAL和_VERTICAL
+        // 第二个参数表示的间隔space,如果设置为5则为5pt的间隔
+        int houseApple = GTK.gtk_box_new(GTK.GTK_ORIENTATION_HORIZONTAL, 0);
+        int houseBanana = GTK.gtk_box_new(GTK.GTK_ORIENTATION_HORIZONTAL, 0);
+        int houseTree = GTK.gtk_box_new(GTK.GTK_ORIENTATION_VERTICAL, 0);
+        //水平house
+        GTK.gtk_box_pack_start(houseApple, label1, true, true, 0);
+        GTK.gtk_box_pack_start(houseApple,entry1 , true, true, 0);
+        GTK.gtk_box_pack_start(houseBanana,label2 , true, true, 0);
+        GTK.gtk_box_pack_start(houseBanana,button1 , true, true, 0);
+        GTK.gtk_box_pack_start(houseBanana,label3 , true, true, 0);
+        //垂直house
+        GTK.gtk_box_pack_start(houseTree, houseApple, true, true, 0);
+        GTK.gtk_box_pack_start(houseTree, houseBanana, true, true, 0);
+
+
+        // 显示三个容器 的house
+        GTK.gtk_widget_show(houseApple);
+        GTK.gtk_widget_show(houseBanana);
+        GTK.gtk_widget_show(houseTree);
+
+        GTK.gtk_container_add(window,houseTree);
+
+        GTK.gtk_main();
+
+
+    }
+</code></pre>
+
+<p>}
+复制代码</p>
+
+<p>case3 网格布局的测试</p>
+
+<p>/**
+* @author 叶昭良
+* @version v1.0
+* @version v1.1 改进了密码框<br />
+*/
+import java.awt.AWTException;
+import java.awt.Robot;</p>
+
+<p>import com.rupeng.gtk4j.GTK;
+import com.rupeng.gtk4j.IGCallBack;
+//import com.rupeng.gtk4j.Utils;
+public class TestGtkWidgetGridLayout
+{</p>
+
+<pre><code>    /**
+     * @param args
+     */
+    public static void main(String[] args)
+    {
+            // TODO 自动生成的方法存根
+            GTK.gtk_init();
+        int window = GTK.gtk_window_new(GTK.GTK_WINDOW_TOPLEVEL); // 原来还有个POPUP估计是右键菜单
+        GTK.gtk_widget_show(window);
+
+        GTK.gtk_window_set_title(window, &quot;霜雪&quot;); // widget下没有 只有在window下有。
+       // GTK.gtk_window_set_position(window, GTK.GTK_WIN_POS_CENTER);
+
+        GTK.gtk_window_set_position(window, GTK.GTK_WIN_POS_CENTER_ALWAYS);
+        //GTK.gtk_window_set_resizable(window, true);  //默认可以拉伸
+        // 默认的窗口可以最大化， GTK.gtk_widget_set_maximize(widget)
+
+
+        // 安静的关闭对话框
+        GTK.g_signal_connect(window, &quot;destroy&quot;, new IGCallBack()
+        {
+                @Override
+                public void execute(int instance, int eventData, Object object)
+                {
+                        // TODO 自动生成的方法存根
+                        GTK.gtk_main_quit();
+                }
+        }, null);
+
+        //int box1= GTK.gtk_box_new(GTK., spacing)
+        //新加了一个网格屋子
+        int houseGrid = GTK.gtk_grid_new();
+
+
+
+
+        // 显示 的houseGrid
+        GTK.gtk_widget_show(houseGrid);
+        // 0开头是程序员的惯例
+        testGtk(houseGrid,0);
+        landInternet(houseGrid,2);
+
+
+
+        GTK.gtk_container_add(window,houseGrid);
+        GTK.gtk_main();
+
+
+    }
+    //新建一个测试的界面
+    /**
+     * 
+     * @param houseGrid  整租的大房子  表示gtk_grid_new的返回值
+     * @param start      在houseGrid分配到的第几行开始编号
+     */
+    public static void testGtk(int houseGrid,int start)
+    {
+               //新建了一个文本框
+        int entry1  = GTK.gtk_entry_new();
+        GTK.gtk_widget_show(entry1);
+        //新建了一个button 
+        int button1 = GTK.gtk_button_new_with_label(&quot;click me&quot;);
+        GTK.gtk_widget_show(button1);
+
+        //新建了一个标签
+        int label1 =  GTK.gtk_label_new(&quot;请输入：&quot;);
+        int label2 =  GTK.gtk_label_new(&quot;&quot;);
+        int label3 =  GTK.gtk_label_new(&quot;&quot;);
+
+        // 显示标签
+        GTK.gtk_widget_show(label1);
+        GTK.gtk_widget_show(label2);
+        GTK.gtk_widget_show(label3);
+
+        //整租到housegrid
+        // gtk_grid_attach(int grid, int child, int left,int top, int width, int height);
+        GTK.gtk_grid_attach(houseGrid, label1, 0, start, 1, 1);
+        GTK.gtk_grid_attach(houseGrid, entry1, 1, start, 1, 1);
+
+        GTK.gtk_grid_attach(houseGrid, button1, 1, start+1, 1, 1);
+    }
+
+//新建一个登陆界面的GTK
+    public static void landInternet(int houseGrid,int start) 
+    {
+               //新建了一个文本框
+        int entry1  = GTK.gtk_entry_new();
+
+        int entry2  = GTK.gtk_entry_new();
+
+        //增加了文本框的密码框的设置y2, false);
+        //可以设置显示的
+        GTK.gtk_entry_set_visibility(entry2,false);  //字符 默认的密码框为*
+        GTK.gtk_entry_set_invisible_char(entry2, '1'); //只能是字符  不能是&quot;1&quot;
+
+        //新建了一个button 
+        int buttonEnter = GTK.gtk_button_new_with_label(&quot;登陆&quot;);
+
+        int buttonClosed = GTK.gtk_button_new_with_label(&quot;取消&quot;);
+
+        int checkbox1= GTK.gtk_check_button_new_with_label(&quot;是否保存密码&quot;);
+        //新建了一个标签
+        int label1 =  GTK.gtk_label_new(&quot;用户名：&quot;);
+        int label2 =  GTK.gtk_label_new(&quot;密码  ：&quot;);
+
+        //为什么要声明为final暂时不是特别清楚
+        final int label3 =  GTK.gtk_label_new(&quot;&quot;);
+
+        // 显示标签
+        GTK.gtk_widget_show(entry1);
+        GTK.gtk_widget_show(entry2);
+        GTK.gtk_widget_show(label1);
+        GTK.gtk_widget_show(label2);
+        GTK.gtk_widget_show(label3);
+        GTK.gtk_widget_show(checkbox1);
+        GTK.gtk_widget_show(buttonEnter);
+        GTK.gtk_widget_show(buttonClosed);
+
+        //整租到houseGrid
+        GTK.gtk_grid_attach(houseGrid, label1, 0, start, 1, 1);
+        GTK.gtk_grid_attach(houseGrid, entry1, 1, start, 1, 1);
+        GTK.gtk_grid_attach(houseGrid, label2, 0, start+1, 1, 1);
+        GTK.gtk_grid_attach(houseGrid, entry2, 1, start+1, 1, 1);
+        GTK.gtk_grid_attach(houseGrid, checkbox1, 1, start+2, 1, 1);
+        GTK.gtk_grid_attach(houseGrid, buttonEnter, 1, start+3, 1, 1);
+        GTK.gtk_grid_attach(houseGrid, buttonClosed, 2, start+3, 1, 1);
+        GTK.gtk_grid_attach(houseGrid, label3, 1, start+5, 1, 1);
+
+
+        // 进行按钮的事件连接
+        GTK.g_signal_connect(buttonEnter,&quot;clicked&quot;,new IGCallBack()
+        {
+                @Override
+                public void execute(int instance, int eventData, Object object)
+                {
+                        // TODO 自动生成的方法存根
+                        System.out.println(&quot;你点击了登陆&quot;);
+                        GTK.gtk_label_set_text(label3, &quot;你点击了登陆&quot;);
+                }
+        },null);
+
+        GTK.g_signal_connect(buttonClosed,&quot;clicked&quot;,new IGCallBack()
+        {
+                @Override
+                public void execute(int instance, int eventData, Object object)
+                {
+                        // TODO 自动生成的方法存根
+                        System.out.println(&quot;你点击了关闭&quot;);
+                        GTK.gtk_label_set_text(label3, &quot;你点击了关闭&quot;);
+                }
+        },null);
+    }
+</code></pre>
+
+<p>}
+复制代码</p>
+
+<p>case4 checkBox模拟 安装界面
+import com.rupeng.gtk4j.GTK;
+import com.rupeng.gtk4j.IGCallBack;
+/**
+*
+*/</p>
+
+<p>/**
+* @author 叶昭良
+* @version  v1.0
+*/
+public class TestGtkCheckBox
+{</p>
+
+<pre><code>    /**
+     * @param args
+     */
+    private static int window ;
+    private static int box;
+    public static void main(String[] args)
+    {
+            // TODO 自动生成的方法存根
+
+    //        gtkHead(window,&quot;gtkCheckbox测试&quot;);
+            GTK.gtk_init();
+            window = GTK.gtk_window_new(GTK.GTK_WINDOW_TOPLEVEL);
+            GTK.gtk_window_set_title(window, &quot;hello&quot;);
+            GTK.gtk_widget_show(window);
+            GTK.g_signal_connect(window,&quot;destroy&quot;,new IGCallBack() 
+            {
+
+                    @Override
+                    public void execute(int instance, int eventData, Object object)
+                    {
+                            // TODO 自动生成的方法存根
+                            GTK.gtk_main_quit();
+                    }
+
+            },null);
+            box = GTK.gtk_box_new(GTK.GTK_ORIENTATION_VERTICAL, 0);
+            int box2= GTK.gtk_box_new(GTK.GTK_ORIENTATION_VERTICAL,0);
+            int box1= GTK.gtk_box_new(GTK.GTK_ORIENTATION_VERTICAL,0);
+            testGtkCheckBox(window,box2);
+            testGtkCheckBoxInstall(window,box1);
+            GTK.gtk_box_pack_start(box, box2, false, false, 0);
+            GTK.gtk_box_pack_start(box, box1, false, false, 0);
+
+            GTK.gtk_container_add(window, box);
+            GTK.gtk_widget_show(box);
+            GTK.gtk_main();
+
+    }
+
+
+    public static void testGtkCheckBox(int window,int box2)
+    {
+
+            int cbMan = GTK.gtk_check_button_new_with_label(&quot;男&quot;);
+            int cbWoman = GTK.gtk_check_button_new_with_label(&quot;女&quot;);
+
+
+            GTK.gtk_box_pack_start(box2, cbMan, false,false        , 0);
+            GTK.gtk_box_pack_start(box2, cbWoman, false,false        , 0);
+
+
+            GTK.gtk_widget_show(cbMan);
+            GTK.gtk_widget_show(cbWoman);
+            GTK.gtk_widget_show(box2);
+
+    }
+    public static void testGtkCheckBoxInstall(int window,int box1)
+    {
+            int entryLicense = GTK.gtk_entry_new();
+            GTK.gtk_entry_set_text(entryLicense, &quot;产品使用声明:\n 尊重ISIS国际标准&quot;);
+
+            //定义控件
+            int boxInner = GTK.gtk_box_new(GTK.GTK_ORIENTATION_HORIZONTAL, 0);
+            //为什么要修改为终态
+            final int cbAgree = GTK.gtk_check_button_new_with_label(&quot;我同意上面的协议&quot;);
+            final int btnInstall = GTK.gtk_button_new_with_label(&quot;install&quot;);
+            int btnClosed  = GTK.gtk_button_new_with_label(&quot;close&quot;);
+            GTK.gtk_widget_set_sensitive(btnInstall, false);
+
+            //添加控件
+            GTK.gtk_box_pack_start(box1, entryLicense, false,false        , 0);
+            GTK.gtk_box_pack_start(box1, cbAgree, false,false, 0);
+            GTK.gtk_box_pack_start(boxInner, btnInstall, false,false,0);
+            GTK.gtk_box_pack_start(boxInner, btnClosed, false,false,0);
+            GTK.gtk_box_pack_start(box1, boxInner, false,false        , 0);
+
+            //显示控件
+            GTK.gtk_widget_show(entryLicense);
+            GTK.gtk_widget_show(cbAgree);
+            GTK.gtk_widget_show(btnInstall);
+            GTK.gtk_widget_show(btnClosed);
+            GTK.gtk_widget_show(boxInner);
+            GTK.gtk_widget_show(box1);
+
+            //添加事件
+            GTK.g_signal_connect(cbAgree, &quot;clicked&quot;, new IGCallBack() 
+            {
+                    @Override
+                    public void execute(int instance, int eventData, Object object)
+                    {
+                            // TODO 自动生成的方法存根
+                            boolean isChecked =  GTK.gtk_toggle_button_get_active(cbAgree);
+
+                            //写了gtk_checkbox发现没有set命令 于是用了widget..
+                            GTK.gtk_widget_set_sensitive(btnInstall, isChecked);
+                    }
+            }, null);
+    }
+</code></pre>
+
+<p>}
+复制代码</p>
+
+<p>通过上面的练习： 学习了GTK框架的编程方式，掌握了 label,entry,checkbox(继承toggle_button),Box Layout, Grid Layout , Fixed Layout的基本使用方法，包括clicked,destroy这两个信号的事件处理。  另外拓展的学习了匿名类 new IGCallback(){..}的使用方法。</p>
+
+<p><img src="/images/java/checkbox.gif" alt="checkbox的结果" />
+<img src="/images/java/盒子.gif" alt="盒子布局的结果" />
+<img src="/images/java/固定.gif" alt="固定布局的结果" />
+<img src="/images/java/网格布局.gif" alt="网格布局的结果" />
+<img src="/images/java/总体框架图.gif" alt="GTK的总体框架图" /></p>
+    </div>
+
+    
+
+
+
+
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/blog/2015/05/11/1%E6%9C%8828%E6%97%A5java%E7%8F%AD%E7%AC%94%E8%AE%B0%E6%8F%90%E4%BA%A4%E5%B8%96/&amp;text=1%e6%9c%8828%e6%97%a5Java%e7%8f%ad%e7%ac%94%e8%ae%b0%e6%8f%90%e4%ba%a4%e5%b8%96" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/blog/2015/05/11/1%E6%9C%8828%E6%97%A5java%E7%8F%AD%E7%AC%94%E8%AE%B0%E6%8F%90%E4%BA%A4%E5%B8%96/&amp;t=1%e6%9c%8828%e6%97%a5Java%e7%8f%ad%e7%ac%94%e8%ae%b0%e6%8f%90%e4%ba%a4%e5%b8%96" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=1%e6%9c%8828%e6%97%a5Java%e7%8f%ad%e7%ac%94%e8%ae%b0%e6%8f%90%e4%ba%a4%e5%b8%96&amp;body=/blog/2015/05/11/1%E6%9C%8828%E6%97%A5java%E7%8F%AD%E7%AC%94%E8%AE%B0%E6%8F%90%E4%BA%A4%E5%B8%96/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/blog/2015/05/11/1%E6%9C%8828%E6%97%A5java%E7%8F%AD%E7%AC%94%E8%AE%B0%E6%8F%90%E4%BA%A4%E5%B8%96/&amp;title=1%e6%9c%8828%e6%97%a5Java%e7%8f%ad%e7%ac%94%e8%ae%b0%e6%8f%90%e4%ba%a4%e5%b8%96" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=1%e6%9c%8828%e6%97%a5Java%e7%8f%ad%e7%ac%94%e8%ae%b0%e6%8f%90%e4%ba%a4%e5%b8%96%20/blog/2015/05/11/1%E6%9C%8828%E6%97%A5java%E7%8F%AD%E7%AC%94%E8%AE%B0%E6%8F%90%E4%BA%A4%E5%B8%96/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/blog/2015/05/11/1%E6%9C%8828%E6%97%A5java%E7%8F%AD%E7%AC%94%E8%AE%B0%E6%8F%90%E4%BA%A4%E5%B8%96/&amp;title=1%e6%9c%8828%e6%97%a5Java%e7%8f%ad%e7%ac%94%e8%ae%b0%e6%8f%90%e4%ba%a4%e5%b8%96" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="portrait mr-3" src="/authors/admin/avatar_hu52a603635ecebd45650b162dadabb4e5_12861_250x250_fill_q90_lanczos_center.jpg" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/">Nelson Bighetti</a></h5>
+      <h6 class="card-subtitle">Professor of Artificial Intelligence</h6>
+      <p class="card-text">My research interests include distributed robotics, mobile computing and programmable matter.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/GeorgeCushen" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.co.uk/citations?user=sIwtMXoAAAAJ" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/gcushen" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js" integrity="sha256-aYTdUrn6Ow1DDgh5JTc3aDGnnju48y/1c8s1dgkYPQ8=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/r.min.js"></script>
+        
+      
+
+      
+      
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    <script id="dsq-count-scr" src="https://yezhaoliang.disqus.com/count.js" async></script>
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.d6bd04fdad2ad213aa8111c5a3b72fc5.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
