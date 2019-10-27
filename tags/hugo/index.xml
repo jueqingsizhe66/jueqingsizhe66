@@ -17,10 +17,68 @@
       <link>https://jueqingsizhe66.github.io/post/hugo-academic-design/</link>
       <pubDate>Mon, 21 Oct 2019 21:47:25 +0800</pubDate>
       <guid>https://jueqingsizhe66.github.io/post/hugo-academic-design/</guid>
-      <description>&lt;p&gt;下面请看hugo academic的开始页面采用多个md文件组合在一起的设计，遵循widgets的设计理念，可单独
+      <description>
+
+&lt;p&gt;下面请看hugo academic的开始页面采用多个md文件组合在一起的设计，遵循widgets的设计理念，可单独
 修改并去除。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/hugo/home.png&#34; alt=&#34;hugo home design&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://ox-hugo.scripter.co/&#34; alt=&#34;hugo home design&#34; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;不修改原则&#34;&gt;不修改原则&lt;/h1&gt;
+
+&lt;p&gt;不要在themes/主题/layout直接修改其中的layout布局，而应该拷贝该主题文件
+到你的blog目录下的layout，并建立相似的文件架构，拷贝对应的文件，然后在
+该拷贝文件中进行修改，请参考&lt;code&gt;./layout/partials&lt;/code&gt;和&lt;code&gt;./layout/_default&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;他是和themes/academic/layout是相同的，但又增加了一些部分&lt;/p&gt;
+
+&lt;p&gt;方便后期升级主题 &lt;code&gt;git submodule update --remote --merge&lt;/code&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;org-hugo&#34;&gt;org-hugo&lt;/h1&gt;
+
+&lt;p&gt;add &lt;code&gt;C-c c A&lt;/code&gt; in your org-capture-templates, so you can create an entry with blog ideas&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-elisp&#34;&gt;
+    (&amp;quot;A&amp;quot; &amp;quot;Blog Ideas&amp;quot; entry (file+headline &amp;quot;~/.emacs.d/Dropbox/GTD/orgBoss/blog.org&amp;quot; &amp;quot;Blog Ideas&amp;quot;)
+    &amp;quot;* TODO [#B] %?\n  %i\n %U&amp;quot;
+    :empty-lines 1)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;add below lisp with &lt;code&gt;C-c c h&lt;/code&gt; in order to create an subtree in &amp;ldquo;Blog Ideas&amp;rdquo; with an blog title!&lt;/p&gt;
+
+&lt;p&gt;设置文章的tag和category。tag直接使用org的tag就行，而category则是前面加@符号的tag&lt;/p&gt;
+
+&lt;p&gt;当该子标题设置为Done的时候，ox-hugo自动帮你导出到对应的blog位置！很方便。&lt;/p&gt;
+
+&lt;p&gt;参考&lt;a href=&#34;https://ox-hugo.scripter.co/&#34; target=&#34;_blank&#34;&gt;ox-hugo&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-elisp&#34;&gt;(with-eval-after-load &#39;org-capture
+  (defun org-hugo-new-subtree-post-capture-template ()
+    &amp;quot;Returns `org-capture&#39; template string for new Hugo post.
+See `org-capture-templates&#39; for more information.&amp;quot;
+    (let* ((title (read-from-minibuffer &amp;quot;Post Title: &amp;quot;)) ;Prompt to enter the post title
+           (fname (org-hugo-slug title)))
+      (mapconcat #&#39;identity
+                 `(
+                   ,(concat &amp;quot;* TODO &amp;quot; title)
+                   &amp;quot;:PROPERTIES:&amp;quot;
+                   ,(concat &amp;quot;:EXPORT_FILE_NAME: &amp;quot; fname)
+                   &amp;quot;:END:&amp;quot;
+                   &amp;quot;\n\n&amp;quot;)        ;Place the cursor here finally
+                 &amp;quot;\n&amp;quot;)))
+
+  (add-to-list &#39;org-capture-templates
+               &#39;(&amp;quot;x&amp;quot;              ;`org-capture&#39; binding + h
+                 &amp;quot;Hugo post&amp;quot;
+                 entry
+                 ;; It is assumed that below file is present in `org-directory&#39;
+                 ;; and that it has a &amp;quot;Blog Ideas&amp;quot; heading. It can even be a
+                 ;; symlink pointing to the actual location of all-posts.org!
+                 (file+headline &amp;quot;~/.emacs.d/Dropbox/GTD/orgBoss/blog.org&amp;quot; &amp;quot;Blog Ideas&amp;quot;)
+                 (function org-hugo-new-subtree-post-capture-template))))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;C-c c x&lt;/code&gt;的templates可以进一步改造&lt;/p&gt;
 </description>
     </item>
     

@@ -28,7 +28,7 @@
   
     
   
-  <meta name="description" content="下面请看hugo academic的开始页面采用多个md文件组合在一起的设计，遵循widgets的设计理念，可单独 修改并去除。">
+  <meta name="description" content="下面请看hugo academic的开始页面采用多个md文件组合在一起的设计，遵循widgets的设计理念，可单独 修改并去除。 不修改原则 不要在">
 
   
   <link rel="alternate" hreflang="en-us" href="https://jueqingsizhe66.github.io/post/hugo-academic-design/">
@@ -59,8 +59,8 @@
     
       
       
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css" crossorigin="anonymous" title="hl-light">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css" crossorigin="anonymous" title="hl-light">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css" crossorigin="anonymous" title="hl-dark" disabled>
       
     
 
@@ -117,7 +117,7 @@
   <meta property="og:site_name" content="Macro Life">
   <meta property="og:url" content="https://jueqingsizhe66.github.io/post/hugo-academic-design/">
   <meta property="og:title" content="Hugo academic 设计理念 | Macro Life">
-  <meta property="og:description" content="下面请看hugo academic的开始页面采用多个md文件组合在一起的设计，遵循widgets的设计理念，可单独 修改并去除。"><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
+  <meta property="og:description" content="下面请看hugo academic的开始页面采用多个md文件组合在一起的设计，遵循widgets的设计理念，可单独 修改并去除。 不修改原则 不要在"><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
   <meta property="twitter:image" content="https://jueqingsizhe66.github.io/img/icon-192.png"><meta property="og:locale" content="en-us">
   
     
@@ -169,7 +169,7 @@
       "url": "https://jueqingsizhe66.github.io/img/icon-512.png"
     }
   },
-  "description": "下面请看hugo academic的开始页面采用多个md文件组合在一起的设计，遵循widgets的设计理念，可单独 修改并去除。"
+  "description": "下面请看hugo academic的开始页面采用多个md文件组合在一起的设计，遵循widgets的设计理念，可单独 修改并去除。 不修改原则 不要在"
 }
 </script>
 
@@ -400,28 +400,6 @@
         
 
         <li class="nav-item">
-          <a class="nav-link " href="/tags/"><span>标签</span></a>
-        </li>
-
-        
-        
-
-        
-
-        
-        
-        
-          
-        
-
-        
-        
-        
-        
-        
-        
-
-        <li class="nav-item">
           <a class="nav-link " href="/courses/"><span>课程</span></a>
         </li>
 
@@ -467,6 +445,35 @@
 
         <li class="nav-item">
           <a class="nav-link " href="/archives"><span>归档</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#tags"><span>标签</span></a>
         </li>
 
         
@@ -547,7 +554,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    1 min read
+    2 min read
 
   </span>
   
@@ -587,21 +594,95 @@
 
 
 
-<span class="article-metadata" >Reading time: 0 minutes and    16 seconds with 62 words. </span>
+<span class="article-metadata" >Reading time: 2 minutes and    27 seconds with 539 words. </span>
     <aside>
-        
+        <nav id="TableOfContents">
+<ul>
+<li><a href="#不修改原则">不修改原则</a></li>
+<li><a href="#org-hugo">org-hugo</a></li>
+</ul>
+</nav>
     </aside>
   <div class="article-container">
 
 
     <div class="article-style">
-      <p>下面请看hugo academic的开始页面采用多个md文件组合在一起的设计，遵循widgets的设计理念，可单独
+      
+
+<p>下面请看hugo academic的开始页面采用多个md文件组合在一起的设计，遵循widgets的设计理念，可单独
 修改并去除。</p>
 
-<p><img src="/images/hugo/home.png" alt="hugo home design" /></p>
+<p><img src="https://ox-hugo.scripter.co/" alt="hugo home design" /></p>
+
+<h1 id="不修改原则">不修改原则</h1>
+
+<p>不要在themes/主题/layout直接修改其中的layout布局，而应该拷贝该主题文件
+到你的blog目录下的layout，并建立相似的文件架构，拷贝对应的文件，然后在
+该拷贝文件中进行修改，请参考<code>./layout/partials</code>和<code>./layout/_default</code></p>
+
+<p>他是和themes/academic/layout是相同的，但又增加了一些部分</p>
+
+<p>方便后期升级主题 <code>git submodule update --remote --merge</code></p>
+
+<h1 id="org-hugo">org-hugo</h1>
+
+<p>add <code>C-c c A</code> in your org-capture-templates, so you can create an entry with blog ideas</p>
+
+<pre><code class="language-elisp">
+    (&quot;A&quot; &quot;Blog Ideas&quot; entry (file+headline &quot;~/.emacs.d/Dropbox/GTD/orgBoss/blog.org&quot; &quot;Blog Ideas&quot;)
+    &quot;* TODO [#B] %?\n  %i\n %U&quot;
+    :empty-lines 1)
+</code></pre>
+
+<p>add below lisp with <code>C-c c h</code> in order to create an subtree in &ldquo;Blog Ideas&rdquo; with an blog title!</p>
+
+<p>设置文章的tag和category。tag直接使用org的tag就行，而category则是前面加@符号的tag</p>
+
+<p>当该子标题设置为Done的时候，ox-hugo自动帮你导出到对应的blog位置！很方便。</p>
+
+<p>参考<a href="https://ox-hugo.scripter.co/" target="_blank">ox-hugo</a></p>
+
+<pre><code class="language-elisp">(with-eval-after-load 'org-capture
+  (defun org-hugo-new-subtree-post-capture-template ()
+    &quot;Returns `org-capture' template string for new Hugo post.
+See `org-capture-templates' for more information.&quot;
+    (let* ((title (read-from-minibuffer &quot;Post Title: &quot;)) ;Prompt to enter the post title
+           (fname (org-hugo-slug title)))
+      (mapconcat #'identity
+                 `(
+                   ,(concat &quot;* TODO &quot; title)
+                   &quot;:PROPERTIES:&quot;
+                   ,(concat &quot;:EXPORT_FILE_NAME: &quot; fname)
+                   &quot;:END:&quot;
+                   &quot;\n\n&quot;)        ;Place the cursor here finally
+                 &quot;\n&quot;)))
+
+  (add-to-list 'org-capture-templates
+               '(&quot;x&quot;              ;`org-capture' binding + h
+                 &quot;Hugo post&quot;
+                 entry
+                 ;; It is assumed that below file is present in `org-directory'
+                 ;; and that it has a &quot;Blog Ideas&quot; heading. It can even be a
+                 ;; symlink pointing to the actual location of all-posts.org!
+                 (file+headline &quot;~/.emacs.d/Dropbox/GTD/orgBoss/blog.org&quot; &quot;Blog Ideas&quot;)
+                 (function org-hugo-new-subtree-post-capture-template))))
+</code></pre>
+
+<p><code>C-c c x</code>的templates可以进一步改造</p>
 
     </div>
+ <div class="nav-links" style="padding:10;">
+        
+        <div align="left">
+        <a href="https://jueqingsizhe66.github.io/post/writing-technical-content/"><span class="arrow">←</span> <strong>上一篇:Writing technical content in Academic</strong></a>
+        </div>
+        
+        
 
+
+       <div align="right"> <a href="https://jueqingsizhe66.github.io/post/first/" ><strong>下一篇:AIWIND numerical simulation </strong><span class="arrow">→</span></a></div>
+        
+      </div>
     
 
 
@@ -819,10 +900,13 @@
 
   
   
+  </div>
+
 
 
 
   </div>
+
 </article>
 <script src="https://utteranc.es/client.js"
         repo="jueqingsizhe66/jueqingsizhe66.github.io"
