@@ -474,6 +474,26 @@
 
 
 
+<script async src="//cdn.busuanzi.ibruce.info/cdn/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        var int = setInterval(fixCount, 100);
+        var busuanziSiteOffset =  100000 
+        function fixCount() {
+            if ($("#busuanzi_container_site_pv").css("display") != "none") {
+                clearInterval(int);
+                $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + busuanziSiteOffset);
+            }
+        }
+    });
+</script>
+
+
+
+
+
 
 
   
@@ -545,7 +565,7 @@
 
 
 
-<span class="article-metadata" >Reading time: 14 minutes and    33 seconds with 3202 words. </span>
+<span class="article-metadata" >Reading time: 14 minutes and    33 seconds with 3202 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
 <ul>
@@ -826,9 +846,30 @@ Psychotherapy发展到今天，虽然派系众多，且新名词套路层出不�
 
   
   
+
+        <p class="credits copyright text-muted">
+        &copy;2017-2018
+          
+          &nbsp;&bull;&nbsp;
+          June 1,2030
+          updated
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://jueqingsizhe66.github.io/">Home</a>
+          
+        </p>
+        ...
+        <p class="credits theme-by text-muted">
+        ...
+        <span id="busuanzi_container_site_pv">
+            本站访问量：<span id="busuanzi_value_site_pv"></span>次
+        </span>
+        &nbsp;
+        <span id="busuanzi_container_site_uv">
+            您是本站第 <span id="busuanzi_value_site_uv"></span> 位访问者
+        </span>
+        </p>
   </div>
-
-
 
 
   </div>
