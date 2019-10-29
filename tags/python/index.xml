@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>python | Macro Life</title>
+    <link>https://jueqingsizhe66.github.io/tags/python/</link>
+      <atom:link href="https://jueqingsizhe66.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <description>python</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>©2019</copyright><lastBuildDate>Tue, 29 Oct 2019 10:33:00 +0800</lastBuildDate>
+    <image>
+      <url>https://jueqingsizhe66.github.io/img/icon-192.png</url>
+      <title>python</title>
+      <link>https://jueqingsizhe66.github.io/tags/python/</link>
+    </image>
+    
+    <item>
+      <title>python提取多个文件汇总到一个excel表</title>
+      <link>https://jueqingsizhe66.github.io/post/python%E6%8F%90%E5%8F%96%E5%A4%9A%E4%B8%AA%E6%96%87%E4%BB%B6%E6%B1%87%E6%80%BB%E5%88%B0%E4%B8%80%E4%B8%AAexcel%E8%A1%A8/</link>
+      <pubDate>Tue, 29 Oct 2019 10:33:00 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/post/python%E6%8F%90%E5%8F%96%E5%A4%9A%E4%B8%AA%E6%96%87%E4%BB%B6%E6%B1%87%E6%80%BB%E5%88%B0%E4%B8%80%E4%B8%AAexcel%E8%A1%A8/</guid>
+      <description>
+
+&lt;h2 id=&#34;背景介绍&#34;&gt;背景介绍&lt;/h2&gt;
+
+&lt;p&gt;在&lt;a href=&#34;https://jueqingsizhe66.github.io/post/perl拆分大文件到excel表/&#34; target=&#34;_blank&#34;&gt;perl拆分大文件&lt;/a&gt;后我们得到下图信息&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/windsim/windsimResults.png&#34; alt=&#34;windsim处理结果&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;我们希望单独提取三列信息到一个excel表大文件夹内，方便比较数据&lt;/p&gt;
+
+&lt;h2 id=&#34;技术分解&#34;&gt;技术分解&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;遍历&lt;/li&gt;
+&lt;li&gt;提却对应文件标识信息，并保存计算结果到xlsx文件&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;技术实现&#34;&gt;技术实现&lt;/h2&gt;
+
+&lt;p&gt;主要用到pandas的ExcelWriter函数&lt;/p&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; numpy &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; np
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; pandas &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; pd
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; os
+
+
+&lt;span style=&#34;color:#75715e&#34;&gt;#headDir=r&amp;#34;C:\Users\yezhaoliang\Desktop\work\AIWind\CompareCloseTOSingle\8.00&amp;#34;&lt;/span&gt;
+headDir&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C:\Users\yezhaoliang\Desktop\work\AIWind\processWindSim\HuaiLaiTurbine&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#headDir=r&amp;#34;D:\BoundaryLines&amp;#34;&lt;/span&gt;
+
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;get_files&lt;/span&gt;(path&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;headDir, rule&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;.csv&amp;#34;&lt;/span&gt;):
+    all &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; fpathe,dirs,fs &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;walk(path):   &lt;span style=&#34;color:#75715e&#34;&gt;# os.walk是获取所有的目录&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; f &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; fs:
+            filename &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;join(fpathe,f)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; filename&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;endswith(rule):  &lt;span style=&#34;color:#75715e&#34;&gt;# 判断是否是&amp;#34;xxx&amp;#34;结尾&lt;/span&gt;
+                all&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(filename)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; all
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; __name__ &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;__main__&amp;#34;&lt;/span&gt;:
+    b &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; get_files()
+    writer&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ExcelWriter(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Results-WindSimHuaiLaiTurbine.xlsx&amp;#34;&lt;/span&gt;)
+    altitudesName&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[]
+    &lt;span style=&#34;color:#75715e&#34;&gt;# googleEarthAltitude=[]&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# computedAltitude=[]&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# deltaAltitude=[]&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; b:
+        them&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;i&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\\&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+        &lt;span style=&#34;color:#75715e&#34;&gt;#secondPart=them[them.__len__()-2]&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;# sheetName=them[them.__len__()-3]+them[them.__len__()-2]+them[them.__len__()-1]&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;#sheetName=them[them.__len__()-3]+them[them.__len__()-2]+them[them.__len__()-1]&lt;/span&gt;
+        sheetName&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;them[them&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;__len__()&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+        altitudesName&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(sheetName)
+        sd&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read_csv(i,skiprows&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;)
+        &lt;span style=&#34;color:#75715e&#34;&gt;## 去除Null行（注意空格，数字也一样处理)&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;#squeezeZseries = sdNotNull.iloc[0:300, 2] - sdNotNull.iat[0, 2]  ## 减去海拔值&lt;/span&gt;
+
+        result &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;DataFrame({
+            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Velocity v/(m/s)&amp;#39;&lt;/span&gt;:sd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[:,&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;],
+            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;KE /(m*2/s*2)&amp;#39;&lt;/span&gt;:sd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[:,&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;],
+            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Z/(m)&amp;#39;&lt;/span&gt;:sd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[:,&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]})
+        result&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_excel(writer,sheet_name&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;sheetName)
+    writer&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;save()
+    writer&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;close()&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
