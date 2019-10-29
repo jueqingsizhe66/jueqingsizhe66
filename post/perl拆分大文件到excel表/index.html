@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.5.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Ye Zhaoliang">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="背景介绍 在风资源分析中，经常需要导出测风塔和风机点位不同扇区下的风速风向、湍流度等风资源信息，而这些信息导出后糅合在同一个大的文件下不好分析">
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://jueqingsizhe66.github.io/post/perl%E6%8B%86%E5%88%86%E5%A4%A7%E6%96%87%E4%BB%B6%E5%88%B0excel%E8%A1%A8/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css" crossorigin="anonymous" title="hl-light">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin="anonymous">
+    
+
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.min.e8d4d5fd376e67b34452ebe1cae16341.css">
+
+  
+
+  
+
+
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon-32.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="https://jueqingsizhe66.github.io/post/perl%E6%8B%86%E5%88%86%E5%A4%A7%E6%96%87%E4%BB%B6%E5%88%B0excel%E8%A1%A8/">
+
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="twitter:site" content="@jueqingsizhe66">
+  <meta property="twitter:creator" content="@jueqingsizhe66">
+  
+  <meta property="og:site_name" content="Macro Life">
+  <meta property="og:url" content="https://jueqingsizhe66.github.io/post/perl%E6%8B%86%E5%88%86%E5%A4%A7%E6%96%87%E4%BB%B6%E5%88%B0excel%E8%A1%A8/">
+  <meta property="og:title" content="perl拆分大文件到excel表 | Macro Life">
+  <meta property="og:description" content="背景介绍 在风资源分析中，经常需要导出测风塔和风机点位不同扇区下的风速风向、湍流度等风资源信息，而这些信息导出后糅合在同一个大的文件下不好分析"><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
+  <meta property="twitter:image" content="https://jueqingsizhe66.github.io/img/icon-192.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2019-10-29T10:00:00&#43;08:00">
+    
+    <meta property="article:modified_time" content="2019-10-29T10:06:34&#43;08:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://jueqingsizhe66.github.io/post/perl%E6%8B%86%E5%88%86%E5%A4%A7%E6%96%87%E4%BB%B6%E5%88%B0excel%E8%A1%A8/"
+  },
+  "headline": "perl拆分大文件到excel表",
+  
+  "datePublished": "2019-10-29T10:00:00+08:00",
+  "dateModified": "2019-10-29T10:06:34+08:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Ye Zhaoliang"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Macro Life",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://jueqingsizhe66.github.io/img/icon-512.png"
+    }
+  },
+  "description": "背景介绍 在风资源分析中，经常需要导出测风塔和风机点位不同扇区下的风速风向、湍流度等风资源信息，而这些信息导出后糅合在同一个大的文件下不好分析"
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>perl拆分大文件到excel表 | Macro Life</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0 compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">Macro Life</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav ml-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#hero"><span>概要</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>博文</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>项目</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#featured"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/about/"><span>About</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/courses/"><span>课程</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/categories/"><span>分类</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/archives"><span>归档</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#tags"><span>标签</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+        </li>
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+  
+ <script async src="//cdn.busuanzi.ibruce.info/cdn/busuanzi/2.3/busuanzi.pure.mini.js"></script> 
+ <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script> 
+ <script> 
+     $(document).ready(function() { 
+         var int = setInterval(fixCount, 100); 
+         var busuanziSiteOffset =  100000  
+         function fixCount() { 
+             if ($("#busuanzi_container_site_pv").css("display") != "none") { 
+                 clearInterval(int); 
+                 $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + busuanziSiteOffset); 
+             } 
+         } 
+     }); 
+ </script> 
+  
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>perl拆分大文件到excel表</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+          Last updated on
+      
+    
+    Oct 29, 2019
+  </span>
+
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    3 min read
+
+  </span>
+  
+
+  
+  
+  
+
+  
+  
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+
+
+<span class="article-metadata" >Reading time: 6 minutes and    7 seconds with 1348 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+    <aside>
+        <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#背景介绍">背景介绍</a></li>
+<li><a href="#原始数据分析">原始数据分析</a></li>
+<li><a href="#技术需求梳理">技术需求梳理</a></li>
+<li><a href="#技术实现">技术实现</a></li>
+</ul></li>
+</ul>
+</nav>
+    </aside>
+  <div class="article-container">
+
+
+    <div class="article-style">
+      
+
+<h2 id="背景介绍">背景介绍</h2>
+
+<p>在风资源分析中，经常需要导出测风塔和风机点位不同扇区下的风速风向、湍流度等风资源信息，而这些信息导出后糅合在同一个大的文件下不好分析，为此需要进行拆分.</p>
+
+<p>数据文件也有一些规律和关键信息，看下面的原始数据片段</p>
+
+<pre><code class="language-text">
+WECS number        :          1
+WECS name          : T12
+Manufacturer       : GW121.1
+Type               : gw
+Nominal effect     :       2500
+Hub height         :       90.0
+x (local)          :     5452.0
+y (local)          :     4103.5
+x (global)         : 20380130.0
+y (global)         :  4475007.5
+
+
+
+sector:     0
+
+  k       z-coord        UCRT         VCRT         WCRT      Speed_2D       Inflow        Shear    Shear_low   Shear_high           KE           TI        alpha           EP
+ (-)        (m)          (m/s)        (m/s)        (m/s)        (m/s)        (deg)        (1/s)        (1/s)        (1/s)    (m*2/s*2)          (%)          (-)    (m*2/s*3)
+   1        4.546        0.076       -3.410       -0.093        3.411       -1.557        0.316        0.750        0.099        0.325       19.289        0.212       0.0165
+   2       13.636        0.095       -4.306       -0.158        4.307       -2.107        0.072        0.099        0.045        0.364       16.171        0.195       0.0069
+
+   ....
+
+WECS number        :         23
+WECS name          : T18
+Manufacturer       : GW121.1
+Type               : gw
+Nominal effect     :       2500
+Hub height         :       90.0
+x (local)          :     4920.0
+y (local)          :     5961.5
+x (global)         : 20379598.0
+y (global)         :  4476865.5
+
+
+
+sector:     0
+
+  k       z-coord        UCRT         VCRT         WCRT      Speed_2D       Inflow        Shear    Shear_low   Shear_high           KE           TI        alpha           EP
+ (-)        (m)          (m/s)        (m/s)        (m/s)        (m/s)        (deg)        (1/s)        (1/s)        (1/s)    (m*2/s*2)          (%)          (-)    (m*2/s*3)
+   1        4.545       -0.043       -3.503       -0.156        3.503       -2.558        0.304        0.771        0.071        0.343       19.305        0.154       0.0180
+
+
+sector:   337
+
+  k       z-coord        UCRT         VCRT         WCRT      Speed_2D       Inflow        Shear    Shear_low   Shear_high           KE           TI        alpha           EP
+ (-)        (m)          (m/s)        (m/s)        (m/s)        (m/s)        (deg)        (1/s)        (1/s)        (1/s)    (m*2/s*2)          (%)          (-)    (m*2/s*3)
+   1        4.545        1.902       -3.359       -0.050        3.860       -0.744        0.325        0.849        0.064        0.412       19.205        0.127       0.0235
+   2       13.636        1.984       -3.970       -0.124        4.438       -1.595        0.045        0.064        0.025        0.418       16.813        0.113       0.0076
+   3       22.727        1.986       -4.226       -0.166        4.670       -2.035        0.022        0.025        0.018        0.450       16.586        0.101       0.0046
+</code></pre>
+
+<h2 id="原始数据分析">原始数据分析</h2>
+
+<p>通过分析发现，数据具有以下特点</p>
+
+<ol>
+<li>存在WECS name ，代表新的机位点</li>
+<li>每个机位点 有很多的扇区，sector开头，并用冒号划分</li>
+<li>为了提取坐标信息，增加了global字段，分别提取x， y信息,可用于保存文件名</li>
+<li>存在WECS name 表示停止打印标记</li>
+<li>Sector之下的一行到数据信息截止【下一个扇区前或者WECS name前】需要保存到一个文件内</li>
+</ol>
+
+<h2 id="技术需求梳理">技术需求梳理</h2>
+
+<ol>
+<li>每个文件起名标准，&rdquo;风机名-扇区名.csv&rdquo;</li>
+<li>什么时候修改风机名？ 遇到WECS name的时候； 但因为还需要提取x,y信息放入headname所以增加一个skip的标记号
+
+<ol>
+<li>skip==1 表示在sector数据范围内,开始打印到文件名内【此时用于提取核心数据】</li>
+<li>skip==2 表示在新风机位置处[此时用于提取x, y坐标信息]</li>
+<li>skip==3 表示停止打印，遇到WECS number【此时用于截断数据打印】</li>
+</ol></li>
+<li>得到扇区名字后，开始进行文件读取命令</li>
+</ol>
+
+<h2 id="技术实现">技术实现</h2>
+
+<p>为此设计了需求字段</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#66d9ef">my</span>  $specialSectorTag<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;sector&#34;</span>;
+<span style="color:#66d9ef">my</span>  $specialHeadTag<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;WECS name&#34;</span>;
+<span style="color:#75715e">#my  $specialHeadTag=&#34;Clim name&#34;;</span>
+<span style="color:#75715e">## Sometimes, there are chinese （）</span>
+<span style="color:#66d9ef">my</span>  $specialHeadTag1<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;global&#34;</span>;
+<span style="color:#66d9ef">my</span>  $specialPrintTag<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;z-coord&#34;</span>;
+<span style="color:#66d9ef">my</span>  $specialStopPrintTag<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;WECS number&#34;</span>;
+<span style="color:#75715e">#my  $specialStopPrintTag=&#34;Climatology number&#34;;</span>
+<span style="color:#66d9ef">my</span>  $skip<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;</code></pre></div>
+
+<p>其中SectorTag表示得到扇区信息,开始生成文件名，创建文件指针，
+SpecialHeadTag可设置多个，当前只需要提取头部两个信息，分别为WECS name风机名字和全局坐标点，所以设置了HeadTag 和HeadTag1，理论上无数多个</p>
+
+<p>PrintTag用于打印核心数据； StopPrintTag用于停止打印核心数据</p>
+
+<p>所有源代码</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#75715e">#!/usr/bin/env perl</span>
+<span style="color:#75715e">#===============================================================================</span>
+<span style="color:#75715e">#</span>
+<span style="color:#75715e">#         FILE: forSplitWindSim.pl</span>
+<span style="color:#75715e">#</span>
+<span style="color:#75715e">#        USAGE: ./forSplitWindSim.pl</span>
+<span style="color:#75715e">#</span>
+<span style="color:#75715e">#  DESCRIPTION:</span>
+<span style="color:#75715e">#</span>
+<span style="color:#75715e">#      OPTIONS: ---</span>
+<span style="color:#75715e"># REQUIREMENTS: ---</span>
+<span style="color:#75715e">#         BUGS: ---</span>
+<span style="color:#75715e">#        NOTES: ---</span>
+<span style="color:#75715e">#       AUTHOR: Ye Zhaoliang (Ye Zhaoliang), yezhaoliang@ncepu.edu.cn</span>
+<span style="color:#75715e"># ORGANIZATION:</span>
+<span style="color:#75715e">#      VERSION: 1.0</span>
+<span style="color:#75715e">#      CREATED: 2019-10-15 1413</span>
+<span style="color:#75715e">#     REVISION: ---</span>
+<span style="color:#75715e">#===============================================================================</span>
+
+<span style="color:#66d9ef">use</span> strict;
+<span style="color:#66d9ef">use</span> warnings;
+<span style="color:#66d9ef">use</span> utf8;
+
+<span style="color:#66d9ef">my</span>  $specialSectorTag<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;sector&#34;</span>;
+<span style="color:#66d9ef">my</span>  $specialHeadTag<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;WECS name&#34;</span>;
+<span style="color:#75715e">#my  $specialHeadTag=&#34;Clim name&#34;;</span>
+<span style="color:#75715e">## Sometimes, there are chinese （）</span>
+<span style="color:#66d9ef">my</span>  $specialHeadTag1<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;global&#34;</span>;
+<span style="color:#66d9ef">my</span>  $specialPrintTag<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;z-coord&#34;</span>;
+<span style="color:#66d9ef">my</span>  $specialStopPrintTag<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;WECS number&#34;</span>;
+<span style="color:#75715e">#my  $specialStopPrintTag=&#34;Climatology number&#34;;</span>
+<span style="color:#66d9ef">my</span>  $skip<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
+
+<span style="color:#75715e">#my	$INPUTDATA_file_name = &#39;D:/vertical_profile_wecs_cosMount.dat&#39;;		# input file name</span>
+<span style="color:#66d9ef">my</span>	$INPUTDATA_file_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;C:\Users\yezhaoliang\Desktop\work\AIWind\processWindSim\HuaiLaiTurbineZhuFengxiang\vertical_profile_wecs.dat&#39;</span>;		<span style="color:#75715e"># in</span>
+
+open  <span style="color:#66d9ef">my</span> $INPUTDATA, <span style="color:#e6db74">&#39;&lt;&#39;</span>, $INPUTDATA_file_name
+    <span style="color:#f92672">or</span> die  <span style="color:#e6db74">&#34;$0 : failed to open  input file &#39;$INPUTDATA_file_name&#39; : $!\n&#34;</span>;
+
+<span style="color:#66d9ef">my</span>  $filename<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>;
+<span style="color:#66d9ef">my</span>  $headName<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>;
+<span style="color:#66d9ef">my</span>  $sectorName<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>;
+<span style="color:#66d9ef">my</span> $INPUTDATAsector;
+<span style="color:#66d9ef">my</span>	$INPUTDATAsector_file_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;		<span style="color:#75715e"># input file name</span>
+
+<span style="color:#66d9ef">while</span> ( <span style="color:#e6db74">&lt;$INPUTDATA&gt;</span> ) {
+
+    <span style="color:#75715e">## Jump out empty line</span>
+    <span style="color:#66d9ef">next</span> <span style="color:#66d9ef">if</span> ($_<span style="color:#f92672">=~</span><span style="color:#e6db74">/^\s*$/</span>);
+    chomp();
+    <span style="color:#66d9ef">my</span>  $line<span style="color:#f92672">=</span>trim($_);
+    <span style="color:#75715e">#my  @columns=split(/\s+|:/,$line);</span>
+    <span style="color:#75715e"># Every files have different patterns, you need to feel it! Modify it!</span>
+    <span style="color:#66d9ef">my</span>  @columns<span style="color:#f92672">=</span>split(<span style="color:#e6db74">/:/</span>,$line);
+    <span style="color:#66d9ef">print</span> $#columns,<span style="color:#e6db74">&#34;\n&#34;</span>;
+    <span style="color:#75715e">#print &#34;$.: $_\n&#34; if($_=~/kpoint/);</span>
+
+    <span style="color:#75715e">##  Test commands for specialTag1  when you are using newest word</span>
+    <span style="color:#75715e">##   You need to find out the most comfortable pattern  for you</span>
+    <span style="color:#75715e">#print &#34;$.: Sector $columns[0]  $columns[1] \n&#34; if($line=~/$specialSectorTag/);</span>
+    <span style="color:#75715e">#print &#34;$.: Name     $columns[0]  $columns[1] \n&#34; if($line=~/$specialHeadTag/);</span>
+    <span style="color:#75715e">#print &#34;$.: X     $columns[0]  $columns[1] \n&#34; if($line=~/$specialHeadTag1/);</span>
+
+
+    <span style="color:#66d9ef">my</span>	$INPUTDATAsector_file_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>;		<span style="color:#75715e"># input file name</span>
+
+
+    <span style="color:#75715e">## 根据skip标记号控制打印,逐行执行,</span>
+    <span style="color:#75715e">## tag the start print position with $specialPrintTag</span>
+    <span style="color:#75715e">## tag the end print position with $specialStopPrintTag</span>
+    <span style="color:#66d9ef">if</span> ( $line <span style="color:#f92672">=~</span><span style="color:#e6db74">/$specialHeadTag|$specialHeadTag1/</span> <span style="color:#f92672">&amp;&amp;</span> $skip<span style="color:#f92672">==</span><span style="color:#ae81ff">3</span>) {
+
+        $headName <span style="color:#f92672">=</span> trim($columns[<span style="color:#ae81ff">1</span>]);  <span style="color:#75715e">## update the headName</span>
+        $skip <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;
+    }<span style="color:#66d9ef">elsif</span>(( $line <span style="color:#f92672">=~</span><span style="color:#e6db74">/$specialHeadTag|$specialHeadTag1/</span> <span style="color:#f92672">&amp;&amp;</span> $skip<span style="color:#f92672">==</span><span style="color:#ae81ff">2</span>)){
+
+        $headName <span style="color:#f92672">=</span> join(<span style="color:#e6db74">&#34;-&#34;</span>,trim($headName),trim($columns[<span style="color:#ae81ff">1</span>])); <span style="color:#75715e">## Apeend the headName</span>
+    }
+
+    <span style="color:#66d9ef">if</span> ( $line <span style="color:#f92672">=~</span><span style="color:#e6db74">/$specialSectorTag/</span> ) {
+
+        $sectorName <span style="color:#f92672">=</span> trim($columns[<span style="color:#ae81ff">1</span>]);
+        $INPUTDATAsector_file_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;D://$headName-$sectorName.csv&#34;</span>;		<span style="color:#75715e"># input file name</span>
+        open  $INPUTDATAsector, <span style="color:#e6db74">&#39;&gt;&#39;</span>, $INPUTDATAsector_file_name
+            <span style="color:#f92672">or</span> die  <span style="color:#e6db74">&#34;$0 : failed to open  input file &#39;$INPUTDATAsector_file_name&#39; : $!\n&#34;</span>;
+
+        <span style="color:#75715e">#        $skip=1;</span>
+    }
+
+    <span style="color:#66d9ef">if</span> ( $line <span style="color:#f92672">=~</span><span style="color:#e6db74"> /$specialPrintTag/</span>) {
+        $skip<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>;
+    }
+
+    <span style="color:#75715e">### New Position for different sectors</span>
+    <span style="color:#66d9ef">if</span> ( $line <span style="color:#f92672">=~</span><span style="color:#e6db74"> /$specialStopPrintTag/</span>) {
+        $skip<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>;
+
+    }
+
+    <span style="color:#66d9ef">if</span> ( $skip <span style="color:#f92672">==</span><span style="color:#ae81ff">1</span> ) {
+        $line <span style="color:#f92672">=~</span> <span style="color:#e6db74">s/\s+/,/g</span>;  <span style="color:#75715e">### colon separate delimiter</span>
+        <span style="color:#66d9ef">print</span> $INPUTDATAsector $line,<span style="color:#e6db74">&#34;\n&#34;</span>;
+
+    }
+
+
+}
+close  $INPUTDATA
+    <span style="color:#f92672">or</span> warn <span style="color:#e6db74">&#34;$0 : failed to close input file &#39;$INPUTDATA_file_name&#39; : $!\n&#34;</span>;
+
+<span style="color:#66d9ef">sub</span> <span style="color:#a6e22e">ltrim</span> { <span style="color:#66d9ef">my</span> $s <span style="color:#f92672">=</span> shift; $s <span style="color:#f92672">=~</span> <span style="color:#e6db74">s/^\s+//</span>;       <span style="color:#66d9ef">return</span> $s };
+<span style="color:#66d9ef">sub</span> <span style="color:#a6e22e">rtrim</span> { <span style="color:#66d9ef">my</span> $s <span style="color:#f92672">=</span> shift; $s <span style="color:#f92672">=~</span> <span style="color:#e6db74">s/\s+$//</span>;       <span style="color:#66d9ef">return</span> $s };
+<span style="color:#66d9ef">sub</span>  <span style="color:#a6e22e">trim</span> { <span style="color:#66d9ef">my</span> $s <span style="color:#f92672">=</span> shift; $s <span style="color:#f92672">=~</span> <span style="color:#e6db74">s/^\s+|\s+$//g</span>; <span style="color:#66d9ef">return</span> $s };</code></pre></div>
+
+    </div>
+ <div class="nav-links" style="padding:10;">
+        
+        <div align="left">
+        <a href="https://jueqingsizhe66.github.io/post/funny/"><span class="arrow">←</span> <strong>上一篇:funny</strong></a>
+        </div>
+        
+        
+      </div>
+    
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tags/perl/">perl</a>
+  
+</div>
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=https://jueqingsizhe66.github.io/post/perl%E6%8B%86%E5%88%86%E5%A4%A7%E6%96%87%E4%BB%B6%E5%88%B0excel%E8%A1%A8/&amp;text=perl%e6%8b%86%e5%88%86%e5%a4%a7%e6%96%87%e4%bb%b6%e5%88%b0excel%e8%a1%a8" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=https://jueqingsizhe66.github.io/post/perl%E6%8B%86%E5%88%86%E5%A4%A7%E6%96%87%E4%BB%B6%E5%88%B0excel%E8%A1%A8/&amp;t=perl%e6%8b%86%e5%88%86%e5%a4%a7%e6%96%87%e4%bb%b6%e5%88%b0excel%e8%a1%a8" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=perl%e6%8b%86%e5%88%86%e5%a4%a7%e6%96%87%e4%bb%b6%e5%88%b0excel%e8%a1%a8&amp;body=https://jueqingsizhe66.github.io/post/perl%E6%8B%86%E5%88%86%E5%A4%A7%E6%96%87%E4%BB%B6%E5%88%B0excel%E8%A1%A8/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https://jueqingsizhe66.github.io/post/perl%E6%8B%86%E5%88%86%E5%A4%A7%E6%96%87%E4%BB%B6%E5%88%B0excel%E8%A1%A8/&amp;title=perl%e6%8b%86%e5%88%86%e5%a4%a7%e6%96%87%e4%bb%b6%e5%88%b0excel%e8%a1%a8" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=perl%e6%8b%86%e5%88%86%e5%a4%a7%e6%96%87%e4%bb%b6%e5%88%b0excel%e8%a1%a8%20https://jueqingsizhe66.github.io/post/perl%E6%8B%86%E5%88%86%E5%A4%A7%E6%96%87%E4%BB%B6%E5%88%B0excel%E8%A1%A8/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=https://jueqingsizhe66.github.io/post/perl%E6%8B%86%E5%88%86%E5%A4%A7%E6%96%87%E4%BB%B6%E5%88%B0excel%E8%A1%A8/&amp;title=perl%e6%8b%86%e5%88%86%e5%a4%a7%e6%96%87%e4%bb%b6%e5%88%b0excel%e8%a1%a8" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="portrait mr-3" src="/authors/admin/avatar_hu52a603635ecebd45650b162dadabb4e5_12861_250x250_fill_q90_lanczos_center.jpg" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://jueqingsizhe66.github.io/">Ye Zhaoliang</a></h5>
+      <h6 class="card-subtitle">Engineer of offshore wind turbine technique research</h6>
+      <p class="card-text">My research interests include distributed energy, wind turbine power generation technique , Computational fluid dynamic and programmable matter.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/jueqingsizhe66" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.co.uk/citations?user=7VyEMyQAAAAJ&amp;hl=zh-CN" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/jueqingsizhe66" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+  
+  
+
+         <span id="busuanzi_container_site_pv"> 
+             本站访问量：<span id="busuanzi_value_site_pv"></span>次 
+         </span> 
+         &nbsp; 
+   </div> 
+
+
+  </div>
+
+</article>
+<script src="https://utteranc.es/client.js"
+        repo="jueqingsizhe66/jueqingsizhe66.github.io"
+        issue-term="pathname"
+        theme="github-dark"
+        crossorigin="anonymous"
+        async>
+</script>
+
+      
+
+    
+    
+    
+    <script src="/js/mathjax-config.js"></script>
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js" integrity="sha256-aYTdUrn6Ow1DDgh5JTc3aDGnnju48y/1c8s1dgkYPQ8=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/go.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/vim.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/matlab.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/sql.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/python.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/c.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/scheme.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/racket.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/perl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/awk.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/clojure.min.js"></script>
+        
+      
+
+      
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
+      
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.d6bd04fdad2ad213aa8111c5a3b72fc5.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    &copy;2019 &middot; 
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

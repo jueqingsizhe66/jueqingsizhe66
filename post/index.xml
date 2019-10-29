@@ -13,6 +13,235 @@
     </image>
     
     <item>
+      <title>perl拆分大文件到excel表</title>
+      <link>https://jueqingsizhe66.github.io/post/perl%E6%8B%86%E5%88%86%E5%A4%A7%E6%96%87%E4%BB%B6%E5%88%B0excel%E8%A1%A8/</link>
+      <pubDate>Tue, 29 Oct 2019 10:00:00 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/post/perl%E6%8B%86%E5%88%86%E5%A4%A7%E6%96%87%E4%BB%B6%E5%88%B0excel%E8%A1%A8/</guid>
+      <description>
+
+&lt;h2 id=&#34;背景介绍&#34;&gt;背景介绍&lt;/h2&gt;
+
+&lt;p&gt;在风资源分析中，经常需要导出测风塔和风机点位不同扇区下的风速风向、湍流度等风资源信息，而这些信息导出后糅合在同一个大的文件下不好分析，为此需要进行拆分.&lt;/p&gt;
+
+&lt;p&gt;数据文件也有一些规律和关键信息，看下面的原始数据片段&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;
+WECS number        :          1
+WECS name          : T12
+Manufacturer       : GW121.1
+Type               : gw
+Nominal effect     :       2500
+Hub height         :       90.0
+x (local)          :     5452.0
+y (local)          :     4103.5
+x (global)         : 20380130.0
+y (global)         :  4475007.5
+
+
+
+sector:     0
+
+  k       z-coord        UCRT         VCRT         WCRT      Speed_2D       Inflow        Shear    Shear_low   Shear_high           KE           TI        alpha           EP
+ (-)        (m)          (m/s)        (m/s)        (m/s)        (m/s)        (deg)        (1/s)        (1/s)        (1/s)    (m*2/s*2)          (%)          (-)    (m*2/s*3)
+   1        4.546        0.076       -3.410       -0.093        3.411       -1.557        0.316        0.750        0.099        0.325       19.289        0.212       0.0165
+   2       13.636        0.095       -4.306       -0.158        4.307       -2.107        0.072        0.099        0.045        0.364       16.171        0.195       0.0069
+
+   ....
+
+WECS number        :         23
+WECS name          : T18
+Manufacturer       : GW121.1
+Type               : gw
+Nominal effect     :       2500
+Hub height         :       90.0
+x (local)          :     4920.0
+y (local)          :     5961.5
+x (global)         : 20379598.0
+y (global)         :  4476865.5
+
+
+
+sector:     0
+
+  k       z-coord        UCRT         VCRT         WCRT      Speed_2D       Inflow        Shear    Shear_low   Shear_high           KE           TI        alpha           EP
+ (-)        (m)          (m/s)        (m/s)        (m/s)        (m/s)        (deg)        (1/s)        (1/s)        (1/s)    (m*2/s*2)          (%)          (-)    (m*2/s*3)
+   1        4.545       -0.043       -3.503       -0.156        3.503       -2.558        0.304        0.771        0.071        0.343       19.305        0.154       0.0180
+
+
+sector:   337
+
+  k       z-coord        UCRT         VCRT         WCRT      Speed_2D       Inflow        Shear    Shear_low   Shear_high           KE           TI        alpha           EP
+ (-)        (m)          (m/s)        (m/s)        (m/s)        (m/s)        (deg)        (1/s)        (1/s)        (1/s)    (m*2/s*2)          (%)          (-)    (m*2/s*3)
+   1        4.545        1.902       -3.359       -0.050        3.860       -0.744        0.325        0.849        0.064        0.412       19.205        0.127       0.0235
+   2       13.636        1.984       -3.970       -0.124        4.438       -1.595        0.045        0.064        0.025        0.418       16.813        0.113       0.0076
+   3       22.727        1.986       -4.226       -0.166        4.670       -2.035        0.022        0.025        0.018        0.450       16.586        0.101       0.0046
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;原始数据分析&#34;&gt;原始数据分析&lt;/h2&gt;
+
+&lt;p&gt;通过分析发现，数据具有以下特点&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;存在WECS name ，代表新的机位点&lt;/li&gt;
+&lt;li&gt;每个机位点 有很多的扇区，sector开头，并用冒号划分&lt;/li&gt;
+&lt;li&gt;为了提取坐标信息，增加了global字段，分别提取x， y信息,可用于保存文件名&lt;/li&gt;
+&lt;li&gt;存在WECS name 表示停止打印标记&lt;/li&gt;
+&lt;li&gt;Sector之下的一行到数据信息截止【下一个扇区前或者WECS name前】需要保存到一个文件内&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;技术需求梳理&#34;&gt;技术需求梳理&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;每个文件起名标准，&amp;rdquo;风机名-扇区名.csv&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;什么时候修改风机名？ 遇到WECS name的时候； 但因为还需要提取x,y信息放入headname所以增加一个skip的标记号
+
+&lt;ol&gt;
+&lt;li&gt;skip==1 表示在sector数据范围内,开始打印到文件名内【此时用于提取核心数据】&lt;/li&gt;
+&lt;li&gt;skip==2 表示在新风机位置处[此时用于提取x, y坐标信息]&lt;/li&gt;
+&lt;li&gt;skip==3 表示停止打印，遇到WECS number【此时用于截断数据打印】&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;li&gt;得到扇区名字后，开始进行文件读取命令&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;技术实现&#34;&gt;技术实现&lt;/h2&gt;
+
+&lt;p&gt;为此设计了需求字段&lt;/p&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-perl&#34; data-lang=&#34;perl&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt;  $specialSectorTag&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;sector&amp;#34;&lt;/span&gt;;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt;  $specialHeadTag&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;WECS name&amp;#34;&lt;/span&gt;;
+&lt;span style=&#34;color:#75715e&#34;&gt;#my  $specialHeadTag=&amp;#34;Clim name&amp;#34;;&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;## Sometimes, there are chinese （）&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt;  $specialHeadTag1&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;global&amp;#34;&lt;/span&gt;;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt;  $specialPrintTag&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;z-coord&amp;#34;&lt;/span&gt;;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt;  $specialStopPrintTag&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;WECS number&amp;#34;&lt;/span&gt;;
+&lt;span style=&#34;color:#75715e&#34;&gt;#my  $specialStopPrintTag=&amp;#34;Climatology number&amp;#34;;&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt;  $skip&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;其中SectorTag表示得到扇区信息,开始生成文件名，创建文件指针，
+SpecialHeadTag可设置多个，当前只需要提取头部两个信息，分别为WECS name风机名字和全局坐标点，所以设置了HeadTag 和HeadTag1，理论上无数多个&lt;/p&gt;
+
+&lt;p&gt;PrintTag用于打印核心数据； StopPrintTag用于停止打印核心数据&lt;/p&gt;
+
+&lt;p&gt;所有源代码&lt;/p&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-perl&#34; data-lang=&#34;perl&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/usr/bin/env perl&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#===============================================================================&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         FILE: forSplitWindSim.pl&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#        USAGE: ./forSplitWindSim.pl&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#  DESCRIPTION:&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#      OPTIONS: ---&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# REQUIREMENTS: ---&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         BUGS: ---&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#        NOTES: ---&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#       AUTHOR: Ye Zhaoliang (Ye Zhaoliang), yezhaoliang@ncepu.edu.cn&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# ORGANIZATION:&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#      VERSION: 1.0&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#      CREATED: 2019-10-15 1413&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#     REVISION: ---&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#===============================================================================&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; strict;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; warnings;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; utf8;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt;  $specialSectorTag&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;sector&amp;#34;&lt;/span&gt;;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt;  $specialHeadTag&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;WECS name&amp;#34;&lt;/span&gt;;
+&lt;span style=&#34;color:#75715e&#34;&gt;#my  $specialHeadTag=&amp;#34;Clim name&amp;#34;;&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;## Sometimes, there are chinese （）&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt;  $specialHeadTag1&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;global&amp;#34;&lt;/span&gt;;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt;  $specialPrintTag&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;z-coord&amp;#34;&lt;/span&gt;;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt;  $specialStopPrintTag&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;WECS number&amp;#34;&lt;/span&gt;;
+&lt;span style=&#34;color:#75715e&#34;&gt;#my  $specialStopPrintTag=&amp;#34;Climatology number&amp;#34;;&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt;  $skip&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;;
+
+&lt;span style=&#34;color:#75715e&#34;&gt;#my	$INPUTDATA_file_name = &amp;#39;D:/vertical_profile_wecs_cosMount.dat&amp;#39;;		# input file name&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt;	$INPUTDATA_file_name &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;C:\Users\yezhaoliang\Desktop\work\AIWind\processWindSim\HuaiLaiTurbineZhuFengxiang\vertical_profile_wecs.dat&amp;#39;&lt;/span&gt;;		&lt;span style=&#34;color:#75715e&#34;&gt;# in&lt;/span&gt;
+
+open  &lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt; $INPUTDATA, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;lt;&amp;#39;&lt;/span&gt;, $INPUTDATA_file_name
+    &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; die  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;$0 : failed to open  input file &amp;#39;$INPUTDATA_file_name&amp;#39; : $!\n&amp;#34;&lt;/span&gt;;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt;  $filename&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt;  $headName&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt;  $sectorName&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt; $INPUTDATAsector;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt;	$INPUTDATAsector_file_name &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;;		&lt;span style=&#34;color:#75715e&#34;&gt;# input file name&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; ( &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;lt;$INPUTDATA&amp;gt;&lt;/span&gt; ) {
+
+    &lt;span style=&#34;color:#75715e&#34;&gt;## Jump out empty line&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;next&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ($_&lt;span style=&#34;color:#f92672&#34;&gt;=~&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;/^\s*$/&lt;/span&gt;);
+    chomp();
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt;  $line&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;trim($_);
+    &lt;span style=&#34;color:#75715e&#34;&gt;#my  @columns=split(/\s+|:/,$line);&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# Every files have different patterns, you need to feel it! Modify it!&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt;  @columns&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;split(&lt;span style=&#34;color:#e6db74&#34;&gt;/:/&lt;/span&gt;,$line);
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt; $#columns,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;\n&amp;#34;&lt;/span&gt;;
+    &lt;span style=&#34;color:#75715e&#34;&gt;#print &amp;#34;$.: $_\n&amp;#34; if($_=~/kpoint/);&lt;/span&gt;
+
+    &lt;span style=&#34;color:#75715e&#34;&gt;##  Test commands for specialTag1  when you are using newest word&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;##   You need to find out the most comfortable pattern  for you&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;#print &amp;#34;$.: Sector $columns[0]  $columns[1] \n&amp;#34; if($line=~/$specialSectorTag/);&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;#print &amp;#34;$.: Name     $columns[0]  $columns[1] \n&amp;#34; if($line=~/$specialHeadTag/);&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;#print &amp;#34;$.: X     $columns[0]  $columns[1] \n&amp;#34; if($line=~/$specialHeadTag1/);&lt;/span&gt;
+
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt;	$INPUTDATAsector_file_name &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;;		&lt;span style=&#34;color:#75715e&#34;&gt;# input file name&lt;/span&gt;
+
+
+    &lt;span style=&#34;color:#75715e&#34;&gt;## 根据skip标记号控制打印,逐行执行,&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;## tag the start print position with $specialPrintTag&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;## tag the end print position with $specialStopPrintTag&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ( $line &lt;span style=&#34;color:#f92672&#34;&gt;=~&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;/$specialHeadTag|$specialHeadTag1/&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; $skip&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;) {
+
+        $headName &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; trim($columns[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]);  &lt;span style=&#34;color:#75715e&#34;&gt;## update the headName&lt;/span&gt;
+        $skip &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;;
+    }&lt;span style=&#34;color:#66d9ef&#34;&gt;elsif&lt;/span&gt;(( $line &lt;span style=&#34;color:#f92672&#34;&gt;=~&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;/$specialHeadTag|$specialHeadTag1/&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; $skip&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;)){
+
+        $headName &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; join(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;-&amp;#34;&lt;/span&gt;,trim($headName),trim($columns[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;])); &lt;span style=&#34;color:#75715e&#34;&gt;## Apeend the headName&lt;/span&gt;
+    }
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ( $line &lt;span style=&#34;color:#f92672&#34;&gt;=~&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;/$specialSectorTag/&lt;/span&gt; ) {
+
+        $sectorName &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; trim($columns[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]);
+        $INPUTDATAsector_file_name &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;D://$headName-$sectorName.csv&amp;#34;&lt;/span&gt;;		&lt;span style=&#34;color:#75715e&#34;&gt;# input file name&lt;/span&gt;
+        open  $INPUTDATAsector, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;gt;&amp;#39;&lt;/span&gt;, $INPUTDATAsector_file_name
+            &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; die  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;$0 : failed to open  input file &amp;#39;$INPUTDATAsector_file_name&amp;#39; : $!\n&amp;#34;&lt;/span&gt;;
+
+        &lt;span style=&#34;color:#75715e&#34;&gt;#        $skip=1;&lt;/span&gt;
+    }
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ( $line &lt;span style=&#34;color:#f92672&#34;&gt;=~&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; /$specialPrintTag/&lt;/span&gt;) {
+        $skip&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;;
+    }
+
+    &lt;span style=&#34;color:#75715e&#34;&gt;### New Position for different sectors&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ( $line &lt;span style=&#34;color:#f92672&#34;&gt;=~&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; /$specialStopPrintTag/&lt;/span&gt;) {
+        $skip&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;;
+
+    }
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ( $skip &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; ) {
+        $line &lt;span style=&#34;color:#f92672&#34;&gt;=~&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;s/\s+/,/g&lt;/span&gt;;  &lt;span style=&#34;color:#75715e&#34;&gt;### colon separate delimiter&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt; $INPUTDATAsector $line,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;\n&amp;#34;&lt;/span&gt;;
+
+    }
+
+
+}
+close  $INPUTDATA
+    &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; warn &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;$0 : failed to close input file &amp;#39;$INPUTDATA_file_name&amp;#39; : $!\n&amp;#34;&lt;/span&gt;;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;sub&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;ltrim&lt;/span&gt; { &lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt; $s &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; shift; $s &lt;span style=&#34;color:#f92672&#34;&gt;=~&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;s/^\s+//&lt;/span&gt;;       &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; $s };
+&lt;span style=&#34;color:#66d9ef&#34;&gt;sub&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;rtrim&lt;/span&gt; { &lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt; $s &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; shift; $s &lt;span style=&#34;color:#f92672&#34;&gt;=~&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;s/\s+$//&lt;/span&gt;;       &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; $s };
+&lt;span style=&#34;color:#66d9ef&#34;&gt;sub&lt;/span&gt;  &lt;span style=&#34;color:#a6e22e&#34;&gt;trim&lt;/span&gt; { &lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt; $s &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; shift; $s &lt;span style=&#34;color:#f92672&#34;&gt;=~&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;s/^\s+|\s+$//g&lt;/span&gt;; &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; $s };&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>funny</title>
       <link>https://jueqingsizhe66.github.io/post/funny/</link>
       <pubDate>Sun, 27 Oct 2019 14:06:00 +0800</pubDate>
