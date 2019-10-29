@@ -13,6 +13,140 @@
     </image>
     
     <item>
+      <title>python提取各个扇区不同机位点风速风向表</title>
+      <link>https://jueqingsizhe66.github.io/post/python%E6%8F%90%E5%8F%96%E5%90%84%E4%B8%AA%E6%89%87%E5%8C%BA%E4%B8%8D%E5%90%8C%E6%9C%BA%E4%BD%8D%E7%82%B9%E9%A3%8E%E9%80%9F%E9%A3%8E%E5%90%91%E8%A1%A8/</link>
+      <pubDate>Tue, 29 Oct 2019 11:14:00 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/post/python%E6%8F%90%E5%8F%96%E5%90%84%E4%B8%AA%E6%89%87%E5%8C%BA%E4%B8%8D%E5%90%8C%E6%9C%BA%E4%BD%8D%E7%82%B9%E9%A3%8E%E9%80%9F%E9%A3%8E%E5%90%91%E8%A1%A8/</guid>
+      <description>
+
+&lt;h2 id=&#34;背景介绍&#34;&gt;背景介绍&lt;/h2&gt;
+
+&lt;p&gt;在前面&lt;a href=&#34;https://jueqingsizhe66.github.io/post/perl拆分大文件到excel表/&#34; target=&#34;_blank&#34;&gt;perl拆分大文件&lt;/a&gt;一文中我们得到各个机位点在不同扇区下的物理量信息，并存放在一个excel表里头&lt;/p&gt;
+
+&lt;p&gt;而其实我们更关心的是轮毂高度处的风速风向信息，即形成下面的轮毂高度处不同扇区和机位点的风速风向&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://jueqingsizhe66.github.io/images/windsim/windspeedAngle.png&#34;&gt;windSpeedAngle&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;技术分解&#34;&gt;技术分解&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;遍历&lt;/li&gt;
+&lt;li&gt;建立一个扇区表和特征物理量【标识信息即可】， 该特征物理量为velocity表示提取偶数行，物理量为Angle表示提取奇数行&lt;/li&gt;
+&lt;li&gt;对特定的物理量进行atan2计算，atan2(vx,vy)得到[-pi,+pi]范围值，加上180°就变成了[0,2pi]&lt;/li&gt;
+&lt;li&gt;导出数据&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>python提取多个文件的存在null速度廓线</title>
+      <link>https://jueqingsizhe66.github.io/post/python%E6%8F%90%E5%8F%96%E5%A4%9A%E4%B8%AA%E6%96%87%E4%BB%B6%E7%9A%84%E5%AD%98%E5%9C%A8nan%E9%80%9F%E5%BA%A6%E5%BB%93%E7%BA%BF/</link>
+      <pubDate>Tue, 29 Oct 2019 10:56:00 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/post/python%E6%8F%90%E5%8F%96%E5%A4%9A%E4%B8%AA%E6%96%87%E4%BB%B6%E7%9A%84%E5%AD%98%E5%9C%A8nan%E9%80%9F%E5%BA%A6%E5%BB%93%E7%BA%BF/</guid>
+      <description>
+
+&lt;h2 id=&#34;背景介绍&#34;&gt;背景介绍&lt;/h2&gt;
+
+&lt;p&gt;在前面 &lt;a href=&#34;https://jueqingsizhe66.github.io/post/python提取多个文件汇总到一个excel表/&#34; target=&#34;_blank&#34;&gt;python提取多个文件&lt;/a&gt;的案例中，只是遍历了全部有效数据，并提取其中两列数据，而如果数据存在NULL? pandas该如何处理?&lt;/p&gt;
+
+&lt;p&gt;在CFDpost处理怀来风电场数据的廓线时候遇到如下问题，速度廓线存在Null值，如下图所示&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://jueqingsizhe66.github.io/images/aiwind/AIWINDVelocity.png&#34;&gt;AIWINDVelocity&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;技术分解&#34;&gt;技术分解&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;遍历&lt;/li&gt;
+&lt;li&gt;提取所有非Null行 满足条件sd[sd.iloc[:, 3] != &amp;lsquo; null&amp;rsquo;] 即可。&lt;/li&gt;
+&lt;li&gt;减去对应海拔值&lt;/li&gt;
+&lt;li&gt;存储结果到对应的sheet表中&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;技术实现&#34;&gt;技术实现&lt;/h2&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; numpy &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; np
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; pandas &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; pd
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; os
+
+
+headDir&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C:\Users\yezhaoliang\PythonAIWind\pandasHuaiLaiProfile&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;get_files&lt;/span&gt;(path&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;headDir, rule&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;.csv&amp;#34;&lt;/span&gt;):
+    all &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; fpathe,dirs,fs &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;walk(path):   &lt;span style=&#34;color:#75715e&#34;&gt;# os.walk是获取所有的目录&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; f &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; fs:
+            filename &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;join(fpathe,f)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; filename&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;endswith(rule):  &lt;span style=&#34;color:#75715e&#34;&gt;# 判断是否是&amp;#34;xxx&amp;#34;结尾&lt;/span&gt;
+                all&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(filename)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; all
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; __name__ &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;__main__&amp;#34;&lt;/span&gt;:
+    b &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; get_files()
+    writer&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ExcelWriter(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Results.xlsx&amp;#34;&lt;/span&gt;)
+    altitudesName&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[]
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; b:
+        them&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;i&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\\&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+        sheetName&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;them[them&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;__len__()&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;them[them&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;__len__()&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;them[them&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;__len__()&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+        altitudesName&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(sheetName)
+        sd&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read_csv(i,skiprows&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;)
+        &lt;span style=&#34;color:#75715e&#34;&gt;## 去除Null行（注意空格，数字也一样处理)&lt;/span&gt;
+        sdNotNull &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; sd[sd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[:, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39; null&amp;#39;&lt;/span&gt;]
+        startZ &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; sdNotNull&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iat[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;]  &lt;span style=&#34;color:#75715e&#34;&gt;## the third column at begin sequence you selected&lt;/span&gt;
+        squeezeZseries &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; sdNotNull&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;300&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; sdNotNull&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iat[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;]  &lt;span style=&#34;color:#75715e&#34;&gt;## 减去海拔值&lt;/span&gt;
+        temp1 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; sdNotNull&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;300&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;]
+        temp2 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; temp1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;astype(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;str&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;str&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;strip()  &lt;span style=&#34;color:#75715e&#34;&gt;##转换成字符串 然后去除左右空格&lt;/span&gt;
+        squeezeVelocityseries &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; temp2&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;astype(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;float64&amp;#39;&lt;/span&gt;);
+        result &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;concat([squeezeVelocityseries, squeezeZseries], axis&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+        result&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_excel(writer,sheet_name&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;sheetName,index_label&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;startZ)
+    writer&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;save()
+    writer&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;close()
+     &lt;span style=&#34;color:#75715e&#34;&gt;#tags=os.path.split(i)&lt;/span&gt;
+     &lt;span style=&#34;color:#75715e&#34;&gt;#print(os.path.join(tags[0],&amp;#39;done&amp;#39;,tags[1]))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&#34;问题发现&#34;&gt;问题发现&lt;/h2&gt;
+
+&lt;p&gt;300个点得到的结果不依，高程不统一，为此专门提取500个点，可以帅选&lt;/p&gt;
+
+&lt;p&gt;改进main部分&lt;/p&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; __name__ &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;__main__&amp;#34;&lt;/span&gt;:
+    b &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; get_files()
+    writer&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ExcelWriter(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Results-compare-600.xlsx&amp;#34;&lt;/span&gt;)
+    altitudesName&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[]
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; b:
+        them&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;i&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\\&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+        secondPart&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;them[them&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;__len__()&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;]
+        &lt;span style=&#34;color:#75715e&#34;&gt;# sheetName=them[them.__len__()-3]+them[them.__len__()-2]+them[them.__len__()-1]&lt;/span&gt;
+        sheetName&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;them[them&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;__len__()&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;secondPart[&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;:]&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;them[them&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;__len__()&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+        altitudesName&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(sheetName)
+        sd&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read_csv(i,skiprows&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;)
+        &lt;span style=&#34;color:#75715e&#34;&gt;## 去除Null行（注意空格，数字也一样处理)&lt;/span&gt;
+        sdNotNull &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; sd[sd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[:, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39; null&amp;#39;&lt;/span&gt;]
+        &lt;span style=&#34;color:#75715e&#34;&gt;#squeezeZseries = sdNotNull.iloc[0:300, 2] - sdNotNull.iat[0, 2]  ## 减去海拔值&lt;/span&gt;
+        temp1 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; sdNotNull&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;1000&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;]
+        temp2 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; temp1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;astype(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;str&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;str&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;strip()  &lt;span style=&#34;color:#75715e&#34;&gt;##转换成字符串 然后去除左右空格&lt;/span&gt;
+        squeezeVelocityseriesPre &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; temp2&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;astype(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;float64&amp;#39;&lt;/span&gt;);
+        squeezeVelocityseriesPreNumpy &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; squeezeVelocityseriesPre&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_numpy();
+        temp3 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; sdNotNull&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;1000&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;]
+        temp4 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; temp3&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;astype(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;str&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;str&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;strip()
+        squeezeZseriesPre &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; temp4&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;astype(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;float64&amp;#39;&lt;/span&gt;);
+        squeezeZseriesPreNumpy &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; squeezeZseriesPre&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_numpy();
+        initialArray&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;squeezeVelocityseriesPre[squeezeVelocityseriesPre&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0.0&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;size
+        initialZ&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;squeezeZseriesPreNumpy[initialArray]
+        squeezeVelocityseriese &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; squeezeVelocityseriesPreNumpy[initialArray:initialArray&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;501&lt;/span&gt;]
+        squeezeZOriginial &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; squeezeZseriesPreNumpy[initialArray:initialArray&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;501&lt;/span&gt;]
+        squeezeZSeries &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; squeezeZseriesPreNumpy[initialArray:initialArray&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;501&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;initialZ
+
+        result &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;DataFrame({
+            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Velocity/(m/s)&amp;#39;&lt;/span&gt;:pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Series(squeezeVelocityseriese),
+            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Z-Z0/(m)&amp;#39;&lt;/span&gt;:pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Series(squeezeZSeries),
+            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Z/(m)&amp;#39;&lt;/span&gt;:pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Series(squeezeZOriginial)})
+        result&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_excel(writer,sheet_name&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;sheetName)
+    writer&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;save()
+    writer&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;close()&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>python提取多个文件汇总到一个excel表</title>
       <link>https://jueqingsizhe66.github.io/post/python%E6%8F%90%E5%8F%96%E5%A4%9A%E4%B8%AA%E6%96%87%E4%BB%B6%E6%B1%87%E6%80%BB%E5%88%B0%E4%B8%80%E4%B8%AAexcel%E8%A1%A8/</link>
       <pubDate>Tue, 29 Oct 2019 10:33:00 +0800</pubDate>
