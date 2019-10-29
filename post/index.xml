@@ -792,6 +792,39 @@ See `org-capture-templates&#39; for more information.&amp;quot;
 &lt;li&gt;在_defaults/list.html添加阅读量信息&lt;/li&gt;
 &lt;li&gt;在partials/page_footer.html添加站内统计&lt;/li&gt;
 &lt;/ol&gt;
+
+&lt;h1 id=&#34;按照博文的tag和categories进行相关文章推荐&#34;&gt;按照博文的tag和categories进行相关文章推荐&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://discourse.gohugo.io/t/related-finds-no-pages/13622/5&#34; target=&#34;_blank&#34;&gt;gohugo论坛&lt;/a&gt;提到相关内容的配置信息：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;threshold = 1
+[[related.indices]]
+name = &amp;quot;keywords&amp;quot;
+weight = 200
+[[related.indices]]
+name  = &amp;quot;tags&amp;quot;
+weight = 100
+[[related.indices]]
+name  = &amp;quot;categories&amp;quot;
+weight = 100
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;因为page_footer.html有这样的设置&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;{{ if ne .Type &amp;quot;page&amp;quot; }}
+  {{ $related := site.RegularPages.Related . | first 5 }}
+  {{ with $related }}
+  &amp;lt;div class=&amp;quot;article-widget content-widget-hr&amp;quot;&amp;gt;
+    &amp;lt;h3&amp;gt;{{ i18n &amp;quot;related&amp;quot; }}&amp;lt;/h3&amp;gt;
+    &amp;lt;ul&amp;gt;
+      {{ range . }}
+      &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;{{ .RelPermalink }}&amp;quot;&amp;gt;{{ .Title }}&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+      {{ end }}
+    &amp;lt;/ul&amp;gt;
+{{ end }}
+
+&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     

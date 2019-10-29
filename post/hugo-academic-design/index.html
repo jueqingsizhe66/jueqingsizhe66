@@ -614,13 +614,14 @@
 
 
 
-<span class="article-metadata" >Reading time: 2 minutes and    59 seconds with 658 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+<span class="article-metadata" >Reading time: 3 minutes and    37 seconds with 797 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
 <ul>
 <li><a href="#不修改原则">不修改原则</a></li>
 <li><a href="#org-hugo">org-hugo</a></li>
 <li><a href="#不蒜子计数器">不蒜子计数器</a></li>
+<li><a href="#按照博文的tag和categories进行相关文章推荐">按照博文的tag和categories进行相关文章推荐</a></li>
 </ul>
 </nav>
     </aside>
@@ -699,6 +700,39 @@ See `org-capture-templates' for more information.&quot;
 <li>在_defaults/list.html添加阅读量信息</li>
 <li>在partials/page_footer.html添加站内统计</li>
 </ol>
+
+<h1 id="按照博文的tag和categories进行相关文章推荐">按照博文的tag和categories进行相关文章推荐</h1>
+
+<p><a href="https://discourse.gohugo.io/t/related-finds-no-pages/13622/5" target="_blank">gohugo论坛</a>提到相关内容的配置信息：</p>
+
+<pre><code>threshold = 1
+[[related.indices]]
+name = &quot;keywords&quot;
+weight = 200
+[[related.indices]]
+name  = &quot;tags&quot;
+weight = 100
+[[related.indices]]
+name  = &quot;categories&quot;
+weight = 100
+
+</code></pre>
+
+<p>因为page_footer.html有这样的设置</p>
+
+<pre><code class="language-js">{{ if ne .Type &quot;page&quot; }}
+  {{ $related := site.RegularPages.Related . | first 5 }}
+  {{ with $related }}
+  &lt;div class=&quot;article-widget content-widget-hr&quot;&gt;
+    &lt;h3&gt;{{ i18n &quot;related&quot; }}&lt;/h3&gt;
+    &lt;ul&gt;
+      {{ range . }}
+      &lt;li&gt;&lt;a href=&quot;{{ .RelPermalink }}&quot;&gt;{{ .Title }}&lt;/a&gt;&lt;/li&gt;
+      {{ end }}
+    &lt;/ul&gt;
+{{ end }}
+
+</code></pre>
 
     </div>
  <div class="nav-links" style="padding:10;">
