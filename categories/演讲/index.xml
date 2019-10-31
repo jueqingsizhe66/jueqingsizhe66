@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>演讲 | Macro Life</title>
+    <link>https://jueqingsizhe66.github.io/categories/%E6%BC%94%E8%AE%B2/</link>
+      <atom:link href="https://jueqingsizhe66.github.io/categories/%E6%BC%94%E8%AE%B2/index.xml" rel="self" type="application/rss+xml" />
+    <description>演讲</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>©2019</copyright><lastBuildDate>Sun, 07 Jun 2015 17:34:49 +0800</lastBuildDate>
+    <image>
+      <url>https://jueqingsizhe66.github.io/img/icon-192.png</url>
+      <title>演讲</title>
+      <link>https://jueqingsizhe66.github.io/categories/%E6%BC%94%E8%AE%B2/</link>
+    </image>
+    
+    <item>
+      <title>pandoc制作幻灯片with revealjs</title>
+      <link>https://jueqingsizhe66.github.io/blog/2015/06/07/pandoczhi-zuo-huan-deng-pian-with-revealjs/</link>
+      <pubDate>Sun, 07 Jun 2015 17:34:49 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/blog/2015/06/07/pandoczhi-zuo-huan-deng-pian-with-revealjs/</guid>
+      <description>&lt;p&gt;第一次看到github.io居然可以放上幻灯片,有点觉得不可思议
+&lt;a href=&#34;http://dongweiming.github.io/sed_and_awk/&#34; target=&#34;_blank&#34;&gt;sed_and_awk教程&lt;/a&gt;。后来调研发现这是采用了
++ &lt;a href=&#34;http://foxswily.iteye.com/blog/1997397&#34; target=&#34;_blank&#34;&gt;轻量slideshow（by markdown、pandoc、revealjs）&lt;/a&gt;
++ &lt;a href=&#34;http://www.soimort.org/posts/165/&#34; target=&#34;_blank&#34;&gt;Markdown+Pandoc→HTML幻灯片速成 &lt;/a&gt;
++ &lt;a href=&#34;http://www.tuicool.com/articles/Bbiu22U&#34; target=&#34;_blank&#34;&gt;pandoc将markdown转换输出HTML slide &lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;我新建了一个文件夹&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;mkdir genereateSlides
+cd generateSlides
+mkdir targets
+
+#并在targets中放上reveal.js,相信大家知道怎么下载
+ git clone https://github.com/hakimel/reveal.js
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后我抛弃掉dzslides,s5,slideous,slidy等，现在只是使用reveal.js&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;它支持md和org格式，这是我欣赏的&lt;/li&gt;
+&lt;li&gt;它支持一标题是水平切换，二标题是纵向切换，这也是我所欣赏，影响我的思维
+
+&lt;ul&gt;
+&lt;li&gt;所以针对markdown你需要思考何时使用#号个数&lt;/li&gt;
+&lt;li&gt;很对org-mode你需要考虑何时使用*号个数&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;它支持列表 逐个显示，也就是+/-/1. 等如果变异的时候加上-i选项则会逐个显示。&lt;/li&gt;
+&lt;li&gt;可以用 &amp;mdash;&amp;mdash;&amp;mdash;-多个破折号强制生成新的幻灯片&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;在开始写作之前首先得注意md开头的前三行：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;% Ye Zhaoliang 
+% Direct Numerical Simulation for Homogenuous Turbulence
+% June 07, 2015
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;pandoc slides.md -o targets/slides.html -t revealjs -s -V theme=beige
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;之前，进行几次实验，发现结果不对！但是其实就是用了上述的命令，而多试几遍又可以了，This is strange!But now it works&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;几种不同的幻灯片样式&#34;&gt;几种不同的幻灯片样式:&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;default：（默认）深灰色背景，白色文字&lt;/li&gt;
+&lt;li&gt;beige：米色背景，深色文字&lt;/li&gt;
+&lt;li&gt;sky：天蓝色背景，白色细文字&lt;/li&gt;
+&lt;li&gt;night：黑色背景，白色粗文字&lt;/li&gt;
+&lt;li&gt;serif：浅色背景，灰色衬线文字&lt;/li&gt;
+&lt;li&gt;simple：白色背景，黑色文字&lt;/li&gt;
+&lt;li&gt;solarized：奶油色背景，深青色文字&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;控制代码高亮风格的选项有&#34;&gt;控制代码高亮风格的选项有：&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&amp;ndash;highlight-style pygments&lt;/li&gt;
+&lt;li&gt;&amp;ndash;highlight-style kate&lt;/li&gt;
+&lt;li&gt;&amp;ndash;highlight-style monochrome&lt;/li&gt;
+&lt;li&gt;&amp;ndash;highlight-style espresso&lt;/li&gt;
+&lt;li&gt;&amp;ndash;highlight-style haddock&lt;/li&gt;
+&lt;li&gt;&amp;ndash;highlight-style tango&lt;/li&gt;
+&lt;li&gt;&amp;ndash;highlight-style zenburn&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -179,7 +179,7 @@ Date Tree a= Leaf a| Branch a a
 定义,这样对象和映射的组合才够成了范畴。
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;这也是为什么他比较重要，因为我们可能一直在用，但是并未知晓。当然上面需要特别注意的是实例声明额时候使用的是Tree，而不是Tree a.
+&lt;p&gt;我们可能一直在用，但是并未知晓。当然上面需要特别注意的是实例声明额时候使用的是Tree，而不是Tree a.
 也就是haskell和c++\java不同的是类型变量和methods的定义是分开的。
 Haskell类类似于java的interface，定义的是一个协议，而不是一个定义一个对象本身。而且最重要的一个区别是haskell没有访问控制
 修饰符比如public 、private。取而代之的是使用module模块系统用来隐藏和显示一个类的组成。&lt;/p&gt;
@@ -1120,21 +1120,6 @@ let g:haddock_docdir=&amp;quot;/home/happycamp-of-lisp/doc&amp;quot;
     </item>
     
     <item>
-      <title>加法之后也需减法</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/05/17/jia-fa-zhi-hou-ye-xu-jian-fa/</link>
-      <pubDate>Sun, 17 May 2015 22:46:35 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/05/17/jia-fa-zhi-hou-ye-xu-jian-fa/</guid>
-      <description>&lt;p&gt;老子道德经说&lt;a href=&#34;http://www.jdon.com/46727&#34; target=&#34;_blank&#34;&gt;道生一，一生二，二生三，三生万物&lt;/a&gt;，这句话符合构造定律Constructal Law.&lt;/p&gt;
-
-&lt;p&gt;学习过&lt;a href=&#34;http://www.cnblogs.com/haippy/archive/2012/06/04/2535197.html&#34; target=&#34;_blank&#34;&gt;git&lt;/a&gt;的人知道(可以参考&lt;a href=&#34;http://www.berlinix.com/it/git.php&#34; target=&#34;_blank&#34;&gt;git入门&lt;/a&gt;)，git体现的本质其实就是分支的思想,他就像是一块一块的&lt;a href=&#34;http://www.programblings.com/2008/06/07/the-illustrated-guide-to-recovering-lost-commits-with-git/&#34; target=&#34;_blank&#34;&gt;积木&lt;/a&gt;一样。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://think-like-a-git.net/&#34; target=&#34;_blank&#34;&gt;Thinking like a git&lt;/a&gt;教会我们 Facebook其实也是范畴的集合&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/tree.png&#34; alt=&#34;十分漂亮的树形图&#34; /&gt;
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/city.jpg&#34; alt=&#34;城市的树形图&#34; /&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
       <title>Haskell的IO main</title>
       <link>https://jueqingsizhe66.github.io/blog/2015/05/17/haskellde-io-main/</link>
       <pubDate>Sun, 17 May 2015 21:48:03 +0800</pubDate>
@@ -1331,6 +1316,8 @@ if-else  这其实是一种控制语句，不能说Haskell放掉了控制语句�
 假如宇宙存在根节点，越靠近根节点的肯定越抽象，我们现在是工作在底层的具象节点下。
 &amp;gt; 面向对象属于分解，函数编程属于组合。有以为 利，通过面向对象我们将一分解为多个，数量多了，“有”，而函数编程则是将多个组合成一个，数量少了  ，“无”，无才能用，只有忽略事物内部的细节，我们才 能用它，否则陷入细节迷失方向。换句话说：数学分数考得好，不代表在实际中用数学用的好，牛    顿没有发明几何学，但是用了几何学，创造了微积分，用它们推导 出万有引力；爱因斯坦用了非几何学推导了相对论。&lt;/p&gt;
 
+&lt;p&gt;简洁才能落地！&lt;/p&gt;
+
 &lt;p&gt;###从有至无方为用，有乃分，无乃合，宇宙的起点源于无&lt;/p&gt;
 
 &lt;p&gt;学习是一种分解能力，使用是一种组合能力，这是两种不同的能力。
@@ -1359,10 +1346,11 @@ if-else  这其实是一种控制语句，不能说Haskell放掉了控制语句�
 &lt;li&gt;忘记学习对象的细节才能用好它，无以为用，事物的制造者都不一定能用好它，除非事先有目标制造它。
 因此，学并不能致用，数理化学得好不一定用得好，博士给老板打工，老板赚大头。因为他把你的学问用处发挥了。自己学自己用因为智力限制也不可能。&lt;/li&gt;
 &lt;li&gt;中国教育的典型
-在学生阶段,中国学生数理化很好，但是毕业后诺贝尔奖获得者几乎没有，世界自然科学领军人物很少，那些高考状元 学神都哪儿去了？学得好不      一定用得好，中国教育制度是以学习能力评价学生，各种考试充斥大量 知识细节，让学生耗费18年于这些可能以后无用的细节中，最终他们已经没有智力      空间来思考如何使用这些大量的知识细节了。中国教育制度存在严重的本质错 误。
-面向对象的分解能力是强，但是组合能力很弱！
-实际上从函数运算的角度，不存在单纯的“值”，1应该是=&amp;amp; gt;1，或者说，所谓的常量值也是函数，只是每次不管输入什么都输出同样的结果。这样世界就只有运算，值是没必&amp;gt;要的，更没有状态。但这是神的视角，而一 旦人开始思考时，由于不具备神的无限的能力，只能在每个瞬间试图去把握世界，就看到了值和状态以及状态呈现时的context/stage/&amp;gt;舞台。但人希 望能像神一样去理解世界，就只好从这每个瞬间呈现的一切中去寻找变与不变的东西，当他们历尽艰辛找到“不变”的“变换”时就迫不及待地将之命名为定律。&lt;/li&gt;
+在学生阶段,中国学生数理化很好，但是毕业后诺贝尔奖获得者几乎没有，世界自然科学领军人物很少，那些高考状元 学神都哪儿去了？学得好不      一定用得好，中国教育制度是以学习能力评价学生，各种考试充斥大量 知识细节，让学生耗费18年于这些可能以后无用的细节中，最终他们已经没有智力空间来思考如何使用这些大量的知识细节了。&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;p&gt;面向对象的分解能力是强，但是组合能力很弱！
+实际上从函数运算的角度，不存在单纯的“值”，1应该是=&amp;amp; gt;1，或者说，所谓的常量值也是函数，只是每次不管输入什么都输出同样的结果。这样世界就只有运算，值是没必&amp;gt;要的，更没有状态。但这是神的视角，而一 旦人开始思考时，由于不具备神的无限的能力，只能在每个瞬间试图去把握世界，就看到了值和状态以及状态呈现时的context/stage/&amp;gt;舞台。但人希 望能像神一样去理解世界，就只好从这每个瞬间呈现的一切中去寻找变与不变的东西，当他们历尽艰辛找到“不变”的“变换”时就迫不及待地将之命名为定律。&lt;/p&gt;
 
 &lt;p&gt;关于上述思想，计算机邀请Haskell带领领略（Haskell可以学习，但是需要投入很多时间，坚持&amp;hellip;）&lt;/p&gt;
 
@@ -1374,7 +1362,7 @@ if-else  这其实是一种控制语句，不能说Haskell放掉了控制语句�
 
 &lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://learnyouahaskell.com/chapters&#34; target=&#34;_blank&#34;&gt;相当棒的趣味指南&lt;/a&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;从现实世界走入计算机-经过计算机思考-再从计算机走出现实世界-这就是-函数式思维-http-www-jdon-com-45608&#34;&gt;从现实世界走入计算机，经过计算机思考，再从计算机走出现实世界，这就是&lt;a href=&#34;http://www.jdon.com/45608&#34; target=&#34;_blank&#34;&gt; 函数式思维&lt;/a&gt;。&lt;/h3&gt;
+&lt;h3 id=&#34;从现实世界走入计算机-经过计算机思考-再从计算机走出并融入现实世界-这就是-函数式思维-http-www-jdon-com-45608&#34;&gt;从现实世界走入计算机，经过计算机思考，再从计算机走出并融入现实世界，这就是&lt;a href=&#34;http://www.jdon.com/45608&#34; target=&#34;_blank&#34;&gt; 函数式思维&lt;/a&gt;。&lt;/h3&gt;
 
 &lt;p&gt;函数的context引入了时间的关系。&lt;a href=&#34;http://www.jdon.com/45608&#34; target=&#34;_blank&#34;&gt; 我们思考逻辑的时候，定义已经是确定的了。也正因为是确定的，才可以逻辑思考&lt;/a&gt;。
 函数不存在状态，所以计算机加入了一个特殊的东西：时钟。值++时间=状态++，在可以忽视时序问题时，可以直接有值=状态。忽视时序问题，就相当于我们平时说的异步。若果单单使用锁，只是一种耗费资源手段。而我们看到无论是唤醒线程，还是延时读取，都是依赖时钟
@@ -1384,7 +1372,7 @@ if-else  这其实是一种控制语句，不能说Haskell放掉了控制语句�
 &lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/desk.jpg&#34; alt=&#34;桌子&#34; /&gt;
 一张桌子为案例，分解思维的人看到后首先想到这张桌子由什么构成，长宽高和材质，这些都是桌子的内部细节；而组合思维的人看到后，环顾四周，看看其处于什么环境，如果放在教室中，他判断这是一张课桌，如果放在食堂，他判断这是一张饭桌。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;从这个例子可以看出组合是从行为（运动、变化、时间）角度看待 世界的，“课桌”、“饭桌”中的“课”和“饭”在这里是动词，意为“上课用”、“吃饭用”的意思，“用”是动词，同一个桌子出现在不同的环境中发挥不同的 作用。而分解思维只研究空间，只研究桌子的空间结构是什么，甚至不研究为什么是四条腿，为什么每条腿长度相同，分解思维根本不考虑这些，不用考虑任何桌子 之外的世界，在分解思维中没有万有引力、没有地面的水平、没有书房和餐厅，只有空间，分解只考虑空间的组成结构。看来分解和组合是相互依存的，分解时研究 的是空间，组合时研究的是行为，把桌子放进餐厅的意义是期待使用它吃饭这样一种运动。 
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;从这个例子可以看出组合是从行为（运动、变化、时间）角度看待 世界的，“课桌”、“饭桌”中的“课”和“饭”在这里是动词，意为“上课用”、“吃饭用”的意思，“用”是动词，同一个桌子出现在不同的环境中发挥不同的 作用。而分解思维只研究空间，只研究桌子的空间结构是什么，甚至不研究为什么是四条腿，为什么每条腿长度相同，分解思维根本不考虑这些，不用考虑任何桌子 之外的世界，在分解思维中没有万有引力、没有地面的水平、没有书房和餐厅，只有空间，分解只考虑空间的组成结构。看来分解和组合是相互依存的，分解时研究 的是空间，组合时研究的是行为，把桌子放进餐厅的意义是期待使用它吃饭这样一种运动[组合运动？]。 
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;范畴英文是Category，也是++分类++的意思，打个比喻，Google能根据哪些网站引用你的网站这个外部信息进行PageRank评分，从而对你的网站权重进行排序，这个道理和我们评价一个人有些类似，看一个不认识的人怎么样，那就看看他交往的什么朋友，什么环境，近墨者黑，人以群分，物以类聚，这些都是从事物所在的分类类别中判断其价值，而不是从事物内部细节。（评判个人的价值标准跟不同的人在一起，意味着你的价值不一样.）&lt;/p&gt;
@@ -1406,7 +1394,7 @@ monad是从范畴论引入， 范畴其实就是一个集合，只不过对这�
       <pubDate>Sat, 16 May 2015 16:17:39 +0800</pubDate>
       <guid>https://jueqingsizhe66.github.io/blog/2015/05/16/language-limits-the-world-of-you/</guid>
       <description>&lt;ol&gt;
-&lt;li&gt;语言可以削尖我们的思维。&lt;/li&gt;
+&lt;li&gt;语言可以削尖我们的思维[进行思维锐化：思维锐化工具有哪些？ 鱼骨图找因果]。&lt;/li&gt;
 &lt;li&gt;语言也会限制我们的世界。&lt;/li&gt;
 &lt;li&gt;好的语言一定会影响你的思维方式,haskell,scheme,lisp&lt;/li&gt;
 &lt;/ol&gt;
@@ -1480,7 +1468,9 @@ Focuses on the low-level &lt;em&gt;&amp;ldquo;how&amp;rdquo;&lt;/em&gt;(Computer
       <link>https://jueqingsizhe66.github.io/blog/2015/05/16/haskellbi-ji/</link>
       <pubDate>Sat, 16 May 2015 14:30:22 +0800</pubDate>
       <guid>https://jueqingsizhe66.github.io/blog/2015/05/16/haskellbi-ji/</guid>
-      <description>&lt;p&gt;2001年，出生于荷兰的计算机大师、图灵奖获得者&lt;strong&gt;EdsgerW.Dijkstra&lt;/strong&gt;给德州大学预算委员会写信，力劝不要将计算机入门课程改为Java。不幸的是，学校最终还是用Java课程替换了Haskell。Haskell真的不行了？国内有些人的&lt;a href=&#34;http://www.vaikan.com/why-haskell-is-worth-learning/&#34; target=&#34;_blank&#34;&gt;评论&lt;/a&gt;&lt;/p&gt;
+      <description>&lt;p&gt;语言的表现力，简洁性，有效性。&lt;/p&gt;
+
+&lt;p&gt;2001年，出生于荷兰的计算机大师、图灵奖获得者&lt;strong&gt;EdsgerW.Dijkstra&lt;/strong&gt;给德州大学预算委员会写信，力劝不要将计算机入门课程改为Java。不幸的是，学校最终还是用Java课程替换了Haskell。Haskell真的不行了？国内有些人的&lt;a href=&#34;http://www.vaikan.com/why-haskell-is-worth-learning/&#34; target=&#34;_blank&#34;&gt;评论&lt;/a&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Haskell:函数式编程语言&lt;/li&gt;

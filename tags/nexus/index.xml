@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>nexus | Macro Life</title>
+    <link>https://jueqingsizhe66.github.io/tags/nexus/</link>
+      <atom:link href="https://jueqingsizhe66.github.io/tags/nexus/index.xml" rel="self" type="application/rss+xml" />
+    <description>nexus</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>©2019</copyright><lastBuildDate>Fri, 10 Feb 2017 00:04:33 +0800</lastBuildDate>
+    <image>
+      <url>https://jueqingsizhe66.github.io/img/icon-192.png</url>
+      <title>nexus</title>
+      <link>https://jueqingsizhe66.github.io/tags/nexus/</link>
+    </image>
+    
+    <item>
+      <title>java开发nexus私服搭建</title>
+      <link>https://jueqingsizhe66.github.io/blog/2017/02/10/javakai-fa-nexussi-fu-da-jian/</link>
+      <pubDate>Fri, 10 Feb 2017 00:04:33 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/blog/2017/02/10/javakai-fa-nexussi-fu-da-jian/</guid>
+      <description>&lt;p&gt;针对一台全新的电脑，安装java开发的maven私服，记录如下，并在IDEA中进行测试。&lt;/p&gt;
+
+&lt;p&gt;涉及到javase安装，maven安装，nexus私服安装，nexus本地配置，nexus界面介绍&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;安装JAVA jdk ,下载&lt;a href=&#34;http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html&#34; target=&#34;_blank&#34;&gt;javaSE安装包&lt;/a&gt;,注意JDK和JRE不要放在同一文件夹下&lt;/li&gt;
+&lt;li&gt;配置JAVA_HOME为JDk目录，并添加JDK的bin目录(%JAVA_HOME%\bin)到path中
+&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nexus/java.png&#34; alt=&#34;java&#34; /&gt;&lt;/li&gt;
+&lt;li&gt;下载&lt;a href=&#34;http://maven.apache.org/&#34; target=&#34;_blank&#34;&gt;maven&lt;/a&gt;,并解压缩，配置MAVEN_HOME为maven的根目录，并添加%MAVEN_HOME%\bin到path
+中
+&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nexus/home.png&#34; alt=&#34;home&#34; /&gt;
+&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nexus/bin.png&#34; alt=&#34;bin&#34; /&gt;
+&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nexus/java.png&#34; alt=&#34;mvn&#34; /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;显示了&lt;code&gt;mvn -v&lt;/code&gt;,也就表示装完了maven
+4. 下载&lt;a href=&#34;https://www.sonatype.com/download-oss-sonatype&#34; target=&#34;_blank&#34;&gt;nexus2.14&lt;/a&gt;,在windows下使用管理员身份打开cmd，并cd到nexus的bin目录，进行安装&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;nexus install
+nexus start
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;注意一定得配置bin\jsw\wrapper.conf的java bin信息，否则出错。
+&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nexus/wrapper.png&#34; alt=&#34;wrapper&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;出现的错误为无法启动，
+&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nexus/success.png&#34; alt=&#34;success&#34; /&gt;&lt;/p&gt;
+
+&lt;hr/&gt;
+
+&lt;p&gt;做完前面的几步之后只是，把配置环境弄完了，还得进行私服镜像配置。
+首先打开nexus私服页面，使用&lt;code&gt;http://localhost:8089/nexus/#welcome&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nexus/nexus.png&#34; alt=&#34;nexus&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;默认的登陆密码是
+    账号：admin
+    密码：admin123&lt;/p&gt;
+
+&lt;p&gt;登陆完的界面
+&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nexus/repositories.png&#34; alt=&#34;login&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;配置中心仓库:&lt;/p&gt;
+
+&lt;p&gt;中心仓库设置download remote indexes为真，为设置本地私服提供源。
+&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nexus/central.png&#34; alt=&#34;central&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;配置了release和snapshot仓库
+&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nexus/release.png&#34; alt=&#34;release&#34; /&gt;
+&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nexus/snapshot.png&#34; alt=&#34;snapshot&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;然后配置了第三方插件
+&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nexus/third.png&#34; alt=&#34;third&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;进入最关键的public Repositories设置&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nexus/public.png&#34; alt=&#34;public&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;有时候可以使用试用Scheduled Tasks观看库的index是否正常进行。
+&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nexus/schedule.png&#34; alt=&#34;scheduled&#34; /&gt;&lt;/p&gt;
+
+&lt;hr/&gt;
+
+&lt;h2 id=&#34;imp&#34;&gt;镜像私服配置&lt;/h2&gt;
+
+&lt;p&gt;maven中的settings.xml登陆私服的账户密码设置
+&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nexus/user.png&#34; alt=&#34;user&#34; /&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  &amp;lt;servers&amp;gt;
+    &amp;lt;server&amp;gt; 
+        &amp;lt;id&amp;gt;nexus-release&amp;lt;/id&amp;gt;
+        &amp;lt;username&amp;gt;admin&amp;lt;/username&amp;gt;
+        &amp;lt;password&amp;gt;admin123&amp;lt;/password&amp;gt;
+    &amp;lt;/server&amp;gt; 
+
+
+    &amp;lt;server&amp;gt; 
+        &amp;lt;id&amp;gt;nexus-snapshot&amp;lt;/id&amp;gt;
+        &amp;lt;username&amp;gt;admin&amp;lt;/username&amp;gt;
+        &amp;lt;password&amp;gt;admin123&amp;lt;/password&amp;gt;
+    &amp;lt;/server&amp;gt; 
+
+
+    &amp;lt;server&amp;gt; 
+        &amp;lt;id&amp;gt;nexus&amp;lt;/id&amp;gt;
+        &amp;lt;username&amp;gt;admin&amp;lt;/username&amp;gt;
+        &amp;lt;password&amp;gt;admin123&amp;lt;/password&amp;gt;
+    &amp;lt;/server&amp;gt; 
+      &amp;lt;!-- server
+     | Specifies the authentication information to use when connecting to a particular server, identified by
+     | a unique name within the system (referred to by the &#39;id&#39; attribute below).
+     |
+     | NOTE: You should either specify username/password OR privateKey/passphrase, since these pairings are
+     |       used together.
+     |
+    &amp;lt;server&amp;gt;
+      &amp;lt;id&amp;gt;deploymentRepo&amp;lt;/id&amp;gt;
+      &amp;lt;username&amp;gt;repouser&amp;lt;/username&amp;gt;
+      &amp;lt;password&amp;gt;repopwd&amp;lt;/password&amp;gt;
+    &amp;lt;/server&amp;gt;
+    --&amp;gt;
+
+    &amp;lt;!-- Another sample, using keys to authenticate.
+    &amp;lt;server&amp;gt;
+      &amp;lt;id&amp;gt;siteServer&amp;lt;/id&amp;gt;
+      &amp;lt;privateKey&amp;gt;/path/to/private/key&amp;lt;/privateKey&amp;gt;
+      &amp;lt;passphrase&amp;gt;optional; leave empty if not used.&amp;lt;/passphrase&amp;gt;
+    &amp;lt;/server&amp;gt;
+    --&amp;gt;
+  &amp;lt;/servers&amp;gt;
+
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;镜像配置&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;注意url链接的端口设置&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;
+&amp;lt;mirrors&amp;gt;
+&amp;lt;mirror&amp;gt;
+    &amp;lt;id&amp;gt;nexus&amp;lt;/id&amp;gt;
+    &amp;lt;mirrorOf&amp;gt;*&amp;lt;/mirrorOf&amp;gt;
+    &amp;lt;url&amp;gt;http://localhost:8089/nexus/content/groups/public/&amp;lt;/url&amp;gt;
+&amp;lt;/mirror&amp;gt;
+&amp;lt;/mirrors&amp;gt;
+&amp;lt;profiles&amp;gt;
+&amp;lt;profile&amp;gt;
+    &amp;lt;id&amp;gt;nexus&amp;lt;/id&amp;gt;
+&amp;lt;repositories&amp;gt;
+    &amp;lt;repository&amp;gt;
+        &amp;lt;id&amp;gt;central&amp;lt;/id&amp;gt;
+        &amp;lt;url&amp;gt;http://central&amp;lt;/url&amp;gt;
+        &amp;lt;releases&amp;gt;&amp;lt;enabled&amp;gt;true&amp;lt;/enabled&amp;gt;&amp;lt;/releases&amp;gt;
+        &amp;lt;snapshots&amp;gt;&amp;lt;enabled&amp;gt;true&amp;lt;/enabled&amp;gt;&amp;lt;/snapshots&amp;gt;
+    &amp;lt;/repository&amp;gt;
+&amp;lt;/repositories&amp;gt;
+&amp;lt;pluginRepositories&amp;gt;
+    &amp;lt;pluginRepository&amp;gt;
+        &amp;lt;id&amp;gt;central&amp;lt;/id&amp;gt;
+        &amp;lt;url&amp;gt;http://central&amp;lt;/url&amp;gt;
+        &amp;lt;releases&amp;gt;&amp;lt;enabled&amp;gt;true&amp;lt;/enabled&amp;gt;&amp;lt;/releases&amp;gt;
+        &amp;lt;snapshots&amp;gt;&amp;lt;enabled&amp;gt;true&amp;lt;/enabled&amp;gt;&amp;lt;/snapshots&amp;gt;
+    &amp;lt;/pluginRepository&amp;gt;
+&amp;lt;/pluginRepositories&amp;gt;
+&amp;lt;/profile&amp;gt;
+&amp;lt;/profiles&amp;gt;
+&amp;lt;activeProfiles&amp;gt;
+    &amp;lt;activeProfile&amp;gt;nexus&amp;lt;/activeProfile&amp;gt;
+&amp;lt;/activeProfiles&amp;gt;
+
+
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在maven中一般是需要设置下载控件jar包放在哪里,在没有私服的情况下，我一般
+可以在setting.xml中设置localRepository&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;   | Default: ${user.home}/.m2/repository
+  &amp;lt;localRepository&amp;gt;/path/to/local/repo&amp;lt;/localRepository&amp;gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;当然IDEA在导入项目或者新建项目的时候都会提醒Environment Variable,设置一下setting和local repository
+(类似的思路需要在myeclipse配置)
+&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nexus/setting.png&#34; alt=&#34;impo&#34; /&gt;
+而私服nexus的存放地点，在nexus界面的时候就已经设置好了，所以也得在每台电脑操作一遍(&lt;font color=&#34;red&#34;&gt;一定不能错&lt;/font&gt;)。&lt;/p&gt;
+
+&lt;p&gt;镜像的话，就不会执行maven的&lt;code&gt;mvn install&lt;/code&gt;等命令还一直向外部仓库访问链接，结果是访问的链接
+都是本地的，可看下节测试。&lt;/p&gt;
+
+&lt;h2 id=&#34;ida&#34;&gt;IDEA测试镜像私服&lt;/h2&gt;
+现在只能通过这个激活了，下载license server
+![license][20]
+
+测试结果如下:
+`mvn site`
+
+![idea][23]
+
+```
+INFO] artifact org.springframework:spring-beans: checking for updates from nexus
+[INFO] artifact org.springframework:spring-context: checking for updates from nexus
+[INFO] artifact org.springframework:spring-context-support: checking for updates from nexus
+[INFO] artifact org.springframework:spring-core: checking for updates from nexus
+[INFO] artifact org.springframework:spring-expression: checking for updates from nexus
+[INFO] artifact org.springframework:spring-instrument: checking for updates from nexus
+[INFO] artifact org.springframework:spring-instrument-tomcat: checking for updates from nexus
+[INFO] artifact org.springframework:spring-jdbc: checking for updates from nexus
+[INFO] artifact org.springframework:spring-jms: checking for updates from nexus
+[INFO] artifact org.springframework:spring-orm: checking for updates from nexus
+[INFO] artifact org.springframework:spring-oxm: checking for updates from nexus
+```
+
+&lt;h2 id=&#34;result&#34;&gt;结论&lt;/h2&gt;
+
+&lt;p&gt;整个配置过程有效，测试通过，进一步可以参考&lt;a href=&#34;http://vdisk.weibo.com/s/za2TN71LdL1tl&#34; target=&#34;_blank&#34;&gt;maven实战 许晓斌&lt;/a&gt;,里面包含了maven的坐标空间概念等，详细介绍了
+maven系统的各个组成和集成测试环境的搭建。&lt;/p&gt;
+
+&lt;p&gt;可以拓展阅读&lt;a href=&#34;http://blog.csdn.net/c1481118216/article/category/6250182&#34; target=&#34;_blank&#34;&gt;java blog&lt;/a&gt;
+三个有用工具包:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/venusdrogon/feilong-platform&#34; target=&#34;_blank&#34;&gt;飞龙 javase javaee(国产)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://feilong-core.mydoc.io/?t=149471&#34; target=&#34;_blank&#34;&gt;飞龙特别用心的手册&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/venusdrogon/feilong-core/wiki/install&#34; target=&#34;_blank&#34;&gt;可以玩玩feilong-platform平台的安装 以及mvn site产生好看的javadoc&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/looly/hutool&#34; target=&#34;_blank&#34;&gt;Hutool javase(国产)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.hutool.cn/apidocs/&#34; target=&#34;_blank&#34;&gt;hutool API手册&lt;/a&gt;  &lt;a href=&#34;http://hutool.mydoc.io/&#34; target=&#34;_blank&#34;&gt;Hutool Wiki&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://ibeetl.com/guide/#beetl&#34; target=&#34;_blank&#34;&gt;闲大赋 beetl 好用的模板引擎(国产)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://cn.vuejs.org/&#34; target=&#34;_blank&#34;&gt;vue.js火热的前端js框架(国产)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

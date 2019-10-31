@@ -389,5 +389,360 @@ sys     0m0.008s
 &lt;p&gt;结论：在awk中执行算术运算，比在bash中执行更好一些。&lt;/p&gt;</description>
     </item>
     
+    <item>
+      <title>使用Ydiff工具生成文件差异比较文件</title>
+      <link>https://jueqingsizhe66.github.io/blog/2016/02/22/shi-yong-ydiffgong-ju-sheng-cheng-wen-jian-chai-yi-bi-jiao-wen-jian/</link>
+      <pubDate>Mon, 22 Feb 2016 19:24:53 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/blog/2016/02/22/shi-yong-ydiffgong-ju-sheng-cheng-wen-jian-chai-yi-bi-jiao-wen-jian/</guid>
+      <description>&lt;p&gt;Ydiff是一个不错的lisp语法分析工具(&lt;a href=&#34;https://github.com/yinwang0/ydiff&#34; target=&#34;_blank&#34;&gt;王垠编制&lt;/a&gt;).下面是该工具简单用途和使用说明。&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;用途
+主要是js，cpp，和lisp的分析，现在也有&lt;a href=&#34;https://github.com/yinwang0/pysonar2&#34; target=&#34;_blank&#34;&gt;python&lt;/a&gt;,&lt;a href=&#34;https://github.com/yinwang0/pysonar2&#34; target=&#34;_blank&#34;&gt;ruby&lt;/a&gt;的分析工具。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;使用说明&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;编译的时候仅仅在项目下载之后，make一下即可生成对应的diff-cpp,diff-js,diff-lisp分析工具.
+文件分为单文件和文件夹两种。&lt;/p&gt;
+
+&lt;h2 id=&#34;单文件使用说明&#34;&gt;单文件使用说明&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt; diff-lisp *.scm *1.scm 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;文件夹使用方式&#34;&gt;文件夹使用方式&lt;/h2&gt;
+
+&lt;p&gt;保存下面源代码为process-lisp.sh&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;
+dir1=let-lang
+dir2=letrec-lang
+for i in `ls ${dir1}/*.scm`
+do
+    export TestVari=$i
+    /home/happycamp-of-lisp/wangying/ydiff/diff-lisp $i ${dir2}/${TestVari##*\/}
+done
+
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;当然也可以改为&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;
+dir1=let-lang
+dir2=letrec-lang
+for i in `ls ${dir1}/*.scm`
+do
+    /home/happycamp-of-lisp/wangying/ydiff/diff-lisp $i ${dir2}/${i##*\/}
+done
+
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;只要修改对应的文件夹dir1,dir2,就可以分析对应文件夹的scm所有文件,然后运用下面命令行，即可生成
+对应的html文件,方便阅读&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;bash process-lisp.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;数组引入进一步修改处理程序&#34;&gt;数组引入进一步修改处理程序&lt;/h2&gt;
+
+&lt;p&gt;数组的shell操作参考&lt;a href=&#34;http://blog.csdn.net/liufei_learning/article/details/8000570&#34; target=&#34;_blank&#34;&gt;如下&lt;/a&gt;,&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;定义的时候通过小括号包裹&lt;/li&gt;
+&lt;li&gt;调用的时候通过${}&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;注意 &lt;a href=&#34;http://blog.csdn.net/flowingflying/article/details/5146160&#34; target=&#34;_blank&#34;&gt;数据运算&lt;/a&gt;和判断(&lt;strong&gt;注意只有在双括号的小于号才是小于号&lt;/strong&gt;)的两个中括号&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;seq 1 $((${#array1[@]}-1))
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;测试过很多错误的情况，比如&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;array1=(`ls -l|grep ^d|awk &#39;{print $9}&#39;`); 
+echo ${array1[@]:0:${#array1[@]}-1};
+export length1=${!array1[@]}; 
+for i in ${array1[@]:1:length1-1}; do 
+    for j in ${array1[@]:$i:length1}; do 
+        echo $i,$j;
+    done;
+done;
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;原因在于,${!}操作并不是把它当作数组形式，所以改为数组即可，使用seq。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;length1=${!array1[@]}
+echo $length1 
+    0 1 2 3
+
+echo ${#length1[@]}
+    1
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;正确的过程(&lt;strong&gt;注意$i+1&lt;/strong&gt;)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;array1=(`ls -l|grep ^d|awk &#39;{print $9}&#39;`);  
+for i in `seq 1 $((${#array1[@]}-1))`; do 
+    for j in ${array1[@]:$i+1:${#array1[@]}}; do 
+        echo ${array1[$i]},$j;
+    done;
+done;
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;结果,满足组合公式&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;1,letrec-lang
+1,lexaddr-lang
+1,proc-lang
+2,lexaddr-lang
+2,proc-lang
+3,proc-lang
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;批处理解析scm文件&#34;&gt;批处理解析scm文件&lt;/h2&gt;
+
+&lt;p&gt;当文件夹下存在如下文件下，则可以进一步利用&lt;a href=&#34;#pi&#34;&gt;程序&lt;/a&gt;进行分析，注意拷贝nav.js和diff.css进行渲染&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ls┌─[root][canbetter-N53SM][±][master ?:10 ✗][2.2.1][/home/happycamp-of-lisp/EOPL2014/DF-eopl/chapter3/proc-lang/ds-rep]
+└─➞ ls
+compiled  data-structures.scm  drscheme-init.scm  environments.scm  interp.scm  lang.scm  tests.scm  top.scm
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;h3 id=&#34;pi&#34;&gt;批处理程序&lt;/h3&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;array1=(`ls -l|grep ^d|awk &#39;{print $9}&#39;`); 
+# 遍历所有文件夹 除了最后一个
+for i in `seq 1 $((${#array1[@]}-1))`; do 
+    #遍历从i之后的文件
+    for j in ${array1[@]:$i:${#array1[@]}}; do 
+        #echo ${array1[$i]},$j;
+        dir1=${array1[$i]};
+        dir2=$j;
+        mkdir ${dir1}-${dir2}
+        # 选取对应文件夹下的scm文件
+        for k in `ls ${dir1}/*.scm`
+        do
+            #export TestVari=$i
+            /home/happycamp-of-lisp/wangying/ydiff/diff-lisp $k ${dir2}/${k##*\/} 
+        done
+
+        mv *.html ${dir1}-${dir2}
+        cp ./nav.js ./diff.css ${dir1}-${dir2}
+    done;
+done;
+
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后可以在terminal运行&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;python -m SimpleHTTPServer
+Serving HTTP on 0.0.0.0 port 8000 ...
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在浏览器输入
+    &lt;a href=&#34;http://localhost:8000/&#34; target=&#34;_blank&#34;&gt;http://localhost:8000/&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;有问题的数组下标&#34;&gt;有问题的数组下标&lt;/h3&gt;
+
+&lt;p&gt;数组下表是从0开始的！&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;
+array1=(`ls -l|grep ^d|awk &#39;{print $9}&#39;`); 
+# 遍历所有文件夹 除了最后一个
+for i in `seq 0 $((${#array1[@]}-1))`; do 
+    #遍历从i之后的文件
+    for j in ${array1[@]:$i+1:${#array1[@]}}; do 
+        #echo ${array1[$i]},$j;
+        dir1=${array1[$i]};
+        dir2=$j;
+        mkdir ${dir1}-${dir2}
+        # 选取对应文件夹下的scm文件
+        for k in `ls ${dir1}/*.scm`
+        do
+            #export TestVari=$i
+            /home/happycamp-of-lisp/wangying/ydiff/diff-lisp $k ${dir2}/${k##*\/} 
+        done
+
+        mv *.html ${dir1}-${dir2}
+        cp ./nav.js ./diff.css ${dir1}-${dir2}
+    done;
+done;
+
+mkdir final-result
+for i in `seq 0 $((${#array1[@]}-1))`; do 
+    #遍历从i之后的文件
+    for j in ${array1[@]:$i+1:${#array1[@]}}; do 
+        #echo ${array1[$i]},$j;
+        dir1=${array1[$i]};
+        dir2=$j;
+        mv ${dir1}-${dir2} final-result
+    done;
+done;
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这样就完成了文件夹下所有的文件对比操作，当然得确保该文件夹下存在scm文件。&lt;/p&gt;
+
+&lt;h2 id=&#34;进一步修改ydiff&#34;&gt;进一步修改YDiff？&lt;/h2&gt;</description>
+    </item>
+    
+    <item>
+      <title>Shell_Programming_with_fewer_bugs</title>
+      <link>https://jueqingsizhe66.github.io/blog/2015/08/09/shell-programming-with-fewer-bugs/</link>
+      <pubDate>Sun, 09 Aug 2015 14:37:30 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/blog/2015/08/09/shell-programming-with-fewer-bugs/</guid>
+      <description>&lt;p&gt;shell的强大之处在于短小精悍，对于IO处理相当方便，当然也可以兼杂小型的数值计算（很少）。
+shell脚本在编写过程中也会产生很多bug。本文借鉴《Pro-Bash-Programming》一书所提倡的：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;comment  写上开头注释&lt;/li&gt;
+&lt;li&gt;Initialization of variables 变量初始化&lt;/li&gt;
+&lt;li&gt;Function definitions  函数定义&lt;/li&gt;
+&lt;li&gt;Runtime configuration 解析选项，读取配置文件等&lt;/li&gt;
+&lt;li&gt;Sanity Check  经过Runtime配置之后，可能修改某些值，比如shift操作，所以需要判断变量的合理性&lt;/li&gt;
+&lt;li&gt;Process information   最后才是计算、IO等&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;通过这中编写框架，可以减少错误。&lt;/p&gt;
+
+&lt;p&gt;a. 首先保存最后的shell代码到一个文件wfe.sh
+b. 其次下载所需要的字典文件&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  mkdir ~/words
+  cd ~/words
+ wget http://cfaj.freeshell.org/wordfinder/Compounds
+ wget http://cfaj.freeshell.org/wordfinder/singlewords
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;c. 运行脚本&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;
+1. 获取帮助
+  bash wfe.sh -h
+2. 获取版本信息
+  bash wfe.sh -v
+3.单个单词查找  
+  bash wfe.sh bro
+4. 复合单词内查找（包含单个单词）
+  bash wfe.sh -c bro 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;d. 源码文件：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;
+#:    Title: wfe - List words ending with PATTERN
+#: Synopsis: wfe [-c|-h|-v] REGEX
+#:     Date: 2009-04-13
+#:  Version: 1.0
+#:   Author: Chris F.A. Johnson
+#:  Options: -c - Include compound words
+#:           -h - Print usage information
+#:           -v - Print version number
+
+set -x
+export PS4=&#39;+ $LINENO : &#39;
+
+## 变量初始化
+## Script metadata
+scriptname=${0##*/}
+description=&amp;quot;List words ending with REGEX&amp;quot;
+usage=&amp;quot;$scriptname [-c|-h|-v] REGEX&amp;quot;
+date_of_creation=2009-04-13
+version=1.0
+author=&amp;quot;Chris F.A. Johnson&amp;quot;
+
+## File locations
+dict=$HOME/words
+wordfile=$dict/singlewords
+compoundfile=$dict/Compounds  # 源代码作者在这边设下陷阱1  con--&amp;gt;com
+
+## Default is not to show compound words
+compounds=
+
+## Reular expression supplied on the command line
+pattern=$1
+
+## Function definitions 函数定义 
+
+#提倡使用这样编写函数@ Description @Usage：
+die() #@ DESCRIPTION: print error message and exit with supplied return code
+{     #@ USAGE: die STATUS [MESSAGE]
+  error=$1
+  shift
+  [ -n &amp;quot;$*&amp;quot; ] printf &amp;quot;%s\n&amp;quot; &amp;quot;$*&amp;quot; &amp;gt;&amp;amp;2
+  exit &amp;quot;$error&amp;quot;
+}
+
+usage() #@ DESCRIPTION: print usage information
+{       #@ USAGE: usage
+        #@ REQUIRES: variable defined: $scriptname
+  printf &amp;quot;%s - %s\n&amp;quot; &amp;quot;$scriptname&amp;quot; &amp;quot;$description&amp;quot;
+  printf &amp;quot;USAGE: %s\n&amp;quot; &amp;quot;$usage&amp;quot;
+}
+
+version() #@ DESCRIPTION: print version information
+{          #@ USAGE: version
+           #@ REQUIRES: variables defined: $scriptname, $author and $version
+  printf &amp;quot;%s version %s\n&amp;quot; &amp;quot;$scriptname&amp;quot; &amp;quot;$version&amp;quot;
+  printf &amp;quot;by %s, %d\n&amp;quot; &amp;quot;$author&amp;quot; &amp;quot;${date_of_creation%%-*}&amp;quot;
+  #printf &amp;quot;by %s, %d\n&amp;quot; &amp;quot;$author&amp;quot; &amp;quot;${date_of_creation%%-*&amp;quot;   指的那边错误不是真正的错误！一般需要往上找
+}
+
+## parse command-line options, -c, -h, and -v 解析
+
+echo $(( $OPTIND ))
+while getopts chv var
+do
+   case $var in
+     c) compounds=$compoundfile ;;
+     h) usage; exit ;;
+     v) version; exit ;;
+   esac
+done
+shift $(( $OPTIND - 1 ))  ## move out one parameter and then position to the right by one step
+                          ## 右移操作
+regex=$1           ## 设下陷阱2 没有注册regex变量，却直接调用$regex
+echo $(( $regex ))
+
+## sanity check   设下陷阱3 没有进行错误检查
+
+if [ -z &amp;quot;$pattern&amp;quot; ]
+then 
+    {
+        echo &amp;quot;Search term missing&amp;quot;
+        usage
+    } &amp;gt;&amp;amp;2
+    exit 1
+fi
+
+
+## Search $wordfile and $compounds if it is defined
+{
+   cat &amp;quot;$wordfile&amp;quot;
+   if [ -n &amp;quot;$compounds&amp;quot; ]  # not null  -n ~ -z   n :nonzero  z:zero
+   then
+      cut -f1 &amp;quot;$compounds&amp;quot;
+   fi
+#}| grep -i &amp;quot;.$regex$&amp;quot; |sort -fu   #errror
+}| grep -i &amp;quot;.$regex$&amp;quot; |sort -fu 
+
+## Case-insensitive sort; remove duplicates
+
+
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
   </channel>
 </rss>
