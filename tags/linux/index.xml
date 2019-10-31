@@ -1,0 +1,2744 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linux | Macro Life</title>
+    <link>https://jueqingsizhe66.github.io/tags/linux/</link>
+      <atom:link href="https://jueqingsizhe66.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <description>Linux</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>©2019</copyright><lastBuildDate>Sun, 25 Sep 2016 23:15:01 +0800</lastBuildDate>
+    <image>
+      <url>https://jueqingsizhe66.github.io/img/icon-192.png</url>
+      <title>Linux</title>
+      <link>https://jueqingsizhe66.github.io/tags/linux/</link>
+    </image>
+    
+    <item>
+      <title>bash special annotation</title>
+      <link>https://jueqingsizhe66.github.io/blog/2016/09/25/bash-special-annotation/</link>
+      <pubDate>Sun, 25 Sep 2016 23:15:01 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/blog/2016/09/25/bash-special-annotation/</guid>
+      <description>&lt;p&gt;关于shell的summary参看&lt;a href=&#34;http://jueqingsizhe66.github.io/blog/2016/08/06/linux-shell-summary/#kernel&#34; target=&#34;_blank&#34;&gt;Linux Shell Summary&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;以下是关于bash的一些比较特殊的地方。&lt;/p&gt;
+
+&lt;h2 id=&#34;1-bash数组再理解&#34;&gt;1. bash数组再理解&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;declare -a&lt;/code&gt;表示声明一个数组，类似于 &lt;code&gt;declare -i&lt;/code&gt; 声明一个整数和&lt;code&gt;declare -x&lt;/code&gt;声明一个环境变量。&lt;/p&gt;
+
+&lt;p&gt;&lt;font color=&#34;red&#34;&gt;bash数组定义时候使用小括号来赋值，而在引用数组的时候反而使用中括号（不同于其他编程语言)&lt;/font&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;定义数组&#34;&gt;定义数组&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;bash2=(&amp;quot;34&amp;quot;,&amp;quot;5&amp;quot;,&amp;quot;5&amp;quot;,&amp;quot;4&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;引用数组&#34;&gt;引用数组&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;echo ${array[n]}
+遍历数组：
+filename=(`ls`)
+for var in ${filename[@]};do
+echo $var
+done
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;添加数组&#34;&gt;添加数组&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;bash1+=&amp;quot;45&amp;quot;; #赋值两边不能有空格
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;2-bash变量截取和变量替换&#34;&gt;2. bash变量截取和变量替换&lt;/h2&gt;
+
+&lt;p&gt;&lt;font color=&#34;red&#34;&gt;bash使用井号代表开头(这和正则表达式有点不同，使用caret)
+而结尾则使用百分号(不同于正则表达式的dollar符号$)。并且在当使用两个重叠的井号，表示最大长度（从头开始的最大删除都删掉）
+而使用两个百分号则表达反方向的最大长度删除（从尾到头删除匹配字符串）&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;#表示正向最短匹配，##表示正向最大匹配&lt;/li&gt;
+&lt;li&gt;%表示反向最短匹配，%%表示反向最大匹配&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;而这一点也体现在变量替换当中，&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;子串替换：
+${string/substring/replacement}
+使用$replacement来替换第一个匹配的$substring.
+
+${string//substring/replacement}
+使用$replacement来替换所有匹配的$substring.
+
+${string/#substring/replacement}
+如果$substring匹配$string的开头部分, 那么就用$replacement来替换$substring.
+
+${string/%substring/replacement}
+如果$substring匹配$string的结尾部分, 那么就用$replacement来替换$substring.
+
+子串提取的方法主要有：直接到指定位置求子串，字符匹配求子串。
+${string:position}
+在$string中从位置$position开始提取子串.
+
+如果$string是&amp;quot;*&amp;quot;或者&amp;quot;@&amp;quot;, 那么将会提取从位置$position开始的位置参数.[1]
+
+${string:position:length}
+在$string中从位置$position开始提取$length长度的子串.
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ol&gt;
+&lt;li&gt;除号表示最短替换，双除号表示最长替换&lt;/li&gt;
+&lt;li&gt;匹配项第一个位置出现#井号表示开头部分&lt;/li&gt;
+&lt;li&gt;匹配项最后一个位置出现%百分号表示结尾部分&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;3-bash接受键盘操作&#34;&gt;3. bash接受键盘操作&lt;/h2&gt;
+
+&lt;p&gt;用一个read命令即可(类似于matlab的input命令)
+通常的风格是 &lt;code&gt;read -p &amp;quot;prompt for reminding&amp;quot; variable-name&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;接收键盘输入：
+    read [选项] [变量名]
+    选项：
+        -p &amp;quot;提示信息&amp;quot;：在等待read输入时，输出提示信息
+        -t 秒数：read命令会一直等待用户输入，使用此选项可以指定等待时间
+        -n 字符数：read命令只接受指定的字符数，就会执行
+        -s：隐藏输入的数据，适用于机密信息的输入
+
+read.sh：
+#!/bin/bash
+
+read -p &amp;quot;please input your name:&amp;quot; -t 30 name
+echo $name
+
+read -p &amp;quot;please input your passwd:&amp;quot; -s passwd
+echo -e &amp;quot;\n&amp;quot;
+echo $passwd
+
+read -p &amp;quot;please input your sex [M/F]:&amp;quot; sex
+echo -e &amp;quot;\n&amp;quot;
+echo $sex
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;4-tac反向&#34;&gt;4. tac反向&lt;/h2&gt;
+
+&lt;p&gt;cat在bash中是打印文本信息的作用，而&lt;a href=&#34;http://bbs.chinaunix.net/thread-250407-1-1.html&#34; target=&#34;_blank&#34;&gt;tac&lt;/a&gt;则是反向输出文件流&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;cat old_file|awk &#39;{print NR,$0}&#39;|sort -r -n|awk &#39;{print $2}&#39;
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ol&gt;
+&lt;li&gt;添加每行的行号&lt;/li&gt;
+&lt;li&gt;逆向排列&lt;/li&gt;
+&lt;li&gt;输出每行&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;5-if当中也可以使用双括号进行算术判断&#34;&gt;5. if当中也可以使用双括号进行算术判断&lt;/h2&gt;
+
+&lt;p&gt;if并不是支持正则表达式？还是只有变量支持？&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;root at javazhao-N53SM [13:26:46ä��午] in /MyBashWork/clean on git:develop?
+$ if [ -f &amp;quot;All.sh&amp;quot; ] ;then echo &amp;quot;hei&amp;quot;; else echo &amp;quot;no&amp;quot; ;fi;
+
+hei
+
+root at javazhao-N53SM [13:26:52ä��午] in /MyBashWork/clean on git:develop?
+$ if [ -f &amp;quot;*.sh&amp;quot; ] ;then echo &amp;quot;hei&amp;quot;; else echo &amp;quot;no&amp;quot; ;fi;
+
+no
+
+
+但是对于变量是可以的
+[root@bj_manager ~]# a=123a;if [[ $a =~ ^[0-9]+$ ]]; then echo ok; fi
+[root@bj_manager ~]# a=123;if [[ $a =~ ^[0-9]+$ ]]; then echo ok; fi  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;font color=&#34;red&#34;&gt;实际情况是只有在双中括号的时候才支持正则表达式&lt;/font&gt;。&lt;font color=&#34;green&#34;&gt;一般是使用双中括号进行文件判断，目录判断，
+文件大小判断等&lt;/font&gt;&lt;/p&gt;
+
+&lt;p&gt;if另外一个特殊地方就是使用双括号执行算术比较&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;708@708-PC MINGW64 /e/plGraphViz (master)
+  if (( 1&amp;lt;2 )) ;then echo &amp;quot;zero&amp;quot;;   echo &amp;quot;a=2&amp;quot;; echo &amp;quot;a=3&amp;quot; ;else echo &amp;quot;no&amp;quot;; fi;
+zero
+a=2
+a=3
+
+
+708@708-PC MINGW64 /e/dot(1)/testByYe
+$   if [[ 1&amp;lt;2 ]] ;then echo &amp;quot;zero&amp;quot;;   echo &amp;quot;a=2&amp;quot;; echo &amp;quot;a=3&amp;quot; ;else echo &amp;quot;no&amp;quot;; fi;
+bash: unexpected token 284 in conditional command
+bash: syntax error near `1&amp;lt;&#39;
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;而bash也一般是使用&lt;code&gt;$((...))&lt;/code&gt; 进行算术的运算.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Ydiff单文件夹的所有scm文件比较</title>
+      <link>https://jueqingsizhe66.github.io/blog/2016/02/26/ydiffdan-wen-jian-jia-de-suo-you-scmwen-jian-bi-jiao/</link>
+      <pubDate>Fri, 26 Feb 2016 18:29:08 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/blog/2016/02/26/ydiffdan-wen-jian-jia-de-suo-you-scmwen-jian-bi-jiao/</guid>
+      <description>&lt;p&gt;关于YDIff处理已经在&lt;a href=&#34;http://jueqingsizhe66.github.io/blog/2016/02/22/shi-yong-ydiffgong-ju-sheng-cheng-wen-jian-chai-yi-bi-jiao-wen-jian/&#34; target=&#34;_blank&#34;&gt;使用Ydiff工具生成文件差异比较文件&lt;/a&gt;中提及，但是只是比较了两个文件夹之间的文件，
+而如果是较为简单的单个文件的所有文件的比较？类似思路如下所示，&lt;/p&gt;
+
+&lt;p&gt;一定要注意数组使用的是小括号包括起来，否则程序有问题。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;
+#遍历当前目录下的所有文件 并进行比较 最终结果存入final-result
+#array1=`ls *.scm`
+array1=(`ls *.scm`)  # 必须加上括号
+mkdir final-result
+for i in `seq 0 $((${#array1[@]}-1))`; do 
+    #遍历从i之后的文件
+    for j in ${array1[@]:$i+1:${#array1[@]}}; do 
+        #echo ${array1[$i]},$j;
+        dir1=${array1[$i]};
+        dir2=$j;
+        # 选取对应文件夹下的scm文件
+            #export TestVari=$i
+            /home/happycamp-of-lisp/wangying/ydiff/diff-lisp $dir1 ${dir2}
+
+    done;
+done;
+        mv *.html final-result
+        cp ./nav.js ./diff.css final-result
+
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ls会找出当前文件夹下的所有scm文件，然后利用bash中的数组操作，使用双重
+循环进行遍历即可。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>使用Ydiff工具生成文件差异比较文件</title>
+      <link>https://jueqingsizhe66.github.io/blog/2016/02/22/shi-yong-ydiffgong-ju-sheng-cheng-wen-jian-chai-yi-bi-jiao-wen-jian/</link>
+      <pubDate>Mon, 22 Feb 2016 19:24:53 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/blog/2016/02/22/shi-yong-ydiffgong-ju-sheng-cheng-wen-jian-chai-yi-bi-jiao-wen-jian/</guid>
+      <description>&lt;p&gt;Ydiff是一个不错的lisp语法分析工具(&lt;a href=&#34;https://github.com/yinwang0/ydiff&#34; target=&#34;_blank&#34;&gt;王垠编制&lt;/a&gt;).下面是该工具简单用途和使用说明。&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;用途
+主要是js，cpp，和lisp的分析，现在也有&lt;a href=&#34;https://github.com/yinwang0/pysonar2&#34; target=&#34;_blank&#34;&gt;python&lt;/a&gt;,&lt;a href=&#34;https://github.com/yinwang0/pysonar2&#34; target=&#34;_blank&#34;&gt;ruby&lt;/a&gt;的分析工具。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;使用说明&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;编译的时候仅仅在项目下载之后，make一下即可生成对应的diff-cpp,diff-js,diff-lisp分析工具.
+文件分为单文件和文件夹两种。&lt;/p&gt;
+
+&lt;h2 id=&#34;单文件使用说明&#34;&gt;单文件使用说明&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt; diff-lisp *.scm *1.scm 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;文件夹使用方式&#34;&gt;文件夹使用方式&lt;/h2&gt;
+
+&lt;p&gt;保存下面源代码为process-lisp.sh&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;
+dir1=let-lang
+dir2=letrec-lang
+for i in `ls ${dir1}/*.scm`
+do
+    export TestVari=$i
+    /home/happycamp-of-lisp/wangying/ydiff/diff-lisp $i ${dir2}/${TestVari##*\/}
+done
+
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;当然也可以改为&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;
+dir1=let-lang
+dir2=letrec-lang
+for i in `ls ${dir1}/*.scm`
+do
+    /home/happycamp-of-lisp/wangying/ydiff/diff-lisp $i ${dir2}/${i##*\/}
+done
+
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;只要修改对应的文件夹dir1,dir2,就可以分析对应文件夹的scm所有文件,然后运用下面命令行，即可生成
+对应的html文件,方便阅读&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;bash process-lisp.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;数组引入进一步修改处理程序&#34;&gt;数组引入进一步修改处理程序&lt;/h2&gt;
+
+&lt;p&gt;数组的shell操作参考&lt;a href=&#34;http://blog.csdn.net/liufei_learning/article/details/8000570&#34; target=&#34;_blank&#34;&gt;如下&lt;/a&gt;,&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;定义的时候通过小括号包裹&lt;/li&gt;
+&lt;li&gt;调用的时候通过${}&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;注意 &lt;a href=&#34;http://blog.csdn.net/flowingflying/article/details/5146160&#34; target=&#34;_blank&#34;&gt;数据运算&lt;/a&gt;和判断(&lt;strong&gt;注意只有在双括号的小于号才是小于号&lt;/strong&gt;)的两个中括号&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;seq 1 $((${#array1[@]}-1))
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;测试过很多错误的情况，比如&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;array1=(`ls -l|grep ^d|awk &#39;{print $9}&#39;`); 
+echo ${array1[@]:0:${#array1[@]}-1};
+export length1=${!array1[@]}; 
+for i in ${array1[@]:1:length1-1}; do 
+    for j in ${array1[@]:$i:length1}; do 
+        echo $i,$j;
+    done;
+done;
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;原因在于,${!}操作并不是把它当作数组形式，所以改为数组即可，使用seq。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;length1=${!array1[@]}
+echo $length1 
+    0 1 2 3
+
+echo ${#length1[@]}
+    1
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;正确的过程(&lt;strong&gt;注意$i+1&lt;/strong&gt;)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;array1=(`ls -l|grep ^d|awk &#39;{print $9}&#39;`);  
+for i in `seq 1 $((${#array1[@]}-1))`; do 
+    for j in ${array1[@]:$i+1:${#array1[@]}}; do 
+        echo ${array1[$i]},$j;
+    done;
+done;
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;结果,满足组合公式&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;1,letrec-lang
+1,lexaddr-lang
+1,proc-lang
+2,lexaddr-lang
+2,proc-lang
+3,proc-lang
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;批处理解析scm文件&#34;&gt;批处理解析scm文件&lt;/h2&gt;
+
+&lt;p&gt;当文件夹下存在如下文件下，则可以进一步利用&lt;a href=&#34;#pi&#34;&gt;程序&lt;/a&gt;进行分析，注意拷贝nav.js和diff.css进行渲染&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ls┌─[root][canbetter-N53SM][±][master ?:10 ✗][2.2.1][/home/happycamp-of-lisp/EOPL2014/DF-eopl/chapter3/proc-lang/ds-rep]
+└─➞ ls
+compiled  data-structures.scm  drscheme-init.scm  environments.scm  interp.scm  lang.scm  tests.scm  top.scm
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;h3 id=&#34;pi&#34;&gt;批处理程序&lt;/h3&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;array1=(`ls -l|grep ^d|awk &#39;{print $9}&#39;`); 
+# 遍历所有文件夹 除了最后一个
+for i in `seq 1 $((${#array1[@]}-1))`; do 
+    #遍历从i之后的文件
+    for j in ${array1[@]:$i:${#array1[@]}}; do 
+        #echo ${array1[$i]},$j;
+        dir1=${array1[$i]};
+        dir2=$j;
+        mkdir ${dir1}-${dir2}
+        # 选取对应文件夹下的scm文件
+        for k in `ls ${dir1}/*.scm`
+        do
+            #export TestVari=$i
+            /home/happycamp-of-lisp/wangying/ydiff/diff-lisp $k ${dir2}/${k##*\/} 
+        done
+
+        mv *.html ${dir1}-${dir2}
+        cp ./nav.js ./diff.css ${dir1}-${dir2}
+    done;
+done;
+
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后可以在terminal运行&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;python -m SimpleHTTPServer
+Serving HTTP on 0.0.0.0 port 8000 ...
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在浏览器输入
+    &lt;a href=&#34;http://localhost:8000/&#34; target=&#34;_blank&#34;&gt;http://localhost:8000/&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;有问题的数组下标&#34;&gt;有问题的数组下标&lt;/h3&gt;
+
+&lt;p&gt;数组下表是从0开始的！&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;
+array1=(`ls -l|grep ^d|awk &#39;{print $9}&#39;`); 
+# 遍历所有文件夹 除了最后一个
+for i in `seq 0 $((${#array1[@]}-1))`; do 
+    #遍历从i之后的文件
+    for j in ${array1[@]:$i+1:${#array1[@]}}; do 
+        #echo ${array1[$i]},$j;
+        dir1=${array1[$i]};
+        dir2=$j;
+        mkdir ${dir1}-${dir2}
+        # 选取对应文件夹下的scm文件
+        for k in `ls ${dir1}/*.scm`
+        do
+            #export TestVari=$i
+            /home/happycamp-of-lisp/wangying/ydiff/diff-lisp $k ${dir2}/${k##*\/} 
+        done
+
+        mv *.html ${dir1}-${dir2}
+        cp ./nav.js ./diff.css ${dir1}-${dir2}
+    done;
+done;
+
+mkdir final-result
+for i in `seq 0 $((${#array1[@]}-1))`; do 
+    #遍历从i之后的文件
+    for j in ${array1[@]:$i+1:${#array1[@]}}; do 
+        #echo ${array1[$i]},$j;
+        dir1=${array1[$i]};
+        dir2=$j;
+        mv ${dir1}-${dir2} final-result
+    done;
+done;
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这样就完成了文件夹下所有的文件对比操作，当然得确保该文件夹下存在scm文件。&lt;/p&gt;
+
+&lt;h2 id=&#34;进一步修改ydiff&#34;&gt;进一步修改YDiff？&lt;/h2&gt;</description>
+    </item>
+    
+    <item>
+      <title>bash Array 和拓展的pattern match</title>
+      <link>https://jueqingsizhe66.github.io/blog/2015/10/24/bash-array-he-tuo-zhan-de-pattern-match/</link>
+      <pubDate>Sat, 24 Oct 2015 15:36:57 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/blog/2015/10/24/bash-array-he-tuo-zhan-de-pattern-match/</guid>
+      <description>&lt;p&gt;通过&lt;a href=&#34;http://jueqingsizhe66.github.io/blog/2015/10/23/bash-support-idede-xin-fa-xian/&#34; target=&#34;_blank&#34;&gt;Bash_It&lt;/a&gt;的学习，第一次意识到Shell数组的不一样的写法。
+并且也看到Pattern Match的一些用途。&lt;/p&gt;
+
+&lt;h2 id=&#34;1-array&#34;&gt;1 Array&lt;/h2&gt;
+
+&lt;h3 id=&#34;1-1-bash数组定义&#34;&gt;1.1 Bash数组定义&lt;/h3&gt;
+
+&lt;p&gt;通过(1,2,3)区分于fortran语言的(/1,2,3/).&lt;/p&gt;
+
+&lt;p&gt;bash1=(34,5,6,4)&lt;/p&gt;
+
+&lt;p&gt;bash2=(&amp;ldquo;34&amp;rdquo;,&amp;ldquo;5&amp;rdquo;,&amp;ldquo;5&amp;rdquo;,&amp;ldquo;4&amp;rdquo;)&lt;/p&gt;
+
+&lt;h3 id=&#34;1-2-bash关联数组定义&#34;&gt;1.2 Bash关联数组定义&lt;/h3&gt;
+
+&lt;p&gt;通过 -A开关选项定义一个关联数组。&lt;/p&gt;
+
+&lt;p&gt;declare -A bash1&lt;/p&gt;
+
+&lt;p&gt;bash1[&amp;ldquo;34&amp;rdquo;]=&amp;ldquo;53&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;bash1[&amp;ldquo;56&amp;rdquo;]=&amp;ldquo;45&amp;rdquo;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;declare -A array
+for subscript in a b c d e
+     do
+         array[$subscript]=&amp;quot;$subscript $RANDOM&amp;quot;
+     done
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;也可以在&lt;em&gt;命令行使用&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  a=($(ls))  #而不是a=$(ls)
+
+  #这样就可以使用
+  ${a[1]}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;1-3-bash数组添加数据&#34;&gt;1.3 Bash数组添加数据&lt;/h3&gt;
+
+&lt;p&gt;bash1+=&amp;ldquo;54&amp;rdquo;&lt;/p&gt;
+
+&lt;h3 id=&#34;1-4-bash数组显示数据和便利&#34;&gt;1.4 Bash数组显示数据和便利&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;##单个显示
+printf &amp;quot;%s\n&amp;quot; &amp;quot;${array[&amp;quot;c&amp;quot;]}&amp;quot;
+
+##遍历
+printf &amp;quot;%s\n&amp;quot; &amp;quot;${array[@]}&amp;quot;
+printf &amp;quot;%s\n&amp;quot; &amp;quot;${array[*]}&amp;quot;
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;1-5-拓展的操作&#34;&gt;1.5 拓展的操作&lt;/h3&gt;
+
+&lt;p&gt;#表示长度的作用&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;${#array&lt;a href=&#34;http://www.gnu.org/&#34; target=&#34;_blank&#34;&gt;2&lt;/a&gt;}  现实第二个数组元素的长度&lt;/li&gt;
+&lt;li&gt;${#array[@]}   显示全部数组元素的长度&lt;/li&gt;
+&lt;li&gt;${#array[*]}  显示全部数组元素的长度&lt;/li&gt;
+&lt;li&gt;${#array[@]:2:3}  获取第2个到3个的长度&lt;/li&gt;
+&lt;li&gt;${!array[@]} !的作用是现实所有的key在数组当中。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;进一步参考&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://www.apress.com/9781484201220&#34; target=&#34;_blank&#34;&gt;pro_Bash_programming&lt;/a&gt;第五章 array部分&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;2-pattern-match&#34;&gt;2. PATTERN MATCH&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;?(pattern-list)   Matches zero or one occurrence of the given patterns
+*(pattern-list)   Matches zero or more occurrences of the given patterns
++(pattern-list)   Matches one or more occurrences of the given patterns
+@(pattern-list)   Matches one of the given patterns
+!(pattern-list)   Matches anything except one of the given patterns
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;比如：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  $ ls +(ab|def)*+(.jpg|.gif)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;进一步参考  ls使用&lt;a href=&#34;http://www.linuxjournal.com/content/bash-extended-globbing&#34; target=&#34;_blank&#34;&gt;PATTERN-MATCH&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Linux基础资料参考&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://www.gnu.org/&#34; target=&#34;_blank&#34;&gt;GNU官网&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://linux.vbird.org/linux_basic/&#34; target=&#34;_blank&#34;&gt;鸟哥论坛&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://linux.about.com/&#34; target=&#34;_blank&#34;&gt;Linux_About&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://www.cnblogs.com/bluebbc/tag/linux&#34; target=&#34;_blank&#34;&gt;CN_Blogs的一个收集&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;3-事情流程&#34;&gt;3 事情流程&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;认定你的事情&lt;/li&gt;
+&lt;li&gt;做&lt;/li&gt;
+&lt;li&gt;检验&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;拓展为:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;认清楚这件事情；&lt;/li&gt;
+&lt;li&gt;分析与这件事情有关的一切的一切；&lt;/li&gt;
+&lt;li&gt;制定做好这件事情的计划；&lt;/li&gt;
+&lt;li&gt;实施计划；&lt;/li&gt;
+&lt;li&gt;验证这件事情的结果；&lt;/li&gt;
+&lt;/ol&gt;</description>
+    </item>
+    
+    <item>
+      <title>Bash Support IDE的新发现</title>
+      <link>https://jueqingsizhe66.github.io/blog/2015/10/23/bash-support-idede-xin-fa-xian/</link>
+      <pubDate>Fri, 23 Oct 2015 00:28:00 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/blog/2015/10/23/bash-support-idede-xin-fa-xian/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://www.vim.org/scripts/script.php?script_id=365&#34; target=&#34;_blank&#34;&gt;Bash Support&lt;/a&gt;实现一个vim的bash IDE工具。好处式可以较快捷的
+输入命令和编程以及调试(bashdb)。&lt;/p&gt;
+
+&lt;h2 id=&#34;支持的几种后缀文件&#34;&gt;支持的几种后缀文件&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;c 的.c  c++ 的.cc  .cpp  cc&lt;/li&gt;
+&lt;li&gt;perl 的.pl&lt;/li&gt;
+&lt;li&gt;awk的.awk&lt;/li&gt;
+&lt;li&gt;shell的.sh&lt;/li&gt;
+&lt;li&gt;vim的.vim文件&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;查看系统的各种template&#34;&gt;查看系统的各种template&lt;/h2&gt;
+
+&lt;p&gt;&lt;font color=&#34;green&#34;&gt;当你新建一个*.sh文件&lt;/font&gt;
+ 一定要记住的一个命令 \ntl,通过它可以知道各个template系统文件
+ 都在干什么，以及如何使用那些快捷命令，比如\ckc \css \cfu \cc \cs  \se \sf 等。&lt;/p&gt;
+
+&lt;h2 id=&#34;几个常见的macro&#34;&gt;几个常见的Macro&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;|FILENAME|&lt;/li&gt;
+&lt;li&gt;|AUTHOR|&lt;/li&gt;
+&lt;li&gt;|DATE|&lt;/li&gt;
+&lt;li&gt;|TIME|&lt;/li&gt;
+&lt;li&gt;|EMAIL|&lt;/li&gt;
+&lt;li&gt;|ORGANIZATION|&lt;/li&gt;
+&lt;li&gt;|AUTHORREF|&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;font color=&#34;red&#34;&gt;你可以在.vim/bundle/bash-support.vim/bash-support/templates/Template文件(
+这边使用的是相对路径，我是通过bundle进行管理vim插件).&lt;/font&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;css-的程序几个大的部分的注释&#34;&gt;css 的程序几个大的部分的注释&lt;/h2&gt;
+
+&lt;p&gt;当你敲入\css会在vim的下端出现一个输入栏，有下面几个选项&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&amp;lsquo;GLOBAL DECLARATIONS&amp;rsquo;     : &amp;lsquo;GLOBAL DECLARATIONS&amp;rsquo;,&lt;/li&gt;
+&lt;li&gt;&amp;lsquo;COMMAND LINE PROCESSING&amp;rsquo; : &amp;lsquo;COMMAND LINE PROCESSING&amp;rsquo;,&lt;/li&gt;
+&lt;li&gt;&amp;lsquo;SANITY CHECKS&amp;rsquo;           : &amp;lsquo;SANITY CHECKS&amp;rsquo;,&lt;/li&gt;
+&lt;li&gt;&amp;lsquo;FUNCTION DEFINITIONS&amp;rsquo;    : &amp;lsquo;FUNCTION DEFINITIONS&amp;rsquo;,&lt;/li&gt;
+&lt;li&gt;&amp;lsquo;TRAPS&amp;rsquo;                   : &amp;lsquo;TRAPS&amp;rsquo;,&lt;/li&gt;
+&lt;li&gt;&amp;lsquo;MAIN SCRIPT&amp;rsquo;             : &amp;lsquo;MAIN SCRIPT&amp;rsquo;,&lt;/li&gt;
+&lt;li&gt;&amp;lsquo;STATISTICS AND CLEAN-UP&amp;rsquo; : &amp;lsquo;STATISTICS AND CLEAN-UP&amp;rsquo;,&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;font color=&#34;red&#34;&gt;具体可以查看你的bash-support.vim/bash-support/templates/comment.templates&lt;/font&gt;
+在该文件的一开头就define了shell文件的注释头。&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;技巧可以通过 G然后TAB就可以直接补全了。&lt;/em&gt;
+  之所以说他特别好是因为，根据&lt;a href=&#34;http://www.apress.com/9781430219972/&#34; target=&#34;_blank&#34;&gt;《Pro Bash Programming》&lt;/a&gt;, 提出的关于
+  写更好的shell script的建议，如下所示：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Comments  文件开头的注释，以及单行注释、函数注释、块注释&lt;/li&gt;
+&lt;li&gt;Initialization of variables  变量声明&lt;/li&gt;
+&lt;li&gt;Function definitions  函数定义&lt;/li&gt;
+&lt;li&gt;Runtime configuration (parse options, read configuration file, and so on) 通过getopt解析脚本选项和运行所需的配置文件的导入&lt;/li&gt;
+&lt;li&gt;Sanity check (are all values reasonable?)   一些判断、检查&lt;/li&gt;
+&lt;li&gt;Command Run  程序运行&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Process information (calculate, slice and dice lines, I/O, and so on)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;
+#:    Title: wfe - List words ending with PATTERN
+#: Synopsis: wfe [-c|-h|-v] REGEX
+#:     Date: 2009-04-13
+#:  Version: 1.0
+#:   Author: Chris F.A. Johnson
+#:  Options: -c - Include compound words
+#:           -h - Print usage information
+#:           -v - Print version number
+
+set -x
+export PS4=&#39;+ $LINENO : &#39;
+## Script metadata
+scriptname=${0##*/}
+description=&amp;quot;List words ending with REGEX&amp;quot;
+usage=&amp;quot;$scriptname [-c|-h|-v] REGEX&amp;quot;
+date_of_creation=2009-04-13
+version=1.0
+author=&amp;quot;Chris F.A. Johnson&amp;quot;
+
+## File locations
+dict=$HOME/words
+wordfile=$dict/singlewords
+compoundfile=$dict/Compounds
+
+## Default is not to show compound words
+compounds=
+
+## Reular expression supplied on the command line
+pattern=$1
+
+## Function definitions
+
+die() #@ DESCRIPTION: print error message and exit with supplied return code
+{     #@ USAGE: die STATUS [MESSAGE]
+error=$1
+shift
+[ -n &amp;quot;$*&amp;quot; ] printf &amp;quot;%s\n&amp;quot; &amp;quot;$*&amp;quot; &amp;gt;&amp;amp;2
+exit &amp;quot;$error&amp;quot;
+}
+
+usage() #@ DESCRIPTION: print usage information
+{       #@ USAGE: usage
+    #@ REQUIRES: variable defined: $scriptname
+printf &amp;quot;%s - %s\n&amp;quot; &amp;quot;$scriptname&amp;quot; &amp;quot;$description&amp;quot;
+printf &amp;quot;USAGE: %s\n&amp;quot; &amp;quot;$usage&amp;quot;
+}
+
+version() #@ DESCRIPTION: print version information
+{          #@ USAGE: version
+       #@ REQUIRES: variables defined: $scriptname, $author and $version
+printf &amp;quot;%s version %s\n&amp;quot; &amp;quot;$scriptname&amp;quot; &amp;quot;$version&amp;quot;
+printf &amp;quot;by %s, %d\n&amp;quot; &amp;quot;$author&amp;quot; &amp;quot;${date_of_creation%%-*}&amp;quot;
+#printf &amp;quot;by %s, %d\n&amp;quot; &amp;quot;$author&amp;quot; &amp;quot;${date_of_creation%%-*&amp;quot;   指的那边错误不是真正的错误！一般需要往上找
+}
+## parse command-line options, -c, -h, and -v
+echo $(( $OPTIND ))
+while getopts chv var
+do
+case $var in
+ c) compounds=$compoundfile ;;
+ h) usage; exit ;;
+ v) version; exit ;;
+esac
+done
+shift $(( $OPTIND - 1 ))  ## move out one parameter and then position to the right by one step
+                      ## 右移操作
+regex=$1
+echo $(( $regex ))
+## sanity check
+if [ -z &amp;quot;$pattern&amp;quot; ]
+then 
+{
+    echo &amp;quot;Search term missing&amp;quot;
+    usage
+} &amp;gt;&amp;amp;2
+exit 1
+fi
+## Search $wordfile and $compounds if it is defined
+{
+cat &amp;quot;$wordfile&amp;quot;
+if [ -n &amp;quot;$compounds&amp;quot; ]  # not null  -n ~ -z   n :nonzero  z:zero
+then
+  cut -f1 &amp;quot;$compounds&amp;quot;
+fi
+#}| grep -i &amp;quot;.$regex$&amp;quot; |sort -fu   #errror
+}| grep -i &amp;quot;.$regex$&amp;quot; |sort -fu 
+## Case-insensitive sort; remove duplicates
+
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;ckc的几种注释关键字&#34;&gt;ckc的几种注释关键字&lt;/h2&gt;
+
+&lt;p&gt;当你敲入\ckc会在vim的下端出现一个输入栏，有下面几个选项&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&amp;lsquo;bug&amp;rsquo;         : &amp;lsquo;:BUG:|DATE| |TIME|:|AUTHORREF|: &lt;CURSOR&gt;&amp;rsquo;,&lt;/li&gt;
+&lt;li&gt;&amp;lsquo;todo&amp;rsquo;        : &amp;lsquo;:TODO:|DATE| |TIME|:|AUTHORREF|: &lt;CURSOR&gt;&amp;rsquo;,&lt;/li&gt;
+&lt;li&gt;&amp;lsquo;tricky&amp;rsquo;      : &amp;lsquo;:TRICKY:|DATE| |TIME|:|AUTHORREF|: &lt;CURSOR&gt;&amp;rsquo;,&lt;/li&gt;
+&lt;li&gt;&amp;lsquo;warning&amp;rsquo;     : &amp;lsquo;:WARNING:|DATE| |TIME|:|AUTHORREF|: &lt;CURSOR&gt;&amp;rsquo;,&lt;/li&gt;
+&lt;li&gt;&amp;lsquo;workaround&amp;rsquo;  : &amp;lsquo;:WORKAROUND:|DATE| |TIME|:|AUTHORREF|: &lt;CURSOR&gt;&amp;rsquo;,&lt;/li&gt;
+&lt;li&gt;&amp;lsquo;new keyword&amp;rsquo; : &amp;lsquo;:&lt;CURSOR&gt;:|DATE| |TIME|:|AUTHORREF|: {+COMMENT+}&amp;lsquo;,&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;进一步的帮助参考&lt;a href=&#34;https://lug.fh-swf.de/vim/vim-bash/StyleGuideShell.en.pdf&#34; target=&#34;_blank&#34;&gt;Bash Style Guide&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>如何解决rake new_post[]出现load error错误</title>
+      <link>https://jueqingsizhe66.github.io/blog/2015/10/22/ru-he-jie-jue-rake-new-post-chu-xian-load-errorcuo-wu/</link>
+      <pubDate>Thu, 22 Oct 2015 23:41:06 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/blog/2015/10/22/ru-he-jie-jue-rake-new-post-chu-xian-load-errorcuo-wu/</guid>
+      <description>&lt;p&gt;在使用octopress的ruby+rails搭建的github博客系统时候，有时候会出现
+一些问题，比如搭建不成功等，具体不提及。本文仅仅解决一个rake新博文的时候
+可能遇到的一个问题。&lt;/p&gt;
+
+&lt;h2 id=&#34;问题再现&#34;&gt;问题再现&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;/usr/local/bin/rake:23:in `load&#39;: cannot load such file -- /usr/share/rubygems-integration/all/gems/rake-10.3.2/bin/rake (LoadError)
+    from /usr/local/bin/rake:23:in `&amp;lt;main&amp;gt;&#39;
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;解决办法&#34;&gt;解决办法&lt;/h2&gt;
+
+&lt;p&gt;source /usr/local/rvm/scripts/rvm这是一个bug，经常需要执行这个，因为可能rvm就被关掉了，一关掉，rake就报错！！！切记&lt;/p&gt;
+
+&lt;p&gt;可以把这句话放到~/.bashrc当中。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>基于现实，抽象现实，模拟现实</title>
+      <link>https://jueqingsizhe66.github.io/blog/2015/10/05/ji-yu-xian-shi-chou-xiang-xian-shi-mo-ni-xian-shi/</link>
+      <pubDate>Mon, 05 Oct 2015 10:04:47 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/blog/2015/10/05/ji-yu-xian-shi-chou-xiang-xian-shi-mo-ni-xian-shi/</guid>
+      <description>&lt;p&gt;信息与知识的不同在于，信息是暂时不被理解的知识，而当它被理解，并被组织，他也就成了知识。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;你的课题是什么&#34;&gt;你的课题是什么？&lt;/h2&gt;
+
+&lt;p&gt;不再是老师布置的题目，而是基于现实，充分调研，提取你需要的信息，
+进行分布式抽象，合理分类，构建知识系统，从而模拟你所expected的现实，
+来论证理论……&lt;/p&gt;
+
+&lt;p&gt;知识的存在就因为被interpreted or made sense,namely some what happened
+have been interpreted and compared ,finnaly stored into your knowledge
+system in the memory(in your head not in the world),更进一步可以阅读
+《The Design of Everyday Things》.&lt;/p&gt;
+
+&lt;h2 id=&#34;获取知识的途径&#34;&gt;获取知识的途径？&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;A goal &amp;ndash;&amp;gt;    Your expected things.What do you want?&lt;/li&gt;
+&lt;li&gt;B plan &amp;ndash;&amp;gt;    what&amp;rsquo;s your actions to get what you want&lt;/li&gt;
+&lt;li&gt;C specify  &amp;ndash;&amp;gt; what action can I do now? Design a conceptual model&lt;/li&gt;
+&lt;li&gt;D perform  &amp;ndash;&amp;gt; How do I do it! Get affordance to execute the action&lt;/li&gt;
+&lt;li&gt;E perceive &amp;ndash;&amp;gt; What happened after you done the action?&lt;/li&gt;
+&lt;li&gt;F interpret &amp;ndash;&amp;gt; explain what happened?&lt;/li&gt;
+&lt;li&gt;G compare   &amp;ndash;&amp;gt; it is okay? is it what you want? compare with what you want?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;bcd is called the stage of execute while efg is called the stage of evaluation. Also ,you can call bcd stage as FeedForward which aid in understanding the process of what can you do.And efg stage can be also looked at as FeedBack stage which aid in understanding the process of what happened.&lt;/p&gt;
+
+&lt;p&gt;In the stage of perceive, you can use some signifiers such as light,colors etc in order to communicate with people sucessfully.
+  In the stage of interpret, it means mapping the knowledge.&lt;/p&gt;
+
+&lt;h2 id=&#34;大量文章的阅读方法&#34;&gt;大量文章的阅读方法&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;前言（引言）的第三段讲述作者为什么要进行这项工作、依据、方法（可能一些结果）&lt;/li&gt;
+&lt;li&gt;文章中的图表（提出的表征方法和性能变化）&amp;ndash;技术手段&amp;ndash;研究路线&lt;/li&gt;
+&lt;li&gt;结论（这些表征方法是否实现了既定的目标以及是否还需要优化（产物的性能怎么样？模拟的精度？未发现的自然现象？）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;摘要的阅读方法&#34;&gt;摘要的阅读方法&lt;/h2&gt;
+
+&lt;p&gt;一般分为三句话。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;第一句话对应引言第一段。比如说某个东西多NB。&lt;/li&gt;
+&lt;li&gt;第二句化对应引言第二段。这个NB东西的工作机理激发了我们设计新的方案的灵感&lt;/li&gt;
+&lt;li&gt;第三句话对应Here we report。。回答四个问题 1.我们到底做了甚？2.怎么做的3.为什么能做到？4.结果怎么样？&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;想把一个研究工作讲成一个好故事，最关键式该工作取得好的结果。上述过程也满足
+SQCA原则，SQCA（situations&amp;mdash;conflict&amp;ndash;Questions&amp;mdash;Answers),很多人针对situations和conflicts基本上都不按章出牌。&lt;/p&gt;
+
+&lt;p&gt;这些都是前人的一些经验，加油你的topic。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Shell_Programming_with_fewer_bugs</title>
+      <link>https://jueqingsizhe66.github.io/blog/2015/08/09/shell-programming-with-fewer-bugs/</link>
+      <pubDate>Sun, 09 Aug 2015 14:37:30 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/blog/2015/08/09/shell-programming-with-fewer-bugs/</guid>
+      <description>&lt;p&gt;shell的强大之处在于短小精悍，对于IO处理相当方便，当然也可以兼杂小型的数值计算（很少）。
+shell脚本在编写过程中也会产生很多bug。本文借鉴《Pro-Bash-Programming》一书所提倡的：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;comment  写上开头注释&lt;/li&gt;
+&lt;li&gt;Initialization of variables 变量初始化&lt;/li&gt;
+&lt;li&gt;Function definitions  函数定义&lt;/li&gt;
+&lt;li&gt;Runtime configuration 解析选项，读取配置文件等&lt;/li&gt;
+&lt;li&gt;Sanity Check  经过Runtime配置之后，可能修改某些值，比如shift操作，所以需要判断变量的合理性&lt;/li&gt;
+&lt;li&gt;Process information   最后才是计算、IO等&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;通过这中编写框架，可以减少错误。&lt;/p&gt;
+
+&lt;p&gt;a. 首先保存最后的shell代码到一个文件wfe.sh
+b. 其次下载所需要的字典文件&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  mkdir ~/words
+  cd ~/words
+ wget http://cfaj.freeshell.org/wordfinder/Compounds
+ wget http://cfaj.freeshell.org/wordfinder/singlewords
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;c. 运行脚本&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;
+1. 获取帮助
+  bash wfe.sh -h
+2. 获取版本信息
+  bash wfe.sh -v
+3.单个单词查找  
+  bash wfe.sh bro
+4. 复合单词内查找（包含单个单词）
+  bash wfe.sh -c bro 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;d. 源码文件：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;
+#:    Title: wfe - List words ending with PATTERN
+#: Synopsis: wfe [-c|-h|-v] REGEX
+#:     Date: 2009-04-13
+#:  Version: 1.0
+#:   Author: Chris F.A. Johnson
+#:  Options: -c - Include compound words
+#:           -h - Print usage information
+#:           -v - Print version number
+
+set -x
+export PS4=&#39;+ $LINENO : &#39;
+
+## 变量初始化
+## Script metadata
+scriptname=${0##*/}
+description=&amp;quot;List words ending with REGEX&amp;quot;
+usage=&amp;quot;$scriptname [-c|-h|-v] REGEX&amp;quot;
+date_of_creation=2009-04-13
+version=1.0
+author=&amp;quot;Chris F.A. Johnson&amp;quot;
+
+## File locations
+dict=$HOME/words
+wordfile=$dict/singlewords
+compoundfile=$dict/Compounds  # 源代码作者在这边设下陷阱1  con--&amp;gt;com
+
+## Default is not to show compound words
+compounds=
+
+## Reular expression supplied on the command line
+pattern=$1
+
+## Function definitions 函数定义 
+
+#提倡使用这样编写函数@ Description @Usage：
+die() #@ DESCRIPTION: print error message and exit with supplied return code
+{     #@ USAGE: die STATUS [MESSAGE]
+  error=$1
+  shift
+  [ -n &amp;quot;$*&amp;quot; ] printf &amp;quot;%s\n&amp;quot; &amp;quot;$*&amp;quot; &amp;gt;&amp;amp;2
+  exit &amp;quot;$error&amp;quot;
+}
+
+usage() #@ DESCRIPTION: print usage information
+{       #@ USAGE: usage
+        #@ REQUIRES: variable defined: $scriptname
+  printf &amp;quot;%s - %s\n&amp;quot; &amp;quot;$scriptname&amp;quot; &amp;quot;$description&amp;quot;
+  printf &amp;quot;USAGE: %s\n&amp;quot; &amp;quot;$usage&amp;quot;
+}
+
+version() #@ DESCRIPTION: print version information
+{          #@ USAGE: version
+           #@ REQUIRES: variables defined: $scriptname, $author and $version
+  printf &amp;quot;%s version %s\n&amp;quot; &amp;quot;$scriptname&amp;quot; &amp;quot;$version&amp;quot;
+  printf &amp;quot;by %s, %d\n&amp;quot; &amp;quot;$author&amp;quot; &amp;quot;${date_of_creation%%-*}&amp;quot;
+  #printf &amp;quot;by %s, %d\n&amp;quot; &amp;quot;$author&amp;quot; &amp;quot;${date_of_creation%%-*&amp;quot;   指的那边错误不是真正的错误！一般需要往上找
+}
+
+## parse command-line options, -c, -h, and -v 解析
+
+echo $(( $OPTIND ))
+while getopts chv var
+do
+   case $var in
+     c) compounds=$compoundfile ;;
+     h) usage; exit ;;
+     v) version; exit ;;
+   esac
+done
+shift $(( $OPTIND - 1 ))  ## move out one parameter and then position to the right by one step
+                          ## 右移操作
+regex=$1           ## 设下陷阱2 没有注册regex变量，却直接调用$regex
+echo $(( $regex ))
+
+## sanity check   设下陷阱3 没有进行错误检查
+
+if [ -z &amp;quot;$pattern&amp;quot; ]
+then 
+    {
+        echo &amp;quot;Search term missing&amp;quot;
+        usage
+    } &amp;gt;&amp;amp;2
+    exit 1
+fi
+
+
+## Search $wordfile and $compounds if it is defined
+{
+   cat &amp;quot;$wordfile&amp;quot;
+   if [ -n &amp;quot;$compounds&amp;quot; ]  # not null  -n ~ -z   n :nonzero  z:zero
+   then
+      cut -f1 &amp;quot;$compounds&amp;quot;
+   fi
+#}| grep -i &amp;quot;.$regex$&amp;quot; |sort -fu   #errror
+}| grep -i &amp;quot;.$regex$&amp;quot; |sort -fu 
+
+## Case-insensitive sort; remove duplicates
+
+
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+    <item>
+      <title>AllFilesInFoldsToOneFile</title>
+      <link>https://jueqingsizhe66.github.io/blog/2015/08/09/allfilesinfoldstoonefile/</link>
+      <pubDate>Sun, 09 Aug 2015 14:03:43 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/blog/2015/08/09/allfilesinfoldstoonefile/</guid>
+      <description>&lt;ol&gt;
+&lt;li&gt;find的使用&lt;/li&gt;
+&lt;li&gt;更新了注释&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;#!/bin/bash - 
+#===============================================================================
+#
+#          FILE: browserNew.sh
+# 
+#         USAGE: ./browserNew.sh 
+# 
+#   DESCRIPTION: 
+# 
+#       OPTIONS: ---
+#  REQUIREMENTS: ---
+#          BUGS: ---
+#         NOTES: ---
+#        AUTHOR: Ye Zhaoliang (), zhaoturkkey@163.com
+#  ORGANIZATION: YZL
+#       CREATED: 2015年06月27日 15:19
+#      REVISION:  ---
+#===============================================================================
+
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME:  generateChapter
+#   DESCRIPTION:  针对不同额文件采用不同的处理方法，判断目录 和判断脚本是一个重要的操作
+#                 但是更为重要的是 find获得文集拿的绝对路径(相对于当前文件)
+#    PARAMETERS:  
+#       RETURNS:  
+#-------------------------------------------------------------------------------
+
+## Function definition 
+
+generateChapter() # @Description : 对不同文件进行不同处理
+                  # @usage       : generatechapter
+{
+    # 妙用find 得到当前目录的相对路径 不需要不断的进入目录
+    for var in `find . -name &amp;quot;*&amp;quot;`
+    do
+        if [[ -d  $var ]] # &amp;lt; cannot . Error
+        then
+            echo &amp;quot;${currentDir}${var#.}是一个目录&amp;quot; # 使用#号来删除之前的点号
+    # 为什么会想到使用 ${var##*/}因为var是一个相对当前文件的绝对路径，所以经过测试发现他和${0}等效如果截取到最大长度的/的话
+        elif [[ &amp;quot;${var##*/}&amp;quot; == &amp;quot;${0}&amp;quot; ]] # 一定要注意等式两边有空格
+        then
+            echo &amp;quot;${currentDir}${var#.} ${0} 脚本文件不处理&amp;quot;
+        else
+            getFile ${currentDir}${var#.} # 这边需要去除到第一个点号,这是才得到的处理方法
+        fi
+
+    done
+}
+
+
+
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME:  getFile
+#   DESCRIPTION:  在每个文件的头部添加一些信息
+#    PARAMETERS:  
+#       RETURNS:  
+#-------------------------------------------------------------------------------
+getFile() #@ Description: 细节处理  包括产生开头 产生边框等
+          #@ Usage      : getFile
+{
+    startString=&amp;quot;# -------------------&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;quot;$1&amp;quot; started&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;-------------------#&amp;quot;
+    endString=&amp;quot;# --------------------&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;quot;$1&amp;quot; ended &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;-------------------#&amp;quot;
+       #echo &amp;quot;&amp;quot; &amp;gt;&amp;gt;summary.sh
+    #echo -e &amp;quot;\033[44;37m -------------------&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;quot;$1&amp;quot; started&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;-------------------\033[0m&amp;quot; &amp;gt;&amp;gt;summary.sh
+    #echo  &amp;quot;# -------------------&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;quot;$1&amp;quot; started&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;-------------------&amp;quot; &amp;gt;&amp;gt;summary.sh
+    echo $startString &amp;gt;&amp;gt; summary.sh
+    echo &amp;quot;#`printf &amp;quot;%$(( ${#startString}-2 ))s&amp;quot; &amp;quot; &amp;quot;`#&amp;quot; &amp;gt;&amp;gt;summary.sh
+    echo &amp;quot;#`printf &amp;quot;%$(( ${#startString}-2 ))s&amp;quot; &amp;quot; &amp;quot;`#&amp;quot; &amp;gt;&amp;gt;summary.sh
+    echo &amp;quot;#`printf &amp;quot;%$(( ${#startString}-2 ))s&amp;quot; &amp;quot; &amp;quot;`#&amp;quot; &amp;gt;&amp;gt;summary.sh ### 不加上$反而不行
+   # echo &amp;quot;#&amp;quot; &amp;gt;&amp;gt;summary.sh
+   # echo &amp;quot;#&amp;quot; &amp;gt;&amp;gt;summary.sh
+    sed &#39;1,7d&#39; $1 &amp;gt;&amp;gt; summary.sh
+    echo &amp;quot;#`printf &amp;quot;%$(( ${#endString}-2 ))s&amp;quot; &amp;quot; &amp;quot;`#&amp;quot; &amp;gt;&amp;gt;summary.sh
+    echo &amp;quot;#`printf &amp;quot;%$(( ${#endString}-2 ))s&amp;quot; &amp;quot; &amp;quot;`#&amp;quot; &amp;gt;&amp;gt;summary.sh
+    echo &amp;quot;#`printf &amp;quot;%$(( ${#endString}-2 ))s&amp;quot; &amp;quot; &amp;quot;`#&amp;quot; &amp;gt;&amp;gt;summary.sh
+    #echo &amp;quot;#&amp;quot; &amp;gt;&amp;gt;summary.sh
+    #echo &amp;quot;#&amp;quot; &amp;gt;&amp;gt;summary.sh
+    #echo -e &amp;quot;\033[43;37m --------------------&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;quot;$1&amp;quot; ended &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;-------------------\033[0m&amp;quot; &amp;gt;&amp;gt; summary.sh
+    #echo &amp;quot;# --------------------&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;quot;$1&amp;quot; ended &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;-------------------&amp;quot; &amp;gt;&amp;gt; summary.sh
+    echo $endString &amp;gt;&amp;gt; summary.sh
+    echo &amp;quot;&amp;quot; &amp;gt;&amp;gt;summary.sh
+    echo &amp;quot;&amp;quot; &amp;gt;&amp;gt;summary.sh
+    echo &amp;quot;&amp;quot; &amp;gt;&amp;gt;summary.sh
+    
+}
+
+## variable initial 
+currentDir=`pwd`
+
+
+## processing information 
+# 如果存在 summary.sh 证明已经存在了，就先把删掉， 因为这里是
+# 采用追加的方式，而不是写入。
+if [[ -e ./summary.sh ]]
+then 
+    rm -rf ./summary.sh
+fi
+# 调用产生所有的文件夹内的数据到一个文件中
+generateChapter
+
+
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+    <item>
+      <title>字符串关键字的出现频率统计</title>
+      <link>https://jueqingsizhe66.github.io/blog/2015/06/14/zi-fu-chuan-guan-jian-zi-de-chu-xian-pin-lu-tong-ji/</link>
+      <pubDate>Sun, 14 Jun 2015 01:50:24 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/blog/2015/06/14/zi-fu-chuan-guan-jian-zi-de-chu-xian-pin-lu-tong-ji/</guid>
+      <description>&lt;p&gt;有时候我们需要统计一篇论文当中某个字符串的出现频率。
+试验了，grep，awk，sed，wc -l等，最终发现awk的RS
+完美的解决了问题。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://www.cnblogs.com/fhefh/archive/2011/11/16/2251656.html&#34; target=&#34;_blank&#34;&gt;RS的用法&lt;/a&gt;
+&lt;a href=&#34;http://blog.163.com/facteur@126/blog/static/23208030201282085943698/&#34; target=&#34;_blank&#34;&gt;统计次数&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;关键字文件（可以不断的添加你要分析的字段):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;风力机
+气动力
+失谐
+偏航
+阵风
+扭矩
+功率
+风切变
+转速
+风速
+升力系数
+阻力系数
+升阻比
+
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;短短的几行shell语句解决了问题，优雅。
+shell文件：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;
+#!/bin/bash - 
+#===============================================================================
+#
+#          FILE: analysis.sh
+# 
+#         USAGE: ./analysis.sh 
+# 
+#   DESCRIPTION: 
+# 
+#       OPTIONS: ---
+#  REQUIREMENTS: ---
+#          BUGS: ---
+#         NOTES: ---
+#        AUTHOR: Ye Zhaoliang (), zhaoturkkey@163.com
+#  ORGANIZATION: YZL
+#       CREATED: 2015年06月14日 01:18
+#      REVISION:  ---
+#===============================================================================
+
+while read lines
+do
+    awk -v RS=&amp;quot;$lines&amp;quot; &#39;END{print RS,--NR}&#39; qiu.org #减减表示减1
+done &amp;lt; &amp;quot;analysis.data&amp;quot;
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;搜索内容&#34;&gt;搜索内容&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;grep -n &amp;ldquo;内容关键字&amp;rdquo; 文件名路径&lt;/li&gt;
+&lt;li&gt;awk &amp;lsquo;{if($0~关键字){}}&amp;rsquo;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;等。
+3. sed &amp;lsquo;/关键字/p&amp;rsquo;&lt;/p&gt;
+
+&lt;h2 id=&#34;结果&#34;&gt;结果&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;┌─[root][javazhao-N53SM][/paper]
+└─➞ sh analysis.sh 
+风力机 379
+气动力 397
+失谐 31
+偏航 353
+阵风 63
+扭矩 171
+功率 139
+风切变 59
+转速 172
+风速 353
+升力系数 27
+阻力系数 13
+升阻比 2
+
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+    <item>
+      <title>把时间和键盘写进script</title>
+      <link>https://jueqingsizhe66.github.io/blog/2015/06/13/ba-shi-jian-he-jian-pan-xie-jin-script/</link>
+      <pubDate>Sat, 13 Jun 2015 20:00:58 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/blog/2015/06/13/ba-shi-jian-he-jian-pan-xie-jin-script/</guid>
+      <description>&lt;p&gt;在Linux地下，脚本(script)编程是一个快捷的方式和内核(kernel)进行交流。
+通常包含以下几种脚本编程:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;bash shell(其他shell也类似)&lt;/li&gt;
+&lt;li&gt;perl&lt;/li&gt;
+&lt;li&gt;python&lt;/li&gt;
+&lt;li&gt;ruby&lt;/li&gt;
+&lt;li&gt;等等&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;我现在发现我们既可以处理文件中的信息，也同时可以处理硬件的东西，这些其实我就清楚，比如linux把很多的设备都虚拟为文件，只不过之前不知道怎么用。
+接触到shell之后，我才发现比如键盘的东西都可以被写进脚本的，也就是电脑上的外接设备也是可以被写进程序当中的，当作计算机里面的一种概念。&lt;/p&gt;
+
+&lt;h2 id=&#34;vim的脚本化操作&#34;&gt;vim的脚本化操作&lt;/h2&gt;
+
+&lt;p&gt;把下段的代码保存为c.sh,主要功能是把双个除号改为井号，当作注释。
+这样就可以把vim的action行为录为脚本。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;
+vim ./cData &amp;lt;&amp;lt;VIM &amp;gt; /dev/null 2&amp;gt;&amp;amp;1 
+:%s#//#\##
+:wq 
+VIM 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;/dev/null 2&amp;gt;&amp;amp;1  拆为四部分来分析下:&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ol&gt;
+&lt;li&gt;首先 0&amp;gt; 表示stdin标准输入; 1&amp;gt; 表示stdout标准输出; 2&amp;gt; 表示stderr错误输出;&lt;/li&gt;
+&lt;li&gt;符号 &amp;gt;  等价于 1&amp;gt; (系统默认为1,省略了先); 所以&amp;rdquo;&amp;gt;/dev/null&amp;rdquo;等同于 &amp;ldquo;1&amp;gt;/dev/null&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;/dev/null 代表空设备文件&lt;/li&gt;
+&lt;li&gt;&amp;amp; 可以理解为是&amp;rdquo;等同于&amp;rdquo;的意思，2&amp;gt;&amp;amp;1，即表示2的输出重定向等同于1
+因此，&amp;gt;/dev/null 2&amp;gt;&amp;amp;1 也可以写成“1&amp;gt; /dev/null 2&amp;gt; &amp;amp;1”&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;那么本文标题的语句执行过程为：
+1&amp;gt;/dev/null ：首先表示标准输出重定向到空设备文件，也就是不输出任何信息到终端，说白了就是不显示任何信息。
+2&amp;gt;&amp;amp;1 ：接着，将标准错误输出重定向 到 标准输出，因为之前标准输出已经重定向到了空设备文件，所以标准错误输出也重定向到空设备文件。&lt;/p&gt;
+
+&lt;p&gt;类似还有cat&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;cat &amp;gt;&amp;gt; /etc/man.config &amp;lt;&amp;lt;EOF
+MANPATH  /srv/httpd/man/
+EOF
+
+cat &amp;gt;&amp;gt; /etc/profile.d/http.sh &amp;lt;&amp;lt;EOF
+export PATH=/srv/httpd/bin:$PATH
+EOF
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;mysql的脚本化操作&#34;&gt;mysql的脚本化操作&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;mysql -u$user -p$password &amp;lt;&amp;lt; EOF  
+FLUSH TABLES WITH READ LOCK;  
+system lvcreate --snapshot -n $snap -L$snapsize /dev/$vg/$lv;  
+UNLOCK TABLES;  
+quit  
+EOF 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;gnuplot的脚本化操作&#34;&gt;gnuplot的脚本化操作&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;gnuplot&amp;lt;&amp;lt;EOF   
+set ter &#39;png&#39;   
+set out &#39;$i/cpUp.png&#39;  
+plot &amp;quot;$i/cpUp.txt&amp;quot; t &#39;cp&#39; w lp  
+EOF 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;获得键盘输入的两种方式&#34;&gt;获得键盘输入的两种方式&lt;/h2&gt;
+
+&lt;h3 id=&#34;使用read&#34;&gt;使用read&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;
+read -p &amp;quot;input a val:&amp;quot;  val
+echo $val
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;使用stty&#34;&gt;使用stty&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;
+get_char(){
+   SAVEDSTTY=`stty -g`
+   stty -echo
+   stty raw
+   dd if=/dev/tty bs=1 count=1 2&amp;gt; /dev/null
+   stty -raw
+   stty echo
+   stty $SAVEDSTTY
+}
+echo &amp;quot;Press any key to continue...&amp;quot;
+char=`get_char`
+read k
+echo $k
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;不错的一个菜单输入&#34;&gt;不错的一个菜单输入&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;
+#字颜色：30—–37  
+#字背景颜色范围：40—–47 
+
+while :
+do
+    echo &amp;quot;\033[5m 1) china \033[0m&amp;quot; 
+    echo &amp;quot;\033[32m 2) America \033[0m&amp;quot; 
+    echo &amp;quot;\033[33m 3) Japan \033[0m&amp;quot; 
+    echo &amp;quot;\033[34m 4) England \033[0m&amp;quot; 
+    echo &amp;quot;\033[35m 5) France \033[0m&amp;quot; 
+    echo &amp;quot;\033[36m 6) Spain \033[0m&amp;quot; 
+    echo &amp;quot;\033[37m 7) Brazil \033[0m&amp;quot; 
+    echo &amp;quot;\033[40;37m 8) Turkey \033[0m&amp;quot; 
+    echo &amp;quot;\033[41;37m 9) Italy \033[0m&amp;quot; 
+    echo &amp;quot;\033[42;37m 10) Germany \033[0m&amp;quot; 
+    echo &amp;quot;\033[43;37m 11) Arabi \033[0m&amp;quot; 
+
+    read -p &amp;quot;Please Enter the number [1-11]&amp;quot; val
+    case $val in
+        1) echo &amp;quot;\033[5m 1) You input the --&amp;gt; china\n \033[0m&amp;quot; 
+            ;;
+        2) echo &amp;quot;\033[32m 2) You input the --&amp;gt; America \n\033[0m&amp;quot; 
+            ;;
+        3) echo &amp;quot;\033[33m 3) You input the --&amp;gt; Japan\n \033[0m&amp;quot; 
+            ;;
+        4) echo &amp;quot;\033[34m 4) You input the --&amp;gt; England \n\033[0m&amp;quot; 
+            ;;
+        5) echo &amp;quot;\033[35m 5) You input the --&amp;gt; France \n \033[0m&amp;quot; 
+            ;;
+        6) echo &amp;quot;\033[36m 6) You input the --&amp;gt; Spain\n \033[0m&amp;quot; 
+            ;;
+        7) echo &amp;quot;\033[37m 7) You input the --&amp;gt; Brazil\n \033[0m&amp;quot; 
+            ;;
+        8) echo &amp;quot;\033[40;37m 8) You input the --&amp;gt; Turkey\n \033[0m&amp;quot; 
+            ;;
+        9) echo &amp;quot;\033[41;37m 9) You input the --&amp;gt; Italy\n \033[0m&amp;quot; 
+            ;;
+        10) echo &amp;quot;\033[42;37m 10) You input the --&amp;gt; Germany\n \033[0m&amp;quot; 
+            ;;
+        11) echo &amp;quot;\033[43;37m 11) You input the --&amp;gt; Arabi\n \033[0m&amp;quot; 
+            ;;
+        *) exit 0
+            ;;
+    esac
+    echo &amp;quot;&amp;quot;
+done
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/menu.png&#34; alt=&#34;结果&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;持续更新本文的script的内容&amp;hellip;.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>ubuntu系统运用</title>
+      <link>https://jueqingsizhe66.github.io/blog/2015/06/10/ubuntuxi-tong-yun-yong/</link>
+      <pubDate>Wed, 10 Jun 2015 13:50:55 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/blog/2015/06/10/ubuntuxi-tong-yun-yong/</guid>
+      <description>&lt;p&gt;ubuntu系统，比如你用&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;tar -cvf \*.tar.gz 某个文件夹
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;会发现可以多窗口地执行。其实这也说明了一点linux系统的多用户、多线程地开发系统、使用系统。&lt;/p&gt;
+
+&lt;p&gt;shell-script是一个比较有用的工具，沟通着用户(user)和内核(kernel)之间,我的理解是shell就是一个解释器(从lisp的解释器的角度来说,相互学习从函数式过渡到命令式)&lt;/p&gt;
+
+&lt;p&gt;所以我会尝试着把我所有需要安装的software(app),都囊括在一个sh文件当中，所以我重装的时候只需要一个批处理即可。&lt;/p&gt;
+
+&lt;p&gt;下面我分成以下5个部分&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;1系统的Git管理&lt;/li&gt;
+&lt;li&gt;2图形部分&lt;/li&gt;
+&lt;li&gt;3语言部分&lt;/li&gt;
+&lt;li&gt;4编辑部分&lt;/li&gt;
+&lt;li&gt;5配置部分&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;一一写上我会执行的操作，当然这些程序组合成为我自己使用的linux系统。方便我和linux的内核进行交流。&lt;/p&gt;
+
+&lt;h2 id=&#34;1系统的git管理&#34;&gt;1系统的Git管理&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;apt-get install git,gitk,git-doc #rememeber how to configure
+apt-get install git-flow #升级版的管理
+
+git config --global user.name &amp;quot;ye zhaoliang&amp;quot;
+git config --global user.email &amp;quot;zhaoturkkey@163.com&amp;quot;
+ssh-keygen -t rsa -C &amp;quot;zhaoturkkey@163.com&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;2图形部分&#34;&gt;2图形部分&lt;/h2&gt;
+
+&lt;p&gt;有时候你希望把你的相关数据打印成图片，这样方便交流&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;apt-get install gnuplot
+apt-get install graphviz
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;3语言部分&#34;&gt;3语言部分&lt;/h2&gt;
+
+&lt;p&gt;从更细小的程度理解你的思维，需要一些编程语言&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;apt-get install gfortran 
+apt-get install gcc 
+apt-get install python
+# drracket
+# haskell
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;4编辑部分&#34;&gt;4编辑部分&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;apt-get install vim   #rememeber how to configure
+apt-get install vim-gtk
+
+apt-get install emacs
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;5配置部分&#34;&gt;5配置部分&lt;/h2&gt;
+
+&lt;p&gt;在ubuntu管理系统经常会需要配置用户目录下的dotfiles，
+比如登录相关文件.bashrc,.bash_logout,.bash_profile.
+我会尝试着把我相关需要的文件夹备份在一个tar包。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;tar -xvf ./bash-it.tar.gz -C ~ # remember vcprompt
+tar -xvf ./vim.tar.gz -C ~ # remember vim :BundleInstall
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;#结论
+通过上面五个部分，无法体现我使用linux的基本感觉&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;recur()
+{
+ 查找(进入某个目录)
+ 判断(If,case)
+ 修改（配置 export 设置环境变量）
+ recur
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;cfaj写的&lt;shell-script:&gt;和&lt;pro-bash-programming&gt;
+主要教会我们的是我使用下划线新建一个临时函数，并使用下划线函数的大写字母来表征函数的返回值。然后使用${}变量引用来实现
+版本号的截取并使用case进行分类选择，还有比如不同的系统的case选择。&lt;/p&gt;
+
+&lt;h3 id=&#34;补充一个操作&#34;&gt;补充一个操作&lt;/h3&gt;
+
+&lt;p&gt;如果你想要使得子程序可以掉哦你个函数，必须使用export命令导出，类似于变量&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;
+function func()
+{
+    echo &amp;quot;导出函数&amp;quot;
+    }
+
+export -f func
+# 使用export -f 导出函数，只用于bash
+# 使用export  DATE  等，导出系统变量
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;只有经过这样你的func才变成公有化。当然你也可以把脚本添加到path路径中。&lt;/p&gt;
+
+&lt;h3 id=&#34;谨记一个失误&#34;&gt;谨记一个失误&lt;/h3&gt;
+
+&lt;p&gt;无论是使用tar -cvf 打包，还是生成某个程序等，一定要检查一遍，是否能够运行，
+当时就确认你的操作无误，否则后来会后悔(曾经打包了一个系统 发现都不能用了！
+而那个系统也被我删掉了，可见我有多懊恼)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;tar: 跳转到下一个头
+tar: 由于前次错误，将以上次的错误状态退出
+
+当然有人说看看是不是需要使用tar -zxvf 而不是tar -xvf
+我说我压缩的时候根本就没有用gzip，当然我也试了没效果，后来都删掉了。
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+    <item>
+      <title>bash提醒框的制作</title>
+      <link>https://jueqingsizhe66.github.io/blog/2015/06/04/bashti-xing-kuang-de-zhi-zuo/</link>
+      <pubDate>Thu, 04 Jun 2015 21:13:33 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/blog/2015/06/04/bashti-xing-kuang-de-zhi-zuo/</guid>
+      <description>&lt;p&gt;一个elegant的提示窗口的制作。从_repeat到升级的优化版本（采用三步优化），然后到后来组装成alert函数。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;_repeat()
+{
+    #@ 使用方式： _repeat 要重复的字符串  重复次数
+    #@  Usage : _repeat string number
+    _REPEAT=  #set but empty
+    echo $2
+    while [[ ${#_REPEAT} -lt $2 ]]
+    do
+        _REPEAT=$_REPEAT$1
+    done
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;_repeat &amp;quot;hello&amp;quot; 30
+echo $_REPEAT
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;#---  FUNCTION  ----------------------------------------------------------------
+#          NAME:  _repeat1
+#   DESCRIPTION:  优化版本
+#    PARAMETERS:  
+#       RETURNS:  
+#-------------------------------------------------------------------------------
+_repeat1()
+{
+    #@ 使用方式： _repeat 要重复的字符串  重复次数
+    #@  Usage : _repeat string number
+    _REPEAT1=$1  #set and not empty, or unlimit recycle
+    while [[ ${#_REPEAT1} -lt $2 ]]
+    do
+        _REPEAT1=$_REPEAT1$_REPEAT1$_REPEAT1 ## 3次优化
+    done
+    _REPEAT1=${_REPEAT1:0:$2} ##Trim到我们需要的长度
+}
+
+repeat()
+{
+    _repeat &amp;quot;$@&amp;quot;
+    printf &amp;quot;%s\n&amp;quot; &amp;quot;$_REPEAT1&amp;quot;
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;_repeat1 &amp;quot;hello&amp;quot; 30
+echo $_REPEAT1
+repeat &amp;quot;hello 30&amp;quot;
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;alert()
+{
+    _repeat1 &amp;quot;${2:-#}&amp;quot; $(( ${#1} + 8 )) ## ${2:-#} 如果$2未定义则使用#
+    printf &#39;\a%s\n&#39; &amp;quot;$_REPEAT1&amp;quot; ## \a=BEL
+    printf &#39;%2.2s %s %2.2s\n&#39; &amp;quot;$_REPEAT1&amp;quot; &amp;quot;$1&amp;quot; &amp;quot;$_REPEAT1&amp;quot; ## \a=BEL
+    printf &#39;%s\n&#39; &amp;quot;$_REPEAT1&amp;quot;
+}
+
+
+alert &amp;quot;Do you really want to delete all the files?&amp;quot;
+
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+    <item>
+      <title>bash命令分类--架构在文件系统级别</title>
+      <link>https://jueqingsizhe66.github.io/blog/2015/06/03/bashming-ling-fen-lei-jia-gou-zai-wen-jian-xi-tong-ji-bie/</link>
+      <pubDate>Wed, 03 Jun 2015 20:18:18 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/blog/2015/06/03/bashming-ling-fen-lei-jia-gou-zai-wen-jian-xi-tong-ji-bie/</guid>
+      <description>&lt;p&gt;I have many years experience in the shell command, so I categoried some commands into
+many categories,which let me understand the commands more clearly.
+You can first practice &lt;a href=&#34;http://blog.chinaunix.net/uid-25932176-id-2973818.html&#34; target=&#34;_blank&#34;&gt;how to play with bash shell&lt;/a&gt;,then you can catch the topic afterward
+&lt;a href=&#34;http://cfajohnson.com/&#34; target=&#34;_blank&#34;&gt;cfaj network&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;bit&#34;&gt;bit&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;programming language :
+
+&lt;ul&gt;
+&lt;li&gt;c ,c++ c#,java&lt;/li&gt;
+&lt;li&gt;lisp,scheme,haskell etc&lt;/li&gt;
+&lt;li&gt;bash,python,perl,ruby,etc&lt;/li&gt;
+&lt;li&gt;javascript&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;word&#34;&gt;word&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;programming language :&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;c ,c++ c#,java&lt;/li&gt;
+&lt;li&gt;lisp,scheme,haskell etc&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://www.vaikan.com/bash-scripting&#34; target=&#34;_blank&#34;&gt;bash&lt;/a&gt;,python,perl,ruby,etc&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;$() == () == `` means in the &lt;strong&gt;subshell&lt;/strong&gt; closure the commands; $((  )) == ((  )): mainly some algorithm operations&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;${} == {} means in the &lt;strong&gt;current shell&lt;/strong&gt; closure the commands;  ${{  }} == {{  }}&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;${#f}  calculate the variable f&amp;rsquo;s length&lt;/li&gt;
+&lt;li&gt;${f:6}  get the string from 6 to end of the string&lt;/li&gt;
+&lt;li&gt;${f:6:4} get the string from 6 to (6+4) of the string. ${f:${pos}:${len}}&lt;/li&gt;
+&lt;li&gt;${f: -8} get the reverse from end to end+8&amp;rsquo;s string.&lt;/li&gt;
+&lt;li&gt;${f/path?/x}  &amp;ndash;single replace&lt;/li&gt;
+&lt;li&gt;${f//path?/x} &amp;ndash;globle replace&lt;/li&gt;
+&lt;li&gt;${f#*/}  delete the characters until get across a  / from left to right(&lt;strong&gt;From means start point. To means end point&lt;/strong&gt;)
+
+&lt;ul&gt;
+&lt;li&gt;${var#*o}  remove the shortest string that matches PATTERN (the character &amp;lsquo;o&amp;rsquo;) from the begining of the expanded value&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;${f##*/} delete the caaracters until all the / symbols have been got across from left to right.
+
+&lt;ul&gt;
+&lt;li&gt;${0##*/} extract the name of a script from the $0 parameter,which contains the full path to the script&lt;/li&gt;
+&lt;li&gt;similarly, you can use &amp;ldquo;${1%/&lt;em&gt;}&amp;ldquo;,&amp;rdquo;${2%/&lt;/em&gt;}&amp;rdquo;  &amp;hellip;.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;${f%*/}  delete the characters until get across a  /  from right to left&lt;/li&gt;
+&lt;li&gt;${f%%*/} delete the caaracters until all the / symbols have been got across from right to left.&lt;/li&gt;
+&lt;li&gt;variable (&lt;strong&gt;- is used to set the unset value; + is used to set the set value&lt;/strong&gt;)
+
+&lt;ul&gt;
+&lt;li&gt;${var:-default} checks to see whether a variable is &lt;strong&gt;unset or empty&lt;/strong&gt;,if yes,then expands to a default string to var(if omit the colon? see below)&lt;code&gt;unset var or var=&lt;/code&gt;
+
+&lt;ul&gt;
+&lt;li&gt;${var:=default} 和${var:-default}很像，只不过他还多做了一个额外的功能，&lt;strong&gt;assign the default value to the variable&lt;/strong&gt;.而在${var:-|+default}的情况下，并没有指派给变量值。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;${var-default} checks to see whether a variable is &lt;strong&gt;unset&lt;/strong&gt;,if yes,then expands to a default string to var, &lt;code&gt;unset var&lt;/code&gt;,almost the same with colon&lt;/li&gt;
+&lt;li&gt;${var:+alternative} use alternative value if $var &lt;strong&gt;is set and  not empty&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;${var+alternative} use alternative value if $var &lt;strong&gt;is set&lt;/strong&gt;,it does matter whether $var is  empty or not&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;${var&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:a-m&#34;&gt;&lt;a href=&#34;#fn:a-m&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;}&lt;/li&gt;
+&lt;li&gt;${var^&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:a-m&#34;&gt;&lt;a href=&#34;#fn:a-m&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;} ## matches all characters from a to m inclusive! if match change to uppercase.NOTE:&lt;strong&gt;Only in Bash &amp;gt;=4.0&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;${var^^}  uppercase the string,such as toronto change to TORONTO&lt;/li&gt;
+&lt;li&gt;${var^} Captitalize the string, such as toronto change to Toronto&lt;/li&gt;
+&lt;li&gt;${var,,}  such as var=TORONTO change to toronto&lt;/li&gt;
+&lt;li&gt;${var,,[N-Q]} such as var=TORONTO changes to ToRonTo&lt;/li&gt;
+&lt;li&gt;ARRAY(use ${} to get the value of the array) Note: &lt;strong&gt;not POSIX standard ,but fit for bash shell&lt;/strong&gt;
+
+&lt;ul&gt;
+&lt;li&gt;printf &amp;ldquo;%s\n&amp;rdquo; &amp;ldquo;${BASH_VERSINFO[0]}&amp;rdquo;    print the first element of the array BASH_VERSINFO bulit in the shell bash&lt;/li&gt;
+&lt;li&gt;printf &amp;ldquo;%s\n&amp;rdquo; &amp;ldquo;${BASH_VERSINFO[1]}&amp;rdquo;    print the second element of the array BASH_VERSINFO bulit in the shell bash&lt;/li&gt;
+&lt;li&gt;printf &amp;ldquo;%s\n&amp;rdquo; &amp;ldquo;${BASH_VERSINFO[*]}&amp;rdquo;    print the all element of the array BASH_VERSINFO bulit in the shell bash in one line as string&lt;/li&gt;
+&lt;li&gt;printf &amp;ldquo;%s\n&amp;rdquo; &amp;ldquo;${BASH_VERSINFO[@]}&amp;rdquo;    print the all element of the array BASH_VERSINFO bulit in the shell bash in different line&lt;/li&gt;
+&lt;li&gt;printf &amp;ldquo;%s\n&amp;rdquo; &amp;ldquo;${BASH_VERSINFO[@]:1:2}&amp;rdquo;    print the secondth and thirdth line element of the array BASH_VERSINFO bulit in the shell bash&lt;/li&gt;
+&lt;li&gt;printf &amp;ldquo;%s\n&amp;rdquo; &amp;ldquo;${#BASH_VERSINFO[*]}&amp;rdquo;    print the length of the array BASH_VERSINFO bulit in the shell bash&lt;/li&gt;
+&lt;li&gt;construct an array 1
+
+&lt;ul&gt;
+&lt;li&gt;unset a&lt;/li&gt;
+&lt;li&gt;a[${#a[@]}]=&amp;ldquo;1 $RANDOM&amp;rdquo; ## #{#a[@]} is 0&lt;/li&gt;
+&lt;li&gt;a[${#a[@]}]=&amp;ldquo;2 $RANDOM&amp;rdquo; ## #{#a[@]} is 1&lt;/li&gt;
+&lt;li&gt;a[${#a[@]}]=&amp;ldquo;3 $RANDOM&amp;rdquo; ## #{#a[@]} is 2&lt;/li&gt;
+&lt;li&gt;a[${#a[@]}]=&amp;ldquo;4 $RANDOM&amp;rdquo; ## #{#a[@]} is 3  &amp;mdash;&amp;gt; finally we have a fourth element array a&lt;/li&gt;
+&lt;li&gt;printf &amp;ldquo;%s\n&amp;rdquo; &amp;ldquo;${a[@]}&amp;rdquo;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;construct an array 2
+
+&lt;ul&gt;
+&lt;li&gt;province=(Beijing Fujian Liaoning)&lt;/li&gt;
+&lt;li&gt;printf &amp;ldquo;%s\n&amp;rdquo; &amp;ldquo;${province[@]}&amp;rdquo;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;construct an array (Associative Arrays must be declared before)
+
+&lt;ul&gt;
+&lt;li&gt;declare -A array1  ## &lt;strong&gt;if not declare -A array1 only keep the last one assignment operation&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;for subsricpt in a b c d e&lt;/li&gt;
+&lt;li&gt;do&lt;/li&gt;
+&lt;li&gt;array[$subscript]=&amp;ldquo;$subscript $RANDOM&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;done&lt;/li&gt;
+&lt;li&gt;printf &amp;ldquo;:%s:\n&amp;rdquo; &amp;ldquo;${array[&amp;ldquo;c&amp;rdquo;]}&amp;rdquo; ## print one value&lt;/li&gt;
+&lt;li&gt;printf &amp;ldquo;:%s:\n&amp;rdquo; &amp;ldquo;${array[@]}&amp;rdquo; ## print one value&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;$[[  ]] == [[  ]] &amp;ndash;&amp;gt; &lt;a href=&#34;you can use variable match the regex expressions inside the  [[]]&#34; target=&#34;_blank&#34;&gt;[ =~ ]&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;some special remarks:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;*(pattern [|pattern] &amp;hellip;)  the match occurence &amp;gt;=0&lt;/li&gt;
+&lt;li&gt;+(pattern [|pattern] &amp;hellip;)  the match occurence &amp;gt;=1&lt;/li&gt;
+&lt;li&gt;@(pattern [|pattern] &amp;hellip;)  the match occurence ==1&lt;/li&gt;
+&lt;li&gt;?(pattern [|pattern] &amp;hellip;)  the match occurence ? I am a little confuse!&lt;/li&gt;
+&lt;li&gt;&amp;amp;   let the command execute backward&lt;/li&gt;
+&lt;li&gt;``  redirect an command output to the argument of another command&lt;/li&gt;
+&lt;li&gt;; command separator&lt;/li&gt;
+&lt;li&gt;| pipe symbol, put a command output redirect to another command&amp;rsquo;s input&lt;/li&gt;
+&lt;li&gt;$# the numbers of the parameters while execute the shell scripts&lt;/li&gt;
+&lt;li&gt;$@ the parameters  while execute the shell scripts(know every parameters) .Note use &amp;ldquo;$@&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;$* the parameters as a string while execute the shell scripts&lt;/li&gt;
+&lt;li&gt;$! the PID number
+
+&lt;ul&gt;
+&lt;li&gt;${!var} 表示的是间接调用变量var,比如x=yes,var=x,如果直接使用echo $x得到yes,如果直接echo $var 得到的是x，如果使用echo ${!var}则是yes&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;${!}给你的感觉会好象是函数式变量，不断的变化中,类似的比如set &amp;ndash;具有更换positional parameters的作用&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;case中&lt;em&gt;[!0-9]&lt;/em&gt;) 表示 非数字 ，在正则表达式中一般是使用[^0-9]&lt;/li&gt;
+&lt;li&gt;&amp;rdquo;&amp;rdquo; 字符串中加上双引号的作用是&amp;rdquo;$a&amp;rdquo; ，[ &amp;ldquo;$a&amp;rdquo; == &amp;ldquo;abc str&amp;rdquo;] 避免太多参数的报错！&amp;rdquo;&amp;ldquo;起着连接的作用,变量的值包起来，防止中间有空格，一般字符串反而不需要.这边又扯到&lt;a href=&#34;http://blog.jobbole.com/46191&#34; target=&#34;_blank&#34;&gt;另一个问题&lt;/a&gt;，比如[[ $foo == bar ]]不会展开foo的值,也就是把空格也当作字符串字面值的整体，而[ $foo == bar ] 则会展开foo的值,也就空格会分隔原来的foo字符串，这样可能会出现多参数错误。所以加上双引号有好处，暂时无坏(针对变量)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;javascript&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;tr&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;tr -d &amp;lsquo;abc&amp;rsquo;&lt;/li&gt;
+&lt;li&gt;tr &amp;lsquo;[a-z]&amp;rsquo; &amp;lsquo;[A-Z]&amp;rsquo;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;seq&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;类似的可以参考&lt;a href=&#34;http://blog.useasp.net/archive/2014/06/02/summary-of-the-special-characters-in-shell-on-linux.aspx&#34; target=&#34;_blank&#34;&gt;shell符号&lt;/a&gt;,并且注意shell当中一个
+比较大的书写问题是：等号两边不能有空格，括号和中括号两边最好有空格(比如最多的if判断）。&lt;/p&gt;
+
+&lt;h2 id=&#34;line&#34;&gt;line&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;head&lt;/li&gt;
+&lt;li&gt;tail&lt;/li&gt;
+&lt;li&gt;sed&lt;/li&gt;
+&lt;li&gt;grep(egrep)
+
+&lt;ul&gt;
+&lt;li&gt;grep -nR &amp;ldquo;neededWord&amp;rdquo; *&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;awk(actually it can be categoried into word manipulation)&lt;/li&gt;
+&lt;li&gt;sort
+
+&lt;ul&gt;
+&lt;li&gt;sort -r -t :  -k 2&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;cut -d&amp;rdquo;:&amp;rdquo;  -f5&lt;/li&gt;
+&lt;li&gt;read&lt;/li&gt;
+&lt;li&gt;echo&lt;/li&gt;
+&lt;li&gt;uniq&lt;/li&gt;
+&lt;li&gt;join&lt;/li&gt;
+&lt;li&gt;paste  (much simpler than join , just separte two parts with Tab)&lt;/li&gt;
+&lt;li&gt;shift
+
+&lt;ul&gt;
+&lt;li&gt;shift 3    To remove the first three parameters(&lt;strong&gt;To means going to do,it is a target&lt;/strong&gt;)&lt;/li&gt;
+&lt;li&gt;shift &amp;ldquo;$#&amp;rdquo;  To remove all the parameters,$# contains the number of all the positional parameters&lt;/li&gt;
+&lt;li&gt;shift $(( $# - 2 ))   Remove all but the last two positional parameters.Remember there are blank between (( and $  also between 2 and  )).&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;set &amp;ndash;  Newparameters ## which is just replace the parameters with Newparameters
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;sh \_max3(){ 
+[ $# -ne 3 ] &amp;amp;&amp;amp; return 5
+[ $1 -gt $2 ] &amp;amp;&amp;amp; { set -- $2 $1 $3; } ## line a   if $1&amp;gt;$2    replace $2 with $1  ,$1 with $2, the bigger in the righter
+[ $2 -gt $3 ] &amp;amp;&amp;amp; { set -- $1 $3 $2; } ## line b:  $1 is the last time&#39;s $1 ,but $3 is the last time&#39;s $3(in line a)
+[ $1 -gt $2 ] &amp;amp;&amp;amp; { set -- $2 $1 $3; } ## line c
+_MAX3=$3
+_MID3=$2
+_MIN3=$1
+}&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;content&#34;&gt;content&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;cat&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;file&#34;&gt;file&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ls&lt;/li&gt;
+&lt;li&gt;find -name &amp;ldquo;&amp;rdquo; src/&lt;/li&gt;
+&lt;li&gt;locate&lt;/li&gt;
+&lt;li&gt;touch&lt;/li&gt;
+&lt;li&gt;wc -l&lt;/li&gt;
+&lt;li&gt;rm -f&lt;/li&gt;
+&lt;li&gt;cp&lt;/li&gt;
+&lt;li&gt;mv&lt;/li&gt;
+&lt;li&gt;source == .  ==&amp;gt; sourch *.sh  == . *.sh     source .bashrc == . bashrc&lt;/li&gt;
+&lt;li&gt;&amp;gt;  == 1&amp;gt;&lt;/li&gt;
+&lt;li&gt;&amp;gt;&amp;gt; == 1&amp;gt;&amp;gt;&lt;/li&gt;
+&lt;li&gt;&amp;lt;  == &amp;lt;1&lt;/li&gt;
+&lt;li&gt;split
+
+&lt;ul&gt;
+&lt;li&gt;split -b 300k &amp;hellip;&lt;/li&gt;
+&lt;li&gt;split -l 300   (line=300 as an file)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;vim&lt;/li&gt;
+&lt;li&gt;gnuplot&lt;/li&gt;
+&lt;li&gt;graghviz&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;fildfolder&#34;&gt;fildfolder&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;cd&lt;/li&gt;
+&lt;li&gt;mkdir&lt;/li&gt;
+&lt;li&gt;rmdir&lt;/li&gt;
+&lt;li&gt;cp -r&lt;/li&gt;
+&lt;li&gt;mv&lt;/li&gt;
+&lt;li&gt;tar
+
+&lt;ul&gt;
+&lt;li&gt;tar -cvf  src.tar.gz src/&lt;/li&gt;
+&lt;li&gt;tar -xvf  src.tar.gz&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;system&#34;&gt;system&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;alias (make the command become convinient)&lt;/li&gt;
+&lt;li&gt;unalias&lt;/li&gt;
+&lt;li&gt;ulimit -a (try to think if there are ten person enter the Linux at the same time, and open th 1G file at the same time, the main machine means 10G. So the machine wil become busy.)&lt;/li&gt;
+&lt;li&gt;set&lt;/li&gt;
+&lt;li&gt;unset&lt;/li&gt;
+&lt;li&gt;env&lt;/li&gt;
+&lt;li&gt;history
+
+&lt;ul&gt;
+&lt;li&gt;!!  the last command(you can use the up and down arrow)&lt;/li&gt;
+&lt;li&gt;!66 the 66th command  !line-number&lt;/li&gt;
+&lt;li&gt;!al run the command begin with &amp;lsquo;al&amp;rsquo; nearest.!command&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;type&lt;/li&gt;
+&lt;li&gt;kill -9&lt;/li&gt;
+&lt;li&gt;crontab -e&lt;/li&gt;
+&lt;li&gt;which&lt;/li&gt;
+&lt;li&gt;who&lt;/li&gt;
+&lt;li&gt;dmesg&lt;/li&gt;
+&lt;li&gt;du -sh .&lt;/li&gt;
+&lt;li&gt;make  (for compiling the system)&lt;/li&gt;
+&lt;li&gt;fsck -c&lt;/li&gt;
+&lt;li&gt;System Transplant
+
+&lt;ul&gt;
+&lt;li&gt;wget -R [website]&lt;/li&gt;
+&lt;li&gt;curl -l&lt;/li&gt;
+&lt;li&gt;git clone&lt;/li&gt;
+&lt;li&gt;hg clone&lt;/li&gt;
+&lt;li&gt;svn clone&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;system enter
+
+&lt;ul&gt;
+&lt;li&gt;ssh&lt;/li&gt;
+&lt;li&gt;telnet&lt;/li&gt;
+&lt;li&gt;ftp&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;ifconfig&lt;/li&gt;
+&lt;li&gt;all files with map relationship can form an ecosystem.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;network-topology&#34;&gt;Network topology&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;node (one computer one system)&lt;/li&gt;
+&lt;li&gt;server (only supply with services)&lt;/li&gt;
+&lt;li&gt;NIC (network interface card)  RJ-45
+
+&lt;ul&gt;
+&lt;li&gt;network interface port   which abstracted by the NIC .&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;route -n&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;bit &amp;ndash;&amp;gt; word &amp;ndash;&amp;gt; line &amp;ndash;&amp;gt; content &amp;ndash;&amp;gt; file &amp;ndash;&amp;gt; system.  ++Actually, you can use the function to abstraction several command.
+What&amp;rsquo;s more ,you can use module or filefolder to do another bigger abstraction++.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;you can find that from bit manipulation to file manipulation,there are many commands used in the Linux system&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:a-m&#34;&gt;a-m &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:a-m&#34;&gt;&lt;sup&gt;^&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:a-m&#34;&gt;a-m &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:a-m&#34;&gt;&lt;sup&gt;^&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>emacs中有趣的词法编程</title>
+      <link>https://jueqingsizhe66.github.io/blog/2015/06/03/emacszhong-you-qu-de-ci-fa-bian-cheng/</link>
+      <pubDate>Wed, 03 Jun 2015 14:35:50 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/blog/2015/06/03/emacszhong-you-qu-de-ci-fa-bian-cheng/</guid>
+      <description>&lt;p&gt;词法编程最开始是有1984，Donald Knuth提出的&lt;a href=&#34;http://comjnl.oxfordjournals.org/content/27/2/97.full.pdf&#34; target=&#34;_blank&#34;&gt;词法编程&lt;/a&gt;.
+另外可以参考&lt;a href=&#34;http://www.howardism.org/Technical/LP/introduction.html&#34; target=&#34;_blank&#34;&gt;emacs org-mode 词法编程&lt;/a&gt;和 &lt;a href=&#34;http://www.howardism.org/Technical/Emacs/literate-devops.html&#34; target=&#34;_blank&#34;&gt;emacs orgmode的高级词法编程&lt;/a&gt;
+我的理解是词法编程，就是在文本和代码中交叉实现，不让代码只是代码，文本只是文本，其实这根函数式编成的思想是相似的，&lt;strong&gt;代码即数据，数据即代码&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;#+begin_src sh
+ls
+hostname -I
+#+end_src
+
+#+results:
+| activate.org                   |
+| activate.png                   |
+| activity.png                   |
+| broken.png                     |
+| communication.png              |
+| data                           |
+| digraph2.png                   |
+| ditaa.org                      |
+| ditta.png                      |
+| emacs-chats                    |
+| emacsconf2015                  |
+| emacs-notes                    |
+| gnuplot.org                    |
+| gnuplot.png                    |
+| #GTD.org#                      |
+| gv01.png                       |
+| javaTalentTest.org             |
+| javaweb5.org                   |
+| javaWriteRules.org             |
+| latex.org                      |
+| Learn.html                     |
+| lispfile.org                   |
+| literate-programming.org       |
+| meeting_states.png             |
+| multi.png                      |
+| named.png                      |
+| newLearningTakecar.el          |
+| newLearningTakecar.org         |
+| newLearningTakecar.org_archive |
+| normal_task_states.png         |
+| object.org                     |
+| object.png                     |
+| orgmode-babel-ditaa3.png       |
+| org-mode-doc                   |
+| org-mode.org                   |
+| orgTest.org                    |
+| outcome.sh                     |
+| phone_states.png               |
+| plantuml_example_states.png    |
+| plantuml.org                   |
+| scales.png                     |
+| schemeToTime.org               |
+| sequence.png                   |
+| some_filename.png              |
+| somefile.png                   |
+| state.org                      |
+| style                          |
+| style.tar.gz                   |
+| table.png                      |
+| task.org                       |
+| teaching.org                   |
+| test-act2.png                  |
+| test-act2.txt                  |
+| test-act3.png                  |
+| test-act3.txt                  |
+| test-act4.png                  |
+| test-act4.txt                  |
+| test-act.png                   |
+| test-act.txt                   |
+| testChines.org                 |
+| testgraph.org                  |
+| thinking.org                   |
+| time.png                       |
+| usecase.org                    |
+| usecase.png                    |
+| vimium                         |
+| 172.17.36.2                    |
+
+** You must add the section :properties: and 🔚 ,or
+nothing show.
+:PROPERTIES:
+:var: name1=&amp;quot;hello&amp;quot;
+:END:
+#+begin_src sh :var hosts=&amp;quot;10.0.2.1&amp;quot;
+echo $hosts
+echo $name1
+#+end_src
+
+#+results:
+| 10.0.2.1 |
+|    hello |
+
+
+#+header: :var Dir=&amp;quot;/home/&amp;quot;
+#+begin_src sh
+cd $Dir
+ls -lsh
+#+end_src
+
+#+results:
+| 总用量 | 28K        |    |          |          |      |     |    |       |                      |
+| 4.0K   | drwx------ | 43 | root     | root     | 4.0K | 5月 | 30 | 15:19 | happycamp-of-fortran |
+| 4.0K   | drwx------ |  5 | root     | root     | 4.0K | 5月 | 30 | 15:36 | happycamp-of-gnuplot |
+| 4.0K   | drwx------ | 31 | root     | root     | 4.0K | 6月 |  3 | 13:32 | happycamp-of-lisp    |
+| 4.0K   | drwxr-xr-x | 50 | javazhao | javazhao | 4.0K | 6月 |  3 | 14:22 | javazhao             |
+| 4.0K   | drwxr-xr-x |  7 | javazhao | javazhao | 4.0K | 4月 | 30 | 16:28 | lispbox-0.7          |
+| 4.0K   | -rw-r--r-- |  1 | root     | root     | 1    | 5月 | 13 | 23:37 | MyOrgHome            |
+| 4.0K   | drwxr-xr-x |  7 | root     | root     | 4.0K | 4月 | 10 | 22:18 | StudyCenter          |
+
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;当然emacs中也是可以结合gnuplot ,latex, plantuml,graphviz等。
+具体可以参看
+&lt;a href=&#34;http://www.3zso.com/archives/orgmode-babel.html&#34; target=&#34;_blank&#34;&gt;http://www.3zso.com/archives/orgmode-babel.html&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>我的Bash-It</title>
+      <link>https://jueqingsizhe66.github.io/blog/2015/06/03/wo-de-bash-it/</link>
+      <pubDate>Wed, 03 Jun 2015 13:59:44 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/blog/2015/06/03/wo-de-bash-it/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/jueqingsizhe66/bash-it&#34; target=&#34;_blank&#34;&gt;Bash-it&lt;/a&gt;是一个开源的bash框架，
+我的第一感觉是他的themes主题不错，所以就用了，这是我采用的rjorgenson的主题
+&lt;img src=&#34;https://jueqingsizhe66.github.io/images/jiemian.png&#34; alt=&#34;rjorgenson&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Bash-it是源自于&lt;a href=&#34;https://github.com/robbyrussell/oh-my-zsh&#34; target=&#34;_blank&#34;&gt;oh-my-zsh&lt;/a&gt;,
+&lt;a href=&#34;http://ohmyz.sh/&#34; target=&#34;_blank&#34;&gt;zsh的一些相关展示&lt;/a&gt;
+主要是调用了一些python和ruby的相关插件。&lt;/p&gt;
+
+&lt;p&gt;##安装步骤&lt;/p&gt;
+
+&lt;p&gt;很简单&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;git clone &amp;ndash;depth=1 &lt;a href=&#34;https://github.com/jueqingsizhe66/bash-it&#34; target=&#34;_blank&#34;&gt;https://github.com/jueqingsizhe66/bash-it&lt;/a&gt; ~/.bash-it (&lt;strong&gt;如果不加入&amp;ndash;depth=1会少一些文件,没有Enable文件夹&lt;/strong&gt;)
+(或者把install.sh里面的enable改成available即可(因为作者可能删掉了enable)
+)&lt;/li&gt;
+&lt;li&gt;cd ~/.bash-it&lt;/li&gt;
+&lt;li&gt;./install&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;当然还需要安装一些&lt;a href=&#34;http://www.phodal.com/blog/use-bash-it-bash-framework/&#34; target=&#34;_blank&#34;&gt;额外的插件&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;apt-get install docker()(有时候可能不需要)
+
+&lt;ul&gt;
+&lt;li&gt;sudo apt-get install docker.io&lt;/li&gt;
+&lt;li&gt;sudo ln -sf /usr/bin/docker.io /usr/local/bin/docker&lt;/li&gt;
+&lt;li&gt;sudo sed -i &amp;lsquo;$acomplete -F _docker docker&amp;rsquo; /etc/bash_completion.d/docker.io&lt;/li&gt;
+&lt;li&gt;chmod 777 /var/run/docker.sock&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;pip install arg (首先得安装python-pip)&lt;/li&gt;
+&lt;li&gt;安装chruby &lt;a href=&#34;https://github.com/postmodern/chruby&#34; target=&#34;_blank&#34;&gt;https://github.com/postmodern/chruby&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;apt-get install libpq-dev&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;现在安装完之后的感觉就是界面变得更好看些，其他没什么改变。&lt;/p&gt;
+
+&lt;h3 id=&#34;注意&#34;&gt;注意&lt;/h3&gt;
+
+&lt;p&gt;Bash_it的配置脚本和openfoam的配置脚本冲突，暂时未找到原因。&lt;/p&gt;
+
+&lt;h3 id=&#34;补充theme配置&#34;&gt;补充theme配置&lt;/h3&gt;
+
+&lt;p&gt;当你执行玩Bash-it的install脚本后，在~目录下会有~/.bashrc文件，修改其中的bash theme主题变量即可。
+我现在使用的是doubletime_multiline_pyonly感觉还不错&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>bash智能分类升级版</title>
+      <link>https://jueqingsizhe66.github.io/blog/2015/06/02/bashzhi-neng-fen-lei-sheng-ji-ban/</link>
+      <pubDate>Tue, 02 Jun 2015 14:35:57 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/blog/2015/06/02/bashzhi-neng-fen-lei-sheng-ji-ban/</guid>
+      <description>&lt;ol&gt;
+&lt;li&gt;加入了 seq 1 8  智能产生序列的方法
+使得30度攻角的实验值也可以处理。&lt;/li&gt;
+&lt;li&gt;判断文件夹内是否存在文件
+[ -e &amp;ldquo;实验*.txt&amp;rdquo; ] 无法执行正则表达式
+因为有可能没有对应攻角的&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;deleteDensity()
+{
+echo  &amp;quot;删除密度和来流&amp;quot;
+if [ -d &amp;quot;modified&amp;quot; ]
+then echo &amp;quot;modified文件夹已存在&amp;quot;
+else 
+mkdir modified
+fi
+for i in `ls *.txt`
+    do 
+        #echo $i
+        # 之所以加入 iconv是因为 字符编码问题  怕找不到 密度 和来流动压行
+        iconv -f gb18030 -t utf-8 $i|awk &#39;{print}&#39;|awk &#39;{if ($0 ~ /攻角/) {print $3;}else if($0 ~ /升力/){print $1,$4,$5}else if($0 ~ /^$/){print &#39;&#39;}else {print $3,$5;}}&#39;   |sed &#39;/密度/d&#39;|sed &#39;/来流动压/d&#39;|sed &#39;/^$/d&#39; &amp;gt;modified/$i 
+    done
+}
+
+# 创建文件夹 从-10攻角到25度攻角
+
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME:  fenLei
+#   DESCRIPTION:  对攻角实行分类，按照不同的攻角创建不同的文件夹
+#    PARAMETERS:  
+#       RETURNS:  
+#-------------------------------------------------------------------------------
+fenLei(){
+cd modified  # 注意下面的所有函数 都运行在modified文件夹下
+#for j in -10.00 -9.00 -8.00 -7.00 -6.00 -5.00 -4.00 -3.00 -2.00 -1.00 0.00 1.00 2.00 3.00 4.00 5.00 6.00 7.00 8.00 9.00 10.00 11.00 12.00 13.00 14.00 15.00 16.00 17.00 18.00 19.00 20.00 21.00 22.00 23.00 24.00 25.00 26.00 27.00 28.00 29.00 30.00
+for j in `seq -10.00 30.00`
+    do 
+        if ! [ -d &amp;quot;a&amp;quot;$j ]
+        then    
+            mkdir &amp;quot;a&amp;quot;$j
+        fi
+    done
+}
+
+# 导入对应攻角文件到文件夹内
+
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME:  getFileIntoDir
+#   DESCRIPTION:  使用Awk按照不同的攻角值 利用 print的功能调用shell，把对应文件拷贝到对应攻角文件夹下
+#                注意-v在awk表示定义变量的间隔符
+#                 已废弃
+#    PARAMETERS:  
+#       RETURNS:  
+#-------------------------------------------------------------------------------
+
+getFileIntoDir(){
+#cd modified
+#for j in -10.00 -9.00 -8.00 -7.00 -6.00 -5.00 -4.00 -3.00 -2.00 -1.00 0.00 1.00 2.00 3.00 4.00 5.00 6.00 7.00 8.00 9.00 10.00 11.00 12.00 13.00 14.00 15.00 16.00 17.00 18.00 19.00 20.00 21.00 22.00 23.00 24.00 25.00 26.00 27.00 28.00 29.00 30.00
+for j in `seq -10.00 30.00`
+do 
+    for i in `ls *.txt`
+        do 
+            awk &#39;{print}&#39; $i |awk -v B=&amp;quot;$i&amp;quot; -v A=&amp;quot;攻角：&amp;quot;&amp;quot;$j&amp;quot; -v C=&amp;quot;a&amp;quot;&amp;quot;$j&amp;quot; &#39;$0~A{print &amp;quot;cp &amp;quot;,B,&amp;quot; &amp;quot;C&amp;quot;/&amp;quot;B|&amp;quot;/bin/bash&amp;quot;}&#39;
+        done
+done
+}
+
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME:  getFileIntoDirNew
+#   DESCRIPTION:  新版本的getFileIntoDir 方式
+#    PARAMETERS:  
+#       RETURNS:  
+#-------------------------------------------------------------------------------
+#grep &amp;quot;攻角：25.00&amp;quot; *.txt|awk -F[:] &#39;{print $1}&#39;
+
+getFileIntoDirNew(){
+#for j in -10.00 -9.00 -8.00 -7.00 -6.00 -5.00 -4.00 -3.00 -2.00 -1.00 0.00 1.00 2.00 3.00 4.00 5.00 6.00 7.00 8.00 9.00 10.00 11.00 12.00 13.00 14.00 15.00 16.00 17.00 18.00 19.00 20.00 21.00 22.00 23.00 24.00 25.00 26.00 27.00 28.00 29.00 30.00
+for j in `seq -10.00 30.00`
+do 
+        grep &amp;quot;攻角：$j&amp;quot; *.txt|awk -F[:] &#39;{print $1}&#39;|xargs -i mv {} &amp;quot;a&amp;quot;&amp;quot;$j&amp;quot;
+done
+
+}
+## 清除空行
+
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME:  blankEmptyLine
+#   DESCRIPTION:  利用sed -i命令直接处理文件中多余的空行
+#    PARAMETERS:  
+#       RETURNS:  
+#-------------------------------------------------------------------------------
+blankEmptyLine(){
+# 在每个文件夹运行这些命令 清除空行 
+#cd modified
+for i in `ls -d */`
+    do 
+        #if [ -e $i/&amp;quot;实验*.txt&amp;quot; ] #由于不存在任何*.txt相关的东西 所以报错！ 但是不影响程序的进行 所以忽略
+        #numBlank=`ls $i/*.txt|wc -l`  # 如果加上.txt反而不断报错
+        numBlank=`ls $i/|wc -l`  # 这样就可以忽略掉 a26.00 --a30.00为空的情况
+        echo $i&amp;quot;--Blank--&amp;quot;$numBlank
+        if [ $numBlank -gt 0 ]
+        then 
+            sed -i &#39;/^\s*$/d&#39; $i/*.txt
+        fi
+    done
+}
+
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME:  cal
+#   DESCRIPTION:  把每个攻角下的文件，利用awk执行攻角平均  升力系数平均  和压力系数平均
+#    PARAMETERS:  
+#       RETURNS:  
+#-------------------------------------------------------------------------------
+cal(){
+# 在每个文件夹下都运行此计算平均值 程序
+#cd modified
+
+for i in `ls -d */`
+    do 
+        #if [ -e $i/&amp;quot;实验*.txt&amp;quot; ]
+        #numCal=`ls $i/*.txt|wc -l`
+        numCal=`ls $i/|wc -l`
+        echo $i&amp;quot;--Cal--&amp;quot;$numCal
+        if [ $numCal -gt 0 ]
+        then 
+            #echo &amp;quot;$i ok&amp;quot;
+            awk -F&amp;quot;[ ：]&amp;quot; &#39;BEGIN{num=0;}{if($0 ~/攻角/){f[FNR]=$1;g[FNR]=$4;num+=1;}else if($0 ~/升力系数/){f[fNR]=$1;g[FNR]+=$4;a[FNR]=$5;b[FNR]+=$9;}else if($0 ~/压力系数/){f[FNR]=$1;g[FNR]=$2}else{f[FNR]+=$1;g[FNR]+=$2;if(nbr&amp;lt;FNR) {nbr=FNR;}}}END{for(i=0;i&amp;lt;=nbr;i++){print f[i]/num,g[i]/num,a[i]/num,b[i]/num;} print num;};&#39; $i/*.txt&amp;gt;$i/modified.txt
+
+        fi
+    done
+}
+
+
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME:  plot
+#   DESCRIPTION:  函数用于画图 调用gnuplot
+#                 使用下面函数之前得安装gnuplot
+#    PARAMETERS:  
+#       RETURNS:  
+#-------------------------------------------------------------------------------
+plot(){
+
+ #for i in `ls`;do num=`ls $i|wc -l`;let num=$[$num-1];sed -n &#39;2p&#39; $i/&amp;quot;modified.txt&amp;quot;|awk -v A=$i -v B=$num-2 &#39;{print A,$2*B}&#39; &amp;gt;&amp;gt; a.txt;sed -n &#39;3p&#39; $i/&amp;quot;modified.txt&amp;quot;|awk &#39;{print $2}&#39; &amp;gt;&amp;gt; a.txt;done; 
+
+ #   sed &#39;N;s/\n/ :/&#39; a.txt
+
+
+# for i in `ls`;do num=`ls $i|wc -l`;let num=$[$num-1];sed -n &#39;2p&#39; $i/&amp;quot;modified.txt&amp;quot;|awk -v A=$i -v B=$num-2 &#39;{print $2*B}&#39; &amp;gt;&amp;gt; a.txt;sed -n &#39;3p&#39; $i/&amp;quot;modified.txt&amp;quot;|awk &#39;{print $2}&#39; &amp;gt;&amp;gt; a.txt;done; 
+ for i in `ls -d */` ## 用法思想和cp的处理一样
+    do 
+        #if [ -e $i/&amp;quot;实验数据*.txt&amp;quot; ] #  不支持正则写法
+        #if [ -e $i/&amp;quot;实验数据*.txt&amp;quot; ]
+        #numPlot=`ls $i/&amp;quot;*.txt&amp;quot;|wc -l`  # 错误写法 不要用双引号
+        #numPlot=`ls $i/*.txt|wc -l` 
+        numPlot=`ls $i/|wc -l` 
+        #echo $i&amp;quot;--cl-cd--&amp;quot;$numPlot
+        if [ $numPlot -gt 0 ]
+        then
+            num=`ls $i|wc -l`
+            num=$(($num-1))
+            #print $i,$num
+            sed -n &#39;2p&#39; $i/&amp;quot;modified.txt&amp;quot;|awk -v A=$i -v B=$num &#39;{print $2*B}&#39; &amp;gt;&amp;gt; shengli.txt
+            sed -n &#39;3p&#39; $i/&amp;quot;modified.txt&amp;quot;|awk &#39;{print $2}&#39; &amp;gt;&amp;gt; shengli.txt
+            sed -n &#39;2p&#39; $i/&amp;quot;modified.txt&amp;quot;|awk -v A=$i -v B=$num &#39;{print $2*B}&#39; &amp;gt;&amp;gt; zuli.txt
+            sed -n &#39;3p&#39; $i/&amp;quot;modified.txt&amp;quot;|awk &#39;{print $4}&#39; &amp;gt;&amp;gt; zuli.txt
+        fi
+    done
+# 这是一个相当棒的技巧 把两行合并为一行
+sed -i &#39;N;s/\n/ /&#39; shengli.txt
+sort -n shengli.txt &amp;gt; shenglimodified.txt
+sed -i &#39;N;s/\n/ /&#39; zuli.txt
+sort -n zuli.txt &amp;gt; zulimodified.txt
+
+# 两张图 第一张是cl  第二章图是cd
+gnuplot&amp;lt;&amp;lt;EOF 
+set ter &#39;png&#39; 
+set out &#39;shengli.png&#39; 
+plot &amp;quot;shenglimodified.txt&amp;quot; t &#39;cl&#39; w lp
+EOF
+gnuplot&amp;lt;&amp;lt;EOF 
+set ter &#39;png&#39; 
+set out &#39;zuli.png&#39; 
+plot &amp;quot;zulimodified.txt&amp;quot; t &#39;cd&#39; w lp
+EOF
+rm -rf zuli.txt
+rm -rf shengli.txt
+}
+
+
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME:  plotCp
+#   DESCRIPTION:  用于打印cp曲线
+#    PARAMETERS:  
+#       RETURNS:  
+#-------------------------------------------------------------------------------
+plotCp(){
+    # 之所以添加上 -d */ 的作用是 不要处理上一步产生的shengli.png 等文件，而只处理文件夹即可!
+ for i in `ls -d */` # 注意一定是 */ 单独使用 ls -d没有效果
+    do 
+        #if [ -d $i ] &amp;amp;&amp;amp; [ -e $i/&amp;quot;实验数据*txt&amp;quot; ]  ;; 不支持正则写法
+        # 新改进的地方 想则会采用 引进ls工具 并调用wc
+        #
+#IF [···] -a [···] 这样不行。 得改成 if [ ... -a ...] 或者 If [...] &amp;amp;&amp;amp; [..]
+#这样吧，IF [···] &amp;amp;&amp;amp; [···] 
+        numPlotCp=`ls $i/|wc -l` 
+        #numPlotCp=`ls $i/*.txt|wc -l` 
+        #echo $i&amp;quot;--Cp--&amp;quot;$numPlotCp
+        if [ $numPlotCp -gt 0 ]
+        then 
+            sed -n &#39;6,47p&#39; $i/&amp;quot;modified.txt&amp;quot; &amp;gt;&amp;gt; $i/&amp;quot;cpUp.txt&amp;quot;;sed -n &#39;49,93p&#39; $i/&amp;quot;modified.txt&amp;quot; |sort -k 2 -nr &amp;gt;&amp;gt; $i/&amp;quot;cpUp.txt&amp;quot;;cpGrid
+        fi
+    done
+
+}
+
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME:  cpGrid
+#   DESCRIPTION:  注意  gnuplot必须放在句首
+#    PARAMETERS:  
+#       RETURNS:  
+#-------------------------------------------------------------------------------
+cpGrid(){
+gnuplot&amp;lt;&amp;lt;EOF 
+set ter &#39;png&#39; 
+set out &#39;$i/cpUp.png&#39;
+set xtics rotate by -45
+set ytics rotate by -45
+plot &amp;quot;$i/cpUp.txt&amp;quot; t &#39;cp&#39; w lp
+EOF
+}
+# 执行函数
+cd $1
+pwd
+deleteDensity
+fenLei
+getFileIntoDirNew
+blankEmptyLine
+cal
+plot
+plotCp
+
+
+
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+    <item>
+      <title>Bash智能分类文件并求值</title>
+      <link>https://jueqingsizhe66.github.io/blog/2015/05/27/bashzhi-neng-fen-lei-wen-jian-bing-qiu-zhi/</link>
+      <pubDate>Wed, 27 May 2015 10:36:24 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/blog/2015/05/27/bashzhi-neng-fen-lei-wen-jian-bing-qiu-zhi/</guid>
+      <description>&lt;p&gt;Bash是linux底下的一种shell实现，可以方便linux用户进行系统管理。他的核心就是
+调用最有效的命令组合形成更加强大完美的管理和应用程序,这也是unix的哲学,通过调用between programs的&lt;strong&gt;关系&lt;/strong&gt;来&lt;strong&gt;get its power&lt;/strong&gt;而不是通过自己的程序。
+shell编成的目的减少unix相关系统的管理员的人物&lt;/p&gt;
+
+&lt;p&gt;下面介绍主要是bash语法，以及有bash语法调用awk，sed，grep等linux底下强大的工具实现一个文件智能分类，并对相应文件夹取平均。&lt;/p&gt;
+
+&lt;p&gt;一些基本语法,虽然扎成一团，却静心选择。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt; 在单行模式下可以
+echo {userA,userB,userC}-{home,bin,data}
+echo {&amp;quot;userA&amp;quot;,&amp;quot;userB&amp;quot;,&amp;quot;userC&amp;quot;}-{&amp;quot;home&amp;quot;,&amp;quot;bin&amp;quot;,&amp;quot;data&amp;quot;}
+echo `{userA,userB,userC}-{home,bin,data}` #error
+echo &#39;{userA,userB,userC}-{home,bin,data}&#39;
+ 分号的作用 挡任连续指令的功能！（其实也可以用换行代替）
+
+
+ 一定要注意的bash的if语法，有空格：
+ if [ &amp;quot;$?&amp;quot; != 0 ] 等价于  if test &amp;quot;$?&amp;quot; != 0    一定要注意[]之间有空格
+
+ 等价关系有条件：
+ `command` 等价于 $(command)
+ &amp;quot;&amp;quot; 约等于 &#39;&#39;  但是单引号不转义特殊字符  双引号不转义特殊字符
+
+ 另外需要注意这种情况，${var} 和$var的区别：
+  基本上一样，$1...$9这个没区别，但是$10呢，${var}的这种就是${10}
+而$var却是$10是$1后边带个0
+
+
+ 几个dollar开头的内置参数
+ $$ shell脚本号
+ $* 以一个单字符显示所有脚本传递的参数 $1 
+ $#  传给shell程序的位置参数个数
+ $0  脚本名称
+ $n  脚本的第几个参数
+ $((...))  ==&amp;gt; x=$(($x+1)) 对括号内的表达式求值
+
+ 逻辑操作符相关:
+ and   statement &amp;amp;&amp;amp; statement &amp;amp;&amp;amp; .. 
+ or statement || statement || .. 
+
+ 最常用的分支判断：
+ if [ -f file_one ]  &amp;amp;&amp;amp; [ -f file_two ]
+ then
+ echo &amp;quot;in if&amp;quot;
+ else
+ echo &amp;quot;in else
+ fi
+
+ bash也在改进,比如：
+ [[]] 是提高版的test  比如\&amp;gt;必须在[]和test中使用  在[[]]直接使用！
+   #  所以以后改用[[]]
+
+ 下面几个${}开头的都是针对字符串的操作，可以剪切替换
+${name:-default} 使用一个默认值（一般是空值）来代替那些空的或者没有赋值的变量name；
+${name:=default}使用指定值来代替空的或者没有赋值的变量name；
+${name:?message}如果变量为空或者未赋值，那么就会显示出错误信息并中止脚本的执行同时返回退出码1。
+${#name} 给出name的长度
+${name%word} 从name的尾部开始删除与word匹配的最小部分，然后返回剩余部分
+${name%%word} 从name的尾部开始删除与word匹配的最长部分，然后返回剩余部分
+${name#word} 从name的头部开始删除与word匹配的最小部分，然后返回剩余部分
+${name##word} 从name的头部开始删除与word匹配的最长部分，然后返回剩余部分
+
+（注，name为变量名，word为要匹配的字符串）
+case${tao} in
+a)      echo “a” ;;
+b)      echo “b” ;;
+esac
+
+## 一些当行运行的指令，只在prompt运行窗口才有效
+1 let
+let &amp;quot;sus=2**3&amp;quot;
+echo &amp;quot;sus = $sus&amp;quot; 
+sus=[[2**3]]
+echo &amp;quot;2**3&amp;quot;
+echo &amp;quot;sus = $sus&amp;quot;,$sus
+if [ 2**3 == 8] 
+then  echo &amp;quot;hello&amp;quot;
+else
+    echo &amp;quot;fuck&amp;quot;
+fi
+ 注意在shell #的命令行运行可以写上分号 
+
+
+
+##  虽然有人说函数创建可以使用  
+ [function] function_name[()]{
+ commands
+ [return ...]
+}
+ 但是我发现加入function反而不行，于是使用 function_name(){}的风格
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;无用的分号命令&#34;&gt;无用的分号命令&lt;/h1&gt;
+
+&lt;p&gt;： 该命令什么都不做，但执行后会返回一个正确的退出代码，即exit 0。比如在if语句中，then后面不想做任何操作，但是又不能空着，这时就可以使用“:”来解决，如下&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;if [ &amp;quot;$i&amp;quot; -ne 1 ];then
+    :
+else
+    echo &amp;quot;$i is not equal 1&amp;quot;
+fi
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;特殊的点号&#34;&gt;特殊的点号&lt;/h1&gt;
+
+&lt;p&gt;点号+ 文件名的作用 和 source+文件名的作用一样，都是在当前的shell执行命令
+而 ./filename.sh 则是在子shell执行命令。
+所以如果想要设置环境变量得用source+文件名或者. 文件名的方式。&lt;/p&gt;
+
+&lt;h1 id=&#34;关于大括号和小括号的区别&#34;&gt;关于大括号和小括号的区别&lt;/h1&gt;
+
+&lt;p&gt;大括号和小括号的作用都一样，都是把几个命令组合在一起，然而他们也有所区别。
+()是在产生的子shell下执行，而{}是在当前的shell下执行
+与前面讲到是使用&amp;rdquo;.  filename.sh&amp;rdquo;和&amp;rdquo;./filename.sh&amp;rdquo;的区别一样&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;
+# A=123
+# (A=abc;echo $A);echo $A
+abc
+123
+# { A=abc;echo $A; };echo $A
+abc
+abc
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;由此可见，() 子shell设置完，不会影响到父shell，因为父不会继承子，影响的只是
+自身的shell。
+&lt;em&gt;注意：()里面两边可以不使用空格，{}里面两边必须使用空格，且最后一个命令也需要以“；”结尾，表示命令结束。&lt;/em&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;中括号用于判断&#34;&gt;中括号用于判断&lt;/h1&gt;
+
+&lt;p&gt;[] 与test命令一样，用于比较值以及检查文件类型。如下&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;[ &amp;ldquo;$A&amp;rdquo; = 123 ]：是字符串的测试，以测试 $A 是否为 1、2、3 这三个连续的&amp;rdquo;文字&amp;rdquo;。&lt;/li&gt;
+&lt;li&gt;[ &amp;ldquo;$A&amp;rdquo; -eq 123 ]：是整数的测试，以测试 $A 是否等于&amp;rdquo;一百二十三&amp;rdquo;。&lt;/li&gt;
+&lt;li&gt;[ -e &amp;ldquo;$A&amp;rdquo; ]：是关于文件的测试，以测试 123 这份&amp;rdquo;文件&amp;rdquo;是否存在&lt;/li&gt;
+&lt;li&gt;[ -f &amp;ldquo;$A&amp;rdquo; ] : 判断是否存在文件&lt;/li&gt;
+&lt;li&gt;[ -d &amp;ldquo;$A&amp;rdquo; ] : 判断是否存在文件夹&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&#34;关于-单括号和双中括号的区别&#34;&gt;关于 单括号和双中括号的区别&lt;/h1&gt;
+
+&lt;p&gt;[[]]可以说是[]的“增强版”，它能够将多个test命令支持的测试组合起来.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;
+# [[ (-d &amp;quot;$HOME&amp;quot;) &amp;amp;&amp;amp; (-w &amp;quot;$HOME&amp;quot;) ]] &amp;amp;&amp;amp; echo echo &amp;quot;home is a writable directory&amp;quot;  
+home is a writable directory
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;两者的主要区别如下&#34;&gt;两者的主要区别如下：&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;数字测试： -eq -ne -lt -le -gt -ge，[[ ]]同 [ ]一致
+
+&lt;ul&gt;
+&lt;li&gt;test int1 -eq int2  测试整数是否相等&lt;/li&gt;
+&lt;li&gt;test int1 -ge int2  测试int1是否&amp;gt;=int2&lt;/li&gt;
+&lt;li&gt;test int1 -gt int2  测试int1是否&amp;gt;int2&lt;/li&gt;
+&lt;li&gt;test int1 -le  int2 测试int1是否&amp;lt;=int2&lt;/li&gt;
+&lt;li&gt;test int1 -lt int2  测试int1是否&amp;lt;int2&lt;/li&gt;
+&lt;li&gt;test int1 -ne int2  测试整数是否不相等&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;文件测试： -r、-l、-w、-x、-f、-d、-s、-nt、-ot，[[ ]]同 [ ]一致
+
+&lt;ul&gt;
+&lt;li&gt;test -d file 指定文件是否目录&lt;/li&gt;
+&lt;li&gt;test -f file 指定文件是否常规文件&lt;/li&gt;
+&lt;li&gt;test -x file 指定文件是否可执行&lt;/li&gt;
+&lt;li&gt;test -r file 指定文件是否可读&lt;/li&gt;
+&lt;li&gt;test -w file 指定文件是否可写&lt;/li&gt;
+&lt;li&gt;test -a file 指定文件是否存在&lt;/li&gt;
+&lt;li&gt;test -s file 文件的大小是否非0&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;字符串测试： &amp;gt; &amp;lt; =(同==) != -n -z，不可使用“&amp;lt;=”和“&amp;gt;=”，[[ ]]同 [ ]一致，但在[]中，&amp;gt;和&amp;lt;必须使用\进行转义，即&amp;gt;和&amp;lt;
+
+&lt;ul&gt;
+&lt;li&gt;test str1=str2  测试字符串是否相等&lt;/li&gt;
+&lt;li&gt;test str1!=str2  测试字符串是否不相等&lt;/li&gt;
+&lt;li&gt;test str1 测试字符串是否不为空&lt;/li&gt;
+&lt;li&gt;test -n str1 测试字符串是否不为空&lt;/li&gt;
+&lt;li&gt;test -z str1 测试字符串是否为空&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;逻辑测试： []为 -a -o ! [[ ]] 为&amp;amp;&amp;amp; || !&lt;/li&gt;
+&lt;li&gt;数学运算： [] 不可以使用 [[ ]]可以使用+ - * / %&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;组合： 均可用各自逻辑符号连接的数字（运算）测试、文件测试、字符测试&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;
+# [ a \&amp;gt; 1 ] &amp;amp;&amp;amp; echo ture || echo false
+ture
+# [[ a &amp;gt; 1 ]] &amp;amp;&amp;amp; echo ture || echo false
+ture
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;双中括号和双小括号&#34;&gt;双中括号和双小括号&lt;/h1&gt;
+
+&lt;p&gt;(())专门来做数值运算，如果表达式求值为 0，则设置退出状态为 1；如果求值为非 0 值，则设置为 0。不需要对 (( 和 )) 之间的操作符转义。算术只对整数进行。除 0 会产生错误，但不会产生溢出。可以执行 C 语言中常见的算术、逻辑和位操作。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;((i=1+99));echo $i
+100
+
+i=99;((i++));echo $i
+100
+
+echo $((2**3))
+8
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;注意：使用 (( )) 时，不需要空格分隔各值和运算符，使用[]和[[ ]] 时需要用空格分隔各值和运算符&lt;/em&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;find跳过指定目录&#34;&gt;find跳过指定目录&lt;/h1&gt;
+
+&lt;p&gt;如果在查找文件时希望忽略某个目录，因为你知道那个目录中没有你所要查找的文件，那么可以使用-prune选项来指出需要忽略的目录。
+在使用 -prune选项时要当心，因为如果你同时使用了-depth选项，那么-prune选项就会被find命令忽略。&lt;/p&gt;
+
+&lt;h1 id=&#34;unix-tutorial-for-beginner-www-ee-surrey-ac-uk-teaching-unix&#34;&gt;&lt;a href=&#34;www.ee.surrey.ac.uk/Teaching/Unix&#34; target=&#34;_blank&#34;&gt;Unix Tutorial for Beginner&lt;/a&gt;&lt;/h1&gt;
+
+&lt;h1 id=&#34;常用的bash命令学习-http-vbird-dic-ksu-edu-tw-linux-basic-0320bash-php&#34;&gt;&lt;a href=&#34;http://vbird.dic.ksu.edu.tw/linux_basic/0320bash.php&#34; target=&#34;_blank&#34;&gt;常用的bash命令学习&lt;/a&gt;&lt;/h1&gt;
+
+&lt;ol&gt;
+&lt;li&gt;wc -l&lt;/li&gt;
+&lt;li&gt;sort -rn -t 2 -k :&lt;/li&gt;
+&lt;li&gt;grep -n &amp;ldquo;bash&amp;rdquo; src&lt;/li&gt;
+&lt;li&gt;join a.txt b.txt 两个文件有一列是相同的&lt;/li&gt;
+&lt;li&gt;find /usr -name &amp;ldquo;hello&amp;rdquo; -type d -exec ls -l {} \;  使用-ok更为安全。&lt;/li&gt;
+&lt;li&gt;find . -type f -atime -7 -print   7天前被访问的&lt;/li&gt;
+&lt;li&gt;find . -type f -size -100M   +100M 大于100M  -100M小于10M&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;b&amp;mdash;&amp;ndash;块（512字节）&lt;/li&gt;
+&lt;li&gt;c&amp;mdash;&amp;ndash;字节&lt;/li&gt;
+&lt;li&gt;w&amp;mdash;&amp;ndash;字（2字节）&lt;/li&gt;
+&lt;li&gt;k&amp;mdash;&amp;mdash;千字节（1024个字节）&lt;/li&gt;
+&lt;li&gt;M&amp;mdash;&amp;ndash;兆字节&lt;/li&gt;
+&lt;li&gt;G&amp;mdash;&amp;mdash;吉字节（1024M）&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;tr &amp;lsquo;A-Z&amp;rsquo; &amp;lsquo;a-z&amp;rsquo;&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;echo &amp;lsquo;this is my passwd&amp;rsquo; |tr &amp;lsquo;abcdefghijklmnopqrstuvwxyz&amp;rdquo;zyxwvutsrqponmlkjihgfedcba&amp;rsquo;   tr也可以用于加密
+解密：
+echo &amp;lsquo;gsrh rh nb kzhhdw&amp;rsquo; |tr &amp;lsquo;zyxwvutsrqponmlkjihgfedcba&amp;rdquo;abcdefghijklmnopqrstuvwxyz&amp;rsquo;&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;tr -d SET1 #用tr删除字符&lt;br /&gt;
+echo &amp;lsquo;Hello1234 World11111 44&amp;rsquo; |tr -d &amp;lsquo;0-9&amp;rsquo;&lt;br /&gt;
+HelloWorld&lt;br /&gt;
+10. grep -oP &amp;lsquo;(?&amp;lt;=+)fx&amp;rsquo; *&lt;br /&gt;
+    grep -oP &amp;lsquo;(?&amp;lt;=+)fx(?=()&amp;rsquo; *
+    grep -onP &amp;lsquo;(?&amp;lt;=+)fx(?=()&amp;rsquo; *
+11. cut -d &amp;ldquo;:&amp;rdquo; -f 1,3 /etc/passwd   类似于awk的字域
+    cut -d &amp;ldquo;:&amp;rdquo; -f 1,3,7 /etc/passwd&lt;/p&gt;
+
+&lt;h1 id=&#34;一个综合性的案例&#34;&gt;一个综合性的案例&lt;/h1&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME:  deleteDensity
+#   DESCRIPTION:  去除密度和来流经验等行  采用  awk和sed组合删除！ 并把有用信息导入modified文件夹下
+#                 iconv主要是考虑到windows下的中文字符无法被识别的问题
+#                  这个步骤是复制，而第三个fileintoDirNew是通过mv来操作的
+#    PARAMETERS:  
+#       RETURNS:  
+#-------------------------------------------------------------------------------
+deleteDensity()
+{
+echo  &amp;quot;删除密度和来流&amp;quot;
+if [ -d &amp;quot;modified&amp;quot; ]
+then echo &amp;quot;modified文件夹已存在&amp;quot;
+else 
+mkdir modified
+fi
+for i in `ls *.txt`
+    do 
+        iconv -f gb18030 -t utf-8 $i|awk &#39;{print}&#39;|awk &#39;{if ($0 ~ /攻角/) {print $3;}else if($0 ~ /升力/){print $1,$4,$5}else if($0 ~ /^$/){print &#39;&#39;}else {print $3,$5;}}&#39;   |sed &#39;/密度/d&#39;|sed &#39;/来流动压/d&#39;|sed &#39;/^$/d&#39; &amp;gt;modified/$i 
+    done
+}
+
+# 创建文件夹 从-10攻角到25度攻角
+
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME:  fenLei
+#   DESCRIPTION:  对攻角实行分类，按照不同的攻角创建不同的文件夹
+#    PARAMETERS:  
+#       RETURNS:  
+#-------------------------------------------------------------------------------
+fenLei(){
+cd modified  # 注意下面的所有函数 都运行在modified文件夹下
+for j in -10.00 -9.00 -8.00 -7.00 -6.00 -5.00 -4.00 -3.00 -2.00 -1.00 0.00 1.00 2.00 3.00 4.00 5.00 6.00 7.00 8.00 9.00 10.00 11.00 12.00 13.00 14.00 15.00 16.00 17.00 18.00 19.00 20.00 21.00 22.00 23.00 24.00 25.00
+    do 
+        if ! [ -d &amp;quot;a&amp;quot;$j ]
+        then    mkdir &amp;quot;a&amp;quot;$j
+        fi
+    done
+}
+
+# 导入对应攻角文件到文件夹内
+
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME:  getFileIntoDir
+#   DESCRIPTION:  使用Awk按照不同的攻角值 利用 print的功能调用shell，把对应文件拷贝到对应攻角文件夹下
+#                注意-v在awk表示定义变量的间隔符
+#    PARAMETERS:  
+#       RETURNS:  
+#-------------------------------------------------------------------------------
+
+getFileIntoDir(){
+#cd modified
+for j in -10.00 -9.00 -8.00 -7.00 -6.00 -5.00 -4.00 -3.00 -2.00 -1.00 0.00 1.00 2.00 3.00 4.00 5.00 6.00 7.00 8.00 9.00 10.00 11.00 12.00 13.00 14.00 15.00 16.00 17.00 18.00 19.00 20.00 21.00 22.00 23.00 24.00 25.00
+do 
+    for i in `ls *.txt`
+        do 
+            awk &#39;{print}&#39; $i |awk -v B=&amp;quot;$i&amp;quot; -v A=&amp;quot;攻角：&amp;quot;&amp;quot;$j&amp;quot; -v C=&amp;quot;a&amp;quot;&amp;quot;$j&amp;quot; &#39;$0~A{print &amp;quot;cp &amp;quot;,B,&amp;quot; &amp;quot;C&amp;quot;/&amp;quot;B|&amp;quot;/bin/bash&amp;quot;}&#39;
+        done
+done
+}
+
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME:  getFileIntoDirNew
+#   DESCRIPTION:  新版本的getFileIntoDir 方式
+#    PARAMETERS:  
+#       RETURNS:  
+#-------------------------------------------------------------------------------
+#grep &amp;quot;攻角：25.00&amp;quot; *.txt|awk -F[:] &#39;{print $1}&#39;
+
+getFileIntoDirNew(){
+for j in -10.00 -9.00 -8.00 -7.00 -6.00 -5.00 -4.00 -3.00 -2.00 -1.00 0.00 1.00 2.00 3.00 4.00 5.00 6.00 7.00 8.00 9.00 10.00 11.00 12.00 13.00 14.00 15.00 16.00 17.00 18.00 19.00 20.00 21.00 22.00 23.00 24.00 25.00
+do 
+        grep &amp;quot;攻角：$j&amp;quot; *.txt|awk -F[:] &#39;{print $1}&#39;|xargs -i mv {} &amp;quot;a&amp;quot;&amp;quot;$j&amp;quot;
+done
+
+}
+## 清除空行
+
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME:  blankEmptyLine
+#   DESCRIPTION:  利用sed -i命令直接处理文件中多余的空行
+#    PARAMETERS:  
+#       RETURNS:  
+#-------------------------------------------------------------------------------
+blankEmptyLine(){
+# 在每个文件夹运行这些命令 清除空行 
+#cd modified
+for i in `ls -d */`
+    do 
+        sed -i &#39;/^\s*$/d&#39; $i/*.txt
+    done
+}
+
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME:  cal
+#   DESCRIPTION:  把每个攻角下的文件，利用awk执行攻角平均  升力系数平均  和压力系数平均
+#    PARAMETERS:  
+#       RETURNS:  
+#-------------------------------------------------------------------------------
+cal(){
+# 在每个文件夹下都运行此计算平均值 程序
+#cd modified
+
+for i in `ls -d */`
+    do 
+        awk -F&amp;quot;[ ：]&amp;quot; &#39;BEGIN{num=0;}{if($0 ~/攻角/){f[FNR]=$1;g[FNR]=$4;num+=1;}else if($0 ~/升力系数/){f[fNR]=$1;g[FNR]+=$4;a[FNR]=$5;b[FNR]+=$9;}else if($0 ~/压力系数/){f[FNR]=$1;g[FNR]=$2}else{f[FNR]+=$1;g[FNR]+=$2;if(nbr&amp;lt;FNR) {nbr=FNR;}}}END{for(i=0;i&amp;lt;=nbr;i++){print f[i]/num,g[i]/num,a[i]/num,b[i]/num;} print num;};&#39; $i/*.txt&amp;gt;$i/modified.txt
+    done
+}
+
+
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME:  plot
+#   DESCRIPTION:  函数用于画图 调用gnuplot
+#                 使用下面函数之前得安装gnuplot
+#    PARAMETERS:  
+#       RETURNS:  
+#-------------------------------------------------------------------------------
+plot(){
+
+ #for i in `ls`;do num=`ls $i|wc -l`;let num=$[$num-1];sed -n &#39;2p&#39; $i/&amp;quot;modified.txt&amp;quot;|awk -v A=$i -v B=$num-2 &#39;{print A,$2*B}&#39; &amp;gt;&amp;gt; a.txt;sed -n &#39;3p&#39; $i/&amp;quot;modified.txt&amp;quot;|awk &#39;{print $2}&#39; &amp;gt;&amp;gt; a.txt;done; 
+
+ #   sed &#39;N;s/\n/ :/&#39; a.txt
+
+
+# for i in `ls`;do num=`ls $i|wc -l`;let num=$[$num-1];sed -n &#39;2p&#39; $i/&amp;quot;modified.txt&amp;quot;|awk -v A=$i -v B=$num-2 &#39;{print $2*B}&#39; &amp;gt;&amp;gt; a.txt;sed -n &#39;3p&#39; $i/&amp;quot;modified.txt&amp;quot;|awk &#39;{print $2}&#39; &amp;gt;&amp;gt; a.txt;done; 
+ for i in `ls`
+    do 
+        num=`ls $i|wc -l`
+        num=$(($num-1))
+        #print $i,$num
+        sed -n &#39;2p&#39; $i/&amp;quot;modified.txt&amp;quot;|awk -v A=$i -v B=$num &#39;{print $2*B}&#39; &amp;gt;&amp;gt; shengli.txt
+        sed -n &#39;3p&#39; $i/&amp;quot;modified.txt&amp;quot;|awk &#39;{print $2}&#39; &amp;gt;&amp;gt; shengli.txt
+        sed -n &#39;2p&#39; $i/&amp;quot;modified.txt&amp;quot;|awk -v A=$i -v B=$num &#39;{print $2*B}&#39; &amp;gt;&amp;gt; zuli.txt
+        sed -n &#39;3p&#39; $i/&amp;quot;modified.txt&amp;quot;|awk &#39;{print $4}&#39; &amp;gt;&amp;gt; zuli.txt
+    done
+
+sed -i &#39;N;s/\n/ /&#39; shengli.txt
+sort -n shengli.txt &amp;gt; shenglimodified.txt
+sed -i &#39;N;s/\n/ /&#39; zuli.txt
+sort -n zuli.txt &amp;gt; zulimodified.txt
+
+gnuplot&amp;lt;&amp;lt;EOF 
+set ter &#39;png&#39; 
+set out &#39;shengli.png&#39; 
+plot &amp;quot;shenglimodified.txt&amp;quot; t &#39;cl&#39; w lp
+EOF
+gnuplot&amp;lt;&amp;lt;EOF 
+set ter &#39;png&#39; 
+set out &#39;zuli.png&#39; 
+plot &amp;quot;zulimodified.txt&amp;quot; t &#39;cd&#39; w lp
+EOF
+rm -rf zuli.txt
+rm -rf shengli.txt
+}
+
+
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME:  plotCp
+#   DESCRIPTION:  用于打印cp曲线
+#    PARAMETERS:  
+#       RETURNS:  
+#-------------------------------------------------------------------------------
+plotCp(){
+ for i in `ls`
+    do 
+        if [ -d $i ]
+            then sed -n &#39;6,47p&#39; $i/&amp;quot;modified.txt&amp;quot; &amp;gt;&amp;gt; $i/&amp;quot;cpUp.txt&amp;quot;;sed -n &#39;49,93p&#39; $i/&amp;quot;modified.txt&amp;quot; |sort -k 2 -nr &amp;gt;&amp;gt; $i/&amp;quot;cpUp.txt&amp;quot;;cpGrid
+            fi
+    done
+
+}
+
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME:  cpGrid
+#   DESCRIPTION:  注意  gnuplot必须放在句首
+#    PARAMETERS:  
+#       RETURNS:  
+#-------------------------------------------------------------------------------
+cpGrid(){
+gnuplot&amp;lt;&amp;lt;EOF 
+set ter &#39;png&#39; 
+set out &#39;$i/cpUp.png&#39;
+set xtics rotate by -45
+set ytics rotate by -45
+plot &amp;quot;$i/cpUp.txt&amp;quot; t &#39;cp&#39; w lp
+EOF
+}
+# 执行函数
+deleteDensity
+fenLei
+getFileIntoDirNew
+blankEmptyLine
+cal
+plot
+plotCp
+
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://dngood.blog.51cto.com/446195/703347&#34; target=&#34;_blank&#34;&gt;shell脚本集合1&lt;/a&gt;
+&lt;a href=&#34;http://dngood.blog.51cto.com/446195/764563&#34; target=&#34;_blank&#34;&gt;shell脚本集合2&lt;/a&gt;
+&lt;a href=&#34;http://dngood.blog.51cto.com/446195/1107458&#34; target=&#34;_blank&#34;&gt;shell脚本集合3&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

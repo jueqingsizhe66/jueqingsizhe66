@@ -13,6 +13,145 @@
     </image>
     
     <item>
+      <title>python众多文件中提取轮毂高度处风速</title>
+      <link>https://jueqingsizhe66.github.io/post/python%E4%BC%97%E5%A4%9A%E6%96%87%E4%BB%B6%E4%B8%AD%E6%8F%90%E5%8F%96%E8%BD%AE%E6%AF%82%E9%AB%98%E5%BA%A6%E5%A4%84%E9%A3%8E%E9%80%9F/</link>
+      <pubDate>Thu, 31 Oct 2019 13:03:00 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/post/python%E4%BC%97%E5%A4%9A%E6%96%87%E4%BB%B6%E4%B8%AD%E6%8F%90%E5%8F%96%E8%BD%AE%E6%AF%82%E9%AB%98%E5%BA%A6%E5%A4%84%E9%A3%8E%E9%80%9F/</guid>
+      <description>
+
+&lt;h2 id=&#34;背景分析&#34;&gt;背景分析&lt;/h2&gt;
+
+&lt;p&gt;在前面的 &lt;a href=&#34;https://jueqingsizhe66.github.io/post/python提取多个文件汇总到一个excel表/&#34; target=&#34;_blank&#34;&gt;python提取多个文件汇总到一个excel表&lt;/a&gt;一文中，我们使用ExcelWriter把提取的速度信息汇总在一个xls文件，各个sheet存放真实数据&lt;/p&gt;
+
+&lt;p&gt;而在AIWIND计算中，有可能插值错误，会出现Null值，于是a &lt;a href=&#34;https://jueqingsizhe66.github.io/post/python提取多个文件的存在nan速度廓线/&#34; target=&#34;_blank&#34;&gt;python提取多个文件的存在null速度廓线&lt;/a&gt;提出了过滤NULL值得方案&lt;/p&gt;
+
+&lt;p&gt;以上工作针对的是风廓线，我们现在想要从这个汇总表提取出来各个机位点在一定扇区下，比如0°得的轮毂高度处速度曲线, 也就是每计算一个扇区，我们都希望立马处理得到对应的对比结果，观察是否有所改进！于是做了下面工作&lt;/p&gt;
+
+&lt;p&gt;在&lt;a href=&#34;https://jueqingsizhe66.github.io/post/python对比作图两个风速风向表/&#34; target=&#34;_blank&#34;&gt;python对比作图&lt;/a&gt;一文中加入了数据的导出功能，可在此基础上进行改写&lt;/p&gt;
+
+&lt;p&gt;下图中左边为瞬态扇区的AIWIND即时结果，右边为改进前的WINDSIM和AIWIND在各个扇区的对比图,我们希望AIWIND即时结果能够较好地吻合规律，与之前的WINDSIM结果做对比，即提取即时扇区下的各个机位点的速度廓线，汇总表格，遍历所有sheetnames,提取轮毂点位的速度信息,作图，也可以导出，当前未进行。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/aiwind/hubVelocity.png&#34; alt=&#34;轮毂风速&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;技术分解&#34;&gt;技术分解&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;依然利用脚本提取风廓线文件，一个扇区生成一个汇总表&lt;/li&gt;
+&lt;li&gt;遍历汇总表的所有sheetnames, 利用Excel_File()和parse的功能&lt;/li&gt;
+&lt;li&gt;利用列表数据结构+条件提取对应高度处的风速&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;技术实现&#34;&gt;技术实现&lt;/h2&gt;
+
+&lt;p&gt;设计了一个plotSector，可针对对应扇区处理;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;注意观察fileReadyAnalysis的及时结果存放位置？&lt;/li&gt;
+&lt;li&gt;注意观察&lt;a href=&#34;https://jueqingsizhe66.github.io/post/python对比作图两个风速风向表/&#34; target=&#34;_blank&#34;&gt;对比作图&lt;/a&gt;导出的数据表格`0-Velocity.xlsx..`存放位置?&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;!--listend--&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; os
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; pandas &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; pd
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; numpy &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; np
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; matplotlib.pyplot &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; plt
+
+&lt;span style=&#34;color:#75715e&#34;&gt;## 注意需要有windsim各个扇区的数据 , 当前有一个问题必须配合AIIWND&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#fileReadyAnalysis=r&amp;#34;C:\Users\yezhaoliang\Desktop\NewSimulation\Results-newSimulation45.xlsx&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#fileReadyAnalysis=r&amp;#34;C:\Users\yezhaoliang\Desktop\NewSimulation\Results-newSimulation0.xlsx&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;## Sector: 0 22 45 67 90 112 135 157 180 202 247 270 292 315 337&lt;/span&gt;
+plotSector&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;0&amp;#39;&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;## AIWIND导出的数据需要汇总&lt;/span&gt;
+fileReadyAnalysis&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C:\Users\yezhaoliang\Desktop\NewSimulation\Results-newSimulation&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;plotSector&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;.xlsx&amp;#34;&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; __name__ &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;__main__&amp;#34;&lt;/span&gt;:
+    x_axix &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T11&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T12&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T13&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T21&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T22&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T23&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T1&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T10&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T14&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T15&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T16&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T17&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T18&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T19&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T2&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T20&amp;#34;&lt;/span&gt;,
+              &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T3&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T4&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T5&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T6&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T7&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T8&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T9&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;366&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;387&amp;#34;&lt;/span&gt;];
+    accordingTable &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T1&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T2&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T3&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T4&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T5&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T6&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T7&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T8&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T9&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T10&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T11&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T12&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T13&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T14&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T15&amp;#34;&lt;/span&gt;,
+                      &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T16&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T17&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T18&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T19&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T20&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T21&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T22&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T23&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;366&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;387&amp;#34;&lt;/span&gt;];
+    x_axisChange &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;1&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;2&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;3&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;4&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;5&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;6&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;7&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;8&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;9&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;10&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;11&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;12&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;13&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;14&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;15&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;16&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;17&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;18&amp;#34;&lt;/span&gt;,
+                    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;19&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;20&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;21&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;22&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;23&amp;#34;&lt;/span&gt; ];
+
+    speedTableDir&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;C:\Users\yezhaoliang\Desktop\work\AIWind\processWindSim\速度表速度分析&amp;#39;&lt;/span&gt;
+    speedTable&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;speedTableDir&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\\&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;plotSector&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;-velocity.xlsx&amp;#39;&lt;/span&gt;
+    speedTableData&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read_excel(speedTable,usecols&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;])
+    &lt;span style=&#34;color:#75715e&#34;&gt;# b = pd.read_excel(fileReadyAnalysis,None)&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# sheetnames=b.keys()&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# sheetvalues=b.values()&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;#hubVelocities=np.zeros(sheetvalues.__len__())&lt;/span&gt;
+
+    xlsx &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ExcelFile(fileReadyAnalysis)
+    turbines&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Series([&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;25&lt;/span&gt;)
+    turbineVelocity&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Series([&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;25&lt;/span&gt;,dtype&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;float&amp;#39;&lt;/span&gt;)
+    count&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;## 读取通过程序汇总的各个扇区的数据(各个机位点存储在相应sheet表中&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; sheetname &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; xlsx&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sheet_names:
+        pdtemp&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;xlsx&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;parse(sheetname)
+        &lt;span style=&#34;color:#75715e&#34;&gt;#print(pdtemp.iloc[5:20,2])&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;#linreg = LinearRegression()&lt;/span&gt;
+        newCount&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;accordingTable&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;index(x_axix[count])
+        &lt;span style=&#34;color:#75715e&#34;&gt;## 机位点名字&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(sheetname[&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt;:&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;])
+        turbines[newCount]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;sheetname[&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt;:&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;]
+        &lt;span style=&#34;color:#75715e&#34;&gt;## 数据提取&lt;/span&gt;
+        text1&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pdtemp&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;100&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;]
+        text2&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pdtemp&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;100&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+        iMax&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[i &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(text1)) &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; text1[i]&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;90&lt;/span&gt;]
+
+        neededIndex&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;iMax[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]
+        neededIndexSmaller&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;iMax[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        smallZ&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;text1[neededIndexSmaller]
+        smallV&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;text2[neededIndexSmaller]
+
+        bigZ &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; text1[neededIndex]
+        bigV &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; text2[neededIndex]
+       &lt;span style=&#34;color:#75715e&#34;&gt;# yi=[y for y in pdtemp.iloc[0:100,1]]&lt;/span&gt;
+       &lt;span style=&#34;color:#75715e&#34;&gt;# linreg.fit(pdtemp.iloc[5:20,2], pdtemp.iloc[5:20,1])&lt;/span&gt;
+        hub_height&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;90&lt;/span&gt;
+        velocityPredict&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;(bigV&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;smallV)&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;(bigZ&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;smallZ)&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;(hub_height&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;smallZ)&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;smallV
+&lt;span style=&#34;color:#75715e&#34;&gt;#        velocityPredict= linreg.predict(hub_height)&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(velocityPredict)
+        turbineVelocity[newCount]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;velocityPredict
+        count&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;count&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    df&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;concat([turbines,turbineVelocity],axis&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+    &lt;span style=&#34;color:#75715e&#34;&gt;#df.to_excel(&amp;#39;hello45.xlsx&amp;#39;)&lt;/span&gt;
+    df&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_excel(&lt;span style=&#34;color:#e6db74&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;C:\Users\yezhaoliang\Desktop\NewSimulation\hello&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;plotSector&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;.xlsx&amp;#39;&lt;/span&gt;)
+    &lt;span style=&#34;color:#75715e&#34;&gt;# speeTableSeries=pd.Series(speedTableData.values())&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# tempArray=pd.concat(turbineVelocity[0:23],speeTableSeries)&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;#temp1=[x for x in speedTableData]&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;#temp2=[y for y in turbineVelocity]&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;#tempArray=[temp1,temp2]&lt;/span&gt;
+    aiwindYaxis&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;turbineVelocity[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;23&lt;/span&gt;]
+    windsimYaxis&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;speedTableData[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;23&lt;/span&gt;]
+    &lt;span style=&#34;color:#75715e&#34;&gt;#ylimMax=max(tempArray[1])&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;#ylimMin=min(tempArray[1])&lt;/span&gt;
+
+    ylimMax&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;
+    ylimMin&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# 开始画图&lt;/span&gt;
+
+    plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;figure(figsize &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;15&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;))
+    plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;title(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Sector-&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;plotSector&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39; Analysis&amp;#39;&lt;/span&gt;,fontsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;32&lt;/span&gt; )
+    &lt;span style=&#34;color:#75715e&#34;&gt;#plt.plot(x_axix, aiwindYaxis, marker=&amp;#39;o&amp;#39;, color=&amp;#39;black&amp;#39;, label=&amp;#39;AIWIND&amp;#39;)&lt;/span&gt;
+    plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;plot(x_axisChange, aiwindYaxis, marker&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;o&amp;#39;&lt;/span&gt;,markersize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;9&amp;#39;&lt;/span&gt;, color&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;red&amp;#39;&lt;/span&gt;,markerfacecolor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;grey&amp;#39;&lt;/span&gt;,markeredgecolor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;black&amp;#39;&lt;/span&gt;,linestyle&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;solid&amp;#39;&lt;/span&gt;, label&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;AIWIND&amp;#39;&lt;/span&gt;,linewidth&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;)
+    &lt;span style=&#34;color:#75715e&#34;&gt;#plt.plot(sub_axix, test_acys,marker=&amp;#39;*&amp;#39;, color=&amp;#39;red&amp;#39;, label=&amp;#39;testing accuracy&amp;#39;)&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;#plt.plot(x_axix, windsimYaxis,marker=&amp;#39;*&amp;#39;, color=&amp;#39;blue&amp;#39;, label=&amp;#39;WindSiM&amp;#39;)&lt;/span&gt;
+    plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;plot(x_axisChange, windsimYaxis,marker&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;*&amp;#39;&lt;/span&gt;,markersize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;9&amp;#39;&lt;/span&gt;, color&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;black&amp;#39;&lt;/span&gt;,markerfacecolor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;grey&amp;#39;&lt;/span&gt;,markeredgecolor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;black&amp;#39;&lt;/span&gt;,label&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;WindSiM&amp;#39;&lt;/span&gt;,linewidth&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;)
+    &lt;span style=&#34;color:#75715e&#34;&gt;#plt.plot(x_axix, thresholds, color=&amp;#39;blue&amp;#39;, label=&amp;#39;threshold&amp;#39;)&lt;/span&gt;
+    plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;legend()  &lt;span style=&#34;color:#75715e&#34;&gt;# 显示图例&lt;/span&gt;
+    plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;margins(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;)
+    plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;grid()
+    plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ylim(ylimMin&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,ylimMax&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+    plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;xlabel(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Turbine Names&amp;#39;&lt;/span&gt;,fontsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;24&lt;/span&gt; )
+    plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ylabel(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Velocity&amp;#39;&lt;/span&gt;,fontsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;24&lt;/span&gt; )
+    plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;tick_params(axis&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;both&amp;#39;&lt;/span&gt;,which&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;major&amp;#39;&lt;/span&gt;,labelsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;24&lt;/span&gt;)
+    plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;savefig(&lt;span style=&#34;color:#e6db74&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C:\Users\yezhaoliang\Desktop\NewSimulation&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\\&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;plotSector&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;_&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Velocity-test&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;.jpg&amp;#34;&lt;/span&gt;,dpi &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;900&lt;/span&gt;)
+    &lt;span style=&#34;color:#75715e&#34;&gt;#plt.show()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>python对比作图两个风速风向表</title>
       <link>https://jueqingsizhe66.github.io/post/python%E5%AF%B9%E6%AF%94%E4%BD%9C%E5%9B%BE%E4%B8%A4%E4%B8%AA%E9%A3%8E%E9%80%9F%E9%A3%8E%E5%90%91%E8%A1%A8/</link>
       <pubDate>Tue, 29 Oct 2019 13:51:00 +0800</pubDate>
@@ -172,6 +311,17 @@ plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;show()
 &lt;span style=&#34;color:#f92672&#34;&gt;....&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/aiwind/sectorAngleTurbines.png&#34; alt=&#34;最终结果&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;曲线数据导出&#34;&gt;曲线数据导出&lt;/h2&gt;
+
+&lt;p&gt;数据导出方便进行比较。
+使用了pandas的concat的功能，注意axis的用法，默认是行记录导入，axis=1相当于列记录导入.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;    sdf=pd.concat([pd.Series(x_axisChange),pd.Series(windsimYaxis),pd.Series(aiwindYaxis)],axis=1)
+    exportFilename=plotSector+&amp;quot;-&amp;quot;+plotPhysics+&amp;quot;.xlsx&amp;quot;
+    sdf.to_excel(exportFilename)
+
+&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     
@@ -695,15 +845,6 @@ close  $INPUTDATA
 &lt;span style=&#34;color:#66d9ef&#34;&gt;sub&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;ltrim&lt;/span&gt; { &lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt; $s &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; shift; $s &lt;span style=&#34;color:#f92672&#34;&gt;=~&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;s/^\s+//&lt;/span&gt;;       &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; $s };
 &lt;span style=&#34;color:#66d9ef&#34;&gt;sub&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;rtrim&lt;/span&gt; { &lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt; $s &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; shift; $s &lt;span style=&#34;color:#f92672&#34;&gt;=~&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;s/\s+$//&lt;/span&gt;;       &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; $s };
 &lt;span style=&#34;color:#66d9ef&#34;&gt;sub&lt;/span&gt;  &lt;span style=&#34;color:#a6e22e&#34;&gt;trim&lt;/span&gt; { &lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt; $s &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; shift; $s &lt;span style=&#34;color:#f92672&#34;&gt;=~&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;s/^\s+|\s+$//g&lt;/span&gt;; &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; $s };&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>funny</title>
-      <link>https://jueqingsizhe66.github.io/post/funny/</link>
-      <pubDate>Sun, 27 Oct 2019 14:06:00 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/post/funny/</guid>
-      <description>&lt;p&gt;hello world&lt;/p&gt;
 </description>
     </item>
     

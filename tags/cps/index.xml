@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>CPS | Macro Life</title>
+    <link>https://jueqingsizhe66.github.io/tags/cps/</link>
+      <atom:link href="https://jueqingsizhe66.github.io/tags/cps/index.xml" rel="self" type="application/rss+xml" />
+    <description>CPS</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>©2019</copyright><lastBuildDate>Fri, 11 Aug 2017 13:25:10 +0800</lastBuildDate>
+    <image>
+      <url>https://jueqingsizhe66.github.io/img/icon-192.png</url>
+      <title>CPS</title>
+      <link>https://jueqingsizhe66.github.io/tags/cps/</link>
+    </image>
+    
+    <item>
+      <title>CPS Intutive</title>
+      <link>https://jueqingsizhe66.github.io/blog/2017/08/11/cps-intutive/</link>
+      <pubDate>Fri, 11 Aug 2017 13:25:10 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/blog/2017/08/11/cps-intutive/</guid>
+      <description>&lt;p&gt;通过deep&amp;amp;coB 和deepB的不同CPS实现，说明letcc版本是直接跳出surrounding，而不管周边的其他计算。 并且可以这样认为所有的scheme lambda表达式都可以理解为kn表达式的过程(好处1)，这种直观的解释方便理解 绕来绕去的过程。并且cps style尾巴的k既可以是变量也可以是函数 (好处2)。&lt;/p&gt;
+
+&lt;h1 id=&#34;1-普通形式&#34;&gt;1. 普通形式&lt;/h1&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-racket&#34;&gt;;; Normal Form
+(define append2
+  (lambda (lisa lisb)
+    (cond
+      ((null? lisa) lisb)
+      (else
+       (cons (car lisa) (append2 (cdr lisa) lisb))))))
+
+
+(define fact
+  (lambda (n)
+    (if (zero? n)
+         1
+         (* n (fact (- n 1))))))
+
+(fact 4)
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;2-tail-form&#34;&gt;2. Tail form&lt;/h1&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-racket&#34;&gt;(define append3
+  (lambda (lisa lisb)
+    (letrec ((ap2
+              (lambda (a b)
+                (cond
+                  ((null? a) b)
+                  (else (ap2 (cdr a) (cons (car a) b)))))))
+      (ap2 (reverse lisa) lisb))))
+
+(define fact2
+  (lambda (n)
+    (letrec ((fact-help (lambda (n help)
+                          (if (zero? n)
+                              help
+                              (fact-help (- n 1) (* n help))))))
+      (fact-help n 1))))
+(fact2 4)
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;#3. deep&amp;amp;coB&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-racket&#34;&gt;(define deep&amp;amp;coB
+  (lambda (m k)
+    (cond
+      ((zero? m)
+       (let ()
+         (set! toppings k)
+         (k &#39;pizza)))
+      (else
+       (deep&amp;amp;coB (sub1 m)
+                 (lambda (x)
+                   (k (cons x &#39;()))))))))
+
+(deep&amp;amp;coB 6 (lambda (x) x))         ; &#39;((((((pizza))))))
+(deep&amp;amp;coB 4 (lambda (x) x)) ; &#39;((((pizza))))
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;cps风格 lambda(x) x ,可以使用k1 k2 k3 的风格进行替换,cps风格仅仅是编程的风格，letcc是其中的一种体现.&lt;/p&gt;
+
+&lt;p&gt;#4. deepB&lt;/p&gt;
+
+&lt;p&gt;letcc风格 直接跳出！！（也就是不管其他计算，直接他就是返回值！！）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-racket&#34;&gt;(define toppings 0)
+(define deepB
+  (lambda (m)
+    (cond
+      ((zero? m)
+       (call-with-current-continuation
+        (lambda (jump)
+          (set! toppings jump)
+          &#39;pizza)))
+      (else
+       (cons (deepB (sub1 m)) &#39;())))))
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;#5. bons and kons&lt;/p&gt;
+
+&lt;p&gt;进一步理解cps风格也可以看看kons和bons的实现&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-racket&#34;&gt;#lang racket
+; kons the magnificent
+;
+(define kons
+  (lambda (kar kdr)
+    (lambda (selector)          ; returns lambda (selector)
+      (selector kar kdr))))     ; calls selector with kar and kdr arguments
+
+; kar
+;
+(define kar
+  (lambda (c)                   ; applies selector on (a d) and returns &#39;a (car)
+    (c (lambda (a d) a))))
+
+; kdr
+;
+(define kdr
+  (lambda (c)                   ; applies selector on (a d) and returns d (cdr)
+    (c (lambda (a d) d))))
+
+; Examples of kons kar kdr
+;
+(kar (kons &#39;a &#39;()))                 ; &#39;a
+(kdr (kons &#39;a &#39;()))                 ; &#39;()
+(kar (kdr (kons &#39;a (kons &#39;b &#39;())))) ; &#39;b
+(kar (kons &#39;a (kons &#39;b &#39;()))) ; &#39;a
+; Another cons
+;
+(define bons
+  (lambda (kar)
+    (let ((kdr &#39;()))
+      (lambda (selector)
+        (selector
+         (lambda (x) (set! kdr x))
+         kar
+         kdr)))))
+
+; Another kar
+;
+(define bar
+  (lambda (c)
+    (c (lambda (s a d) a))))
+
+; Another kdr
+;
+(define bdr
+  (lambda (c)
+    (c (lambda (s a d) d))))
+
+; set-kdr
+;
+(define set-kdr
+  (lambda (c x)
+    ((c (lambda (s a d) s)) x)))
+
+; create kons using set-kdr and bons
+;
+(define kons2
+  (lambda (a d)
+    (let ((c (bons a)))
+      (set-kdr c d)
+      c)))
+
+; Example of kons2 bar and bdr
+;
+(bar (kons2 &#39;a &#39;(1 2 3)))       ; &#39;a
+(bdr (kons2 &#39;a &#39;(1 2 3)))       ; &#39;(1 2 3)
+(define bad
+  (lambda (x)
+    (and (will-stop? bad)
+         (eternity x))))
+(define eternity
+  (lambda (x)
+    (eternity x)))
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;https://cgi.soic.indiana.edu/~c311/lib/exe/fetch.php?media=cps-notes.scm&#34; target=&#34;_blank&#34;&gt; cps变换教程 &lt;/a&gt;
+2 &lt;a href=&#34;http://www.ece.uc.edu/~franco/C511/html/Scheme/ycomb.html&#34; target=&#34;_blank&#34;&gt; Y combinator推导 &lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

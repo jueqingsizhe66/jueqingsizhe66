@@ -5,12 +5,151 @@
     <link>https://jueqingsizhe66.github.io/tags/python/</link>
       <atom:link href="https://jueqingsizhe66.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
     <description>python</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>©2019</copyright><lastBuildDate>Tue, 29 Oct 2019 13:51:00 +0800</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>©2019</copyright><lastBuildDate>Thu, 31 Oct 2019 13:03:00 +0800</lastBuildDate>
     <image>
       <url>https://jueqingsizhe66.github.io/img/icon-192.png</url>
       <title>python</title>
       <link>https://jueqingsizhe66.github.io/tags/python/</link>
     </image>
+    
+    <item>
+      <title>python众多文件中提取轮毂高度处风速</title>
+      <link>https://jueqingsizhe66.github.io/post/python%E4%BC%97%E5%A4%9A%E6%96%87%E4%BB%B6%E4%B8%AD%E6%8F%90%E5%8F%96%E8%BD%AE%E6%AF%82%E9%AB%98%E5%BA%A6%E5%A4%84%E9%A3%8E%E9%80%9F/</link>
+      <pubDate>Thu, 31 Oct 2019 13:03:00 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/post/python%E4%BC%97%E5%A4%9A%E6%96%87%E4%BB%B6%E4%B8%AD%E6%8F%90%E5%8F%96%E8%BD%AE%E6%AF%82%E9%AB%98%E5%BA%A6%E5%A4%84%E9%A3%8E%E9%80%9F/</guid>
+      <description>
+
+&lt;h2 id=&#34;背景分析&#34;&gt;背景分析&lt;/h2&gt;
+
+&lt;p&gt;在前面的 &lt;a href=&#34;https://jueqingsizhe66.github.io/post/python提取多个文件汇总到一个excel表/&#34; target=&#34;_blank&#34;&gt;python提取多个文件汇总到一个excel表&lt;/a&gt;一文中，我们使用ExcelWriter把提取的速度信息汇总在一个xls文件，各个sheet存放真实数据&lt;/p&gt;
+
+&lt;p&gt;而在AIWIND计算中，有可能插值错误，会出现Null值，于是a &lt;a href=&#34;https://jueqingsizhe66.github.io/post/python提取多个文件的存在nan速度廓线/&#34; target=&#34;_blank&#34;&gt;python提取多个文件的存在null速度廓线&lt;/a&gt;提出了过滤NULL值得方案&lt;/p&gt;
+
+&lt;p&gt;以上工作针对的是风廓线，我们现在想要从这个汇总表提取出来各个机位点在一定扇区下，比如0°得的轮毂高度处速度曲线, 也就是每计算一个扇区，我们都希望立马处理得到对应的对比结果，观察是否有所改进！于是做了下面工作&lt;/p&gt;
+
+&lt;p&gt;在&lt;a href=&#34;https://jueqingsizhe66.github.io/post/python对比作图两个风速风向表/&#34; target=&#34;_blank&#34;&gt;python对比作图&lt;/a&gt;一文中加入了数据的导出功能，可在此基础上进行改写&lt;/p&gt;
+
+&lt;p&gt;下图中左边为瞬态扇区的AIWIND即时结果，右边为改进前的WINDSIM和AIWIND在各个扇区的对比图,我们希望AIWIND即时结果能够较好地吻合规律，与之前的WINDSIM结果做对比，即提取即时扇区下的各个机位点的速度廓线，汇总表格，遍历所有sheetnames,提取轮毂点位的速度信息,作图，也可以导出，当前未进行。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/aiwind/hubVelocity.png&#34; alt=&#34;轮毂风速&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;技术分解&#34;&gt;技术分解&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;依然利用脚本提取风廓线文件，一个扇区生成一个汇总表&lt;/li&gt;
+&lt;li&gt;遍历汇总表的所有sheetnames, 利用Excel_File()和parse的功能&lt;/li&gt;
+&lt;li&gt;利用列表数据结构+条件提取对应高度处的风速&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;技术实现&#34;&gt;技术实现&lt;/h2&gt;
+
+&lt;p&gt;设计了一个plotSector，可针对对应扇区处理;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;注意观察fileReadyAnalysis的及时结果存放位置？&lt;/li&gt;
+&lt;li&gt;注意观察&lt;a href=&#34;https://jueqingsizhe66.github.io/post/python对比作图两个风速风向表/&#34; target=&#34;_blank&#34;&gt;对比作图&lt;/a&gt;导出的数据表格`0-Velocity.xlsx..`存放位置?&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;!--listend--&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; os
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; pandas &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; pd
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; numpy &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; np
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; matplotlib.pyplot &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; plt
+
+&lt;span style=&#34;color:#75715e&#34;&gt;## 注意需要有windsim各个扇区的数据 , 当前有一个问题必须配合AIIWND&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#fileReadyAnalysis=r&amp;#34;C:\Users\yezhaoliang\Desktop\NewSimulation\Results-newSimulation45.xlsx&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#fileReadyAnalysis=r&amp;#34;C:\Users\yezhaoliang\Desktop\NewSimulation\Results-newSimulation0.xlsx&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;## Sector: 0 22 45 67 90 112 135 157 180 202 247 270 292 315 337&lt;/span&gt;
+plotSector&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;0&amp;#39;&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;## AIWIND导出的数据需要汇总&lt;/span&gt;
+fileReadyAnalysis&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C:\Users\yezhaoliang\Desktop\NewSimulation\Results-newSimulation&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;plotSector&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;.xlsx&amp;#34;&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; __name__ &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;__main__&amp;#34;&lt;/span&gt;:
+    x_axix &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T11&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T12&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T13&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T21&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T22&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T23&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T1&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T10&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T14&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T15&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T16&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T17&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T18&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T19&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T2&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T20&amp;#34;&lt;/span&gt;,
+              &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T3&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T4&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T5&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T6&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T7&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T8&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T9&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;366&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;387&amp;#34;&lt;/span&gt;];
+    accordingTable &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T1&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T2&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T3&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T4&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T5&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T6&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T7&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T8&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T9&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T10&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T11&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T12&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T13&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T14&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T15&amp;#34;&lt;/span&gt;,
+                      &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T16&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T17&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T18&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T19&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T20&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T21&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T22&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T23&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;366&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;387&amp;#34;&lt;/span&gt;];
+    x_axisChange &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;1&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;2&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;3&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;4&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;5&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;6&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;7&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;8&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;9&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;10&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;11&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;12&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;13&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;14&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;15&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;16&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;17&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;18&amp;#34;&lt;/span&gt;,
+                    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;19&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;20&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;21&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;22&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;23&amp;#34;&lt;/span&gt; ];
+
+    speedTableDir&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;C:\Users\yezhaoliang\Desktop\work\AIWind\processWindSim\速度表速度分析&amp;#39;&lt;/span&gt;
+    speedTable&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;speedTableDir&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\\&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;plotSector&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;-velocity.xlsx&amp;#39;&lt;/span&gt;
+    speedTableData&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read_excel(speedTable,usecols&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;])
+    &lt;span style=&#34;color:#75715e&#34;&gt;# b = pd.read_excel(fileReadyAnalysis,None)&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# sheetnames=b.keys()&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# sheetvalues=b.values()&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;#hubVelocities=np.zeros(sheetvalues.__len__())&lt;/span&gt;
+
+    xlsx &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ExcelFile(fileReadyAnalysis)
+    turbines&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Series([&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;25&lt;/span&gt;)
+    turbineVelocity&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Series([&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;25&lt;/span&gt;,dtype&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;float&amp;#39;&lt;/span&gt;)
+    count&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;## 读取通过程序汇总的各个扇区的数据(各个机位点存储在相应sheet表中&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; sheetname &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; xlsx&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sheet_names:
+        pdtemp&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;xlsx&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;parse(sheetname)
+        &lt;span style=&#34;color:#75715e&#34;&gt;#print(pdtemp.iloc[5:20,2])&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;#linreg = LinearRegression()&lt;/span&gt;
+        newCount&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;accordingTable&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;index(x_axix[count])
+        &lt;span style=&#34;color:#75715e&#34;&gt;## 机位点名字&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(sheetname[&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt;:&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;])
+        turbines[newCount]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;sheetname[&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt;:&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;]
+        &lt;span style=&#34;color:#75715e&#34;&gt;## 数据提取&lt;/span&gt;
+        text1&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pdtemp&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;100&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;]
+        text2&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pdtemp&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;100&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+        iMax&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[i &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(text1)) &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; text1[i]&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;90&lt;/span&gt;]
+
+        neededIndex&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;iMax[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]
+        neededIndexSmaller&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;iMax[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        smallZ&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;text1[neededIndexSmaller]
+        smallV&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;text2[neededIndexSmaller]
+
+        bigZ &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; text1[neededIndex]
+        bigV &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; text2[neededIndex]
+       &lt;span style=&#34;color:#75715e&#34;&gt;# yi=[y for y in pdtemp.iloc[0:100,1]]&lt;/span&gt;
+       &lt;span style=&#34;color:#75715e&#34;&gt;# linreg.fit(pdtemp.iloc[5:20,2], pdtemp.iloc[5:20,1])&lt;/span&gt;
+        hub_height&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;90&lt;/span&gt;
+        velocityPredict&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;(bigV&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;smallV)&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;(bigZ&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;smallZ)&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;(hub_height&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;smallZ)&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;smallV
+&lt;span style=&#34;color:#75715e&#34;&gt;#        velocityPredict= linreg.predict(hub_height)&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(velocityPredict)
+        turbineVelocity[newCount]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;velocityPredict
+        count&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;count&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    df&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;concat([turbines,turbineVelocity],axis&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+    &lt;span style=&#34;color:#75715e&#34;&gt;#df.to_excel(&amp;#39;hello45.xlsx&amp;#39;)&lt;/span&gt;
+    df&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_excel(&lt;span style=&#34;color:#e6db74&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;C:\Users\yezhaoliang\Desktop\NewSimulation\hello&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;plotSector&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;.xlsx&amp;#39;&lt;/span&gt;)
+    &lt;span style=&#34;color:#75715e&#34;&gt;# speeTableSeries=pd.Series(speedTableData.values())&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# tempArray=pd.concat(turbineVelocity[0:23],speeTableSeries)&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;#temp1=[x for x in speedTableData]&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;#temp2=[y for y in turbineVelocity]&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;#tempArray=[temp1,temp2]&lt;/span&gt;
+    aiwindYaxis&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;turbineVelocity[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;23&lt;/span&gt;]
+    windsimYaxis&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;speedTableData[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;23&lt;/span&gt;]
+    &lt;span style=&#34;color:#75715e&#34;&gt;#ylimMax=max(tempArray[1])&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;#ylimMin=min(tempArray[1])&lt;/span&gt;
+
+    ylimMax&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;
+    ylimMin&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# 开始画图&lt;/span&gt;
+
+    plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;figure(figsize &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;15&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;))
+    plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;title(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Sector-&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;plotSector&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39; Analysis&amp;#39;&lt;/span&gt;,fontsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;32&lt;/span&gt; )
+    &lt;span style=&#34;color:#75715e&#34;&gt;#plt.plot(x_axix, aiwindYaxis, marker=&amp;#39;o&amp;#39;, color=&amp;#39;black&amp;#39;, label=&amp;#39;AIWIND&amp;#39;)&lt;/span&gt;
+    plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;plot(x_axisChange, aiwindYaxis, marker&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;o&amp;#39;&lt;/span&gt;,markersize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;9&amp;#39;&lt;/span&gt;, color&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;red&amp;#39;&lt;/span&gt;,markerfacecolor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;grey&amp;#39;&lt;/span&gt;,markeredgecolor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;black&amp;#39;&lt;/span&gt;,linestyle&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;solid&amp;#39;&lt;/span&gt;, label&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;AIWIND&amp;#39;&lt;/span&gt;,linewidth&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;)
+    &lt;span style=&#34;color:#75715e&#34;&gt;#plt.plot(sub_axix, test_acys,marker=&amp;#39;*&amp;#39;, color=&amp;#39;red&amp;#39;, label=&amp;#39;testing accuracy&amp;#39;)&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;#plt.plot(x_axix, windsimYaxis,marker=&amp;#39;*&amp;#39;, color=&amp;#39;blue&amp;#39;, label=&amp;#39;WindSiM&amp;#39;)&lt;/span&gt;
+    plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;plot(x_axisChange, windsimYaxis,marker&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;*&amp;#39;&lt;/span&gt;,markersize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;9&amp;#39;&lt;/span&gt;, color&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;black&amp;#39;&lt;/span&gt;,markerfacecolor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;grey&amp;#39;&lt;/span&gt;,markeredgecolor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;black&amp;#39;&lt;/span&gt;,label&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;WindSiM&amp;#39;&lt;/span&gt;,linewidth&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;)
+    &lt;span style=&#34;color:#75715e&#34;&gt;#plt.plot(x_axix, thresholds, color=&amp;#39;blue&amp;#39;, label=&amp;#39;threshold&amp;#39;)&lt;/span&gt;
+    plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;legend()  &lt;span style=&#34;color:#75715e&#34;&gt;# 显示图例&lt;/span&gt;
+    plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;margins(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;)
+    plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;grid()
+    plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ylim(ylimMin&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,ylimMax&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+    plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;xlabel(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Turbine Names&amp;#39;&lt;/span&gt;,fontsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;24&lt;/span&gt; )
+    plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ylabel(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Velocity&amp;#39;&lt;/span&gt;,fontsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;24&lt;/span&gt; )
+    plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;tick_params(axis&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;both&amp;#39;&lt;/span&gt;,which&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;major&amp;#39;&lt;/span&gt;,labelsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;24&lt;/span&gt;)
+    plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;savefig(&lt;span style=&#34;color:#e6db74&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C:\Users\yezhaoliang\Desktop\NewSimulation&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\\&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;plotSector&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;_&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Velocity-test&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;.jpg&amp;#34;&lt;/span&gt;,dpi &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;900&lt;/span&gt;)
+    &lt;span style=&#34;color:#75715e&#34;&gt;#plt.show()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>python对比作图两个风速风向表</title>
@@ -172,6 +311,17 @@ plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;show()
 &lt;span style=&#34;color:#f92672&#34;&gt;....&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/aiwind/sectorAngleTurbines.png&#34; alt=&#34;最终结果&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;曲线数据导出&#34;&gt;曲线数据导出&lt;/h2&gt;
+
+&lt;p&gt;数据导出方便进行比较。
+使用了pandas的concat的功能，注意axis的用法，默认是行记录导入，axis=1相当于列记录导入.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;    sdf=pd.concat([pd.Series(x_axisChange),pd.Series(windsimYaxis),pd.Series(aiwindYaxis)],axis=1)
+    exportFilename=plotSector+&amp;quot;-&amp;quot;+plotPhysics+&amp;quot;.xlsx&amp;quot;
+    sdf.to_excel(exportFilename)
+
+&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     
@@ -467,6 +617,338 @@ headDir&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#
     writer&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;save()
     writer&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;close()&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 </description>
+    </item>
+    
+    <item>
+      <title>基于python的局域网文件共享软件SimpleHTTPServerWithUpload</title>
+      <link>https://jueqingsizhe66.github.io/blog/2015/06/11/ji-yu-pythonde-ju-yu-wang-wen-jian-gong-xiang-ruan-jian-simplehttpserverwithupload/</link>
+      <pubDate>Thu, 11 Jun 2015 23:00:09 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/blog/2015/06/11/ji-yu-pythonde-ju-yu-wang-wen-jian-gong-xiang-ruan-jian-simplehttpserverwithupload/</guid>
+      <description>&lt;p&gt;我有两台电脑，都有IP，处于相同的局域网。
+我想传递文件，然而我又不想用U盘，我也不想用teamview，更不想用比如百度盘、新浪盘，有道云笔记等。
+我想要用命令行解决。python提供了一种解决方案。
+&lt;img src=&#34;https://jueqingsizhe66.github.io/images/shangchuan.png&#34; alt=&#34;上传&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;python内部支持Simplehttpserver服务，所以只要装上python即可&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;python Simplehttpserver 
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;默认浏览器打开  127.0.0.1:8000
+当然你也是可以指定端口比如801&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;
+python Simplehttpserver -m 801
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;此时打开浏览器输入：
+127.0.0.1:801&lt;/p&gt;
+
+&lt;p&gt;当然如果本机的Ip为121.195.172.217那么，另一台电脑的浏览器只需要输入
+121.195.172.217:801即可打开本机的共享目录，非常方便。&lt;/p&gt;
+
+&lt;h2 id=&#34;升级版的simplehttpserver-支持上传&#34;&gt;升级版的Simplehttpserver 支持上传&lt;/h2&gt;
+
+&lt;p&gt;把下面的源代码保存为Simplehttpserverwithupload.py即可，然后运行他&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;#!/usr/bin/env python
+
+&amp;quot;&amp;quot;&amp;quot;Simple HTTP Server With Upload.
+
+This module builds on BaseHTTPServer by implementing the standard GET
+and HEAD requests in a fairly straightforward manner.
+
+&amp;quot;&amp;quot;&amp;quot;
+
+
+__version__ = &amp;quot;0.1&amp;quot;
+__all__ = [&amp;quot;SimpleHTTPRequestHandler&amp;quot;]
+__author__ = &amp;quot;bones7456&amp;quot;
+__home_page__ = &amp;quot;http://li2z.cn/&amp;quot;
+
+import os
+import posixpath
+import BaseHTTPServer
+import urllib
+import cgi
+import shutil
+import mimetypes
+import re
+try:
+    from cStringIO import StringIO
+except ImportError:
+    from StringIO import StringIO
+
+
+class SimpleHTTPRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
+
+    &amp;quot;&amp;quot;&amp;quot;Simple HTTP request handler with GET/HEAD/POST commands.
+
+    This serves files from the current directory and any of its
+    subdirectories.  The MIME type for files is determined by
+    calling the .guess_type() method. And can reveive file uploaded
+    by client.
+
+    The GET/HEAD/POST requests are identical except that the HEAD
+    request omits the actual contents of the file.
+
+    &amp;quot;&amp;quot;&amp;quot;
+
+    server_version = &amp;quot;SimpleHTTPWithUpload/&amp;quot; + __version__
+
+    def do_GET(self):
+        &amp;quot;&amp;quot;&amp;quot;Serve a GET request.&amp;quot;&amp;quot;&amp;quot;
+        f = self.send_head()
+        if f:
+            self.copyfile(f, self.wfile)
+            f.close()
+
+    def do_HEAD(self):
+        &amp;quot;&amp;quot;&amp;quot;Serve a HEAD request.&amp;quot;&amp;quot;&amp;quot;
+        f = self.send_head()
+        if f:
+            f.close()
+
+    def do_POST(self):
+        &amp;quot;&amp;quot;&amp;quot;Serve a POST request.&amp;quot;&amp;quot;&amp;quot;
+        r, info = self.deal_post_data()
+        print r, info, &amp;quot;by: &amp;quot;, self.client_address
+        f = StringIO()
+        f.write(&#39;&amp;lt;!DOCTYPE html PUBLIC &amp;quot;-//W3C//DTD HTML 3.2 Final//EN&amp;quot;&amp;gt;&#39;)
+        f.write(&amp;quot;&amp;lt;html&amp;gt;\n&amp;lt;title&amp;gt;Upload Result Page&amp;lt;/title&amp;gt;\n&amp;quot;)
+        f.write(&amp;quot;&amp;lt;body&amp;gt;\n&amp;lt;h2&amp;gt;Upload Result Page&amp;lt;/h2&amp;gt;\n&amp;quot;)
+        f.write(&amp;quot;&amp;lt;hr&amp;gt;\n&amp;quot;)
+        if r:
+            f.write(&amp;quot;&amp;lt;strong&amp;gt;Success:&amp;lt;/strong&amp;gt;&amp;quot;)
+        else:
+            f.write(&amp;quot;&amp;lt;strong&amp;gt;Failed:&amp;lt;/strong&amp;gt;&amp;quot;)
+        f.write(info)
+        f.write(&amp;quot;&amp;lt;br&amp;gt;&amp;lt;a href=\&amp;quot;%s\&amp;quot;&amp;gt;back&amp;lt;/a&amp;gt;&amp;quot; % self.headers[&#39;referer&#39;])
+        f.write(&amp;quot;&amp;lt;hr&amp;gt;&amp;lt;small&amp;gt;Powered By: bones7456, check new version at &amp;quot;)
+        f.write(&amp;quot;&amp;lt;a href=\&amp;quot;http://li2z.cn/?s=SimpleHTTPServerWithUpload\&amp;quot;&amp;gt;&amp;quot;)
+        f.write(&amp;quot;here&amp;lt;/a&amp;gt;.&amp;lt;/small&amp;gt;&amp;lt;/body&amp;gt;\n&amp;lt;/html&amp;gt;\n&amp;quot;)
+        length = f.tell()
+        f.seek(0)
+        self.send_response(200)
+        self.send_header(&amp;quot;Content-type&amp;quot;, &amp;quot;text/html&amp;quot;)
+        self.send_header(&amp;quot;Content-Length&amp;quot;, str(length))
+        self.end_headers()
+        if f:
+            self.copyfile(f, self.wfile)
+            f.close()
+        
+    def deal_post_data(self):
+        boundary = self.headers.plisttext.split(&amp;quot;=&amp;quot;)[1]
+        remainbytes = int(self.headers[&#39;content-length&#39;])
+        line = self.rfile.readline()
+        remainbytes -= len(line)
+        if not boundary in line:
+            return (False, &amp;quot;Content NOT begin with boundary&amp;quot;)
+        line = self.rfile.readline()
+        remainbytes -= len(line)
+        fn = re.findall(r&#39;Content-Disposition.*name=&amp;quot;file&amp;quot;; filename=&amp;quot;(.*)&amp;quot;&#39;, line)
+        if not fn:
+            return (False, &amp;quot;Can&#39;t find out file name...&amp;quot;)
+        path = self.translate_path(self.path)
+        fn = os.path.join(path, fn[0])
+        while os.path.exists(fn):
+            fn += &amp;quot;_&amp;quot;
+        line = self.rfile.readline()
+        remainbytes -= len(line)
+        line = self.rfile.readline()
+        remainbytes -= len(line)
+        try:
+            out = open(fn, &#39;wb&#39;)
+        except IOError:
+            return (False, &amp;quot;Can&#39;t create file to write, do you have permission to write?&amp;quot;)
+                
+        preline = self.rfile.readline()
+        remainbytes -= len(preline)
+        while remainbytes &amp;gt; 0:
+            line = self.rfile.readline()
+            remainbytes -= len(line)
+            if boundary in line:
+                preline = preline[0:-1]
+                if preline.endswith(&#39;\r&#39;):
+                    preline = preline[0:-1]
+                out.write(preline)
+                out.close()
+                return (True, &amp;quot;File &#39;%s&#39; upload success!&amp;quot; % fn)
+            else:
+                out.write(preline)
+                preline = line
+        return (False, &amp;quot;Unexpect Ends of data.&amp;quot;)
+
+    def send_head(self):
+        &amp;quot;&amp;quot;&amp;quot;Common code for GET and HEAD commands.
+
+        This sends the response code and MIME headers.
+
+        Return value is either a file object (which has to be copied
+        to the outputfile by the caller unless the command was HEAD,
+        and must be closed by the caller under all circumstances), or
+        None, in which case the caller has nothing further to do.
+
+        &amp;quot;&amp;quot;&amp;quot;
+        path = self.translate_path(self.path)
+        f = None
+        if os.path.isdir(path):
+            if not self.path.endswith(&#39;/&#39;):
+                # redirect browser - doing basically what apache does
+                self.send_response(301)
+                self.send_header(&amp;quot;Location&amp;quot;, self.path + &amp;quot;/&amp;quot;)
+                self.end_headers()
+                return None
+            for index in &amp;quot;index.html&amp;quot;, &amp;quot;index.htm&amp;quot;:
+                index = os.path.join(path, index)
+                if os.path.exists(index):
+                    path = index
+                    break
+            else:
+                return self.list_directory(path)
+        ctype = self.guess_type(path)
+        try:
+            # Always read in binary mode. Opening files in text mode may cause
+            # newline translations, making the actual size of the content
+            # transmitted *less* than the content-length!
+            f = open(path, &#39;rb&#39;)
+        except IOError:
+            self.send_error(404, &amp;quot;File not found&amp;quot;)
+            return None
+        self.send_response(200)
+        self.send_header(&amp;quot;Content-type&amp;quot;, ctype)
+        fs = os.fstat(f.fileno())
+        self.send_header(&amp;quot;Content-Length&amp;quot;, str(fs[6]))
+        self.send_header(&amp;quot;Last-Modified&amp;quot;, self.date_time_string(fs.st_mtime))
+        self.end_headers()
+        return f
+
+    def list_directory(self, path):
+        &amp;quot;&amp;quot;&amp;quot;Helper to produce a directory listing (absent index.html).
+
+        Return value is either a file object, or None (indicating an
+        error).  In either case, the headers are sent, making the
+        interface the same as for send_head().
+
+        &amp;quot;&amp;quot;&amp;quot;
+        try:
+            list = os.listdir(path)
+        except os.error:
+            self.send_error(404, &amp;quot;No permission to list directory&amp;quot;)
+            return None
+        list.sort(key=lambda a: a.lower())
+        f = StringIO()
+        displaypath = cgi.escape(urllib.unquote(self.path))
+        f.write(&#39;&amp;lt;!DOCTYPE html PUBLIC &amp;quot;-//W3C//DTD HTML 3.2 Final//EN&amp;quot;&amp;gt;&#39;)
+        f.write(&amp;quot;&amp;lt;html&amp;gt;\n&amp;lt;title&amp;gt;Directory listing for %s&amp;lt;/title&amp;gt;\n&amp;quot; % displaypath)
+        f.write(&amp;quot;&amp;lt;body&amp;gt;\n&amp;lt;h2&amp;gt;Directory listing for %s&amp;lt;/h2&amp;gt;\n&amp;quot; % displaypath)
+        f.write(&amp;quot;&amp;lt;hr&amp;gt;\n&amp;quot;)
+        f.write(&amp;quot;&amp;lt;form ENCTYPE=\&amp;quot;multipart/form-data\&amp;quot; method=\&amp;quot;post\&amp;quot;&amp;gt;&amp;quot;)
+        f.write(&amp;quot;&amp;lt;input name=\&amp;quot;file\&amp;quot; type=\&amp;quot;file\&amp;quot;/&amp;gt;&amp;quot;)
+        f.write(&amp;quot;&amp;lt;input type=\&amp;quot;submit\&amp;quot; value=\&amp;quot;upload\&amp;quot;/&amp;gt;&amp;lt;/form&amp;gt;\n&amp;quot;)
+        f.write(&amp;quot;&amp;lt;hr&amp;gt;\n&amp;lt;ul&amp;gt;\n&amp;quot;)
+        for name in list:
+            fullname = os.path.join(path, name)
+            displayname = linkname = name
+            # Append / for directories or @ for symbolic links
+            if os.path.isdir(fullname):
+                displayname = name + &amp;quot;/&amp;quot;
+                linkname = name + &amp;quot;/&amp;quot;
+            if os.path.islink(fullname):
+                displayname = name + &amp;quot;@&amp;quot;
+                # Note: a link to a directory displays with @ and links with /
+            f.write(&#39;&amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;%s&amp;quot;&amp;gt;%s&amp;lt;/a&amp;gt;\n&#39;
+                    % (urllib.quote(linkname), cgi.escape(displayname)))
+        f.write(&amp;quot;&amp;lt;/ul&amp;gt;\n&amp;lt;hr&amp;gt;\n&amp;lt;/body&amp;gt;\n&amp;lt;/html&amp;gt;\n&amp;quot;)
+        length = f.tell()
+        f.seek(0)
+        self.send_response(200)
+        self.send_header(&amp;quot;Content-type&amp;quot;, &amp;quot;text/html&amp;quot;)
+        self.send_header(&amp;quot;Content-Length&amp;quot;, str(length))
+        self.end_headers()
+        return f
+
+    def translate_path(self, path):
+        &amp;quot;&amp;quot;&amp;quot;Translate a /-separated PATH to the local filename syntax.
+
+        Components that mean special things to the local file system
+        (e.g. drive or directory names) are ignored.  (XXX They should
+        probably be diagnosed.)
+
+        &amp;quot;&amp;quot;&amp;quot;
+        # abandon query parameters
+        path = path.split(&#39;?&#39;,1)[0]
+        path = path.split(&#39;#&#39;,1)[0]
+        path = posixpath.normpath(urllib.unquote(path))
+        words = path.split(&#39;/&#39;)
+        words = filter(None, words)
+        path = os.getcwd()
+        for word in words:
+            drive, word = os.path.splitdrive(word)
+            head, word = os.path.split(word)
+            if word in (os.curdir, os.pardir): continue
+            path = os.path.join(path, word)
+        return path
+
+    def copyfile(self, source, outputfile):
+        &amp;quot;&amp;quot;&amp;quot;Copy all data between two file objects.
+
+        The SOURCE argument is a file object open for reading
+        (or anything with a read() method) and the DESTINATION
+        argument is a file object open for writing (or
+        anything with a write() method).
+
+        The only reason for overriding this would be to change
+        the block size or perhaps to replace newlines by CRLF
+        -- note however that this the default server uses this
+        to copy binary data as well.
+
+        &amp;quot;&amp;quot;&amp;quot;
+        shutil.copyfileobj(source, outputfile)
+
+    def guess_type(self, path):
+        &amp;quot;&amp;quot;&amp;quot;Guess the type of a file.
+
+        Argument is a PATH (a filename).
+
+        Return value is a string of the form type/subtype,
+        usable for a MIME Content-type header.
+
+        The default implementation looks the file&#39;s extension
+        up in the table self.extensions_map, using application/octet-stream
+        as a default; however it would be permissible (if
+        slow) to look inside the data to make a better guess.
+
+        &amp;quot;&amp;quot;&amp;quot;
+
+        base, ext = posixpath.splitext(path)
+        if ext in self.extensions_map:
+            return self.extensions_map[ext]
+        ext = ext.lower()
+        if ext in self.extensions_map:
+            return self.extensions_map[ext]
+        else:
+            return self.extensions_map[&#39;&#39;]
+
+    if not mimetypes.inited:
+        mimetypes.init() # try to read system mime.types
+    extensions_map = mimetypes.types_map.copy()
+    extensions_map.update({
+        &#39;&#39;: &#39;application/octet-stream&#39;, # Default
+        &#39;.py&#39;: &#39;text/plain&#39;,
+        &#39;.c&#39;: &#39;text/plain&#39;,
+        &#39;.h&#39;: &#39;text/plain&#39;,
+        })
+
+
+def test(HandlerClass = SimpleHTTPRequestHandler,
+         ServerClass = BaseHTTPServer.HTTPServer):
+    BaseHTTPServer.test(HandlerClass, ServerClass)
+
+if __name__ == &#39;__main__&#39;:
+    test()
+&lt;/code&gt;&lt;/pre&gt;</description>
     </item>
     
   </channel>

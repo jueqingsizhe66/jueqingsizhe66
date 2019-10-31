@@ -1,0 +1,4030 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mysql | Macro Life</title>
+    <link>https://jueqingsizhe66.github.io/tags/mysql/</link>
+      <atom:link href="https://jueqingsizhe66.github.io/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
+    <description>Mysql</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>©2019</copyright><lastBuildDate>Mon, 13 Feb 2017 10:04:33 +0800</lastBuildDate>
+    <image>
+      <url>https://jueqingsizhe66.github.io/img/icon-192.png</url>
+      <title>Mysql</title>
+      <link>https://jueqingsizhe66.github.io/tags/mysql/</link>
+    </image>
+    
+    <item>
+      <title>Mysql乱码回顾</title>
+      <link>https://jueqingsizhe66.github.io/blog/2017/02/13/mysqlluan-ma-hui-gu/</link>
+      <pubDate>Mon, 13 Feb 2017 10:04:33 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/blog/2017/02/13/mysqlluan-ma-hui-gu/</guid>
+      <description>&lt;p&gt;mysql是一个中型的数据库操作系统平台,他的&lt;a href=&#34;http://www.linuxidc.com/Linux/2013-04/83581.htm&#34; target=&#34;_blank&#34;&gt;基本组成&lt;/a&gt;由存储引擎、各个命令模块、优化器、缓存器、解析器、用户模块、链接器(connector)等组成，&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/mysql/mysql-archetype.png&#34; alt=&#34;mysql architect&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;其中存储引擎现在一般选用innodb居多(具体可以查看&lt;a href=&#34;http://c.biancheng.net/cpp/html/1465.html&#34; target=&#34;_blank&#34;&gt;各个存储引擎的区别&lt;/a&gt;)&lt;/p&gt;
+
+&lt;p&gt;mysql操作级别：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;数据库级别&lt;/li&gt;
+&lt;li&gt;表级别&lt;/li&gt;
+&lt;li&gt;字段级别&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;而这三个级别就影响这数据库的乱码级别。 一般事先使用&lt;code&gt;show variables like &#39;%char%&#39;&lt;/code&gt;, 来查看mysql的所有字符信息，参考&lt;a href=&#34;http://www.jb51.net/article/74769.htm&#34; target=&#34;_blank&#34;&gt;mysql乱码解决&lt;/a&gt;, 根据该文基本上可以解决问题，另外可以进一步查看各个字符集和mysql查询涉及到的各个字符集的关系(对应命令的求解), 查阅了&lt;a href=&#34;http://www.pc6.com/infoview/Article_63586.html&#34; target=&#34;_blank&#34;&gt;多个链接&lt;/a&gt;,都显示
+&lt;code&gt;set names gbk&lt;/code&gt;对最终的显示有影响，根据我的使用经验来讲，&lt;/p&gt;
+
+&lt;p&gt;当你使用&lt;code&gt;set names gbk&lt;/code&gt;则可以显示正常，而&lt;code&gt;set names utf8&lt;/code&gt;则出现乱码&lt;/p&gt;
+
+&lt;p&gt;我在建立数据库的时候也使用了&lt;code&gt;create database rupeng chracter set utf8&lt;/code&gt;等，但试过一遍只有最终加上&lt;code&gt;set names gbk&lt;/code&gt;有效果。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;set character_set_database=utf8;
+set character_set_server=utf8;
+set character_set_client=gbk;
+set character_set_connection=gbk;
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;系统变量：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;
+client    为客户端使用的字符集。
+connection    为连接数据库的字符集设置类型，如果程序没有指明连接数据库使用的字符集类型则按照服务器端默认的字符集设置。
+database  为数据库服务器中某个库使用的字符集设定，如果建库时没有指明，将使用服务器安装时指定的字符集设置。
+results   为数据库给客户端返回时使用的字符集设定，如果没有指明，使用服务器默认的字符集。
+server    为服务器安装时指定的默认字符集设定。
+system    为数据库系统使用的字符集设定。
+
+– character_set_client：客户端来源数据使用的字符集
+– character_set_connection：连接层字符集
+– character_set_database：当前选中数据库的默认字符集
+– character_set_results：查询结果字符集
+– character_set_server：默认的内部操作字符集
+– character_set_system：系统元数据(字段名等)字符集
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://blog.csdn.net/sunqing0316/article/details/46680617&#34; target=&#34;_blank&#34;&gt;mysql字符集转换过程&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;
+1. MySQL Server收到请求时将请求数据从character_set_client转换为character_set_connection；
+2. 进行内部操作前将请求数据从character_set_connection转换为内部操作字符集，其确定方法如下：
+• 使用每个数据字段的CHARACTER SET设定值；
+• 若上述值不存在，则使用对应数据表的DEFAULT CHARACTER SET设定值(MySQL扩展，非SQL标准)；
+• 若上述值不存在，则使用对应数据库的DEFAULT CHARACTER SET设定值；
+• 若上述值不存在，则使用character_set_server设定值。
+3. 将操作结果从内部操作字符集转换为character_set_results。
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;参考&lt;a href=&#34;http://www.2cto.com/database/201410/341144.html&#34; target=&#34;_blank&#34;&gt; myeclipse-mysql &lt;/a&gt;,有一个原则就是不要让你的character出现latin1编码即可&lt;/p&gt;
+
+&lt;p&gt;我们操作所有数据库mysql中型,sqlite,postgreSql流行,db2(IBM)企业级,oracle大型运用企业级,informix(IBM), sql server&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.yiibai.com/mysql/mysql_quick_start.html&#34; target=&#34;_blank&#34;&gt; mysql快速入门学习 &lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.w3school.com.cn/sql/sql_intro.asp&#34; target=&#34;_blank&#34;&gt; W3C sql入门教程 &lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.csdn.net/hgd613/article/details/50433135&#34; target=&#34;_blank&#34;&gt; 左连接 &lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://database.51cto.com/art/200511/12708.htm&#34; target=&#34;_blank&#34;&gt; 51cto数据库论坛 &lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</description>
+    </item>
+    
+    <item>
+      <title>mysql2月15日Java班作业笔记</title>
+      <link>https://jueqingsizhe66.github.io/blog/2015/05/11/mysql2yue-15ri-javaban-zuo-ye-bi-ji/</link>
+      <pubDate>Mon, 11 May 2015 14:58:45 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/blog/2015/05/11/mysql2yue-15ri-javaban-zuo-ye-bi-ji/</guid>
+      <description>&lt;p&gt;1、MYSQL官方版下载地址（不推荐初学者使用）：&lt;a href=&#34;http://www.mysql.com/downloads/&#34; target=&#34;_blank&#34;&gt;http://www.mysql.com/downloads/&lt;/a&gt;
+    如鹏网版绿色免安装版MYSQL（推荐初学者使用）：&lt;a href=&#34;http://pan.baidu.com/s/1c0COfGc&#34; target=&#34;_blank&#34;&gt;http://pan.baidu.com/s/1c0COfGc&lt;/a&gt;
+2、 常用概念
+       一般我们说的数据库是指DBMS，数据库管理系统，比如“你用了什么数据库”，“你会用什么数据库”,”你把数据库删了”。前两个是DBMS，第三个是指的是真实的数据
+库（database）：众多事物的集合
+表(table)：就是一类事物的集合
+列(column)：某类事物的具体的字段。也叫做字段。&lt;/p&gt;
+
+&lt;p&gt;3.解压后运行 mysql文件夹下的mysqld.exe,启动mysql服务器
+4.运行mysql
+C:\mysql\bin&amp;gt;mysql-uroot –proot
+复制代码&lt;/p&gt;
+
+&lt;p&gt;5:显示当前所有的仓库&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema|
+| customer           |
+| mysql              |
+| performance_schema|
+| study              |
+| t_employees        |
++--------------------+
+6 rows in set (0.39sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;6：创建了一个database&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; create database test;
+Query OK, 1 rowaffected (0.10 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;7:真的有了test&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema|
+| customer           |
+| mysql              |
+| performance_schema|
+| study              |
+| t_employees        |
+| test               |
++--------------------+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;8：使用test库&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; use test;
+Database changed
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;9：显示表格，一个表格都没有&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; show tables;
+Empty set (0.04 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;10：创建表格
+主键：primary key 一般一张表一个主键，且该主键一般是没有任何的物理意义或者业务意义的数字，比如身份证ID
+Auto_increment:自增长的好处，是可以不必设置该列的值，自动增长（自动增长的步数一般为1，也可以更改，show variables like ‘%auto_inc%’查询如何设置。）
+Engine:一把是设置为innodb，也可以有其他的比如myisam，memory等
+Not null：是比较好的设计表的方式，据说可以加快表的索引速度，表示非空&lt;/p&gt;
+
+&lt;p&gt;Default:  默认 表示默认值 一般是default value;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; create table apple(
+    -&amp;gt; id int auto_increment primary key,
+    -&amp;gt; name varchar(20) not null default &#39;&#39;)engine = innodb;
+Query OK, 0 rowsaffected (0.69 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;10：的确是有了一张apple表&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; show tables;
++----------------+
+| Tables_in_test |
++----------------+
+| apple          |
++----------------+
+1 row in set (0.00sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;11：查看apple表结构&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; desc apple;
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| id    | int(11)     | NO  | PRI | NULL    | auto_increment |
+| name  | varchar(20) | NO   |    |         |                |
++-------+-------------+------+-----+---------+----------------+
+2 rows in set (0.09sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;类似的查看方式1：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; explain apple;
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| id    | int(11)     | NO  | PRI | NULL    | auto_increment |
+| name  | varchar(20) | NO   |    |         |                |
++-------+-------------+------+-----+---------+----------------+
+2 rows in set (0.00sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;类似的查看方式2：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; show columns from apple;
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| id    | int(11)     | NO  | PRI | NULL    | auto_increment |
+| name  | varchar(20) | NO   |    |         |                |
++-------+-------------+------+-----+---------+----------------+
+2 rows in set (0.00sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最本质的查看表结构的方式：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; show create table apple\G;
+***************************1. row ***************************
+       Table: apple
+Create Table: CREATETABLE `apple` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) NOT NULL DEFAULT &#39;&#39;,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDBDEFAULT CHARSET=latin1
+1 row in set (0.00sec)
+ERROR:
+No query specified
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;13插入表数据&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; insert into apple values (1,&#39;tab&#39;),(2,&#39;ctrl&#39;),(3,&#39;shift&#39;);
+Query OK, 3 rowsaffected (0.39 sec)
+Records: 3  Duplicates: 0 Warnings: 0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;14 查看表数据&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; select *from apple;
++----+-------+
+| id | name  |
++----+-------+
+|  1 | tab  |
+|  2 | ctrl |
+|  3 | shift |
++----+-------+
+3 rows in set (0.00sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;15 插入数据&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; insert into apple(id,name) values(4,&#39;caps&#39;);
+Query OK, 1 rowaffected (0.08 sec)
+mysql&amp;gt; insert intoapple values (6,&#39;tomato&#39;);
+Query OK, 1 rowaffected (0.09 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;为什么这种方式不行呢？ 正在查&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; insert into apple values (&#39;tomato&#39;);
+ERROR 1136 (21S01):Column count doesn&#39;t match value count at row 1
+利用mysql的最佳工具help
+mysql&amp;gt; helpauto_increment;
+Name:&#39;AUTO_INCREMENT&#39;
+Description: ….
+Examples:
+CREATE TABLE animals(
+     id MEDIUMINT NOT NULL AUTO_INCREMENT,
+     name CHAR(30) NOT NULL,
+     PRIMARY KEY (id)
+);
+INSERT INTO animals(name) VALUES
+    (&#39;dog&#39;),(&#39;cat&#39;),(&#39;penguin&#39;),
+(&#39;lax&#39;),(&#39;whale&#39;),(&#39;ostrich&#39;);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;所以解决方法是：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; insert into apple (name) values(&amp;quot;backspace&amp;quot;);
+Query OK, 1 rowaffected (0.10 sec)
+mysql&amp;gt; select * from apple;
++----+-----------+
+| id | name      |
++----+-----------+
+|  1 | tab       |
+|  2 | ctrl      |
+|  3 | shift     |
+|  4 | caps      |
+|  6 | tomato    |
+|  7 | backspace |
++----+-----------+
+6 rows in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;16:无意中添加了一行没有必要的数据&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; insert into apple (name) values(&amp;quot;luanqibazhao&amp;quot;);
+Query OK, 1 row affected (0.11 sec)
+mysql&amp;gt; select * from apple;
++----+--------------+
+| id | name         |
++----+--------------+
+|  1 | tab          |
+|  2 | ctrl         |
+|  3 | shift        |
+|  4 | caps         |
+|  6 | tomato       |
+|  7 | backspace    |
+|  8 | luanqibazhao |
++----+--------------+
+7 rows in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;17：删掉id=8的数据&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; delete * from apple where id=8 andname=&amp;quot;luanqibazhao&amp;quot;;
+ERROR 1064 (42000): You have an error in your SQL syntax; check themanual that
+corresponds to your MySQL server version for the right syntax to usenear &#39;* fro
+m apple where id=8 and name=&amp;quot;luanqibazhao&amp;quot;&#39; at line 1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;为什么不行？
+查看帮助&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; help delete;
+Name: &#39;DELETE&#39;
+Description:
+Syntax:
+DELETE is a DML statement that removes rows from a table.
+Single-Table Syntax
+DELETE [LOW_PRIORITY] [QUICK] [IGNORE] FROM tbl_name
+    [PARTITION(partition_name,...)]
+    [WHERE where_condition]
+    [ORDER BY ...]
+[LIMIT row_count]
+The DELETE statement deletes rows fromtbl_name and returns the number
+of deleted rows. To check the number ofdeleted rows, call the
+ROW_COUNT() function describedin
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;原来是语法错误&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; delete from apple where id=8 andname=&amp;quot;luanqibazhao&amp;quot;;
+Query OK, 1 row affected (0.11 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;真的删掉了！&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; select * from apple;
++----+-----------+
+| id | name      |
++----+-----------+
+|  1 |tab       |
+|  2 |ctrl      |
+|  3 |shift     |
+|  4 |caps      |
+|  6 |tomato    |
+|  7 |backspace |
++----+-----------+
+6 rows in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;18.有时候我们还想着更新某个id的值&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; update apple set name=caps1 from id=4;
+ERROR 1064 (42000): You have an error in yourSQL syntax; check the manual that
+corresponds to your MySQL server version forthe right syntax to use near &#39;from
+id =4&#39; at line 1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;为什么报错呢？可以使用show errors 查看报错信息类似的show warnings;&lt;/p&gt;
+
+&lt;p&gt;查询帮助：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; help  update
+Name: &#39;UPDATE&#39;
+Description:
+Syntax:
+Single-table syntax:
+UPDATE [LOW_PRIORITY] [IGNORE]table_reference
+    SETcol_name1={expr1|DEFAULT} [, col_name2={expr2|DEFAULT}] ...
+   [WHERE where_condition]
+   [ORDER BY ...]
+   [LIMIT row_count]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;帮助中显示并没有from的后缀，于是把from改为where，然后再让caps1加上单引号。
+第一个错误修正加上单引号
+第二个错误修正 from改为where&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; update apple set name=&#39;caps1&#39; whereid =4;
+Query OK, 1 row affected (0.16 sec)
+Rows matched: 1  Changed: 1 Warnings: 0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;到这边为止，是全套的mysql的常用基本指令，包含建库，建表，插入表数据，删除表数据，更新表数据，查询库，查询表，查询表数据。当然可能少了清空表数据（truncate table apple）删除表（drop table apple）,删除库（drop database test）&lt;/p&gt;
+
+&lt;p&gt;有时候我们可能修改表的结构&lt;/p&gt;
+
+&lt;p&gt;于是我们首先查询表，并增加了一个age字段，该字段是什么数据类型？　保证数据存储，并高效。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; desc apple;
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| id    | int(11)     | NO   | PRI | NULL    | auto_increment |
+| name  | varchar(20) | NO   |     |         |                |
++-------+-------------+------+-----+---------+----------------+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;小姐了如下的整形数据的设计考虑：
+分为两类一类是精准数值类型，另一类为非精准型
+包含整数和小数&lt;/p&gt;
+
+&lt;p&gt;TinyInt :(-128-127  或者unsigned 是  0-256)
+           一般用于  Age 年龄字段（树的年龄可能过大&lt;/p&gt;
+
+&lt;p&gt;SmallInt：具体的数值范围可以用help smallint查到
+         一般用于技能值
+          ids
+mediumint  一般用于   Auto_increment
+                      Row number 行数是够的！！
+                    行数一般也是1600行  最大的暂时有做到8亿，但是数据一大会影响
+                    到mysql的存储问题，所以一般是分库分表
+int(integer) ：
+           一般用于  Auto_increment
+                    比如  money  ， salary 就够了（游戏当中的钱　通常会较大）&lt;/p&gt;
+
+&lt;p&gt;BigInt  : 一般用于科学计算
+             人口数 Population&lt;/p&gt;
+
+&lt;p&gt;精准性有一类比较特殊的DECIMAL(DEC)
+DECIMAL(f,g)   f表示总的位数  g表示小数点后的位数
+比如   money DECIMAL(12,2)
+           那么存储会消耗  整数部分：（12-2）  = 9(==4个字节 规定 ) + &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2&lt;/sub&gt; =5
+                           小数部分： &lt;sup&gt;2&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2&lt;/sub&gt; = 1
+                               总消耗： 5+1  =6 个字节&lt;/p&gt;
+
+&lt;p&gt;非精准型：
+Float(p)
+Real  p表示precise
+DOUBLE PRECISE&lt;/p&gt;
+
+&lt;p&gt;于是我们选择age 字段为tinyint即可。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; alter table apple add age tinyint not null default 0;
+Query OK, 0 rows affected (0.89 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;再次查询表结构&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; desc apple;
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| id    | int(11)     | NO   | PRI | NULL    | auto_increment |
+| name  | varchar(20) | NO   |     |         |                |
+| age   | tinyint(4)  | NO   |     | 0       |                |
++-------+-------------+------+-----+---------+----------------+
+3 rows in set (0.05 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;查询表数据：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; select * from apple;
++----+-----------+-----+
+| id | name      | age |
++----+-----------+-----+
+|  1 | tab       |   0 |
+|  2 | ctrl      |   0 |
+|  3 | shift     |   0 |
+|  4 | caps1     |   0 |
+|  6 | tomato    |   0 |
+|  7 | backspace |   0 |
++----+-----------+-----+
+6 rows in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;有时候我们可能修改表的结构
+于是我们首先查询表，并增加了一个age字段，该字段是什么数据类型，才能保证更加高效。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; desc apple;
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| id    | int(11)     | NO   | PRI | NULL    | auto_increment |
+| name  | varchar(20) | NO   |     |         |                |
++-------+-------------+------+-----+---------+----------------+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;分为两类一类是精准数值类型，另一类为非精准型&lt;/p&gt;
+
+&lt;p&gt;包含整数和小数&lt;/p&gt;
+
+&lt;p&gt;设计考虑：&lt;/p&gt;
+
+&lt;p&gt;TinyInt :(-128-127  或者unsigned 是   0-256)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;       一般用于  Age  年龄字段（树的年龄可能过大
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;SmallInt：（可以查询help smallint 来查看数值范围）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;     一般用于技能值
+
+      ids
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;mediumint  一般用于    Auto_increment&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;                  Row number  行数是够的！！
+
+                行数一般也是1600行  最大的暂时有做到8亿，但是数据一大会影响
+
+                到mysql的存储问题，所以一般是分库分表
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;int(integer) ：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;       一般用于   Auto_increment
+
+                比如   money   salary 就够了
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;BigInt  : 一般用于科学计算&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;         人口数 Population
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;精准性有一类比较特殊的DECIMAL(DEC)&lt;/p&gt;
+
+&lt;p&gt;DECIMAL(f,g)   f表示总的位数  g表示小数点后的位数&lt;/p&gt;
+
+&lt;p&gt;比如    money DECIMAL(12,2)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;       那么存储会消耗  整数部分：（12-2）  =  9(==4个字节 规定 ) + 1/2 =5
+
+                       小数部分： 2/2 = 1
+
+                           总消耗： 5+1   =6 个字节
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;非精准型：&lt;/p&gt;
+
+&lt;p&gt;Float(p)&lt;/p&gt;
+
+&lt;p&gt;Real  p表示precise&lt;/p&gt;
+
+&lt;p&gt;DOUBLE PRECISE&lt;/p&gt;
+
+&lt;p&gt;于是我们选择age 字段为tinyint即可。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; alter table apple add age tinyint not null default 0;
+Query OK, 0 rows affected (0.89 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;再次查询表结构&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; desc apple;
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| id    | int(11)     | NO   | PRI | NULL    | auto_increment |
+| name  | varchar(20) | NO   |     |         |                |
+| age   | tinyint(4)  | NO   |     | 0       |                |
++-------+-------------+------+-----+---------+----------------+
+3 rows in set (0.05 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;查询结果：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; select * from apple;
++----+-----------+-----+
+| id | name      | age |
++----+-----------+-----+
+|  1 | tab       |   0 |
+|  2 | ctrl      |   0 |
+|  3 | shift     |   0 |
+|  4 | caps1     |   0 |
+|  6 | tomato    |   0 |
+|  7 | backspace |   0 |
++----+-----------+-----+
+6 rows in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;char与varchar的比较
+分两个部分进行比较
+1:创建表时候
+2:添加表数据的时候&lt;/p&gt;
+
+&lt;p&gt;查看help帮助信息&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; help char
+Name: &#39;CHAR&#39;
+Description:
+[NATIONAL] CHAR[(M)] [CHARACTER SET charset_name] [COLLATE
+collation_name]
+
+A fixed-length string that is always right-padded with spaces to the
+specified length when stored. M represents the column length in
+characters. The range of M is 0 to 255. If M is omitted, the length is
+1.
+
+*Note*: Trailing spaces are removed when CHAR values are retrieved
+unless the PAD_CHAR_TO_FULL_LENGTH SQL mode is enabled.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;sql_mode的pad_char_to_full_length,这是一个特别的模式，将会在下文列出，至于M is from 0 to 255是指char(256)会报错！&lt;/p&gt;
+
+&lt;p&gt;再次查看varchar的帮助信息&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; help varchar
+Name: &#39;VARCHAR&#39;
+Description:
+[NATIONAL] VARCHAR(M) [CHARACTER SET charset_name] [COLLATE
+collation_name]
+
+A variable-length string. M represents the maximum column length in
+characters. The range of M is 0 to 65,535. The effective maximum length
+of a VARCHAR is subject to the maximum row size (65,535 bytes, which is
+shared among all columns) and the character set used. For example, utf8
+characters can require up to three bytes per character, so a VARCHAR
+column that uses the utf8 character set can be declared to be a maximum
+of 21,844 characters. See
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;可以看到最大长度为 65535，
+并且在utf8字符的时候（也就是national varchar)的情况下，最大阴虚21844, 也就是national varchar(21845)会报错
+21844*3 =65532（计算器）（可能还剩下3个字符，摆放需要的设置符）
+说明当前我的版本的mysql 5.6的utf所占用的是三个字节，据说新版本的是4个字节的&lt;/p&gt;
+
+&lt;p&gt;新建一个测试的orange表&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; create table orange(
+    -&amp;gt; col1 char(6) not null default &#39;&#39;,
+    -&amp;gt; col2 varchar(65510));
+Query OK, 0 rows affected, 1 warning (0.55 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&amp;mdash;习惯的查询一下表的样式&lt;/p&gt;
+
+&lt;p&gt;新增一个varchar(100)字段做测试&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt;  alter table orange add col3 varchar(100);
+ERROR 1118 (42000): Row size too large. The maximum row size for the used tabl
+type, not counting BLOBs, is 65535. This includes storage overhead, check the
+nual. You have to change some columns to TEXT or BLOBs
+mysql&amp;gt; alter table orange add col3 varchar(100);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;为什么？再添加varchar(100）则会一直报错.Maximum(varchar)=65535 现在使用了65510 ，再加上25呢？如果改为varcahr&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; alter table orange add col3 varchar(100);
+Query OK, 0 rows affected (0.85 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; alter table orange add col3 varchar(22);
+ERROR 1118 (42000): Row size too large. The maximum row size for the us
+type, not counting BLOBs, is 65535. This includes storage overhead, che
+nual. You have to change some columns to TEXT or BLOBs
+mysql&amp;gt; alter table orange add col3 varchar(1);
+Query OK, 0 rows affected (0.69 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;一直报错！！&lt;/p&gt;
+
+&lt;p&gt;再次显示表结构&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; desc orange;
++-------+----------------+------+-----+---------+-------+
+| Field | Type           | Null | Key | Default | Extra |
++-------+----------------+------+-----+---------+-------+
+| col1  | char(6)        | NO   |     |         |       |
+| col2  | varchar(65510) | YES  |     | NULL    |       |
+| col3  | varchar(1)     | YES  |     | NULL    |       |
++-------+----------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;为什么呢？&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; show variables like &#39;%sql_mode%&#39;;
++---------------+-------------------+
+| Variable_name | Value             |
++---------------+-------------------+
+| sql_mode      | STRICT_ALL_TABLES |
++---------------+-------------------+
+1 row in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;当前的sql模式是严格表模式，sql_mode变量特别重要，所以我进行了测试！假设我们现在改回去默认的空模式；&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; set sql_mode=&#39;&#39;;
+Query OK, 0 rows affected (0.00 sec)
+复制代码
+重新创建一张香蕉表banana:
+mysql&amp;gt; create table banana(
+    -&amp;gt; col1 char(6),
+    -&amp;gt; col2 varchar(65510));
+Query OK, 0 rows affected (0.32 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;显示表结构信息：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; desc banana;
++-------+----------------+------+-----+---------+-------+
+| Field | Type           | Null | Key | Default | Extra |
++-------+----------------+------+-----+---------+-------+
+| col1  | char(6)        | YES  |     | NULL    |       |
+| col2  | varchar(65510) | YES  |     | NULL    |       |
++-------+----------------+------+-----+---------+-------+
+2 rows in set (0.01 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;发现还是会报错的：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; alter table banana add col3 varchar(100);
+ERROR 1118 (42000): Row size too large. The maximum row size for the used tabl
+type, not counting BLOBs, is 65535. This includes storage overhead, check the
+nual. You have to change some columns to TEXT or BLOBs
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&amp;mdash;终于给我报错了&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; alter table orange add col5 char(258);
+ERROR 1074 (42000): Column length too big for column &#39;col5&#39; (max = 255); use BLO
+B or TEXT instead
+
+mysql&amp;gt; alter table orange add col6 char(65537);
+ERROR 1074 (42000): Column length too big for column &#39;col6&#39; (max = 255); use BLO
+B or TEXT instead
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;总结varchar最大量不能超过65530.。。char不能超过256.。。
+上面是一些创建char和varchar表的时候可能会出现的一些情况。
+接下来测试添加数据：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; alter table banana modify col2 varchar(6);
+Query OK, 0 rows affected (0.81 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql&amp;gt; desc banana;
++-------+------------+------+-----+---------+-------+
+| Field | Type       | Null | Key | Default | Extra |
++-------+------------+------+-----+---------+-------+
+| col1  | char(6)    | YES  |     | NULL    |       |
+| col2  | varchar(6) | YES  |     | NULL    |       |
++-------+------------+------+-----+---------+-------+
+2 rows in set (0.02 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;不是特别能够显示其中的区别：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; insert into banana values(&#39;abc&#39;,&#39;abc&#39;);
+Query OK, 1 row affected (0.04 sec)
+
+mysql&amp;gt; select * from banana;
++--------+------+
+| col1   | col2 |
++--------+------+
+| abc    | abc  |
++--------+------+
+1 row in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果加入&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; select concat(col1,&#39;-&#39;),concat(col2,&#39;-&#39;) from banana;
++------------------+------------------+
+| concat(col1,&#39;-&#39;) | concat(col2,&#39;-&#39;) |
++------------------+------------------+
+| abc   -          | abc-             |
++------------------+------------------+
+1 row in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;再次比较&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; select length(col1),length(col2) from banana;
++--------------+--------------+
+| length(col1) | length(col2) |
++--------------+--------------+
+|            6 |            3 |
++--------------+--------------+
+1 row in set (0.02 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;可见在sql_mode=pad_char_to_full_length的情况下，char即使赋的值是abc三个字符，该类型也会填充到6个字符
+      而varchar则是三个字符就三个字符
+而如果sql_mode = &amp;ldquo; 呢？
+         sql_mode =&amp;lsquo;strict_all_tables&amp;rsquo;呢？&lt;/p&gt;
+
+&lt;p&gt;如果是sql_mode= &amp;ldquo;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; set sql_mode=&#39;&#39;;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql&amp;gt; select concat(col1,&#39;-&#39;),concat(col2,&#39;-&#39;) from banana;
++------------------+------------------+
+| concat(col1,&#39;-&#39;) | concat(col2,&#39;-&#39;) |
++------------------+------------------+
+| abc-             | abc-             |
++------------------+------------------+
+1 row in set (0.00 sec)
+
+mysql&amp;gt; select length(col1),length(col2) from banana;
++--------------+--------------+
+| length(col1) | length(col2) |
++--------------+--------------+
+|            3 |            3 |
++--------------+--------------+
+1 row in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果是sql_mode=strict_all_tables?&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; set sql_mode=&#39;strict_all_tables&#39;;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql&amp;gt; select concat(col1,&#39;-&#39;),concat(col2,&#39;-&#39;) from banana;
++------------------+------------------+
+| concat(col1,&#39;-&#39;) | concat(col2,&#39;-&#39;) |
++------------------+------------------+
+| abc-             | abc-             |
++------------------+------------------+
+1 row in set (0.00 sec)
+
+mysql&amp;gt; select length(col1),length(col2) from banana;
++--------------+--------------+
+| length(col1) | length(col2) |
++--------------+--------------+
+|            3 |            3 |
++--------------+--------------+
+1 row in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;好了，我们可以小结
+在pad_char_to_full_length的情况下，char会自动填充到定义的字符，而varchar不会
+   在其他的sql_mode模式下，char和varchar感觉没有太大的区别
+  varchar一个表的最大长度是65535
+  char在一个表的最大长度是255&lt;/p&gt;
+
+&lt;p&gt;所在在存储空间允许的情况下，尽量使用char
+在需要更大的文本可以用blod或者text。&lt;/p&gt;
+
+&lt;p&gt;字符串类型，一般使用char较多。
+char
+varchar
+smallblod,mediumblod,longblod
+smalltext,mediumtext,longtext&lt;/p&gt;
+
+&lt;p&gt;枚举类字段的创建是为了让用户只能选取某个值范围。
+创建一个枚举表进行测试&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; create table enum_t(
+    -&amp;gt; col1 enum(&#39;F&#39;,&#39;M&#39;,&#39;UN&#39;));
+Query OK, 0 rows affected (0.29 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;插入数据：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; insert into enum_t values(&#39;F&#39;);
+Query OK, 1 row affected (0.10 sec)
+
+mysql&amp;gt; insert into enum_t values(&#39;M&#39;);
+Query OK, 1 row affected (0.06 sec)
+
+mysql&amp;gt; insert into enum_t values(&#39;F,M&#39;);
+Query OK, 1 row affected, 1 warning (0.10 sec)
+
+mysql&amp;gt; insert into enum_t values(&#39;UN&#39;);
+Query OK, 1 row affected (0.07 sec)
+
+mysql&amp;gt; insert into enum_t values(&#39;F,M,UN&#39;);
+Query OK, 1 row affected, 1 warning (0.04 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;显示数据：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; select col1,col1+0 from enum_t;
++------+--------+
+| col1 | col1+0 |
++------+--------+
+| F    |      1 |
+| M    |      2 |
+|      |      0 |
+| UN   |      3 |
+|      |      0 |
++------+--------+
+5 rows in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;发现第三列和第五列的col1的字段值缺失，是因为没有在枚举类中该值！然而mysql还有另外一种类型叫做set，却是可以存在不同的情况&lt;/p&gt;
+
+&lt;p&gt;&amp;mdash;&amp;mdash;再次返回到sql_mode有问题的那部分&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; desc enum_t;
++-------+--------------------+------+-----+---------+-------+
+| Field | Type               | Null | Key | Default | Extra |
++-------+--------------------+------+-----+---------+-------+
+| col1  | enum(&#39;F&#39;,&#39;M&#39;,&#39;UN&#39;) | YES  |     | NULL    |       |
++-------+--------------------+------+-----+---------+-------+
+1 row in set (0.00 sec)
+
+mysql&amp;gt; insert into enum_t values(&#39;a&#39;);
+Query OK, 1 row affected, 1 warning (0.09 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&amp;mdash;有警告一般是和sql_mode有关，如果是strict_all_tables一般是error&lt;/p&gt;
+
+&lt;p&gt;&amp;mdash;让我们来看一个和enum特别像的set&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; create table set_t(
+    -&amp;gt; col1 set(&#39;F&#39;,&#39;M&#39;,&#39;UN&#39;));
+Query OK, 0 rows affected (0.25 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;插入表数据&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; insert into set_t values(&#39;F&#39;);
+Query OK, 1 row affected (0.07 sec)
+
+mysql&amp;gt; insert into set_t values(&#39;M&#39;);
+Query OK, 1 row affected (0.08 sec)
+
+mysql&amp;gt; insert into set_t values(&#39;F,M&#39;);
+Query OK, 1 row affected (0.08 sec)
+
+mysql&amp;gt; insert into set_t values(&#39;UN&#39;);
+Query OK, 1 row affected (0.05 sec)
+
+mysql&amp;gt; insert into set_t values(&#39;F,M,UN&#39;);
+Query OK, 1 row affected (0.07 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;显示表数据信息：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; select col1,col1+0 from set_t;
++--------+--------+
+| col1   | col1+0 |
++--------+--------+
+| F      |      1 |
+| M      |      2 |
+| F,M    |      3 |
+| UN     |      4 |
+| F,M,UN |      7 |
++--------+--------+
+5 rows in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;可以发现F,M虽然没有定义，但是也是可以使用！！！只要不重复都可以在set中出现，并遵循下面的计算方式：
+因为在set模式下，默认存储室
+F  1
+M  10
+UN 100
+所以F,M  11
+    F,M,UN 111&lt;/p&gt;
+
+&lt;p&gt;引入了二进制，于是学习了mysql特殊的一种二进制类型binary,和bit类型（bit(4) 就表示最大值为1111 也就是15）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; help binary
+Name: &#39;BINARY&#39;
+Description:
+BINARY(M)
+
+The BINARY type is similar to the CHAR type, but stores binary byte
+strings rather than nonbinary character strings. M represents the
+column length in bytes.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;可以看到binary类似于char只不过是存储二进制形式&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; create table binary_t(
+    -&amp;gt; col1 binary(4));
+Query OK, 0 rows affected (0.33 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;插入数据：超过5个字节就错误了&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; desc binary_t;
++-------+-----------+------+-----+---------+-------+
+| Field | Type      | Null | Key | Default | Extra |
++-------+-----------+------+-----+---------+-------+
+| col1  | binary(4) | YES  |     | NULL    |       |
++-------+-----------+------+-----+---------+-------+
+1 row in set (0.05 sec)
+
+mysql&amp;gt; insert into binary_t values(&#39;a&#39;);
+Query OK, 1 row affected (0.07 sec)
+
+mysql&amp;gt; insert into binary_t values(&#39;abcd&#39;);
+Query OK, 1 row affected (0.07 sec)
+
+mysql&amp;gt; insert into binary_t values(&#39;abcde&#39;);
+ERROR 1406 (22001): Data too long for column &#39;col1&#39; at row 1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上述的过程类似于char，但是binary和char到底体现在哪里的区别？&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; select * from binary_t;
++------+
+| col1 |
++------+
+| a    |
+| abcd |
++------+
+2 rows in set (0.00 sec)
+
+mysql&amp;gt; select col1=&#39;a&#39; from binary_t;
++----------+
+| col1=&#39;a&#39; |
++----------+
+|        0 |
+|        0 |
++----------+
+2 rows in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;为什么明明有a却是无法找到？是不是跟sql_mode有关系？&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; show variables like &#39;%sql_mode%&#39;;
++---------------+-------------------+
+| Variable_name | Value             |
++---------------+-------------------+
+| sql_mode      | STRICT_ALL_TABLES |
++---------------+-------------------+
+1 row in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;重新设置为空状态（默认一般是空的状态），再次尝试：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; select * from binary_t;
++------+
+| col1 |
++------+
+| a    |
+| abcd |
++------+
+2 rows in set (0.00 sec)
+
+mysql&amp;gt; select col1=&#39;a&#39; from binary_t;
++----------+
+| col1=&#39;a&#39; |
++----------+
+|        0 |
+|        0 |
++----------+
+2 rows in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;可以看到依然不行，这就是二进制的一些小区别，不是类似于char在pad_char_to_full_length(专门针对char)
+这时候需要用专门的测试方法&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; select col1=&#39;a\0\0\0&#39; from binary_t;
++----------------+
+| col1=&#39;a\0\0\0&#39; |
++----------------+
+|              1 |
+|              0 |
++----------------+
+2 rows in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;可以了！！因为binary是为默认加上\0\0\0 ，而char在sql=&amp;lsquo;pad_char_to_full_length&amp;rsquo;会默认加上空格。这就是一个区别，慎用，一般用char即可，
+也许binary可能是存储少占空间。&lt;/p&gt;
+
+&lt;p&gt;一个特别的数据类型Bit的用法（他是一个跟计算机的最小单元bit位有关系的）
+手又痒了，必须再来个bit_t不可&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; create table bit_t(
+    -&amp;gt; ids bit(4));
+Query OK, 0 rows affected (0.20 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&amp;ndash;bit(4) y也就是说  1111  最多是，类似地int(4)  char(4) varchar(4)  binary(4)  等有着其特殊的含义&lt;br /&gt;
+&amp;mdash;用严格模式测试一下&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; help int
+Name: &#39;INT&#39;
+Description:
+INT[(M)] [UNSIGNED] [ZEROFILL]
+
+mysql&amp;gt; insert into bit_t values(1);
+Query OK, 1 row affected (0.11 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;显示数据：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; select ids,ids+0,bin(ids) from bit_t;
++------+-------+----------+
+| ids  | ids+0 | bin(ids) |
++------+-------+----------+
+|     |     1 | 1        |
++------+-------+----------+
+1 row in set (0.05 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;显示二进制信息一般是使用+0进行数据隐式转换，或者用bin函数；&lt;/p&gt;
+
+&lt;p&gt;&amp;ndash;再查一下表结构&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; desc bit_t;
++-------+--------+------+-----+---------+-------+
+| Field | Type   | Null | Key | Default | Extra |
++-------+--------+------+-----+---------+-------+
+| ids   | bit(4) | YES  |     | NULL    |       |
++-------+--------+------+-----+---------+-------+
+1 row in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;再次插入表数据：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; insert into bit_t values(1);
+Query OK, 1 row affected (0.09 sec)
+
+mysql&amp;gt; insert into bit_t values(0);
+Query OK, 1 row affected (0.09 sec)
+
+mysql&amp;gt; insert into bit_t values(3);
+Query OK, 1 row affected (0.05 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;显示新的表的信息&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; select ids,ids+0,bin(ids) from bit_t;
++------+-------+----------+
+| ids  | ids+0 | bin(ids) |
++------+-------+----------+
+|     |     1 | 1        |
+|     |     1 | 1        |
+|      |     0 | 0        |
+|     |     3 | 11       |
++------+-------+----------+
+4 rows in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;当插入数据过大则报错：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; insert into bit_t values(16);
+ERROR 1406 (22001): Data too long for column &#39;ids&#39; at row 1
+
+mysql&amp;gt; insert into bit_t values(15);
+Query OK, 1 row affected (0.11 sec)
+mysql&amp;gt; select ids,ids+0,bin(ids) from bit_t;
++------+-------+----------+
+| ids  | ids+0 | bin(ids) |
++------+-------+----------+
+|     |     1 | 1        |
+|     |     1 | 1        |
+|      |     0 | 0        |
+|     |     3 | 11       |
+|     |    15 | 1111     |
++------+-------+----------+
+5 rows in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最大的的确是4个1111 满足了我们的愿望。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; select ids,ids+0,length(bin(ids)) from bit_t;
++------+-------+------------------+
+| ids  | ids+0 | length(bin(ids)) |
++------+-------+------------------+
+|     |     1 |                1 |
+|     |     1 |                1 |
+|      |     0 |                1 |
+|     |     3 |                2 |
+|     |    15 |                4 |
++------+-------+------------------+
+5 rows in set (0.06 sec)
+
+
+mysql&amp;gt; select ids,ids+0,length(ids+0),bin(ids),length(bin(ids)) from bit_t;
++------+-------+---------------+----------+------------------+
+| ids  | ids+0 | length(ids+0) | bin(ids) | length(bin(ids)) |
++------+-------+---------------+----------+------------------+
+|     |     1 |             1 | 1        |                1 |
+|     |     1 |             1 | 1        |                1 |
+|      |     0 |             1 | 0        |                1 |
+|     |     3 |             1 | 11       |                2 |
+|     |    15 |             2 | 1111     |                4 |
++------+-------+---------------+----------+------------------+
+5 rows in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&amp;mdash;&amp;ndash;不一样的插入额&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; insert into bit_t values (4),(5),(6);
+Query OK, 3 rows affected (0.03 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+----insert into bit_t  set ids =4
+mysql&amp;gt; insert into bit_t set ids=7;
+Query OK, 1 row affected (0.05 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;再次显示新的数据&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; select ids,ids+0,length(ids+0),bin(ids),length(bin(ids)) from bit_t;
++------+-------+---------------+----------+------------------+
+| ids  | ids+0 | length(ids+0) | bin(ids) | length(bin(ids)) |
++------+-------+---------------+----------+------------------+
+|     |     1 |             1 | 1        |                1 |
+|     |     1 |             1 | 1        |                1 |
+|      |     0 |             1 | 0        |                1 |
+|     |     3 |             1 | 11       |                2 |
+|     |    15 |             2 | 1111     |                4 |
+|     |     4 |             1 | 100      |                3 |
+|     |     5 |             1 | 101      |                3 |
+|     |     6 |             1 | 110      |                3 |
+|     |     7 |             1 | 111      |                3 |
++------+-------+---------------+----------+------------------+
+9 rows in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&amp;mdash;&amp;ndash;通过bin函数进行选择&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; select bin(ids) from bit_t where ids=7;
++----------+
+| bin(ids) |
++----------+
+| 111      |
++----------+
+1 row in set (0.00 sec)
+
+mysql&amp;gt; select bin(ids) from bit_t where bin(ids)=111;
++----------+
+| bin(ids) |
++----------+
+| 111      |
++----------+
+1 row in set (0.00 sec)
+
+
+
+mysql&amp;gt; delete from bit_t where bin(ids)=1;
+Query OK, 2 rows affected (0.09 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;显示最新的数据：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; select ids,ids+0,length(ids+0),bin(ids),length(bin(ids)) from bit_t;
++------+-------+---------------+----------+------------------+
+| ids  | ids+0 | length(ids+0) | bin(ids) | length(bin(ids)) |
++------+-------+---------------+----------+------------------+
+|      |     0 |             1 | 0        |                1 |
+|     |     3 |             1 | 11       |                2 |
+|     |    15 |             2 | 1111     |                4 |
+|     |     4 |             1 | 100      |                3 |
+|     |     5 |             1 | 101      |                3 |
+|     |     6 |             1 | 110      |                3 |
+|     |     7 |             1 | 111      |                3 |
++------+-------+---------------+----------+------------------+
+7 rows in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;所以  一句话：bit要注意位数和 bin函数的使用！&lt;/p&gt;
+
+&lt;p&gt;在很多情况下，我们可能接触时间这一数据类型于是考察了查询了year,time,datetime,timestamp等信息，显示其值的范围&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; help year;
+Name: &#39;YEAR&#39;
+Description:
+Syntax:
+YEAR(date)
+
+Returns the year for date, in the range 1000 to 9999, or 0 for the
+&amp;quot;zero&amp;quot; date.
+
+mysql&amp;gt; help Timestamp
+Name: &#39;TIMESTAMP&#39;
+Description:
+TIMESTAMP[(fsp)]
+
+A timestamp. The range is &#39;1970-01-01 00:00:01.000000&#39; UTC to
+&#39;2038-01-19 03:14:07.999999&#39; UTC. TIMESTAMP values are stored as the
+
+mysql&amp;gt; help datetime
+Name: &#39;DATETIME&#39;
+Description:
+DATETIME[(fsp)]
+
+A date and time combination. The supported range is &#39;1000-01-01
+00:00:00.000000&#39; to &#39;9999-12-31 23:59:59.999999&#39;. MySQL displays
+
+mysql&amp;gt; help date
+Name: &#39;DATE&#39;
+Description:
+DATE
+
+A date. The supported range is &#39;1000-01-01&#39; to &#39;9999-12-31&#39;. MySQL
+
+mysql&amp;gt; help time
+Name: &#39;TIME&#39;
+Description:
+TIME[(fsp)]
+
+A time. The range is &#39;-838:59:59.000000&#39; to &#39;838:59:59.000000&#39;. MySQL
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;创建一张表year_t进行测试：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; create table year_t(
+    -&amp;gt; col1 year(2),
+    -&amp;gt; col2 year(4),
+    -&amp;gt; col3 year(100));
+Query OK, 0 rows affected, 2 warnings (0.27 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;显示表结构信息，发现都是year(4)的大小结构&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; desc year_t;
++-------+---------+------+-----+---------+-------+
+| Field | Type    | Null | Key | Default | Extra |
++-------+---------+------+-----+---------+-------+
+| col1  | year(4) | YES  |     | NULL    |       |
+| col2  | year(4) | YES  |     | NULL    |       |
+| col3  | year(4) | YES  |     | NULL    |       |
++-------+---------+------+-----+---------+-------+
+3 rows in set (0.06 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;插入表信息：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; insert into year_t values(77,2000,2055);
+Query OK, 1 row affected (0.06 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;显示表数据：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; select * from year_t;
++------+------+------+
+| col1 | col2 | col3 |
++------+------+------+
+| 1977 | 2000 | 2055 |
++------+------+------+
+1 row in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;为什么是1977？ 而不是2077？
+查询到一个结果：
+year(4)  1901-2155
+year(2) 1970-2069
+year     1000-9999（这种解释有点不可靠）&lt;/p&gt;
+
+&lt;p&gt;为什么再进行desc year_t 显示的多是year(4)暂时未清除。据推测，显示有问题，基本和sql_mode相关&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; show variables like &#39;%sql_mode%&#39;;
++---------------+------------------------+
+| Variable_name | Value                  |
++---------------+------------------------+
+| sql_mode      | NO_ENGINE_SUBSTITUTION |
++---------------+------------------------+
+1 row in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&amp;mdash;&amp;ndash;总结sql_mode的8种风格
+SET sql_mode =&amp;ldquo;; &amp;mdash;default style
+SET sql_mode=&amp;lsquo;PAD_CHAR_TO_FULL_LENGTH&amp;rsquo;;  &amp;ndash; 会填充到一定的长度
+SET sql_mode  = &amp;lsquo;STRICT_ALL_TABLES&amp;rsquo;;  &amp;ndash; 也就是当超过最大长度 会报错而不是截断
+SET sql_mode = &amp;lsquo;STRICT_ALL_TABLES,ERROR_FOR_DIVISION_BY_ZERO&amp;rsquo;;
+SET sql_mode = &amp;lsquo;STRICT_ALL_TABLES, NO_ZERO_DATE,NO_ZERO_IN_DATE&amp;rsquo;;
+SET sql_mode = &amp;lsquo;ALLOW_INVALID_DATES&amp;rsquo;; &amp;mdash; 允许无效的日期
+SET sql_mode = &amp;lsquo;STRICT_ALL_TABLES,ALLOW_INVALID_DATES&amp;rsquo;;
+SET sql_mode = ‘real_as_float’;
+（real_as_float 是指默认情况real(10,2)而不能使用real(10) 因为real(10,2)其实等效于double，只有设置real_as_float之后才可以使用real(10)）&lt;/p&gt;
+
+&lt;p&gt;改成严格模式再次尝试：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; set sql_mode=&#39;strict_all_tables&#39;;
+Query OK, 0 rows affected (0.06 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;再次显示新的模式下的表结构信息：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; desc year_t;
++-------+---------+------+-----+---------+-------+
+| Field | Type    | Null | Key | Default | Extra |
++-------+---------+------+-----+---------+-------+
+| col1  | year(4) | YES  |     | NULL    |       |
+| col2  | year(4) | YES  |     | NULL    |       |
+| col3  | year(4) | YES  |     | NULL    |       |
++-------+---------+------+-----+---------+-------+
+3 rows in set (0.05 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;设置了严格模式，发现没有任何改变。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; show create table year_t\G;
+*************************** 1. row ***************************
+       Table: year_t
+Create Table: CREATE TABLE `year_t` (
+  `col1` year(4) DEFAULT NULL,
+  `col2` year(4) DEFAULT NULL,
+  `col3` year(4) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
+1 row in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;再次查看表结构，依然无法解释，于是尝试定义为year(4)的方式，新建了另一张表year_t1&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; create table year_t1(
+    -&amp;gt; col1 year(4),
+    -&amp;gt; col2 year(4),
+    -&amp;gt; col3 year(4));
+Query OK, 0 rows affected (0.33 sec)
+
+mysql&amp;gt; desc year_t1;
++-------+---------+------+-----+---------+-------+
+| Field | Type    | Null | Key | Default | Extra |
++-------+---------+------+-----+---------+-------+
+| col1  | year(4) | YES  |     | NULL    |       |
+| col2  | year(4) | YES  |     | NULL    |       |
+| col3  | year(4) | YES  |     | NULL    |       |
++-------+---------+------+-----+---------+-------+
+3 rows in set (0.04 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;再次插入表的数据：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; insert into year_t1 values(77,2000,2055);
+Query OK, 1 row affected (0.05 sec)
+
+mysql&amp;gt; select * from year_t1;
++------+------+------+
+| col1 | col2 | col3 |
++------+------+------+
+| 1977 | 2000 | 2055 |
++------+------+------+
+1 row in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;依然是1977 ，遇到一个暂时无法解答的问题。到底有没有year(2) year(4)的问题？ 暂时留着！&lt;/p&gt;
+
+&lt;p&gt;下面介绍比较常见的timestamp的使用方式：
+&amp;mdash;-创建一张苹果表；&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; create table apple(
+    -&amp;gt; timeme timestamp default current_timestamp
+    -&amp;gt; on update current_timestamp,
+    -&amp;gt; id smallint);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;之所以是on update current_timestamp是指当表中的某行数据更新时候，顺便会把timeme的数据更新为当前系统的最新的状态（之所以是系统最新状态，可以查看 show variables like &amp;ldquo;%time_zone%&amp;ldquo;;将在下文给出）&lt;/p&gt;
+
+&lt;p&gt;&amp;mdash;-显示苹果表的信息&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; desc apple;
++--------+-------------+------+-----+-------------------+-----------------------
+------+
+| Field  | Type        | Null | Key | Default           | Extra
+      |
++--------+-------------+------+-----+-------------------+-----------------------
+------+
+| timeme | timestamp   | NO   |     | CURRENT_TIMESTAMP | on update CURRENT_TIME
+STAMP |
+| id     | smallint(6) | YES  |     | NULL              |
+      |
++--------+-------------+------+-----+-------------------+-----------------------
+------+
+2 rows in set (0.01 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;插入数据信息：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; insert into apple values(now(),200);
+Query OK, 1 row affected (0.25 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;显示表数据：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; select * from apple;
++---------------------+------+
+| timeme              | id   |
++---------------------+------+
+| 2015-02-14 11:54:11 |  200 |
++---------------------+------+
+1 row in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&amp;mdash;&amp;mdash;-显示系统变量&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; show variables like &amp;quot;%time_zone%&amp;quot;;
++------------------+--------+
+| Variable_name    | Value  |
++------------------+--------+
+| system_time_zone |        |
+| time_zone        | SYSTEM |
++------------------+--------+
+2 rows in set, 1 warning (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&amp;mdash;&amp;mdash;&amp;ndash;显示字符集&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; show character set;
++----------+-----------------------------+---------------------+--------+
+| Charset  | Description                 | Default collation   | Maxlen |
++----------+-----------------------------+---------------------+--------+
+| big5     | Big5 Traditional Chinese    | big5_chinese_ci     |      2 |
+| dec8     | DEC West European           | dec8_swedish_ci     |      1 |
+| cp850    | DOS West European           | cp850_general_ci    |      1 |
+| hp8      | HP West European            | hp8_english_ci      |      1 |
+| koi8r    | KOI8-R Relcom Russian       | koi8r_general_ci    |      1 |
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;另外附录在创建表的时候需要考虑下面的信息
+&amp;mdash;&amp;mdash;在创建表的时候必须主要的字段 属性    影响存储性能（比如Not NULL)和运行效果 比如zerofill;
+1: AUTO_INCREMENT    用于主键 的自动编号
+2: LAST_INSERT_ID()
+3: UNSIGNED          无符号（一把是int数据）
+4: ZEROFILL          填充 0（一把是int数据）
+5: NULL/NOT NULL     一般使用非空，增强mysql的性能（一般设置为非空属性）
+6: DEFAULT value     默认值
+7: CHARACTER SET     字符集&lt;/p&gt;
+
+&lt;p&gt;添加一个null行的数据（null不知道的值，类似于java的对象。） 由于on update current_timestamp所以插入当前系统的最新时间&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; insert into apple values(null,100);
+Query OK, 1 row affected (0.15 sec)
+
+mysql&amp;gt; select * from apple;
++---------------------+------+
+| timeme              | id   |
++---------------------+------+
+| 2015-02-14 11:54:11 |  200 |
+| 2015-02-14 13:06:37 |  100 |
++---------------------+------+
+2 rows in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&amp;mdash;&amp;mdash;&amp;mdash;&amp;ndash;默认为null时候添加  now()的值
+如果添加入不合适的值（再sql_mode = &amp;ldquo; 则是警告，如果是sql_mode=&amp;lsquo;strict_all_tables&amp;rsquo;则是错误提示 errors产生）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; insert into apple value(&amp;quot;123&amp;quot;,100);
+Query OK, 1 row affected, 1 warning (0.10 sec)
+
+
+mysql&amp;gt; show warnings;
++---------+------+---------------------------------------------+
+| Level   | Code | Message                                     |
++---------+------+---------------------------------------------+
+| Warning | 1265 | Data truncated for column &#39;timeme&#39; at row 1 |
++---------+------+---------------------------------------------+
+1 row in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&amp;mdash;&amp;ndash;当插入的值不合适时候  则用000替换！！&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; select * from apple;
++---------------------+------+
+| timeme              | id   |
++---------------------+------+
+| 2015-02-14 11:54:11 |  200 |
+| 2015-02-14 13:06:37 |  100 |
+| 0000-00-00 00:00:00 |  100 |
++---------------------+------+
+3 rows in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;省略过程得到新的表数据如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; select * from apple;
++---------------------+------+
+| timeme              | id   |
++---------------------+------+
+| 2015-02-14 11:54:11 |  200 |
+| 2015-02-14 13:06:37 |  100 |
+| 0000-00-00 00:00:00 |  100 |
+| 2015-02-14 13:09:20 |  400 |
+| 0000-00-00 00:00:00 |  500 |
++---------------------+------+
+5 rows in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&amp;mdash;-现在我要更新 id=500的值&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; update apple set id=600 where id=500;
+Query OK, 1 row affected (0.27 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+mysql&amp;gt; select * from apple;
++---------------------+------+
+| timeme              | id   |
++---------------------+------+
+| 2015-02-14 11:54:11 |  200 |
+| 2015-02-14 13:06:37 |  100 |
+| 0000-00-00 00:00:00 |  100 |
+| 2015-02-14 13:09:20 |  400 |
+| 2015-02-14 13:10:47 |  600 |  &amp;lt;-----------------timestame的值！也跟着变化！因为on update的作用
++---------------------+------+
+5 rows in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这就是timestamp和year的部分用法。&lt;/p&gt;
+
+&lt;p&gt;常用的show命令汇总show tables;
+show databases;
+show current_user();
+show user();
+show columns from apple; &amp;mdash;&amp;gt;显示apple表结构，类似explain 和desc
+show variables like &amp;lsquo;%sql_mode%&amp;rsquo;   &amp;mdash;-&amp;gt;和显式相关，是mysql比较重要的参数
+show variables like &amp;lsquo;log%&amp;rsquo;              &amp;mdash;-&amp;gt;会显示日志相关信息
+show variables like &amp;lsquo;max_connect%&amp;rsquo;  &amp;mdash;-&amp;gt;显式mysql供用户的最大连接数
+show variables like &amp;lsquo;%innodb%&amp;rsquo;       &amp;mdash;-&amp;gt;显式innodb相关的信息
+show variables like &amp;lsquo;%data%&amp;rsquo;           &amp;mdash;-&amp;gt;显式mysql 数据的存储相关信息
+show variables like &amp;lsquo;%time_zone%&amp;rsquo;  &amp;mdash;&amp;ndash;&amp;gt;显式时区相关信息
+show variables like &amp;lsquo;%character%&amp;rsquo;;   &amp;mdash;-&amp;gt;显式字符集和编码的相关信息
+一些不常用的show variables
+show variables like &amp;lsquo;%query_cache%&amp;rsquo;  &amp;mdash;-&amp;gt;查询缓存，不想深入，据说是跟优化有关，DBA选手可以深入，有一个工业标准。
+show variables like &amp;lsquo;%key_buffer%&amp;rsquo;   &amp;mdash;&amp;mdash;&amp;gt;也和优化相关，也有工业标准值&lt;/p&gt;
+
+&lt;p&gt;还有一些没想起来的，以后再写。
+另外还可以显示当前系统的状态的详细值
+show status;
+show status like &amp;lsquo;%&amp;hellip;%&amp;rsquo;  &amp;mdash;-&amp;gt;显示某个值的信息
+mysql&amp;gt; show status like &amp;lsquo;%buffer%&amp;rsquo;;&lt;/p&gt;
+
+&lt;p&gt;信息值不是特别了解。。。&lt;/p&gt;
+
+&lt;p&gt;status 显式mysql当前库的使用情况：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; status
+--------------
+mysql  Ver 14.14 Distrib 5.6.20, for Win32 (x86)
+
+Connection id:          2             连接的id
+Current database:       test     当前数据库
+Current user:           root@localhost    当前用户
+SSL:                    Not in use             是否使用加密的ssl协议
+Using delimiter:        ;          使用的终止符
+Server version:         5.6.20 MySQL Community Server (GPL)
+Protocol version:       10
+Connection:             localhost via TCP/IP
+Server characterset:    latin1
+Db     characterset:    latin1            数据库的字符集
+Client characterset:    gbk          客户端的字符集
+Conn.  characterset:    gbk        
+TCP port:               3306                      开放的端口号
+Uptime:                 5 hours 20 min 1 sec    登录时间
+
+一些当前线程信息
+Threads: 1  Questions: 182  Slow queries: 0  Opens: 96  Flush tables: 1
+bles: 72  Queries per second avg: 0.009
+--------------
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;create database ch charset = utf8;  &amp;mdash;-&amp;gt;会改变Db characterset的值
+set names utf8  &amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;-&amp;gt;会改变client characerset 和Conn.characternet的值！&lt;/p&gt;
+
+&lt;p&gt;delimiter $$   则每使用一个mysql语句必须是用$$结尾  而不是;分号结尾了！&lt;/p&gt;
+
+&lt;p&gt;补充数据类型的分类：（摘自如鹏）
+文本：&lt;/p&gt;
+
+&lt;p&gt;CHAR(&lt;em&gt;)：最多255个字节的定长字符串，它的长度必须在创建时指定
+VARCHAR(&lt;/em&gt;)：最多255（65535）个字节的可变长度字符串，它的长度必须在创建时指定
+TEXT：最大长度为64K字符的变长文本
+TINYTEXT：最大长度为255字符的变长文本
+MEDUIMTEXT：最大长度为16K字符的变长文本
+LONGTEXT：最大长度为4GB字符的变长文本&lt;/p&gt;
+
+&lt;p&gt;整数(考虑数据取值后选择尽可能小的类型)&lt;/p&gt;
+
+&lt;p&gt;tinyint：1字节。有符号值：-128 到127；无符号值：0到255
+smallint：2字节。有符号值：-32768 到32767；无符号值：0到65535
+mediumint：3字节。
+int：4字节
+bigint：8字节&lt;/p&gt;
+
+&lt;p&gt;小数(需要指定长度和小数点，也就是显示宽度和小数位数)：&lt;/p&gt;
+
+&lt;p&gt;decimal：精确存储的小数，在内部用字符串存储，适合金额等要求精确的类型。别名：NUMERIC（银行，差一点都不行！）
+float：4字节，单精度。会近似存储(&lt;em&gt;)，效率比decimal高。
+double：8字节，双精度。会近似存储(&lt;/em&gt;)，效率比decimal高。&lt;/p&gt;
+
+&lt;p&gt;日期时间：&lt;/p&gt;
+
+&lt;p&gt;DATE：4字节。范围：1000-01-01——9999-12-31
+TIME：3字节。范围：-838:59:59——838:59:59
+DATETIME：8字节。范围：1000-01-01 00:00:00——9999-12-31 23:59:59&lt;/p&gt;
+
+&lt;p&gt;二进制大数据：&lt;/p&gt;
+
+&lt;p&gt;TITYBLOB：最大长度为255字节
+BLOB：最大长度为64KB
+MEDIUMBLOB：最大长度为16MB
+LONGBLOB：最大长度为4GB&lt;/p&gt;
+
+&lt;p&gt;select的高级使用方式：&lt;/p&gt;
+
+&lt;p&gt;1：聚合函数
+聚合函数：其实就是统计中常用的最大值（MAX），最小值(MIN)，平均值(AVG),求和（SUM），记录统计（COUNT）等函数
+mysql&amp;gt; select count(*) from apple;
+mysql&amp;gt; select max(id) from apple;
+复制代码
+按照具体情况匹配使用&lt;/p&gt;
+
+&lt;p&gt;2： limit 限制显示的条数
+一个注意点limit是mysql独有的，必须放在最后，甚至比分组（order by）还靠后
+Limit 2,4 表示从第二个记录之后的四个记录，即2,3,4,5&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; select * from apple limit 2,4;
++----+-----------+
+| id | name      |
++----+-----------+
+|  3 | shift     |
+|  4 | caps      |
+|  6 | tomato    |
+|  7 | backspace |
++----+-----------+
+4 rows in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;注意： 可用于网页的分页！  用于order by 之后，order by 一般用于where之后
+where  &amp;hellip;
+order by &amp;hellip;
+limit &amp;hellip;
+3 排序（order by)&lt;/p&gt;
+
+&lt;p&gt;一般是处于select语句的末尾（适用于sqlserver mysql oracle..)&lt;/p&gt;
+
+&lt;p&gt;这时候想要复制一张表
+参考此文
+1.复制表结构及数据到新表&lt;/p&gt;
+
+&lt;p&gt;CREATE TABLE 新表
+SELECT * FROM 旧表&lt;/p&gt;
+
+&lt;p&gt;2.只复制表结构到新表&lt;/p&gt;
+
+&lt;p&gt;CREATE TABLE 新表
+SELECT * FROM 旧表 WHERE 1=2
+即:让WHERE条件不成立.
+方法二:(低版本的mysql不支持，mysql4.0.25 不支持，mysql5已经支持了)
+CREATE TABLE 新表
+LIKE 旧表&lt;/p&gt;
+
+&lt;p&gt;3.复制旧表的数据到新表(假设两个表结构一样)&lt;/p&gt;
+
+&lt;p&gt;INSERT INTO 新表
+SELECT * FROM 旧表&lt;/p&gt;
+
+&lt;p&gt;4.复制旧表的数据到新表(假设两个表结构不一样)&lt;/p&gt;
+
+&lt;p&gt;INSERT INTO 新表(字段1,字段2,…….)
+SELECT 字段1,字段2,…… FROM 旧表&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; create table b1 select * from t_students;
+Query OK, 18 rows affected (0.55 sec)
+Records: 18  Duplicates: 0  Warnings: 0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;b1就是我们测试的数据表；
+删除某个字段，比如名字不想显示。参考此文
+知道了可以drop column  也可以change 字段信息
+MySQL添加字段：&lt;/p&gt;
+
+&lt;p&gt;alter table &lt;code&gt;user_movement_log&lt;/code&gt;&lt;br /&gt;
+Add column GatewayId int not null default 0 AFTER &lt;code&gt;Regionid&lt;/code&gt; (在哪个字段后面添加)&lt;/p&gt;
+
+&lt;p&gt;删除字段：&lt;/p&gt;
+
+&lt;p&gt;alter table &lt;code&gt;user_movement_log&lt;/code&gt; drop column Gatewayid&lt;/p&gt;
+
+&lt;p&gt;调整字段顺序：&lt;/p&gt;
+
+&lt;p&gt;ALTER TABLE &lt;code&gt;user_movement_log&lt;/code&gt; CHANGE &lt;code&gt;GatewayId&lt;/code&gt; &lt;code&gt;GatewayId&lt;/code&gt; int not null default 0 AFTER RegionID&lt;/p&gt;
+
+&lt;p&gt;mysql&amp;gt; alter table b1 drop column Name;
+Query OK, 0 rows affected (0.52 sec)
+Records: 0  Duplicates: 0  Warnings: 0&lt;/p&gt;
+
+&lt;p&gt;是的通过此种方式有效：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; select * from b1;
++----+--------+-----------------+------+------+
+| Id | Gender | Hobbies         | Age  | Test |
++----+--------+-----------------+------+------+
+|  0 |       | 羽毛球          |   30 |   31 |
+|  1 |       | 编程            |   24 |   31 |
+|  2 |        | 旅游            |   27 |   30 |
+|  3 |       | 足球 dota       |   25 |   31 |
+|  4 |       | 打炮，摄影      |   30 |   31 |
+|  6 |       | 篮球            |   34 |   31 |
+|  7 |       | 音乐，编程 军事 |   30 |   31 |
+|  8 |       | 摄影            |   26 |   31 |
+|  9 |       | 电影            |   26 |   31 |
+| 10 |       | 消消乐          |   26 |   31 |
+| 11 |        | 消消乐          |   24 |   30 |
+| 12 |        | 购物            | NULL |   30 |
+| 13 |       | 骑行            | NULL |   31 |
+| 14 |       | 学术            |   34 |   31 |
+| 15 |       | 不清楚          | NULL |   31 |
+| 16 |       | 散步            | NULL |   31 |
+| 17 |       | NULL            | NULL |   31 |
+| 18 |        | 家庭主妇        |   26 |   30 |
++----+--------+-----------------+------+------+
+18 rows in set (0.00 sec)
+	```
+测试分组方法：升序排列（降序用desc）
+  规则用 order by 字段名  asc|desc
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;mysql
+mysql&amp;gt; select * from b1
+    -&amp;gt; order by Age asc;
++&amp;mdash;-+&amp;mdash;&amp;mdash;&amp;ndash;+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;ndash;+&amp;mdash;&amp;mdash;+&amp;mdash;&amp;mdash;+
+| Id | Gender | Hobbies         | Age  | Test |
++&amp;mdash;-+&amp;mdash;&amp;mdash;&amp;ndash;+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;ndash;+&amp;mdash;&amp;mdash;+&amp;mdash;&amp;mdash;+
+| 17 |       | NULL            | NULL |   31 |
+| 16 |       | 散步            | NULL |   31 |
+| 15 |       | 不清楚          | NULL |   31 |
+| 13 |       | 骑行            | NULL |   31 |
+| 12 |        | 购物            | NULL |   30 |
+|  1 |       | 编程            |   24 |   31 |
+| 11 |        | 消消乐          |   24 |   30 |
+|  3 |       | 足球 dota       |   25 |   31 |
+| 18 |        | 家庭主妇        |   26 |   30 |
+| 10 |       | 消消乐          |   26 |   31 |
+|  9 |       | 电影            |   26 |   31 |
+|  8 |       | 摄影            |   26 |   31 |
+|  2 |        | 旅游            |   27 |   30 |
+|  7 |       | 音乐，编程 军事 |   30 |   31 |
+|  4 |       | 打炮，摄影      |   30 |   31 |
+|  0 |       | 羽毛球          |   30 |   31 |
+| 14 |       | 学术            |   34 |   31 |
+|  6 |       | 篮球            |   34 |   31 |
++&amp;mdash;-+&amp;mdash;&amp;mdash;&amp;ndash;+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;ndash;+&amp;mdash;&amp;mdash;+&amp;mdash;&amp;mdash;+&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    也可以组合排序：先按年龄的升序，再按id的降序
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;mysql
+mysql&amp;gt; select * from b1
+    -&amp;gt; order by Age asc,Id desc;
++&amp;mdash;-+&amp;mdash;&amp;mdash;&amp;ndash;+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;ndash;+&amp;mdash;&amp;mdash;+&amp;mdash;&amp;mdash;+
+| Id | Gender | Hobbies         | Age  | Test |
++&amp;mdash;-+&amp;mdash;&amp;mdash;&amp;ndash;+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;ndash;+&amp;mdash;&amp;mdash;+&amp;mdash;&amp;mdash;+
+| 17 |       | NULL            | NULL |   31 |
+| 16 |       | 散步            | NULL |   31 |
+| 15 |       | 不清楚          | NULL |   31 |
+| 13 |       | 骑行            | NULL |   31 |
+| 12 |        | 购物            | NULL |   30 |
+| 11 |        | 消消乐          |   24 |   30 |
+|  1 |       | 编程            |   24 |   31 |
+|  3 |       | 足球 dota       |   25 |   31 |
+| 18 |        | 家庭主妇        |   26 |   30 |
+| 10 |       | 消消乐          |   26 |   31 |
+|  9 |       | 电影            |   26 |   31 |
+|  8 |       | 摄影            |   26 |   31 |
+|  2 |        | 旅游            |   27 |   30 |
+|  7 |       | 音乐，编程 军事 |   30 |   31 |
+|  4 |       | 打炮，摄影      |   30 |   31 |
+|  0 |       | 羽毛球          |   30 |   31 |
+| 14 |       | 学术            |   34 |   31 |
+|  6 |       | 篮球            |   34 |   31 |
++&amp;mdash;-+&amp;mdash;&amp;mdash;&amp;ndash;+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;ndash;+&amp;mdash;&amp;mdash;+&amp;mdash;&amp;mdash;+&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;
+4. as作为辅助显示   where 则进行判断，条件显示信息
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;mysql
+mysql&amp;gt; select Hobbies as 爱好,Age as 年龄 from b1
+    -&amp;gt; where Age &amp;gt;24 and Age &amp;lt;30;
++&amp;mdash;&amp;mdash;&amp;mdash;&amp;ndash;+&amp;mdash;&amp;mdash;+
+| 爱好      | 年龄 |
++&amp;mdash;&amp;mdash;&amp;mdash;&amp;ndash;+&amp;mdash;&amp;mdash;+
+| 旅游      |   27 |
+| 足球 dota |   25 |
+| 摄影      |   26 |
+| 电影      |   26 |
+| 消消乐    |   26 |
+| 家庭主妇  |   26 |
++&amp;mdash;&amp;mdash;&amp;mdash;&amp;ndash;+&amp;mdash;&amp;mdash;+
+6 rows in set (0.02 sec)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;
+
+5：like模糊匹配
+     正则表达式的效果，查找含有某某的字符串的信息
+
+下面信息来自如鹏：
+通配符过滤使用LIKE 。
+1、单字符匹配的通配符为半角下划线“_”（类似于正则表达式的.），它匹配单个出现的字符。以任意字符开头，剩余部分为“erry” ：SELECT * FROM T_Employees WHERE Name LIKE &#39;_erry&#39;
+2、多字符匹配的通配符为半角百分号“%”，它匹配任意次数（零或多个）出现的任意字符。 “k%”匹配以“k”开头、任意长度的字符串。检索姓名中包含字母“n”的员工信息 ：SELECT * FROM T_Employees WHERE Name LIKE &#39;%n%&#39;
+3、Like性能较差，很容易造成全表扫描，谨慎使用。后面会讲数据库优化(索引等)，项目中做搜索用全文检索。
+测试：（不像 = 号必须一样 ， like是模糊匹配）(数据库全部取出来，然后一条一条扫描)
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;mysql
+mysql&amp;gt; select * from b1 where Hobbies like &amp;lsquo;%羽毛%&amp;rsquo;;
++&amp;mdash;-+&amp;mdash;&amp;mdash;&amp;ndash;+&amp;mdash;&amp;mdash;&amp;mdash;+&amp;mdash;&amp;mdash;+&amp;mdash;&amp;mdash;+
+| Id | Gender | Hobbies | Age  | Test |
++&amp;mdash;-+&amp;mdash;&amp;mdash;&amp;ndash;+&amp;mdash;&amp;mdash;&amp;mdash;+&amp;mdash;&amp;mdash;+&amp;mdash;&amp;mdash;+
+|  0 |       | 羽毛球  |   30 |   31 |
++&amp;mdash;-+&amp;mdash;&amp;mdash;&amp;ndash;+&amp;mdash;&amp;mdash;&amp;mdash;+&amp;mdash;&amp;mdash;+&amp;mdash;&amp;mdash;+
+1 row in set (0.14 sec)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;
+6.控制判断 Null
+Null的精确翻译是不知道，连不知道怎么让数据库知道，所以必须用专门的函数is和is not进行判断，类似于bit的bin函数
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;mysql
+mysql&amp;gt; select Null+1;
++&amp;mdash;&amp;mdash;&amp;ndash;+
+| Null+1 |
++&amp;mdash;&amp;mdash;&amp;ndash;+
+|   NULL |
++&amp;mdash;&amp;mdash;&amp;ndash;+
+1 row in set (0.04 sec)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;不知道+1还是不知道。NUll相当于是一个对象，这个对象不知道里面的值为多少，所以无法进行=和like的比较
+SQL中使用is null、is not null来进行空值判断：
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;mysql
+mysql&amp;gt; select * from  b1 where Age is NULL;
++&amp;mdash;-+&amp;mdash;&amp;mdash;&amp;ndash;+&amp;mdash;&amp;mdash;&amp;mdash;+&amp;mdash;&amp;mdash;+&amp;mdash;&amp;mdash;+
+| Id | Gender | Hobbies | Age  | Test |
++&amp;mdash;-+&amp;mdash;&amp;mdash;&amp;ndash;+&amp;mdash;&amp;mdash;&amp;mdash;+&amp;mdash;&amp;mdash;+&amp;mdash;&amp;mdash;+
+| 12 |        | 购物    | NULL |   30 |
+| 13 |       | 骑行    | NULL |   31 |
+| 15 |       | 不清楚  | NULL |   31 |
+| 16 |       | 散步    | NULL |   31 |
+| 17 |       | NULL    | NULL |   31 |
++&amp;mdash;-+&amp;mdash;&amp;mdash;&amp;ndash;+&amp;mdash;&amp;mdash;&amp;mdash;+&amp;mdash;&amp;mdash;+&amp;mdash;&amp;mdash;+
+5 rows in set (0.00 sec)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;如果使用=号 和like则没有任何显示
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;mysql
+mysql&amp;gt; select * from  b1 where Age = NULL;
+Empty set (0.01 sec)&lt;/p&gt;
+
+&lt;p&gt;mysql&amp;gt; select * from  b1 where Age like &amp;lsquo;%NULL%&amp;rsquo;;
+Empty set (0.00 sec)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;
+7 分组（group by)
+
+比如有一个字段叫做部门，如果group by 部门  那么如果部门值相同的id则被分配到一个组中！！！同一组中的值可以进行再select,为了实现这个目的，一般需要了解外键的知识，多表的概念。现在进行测试：
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;mysql
+mysql&amp;gt; select Age from b1 group by age;
++&amp;mdash;&amp;mdash;+
+| Age  |
++&amp;mdash;&amp;mdash;+
+| NULL |
+|   24 |
+|   25 |
+|   26 |
+|   27 |
+|   30 |
+|   34 |
++&amp;mdash;&amp;mdash;+
+7 rows in set (0.04 sec)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;可以看到如果对年龄进行分组，总共有7个组
+将Age相同的数据行放到一组，分组后的数据可以看作一个临时的结果集，而SELECT  Age语句则取出每组的Age字段的值，这样我们就得到上表的员工年龄段表了
+注意点：如果SELECT语句有WHERE子句，则GROUP BY子句必须放到WHERE语句的之后。
+通过count(Age)可以看到每个分组到底有多少个人！这是一个相当棒的查询结果
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;mysql
+mysql&amp;gt; select Age,count(Age) from b1 group by age;
++&amp;mdash;&amp;mdash;+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;+
+| Age  | count(Age) |
++&amp;mdash;&amp;mdash;+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;+
+| NULL |          0 |
+|   24 |          2 |
+|   25 |          1 |
+|   26 |          4 |
+|   27 |          1 |
+|   30 |          3 |
+|   34 |          2 |
++&amp;mdash;&amp;mdash;+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;+
+7 rows in set (0.00 sec)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;可以想想如果 是对部门进行分组，并存在salary字段，则可以avg(salary)获得某个部门的平均工资（min 最小  max最大  sum对部门工资求和！方便），因为经过分组后，select得到的结果是分组的信息，
+而不是单一的信息了
+1）计算每个分组中的员工平均工资
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;mysql
+SELECT Age,AVG(Salary) FROM T_Employees&lt;/p&gt;
+
+&lt;p&gt;GROUP BY Age&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;如鹏的总结：分组语句一般和聚合函数一起使用，GROUP BY子句负责将数据分成逻辑组，而聚合函数则对每一个组进行统计计算。
+
+
+8.联合查询--之leftjoin模式
+
+多表查询，是一个比较实际的运用！，多表查询中涉及到联合查询，先建立三张表，然后添加数据，测试就会明白了
+创建第一张表 T_customers ,设计了Id为主键,自动增长，Name为varchar  not null，Age为tinyint就够了
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;mysql
+mysql&amp;gt; create table T_Customers(
+    -&amp;gt; Id int(4) auto_increment primary key,
+    -&amp;gt; Name varchar(20) not null default &amp;ldquo;,
+    -&amp;gt; Age tinyint default 0);
+Query OK, 0 rows affected (0.31 sec)&lt;/p&gt;
+
+&lt;p&gt;并添加完数据：
+mysql&amp;gt; INSERT INTO T_Customers(Id,Name,Age)
+    -&amp;gt; VALUES(1,&amp;lsquo;TOM&amp;rsquo;,21);
+Query OK, 1 row affected (0.12 sec)&lt;/p&gt;
+
+&lt;p&gt;mysql&amp;gt; INSERT INTO T_Customers(Id,Name,Age)
+    -&amp;gt; VALUES(2,&amp;lsquo;MIKE&amp;rsquo;,24);
+Query OK, 1 row affected (0.06 sec)&lt;/p&gt;
+
+&lt;p&gt;mysql&amp;gt; INSERT INTO T_Customers(Id,Name,Age)
+    -&amp;gt; VALUES(3,&amp;lsquo;JACK&amp;rsquo;,30);
+Query OK, 1 row affected (0.09 sec)&lt;/p&gt;
+
+&lt;p&gt;mysql&amp;gt; INSERT INTO T_Customers(Id,Name,Age)
+    -&amp;gt; VALUES(4,&amp;lsquo;TOM&amp;rsquo;,25);
+Query OK, 1 row affected (0.03 sec)&lt;/p&gt;
+
+&lt;p&gt;mysql&amp;gt; INSERT INTO T_Customers(Id,Name,Age)
+    -&amp;gt; VALUES(5,&amp;lsquo;LINDA&amp;rsquo;,30);
+Query OK, 1 row affected (0.08 sec)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;显示表格结构:
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;mysql
+mysql&amp;gt; desc T_customers;
++&amp;mdash;&amp;mdash;-+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;-+&amp;mdash;&amp;mdash;+&amp;mdash;&amp;ndash;+&amp;mdash;&amp;mdash;&amp;mdash;+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;-+
+| Field | Type        | Null | Key | Default | Extra          |
++&amp;mdash;&amp;mdash;-+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;-+&amp;mdash;&amp;mdash;+&amp;mdash;&amp;ndash;+&amp;mdash;&amp;mdash;&amp;mdash;+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;-+
+| Id    | int(4)      | NO   | PRI | NULL    | auto_increment |
+| Name  | varchar(20) | NO   |     |         |                |
+| Age   | tinyint(4)  | YES  |     | 0       |                |
++&amp;mdash;&amp;mdash;-+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;-+&amp;mdash;&amp;mdash;+&amp;mdash;&amp;ndash;+&amp;mdash;&amp;mdash;&amp;mdash;+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;-+
+3 rows in set (0.00 sec)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;显示表数据：
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;mysql
+mysql&amp;gt; select * from T_customers;
++&amp;mdash;-+&amp;mdash;&amp;mdash;-+&amp;mdash;&amp;mdash;+
+| Id | Name  | Age  |
++&amp;mdash;-+&amp;mdash;&amp;mdash;-+&amp;mdash;&amp;mdash;+
+|  1 | TOM   |   21 |
+|  2 | MIKE  |   24 |
+|  3 | JACK  |   30 |
+|  4 | TOM   |   25 |
+|  5 | LINDA |   30 |
++&amp;mdash;-+&amp;mdash;&amp;mdash;-+&amp;mdash;&amp;mdash;+
+5 rows in set (0.00 sec)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;
+新建第二张表：T_OrderType
+设计ID和T_Customers一样，Name为订单类型名字，varchar（30）且非空
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;mysql
+mysql&amp;gt; create table T_OrderType(
+    -&amp;gt; Id int auto_increment primary key,
+    -&amp;gt; Name varchar(30) not null default &amp;ldquo;);
+Query OK, 0 rows affected (0.35 sec)&lt;/p&gt;
+
+&lt;p&gt;mysql&amp;gt; desc T_OrderType;
++&amp;mdash;&amp;mdash;-+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;-+&amp;mdash;&amp;mdash;+&amp;mdash;&amp;ndash;+&amp;mdash;&amp;mdash;&amp;mdash;+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;-+
+| Field | Type        | Null | Key | Default | Extra          |
++&amp;mdash;&amp;mdash;-+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;-+&amp;mdash;&amp;mdash;+&amp;mdash;&amp;ndash;+&amp;mdash;&amp;mdash;&amp;mdash;+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;-+
+| Id    | int(11)     | NO   | PRI | NULL    | auto_increment |
+| Name  | varchar(30) | NO   |     |         |                |
++&amp;mdash;&amp;mdash;-+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;-+&amp;mdash;&amp;mdash;+&amp;mdash;&amp;ndash;+&amp;mdash;&amp;mdash;&amp;mdash;+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;-+
+2 rows in set (0.00 sec)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;
+并插入表数据：
+不小心检错表名字了 ，进行修改
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;mysql
+mysql&amp;gt; rename table T_OrderType to T_OrderTypes;
+Query OK, 0 rows affected (0.19 sec)
+复制代码&lt;/p&gt;
+
+&lt;p&gt;mysql&amp;gt; INSERT INTO T_OrderTypes(Id,Name)
+    -&amp;gt; VALUES(1,&amp;lsquo;现货订单&amp;rsquo;);
+Query OK, 1 row affected (0.12 sec)&lt;/p&gt;
+
+&lt;p&gt;mysql&amp;gt; INSERT INTO T_OrderTypes(Id,Name)
+    -&amp;gt; VALUES(2,&amp;lsquo;预订订单&amp;rsquo;);
+Query OK, 1 row affected (0.03 sec)&lt;/p&gt;
+
+&lt;p&gt;mysql&amp;gt; INSERT INTO T_OrderTypes(Id,Name)
+    -&amp;gt; VALUES(3,&amp;lsquo;预购订单&amp;rsquo;);
+Query OK, 1 row affected (0.09 sec)&lt;/p&gt;
+
+&lt;p&gt;mysql&amp;gt; INSERT INTO T_OrderTypes(Id,Name)
+    -&amp;gt; VALUES(4,&amp;lsquo;内部&amp;rsquo;);
+Query OK, 1 row affected (0.09 sec)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;显示订单类型表结构信息
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;mysql
+mysql&amp;gt; desc T_OrderTypes;
++&amp;mdash;&amp;mdash;-+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;-+&amp;mdash;&amp;mdash;+&amp;mdash;&amp;ndash;+&amp;mdash;&amp;mdash;&amp;mdash;+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;-+
+| Field | Type        | Null | Key | Default | Extra          |
++&amp;mdash;&amp;mdash;-+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;-+&amp;mdash;&amp;mdash;+&amp;mdash;&amp;ndash;+&amp;mdash;&amp;mdash;&amp;mdash;+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;-+
+| Id    | int(11)     | NO   | PRI | NULL    | auto_increment |
+| Name  | varchar(30) | NO   |     |         |                |
++&amp;mdash;&amp;mdash;-+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;-+&amp;mdash;&amp;mdash;+&amp;mdash;&amp;ndash;+&amp;mdash;&amp;mdash;&amp;mdash;+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;-+
+2 rows in set (0.01 sec)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;显示其中的数据：
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;mysql
+mysql&amp;gt; select * from T_OrderTypes;
++&amp;mdash;-+&amp;mdash;&amp;mdash;&amp;mdash;-+
+| Id | Name     |
++&amp;mdash;-+&amp;mdash;&amp;mdash;&amp;mdash;-+
+|  1 | 现货订单 |
+|  2 | 预订订单 |
+|  3 | 预购订单 |
+|  4 | 内部     |
++&amp;mdash;-+&amp;mdash;&amp;mdash;&amp;mdash;-+
+4 rows in set (0.00 sec)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;
+
+新建第三张 最重要的表！涉及到一个关键的新的知识点，外键的创建
+设计了五个参数
+ID                 订单ID  设计和其他两张表类型一致
+Number       订单编号 设计为varchar（20） not null
+Price             设计为 int类型
+CustomerId  外键1   为T_Customers的外键
+TypeId           外键2  为T_OrderTypes的外键
+参考此文
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;mysql
+mysql&amp;gt; create table T_Orders(
+    -&amp;gt; Id int auto_increment primary key,
+    -&amp;gt; Number varchar(20) not null default &amp;ldquo;,
+    -&amp;gt; Price int not null default 0,
+    -&amp;gt; CustomerId int, foreign key(CustomerId) references T_customers(Id) on del
+ete restrict on update cascade,
+    -&amp;gt; TypeId int, foreign key(TypeId) references T_OrderTypes(Id) on delete res
+trict on update cascade);
+Query OK, 0 rows affected (0.46 sec)&lt;/p&gt;
+
+&lt;p&gt;mysql&amp;gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;显示表结构
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;mysql
+mysql&amp;gt; desc T_Orders;
++&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;-+&amp;mdash;&amp;mdash;+&amp;mdash;&amp;ndash;+&amp;mdash;&amp;mdash;&amp;mdash;+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;-+
+| Field      | Type        | Null | Key | Default | Extra          |
++&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;-+&amp;mdash;&amp;mdash;+&amp;mdash;&amp;ndash;+&amp;mdash;&amp;mdash;&amp;mdash;+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;-+
+| Id         | int(11)     | NO   | PRI | NULL    | auto_increment |
+| Number     | varchar(20) | NO   |     |         |                |
+| Price      | int(11)     | NO   |     | 0       |                |
+| CustomerId | int(11)     | YES  | MUL | NULL    |                |
+| TypeId     | int(11)     | YES  | MUL | NULL    |                |
++&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;-+&amp;mdash;&amp;mdash;+&amp;mdash;&amp;ndash;+&amp;mdash;&amp;mdash;&amp;mdash;+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;-+
+5 rows in set (0.03 sec)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;另外一种更加清晰地显示表结构：
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;mysql
+mysql&amp;gt; show create table T_Orders\G;
+*************************** 1. row ***************************
+       Table: T_Orders
+Create Table: CREATE TABLE &lt;code&gt;t_orders&lt;/code&gt; (
+  &lt;code&gt;Id&lt;/code&gt; int(11) NOT NULL AUTO_INCREMENT,
+  &lt;code&gt;Number&lt;/code&gt; varchar(20) NOT NULL DEFAULT &amp;ldquo;,
+  &lt;code&gt;Price&lt;/code&gt; int(11) NOT NULL DEFAULT &amp;lsquo;0&amp;rsquo;,
+  &lt;code&gt;CustomerId&lt;/code&gt; int(11) DEFAULT NULL,
+  &lt;code&gt;TypeId&lt;/code&gt; int(11) DEFAULT NULL,
+  PRIMARY KEY (&lt;code&gt;Id&lt;/code&gt;),
+  KEY &lt;code&gt;CustomerId&lt;/code&gt; (&lt;code&gt;CustomerId&lt;/code&gt;),
+  KEY &lt;code&gt;TypeId&lt;/code&gt; (&lt;code&gt;TypeId&lt;/code&gt;),
+  CONSTRAINT &lt;code&gt;t_orders_ibfk_1&lt;/code&gt; FOREIGN KEY (&lt;code&gt;CustomerId&lt;/code&gt;) REFERENCES &lt;code&gt;t_customer
+s&lt;/code&gt; (&lt;code&gt;Id&lt;/code&gt;) ON UPDATE CASCADE,
+  CONSTRAINT &lt;code&gt;t_orders_ibfk_2&lt;/code&gt; FOREIGN KEY (&lt;code&gt;TypeId&lt;/code&gt;) REFERENCES &lt;code&gt;t_ordertypes&lt;/code&gt;
+(&lt;code&gt;Id&lt;/code&gt;) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+1 row in set (0.00 sec)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;可以见到 CONSTRAINT的标志，如多定义没有指定CONSTRAINT 外键符号时，mysql会自动创建一个，比如t_orders_ibfk_1，就是外键符号，
+可以通过
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;mysql
+ALTER TABLE T_Orders DROP FOREIGN KEY &lt;code&gt;t_orders_ibfk_1&lt;/code&gt;来删除外键
+mysql&amp;gt; alter table T_orders drop foreign key t_orders_ibfk_1;
+Query OK, 0 rows affected (0.25 sec)
+Records: 0  Duplicates: 0  Warnings: 0&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;再次显示表结构信息：
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;mysql
+mysql&amp;gt; show create table T_orders\G;
+*************************** 1. row ***************************
+       Table: T_orders
+Create Table: CREATE TABLE &lt;code&gt;t_orders&lt;/code&gt; (
+  &lt;code&gt;Id&lt;/code&gt; int(11) NOT NULL AUTO_INCREMENT,
+  &lt;code&gt;Number&lt;/code&gt; varchar(20) NOT NULL DEFAULT &amp;ldquo;,
+  &lt;code&gt;Price&lt;/code&gt; int(11) NOT NULL DEFAULT &amp;lsquo;0&amp;rsquo;,
+  &lt;code&gt;CustomerId&lt;/code&gt; int(11) DEFAULT NULL,
+  &lt;code&gt;TypeId&lt;/code&gt; int(11) DEFAULT NULL,
+  PRIMARY KEY (&lt;code&gt;Id&lt;/code&gt;),
+  KEY &lt;code&gt;CustomerId&lt;/code&gt; (&lt;code&gt;CustomerId&lt;/code&gt;),
+  KEY &lt;code&gt;TypeId&lt;/code&gt; (&lt;code&gt;TypeId&lt;/code&gt;),
+  CONSTRAINT &lt;code&gt;t_orders_ibfk_2&lt;/code&gt; FOREIGN KEY (&lt;code&gt;TypeId&lt;/code&gt;) REFERENCES &lt;code&gt;t_ordertypes&lt;/code&gt;
+(&lt;code&gt;Id&lt;/code&gt;) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+1 row in set (0.00 sec)&lt;/p&gt;
+
+&lt;p&gt;ERROR:
+No query specified&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;少了t_orders_ibfk_2
+那么如何再次添加呢？
+参考此文
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;mysql
+mysql&amp;gt; alter table T_orders add  foreign key hello(CustomerId) references T_cust
+omers(Id);
+Query OK, 0 rows affected (0.74 sec)
+Records: 0  Duplicates: 0  Warnings: 0&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;再次查看表结构信息：
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;mysql
+mysql&amp;gt; show create table T_orders\G;
+*************************** 1. row ***************************
+       Table: T_orders
+Create Table: CREATE TABLE &lt;code&gt;t_orders&lt;/code&gt; (
+  &lt;code&gt;Id&lt;/code&gt; int(11) NOT NULL AUTO_INCREMENT,
+  &lt;code&gt;Number&lt;/code&gt; varchar(20) NOT NULL DEFAULT &amp;ldquo;,
+  &lt;code&gt;Price&lt;/code&gt; int(11) NOT NULL DEFAULT &amp;lsquo;0&amp;rsquo;,
+  &lt;code&gt;CustomerId&lt;/code&gt; int(11) DEFAULT NULL,
+  &lt;code&gt;TypeId&lt;/code&gt; int(11) DEFAULT NULL,
+  PRIMARY KEY (&lt;code&gt;Id&lt;/code&gt;),
+  KEY &lt;code&gt;TypeId&lt;/code&gt; (&lt;code&gt;TypeId&lt;/code&gt;),
+  KEY &lt;code&gt;hello&lt;/code&gt; (&lt;code&gt;CustomerId&lt;/code&gt;),
+  CONSTRAINT &lt;code&gt;t_orders_ibfk_2&lt;/code&gt; FOREIGN KEY (&lt;code&gt;TypeId&lt;/code&gt;) REFERENCES &lt;code&gt;t_ordertypes&lt;/code&gt;
+(&lt;code&gt;Id&lt;/code&gt;) ON UPDATE CASCADE,
+  CONSTRAINT &lt;code&gt;t_orders_ibfk_3&lt;/code&gt; FOREIGN KEY (&lt;code&gt;CustomerId&lt;/code&gt;) REFERENCES &lt;code&gt;t_customer
+s&lt;/code&gt; (&lt;code&gt;Id&lt;/code&gt;)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+1 row in set (0.00 sec)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;可以看到又增加了！
+插入表结构信息
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;mysql
+mysql&amp;gt; INSERT INTO T_Orders(Id,Number,Price,CustomerId, TypeId)
+    -&amp;gt; VALUES(1,&amp;lsquo;K001&amp;rsquo;,100,1,1);
+Query OK, 1 row affected (0.06 sec)&lt;/p&gt;
+
+&lt;p&gt;mysql&amp;gt; INSERT INTO T_Orders(Id,Number,Price,CustomerId, TypeId)
+    -&amp;gt; VALUES(2,&amp;lsquo;K002&amp;rsquo;,200,1,1);
+Query OK, 1 row affected (0.04 sec)&lt;/p&gt;
+
+&lt;p&gt;mysql&amp;gt; INSERT INTO T_Orders(Id,Number,Price,CustomerId, TypeId)
+    -&amp;gt; VALUES(3,&amp;lsquo;T003&amp;rsquo;,300,1,2);
+Query OK, 1 row affected (0.08 sec)&lt;/p&gt;
+
+&lt;p&gt;mysql&amp;gt; INSERT INTO T_Orders(Id,Number,Price,CustomerId, TypeId)
+    -&amp;gt; VALUES(4,&amp;lsquo;N002&amp;rsquo;,100,2,2);
+Query OK, 1 row affected (0.04 sec)&lt;/p&gt;
+
+&lt;p&gt;mysql&amp;gt; INSERT INTO T_Orders(Id,Number,Price,CustomerId, TypeId)
+    -&amp;gt; VALUES(5,&amp;lsquo;N003&amp;rsquo;,500,3,4);
+Query OK, 1 row affected (0.04 sec)&lt;/p&gt;
+
+&lt;p&gt;mysql&amp;gt; INSERT INTO T_Orders(Id,Number,Price,CustomerId, TypeId)
+    -&amp;gt; VALUES(6,&amp;lsquo;T001&amp;rsquo;,300,4,3);
+Query OK, 1 row affected (0.04 sec)&lt;/p&gt;
+
+&lt;p&gt;mysql&amp;gt; INSERT INTO T_Orders(Id,Number,Price,CustomerId, TypeId)
+    -&amp;gt; VALUES(7,&amp;lsquo;T002&amp;rsquo;,100,1,1);
+Query OK, 1 row affected (0.05 sec)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;
+于是我们可以开始进行联合查询了：
+1、查询每张订单的订单号、价格、对应的客户姓名以及客户年龄
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;mysql
+mysql&amp;gt; select o.Number,o.Price,c.Name,c.Age
+    -&amp;gt; From T_Orders o
+    -&amp;gt; Left join T_Customers c
+    -&amp;gt; On o.CustomerId=c.Id;
++&amp;mdash;&amp;mdash;&amp;ndash;+&amp;mdash;&amp;mdash;-+&amp;mdash;&amp;mdash;+&amp;mdash;&amp;mdash;+
+| Number | Price | Name | Age  |
++&amp;mdash;&amp;mdash;&amp;ndash;+&amp;mdash;&amp;mdash;-+&amp;mdash;&amp;mdash;+&amp;mdash;&amp;mdash;+
+| K001   |   100 | TOM  |   21 |
+| K002   |   200 | TOM  |   21 |
+| T003   |   300 | TOM  |   21 |
+| T002   |   100 | TOM  |   21 |
+| N002   |   100 | MIKE |   24 |
+| N003   |   500 | JACK |   30 |
+| T001   |   300 | TOM  |   25 |
++&amp;mdash;&amp;mdash;&amp;ndash;+&amp;mdash;&amp;mdash;-+&amp;mdash;&amp;mdash;+&amp;mdash;&amp;mdash;+
+7 rows in set (0.08 sec)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;2、添加where语句(显示价格&amp;gt;=150元的订单)
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;mysql
+mysql&amp;gt; select o.Number,o.Price,o.CustomerId,c.Name,c.Age
+    -&amp;gt; from t_orders o
+    -&amp;gt; left join t_customers c on o.CustomerId = c.Id
+    -&amp;gt; where o.price &amp;gt;=150;
++&amp;mdash;&amp;mdash;&amp;ndash;+&amp;mdash;&amp;mdash;-+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;+&amp;mdash;&amp;mdash;+&amp;mdash;&amp;mdash;+
+| Number | Price | CustomerId | Name | Age  |
++&amp;mdash;&amp;mdash;&amp;ndash;+&amp;mdash;&amp;mdash;-+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;+&amp;mdash;&amp;mdash;+&amp;mdash;&amp;mdash;+
+| K002   |   200 |          1 | TOM  |   21 |
+| T003   |   300 |          1 | TOM  |   21 |
+| N003   |   500 |          3 | JACK |   30 |
+| T001   |   300 |          4 | TOM  |   25 |
++&amp;mdash;&amp;mdash;&amp;ndash;+&amp;mdash;&amp;mdash;-+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;+&amp;mdash;&amp;mdash;+&amp;mdash;&amp;mdash;+
+4 rows in set (0.06 sec)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;3、多表join连接查询
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;mysql
+mysql&amp;gt; select o.Number 订单号 ,o.Price 价格,c.Name 客户姓名,c.Age 客户年
+    -&amp;gt; t.Name 订单类型 from t_orders o
+    -&amp;gt; left join T_customers c on o.customerId=c.Id
+    -&amp;gt; left join T_OrderTypes t on o.TypeId=t.Id;
++&amp;mdash;&amp;mdash;&amp;ndash;+&amp;mdash;&amp;mdash;+&amp;mdash;&amp;mdash;&amp;mdash;-+&amp;mdash;&amp;mdash;&amp;mdash;-+&amp;mdash;&amp;mdash;&amp;mdash;-+
+| 订单号 | 价格 | 客户姓名 | 客户年龄 | 订单类型 |
++&amp;mdash;&amp;mdash;&amp;ndash;+&amp;mdash;&amp;mdash;+&amp;mdash;&amp;mdash;&amp;mdash;-+&amp;mdash;&amp;mdash;&amp;mdash;-+&amp;mdash;&amp;mdash;&amp;mdash;-+
+| K001   |  100 | TOM      |       21 | 现货订单 |
+| K002   |  200 | TOM      |       21 | 现货订单 |
+| T003   |  300 | TOM      |       21 | 预订订单 |
+| T002   |  100 | TOM      |       21 | 现货订单 |
+| N002   |  100 | MIKE     |       24 | 预订订单 |
+| N003   |  500 | JACK     |       30 | 内部     |
+| T001   |  300 | TOM      |       25 | 预购订单 |
++&amp;mdash;&amp;mdash;&amp;ndash;+&amp;mdash;&amp;mdash;+&amp;mdash;&amp;mdash;&amp;mdash;-+&amp;mdash;&amp;mdash;&amp;mdash;-+&amp;mdash;&amp;mdash;&amp;mdash;-+
+7 rows in set (0.12 sec)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;
+
+由此可见 多表查询的魅力！！！。
+
+9.外键约束
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;mysql
+create table T_Orders(
+Id int auto_increment primary key,
+Number varchar(20) not null default &amp;ldquo;,
+Price int not null default 0,
+CustomerId int, foreign key(CustomerId) references T_customers(Id) on del
+ete restrict on update cascade,
+TypeId int, foreign key(TypeId) references T_OrderTypes(Id) on delete res
+trict on update cascade);
+on delete restrict: 也就是限制删除(当你的外键被使用是  一旦被引用则不被删除，防止产生数据紊乱）
+on update cascade（当更新时候，索引也相应的进行更新）&lt;/p&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;待学习的知识点：  触发器，约束，子查询，引擎（存储过程），除了left join的其他join 。。。&lt;/p&gt;
+
+&lt;p&gt;补充（来自如鹏）：1SQL语句中字符串一般用单引号。
+2简单的插入数据的SQL语句：INSERT INTO T_Persons(Id,Name,Age,Gender) VALUES(5,&amp;lsquo;Jim&amp;rsquo;,20,1)
+Insert语句可以省略表名后的列名，但是强烈不推荐
+3.如果插入的行中有些字段的值不确定，那么Insert的时候不指定那些列即可。不“允许为空”的列在插入时不能省略
+4，自动递增/自增(Auto Increment)：字段自增可以避免并发等问题，不要程序员代码控制自增。用自增字段在Insert的时候不用指定值。修改表结构的方法【设计表】&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;1.MySQL的语言中没有top修饰，不过可以使用limit来操作。
+    2.MySQL和SQL Server 均支持as。as可以命名一个列或者表为其他名称。
+    3.Distinct可以用户排除重复，若在Distinct后面用逗号分隔了好几个列，那表示要将这些列联合起来去重复。
+    4.Order by 列名 asc/desc  其中asc为默认的从小到大，desc为从大大小，实际项目中，很多表的数据显示都需要从后面到前面。
+    5.聚合函数在各个数据库中均受到支持。AVG、MAX、SUM、COUNT。同一个语句中，多个聚合函数可以一起使用。
+    6.聚合函数多和Group by一起使用，如果没有Group by那么聚合的就是整个表的所有指定列的数据。
+    7.模糊查询不是使用= 而是使用 like结合百分号 %
+    8.使用count聚合函数可以查找符合条件的某一列是否存在。
+    9.原则∶当使用了分组函数Group by后，select只能是聚合函数或者Group by的列。虽然MySQL不报错，但是仍然不推荐这么使用。
+    10.对于第9点，虽然select 的只能是Group by的但是聚合函数仍然可以聚合其他列。
+    11.Having和Where区别，Having搭配Group by使用，是对分组后的数据进行筛选。而Where是在分组前就行筛选。
+    12.当多表查询的时候，不推荐单纯的使用*
+    13.对于多表查询，一定要注意使用别名。
+    14.Inner  Join 就是Join。
+    15.All  Some Any中Some和Any等价的。
+    16.多表查询使用On来连接，多为=来连接。
+    17.Join和Union区别，可以形象的记忆为 Join是横着的连接，Union是上下竖着的连接。
+    18.Left Join 是一定显示左边的，没显示的使用null来补位，Right Join是右边的表一定显示，左边的表某列不存在使用Null来补位。
+    19.当子查询的结果不是一个的时候，主查询又在使用&amp;gt; &amp;lt; =表达式的时候，All 所有  Any/Some的作用就发挥了。
+    20.从原理上来讲，多张表联合起来的查询是∶若A,B两张表，A表的第一列依次扫描B表的每一列，提取符号条件的。类似2个嵌套的for循环那样。
+    21.当子查询的结果不是1列的时候，是不能使用 &amp;gt; =&amp;lt; 这些运算符的。
+    22.使用Union，Intersect，Except运算符的时候，目标列表需要有相同的数目。
+    23.聚合函数一般搭配分组函数一起使用，若不分组，那么就按照where的来，如果where没有就是所有的列。
+    24.在使用in的语句中，一般都是可以使用Exists，且Exits会走索性相对来说快点，但是不一定。练习的时候，2个都要写出来。
+    25.当Exits Where 的时候，该SQL语句运行顺序是这样的∶先运行Exits前面的，然后将每一列带入where中进行查询匹配，如果找到了就输出这一列。反之不输出。
+    26.Exits函数的返回只是true或者fanlse。
+    27.like或者not like利用 %进行模糊查询。
+    28.逗号连接的2个∶  from A，B   |||   order by a asc, b desc
+    29.聚合函数不应该出现在Where中，如果Where要出现，那么将其单独搞成子查询的模式。
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+    <item>
+      <title>2月14日Java班mysql</title>
+      <link>https://jueqingsizhe66.github.io/blog/2015/05/11/2yue-14ri-javaban-mysql/</link>
+      <pubDate>Mon, 11 May 2015 14:58:41 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/blog/2015/05/11/2yue-14ri-javaban-mysql/</guid>
+      <description>&lt;p&gt;第一部分 笔记&lt;/p&gt;
+
+&lt;p&gt;1：关于事务在命令窗口的练习：
+事务  就是一连串命令的集合，只要这部命令都执行完毕，才能更新到数据库中，否则退出！！即使有一行比如 null.length()的存在空指针，则不成功。
+一旦执行失败则回滚。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; begin;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql&amp;gt; update t_person set age=age+1 where Name=&#39;yezhao&#39;;
+Query OK, 2 rows affected (0.35 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql&amp;gt; select * from t_person where Name=&#39;yezhao&#39;;
++----+--------+-----+--------+
+| Id | Name   | Age | Gender |
++----+--------+-----+--------+
+|  1 | yezhao |  25 |      1 |
+|  7 | yezhao |  26 |      1 |
++----+--------+-----+--------+
+2 rows in set (0.02 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然而在navicat的显示结果是之前的信息  也就是  24  25，当在cmd窗口执行完commit之后：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; commit;
+Query OK, 0 rows affected (0.11 sec)
+
+mysql&amp;gt; select * from t_person where Name=&#39;yezhao&#39;;
++----+--------+-----+--------+
+| Id | Name   | Age | Gender |
++----+--------+-----+--------+
+|  1 | yezhao |  25 |      1 |
+|  7 | yezhao |  26 |      1 |
++----+--------+-----+--------+
+2 rows in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;navicat也会发生相应的变化：
+1        yezhao        25        1
+7        yezhao        26        1&lt;/p&gt;
+
+&lt;p&gt;java的conn.setAutoCommit(false);//相当于begin的作用
+所以：只有commit之后mysql信息才会在不同的客户端同步，现在尝试在java中的使用，已在练习部分给出，&lt;/p&gt;
+
+&lt;p&gt;2.在没有批量导入数据之前，一般是需要花费很长的时间，现在采用addbatch进行。
+ps.clearParameters()的作用是清空上一次数据的值，不影响到下一次&lt;/p&gt;
+
+&lt;p&gt;而一般数据量大的情况下，导入可能会出现问题，这样如果批量导入在事务中运行，将会更加保险，已在练习给出。
+注意加入事物的时候，抛出异常时候采用conn.rollback();把executeUpdate()改成addBatch()，在最后再ps.executeBatch()&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;mysql获取最后一次插入的id号函数，在java中也可以实现。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; select last_insert_id();
++------------------+
+| last_insert_id() |
++------------------+
+|                0 |
++------------------+
+1 row in set (0.17 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;有没有发现是0 ，即使是我最新插入也是这样；调查后发现是：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; insert into t_person(Name,Age,Gender) values (&#39;悟空&#39;,30,1);
+Query OK, 1 row affected (0.04 sec)
+
+mysql&amp;gt; select last_insert_id();
++------------------+
+| last_insert_id() |
++------------------+
+|            11317 |
++------------------+
+1 row in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;如果你添加的时候，不要写上主键的值，则是可以！如果直接加上主键的值，则显示的是0！&lt;/p&gt;
+
+&lt;p&gt;第二部分 练习
+1.一个比较戳版本的JDBCUtils的版本，虽然没有错误，但是未关闭连接，且整体逻辑性不强，并多次加载驱动&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;/**
+* 
+*/
+package com.jdbc.test;
+
+import java.util.Properties;
+import java.io.*;
+import java.sql.*;
+/**
+* @author    叶昭良
+* @time      2015年2月17日下午11:31:53
+* @version   com.jdbc.testJDBCUtils V1.0
+*/
+public class JDBCUtils
+{
+
+        /**
+         * @param args
+         */
+        public static void main(String[] args)
+        {
+                // TODO Auto-generated method stub
+                
+                try
+                {
+                        
+        //查询的测试分为三个阶段    无参 的两个   有参的一个
+                        //测试1   success
+                        /**
+                         *  mysql&amp;gt; select * from t_person;
+                         *  6 rows in set (0.35 sec)
+                         */
+                        /*
+                        Connection conn = JDBCUtils.createConnection() ;
+                        ResultSet rs = JDBCUtils.executeQuery(conn, &amp;quot;select * from t_person&amp;quot;, null);
+                        int i = 0;
+                        while(rs.next())
+                        {
+                                i++;
+                        }
+                        System.out.println(&amp;quot;总的返回了&amp;quot;+i+&amp;quot;条记录&amp;quot;);
+                        */
+                        //测试2   success
+                        /**
+                         *  mysql&amp;gt; select * from t_person;
+                         *  6 rows in set (0.35 sec)
+                         */
+                        /*
+                        ResultSet rs = JDBCUtils.executeQuery( &amp;quot;select * from t_person&amp;quot;, null);
+                        int i = 0;
+                        while(rs.next())
+                        {
+                                i++;
+                        }
+                        System.out.println(&amp;quot;总的返回了&amp;quot;+i+&amp;quot;条记录&amp;quot;);
+                        */
+                        
+                        //测试3    success
+                        /* mysql&amp;gt; select * from t_person where name=&#39;xinran&#39;
+                         * 3 rows in set (0.00 sec)
+                         */
+/*                        ResultSet rs = JDBCUtils.executeQuery(&amp;quot;select * from t_person where name = ?&amp;quot;, &amp;quot;xinran&amp;quot;);
+                        int i = 0;
+                        while(rs.next())
+                        {
+                                i++;
+                        }
+                        System.out.println(&amp;quot;总的返回了&amp;quot;+i+&amp;quot;条记录&amp;quot;);*/
+                        
+        //插入阶段的测试   类似查询分为三个阶段    无参 的两个   有参的一个
+                        /**
+                         * 测试成功！ //1
+                         */
+                        /*Connection conn = JDBCUtils.createConnection() ;
+                        int i = JDBCUtils.executeUpdate(conn, &amp;quot;insert into t_person(Id,Name,Age,Gender) values(8,&#39;lizi&#39;,82,1)&amp;quot;, null);
+
+                        //System.out.println(&amp;quot;总的返回了&amp;quot;+i+&amp;quot;条记录&amp;quot;);
+
+            */        
+                        /**
+                         * 测试成功！ //2 没想到只要两行语句 则进行了一次插入
+                         */
+                        /*String sql = &amp;quot;insert into t_person(Id,Name,Age,Gender) values(9,&#39;孙悟空&#39;,12,1)&amp;quot;; //年龄不能过大
+                        JDBCUtils.executeUpdate(sql, null);*/
+                        
+                        /**
+                         *  测试成功！  //3  连有参的形式也是成功了
+                         *  mysql&amp;gt; select * from t_person;
+                        +----+---------+-----+--------+
+                        | Id | Name    | Age | Gender |
+                        +----+---------+-----+--------+
+                        |  1 | yezhao  |  24 |      1 |
+                        |  3 | xinran  |  32 |      0 |
+                        |  4 | xinran  |  32 |      4 |
+                        |  5 | xinran  |  32 |      4 |
+                        |  6 | yezhao1 |  25 |      0 |
+                        |  7 | yezhao  |  25 |      1 |
+                        |  8 | lizi    |  82 |      1 |
+                        |  9 | 孙悟空  |  12 |      1 |
+                        | 10 | 蝴蝶    |   3 |      0 |
+                        +----+---------+-----+--------+
+                        9 rows in set (0.00 sec)
+                         */
+                        String sql = &amp;quot;insert into t_person(Id,Name,Age,Gender) values(?,?,?,?)&amp;quot;; //年龄不能过大
+                        JDBCUtils.executeUpdate(sql, 11,&amp;quot;孟彩兰&amp;quot;,13,1);
+                        
+                } catch (SQLException e)
+                {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                }
+        }
+        
+        
+        public static  Connection createConnection() throws SQLException
+        {
+                InputStream is = JDBCUtils.class.getClassLoader().getResourceAsStream(&amp;quot;com/jdbc/test/sql.properties&amp;quot;);
+                 
+                //InputStream is = JDBCUtils.class.getClassLoader().getResourceAsStream(&amp;quot;sql.properties&amp;quot;);
+                Properties ps  = new Properties();
+                Connection c1 = null;
+                try
+                {
+                        ps.load(is);
+                        String mysqlDriver = ps.getProperty(&amp;quot;mysqlDriver&amp;quot;);
+//                        System.out.println(mysqlDriver);
+                        
+                        String connectDatabase = ps.getProperty(&amp;quot;connectDatabase&amp;quot;);
+//                        System.out.println(connectDatabase);
+                        
+                        String userName = ps.getProperty(&amp;quot;userName&amp;quot;);
+//                        System.out.println(userName);
+                        
+                        String Password = ps.getProperty(&amp;quot;Password&amp;quot;);
+//                        System.out.println(Password);
+                        
+                        Class.forName(mysqlDriver);
+                        
+                        c1 = DriverManager.getConnection(connectDatabase,userName,Password);
+                        System.out.println(&amp;quot;连接成功&amp;quot;);
+                } catch (IOException | ClassNotFoundException | SQLException e)
+                {
+                        // TODO Auto-generated catch block
+                        System.out.println(&amp;quot;数据库驱动加载失败&amp;quot;+e.getMessage());
+                        return null;
+                }
+                return c1;
+        }
+
+        public static int executeUpdate(String sql,Object... parameter) throws SQLException
+        {
+                Connection conn = JDBCUtils.createConnection();
+                PreparedStatement ps = conn.prepareStatement(sql);
+                int i = 1;
+                if(parameter != null)
+                {
+                        for(Object pa1:parameter)
+                        {
+                                ps.setObject(i, pa1);
+                                i++;
+                        }
+                }
+                int rows = ps.executeUpdate();
+                System.out.println(&amp;quot;有&amp;quot;+rows+&amp;quot;条记录被影响&amp;quot;);
+                return rows;
+        }
+        
+        public static int executeUpdate(Connection conn,String sql,Object... parameter) throws SQLException
+        {
+                PreparedStatement ps = conn.prepareStatement(sql);
+                int i = 1;
+                if(parameter != null)
+                {
+                        for(Object pa1:parameter)
+                        {
+                                ps.setObject(i, pa1);
+                                i++;
+                        }
+                }
+                int rows = ps.executeUpdate();
+                System.out.println(&amp;quot;有&amp;quot;+rows+&amp;quot;条记录被影响&amp;quot;);
+                return rows;
+        }
+        
+        public static ResultSet executeQuery(String sql,Object... parameter) throws SQLException
+        {
+                Connection conn = JDBCUtils.createConnection();
+                PreparedStatement ps = conn.prepareStatement(sql);
+                int i =1;
+                if(parameter != null)
+                {
+                        for(Object pa1:parameter)
+                        {
+                                ps.setObject(i, pa1);
+                                i++;
+                        }
+                }
+                ResultSet rs = ps.executeQuery();
+                return rs;
+        }
+        
+        public static ResultSet executeQuery(Connection conn,String sql,Object... parameter) throws SQLException
+        {
+                PreparedStatement ps = conn.prepareStatement(sql);
+                int i =1;
+                if(parameter != null)
+                {
+                        for(Object pa1:parameter)
+                        {
+                                ps.setObject(i, pa1);
+                                i++;
+                        }
+                }
+                ResultSet rs = ps.executeQuery();
+                return rs;
+        }
+        
+        static void closeQuietly(PreparedStatement ps)
+        {
+                if(ps!= null)
+                {
+                        try
+                        {
+                                ps.close();
+                        }catch(SQLException e)
+                        {
+                        
+                        }
+                }
+        }
+        
+        static void closeQuietly(Connection conn)
+        {
+                if(conn!= null)
+                {
+                        try
+                        {
+                                conn.close();
+                        }catch(SQLException e)
+                        {
+                        
+                        }
+                }
+        }
+        static void closeQuietly(ResultSet rs)
+        {
+                if(rs!= null)
+                {
+                        try
+                        {
+                                rs.close();
+                        }catch(SQLException e)
+                        {
+                        
+                        }
+                }
+        }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;新一个版本的改进，主要是利用杨老师讲的 静态代码块仅仅一次加载驱动！ 并关闭有些使用的资源，ResultSet资源不关闭，由调用者去关闭&lt;/p&gt;
+
+&lt;p&gt;2.新的版本真是比较清晰。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;/**
+* 
+*/
+package com.jdbc.test;
+
+import java.util.Properties;
+import java.io.*;
+import java.sql.*;
+/**
+* @author    叶昭良
+* @time      2015年2月17日下午11:31:53
+* @version   com.jdbc.testJDBCUtils V1.0
+*                         V2.0  改变配置文件变为为final，并把sql.properties文件提到
+*                                 com.jdbc目录下 com/jdbc/test/sql.properties
+*                                 测试通过
+*          V3.0 改变为静态代码段 加载驱动！ 并把加载配置文件
+*               也放在静态代码段中！仅仅加载一次即可！而不需要
+*               一直加载
+*          V4.0 修正了没有close的问题！！防止一直连着。 明白了吃异常的过程
+*                在类库中不知道怎么处理！直接抛出异常即可！让调用者自己去处理！
+*                咱们提供方法，不提供异常的处理！打印异常不叫做处理！而叫做“吃异常”
+*          V5.0  不吃异常的方式就是 throw new RuntimeException ，静态代码段
+*                  无法throw checkedException检查异常
+*                没想到经过这样的过程封装比我原先的好看多了！而且逻辑更加清晰
+*                
+*/
+public class JDBCUtils
+{
+
+        /**
+         * @param args
+         */
+        private static final String mysqlDriver;
+        private static final String connectDatabase;
+        private static final String userName;
+        private static final String Password;
+        static
+        {
+                InputStream is = null; 
+                //InputStream is = JDBCUtils.class.getClassLoader().getResourceAsStream(&amp;quot;sql.properties&amp;quot;);
+                Properties ps  = new Properties();
+                Connection c1 = null;
+                try
+                {
+                        is = JDBCUtils.class.getClassLoader().getResourceAsStream(&amp;quot;&amp;quot;
+                                        + &amp;quot;com/jdbc/test/sql.properties&amp;quot;);
+                        ps.load(is);
+                        mysqlDriver = ps.getProperty(&amp;quot;mysqlDriver&amp;quot;);
+//                        System.out.println(mysqlDriver);
+                        connectDatabase = ps.getProperty(&amp;quot;connectDatabase&amp;quot;);
+        //                        System.out.println(connectDatabase);
+                        userName = ps.getProperty(&amp;quot;userName&amp;quot;);
+        //                        System.out.println(userName);
+                        Password = ps.getProperty(&amp;quot;Password&amp;quot;);
+        //                        System.out.println(Password);
+                        //仅仅在静态代码段中加载一次驱动即可（在运行中）
+                        
+                } catch (IOException e)
+                {
+                        // TODO Auto-generated catch block
+                        //System.out.println(&amp;quot;配置文件加载失败&amp;quot;+e.getMessage());
+                        throw new RuntimeException(&amp;quot;配置文件sql.properties加载失败&amp;quot;+e.getMessage());
+                        //return null;
+                }
+                try
+                {
+                        Class.forName(mysqlDriver); //仅仅在程序运行中加载一次驱动即可！！！
+                } catch (ClassNotFoundException e)
+                {
+                        // TODO Auto-generated catch block
+//                        System.out.println(&amp;quot;驱动加载失败&amp;quot;+e.getMessage());
+                        throw new RuntimeException(&amp;quot;驱动加载失败&amp;quot;+e.getMessage());
+                }
+
+        }
+        
+        public static void main(String[] args)
+        {
+                // TODO Auto-generated method stub
+                
+                try
+                {
+                        
+        //查询的测试分为三个阶段    无参 的两个   有参的一个
+                        //测试1   success
+                        /**
+                         *  mysql&amp;gt; select * from t_person;
+                         *  6 rows in set (0.35 sec)
+                         */
+                        /*
+                        Connection conn = JDBCUtils.createConnection() ;
+                        ResultSet rs = JDBCUtils.executeQuery(conn, &amp;quot;select * from t_person&amp;quot;, null);
+                        int i = 0;
+                        while(rs.next())
+                        {
+                                i++;
+                        }
+                        System.out.println(&amp;quot;总的返回了&amp;quot;+i+&amp;quot;条记录&amp;quot;);
+                        */
+                        //测试2   success
+                        /**
+                         *  mysql&amp;gt; select * from t_person;
+                         *  6 rows in set (0.35 sec)
+                         */
+                        /*
+                        ResultSet rs = JDBCUtils.executeQuery( &amp;quot;select * from t_person&amp;quot;, null);
+                        int i = 0;
+                        while(rs.next())
+                        {
+                                i++;
+                        }
+                        System.out.println(&amp;quot;总的返回了&amp;quot;+i+&amp;quot;条记录&amp;quot;);
+                        */
+                        
+                        //测试3    success
+                        /* mysql&amp;gt; select * from t_person where name=&#39;xinran&#39;
+                         * 3 rows in set (0.00 sec)
+                         */
+/*                        ResultSet rs = JDBCUtils.executeQuery(&amp;quot;select * from t_person where name = ?&amp;quot;, &amp;quot;xinran&amp;quot;);
+                        int i = 0;
+                        while(rs.next())
+                        {
+                                i++;
+                        }
+                        System.out.println(&amp;quot;总的返回了&amp;quot;+i+&amp;quot;条记录&amp;quot;);*/
+                        
+        //插入阶段的测试   类似查询分为三个阶段    无参 的两个   有参的一个
+                        /**
+                         * 测试成功！ //1
+                         */
+                        /*Connection conn = JDBCUtils.createConnection() ;
+                        int i = JDBCUtils.executeUpdate(conn, &amp;quot;insert into t_person(Id,Name,Age,Gender) values(8,&#39;lizi&#39;,82,1)&amp;quot;, null);
+
+                        //System.out.println(&amp;quot;总的返回了&amp;quot;+i+&amp;quot;条记录&amp;quot;);
+
+            */        
+                        /**
+                         * 测试成功！ //2 没想到只要两行语句 则进行了一次插入
+                         */
+                        /*String sql = &amp;quot;insert into t_person(Id,Name,Age,Gender) values(9,&#39;孙悟空&#39;,12,1)&amp;quot;; //年龄不能过大
+                        JDBCUtils.executeUpdate(sql, null);*/
+                        
+                        /**
+                         *  测试成功！  //3  连有参的形式也是成功了
+                         *  mysql&amp;gt; select * from t_person;
+                        +----+---------+-----+--------+
+                        | Id | Name    | Age | Gender |
+                        +----+---------+-----+--------+
+                        |  1 | yezhao  |  24 |      1 |
+                        |  3 | xinran  |  32 |      0 |
+                        |  4 | xinran  |  32 |      4 |
+                        |  5 | xinran  |  32 |      4 |
+                        |  6 | yezhao1 |  25 |      0 |
+                        |  7 | yezhao  |  25 |      1 |
+                        |  8 | lizi    |  82 |      1 |
+                        |  9 | 孙悟空  |  12 |      1 |
+                        | 10 | 蝴蝶    |   3 |      0 |
+                        +----+---------+-----+--------+
+                        9 rows in set (0.00 sec)
+                         */
+                        String sql = &amp;quot;insert into t_person(Id,Name,Age,Gender) values(?,?,?,?)&amp;quot;; //年龄不能过大
+                        JDBCUtils.executeUpdate(sql, 12,&amp;quot;孟江虎&amp;quot;,15,0);
+                        
+                } catch (SQLException e)
+                {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                }
+        }
+        
+        /**
+         * 创建数据库的连接
+         * @return   返回mysql的连接
+         */
+        public static  Connection createConnection() 
+        {
+                Connection c1  = null;
+                try
+                {
+                        
+                  c1 = DriverManager.getConnection(connectDatabase,userName,Password);
+                        System.out.println(&amp;quot;连接成功&amp;quot;);
+                } catch (SQLException e)
+                {
+                        // TODO Auto-generated catch block
+                        System.out.println(&amp;quot;数据库连接创建失败&amp;quot;+e.getMessage());
+                        return null;
+                }
+                return c1;
+        }
+        /**
+         * 
+         * @param sql        sql的update,delete,insert等修改数据库的语句
+         * @param parameter  参数化的update,delete,insert等的设置 
+         * @return           返回被影响的函数
+         * @throws SQLException   抛出SQLException由用户自己去特殊处理
+         */
+        public static int executeUpdate(String sql,Object... parameter) throws SQLException
+        {
+                Connection conn = null;
+                PreparedStatement ps = null;
+                int rows = 0;
+                try
+                {
+                        conn = JDBCUtils.createConnection();
+                        ps = conn.prepareStatement(sql);
+                        int i = 1;
+                        if(parameter != null)
+                        {
+                                for(Object pa1:parameter)
+                                {
+                                        ps.setObject(i, pa1);
+                                        i++;
+                                }
+                        }
+                        rows = ps.executeUpdate();
+                }finally
+                {
+                        JDBCUtils.closeQuietly(ps);
+                }
+                System.out.println(&amp;quot;有&amp;quot;+rows+&amp;quot;条记录被影响&amp;quot;);
+                return rows;
+        }
+        /**
+         * @param conn       数据库的连接
+         * @param sql        sql的update,delete,insert等修改数据库的语句
+         * @param parameter  参数化的update,delete,insert等的设置 
+         * @return           返回被影响的函数
+         * @throws SQLException   抛出SQLException由用户自己去特殊处理
+         */
+        public static int executeUpdate(Connection conn,String sql,Object... parameter) throws SQLException
+        {
+                PreparedStatement ps = null;
+                int rows = 0;
+                try
+                {
+                        ps = conn.prepareStatement(sql);
+                        int i = 1;
+                        if(parameter != null)
+                        {
+                                for(Object pa1:parameter)
+                                {
+                                        ps.setObject(i, pa1);
+                                        i++;
+                                }
+                        }
+                        rows = ps.executeUpdate();
+                }finally
+                {
+                        JDBCUtils.closeQuietly(ps);
+                }
+                
+                System.out.println(&amp;quot;有&amp;quot;+rows+&amp;quot;条记录被影响&amp;quot;);
+                return rows;
+        }
+        /**
+         * 
+         * @param sql        sql的select不修改数据库的语句
+         * @param parameter  参数化的查询，参数集的设置 
+         * @return           返回查询的数据集
+         * @throws SQLException   抛出SQLException由用户自己去特殊处理
+         */
+        public static ResultSet executeQuery(String sql,Object... parameter) throws SQLException
+        {
+                Connection conn = null;
+                PreparedStatement ps = null;
+                try
+                {
+                        conn = JDBCUtils.createConnection();
+                        ps = conn.prepareStatement(sql);
+                        int i =1;
+                        if(parameter != null)
+                        {
+                                for(Object pa1:parameter)
+                                {
+                                        ps.setObject(i, pa1);
+                                        i++;
+                                }
+                        }
+                        ResultSet rs = ps.executeQuery();
+                        //因为finally是肯定会被执行的片段  即使他放在return之后
+                        return rs;
+                }finally
+                {
+                        JDBCUtils.closeQuietly(ps);
+                }
+                
+                
+        }
+        /**
+         * @param conn       数据库连接
+         * @param sql        sql的select不修改数据库的语句
+         * @param parameter  参数化的查询，参数集的设置 
+         * @return           返回查询的数据集
+         * @throws SQLException   抛出SQLException由用户自己去特殊处理
+         */
+        public static ResultSet executeQuery(Connection conn,String sql,Object... parameter) throws SQLException
+        {
+                PreparedStatement ps = null;
+                try
+                {
+                        ps = conn.prepareStatement(sql);
+                        int i =1;
+                        if(parameter != null)
+                        {
+                                for(Object pa1:parameter)
+                                {
+                                        ps.setObject(i, pa1);
+                                        i++;
+                                }
+                        }
+                        ResultSet rs = ps.executeQuery();
+                        return rs;
+                }finally
+                {
+                        JDBCUtils.closeQuietly(ps);
+                }
+                
+        }
+        /**
+         *  关闭PreparedStatment连接
+         * @param ps   PreparedStatment对象
+         */
+        static void closeQuietly(PreparedStatement ps)
+        {
+                if(ps!= null)
+                {
+                        try
+                        {
+                                ps.close();
+                        }catch(SQLException e)
+                        {
+                        
+                        }
+                }
+        }
+        /**
+         *  关闭Connection连接
+         * @param connn   Connection对象
+         */
+        static void closeQuietly(Connection conn)
+        {
+                if(conn!= null)
+                {
+                        try
+                        {
+                                conn.close();
+                        }catch(SQLException e)
+                        {
+                        
+                        }
+                }
+        }
+        /**
+         *  关闭ResultSet连接
+         * @param rs   ResultSet对象
+         */
+        static void closeQuietly(ResultSet rs)
+        {
+                if(rs!= null)
+                {
+                        try
+                        {
+                                rs.close();
+                        }catch(SQLException e)
+                        {
+                        
+                        }
+                }
+        }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;原来自己又没有理解清楚，我们实际用的较多executeUpdate和executeQuery的无conn
+的形式，而带conn只是一个中间过程！ 并且无conn的会调用有conn的形式！同时这也是一个比较好的习惯！只要改一个地方就都改了！&lt;/p&gt;
+
+&lt;p&gt;而且并且改掉代码的重复片段，一举多得，并且思路更清晰！
+学习，札记。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;/**
+         * 
+         * @param sql        sql的update,delete,insert等修改数据库的语句
+         * @param parameter  参数化的update,delete,insert等的设置 
+         * @return           返回被影响的函数
+         * @throws SQLException   抛出SQLException由用户自己去特殊处理
+         */
+        public static int executeUpdate(String sql,Object... parameter) throws SQLException
+        {
+                Connection conn = null;
+                try
+                {
+                        conn = JDBCUtils.createConnection();
+                        return executeUpdate(conn, sql, parameter);
+                }finally
+                {
+                        JDBCUtils.closeQuietly(conn);
+                }
+        }
+
+        /**
+         * 
+         * @param sql        sql的select不修改数据库的语句
+         * @param parameter  参数化的查询，参数集的设置 
+         * @return           返回查询的数据集
+         * @throws SQLException   抛出SQLException由用户自己去特殊处理
+         */
+        public static ResultSet executeQuery(String sql,Object... parameter) throws SQLException
+        {
+                Connection conn = null;
+                try
+                {
+                        conn = JDBCUtils.createConnection();
+                        return executeQuery(conn,sql, parameter);
+                }finally
+                {
+                        JDBCUtils.closeQuietly(conn);
+                }
+                
+        }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;漂亮，优雅！！！美丽&lt;/p&gt;
+
+&lt;p&gt;3测试了一个多次插入的案例：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;/**
+                 *  测试结果： 单个连接 插入100条数据耗时3767 
+                 */
+/*                        long startTime = System.currentTimeMillis();
+                        String sql = &amp;quot;insert into t_person(Id,Name,Age,Gender) values(?,?,?,?)&amp;quot;;
+                        Connection conn = null;
+                        try
+                        {
+                                conn = JDBCUtils.createConnection();
+                                //原先有数据！并且主键不能重复 所以只好从18开始
+                                for(int i = 15; i &amp;lt; 115; i++)
+                                {
+                                        JDBCUtils.executeUpdate(conn,sql, i,&amp;quot;SpringDay&amp;quot;,17,1);
+                                }
+                                System.out.println(&amp;quot;单个连接 插入100条数据耗时&amp;quot;+(System.currentTimeMillis()
+                                                -startTime));
+
+                        }catch(SQLException e)
+                        {
+                                System.out.println(&amp;quot;数据库连接异常&amp;quot;);
+                        }finally
+                        {
+                                JDBCUtils.closeQuietly(conn);
+                        }*/
+                /**
+                 * 一个连接 插入一条数据 100条后耗时7850  
+                 *   可见这种方式还是相对较慢的！！！！
+                 *   总结   在多次插入数据库中！最好是一次连接，不要关闭，插入完在关闭
+                 */
+                long startTime = System.currentTimeMillis();
+                String sql = &amp;quot;insert into t_person(Id,Name,Age,Gender) values(?,?,?,?)&amp;quot;;
+                try
+                {
+                        for(int i = 116; i &amp;lt; 216; i++)
+                        {
+                                JDBCUtils.executeUpdate(sql, i,&amp;quot;SpringDay&amp;quot;,17,1);
+                        }
+                        System.out.println(&amp;quot;一个连接 插入一条数据 100条后耗时&amp;quot;+(System.currentTimeMillis()
+                                        -startTime));
+                }catch(SQLException e)
+                {
+                        System.out.println(&amp;quot;连接失败！主键有问题&amp;quot;+e.getMessage());
+                }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;总结 在多次插入数据库中！最好是一次连接，不要关闭，插入完在关闭&lt;/p&gt;
+
+&lt;p&gt;再次改进！不需要把executeQuery的connection关闭&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;*                由于PreparedStatement 来自Statement
+*                rs.getStatement() 表示返回一个statement，而不会关闭PreparedStatement
+*                常见了一个closeAll(),这也是为什么 暂时不关闭查询连接的原因，同时不关闭
+*                方便进行多次查询，反复查询
+
+/**
+         * 从resultSet中关闭所有的连接
+         * @param rs
+         */
+        static void closeAll(ResultSet rs)
+        {
+                if(rs == null)
+                {
+                        return;
+                }
+                try
+                {
+                        JDBCUtils.closeQuietly(rs.getStatement().getConnection());
+                        JDBCUtils.closeQuietly(rs.getStatement());
+                        JDBCUtils.closeAll(rs);
+                }catch(SQLException e)
+                {
+                        
+                }
+        }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;并且必须修正 executeQuery的函数，把原先的JDBCUtils.closeQuietly(ps)关掉！ 否则报错！出现异常，然后就可以很happy的使用JDBCUtils了&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;  ResultSet rs = null;
+                String sql = &amp;quot;select * from t_person&amp;quot;;
+                try
+                {
+                        rs = executeQuery(sql);
+                        while(rs.next())
+                        {
+                                String Name= rs.getString(&amp;quot;Name&amp;quot;);
+                                System.out.println(Name);
+                        }
+                }catch(SQLException e)
+                {
+                        System.out.println(&amp;quot;居然报错&amp;quot;);
+                }finally
+                {
+                        JDBCUtils.closeAll(rs);
+                }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;4午饭前版本的JDBCUtils：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;/**
+* 
+*/
+package com.jdbc.test;
+
+import java.util.Properties;
+import java.io.*;
+import java.sql.*;
+/**
+* @author    叶昭良
+* @time      2015年2月17日下午11:31:53
+* @version   com.jdbc.testJDBCUtils V1.0
+*                         V2.0  改变配置文件变为为final，并把sql.properties文件提到
+*                                 com.jdbc目录下 com/jdbc/test/sql.properties
+*                                 测试通过
+*          V3.0 改变为静态代码段 加载驱动！ 并把加载配置文件
+*               也放在静态代码段中！仅仅加载一次即可！而不需要
+*               一直加载
+*          V4.0 修正了没有close的问题！！防止一直连着。 明白了吃异常的过程
+*                在类库中不知道怎么处理！直接抛出异常即可！让调用者自己去处理！
+*                咱们提供方法，不提供异常的处理！打印异常不叫做处理！而叫做“吃异常”
+*          V5.0  不吃异常的方式就是 throw new RuntimeException ，静态代码段
+*                  无法throw checkedException检查异常
+*                没想到经过这样的过程封装比我原先的好看多了！而且逻辑更加清晰
+*          V6.0 有没有理解清楚，我们实际用的较多executeUpdate和executeQuery的无conn
+*               的形式，而带conn只是一个中间过程！ 并且无conn的会调用有conn的形式！
+*              再次修改！ 注意观看executeUpdate的实现
+*          V7.0  再次改进！不需要把executeQuery的connection关闭
+*                由于PreparedStatement 来自Statement
+*                rs.getStatement() 表示返回一个statement，而不会关闭PreparedStatement
+*                常见了一个closeAll(),这也是为什么 暂时不关闭查询连接的原因，同时不关闭
+*                方便进行多次查询，反复查询
+*                
+*           V8.0  cachedRowSet 是一个缓冲的mysql字符集，连接中断！把所有数据缓冲到客户端！
+*                 不需要再次连接，所以关闭Connection也是可以
+*                 但是这个栈内存  暂时不使用 
+*                
+*/
+public class JDBCUtils
+{
+
+        /**
+         * @param args
+         */
+        private static final String mysqlDriver;
+        private static final String connectDatabase;
+        private static final String userName;
+        private static final String Password;
+        static
+        {
+                InputStream is = null; 
+                //InputStream is = JDBCUtils.class.getClassLoader().getResourceAsStream(&amp;quot;sql.properties&amp;quot;);
+                Properties ps  = new Properties();
+                Connection c1 = null;
+                try
+                {
+                        //is = JDBCUtils.class.getClassLoader().getResourceAsStream(&amp;quot;&amp;quot;
+                        //                + &amp;quot;com/jdbc/test/sql.properties&amp;quot;);
+                        is = JDBCUtils.class.getResourceAsStream(&amp;quot;sql.properties&amp;quot;);
+                        //这种情况省略宝和getClassLoader()
+                        ps.load(is);
+                        mysqlDriver = ps.getProperty(&amp;quot;mysqlDriver&amp;quot;);
+//                        System.out.println(mysqlDriver);
+                        connectDatabase = ps.getProperty(&amp;quot;connectDatabase&amp;quot;);
+        //                        System.out.println(connectDatabase);
+                        userName = ps.getProperty(&amp;quot;userName&amp;quot;);
+        //                        System.out.println(userName);
+                        Password = ps.getProperty(&amp;quot;Password&amp;quot;);
+        //                        System.out.println(Password);
+                        //仅仅在静态代码段中加载一次驱动即可（在运行中）
+                        
+                } catch (IOException e)
+                {
+                        // TODO Auto-generated catch block
+                        //System.out.println(&amp;quot;配置文件加载失败&amp;quot;+e.getMessage());
+                        throw new RuntimeException(&amp;quot;配置文件sql.properties加载失败&amp;quot;+e.getMessage());
+                        //return null;
+                }
+                try
+                {
+                        Class.forName(mysqlDriver); //仅仅在程序运行中加载一次驱动即可！！！
+                } catch (ClassNotFoundException e)
+                {
+                        // TODO Auto-generated catch block
+//                        System.out.println(&amp;quot;驱动加载失败&amp;quot;+e.getMessage());
+                        throw new RuntimeException(&amp;quot;驱动加载失败&amp;quot;+e.getMessage());
+                }
+
+        }
+        
+        public static void main(String[] args)
+        {
+                
+                ResultSet rs = null;
+                String sql = &amp;quot;select * from t_person&amp;quot;;
+                try
+                {
+                        rs = executeQuery(sql);
+                        while(rs.next())
+                        {
+                                String Name= rs.getString(&amp;quot;Name&amp;quot;);
+                                System.out.println(Name);
+                        }
+                }catch(SQLException e)
+                {
+                        System.out.println(&amp;quot;居然报错&amp;quot;);
+                }finally
+                {
+                        JDBCUtils.closeAll(rs);
+                }
+        
+/*                try
+                {
+                        ResultSet rs = JDBCUtils.executeQuery( &amp;quot;select * from t_person&amp;quot;, null);
+                        int i = 0;
+                        while(rs.next())
+                        {
+                                i++;
+                        }
+                        System.out.println(&amp;quot;总的返回了&amp;quot;+i+&amp;quot;条记录&amp;quot;);
+                }catch(SQLException e)
+                {
+                        System.out.println(&amp;quot;juran&amp;quot;);
+                }
+                */
+                        
+        }
+        
+        /**
+         * 创建数据库的连接
+         * @return   返回mysql的连接
+         */
+        public static  Connection createConnection() 
+        {
+                Connection c1  = null;
+                try
+                {
+                        
+                  c1 = DriverManager.getConnection(connectDatabase,userName,Password);
+                        System.out.println(&amp;quot;连接成功&amp;quot;);
+                } catch (SQLException e)
+                {
+                        // TODO Auto-generated catch block
+                        System.out.println(&amp;quot;数据库连接创建失败&amp;quot;+e.getMessage());
+                        return null;
+                }
+                return c1;
+        }
+        /**
+         * 
+         * @param sql        sql的update,delete,insert等修改数据库的语句
+         * @param parameter  参数化的update,delete,insert等的设置 
+         * @return           返回被影响的函数
+         * @throws SQLException   抛出SQLException由用户自己去特殊处理
+         */
+        public static int executeUpdate(String sql,Object... parameter) throws SQLException
+        {
+                Connection conn = null;
+                try
+                {
+                        conn = JDBCUtils.createConnection();
+                        return executeUpdate(conn, sql, parameter);
+                }finally
+                {
+                        JDBCUtils.closeQuietly(conn);
+                }
+        }
+        /**
+         * @param conn       数据库的连接
+         * @param sql        sql的update,delete,insert等修改数据库的语句
+         * @param parameter  参数化的update,delete,insert等的设置 
+         * @return           返回被影响的函数
+         * @throws SQLException   抛出SQLException由用户自己去特殊处理
+         */
+        public static int executeUpdate(Connection conn,String sql,Object... parameter) throws SQLException
+        {
+                PreparedStatement ps = null;
+                int rows = 0;
+                try
+                {
+                        ps = conn.prepareStatement(sql);
+                        int i = 1;
+                        if(parameter != null)
+                        {
+                                for(Object pa1:parameter)
+                                {
+                                        ps.setObject(i, pa1);
+                                        i++;
+                                }
+                        }
+                        rows = ps.executeUpdate();
+                }finally
+                {
+                        JDBCUtils.closeQuietly(ps);
+                }
+                
+                System.out.println(&amp;quot;有&amp;quot;+rows+&amp;quot;条记录被影响&amp;quot;);
+                return rows;
+        }
+        /**
+         * 
+         * @param sql        sql的select不修改数据库的语句
+         * @param parameter  参数化的查询，参数集的设置 
+         * @return           返回查询的数据集
+         * @throws SQLException   抛出SQLException由用户自己去特殊处理
+         */
+        public static ResultSet executeQuery(String sql,Object... parameter) throws SQLException
+        {
+                Connection conn = null;
+                
+                conn = JDBCUtils.createConnection();
+                return executeQuery(conn,sql, parameter);
+                /*finally
+                {
+                        JDBCUtils.closeQuietly(conn);
+                }*/
+                
+        }
+        /**
+         * @param conn       数据库连接
+         * @param sql        sql的select不修改数据库的语句
+         * @param parameter  参数化的查询，参数集的设置 
+         * @return           返回查询的数据集
+         * @throws SQLException   抛出SQLException由用户自己去特殊处理
+         */
+        public static ResultSet executeQuery(Connection conn,String sql,Object... parameter) throws SQLException
+        {
+                PreparedStatement ps = null;
+                ps = conn.prepareStatement(sql);
+                int i =1;
+                if(parameter != null)
+                {
+                        for(Object pa1:parameter)
+                        {
+                                ps.setObject(i, pa1);
+                                i++;
+                        }
+                }
+                ResultSet rs = ps.executeQuery();
+                return rs;        
+        }
+        /**
+         * 从resultSet中关闭所有的连接
+         * @param rs
+         */
+        static void closeAll(ResultSet rs)
+        {
+                if(rs == null)
+                {
+                        return;
+                }
+                try
+                {
+                        JDBCUtils.closeQuietly(rs.getStatement().getConnection());
+                        JDBCUtils.closeQuietly(rs.getStatement());
+                        JDBCUtils.closeAll(rs);
+                }catch(SQLException e)
+                {
+                        
+                }
+        }
+        /**
+         *  关闭PreparedStatment连接
+         * @param ps   PreparedStatment对象
+         */
+        //static void closeQuietly(PreparedStatement ps)
+        static void closeQuietly(Statement ps)
+        {
+                if(ps!= null)
+                {
+                        try
+                        {
+                                ps.close();
+                        }catch(SQLException e)
+                        {
+                        
+                        }
+                }
+        }
+        /**
+         *  关闭Connection连接
+         * @param connn   Connection对象
+         */
+        static void closeQuietly(Connection conn)
+        {
+                if(conn!= null)
+                {
+                        try
+                        {
+                                conn.close();
+                        }catch(SQLException e)
+                        {
+                        
+                        }
+                }
+        }
+        /**
+         *  关闭ResultSet连接
+         * @param rs   ResultSet对象
+         */
+        static void closeQuietly(ResultSet rs)
+        {
+                if(rs!= null)
+                {
+                        try
+                        {
+                                rs.close();
+                        }catch(SQLException e)
+                        {
+                        
+                        }
+                }
+        }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;思路总结：
+1：利用配置表，载入mysql和数据库信息
+2：利用静态代码段载入驱动（只需要一次）
+3： 编写 带connection的executeUpdate和executeQuery,并且在executeResult不要关闭任何信息，待统一关闭
+4： 编写 不带Connection的executeUpdate和executeQuery,内部调用带Connction版本的而寒暑
+5： 编写closeQuietly函数  和closeAll函数，在调用executeQuery,并关闭closeAll即可&lt;/p&gt;
+
+&lt;p&gt;练习使用ctrl+O 打开方法。。（大年30 刚喝完半碗酒  继续。。。）&lt;/p&gt;
+
+&lt;p&gt;5事务的练习1：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;/**
+* 
+*/
+package com.jdbc.test;
+
+/**
+* @author    叶昭良
+* @time      2015年2月18日下午1:43:28
+* @version   com.jdbc.testtransaction1 V1.0
+*/
+import java.sql.*;
+public class transaction1
+{
+
+        /**
+         * @param args
+         */
+        public static void main(String[] args)
+        {
+                // TODO Auto-generated method stub
+                Connection conn = null;
+                PreparedStatement ps1 = null;
+                PreparedStatement ps2 = null;
+                try
+                {
+                    conn = JDBCUtils.createConnection();
+                    conn.setAutoCommit(false);
+                    ps1 = conn.prepareStatement(&amp;quot;Update t_person Set Age=Age+1 where Name=&#39;yezhao&#39;&amp;quot;);
+                    ps1.executeUpdate();
+                    ps2 = conn.prepareStatement(&amp;quot;Update t_person Set Age=Age-1 where Name=&#39;xinran&#39;&amp;quot;);
+                    ps2.executeUpdate();
+                    conn.commit();
+                } catch (SQLException e)
+                {
+                    try
+                        {
+                                conn.rollback();
+                        } catch (SQLException e1)
+                        {
+                                // TODO Auto-generated catch block
+                                e1.printStackTrace();
+                        }
+                }
+        }
+
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;测试navicat 和cmd都更新了。&lt;/p&gt;
+
+&lt;p&gt;6batch+事务的总和练习：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;/**
+* 
+*/
+package com.jdbc.test;
+
+/**
+* @author    叶昭良
+* @time      2015年2月18日下午2:31:56
+* @version   com.jdbc.testtestBatchInsertAndUpdate V1.0
+*/
+import java.sql.*;
+public class testBatchInsertAndUpdate
+{
+
+        /**
+         * @param args
+         */
+        public static void main(String[] args)
+        {
+                // TODO Auto-generated method stub
+                //在没有批量导入数据之前，一般是需要花费很长的时间，现在采用addbatch进行
+                Connection conn = null;
+                PreparedStatement ps = null;
+                String sql=&amp;quot;insert into t_person(Id,Name,Age,Gender)values(?,?,?,?)&amp;quot;;
+                //测试了删除操作，success!
+                //String sql= &amp;quot;delete from t_person where Name=?&amp;quot;;
+                long startTime = System.currentTimeMillis();
+                /**
+                 * 不添加批处理后，添加1000条后耗时845
+                 *  不添加批处理  添加11000条后   耗时2604  ,所以我不知道批处理的好处啊！！！
+                 *                           反正即使2530s左右
+                 * 
+                   添加批处理后                添加1000条后耗时799
+                                                 添加11000条后耗时3206
+                                                 添加11000条后耗时3143(每个1000提交一次）
+
+
+                 */
+                try
+                {
+                        //之前表中已有 215行
+                        conn = JDBCUtils.createConnection();
+                        conn.setAutoCommit(false);//相当于begin的作用
+                        ps = conn.prepareStatement(sql);
+                        for(int i = 316;i &amp;lt; 11316;i++)
+                        {
+                                //JDBCUtils.executeUpdate(conn, sql, i,&amp;quot;Autumn&amp;quot;,20,1);
+                                //ps.clearParameters();
+                                ps.setInt(1, i);
+                                ps.setString(2,&amp;quot;Winter&amp;quot;);
+                                ps.setInt(3, 21);
+                                ps.setBoolean(4, true);
+                                //ps.executeUpdate();
+                                
+                                
+                                /**
+                                 * if(i%1000 == 0) //每个1000次提交一次！！！这样好！
+                                 * {
+                                 *    ps.executeBatch();
+                                 *  }
+                                 *  少于1000次的最后一笔  再用一次ps.executeBatch();
+                                 */
+                                ps.addBatch(); //据说是装到箱子的作用
+                                if(i%1000 == 0)
+                                {
+                                        ps.executeBatch();
+                                }
+                        }
+                                //JDBCUtils.executeUpdate(conn, sql, i,&amp;quot;Autumn&amp;quot;,20,1);
+                                //测试删除使用的
+                                //JDBCUtils.executeUpdate(conn, sql, &amp;quot;Autumn&amp;quot;);
+                        //}
+                        ps.executeBatch(); //把箱子里面的数据 直接一次性提交mysql
+                        conn.commit();
+                        System.out.println(&amp;quot;添加1000条后耗时&amp;quot;+(System.currentTimeMillis()
+                                        -startTime));
+                }catch(SQLException e)
+                {
+                        try
+                        {
+                                conn.rollback();
+                        } catch (SQLException e1)
+                        {
+                                // TODO Auto-generated catch block
+                                e1.printStackTrace();
+                        }
+                }finally
+                {
+                        JDBCUtils.closeQuietly(conn);
+                }
+                
+        }
+
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;7导入手机账簿，并进行手机号所在地的查询&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;/**
+* 
+*/
+package com.jdbc.test;
+
+/**
+* @author    叶昭良
+* @time      2015年2月18日下午3:49:22
+* @version   com.jdbc.testphoneCheck V1.0
+*/
+import java.io.*;
+import java.sql.*;
+import java.util.Scanner;
+
+
+public class phoneCheck
+{
+
+        /**
+         * @param args
+         */
+/**
+* ID,MobileNumber,MobileArea,MobileType,AreaCode,PostCode,0
+        连接成功
+        总共添加了300105条数据.耗时：64712
+*/
+        private static void load()
+        {
+                //导入csv数据，利用BufferedInputStream
+          InputStream is = null;
+          InputStreamReader isr = null;
+          BufferedReader bis = null; //一行一行读入数据
+          
+          Connection conn = null;
+          PreparedStatement ps = null;
+                int len = 0;
+                int i = 0;
+                long startms = System.currentTimeMillis();
+                try
+                {
+                        is = new FileInputStream(&amp;quot;e://phone.csv&amp;quot;);
+                    isr = new InputStreamReader(is);
+                        bis = new BufferedReader(isr);
+                        
+                        System.out.println(bis.readLine());
+                        //第一行字段舍去
+                        String apple=  null;
+                        String[] applePiles = null;
+                        //第一次测试  字符串的行读入
+/*                        System.out.println(bis.readLine());
+                        System.out.println(bis.readLine());*/
+                        /*apple =bis.readLine();
+                        //字符串的一次失误！！ 导致插入失败！！＂＂是默认存在的　必须删掉
+                        apple = apple.replaceAll(&amp;quot;\&amp;quot;&amp;quot;, &amp;quot;&amp;quot;);
+                        //第二次测试 字符串分隔
+                        String[] splitArray = apple.split(&amp;quot;,&amp;quot;);
+                        for(String apple1 :splitArray)
+                        {
+                                System.out.println(apple1);
+                        }*/
+                        conn = JDBCUtils.createConnection();
+                        conn.setAutoCommit(false);
+                        
+                        String sql = &amp;quot;insert into phone(MobileNumber,MobileArea,MobileType,Area&amp;quot;
+                                        + &amp;quot;Code,PostCode) values(?,?,?,?,?);&amp;quot;;
+                        ps = conn.prepareStatement(sql);
+                        /**
+                         * 370中国电信
+                                371中国电信
+                                之后 报错 ，可能是为空的原因 
+                         */
+                        while((apple=bis.readLine()) != null)
+                        {
+                                apple = apple.replaceAll(&amp;quot;\&amp;quot;&amp;quot;, &amp;quot;&amp;quot;);
+                                applePiles = apple.split(&amp;quot;,&amp;quot;);
+                                
+                                ps.clearParameters();
+                                //ps.setInt(1, Integer.parseInt(applePiles[1].equalsIgnoreCase(&amp;quot;&amp;quot;)?&amp;quot;1111&amp;quot;:applePiles[4]));
+                                //ps.setInt(1, Integer.parseInt(applePiles[1]));
+                                ps.setString(1, applePiles[1]);
+                                ps.setString(2, applePiles[2]);
+                                //System.out.println(i+applePiles[3]+applePiles[4]);
+                                ps.setString(3, applePiles[3]);
+//                                ps.setInt(4, Integer.parseInt(applePiles[4]));//.equalsIgnoreCase(&amp;quot;&amp;quot;)?&amp;quot;1111&amp;quot;:applePiles[4]));
+//                                ps.setInt(5, Integer.parseInt(applePiles[5]));//.equalsIgnoreCase(&amp;quot;&amp;quot;)?&amp;quot;1111&amp;quot;:applePiles[4]));
+                                ps.setString(4, applePiles[4]);
+                                ps.setString(5, applePiles[5]);
+                                ps.addBatch();
+
+                                i++;
+                                if(i%2000==0)
+                                {
+                                        ps.executeBatch();
+                                }
+                        }
+                        ps.executeBatch();
+                        conn.commit();
+                        long endMs = System.currentTimeMillis();
+                        System.out.println(&amp;quot;总共添加了&amp;quot;+i+&amp;quot;条数据&amp;quot;+&amp;quot;.耗时：&amp;quot;+(endMs-startms));
+                }catch(IOException e)
+                {
+                        throw new RuntimeException(&amp;quot;读取文件异常&amp;quot;);
+                }catch(SQLException e)
+                {
+                        try
+                        {
+                                conn.rollback();
+                        } catch (SQLException e1)
+                        {
+                                // TODO Auto-generated catch block
+                                e1.printStackTrace();
+                        } //又忘记了
+                        throw new RuntimeException(&amp;quot;数据库插入异常！&amp;quot;);
+                        
+                }
+        }
+        
+        public static void checkPhoneNumber(String PhoneNumber)
+        {
+
+                
+                PhoneNumber = &amp;quot;%&amp;quot;+PhoneNumber+&amp;quot;%&amp;quot;;
+                String sql = &amp;quot;select * from phone where MobileNumber like ?&amp;quot;;
+                ResultSet rs  = null;
+                try
+                {
+                        rs = JDBCUtils.executeQuery(sql, PhoneNumber);
+                        if(!rs.next())
+                        {
+                                System.out.println(&amp;quot;当前版本没有&amp;quot;+PhoneNumber+&amp;quot;的信息&amp;quot;);
+//                                return;
+                        }
+                        //rs.next();
+                        System.out.println(PhoneNumber+&amp;quot;手机号来自&amp;quot;+rs.getString(&amp;quot;MobileArea&amp;quot;)+rs.getString(&amp;quot;MobileType&amp;quot;));
+                } catch (SQLException e)
+                {
+                        // TODO Auto-generated catch block
+                        return;
+                }finally
+                {
+                        JDBCUtils.closeAll(rs);
+                }
+                
+        }
+        public static void main(String[] args)
+        {
+                // TODO Auto-generated method stub
+                //导入一次即可
+                //load();
+                while(true)
+                {
+                        System.out.println(&amp;quot;请输入手机号(至少7位)&amp;quot;);
+                        Scanner sc = new Scanner(System.in);
+                        String PhoneNumber = sc.nextLine();
+                        
+                        if(PhoneNumber.equalsIgnoreCase(&amp;quot;exit&amp;quot;)||PhoneNumber.equalsIgnoreCase(&amp;quot;quit&amp;quot;))
+                        {
+                                return;
+                        }
+                        PhoneNumber = PhoneNumber.substring(0,7);
+                        checkPhoneNumber(PhoneNumber);
+                }
+                
+        }
+
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;JDBCUtils 第一遍重写：&lt;/p&gt;
+
+&lt;p&gt;//再次书写的时候  注意 对于吃掉的异常的处理
+                        //第二  在静态代码段中  加载mysql驱动
+                        //静态代码块的两个作用：加载配置控件，加载驱动&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;                    //try....finally  可以在throw SQLException的情况下使用，最后关闭需要的连接
+                    //进一步体会两个executeUpdate的区别（executeQuery也是一样）
+                    //一个抛出异常 一个则负责接住 并继续关闭的相应的连接
+                    //try....finally 和try...catch....finally的配合使用
+
+                    //在查询时候的编写 则是都抛出！ 不负责关闭！！ 等到查询的时候！ 统一的去关闭
+                    //因为可能存在多处查询
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;复制代码
+JDBCUtils 第二遍重写：
+* @time      2015年2月19日下午9:52:52
+*                          10:20完成            28min左右&lt;/p&gt;
+
+&lt;p&gt;//第三次重写 意识到了  静态代码快不能加载 检查性的异常! 在try&amp;mdash;catch的时候
+        //一定得throw new RuntimeException 才不至于报错&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    //居然忘记了先重写 Connection的创建！直接close,!有点错乱的感觉！
+    //应该是按照逻辑的顺序进行编写，先是创建连接！ 最后在关闭
+    //只不过当时是这样想的！ 其实这些关闭会一直反复的用到，
+    //就想着先把他们给写上！也是符合逻辑！因为逻辑里面他们是反复被
+    //调用的小插件
+
+    //同时在创建connection再疑问是否抛出异常？ 最终抛出了？
+    //为什么？  因为这个异常是自己可以处理的
+    //连连接都拿不到 ！那就直接返回吧！肯定程序是有问题的
+
+    //至于executeUpate executeQuery的异常都交由 调用者去处理他的异常
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;复制代码
+JDBCUtils 第三遍重写：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;@time      2015年2月19日下午10:21:46&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;10:40  结束      19min&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;书写第四遍的时候  遇到一个问题 在executeUpdate的时候  是不是改在
+
+&lt;ul&gt;
+&lt;li&gt;try&amp;hellip;finally   的try块就应该返回了 而不是finally的后面&lt;/li&gt;
+&lt;li&gt;如果在后面 肯定是错误的！！！因为资源已经关闭
+复制代码
+JDBCUtils 第四遍重写：&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;@time      2015年2月19日下午10:41:37&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;10:55     14min&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
