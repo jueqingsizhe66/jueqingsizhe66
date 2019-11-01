@@ -334,11 +334,13 @@ plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;show()
 
 &lt;h2 id=&#34;背景介绍&#34;&gt;背景介绍&lt;/h2&gt;
 
-&lt;p&gt;在前面&lt;a href=&#34;https://jueqingsizhe66.github.io/post/perl拆分大文件到excel表/&#34; target=&#34;_blank&#34;&gt;perl拆分大文件&lt;/a&gt;一文中我们得到各个机位点在不同扇区下的物理量信息，并存放在一个excel表里头&lt;/p&gt;
+&lt;p&gt;我们依然来处理windsim导出的风廓线信息(Tools-&amp;gt;Export vertical profile)在前面&lt;a href=&#34;https://jueqingsizhe66.github.io/post/perl拆分大文件到excel表/&#34; target=&#34;_blank&#34;&gt;perl拆分大文件&lt;/a&gt;一文中我们得到各个机位点在不同扇区下的物理量信息，并存放在一个excel表里头&lt;/p&gt;
 
 &lt;p&gt;而其实我们更关心的是轮毂高度处的风速风向信息，即形成下面的轮毂高度处不同扇区和机位点的风速风向&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/windsim/windspeedAngle.png&#34; alt=&#34;windSpeedAngle&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;每个风场均需要修改对应风机信息!&lt;/p&gt;
 
 &lt;h2 id=&#34;技术分解&#34;&gt;技术分解&lt;/h2&gt;
 
@@ -368,8 +370,12 @@ plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;show()
      &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T20_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T20_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T19_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T19_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T18_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T18_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;HL387_24035001_Velocity&amp;#34;&lt;/span&gt;,
      &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;HL387_24035001_Angle&amp;#34;&lt;/span&gt;]
     &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
 
-&lt;li&gt;&lt;p&gt;使用pandas创建数组、存储文件&lt;/p&gt;&lt;/li&gt;
+&lt;p&gt;如果换了个风电场该信息得重新编排，按照实际风电场需求&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;使用pandas创建数组、存储文件&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;根据扇区和机位信息建立pandas空数组&lt;/p&gt;
@@ -393,6 +399,7 @@ results&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[turbineAId,s
 &lt;span style=&#34;color:#75715e&#34;&gt;#headDir=r&amp;#34;C:\Users\yezhaoliang\Desktop\work\AIWind\processWindSim\HuaiLaiTurbine&amp;#34;&lt;/span&gt;
 headDir&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C:\Users\yezhaoliang\Desktop\work\AIWind\processWindSim\HuaiLaiTurbineZhuFengxiang&amp;#34;&lt;/span&gt;
 
+&lt;span style=&#34;color:#75715e&#34;&gt;## 遍历所有csv文件&lt;/span&gt;
 &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;get_files&lt;/span&gt;(path&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;headDir, rule&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;.csv&amp;#34;&lt;/span&gt;):
     all &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
     &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; fpathe,dirs,fs &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;walk(path):   &lt;span style=&#34;color:#75715e&#34;&gt;# os.walk是获取所有的目录&lt;/span&gt;
@@ -403,7 +410,9 @@ headDir&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#
     &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; all
 
 &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; __name__ &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;__main__&amp;#34;&lt;/span&gt;:
+&lt;span style=&#34;color:#75715e&#34;&gt;## 定义计算的扇区表&lt;/span&gt;
     columnMe&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;0&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;22&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;45&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;67&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;90&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;112&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;135&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;157&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;180&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;202&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;225&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;247&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;270&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;292&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;315&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;337&amp;#39;&lt;/span&gt;];
+&lt;span style=&#34;color:#75715e&#34;&gt;## 定义风向风速表的行信息&lt;/span&gt;
     indexMe&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T12_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T12_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T11_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T11_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T10_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T10_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T1_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T1_Angle&amp;#34;&lt;/span&gt;,
      &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T3_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T3_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T2_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T2_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T4_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T4_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T5_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T5_Angle&amp;#34;&lt;/span&gt;,
      &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T9_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T9_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T8_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T8_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T7_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T7_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T6_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T6_Angle&amp;#34;&lt;/span&gt;,
@@ -411,6 +420,7 @@ headDir&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#
      &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T17_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T17_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T23_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T23_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T22_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T22_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T21_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T21_Angle&amp;#34;&lt;/span&gt;,
      &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T20_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T20_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T19_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T19_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T18_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T18_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;HL387_24035001_Velocity&amp;#34;&lt;/span&gt;,
      &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;HL387_24035001_Angle&amp;#34;&lt;/span&gt;]
+&lt;span style=&#34;color:#75715e&#34;&gt;## 创建一个空的DataFrame空结构,结构index由indexMe组成，结构的columns信息由columnMe组成&lt;/span&gt;
     results&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;DataFrame([],index&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;indexMe,columns&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;columnMe)
     b &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; get_files()
     altitudesName&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[]
@@ -418,19 +428,23 @@ headDir&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#
         them&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;i&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\\&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
         currentFilename&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;them[them&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;__len__()&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
         turbinesAndSectors&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;re&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split(&lt;span style=&#34;color:#e6db74&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;[.|-]&amp;#39;&lt;/span&gt;,currentFilename)
+&lt;span style=&#34;color:#75715e&#34;&gt;## 文件名第一项为风机信息&lt;/span&gt;
         currentTurbine&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;turbinesAndSectors[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]
+&lt;span style=&#34;color:#75715e&#34;&gt;## 文件名倒数第二项为扇区信息---拆分的时候识别sector信息&lt;/span&gt;
         currentSector&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;turbinesAndSectors[turbinesAndSectors&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;__len__()&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;]
         &lt;span style=&#34;color:#75715e&#34;&gt;# sheetName=them[them.__len__()-3]+them[them.__len__()-2]+them[them.__len__()-1]&lt;/span&gt;
-        &lt;span style=&#34;color:#75715e&#34;&gt;#altitudesName.append(sheetName)&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;## 得到SectorID index用于存储数据&lt;/span&gt;
         sectorId&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;columnMe&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;index(currentSector);
         turbineVId&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;indexMe&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;index(currentTurbine&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;_Velocity&amp;#34;&lt;/span&gt;)
         turbineAId&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;indexMe&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;index(currentTurbine&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;_Angle&amp;#34;&lt;/span&gt;)
         sd&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read_csv(i,skiprows&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;)
         &lt;span style=&#34;color:#75715e&#34;&gt;## 去除Null行（注意空格，数字也一样处理)&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;## 确认了第九行信息为所需要的信息 ，也可以做个线性化操作&lt;/span&gt;
         UCRT&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;sd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[&lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;]
         VCRT&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;sd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[&lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;]
         speed2d&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;sd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[&lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;]
         actualAngle&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;ma&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;atan2(UCRT,VCRT)&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;180&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3.1415926&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;180&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;## 赋值&lt;/span&gt;
         results&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[turbineVId,sectorId]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;speed2d
         results&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[turbineAId,sectorId]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;actualAngle
 
@@ -452,6 +466,8 @@ headDir&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#
 &lt;p&gt;在CFDpost处理怀来风电场数据的廓线时候遇到如下问题，速度廓线存在Null值，如下图所示&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://jueqingsizhe66.github.io/images/aiwind/AIWINDVelocity.png&#34;&gt;AIWINDVelocity&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;适合AIWIND计算出来的风电场机位点风廓线处理，存在空值&lt;/p&gt;
 
 &lt;h2 id=&#34;技术分解&#34;&gt;技术分解&lt;/h2&gt;
 
@@ -561,6 +577,8 @@ headDir&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#
 
 &lt;p&gt;我们希望单独提取三列信息到一个excel表大文件夹内，方便比较数据&lt;/p&gt;
 
+&lt;p&gt;适合任何风电场！&lt;/p&gt;
+
 &lt;h2 id=&#34;技术分解&#34;&gt;技术分解&lt;/h2&gt;
 
 &lt;ol&gt;
@@ -630,7 +648,9 @@ headDir&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#
 
 &lt;p&gt;在风资源分析中，经常需要导出测风塔和风机点位不同扇区下的风速风向、湍流度等风资源信息，而这些信息导出后糅合在同一个大的文件下不好分析，为此需要进行拆分.&lt;/p&gt;
 
-&lt;p&gt;数据文件也有一些规律和关键信息，看下面的原始数据片段&lt;/p&gt;
+&lt;p&gt;数据文件也有一些规律和关键信息，看下面的原始数据片段(通过windsim计算导出的wind vertical profile,)&lt;/p&gt;
+
+&lt;p&gt;适合任意风场！&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;
 WECS number        :          1

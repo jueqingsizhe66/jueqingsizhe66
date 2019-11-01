@@ -43,6 +43,652 @@
     </item>
     
     <item>
+      <title>TurbSim 8个湍流模型的对比</title>
+      <link>https://jueqingsizhe66.github.io/blog/2015/08/10/turbsim-8ge-tuan-liu-mo-xing-de-dui-bi/</link>
+      <pubDate>Mon, 10 Aug 2015 01:00:47 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/blog/2015/08/10/turbsim-8ge-tuan-liu-mo-xing-de-dui-bi/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://nwtc.nrel.gov/TurbSim&#34; target=&#34;_blank&#34;&gt;TurbSim&lt;/a&gt;,是NREL提供的一个小的开源工具， 用于产生湍流风，设置的时候可能对于不同模型会有不同的参数，基于范本进行了一番分析。当然测试文件在TurbSim的Test文件下的inp文件夹下。&lt;/p&gt;
+
+&lt;p&gt;如果对那些湍流模型做一个对比，那样是否可以更加清晰的看出不同呢？
+于是就有了下面的shell分析脚本。&lt;/p&gt;
+
+&lt;p&gt;TurbSim产生的风力机一圈的入流截面模型（仅仅一个截面，全场是因为捕捉了很多个截面）&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/fast/turbsim.png&#34; alt=&#34;Turbsim&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;shell解析脚本&#34;&gt;Shell解析脚本&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;#!/bin/bash - 
+#===============================================================================
+#
+#          FILE: a.sh
+# 
+#         USAGE: ./a.sh 
+# 
+#   DESCRIPTION: 
+# 
+#       OPTIONS: ---
+#  REQUIREMENTS: ---
+#          BUGS: ---
+#         NOTES: ---
+#        AUTHOR: Ye Zhaoliang (), zhaoturkkey@163.com
+#  ORGANIZATION: YZL
+#       CREATED: 2015年08月10日 00:26
+#      REVISION:  ---
+#===============================================================================
+
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME:  _repeat1
+#   DESCRIPTION:  优化版本
+#    PARAMETERS:  
+#       RETURNS:  
+#-------------------------------------------------------------------------------
+_repeat1()
+{
+    #@ 使用方式： _repeat 要重复的字符串  重复次数
+    #@  Usage : _repeat string number
+    _REPEAT1=$1  #set and not empty, or unlimit recycle
+    while [[ ${#_REPEAT1} -lt $2 ]]
+    do
+        _REPEAT1=$_REPEAT1$_REPEAT1$_REPEAT1 ## 3次优化
+    done
+    _REPEAT1=${_REPEAT1:0:$2} ##Trim到我们需要的长度
+}
+
+alert() #@ Description    产生一个方框的注释
+{       #@ Usage    alert &amp;quot;话语&amp;quot;
+    _repeat1 &amp;quot;${2:-#}&amp;quot; $(( ${#1} + 8 )) ## ${2:-#} 如果$2未定义则使用#
+    printf &#39;%s\n&#39; &amp;quot;$_REPEAT1&amp;quot; ## \a=BEL
+    printf &#39;%2.2s %s %2.2s\n&#39; &amp;quot;$_REPEAT1&amp;quot; &amp;quot;$1&amp;quot; &amp;quot;$_REPEAT1&amp;quot; ## \a=BEL
+    printf &#39;%s\n&#39; &amp;quot;$_REPEAT1&amp;quot;
+}
+
+
+#alert &amp;quot;Do you really want to delete all the files?&amp;quot;
+
+
+## RandSeed1 在不同湍流模型配置的不同
+{
+alert  &amp;quot;RandSeed1&amp;quot; 
+grep -n &amp;quot;RandSeed1&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
+alert  &amp;quot;RandSeed2&amp;quot; 
+grep -n &amp;quot;RandSeed2&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
+alert  &amp;quot;WrBHHTP&amp;quot; 
+grep -n &amp;quot;WrBHHTP&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
+alert  &amp;quot;WrFHHTP&amp;quot; 
+grep -n &amp;quot;WrFHHTP&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
+alert  &amp;quot;WrADHH&amp;quot; 
+grep -n &amp;quot;WrADHH&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
+alert  &amp;quot;WrADFF&amp;quot; 
+grep -n &amp;quot;WrADFF&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
+alert  &amp;quot;WrBLFF&amp;quot; 
+grep -n &amp;quot;WrBLFF&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
+alert  &amp;quot;WrADTWR&amp;quot; 
+grep -n &amp;quot;WrADTWR&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
+alert  &amp;quot;WrFMTFF&amp;quot; 
+grep -n &amp;quot;WrFMTFF&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
+alert  &amp;quot;WrACT&amp;quot; 
+grep -n &amp;quot;WrACT&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
+alert  &amp;quot;NumGrid_Z&amp;quot; 
+grep -n &amp;quot;NumGrid_Z&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
+alert  &amp;quot;NumGrid_Y&amp;quot; 
+grep -n &amp;quot;NumGrid_Y&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
+alert  &amp;quot;HubHt&amp;quot; 
+grep -n &amp;quot;HubHt&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
+alert  &amp;quot;GridHeight&amp;quot; 
+grep -n &amp;quot;GridHeight&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|sed &#39;/HubHt/d&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
+alert  &amp;quot;GridWidth&amp;quot; 
+grep -n &amp;quot;GridWidth&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|sed &#39;/HubHt/d&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
+alert  &amp;quot;VFlowAng&amp;quot; 
+grep -n &amp;quot;VFlowAng&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
+alert  &amp;quot;HFlowAng&amp;quot; 
+grep -n &amp;quot;HFlowAng&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
+alert  &amp;quot;TurbModel&amp;quot; 
+grep -n &amp;quot;TurbModel&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
+alert  &amp;quot;IECstandard&amp;quot; 
+grep -n &amp;quot;IECstandard&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
+alert  &amp;quot;IECturbc&amp;quot; 
+grep -n &amp;quot;IECturbc&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
+alert  &amp;quot;IEC_WindType&amp;quot; 
+grep -n &amp;quot;IEC_WindType&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
+alert  &amp;quot;ETMc&amp;quot; 
+grep -n &amp;quot;ETMc&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
+alert  &amp;quot;WindProfileType&amp;quot; 
+grep -n &amp;quot;WindProfileType&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
+alert  &amp;quot;RefHt&amp;quot; 
+grep -n &amp;quot;RefHt&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
+alert  &amp;quot;URef&amp;quot; 
+grep -n &amp;quot;URef&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
+alert  &amp;quot;ZJetMax&amp;quot; 
+grep -n &amp;quot;ZJetMax&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
+alert  &amp;quot;PLExp&amp;quot; 
+grep -n &amp;quot;PLExp&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
+alert  &amp;quot;Z0&amp;quot; 
+grep -n &amp;quot;Z0&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
+alert  &amp;quot;RICH_NO&amp;quot; 
+grep -n &amp;quot;RICH_NO&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
+alert  &amp;quot;ZI&amp;quot; 
+grep -n &amp;quot;ZI&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
+alert  &amp;quot;PC_UW&amp;quot; 
+grep -n &amp;quot;PC_UW&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
+alert  &amp;quot;PC_UV&amp;quot; 
+grep -n &amp;quot;PC_UV&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
+alert  &amp;quot;PC_VW&amp;quot; 
+grep -n &amp;quot;PC_VW&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
+alert  &amp;quot;CohExp&amp;quot; 
+grep -n &amp;quot;CohExp&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
+alert  &amp;quot;CTEventPath&amp;quot; 
+grep -n &amp;quot;CTEventPath&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
+alert  &amp;quot;CTEventFile&amp;quot; 
+grep -n &amp;quot;CTEventFile&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
+alert  &amp;quot;Randomize&amp;quot; 
+grep -n &amp;quot;Randomize&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
+alert  &amp;quot;DistScl&amp;quot; 
+grep -n &amp;quot;DistScl&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
+alert  &amp;quot;CTLy&amp;quot; 
+grep -n &amp;quot;CTLy&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
+alert  &amp;quot;CTLz&amp;quot; 
+grep -n &amp;quot;CTLz&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
+alert  &amp;quot;CTStartTime&amp;quot; 
+grep -n &amp;quot;CTStartTime&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
+} &amp;gt; summary.out
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;改进&#34;&gt;改进&lt;/h3&gt;
+
+&lt;ol&gt;
+&lt;li&gt;去除无用的Turbulence and Boundary&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;增加了对GridWidth and GridHeight的处理&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;grep -n &amp;quot;GridHeight&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|sed &#39;/HubHt/d&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
+grep -n &amp;quot;GridWidth&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|sed &#39;/HubHt/d&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;3.&lt;/p&gt;
+
+&lt;h2 id=&#34;shell产生的结果如下&#34;&gt;shell产生的结果如下：&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;#################
+## RandSeed1 ##
+#################
+GPLLJ        234516
+HYDRO_TIDAL  2318573
+Kaimal_15    123456
+Kaimal       123456
+KHtest       123456
+smooth       4433456
+vonKarm_15   123456
+vonKarm      123456
+#################
+## RandSeed2 ##
+#################
+GPLLJ        789012
+HYDRO_TIDAL  RANLUX
+Kaimal_15    789012
+Kaimal       789012
+KHtest       &amp;quot;RanLux&amp;quot;
+smooth       &amp;quot;RanLux&amp;quot;
+vonKarm_15   789012
+vonKarm      789012
+###############
+## WrBHHTP ##
+###############
+GPLLJ        False
+HYDRO_TIDAL  False
+Kaimal_15    False
+Kaimal       False
+KHtest       False
+smooth       True
+vonKarm_15   False
+vonKarm      False
+###############
+## WrFHHTP ##
+###############
+GPLLJ        True
+HYDRO_TIDAL  True
+Kaimal_15    False
+Kaimal       False
+KHtest       False
+smooth       False
+vonKarm_15   True
+vonKarm      True
+##############
+## WrADHH ##
+##############
+GPLLJ        False
+HYDRO_TIDAL  True
+Kaimal_15    False
+Kaimal       False
+KHtest       False
+smooth       False
+vonKarm_15   True
+vonKarm      True
+##############
+## WrADFF ##
+##############
+GPLLJ        True
+HYDRO_TIDAL  False
+Kaimal_15    False
+Kaimal       False
+KHtest       False
+smooth       False
+vonKarm_15   False
+vonKarm      False
+##############
+## WrBLFF ##
+##############
+GPLLJ        False
+HYDRO_TIDAL  True
+Kaimal_15    False
+Kaimal       False
+KHtest       True
+smooth       True
+vonKarm_15   False
+vonKarm      False
+###############
+## WrADTWR ##
+###############
+GPLLJ        False
+HYDRO_TIDAL  False
+Kaimal_15    False
+Kaimal       False
+KHtest       False
+smooth       False
+vonKarm_15   False
+vonKarm      False
+###############
+## WrFMTFF ##
+###############
+GPLLJ        False
+HYDRO_TIDAL  False
+Kaimal_15    True
+Kaimal       True
+KHtest       False
+smooth       False
+vonKarm_15   False
+vonKarm      False
+#############
+## WrACT ##
+#############
+GPLLJ        True
+HYDRO_TIDAL  False
+Kaimal_15    False
+Kaimal       False
+KHtest       True
+smooth       True
+vonKarm_15   False
+vonKarm      False
+#################
+## NumGrid_Z ##
+#################
+GPLLJ        5
+HYDRO_TIDAL  5
+Kaimal_15    5
+Kaimal       5
+KHtest       5
+smooth       5
+vonKarm_15   5
+vonKarm      5
+#################
+## NumGrid_Y ##
+#################
+GPLLJ        5
+HYDRO_TIDAL  5
+Kaimal_15    5
+Kaimal       5
+KHtest       5
+smooth       5
+vonKarm_15   5
+vonKarm      5
+#############
+## HubHt ##
+#############
+GPLLJ        90.00
+HYDRO_TIDAL  10
+Kaimal_15    37.00
+Kaimal       37.00
+KHtest       37.00
+smooth       84.00
+vonKarm_15   37.00
+vonKarm      37.00
+##################
+## GridHeight ##
+##################
+GPLLJ        80.00
+HYDRO_TIDAL  9.00
+Kaimal_15    30.00
+Kaimal       30.00
+KHtest       50.00
+smooth       70.00
+vonKarm_15   30.00
+vonKarm      30.00
+#################
+## GridWidth ##
+#################
+GPLLJ        600.0
+GPLLJ        90.0
+GPLLJ        80.00
+HYDRO_TIDAL  600
+HYDRO_TIDAL  40
+HYDRO_TIDAL  9.00
+Kaimal_15    600.0
+Kaimal_15    55.8
+Kaimal_15    30.00
+Kaimal       600.0
+Kaimal       55.8
+Kaimal       30.00
+KHtest       600.0
+KHtest       100.0
+KHtest       50.00
+smooth       600.0
+smooth       100.0
+smooth       70.00
+vonKarm_15   600.0
+vonKarm_15   55.8
+vonKarm_15   30.00
+vonKarm      600.0
+vonKarm      55.8
+vonKarm      30.00
+################
+## VFlowAng ##
+################
+GPLLJ        0
+HYDRO_TIDAL  0
+Kaimal_15    5
+Kaimal       5
+KHtest       0
+smooth       0
+vonKarm_15   5
+vonKarm      0
+################
+## HFlowAng ##
+################
+GPLLJ        0
+HYDRO_TIDAL  0
+Kaimal_15    10
+Kaimal       10
+KHtest       0
+smooth       0
+vonKarm_15   10
+vonKarm      0
+#################
+## TurbModel ##
+#################
+GPLLJ        &amp;quot;GP_LLJ&amp;quot;
+HYDRO_TIDAL  &amp;quot;TIDAL&amp;quot;
+Kaimal_15    &amp;quot;IECKAI&amp;quot;
+Kaimal       &amp;quot;IECKAI&amp;quot;
+KHtest       &amp;quot;NWTCUP&amp;quot;
+smooth       &amp;quot;SMOOTH&amp;quot;
+vonKarm_15   &amp;quot;IECVKM&amp;quot;
+vonKarm      &amp;quot;IECVKM&amp;quot;
+###################
+## IECstandard ##
+###################
+GPLLJ        1
+HYDRO_TIDAL  &amp;quot;1-ED3&amp;quot;
+Kaimal_15    &amp;quot;1-ED2&amp;quot;
+Kaimal       1
+KHtest       1
+smooth       1
+vonKarm_15   1
+vonKarm      1
+################
+## IECturbc ##
+################
+GPLLJ        &amp;quot;A&amp;quot;
+HYDRO_TIDAL  &amp;quot;A&amp;quot;
+Kaimal_15    &amp;quot;18.0&amp;quot;
+Kaimal       &amp;quot;C&amp;quot;
+KHtest       &amp;quot;KHtest&amp;quot;
+smooth       &amp;quot;A&amp;quot;
+vonKarm_15   16.0
+vonKarm      &amp;quot;A&amp;quot;
+####################
+## IEC_WindType ##
+####################
+GPLLJ        NTM
+HYDRO_TIDAL  &amp;quot;NTM&amp;quot;
+Kaimal_15    NTM
+Kaimal       NTM
+KHtest       NTM
+smooth       NTM
+vonKarm_15   NTM
+vonKarm      NTM
+############
+## ETMc ##
+############
+GPLLJ        default
+HYDRO_TIDAL  default
+Kaimal_15    default
+Kaimal       default
+KHtest       default
+smooth       default
+vonKarm_15   default
+vonKarm      default
+#######################
+## WindProfileType ##
+#######################
+GPLLJ        default
+HYDRO_TIDAL  &amp;quot;H2L&amp;quot;
+Kaimal_15    default
+Kaimal       default
+KHtest       default
+smooth       default
+vonKarm_15   default
+vonKarm      default
+#############
+## RefHt ##
+#############
+GPLLJ        85.00
+HYDRO_TIDAL  18
+Kaimal_15    10.00
+Kaimal       10.00
+KHtest       37.00
+smooth       84.00
+vonKarm_15   10.00
+vonKarm      10.00
+############
+## URef ##
+############
+GPLLJ        12.0
+HYDRO_TIDAL  18
+HYDRO_TIDAL  1.2
+Kaimal_15    15.0
+Kaimal       6.0
+KHtest       13.0
+smooth       17.0
+vonKarm_15   15.0
+vonKarm      6.0
+###############
+## ZJetMax ##
+###############
+GPLLJ        350
+HYDRO_TIDAL  default
+Kaimal_15    350
+Kaimal       350
+KHtest       350
+smooth       350
+vonKarm_15   350
+vonKarm      260
+#############
+## PLExp ##
+#############
+GPLLJ        default
+HYDRO_TIDAL  default
+Kaimal_15    default
+Kaimal       default
+KHtest       default
+smooth       1.527
+vonKarm_15   default
+vonKarm      default
+##########
+## Z0 ##
+##########
+GPLLJ        default
+HYDRO_TIDAL  default
+Kaimal_15    default
+Kaimal       default
+KHtest       default
+smooth       default
+vonKarm_15   default
+vonKarm      default
+###############
+## RICH_NO ##
+###############
+GPLLJ        0.05
+HYDRO_TIDAL  0.05
+Kaimal_15    0.05
+Kaimal       0.05
+KHtest       0.02
+smooth       0.05
+vonKarm_15   0.05
+vonKarm      0.05
+##########
+## ZI ##
+##########
+GPLLJ        default
+HYDRO_TIDAL  default
+Kaimal_15    default
+Kaimal       default
+KHtest       default
+smooth       default
+vonKarm_15   default
+vonKarm      default
+#############
+## PC_UW ##
+#############
+GPLLJ        default
+HYDRO_TIDAL  default
+Kaimal_15    default
+Kaimal       default
+KHtest       default
+smooth       default
+vonKarm_15   default
+vonKarm      default
+#############
+## PC_UV ##
+#############
+GPLLJ        default
+HYDRO_TIDAL  default
+Kaimal_15    default
+Kaimal       default
+KHtest       default
+smooth       default
+vonKarm_15   default
+vonKarm      default
+#############
+## PC_VW ##
+#############
+GPLLJ        default
+HYDRO_TIDAL  default
+Kaimal_15    default
+Kaimal       default
+KHtest       default
+smooth       default
+vonKarm_15   default
+vonKarm      default
+##############
+## CohExp ##
+##############
+GPLLJ        default
+HYDRO_TIDAL  default
+Kaimal_15    default
+Kaimal       default
+KHtest       default
+smooth       default
+vonKarm_15   default
+vonKarm      default
+###################
+## CTEventPath ##
+###################
+GPLLJ        &amp;quot;.\EventData&amp;quot;
+HYDRO_TIDAL  &amp;quot;/home/lkilcher/work/nwtc/turbsim/trunk/Test/EventData/&amp;quot;
+Kaimal_15    &amp;quot;.\EventData&amp;quot;
+Kaimal       &amp;quot;.\EventData&amp;quot;
+KHtest       &amp;quot;.\EventData&amp;quot;
+smooth       &amp;quot;.\EventData&amp;quot;
+vonKarm_15   &amp;quot;.\EventData&amp;quot;
+vonKarm      &amp;quot;.\EventData&amp;quot;
+###################
+## CTEventFile ##
+###################
+GPLLJ        LES
+HYDRO_TIDAL  &amp;quot;Random&amp;quot;
+Kaimal_15    random
+Kaimal       random
+KHtest       &amp;quot;les&amp;quot;
+smooth       &amp;quot;les&amp;quot;
+vonKarm_15   random
+vonKarm      random
+#################
+## Randomize ##
+#################
+GPLLJ        true
+HYDRO_TIDAL  true
+HYDRO_TIDAL  1.0
+HYDRO_TIDAL  0.5
+HYDRO_TIDAL  0.5
+Kaimal_15    true
+Kaimal       true
+KHtest       true
+smooth       true
+vonKarm_15   true
+vonKarm      true
+###############
+## DistScl ##
+###############
+GPLLJ        1.0
+HYDRO_TIDAL  1.0
+Kaimal_15    1.0
+Kaimal       1.0
+KHtest       1.0
+smooth       1.0
+vonKarm_15   1.0
+vonKarm      1.0
+############
+## CTLy ##
+############
+GPLLJ        0.5
+HYDRO_TIDAL  0.5
+Kaimal_15    0.5
+Kaimal       0.5
+KHtest       0.5
+smooth       0.5
+vonKarm_15   0.5
+vonKarm      0.5
+############
+## CTLz ##
+############
+GPLLJ        0.5
+HYDRO_TIDAL  0.5
+Kaimal_15    0.5
+Kaimal       0.5
+KHtest       0.5
+smooth       0.5
+vonKarm_15   0.5
+vonKarm      0.5
+###################
+## CTStartTime ##
+###################
+GPLLJ        30.0
+HYDRO_TIDAL  30.0
+Kaimal_15    30.0
+Kaimal       30.0
+KHtest       0.0
+smooth       10.0
+vonKarm_15   30.0
+vonKarm      30.0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;进一步的细节可以参考&lt;a href=&#34;https://nwtc.nrel.gov/system/files/TurbSim.pdf&#34; target=&#34;_blank&#34;&gt;Turbsim UserGuide&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Incompact3d的Makefile及DNS算法</title>
       <link>https://jueqingsizhe66.github.io/blog/2015/06/22/incompact3dde-makefileji-dnssuan-fa/</link>
       <pubDate>Mon, 22 Jun 2015 16:52:20 +0800</pubDate>
@@ -336,6 +982,434 @@ END PROGRAM b
     </item>
     
     <item>
+      <title>U&#43;-Y&#43;</title>
+      <link>https://jueqingsizhe66.github.io/blog/2015/05/31/u-plus-y-plus/</link>
+      <pubDate>Sun, 31 May 2015 09:31:05 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/blog/2015/05/31/u-plus-y-plus/</guid>
+      <description>&lt;p&gt;这个gnuplot脚本是我用于处理Incompact3d产生出来的统计结果(如何统计部分，暂时未写)的画图脚本。&lt;/p&gt;
+
+&lt;h2 id=&#34;数据段&#34;&gt;数据段&lt;/h2&gt;
+
+&lt;p&gt;注意gnuplot处理数据文件按照空行划分index部分。所以下面的部分总共有四个index，调用方式是&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;plot &amp;ldquo;文件名&amp;rdquo; index 0   第一部分文件信息的打印&lt;/li&gt;
+&lt;li&gt;plot &amp;ldquo;文件名&amp;rdquo; index 1&lt;/li&gt;
+&lt;li&gt;plot &amp;ldquo;文件名&amp;rdquo; index 2&lt;/li&gt;
+&lt;li&gt;plot &amp;ldquo;文件名&amp;rdquo; index 3&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;具体看gnuplot脚本部分。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;0 2.9684e-24
+0.7369 0.73552
+1.4746 1.4677
+2.2139 2.195
+2.9556 2.915
+3.7005 3.6242
+4.4495 4.3184
+5.2034 4.9934
+5.9631 5.6455
+6.7295 6.2713
+7.5034 6.8686
+8.2859 7.4358
+9.078 7.9722
+9.8806 8.4777
+10.695 8.9528
+11.522 9.3986
+12.363 9.8162
+13.219 10.207
+14.092 10.573
+14.983 10.916
+15.894 11.236
+16.825 11.537
+17.779 11.819
+18.759 12.084
+19.764 12.334
+20.799 12.569
+21.864 12.791
+22.963 13.001
+24.099 13.201
+25.273 13.391
+26.49 13.572
+27.753 13.745
+29.065 13.911
+30.431 14.071
+31.855 14.225
+33.343 14.374
+34.899 14.52
+36.529 14.661
+38.24 14.8
+40.04 14.936
+41.936 15.07
+43.936 15.202
+46.052 15.333
+48.292 15.464
+50.669 15.594
+53.196 15.725
+55.887 15.856
+58.756 15.989
+61.819 16.124
+65.096 16.262
+68.603 16.402
+72.361 16.544
+76.389 16.69
+80.706 16.838
+85.33 16.988
+90.276 17.139
+95.557 17.288
+101.18 17.434
+107.14 17.572
+113.42 17.7
+120 17.813
+126.85 17.906
+133.91 17.975
+141.11 18.017
+148.4 18.03
+
+
+5 0
+5 20
+
+
+30 0
+30 20
+
+
+120 0
+120 20
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;gnuplot处理部分&#34;&gt;gnuplot处理部分&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-gnuplot&#34;&gt;set ter &#39;png&#39;
+set out &#39;fit1.png&#39;
+
+set xlabel &amp;quot;Y+&amp;quot;
+set ylabel &amp;quot;U+&amp;quot;
+set xtics font &#39;Times-Roman, 15&#39;
+f(x)=a*x+b
+g(x)=1/k*log(x)+B
+fit [0:5] f(x) &amp;quot;umfit.dat&amp;quot; index 0 via a,b
+print &amp;quot;a:=&amp;quot;,a,&amp;quot;b=&amp;quot;,b
+fit [30:148] g(x) &amp;quot;umfit.dat&amp;quot; index 0 via k,B
+print &amp;quot;k=&amp;quot;,k,&amp;quot;B=&amp;quot;,B
+set xtics 20
+set samples 1280
+set key right bottom box
+set arrow from 20,5 to  5,2 
+set label  sprintf(&amp;quot;viscous sub-layer fit:\n f(x)=%g*x +%g&amp;quot;, a,b)  at 20,6 
+set arrow from 90,12 to  70,16
+set label sprintf(&amp;quot;logarithm range fit:\n f(x)=1/%g*log(x) +%g&amp;quot;,k,B) at 90,11 
+
+#set logscale x
+#set xrange
+#set yrange [0:0.5]
+#[0:220][0:0.04]   # the most important place is here
+plot  [0:148][0:20]  &amp;quot;umfit.dat&amp;quot; index 0 w lp pt 1  t &amp;quot;U+--Y+&amp;quot;,f(x) w l lt -1 lw 2 t &amp;quot;linear-fit&amp;quot;,g(x)  w  l lt 3 lw 2 t &amp;quot;log-fit&amp;quot;,\
+ &amp;quot;&amp;quot; index 1 w l lt 0 t &amp;quot;linear-fit-end&amp;quot;,&amp;quot;&amp;quot; index 2 w l lt 0 t &amp;quot;log-law-start&amp;quot;,&amp;quot;&amp;quot; index 3 w l lt 0 t &amp;quot;log-law-end&amp;quot;
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;处理结果&#34;&gt;处理结果&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/incompact3d/fit1.png&#34; alt=&#34;处理结果&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;一些实时监测部分&#34;&gt;一些实时监测部分&lt;/h2&gt;
+
+&lt;h3 id=&#34;执行部分&#34;&gt;执行部分：&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;a.sh&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;mpirun -np 8  incompact3d  &amp;gt;&amp;gt; tail.out &amp;amp;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;获取信息部分&#34;&gt;获取信息部分&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;image.sh&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;more tail.out | grep DIV | grep U* |grep Max|sed &#39;/final/d&#39;| awk -F&#39;=&#39; &#39;{print $2}&#39; |sed &#39;1,3d&#39;&amp;gt; divu
+more tail.out | grep UT | awk  &#39;{print $4}&#39;|sed &#39;1,2d&#39; &amp;gt; flow-rate-correction-factor
+
+#more tail.out | grep zhao | awk &#39;{print $2,$3,$4}&#39; &amp;gt; stretching
+
+more tail.out | grep PHI | grep max|awk -F&#39;=&#39; &#39;{print $2}&#39; &amp;gt; PHImax
+
+more tail.out | grep PHI|grep MOYEN | awk  -F&amp;quot;:&amp;quot; &#39;{print $2*10^4}&#39;&amp;gt; PHImoyen
+#gnuplot monitorFLOWRATE.gnu
+
+bash monitor.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;打印部分&#34;&gt;打印部分&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;monitor.sh&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;#!/bin/bash
+#===============================================================================
+#
+#          FILE:  monitor.sh
+# 
+#         USAGE:  ./monitor.sh 
+# 
+#   DESCRIPTION:  
+# 
+#       OPTIONS:  ---
+#  REQUIREMENTS:  ---
+#          BUGS:  ---
+#         NOTES:  ---
+#        AUTHOR:  Ye Zhaoliang (YZL), zhaoturkkey@163.com
+#       COMPANY:  NCEPU
+#       VERSION:  1.0
+#       CREATED:  2014年10月28日 09时42分15秒 CST
+#      REVISION:  ---
+#===============================================================================
+
+# set yrange [0:2]
+# set xlabel
+# set ylabel
+function mainpoint()
+{
+ #   echo $0;
+#    echo $1;
+gnuplot&amp;lt;&amp;lt;EOF
+set ter &#39;png&#39;
+set out &#39;$1.png&#39;
+set grid
+plot &#39;$1&#39; w p pt 2
+EOF
+
+}
+
+function mainline()
+{
+ #   echo $0;
+ #   echo $1;
+gnuplot&amp;lt;&amp;lt;EOF
+set ter &#39;png&#39;
+set out &#39;$1.png&#39;
+set grid
+set yrange [0:2]
+plot &#39;$1&#39; w l lt 2
+EOF
+
+
+}
+
+#mainpoint ux2
+#mainpoint uy2
+#mainpoint uz2
+#mainpoint ux5
+#mainpoint uy5
+#mainpoint uz5
+#mainline uy2
+mainpoint divu
+mainpoint flow-rate-correction-factor
+#mainpoint stretching
+mainpoint PHImax
+mainpoint PHImoyen
+#mainpoint averageux2
+#mainpoint averageux5
+#mainpoint rxx2
+#mainpoint rxx5
+#mainpoint dudy_bottom_spatial_only
+#mainpoint dudy_top_spatial_only
+#mainpoint dudy_bottom_spatial_time
+#mainpoint dudy_top_spatial_time
+
+#new add  stress
+#mainpoint umean
+#mainpoint vmean
+#mainpoint wmean
+##mainpoint uu
+##mainpoint vv
+#mainpoint ww
+
+#mainpoint stressu
+#mainpoint stressv
+#mainpoint stressw
+#mainpoint stressuv
+#mainpoint stressuw
+#mainpoint stressvw
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;整合部分&#34;&gt;整合部分&lt;/h3&gt;
+
+&lt;p&gt;cut -c的目的是获取具体对应的时间步,然后把所有的png相关信息 放到对应时间步文件夹中。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;cd /home/Cedric/diric/src &amp;amp;&amp;amp; more tail.out |grep Time|awk &#39;{print $4}&#39; |tail -1|cut -c 1-6 |awk &#39;{cmd=&amp;quot;mkdir step&amp;quot;$1;system(cmd);system(&amp;quot;sh image.sh&amp;quot;);cmd2=&amp;quot;mv *.png step&amp;quot;$1;system(cmd2);} &#39;
+
+# END{cmd3=&amp;quot;mv dudy* umean stress step&amp;quot;$1;system(cmd3)}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;实时浏览&#34;&gt;实时浏览&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;切换到对应的文件夹
+$ python -m SimpleHTTPServer 
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后就可以打开 127.0.0.1:8000进行浏览了。&lt;/p&gt;
+
+&lt;h3 id=&#34;you-can-also-use-crontab-to-execute-program-in-real-time&#34;&gt;You can also use crontab to execute program in real time&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;
+crontab -e
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then you can copy the info below,but modified the datatime.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;0 23 19 6 * sh /home/simulation2_128-117-128Re4200/main.sh 
+30 23 19 6 * sh /home/simulation2_128-117-128Re4200/main.sh 
+0 0 20 6 * sh /home/simulation2_128-117-128Re4200/main.sh 
+30 0 20 6 * sh /home/simulation2_128-117-128Re4200/main.sh 
+0 1 20 6 * sh /home/simulation2_128-117-128Re4200/main.sh 
+30 1 20 6 * sh /home/simulation2_128-117-128Re4200/main.sh 
+0 2 20 6 * sh /home/simulation2_128-117-128Re4200/main.sh 
+30 2 20 6 * sh /home/simulation2_128-117-128Re4200/main.sh 
+0 3 20 6 * sh /home/simulation2_128-117-128Re4200/main.sh 
+30 3 20 6 * sh /home/simulation2_128-117-128Re4200/main.sh 
+0 4 20 6 * sh /home/simulation2_128-117-128Re4200/main.sh 
+30 4 20 6 * sh /home/simulation2_128-117-128Re4200/main.sh 
+0 5 20 6 * sh /home/simulation2_128-117-128Re4200/main.sh 
+30 5 20 6 * sh /home/simulation2_128-117-128Re4200/main.sh 
+0 6 20 6 * sh /home/simulation2_128-117-128Re4200/main.sh 
+30 6 20 6 * sh /home/simulation2_128-117-128Re4200/main.sh 
+0 7 20 6 * sh /home/simulation2_128-117-128Re4200/main.sh 
+30 7 20 6 * sh /home/simulation2_128-117-128Re4200/main.sh 
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+    <item>
+      <title>The greatest weapons</title>
+      <link>https://jueqingsizhe66.github.io/blog/2015/05/17/the-greatest-weapons/</link>
+      <pubDate>Sun, 17 May 2015 19:01:59 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/blog/2015/05/17/the-greatest-weapons/</guid>
+      <description>&lt;p&gt;Everything in Haskell has a Type
+Here are some Type declarations.&lt;/p&gt;
+
+&lt;p&gt;These are your greatest weapons.&lt;/p&gt;
+
+&lt;p&gt;head :: [a] -&amp;gt; a &amp;ndash; gets the first element of a list&lt;/p&gt;
+
+&lt;p&gt;tail :: [a] -&amp;gt; [a] &amp;ndash; gets everything but the first element&lt;/p&gt;
+
+&lt;p&gt;last :: [a] -&amp;gt; a &amp;ndash; gets the last element of a list&lt;/p&gt;
+
+&lt;p&gt;init :: [a] -&amp;gt; [a] &amp;ndash; gets everything but the last element&lt;/p&gt;
+
+&lt;p&gt;(++) :: [a] -&amp;gt; [a] -&amp;gt; [a] &amp;ndash; concatenates two lists together&lt;/p&gt;
+
+&lt;p&gt;(:) :: a -&amp;gt; [a] -&amp;gt; [a] &amp;ndash; prepends an element to a list&lt;/p&gt;
+
+&lt;p&gt;fst  :: (a,b) -&amp;gt; a &amp;ndash; gets the first element of a tuple&lt;/p&gt;
+
+&lt;p&gt;snd  :: (a,b) -&amp;gt; b &amp;ndash; gets the second element of a tuple&lt;/p&gt;
+
+&lt;p&gt;(!!) :: [a]-&amp;gt;Int a&lt;/p&gt;
+
+&lt;h3 id=&#34;数学中λ-calculus的表示法为&#34;&gt;数学中λ-calculus的表示法为：&lt;/h3&gt;
+
+&lt;ol&gt;
+&lt;li&gt;λx.t&lt;/li&gt;
+&lt;li&gt;λx[t]&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;“λ”不具有任何特殊意思，标识着其表达式中的可取一数值x带入。
+t是表达式（例如x+3、x^2+2x+1等）。&lt;/p&gt;
+
+&lt;h3 id=&#34;代入数值p的表示法为&#34;&gt;代入数值p的表示法为：&lt;/h3&gt;
+
+&lt;ol&gt;
+&lt;li&gt;(λx.t)p&lt;/li&gt;
+&lt;li&gt;(λx[t])p&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&#34;lisp-scheme的λ表示法与数值代入&#34;&gt;Lisp|scheme的λ表示法与数值代入：&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scheme&#34;&gt;(lambda (x) (+ x 1))
+((lambda (x) (+ x 1) 10))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;haskell&#34;&gt;Haskell：&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;\x -&amp;gt; x+1
+(\x -&amp;gt; x+1)10
+
+Prelude&amp;gt; map (\x-&amp;gt;x+1) [1..10]
+[2,3,4,5,6,7,8,9,10,11]
+
+\ para1 para2-&amp;gt;(return value) 
+\ (para1,para2) -&amp;gt; (return value)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;lambda-calculus&#34;&gt;Lambda Calculus&lt;/h3&gt;
+
+&lt;p&gt;前面提到了Haskell是基于&lt;strong&gt;Lambda Calculus&lt;/strong&gt;的，所以在学习Haskell之前，我们有必要了解一下Lambda Caculus的一些基本的内容，方便我们后面正式介绍Haskell。其实，Lambda Calculus是所有函数式语言的基础，要学习FP，最好都了解一下Lambda Calculus。下面对Lambda Calculus做一个简单的介绍：&lt;/p&gt;
+
+&lt;h4 id=&#34;基本的语法-lambda-calculus的核心是表达式-expression-用fp语言写的程序执行的过程-本质上就是对表达式求值的过程&#34;&gt;基本的语法：Lambda Calculus的核心是表达式(Expression)，用FP语言写的程序执行的过程，本质上就是对表达式求值的过程&lt;/h4&gt;
+
+&lt;p&gt;expression := variable | function | application
+funciton := λvariable.expression (.前面部分为定义(definition)，后面部分为函数体(body))
+application := expression expression&lt;/p&gt;
+
+&lt;p&gt;另外一种表述方法:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;&amp;lt;expr&amp;gt; ::= &amp;lt;identifier&amp;gt; 
+&amp;lt;expr&amp;gt; ::= lambda &amp;lt;identifier-list&amp;gt;. &amp;lt;expr&amp;gt; 
+&amp;lt;expr&amp;gt; ::= (&amp;lt;expr&amp;gt; &amp;lt;expr&amp;gt;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;前两条语法用于生成lambda表达式（lambda函数），如：
+lambda x y. x + y
+haskell里面为了简洁起见用“\”来代替希腊字母lambda，它们形状比较相似。故而上面的定义也可以写成：
+\ x y. x + y&lt;/p&gt;
+
+&lt;h4 id=&#34;变量的bound与free&#34;&gt;变量的bound与free:&lt;/h4&gt;
+
+&lt;p&gt;λx.xy →x is bound, y is free&lt;/p&gt;
+
+&lt;h4 id=&#34;表达式化简-reduction-的基本法则&#34;&gt;表达式化简（Reduction)的基本法则:&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;α−reduction: λx.E→λy.E[y/x]
+β−reduction:((λx.E)z)→E[z/x]
+η−reduction(if x is not free in E): λx.(Ex)→E
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Alpha转换公理：例如，“lambda x y. x + y”转换为“lambda a b. a + b”。换句话说，函数的参数起什么名字没有关系，可以随意替换，只要函数体里面对参数的使用的地方也同时注意相应替换掉就是了。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Beta转换公理：例如，“(lambda x y. x + y) 2 3”转换为“2 + 3”。这个就更简单了，也就是说，当把一个lambda函数用到参数身上时，只需用实际的参数来替换掉其函数体中的相应变量即可。&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://mindhacks.cn/2006/10/15/cantor-godel-turing-an-eternal-golden-diagonal/&#34; target=&#34;_blank&#34;&gt;软件工程里面的一条黄金定律：“任何问题都可以通过增加一个间接层来解决&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;变量替换&#34;&gt;变量替换&lt;/h4&gt;
+
+&lt;p&gt;[y/x]E →  substitute  all occurrences of x in E to y&lt;/p&gt;
+
+&lt;p&gt;以上是Lambda Calculus的一些基础知识，读者朋友现在不理解没有关系，等后面讲到Haskell中相关的部分就可以理解了。对于抑制不住自已的好奇心的朋友，可以在这里：&lt;a href=&#34;http://en.wikipedia.org/wiki/Lambda_calculus&#34; target=&#34;_blank&#34;&gt;http://en.wikipedia.org/wiki/Lambda_calculus&lt;/a&gt;做进一步的了解。&lt;/p&gt;
+
+&lt;p&gt;在之前做的&lt;a href=&#34;http://jueqingsizhe66.github.io/blog/2015/05/17/cong-lambdadao-simple-plus-complexjie-shi-qi-zai-dao-shu-xing-chou-xiang/&#34; target=&#34;_blank&#34;&gt;lambda的推导&lt;/a&gt;其实都只是针对单个参数，包括&lt;a href=&#34;http://shuklan.com/haskell/lec03.html#/0/15&#34; target=&#34;_blank&#34;&gt;Haskell也是强调单参数的调用&lt;/a&gt;，如果多惨数那就是用curry来解决(funny多参数)
+关于多参数的lambda推到比较少见，但是多参数都是可以通过curry实现。&lt;/p&gt;
+
+&lt;p&gt;比如Haskell的实现:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;Prelude&amp;gt; :type take
+take :: Int -&amp;gt; [a] -&amp;gt; [a]
+Prelude&amp;gt; let takeFive = take 5
+Prelude&amp;gt; :type takeFive
+takeFive :: [a] -&amp;gt; [a]
+Prelude&amp;gt; takeFive [1..]
+[1,2,3,4,5]
+	   
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+    <item>
       <title>Haskell几个基本概念--学而无用--无以为用</title>
       <link>https://jueqingsizhe66.github.io/blog/2015/05/16/haskellji-ge-ji-ben-gai-nian-xue-er-wu-yong-wu-yi-wei-yong/</link>
       <pubDate>Sat, 16 May 2015 21:11:50 +0800</pubDate>
@@ -426,6 +1500,78 @@ monad是从范畴论引入， 范畴其实就是一个集合，只不过对这�
 
 &lt;p&gt;&lt;a href=&#34;http://www.jdon.com/44842&#34; target=&#34;_blank&#34;&gt;函数的逻辑性&lt;/a&gt;与关系数据库的是一致的，而逻辑在不同语言之间是自然贯穿的，也就是说若果所有都用函数来表达的，可以使sql消失，那么由于sql引发的问题自然就消失。
 数据库 = 一个集合,这就是面向集合，mongodb就是这样的思想&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>尾递归</title>
+      <link>https://jueqingsizhe66.github.io/blog/2015/05/13/wei-di-gui/</link>
+      <pubDate>Wed, 13 May 2015 20:56:12 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/blog/2015/05/13/wei-di-gui/</guid>
+      <description>&lt;p&gt;尾递归的好处就是快速计算，尾递归实际上是在递归计算的过程中，
+（印象中递归过程[表示语法形式-调用自己]和递归计算过程[表正线性方式 和非线性方式]是不一样的）, 加入了迭代的思想，不断的修改了product和counter的值，
+不需要树形展开。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scheme&#34;&gt;(define (fact n)
+  (cond
+    ((= n 1) 1)
+    (else (* n (fact (- n 1))))))
+
+(define (fact1 n)
+  (define (fact-iter product counter)
+    (cond
+      ((= counter 1) product)
+      (else (fact-iter (* product counter) (- counter 1)))))
+  (fact-iter 1 n))
+;;;Solve 4!
+(fact 4)
+(fact1 4)
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;;;; 求幂&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scheme&#34;&gt;(define (expr b n)
+  (if (= n 0)
+     1
+     (* b (expt b (- n 1)))))
+
+;;;iter form
+(define (expr1 b n)
+  (define (expr-iter b counter product)
+    (if (= counter 0)
+       product
+       (expr-iter b (- counter 1) (* b product))))
+  (expr-iter b  n 1))
+
+(expr 4 5)
+(expr1 4 5)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;===&amp;gt;另外还有一种更快速的方法
+;; b^n =(b^(n/2))^2, n is even
+;; b^n =(b*b^(n-1)) , n is odd&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scheme&#34;&gt;(define (fast-iter b n)
+ (cond 
+  ((= n 0) 1)
+  ((even? n) (square (fast)))
+  (else (* b (fast-iter b (- n 1))))))
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;====&amp;gt;并最终得到尾递归的一般形式
+结合&lt;a href=&#34;jueqingsizhe66.github.io/2015/05/13/qiu-ding-ji-fen/&#34; target=&#34;_blank&#34;&gt;求定积分&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;===&amp;gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scheme&#34;&gt;(define (sum term a  next b)
+    (define (sum-iter a result)
+     (if &amp;lt;???&amp;gt;
+       &amp;lt;???&amp;gt; 
+       (iter &amp;lt;???&amp;gt; &amp;lt;???&amp;gt;)))
+    (sum-iter &amp;lt;???&amp;gt; &amp;lt;???&amp;gt;)
+)
+&lt;/code&gt;&lt;/pre&gt;</description>
     </item>
     
     <item>
@@ -791,6 +1937,139 @@ term其实就是涉及到你需要思考的三种情况
    (* (/ h 3) (+ (y 0) (y n) part-value)))
  (sim-integral cube 1 3 10)  ;;; 有问题 已解决
  (sim-integral cube 1 3 11) ;;; 有问题  已解决
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+    <item>
+      <title>找出函数的不动点--Navier-Stokes方程</title>
+      <link>https://jueqingsizhe66.github.io/blog/2015/05/12/zhao-chu-han-shu-de-bu-dong-dian-navier-stokesfang-cheng/</link>
+      <pubDate>Tue, 12 May 2015 03:13:50 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/blog/2015/05/12/zhao-chu-han-shu-de-bu-dong-dian-navier-stokesfang-cheng/</guid>
+      <description>&lt;p&gt;##Beautiful code!&lt;/p&gt;
+
+&lt;p&gt;数x为函数的f的不动点（f可以代表N-S方程），如果满足f(x)=x,则称x
+为函数f的不动点。
+性质 f(x),f(f(x)),f(f(f(x)))&amp;hellip;., change the x&amp;rsquo;s value if f(x)=x,then
+you found!&lt;/p&gt;
+
+&lt;h2 id=&#34;source-code&#34;&gt;Source code&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scheme&#34;&gt;(define tolerance 0.000001)
+(define (fixed-point f first-guess)
+  (define (close-enough? v1 v2)
+    (&amp;lt; (abs (-  v1 v2)) tolerance))
+  (define (try guess)
+    (let ((next (f guess)))
+      (if (close-enough? guess next)
+         next
+         (try next))))
+  (try first-guess))
+
+;;;solve cos(x)=x
+(fixed-point cos 1.0)
+
+
+;;(cos 0.7390855263619245)
+;;0.7390848683867142
+;;(abs (-  (cos 0.7390855263619245) 0.7390855263619245))
+;;6.579752103164083e-07
+
+
+;;;solve y=siny+cosy   x=f(x) ====&amp;gt; Navier Stokes equation
+(fixed-point (lambda (y) (+ (sin y) (cos y))) 1.0)
+
+;;It is what we want!!!
+;;;(abs (- ((lambda (y) (+ (sin y) (cos y))) 1.2587277968014188) 1.2587277968014188)) 
+;;6.26112570678572e-07
+
+
+;;;;One method to calculate the square value
+;;because x^2 = y  so x = y/x (x =f (x) next we  will use the fixed-point thinking) we should continue change the x&#39;s value!
+(define (sqrt-iter guess x)
+  (if (good-enough? guess x)
+     guess
+     (sqrt-iter (improve guess x)
+               x)))
+
+(define (square x)
+  (* x x))
+;;;good-enough? is similar to close-enough？
+(define (good-enough? x y)
+  (&amp;lt; (abs (- (square x) y)) 0.00001))
+
+;;x^2=y   x=y/x   x+x=y/x+x  x=(y/x+x)/2
+(define (improve guess x)
+  (average guess (/ x guess)))
+
+(define (mysqrt x)
+  (sqrt-iter 1.0 x))
+
+
+;;(mysqrt 4)
+;;2.0000000929222947
+
+;;;Use fixed-point thinking 
+
+(define (mysqrt_death_fixed x)
+  (fixed-point (lambda (y) (/ x y))
+              1.0))
+
+;;(mysqrt_death_fixed 4)
+;;;wrong !!!  can not convenge!!!! why?
+
+;;because   y2= x/y1  y3=x/y2=x/(x/y1)=y1 ====&amp;gt;death recycle===&amp;gt; so we use average
+
+(define (mysqrt_fixed x)
+  (fixed-point (lambda (y) (average y (/  x y)))
+              1.0))
+
+(mysqrt_fixed 4)
+
+;;;ok fine
+;;2.000000000000002====&amp;gt;这也叫做平均阻尼定义！常用于数值计算当中
+;;在不动点的搜寻中，作为帮助收敛的手段！！！！
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+    <item>
+      <title>折半查找有条件</title>
+      <link>https://jueqingsizhe66.github.io/blog/2015/05/12/zhe-ban-chao-zhao-you-tiao-jian/</link>
+      <pubDate>Tue, 12 May 2015 02:46:03 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/blog/2015/05/12/zhe-ban-chao-zhao-you-tiao-jian/</guid>
+      <description>&lt;p&gt;You want to solve F(x)=0,
+if f(a)&amp;lt;0&amp;lt;f(b), so the value must be inside the [a,b].&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scheme&#34;&gt;#lang racket
+(define (close-enough? x  y)
+  (&amp;lt; (abs (-  x y)) 0.00001))
+
+(define (average a b)
+  (/ (+  a b) 2.0))
+(define (search f neg-point pos-point)
+   (let ((midpoint (average neg-point pos-point)))
+     (if (close-enough? neg-point pos-point)
+        midpoint
+        (let ((test-value (f midpoint)))
+          (cond ((positive? test-value)
+                 (search f neg-point midpoint))
+               ((negative? test-value) 
+                (search f midpoint pos-point))
+               (else midpoint))))))
+
+;;必须判断一下，如果同号则无法使用折半查找
+(define (half-interval-method f a b)
+  (let ((a-value (f a))
+          (b-value (f b)))
+     (cond ((and (negative? a-value) (positive? b-value))
+            (search f a b))
+          ((and (negative? b-value) (positive? a-value))
+           (search f  a b))
+          (else
+           (error &amp;quot;values are not of opposite sign&amp;quot; a b)))))
+
+(half-interval-method (lambda (x) (- (* x x x) (* 2 x) 3))
+                       1.0
+                       2.0)
 &lt;/code&gt;&lt;/pre&gt;</description>
     </item>
     

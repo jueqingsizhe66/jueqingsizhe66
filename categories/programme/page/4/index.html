@@ -122,7 +122,7 @@
   <meta property="og:description" content="Engineer of offshore wind turbine technique research"><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
   <meta property="twitter:image" content="https://jueqingsizhe66.github.io/img/icon-192.png"><meta property="og:locale" content="en-us">
   
-    <meta property="og:updated_time" content="2017-08-11T20:13:42&#43;08:00">
+    <meta property="og:updated_time" content="2019-11-02T00:44:00&#43;08:00">
   
 
   
@@ -510,30 +510,11 @@
   
   
   <div>
-    <h2><a href="/blog/2016/02/17/scheme-ioshi-xian-lai-zi-yu-cpshuo-zhe-haskellde-monodfan-chou-si-xiang/">scheme IO实现来自于CPS或者haskell的monod范畴思想</a></h2>
+    <h2><a href="/blog/2016/02/27/the-fourth-interpreter-about-the-traceproc/">The Fourth Interpreter about the traceproc</a></h2>
 
 
 
-<span class="article-metadata" >2016-2-17,Wednesday 预计阅读时间: 2 minutes and    3 seconds with 452 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span>
-
-   
-  
-  <span class="middot-divider"></span>
-  <span class="article-metadata">
-    <i class="fas fa-folder mr-1"></i><a href="/categories/programme/">programme</a></span><div class="article-style">
-      
-      scheme中IO的实现类似于CPS在原来函数的基础上增加了一个控制变量。
-
-      
-    <a href='/blog/2016/02/17/scheme-ioshi-xian-lai-zi-yu-cpshuo-zhe-haskellde-monodfan-chou-si-xiang/'><br>&hellip; 阅读全文&gt;&gt;</a></div>
-  </div>
-  
-  <div>
-    <h2><a href="/blog/2016/02/16/let-and-letrec-makes-programming-orient-object/">let and letrec makes programming orient object</a></h2>
-
-
-
-<span class="article-metadata" >2016-2-16,Tuesday 预计阅读时间: 2 minutes and    39 seconds with 586 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span>
+<span class="article-metadata" >2016-2-27,Saturday 预计阅读时间: 2 minutes and    51 seconds with 630 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span>
 
    
   
@@ -541,18 +522,19 @@
   <span class="article-metadata">
     <i class="fas fa-folder mr-1"></i><a href="/categories/programme/">programme</a></span><div class="article-style">
       
-      面向对象已经大行其道，而在scheme是如何实现，本文仅仅是刹那的思路， 可以通过let来定义局部变量，而可以通过letrec定义method的过程来实现 面向对象的数据抽象的能力。
-
+      程序的过程追踪能力体现着一个独特的优势，本文在First Interpreter,Second Interpreter,Third Interpreter基础上实现新的解释器功能。
+实现效果:
+ enter: x = #(struct:num-val 30) exting: result = #(struct:num-val 29) 
       
-    <a href='/blog/2016/02/16/let-and-letrec-makes-programming-orient-object/'><br>&hellip; 阅读全文&gt;&gt;</a></div>
+    <a href='/blog/2016/02/27/the-fourth-interpreter-about-the-traceproc/'><br>&hellip; 阅读全文&gt;&gt;</a></div>
   </div>
   
   <div>
-    <h2><a href="/blog/2016/02/15/data-representation-the-same-interface-with-different-implementation/">Data Representation-The Same interface with Different implementation</a></h2>
+    <h2><a href="/blog/2016/02/27/the-third-interpreter-implementing-proc/">The third Interpreter implementing Proc</a></h2>
 
 
 
-<span class="article-metadata" >2016-2-15,Monday 预计阅读时间: 2 minutes and    29 seconds with 549 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span>
+<span class="article-metadata" >2016-2-27,Saturday 预计阅读时间: 11 minutes and    8 seconds with 2452 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span>
 
    
   
@@ -560,19 +542,18 @@
   <span class="article-metadata">
     <i class="fas fa-folder mr-1"></i><a href="/categories/programme/">programme</a></span><div class="article-style">
       
-      我们设定一个接口，该接口实现包括三个constructor和1个observer
- zero successor predecessor zero?  当然也可以拓展该接口包括scheme-val-&gt;my-val,my-val-&gt;scheme-val,plus等。 下面看一下如何实现三个相同接口的实现，从而体味data abstraction(data representation or data boundary).
-
+      Scheme解释器的好处是可以不断的拓展自己语言的能力，
+ 通过The First-interpreter-from-eopl创建了一个较为简单let-language，实现了较为简单的减法运算和let局部变量赋值等功能。 The Second Interpreter from on第一次扩展了基础的let-language，实现了四则运算，逻辑判断，列表操作,列表赋值等。 这个版本的解释器进一步拓展了过程定义和过程调用的功能。 
       
-    <a href='/blog/2016/02/15/data-representation-the-same-interface-with-different-implementation/'><br>&hellip; 阅读全文&gt;&gt;</a></div>
+    <a href='/blog/2016/02/27/the-third-interpreter-implementing-proc/'><br>&hellip; 阅读全文&gt;&gt;</a></div>
   </div>
   
   <div>
-    <h2><a href="/blog/2016/02/14/shuffle-cards/">shuffle cards</a></h2>
+    <h2><a href="/blog/2016/02/27/the-second-interpreter-from-one/">The Second Interpreter from One</a></h2>
 
 
 
-<span class="article-metadata" >2016-2-14,Sunday 预计阅读时间: 5 minutes and    56 seconds with 1306 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span>
+<span class="article-metadata" >2016-2-27,Saturday 预计阅读时间: 16 minutes and    25 seconds with 3614 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span>
 
    
   
@@ -580,18 +561,38 @@
   <span class="article-metadata">
     <i class="fas fa-folder mr-1"></i><a href="/categories/programme/">programme</a></span><div class="article-style">
       
-      这个程序是参考洗牌而来，主要定位于scheme的算法运用实现。
+      在[First Interpreter From EOPL][1]中我们定义了一个最为基本的解释器，包含解释以下解释部分
+ const-exp diff-exp zero?-exp if-exp var-exp let-exp  这六种是比较基础的形式，在此基础上我们可以增加四则运算，加入list操作，加入逻辑比较
 
       
-    <a href='/blog/2016/02/14/shuffle-cards/'><br>&hellip; 阅读全文&gt;&gt;</a></div>
+    <a href='/blog/2016/02/27/the-second-interpreter-from-one/'><br>&hellip; 阅读全文&gt;&gt;</a></div>
   </div>
   
   <div>
-    <h2><a href="/blog/2016/02/14/si-ji-mo-si-de-le-yuan-schemers/">斯基摩斯的乐园schemers</a></h2>
+    <h2><a href="/blog/2016/02/26/ydiffdan-wen-jian-jia-de-suo-you-scmwen-jian-bi-jiao/">Ydiff单文件夹的所有scm文件比较</a></h2>
 
 
 
-<span class="article-metadata" >2016-2-14,Sunday 预计阅读时间: 1 minutes and    24 seconds with 310 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span>
+<span class="article-metadata" >2016-2-26,Friday 预计阅读时间: 1 minutes and    11 seconds with 263 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span>
+
+   
+  
+  <span class="middot-divider"></span>
+  <span class="article-metadata">
+    <i class="fas fa-folder mr-1"></i><a href="/categories/programme/">programme</a></span><div class="article-style">
+      
+      关于YDIff处理已经在使用Ydiff工具生成文件差异比较文件中提及，但是只是比较了两个文件夹之间的文件， 而如果是较为简单的单个文件的所有文件的比较？类似思路如下所示，
+
+      
+    <a href='/blog/2016/02/26/ydiffdan-wen-jian-jia-de-suo-you-scmwen-jian-bi-jiao/'><br>&hellip; 阅读全文&gt;&gt;</a></div>
+  </div>
+  
+  <div>
+    <h2><a href="/blog/2016/02/26/some-notations-in-the-design-of-the-language/">Some notations in the design of the language</a></h2>
+
+
+
+<span class="article-metadata" >2016-2-26,Friday 预计阅读时间: 11 minutes and    48 seconds with 2599 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span>
 
    
   
@@ -599,18 +600,18 @@
   <span class="article-metadata">
     <i class="fas fa-folder mr-1"></i><a href="/categories/programme/">programme</a>, <a href="">方法</a></span><div class="article-style">
       
-      作为一个schemer，你得去学习，编程，社交，工作，保持畅通等, 当然你最不该错过的是斯基摩斯的乐园。
+      What does it mean by Kleene star? What can it be used for? It is not so important,but a good tools to record the grammer of the language.目的就是如何更简洁地定义语法。
 
       
-    <a href='/blog/2016/02/14/si-ji-mo-si-de-le-yuan-schemers/'><br>&hellip; 阅读全文&gt;&gt;</a></div>
+    <a href='/blog/2016/02/26/some-notations-in-the-design-of-the-language/'><br>&hellip; 阅读全文&gt;&gt;</a></div>
   </div>
   
   <div>
-    <h2><a href="/blog/2016/02/14/chicken-scheme/">chicken-scheme</a></h2>
+    <h2><a href="/blog/2016/02/25/first-interpreter-from-eopl/">First Interpreter from EOPL</a></h2>
 
 
 
-<span class="article-metadata" >2016-2-14,Sunday 预计阅读时间: 0 minutes and    35 seconds with 130 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span>
+<span class="article-metadata" >2016-2-25,Thursday 预计阅读时间: 20 minutes and    3 seconds with 4412 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span>
 
    
   
@@ -618,18 +619,18 @@
   <span class="article-metadata">
     <i class="fas fa-folder mr-1"></i><a href="/categories/programme/">programme</a></span><div class="article-style">
       
-      它的主要住用适用于产生exe文件，并且对应产生的c代码更加的有效， 运行效率较高。
+      这是EOPL一个最为基本的解释器，后面的解释器都在此基础上进行改造，所以 得理解各个部分，并知道如何使用和改造。最终告诉的是解释器如何解释表达式(每一种语言的表达式)。 解释器解释表达式的问题。
 
       
-    <a href='/blog/2016/02/14/chicken-scheme/'><br>&hellip; 阅读全文&gt;&gt;</a></div>
+    <a href='/blog/2016/02/25/first-interpreter-from-eopl/'><br>&hellip; 阅读全文&gt;&gt;</a></div>
   </div>
   
   <div>
-    <h2><a href="/blog/2016/02/14/notes-from-teach-yourself-scheme/">Notes from Teach yourself scheme</a></h2>
+    <h2><a href="/blog/2016/02/24/chicago-really-only-has-7-characters/">Chicago really only has 7 characters?</a></h2>
 
 
 
-<span class="article-metadata" >2016-2-14,Sunday 预计阅读时间: 2 minutes and    6 seconds with 464 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span>
+<span class="article-metadata" >2016-2-24,Wednesday 预计阅读时间: 4 minutes and    48 seconds with 1059 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span>
 
    
   
@@ -637,18 +638,18 @@
   <span class="article-metadata">
     <i class="fas fa-folder mr-1"></i><a href="/categories/programme/">programme</a></span><div class="article-style">
       
-      The notes is published for rethinking what I am reading in the book called 《Teach Yourself Scheme in Fixnum Days》. It is a good book for introducing scheme(you&rsquo;d better have read the TLS)
+      我在听SICP的优酷视频时，听到“芝加哥也可以说是具有7个字符，同时他也可以表述为美国的中西部伊利诺伊州的全美第三大国际大都市”. 它可以仅仅表示语言的表面意思，也可以表示语言中的隐含意思。这体现了语言实现的一种魅力，Chicago really only has 7 characters?
 
       
-    <a href='/blog/2016/02/14/notes-from-teach-yourself-scheme/'><br>&hellip; 阅读全文&gt;&gt;</a></div>
+    <a href='/blog/2016/02/24/chicago-really-only-has-7-characters/'><br>&hellip; 阅读全文&gt;&gt;</a></div>
   </div>
   
   <div>
-    <h2><a href="/blog/2016/02/13/different-data-types-decide-the-different-operations/">Different data types decide the different operations</a></h2>
+    <h2><a href="/blog/2016/02/23/casesde-zuo-yong/">cases的作用</a></h2>
 
 
 
-<span class="article-metadata" >2016-2-13,Saturday 预计阅读时间: 1 minutes and    58 seconds with 436 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span>
+<span class="article-metadata" >2016-2-23,Tuesday 预计阅读时间: 3 minutes and    7 seconds with 686 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span>
 
    
   
@@ -656,18 +657,18 @@
   <span class="article-metadata">
     <i class="fas fa-folder mr-1"></i><a href="/categories/programme/">programme</a></span><div class="article-style">
       
-      Data types such as list,vector,array,linkedlist,tree etc, all have the self operations to add,delete,modify the content referred.
+      为什么要实现cases,目的在于进一步抽象简化过程。
 
       
-    <a href='/blog/2016/02/13/different-data-types-decide-the-different-operations/'><br>&hellip; 阅读全文&gt;&gt;</a></div>
+    <a href='/blog/2016/02/23/casesde-zuo-yong/'><br>&hellip; 阅读全文&gt;&gt;</a></div>
   </div>
   
   <div>
-    <h2><a href="/blog/2016/02/09/its-a-dead-program-dot-how-to-let-it-alive/">It&#39;s a dead program.How to let it alive?</a></h2>
+    <h2><a href="/blog/2016/02/22/tong-guo-schemedu-qu-wen-jian/">通过Scheme读取文件</a></h2>
 
 
 
-<span class="article-metadata" >2016-2-9,Tuesday 预计阅读时间: 12 minutes and    43 seconds with 2799 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span>
+<span class="article-metadata" >2016-2-22,Monday 预计阅读时间: 1 minutes and    20 seconds with 295 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span>
 
    
   
@@ -675,19 +676,17 @@
   <span class="article-metadata">
     <i class="fas fa-folder mr-1"></i><a href="/categories/programme/">programme</a></span><div class="article-style">
       
-      All programs are data. All intepreters are program. All Handware and software,or type checkers etc are interpreter.
-I think data conceives the soul,not only the fixed process,but changing vari-language.
-
+       通过IO monad的open-input-file 读取文件 通过read-line 读取接口文件 通过name-loop命名loop来循环读取文件。 
       
-    <a href='/blog/2016/02/09/its-a-dead-program-dot-how-to-let-it-alive/'><br>&hellip; 阅读全文&gt;&gt;</a></div>
+    <a href='/blog/2016/02/22/tong-guo-schemedu-qu-wen-jian/'><br>&hellip; 阅读全文&gt;&gt;</a></div>
   </div>
   
   <div>
-    <h2><a href="/blog/2015/10/24/bash-array-he-tuo-zhan-de-pattern-match/">bash Array 和拓展的pattern match</a></h2>
+    <h2><a href="/blog/2016/02/22/shi-yong-ydiffgong-ju-sheng-cheng-wen-jian-chai-yi-bi-jiao-wen-jian/">使用Ydiff工具生成文件差异比较文件</a></h2>
 
 
 
-<span class="article-metadata" >2015-10-24,Saturday 预计阅读时间: 2 minutes and    22 seconds with 523 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span>
+<span class="article-metadata" >2016-2-22,Monday 预计阅读时间: 4 minutes and    37 seconds with 1017 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span>
 
    
   
@@ -695,10 +694,10 @@ I think data conceives the soul,not only the fixed process,but changing vari-lan
   <span class="article-metadata">
     <i class="fas fa-folder mr-1"></i><a href="/categories/programme/">programme</a></span><div class="article-style">
       
-      通过Bash_It的学习，第一次意识到Shell数组的不一样的写法。 并且也看到Pattern Match的一些用途。
+      Ydiff是一个不错的lisp语法分析工具(王垠编制).下面是该工具简单用途和使用说明。
 
       
-    <a href='/blog/2015/10/24/bash-array-he-tuo-zhan-de-pattern-match/'><br>&hellip; 阅读全文&gt;&gt;</a></div>
+    <a href='/blog/2016/02/22/shi-yong-ydiffgong-ju-sheng-cheng-wen-jian-chai-yi-bi-jiao-wen-jian/'><br>&hellip; 阅读全文&gt;&gt;</a></div>
   </div>
   
 

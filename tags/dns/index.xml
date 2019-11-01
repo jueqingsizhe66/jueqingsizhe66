@@ -306,6 +306,306 @@ END PROGRAM b
     </item>
     
     <item>
+      <title>U&#43;-Y&#43;</title>
+      <link>https://jueqingsizhe66.github.io/blog/2015/05/31/u-plus-y-plus/</link>
+      <pubDate>Sun, 31 May 2015 09:31:05 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/blog/2015/05/31/u-plus-y-plus/</guid>
+      <description>&lt;p&gt;这个gnuplot脚本是我用于处理Incompact3d产生出来的统计结果(如何统计部分，暂时未写)的画图脚本。&lt;/p&gt;
+
+&lt;h2 id=&#34;数据段&#34;&gt;数据段&lt;/h2&gt;
+
+&lt;p&gt;注意gnuplot处理数据文件按照空行划分index部分。所以下面的部分总共有四个index，调用方式是&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;plot &amp;ldquo;文件名&amp;rdquo; index 0   第一部分文件信息的打印&lt;/li&gt;
+&lt;li&gt;plot &amp;ldquo;文件名&amp;rdquo; index 1&lt;/li&gt;
+&lt;li&gt;plot &amp;ldquo;文件名&amp;rdquo; index 2&lt;/li&gt;
+&lt;li&gt;plot &amp;ldquo;文件名&amp;rdquo; index 3&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;具体看gnuplot脚本部分。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;0 2.9684e-24
+0.7369 0.73552
+1.4746 1.4677
+2.2139 2.195
+2.9556 2.915
+3.7005 3.6242
+4.4495 4.3184
+5.2034 4.9934
+5.9631 5.6455
+6.7295 6.2713
+7.5034 6.8686
+8.2859 7.4358
+9.078 7.9722
+9.8806 8.4777
+10.695 8.9528
+11.522 9.3986
+12.363 9.8162
+13.219 10.207
+14.092 10.573
+14.983 10.916
+15.894 11.236
+16.825 11.537
+17.779 11.819
+18.759 12.084
+19.764 12.334
+20.799 12.569
+21.864 12.791
+22.963 13.001
+24.099 13.201
+25.273 13.391
+26.49 13.572
+27.753 13.745
+29.065 13.911
+30.431 14.071
+31.855 14.225
+33.343 14.374
+34.899 14.52
+36.529 14.661
+38.24 14.8
+40.04 14.936
+41.936 15.07
+43.936 15.202
+46.052 15.333
+48.292 15.464
+50.669 15.594
+53.196 15.725
+55.887 15.856
+58.756 15.989
+61.819 16.124
+65.096 16.262
+68.603 16.402
+72.361 16.544
+76.389 16.69
+80.706 16.838
+85.33 16.988
+90.276 17.139
+95.557 17.288
+101.18 17.434
+107.14 17.572
+113.42 17.7
+120 17.813
+126.85 17.906
+133.91 17.975
+141.11 18.017
+148.4 18.03
+
+
+5 0
+5 20
+
+
+30 0
+30 20
+
+
+120 0
+120 20
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;gnuplot处理部分&#34;&gt;gnuplot处理部分&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-gnuplot&#34;&gt;set ter &#39;png&#39;
+set out &#39;fit1.png&#39;
+
+set xlabel &amp;quot;Y+&amp;quot;
+set ylabel &amp;quot;U+&amp;quot;
+set xtics font &#39;Times-Roman, 15&#39;
+f(x)=a*x+b
+g(x)=1/k*log(x)+B
+fit [0:5] f(x) &amp;quot;umfit.dat&amp;quot; index 0 via a,b
+print &amp;quot;a:=&amp;quot;,a,&amp;quot;b=&amp;quot;,b
+fit [30:148] g(x) &amp;quot;umfit.dat&amp;quot; index 0 via k,B
+print &amp;quot;k=&amp;quot;,k,&amp;quot;B=&amp;quot;,B
+set xtics 20
+set samples 1280
+set key right bottom box
+set arrow from 20,5 to  5,2 
+set label  sprintf(&amp;quot;viscous sub-layer fit:\n f(x)=%g*x +%g&amp;quot;, a,b)  at 20,6 
+set arrow from 90,12 to  70,16
+set label sprintf(&amp;quot;logarithm range fit:\n f(x)=1/%g*log(x) +%g&amp;quot;,k,B) at 90,11 
+
+#set logscale x
+#set xrange
+#set yrange [0:0.5]
+#[0:220][0:0.04]   # the most important place is here
+plot  [0:148][0:20]  &amp;quot;umfit.dat&amp;quot; index 0 w lp pt 1  t &amp;quot;U+--Y+&amp;quot;,f(x) w l lt -1 lw 2 t &amp;quot;linear-fit&amp;quot;,g(x)  w  l lt 3 lw 2 t &amp;quot;log-fit&amp;quot;,\
+ &amp;quot;&amp;quot; index 1 w l lt 0 t &amp;quot;linear-fit-end&amp;quot;,&amp;quot;&amp;quot; index 2 w l lt 0 t &amp;quot;log-law-start&amp;quot;,&amp;quot;&amp;quot; index 3 w l lt 0 t &amp;quot;log-law-end&amp;quot;
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;处理结果&#34;&gt;处理结果&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/incompact3d/fit1.png&#34; alt=&#34;处理结果&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;一些实时监测部分&#34;&gt;一些实时监测部分&lt;/h2&gt;
+
+&lt;h3 id=&#34;执行部分&#34;&gt;执行部分：&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;a.sh&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;mpirun -np 8  incompact3d  &amp;gt;&amp;gt; tail.out &amp;amp;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;获取信息部分&#34;&gt;获取信息部分&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;image.sh&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;more tail.out | grep DIV | grep U* |grep Max|sed &#39;/final/d&#39;| awk -F&#39;=&#39; &#39;{print $2}&#39; |sed &#39;1,3d&#39;&amp;gt; divu
+more tail.out | grep UT | awk  &#39;{print $4}&#39;|sed &#39;1,2d&#39; &amp;gt; flow-rate-correction-factor
+
+#more tail.out | grep zhao | awk &#39;{print $2,$3,$4}&#39; &amp;gt; stretching
+
+more tail.out | grep PHI | grep max|awk -F&#39;=&#39; &#39;{print $2}&#39; &amp;gt; PHImax
+
+more tail.out | grep PHI|grep MOYEN | awk  -F&amp;quot;:&amp;quot; &#39;{print $2*10^4}&#39;&amp;gt; PHImoyen
+#gnuplot monitorFLOWRATE.gnu
+
+bash monitor.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;打印部分&#34;&gt;打印部分&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;monitor.sh&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;#!/bin/bash
+#===============================================================================
+#
+#          FILE:  monitor.sh
+# 
+#         USAGE:  ./monitor.sh 
+# 
+#   DESCRIPTION:  
+# 
+#       OPTIONS:  ---
+#  REQUIREMENTS:  ---
+#          BUGS:  ---
+#         NOTES:  ---
+#        AUTHOR:  Ye Zhaoliang (YZL), zhaoturkkey@163.com
+#       COMPANY:  NCEPU
+#       VERSION:  1.0
+#       CREATED:  2014年10月28日 09时42分15秒 CST
+#      REVISION:  ---
+#===============================================================================
+
+# set yrange [0:2]
+# set xlabel
+# set ylabel
+function mainpoint()
+{
+ #   echo $0;
+#    echo $1;
+gnuplot&amp;lt;&amp;lt;EOF
+set ter &#39;png&#39;
+set out &#39;$1.png&#39;
+set grid
+plot &#39;$1&#39; w p pt 2
+EOF
+
+}
+
+function mainline()
+{
+ #   echo $0;
+ #   echo $1;
+gnuplot&amp;lt;&amp;lt;EOF
+set ter &#39;png&#39;
+set out &#39;$1.png&#39;
+set grid
+set yrange [0:2]
+plot &#39;$1&#39; w l lt 2
+EOF
+
+
+}
+
+#mainpoint ux2
+#mainpoint uy2
+#mainpoint uz2
+#mainpoint ux5
+#mainpoint uy5
+#mainpoint uz5
+#mainline uy2
+mainpoint divu
+mainpoint flow-rate-correction-factor
+#mainpoint stretching
+mainpoint PHImax
+mainpoint PHImoyen
+#mainpoint averageux2
+#mainpoint averageux5
+#mainpoint rxx2
+#mainpoint rxx5
+#mainpoint dudy_bottom_spatial_only
+#mainpoint dudy_top_spatial_only
+#mainpoint dudy_bottom_spatial_time
+#mainpoint dudy_top_spatial_time
+
+#new add  stress
+#mainpoint umean
+#mainpoint vmean
+#mainpoint wmean
+##mainpoint uu
+##mainpoint vv
+#mainpoint ww
+
+#mainpoint stressu
+#mainpoint stressv
+#mainpoint stressw
+#mainpoint stressuv
+#mainpoint stressuw
+#mainpoint stressvw
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;整合部分&#34;&gt;整合部分&lt;/h3&gt;
+
+&lt;p&gt;cut -c的目的是获取具体对应的时间步,然后把所有的png相关信息 放到对应时间步文件夹中。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;cd /home/Cedric/diric/src &amp;amp;&amp;amp; more tail.out |grep Time|awk &#39;{print $4}&#39; |tail -1|cut -c 1-6 |awk &#39;{cmd=&amp;quot;mkdir step&amp;quot;$1;system(cmd);system(&amp;quot;sh image.sh&amp;quot;);cmd2=&amp;quot;mv *.png step&amp;quot;$1;system(cmd2);} &#39;
+
+# END{cmd3=&amp;quot;mv dudy* umean stress step&amp;quot;$1;system(cmd3)}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;实时浏览&#34;&gt;实时浏览&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;切换到对应的文件夹
+$ python -m SimpleHTTPServer 
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后就可以打开 127.0.0.1:8000进行浏览了。&lt;/p&gt;
+
+&lt;h3 id=&#34;you-can-also-use-crontab-to-execute-program-in-real-time&#34;&gt;You can also use crontab to execute program in real time&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;
+crontab -e
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then you can copy the info below,but modified the datatime.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;0 23 19 6 * sh /home/simulation2_128-117-128Re4200/main.sh 
+30 23 19 6 * sh /home/simulation2_128-117-128Re4200/main.sh 
+0 0 20 6 * sh /home/simulation2_128-117-128Re4200/main.sh 
+30 0 20 6 * sh /home/simulation2_128-117-128Re4200/main.sh 
+0 1 20 6 * sh /home/simulation2_128-117-128Re4200/main.sh 
+30 1 20 6 * sh /home/simulation2_128-117-128Re4200/main.sh 
+0 2 20 6 * sh /home/simulation2_128-117-128Re4200/main.sh 
+30 2 20 6 * sh /home/simulation2_128-117-128Re4200/main.sh 
+0 3 20 6 * sh /home/simulation2_128-117-128Re4200/main.sh 
+30 3 20 6 * sh /home/simulation2_128-117-128Re4200/main.sh 
+0 4 20 6 * sh /home/simulation2_128-117-128Re4200/main.sh 
+30 4 20 6 * sh /home/simulation2_128-117-128Re4200/main.sh 
+0 5 20 6 * sh /home/simulation2_128-117-128Re4200/main.sh 
+30 5 20 6 * sh /home/simulation2_128-117-128Re4200/main.sh 
+0 6 20 6 * sh /home/simulation2_128-117-128Re4200/main.sh 
+30 6 20 6 * sh /home/simulation2_128-117-128Re4200/main.sh 
+0 7 20 6 * sh /home/simulation2_128-117-128Re4200/main.sh 
+30 7 20 6 * sh /home/simulation2_128-117-128Re4200/main.sh 
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+    <item>
       <title>poisson</title>
       <link>https://jueqingsizhe66.github.io/blog/2014/05/14/poisson/</link>
       <pubDate>Wed, 14 May 2014 02:09:00 +0800</pubDate>
