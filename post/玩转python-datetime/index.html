@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.5.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Ye Zhaoliang">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="背景介绍 需要把文本数据格式的时间转变为空格划分的时间信息，见下图 功能实现 技术分解 提取时间信息 字符串处理，头信息组装 datetime格式转变，">
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://jueqingsizhe66.github.io/post/%E7%8E%A9%E8%BD%ACpython-datetime/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css" crossorigin="anonymous" title="hl-light">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin="anonymous">
+    
+
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.min.e8d4d5fd376e67b34452ebe1cae16341.css">
+
+  
+
+  
+
+
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon-32.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="https://jueqingsizhe66.github.io/post/%E7%8E%A9%E8%BD%ACpython-datetime/">
+
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="twitter:site" content="@jueqingsizhe66">
+  <meta property="twitter:creator" content="@jueqingsizhe66">
+  
+  <meta property="og:site_name" content="Macro Life">
+  <meta property="og:url" content="https://jueqingsizhe66.github.io/post/%E7%8E%A9%E8%BD%ACpython-datetime/">
+  <meta property="og:title" content="玩转python datetime | Macro Life">
+  <meta property="og:description" content="背景介绍 需要把文本数据格式的时间转变为空格划分的时间信息，见下图 功能实现 技术分解 提取时间信息 字符串处理，头信息组装 datetime格式转变，"><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
+  <meta property="twitter:image" content="https://jueqingsizhe66.github.io/img/icon-192.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2019-11-06T18:44:00&#43;08:00">
+    
+    <meta property="article:modified_time" content="2019-11-06T18:44:31&#43;08:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://jueqingsizhe66.github.io/post/%E7%8E%A9%E8%BD%ACpython-datetime/"
+  },
+  "headline": "玩转python datetime",
+  
+  "datePublished": "2019-11-06T18:44:00+08:00",
+  "dateModified": "2019-11-06T18:44:31+08:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Ye Zhaoliang"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Macro Life",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://jueqingsizhe66.github.io/img/icon-512.png"
+    }
+  },
+  "description": "背景介绍 需要把文本数据格式的时间转变为空格划分的时间信息，见下图 功能实现 技术分解 提取时间信息 字符串处理，头信息组装 datetime格式转变，"
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>玩转python datetime | Macro Life</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0 compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">Macro Life</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav ml-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#hero"><span>概要</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>博文</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>项目</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#featured"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/about/"><span>About</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/courses/"><span>课程</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/categories/"><span>分类</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/archives"><span>归档</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#tags"><span>标签</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+        </li>
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+  
+ <script async src="//cdn.busuanzi.ibruce.info/cdn/busuanzi/2.3/busuanzi.pure.mini.js"></script> 
+ <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script> 
+ <script> 
+     $(document).ready(function() { 
+         var int = setInterval(fixCount, 100); 
+         var busuanziSiteOffset =  100000  
+         function fixCount() { 
+             if ($("#busuanzi_container_site_pv").css("display") != "none") { 
+                 clearInterval(int); 
+                 $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + busuanziSiteOffset); 
+             } 
+         } 
+     }); 
+ </script> 
+  
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>玩转python datetime</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+          Last updated on
+      
+    
+    Nov 6, 2019
+  </span>
+
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    1 min read
+
+  </span>
+  
+
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/categories/programme/">programme</a></span>
+
+  
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+
+
+<span class="article-metadata" >Reading time: 1 minutes and    10 seconds with 258 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+    <aside>
+        <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#背景介绍">背景介绍</a></li>
+<li><a href="#技术分解">技术分解</a></li>
+<li><a href="#技术实现">技术实现</a></li>
+<li><a href="#附录">附录</a></li>
+</ul></li>
+</ul>
+</nav>
+    </aside>
+  <div class="article-container">
+
+
+    <div class="article-style">
+      
+
+<h2 id="背景介绍">背景介绍</h2>
+
+<p>需要把文本数据格式的时间转变为空格划分的时间信息，见下图
+<a href="/images/aiwind/t1.png">功能实现</a></p>
+
+<h2 id="技术分解">技术分解</h2>
+
+<ol>
+<li>提取时间信息</li>
+<li>字符串处理，头信息组装</li>
+<li>datetime格式转变，运用</li>
+</ol>
+
+<h2 id="技术实现">技术实现</h2>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    <span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
+
+    <span style="color:#f92672">import</span> datetime<span style="color:#f92672">,</span>time
+    csvFile<span style="color:#f92672">=</span><span style="color:#e6db74">r</span><span style="color:#e6db74">&#34;C:\Users\yezhaoliang\Desktop\ew.csv&#34;</span>
+
+    csvData<span style="color:#f92672">=</span>pd<span style="color:#f92672">.</span>read_csv(csvFile,skiprows<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+
+    <span style="color:#75715e"># print(csvData.iloc[1,0])</span>
+    <span style="color:#75715e"># a=csvData.iloc[1,0]</span>
+    <span style="color:#75715e"># print(a)</span>
+    <span style="color:#75715e"># timeArray = time.strptime(a, &#34;%Y%m%d %H:%M:%S&#34;)</span>
+    <span style="color:#75715e">#</span>
+    <span style="color:#75715e"># print(timeArray[1])</span>
+    <span style="color:#75715e"># print(csvDatum)</span>
+    versionName<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;version&#39;</span>
+    versionNumber<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;01&#39;</span>
+    sitename<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;site name&#39;</span>
+    measureTimeName<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;measure period&#39;</span>
+    siteposName<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;site position&#39;</span>
+    coorName<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;coordinate system&#39;</span>
+    measureHeightName<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;measurement height&#39;</span>
+
+    <span style="color:#75715e">### 必须填对测风塔位置！</span>
+    sitePositionX<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;20379022.37&#39;</span>
+    sitePositionY<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;4475481.11&#39;</span>
+    bakFile <span style="color:#f92672">=</span> open(<span style="color:#e6db74">&#34;./testOutput2.tws&#34;</span>, <span style="color:#e6db74">&#39;w&#39;</span>)
+  <span style="color:#75715e">## 用于字符串的填充！打印效果好看些</span>
+    NameListLength<span style="color:#f92672">=</span><span style="color:#ae81ff">22</span>
+    earlistDay<span style="color:#f92672">=</span>csvData<span style="color:#f92672">.</span>iloc[<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>]
+    earlistDate <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>strptime(earlistDay, <span style="color:#e6db74">&#39;%Y%m</span><span style="color:#e6db74">%d</span><span style="color:#e6db74"> %H:%M:%S&#39;</span>)
+    latestDay<span style="color:#f92672">=</span>csvData<span style="color:#f92672">.</span>iloc[len(csvData)<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0</span>]
+    latestDate <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>strptime(latestDay, <span style="color:#e6db74">&#39;%Y%m</span><span style="color:#e6db74">%d</span><span style="color:#e6db74"> %H:%M:%S&#39;</span>)
+    <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;{versionName.ljust(NameListLength,&#34; &#34;)}: {versionNumber}&#39;</span>,file<span style="color:#f92672">=</span>bakFile)
+    <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;{sitename.ljust(NameListLength,&#34; &#34;)}: Tower_wind_{earlistDate.year:04}{earlistDate.month:02}{earlistDate.day:02}&#39;</span>
+          f<span style="color:#e6db74">&#39;-{latestDate.year:04}{latestDate.month:02}{latestDate.day:02}.tim&#39;</span>,file<span style="color:#f92672">=</span>bakFile)
+    <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;{measureTimeName.ljust(NameListLength,&#34; &#34;)}: {earlistDate:%m/</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">/%Y %H:%M}-{latestDate:%m/</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">/%Y %H:%m}&#39;</span>,file<span style="color:#f92672">=</span>bakFile)
+    <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;{siteposName.ljust(NameListLength,&#34; &#34;)}: {sitePositionX} {sitePositionY}&#39;</span>,file<span style="color:#f92672">=</span>bakFile)
+    <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;{coorName.ljust(NameListLength,&#34; &#34;)}: 3&#39;</span>,file<span style="color:#f92672">=</span>bakFile)
+    <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;{measureHeightName.ljust(NameListLength,&#34; &#34;)}: 90.0&#39;</span>,file<span style="color:#f92672">=</span>bakFile)
+    <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;&#39;</span>,file<span style="color:#f92672">=</span>bakFile)
+    <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;rec nr:</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">year:</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">mon:</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">date:</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">hour:</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">min:</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">dir:</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">speed:&#39;</span>,file<span style="color:#f92672">=</span>bakFile)
+<span style="color:#75715e">###正式打入需要的数据</span>
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(csvData)):
+        a <span style="color:#f92672">=</span> csvData<span style="color:#f92672">.</span>iloc[i, <span style="color:#ae81ff">0</span>]
+        direction <span style="color:#f92672">=</span> csvData<span style="color:#f92672">.</span>iloc[i, <span style="color:#ae81ff">1</span>]
+        velocity <span style="color:#f92672">=</span> csvData<span style="color:#f92672">.</span>iloc[i, <span style="color:#ae81ff">2</span>]
+        d1 <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>strptime(a, <span style="color:#e6db74">&#39;%Y%m</span><span style="color:#e6db74">%d</span><span style="color:#e6db74"> %H:%M:%S&#39;</span>)
+        <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;{i}</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">{d1.year:04}</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">{d1.month:02}</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">{d1.day:02}</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">{d1.hour:02}</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">{d1.minute:02}</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">{direction}</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">{velocity}&#39;</span>,file<span style="color:#f92672">=</span>bakFile)
+    bakFile<span style="color:#f92672">.</span>close()</code></pre></div>
+
+<h2 id="附录">附录</h2>
+
+<ol>
+<li><a href="https://blog.csdn.net/qq%5F35711912/article/details/80477950" target="_blank">补全字符串</a></li>
+<li><a href="https://blog.csdn.net/sunxb10/article/details/81036693" target="_blank">Python格式化字符串f-string概览</a></li>
+<li><a href="https://segmentfault.com/a/1190000010310346" target="_blank">输出print信息到文件</a></li>
+</ol>
+
+    </div>
+ <div class="nav-links" style="padding:10;">
+        
+        <div align="left">
+        <a href="https://jueqingsizhe66.github.io/post/python-pandas%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%BD%AC%E5%8C%96/"><span class="arrow">←</span> <strong>上一篇:python pandas数据结构转化</strong></a>
+        </div>
+        
+        
+      </div>
+    
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tags/python/">python</a>
+  
+</div>
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=https://jueqingsizhe66.github.io/post/%E7%8E%A9%E8%BD%ACpython-datetime/&amp;text=%e7%8e%a9%e8%bd%acpython%20datetime" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=https://jueqingsizhe66.github.io/post/%E7%8E%A9%E8%BD%ACpython-datetime/&amp;t=%e7%8e%a9%e8%bd%acpython%20datetime" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=%e7%8e%a9%e8%bd%acpython%20datetime&amp;body=https://jueqingsizhe66.github.io/post/%E7%8E%A9%E8%BD%ACpython-datetime/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https://jueqingsizhe66.github.io/post/%E7%8E%A9%E8%BD%ACpython-datetime/&amp;title=%e7%8e%a9%e8%bd%acpython%20datetime" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=%e7%8e%a9%e8%bd%acpython%20datetime%20https://jueqingsizhe66.github.io/post/%E7%8E%A9%E8%BD%ACpython-datetime/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=https://jueqingsizhe66.github.io/post/%E7%8E%A9%E8%BD%ACpython-datetime/&amp;title=%e7%8e%a9%e8%bd%acpython%20datetime" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="portrait mr-3" src="/authors/admin/avatar_hu52a603635ecebd45650b162dadabb4e5_12861_250x250_fill_q90_lanczos_center.jpg" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://jueqingsizhe66.github.io/">Ye Zhaoliang</a></h5>
+      <h6 class="card-subtitle">Engineer of offshore wind turbine technique research</h6>
+      <p class="card-text">My research interests include distributed energy, wind turbine power generation technique , Computational fluid dynamic and programmable matter.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/jueqingsizhe66" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.co.uk/citations?user=7VyEMyQAAAAJ&amp;hl=zh-CN" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/jueqingsizhe66" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>Related</h3>
+    <ul>
+      
+      <li><a href="/post/python-pandas%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%BD%AC%E5%8C%96/">python pandas数据结构转化</a></li>
+      
+      <li><a href="/blog/2015/06/11/ji-yu-pythonde-ju-yu-wang-wen-jian-gong-xiang-ruan-jian-simplehttpserverwithupload/">基于python的局域网文件共享软件SimpleHTTPServerWithUpload</a></li>
+      
+      <li><a href="/post/python%E4%BC%97%E5%A4%9A%E6%96%87%E4%BB%B6%E4%B8%AD%E6%8F%90%E5%8F%96%E8%BD%AE%E6%AF%82%E9%AB%98%E5%BA%A6%E5%A4%84%E9%A3%8E%E9%80%9F/">python众多文件中提取轮毂高度处风速</a></li>
+      
+      <li><a href="/post/python%E5%AF%B9%E6%AF%94%E4%BD%9C%E5%9B%BE%E4%B8%A4%E4%B8%AA%E9%A3%8E%E9%80%9F%E9%A3%8E%E5%90%91%E8%A1%A8/">python对比作图两个风速风向表</a></li>
+      
+      <li><a href="/post/python%E6%8F%90%E5%8F%96%E5%90%84%E4%B8%AA%E6%89%87%E5%8C%BA%E4%B8%8D%E5%90%8C%E6%9C%BA%E4%BD%8D%E7%82%B9%E9%A3%8E%E9%80%9F%E9%A3%8E%E5%90%91%E8%A1%A8/">python提取各个扇区不同机位点风速风向表</a></li>
+      
+    </ul>
+
+
+         <span id="busuanzi_container_site_pv"> 
+             本站访问量：<span id="busuanzi_value_site_pv"></span>次 
+         </span> 
+         &nbsp; 
+   </div> 
+
+
+  </div>
+
+</article>
+<script src="https://utteranc.es/client.js"
+        repo="jueqingsizhe66/jueqingsizhe66.github.io"
+        issue-term="pathname"
+        theme="github-dark"
+        crossorigin="anonymous"
+        async>
+</script>
+
+      
+
+    
+    
+    
+    <script src="/js/mathjax-config.js"></script>
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js" integrity="sha256-aYTdUrn6Ow1DDgh5JTc3aDGnnju48y/1c8s1dgkYPQ8=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/go.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/vim.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/matlab.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/sql.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/python.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/c.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/scheme.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/racket.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/perl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/awk.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/clojure.min.js"></script>
+        
+      
+
+      
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
+      
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.d6bd04fdad2ad213aa8111c5a3b72fc5.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    &copy;2019 &middot; 
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

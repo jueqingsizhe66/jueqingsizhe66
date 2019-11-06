@@ -5,12 +5,94 @@
     <link>https://jueqingsizhe66.github.io/tags/python/</link>
       <atom:link href="https://jueqingsizhe66.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
     <description>python</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>©2019</copyright><lastBuildDate>Sat, 02 Nov 2019 00:44:00 +0800</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>©2019</copyright><lastBuildDate>Wed, 06 Nov 2019 18:44:00 +0800</lastBuildDate>
     <image>
       <url>https://jueqingsizhe66.github.io/img/icon-192.png</url>
       <title>python</title>
       <link>https://jueqingsizhe66.github.io/tags/python/</link>
     </image>
+    
+    <item>
+      <title>玩转python datetime</title>
+      <link>https://jueqingsizhe66.github.io/post/%E7%8E%A9%E8%BD%ACpython-datetime/</link>
+      <pubDate>Wed, 06 Nov 2019 18:44:00 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/post/%E7%8E%A9%E8%BD%ACpython-datetime/</guid>
+      <description>
+
+&lt;h2 id=&#34;背景介绍&#34;&gt;背景介绍&lt;/h2&gt;
+
+&lt;p&gt;需要把文本数据格式的时间转变为空格划分的时间信息，见下图
+&lt;a href=&#34;https://jueqingsizhe66.github.io/images/aiwind/t1.png&#34;&gt;功能实现&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;技术分解&#34;&gt;技术分解&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;提取时间信息&lt;/li&gt;
+&lt;li&gt;字符串处理，头信息组装&lt;/li&gt;
+&lt;li&gt;datetime格式转变，运用&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;技术实现&#34;&gt;技术实现&lt;/h2&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; pandas &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; pd
+
+    &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; datetime&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt;time
+    csvFile&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C:\Users\yezhaoliang\Desktop\ew.csv&amp;#34;&lt;/span&gt;
+
+    csvData&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read_csv(csvFile,skiprows&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+
+    &lt;span style=&#34;color:#75715e&#34;&gt;# print(csvData.iloc[1,0])&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# a=csvData.iloc[1,0]&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# print(a)&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# timeArray = time.strptime(a, &amp;#34;%Y%m%d %H:%M:%S&amp;#34;)&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;#&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# print(timeArray[1])&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# print(csvDatum)&lt;/span&gt;
+    versionName&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;version&amp;#39;&lt;/span&gt;
+    versionNumber&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;01&amp;#39;&lt;/span&gt;
+    sitename&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;site name&amp;#39;&lt;/span&gt;
+    measureTimeName&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;measure period&amp;#39;&lt;/span&gt;
+    siteposName&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;site position&amp;#39;&lt;/span&gt;
+    coorName&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;coordinate system&amp;#39;&lt;/span&gt;
+    measureHeightName&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;measurement height&amp;#39;&lt;/span&gt;
+
+    &lt;span style=&#34;color:#75715e&#34;&gt;### 必须填对测风塔位置！&lt;/span&gt;
+    sitePositionX&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;20379022.37&amp;#39;&lt;/span&gt;
+    sitePositionY&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;4475481.11&amp;#39;&lt;/span&gt;
+    bakFile &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; open(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;./testOutput2.tws&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;w&amp;#39;&lt;/span&gt;)
+  &lt;span style=&#34;color:#75715e&#34;&gt;## 用于字符串的填充！打印效果好看些&lt;/span&gt;
+    NameListLength&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;22&lt;/span&gt;
+    earlistDay&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;csvData&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]
+    earlistDate &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;strptime(earlistDay, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;%Y%m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%d&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; %H:%M:%S&amp;#39;&lt;/span&gt;)
+    latestDay&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;csvData&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[len(csvData)&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]
+    latestDate &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;strptime(latestDay, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;%Y%m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%d&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; %H:%M:%S&amp;#39;&lt;/span&gt;)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(f&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{versionName.ljust(NameListLength,&amp;#34; &amp;#34;)}: {versionNumber}&amp;#39;&lt;/span&gt;,file&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;bakFile)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(f&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{sitename.ljust(NameListLength,&amp;#34; &amp;#34;)}: Tower_wind_{earlistDate.year:04}{earlistDate.month:02}{earlistDate.day:02}&amp;#39;&lt;/span&gt;
+          f&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;-{latestDate.year:04}{latestDate.month:02}{latestDate.day:02}.tim&amp;#39;&lt;/span&gt;,file&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;bakFile)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(f&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{measureTimeName.ljust(NameListLength,&amp;#34; &amp;#34;)}: {earlistDate:%m/&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%d&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;/%Y %H:%M}-{latestDate:%m/&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%d&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;/%Y %H:%m}&amp;#39;&lt;/span&gt;,file&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;bakFile)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(f&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{siteposName.ljust(NameListLength,&amp;#34; &amp;#34;)}: {sitePositionX} {sitePositionY}&amp;#39;&lt;/span&gt;,file&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;bakFile)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(f&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{coorName.ljust(NameListLength,&amp;#34; &amp;#34;)}: 3&amp;#39;&lt;/span&gt;,file&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;bakFile)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(f&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{measureHeightName.ljust(NameListLength,&amp;#34; &amp;#34;)}: 90.0&amp;#39;&lt;/span&gt;,file&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;bakFile)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(f&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;,file&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;bakFile)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(f&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;rec nr:&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\t&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;year:&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\t&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;mon:&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\t&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;date:&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\t&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;hour:&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\t&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;min:&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\t&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;dir:&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\t&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;speed:&amp;#39;&lt;/span&gt;,file&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;bakFile)
+&lt;span style=&#34;color:#75715e&#34;&gt;###正式打入需要的数据&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(csvData)):
+        a &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; csvData&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[i, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]
+        direction &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; csvData&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[i, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+        velocity &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; csvData&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[i, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;]
+        d1 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;strptime(a, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;%Y%m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%d&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; %H:%M:%S&amp;#39;&lt;/span&gt;)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(f&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{i}&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\t&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{d1.year:04}&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\t&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{d1.month:02}&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\t&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{d1.day:02}&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\t&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{d1.hour:02}&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\t&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{d1.minute:02}&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\t&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{direction}&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\t&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{velocity}&amp;#39;&lt;/span&gt;,file&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;bakFile)
+    bakFile&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;close()&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&#34;附录&#34;&gt;附录&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/qq%5F35711912/article/details/80477950&#34; target=&#34;_blank&#34;&gt;补全字符串&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/sunxb10/article/details/81036693&#34; target=&#34;_blank&#34;&gt;Python格式化字符串f-string概览&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://segmentfault.com/a/1190000010310346&#34; target=&#34;_blank&#34;&gt;输出print信息到文件&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
     
     <item>
       <title>python pandas数据结构转化</title>
@@ -586,6 +668,8 @@ headDir&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#
         UCRT&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;sd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[&lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;]
         VCRT&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;sd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[&lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;]
         speed2d&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;sd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[&lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;]
+&lt;span style=&#34;color:#75715e&#34;&gt;## 有趣的是： python atan2(y,x) 而在excel对应的为 atan2(x,y) --&amp;gt;只是针对和x轴夹角&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;##   如果需要针对y轴夹角必须采用python的atan2(x,y), 或者 excel的atan2(y,x)才是扇区角度的意思&lt;/span&gt;
         actualAngle&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;ma&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;atan2(UCRT,VCRT)&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;180&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3.1415926&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;180&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;## 赋值&lt;/span&gt;
         results&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[turbineVId,sectorId]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;speed2d
