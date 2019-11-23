@@ -461,6 +461,21 @@ write_file $filename, {binmode &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;g
     &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;其实外置、内置的思路都是open、循环、删除、重命名的过程这样还可以不断拓展，增加判断等。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;elisp通过defmacro生成一个&lt;a href=&#34;https://emacs-china.org/t/elisp/11023/3&#34; target=&#34;_blank&#34;&gt; 临时的defvar、defun &lt;/a&gt;等,即生成一个新的状态或者worker&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-elisp&#34;&gt;(defmacro defvar/os (name &amp;amp;rest args)
+`(defvar ,name
+ (pcase system-type
+   ,@(mapcar (lambda (x)
+               (let ((a (car x))
+                     (b (cadr x)))
+                 `(,(ecase a
+                      (:windows &#39;&#39;windows-nt)
+                      (:macos &#39;&#39;darwin))
+                   ,b)))
+               (-partition-all 2 args)))))
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;h3 id=&#34;增强版的自定义功能&#34;&gt;增强版的自定义功能&lt;/h3&gt;

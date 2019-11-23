@@ -5,12 +5,463 @@
     <link>https://jueqingsizhe66.github.io/tags/python/</link>
       <atom:link href="https://jueqingsizhe66.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
     <description>python</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>©2019</copyright><lastBuildDate>Wed, 06 Nov 2019 18:44:00 +0800</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>©2019</copyright><lastBuildDate>Sat, 23 Nov 2019 23:16:00 +0800</lastBuildDate>
     <image>
       <url>https://jueqingsizhe66.github.io/img/icon-192.png</url>
       <title>python</title>
       <link>https://jueqingsizhe66.github.io/tags/python/</link>
     </image>
+    
+    <item>
+      <title>风电场SCADA风速手算理论发电量和K值</title>
+      <link>https://jueqingsizhe66.github.io/post/%E9%A3%8E%E7%94%B5%E5%9C%BAscada%E9%A3%8E%E9%80%9F%E6%89%8B%E7%AE%97%E7%90%86%E8%AE%BA%E5%8F%91%E7%94%B5%E9%87%8F/</link>
+      <pubDate>Sat, 23 Nov 2019 23:16:00 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/post/%E9%A3%8E%E7%94%B5%E5%9C%BAscada%E9%A3%8E%E9%80%9F%E6%89%8B%E7%AE%97%E7%90%86%E8%AE%BA%E5%8F%91%E7%94%B5%E9%87%8F/</guid>
+      <description>
+
+&lt;h2 id=&#34;背景分析&#34;&gt;背景分析&lt;/h2&gt;
+
+&lt;p&gt;有时候需要根据一条功率曲线，手算scada速度序列的发电量&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;设计功率曲线&lt;/li&gt;
+&lt;li&gt;scada风速序列&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;!--listend--&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; pandas &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; pd
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; numpy &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; np
+
+&lt;span style=&#34;color:#75715e&#34;&gt;## Yandun&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#powerlaw=pd.read_csv(r&amp;#39;C:\Users\yezhaoliang\Desktop\power12.csv&amp;#39;)&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;## Dongping&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#powerlaw=pd.read_csv(r&amp;#39;C:\Users\yezhaoliang\Desktop\my89_12.csv&amp;#39;)&lt;/span&gt;
+powerlaw&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read_csv(&lt;span style=&#34;color:#e6db74&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;C:\Users\yezhaoliang\Desktop\SL3000_121.pws.csv&amp;#39;&lt;/span&gt;)
+
+cpVs &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; powerlaw&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[:, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]
+cpPs &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; powerlaw&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[:, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+&lt;span style=&#34;color:#75715e&#34;&gt;#velocitySet=pd.read_csv(r&amp;#39;C:\Users\yezhaoliang\Desktop\nacWindsim2.csv&amp;#39;)&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#velocitySet=pd.read_csv(r&amp;#39;C:\Users\yezhaoliang\Desktop\lidar.csv&amp;#39;)&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# velocitySet=pd.read_csv(r&amp;#39;C:\Users\yezhaoliang\Desktop\nac1.csv&amp;#39;,skiprows=1)&lt;/span&gt;
+
+&lt;span style=&#34;color:#75715e&#34;&gt;# nac1= velocitySet.iloc[:,0]&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# nac2= velocitySet.iloc[:,1]&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# nac4= velocitySet.iloc[:,2]&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# nac7= velocitySet.iloc[:,3]&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# nac8= velocitySet.iloc[:,4]&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# nac12= velocitySet.iloc[:,5]&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;find&lt;/span&gt;(vel, cpVs):
+    count&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; cpV &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; cpVs:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(cpV &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; vel):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; count
+        count&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;count&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;getMean&lt;/span&gt;(cpVs,cpPs,vel):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(vel&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;):
+        rePower&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; rePower
+    index &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; find(vel, cpVs)
+    v1&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; cpVs[index&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+    v2&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; cpVs[index]
+    p1&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; cpPs[index&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+    p2&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; cpPs[index]
+    rePower &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; p1&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;(p2&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;p1)&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;(v2&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;v1)&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;(vel&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;v1)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; rePower
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;modify&lt;/span&gt;(vel):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; (vel&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0.7081&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0.9869&lt;/span&gt;
+
+&lt;span style=&#34;color:#75715e&#34;&gt;############################################################&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;##  Velocity linear interpolation Method ####################################&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;############################################################&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;getPower&lt;/span&gt;(nac,i):
+    calPower&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;zeros(len(nac),dtype&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;float)
+    calVel&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;zeros(len(nac),dtype&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;float)
+    count&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; vel &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; nac:
+        calPower[count]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;getMean(cpVs,cpPs,modify(vel))
+        &lt;span style=&#34;color:#75715e&#34;&gt;#calPower[count]=getMean(cpVs,cpPs,vel)&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;#calPower[count]=getMean(cpVs,cpPs,vel)&lt;/span&gt;
+        calVel[count]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;modify(vel)
+        count&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;count&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    calPowerSeries&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;DataFrame([calVel,calPower])&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;T
+    calPowerSeries&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_csv(str(i)&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;-power.csv&amp;#34;&lt;/span&gt;)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sum(calPower)&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;6000&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;############################################################&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;##  Velocity Bin Method ####################################&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;############################################################&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;powerLawIntoZones&lt;/span&gt;(zones):
+    velocityZones&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;linspace(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;25&lt;/span&gt;,zones)
+    powerZones&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;zeros(velocityZones&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;__len__())
+    velocityBinMag&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;25&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;zones
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(zones):
+        velocityZones[i]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;i&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;velocityBinMag
+        powerZones[i]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;getMean(cpVs,cpPs,i&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;velocityBinMag)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; velocityZones,powerZones
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;whichZones&lt;/span&gt;(vel,velocityZones,powerZones,zones):
+    velocityMagnitude&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;25.0&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;zones
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(zones):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;i):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(vel&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; vel &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;velocityMagnitude&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2.0&lt;/span&gt;):
+                power&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(vel&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt;(velocityZones[i]&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;velocityMagnitude&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2.0&lt;/span&gt;)  &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt;
+                    vel&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;(velocityZones[i]&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;velocityMagnitude&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2.0&lt;/span&gt;) ):
+                power &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; powerZones[i]
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; power
+
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;getPowerVelocityBin&lt;/span&gt;(nac,i,zones&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;50&lt;/span&gt;):
+    calPower&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;zeros(len(nac),dtype&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;float)
+    calVel&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;zeros(len(nac),dtype&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;float)
+    count&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    [velocityZones,powerZones]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;powerLawIntoZones(zones)
+    cps&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;DataFrame([velocityZones,powerZones])&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;T
+    cps&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_excel(f&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;powerVelocityBin{zones}.xlsx&amp;#34;&lt;/span&gt;)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; vel &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; nac:
+        &lt;span style=&#34;color:#75715e&#34;&gt;#calPower[count]=getMean(cpVs,cpPs,vel)&lt;/span&gt;
+        calVel[count]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;vel
+        calPower[count]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;whichZones(modify(vel),velocityZones,powerZones,zones)
+        count&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;count&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    calPowerSeries&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;DataFrame([calVel,calPower])&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;T
+    calPowerSeries&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_csv(str(i)&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;-powerBin.csv&amp;#34;&lt;/span&gt;)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sum(calPower)&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;6000&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# nac8 = velocitySet.iloc[:, 0]&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# power1 = getPower(nac8,0)&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# print(power1)&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# 烟墩6台机组 ：0-6&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#velocitySet=pd.read_csv(r&amp;#39;C:\Users\yezhaoliang\Desktop\nacVelocity.csv&amp;#39;,skiprows=1)&lt;/span&gt;
+velocitySet&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read_csv(&lt;span style=&#34;color:#e6db74&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;C:\Users\yezhaoliang\Desktop\nacVelocity220.csv&amp;#39;&lt;/span&gt;,skiprows&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+&lt;span style=&#34;color:#75715e&#34;&gt;# 东平10台机组 ： 0-10&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#velocitySet=pd.read_csv(r&amp;#39;C:\Users\yezhaoliang\Desktop\VP.csv&amp;#39;,skiprows=1)&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;):
+&lt;span style=&#34;color:#75715e&#34;&gt;#for i in range(0,10):&lt;/span&gt;
+    nac8 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; velocitySet&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[:, i]
+    power1 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; getPower(nac8,i)
+    &lt;span style=&#34;color:#75715e&#34;&gt;#power1 = getPowerVelocityBin(nac8,i,50)&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(power1)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&#34;速度分仓&#34;&gt;速度分仓&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;设计功率曲线按照分仓个数bin,进行分仓&lt;/li&gt;
+&lt;li&gt;按照分仓大小，设置速度范围多少归入一个仓中，比如50个分仓，仓大小为0.5, 那么第二个分仓也就是0.5，得满足所有大于等于0.25 小于0.75的速度序列术语第二个分仓&lt;/li&gt;
+&lt;li&gt;结果发现速度分仓超过25仓之后，对功率曲线计算结果基本上和线性插值类似。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;悟空-条件&#34;&gt;悟空[条件]&lt;/h2&gt;
+
+&lt;p&gt;注意判断中大于号和小于号都不能写错，涉及到判断、抉择、条件、空的时候一定得注意思考对，曾经我就犯过错误!&lt;/p&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(vel&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt;(velocityZones[i]&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;velocityMagnitude&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2.0&lt;/span&gt;)  &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt;
+        vel&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;(velocityZones[i]&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;velocityMagnitude&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2.0&lt;/span&gt;) ):&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&#34;手算两条功率的k值&#34;&gt;手算两条功率的k值&lt;/h2&gt;
+
+&lt;p&gt;实际功率曲线[一般是scada的风速和功率的散点图]和设计功率曲线之比如果达到1，也就是k值，那么认为是最好的，如果大点也可以，但是最好不要少于，为了计算这个k值，简单编写了下面代码&lt;/p&gt;
+
+&lt;p&gt;核心的地方在于比较提取的过程，即&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;scada的风速-功率关系散点图&lt;/li&gt;
+&lt;li&gt;设计功率曲线&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;!--listend--&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; vel &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(nac&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;__len__()):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(zones):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;j &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; nac[vel]&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; nac[vel] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;velocityMagnitude&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2.0&lt;/span&gt;):
+            counts[j]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;counts[j]&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+            velocitySum[j]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;velocitySum[j]&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;nac[vel]
+            powerSum[j]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;powerSum[j]&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;power[vel]
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt;(nac[vel]&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt;(velocityZones[j]&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;velocityMagnitude&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2.0&lt;/span&gt;)  &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt;
+            nac[vel]&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;(velocityZones[j]&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;velocityMagnitude&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2.0&lt;/span&gt;)):
+            counts[j]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;counts[j]&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+            velocitySum[j]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;velocitySum[j]&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;nac[vel]
+            powerSum[j]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;powerSum[j]&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;power[vel]
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;全部代码如下：&lt;/p&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; pandas &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; pd
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; numpy &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; np
+
+&lt;span style=&#34;color:#75715e&#34;&gt;### 规定风速范围从0-25 不能少于25&lt;/span&gt;
+powerlaw&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read_csv(&lt;span style=&#34;color:#e6db74&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;C:\Users\yezhaoliang\Desktop\my89_12.csv&amp;#39;&lt;/span&gt;)
+
+cpVs &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; powerlaw&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[:, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]
+cpPs &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; powerlaw&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[:, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+&lt;span style=&#34;color:#75715e&#34;&gt;#velocitySet=pd.read_csv(r&amp;#39;C:\Users\yezhaoliang\Desktop\nacWindsim2.csv&amp;#39;)&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#velocitySet=pd.read_csv(r&amp;#39;C:\Users\yezhaoliang\Desktop\lidar.csv&amp;#39;)&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# velocitySet=pd.read_csv(r&amp;#39;C:\Users\yezhaoliang\Desktop\nac1.csv&amp;#39;,skiprows=1)&lt;/span&gt;
+
+&lt;span style=&#34;color:#75715e&#34;&gt;# nac1= velocitySet.iloc[:,0]&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# nac2= velocitySet.iloc[:,1]&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# nac4= velocitySet.iloc[:,2]&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# nac7= velocitySet.iloc[:,3]&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# nac8= velocitySet.iloc[:,4]&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# nac12= velocitySet.iloc[:,5]&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;find&lt;/span&gt;(vel, cpVs):
+    count&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; cpV &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; cpVs:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(cpV &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; vel):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; count
+        count&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;count&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;getMean&lt;/span&gt;(cpVs,cpPs,vel):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(vel&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;):
+        rePower&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; rePower
+    index &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; find(vel, cpVs)
+    v1&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; cpVs[index&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+    v2&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; cpVs[index]
+    p1&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; cpPs[index&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+    p2&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; cpPs[index]
+    rePower &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; p1&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;(p2&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;p1)&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;(v2&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;v1)&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;(vel&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;v1)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; rePower
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;modify&lt;/span&gt;(vel):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; (vel&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0.7081&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0.9869&lt;/span&gt;
+
+&lt;span style=&#34;color:#75715e&#34;&gt;############################################################&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;##  Velocity linear interpolation Method ####################################&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;############################################################&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;getPower&lt;/span&gt;(nac,i):
+    calPower&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;zeros(len(nac),dtype&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;float)
+    calVel&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;zeros(len(nac),dtype&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;float)
+    count&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; vel &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; nac:
+        calPower[count]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;getMean(cpVs,cpPs,modify(vel))
+        &lt;span style=&#34;color:#75715e&#34;&gt;#calPower[count]=getMean(cpVs,cpPs,vel)&lt;/span&gt;
+        calVel[count]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;vel
+        count&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;count&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    calPowerSeries&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;DataFrame([calVel,calPower])&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;T
+    calPowerSeries&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_csv(str(i)&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;-power.csv&amp;#34;&lt;/span&gt;)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sum(calPower)&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;6000&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;############################################################&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;##  Velocity Bin Method ####################################&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;############################################################&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;powerLawIntoZones&lt;/span&gt;(zones):
+    velocityZones&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;linspace(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;25&lt;/span&gt;,zones)
+    powerZones&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;zeros(velocityZones&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;__len__())
+    velocityBinMag&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;25&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;zones
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(zones):
+        velocityZones[i]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;i&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;velocityBinMag
+        powerZones[i]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;getMean(cpVs,cpPs,i&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;velocityBinMag)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; velocityZones,powerZones
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;velocitySeriesSplitIntoZones&lt;/span&gt;(nac,power,zones&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;50&lt;/span&gt;):
+    [velocityZones,powerZones]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;powerLawIntoZones(zones)
+    velocityMagnitude&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;25.0&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;zones
+    counts&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;zeros(zones)
+    probability&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;zeros(zones)
+    velocitySum&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;zeros(zones)
+    velocityMean&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;zeros(zones)
+    powerSum&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;zeros(zones)
+    powerMean&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;zeros(zones)
+    powerTheory&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;zeros(zones)
+
+    AEPActual&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;zeros(zones)
+    AEPTheory&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;zeros(zones)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; vel &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(nac&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;__len__()):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(zones):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;j &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; nac[vel]&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; nac[vel] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;velocityMagnitude&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2.0&lt;/span&gt;):
+                counts[j]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;counts[j]&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+                velocitySum[j]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;velocitySum[j]&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;nac[vel]
+                powerSum[j]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;powerSum[j]&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;power[vel]
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt;(nac[vel]&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt;(velocityZones[j]&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;velocityMagnitude&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2.0&lt;/span&gt;)  &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt;
+                 nac[vel]&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;(velocityZones[j]&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;velocityMagnitude&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2.0&lt;/span&gt;)):
+                counts[j]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;counts[j]&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+                velocitySum[j]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;velocitySum[j]&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;nac[vel]
+                powerSum[j]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;powerSum[j]&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;power[vel]
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(counts&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;__len__()):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;counts[i]):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;continue&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+            probability[i]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;counts[i]&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;nac&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;__len__()
+            velocityMean[i]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;velocitySum[i]&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;counts[i]
+            powerMean[i]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;powerSum[i]&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;counts[i]
+            powerTheory[i]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;getMean(cpVs,cpPs,velocityMean[i])
+            AEPActual[i]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;probability[i]&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;powerMean[i]&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;8760&lt;/span&gt;
+            AEPTheory[i]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;probability[i]&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;powerTheory[i]&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;8760&lt;/span&gt;
+
+
+    k&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sum(AEPActual)&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sum(AEPTheory)
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; probability,velocityMean,powerMean,k
+
+
+
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;whichZones&lt;/span&gt;(vel,velocityZones,powerZones,zones):
+    velocityMagnitude&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;25.0&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;zones
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(zones):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;i):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(vel&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; vel &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;velocityMagnitude&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2.0&lt;/span&gt;):
+                power&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(vel&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt;(velocityZones[i]&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;velocityMagnitude&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2.0&lt;/span&gt;)  &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt;
+                    vel&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;(velocityZones[i]&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;velocityMagnitude&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2.0&lt;/span&gt;) ):
+                power &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; powerZones[i]
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; power
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;getPowerVelocityBin&lt;/span&gt;(nac,i,zones&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;50&lt;/span&gt;):
+    calPower&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;zeros(len(nac),dtype&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;float)
+    calVel&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;zeros(len(nac),dtype&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;float)
+    count&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    [velocityZones,powerZones]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;powerLawIntoZones(zones)
+    cps&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;DataFrame([velocityZones,powerZones])&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;T
+    cps&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_excel(f&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;powerVelocityBin{zones}.xlsx&amp;#34;&lt;/span&gt;)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; vel &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; nac:
+        &lt;span style=&#34;color:#75715e&#34;&gt;#calPower[count]=getMean(cpVs,cpPs,vel)&lt;/span&gt;
+        calVel[count]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;vel
+        calPower[count]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;whichZones(modify(vel),velocityZones,powerZones,zones)
+        count&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;count&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    calPowerSeries&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;DataFrame([calVel,calPower])&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;T
+    calPowerSeries&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_csv(str(i)&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;-powerBin.csv&amp;#34;&lt;/span&gt;)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sum(calPower)&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;6000&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# nac8 = velocitySet.iloc[:, 0]&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# power1 = getPower(nac8,0)&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# print(power1)&lt;/span&gt;
+velocitySet&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read_csv(&lt;span style=&#34;color:#e6db74&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;C:\Users\yezhaoliang\Desktop\nacVelocity.csv&amp;#39;&lt;/span&gt;,skiprows&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+velocityPowerSeries&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read_csv(&lt;span style=&#34;color:#e6db74&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;C:\Users\yezhaoliang\Desktop\vp.csv&amp;#39;&lt;/span&gt;)
+
+kvalues&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;zeros(&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;):
+    &lt;span style=&#34;color:#75715e&#34;&gt;# nac8 = velocitySet.iloc[:, i]&lt;/span&gt;
+    nac8 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; velocityPowerSeries&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[:, i]
+    power8 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; velocityPowerSeries&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[:, i&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;]
+    [probability,velocitySet,PowerSet,k] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; velocitySeriesSplitIntoZones(nac8,power8,&lt;span style=&#34;color:#ae81ff&#34;&gt;50&lt;/span&gt;)
+    kvalues[i] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; k
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sum(probability))
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(f&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;k value is {k}&amp;#34;&lt;/span&gt;)
+    &lt;span style=&#34;color:#75715e&#34;&gt;#power1 = getPower(nac8,i)&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#    power1 = getPowerVelocityBin(nac8,i,125)&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#    print(power1)&lt;/span&gt;
+kset&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Series(kvalues)
+kset&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_csv(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;kvalues.csv&amp;#34;&lt;/span&gt;)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>python制作曲线动画</title>
+      <link>https://jueqingsizhe66.github.io/post/python%E5%88%B6%E4%BD%9C%E6%9B%B2%E7%BA%BF%E5%8A%A8%E7%94%BB/</link>
+      <pubDate>Sat, 23 Nov 2019 18:50:00 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/post/python%E5%88%B6%E4%BD%9C%E6%9B%B2%E7%BA%BF%E5%8A%A8%E7%94%BB/</guid>
+      <description>
+
+&lt;p&gt;动画是一个比较直观的方式展示你的设计过程，下文的codes可以方便按照你规定的点序进行逐点绘制&lt;/p&gt;
+
+&lt;p&gt;编写的步骤如下技术路线图&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/python/hugoAnimation.png&#34; alt=&#34;技术路线&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;text绘制添加增加动画效果&#34;&gt;text绘制添加增加动画效果&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.cnblogs.com/endlesscoding/p/10308111.html&#34; target=&#34;_blank&#34;&gt;如何在运动过程中添加背景点text&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;mp4格式导出&#34;&gt;mp4格式导出&lt;/h2&gt;
+
+&lt;p&gt;在Ubuntu或者mac系统可以试用image
+注意控制&lt;a href=&#34;https://blog.csdn.net/sailist/article/details/79502007&#34; target=&#34;_blank&#34;&gt;ffmpeg&lt;/a&gt;的路径&lt;/p&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## 设置ffmpeg路径&lt;/span&gt;
+  ffmpegpath &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;abspath(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;./ffmpeg/bin/ffmpeg.exe&amp;#34;&lt;/span&gt;)
+  plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;rcParams[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;animation.ffmpeg_path&amp;#34;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ffmpegpath
+  writer &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; animation&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;FFMpegWriter()
+&lt;span style=&#34;color:#75715e&#34;&gt;## 在sava函数中设置执行者&lt;/span&gt;
+  anim&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;save(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;test_animation.mp4&amp;#39;&lt;/span&gt;,writer&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;writer)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&#34;技术实现&#34;&gt;技术实现&lt;/h2&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; numpy &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; np
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; matplotlib.pyplot &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; plt
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; matplotlib.animation &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; animation
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; os
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; math
+
+&lt;span style=&#34;color:#75715e&#34;&gt;#fig, ax = plt.subplots()&lt;/span&gt;
+fig, ax &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;subplots(figsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;))
+&lt;span style=&#34;color:#75715e&#34;&gt;#https://blog.csdn.net/xiaosebi1111/article/details/50617433  控制子图&lt;/span&gt;
+xdata, ydata &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [], []
+ln, &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;plot([], [], &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;rs&amp;#39;&lt;/span&gt;,animated&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;True)
+text_pt &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;text(&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;, fontsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;18&lt;/span&gt;)
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;init&lt;/span&gt;():
+    ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;set_xlim(&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;18&lt;/span&gt;)
+    ax&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;set_ylim(&lt;span style=&#34;color:#ae81ff&#34;&gt;26&lt;/span&gt;,&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ln,
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;update&lt;/span&gt;(frame):
+    xdata&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(frame)
+    &lt;span style=&#34;color:#75715e&#34;&gt;#ydata.append(np.sin(frame))&lt;/span&gt;
+    ydata&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+    ln&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;set_data(xdata, ydata)
+    ln&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;set_markersize(&lt;span style=&#34;color:#ae81ff&#34;&gt;12&lt;/span&gt;)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ln,
+&lt;span style=&#34;color:#75715e&#34;&gt;# 16控制点数&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;update2&lt;/span&gt;(frame):
+    xdata&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(frame&lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;16&lt;/span&gt;)
+    &lt;span style=&#34;color:#75715e&#34;&gt;#ydata.append(np.sin(frame))&lt;/span&gt;
+    ydata&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(math&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;floor(frame&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;16&lt;/span&gt;) )
+    ln&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;set_data(xdata, ydata)
+    text_pt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;set_text(f&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Sector={frame%16+1}, VelocityBin={math.floor(frame/16)+1}&amp;#34;&lt;/span&gt; )
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ln,text_pt,
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;generateFrames&lt;/span&gt;(rows&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;16&lt;/span&gt;,cols&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;25&lt;/span&gt;):
+   count&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;;
+   dataArray&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;zeros(&lt;span style=&#34;color:#ae81ff&#34;&gt;16&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;25&lt;/span&gt;)
+   &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(rows):
+       dataArray[count]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;i
+       count&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;count&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+   &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(rows):
+       &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(cols&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+           dataArray[count]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;(j&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;rows&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;i
+           count&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;count&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+   &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; dataArray
+
+&lt;span style=&#34;color:#75715e&#34;&gt;# 16控制点数&lt;/span&gt;
+ffmpegpath &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;abspath(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;./ffmpeg/bin/ffmpeg.exe&amp;#34;&lt;/span&gt;)
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;grid(ls&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;--&amp;#34;&lt;/span&gt;)
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;tick_params(axis&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;both&amp;#39;&lt;/span&gt;, which&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;major&amp;#39;&lt;/span&gt;, labelsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;18&lt;/span&gt;)
+x&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;linspace(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;16&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;16&lt;/span&gt;)
+y&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0.5&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ones(&lt;span style=&#34;color:#ae81ff&#34;&gt;16&lt;/span&gt;)
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;plot(x,y,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;r--&amp;#39;&lt;/span&gt;)
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;rcParams[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;animation.ffmpeg_path&amp;#34;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ffmpegpath
+
+&lt;span style=&#34;color:#75715e&#34;&gt;##https://blog.csdn.net/sailist/article/details/79502007  ffmpeg路径&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;##https://www.cnblogs.com/endlesscoding/p/10308111.html   改进&lt;/span&gt;
+writer &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; animation&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;FFMpegWriter()
+&lt;span style=&#34;color:#75715e&#34;&gt;#frames=np.linspace(0,16*25,16*25+1)&lt;/span&gt;
+frames&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;generateFrames(&lt;span style=&#34;color:#ae81ff&#34;&gt;16&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;25&lt;/span&gt;)
+&lt;span style=&#34;color:#75715e&#34;&gt;#frames=np.linspace(-np.pi,np.pi, 16)&lt;/span&gt;
+anim &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; animation&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;FuncAnimation(fig, update2, frames&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;frames,interval&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;25&lt;/span&gt;,
+                    init_func&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;init,blit&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;True)
+
+&lt;span style=&#34;color:#75715e&#34;&gt;# anim = animation.FuncAnimation(fig, update, frames=np.linspace(-np.pi,np.pi, 16),interval=10,&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#                                init_func=init,blit=True)&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#anim.save(&amp;#39;test_animation.gif&amp;#39;,writer=&amp;#39;imagemagick&amp;#39;)&lt;/span&gt;
+anim&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;save(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;test_animation.mp4&amp;#39;&lt;/span&gt;,writer&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;writer)
+&lt;span style=&#34;color:#75715e&#34;&gt;#plt.show()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&#34;结果展示&#34;&gt;结果展示&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/python/dotSeries.png&#34; alt=&#34;点序结果&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;小结&lt;/p&gt;
+
+&lt;p&gt;只要修改好update函数，使其根据你设定的frames，就可以得到符合你需要的动画&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>玩转python datetime</title>

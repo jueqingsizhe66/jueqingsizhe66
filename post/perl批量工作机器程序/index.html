@@ -614,7 +614,7 @@
 
 
 
-<span class="article-metadata" >Reading time: 15 minutes and    3 seconds with 3313 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+<span class="article-metadata" >Reading time: 15 minutes and    25 seconds with 3395 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
 <ul>
@@ -1103,6 +1103,21 @@ write_file $filename, {binmode <span style="color:#f92672">=&gt;</span> <span st
     </code></pre></div>
 
 <p>其实外置、内置的思路都是open、循环、删除、重命名的过程这样还可以不断拓展，增加判断等。</p></li>
+
+<li><p>elisp通过defmacro生成一个<a href="https://emacs-china.org/t/elisp/11023/3" target="_blank"> 临时的defvar、defun </a>等,即生成一个新的状态或者worker</p>
+
+<pre><code class="language-elisp">(defmacro defvar/os (name &amp;rest args)
+`(defvar ,name
+ (pcase system-type
+   ,@(mapcar (lambda (x)
+               (let ((a (car x))
+                     (b (cadr x)))
+                 `(,(ecase a
+                      (:windows ''windows-nt)
+                      (:macos ''darwin))
+                   ,b)))
+               (-partition-all 2 args)))))
+</code></pre></li>
 </ol>
 
 <h3 id="增强版的自定义功能">增强版的自定义功能</h3>
@@ -1413,6 +1428,10 @@ close  $input
         <a href="https://jueqingsizhe66.github.io/post/%E7%8E%A9%E8%BD%ACpython-datetime/"><span class="arrow">←</span> <strong>上一篇:玩转python datetime</strong></a>
         </div>
         
+        
+
+
+       <div align="right"> <a href="https://jueqingsizhe66.github.io/post/python%E5%88%B6%E4%BD%9C%E6%9B%B2%E7%BA%BF%E5%8A%A8%E7%94%BB/" ><strong>下一篇:python制作曲线动画 </strong><span class="arrow">→</span></a></div>
         
       </div>
     

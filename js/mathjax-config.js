@@ -1,1 +1,10 @@
-window.MathJax={CommonHTML:{linebreaks:{automatic:!0}},tex2jax:{inlineMath:[["$","$"],["\\(","\\)"]],displayMath:[["$$","$$"],["\\[","\\]"]],processEscapes:!1},TeX:{noUndefined:{attributes:{mathcolor:"red",mathbackground:"#FFEEEE",mathsize:"90%"}}},messageStyle:"none"};
+window.MathJax = {
+  CommonHTML: {linebreaks: {automatic: true}},
+  tex2jax: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    processEscapes: false
+  },
+  TeX: {noUndefined: {attributes: {mathcolor: 'red', mathbackground: '#FFEEEE', mathsize: '90%'}}},
+  messageStyle: 'none'
+};
