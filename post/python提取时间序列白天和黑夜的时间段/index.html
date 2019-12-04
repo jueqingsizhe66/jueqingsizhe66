@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.5.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Ye Zhaoliang">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="玩转Python datetime已针对时间序列进行了相关处理，得到了满足AIWIND计算要求的测风塔时间序列 Atmospheric Boundary Layer Stability一文我们">
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://jueqingsizhe66.github.io/post/python%E6%8F%90%E5%8F%96%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E7%99%BD%E5%A4%A9%E5%92%8C%E9%BB%91%E5%A4%9C%E7%9A%84%E6%97%B6%E9%97%B4%E6%AE%B5/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css" crossorigin="anonymous" title="hl-light">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin="anonymous">
+    
+
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.min.e8d4d5fd376e67b34452ebe1cae16341.css">
+
+  
+
+  
+
+
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon-32.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="https://jueqingsizhe66.github.io/post/python%E6%8F%90%E5%8F%96%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E7%99%BD%E5%A4%A9%E5%92%8C%E9%BB%91%E5%A4%9C%E7%9A%84%E6%97%B6%E9%97%B4%E6%AE%B5/">
+
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="twitter:site" content="@jueqingsizhe66">
+  <meta property="twitter:creator" content="@jueqingsizhe66">
+  
+  <meta property="og:site_name" content="Macro Life">
+  <meta property="og:url" content="https://jueqingsizhe66.github.io/post/python%E6%8F%90%E5%8F%96%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E7%99%BD%E5%A4%A9%E5%92%8C%E9%BB%91%E5%A4%9C%E7%9A%84%E6%97%B6%E9%97%B4%E6%AE%B5/">
+  <meta property="og:title" content="python提取时间序列白天和黑夜的时间段 | Macro Life">
+  <meta property="og:description" content="玩转Python datetime已针对时间序列进行了相关处理，得到了满足AIWIND计算要求的测风塔时间序列 Atmospheric Boundary Layer Stability一文我们"><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
+  <meta property="twitter:image" content="https://jueqingsizhe66.github.io/img/icon-192.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2019-12-04T14:18:00&#43;08:00">
+    
+    <meta property="article:modified_time" content="2019-12-04T14:18:27&#43;08:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://jueqingsizhe66.github.io/post/python%E6%8F%90%E5%8F%96%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E7%99%BD%E5%A4%A9%E5%92%8C%E9%BB%91%E5%A4%9C%E7%9A%84%E6%97%B6%E9%97%B4%E6%AE%B5/"
+  },
+  "headline": "python提取时间序列白天和黑夜的时间段",
+  
+  "datePublished": "2019-12-04T14:18:00+08:00",
+  "dateModified": "2019-12-04T14:18:27+08:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Ye Zhaoliang"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Macro Life",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://jueqingsizhe66.github.io/img/icon-512.png"
+    }
+  },
+  "description": "玩转Python datetime已针对时间序列进行了相关处理，得到了满足AIWIND计算要求的测风塔时间序列 Atmospheric Boundary Layer Stability一文我们"
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>python提取时间序列白天和黑夜的时间段 | Macro Life</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0 compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">Macro Life</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav ml-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#hero"><span>概要</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>博文</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>项目</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#featured"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/about/"><span>About</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/courses/"><span>课程</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/categories/"><span>分类</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/archives"><span>归档</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#tags"><span>标签</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+        </li>
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+  
+ <script async src="//cdn.busuanzi.ibruce.info/cdn/busuanzi/2.3/busuanzi.pure.mini.js"></script> 
+ <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script> 
+ <script> 
+     $(document).ready(function() { 
+         var int = setInterval(fixCount, 100); 
+         var busuanziSiteOffset =  100000  
+         function fixCount() { 
+             if ($("#busuanzi_container_site_pv").css("display") != "none") { 
+                 clearInterval(int); 
+                 $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + busuanziSiteOffset); 
+             } 
+         } 
+     }); 
+ </script> 
+  
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>python提取时间序列白天和黑夜的时间段</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+          Last updated on
+      
+    
+    Dec 4, 2019
+  </span>
+
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    2 min read
+
+  </span>
+  
+
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/categories/programme/">programme</a></span>
+
+  
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+
+
+<span class="article-metadata" >Reading time: 4 minutes and    32 seconds with 998 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+    <aside>
+        <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#原始数据格式">原始数据格式</a></li>
+<li><a href="#结论">结论</a></li>
+</ul></li>
+</ul>
+</nav>
+    </aside>
+  <div class="article-container">
+
+
+    <div class="article-style">
+      
+
+<p><a href="https://jueqingsizhe66.github.io/post/玩转python-datetime/" target="_blank">玩转Python datetime</a>已针对时间序列进行了相关处理，得到了满足AIWIND计算要求的测风塔时间序列</p>
+
+<p><a href="https://www.semanticscholar.org/paper/Atmospheric-boundary-layer-stability-and-its-to-Breedt/9bfd308031989e2a7f31dc54779182a4f8735980" target="_blank">Atmospheric Boundary Layer Stability</a>一文我们知道地表边界层在昼夜存在不同；白天由于地表被加热，边界层较薄，反之亦然；为此需要对雷达的测量结果提取昼夜的分布信息</p>
+
+<p><a href="https://www.jianshu.com/p/3d1d648406f3" target="_blank">Astral库计算日出日落时间</a>一文解决获取当天日出日落时间，进一步可参考<a href="https://astral.readthedocs.io/en/stable/index.html" target="_blank">Astral手册</a></p>
+
+<h2 id="原始数据格式">原始数据格式</h2>
+
+<p><img src="/images/aiwind/dataFormatDayNight.png" alt="原始数据格式" />：第一列为时间序列，2,3列分别为雷达40m处的风向风速，依次类推</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">  <span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
+  <span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+  <span style="color:#f92672">import</span> datetime
+  <span style="color:#f92672">import</span> astral
+
+  <span style="color:#75715e">##https://www.jianshu.com/p/3d1d648406f3</span>
+  longititude<span style="color:#f92672">=</span><span style="color:#ae81ff">21.45</span> <span style="color:#75715e">## 城市经度信息</span>
+  latitude<span style="color:#f92672">=</span><span style="color:#ae81ff">112.15</span> <span style="color:#75715e">## 城市纬度度信息</span>
+  location_yangjiang <span style="color:#f92672">=</span> astral<span style="color:#f92672">.</span>Location((<span style="color:#e6db74">&#39;Yangjiang&#39;</span>, <span style="color:#e6db74">&#39;China&#39;</span>,<span style="color:#ae81ff">21.45</span> ,<span style="color:#ae81ff">112.15</span> , <span style="color:#e6db74">&#39;Asia/Shanghai&#39;</span>, <span style="color:#ae81ff">0</span>))
+  <span style="color:#75715e">#location_yangjiang = astral.Location((&#39;YanDun&#39;, &#39;China&#39;,42.3369 ,94.382 , &#39;Asia/Shanghai&#39;, 0))</span>
+  <span style="color:#75715e">#location_yangjiang = astral.Location((&#39;huailai&#39;, &#39;China&#39;,42.242 ,115.35 , &#39;Asia/Shanghai&#39;, 0))</span>
+  <span style="color:#75715e">#time_sunrise=location_yangjiang.sunrise(date=datetime.date.today(),local=True)</span>
+  time_sunrise<span style="color:#f92672">=</span>location_yangjiang<span style="color:#f92672">.</span>sunrise(date<span style="color:#f92672">=</span>datetime<span style="color:#f92672">.</span>date(<span style="color:#ae81ff">2019</span>,<span style="color:#ae81ff">6</span>,<span style="color:#ae81ff">15</span>),local<span style="color:#f92672">=</span>True)
+  time_sunrise_update<span style="color:#f92672">=</span>time_sunrise <span style="color:#f92672">+</span> datetime<span style="color:#f92672">.</span>timedelta(hours<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>) <span style="color:#75715e">#提前/延后日出时间量</span>
+  time_sunrise_new<span style="color:#f92672">=</span>str(time_sunrise_update)
+  <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#34;日出时间:{time_sunrise_new}&#34;</span>)
+
+  <span style="color:#75715e">#time_sunset=location_yangjiang.sunset(date=datetime.date.today(),local=True)</span>
+  time_sunset<span style="color:#f92672">=</span>location_yangjiang<span style="color:#f92672">.</span>sunset(date<span style="color:#f92672">=</span>datetime<span style="color:#f92672">.</span>date(<span style="color:#ae81ff">2019</span>,<span style="color:#ae81ff">6</span>,<span style="color:#ae81ff">15</span>),local<span style="color:#f92672">=</span>True)
+
+  time_sunset_update<span style="color:#f92672">=</span>time_sunset <span style="color:#f92672">+</span> datetime<span style="color:#f92672">.</span>timedelta(hours<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>) <span style="color:#75715e">#提前/延后日落时间量</span>
+  time_sunset_new<span style="color:#f92672">=</span>str(time_sunset_update)
+  <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#34;日落时间:{time_sunset_new}&#34;</span>)
+
+
+  <span style="color:#75715e">#dongpingLidar=pd.read_excel(r&#34;C:\Users\yezhaoliang\Desktop\dongpingLidar67.xlsx&#34;)</span>
+  dongpingLidar<span style="color:#f92672">=</span>pd<span style="color:#f92672">.</span>read_excel(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#34;C:\Users\yezhaoliang\Desktop\work\AIWind\功率曲线\手算白天黑夜\dongpingLidar14WithTime.xlsx&#34;</span>)
+  positions<span style="color:#f92672">=</span>[<span style="color:#ae81ff">40</span>,<span style="color:#ae81ff">65</span>,<span style="color:#ae81ff">90</span>,<span style="color:#ae81ff">115</span>,<span style="color:#ae81ff">140</span>,<span style="color:#ae81ff">150</span>,<span style="color:#ae81ff">160</span>,<span style="color:#ae81ff">170</span>,<span style="color:#ae81ff">180</span>,<span style="color:#ae81ff">190</span>,<span style="color:#ae81ff">200</span>,<span style="color:#ae81ff">210</span>]
+  windDirection<span style="color:#f92672">=</span><span style="color:#ae81ff">180</span>
+  minusPlus<span style="color:#f92672">=</span><span style="color:#ae81ff">30</span>
+  velMean<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>zeros(positions<span style="color:#f92672">.</span>__len__())
+
+  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">getSunriseFromDay</span>(today):
+      <span style="color:#75715e">## 日出</span>
+      year<span style="color:#f92672">=</span>today[<span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">4</span>]
+      month<span style="color:#f92672">=</span>today[<span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">6</span>]
+      day<span style="color:#f92672">=</span>today[<span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">8</span>]
+      time_sunrise <span style="color:#f92672">=</span> location_yangjiang<span style="color:#f92672">.</span>sunrise(date<span style="color:#f92672">=</span>datetime<span style="color:#f92672">.</span>date(int(year), int(month), int(day)), local<span style="color:#f92672">=</span>True)
+      time_sunrise_update <span style="color:#f92672">=</span> time_sunrise <span style="color:#f92672">+</span> datetime<span style="color:#f92672">.</span>timedelta(hours<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)  <span style="color:#75715e"># 提前/延后日出时间量</span>
+      time_sunrise_new <span style="color:#f92672">=</span> str(time_sunrise_update)
+      <span style="color:#66d9ef">return</span> time_sunrise_new[<span style="color:#ae81ff">11</span>:<span style="color:#ae81ff">19</span>]
+
+  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">getSunsetFromDay</span>(today):
+      year<span style="color:#f92672">=</span>today[<span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">4</span>]
+      month<span style="color:#f92672">=</span>today[<span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">6</span>]
+      day<span style="color:#f92672">=</span>today[<span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">8</span>]
+      <span style="color:#75715e">## 日落</span>
+      time_sunset <span style="color:#f92672">=</span> location_yangjiang<span style="color:#f92672">.</span>sunset(date<span style="color:#f92672">=</span>datetime<span style="color:#f92672">.</span>date(int(year), int(month), int(day)), local<span style="color:#f92672">=</span>True)
+      time_sunset_update <span style="color:#f92672">=</span> time_sunset <span style="color:#f92672">+</span> datetime<span style="color:#f92672">.</span>timedelta(hours<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)  <span style="color:#75715e"># 提前/延后日落时间量</span>
+      time_sunset_new <span style="color:#f92672">=</span> str(time_sunset_update)
+      <span style="color:#66d9ef">return</span> time_sunset_new[<span style="color:#ae81ff">11</span>:<span style="color:#ae81ff">19</span>]
+
+
+  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">getDayArrayCursorByDay</span>():
+      timeseries<span style="color:#f92672">=</span>dongpingLidar<span style="color:#f92672">.</span>iloc[:,<span style="color:#ae81ff">0</span>]
+
+      <span style="color:#75715e">## timeSeries 9-19 为小时：分钟:秒      time_sunset_new 11:19为小时:分钟:秒</span>
+      <span style="color:#75715e"># for (idx, val) in enumerate(timeseries):</span>
+      <span style="color:#75715e">#     time_sunrise_new,time_sunset_new=getSunriseSunsetFromDay(val)</span>
+      <span style="color:#75715e">#     if(val[9:19] &gt;= time_sunrise_new[11:19] and val[9:19] &lt;= time_sunset_new[11:19]]):</span>
+      <span style="color:#75715e">#         dayIndex</span>
+
+      <span style="color:#75715e"># dayIndex = [idx for (idx, val) in enumerate(timeseries) if val[9:19] &gt;= time_sunrise_new[11:19] and val[9:19] &lt;=time_sunset_new[11:19]]</span>
+      <span style="color:#75715e"># nightIndex = [idx for (idx, val) in enumerate(timeseries) if val[9:19] &lt; time_sunrise_new[11:19] or val[9:19] &gt; time_sunset_new[11:19]]</span>
+      dayIndex <span style="color:#f92672">=</span> [idx <span style="color:#66d9ef">for</span> (idx, val) <span style="color:#f92672">in</span> enumerate(timeseries) <span style="color:#66d9ef">if</span> val[<span style="color:#ae81ff">9</span>:<span style="color:#ae81ff">19</span>] <span style="color:#f92672">&gt;=</span> getSunriseFromDay(val) <span style="color:#f92672">and</span> val[<span style="color:#ae81ff">9</span>:<span style="color:#ae81ff">19</span>] <span style="color:#f92672">&lt;=</span>getSunsetFromDay(val)]
+      nightIndex <span style="color:#f92672">=</span> [idx <span style="color:#66d9ef">for</span> (idx, val) <span style="color:#f92672">in</span> enumerate(timeseries) <span style="color:#66d9ef">if</span> val[<span style="color:#ae81ff">9</span>:<span style="color:#ae81ff">19</span>] <span style="color:#f92672">&lt;</span> getSunriseFromDay(val) <span style="color:#f92672">or</span> val[<span style="color:#ae81ff">9</span>:<span style="color:#ae81ff">19</span>] <span style="color:#f92672">&gt;</span> getSunsetFromDay(val)]
+      <span style="color:#66d9ef">return</span> dayIndex,nightIndex
+
+  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">getDayArrayCursor</span>():
+      timeseries<span style="color:#f92672">=</span>dongpingLidar<span style="color:#f92672">.</span>iloc[:,<span style="color:#ae81ff">0</span>]
+
+      <span style="color:#75715e">## timeSeries 9-19 为小时：分钟:秒      time_sunset_new 11:19为小时:分钟:秒</span>
+      dayIndex <span style="color:#f92672">=</span> [idx <span style="color:#66d9ef">for</span> (idx, val) <span style="color:#f92672">in</span> enumerate(timeseries) <span style="color:#66d9ef">if</span> val[<span style="color:#ae81ff">9</span>:<span style="color:#ae81ff">19</span>] <span style="color:#f92672">&gt;=</span> time_sunrise_new[<span style="color:#ae81ff">11</span>:<span style="color:#ae81ff">19</span>] <span style="color:#f92672">and</span> val[<span style="color:#ae81ff">9</span>:<span style="color:#ae81ff">19</span>] <span style="color:#f92672">&lt;=</span>time_sunset_new[<span style="color:#ae81ff">11</span>:<span style="color:#ae81ff">19</span>]]
+      nightIndex <span style="color:#f92672">=</span> [idx <span style="color:#66d9ef">for</span> (idx, val) <span style="color:#f92672">in</span> enumerate(timeseries) <span style="color:#66d9ef">if</span> val[<span style="color:#ae81ff">9</span>:<span style="color:#ae81ff">19</span>] <span style="color:#f92672">&lt;</span> time_sunrise_new[<span style="color:#ae81ff">11</span>:<span style="color:#ae81ff">19</span>] <span style="color:#f92672">or</span> val[<span style="color:#ae81ff">9</span>:<span style="color:#ae81ff">19</span>] <span style="color:#f92672">&gt;</span> time_sunset_new[<span style="color:#ae81ff">11</span>:<span style="color:#ae81ff">19</span>]]
+      <span style="color:#66d9ef">return</span> dayIndex,nightIndex
+
+<span style="color:#75715e">##1. 逐日跟踪日落日出</span>
+  dayIndex,nightIndex<span style="color:#f92672">=</span>getDayArrayCursorByDay()
+
+<span style="color:#75715e">##2. 测试期中间日期跟踪日落日出</span>
+  <span style="color:#75715e"># dayIndex,nightIndex=getDayArrayCursor()</span>
+  <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(positions)):
+      <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#34;{i}:&#34;</span>)
+      dir1 <span style="color:#f92672">=</span> dongpingLidar<span style="color:#f92672">.</span>iloc[:, <span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>]
+      vel <span style="color:#f92672">=</span> dongpingLidar<span style="color:#f92672">.</span>iloc[:, <span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>i<span style="color:#f92672">+</span><span style="color:#ae81ff">2</span>]
+
+      dayDir1<span style="color:#f92672">=</span>dir1[dayIndex]
+      dayVel<span style="color:#f92672">=</span>vel[dayIndex]
+
+      <span style="color:#75715e"># dayDir1=dir1[nightIndex]</span>
+      <span style="color:#75715e"># dayVel=vel[nightIndex]</span>
+      idx <span style="color:#f92672">=</span> [idx <span style="color:#66d9ef">for</span> (idx, val) <span style="color:#f92672">in</span> enumerate(dayDir1) <span style="color:#66d9ef">if</span> val <span style="color:#f92672">&gt;=</span> (windDirection<span style="color:#f92672">-</span>minusPlus) <span style="color:#f92672">and</span> val <span style="color:#f92672">&lt;=</span>(windDirection<span style="color:#f92672">+</span>minusPlus)]
+      <span style="color:#75715e">## dir1[idx]  vel[idx]</span>
+      countVel<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+      <span style="color:#66d9ef">for</span> cursor1 <span style="color:#f92672">in</span> range(len(idx)):
+          cursor<span style="color:#f92672">=</span>idx[cursor1]
+          countVel<span style="color:#f92672">=</span>countVel<span style="color:#f92672">+</span>dayVel<span style="color:#f92672">.</span>iloc[cursor]
+
+      velMean[i]<span style="color:#f92672">=</span>countVel<span style="color:#f92672">/</span>len(idx)
+
+  profiles<span style="color:#f92672">=</span>pd<span style="color:#f92672">.</span>DataFrame([velMean,positions])<span style="color:#f92672">.</span>T
+  profiles<span style="color:#f92672">.</span>to_csv(<span style="color:#e6db74">&#34;Lidar387Profiles14Day30.csv&#34;</span>)</code></pre></div>
+
+<h2 id="结论">结论</h2>
+
+<ol>
+<li>1-2个月的雷达用中间日期即可，差别不大；如果全年的话，最好是跟踪每日。</li>
+<li>白天的计算速度边界层较薄，夜晚较厚一些，原因是白天的地表收到加热效应。</li>
+</ol>
+
+<p>顺便提及，我喜欢用TotalCommander对文件夹和文件进行颜色控制</p>
+
+<ol>
+<li>凡是有备注的都显示粉色</li>
+<li>凡是一周之内有变动的文件和文件夹都显示蓝色</li>
+<li>凡是一天之内有变动的文件和文件夹都显示红色</li>
+<li>凡是office文件都显示灰色</li>
+</ol>
+
+    </div>
+ <div class="nav-links" style="padding:10;">
+        
+        <div align="left">
+        <a href="https://jueqingsizhe66.github.io/post/python%E7%BB%95%E7%82%B9%E6%97%8B%E8%BD%AC/"><span class="arrow">←</span> <strong>上一篇:python绕点旋转</strong></a>
+        </div>
+        
+        
+      </div>
+    
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tags/python/">python</a>
+  
+</div>
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=https://jueqingsizhe66.github.io/post/python%E6%8F%90%E5%8F%96%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E7%99%BD%E5%A4%A9%E5%92%8C%E9%BB%91%E5%A4%9C%E7%9A%84%E6%97%B6%E9%97%B4%E6%AE%B5/&amp;text=python%e6%8f%90%e5%8f%96%e6%97%b6%e9%97%b4%e5%ba%8f%e5%88%97%e7%99%bd%e5%a4%a9%e5%92%8c%e9%bb%91%e5%a4%9c%e7%9a%84%e6%97%b6%e9%97%b4%e6%ae%b5" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=https://jueqingsizhe66.github.io/post/python%E6%8F%90%E5%8F%96%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E7%99%BD%E5%A4%A9%E5%92%8C%E9%BB%91%E5%A4%9C%E7%9A%84%E6%97%B6%E9%97%B4%E6%AE%B5/&amp;t=python%e6%8f%90%e5%8f%96%e6%97%b6%e9%97%b4%e5%ba%8f%e5%88%97%e7%99%bd%e5%a4%a9%e5%92%8c%e9%bb%91%e5%a4%9c%e7%9a%84%e6%97%b6%e9%97%b4%e6%ae%b5" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=python%e6%8f%90%e5%8f%96%e6%97%b6%e9%97%b4%e5%ba%8f%e5%88%97%e7%99%bd%e5%a4%a9%e5%92%8c%e9%bb%91%e5%a4%9c%e7%9a%84%e6%97%b6%e9%97%b4%e6%ae%b5&amp;body=https://jueqingsizhe66.github.io/post/python%E6%8F%90%E5%8F%96%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E7%99%BD%E5%A4%A9%E5%92%8C%E9%BB%91%E5%A4%9C%E7%9A%84%E6%97%B6%E9%97%B4%E6%AE%B5/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https://jueqingsizhe66.github.io/post/python%E6%8F%90%E5%8F%96%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E7%99%BD%E5%A4%A9%E5%92%8C%E9%BB%91%E5%A4%9C%E7%9A%84%E6%97%B6%E9%97%B4%E6%AE%B5/&amp;title=python%e6%8f%90%e5%8f%96%e6%97%b6%e9%97%b4%e5%ba%8f%e5%88%97%e7%99%bd%e5%a4%a9%e5%92%8c%e9%bb%91%e5%a4%9c%e7%9a%84%e6%97%b6%e9%97%b4%e6%ae%b5" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=python%e6%8f%90%e5%8f%96%e6%97%b6%e9%97%b4%e5%ba%8f%e5%88%97%e7%99%bd%e5%a4%a9%e5%92%8c%e9%bb%91%e5%a4%9c%e7%9a%84%e6%97%b6%e9%97%b4%e6%ae%b5%20https://jueqingsizhe66.github.io/post/python%E6%8F%90%E5%8F%96%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E7%99%BD%E5%A4%A9%E5%92%8C%E9%BB%91%E5%A4%9C%E7%9A%84%E6%97%B6%E9%97%B4%E6%AE%B5/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=https://jueqingsizhe66.github.io/post/python%E6%8F%90%E5%8F%96%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E7%99%BD%E5%A4%A9%E5%92%8C%E9%BB%91%E5%A4%9C%E7%9A%84%E6%97%B6%E9%97%B4%E6%AE%B5/&amp;title=python%e6%8f%90%e5%8f%96%e6%97%b6%e9%97%b4%e5%ba%8f%e5%88%97%e7%99%bd%e5%a4%a9%e5%92%8c%e9%bb%91%e5%a4%9c%e7%9a%84%e6%97%b6%e9%97%b4%e6%ae%b5" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="portrait mr-3" src="/authors/admin/avatar_hu52a603635ecebd45650b162dadabb4e5_12861_250x250_fill_q90_lanczos_center.jpg" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://jueqingsizhe66.github.io/">Ye Zhaoliang</a></h5>
+      <h6 class="card-subtitle">Engineer of offshore wind turbine technique research</h6>
+      <p class="card-text">My research interests include distributed energy, wind turbine power generation technique , Computational fluid dynamic and programmable matter.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/jueqingsizhe66" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.co.uk/citations?user=7VyEMyQAAAAJ&amp;hl=zh-CN" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/jueqingsizhe66" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>Related</h3>
+    <ul>
+      
+      <li><a href="/post/%E9%A3%8E%E7%94%B5%E5%9C%BAscada%E9%A3%8E%E9%80%9F%E6%89%8B%E7%AE%97%E7%90%86%E8%AE%BA%E5%8F%91%E7%94%B5%E9%87%8F/">风电场SCADA风速手算理论发电量和K值</a></li>
+      
+      <li><a href="/post/python%E5%88%B6%E4%BD%9C%E6%9B%B2%E7%BA%BF%E5%8A%A8%E7%94%BB/">python制作曲线动画</a></li>
+      
+      <li><a href="/post/%E7%8E%A9%E8%BD%ACpython-datetime/">玩转python datetime</a></li>
+      
+      <li><a href="/post/python-pandas%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%BD%AC%E5%8C%96/">python pandas数据结构转化</a></li>
+      
+      <li><a href="/blog/2015/06/11/ji-yu-pythonde-ju-yu-wang-wen-jian-gong-xiang-ruan-jian-simplehttpserverwithupload/">基于python的局域网文件共享软件SimpleHTTPServerWithUpload</a></li>
+      
+    </ul>
+
+
+         <span id="busuanzi_container_site_pv"> 
+             本站访问量：<span id="busuanzi_value_site_pv"></span>次 
+         </span> 
+         &nbsp; 
+   </div> 
+
+
+  </div>
+
+</article>
+<script src="https://utteranc.es/client.js"
+        repo="jueqingsizhe66/jueqingsizhe66.github.io"
+        issue-term="pathname"
+        theme="github-dark"
+        crossorigin="anonymous"
+        async>
+</script>
+
+      
+
+    
+    
+    
+    <script src="/js/mathjax-config.js"></script>
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js" integrity="sha256-aYTdUrn6Ow1DDgh5JTc3aDGnnju48y/1c8s1dgkYPQ8=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/go.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/vim.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/matlab.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/sql.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/python.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/c.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/scheme.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/racket.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/perl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/awk.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/clojure.min.js"></script>
+        
+      
+
+      
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
+      
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.d6bd04fdad2ad213aa8111c5a3b72fc5.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    &copy;2019 &middot; 
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

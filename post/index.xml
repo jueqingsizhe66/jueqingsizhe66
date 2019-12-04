@@ -13,6 +13,192 @@
     </image>
     
     <item>
+      <title>python提取时间序列白天和黑夜的时间段</title>
+      <link>https://jueqingsizhe66.github.io/post/python%E6%8F%90%E5%8F%96%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E7%99%BD%E5%A4%A9%E5%92%8C%E9%BB%91%E5%A4%9C%E7%9A%84%E6%97%B6%E9%97%B4%E6%AE%B5/</link>
+      <pubDate>Wed, 04 Dec 2019 14:18:00 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/post/python%E6%8F%90%E5%8F%96%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E7%99%BD%E5%A4%A9%E5%92%8C%E9%BB%91%E5%A4%9C%E7%9A%84%E6%97%B6%E9%97%B4%E6%AE%B5/</guid>
+      <description>
+
+&lt;p&gt;&lt;a href=&#34;https://jueqingsizhe66.github.io/post/玩转python-datetime/&#34; target=&#34;_blank&#34;&gt;玩转Python datetime&lt;/a&gt;已针对时间序列进行了相关处理，得到了满足AIWIND计算要求的测风塔时间序列&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.semanticscholar.org/paper/Atmospheric-boundary-layer-stability-and-its-to-Breedt/9bfd308031989e2a7f31dc54779182a4f8735980&#34; target=&#34;_blank&#34;&gt;Atmospheric Boundary Layer Stability&lt;/a&gt;一文我们知道地表边界层在昼夜存在不同；白天由于地表被加热，边界层较薄，反之亦然；为此需要对雷达的测量结果提取昼夜的分布信息&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.jianshu.com/p/3d1d648406f3&#34; target=&#34;_blank&#34;&gt;Astral库计算日出日落时间&lt;/a&gt;一文解决获取当天日出日落时间，进一步可参考&lt;a href=&#34;https://astral.readthedocs.io/en/stable/index.html&#34; target=&#34;_blank&#34;&gt;Astral手册&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;原始数据格式&#34;&gt;原始数据格式&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/aiwind/dataFormatDayNight.png&#34; alt=&#34;原始数据格式&#34; /&gt;：第一列为时间序列，2,3列分别为雷达40m处的风向风速，依次类推&lt;/p&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; pandas &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; pd
+  &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; numpy &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; np
+  &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; datetime
+  &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; astral
+
+  &lt;span style=&#34;color:#75715e&#34;&gt;##https://www.jianshu.com/p/3d1d648406f3&lt;/span&gt;
+  longititude&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;21.45&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;## 城市经度信息&lt;/span&gt;
+  latitude&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;112.15&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;## 城市纬度度信息&lt;/span&gt;
+  location_yangjiang &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; astral&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Location((&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Yangjiang&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;China&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;21.45&lt;/span&gt; ,&lt;span style=&#34;color:#ae81ff&#34;&gt;112.15&lt;/span&gt; , &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Asia/Shanghai&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;))
+  &lt;span style=&#34;color:#75715e&#34;&gt;#location_yangjiang = astral.Location((&amp;#39;YanDun&amp;#39;, &amp;#39;China&amp;#39;,42.3369 ,94.382 , &amp;#39;Asia/Shanghai&amp;#39;, 0))&lt;/span&gt;
+  &lt;span style=&#34;color:#75715e&#34;&gt;#location_yangjiang = astral.Location((&amp;#39;huailai&amp;#39;, &amp;#39;China&amp;#39;,42.242 ,115.35 , &amp;#39;Asia/Shanghai&amp;#39;, 0))&lt;/span&gt;
+  &lt;span style=&#34;color:#75715e&#34;&gt;#time_sunrise=location_yangjiang.sunrise(date=datetime.date.today(),local=True)&lt;/span&gt;
+  time_sunrise&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;location_yangjiang&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sunrise(date&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;date(&lt;span style=&#34;color:#ae81ff&#34;&gt;2019&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;15&lt;/span&gt;),local&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;True)
+  time_sunrise_update&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;time_sunrise &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;timedelta(hours&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;#提前/延后日出时间量&lt;/span&gt;
+  time_sunrise_new&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;str(time_sunrise_update)
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(f&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;日出时间:{time_sunrise_new}&amp;#34;&lt;/span&gt;)
+
+  &lt;span style=&#34;color:#75715e&#34;&gt;#time_sunset=location_yangjiang.sunset(date=datetime.date.today(),local=True)&lt;/span&gt;
+  time_sunset&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;location_yangjiang&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sunset(date&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;date(&lt;span style=&#34;color:#ae81ff&#34;&gt;2019&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;15&lt;/span&gt;),local&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;True)
+
+  time_sunset_update&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;time_sunset &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;timedelta(hours&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;#提前/延后日落时间量&lt;/span&gt;
+  time_sunset_new&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;str(time_sunset_update)
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(f&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;日落时间:{time_sunset_new}&amp;#34;&lt;/span&gt;)
+
+
+  &lt;span style=&#34;color:#75715e&#34;&gt;#dongpingLidar=pd.read_excel(r&amp;#34;C:\Users\yezhaoliang\Desktop\dongpingLidar67.xlsx&amp;#34;)&lt;/span&gt;
+  dongpingLidar&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read_excel(&lt;span style=&#34;color:#e6db74&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C:\Users\yezhaoliang\Desktop\work\AIWind\功率曲线\手算白天黑夜\dongpingLidar14WithTime.xlsx&amp;#34;&lt;/span&gt;)
+  positions&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[&lt;span style=&#34;color:#ae81ff&#34;&gt;40&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;65&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;90&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;115&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;140&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;150&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;160&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;170&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;180&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;190&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;210&lt;/span&gt;]
+  windDirection&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;180&lt;/span&gt;
+  minusPlus&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;30&lt;/span&gt;
+  velMean&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;zeros(positions&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;__len__())
+
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;getSunriseFromDay&lt;/span&gt;(today):
+      &lt;span style=&#34;color:#75715e&#34;&gt;## 日出&lt;/span&gt;
+      year&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;today[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;]
+      month&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;today[&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;]
+      day&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;today[&lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;]
+      time_sunrise &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; location_yangjiang&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sunrise(date&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;date(int(year), int(month), int(day)), local&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;True)
+      time_sunrise_update &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; time_sunrise &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;timedelta(hours&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;)  &lt;span style=&#34;color:#75715e&#34;&gt;# 提前/延后日出时间量&lt;/span&gt;
+      time_sunrise_new &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; str(time_sunrise_update)
+      &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; time_sunrise_new[&lt;span style=&#34;color:#ae81ff&#34;&gt;11&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;19&lt;/span&gt;]
+
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;getSunsetFromDay&lt;/span&gt;(today):
+      year&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;today[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;]
+      month&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;today[&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;]
+      day&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;today[&lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;]
+      &lt;span style=&#34;color:#75715e&#34;&gt;## 日落&lt;/span&gt;
+      time_sunset &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; location_yangjiang&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sunset(date&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;date(int(year), int(month), int(day)), local&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;True)
+      time_sunset_update &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; time_sunset &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;timedelta(hours&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;)  &lt;span style=&#34;color:#75715e&#34;&gt;# 提前/延后日落时间量&lt;/span&gt;
+      time_sunset_new &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; str(time_sunset_update)
+      &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; time_sunset_new[&lt;span style=&#34;color:#ae81ff&#34;&gt;11&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;19&lt;/span&gt;]
+
+
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;getDayArrayCursorByDay&lt;/span&gt;():
+      timeseries&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;dongpingLidar&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[:,&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]
+
+      &lt;span style=&#34;color:#75715e&#34;&gt;## timeSeries 9-19 为小时：分钟:秒      time_sunset_new 11:19为小时:分钟:秒&lt;/span&gt;
+      &lt;span style=&#34;color:#75715e&#34;&gt;# for (idx, val) in enumerate(timeseries):&lt;/span&gt;
+      &lt;span style=&#34;color:#75715e&#34;&gt;#     time_sunrise_new,time_sunset_new=getSunriseSunsetFromDay(val)&lt;/span&gt;
+      &lt;span style=&#34;color:#75715e&#34;&gt;#     if(val[9:19] &amp;gt;= time_sunrise_new[11:19] and val[9:19] &amp;lt;= time_sunset_new[11:19]]):&lt;/span&gt;
+      &lt;span style=&#34;color:#75715e&#34;&gt;#         dayIndex&lt;/span&gt;
+
+      &lt;span style=&#34;color:#75715e&#34;&gt;# dayIndex = [idx for (idx, val) in enumerate(timeseries) if val[9:19] &amp;gt;= time_sunrise_new[11:19] and val[9:19] &amp;lt;=time_sunset_new[11:19]]&lt;/span&gt;
+      &lt;span style=&#34;color:#75715e&#34;&gt;# nightIndex = [idx for (idx, val) in enumerate(timeseries) if val[9:19] &amp;lt; time_sunrise_new[11:19] or val[9:19] &amp;gt; time_sunset_new[11:19]]&lt;/span&gt;
+      dayIndex &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [idx &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (idx, val) &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; enumerate(timeseries) &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; val[&lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;19&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt; getSunriseFromDay(val) &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; val[&lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;19&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt;getSunsetFromDay(val)]
+      nightIndex &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [idx &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (idx, val) &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; enumerate(timeseries) &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; val[&lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;19&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; getSunriseFromDay(val) &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; val[&lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;19&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; getSunsetFromDay(val)]
+      &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; dayIndex,nightIndex
+
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;getDayArrayCursor&lt;/span&gt;():
+      timeseries&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;dongpingLidar&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[:,&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]
+
+      &lt;span style=&#34;color:#75715e&#34;&gt;## timeSeries 9-19 为小时：分钟:秒      time_sunset_new 11:19为小时:分钟:秒&lt;/span&gt;
+      dayIndex &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [idx &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (idx, val) &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; enumerate(timeseries) &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; val[&lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;19&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt; time_sunrise_new[&lt;span style=&#34;color:#ae81ff&#34;&gt;11&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;19&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; val[&lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;19&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt;time_sunset_new[&lt;span style=&#34;color:#ae81ff&#34;&gt;11&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;19&lt;/span&gt;]]
+      nightIndex &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [idx &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (idx, val) &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; enumerate(timeseries) &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; val[&lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;19&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; time_sunrise_new[&lt;span style=&#34;color:#ae81ff&#34;&gt;11&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;19&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; val[&lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;19&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; time_sunset_new[&lt;span style=&#34;color:#ae81ff&#34;&gt;11&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;19&lt;/span&gt;]]
+      &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; dayIndex,nightIndex
+
+&lt;span style=&#34;color:#75715e&#34;&gt;##1. 逐日跟踪日落日出&lt;/span&gt;
+  dayIndex,nightIndex&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;getDayArrayCursorByDay()
+
+&lt;span style=&#34;color:#75715e&#34;&gt;##2. 测试期中间日期跟踪日落日出&lt;/span&gt;
+  &lt;span style=&#34;color:#75715e&#34;&gt;# dayIndex,nightIndex=getDayArrayCursor()&lt;/span&gt;
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(positions)):
+      &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(f&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{i}:&amp;#34;&lt;/span&gt;)
+      dir1 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; dongpingLidar&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[:, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;i&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+      vel &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; dongpingLidar&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[:, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;i&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;]
+
+      dayDir1&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;dir1[dayIndex]
+      dayVel&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;vel[dayIndex]
+
+      &lt;span style=&#34;color:#75715e&#34;&gt;# dayDir1=dir1[nightIndex]&lt;/span&gt;
+      &lt;span style=&#34;color:#75715e&#34;&gt;# dayVel=vel[nightIndex]&lt;/span&gt;
+      idx &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [idx &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (idx, val) &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; enumerate(dayDir1) &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; val &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt; (windDirection&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;minusPlus) &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; val &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt;(windDirection&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;minusPlus)]
+      &lt;span style=&#34;color:#75715e&#34;&gt;## dir1[idx]  vel[idx]&lt;/span&gt;
+      countVel&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+      &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; cursor1 &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(idx)):
+          cursor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;idx[cursor1]
+          countVel&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;countVel&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;dayVel&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[cursor]
+
+      velMean[i]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;countVel&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;len(idx)
+
+  profiles&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;DataFrame([velMean,positions])&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;T
+  profiles&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_csv(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Lidar387Profiles14Day30.csv&amp;#34;&lt;/span&gt;)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&#34;结论&#34;&gt;结论&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;1-2个月的雷达用中间日期即可，差别不大；如果全年的话，最好是跟踪每日。&lt;/li&gt;
+&lt;li&gt;白天的计算速度边界层较薄，夜晚较厚一些，原因是白天的地表收到加热效应。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;顺便提及，我喜欢用TotalCommander对文件夹和文件进行颜色控制&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;凡是有备注的都显示粉色&lt;/li&gt;
+&lt;li&gt;凡是一周之内有变动的文件和文件夹都显示蓝色&lt;/li&gt;
+&lt;li&gt;凡是一天之内有变动的文件和文件夹都显示红色&lt;/li&gt;
+&lt;li&gt;凡是office文件都显示灰色&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>python绕点旋转</title>
+      <link>https://jueqingsizhe66.github.io/post/python%E7%BB%95%E7%82%B9%E6%97%8B%E8%BD%AC/</link>
+      <pubDate>Wed, 04 Dec 2019 11:24:00 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/post/python%E7%BB%95%E7%82%B9%E6%97%8B%E8%BD%AC/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/can3981132/article/details/52518833&#34; target=&#34;_blank&#34;&gt;数学理论公式推导&lt;/a&gt;,基于相同的半径，然后旋转，利用三角函数的拆分方法得到旋转后的坐标&lt;/p&gt;
+
+&lt;p&gt;具体实现，&lt;/p&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; numpy &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; np
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; math
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; matplotlib.pyplot &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; plt
+&lt;span style=&#34;color:#75715e&#34;&gt;# 绕pointx,pointy逆时针旋转&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Nrotate&lt;/span&gt;(angle,valuex,valuey,pointx,pointy):
+  valuex &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;array(valuex)
+  valuey &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;array(valuey)
+  nRotatex &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (valuex&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;pointx)&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;math&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;cos(angle) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; (valuey&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;pointy)&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;math&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sin(angle) &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; pointx
+  nRotatey &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (valuex&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;pointx)&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;math&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sin(angle) &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; (valuey&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;pointy)&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;math&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;cos(angle) &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; pointy
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; nRotatex, nRotatey
+&lt;span style=&#34;color:#75715e&#34;&gt;# 绕pointx,pointy顺时针旋转&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Srotate&lt;/span&gt;(angle,valuex,valuey,pointx,pointy):
+  valuex &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;array(valuex)
+  valuey &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;array(valuey)
+  sRotatex &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (valuex&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;pointx)&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;math&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;cos(angle) &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; (valuey&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;pointy)&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;math&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sin(angle) &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; pointx
+  sRotatey &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (valuey&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;pointy)&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;math&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;cos(angle) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; (valuex&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;pointx)&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;math&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sin(angle) &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; pointy
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; sRotatex,sRotatey
+
+&lt;span style=&#34;color:#75715e&#34;&gt;## 绕点坐标&lt;/span&gt;
+pointx &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;7.352847966&lt;/span&gt;
+pointy &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;210&lt;/span&gt;
+
+&lt;span style=&#34;color:#75715e&#34;&gt;## 旋转前坐标&lt;/span&gt;
+targetX&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;6.074863636&lt;/span&gt;
+targetY&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;40&lt;/span&gt;
+
+&lt;span style=&#34;color:#75715e&#34;&gt;## 旋转后坐标   0.5代表°， 注意如果x和y差距较大，则角度相应较小些。&lt;/span&gt;
+sPointx ,sPointy &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Srotate(math&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;radians(&lt;span style=&#34;color:#ae81ff&#34;&gt;0.5&lt;/span&gt;),targetX,targetY,pointx,pointy)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(sPointx,sPointy)
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;plot([pointx,targetX],[pointy,targetY])
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;plot([pointx,sPointx],[pointy,sPointy])
+&lt;span style=&#34;color:#75715e&#34;&gt;# plt.xlim(-3.,3.)&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# plt.ylim(-3.,3.)&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# plt.xticks(np.arange(-3.,3.,1))&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# plt.yticks(np.arange(-3.,3.,1))&lt;/span&gt;
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;show()&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>风电场SCADA风速手算理论发电量和K值</title>
       <link>https://jueqingsizhe66.github.io/post/%E9%A3%8E%E7%94%B5%E5%9C%BAscada%E9%A3%8E%E9%80%9F%E6%89%8B%E7%AE%97%E7%90%86%E8%AE%BA%E5%8F%91%E7%94%B5%E9%87%8F/</link>
       <pubDate>Sat, 23 Nov 2019 23:16:00 +0800</pubDate>
