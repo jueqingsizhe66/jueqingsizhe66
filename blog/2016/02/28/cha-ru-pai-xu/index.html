@@ -568,16 +568,13 @@
 <span class="article-metadata" >Reading time: 3 minutes and    44 seconds with 823 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#如何把一个数字插入到一个列表中">如何把一个数字插入到一个列表中</a></li>
-<li><a href="#提取出判断条件">提取出判断条件</a></li>
-<li><a href="#对一个列表进行插入排序">对一个列表进行插入排序</a></li>
-<li><a href="#利用内部define和letrec改写程序">利用内部define和letrec改写程序</a></li>
-<li><a href="#结论">结论</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#heading">如何把一个数字插入到一个列表中</a></li>
+    <li><a href="#heading-1">提取出判断条件</a></li>
+    <li><a href="#heading-2">对一个列表进行插入排序</a></li>
+    <li><a href="#defineletrec">利用内部define和letrec改写程序</a></li>
+    <li><a href="#heading-3">结论</a></li>
+  </ul>
 </nav>
     </aside>
   <div class="article-container">
@@ -586,9 +583,7 @@
     <div class="article-style">
       <p>排序算法是一种比较常见的算法，一般包括冒泡排序，插入排序，快速排序等。
 本文主要是关于插入排序。</p>
-
-<h2 id="如何把一个数字插入到一个列表中">如何把一个数字插入到一个列表中</h2>
-
+<h2 id="heading">如何把一个数字插入到一个列表中</h2>
 <pre><code>;; using insert sort here
 
 (define insert
@@ -610,12 +605,8 @@
     (sort-rec '() lst)))
 
 
-</code></pre>
-
-<h2 id="提取出判断条件">提取出判断条件</h2>
-
+</code></pre><h2 id="heading-1">提取出判断条件</h2>
 <p>利用pred代表小于号</p>
-
 <pre><code>(define insert
   (lambda (lst elem pred)
      (cond
@@ -624,134 +615,107 @@
           (cons elem lst))
         (else (cons (car lst)
                     (insert (cdr lst) elem pred))))))
-</code></pre>
-
-<p>结果：</p>
-
+</code></pre><p>结果：</p>
 <pre><code>(insert '(1 2 3) '4 &lt;)
     (1 2 3 4)
 (insert '(1 2 3) '0 &lt;)
     (0 1 2 3)
 (insert '(1 3 2) '4 &lt;)
     (1 3 2 4)    ==&gt; 这不是我们想要的
-</code></pre>
-
-<p>分析发现 insert仅仅是在判断满足条件的时候，直接退出，不管后面的大小问题，
-<font color="red">我们不可以判断该元素之后的所有的字符的情况</font>。</p>
-
+</code></pre><p>分析发现 insert仅仅是在判断满足条件的时候，直接退出，不管后面的大小问题，
+<!-- raw HTML omitted -->我们不可以判断该元素之后的所有的字符的情况<!-- raw HTML omitted -->。</p>
 <p>然而该程序当作一个最小的模块，也就是加入我逐个提出判断列表，最终实现的是每提取一个元素
 都和新构成的排序列表进行判断，那么也就算判断完成。</p>
-
-<h2 id="对一个列表进行插入排序">对一个列表进行插入排序</h2>
-
+<h2 id="heading-2">对一个列表进行插入排序</h2>
 <p>在原先insert的基础上，书写了sort-rec和sort-predicate</p>
-
 <ul>
 <li>sort-rec 逐个判断最新的元素和新的临时列表的比较</li>
-
-<li><p>sort-predicate 仅仅是选择判断的标准。</p>
-
+<li>sort-predicate 仅仅是选择判断的标准。</li>
+</ul>
 <pre><code>(define sort-rec
-(lambda (prev now pred)
-(if (null? now)
-    prev
-    (sort-rec (insert prev (car now) pred)
-              (cdr now)
-              pred))))
+  (lambda (prev now pred)
+    (if (null? now)
+        prev
+        (sort-rec (insert prev (car now) pred)
+                  (cdr now)
+                  pred))))
 
 (define sort/predicate
-(lambda (pred lst)
-  (sort-rec '() lst pred)))
+   (lambda (pred lst)
+      (sort-rec '() lst pred)))
 
-</code></pre></li>
-
-<li><p>sort-rec的prev在逐渐的变大，而now的部分在不断的变小</p></li>
-
-<li><p>也就是 sort-rec 的第一号位置不断变大，第二号位由于cdr作用不断变小。</p>
-
-<pre><code class="language-scheme">
-(sort/predicate &lt; '(1 6 5 7))
-
-prev          now
-1.  ()         (1 6 5 7)
-2.  (1)        (6 5 7)
-3.  (1 6)      (5 7)
-4.  (1 5 6)    (7)
-5.  (1 5 6 7)  ()
-
-计算结束，返回prev的值
-</code></pre></li>
+</code></pre><ul>
+<li>sort-rec的prev在逐渐的变大，而now的部分在不断的变小</li>
+<li>也就是 sort-rec 的第一号位置不断变大，第二号位由于cdr作用不断变小。</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">
+(<span style="color:#a6e22e">sort/predicate</span> &lt; <span style="color:#f92672">&#39;</span>(<span style="color:#ae81ff">1</span> <span style="color:#ae81ff">6</span> <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">7</span>))
 
-<p>于是我们就可以获得正确的结果</p>
+    prev          now
+<span style="color:#ae81ff">1</span><span style="color:#f92672">.</span>  ()         (<span style="color:#ae81ff">1</span> <span style="color:#ae81ff">6</span> <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">7</span>)
+<span style="color:#ae81ff">2</span><span style="color:#f92672">.</span>  (<span style="color:#ae81ff">1</span>)        (<span style="color:#ae81ff">6</span> <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">7</span>)
+<span style="color:#ae81ff">3</span><span style="color:#f92672">.</span>  (<span style="color:#ae81ff">1</span> <span style="color:#ae81ff">6</span>)      (<span style="color:#ae81ff">5</span> <span style="color:#ae81ff">7</span>)
+<span style="color:#ae81ff">4</span><span style="color:#f92672">.</span>  (<span style="color:#ae81ff">1</span> <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">6</span>)    (<span style="color:#ae81ff">7</span>)
+<span style="color:#ae81ff">5</span><span style="color:#f92672">.</span>  (<span style="color:#ae81ff">1</span> <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">6</span> <span style="color:#ae81ff">7</span>)  ()
 
+计算结束<span style="color:#960050;background-color:#1e0010">，</span>返回prev的值
+</code></pre></div><p>于是我们就可以获得正确的结果</p>
 <pre><code>(sort/predicate &lt; '(1 6 5 7))
     (1 5 6 7)
-</code></pre>
-
-<h2 id="利用内部define和letrec改写程序">利用内部define和letrec改写程序</h2>
-
+</code></pre><h2 id="defineletrec">利用内部define和letrec改写程序</h2>
 <ul>
 <li>采用内部的define实现</li>
 </ul>
-
 <p>可以保护函数的实现（只被使用一次）</p>
-
-<pre><code class="language-scheme">(define sort/predicate1
-  (lambda (pred lst)
-    (define sort-rec
-      (lambda (prev now pred)
-        (if (null? now)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">define </span>sort/predicate1
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">pred</span> lst)
+    (<span style="color:#66d9ef">define </span>sort-rec
+      (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">prev</span> now pred)
+        (<span style="color:#66d9ef">if </span>(null? now)
            prev
-           (sort-rec (insert prev (car now) pred)
+           (<span style="color:#a6e22e">sort-rec</span> (<span style="color:#a6e22e">insert</span> prev (car now) pred)
                     (cdr now)
                     pred))))
-    (define insert
-      (lambda (lst elem pred)
-        (cond
+    (<span style="color:#66d9ef">define </span>insert
+      (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">lst</span> elem pred)
+        (<span style="color:#a6e22e">cond</span>
           ((null? lst) (list elem))
-          ((pred elem (car lst))
+          ((<span style="color:#a6e22e">pred</span> elem (car lst))
            (cons elem lst))
-          (else (cons (car lst)
-                     (insert (cdr lst) elem pred))))))
+          (<span style="color:#66d9ef">else </span>(cons (car lst)
+                     (<span style="color:#a6e22e">insert</span> (cdr lst) elem pred))))))
 
-     (sort-rec '() lst pred)))
+     (<span style="color:#a6e22e">sort-rec</span> <span style="color:#f92672">&#39;</span>() lst pred)))
 
-      (sort/predicate1 &lt; '(1 6 5 7))
+      (<span style="color:#a6e22e">sort/predicate1</span> &lt; <span style="color:#f92672">&#39;</span>(<span style="color:#ae81ff">1</span> <span style="color:#ae81ff">6</span> <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">7</span>))
     
-</code></pre>
-
-<ul>
-<li><p>采用letrec实现sort/predicate,主要是用<code>(letrec (() ...) ...)</code> 结构</p>
-
-<pre><code class="language-scheme">
-(define sort/predicate2
-(lambda (pred lst)
-(letrec ((sort-rec
-          (lambda (prev now pred)
-            (if (null? now)
-               prev
-               (sort-rec (insert prev (car now) pred)
-                        (cdr now)
-                        pred))))
-         (insert
-          (lambda (lst elem pred)
-            (cond
-              ((null? lst) (list elem))
-              ((pred elem (car lst))
-               (cons elem lst))
-              (else (cons (car lst)
-                         (insert (cdr lst) elem pred)))))))
-      
-  (sort-rec '() lst pred))))
-
-(sort/predicate2 &lt; '(1 6 5 7))
-
-</code></pre></li>
+</code></pre></div><ul>
+<li>采用letrec实现sort/predicate,主要是用<code>(letrec (() ...) ...)</code> 结构</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">
+(<span style="color:#66d9ef">define </span>sort/predicate2
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">pred</span> lst)
+    (<span style="color:#66d9ef">letrec </span>((<span style="color:#a6e22e">sort-rec</span>
+              (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">prev</span> now pred)
+                (<span style="color:#66d9ef">if </span>(null? now)
+                   prev
+                   (<span style="color:#a6e22e">sort-rec</span> (<span style="color:#a6e22e">insert</span> prev (car now) pred)
+                            (cdr now)
+                            pred))))
+             (<span style="color:#a6e22e">insert</span>
+              (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">lst</span> elem pred)
+                (<span style="color:#a6e22e">cond</span>
+                  ((null? lst) (list elem))
+                  ((<span style="color:#a6e22e">pred</span> elem (car lst))
+                   (cons elem lst))
+                  (<span style="color:#66d9ef">else </span>(cons (car lst)
+                             (<span style="color:#a6e22e">insert</span> (cdr lst) elem pred)))))))
+      
+      (<span style="color:#a6e22e">sort-rec</span> <span style="color:#f92672">&#39;</span>() lst pred))))
 
-<h2 id="结论">结论</h2>
+(<span style="color:#a6e22e">sort/predicate2</span> &lt; <span style="color:#f92672">&#39;</span>(<span style="color:#ae81ff">1</span> <span style="color:#ae81ff">6</span> <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">7</span>))
 
+</code></pre></div><h2 id="heading-3">结论</h2>
 <ol>
 <li>每隔离一层抽象，相当于增加了一种变化</li>
 <li>了解插入排序的实现过程。</li>
@@ -1159,7 +1123,7 @@ prev          now
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

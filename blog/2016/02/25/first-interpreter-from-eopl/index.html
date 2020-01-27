@@ -567,9 +567,9 @@
 
 
 
-<span class="article-metadata" >Reading time: 20 minutes and    3 seconds with 4412 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+<span class="article-metadata" >Reading time: 19 minutes and    20 seconds with 4255 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
-        
+        <nav id="TableOfContents"></nav>
     </aside>
   <div class="article-container">
 
@@ -578,25 +578,23 @@
       <p>这是EOPL一个最为基本的解释器，后面的解释器都在此基础上进行改造，所以
 得理解各个部分，并知道如何使用和改造。最终告诉的是解释器如何解释表达式(每一种语言的表达式)。
 <strong>解释器解释表达式的问题</strong>。</p>
-
 <ul>
 <li><a href="#1">1. 测试Interpreter程序</a></li>
 <li><a href="#2">2. 测试结果</a></li>
 <li><a href="#3">3. 反思结果</a>
-
 <ul>
 <li><a href="#3.1">3.1 非expressions部分</a></li>
 <li><a href="#3.2">3.2 expressions部分</a></li>
-</ul></li>
+</ul>
+</li>
 <li><a href="#4">4. 是解决问题，还是抽象问题？科学性何在?</a>
-
 <ul>
 <li><a href="#4.1">4.1 科学性问题何在？</a></li>
 <li><a href="#4.2">4.2 一个解释器该解决哪些问题？</a></li>
 <li><a href="#4.3">4.3 抽象的目的是什么</a></li>
-</ul></li>
+</ul>
+</li>
 <li><a href="#5">5.一个解释器的具体实现</a>
-
 <ul>
 <li><a href="#5.1">5.1 语言前端表现形式</a> lang</li>
 <li><a href="#5.2">5.2 语言数据结构</a> data-structures</li>
@@ -605,13 +603,11 @@
 <li><a href="#5.5">5.5 语言的初始化</a> drscheme-init</li>
 <li><a href="#5.6">5.6 语言的测试程序</a> tests</li>
 <li><a href="#5.7">5.7 语言前端封装测试</a>Top</li>
-</ul></li>
 </ul>
-
-<hr />
-
-<h2 id="1"> 1. 测试Interpreter程序</h2>
-
+</li>
+</ul>
+<hr>
+<!-- raw HTML omitted -->
 <pre><code>
 ;;测试一个
 (run-tests! run equal-answer? 
@@ -626,204 +622,157 @@
      (if-eval-test-true &quot;if zero?(-(11,11)) then 3 else 4&quot; 3)
     ))
    
-</code></pre>
-
-<h2 id="2"> 2. 测试结果</h2>
-
+</code></pre><!-- raw HTML omitted -->
 <ul>
-<li><p>one test: positive</p>
-
-<pre><code>test: positive
-correct
-
-no bugs found
-
-</code></pre></li>
-
-<li><p>two tests:positive if-else</p>
-
-<pre><code>test: positive
-correct
-
-test: if-eval-test-true
-correct
-
-no bugs found
-</code></pre></li>
+<li>one test: positive</li>
 </ul>
+<pre><code>    test: positive
+    correct
 
-<h2 id="3"> 3. 反思结果</h2>
+    no bugs found
 
+</code></pre><ul>
+<li>two tests:positive if-else</li>
+</ul>
+<pre><code>    test: positive
+    correct
+
+    test: if-eval-test-true
+    correct
+
+    no bugs found
+</code></pre><!-- raw HTML omitted -->
 <p>结果测试很理想并没有错误，并且可以在test中不断增加判断语句。
 而run-test的解析分为两个部分</p>
-
 <ul>
 <li>expressions 这部分的工作主要是value-of</li>
 <li>非expressions  这部分的主要工作就是sligen通过the-grammer的定义进行解析</li>
 </ul>
-
-<h3 id="3.1"> 3.1 非expressions部分</h3>
-
+<!-- raw HTML omitted -->
 <p>这部分需要配合value-of的define-datatype进行对应的变化，且看the-grammer代码</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">
+  (<span style="color:#66d9ef">define </span>the-grammar
+    <span style="color:#f92672">&#39;</span>((<span style="color:#a6e22e">program</span> (<span style="color:#a6e22e">expression</span>) a-program)
 
-<pre><code class="language-scheme">
-  (define the-grammar
-    '((program (expression) a-program)
-
-      (expression (number) const-exp)
-      (expression
-        (&quot;-&quot; &quot;(&quot; expression &quot;,&quot; expression &quot;)&quot;)
+      (<span style="color:#a6e22e">expression</span> (<span style="color:#a6e22e">number</span>) const-exp)
+      (<span style="color:#a6e22e">expression</span>
+        (<span style="color:#e6db74">&#34;-&#34;</span> <span style="color:#e6db74">&#34;(&#34;</span> expression <span style="color:#e6db74">&#34;,&#34;</span> expression <span style="color:#e6db74">&#34;)&#34;</span>)
         diff-exp)
       
-      (expression
-       (&quot;zero?&quot; &quot;(&quot; expression &quot;)&quot;)
+      (<span style="color:#a6e22e">expression</span>
+       (<span style="color:#e6db74">&#34;zero?&#34;</span> <span style="color:#e6db74">&#34;(&#34;</span> expression <span style="color:#e6db74">&#34;)&#34;</span>)
        zero?-exp)
 
-      (expression
-       (&quot;if&quot; expression &quot;then&quot; expression &quot;else&quot; expression)
+      (<span style="color:#a6e22e">expression</span>
+       (<span style="color:#e6db74">&#34;if&#34;</span> expression <span style="color:#e6db74">&#34;then&#34;</span> expression <span style="color:#e6db74">&#34;else&#34;</span> expression)
        if-exp)
 
-      (expression (identifier) var-exp)
+      (<span style="color:#a6e22e">expression</span> (<span style="color:#a6e22e">identifier</span>) var-exp)
 
-      (expression
-       (&quot;let&quot; identifier &quot;=&quot; expression &quot;in&quot; expression)
+      (<span style="color:#a6e22e">expression</span>
+       (<span style="color:#e6db74">&#34;let&#34;</span> identifier <span style="color:#e6db74">&#34;=&#34;</span> expression <span style="color:#e6db74">&#34;in&#34;</span> expression)
        let-exp)   
 
       ))
-</code></pre>
-
-<p>可以看到if,then,else都被当作不变的地方，而其中三个expressions被传动到value-of做进一步的解析。</p>
-
-<h3 id="3.2"> 3. expressions部分</h3>
-
+</code></pre></div><p>可以看到if,then,else都被当作不变的地方，而其中三个expressions被传动到value-of做进一步的解析。</p>
+<!-- raw HTML omitted -->
 <p>继续看value-of的部分，则是对if-exp,var-exp,let-exp,letrec-exp,diff-exp,zerp?-exp?等进行解析的过程。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">
+(<span style="color:#66d9ef">define </span>value-of
+    (<span style="color:#66d9ef">lambda </span>(exp env)
+      (<span style="color:#a6e22e">cases</span> expression exp
 
-<pre><code class="language-scheme">
-(define value-of
-    (lambda (exp env)
-      (cases expression exp
+        (<span style="color:#a6e22e">const-exp</span> (<span style="color:#a6e22e">num</span>) (<span style="color:#a6e22e">num-val</span> num))
 
-        (const-exp (num) (num-val num))
+        (<span style="color:#a6e22e">var-exp</span> (<span style="color:#a6e22e">var</span>) (<span style="color:#a6e22e">apply-env</span> env var))
 
-        (var-exp (var) (apply-env env var))
-
-        (diff-exp (exp1 exp2)
-          (let ((val1 (value-of exp1 env))
-                (val2 (value-of exp2 env)))
-            (let ((num1 (expval-&gt;num val1))
-                  (num2 (expval-&gt;num val2)))
-              (num-val
+        (<span style="color:#a6e22e">diff-exp</span> (<span style="color:#a6e22e">exp1</span> exp2)
+          (<span style="color:#66d9ef">let </span>((<span style="color:#a6e22e">val1</span> (<span style="color:#a6e22e">value-of</span> exp1 env))
+                (<span style="color:#a6e22e">val2</span> (<span style="color:#a6e22e">value-of</span> exp2 env)))
+            (<span style="color:#66d9ef">let </span>((<span style="color:#a6e22e">num1</span> (<span style="color:#a6e22e">expval-&gt;num</span> val1))
+                  (<span style="color:#a6e22e">num2</span> (<span style="color:#a6e22e">expval-&gt;num</span> val2)))
+              (<span style="color:#a6e22e">num-val</span>
                 (- num1 num2)))))
 
-        (zero?-exp (exp1)
-          (let ((val1 (value-of exp1 env)))
-            (let ((num1 (expval-&gt;num val1)))
-              (if (zero? num1)
-                (bool-val #t)
-                (bool-val #f)))))
+        (<span style="color:#a6e22e">zero?-exp</span> (<span style="color:#a6e22e">exp1</span>)
+          (<span style="color:#66d9ef">let </span>((<span style="color:#a6e22e">val1</span> (<span style="color:#a6e22e">value-of</span> exp1 env)))
+            (<span style="color:#66d9ef">let </span>((<span style="color:#a6e22e">num1</span> (<span style="color:#a6e22e">expval-&gt;num</span> val1)))
+              (<span style="color:#66d9ef">if </span>(zero? num1)
+                (<span style="color:#a6e22e">bool-val</span> <span style="color:#66d9ef">#t</span>)
+                (<span style="color:#a6e22e">bool-val</span> <span style="color:#66d9ef">#f</span>)))))
               
-        (if-exp (exp1 exp2 exp3)
-          (let ((val1 (value-of exp1 env)))
-            (if (expval-&gt;bool val1)
-              (value-of exp2 env)
-              (value-of exp3 env))))
+        (<span style="color:#a6e22e">if-exp</span> (<span style="color:#a6e22e">exp1</span> exp2 exp3)
+          (<span style="color:#66d9ef">let </span>((<span style="color:#a6e22e">val1</span> (<span style="color:#a6e22e">value-of</span> exp1 env)))
+            (<span style="color:#66d9ef">if </span>(<span style="color:#a6e22e">expval-&gt;bool</span> val1)
+              (<span style="color:#a6e22e">value-of</span> exp2 env)
+              (<span style="color:#a6e22e">value-of</span> exp3 env))))
 
-        (let-exp (var exp1 body)       
-          (let ((val1 (value-of exp1 env)))
-            (value-of body
-              (extend-env var val1 env))))
+        (<span style="color:#a6e22e">let-exp</span> (<span style="color:#a6e22e">var</span> exp1 body)       
+          (<span style="color:#66d9ef">let </span>((<span style="color:#a6e22e">val1</span> (<span style="color:#a6e22e">value-of</span> exp1 env)))
+            (<span style="color:#a6e22e">value-of</span> body
+              (<span style="color:#a6e22e">extend-env</span> var val1 env))))
 
         )))
-</code></pre>
-
-<p>可以参考<a href="http://jueqingsizhe66.github.io/blog/2016/02/19/the-implementation-of-define-datetype/" target="_blank">cases的实现</a>,以及<a href="http://jueqingsizhe66.github.io/blog/2016/02/23/casesde-zuo-yong/" target="_blank">cases的作用</a>
-当然<a href="http://jueqingsizhe66.github.io/blog/2016/02/09/its-a-dead-program-dot-how-to-let-it-alive/#1" target="_blank">TLS</a>也提供了比如*const,*application等的定义</p>
-
-<pre><code class="language-scheme">;第一大部分 定义好整体框架
-(define value
- (lambda (e)
-  (meaning e (quote ()))))
-(define meaning
- (lambda (e table)
-  ((expression-to-action e) e table))
-</code></pre>
-
-<p>其中的<code>(expression-to-action)</code>就会产生对应的<code>*const*,*identifier*,*lambda*
-,*cond*,*quote*,*application*</code>以及<a href="http://jueqingsizhe66.github.io/blog/2016/02/09/its-a-dead-program-dot-how-to-let-it-alive/#2" target="_blank">TSS</a>中新增加的<code>*set*,*define*,*let*</code>。</p>
-
-<p>这两个部分是比较有趣的地方，规范了语言的前端部分，犹如左右手交换来交换去和penrose-stair<img src="/images/penrose-stair.png" alt="penrose-stair" />
-,进一步可以看看<a href="http://df.xq0510.blog.163.com/blog/static/16013465820108704920944/" target="_blank">盗墓笔记(inception)的评述</a></p>
-
-<h2 id="4"> 4. 是解决问题，还是抽象问题？科学性何在?</h2>
-
+</code></pre></div><p>可以参考<a href="http://jueqingsizhe66.github.io/blog/2016/02/19/the-implementation-of-define-datetype/">cases的实现</a>,以及<a href="http://jueqingsizhe66.github.io/blog/2016/02/23/casesde-zuo-yong/">cases的作用</a>
+当然<a href="http://jueqingsizhe66.github.io/blog/2016/02/09/its-a-dead-program-dot-how-to-let-it-alive/#1">TLS</a>也提供了比如*const,*application等的定义</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#75715e">;第一大部分 定义好整体框架</span>
+(<span style="color:#66d9ef">define </span>value
+ (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">e</span>)
+  (<span style="color:#a6e22e">meaning</span> e (<span style="color:#66d9ef">quote </span>()))))
+(<span style="color:#66d9ef">define </span>meaning
+ (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">e</span> table)
+  ((<span style="color:#a6e22e">expression-to-action</span> e) e table))
+</code></pre></div><p>其中的<code>(expression-to-action)</code>就会产生对应的<code>*const*,*identifier*,*lambda* ,*cond*,*quote*,*application*</code>以及<a href="http://jueqingsizhe66.github.io/blog/2016/02/09/its-a-dead-program-dot-how-to-let-it-alive/#2">TSS</a>中新增加的<code>*set*,*define*,*let*</code>。</p>
+<p>这两个部分是比较有趣的地方，规范了语言的前端部分，犹如左右手交换来交换去和penrose-stair<img src="/images/penrose-stair.png" alt="penrose-stair">
+,进一步可以看看<a href="http://df.xq0510.blog.163.com/blog/static/16013465820108704920944/">盗墓笔记(inception)的评述</a></p>
+<!-- raw HTML omitted -->
 <p>科学进步的每一步发展，不是通过不断抽象来直觉抽取出进步，而是通过直觉发现问题，在利用抽象的方式进行求解，从而获得进步。
 而抽象其实就是通过<strong>interface</strong>和<strong>implementation</strong>来进行，</p>
-
 <ul>
-<li>interface的定义就是通过<a href="http://jueqingsizhe66.github.io/blog/2016/02/19/the-implementation-of-define-datetype/" target="_blank">define-datatype</a>进行，</li>
+<li>interface的定义就是通过<a href="http://jueqingsizhe66.github.io/blog/2016/02/19/the-implementation-of-define-datetype/">define-datatype</a>进行，</li>
 <li>implementation则是通过cases进行。</li>
 </ul>
-
-<h3 id="4.1">4.1 科学性问题何在？</h3>
-
+<!-- raw HTML omitted -->
 <p>现象和本质的探寻，透过现象看到本质，现象的产生都有其内在的原理，科学关注的是内在的本质联系。
 scheme这门语言可以透过不断的抽象，产生许许多多的语言，但是这些语言层是否真的对科学问题有帮助，
 这是值得怀疑的地方！科学必须要有怀疑！科学必须找寻问题所在，从而探索产生原因（持保留意见）。</p>
-
-<h3 id="4.2">4.2 一个解释器该解决哪些问题？</h3>
-
+<!-- raw HTML omitted -->
 <p>最基本的我觉得应该有两个：</p>
-
 <ul>
 <li>词法解析问题
 解决我输入的字符串，该如何由scan&amp;parse进行解析</li>
 <li>语义解析问题
 解决我得到的表达式(expression),它怎么由value-of进行解析，到底是const-exp,var-exp,proc-exp,let-exp等</li>
 </ul>
-
 <p>其实语言系列的表达主要有</p>
-
 <ol>
 <li>imperative language(C,fortran)</li>
 <li>functional programming language(Lisp,ML,Haskell,Scheme)</li>
 <li>message passing language(OOP: Java,C++,)</li>
 </ol>
-
-<p>他们在解析程序的过程中都离不开上述的两个基本问题的解析，他们也被叫做<strong>前端(front-end)</strong>。<img src="/images/lisp/front-end.png" alt="front-end" /></p>
-
+<p>他们在解析程序的过程中都离不开上述的两个基本问题的解析，他们也被叫做<strong>前端(front-end)</strong>。<img src="/images/lisp/front-end.png" alt="front-end"></p>
 <p>而任何语言如果仅仅有这个value的过程，而不会产生任何的effects，
 比如：</p>
-
 <ul>
 <li>print</li>
 <li>read</li>
 <li>modify the memory state or file system</li>
 </ul>
-
 <p>那就太没有意思了，所以语言的完成需要他拓充到操作系统的处理、IO处理、显示处理，增加它的趣味性，而不是一味的解决问题（持保留意见）</p>
-
 <ul>
 <li>词法解析使我们获得从字符串到对应的语言的const-exp等的exp形式</li>
 <li>语义解析部分则是我们对const-exp等的具体实现部分</li>
 </ul>
-
-<p>所以本质上来说这两点也是抽象的组成部分（<a href="http://jueqingsizhe66.github.io/blog/2016/02/15/data-representation-the-same-interface-with-different-implementation/" target="_blank">接口和实现</a>）,所以本质上解决解释器的实现问题，其实就是<strong>如何抽象的问题?</strong>。</p>
-
-<h3 id="4.3">4.3 抽象的目的是什么？</h3>
-
+<p>所以本质上来说这两点也是抽象的组成部分（<a href="http://jueqingsizhe66.github.io/blog/2016/02/15/data-representation-the-same-interface-with-different-implementation/">接口和实现</a>）,所以本质上解决解释器的实现问题，其实就是<strong>如何抽象的问题?</strong>。</p>
+<!-- raw HTML omitted -->
 <p>在于解决现实出现的科学问题。
 也就是这些问题都能够被设定的接口和实现通过递归进行解释，并最终获得结果(result or outcome)。</p>
-
 <p>而为什么要绕来绕去的谈这些问题呢？ 因为interpreter的实现过程本质也是递归的思想，在不断规约到一个结论。</p>
-
-<h2 id="5">5. 一个解释器的具体实现</h2>
-
+<!-- raw HTML omitted -->
 <p>参考EOPL第三章.</p>
-
 <p>一般过程是先思考新语言的表现形式lang.scm，设定几个数据类型放入data-structures.scm中,
 然后我们需要给这两个阶段设定bridge，也就是环境封装.这样我们就可以写一个解释器interpreter,解释并获得最终结果。
-简而言之，其实我们就是想看看计算机是如何解释我们输入的这句话，具体就是<a href="https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-35.html#%_sec_5.5" target="_blank"><strong>解释器如何解析输入的表达式</strong></a></p>
-
+简而言之，其实我们就是想看看计算机是如何解释我们输入的这句话，具体就是<a href="https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-35.html#%25_sec_5.5"><strong>解释器如何解析输入的表达式</strong></a></p>
 <ol>
 <li>语言<a href="#5.1">前端表现形式</a> lang</li>
 <li>语言<a href="#5.2">数据结构</a> data-structures</li>
@@ -833,589 +782,553 @@ scheme这门语言可以透过不断的抽象，产生许许多多的语言，�
 <li>语言的<a href="#5.6">测试程序</a> tests</li>
 <li>语言<a href="#5.7">前端封装测试</a>Top</li>
 </ol>
-
-<h3 id="5.1">5.1 前端表现形式</h3>
-
+<!-- raw HTML omitted -->
 <p>保存为lang.scm</p>
-
 <p>该阶段的主要目的就是定义新生成的语言该是如何使用的？也就是语法部分。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">
+(<span style="color:#a6e22e">module</span> lang
 
-<pre><code class="language-scheme">
-(module lang
+  <span style="color:#75715e">;; grammar for the LET language</span>
 
-  ;; grammar for the LET language
-
-  (lib &quot;eopl.ss&quot; &quot;eopl&quot;)                
+  (<span style="color:#a6e22e">lib</span> <span style="color:#e6db74">&#34;eopl.ss&#34;</span> <span style="color:#e6db74">&#34;eopl&#34;</span>)                
   
-  (require &quot;drscheme-init.scm&quot;)
+  (<span style="color:#a6e22e">require</span> <span style="color:#e6db74">&#34;drscheme-init.scm&#34;</span>)
   
-  (provide (all-defined-out))
+  (<span style="color:#a6e22e">provide</span> (<span style="color:#a6e22e">all-defined-out</span>))
 
-  ;;;;;;;;;;;;;;;; grammatical specification ;;;;;;;;;;;;;;;;
+  <span style="color:#75715e">;;;;;;;;;;;;;;;; grammatical specification ;;;;;;;;;;;;;;;;</span>
   
-  (define the-lexical-spec
-    '((whitespace (whitespace) skip)
-      (comment (&quot;%&quot; (arbno (not #\newline))) skip)
-      (identifier
-       (letter (arbno (or letter digit &quot;_&quot; &quot;-&quot; &quot;?&quot;)))
+  (<span style="color:#66d9ef">define </span>the-lexical-spec
+    <span style="color:#f92672">&#39;</span>((<span style="color:#a6e22e">whitespace</span> (<span style="color:#a6e22e">whitespace</span>) skip)
+      (<span style="color:#a6e22e">comment</span> (<span style="color:#e6db74">&#34;%&#34;</span> (<span style="color:#a6e22e">arbno</span> (not <span style="color:#e6db74">#\newline</span>))) skip)
+      (<span style="color:#a6e22e">identifier</span>
+       (<span style="color:#a6e22e">letter</span> (<span style="color:#a6e22e">arbno</span> (<span style="color:#66d9ef">or </span>letter digit <span style="color:#e6db74">&#34;_&#34;</span> <span style="color:#e6db74">&#34;-&#34;</span> <span style="color:#e6db74">&#34;?&#34;</span>)))
        symbol)
-      (number (digit (arbno digit)) number)
-      (number (&quot;-&quot; digit (arbno digit)) number)
+      (<span style="color:#a6e22e">number</span> (<span style="color:#a6e22e">digit</span> (<span style="color:#a6e22e">arbno</span> digit)) number)
+      (<span style="color:#a6e22e">number</span> (<span style="color:#e6db74">&#34;-&#34;</span> digit (<span style="color:#a6e22e">arbno</span> digit)) number)
       ))
   
-  (define the-grammar
-    '((program (expression) a-program)
+  (<span style="color:#66d9ef">define </span>the-grammar
+    <span style="color:#f92672">&#39;</span>((<span style="color:#a6e22e">program</span> (<span style="color:#a6e22e">expression</span>) a-program)
 
-      (expression (number) const-exp)
-      (expression
-        (&quot;-&quot; &quot;(&quot; expression &quot;,&quot; expression &quot;)&quot;)
+      (<span style="color:#a6e22e">expression</span> (<span style="color:#a6e22e">number</span>) const-exp)
+      (<span style="color:#a6e22e">expression</span>
+        (<span style="color:#e6db74">&#34;-&#34;</span> <span style="color:#e6db74">&#34;(&#34;</span> expression <span style="color:#e6db74">&#34;,&#34;</span> expression <span style="color:#e6db74">&#34;)&#34;</span>)
         diff-exp)
       
-      (expression
-       (&quot;zero?&quot; &quot;(&quot; expression &quot;)&quot;)
+      (<span style="color:#a6e22e">expression</span>
+       (<span style="color:#e6db74">&#34;zero?&#34;</span> <span style="color:#e6db74">&#34;(&#34;</span> expression <span style="color:#e6db74">&#34;)&#34;</span>)
        zero?-exp)
 
-      (expression
-       (&quot;if&quot; expression &quot;then&quot; expression &quot;else&quot; expression)
+      (<span style="color:#a6e22e">expression</span>
+       (<span style="color:#e6db74">&#34;if&#34;</span> expression <span style="color:#e6db74">&#34;then&#34;</span> expression <span style="color:#e6db74">&#34;else&#34;</span> expression)
        if-exp)
 
-      (expression (identifier) var-exp)
+      (<span style="color:#a6e22e">expression</span> (<span style="color:#a6e22e">identifier</span>) var-exp)
 
-      (expression
-       (&quot;let&quot; identifier &quot;=&quot; expression &quot;in&quot; expression)
+      (<span style="color:#a6e22e">expression</span>
+       (<span style="color:#e6db74">&#34;let&#34;</span> identifier <span style="color:#e6db74">&#34;=&#34;</span> expression <span style="color:#e6db74">&#34;in&#34;</span> expression)
        let-exp)   
 
       ))
   
-  ;;;;;;;;;;;;;;;; sllgen boilerplate ;;;;;;;;;;;;;;;;
+  <span style="color:#75715e">;;;;;;;;;;;;;;;; sllgen boilerplate ;;;;;;;;;;;;;;;;</span>
   
-  (sllgen:make-define-datatypes the-lexical-spec the-grammar)
+  (<span style="color:#a6e22e">sllgen:make-define-datatypes</span> the-lexical-spec the-grammar)
   
-  (define show-the-datatypes
-    (lambda () (sllgen:list-define-datatypes the-lexical-spec the-grammar)))
+  (<span style="color:#66d9ef">define </span>show-the-datatypes
+    (<span style="color:#66d9ef">lambda </span>() (<span style="color:#a6e22e">sllgen:list-define-datatypes</span> the-lexical-spec the-grammar)))
   
-  (define scan&amp;parse
-    (sllgen:make-string-parser the-lexical-spec the-grammar))
+  (<span style="color:#66d9ef">define </span>scan&amp;parse
+    (<span style="color:#a6e22e">sllgen:make-string-parser</span> the-lexical-spec the-grammar))
   
-  (define just-scan
-    (sllgen:make-string-scanner the-lexical-spec the-grammar))
+  (<span style="color:#66d9ef">define </span>just-scan
+    (<span style="color:#a6e22e">sllgen:make-string-scanner</span> the-lexical-spec the-grammar))
   
   )
-</code></pre>
-
-<h3 id="5.2">5.2 数据结构</h3>
-
+</code></pre></div><!-- raw HTML omitted -->
 <p>保存为data-structures.scm</p>
-
 <p>该阶段的主要目的就是定义对应的类型该具有什么样的接口，这些接口的实现部分在第四部分有具体的体现。
 这部分就是程序的<strong>类型接口的转换部分</strong>。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">
+(<span style="color:#a6e22e">module</span> data-structures (<span style="color:#a6e22e">lib</span> <span style="color:#e6db74">&#34;eopl.ss&#34;</span> <span style="color:#e6db74">&#34;eopl&#34;</span>)
 
-<pre><code class="language-scheme">
-(module data-structures (lib &quot;eopl.ss&quot; &quot;eopl&quot;)
+  <span style="color:#75715e">;; data structures for let-lang.</span>
 
-  ;; data structures for let-lang.
+  (<span style="color:#a6e22e">provide</span> (<span style="color:#a6e22e">all-defined-out</span>))               <span style="color:#75715e">; too many things to list</span>
 
-  (provide (all-defined-out))               ; too many things to list
+<span style="color:#75715e">;;;;;;;;;;;;;;;; expressed values ;;;;;;;;;;;;;;;;</span>
 
-;;;;;;;;;;;;;;;; expressed values ;;;;;;;;;;;;;;;;
+<span style="color:#75715e">;;; an expressed value is either a number, a boolean or a procval.</span>
 
-;;; an expressed value is either a number, a boolean or a procval.
+  (<span style="color:#a6e22e">define-datatype</span> expval expval?
+    (<span style="color:#a6e22e">num-val</span>
+      (<span style="color:#a6e22e">value</span> number?))
+    (<span style="color:#a6e22e">bool-val</span>
+      (<span style="color:#a6e22e">boolean</span> boolean?)))
 
-  (define-datatype expval expval?
-    (num-val
-      (value number?))
-    (bool-val
-      (boolean boolean?)))
+<span style="color:#75715e">;;; extractors:</span>
 
-;;; extractors:
+  <span style="color:#75715e">;; expval-&gt;num : ExpVal -&gt; Int</span>
+  <span style="color:#75715e">;; Page: 70</span>
+  (<span style="color:#66d9ef">define </span>expval-&gt;num
+    (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">v</span>)
+      (<span style="color:#a6e22e">cases</span> expval v
+	(<span style="color:#a6e22e">num-val</span> (<span style="color:#a6e22e">num</span>) num)
+	(<span style="color:#66d9ef">else </span>(<span style="color:#a6e22e">expval-extractor-error</span> <span style="color:#e6db74">&#39;num</span> v)))))
 
-  ;; expval-&gt;num : ExpVal -&gt; Int
-  ;; Page: 70
-  (define expval-&gt;num
-    (lambda (v)
-      (cases expval v
-	(num-val (num) num)
-	(else (expval-extractor-error 'num v)))))
+  <span style="color:#75715e">;; expval-&gt;bool : ExpVal -&gt; Bool</span>
+  <span style="color:#75715e">;; Page: 70</span>
+  (<span style="color:#66d9ef">define </span>expval-&gt;bool
+    (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">v</span>)
+      (<span style="color:#a6e22e">cases</span> expval v
+	(<span style="color:#a6e22e">bool-val</span> (<span style="color:#a6e22e">bool</span>) bool)
+	(<span style="color:#66d9ef">else </span>(<span style="color:#a6e22e">expval-extractor-error</span> <span style="color:#e6db74">&#39;bool</span> v)))))
 
-  ;; expval-&gt;bool : ExpVal -&gt; Bool
-  ;; Page: 70
-  (define expval-&gt;bool
-    (lambda (v)
-      (cases expval v
-	(bool-val (bool) bool)
-	(else (expval-extractor-error 'bool v)))))
-
-  (define expval-extractor-error
-    (lambda (variant value)
-      (eopl:error 'expval-extractors &quot;Looking for a ~s, found ~s&quot;
+  (<span style="color:#66d9ef">define </span>expval-extractor-error
+    (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">variant</span> value)
+      (<span style="color:#a6e22e">eopl:error</span> <span style="color:#e6db74">&#39;expval-extractors</span> <span style="color:#e6db74">&#34;Looking for a ~s, found ~s&#34;</span>
 	variant value)))
 
-;;;;;;;;;;;;;;;; environment structures ;;;;;;;;;;;;;;;;
+<span style="color:#75715e">;;;;;;;;;;;;;;;; environment structures ;;;;;;;;;;;;;;;;</span>
 
-;; example of a data type built without define-datatype
+<span style="color:#75715e">;; example of a data type built without define-datatype</span>
 
-  (define empty-env-record
-    (lambda () 
-      '()))
+  (<span style="color:#66d9ef">define </span>empty-env-record
+    (<span style="color:#66d9ef">lambda </span>() 
+      <span style="color:#f92672">&#39;</span>()))
 
-  (define extended-env-record
-    (lambda (sym val old-env)
+  (<span style="color:#66d9ef">define </span>extended-env-record
+    (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">sym</span> val old-env)
       (cons (list sym val) old-env)))
   
-  (define empty-env-record? null?)
+  (<span style="color:#66d9ef">define </span>empty-env-record? null?)
   
-  (define environment?
-    (lambda (x)
-      (or (empty-env-record? x)
-          (and (pair? x)
+  (<span style="color:#66d9ef">define </span>environment?
+    (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">x</span>)
+      (<span style="color:#66d9ef">or </span>(<span style="color:#a6e22e">empty-env-record?</span> x)
+          (<span style="color:#66d9ef">and </span>(pair? x)
                (symbol? (car (car x)))
-               (expval? (cadr (car x)))
-               (environment? (cdr x))))))
+               (<span style="color:#a6e22e">expval?</span> (cadr (car x)))
+               (<span style="color:#a6e22e">environment?</span> (cdr x))))))
 
-  (define extended-env-record-&gt;sym
-    (lambda (r)
+  (<span style="color:#66d9ef">define </span>extended-env-record-&gt;sym
+    (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">r</span>)
       (car (car r))))
 
-  (define extended-env-record-&gt;val
-    (lambda (r)
+  (<span style="color:#66d9ef">define </span>extended-env-record-&gt;val
+    (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">r</span>)
       (cadr (car r))))
 
-  (define extended-env-record-&gt;old-env
-    (lambda (r)
+  (<span style="color:#66d9ef">define </span>extended-env-record-&gt;old-env
+    (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">r</span>)
       (cdr r)))
 
 )
-</code></pre>
-
-<h3 id="5.3">5.3 中间阶段</h3>
-
+</code></pre></div><!-- raw HTML omitted -->
 <p>保存为environments.scm</p>
-
 <p>该阶段的主要目的是为了解释当遇到一些变量或者之后的解释器的lambda（将在下一个版本解释器体现），如何保存下来
 ，并供对应程序使用。</p>
-
-<pre><code class="language-scheme">(module environments (lib &quot;eopl.ss&quot; &quot;eopl&quot;) 
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#a6e22e">module</span> environments (<span style="color:#a6e22e">lib</span> <span style="color:#e6db74">&#34;eopl.ss&#34;</span> <span style="color:#e6db74">&#34;eopl&#34;</span>) 
   
-  ;; builds environment interface, using data structures defined in
-  ;; data-structures.scm. 
+  <span style="color:#75715e">;; builds environment interface, using data structures defined in</span>
+  <span style="color:#75715e">;; data-structures.scm. </span>
 
-  (require &quot;data-structures.scm&quot;)
+  (<span style="color:#a6e22e">require</span> <span style="color:#e6db74">&#34;data-structures.scm&#34;</span>)
 
-  (provide init-env empty-env extend-env apply-env)
+  (<span style="color:#a6e22e">provide</span> init-env empty-env extend-env apply-env)
 
-;;;;;;;;;;;;;;;; initial environment ;;;;;;;;;;;;;;;;
+<span style="color:#75715e">;;;;;;;;;;;;;;;; initial environment ;;;;;;;;;;;;;;;;</span>
   
-  ;; init-env : () -&gt; Env
-  ;; usage: (init-env) = [i=1, v=5, x=10]
-  ;; (init-env) builds an environment in which i is bound to the
-  ;; expressed value 1, v is bound to the expressed value 5, and x is
-  ;; bound to the expressed value 10.
-  ;; Page: 69
+  <span style="color:#75715e">;; init-env : () -&gt; Env</span>
+  <span style="color:#75715e">;; usage: (init-env) = [i=1, v=5, x=10]</span>
+  <span style="color:#75715e">;; (init-env) builds an environment in which i is bound to the</span>
+  <span style="color:#75715e">;; expressed value 1, v is bound to the expressed value 5, and x is</span>
+  <span style="color:#75715e">;; bound to the expressed value 10.</span>
+  <span style="color:#75715e">;; Page: 69</span>
 
-  (define init-env 
-    (lambda ()
-      (extend-env 
-       'i (num-val 1)
-       (extend-env
-        'v (num-val 5)
-        (extend-env
-         'x (num-val 10)
-         (empty-env))))))
+  (<span style="color:#66d9ef">define </span>init-env 
+    (<span style="color:#66d9ef">lambda </span>()
+      (<span style="color:#a6e22e">extend-env</span> 
+       <span style="color:#e6db74">&#39;i</span> (<span style="color:#a6e22e">num-val</span> <span style="color:#ae81ff">1</span>)
+       (<span style="color:#a6e22e">extend-env</span>
+        <span style="color:#e6db74">&#39;v</span> (<span style="color:#a6e22e">num-val</span> <span style="color:#ae81ff">5</span>)
+        (<span style="color:#a6e22e">extend-env</span>
+         <span style="color:#e6db74">&#39;x</span> (<span style="color:#a6e22e">num-val</span> <span style="color:#ae81ff">10</span>)
+         (<span style="color:#a6e22e">empty-env</span>))))))
 
-;;;;;;;;;;;;;;;; environment constructors and observers ;;;;;;;;;;;;;;;;
+<span style="color:#75715e">;;;;;;;;;;;;;;;; environment constructors and observers ;;;;;;;;;;;;;;;;</span>
 
-  (define empty-env
-    (lambda ()
-      (empty-env-record)))
+  (<span style="color:#66d9ef">define </span>empty-env
+    (<span style="color:#66d9ef">lambda </span>()
+      (<span style="color:#a6e22e">empty-env-record</span>)))
   
-  (define empty-env? 
-    (lambda (x)
-      (empty-env-record? x)))
+  (<span style="color:#66d9ef">define </span>empty-env? 
+    (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">x</span>)
+      (<span style="color:#a6e22e">empty-env-record?</span> x)))
 
-  (define extend-env
-    (lambda (sym val old-env)
-      (extended-env-record sym val old-env)))
+  (<span style="color:#66d9ef">define </span>extend-env
+    (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">sym</span> val old-env)
+      (<span style="color:#a6e22e">extended-env-record</span> sym val old-env)))
 
-  (define apply-env
-    (lambda (env search-sym)
-      (if (empty-env? env)
-	(eopl:error 'apply-env &quot;No binding for ~s&quot; search-sym)
-	(let ((sym (extended-env-record-&gt;sym env))
-	      (val (extended-env-record-&gt;val env))
-	      (old-env (extended-env-record-&gt;old-env env)))
-	  (if (eqv? search-sym sym)
+  (<span style="color:#66d9ef">define </span>apply-env
+    (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">env</span> search-sym)
+      (<span style="color:#66d9ef">if </span>(<span style="color:#a6e22e">empty-env?</span> env)
+	(<span style="color:#a6e22e">eopl:error</span> <span style="color:#e6db74">&#39;apply-env</span> <span style="color:#e6db74">&#34;No binding for ~s&#34;</span> search-sym)
+	(<span style="color:#66d9ef">let </span>((<span style="color:#a6e22e">sym</span> (<span style="color:#a6e22e">extended-env-record-&gt;sym</span> env))
+	      (<span style="color:#a6e22e">val</span> (<span style="color:#a6e22e">extended-env-record-&gt;val</span> env))
+	      (<span style="color:#a6e22e">old-env</span> (<span style="color:#a6e22e">extended-env-record-&gt;old-env</span> env)))
+	  (<span style="color:#66d9ef">if </span>(eqv? search-sym sym)
 	    val
-	    (apply-env old-env search-sym))))))
+	    (<span style="color:#a6e22e">apply-env</span> old-env search-sym))))))
 
   )
-</code></pre>
-
-<h3 id="5.4">5.4 核心阶段</h3>
-
+</code></pre></div><!-- raw HTML omitted -->
 <p>保存为interp.scm</p>
-
 <p>该阶段的主要目的就是编写针对第3阶段生成的var-exp、const-exp等expval的解析，算是核心部分，最终的结果的产生地，
 后面的几个阶段只不过是针对这部分内容做了一些前端的准备，算是死门，而这部分和前面的词法解析、类型转换接口算是一个语言的生门部分。</p>
-
-<pre><code class="language-scheme">
-(module interp (lib &quot;eopl.ss&quot; &quot;eopl&quot;)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">
+(<span style="color:#a6e22e">module</span> interp (<span style="color:#a6e22e">lib</span> <span style="color:#e6db74">&#34;eopl.ss&#34;</span> <span style="color:#e6db74">&#34;eopl&#34;</span>)
   
-  ;; interpreter for the LET language.  The \commentboxes are the
-  ;; latex code for inserting the rules into the code in the book.
-  ;; These are too complicated to put here, see the text, sorry.
+  <span style="color:#75715e">;; interpreter for the LET language.  The \commentboxes are the</span>
+  <span style="color:#75715e">;; latex code for inserting the rules into the code in the book.</span>
+  <span style="color:#75715e">;; These are too complicated to put here, see the text, sorry.</span>
 
-  (require &quot;drscheme-init.scm&quot;)
+  (<span style="color:#a6e22e">require</span> <span style="color:#e6db74">&#34;drscheme-init.scm&#34;</span>)
 
-  (require &quot;lang.scm&quot;)
-  (require &quot;data-structures.scm&quot;)
-  (require &quot;environments.scm&quot;)
+  (<span style="color:#a6e22e">require</span> <span style="color:#e6db74">&#34;lang.scm&#34;</span>)
+  (<span style="color:#a6e22e">require</span> <span style="color:#e6db74">&#34;data-structures.scm&#34;</span>)
+  (<span style="color:#a6e22e">require</span> <span style="color:#e6db74">&#34;environments.scm&#34;</span>)
 
-  (provide value-of-program value-of)
+  (<span style="color:#a6e22e">provide</span> value-of-program value-of)
 
-;;;;;;;;;;;;;;;; the interpreter ;;;;;;;;;;;;;;;;
+<span style="color:#75715e">;;;;;;;;;;;;;;;; the interpreter ;;;;;;;;;;;;;;;;</span>
 
-  ;; value-of-program : Program -&gt; ExpVal
-  ;; Page: 71
-  (define value-of-program 
-    (lambda (pgm)
-      (cases program pgm
-        (a-program (exp1)
-          (value-of exp1 (init-env))))))
+  <span style="color:#75715e">;; value-of-program : Program -&gt; ExpVal</span>
+  <span style="color:#75715e">;; Page: 71</span>
+  (<span style="color:#66d9ef">define </span>value-of-program 
+    (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">pgm</span>)
+      (<span style="color:#a6e22e">cases</span> program pgm
+        (<span style="color:#a6e22e">a-program</span> (<span style="color:#a6e22e">exp1</span>)
+          (<span style="color:#a6e22e">value-of</span> exp1 (<span style="color:#a6e22e">init-env</span>))))))
 
-  ;; value-of : Exp * Env -&gt; ExpVal
-  ;; Page: 71
-  (define value-of
-    (lambda (exp env)
-      (cases expression exp
+  <span style="color:#75715e">;; value-of : Exp * Env -&gt; ExpVal</span>
+  <span style="color:#75715e">;; Page: 71</span>
+  (<span style="color:#66d9ef">define </span>value-of
+    (<span style="color:#66d9ef">lambda </span>(exp env)
+      (<span style="color:#a6e22e">cases</span> expression exp
 
-        (const-exp (num) (num-val num))
+        (<span style="color:#a6e22e">const-exp</span> (<span style="color:#a6e22e">num</span>) (<span style="color:#a6e22e">num-val</span> num))
 
-        (var-exp (var) (apply-env env var))
+        (<span style="color:#a6e22e">var-exp</span> (<span style="color:#a6e22e">var</span>) (<span style="color:#a6e22e">apply-env</span> env var))
 
-        (diff-exp (exp1 exp2)
-          (let ((val1 (value-of exp1 env))
-                (val2 (value-of exp2 env)))
-            (let ((num1 (expval-&gt;num val1))
-                  (num2 (expval-&gt;num val2)))
-              (num-val
+        (<span style="color:#a6e22e">diff-exp</span> (<span style="color:#a6e22e">exp1</span> exp2)
+          (<span style="color:#66d9ef">let </span>((<span style="color:#a6e22e">val1</span> (<span style="color:#a6e22e">value-of</span> exp1 env))
+                (<span style="color:#a6e22e">val2</span> (<span style="color:#a6e22e">value-of</span> exp2 env)))
+            (<span style="color:#66d9ef">let </span>((<span style="color:#a6e22e">num1</span> (<span style="color:#a6e22e">expval-&gt;num</span> val1))
+                  (<span style="color:#a6e22e">num2</span> (<span style="color:#a6e22e">expval-&gt;num</span> val2)))
+              (<span style="color:#a6e22e">num-val</span>
                 (- num1 num2)))))
 
-        (zero?-exp (exp1)
-          (let ((val1 (value-of exp1 env)))
-            (let ((num1 (expval-&gt;num val1)))
-              (if (zero? num1)
-                (bool-val #t)
-                (bool-val #f)))))
+        (<span style="color:#a6e22e">zero?-exp</span> (<span style="color:#a6e22e">exp1</span>)
+          (<span style="color:#66d9ef">let </span>((<span style="color:#a6e22e">val1</span> (<span style="color:#a6e22e">value-of</span> exp1 env)))
+            (<span style="color:#66d9ef">let </span>((<span style="color:#a6e22e">num1</span> (<span style="color:#a6e22e">expval-&gt;num</span> val1)))
+              (<span style="color:#66d9ef">if </span>(zero? num1)
+                (<span style="color:#a6e22e">bool-val</span> <span style="color:#66d9ef">#t</span>)
+                (<span style="color:#a6e22e">bool-val</span> <span style="color:#66d9ef">#f</span>)))))
               
-        (if-exp (exp1 exp2 exp3)
-          (let ((val1 (value-of exp1 env)))
-            (if (expval-&gt;bool val1)
-              (value-of exp2 env)
-              (value-of exp3 env))))
+        (<span style="color:#a6e22e">if-exp</span> (<span style="color:#a6e22e">exp1</span> exp2 exp3)
+          (<span style="color:#66d9ef">let </span>((<span style="color:#a6e22e">val1</span> (<span style="color:#a6e22e">value-of</span> exp1 env)))
+            (<span style="color:#66d9ef">if </span>(<span style="color:#a6e22e">expval-&gt;bool</span> val1)
+              (<span style="color:#a6e22e">value-of</span> exp2 env)
+              (<span style="color:#a6e22e">value-of</span> exp3 env))))
 
-        (let-exp (var exp1 body)       
-          (let ((val1 (value-of exp1 env)))
-            (value-of body
-              (extend-env var val1 env))))
+        (<span style="color:#a6e22e">let-exp</span> (<span style="color:#a6e22e">var</span> exp1 body)       
+          (<span style="color:#66d9ef">let </span>((<span style="color:#a6e22e">val1</span> (<span style="color:#a6e22e">value-of</span> exp1 env)))
+            (<span style="color:#a6e22e">value-of</span> body
+              (<span style="color:#a6e22e">extend-env</span> var val1 env))))
 
         )))
 
 
   )
 
-</code></pre>
-
-<h3 id="5.5">5.5 初始化</h3>
-
+</code></pre></div><!-- raw HTML omitted -->
 <p>保存为drscheme-init.scm</p>
-
 <p>该阶段主要目的是编写测试需要的套件，提供测试是否成功的判断标准。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">
+<span style="color:#75715e">;; drscheme-init.scm - compatibility file for DrScheme</span>
+<span style="color:#75715e">;; usage: (require &#34;drscheme-init.scm&#34;)</span>
 
-<pre><code class="language-scheme">
-;; drscheme-init.scm - compatibility file for DrScheme
-;; usage: (require &quot;drscheme-init.scm&quot;)
-
-;;; makes structs printable, and provides basic functionality for
-;;; testing.  This includes pretty-printing and tracing.
+<span style="color:#75715e">;;; makes structs printable, and provides basic functionality for</span>
+<span style="color:#75715e">;;; testing.  This includes pretty-printing and tracing.</span>
 
 
-(module drscheme-init mzscheme
+(<span style="color:#a6e22e">module</span> drscheme-init mzscheme
 
-  ;; show the contents of define-datatype values
-  (print-struct #t)
+  <span style="color:#75715e">;; show the contents of define-datatype values</span>
+  (<span style="color:#a6e22e">print-struct</span> <span style="color:#66d9ef">#t</span>)
 
-  (require (lib &quot;pretty.ss&quot;))
-  (provide (all-from (lib &quot;pretty.ss&quot;)))
+  (<span style="color:#a6e22e">require</span> (<span style="color:#a6e22e">lib</span> <span style="color:#e6db74">&#34;pretty.ss&#34;</span>))
+  (<span style="color:#a6e22e">provide</span> (<span style="color:#a6e22e">all-from</span> (<span style="color:#a6e22e">lib</span> <span style="color:#e6db74">&#34;pretty.ss&#34;</span>)))
 
-  (require (lib &quot;trace.ss&quot;))
-  (provide (all-from (lib &quot;trace.ss&quot;)))
+  (<span style="color:#a6e22e">require</span> (<span style="color:#a6e22e">lib</span> <span style="color:#e6db74">&#34;trace.ss&#34;</span>))
+  (<span style="color:#a6e22e">provide</span> (<span style="color:#a6e22e">all-from</span> (<span style="color:#a6e22e">lib</span> <span style="color:#e6db74">&#34;trace.ss&#34;</span>)))
 
-  (provide make-parameter)
+  (<span style="color:#a6e22e">provide</span> make-parameter)
 
-  (provide 
+  (<span style="color:#a6e22e">provide</span> 
    run-experiment
    run-tests!
    stop-after-first-error
    run-quietly
    )
   
-  ;; safely apply procedure fn to a list of args.
-  ;; if successful, return (cons #t val)
-  ;; if eopl:error is invoked, returns (cons #f string), where string is the
-  ;; format string generated by eopl:error.  If somebody manages to raise a 
-  ;; value other than an exception, then the raised value is reported.
+  <span style="color:#75715e">;; safely apply procedure fn to a list of args.</span>
+  <span style="color:#75715e">;; if successful, return (cons #t val)</span>
+  <span style="color:#75715e">;; if eopl:error is invoked, returns (cons #f string), where string is the</span>
+  <span style="color:#75715e">;; format string generated by eopl:error.  If somebody manages to raise a </span>
+  <span style="color:#75715e">;; value other than an exception, then the raised value is reported.</span>
   
-  (define apply-safely
-    (lambda (proc args)
-      (with-handlers ([(lambda (exn) #t)      ; catch any error
-                       (lambda (exn)          ; evaluate to a failed test result
-                         (cons #f 
-                               (if (exn? exn)
-                                   (exn-message exn)
+  (<span style="color:#66d9ef">define </span>apply-safely
+    (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">proc</span> args)
+      (<span style="color:#a6e22e">with-handlers</span> ([(<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">exn</span>) <span style="color:#66d9ef">#t</span>)      <span style="color:#75715e">; catch any error</span>
+                       (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">exn</span>)          <span style="color:#75715e">; evaluate to a failed test result</span>
+                         (cons <span style="color:#66d9ef">#f</span> 
+                               (<span style="color:#66d9ef">if </span>(<span style="color:#a6e22e">exn?</span> exn)
+                                   (<span style="color:#a6e22e">exn-message</span> exn)
                                    exn)))])  
-        (let ([actual (apply proc args)])
-          (cons #t actual)))))
+        (<span style="color:#66d9ef">let </span>([actual (apply proc args)])
+          (cons <span style="color:#66d9ef">#t</span> actual)))))
 
-  ;; run-experiment :
-  ;;  ((a ...) -&gt; b) * (a ...) * b * (b * b -&gt; bool)
-  ;;  -&gt; (cons bool b)
+  <span style="color:#75715e">;; run-experiment :</span>
+  <span style="color:#75715e">;;  ((a ...) -&gt; b) * (a ...) * b * (b * b -&gt; bool)</span>
+  <span style="color:#75715e">;;  -&gt; (cons bool b)</span>
   
-  ;; usage: (run-experiment fn args correct-answer equal-answer?)
-  ;; Applies fn to args.  Compares the result to correct-answer. 
-  ;; Returns (cons bool b) where bool indicates whether the
-  ;; answer is correct.
+  <span style="color:#75715e">;; usage: (run-experiment fn args correct-answer equal-answer?)</span>
+  <span style="color:#75715e">;; Applies fn to args.  Compares the result to correct-answer. </span>
+  <span style="color:#75715e">;; Returns (cons bool b) where bool indicates whether the</span>
+  <span style="color:#75715e">;; answer is correct.</span>
 
-  (define run-experiment
-    (lambda (fn args correct-answer equal-answer?)
-      (let*
-          ((result (apply-safely fn args))
-           ;; ans is either the answer or the args to eopl:error
-           (error-thrown? (not (car result)))
-           (ans (cdr result)))
+  (<span style="color:#66d9ef">define </span>run-experiment
+    (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">fn</span> args correct-answer equal-answer?)
+      (<span style="color:#a6e22e">let*</span>
+          ((<span style="color:#a6e22e">result</span> (<span style="color:#a6e22e">apply-safely</span> fn args))
+           <span style="color:#75715e">;; ans is either the answer or the args to eopl:error</span>
+           (<span style="color:#a6e22e">error-thrown?</span> (not (car result)))
+           (<span style="color:#a6e22e">ans</span> (cdr result)))
           
-        (cons
-         (if (eqv? correct-answer 'error)
+        (<span style="color:#a6e22e">cons</span>
+         (<span style="color:#66d9ef">if </span>(eqv? correct-answer <span style="color:#e6db74">&#39;error</span>)
              error-thrown?
-             (equal-answer? ans correct-answer))
+             (<span style="color:#a6e22e">equal-answer?</span> ans correct-answer))
          ans))))
   
-  (define stop-after-first-error (make-parameter #f))
-  (define run-quietly (make-parameter #t))
+  (<span style="color:#66d9ef">define </span>stop-after-first-error (<span style="color:#a6e22e">make-parameter</span> <span style="color:#66d9ef">#f</span>))
+  (<span style="color:#66d9ef">define </span>run-quietly (<span style="color:#a6e22e">make-parameter</span> <span style="color:#66d9ef">#t</span>))
    
-  ;; run-tests! : (arg -&gt; outcome) * (any * any -&gt; bool) * (list-of test)
-  ;;             -&gt; unspecified
+  <span style="color:#75715e">;; run-tests! : (arg -&gt; outcome) * (any * any -&gt; bool) * (list-of test)</span>
+  <span style="color:#75715e">;;             -&gt; unspecified</span>
 
-  ;; where:
-  ;; test ::= (name arg outcome)
-  ;; outcome ::= ERROR | any
+  <span style="color:#75715e">;; where:</span>
+  <span style="color:#75715e">;; test ::= (name arg outcome)</span>
+  <span style="color:#75715e">;; outcome ::= ERROR | any</span>
   
-  ;; usage: (run-tests! run-fn equal-answer? tests)
+  <span style="color:#75715e">;; usage: (run-tests! run-fn equal-answer? tests)</span>
 
-  ;; for each item in tests, apply run-fn to the arg.  Check to see if
-  ;; the outcome is right, comparing values using equal-answer?.
+  <span style="color:#75715e">;; for each item in tests, apply run-fn to the arg.  Check to see if</span>
+  <span style="color:#75715e">;; the outcome is right, comparing values using equal-answer?.</span>
 
-  ;; print a log of the tests.
+  <span style="color:#75715e">;; print a log of the tests.</span>
 
-  ;; at the end, print either &quot;no bugs found&quot; or the list of tests
-  ;; failed. 
+  <span style="color:#75715e">;; at the end, print either &#34;no bugs found&#34; or the list of tests</span>
+  <span style="color:#75715e">;; failed. </span>
   
-  ;; Normally, run-tests! will recover from any error and continue to
-  ;; the end of the test suite.  This behavior can be altered by
-  ;; setting (stop-after-first-error #t).
+  <span style="color:#75715e">;; Normally, run-tests! will recover from any error and continue to</span>
+  <span style="color:#75715e">;; the end of the test suite.  This behavior can be altered by</span>
+  <span style="color:#75715e">;; setting (stop-after-first-error #t).</span>
 
-  (define (run-tests! run-fn equal-answer? tests)
-    (let ((tests-failed '()))
-      (for-each
-       (lambda (test-item)
-         (let ((name (car test-item))
-               (pgm (cadr test-item))
-               (correct-answer (caddr test-item)))
-           (printf &quot;test: ~a~%&quot; name)
-           (let* ((result
-                   (run-experiment
+  (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">run-tests!</span> run-fn equal-answer? tests)
+    (<span style="color:#66d9ef">let </span>((<span style="color:#a6e22e">tests-failed</span> <span style="color:#f92672">&#39;</span>()))
+      (<span style="color:#a6e22e">for-each</span>
+       (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">test-item</span>)
+         (<span style="color:#66d9ef">let </span>((<span style="color:#a6e22e">name</span> (car test-item))
+               (<span style="color:#a6e22e">pgm</span> (cadr test-item))
+               (<span style="color:#a6e22e">correct-answer</span> (caddr test-item)))
+           (<span style="color:#a6e22e">printf</span> <span style="color:#e6db74">&#34;test: ~a~%&#34;</span> name)
+           (<span style="color:#66d9ef">let* </span>((<span style="color:#a6e22e">result</span>
+                   (<span style="color:#a6e22e">run-experiment</span>
 		     run-fn (list pgm) correct-answer equal-answer?))
-                  (correct? (car result))
-                  (actual-answer (cdr result)))
-             (if (or
+                  (<span style="color:#a6e22e">correct?</span> (car result))
+                  (<span style="color:#a6e22e">actual-answer</span> (cdr result)))
+             (<span style="color:#66d9ef">if </span>(<span style="color:#a6e22e">or</span>
                    (not correct?)
-                   (not (run-quietly)))
-               (begin
-                 (printf &quot;~a~%&quot; pgm)
-                 (printf &quot;correct outcome: ~a~%&quot; correct-answer)
-                 (printf &quot;actual outcome:  &quot;)
-                 (pretty-display actual-answer)))
-             (if correct?
-                 (printf &quot;correct~%~%&quot;)
-                 (begin
-                   (printf &quot;incorrect~%~%&quot;)
-                   ;; stop on first error if stop-after-first? is set:
-                   (if (stop-after-first-error)
-                       (error name &quot;incorrect outcome detected&quot;)) 
-                   (set! tests-failed
+                   (not (<span style="color:#a6e22e">run-quietly</span>)))
+               (<span style="color:#a6e22e">begin</span>
+                 (<span style="color:#a6e22e">printf</span> <span style="color:#e6db74">&#34;~a~%&#34;</span> pgm)
+                 (<span style="color:#a6e22e">printf</span> <span style="color:#e6db74">&#34;correct outcome: ~a~%&#34;</span> correct-answer)
+                 (<span style="color:#a6e22e">printf</span> <span style="color:#e6db74">&#34;actual outcome:  &#34;</span>)
+                 (<span style="color:#a6e22e">pretty-display</span> actual-answer)))
+             (<span style="color:#66d9ef">if </span>correct?
+                 (<span style="color:#a6e22e">printf</span> <span style="color:#e6db74">&#34;correct~%~%&#34;</span>)
+                 (<span style="color:#a6e22e">begin</span>
+                   (<span style="color:#a6e22e">printf</span> <span style="color:#e6db74">&#34;incorrect~%~%&#34;</span>)
+                   <span style="color:#75715e">;; stop on first error if stop-after-first? is set:</span>
+                   (<span style="color:#66d9ef">if </span>(<span style="color:#a6e22e">stop-after-first-error</span>)
+                       (<span style="color:#a6e22e">error</span> name <span style="color:#e6db74">&#34;incorrect outcome detected&#34;</span>)) 
+                   (<span style="color:#66d9ef">set! </span>tests-failed
                          (cons name tests-failed)))))))
        tests)
-      (if (null? tests-failed)
-          (printf &quot;no bugs found~%&quot;)
-          (printf &quot;incorrect answers on tests: ~a~%&quot;
+      (<span style="color:#66d9ef">if </span>(null? tests-failed)
+          (<span style="color:#a6e22e">printf</span> <span style="color:#e6db74">&#34;no bugs found~%&#34;</span>)
+          (<span style="color:#a6e22e">printf</span> <span style="color:#e6db74">&#34;incorrect answers on tests: ~a~%&#34;</span>
             (reverse tests-failed)))))
 
   )  
   
   
-</code></pre>
-
-<h3 id="5.6">5.6 测试程序</h3>
-
+</code></pre></div><!-- raw HTML omitted -->
 <p>保存为tests.scm</p>
-
 <p>该阶段的主要目的就是编写测试语句，包括常量、变量、表达式、if、diff、let等语句的使用。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#a6e22e">module</span> tests mzscheme
+  
+  (<span style="color:#a6e22e">provide</span> test-list)
 
-<pre><code class="language-scheme">(module tests mzscheme
+  <span style="color:#75715e">;;;;;;;;;;;;;;;; tests ;;;;;;;;;;;;;;;;</span>
   
-  (provide test-list)
-
-  ;;;;;;;;;;;;;;;; tests ;;;;;;;;;;;;;;;;
+  (<span style="color:#66d9ef">define </span>test-list
+    <span style="color:#f92672">&#39;</span>(
   
-  (define test-list
-    '(
+      <span style="color:#75715e">;; simple arithmetic</span>
+      (<span style="color:#a6e22e">positive-const</span> <span style="color:#e6db74">&#34;11&#34;</span> <span style="color:#ae81ff">11</span>)
+      (<span style="color:#a6e22e">negative-const</span> <span style="color:#e6db74">&#34;-33&#34;</span> <span style="color:#ae81ff">-33</span>)
+      (<span style="color:#a6e22e">simple-arith-1</span> <span style="color:#e6db74">&#34;-(44,33)&#34;</span> <span style="color:#ae81ff">11</span>)
   
-      ;; simple arithmetic
-      (positive-const &quot;11&quot; 11)
-      (negative-const &quot;-33&quot; -33)
-      (simple-arith-1 &quot;-(44,33)&quot; 11)
+      <span style="color:#75715e">;; nested arithmetic</span>
+      (<span style="color:#a6e22e">nested-arith-left</span> <span style="color:#e6db74">&#34;-(-(44,33),22)&#34;</span> <span style="color:#ae81ff">-11</span>)
+      (<span style="color:#a6e22e">nested-arith-right</span> <span style="color:#e6db74">&#34;-(55, -(22,11))&#34;</span> <span style="color:#ae81ff">44</span>)
   
-      ;; nested arithmetic
-      (nested-arith-left &quot;-(-(44,33),22)&quot; -11)
-      (nested-arith-right &quot;-(55, -(22,11))&quot; 44)
-  
-      ;; simple variables
-      (test-var-1 &quot;x&quot; 10)
-      (test-var-2 &quot;-(x,1)&quot; 9)
-      (test-var-3 &quot;-(1,x)&quot; -9)
+      <span style="color:#75715e">;; simple variables</span>
+      (<span style="color:#a6e22e">test-var-1</span> <span style="color:#e6db74">&#34;x&#34;</span> <span style="color:#ae81ff">10</span>)
+      (<span style="color:#a6e22e">test-var-2</span> <span style="color:#e6db74">&#34;-(x,1)&#34;</span> <span style="color:#ae81ff">9</span>)
+      (<span style="color:#a6e22e">test-var-3</span> <span style="color:#e6db74">&#34;-(1,x)&#34;</span> <span style="color:#ae81ff">-9</span>)
       
-      ;; simple unbound variables
-      (test-unbound-var-1 &quot;foo&quot; error)
-      (test-unbound-var-2 &quot;-(x,foo)&quot; error)
+      <span style="color:#75715e">;; simple unbound variables</span>
+      (<span style="color:#a6e22e">test-unbound-var-1</span> <span style="color:#e6db74">&#34;foo&#34;</span> error)
+      (<span style="color:#a6e22e">test-unbound-var-2</span> <span style="color:#e6db74">&#34;-(x,foo)&#34;</span> error)
   
-      ;; simple conditionals
-      (if-true &quot;if zero?(0) then 3 else 4&quot; 3)
-      (if-false &quot;if zero?(1) then 3 else 4&quot; 4)
+      <span style="color:#75715e">;; simple conditionals</span>
+      (<span style="color:#a6e22e">if-true</span> <span style="color:#e6db74">&#34;if zero?(0) then 3 else 4&#34;</span> <span style="color:#ae81ff">3</span>)
+      (<span style="color:#a6e22e">if-false</span> <span style="color:#e6db74">&#34;if zero?(1) then 3 else 4&#34;</span> <span style="color:#ae81ff">4</span>)
       
-      ;; test dynamic typechecking
-      (no-bool-to-diff-1 &quot;-(zero?(0),1)&quot; error)
-      (no-bool-to-diff-2 &quot;-(1,zero?(0))&quot; error)
-      (no-int-to-if &quot;if 1 then 2 else 3&quot; error)
+      <span style="color:#75715e">;; test dynamic typechecking</span>
+      (<span style="color:#a6e22e">no-bool-to-diff-1</span> <span style="color:#e6db74">&#34;-(zero?(0),1)&#34;</span> error)
+      (<span style="color:#a6e22e">no-bool-to-diff-2</span> <span style="color:#e6db74">&#34;-(1,zero?(0))&#34;</span> error)
+      (<span style="color:#a6e22e">no-int-to-if</span> <span style="color:#e6db74">&#34;if 1 then 2 else 3&#34;</span> error)
 
-      ;; make sure that the test and both arms get evaluated
-      ;; properly. 
-      (if-eval-test-true &quot;if zero?(-(11,11)) then 3 else 4&quot; 3)
-      (if-eval-test-false &quot;if zero?(-(11, 12)) then 3 else 4&quot; 4)
+      <span style="color:#75715e">;; make sure that the test and both arms get evaluated</span>
+      <span style="color:#75715e">;; properly. </span>
+      (<span style="color:#a6e22e">if-eval-test-true</span> <span style="color:#e6db74">&#34;if zero?(-(11,11)) then 3 else 4&#34;</span> <span style="color:#ae81ff">3</span>)
+      (<span style="color:#a6e22e">if-eval-test-false</span> <span style="color:#e6db74">&#34;if zero?(-(11, 12)) then 3 else 4&#34;</span> <span style="color:#ae81ff">4</span>)
       
-      ;; and make sure the other arm doesn't get evaluated.
-      (if-eval-test-true-2 &quot;if zero?(-(11, 11)) then 3 else foo&quot; 3)
-      (if-eval-test-false-2 &quot;if zero?(-(11,12)) then foo else 4&quot; 4)
+      <span style="color:#75715e">;; and make sure the other arm doesn&#39;t get evaluated.</span>
+      (<span style="color:#a6e22e">if-eval-test-true-2</span> <span style="color:#e6db74">&#34;if zero?(-(11, 11)) then 3 else foo&#34;</span> <span style="color:#ae81ff">3</span>)
+      (<span style="color:#a6e22e">if-eval-test-false-2</span> <span style="color:#e6db74">&#34;if zero?(-(11,12)) then foo else 4&#34;</span> <span style="color:#ae81ff">4</span>)
 
-      ;; simple let
-      (simple-let-1 &quot;let x = 3 in x&quot; 3)
+      <span style="color:#75715e">;; simple let</span>
+      (<span style="color:#a6e22e">simple-let-1</span> <span style="color:#e6db74">&#34;let x = 3 in x&#34;</span> <span style="color:#ae81ff">3</span>)
 
-      ;; make sure the body and rhs get evaluated
-      (eval-let-body &quot;let x = 3 in -(x,1)&quot; 2)
-      (eval-let-rhs &quot;let x = -(4,1) in -(x,1)&quot; 2)
+      <span style="color:#75715e">;; make sure the body and rhs get evaluated</span>
+      (<span style="color:#a6e22e">eval-let-body</span> <span style="color:#e6db74">&#34;let x = 3 in -(x,1)&#34;</span> <span style="color:#ae81ff">2</span>)
+      (<span style="color:#a6e22e">eval-let-rhs</span> <span style="color:#e6db74">&#34;let x = -(4,1) in -(x,1)&#34;</span> <span style="color:#ae81ff">2</span>)
 
-      ;; check nested let and shadowing
-      (simple-nested-let &quot;let x = 3 in let y = 4 in -(x,y)&quot; -1)
-      (check-shadowing-in-body &quot;let x = 3 in let x = 4 in x&quot; 4)
-      (check-shadowing-in-rhs &quot;let x = 3 in let x = -(x,1) in x&quot; 2)
+      <span style="color:#75715e">;; check nested let and shadowing</span>
+      (<span style="color:#a6e22e">simple-nested-let</span> <span style="color:#e6db74">&#34;let x = 3 in let y = 4 in -(x,y)&#34;</span> <span style="color:#ae81ff">-1</span>)
+      (<span style="color:#a6e22e">check-shadowing-in-body</span> <span style="color:#e6db74">&#34;let x = 3 in let x = 4 in x&#34;</span> <span style="color:#ae81ff">4</span>)
+      (<span style="color:#a6e22e">check-shadowing-in-rhs</span> <span style="color:#e6db74">&#34;let x = 3 in let x = -(x,1) in x&#34;</span> <span style="color:#ae81ff">2</span>)
 
       ))
   )
-</code></pre>
-
-<h3 id="5.7">5.7 前端封装测试</h3>
-
+</code></pre></div><!-- raw HTML omitted -->
 <p>保存为top.scm</p>
-
 <p>该阶段的目的就是测试这个新的解释器语言到底有没有用？他是否能够解释从tests中导入的
 程序片段？是否测试通过。</p>
-
-<pre><code class="language-scheme">(module top (lib &quot;eopl.ss&quot; &quot;eopl&quot;)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#a6e22e">module</span> top (<span style="color:#a6e22e">lib</span> <span style="color:#e6db74">&#34;eopl.ss&#34;</span> <span style="color:#e6db74">&#34;eopl&#34;</span>)
   
-  ;; top level module.  Loads all required pieces.
-  ;; Run the test suite with (run-all).
+  <span style="color:#75715e">;; top level module.  Loads all required pieces.</span>
+  <span style="color:#75715e">;; Run the test suite with (run-all).</span>
 
-  (require &quot;drscheme-init.scm&quot;)
-  (require &quot;data-structures.scm&quot;)  ; for expval constructors
-  (require &quot;lang.scm&quot;)             ; for scan&amp;parse
-  (require &quot;interp.scm&quot;)           ; for value-of-program
-  (require &quot;tests.scm&quot;)            ; for test-list
+  (<span style="color:#a6e22e">require</span> <span style="color:#e6db74">&#34;drscheme-init.scm&#34;</span>)
+  (<span style="color:#a6e22e">require</span> <span style="color:#e6db74">&#34;data-structures.scm&#34;</span>)  <span style="color:#75715e">; for expval constructors</span>
+  (<span style="color:#a6e22e">require</span> <span style="color:#e6db74">&#34;lang.scm&#34;</span>)             <span style="color:#75715e">; for scan&amp;parse</span>
+  (<span style="color:#a6e22e">require</span> <span style="color:#e6db74">&#34;interp.scm&#34;</span>)           <span style="color:#75715e">; for value-of-program</span>
+  (<span style="color:#a6e22e">require</span> <span style="color:#e6db74">&#34;tests.scm&#34;</span>)            <span style="color:#75715e">; for test-list</span>
   
-  ;; since this is the top-level module, we don't really need to
-  ;; provide anything, but we do so just in case.  
+  <span style="color:#75715e">;; since this is the top-level module, we don&#39;t really need to</span>
+  <span style="color:#75715e">;; provide anything, but we do so just in case.  </span>
 
-  (provide run run-all)
+  (<span style="color:#a6e22e">provide</span> run run-all)
 
-  (provide test-all)
+  (<span style="color:#a6e22e">provide</span> test-all)
 
-  (define (test-all) (run-all))
+  (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">test-all</span>) (<span style="color:#a6e22e">run-all</span>))
 
-  ;; here are some other things that could be provided:
+  <span style="color:#75715e">;; here are some other things that could be provided:</span>
 
-  ;;   (provide (all-defined-out))
-  ;;   (provide (all-from &quot;interp.scm&quot;))
-  ;;   (provide (all-from &quot;lang.scm&quot;))
+  <span style="color:#75715e">;;   (provide (all-defined-out))</span>
+  <span style="color:#75715e">;;   (provide (all-from &#34;interp.scm&#34;))</span>
+  <span style="color:#75715e">;;   (provide (all-from &#34;lang.scm&#34;))</span>
   
-  ;;;;;;;;;;;;;;;; interface to test harness ;;;;;;;;;;;;;;;;
+  <span style="color:#75715e">;;;;;;;;;;;;;;;; interface to test harness ;;;;;;;;;;;;;;;;</span>
   
-  ;; run : String -&gt; ExpVal
-  ;; Page: 71
-  (define run
-    (lambda (string)
-      (value-of-program (scan&amp;parse string))))
+  <span style="color:#75715e">;; run : String -&gt; ExpVal</span>
+  <span style="color:#75715e">;; Page: 71</span>
+  (<span style="color:#66d9ef">define </span>run
+    (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">string</span>)
+      (<span style="color:#a6e22e">value-of-program</span> (<span style="color:#a6e22e">scan&amp;parse</span> string))))
   
-  ;; run-all : () -&gt; unspecified
+  <span style="color:#75715e">;; run-all : () -&gt; unspecified</span>
   
-  ;; runs all the tests in test-list, comparing the results with
-  ;; equal-answer?  
+  <span style="color:#75715e">;; runs all the tests in test-list, comparing the results with</span>
+  <span style="color:#75715e">;; equal-answer?  </span>
 
-  (define run-all
-    (lambda ()
-      (run-tests! run equal-answer? test-list)))
+  (<span style="color:#66d9ef">define </span>run-all
+    (<span style="color:#66d9ef">lambda </span>()
+      (<span style="color:#a6e22e">run-tests!</span> run equal-answer? test-list)))
   
-  (define equal-answer?
-    (lambda (ans correct-ans)
-      (equal? ans (sloppy-&gt;expval correct-ans))))
+  (<span style="color:#66d9ef">define </span>equal-answer?
+    (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">ans</span> correct-ans)
+      (equal? ans (<span style="color:#a6e22e">sloppy-&gt;expval</span> correct-ans))))
   
-  (define sloppy-&gt;expval 
-    (lambda (sloppy-val)
-      (cond
-        ((number? sloppy-val) (num-val sloppy-val))
-        ((boolean? sloppy-val) (bool-val sloppy-val))
-        (else
-         (eopl:error 'sloppy-&gt;expval 
-                     &quot;Can't convert sloppy value to expval: ~s&quot;
+  (<span style="color:#66d9ef">define </span>sloppy-&gt;expval 
+    (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">sloppy-val</span>)
+      (<span style="color:#a6e22e">cond</span>
+        ((number? sloppy-val) (<span style="color:#a6e22e">num-val</span> sloppy-val))
+        ((boolean? sloppy-val) (<span style="color:#a6e22e">bool-val</span> sloppy-val))
+        (<span style="color:#a6e22e">else</span>
+         (<span style="color:#a6e22e">eopl:error</span> <span style="color:#e6db74">&#39;sloppy-&gt;expval</span> 
+                     <span style="color:#e6db74">&#34;Can&#39;t convert sloppy value to expval: ~s&#34;</span>
                      sloppy-val)))))
     
-  ;; run-one : symbol -&gt; expval
+  <span style="color:#75715e">;; run-one : symbol -&gt; expval</span>
 
-  ;; (run-one sym) runs the test whose name is sym
+  <span style="color:#75715e">;; (run-one sym) runs the test whose name is sym</span>
   
-  (define run-one
-    (lambda (test-name)
-      (let ((the-test (assoc test-name test-list)))
-        (cond
+  (<span style="color:#66d9ef">define </span>run-one
+    (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">test-name</span>)
+      (<span style="color:#66d9ef">let </span>((<span style="color:#a6e22e">the-test</span> (assoc test-name test-list)))
+        (<span style="color:#a6e22e">cond</span>
           ((assoc test-name test-list)
-           =&gt; (lambda (test)
-                (run (cadr test))))
-          (else (eopl:error 'run-one &quot;no such test: ~s&quot; test-name))))))
+           <span style="color:#66d9ef">=&gt; </span>(<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">test</span>)
+                (<span style="color:#a6e22e">run</span> (cadr test))))
+          (<span style="color:#66d9ef">else </span>(<span style="color:#a6e22e">eopl:error</span> <span style="color:#e6db74">&#39;run-one</span> <span style="color:#e6db74">&#34;no such test: ~s&#34;</span> test-name))))))
  
-  ;; (run-all)
+  <span style="color:#75715e">;; (run-all)</span>
   
   )
 
 
-</code></pre>
-
-<hr />
+</code></pre></div><hr>
     </div>
  <div class="nav-links" style="padding:10;">
         
@@ -1819,7 +1732,7 @@ scheme这门语言可以透过不断的抽象，产生许许多多的语言，�
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

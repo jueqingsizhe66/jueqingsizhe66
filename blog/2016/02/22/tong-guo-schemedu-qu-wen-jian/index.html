@@ -573,7 +573,7 @@
 
 <span class="article-metadata" >Reading time: 1 minutes and    20 seconds with 295 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
-        
+        <nav id="TableOfContents"></nav>
     </aside>
   <div class="article-container">
 
@@ -584,61 +584,52 @@
 <li>通过read-line 读取接口文件</li>
 <li>通过name-loop命名loop来循环读取文件。</li>
 </ol>
-
 <ul>
 <li>通过文件句柄读取文件，这边接口就是文件句柄</li>
 <li>现在还不清楚文件模式的几种类型
-
 <ul>
 <li>text</li>
 <li>append</li>
 <li>write（是否有）</li>
-</ul></li>
-
-<li><p>eof-object?判断是否文件末尾</p>
-
-<pre><code class="language-scheme">(define read-file
-(lambda (filename)
-(let ([port (open-input-file filename #:mode 'text)])
-  (let loop ([line (read-line port)]
-             [all &quot;&quot;])
-    (cond
-     [(eof-object? line) all]
-     [else
-      (loop (read-line port)
-            (string-append all line &quot;\n&quot;))])))))
-</code></pre></li>
 </ul>
-
-<p>从这边提取出一个最常用的let loop循环可以用于很多地方，重复几条语句分析所有程序</p>
-
-<pre><code class="language-scheme">
-    (let loop ([start 0] [toks '()])
-      (letv ([(tok newstart) (scan1 s start)])
-        (cond
-         [(eq? tok 'eof)
+</li>
+<li>eof-object?判断是否文件末尾</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">define </span>read-file
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">filename</span>)
+    (<span style="color:#66d9ef">let </span>([port (open-input-file filename <span style="color:#f92672">#</span>:mode <span style="color:#e6db74">&#39;text</span>)])
+      (<span style="color:#66d9ef">let </span>loop ([line (<span style="color:#a6e22e">read-line</span> port)]
+                 [all <span style="color:#e6db74">&#34;&#34;</span>])
+        (<span style="color:#a6e22e">cond</span>
+         [(eof-object? line) all]
+         [else
+          (<span style="color:#a6e22e">loop</span> (<span style="color:#a6e22e">read-line</span> port)
+                (string-append all line <span style="color:#e6db74">&#34;\n&#34;</span>))])))))
+</code></pre></div><p>从这边提取出一个最常用的let loop循环可以用于很多地方，重复几条语句分析所有程序</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">
+    (<span style="color:#66d9ef">let </span>loop ([start <span style="color:#ae81ff">0</span>] [toks <span style="color:#f92672">&#39;</span>()])
+      (<span style="color:#a6e22e">letv</span> ([(<span style="color:#a6e22e">tok</span> newstart) (<span style="color:#a6e22e">scan1</span> s start)])
+        (<span style="color:#a6e22e">cond</span>
+         [(eq? tok <span style="color:#e6db74">&#39;eof</span>)
           (reverse toks)]
          [else
-          (loop newstart (cons tok toks))])))))
+          (<span style="color:#a6e22e">loop</span> newstart (cons tok toks))])))))
 
-</code></pre>
+</code></pre></div><p>另外，比如onstack? 用于判断是否存于栈</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">
 
-<p>另外，比如onstack? 用于判断是否存于栈</p>
-
-<pre><code class="language-scheme">
-
-(define onstack?
-  (lambda (u v stk)
-    (let loop ([stk stk] [trace '()])
-      (cond
-       [(null? stk) #f]
-       [(and (eq? u (car (car stk)))
+(<span style="color:#66d9ef">define </span>onstack?
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">u</span> v stk)
+    (<span style="color:#66d9ef">let </span>loop ([stk stk] [trace <span style="color:#f92672">&#39;</span>()])
+      (<span style="color:#a6e22e">cond</span>
+       [(null? stk) <span style="color:#66d9ef">#f</span>]
+       [(<span style="color:#66d9ef">and </span>(eq? u (car (car stk)))
              (eq? v (cdr (car stk))))
         (reverse (cons (car stk) trace))]
        [else
-        (loop (cdr stk) (cons (car stk) trace))]))))
+        (<span style="color:#a6e22e">loop</span> (cdr stk) (cons (car stk) trace))]))))
 
-</code></pre>
+</code></pre></div>
     </div>
  <div class="nav-links" style="padding:10;">
         
@@ -1042,7 +1033,7 @@
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

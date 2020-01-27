@@ -5,7 +5,7 @@
     <link>https://jueqingsizhe66.github.io/tags/module/</link>
       <atom:link href="https://jueqingsizhe66.github.io/tags/module/index.xml" rel="self" type="application/rss+xml" />
     <description>module</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>©2019</copyright><lastBuildDate>Wed, 14 May 2014 13:09:20 +0800</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>©2020</copyright><lastBuildDate>Wed, 14 May 2014 13:09:20 +0800</lastBuildDate>
     <image>
       <url>https://jueqingsizhe66.github.io/img/icon-192.png</url>
       <title>module</title>
@@ -17,29 +17,29 @@
       <link>https://jueqingsizhe66.github.io/blog/2014/05/14/makefilebian-yi-fortrande-module/</link>
       <pubDate>Wed, 14 May 2014 13:09:20 +0800</pubDate>
       <guid>https://jueqingsizhe66.github.io/blog/2014/05/14/makefilebian-yi-fortrande-module/</guid>
-      <description>&lt;pre&gt;&lt;code class=&#34;language-makefile&#34;&gt;FC = gfortran
-FFLAGS = -g -Wall -O3 --free-form
-modFFLAGS =  --free-form
+      <description>&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-makefile&#34; data-lang=&#34;makefile&#34;&gt;FC &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; gfortran
+FFLAGS &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; -g -Wall -O3 --free-form
+modFFLAGS &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;  --free-form
 
-OPTFC = -O3 -funroll-loops -ftree-vectorize -fcray-pointer -cpp
-#src = $(wildcard *.f90)
-src = secdmo.f90 record.f90
-obj = $(src:.f90=.o )
-secd : $(obj)
-    $(FC) $(FFLAGS) -o $@ $^
+OPTFC &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; -O3 -funroll-loops -ftree-vectorize -fcray-pointer -cpp
+&lt;span style=&#34;color:#75715e&#34;&gt;#src = $(wildcard *.f90)
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;src &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; secdmo.f90 record.f90
+obj &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;src:.f90&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;.o &lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;
+&lt;span style=&#34;color:#a6e22e&#34;&gt;secd &lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;obj&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;FC&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;FFLAGS&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt; -o $@ $^
 
-%.o : %.f90
-    $(FC) $(modFFLAGS) $(OPTFC) -c $&amp;lt;
+&lt;span style=&#34;color:#a6e22e&#34;&gt;%.o &lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; %.f90
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;FC&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;modFFLAGS&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;OPTFC&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt; -c $&amp;lt;
 
-#secdmo.mod : secdmo.f
-#	$(FC) $(modFFLAGS) @ $&amp;lt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#secdmo.mod : secdmo.f
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#	$(FC) $(modFFLAGS) @ $&amp;lt;
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color:#a6e22e&#34;&gt;.phony&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; clean
 
-.phony: clean
-
-clean:
+&lt;span style=&#34;color:#a6e22e&#34;&gt;clean&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
     rm -rf secd secdmo.mod funct.plo accu* fort* ./errdi* *.o
 
-&lt;/code&gt;&lt;/pre&gt;</description>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
     
   </channel>

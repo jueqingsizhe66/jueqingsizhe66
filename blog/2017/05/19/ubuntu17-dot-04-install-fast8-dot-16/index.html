@@ -565,31 +565,27 @@
 
 <span class="article-metadata" >Reading time: 4 minutes and    9 seconds with 914 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
-        
+        <nav id="TableOfContents"></nav>
     </aside>
   <div class="article-container">
 
 
     <div class="article-style">
       <p>Something Noted in the process of installation FAST8.16 in the 32bit ubuntu17.04 system.</p>
-
 <ol>
-<li><p>Download  <a href="https://nwtc.nrel.gov/FAST8" target="_blank"> Fast8.16 </a> and decompress</p>
-
-<pre><code class="language-sh">
+<li>Download  <a href="https://nwtc.nrel.gov/FAST8"> Fast8.16 </a> and decompress</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">
 mkdir FAST-816
 cd FAST-816
 mv FAST*.tar.gz FAST-816
 tar -xvf FAST*.tar.gz
 
-</code></pre></li>
-
-<li><p>Download  <a href="https://nwtc.nrel.gov/system/files/MAP_v1.20.10.tar.gz" target="_blank"> Map </a> for generating map.so and decompress</p></li>
+</code></pre></div><ol start="2">
+<li>Download  <a href="https://nwtc.nrel.gov/system/files/MAP_v1.20.10.tar.gz"> Map </a> for generating map.so and decompress</li>
 </ol>
-
 <p>FAST_DIR 告诉MAP FAST项目存在哪里</p>
-
-<pre><code class="language-sh">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">
 cd FAST-816
 mkdir LIBMAP
 cd LIBMAP
@@ -597,197 +593,166 @@ mv ../../*.MAP*.tar.gz .
 tar -xvf *MAP*.tar.gz
 
 cd compiling
-vim driver_makefile&lt;&lt;EOF
-
------ FAST_DIR     = ../Source
-+++++ FAST_DIR     = /paper/FAST-816/
-
-EOF
+vim driver_makefile<span style="color:#e6db74">&lt;&lt;EOF
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">----- FAST_DIR     = ../Source
+</span><span style="color:#e6db74">+++++ FAST_DIR     = /paper/FAST-816/
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">EOF</span>
 
 cd ../src/
 
-vim makefile&lt;&lt;EOF
-
------ BITS = -m64
-+++++ BITS = -m32  32bit系统
-
-EOF
+vim makefile<span style="color:#e6db74">&lt;&lt;EOF
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">----- BITS = -m64
+</span><span style="color:#e6db74">+++++ BITS = -m32  32bit系统
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">EOF</span>
 
 make#################something error here
 
 
-</code></pre>
-
-<p>make Libmap.so something error here</p>
-
-<pre><code class="language-sh">a.o mapinit.o maperror.o lineroutines.o numeric.o outputstream.o mapapi.o lmroutines.o jacobian.o residual.o  -lm -llapacke 
+</code></pre></div><p>make Libmap.so something error here</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">a.o mapinit.o maperror.o lineroutines.o numeric.o outputstream.o mapapi.o lmroutines.o jacobian.o residual.o  -lm -llapacke 
 /usr/bin/ld: 找不到 -llapacke
 /usr/bin/ld: 找不到 -llapacke
-collect2: error: ld returned 1 exit status
-makefile:81: recipe for target 'all' failed
-make: *** [all] Error 1
+collect2: error: ld returned <span style="color:#ae81ff">1</span> exit status
+makefile:81: recipe <span style="color:#66d9ef">for</span> target <span style="color:#e6db74">&#39;all&#39;</span> failed
+make: *** <span style="color:#f92672">[</span>all<span style="color:#f92672">]</span> Error <span style="color:#ae81ff">1</span>
 
-</code></pre>
-
-<p><a href="http://jueqingsizhe66.github.io/blog/2016/04/15/ubuntu15-dot-10-32bit-an-zhuang-fastv8-dot-15/" target="_blank"> fixed it </a>:</p>
-
+</code></pre></div><p><a href="http://jueqingsizhe66.github.io/blog/2016/04/15/ubuntu15-dot-10-32bit-an-zhuang-fastv8-dot-15/"> fixed it </a>:</p>
 <pre><code>
 apt-get install lapacke-dev*
 
-</code></pre>
-
-<p>make again</p>
-
-<pre><code class="language-sh">make ### OK generate libmap-1.2.so
+</code></pre><p>make again</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">make <span style="color:#75715e">### OK generate libmap-1.2.so</span>
 
 mkdir /paper/FAST-816/bin
 cp libmap-1.20.10.so /paper/FAST-816/bin
 
 
-</code></pre>
-
-<ol>
-<li><p>Now Install FAST</p>
-
+</code></pre></div><ol start="3">
+<li>Now Install FAST</li>
+</ol>
 <pre><code>
 cd /paper/FAST-816/compiling/
 make 
 make -f makefile_DISCON_DLL ## for Test18-26.fst case
 
 
-</code></pre></li>
-</ol>
-
-<p><code>gcc -fbacktrack FAST_Subs</code> 可能再gcc-6会有点问题，部分f90文件得删除该选项 删掉-fbacktrace测试通过</p>
-
-<pre><code class="language-sh">
- 2 &gt; make
+</code></pre><p><code>gcc -fbacktrack FAST_Subs</code> 可能再gcc-6会有点问题，部分f90文件得删除该选项 删掉-fbacktrace测试通过</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">
+ <span style="color:#ae81ff">2</span> &gt; make
 gfortran -I Obj_lin32 -O2 -m32 -fbacktrace -ffree-line-length-none -x f95-cpp-input -DNO_LibLoad -DUSE_DLL_INTERFACE -c ../Source/FAST_Subs.f90 -o Obj_lin32/FAST_Subs.o -J Obj_lin32 -B Obj_lin32
-gfortran: internal compiler error: 已杀死 (program f951)
+gfortran: internal compiler error: 已杀死 <span style="color:#f92672">(</span>program f951<span style="color:#f92672">)</span>
 Please submit a full bug report,
-with preprocessed source if appropriate.
-See &lt;file:///usr/share/doc/gcc-6/README.Bugs&gt; for instructions.
-makefile:416: recipe for target 'FAST_Subs.o' failed
-make: *** [FAST_Subs.o] Error 4
-</code></pre>
-
-<ol>
+with preprocessed source <span style="color:#66d9ef">if</span> appropriate.
+See &lt;file:///usr/share/doc/gcc-6/README.Bugs&gt; <span style="color:#66d9ef">for</span> instructions.
+makefile:416: recipe <span style="color:#66d9ef">for</span> target <span style="color:#e6db74">&#39;FAST_Subs.o&#39;</span> failed
+make: *** <span style="color:#f92672">[</span>FAST_Subs.o<span style="color:#f92672">]</span> Error <span style="color:#ae81ff">4</span>
+</code></pre></div><ol start="4">
 <li>Run Test1-18.fst</li>
 </ol>
-
 <p>You can go to /paper/FAST-816/bin to check whether FAST_Glin32 and libmap.so have been generated or not</p>
-
-<pre><code class="language-sh">cd /paper/FAST-816/bin
-</code></pre>
-
-<pre><code class="language-sh">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">cd /paper/FAST-816/bin
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">
 ❯ ./FAST_glin32 ../CertTest/Test02.fst
 
  **************************************************************************************************
- FAST (v8.16.00a-bjj, 27-Jul-2016)
+ FAST <span style="color:#f92672">(</span>v8.16.00a-bjj, 27-Jul-2016<span style="color:#f92672">)</span>
 
- Copyright (C) 2016 National Renewable Energy Laboratory
+ Copyright <span style="color:#f92672">(</span>C<span style="color:#f92672">)</span> <span style="color:#ae81ff">2016</span> National Renewable Energy Laboratory
 
- This program comes with ABSOLUTELY NO WARRANTY. See the &quot;license.txt&quot; file distributed with this
- software for details.
+ This program comes with ABSOLUTELY NO WARRANTY. See the <span style="color:#e6db74">&#34;license.txt&#34;</span> file distributed with this
+ software <span style="color:#66d9ef">for</span> details.
  **************************************************************************************************
 
-  Running FAST (v8.16.00a-bjj, 27-Jul-2016), compiled as a 32-bit application using single
+  Running FAST <span style="color:#f92672">(</span>v8.16.00a-bjj, 27-Jul-2016<span style="color:#f92672">)</span>, compiled as a 32-bit application using single
   precision
-  linked with NWTC Subroutine Library (v2.09.00, 23-Jul-2016)
+  linked with NWTC Subroutine Library <span style="color:#f92672">(</span>v2.09.00, 23-Jul-2016<span style="color:#f92672">)</span>
 
   Heading of the FAST input file:
-    FAST Certification Test #02: AWT-27CR2 with many DOFs with startup and shutdown and steady wind
+    FAST Certification Test <span style="color:#75715e">#02: AWT-27CR2 with many DOFs with startup and shutdown and steady wind</span>
 
-  Running ElastoDyn (v1.04.00a-bjj, 26-Jul-2016).
+  Running ElastoDyn <span style="color:#f92672">(</span>v1.04.00a-bjj, 26-Jul-2016<span style="color:#f92672">)</span>.
 
-  Running AeroDyn (v15.03.00, 27-Jul-2016).
+  Running AeroDyn <span style="color:#f92672">(</span>v15.03.00, 27-Jul-2016<span style="color:#f92672">)</span>.
 
-  Running AirfoilInfo (v1.01.00a-bjj, 5-Apr-2016).
+  Running AirfoilInfo <span style="color:#f92672">(</span>v1.01.00a-bjj, 5-Apr-2016<span style="color:#f92672">)</span>.
 
-  Running BEM (v1.02.00, 29-Jun-2016).
+  Running BEM <span style="color:#f92672">(</span>v1.02.00, 29-Jun-2016<span style="color:#f92672">)</span>.
 
-  Running InflowWind (v3.03.00, 26-Jul-2016).
+  Running InflowWind <span style="color:#f92672">(</span>v3.03.00, 26-Jul-2016<span style="color:#f92672">)</span>.
   Opening InflowWind input file:  ../CertTest/AWT27/Test02_InflowWind.dat
 
-  Running ServoDyn (v1.06.00a-bjj, 26-Jul-2016).
-  Timestep: 0 of 20 seconds.
+  Running ServoDyn <span style="color:#f92672">(</span>v1.06.00a-bjj, 26-Jul-2016<span style="color:#f92672">)</span>.
+  Timestep: <span style="color:#ae81ff">0</span> of <span style="color:#ae81ff">20</span> seconds.
 
- Timestep: 2 of 20 seconds. Estimated final completion at 16:05:13.                               
- Timestep: 4 of 20 seconds. Estimated final completion at 16:05:12.    
+ Timestep: <span style="color:#ae81ff">2</span> of <span style="color:#ae81ff">20</span> seconds. Estimated final completion at 16:05:13.                               
+ Timestep: <span style="color:#ae81ff">4</span> of <span style="color:#ae81ff">20</span> seconds. Estimated final completion at 16:05:12.    
 
 
-</code></pre>
-
-<ol>
-<li><p>Modify the ServoData for servo module
-<a href="http://jueqingsizhe66.github.io/blog/2015/10/22/fast-in-ubuntu64bit-bian-yi-zhu-yi-shi-xiang/" target="_blank"> DISON_DLL running </a> 因为FAST在运行Test18-26.fst的case时候会去读取5MW_BASELINE[只针对的是5MW]底下的ServoData的文件, 所以对应dll-filename得修改一下。</p>
-
+</code></pre></div><ol start="5">
+<li>
+<p>Modify the ServoData for servo module
+<a href="http://jueqingsizhe66.github.io/blog/2015/10/22/fast-in-ubuntu64bit-bian-yi-zhu-yi-shi-xiang/"> DISON_DLL running </a> 因为FAST在运行Test18-26.fst的case时候会去读取5MW_BASELINE[只针对的是5MW]底下的ServoData的文件, 所以对应dll-filename得修改一下。</p>
 <p>make DISCON SO file</p>
-
-<pre><code class="language-sh">❯ make -f makefile_DISCON_DLL
+</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">❯ make -f makefile_DISCON_DLL
 gfortran  -O2 -m32 -fbacktrace -ffree-line-length-none -x f95-cpp-input -C -DIMPLICIT_DLLEXPORT -fPIC -c ../CertTest/5MW_Baseline/ServoData/Source/DISCON.f90 -o Obj_lin32/DISCON.obj -J Obj_lin32 -B Obj_lin32
-gfortran -shared -O2 -m32 -fbacktrace -fPIC -I Obj_lin32 -o ../CertTest/5MW_Baseline/ServoData/DISCON_glin32.so \
-Obj_lin32/DISCON.obj
+gfortran -shared -O2 -m32 -fbacktrace -fPIC -I Obj_lin32 -o ../CertTest/5MW_Baseline/ServoData/DISCON_glin32.so <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span> Obj_lin32/DISCON.obj
+</code></pre></div><pre><code>Change DLL_FileName in the configure data file
 </code></pre>
-
-<p>Change DLL_FileName in the configure data file</p>
-
-<pre><code class="language-sh">cd /paper/FAST-816/CertTest/5MW_Baseline
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">cd /paper/FAST-816/CertTest/5MW_Baseline
 vim NRELOffshrBsline5MW_Onshore_ServoDyn.dat 
 
 修改DLL_FileName为 ServoData/DISCON_glin32.so
-</code></pre></li>
-</ol>
+</code></pre></div><p>Test RESULT:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">
+  Running BeamDyn <span style="color:#f92672">(</span>v1.01.04, 26-Jul-2016<span style="color:#f92672">)</span>.
 
-<p>Test RESULT:</p>
+  Running AeroDyn <span style="color:#f92672">(</span>v15.03.00, 27-Jul-2016<span style="color:#f92672">)</span>.
 
-<pre><code class="language-sh">
-  Running BeamDyn (v1.01.04, 26-Jul-2016).
+  Running AirfoilInfo <span style="color:#f92672">(</span>v1.01.00a-bjj, 5-Apr-2016<span style="color:#f92672">)</span>.
 
-  Running AeroDyn (v15.03.00, 27-Jul-2016).
+  Running BEM <span style="color:#f92672">(</span>v1.02.00, 29-Jun-2016<span style="color:#f92672">)</span>.
+ Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode <span style="color:#f92672">=</span> 1, Blade <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+ Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode <span style="color:#f92672">=</span> 2, Blade <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+ Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode <span style="color:#f92672">=</span> 3, Blade <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+ Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode <span style="color:#f92672">=</span> 4, Blade <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+ Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode <span style="color:#f92672">=</span> 1, Blade <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
+ Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode <span style="color:#f92672">=</span> 2, Blade <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
+ Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode <span style="color:#f92672">=</span> 3, Blade <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
+ Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode <span style="color:#f92672">=</span> 4, Blade <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
+ Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode <span style="color:#f92672">=</span> 1, Blade <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>
+ Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode <span style="color:#f92672">=</span> 2, Blade <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>
+ Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode <span style="color:#f92672">=</span> 3, Blade <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>
+ Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode <span style="color:#f92672">=</span> 4, Blade <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>
 
-  Running AirfoilInfo (v1.01.00a-bjj, 5-Apr-2016).
-
-  Running BEM (v1.02.00, 29-Jun-2016).
- Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode = 1, Blade = 1
- Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode = 2, Blade = 1
- Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode = 3, Blade = 1
- Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode = 4, Blade = 1
- Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode = 1, Blade = 2
- Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode = 2, Blade = 2
- Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode = 3, Blade = 2
- Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode = 4, Blade = 2
- Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode = 1, Blade = 3
- Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode = 2, Blade = 3
- Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode = 3, Blade = 3
- Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode = 4, Blade = 3
-
-  Running InflowWind (v3.03.00, 26-Jul-2016).
+  Running InflowWind <span style="color:#f92672">(</span>v3.03.00, 26-Jul-2016<span style="color:#f92672">)</span>.
   Opening InflowWind input file:  ../CertTest/5MW_Baseline/NRELOffshrBsline5MW_InflowWind_12mps.dat
 
-    Reading a 31x31 grid (145 m wide, 17.5 m to 162.5 m above ground) with a characteristic wind
-    speed of 12 m/s. This full-field file was generated by TurbSim (v1.06.00, 21-Sep-2012) on
+    Reading a 31x31 grid <span style="color:#f92672">(</span><span style="color:#ae81ff">145</span> m wide, 17.5 m to 162.5 m above ground<span style="color:#f92672">)</span> with a characteristic wind
+    speed of <span style="color:#ae81ff">12</span> m/s. This full-field file was generated by TurbSim <span style="color:#f92672">(</span>v1.06.00, 21-Sep-2012<span style="color:#f92672">)</span> on
     07-Jan-2014 at 12:50:45.
 
-    Processed 1442 time steps of 20-Hz full-field data (72.05 seconds).
+    Processed <span style="color:#ae81ff">1442</span> time steps of 20-Hz full-field data <span style="color:#f92672">(</span>72.05 seconds<span style="color:#f92672">)</span>.
 
-  Running ServoDyn (v1.06.00a-bjj, 26-Jul-2016).
+  Running ServoDyn <span style="color:#f92672">(</span>v1.06.00a-bjj, 26-Jul-2016<span style="color:#f92672">)</span>.
 
-  Running ServoDyn Interface for Bladed Controllers (using GNU Fortran for Linux, 14-Oct-2015).
-  Timestep: 0 of 20 seconds.
+  Running ServoDyn Interface <span style="color:#66d9ef">for</span> Bladed Controllers <span style="color:#f92672">(</span>using GNU Fortran <span style="color:#66d9ef">for</span> Linux, 14-Oct-2015<span style="color:#f92672">)</span>.
+  Timestep: <span style="color:#ae81ff">0</span> of <span style="color:#ae81ff">20</span> seconds.
 
  FAST_Solution0:CalcOutputs_And_SolveForInputs:SolveOption2:SrvD_CalcOutput:Running with torque
  and pitch control of the NREL offshore 5MW baseline wind turbine from DISCON.dll as written by J.
- Jonkman of NREL/NWTC for use in the IEA Annex XXIII OC3 studies.
+ Jonkman of NREL/NWTC <span style="color:#66d9ef">for</span> use in the IEA Annex XXIII OC3 studies.
 
 
- Timestep: 1 of 20 seconds. Estimated final completion at 16:20:36.                               
+ Timestep: <span style="color:#ae81ff">1</span> of <span style="color:#ae81ff">20</span> seconds. Estimated final completion at 16:20:36.                               
 
-</code></pre>
-
-<p>Okay, All things have been done.</p>
-
+</code></pre></div><p>Okay, All things have been done.</p>
 <p>Happy FAST programming.</p>
     </div>
  <div class="nav-links" style="padding:10;">
@@ -1194,7 +1159,7 @@ vim NRELOffshrBsline5MW_Onshore_ServoDyn.dat
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

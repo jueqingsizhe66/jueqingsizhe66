@@ -31,13 +31,11 @@
   <meta name="description" content="在Linux地下，脚本(script)编程是一个快捷的方式和内核(kernel)进行交流。
 通常包含以下几种脚本编程:
 
-
 bash shell(其他shell也类似)
 perl
 python
 ruby
 等等
-
 
 我现在发现我们既可以处理文件中的信息，也同时可以处理硬件的东西，这些其实我就清楚，比如linux把很多的设备都虚拟为文件，只不过之前不知道怎么用。
 接触到shell之后，我才发现比如键盘的东西都可以被写进脚本的，也就是电脑上的外接设备也是可以被写进程序当中的，当作计算机里面的一种概念。">
@@ -132,13 +130,11 @@ ruby
   <meta property="og:description" content="在Linux地下，脚本(script)编程是一个快捷的方式和内核(kernel)进行交流。
 通常包含以下几种脚本编程:
 
-
 bash shell(其他shell也类似)
 perl
 python
 ruby
 等等
-
 
 我现在发现我们既可以处理文件中的信息，也同时可以处理硬件的东西，这些其实我就清楚，比如linux把很多的设备都虚拟为文件，只不过之前不知道怎么用。
 接触到shell之后，我才发现比如键盘的东西都可以被写进脚本的，也就是电脑上的外接设备也是可以被写进程序当中的，当作计算机里面的一种概念。"><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
@@ -587,23 +583,21 @@ ruby
 
 
 
-<span class="article-metadata" >Reading time: 4 minutes and    40 seconds with 1030 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+<span class="article-metadata" >Reading time: 4 minutes and    39 seconds with 1026 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#vim的脚本化操作">vim的脚本化操作</a></li>
-<li><a href="#mysql的脚本化操作">mysql的脚本化操作</a></li>
-<li><a href="#gnuplot的脚本化操作">gnuplot的脚本化操作</a></li>
-<li><a href="#获得键盘输入的两种方式">获得键盘输入的两种方式</a>
-<ul>
-<li><a href="#使用read">使用read</a></li>
-<li><a href="#使用stty">使用stty</a></li>
-</ul></li>
-<li><a href="#不错的一个菜单输入">不错的一个菜单输入</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#vim">vim的脚本化操作</a></li>
+    <li><a href="#mysql">mysql的脚本化操作</a></li>
+    <li><a href="#gnuplot">gnuplot的脚本化操作</a></li>
+    <li><a href="#heading">获得键盘输入的两种方式</a>
+      <ul>
+        <li><a href="#read">使用read</a></li>
+        <li><a href="#stty">使用stty</a></li>
+      </ul>
+    </li>
+    <li><a href="#heading-1">不错的一个菜单输入</a></li>
+  </ul>
 </nav>
     </aside>
   <div class="article-container">
@@ -612,7 +606,6 @@ ruby
     <div class="article-style">
       <p>在Linux地下，脚本(script)编程是一个快捷的方式和内核(kernel)进行交流。
 通常包含以下几种脚本编程:</p>
-
 <ul>
 <li>bash shell(其他shell也类似)</li>
 <li>perl</li>
@@ -620,150 +613,121 @@ ruby
 <li>ruby</li>
 <li>等等</li>
 </ul>
-
 <p>我现在发现我们既可以处理文件中的信息，也同时可以处理硬件的东西，这些其实我就清楚，比如linux把很多的设备都虚拟为文件，只不过之前不知道怎么用。
 接触到shell之后，我才发现比如键盘的东西都可以被写进脚本的，也就是电脑上的外接设备也是可以被写进程序当中的，当作计算机里面的一种概念。</p>
-
-<h2 id="vim的脚本化操作">vim的脚本化操作</h2>
-
+<h2 id="vim">vim的脚本化操作</h2>
 <p>把下段的代码保存为c.sh,主要功能是把双个除号改为井号，当作注释。
 这样就可以把vim的action行为录为脚本。</p>
-
-<pre><code class="language-sh">
-vim ./cData &lt;&lt;VIM &gt; /dev/null 2&gt;&amp;1 
-:%s#//#\##
-:wq 
-VIM 
-</code></pre>
-
-<blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">
+vim ./cData <span style="color:#e6db74">&lt;&lt;VIM &gt; /dev/null 2&gt;&amp;1 
+</span><span style="color:#e6db74">:%s#//#\##
+</span><span style="color:#e6db74">:wq 
+</span><span style="color:#e6db74">VIM</span> 
+</code></pre></div><blockquote>
 <p>/dev/null 2&gt;&amp;1  拆为四部分来分析下:</p>
 </blockquote>
-
 <ol>
 <li>首先 0&gt; 表示stdin标准输入; 1&gt; 表示stdout标准输出; 2&gt; 表示stderr错误输出;</li>
-<li>符号 &gt;  等价于 1&gt; (系统默认为1,省略了先); 所以&rdquo;&gt;/dev/null&rdquo;等同于 &ldquo;1&gt;/dev/null&rdquo;</li>
+<li>符号 &gt;  等价于 1&gt; (系统默认为1,省略了先); 所以&quot;&gt;/dev/null&quot;等同于 &ldquo;1&gt;/dev/null&rdquo;</li>
 <li>/dev/null 代表空设备文件</li>
-<li>&amp; 可以理解为是&rdquo;等同于&rdquo;的意思，2&gt;&amp;1，即表示2的输出重定向等同于1
+<li>&amp; 可以理解为是&quot;等同于&quot;的意思，2&gt;&amp;1，即表示2的输出重定向等同于1
 因此，&gt;/dev/null 2&gt;&amp;1 也可以写成“1&gt; /dev/null 2&gt; &amp;1”</li>
 </ol>
-
 <p>那么本文标题的语句执行过程为：
 1&gt;/dev/null ：首先表示标准输出重定向到空设备文件，也就是不输出任何信息到终端，说白了就是不显示任何信息。
 2&gt;&amp;1 ：接着，将标准错误输出重定向 到 标准输出，因为之前标准输出已经重定向到了空设备文件，所以标准错误输出也重定向到空设备文件。</p>
-
 <p>类似还有cat</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">cat &gt;&gt; /etc/man.config <span style="color:#e6db74">&lt;&lt;EOF
+</span><span style="color:#e6db74">MANPATH  /srv/httpd/man/
+</span><span style="color:#e6db74">EOF</span>
 
-<pre><code class="language-sh">cat &gt;&gt; /etc/man.config &lt;&lt;EOF
-MANPATH  /srv/httpd/man/
-EOF
-
-cat &gt;&gt; /etc/profile.d/http.sh &lt;&lt;EOF
-export PATH=/srv/httpd/bin:$PATH
-EOF
-</code></pre>
-
-<h2 id="mysql的脚本化操作">mysql的脚本化操作</h2>
-
-<pre><code class="language-sh">mysql -u$user -p$password &lt;&lt; EOF  
-FLUSH TABLES WITH READ LOCK;  
-system lvcreate --snapshot -n $snap -L$snapsize /dev/$vg/$lv;  
-UNLOCK TABLES;  
-quit  
-EOF 
-</code></pre>
-
-<h2 id="gnuplot的脚本化操作">gnuplot的脚本化操作</h2>
-
-<pre><code class="language-sh">gnuplot&lt;&lt;EOF   
-set ter 'png'   
-set out '$i/cpUp.png'  
-plot &quot;$i/cpUp.txt&quot; t 'cp' w lp  
-EOF 
-</code></pre>
-
-<h2 id="获得键盘输入的两种方式">获得键盘输入的两种方式</h2>
-
-<h3 id="使用read">使用read</h3>
-
-<pre><code class="language-sh">
-read -p &quot;input a val:&quot;  val
+cat &gt;&gt; /etc/profile.d/http.sh <span style="color:#e6db74">&lt;&lt;EOF
+</span><span style="color:#e6db74">export PATH=/srv/httpd/bin:$PATH
+</span><span style="color:#e6db74">EOF</span>
+</code></pre></div><h2 id="mysql">mysql的脚本化操作</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">mysql -u$user -p$password <span style="color:#e6db74">&lt;&lt; EOF  
+</span><span style="color:#e6db74">FLUSH TABLES WITH READ LOCK;  
+</span><span style="color:#e6db74">system lvcreate --snapshot -n $snap -L$snapsize /dev/$vg/$lv;  
+</span><span style="color:#e6db74">UNLOCK TABLES;  
+</span><span style="color:#e6db74">quit  
+</span><span style="color:#e6db74">EOF</span> 
+</code></pre></div><h2 id="gnuplot">gnuplot的脚本化操作</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">gnuplot<span style="color:#e6db74">&lt;&lt;EOF   
+</span><span style="color:#e6db74">set ter &#39;png&#39;   
+</span><span style="color:#e6db74">set out &#39;$i/cpUp.png&#39;  
+</span><span style="color:#e6db74">plot &#34;$i/cpUp.txt&#34; t &#39;cp&#39; w lp  
+</span><span style="color:#e6db74">EOF</span> 
+</code></pre></div><h2 id="heading">获得键盘输入的两种方式</h2>
+<h3 id="read">使用read</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">
+read -p <span style="color:#e6db74">&#34;input a val:&#34;</span>  val
 echo $val
 
-</code></pre>
-
-<h3 id="使用stty">使用stty</h3>
-
-<pre><code class="language-sh">
-get_char(){
-   SAVEDSTTY=`stty -g`
+</code></pre></div><h3 id="stty">使用stty</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">
+get_char<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+   SAVEDSTTY<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>stty -g<span style="color:#e6db74">`</span>
    stty -echo
    stty raw
-   dd if=/dev/tty bs=1 count=1 2&gt; /dev/null
+   dd <span style="color:#66d9ef">if</span><span style="color:#f92672">=</span>/dev/tty bs<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> count<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> 2&gt; /dev/null
    stty -raw
    stty echo
    stty $SAVEDSTTY
-}
-echo &quot;Press any key to continue...&quot;
-char=`get_char`
+<span style="color:#f92672">}</span>
+echo <span style="color:#e6db74">&#34;Press any key to continue...&#34;</span>
+char<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>get_char<span style="color:#e6db74">`</span>
 read k
 echo $k
-</code></pre>
+</code></pre></div><h2 id="heading-1">不错的一个菜单输入</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">
+<span style="color:#75715e">#字颜色：30—–37</span>  
+<span style="color:#75715e">#字背景颜色范围：40—–47</span> 
 
-<h2 id="不错的一个菜单输入">不错的一个菜单输入</h2>
+<span style="color:#66d9ef">while</span> :
+<span style="color:#66d9ef">do</span>
+    echo <span style="color:#e6db74">&#34;\033[5m 1) china \033[0m&#34;</span> 
+    echo <span style="color:#e6db74">&#34;\033[32m 2) America \033[0m&#34;</span> 
+    echo <span style="color:#e6db74">&#34;\033[33m 3) Japan \033[0m&#34;</span> 
+    echo <span style="color:#e6db74">&#34;\033[34m 4) England \033[0m&#34;</span> 
+    echo <span style="color:#e6db74">&#34;\033[35m 5) France \033[0m&#34;</span> 
+    echo <span style="color:#e6db74">&#34;\033[36m 6) Spain \033[0m&#34;</span> 
+    echo <span style="color:#e6db74">&#34;\033[37m 7) Brazil \033[0m&#34;</span> 
+    echo <span style="color:#e6db74">&#34;\033[40;37m 8) Turkey \033[0m&#34;</span> 
+    echo <span style="color:#e6db74">&#34;\033[41;37m 9) Italy \033[0m&#34;</span> 
+    echo <span style="color:#e6db74">&#34;\033[42;37m 10) Germany \033[0m&#34;</span> 
+    echo <span style="color:#e6db74">&#34;\033[43;37m 11) Arabi \033[0m&#34;</span> 
 
-<pre><code class="language-sh">
-#字颜色：30—–37  
-#字背景颜色范围：40—–47 
+    read -p <span style="color:#e6db74">&#34;Please Enter the number [1-11]&#34;</span> val
+    <span style="color:#66d9ef">case</span> $val in
+        1<span style="color:#f92672">)</span> echo <span style="color:#e6db74">&#34;\033[5m 1) You input the --&gt; china\n \033[0m&#34;</span> 
+            ;;
+        2<span style="color:#f92672">)</span> echo <span style="color:#e6db74">&#34;\033[32m 2) You input the --&gt; America \n\033[0m&#34;</span> 
+            ;;
+        3<span style="color:#f92672">)</span> echo <span style="color:#e6db74">&#34;\033[33m 3) You input the --&gt; Japan\n \033[0m&#34;</span> 
+            ;;
+        4<span style="color:#f92672">)</span> echo <span style="color:#e6db74">&#34;\033[34m 4) You input the --&gt; England \n\033[0m&#34;</span> 
+            ;;
+        5<span style="color:#f92672">)</span> echo <span style="color:#e6db74">&#34;\033[35m 5) You input the --&gt; France \n \033[0m&#34;</span> 
+            ;;
+        6<span style="color:#f92672">)</span> echo <span style="color:#e6db74">&#34;\033[36m 6) You input the --&gt; Spain\n \033[0m&#34;</span> 
+            ;;
+        7<span style="color:#f92672">)</span> echo <span style="color:#e6db74">&#34;\033[37m 7) You input the --&gt; Brazil\n \033[0m&#34;</span> 
+            ;;
+        8<span style="color:#f92672">)</span> echo <span style="color:#e6db74">&#34;\033[40;37m 8) You input the --&gt; Turkey\n \033[0m&#34;</span> 
+            ;;
+        9<span style="color:#f92672">)</span> echo <span style="color:#e6db74">&#34;\033[41;37m 9) You input the --&gt; Italy\n \033[0m&#34;</span> 
+            ;;
+        10<span style="color:#f92672">)</span> echo <span style="color:#e6db74">&#34;\033[42;37m 10) You input the --&gt; Germany\n \033[0m&#34;</span> 
+            ;;
+        11<span style="color:#f92672">)</span> echo <span style="color:#e6db74">&#34;\033[43;37m 11) You input the --&gt; Arabi\n \033[0m&#34;</span> 
+            ;;
+        *<span style="color:#f92672">)</span> exit <span style="color:#ae81ff">0</span>
+            ;;
+    <span style="color:#66d9ef">esac</span>
+    echo <span style="color:#e6db74">&#34;&#34;</span>
+<span style="color:#66d9ef">done</span>
 
-while :
-do
-    echo &quot;\033[5m 1) china \033[0m&quot; 
-    echo &quot;\033[32m 2) America \033[0m&quot; 
-    echo &quot;\033[33m 3) Japan \033[0m&quot; 
-    echo &quot;\033[34m 4) England \033[0m&quot; 
-    echo &quot;\033[35m 5) France \033[0m&quot; 
-    echo &quot;\033[36m 6) Spain \033[0m&quot; 
-    echo &quot;\033[37m 7) Brazil \033[0m&quot; 
-    echo &quot;\033[40;37m 8) Turkey \033[0m&quot; 
-    echo &quot;\033[41;37m 9) Italy \033[0m&quot; 
-    echo &quot;\033[42;37m 10) Germany \033[0m&quot; 
-    echo &quot;\033[43;37m 11) Arabi \033[0m&quot; 
-
-    read -p &quot;Please Enter the number [1-11]&quot; val
-    case $val in
-        1) echo &quot;\033[5m 1) You input the --&gt; china\n \033[0m&quot; 
-            ;;
-        2) echo &quot;\033[32m 2) You input the --&gt; America \n\033[0m&quot; 
-            ;;
-        3) echo &quot;\033[33m 3) You input the --&gt; Japan\n \033[0m&quot; 
-            ;;
-        4) echo &quot;\033[34m 4) You input the --&gt; England \n\033[0m&quot; 
-            ;;
-        5) echo &quot;\033[35m 5) You input the --&gt; France \n \033[0m&quot; 
-            ;;
-        6) echo &quot;\033[36m 6) You input the --&gt; Spain\n \033[0m&quot; 
-            ;;
-        7) echo &quot;\033[37m 7) You input the --&gt; Brazil\n \033[0m&quot; 
-            ;;
-        8) echo &quot;\033[40;37m 8) You input the --&gt; Turkey\n \033[0m&quot; 
-            ;;
-        9) echo &quot;\033[41;37m 9) You input the --&gt; Italy\n \033[0m&quot; 
-            ;;
-        10) echo &quot;\033[42;37m 10) You input the --&gt; Germany\n \033[0m&quot; 
-            ;;
-        11) echo &quot;\033[43;37m 11) You input the --&gt; Arabi\n \033[0m&quot; 
-            ;;
-        *) exit 0
-            ;;
-    esac
-    echo &quot;&quot;
-done
-
-</code></pre>
-
-<p><img src="/images/menu.png" alt="结果" /></p>
-
+</code></pre></div><p><img src="/images/menu.png" alt="结果"></p>
 <p>持续更新本文的script的内容&hellip;.</p>
     </div>
  <div class="nav-links" style="padding:10;">
@@ -1168,7 +1132,7 @@ done
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

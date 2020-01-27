@@ -31,15 +31,8 @@
   <meta name="description" content="I have a question about how to call the function when
 we see the type declartion.我有一个关于阅读函数声明时候，如何调用函数的疑问。
 比如:
-
-
+f :: (Double,Double,Double) -&gt; (Double,Double)
 It is one parameter, but it must be a tuple with three tuple elements
-
-
-
-it must be a tuple with three tuple elements
-
-
 ::Double-&gt;Double-&gt;Double
 What does it mean?">
 
@@ -133,15 +126,8 @@ What does it mean?">
   <meta property="og:description" content="I have a question about how to call the function when
 we see the type declartion.我有一个关于阅读函数声明时候，如何调用函数的疑问。
 比如:
-
-
+f :: (Double,Double,Double) -&gt; (Double,Double)
 It is one parameter, but it must be a tuple with three tuple elements
-
-
-
-it must be a tuple with three tuple elements
-
-
 ::Double-&gt;Double-&gt;Double
 What does it mean?"><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
   <meta property="twitter:image" content="https://jueqingsizhe66.github.io/img/icon-192.png"><meta property="og:locale" content="en-us">
@@ -589,16 +575,13 @@ What does it mean?"><meta property="og:image" content="https://jueqingsizhe66.gi
 
 
 
-<span class="article-metadata" >Reading time: 2 minutes and    37 seconds with 579 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+<span class="article-metadata" >Reading time: 2 minutes and    36 seconds with 575 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#绑定binding-http-www-jdon-com-idea-haskell-html"><a href="http://www.jdon.com/idea/haskell.html" target="_blank">绑定Binding</a></a></li>
-<li><a href="#变量是不可变的">变量是不可变的</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#bindinghttpwwwjdoncomideahaskellhtml">绑定Binding</a></li>
+    <li><a href="#heading">变量是不可变的</a></li>
+  </ul>
 </nav>
     </aside>
   <div class="article-container">
@@ -608,67 +591,40 @@ What does it mean?"><meta property="og:image" content="https://jueqingsizhe66.gi
       <p>I have a <strong>question</strong> about how to call the function when
 we see the type declartion.我有一个关于阅读函数声明时候，如何调用函数的疑问。
 比如:</p>
-
-<dl>
-<dt>It is one parameter, but it must be a tuple with three tuple elements</dt>
-</dl>
-
-<dl>
-<dt>it must be a tuple with three tuple elements</dt>
-</dl>
-
+<p>f :: (Double,Double,Double) -&gt; (Double,Double)
+It is one parameter, but it must be a tuple with three tuple elements</p>
 <p>::Double-&gt;Double-&gt;Double
 <strong>What does it mean?</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#a6e22e">areAsceneding</span> <span style="color:#f92672">::</span> <span style="color:#66d9ef">Integer</span><span style="color:#f92672">-&gt;</span><span style="color:#66d9ef">Integer</span><span style="color:#f92672">-&gt;</span><span style="color:#66d9ef">Integer</span><span style="color:#f92672">-&gt;</span><span style="color:#66d9ef">Bool</span>
+<span style="color:#a6e22e">areAsceneding</span> a b c<span style="color:#f92672">=</span>a<span style="color:#f92672">&lt;</span>b <span style="color:#f92672">&amp;&amp;</span> b<span style="color:#f92672">&lt;</span>c
 
-<pre><code class="language-haskell">areAsceneding :: Integer-&gt;Integer-&gt;Integer-&gt;Bool
-areAsceneding a b c=a&lt;b &amp;&amp; b&lt;c
-
-areasceneding 1 2 3
---get true
-areasceneding 1 4 2
---get false
-</code></pre>
-
-<p>Actually ,multiply parameter can changed into one parameter method by
+<span style="color:#a6e22e">areasceneding</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span>
+<span style="color:#75715e">--get true</span>
+<span style="color:#a6e22e">areasceneding</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">2</span>
+<span style="color:#75715e">--get false</span>
+</code></pre></div><p>Actually ,multiply parameter can changed into one parameter method by
 currying!!</p>
-
 <p>You must care about the () means tuple data structure.
 [] means list  data structure.</p>
-
-<h2 id="绑定binding-http-www-jdon-com-idea-haskell-html"><a href="http://www.jdon.com/idea/haskell.html" target="_blank">绑定Binding</a></h2>
-
+<h2 id="bindinghttpwwwjdoncomideahaskellhtml"><a href="http://www.jdon.com/idea/haskell.html">绑定Binding</a></h2>
 <p>　　Haskell使用=实现绑定，前面我们说=是引用透明的案例，是一种数学意义，实际是将两者绑定了。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#a6e22e">x</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>                   <span style="color:#75715e">-- 两个连字符号表示注解</span>
 
-<pre><code class="language-haskell">x = 2                   -- 两个连字符号表示注解
+<span style="color:#a6e22e">y</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>                   <span style="color:#75715e">--    </span>
+<span style="color:#a6e22e">main</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">let</span> z <span style="color:#f92672">=</span> x <span style="color:#f92672">+</span> y    <span style="color:#75715e">-- let 引入一个本地绑定</span>
+       <span style="color:#66d9ef">in</span> print z       <span style="color:#75715e">-- 程序将打印 5</span>
+</code></pre></div><p>Binding名称不能大写，绑定可以定义一个或多个参数的函数，函数和参数使用空格，这是Haskell区别其他语言的简洁之处：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#a6e22e">add</span> arg1 arg2 <span style="color:#f92672">=</span> arg1 <span style="color:#f92672">+</span> arg2 <span style="color:#75715e">-- 定义函数add</span>
+<span style="color:#a6e22e">five</span> <span style="color:#f92672">=</span> add <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span> <span style="color:#75715e">-- 调用函数add</span>
 
-y = 3                   --    
-main = let z = x + y    -- let 引入一个本地绑定
-       in print z       -- 程序将打印 5
-</code></pre>
-
-<p>Binding名称不能大写，绑定可以定义一个或多个参数的函数，函数和参数使用空格，这是Haskell区别其他语言的简洁之处：</p>
-
-<pre><code class="language-haskell">add arg1 arg2 = arg1 + arg2 -- 定义函数add
-five = add 2 3 -- 调用函数add
-
-</code></pre>
-
-<p>　　括号可以包装复合表达式：</p>
-
-<pre><code class="language-haskell">bad = print add 2 3 -- error! (打印只能有一个参数)
-main = print (add 2 3) -- ok, 使用一个参数5作为打印参数
-</code></pre>
-
-<h2 id="变量是不可变的">变量是不可变的</h2>
-
+</code></pre></div><p>　　括号可以包装复合表达式：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#a6e22e">bad</span> <span style="color:#f92672">=</span> print add <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span> <span style="color:#75715e">-- error! (打印只能有一个参数)</span>
+<span style="color:#a6e22e">main</span> <span style="color:#f92672">=</span> print (add <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span>) <span style="color:#75715e">-- ok, 使用一个参数5作为打印参数</span>
+</code></pre></div><h2 id="heading">变量是不可变的</h2>
 <p>　　与命令式语言变量不同,Haskell绑定变量 不可变的：</p>
-
-<pre><code class="language-haskell">x = 5
-x = 6 -- 错误, 不能再绑定x,但是在let中则是不一样
-</code></pre>
-
-<p>类型有下面几种：</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#a6e22e">x</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>
+<span style="color:#a6e22e">x</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">6</span> <span style="color:#75715e">-- 错误, 不能再绑定x,但是在let中则是不一样</span>
+</code></pre></div><p>类型有下面几种：</p>
 <ul>
 <li>Bool - 有两个元素： True 或 False</li>
 <li>Char - unicode符合集合</li>
@@ -1083,7 +1039,7 @@ x = 6 -- 错误, 不能再绑定x,但是在let中则是不一样
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

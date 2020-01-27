@@ -614,54 +614,41 @@
 
 
 
-<span class="article-metadata" >Reading time: 2 minutes and    32 seconds with 560 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+<span class="article-metadata" >Reading time: 2 minutes and    32 seconds with 558 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#背景介绍">背景介绍</a></li>
-<li><a href="#技术分解">技术分解</a></li>
-<li><a href="#技术实现">技术实现</a></li>
-<li><a href="#问题发现">问题发现</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#背景介绍">背景介绍</a></li>
+    <li><a href="#技术分解">技术分解</a></li>
+    <li><a href="#技术实现">技术实现</a></li>
+    <li><a href="#问题发现">问题发现</a></li>
+  </ul>
 </nav>
     </aside>
   <div class="article-container">
 
 
     <div class="article-style">
-      
-
-<h2 id="背景介绍">背景介绍</h2>
-
-<p>在前面 <a href="https://jueqingsizhe66.github.io/post/python提取多个文件汇总到一个excel表/" target="_blank">python提取多个文件</a>的案例中，只是遍历了全部有效数据，并提取其中两列数据，而如果数据存在NULL? pandas该如何处理?</p>
-
+      <h2 id="背景介绍">背景介绍</h2>
+<p>在前面 <a href="https://jueqingsizhe66.github.io/post/python%E6%8F%90%E5%8F%96%E5%A4%9A%E4%B8%AA%E6%96%87%E4%BB%B6%E6%B1%87%E6%80%BB%E5%88%B0%E4%B8%80%E4%B8%AAexcel%E8%A1%A8/">python提取多个文件</a>的案例中，只是遍历了全部有效数据，并提取其中两列数据，而如果数据存在NULL? pandas该如何处理?</p>
 <p>在CFDpost处理怀来风电场数据的廓线时候遇到如下问题，速度廓线存在Null值，如下图所示</p>
-
 <p><a href="/images/aiwind/AIWINDVelocity.png">AIWINDVelocity</a></p>
-
 <p>适合AIWIND计算出来的风电场机位点风廓线处理，存在空值</p>
-
 <h2 id="技术分解">技术分解</h2>
-
 <ol>
 <li>遍历</li>
-<li>提取所有非Null行 满足条件sd[sd.iloc[:, 3] != &lsquo; null&rsquo;] 即可。</li>
+<li>提取所有非Null行 满足条件sd[sd.iloc[:, 3] != ' null&rsquo;] 即可。</li>
 <li>减去对应海拔值</li>
 <li>存储结果到对应的sheet表中</li>
 </ol>
-
 <h2 id="技术实现">技术实现</h2>
-
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
 <span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
 <span style="color:#f92672">import</span> os
 
 
-headDir<span style="color:#f92672">=</span><span style="color:#e6db74">r</span><span style="color:#e6db74">&#34;C:\Users\yezhaoliang\PythonAIWind\pandasHuaiLaiProfile&#34;</span>
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_files</span>(path<span style="color:#f92672">=</span>headDir, rule<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;.csv&#34;</span>):
+headDir<span style="color:#f92672">=</span><span style="color:#e6db74">r</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">C:</span><span style="color:#e6db74">\</span><span style="color:#e6db74">Users</span><span style="color:#e6db74">\</span><span style="color:#e6db74">yezhaoliang</span><span style="color:#e6db74">\</span><span style="color:#e6db74">PythonAIWind</span><span style="color:#e6db74">\</span><span style="color:#e6db74">pandasHuaiLaiProfile</span><span style="color:#e6db74">&#34;</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_files</span>(path<span style="color:#f92672">=</span>headDir, rule<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">.csv</span><span style="color:#e6db74">&#34;</span>):
     all <span style="color:#f92672">=</span> []
     <span style="color:#66d9ef">for</span> fpathe,dirs,fs <span style="color:#f92672">in</span> os<span style="color:#f92672">.</span>walk(path):   <span style="color:#75715e"># os.walk是获取所有的目录</span>
         <span style="color:#66d9ef">for</span> f <span style="color:#f92672">in</span> fs:
@@ -670,67 +657,63 @@ headDir<span style="color:#f92672">=</span><span style="color:#e6db74">r</span><
                 all<span style="color:#f92672">.</span>append(filename)
     <span style="color:#66d9ef">return</span> all
 
-<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#34;</span>:
     b <span style="color:#f92672">=</span> get_files()
-    writer<span style="color:#f92672">=</span>pd<span style="color:#f92672">.</span>ExcelWriter(<span style="color:#e6db74">&#34;Results.xlsx&#34;</span>)
+    writer<span style="color:#f92672">=</span>pd<span style="color:#f92672">.</span>ExcelWriter(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Results.xlsx</span><span style="color:#e6db74">&#34;</span>)
     altitudesName<span style="color:#f92672">=</span>[]
     <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> b:
-        them<span style="color:#f92672">=</span>i<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">&#34;</span>)
+        them<span style="color:#f92672">=</span>i<span style="color:#f92672">.</span>split(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">&#34;</span>)
         sheetName<span style="color:#f92672">=</span>them[them<span style="color:#f92672">.</span>__len__()<span style="color:#f92672">-</span><span style="color:#ae81ff">4</span>]<span style="color:#f92672">+</span>them[them<span style="color:#f92672">.</span>__len__()<span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>]<span style="color:#f92672">+</span>them[them<span style="color:#f92672">.</span>__len__()<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]
         altitudesName<span style="color:#f92672">.</span>append(sheetName)
         sd<span style="color:#f92672">=</span>pd<span style="color:#f92672">.</span>read_csv(i,skiprows<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>)
         <span style="color:#75715e">## 去除Null行（注意空格，数字也一样处理)</span>
-        sdNotNull <span style="color:#f92672">=</span> sd[sd<span style="color:#f92672">.</span>iloc[:, <span style="color:#ae81ff">3</span>] <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39; null&#39;</span>]
+        sdNotNull <span style="color:#f92672">=</span> sd[sd<span style="color:#f92672">.</span>iloc[:, <span style="color:#ae81ff">3</span>] <span style="color:#f92672">!=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74"> null</span><span style="color:#e6db74">&#39;</span>]
         startZ <span style="color:#f92672">=</span> sdNotNull<span style="color:#f92672">.</span>iat[<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">2</span>]  <span style="color:#75715e">## the third column at begin sequence you selected</span>
         squeezeZseries <span style="color:#f92672">=</span> sdNotNull<span style="color:#f92672">.</span>iloc[<span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">300</span>, <span style="color:#ae81ff">2</span>] <span style="color:#f92672">-</span> sdNotNull<span style="color:#f92672">.</span>iat[<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">2</span>]  <span style="color:#75715e">## 减去海拔值</span>
         temp1 <span style="color:#f92672">=</span> sdNotNull<span style="color:#f92672">.</span>iloc[<span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">300</span>, <span style="color:#ae81ff">3</span>]
-        temp2 <span style="color:#f92672">=</span> temp1<span style="color:#f92672">.</span>astype(<span style="color:#e6db74">&#39;str&#39;</span>)<span style="color:#f92672">.</span>str<span style="color:#f92672">.</span>strip()  <span style="color:#75715e">##转换成字符串 然后去除左右空格</span>
-        squeezeVelocityseries <span style="color:#f92672">=</span> temp2<span style="color:#f92672">.</span>astype(<span style="color:#e6db74">&#39;float64&#39;</span>);
+        temp2 <span style="color:#f92672">=</span> temp1<span style="color:#f92672">.</span>astype(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">str</span><span style="color:#e6db74">&#39;</span>)<span style="color:#f92672">.</span>str<span style="color:#f92672">.</span>strip()  <span style="color:#75715e">##转换成字符串 然后去除左右空格</span>
+        squeezeVelocityseries <span style="color:#f92672">=</span> temp2<span style="color:#f92672">.</span>astype(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">float64</span><span style="color:#e6db74">&#39;</span>);
         result <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>concat([squeezeVelocityseries, squeezeZseries], axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
         result<span style="color:#f92672">.</span>to_excel(writer,sheet_name<span style="color:#f92672">=</span>sheetName,index_label<span style="color:#f92672">=</span>startZ)
     writer<span style="color:#f92672">.</span>save()
     writer<span style="color:#f92672">.</span>close()
      <span style="color:#75715e">#tags=os.path.split(i)</span>
      <span style="color:#75715e">#print(os.path.join(tags[0],&#39;done&#39;,tags[1]))</span></code></pre></div>
-
 <h2 id="问题发现">问题发现</h2>
-
 <p>300个点得到的结果不依，高程不统一，为此专门提取500个点，可以帅选</p>
-
 <p>改进main部分</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#34;</span>:
     b <span style="color:#f92672">=</span> get_files()
-    writer<span style="color:#f92672">=</span>pd<span style="color:#f92672">.</span>ExcelWriter(<span style="color:#e6db74">&#34;Results-compare-600.xlsx&#34;</span>)
+    writer<span style="color:#f92672">=</span>pd<span style="color:#f92672">.</span>ExcelWriter(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Results-compare-600.xlsx</span><span style="color:#e6db74">&#34;</span>)
     altitudesName<span style="color:#f92672">=</span>[]
     <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> b:
-        them<span style="color:#f92672">=</span>i<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">&#34;</span>)
+        them<span style="color:#f92672">=</span>i<span style="color:#f92672">.</span>split(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">&#34;</span>)
         secondPart<span style="color:#f92672">=</span>them[them<span style="color:#f92672">.</span>__len__()<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>]
         <span style="color:#75715e"># sheetName=them[them.__len__()-3]+them[them.__len__()-2]+them[them.__len__()-1]</span>
         sheetName<span style="color:#f92672">=</span>them[them<span style="color:#f92672">.</span>__len__()<span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>]<span style="color:#f92672">+</span>secondPart[<span style="color:#f92672">-</span><span style="color:#ae81ff">9</span>:]<span style="color:#f92672">+</span>them[them<span style="color:#f92672">.</span>__len__()<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]
         altitudesName<span style="color:#f92672">.</span>append(sheetName)
         sd<span style="color:#f92672">=</span>pd<span style="color:#f92672">.</span>read_csv(i,skiprows<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>)
         <span style="color:#75715e">## 去除Null行（注意空格，数字也一样处理)</span>
-        sdNotNull <span style="color:#f92672">=</span> sd[sd<span style="color:#f92672">.</span>iloc[:, <span style="color:#ae81ff">3</span>] <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39; null&#39;</span>]
+        sdNotNull <span style="color:#f92672">=</span> sd[sd<span style="color:#f92672">.</span>iloc[:, <span style="color:#ae81ff">3</span>] <span style="color:#f92672">!=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74"> null</span><span style="color:#e6db74">&#39;</span>]
         <span style="color:#75715e">#squeezeZseries = sdNotNull.iloc[0:300, 2] - sdNotNull.iat[0, 2]  ## 减去海拔值</span>
         temp1 <span style="color:#f92672">=</span> sdNotNull<span style="color:#f92672">.</span>iloc[<span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">1000</span>, <span style="color:#ae81ff">3</span>]
-        temp2 <span style="color:#f92672">=</span> temp1<span style="color:#f92672">.</span>astype(<span style="color:#e6db74">&#39;str&#39;</span>)<span style="color:#f92672">.</span>str<span style="color:#f92672">.</span>strip()  <span style="color:#75715e">##转换成字符串 然后去除左右空格</span>
-        squeezeVelocityseriesPre <span style="color:#f92672">=</span> temp2<span style="color:#f92672">.</span>astype(<span style="color:#e6db74">&#39;float64&#39;</span>);
+        temp2 <span style="color:#f92672">=</span> temp1<span style="color:#f92672">.</span>astype(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">str</span><span style="color:#e6db74">&#39;</span>)<span style="color:#f92672">.</span>str<span style="color:#f92672">.</span>strip()  <span style="color:#75715e">##转换成字符串 然后去除左右空格</span>
+        squeezeVelocityseriesPre <span style="color:#f92672">=</span> temp2<span style="color:#f92672">.</span>astype(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">float64</span><span style="color:#e6db74">&#39;</span>);
         squeezeVelocityseriesPreNumpy <span style="color:#f92672">=</span> squeezeVelocityseriesPre<span style="color:#f92672">.</span>to_numpy();
         temp3 <span style="color:#f92672">=</span> sdNotNull<span style="color:#f92672">.</span>iloc[<span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">1000</span>,<span style="color:#ae81ff">2</span>]
-        temp4 <span style="color:#f92672">=</span> temp3<span style="color:#f92672">.</span>astype(<span style="color:#e6db74">&#39;str&#39;</span>)<span style="color:#f92672">.</span>str<span style="color:#f92672">.</span>strip()
-        squeezeZseriesPre <span style="color:#f92672">=</span> temp4<span style="color:#f92672">.</span>astype(<span style="color:#e6db74">&#39;float64&#39;</span>);
+        temp4 <span style="color:#f92672">=</span> temp3<span style="color:#f92672">.</span>astype(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">str</span><span style="color:#e6db74">&#39;</span>)<span style="color:#f92672">.</span>str<span style="color:#f92672">.</span>strip()
+        squeezeZseriesPre <span style="color:#f92672">=</span> temp4<span style="color:#f92672">.</span>astype(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">float64</span><span style="color:#e6db74">&#39;</span>);
         squeezeZseriesPreNumpy <span style="color:#f92672">=</span> squeezeZseriesPre<span style="color:#f92672">.</span>to_numpy();
-        initialArray<span style="color:#f92672">=</span>squeezeVelocityseriesPre[squeezeVelocityseriesPre<span style="color:#f92672">&lt;=</span><span style="color:#ae81ff">0.0</span>]<span style="color:#f92672">.</span>size
+        initialArray<span style="color:#f92672">=</span>squeezeVelocityseriesPre[squeezeVelocityseriesPre<span style="color:#f92672">&lt;</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0.0</span>]<span style="color:#f92672">.</span>size
         initialZ<span style="color:#f92672">=</span>squeezeZseriesPreNumpy[initialArray]
         squeezeVelocityseriese <span style="color:#f92672">=</span> squeezeVelocityseriesPreNumpy[initialArray:initialArray<span style="color:#f92672">+</span><span style="color:#ae81ff">501</span>]
         squeezeZOriginial <span style="color:#f92672">=</span> squeezeZseriesPreNumpy[initialArray:initialArray<span style="color:#f92672">+</span><span style="color:#ae81ff">501</span>]
         squeezeZSeries <span style="color:#f92672">=</span> squeezeZseriesPreNumpy[initialArray:initialArray<span style="color:#f92672">+</span><span style="color:#ae81ff">501</span>]<span style="color:#f92672">-</span>initialZ
 
         result <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame({
-            <span style="color:#e6db74">&#39;Velocity/(m/s)&#39;</span>:pd<span style="color:#f92672">.</span>Series(squeezeVelocityseriese),
-            <span style="color:#e6db74">&#39;Z-Z0/(m)&#39;</span>:pd<span style="color:#f92672">.</span>Series(squeezeZSeries),
-            <span style="color:#e6db74">&#39;Z/(m)&#39;</span>:pd<span style="color:#f92672">.</span>Series(squeezeZOriginial)})
+            <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Velocity/(m/s)</span><span style="color:#e6db74">&#39;</span>:pd<span style="color:#f92672">.</span>Series(squeezeVelocityseriese),
+            <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Z-Z0/(m)</span><span style="color:#e6db74">&#39;</span>:pd<span style="color:#f92672">.</span>Series(squeezeZSeries),
+            <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Z/(m)</span><span style="color:#e6db74">&#39;</span>:pd<span style="color:#f92672">.</span>Series(squeezeZOriginial)})
         result<span style="color:#f92672">.</span>to_excel(writer,sheet_name<span style="color:#f92672">=</span>sheetName)
     writer<span style="color:#f92672">.</span>save()
     writer<span style="color:#f92672">.</span>close()</code></pre></div>
@@ -1138,7 +1121,7 @@ headDir<span style="color:#f92672">=</span><span style="color:#e6db74">r</span><
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

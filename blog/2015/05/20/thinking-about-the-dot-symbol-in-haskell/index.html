@@ -29,17 +29,11 @@
     
   
   <meta name="description" content="In haskell you can use () to embrace the function into an application
-
 not odd 4   --&gt;error
 not (odd 4) --&gt;right
-
-
 you can also use $ (called a function application),it makes functions right
 associative.
-
 not $ odd 4
-
-
 but more pretty and elegant method is use .">
 
   
@@ -130,17 +124,11 @@ but more pretty and elegant method is use .">
   <meta property="og:url" content="https://jueqingsizhe66.github.io/blog/2015/05/20/thinking-about-the-dot-symbol-in-haskell/">
   <meta property="og:title" content="Thinking about the dot symbol in haskell | Macro Life">
   <meta property="og:description" content="In haskell you can use () to embrace the function into an application
-
 not odd 4   --&gt;error
 not (odd 4) --&gt;right
-
-
 you can also use $ (called a function application),it makes functions right
 associative.
-
 not $ odd 4
-
-
 but more pretty and elegant method is use ."><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
   <meta property="twitter:image" content="https://jueqingsizhe66.github.io/img/icon-192.png"><meta property="og:locale" content="en-us">
   
@@ -587,21 +575,19 @@ but more pretty and elegant method is use ."><meta property="og:image" content="
 
 
 
-<span class="article-metadata" >Reading time: 1 minutes and    25 seconds with 315 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+<span class="article-metadata" >Reading time: 1 minutes and    24 seconds with 311 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#in-the-data-list-module">In the Data.List module:</a></li>
-<li><a href="#also-there-are-data-char">Also there are Data.Char</a></li>
-<li><a href="#there-are-also-some-in-data-map">There are also some in Data.Map</a></li>
-<li><a href="#we-can-continue-see-data-set">We can continue see Data.Set</a></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#in-the-datalist-module">In the Data.List module:</a></li>
+        <li><a href="#also-there-are-datachar">Also there are Data.Char</a></li>
+        <li><a href="#there-are-also-some-in-datamap">There are also some in Data.Map</a></li>
+        <li><a href="#we-can-continue-see-dataset">We can continue see Data.Set</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
     </aside>
   <div class="article-container">
@@ -609,113 +595,90 @@ but more pretty and elegant method is use ."><meta property="og:image" content="
 
     <div class="article-style">
       <p>In haskell you can use () to embrace the function into an application</p>
-
-<pre><code class="language-haskell">not odd 4   --&gt;error
-not (odd 4) --&gt;right
-</code></pre>
-
-<p>you can also use $ (called a function application),it makes functions right
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#a6e22e">not</span> odd <span style="color:#ae81ff">4</span>   <span style="color:#f92672">--&gt;</span><span style="color:#a6e22e">error</span>
+<span style="color:#a6e22e">not</span> (odd <span style="color:#ae81ff">4</span>) <span style="color:#f92672">--&gt;</span>right
+</code></pre></div><p>you can also use $ (called a function application),it makes functions right
 associative.</p>
-
-<pre><code class="language-haskell">not $ odd 4
-</code></pre>
-
-<p>but more pretty and elegant method is use .</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#a6e22e">not</span> <span style="color:#f92672">$</span> odd <span style="color:#ae81ff">4</span>
+</code></pre></div><p>but more pretty and elegant method is use .</p>
 <p>It composes functions in a readable manner
 f(g(h(k(x)))) is ugly
 (f.g.h.k)(x) is pretty</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell">(not<span style="color:#f92672">.</span>odd) <span style="color:#ae81ff">4</span>
+(length<span style="color:#f92672">.</span>head<span style="color:#f92672">.</span>words) <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">university of NCEPU</span><span style="color:#e6db74">&#34;</span>
+</code></pre></div><p>Haskell's all functions</p>
+<ul>
+<li>Data.List</li>
+<li>Data.Char</li>
+<li>Data.Map</li>
+<li>Data.Set
+&hellip;..and more than 350 others</li>
+</ul>
+<h3 id="in-the-datalist-module">In the Data.List module:</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#66d9ef">Main</span> <span style="color:#66d9ef">Data</span><span style="color:#f92672">.</span><span style="color:#66d9ef">List</span><span style="color:#f92672">&gt;</span> concat [<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">under</span><span style="color:#e6db74">&#34;</span>,<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">stand</span><span style="color:#e6db74">&#34;</span>,<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">ing</span><span style="color:#e6db74">&#34;</span>]
+<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">understanding</span><span style="color:#e6db74">&#34;</span>
+<span style="color:#66d9ef">Main</span> <span style="color:#66d9ef">Data</span><span style="color:#f92672">.</span><span style="color:#66d9ef">List</span><span style="color:#f92672">&gt;</span> any (<span style="color:#f92672">==</span><span style="color:#ae81ff">0</span>) [<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>]
+<span style="color:#66d9ef">True</span>
+<span style="color:#66d9ef">Main</span> <span style="color:#66d9ef">Data</span><span style="color:#f92672">.</span><span style="color:#66d9ef">List</span><span style="color:#f92672">&gt;</span> sort <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">helo</span><span style="color:#e6db74">&#34;</span>
+<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">ehlo</span><span style="color:#e6db74">&#34;</span>
 
-<pre><code class="language-haskell">(not.odd) 4
-(length.head.words) &quot;university of NCEPU&quot;
-</code></pre>
+<span style="color:#75715e">--And over 200 more!</span>
+</code></pre></div><h3 id="also-there-are-datachar">Also there are Data.Char</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#66d9ef">Main</span> <span style="color:#66d9ef">Data</span><span style="color:#f92672">.</span><span style="color:#66d9ef">List</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">import</span> Data.Char
+<span style="color:#66d9ef">Main</span> <span style="color:#66d9ef">Data</span><span style="color:#f92672">.</span><span style="color:#66d9ef">List</span> <span style="color:#66d9ef">Data</span><span style="color:#f92672">.</span><span style="color:#66d9ef">Char</span><span style="color:#f92672">&gt;</span> isNumber <span style="color:#e6db74">&#39;h&#39;</span>
+<span style="color:#66d9ef">False</span>
+<span style="color:#66d9ef">Main</span> <span style="color:#66d9ef">Data</span><span style="color:#f92672">.</span><span style="color:#66d9ef">List</span> <span style="color:#66d9ef">Data</span><span style="color:#f92672">.</span><span style="color:#66d9ef">Char</span><span style="color:#f92672">&gt;</span> toUpper <span style="color:#e6db74">&#39;t&#39;</span>
+<span style="color:#66d9ef">Main</span> <span style="color:#66d9ef">Data</span><span style="color:#f92672">.</span><span style="color:#66d9ef">List</span> <span style="color:#66d9ef">Data</span><span style="color:#f92672">.</span><span style="color:#66d9ef">Char</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">Data</span><span style="color:#f92672">.</span><span style="color:#66d9ef">List</span><span style="color:#f92672">.</span>map ord [<span style="color:#e6db74">&#39;A&#39;</span><span style="color:#f92672">..</span><span style="color:#e6db74">&#39;F&#39;</span>]
+[<span style="color:#ae81ff">65</span>,<span style="color:#ae81ff">66</span>,<span style="color:#ae81ff">67</span>,<span style="color:#ae81ff">68</span>,<span style="color:#ae81ff">69</span>,<span style="color:#ae81ff">70</span>]
 
-<p>Haskell&rsquo;s all functions
-+ Data.List
-+ Data.Char
-+ Data.Map
-+ Data.Set
-&hellip;..and more than 350 others</p>
-
-<h3 id="in-the-data-list-module">In the Data.List module:</h3>
-
-<pre><code class="language-haskell">Main Data.List&gt; concat [&quot;under&quot;,&quot;stand&quot;,&quot;ing&quot;]
-&quot;understanding&quot;
-Main Data.List&gt; any (==0) [1,1,1,1,1,0,0]
-True
-Main Data.List&gt; sort &quot;helo&quot;
-&quot;ehlo&quot;
-
---And over 200 more!
-</code></pre>
-
-<h3 id="also-there-are-data-char">Also there are Data.Char</h3>
-
-<pre><code class="language-haskell">Main Data.List&gt; import Data.Char
-Main Data.List Data.Char&gt; isNumber 'h'
-False
-Main Data.List Data.Char&gt; toUpper 't'
-Main Data.List Data.Char&gt; Data.List.map ord ['A'..'F']
-[65,66,67,68,69,70]
-
---and over 100 more!
-</code></pre>
-
-<h3 id="there-are-also-some-in-data-map">There are also some in Data.Map</h3>
-
-<pre><code class="language-haskell">
-Main Data.List Data.Char&gt; import Data.Map
-Main Data.List Data.Char Data.Map&gt; let m = fromList[(&quot;CS&quot;,&quot;Computer Science&quot;),(&quot;TLS&quot;,&quot;The Little Scheme&quot;),(&quot;TSS&quot;,&quot;The Season Scheme&quot;)]
-Main Data.List Data.Char Data.Map&gt; m
-fromList [(&quot;CS&quot;,&quot;Computer Science&quot;),(&quot;TLS&quot;,&quot;The Little Scheme&quot;),(&quot;TSS&quot;,&quot;The Season Scheme&quot;)]
-Main Data.List Data.Char Data.Map&gt; keys m
-[&quot;CS&quot;,&quot;TLS&quot;,&quot;TSS&quot;]
+<span style="color:#75715e">--and over 100 more!</span>
+</code></pre></div><h3 id="there-are-also-some-in-datamap">There are also some in Data.Map</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell">
+<span style="color:#66d9ef">Main</span> <span style="color:#66d9ef">Data</span><span style="color:#f92672">.</span><span style="color:#66d9ef">List</span> <span style="color:#66d9ef">Data</span><span style="color:#f92672">.</span><span style="color:#66d9ef">Char</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">import</span> Data.Map
+<span style="color:#66d9ef">Main</span> <span style="color:#66d9ef">Data</span><span style="color:#f92672">.</span><span style="color:#66d9ef">List</span> <span style="color:#66d9ef">Data</span><span style="color:#f92672">.</span><span style="color:#66d9ef">Char</span> <span style="color:#66d9ef">Data</span><span style="color:#f92672">.</span><span style="color:#66d9ef">Map</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">let</span> m <span style="color:#f92672">=</span> fromList[(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">CS</span><span style="color:#e6db74">&#34;</span>,<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Computer Science</span><span style="color:#e6db74">&#34;</span>),(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">TLS</span><span style="color:#e6db74">&#34;</span>,<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">The Little Scheme</span><span style="color:#e6db74">&#34;</span>),(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">TSS</span><span style="color:#e6db74">&#34;</span>,<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">The Season Scheme</span><span style="color:#e6db74">&#34;</span>)]
+<span style="color:#66d9ef">Main</span> <span style="color:#66d9ef">Data</span><span style="color:#f92672">.</span><span style="color:#66d9ef">List</span> <span style="color:#66d9ef">Data</span><span style="color:#f92672">.</span><span style="color:#66d9ef">Char</span> <span style="color:#66d9ef">Data</span><span style="color:#f92672">.</span><span style="color:#66d9ef">Map</span><span style="color:#f92672">&gt;</span> m
+<span style="color:#a6e22e">fromList</span> [(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">CS</span><span style="color:#e6db74">&#34;</span>,<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Computer Science</span><span style="color:#e6db74">&#34;</span>),(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">TLS</span><span style="color:#e6db74">&#34;</span>,<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">The Little Scheme</span><span style="color:#e6db74">&#34;</span>),(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">TSS</span><span style="color:#e6db74">&#34;</span>,<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">The Season Scheme</span><span style="color:#e6db74">&#34;</span>)]
+<span style="color:#66d9ef">Main</span> <span style="color:#66d9ef">Data</span><span style="color:#f92672">.</span><span style="color:#66d9ef">List</span> <span style="color:#66d9ef">Data</span><span style="color:#f92672">.</span><span style="color:#66d9ef">Char</span> <span style="color:#66d9ef">Data</span><span style="color:#f92672">.</span><span style="color:#66d9ef">Map</span><span style="color:#f92672">&gt;</span> keys m
+[<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">CS</span><span style="color:#e6db74">&#34;</span>,<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">TLS</span><span style="color:#e6db74">&#34;</span>,<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">TSS</span><span style="color:#e6db74">&#34;</span>]
 
 
-Main Data.List Data.Char Data.Map&gt; Data.Map.lookup &quot;CS&quot; m
-Just &quot;Computer Science&quot;
+<span style="color:#66d9ef">Main</span> <span style="color:#66d9ef">Data</span><span style="color:#f92672">.</span><span style="color:#66d9ef">List</span> <span style="color:#66d9ef">Data</span><span style="color:#f92672">.</span><span style="color:#66d9ef">Char</span> <span style="color:#66d9ef">Data</span><span style="color:#f92672">.</span><span style="color:#66d9ef">Map</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">Data</span><span style="color:#f92672">.</span><span style="color:#66d9ef">Map</span><span style="color:#f92672">.</span>lookup <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">CS</span><span style="color:#e6db74">&#34;</span> m
+<span style="color:#66d9ef">Just</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Computer Science</span><span style="color:#e6db74">&#34;</span>
 
-and over 200 more!!!!
-</code></pre>
+<span style="color:#a6e22e">and</span> over <span style="color:#ae81ff">200</span> more<span style="color:#f92672">!!!!</span>
+</code></pre></div><h3 id="we-can-continue-see-dataset">We can continue see Data.Set</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell">
+<span style="color:#66d9ef">Main</span> <span style="color:#66d9ef">Data</span><span style="color:#f92672">.</span><span style="color:#66d9ef">List</span> <span style="color:#66d9ef">Data</span><span style="color:#f92672">.</span><span style="color:#66d9ef">Char</span> <span style="color:#66d9ef">Data</span><span style="color:#f92672">.</span><span style="color:#66d9ef">Map</span> <span style="color:#66d9ef">Data</span><span style="color:#f92672">.</span><span style="color:#66d9ef">Set</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">let</span> a <span style="color:#f92672">=</span><span style="color:#66d9ef">Data</span><span style="color:#f92672">.</span><span style="color:#66d9ef">Set</span><span style="color:#f92672">.</span>fromList[<span style="color:#ae81ff">1</span><span style="color:#f92672">..</span><span style="color:#ae81ff">58</span>]
+<span style="color:#66d9ef">Main</span> <span style="color:#66d9ef">Data</span><span style="color:#f92672">.</span><span style="color:#66d9ef">List</span> <span style="color:#66d9ef">Data</span><span style="color:#f92672">.</span><span style="color:#66d9ef">Char</span> <span style="color:#66d9ef">Data</span><span style="color:#f92672">.</span><span style="color:#66d9ef">Map</span> <span style="color:#66d9ef">Data</span><span style="color:#f92672">.</span><span style="color:#66d9ef">Set</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">let</span> b <span style="color:#f92672">=</span><span style="color:#66d9ef">Data</span><span style="color:#f92672">.</span><span style="color:#66d9ef">Set</span><span style="color:#f92672">.</span>fromList[<span style="color:#ae81ff">53</span><span style="color:#f92672">..</span><span style="color:#ae81ff">100</span>]
+<span style="color:#66d9ef">Main</span> <span style="color:#66d9ef">Data</span><span style="color:#f92672">.</span><span style="color:#66d9ef">List</span> <span style="color:#66d9ef">Data</span><span style="color:#f92672">.</span><span style="color:#66d9ef">Char</span> <span style="color:#66d9ef">Data</span><span style="color:#f92672">.</span><span style="color:#66d9ef">Map</span> <span style="color:#66d9ef">Data</span><span style="color:#f92672">.</span><span style="color:#66d9ef">Set</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">Data</span><span style="color:#f92672">.</span><span style="color:#66d9ef">Set</span><span style="color:#f92672">.</span>intersection a b
+<span style="color:#a6e22e">fromList</span> [<span style="color:#ae81ff">53</span>,<span style="color:#ae81ff">54</span>,<span style="color:#ae81ff">55</span>,<span style="color:#ae81ff">56</span>,<span style="color:#ae81ff">57</span>,<span style="color:#ae81ff">58</span>]
 
-<h3 id="we-can-continue-see-data-set">We can continue see Data.Set</h3>
+<span style="color:#66d9ef">Main</span> <span style="color:#66d9ef">Data</span><span style="color:#f92672">.</span><span style="color:#66d9ef">List</span> <span style="color:#66d9ef">Data</span><span style="color:#f92672">.</span><span style="color:#66d9ef">Char</span> <span style="color:#66d9ef">Data</span><span style="color:#f92672">.</span><span style="color:#66d9ef">Map</span> <span style="color:#66d9ef">Data</span><span style="color:#f92672">.</span><span style="color:#66d9ef">Set</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">Data</span><span style="color:#f92672">.</span><span style="color:#66d9ef">Set</span><span style="color:#f92672">.</span>findMax <span style="color:#f92672">$</span> <span style="color:#66d9ef">Data</span><span style="color:#f92672">.</span><span style="color:#66d9ef">Set</span><span style="color:#f92672">.</span>union a b
+<span style="color:#ae81ff">100</span>
 
-<pre><code class="language-haskell">
-Main Data.List Data.Char Data.Map Data.Set&gt; let a =Data.Set.fromList[1..58]
-Main Data.List Data.Char Data.Map Data.Set&gt; let b =Data.Set.fromList[53..100]
-Main Data.List Data.Char Data.Map Data.Set&gt; Data.Set.intersection a b
-fromList [53,54,55,56,57,58]
-
-Main Data.List Data.Char Data.Map Data.Set&gt; Data.Set.findMax $ Data.Set.union a b
-100
-
---and even 100 more
-</code></pre>
-
-<p><em>There are one problem: Some function multiple definition in the Data.List and Data.Map,So take note!</em></p>
-
+<span style="color:#75715e">--and even 100 more</span>
+</code></pre></div><p><em>There are one problem: Some function multiple definition in the Data.List and Data.Map,So take note!</em></p>
 <p>Solve the strong passwd</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell">
+<span style="color:#a6e22e">strong</span> x <span style="color:#f92672">=</span> length x <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">14</span>
+           <span style="color:#f92672">&amp;&amp;</span> any isLower x
+           <span style="color:#f92672">&amp;&amp;</span> any isUpper x
+            <span style="color:#f92672">&amp;&amp;</span> any isDigit x
 
-<pre><code class="language-haskell">
-strong x = length x &gt; 14
-           &amp;&amp; any isLower x
-           &amp;&amp; any isUpper x
-            &amp;&amp; any isDigit x
 
+<span style="color:#75715e">-- Designed by Jared Candelaria</span>
 
--- Designed by Jared Candelaria
+<span style="color:#75715e">--import Data.Char</span>
 
---import Data.Char
-
-strong :: String -&gt; Bool
-strong password = all ($ password) requirements
-    where
-        requirements = [minLength 15, 
+<span style="color:#a6e22e">strong</span> <span style="color:#f92672">::</span> <span style="color:#66d9ef">String</span> <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">Bool</span>
+<span style="color:#a6e22e">strong</span> password <span style="color:#f92672">=</span> all (<span style="color:#f92672">$</span> password) requirements
+    <span style="color:#66d9ef">where</span>
+        requirements <span style="color:#f92672">=</span> [minLength <span style="color:#ae81ff">15</span>, 
                         any isUpper, 
                         any isLower, 
                         any isDigit]
-        minLength n str = n &lt;= length str
-</code></pre>
+        minLength n str <span style="color:#f92672">=</span> n <span style="color:#f92672">&lt;=</span> length str
+</code></pre></div>
     </div>
  <div class="nav-links" style="padding:10;">
         
@@ -1119,7 +1082,7 @@ strong password = all ($ password) requirements
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

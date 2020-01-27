@@ -29,9 +29,7 @@
     
   
   <meta name="description" content="程序的过程追踪能力体现着一个独特的优势，本文在First Interpreter,Second Interpreter,Third Interpreter基础上实现新的解释器功能。
-
 实现效果:
-
     enter: x = #(struct:num-val 30)
     exting: result = #(struct:num-val 29)
 ">
@@ -124,9 +122,7 @@
   <meta property="og:url" content="https://jueqingsizhe66.github.io/blog/2016/02/27/the-fourth-interpreter-about-the-traceproc/">
   <meta property="og:title" content="The Fourth Interpreter about the traceproc | Macro Life">
   <meta property="og:description" content="程序的过程追踪能力体现着一个独特的优势，本文在First Interpreter,Second Interpreter,Third Interpreter基础上实现新的解释器功能。
-
 实现效果:
-
     enter: x = #(struct:num-val 30)
     exting: result = #(struct:num-val 29)
 "><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
@@ -578,138 +574,99 @@
 <span class="article-metadata" >Reading time: 2 minutes and    51 seconds with 630 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#lang-scm修改程序追踪部分">lang.scm修改程序追踪部分</a></li>
-<li><a href="#data-structures-scm-进行部分修改">data-structures.scm 进行部分修改</a></li>
-<li><a href="#interp-scm-修改程序追踪部分">interp.scm 修改程序追踪部分</a>
-<ul>
-<li><a href="#apply-procedure的修改">apply-procedure的修改</a></li>
-<li><a href="#value-of-的修改">value-of 的修改</a></li>
-</ul></li>
-<li><a href="#测试追踪修改的结果">测试追踪修改的结果</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#langscm">lang.scm修改程序追踪部分</a></li>
+    <li><a href="#data-structuresscm-">data-structures.scm 进行部分修改</a></li>
+    <li><a href="#interpscm-">interp.scm 修改程序追踪部分</a>
+      <ul>
+        <li><a href="#apply-procedure">apply-procedure的修改</a></li>
+        <li><a href="#value-of-">value-of 的修改</a></li>
+      </ul>
+    </li>
+    <li><a href="#heading">测试追踪修改的结果</a></li>
+  </ul>
 </nav>
     </aside>
   <div class="article-container">
 
 
     <div class="article-style">
-      <p>程序的过程追踪能力体现着一个独特的优势，本文在<a href="http://jueqingsizhe66.github.io/blog/2016/02/25/first-interpreter-from-eopl/" target="_blank">First Interpreter</a>,<a href="http://jueqingsizhe66.github.io/blog/2016/02/27/the-second-interpreter-from-one/" target="_blank">Second Interpreter</a>,<a href="http://jueqingsizhe66.github.io/blog/2016/02/27/the-third-interpreter-implementing-proc/" target="_blank">Third Interpreter</a>基础上实现新的解释器功能。</p>
-
+      <p>程序的过程追踪能力体现着一个独特的优势，本文在<a href="http://jueqingsizhe66.github.io/blog/2016/02/25/first-interpreter-from-eopl/">First Interpreter</a>,<a href="http://jueqingsizhe66.github.io/blog/2016/02/27/the-second-interpreter-from-one/">Second Interpreter</a>,<a href="http://jueqingsizhe66.github.io/blog/2016/02/27/the-third-interpreter-implementing-proc/">Third Interpreter</a>基础上实现新的解释器功能。</p>
 <p>实现效果:</p>
-
 <pre><code>    enter: x = #(struct:num-val 30)
     exting: result = #(struct:num-val 29)
-</code></pre>
-
-<p><font size="2" color="red">老阮不狂谁会得？出门一笑大江横！</font></p>
-
-<h2 id="lang-scm修改程序追踪部分">lang.scm修改程序追踪部分</h2>
-
-<pre><code class="language-scheme">      ;;增加了trace-proc
-          (expression (&quot;traceproc&quot; &quot;(&quot; identifier &quot;)&quot; expression) traceproc-exp)
-</code></pre>
-
-<p>至于proc的语法并不需要做任何的修改。</p>
-
-<h2 id="data-structures-scm-进行部分修改">data-structures.scm 进行部分修改</h2>
-
+</code></pre><p><!-- raw HTML omitted -->老阮不狂谁会得？出门一笑大江横！<!-- raw HTML omitted --></p>
+<h2 id="langscm">lang.scm修改程序追踪部分</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">      <span style="color:#75715e">;;增加了trace-proc</span>
+          (<span style="color:#a6e22e">expression</span> (<span style="color:#e6db74">&#34;traceproc&#34;</span> <span style="color:#e6db74">&#34;(&#34;</span> identifier <span style="color:#e6db74">&#34;)&#34;</span> expression) traceproc-exp)
+</code></pre></div><p>至于proc的语法并不需要做任何的修改。</p>
+<h2 id="data-structuresscm-">data-structures.scm 进行部分修改</h2>
 <ol>
 <li>在修改trace-proc实现的情况下还得修改proc?</li>
 </ol>
-
 <p>原先的proc?实现</p>
-
-<pre><code class="language-scheme">  ;; proc? : SchemeVal -&gt; Bool
-  ;; procedure : Var * Exp * Env -&gt; Proc
-  (define-datatype proc proc?
-    (procedure
-     (var symbol?)
-     (body expression?)
-     (env environment?)))
-</code></pre>
-
-<p>改进后的<code>proc?</code>实现,注意trace 是<code>boolean?</code>类型。</p>
-
-<pre><code class="language-scheme">  ;; proc? : SchemeVal -&gt; Bool
-  ;; procedure : Var * Exp * Env -&gt; Proc
-  (define-datatype proc proc?
-    (procedure
-     (var symbol?)
-     (body expression?)
-     (env environment?)
-     (trace boolean?)))
-</code></pre>
-
-<h2 id="interp-scm-修改程序追踪部分">interp.scm 修改程序追踪部分</h2>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">  <span style="color:#75715e">;; proc? : SchemeVal -&gt; Bool</span>
+  <span style="color:#75715e">;; procedure : Var * Exp * Env -&gt; Proc</span>
+  (<span style="color:#a6e22e">define-datatype</span> proc proc?
+    (<span style="color:#a6e22e">procedure</span>
+     (<span style="color:#a6e22e">var</span> symbol?)
+     (<span style="color:#a6e22e">body</span> expression?)
+     (<span style="color:#a6e22e">env</span> environment?)))
+</code></pre></div><p>改进后的<code>proc?</code>实现,注意trace 是<code>boolean?</code>类型。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">  <span style="color:#75715e">;; proc? : SchemeVal -&gt; Bool</span>
+  <span style="color:#75715e">;; procedure : Var * Exp * Env -&gt; Proc</span>
+  (<span style="color:#a6e22e">define-datatype</span> proc proc?
+    (<span style="color:#a6e22e">procedure</span>
+     (<span style="color:#a6e22e">var</span> symbol?)
+     (<span style="color:#a6e22e">body</span> expression?)
+     (<span style="color:#a6e22e">env</span> environment?)
+     (<span style="color:#a6e22e">trace</span> boolean?)))
+</code></pre></div><h2 id="interpscm-">interp.scm 修改程序追踪部分</h2>
 <p>由于proc?的类型实现发生了变化，所以需要进行对应的修改apply-procedure和value-of。</p>
-
-<h3 id="apply-procedure的修改">apply-procedure的修改</h3>
-
+<h3 id="apply-procedure">apply-procedure的修改</h3>
 <p>原先的apply-procedure实现：</p>
-
-<pre><code class="language-scheme">
-(define apply-procedure
-    (lambda (proc1 val)
-      (cases proc proc1
-        (procedure (var body saved-env)
-          (value-of body (extend-env var val saved-env))))))
-</code></pre>
-
-<p>改进后的apply-procedure增加了trace?的判断</p>
-
-<pre><code class="language-scheme">;; apply-procedure : Proc * ExpVal -&gt; ExpVal
-  ;; Page: 79
-  (define apply-procedure
-    (lambda (proc1 val)
-      (cases proc proc1
-        (procedure (var body saved-env trace?)
-                  (if trace? (printf &quot;enter: ~a = ~a\n&quot; var val) '**proc**)
-                  (let ((value (value-of body (extend-env var val saved-env))))
-                    (if trace? (printf &quot;exting: result = ~a\n&quot; value) '**proc**)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">
+(<span style="color:#66d9ef">define </span>apply-procedure
+    (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">proc1</span> val)
+      (<span style="color:#a6e22e">cases</span> proc proc1
+        (<span style="color:#a6e22e">procedure</span> (<span style="color:#a6e22e">var</span> body saved-env)
+          (<span style="color:#a6e22e">value-of</span> body (<span style="color:#a6e22e">extend-env</span> var val saved-env))))))
+</code></pre></div><p>改进后的apply-procedure增加了trace?的判断</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#75715e">;; apply-procedure : Proc * ExpVal -&gt; ExpVal</span>
+  <span style="color:#75715e">;; Page: 79</span>
+  (<span style="color:#66d9ef">define </span>apply-procedure
+    (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">proc1</span> val)
+      (<span style="color:#a6e22e">cases</span> proc proc1
+        (<span style="color:#a6e22e">procedure</span> (<span style="color:#a6e22e">var</span> body saved-env trace?)
+                  (<span style="color:#66d9ef">if </span>trace? (<span style="color:#a6e22e">printf</span> <span style="color:#e6db74">&#34;enter: ~a = ~a\n&#34;</span> var val) <span style="color:#e6db74">&#39;**proc**</span>)
+                  (<span style="color:#66d9ef">let </span>((<span style="color:#a6e22e">value</span> (<span style="color:#a6e22e">value-of</span> body (<span style="color:#a6e22e">extend-env</span> var val saved-env))))
+                    (<span style="color:#66d9ef">if </span>trace? (<span style="color:#a6e22e">printf</span> <span style="color:#e6db74">&#34;exting: result = ~a\n&#34;</span> value) <span style="color:#e6db74">&#39;**proc**</span>)
                     value)))))
-</code></pre>
-
-<h3 id="value-of-的修改">value-of 的修改</h3>
-
+</code></pre></div><h3 id="value-of-">value-of 的修改</h3>
 <p>原先的value-of实现：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">  (<span style="color:#a6e22e">proc-exp</span> (<span style="color:#a6e22e">var</span> body)
+                 (<span style="color:#a6e22e">proc-val</span> (<span style="color:#a6e22e">procedure</span> var body env)))
+</code></pre></div><p>新改进的的value-of 实现:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">    (<span style="color:#a6e22e">proc-exp</span> (<span style="color:#a6e22e">var</span> body)
+                 (<span style="color:#a6e22e">proc-val</span> (<span style="color:#a6e22e">procedure</span> var body env <span style="color:#66d9ef">#f</span>)))
+    (<span style="color:#a6e22e">traceproc-exp</span> (<span style="color:#a6e22e">var</span> body)
+                  (<span style="color:#a6e22e">proc-val</span> (<span style="color:#a6e22e">procedure</span> var body env <span style="color:#66d9ef">#t</span>)))
+</code></pre></div><h2 id="heading">测试追踪修改的结果</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#a6e22e">run</span> <span style="color:#e6db74">&#34;proc(x) -(x, 1)&#34;</span>)
+(<span style="color:#a6e22e">run</span> <span style="color:#e6db74">&#34;(proc(x) -(x,1)  30)&#34;</span>)
+(<span style="color:#a6e22e">run</span> <span style="color:#e6db74">&#34;let f = traceproc (x) -(x,1) in (f 30)&#34;</span>)
+(<span style="color:#a6e22e">run</span> <span style="color:#e6db74">&#34;(proc(f)(f 30)  proc(x)-(x,1))&#34;</span>)
+(<span style="color:#a6e22e">run</span> <span style="color:#e6db74">&#34;let x = 3 in -(x,1)&#34;</span>)
 
-<pre><code class="language-scheme">  (proc-exp (var body)
-                 (proc-val (procedure var body env)))
-</code></pre>
-
-<p>新改进的的value-of 实现:</p>
-
-<pre><code class="language-scheme">    (proc-exp (var body)
-                 (proc-val (procedure var body env #f)))
-    (traceproc-exp (var body)
-                  (proc-val (procedure var body env #t)))
-</code></pre>
-
-<h2 id="测试追踪修改的结果">测试追踪修改的结果</h2>
-
-<pre><code class="language-scheme">(run &quot;proc(x) -(x, 1)&quot;)
-(run &quot;(proc(x) -(x,1)  30)&quot;)
-(run &quot;let f = traceproc (x) -(x,1) in (f 30)&quot;)
-(run &quot;(proc(f)(f 30)  proc(x)-(x,1))&quot;)
-(run &quot;let x = 3 in -(x,1)&quot;)
-
-    (proc-val (procedure 'x (diff-exp (var-exp 'x) (const-exp 1)) (list (list 'i (num-val 1)) (list 'v (num-val 5)) (list 'x (num-val 10))) #f))
-    (num-val 29)
-    enter: x = #(struct:num-val 30)
-    exting: result = #(struct:num-val 29)
-    (num-val 29)
-    (num-val 29)
-    (num-val 2)
-</code></pre>
-
-<hr />
-
-<p><font size="9" color="yellow">老阮不狂谁会得？出门一笑大江横！</font></p>
+    (<span style="color:#a6e22e">proc-val</span> (<span style="color:#a6e22e">procedure</span> <span style="color:#e6db74">&#39;x</span> (<span style="color:#a6e22e">diff-exp</span> (<span style="color:#a6e22e">var-exp</span> <span style="color:#e6db74">&#39;x</span>) (<span style="color:#a6e22e">const-exp</span> <span style="color:#ae81ff">1</span>)) (list (list <span style="color:#e6db74">&#39;i</span> (<span style="color:#a6e22e">num-val</span> <span style="color:#ae81ff">1</span>)) (list <span style="color:#e6db74">&#39;v</span> (<span style="color:#a6e22e">num-val</span> <span style="color:#ae81ff">5</span>)) (list <span style="color:#e6db74">&#39;x</span> (<span style="color:#a6e22e">num-val</span> <span style="color:#ae81ff">10</span>))) <span style="color:#66d9ef">#f</span>))
+    (<span style="color:#a6e22e">num-val</span> <span style="color:#ae81ff">29</span>)
+    enter: x = <span style="color:#f92672">#</span>(struct:num-val <span style="color:#ae81ff">30</span>)
+    exting: result = <span style="color:#f92672">#</span>(struct:num-val <span style="color:#ae81ff">29</span>)
+    (<span style="color:#a6e22e">num-val</span> <span style="color:#ae81ff">29</span>)
+    (<span style="color:#a6e22e">num-val</span> <span style="color:#ae81ff">29</span>)
+    (<span style="color:#a6e22e">num-val</span> <span style="color:#ae81ff">2</span>)
+</code></pre></div><hr>
+<p><!-- raw HTML omitted -->老阮不狂谁会得？出门一笑大江横！<!-- raw HTML omitted --></p>
     </div>
  <div class="nav-links" style="padding:10;">
         
@@ -1113,7 +1070,7 @@
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

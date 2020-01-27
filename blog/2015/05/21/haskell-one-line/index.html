@@ -563,12 +563,9 @@ write very elegant code(compact code)."><meta property="og:image" content="https
 <span class="article-metadata" >Reading time: 1 minutes and    5 seconds with 240 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#function-application-http-shuklan-com-haskell-lec06-html-0-13"><a href="http://shuklan.com/haskell/lec06.html#/0/13" target="_blank">Function Application</a></a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#function-applicationhttpshuklancomhaskelllec06html013">Function Application</a></li>
+  </ul>
 </nav>
     </aside>
   <div class="article-container">
@@ -577,75 +574,54 @@ write very elegant code(compact code)."><meta property="og:image" content="https
     <div class="article-style">
       <p>Haskell have many beautiful features,such as monad(combination),so we can
 write very elegant code(compact code).</p>
-
-<p>Reference <a href="http://www.shuklan.com/haskell/lec08.html#/0/17" target="_blank">Here</a>
+<p>Reference <a href="http://www.shuklan.com/haskell/lec08.html#/0/17">Here</a>
 verbose:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell">
+<span style="color:#66d9ef">module</span> Main <span style="color:#66d9ef">where</span>
 
-<pre><code class="language-haskell">
-module Main where
+<span style="color:#66d9ef">import</span> System.IO
 
-import System.IO
-
-main = do
-  theInput &lt;- readFile &quot;input.txt&quot;
+<span style="color:#a6e22e">main</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">do</span>
+  theInput <span style="color:#f92672">&lt;-</span> readFile <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">input.txt</span><span style="color:#e6db74">&#34;</span>
   putStrLn (countLines theInput)
 
-countLines :: String -&gt; String
-countLines str = (show (length (lines str)))
-</code></pre>
+<span style="color:#a6e22e">countLines</span> <span style="color:#f92672">::</span> <span style="color:#66d9ef">String</span> <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">String</span>
+<span style="color:#a6e22e">countLines</span> str <span style="color:#f92672">=</span> (show (length (lines str)))
+</code></pre></div><p>elegant:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#66d9ef">module</span> Main <span style="color:#66d9ef">where</span>
 
-<p>elegant:</p>
+<span style="color:#66d9ef">import</span> System.IO
 
-<pre><code class="language-haskell">module Main where
-
-import System.IO
-
-main = readFile &quot;input.txt&quot; &gt;&gt;= print.length.lines
+<span style="color:#a6e22e">main</span> <span style="color:#f92672">=</span> readFile <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">input.txt</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&gt;&gt;=</span> print<span style="color:#f92672">.</span>length<span style="color:#f92672">.</span>lines
 	      
-</code></pre>
-
-<h2 id="function-application-http-shuklan-com-haskell-lec06-html-0-13"><a href="http://shuklan.com/haskell/lec06.html#/0/13" target="_blank">Function Application</a></h2>
-
+</code></pre></div><h2 id="function-applicationhttpshuklancomhaskelllec06html013"><a href="http://shuklan.com/haskell/lec06.html#/0/13">Function Application</a></h2>
 <p>verbose:</p>
-
-<pre><code class="language-haskell">not (odd 4)
-not $ odd 4
-</code></pre>
-
-<p>elegant:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#a6e22e">not</span> (odd <span style="color:#ae81ff">4</span>)
+<span style="color:#a6e22e">not</span> <span style="color:#f92672">$</span> odd <span style="color:#ae81ff">4</span>
+</code></pre></div><p>elegant:
 The . Function
 It composes functions in a readable manner</p>
-
-<pre><code class="language-haskell">
-f(g(h(k(x)))) is ugly
-(f.g.h.k)(x) is pretty
- (not.odd) 4
- (length.head.words) &quot;University of Virginia&quot;
-</code></pre>
-
-<p>上面写的elegant风格都可以叫做point-free风格，它使用Monad的结合律，</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell">
+<span style="color:#a6e22e">f</span>(g(h(k(x)))) is ugly
+(f<span style="color:#f92672">.</span>g<span style="color:#f92672">.</span>h<span style="color:#f92672">.</span>k)(x) is pretty
+ (not<span style="color:#f92672">.</span>odd) <span style="color:#ae81ff">4</span>
+ (length<span style="color:#f92672">.</span>head<span style="color:#f92672">.</span>words) <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">University of Virginia</span><span style="color:#e6db74">&#34;</span>
+</code></pre></div><p>上面写的elegant风格都可以叫做point-free风格，它使用Monad的结合律，</p>
 <p>比如下面转换一般代码到point-free风格的方法：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#a6e22e">f</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">8</span><span style="color:#f92672">/</span>x
+<span style="color:#a6e22e">f</span> x <span style="color:#f92672">=</span> (<span style="color:#f92672">+</span>) <span style="color:#ae81ff">5</span> (<span style="color:#ae81ff">8</span><span style="color:#f92672">/</span>x)
+<span style="color:#a6e22e">f</span> x <span style="color:#f92672">=</span> (<span style="color:#f92672">+</span>) <span style="color:#ae81ff">5</span> ((<span style="color:#f92672">/</span>) <span style="color:#ae81ff">8</span> x)
+<span style="color:#a6e22e">f</span> x <span style="color:#f92672">=</span> ((<span style="color:#f92672">+</span>) <span style="color:#ae81ff">5</span>) ((<span style="color:#f92672">/</span>) <span style="color:#ae81ff">8</span> x)
+<span style="color:#a6e22e">f</span> x <span style="color:#f92672">=</span> ((<span style="color:#f92672">+</span>) <span style="color:#ae81ff">5</span>) (((<span style="color:#f92672">/</span>) <span style="color:#ae81ff">8</span>) x)
+<span style="color:#a6e22e">f</span> x <span style="color:#f92672">=</span> ((<span style="color:#f92672">+</span>) <span style="color:#ae81ff">5</span>)<span style="color:#f92672">.</span>(((<span style="color:#f92672">/</span>) <span style="color:#ae81ff">8</span>)) x
 
-<pre><code class="language-haskell">f x = 5 + 8/x
-f x = (+) 5 (8/x)
-f x = (+) 5 ((/) 8 x)
-f x = ((+) 5) ((/) 8 x)
-f x = ((+) 5) (((/) 8) x)
-f x = ((+) 5).(((/) 8)) x
+<span style="color:#a6e22e">f</span><span style="color:#f92672">=</span> ((<span style="color:#f92672">+</span>) <span style="color:#ae81ff">5</span>)<span style="color:#f92672">.</span>((<span style="color:#f92672">/</span>) <span style="color:#ae81ff">8</span>)
+<span style="color:#a6e22e">f</span><span style="color:#f92672">=</span> (<span style="color:#ae81ff">5</span><span style="color:#f92672">+</span>)<span style="color:#f92672">.</span>(<span style="color:#ae81ff">8</span><span style="color:#f92672">/</span>)
+</code></pre></div><p>另一个常用的转换写法：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#a6e22e">add</span> a b <span style="color:#f92672">=</span> a<span style="color:#f92672">+</span> b  <span style="color:#75715e">---&gt; add =(+)</span>
+<span style="color:#a6e22e">f</span> s <span style="color:#f92672">=</span>length (head (words s)) <span style="color:#75715e">---&gt; f= length.head.words</span>
 
-f= ((+) 5).((/) 8)
-f= (5+).(8/)
-</code></pre>
-
-<p>另一个常用的转换写法：</p>
-
-<pre><code class="language-haskell">add a b = a+ b  ---&gt; add =(+)
-f s =length (head (words s)) ---&gt; f= length.head.words
-
-</code></pre>
-
-<p>Add later</p>
+</code></pre></div><p>Add later</p>
     </div>
  <div class="nav-links" style="padding:10;">
         
@@ -1049,7 +1025,7 @@ f s =length (head (words s)) ---&gt; f= length.head.words
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

@@ -567,381 +567,340 @@
 
 
 
-<span class="article-metadata" >Reading time: 10 minutes and    56 seconds with 2407 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+<span class="article-metadata" >Reading time: 10 minutes and    55 seconds with 2405 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#于是我们可以得到">于是我们可以得到</a></li>
-<li><a href="#and-apply-the-sum-to-get-the-sum-integer2-sum-cube2-sum-pi2">And Apply the sum  to get the sum-integer2 sum-cube2 sum-pi2</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#heading">于是我们可以得到</a></li>
+    <li><a href="#and-apply-the-sum--to-get-the-sum-integer2-sum-cube2-sum-pi2">And Apply the sum  to get the sum-integer2 sum-cube2 sum-pi2</a></li>
+  </ul>
 </nav>
     </aside>
   <div class="article-container">
 
 
     <div class="article-style">
-      <p><img src="/images/maths/dingjifen.jpg" alt="定积分" />
-<img src="/images/maths/dingjifen3.jpg" alt="定积分的数值计算" />
-<img src="/images/maths/dingjifen2.jpg" alt="定积分的图形示意" /></p>
+      <p><img src="/images/maths/dingjifen.jpg" alt="定积分">
+<img src="/images/maths/dingjifen3.jpg" alt="定积分的数值计算">
+<img src="/images/maths/dingjifen2.jpg" alt="定积分的图形示意"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">
+ (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">cube</span>  x) (* x  x x))
+ <span style="color:#75715e">;;;累加</span>
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">sum-integer</span> a b)
+  (<span style="color:#66d9ef">if </span>(&gt; a b)
+     <span style="color:#ae81ff">0</span>
+     (+ a (<span style="color:#a6e22e">sum-integer</span> (+ a <span style="color:#ae81ff">1</span>) b))))
 
-<pre><code class="language-scheme">
- (define (cube  x) (* x  x x))
- ;;;累加
-(define (sum-integer a b)
-  (if (&gt; a b)
-     0
-     (+ a (sum-integer (+ a 1) b))))
-
-(sum-integer 1 10)
-;;;立方累加
-(define (sum-cube a b)
-  (if (&gt; a b)
-     0
-     (+ (cube a) (sum-cube (+ a 1)  b))))
-(sum-cube 1 3)
-;;; 求Pi 值 分数累加
-(define (sum-pi a b)
-  (if (&gt; a b)
-     0
-     (+ (/ 1.0 (* a (+ a 2))) (sum-pi (+ a 4) b))))
-(sum-pi 1 9)
-</code></pre>
-
-<p>观察上面的积分过程
+(<span style="color:#a6e22e">sum-integer</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">10</span>)
+<span style="color:#75715e">;;;立方累加</span>
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">sum-cube</span> a b)
+  (<span style="color:#66d9ef">if </span>(&gt; a b)
+     <span style="color:#ae81ff">0</span>
+     (+ (<span style="color:#a6e22e">cube</span> a) (<span style="color:#a6e22e">sum-cube</span> (+ a <span style="color:#ae81ff">1</span>)  b))))
+(<span style="color:#a6e22e">sum-cube</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">3</span>)
+<span style="color:#75715e">;;; 求Pi 值 分数累加</span>
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">sum-pi</span> a b)
+  (<span style="color:#66d9ef">if </span>(&gt; a b)
+     <span style="color:#ae81ff">0</span>
+     (+ (/ <span style="color:#ae81ff">1.0</span> (* a (+ a <span style="color:#ae81ff">2</span>))) (<span style="color:#a6e22e">sum-pi</span> (+ a <span style="color:#ae81ff">4</span>) b))))
+(<span style="color:#a6e22e">sum-pi</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">9</span>)
+</code></pre></div><p>观察上面的积分过程
 ##最终提取出公共的形式 Sum</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">
+<span style="color:#75715e">;; (define (&lt;name&gt; a b)</span>
+<span style="color:#75715e">;;  (if (&gt; a b)</span>
+<span style="color:#75715e">;;  0</span>
+<span style="color:#75715e">;;  (+ (&lt;term&gt; a) (&lt;name&gt; (&lt;next&gt;a) b))))</span>
 
-<pre><code class="language-scheme">
-;; (define (&lt;name&gt; a b)
-;;  (if (&gt; a b)
-;;  0
-;;  (+ (&lt;term&gt; a) (&lt;name&gt; (&lt;next&gt;a) b))))
+</code></pre></div><h2 id="heading">于是我们可以得到</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">sum</span> term a next b)
+  (<span style="color:#66d9ef">if </span>(&gt;  a b)
+     <span style="color:#ae81ff">0</span>
+     (+ (<span style="color:#a6e22e">term</span> a) (<span style="color:#a6e22e">sum</span> term (<span style="color:#a6e22e">next</span> a)  next b))))
 
-</code></pre>
+</code></pre></div><h2 id="and-apply-the-sum--to-get-the-sum-integer2-sum-cube2-sum-pi2">And Apply the sum  to get the sum-integer2 sum-cube2 sum-pi2</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">sum-integer2</span> a b) (<span style="color:#a6e22e">sum</span> (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">x</span>) x) ((<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">x</span>) (+ x <span style="color:#ae81ff">1</span>)) a) (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">x</span>) (+ x <span style="color:#ae81ff">1</span>)) b)) <span style="color:#75715e">;;;--&gt;There is some problems</span>
 
-<h2 id="于是我们可以得到">于是我们可以得到</h2>
+<span style="color:#75715e">;&gt; (sum-integer2 1 10)</span>
+<span style="color:#75715e">;54  ------------------------&gt;Why</span>
+<span style="color:#75715e">;&gt; (sum-integer 1 10)</span>
+<span style="color:#75715e">;55</span>
 
-<pre><code class="language-scheme">
-(define (sum term a next b)
-  (if (&gt;  a b)
-     0
-     (+ (term a) (sum term (next a)  next b))))
-
-</code></pre>
-
-<h2 id="and-apply-the-sum-to-get-the-sum-integer2-sum-cube2-sum-pi2">And Apply the sum  to get the sum-integer2 sum-cube2 sum-pi2</h2>
-
-<pre><code class="language-scheme">(define (sum-integer2 a b) (sum (lambda (x) x) ((lambda (x) (+ x 1)) a) (lambda (x) (+ x 1)) b)) ;;;--&gt;There is some problems
-
-;&gt; (sum-integer2 1 10)
-;54  ------------------------&gt;Why
-;&gt; (sum-integer 1 10)
-;55
-
-(define (identity x) x)
-(define (inc x) (+ x 1))
-(define (sum-integer3 a b) (sum identity a inc b))
-(sum-integer3 1 3)
-(define (sum-cube2 a b) (sum cube a inc b))
-(sum-cube2 1 3)
-(define (sum-pi2 a b) 
-  (define (pi-term x)
-    (/ 1.0 (* x (+ x 2))))
-  (define (pi-next x)
-    (+ x 4))
-  (sum pi-term a pi-next b))
-(sum-pi2 1 9)
-(* 8 (sum-pi2 1 1000))
-</code></pre>
-
-<p>也就是我们现在可以计算积分了！
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">identity</span> x) x)
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">inc</span> x) (+ x <span style="color:#ae81ff">1</span>))
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">sum-integer3</span> a b) (<span style="color:#a6e22e">sum</span> identity a inc b))
+(<span style="color:#a6e22e">sum-integer3</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">3</span>)
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">sum-cube2</span> a b) (<span style="color:#a6e22e">sum</span> cube a inc b))
+(<span style="color:#a6e22e">sum-cube2</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">3</span>)
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">sum-pi2</span> a b) 
+  (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">pi-term</span> x)
+    (/ <span style="color:#ae81ff">1.0</span> (* x (+ x <span style="color:#ae81ff">2</span>))))
+  (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">pi-next</span> x)
+    (+ x <span style="color:#ae81ff">4</span>))
+  (<span style="color:#a6e22e">sum</span> pi-term a pi-next b))
+(<span style="color:#a6e22e">sum-pi2</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">9</span>)
+(* <span style="color:#ae81ff">8</span> (<span style="color:#a6e22e">sum-pi2</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1000</span>))
+</code></pre></div><p>也就是我们现在可以计算积分了！
 我们的问题是求解下面的定积分：
-<img src="/images/maths/integral.png" alt="定积分" /></p>
+<img src="/images/maths/integral.png" alt="定积分"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#75715e">;;;; So now we can do the integrate computing</span>
 
-<pre><code class="language-scheme">;;;; So now we can do the integrate computing
-
-;;Because integrate will have the same function but different next function
-;;;a-b 之间关于f函数的定积分的求法
-(define (integral f a b dx)
-  (define (add-dx x) (+ x dx))
-  (define (update-a a dx) (+ a (/ dx 2.0)))
-  (* (sum f (update-a a dx) add-dx b) dx))
-(integral cube 0 1 0.01)
-(integral cube 0 1 0.001)
-(integral cube 0 1 0.0001)
-(/ 1 4.0)
-(/ (* 1 (cube 1)) 4.0)
+<span style="color:#75715e">;;Because integrate will have the same function but different next function</span>
+<span style="color:#75715e">;;;a-b 之间关于f函数的定积分的求法</span>
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">integral</span> f a b dx)
+  (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">add-dx</span> x) (+ x dx))
+  (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">update-a</span> a dx) (+ a (/ dx <span style="color:#ae81ff">2.0</span>)))
+  (* (<span style="color:#a6e22e">sum</span> f (<span style="color:#a6e22e">update-a</span> a dx) add-dx b) dx))
+(<span style="color:#a6e22e">integral</span> cube <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">0.01</span>)
+(<span style="color:#a6e22e">integral</span> cube <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">0.001</span>)
+(<span style="color:#a6e22e">integral</span> cube <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">0.0001</span>)
+(/ <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">4.0</span>)
+(/ (* <span style="color:#ae81ff">1</span> (<span style="color:#a6e22e">cube</span> <span style="color:#ae81ff">1</span>)) <span style="color:#ae81ff">4.0</span>)
 
 
-;result:
-;0.24998750000000042
-;0.249999875000001
-;0.24999999874993412
-;0.25
-;0.25
+<span style="color:#75715e">;result:</span>
+<span style="color:#75715e">;0.24998750000000042</span>
+<span style="color:#75715e">;0.249999875000001</span>
+<span style="color:#75715e">;0.24999999874993412</span>
+<span style="color:#75715e">;0.25</span>
+<span style="color:#75715e">;0.25</span>
 
-</code></pre>
-
-<p>为了更精确的求解积分，我们使用更为精妙的辛普森积分
-<img src="/images/maths/xinpusen1.jpg" alt="辛普森的抛物线积分方法" />
-<img src="/images/maths/xinpusen2.jpg" alt="辛普森的数学公式" />
-<img src="/images/maths/xinpusen3.jpg" alt="最终简化" />
+</code></pre></div><p>为了更精确的求解积分，我们使用更为精妙的辛普森积分
+<img src="/images/maths/xinpusen1.jpg" alt="辛普森的抛物线积分方法">
+<img src="/images/maths/xinpusen2.jpg" alt="辛普森的数学公式">
+<img src="/images/maths/xinpusen3.jpg" alt="最终简化">
 ###包含奇数的两倍 和偶数的四倍，两边不加倍</p>
-
-<ol>
+<ol start="0">
 <li>h = (b-a)/n</li>
 <li>yk= f(a+kh) &mdash;&gt; next</li>
 <li>(even? k)  (odd? k)</li>
 <li>y0 =a  yn= b</li>
 </ol>
-
 <p>a. 设计的过程遇到的问题是 参数的问题 需要设置k？
 b. 中间过程的问题，如何划分三种情况
-      b.1  k为0和n的情况
-      b.2  k为奇数的情况
-      b.3  k为偶数的情况</p>
-
+b.1  k为0和n的情况
+b.2  k为奇数的情况
+b.3  k为偶数的情况</p>
 <p>最终, 利用Fact的思想 进行求积分</p>
-
 <p>;;; 下面是一个较为混乱的设计，且没有考虑使用sum</p>
-
-<pre><code class="language-scheme">(define (simpson-integral f a b n)
-(let ((h (/ (- b a) n))
-      (k 0))
-(define inc (+ a (* k h)))
-(define inc2 (* 2 f(inc)))
-(define inc4 (* 4 f(inc)))
-  (cond
-    ((= k 0) (f a))
-    ((= k n) (f b))
-    ((even? k) (+ (* 2 f((+ a (* k h))))  
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">simpson-integral</span> f a b n)
+(<span style="color:#66d9ef">let </span>((<span style="color:#a6e22e">h</span> (/ (- b a) n))
+      (<span style="color:#a6e22e">k</span> <span style="color:#ae81ff">0</span>))
+(<span style="color:#66d9ef">define </span>inc (+ a (* k h)))
+(<span style="color:#66d9ef">define </span>inc2 (* <span style="color:#ae81ff">2</span> f(<span style="color:#a6e22e">inc</span>)))
+(<span style="color:#66d9ef">define </span>inc4 (* <span style="color:#ae81ff">4</span> f(<span style="color:#a6e22e">inc</span>)))
+  (<span style="color:#a6e22e">cond</span>
+    ((= k <span style="color:#ae81ff">0</span>) (<span style="color:#a6e22e">f</span> a))
+    ((= k n) (<span style="color:#a6e22e">f</span> b))
+    ((even? k) (+ (* <span style="color:#ae81ff">2</span> f((+ a (* k h))))  
 )))
 
-</code></pre>
-
-<p>补充，好思想:保证最后一个为偶数</p>
-
-<pre><code class="language-scheme">(define (round-to-next-even x)
- (+ x (remainder x 2))
+</code></pre></div><p>补充，好思想:保证最后一个为偶数</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">round-to-next-even</span> x)
+ (+ x (remainder x <span style="color:#ae81ff">2</span>))
 )
 
-</code></pre>
-
-<p>于是有了下面较好的版本，思考，之前的Sum其实是已经提供了inc递增的a
+</code></pre></div><p>于是有了下面较好的版本，思考，之前的Sum其实是已经提供了inc递增的a
 以及范围，我们主要的目的就是写好term即可！而
 term其实就是涉及到你需要思考的三种情况
 之前你之所以回想不清楚，因为你没有斩断念头，term只接受一个参数，
 这个参数其实就是你一直想的k，所以simpson-term的一个参数就是k，利用它
 开始做文章即可</p>
-
-<pre><code class="language-scheme">(define (simpson-integral f a b n)
-    (define (round-to-next-even x)  (+ x (remainder x 2)))
-    (define fixed-n (round-to-next-even n))
-    (define h (/ (- b a) fixed-n))
-    (define (simpson-term k) 
-      (define y (f (+ a (* k h))))
-      (cond 
-          ((or (= k 0) (= k fixed-n))
-            (* 1 y))
-          ((even? k) (* 2 y))
-          (else (* 4 y))))
-    (* (/ h 3) (sum simpson-term 0 inc fixed-n))
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">simpson-integral</span> f a b n)
+    (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">round-to-next-even</span> x)  (+ x (remainder x <span style="color:#ae81ff">2</span>)))
+    (<span style="color:#66d9ef">define </span>fixed-n (<span style="color:#a6e22e">round-to-next-even</span> n))
+    (<span style="color:#66d9ef">define </span>h (/ (- b a) fixed-n))
+    (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">simpson-term</span> k) 
+      (<span style="color:#66d9ef">define </span>y (<span style="color:#a6e22e">f</span> (+ a (* k h))))
+      (<span style="color:#66d9ef">cond </span>
+          ((<span style="color:#66d9ef">or </span>(= k <span style="color:#ae81ff">0</span>) (= k fixed-n))
+            (* <span style="color:#ae81ff">1</span> y))
+          ((even? k) (* <span style="color:#ae81ff">2</span> y))
+          (<span style="color:#66d9ef">else </span>(* <span style="color:#ae81ff">4</span> y))))
+    (* (/ h <span style="color:#ae81ff">3</span>) (<span style="color:#a6e22e">sum</span> simpson-term <span style="color:#ae81ff">0</span> inc fixed-n))
  ))
 
-;(simpson-integral cube 0 1 10)
-;1/4
-</code></pre>
-
-<p>另外还有几种变体，只不过总体思路都在上面类似。</p>
-
+<span style="color:#75715e">;(simpson-integral cube 0 1 10)</span>
+<span style="color:#75715e">;1/4</span>
+</code></pre></div><p>另外还有几种变体，只不过总体思路都在上面类似。</p>
 <p>a1:breaking the problem into four parts: (f y0), (f yn) and two sums,one over even k and another over odd k</p>
-
-<pre><code class="language-scheme">(define (another-simpson-integral f a b n) 
-   (define h (/ (- b a) n))  
-   (define (add-2h x) (+ x (* 2 h))) 
-   (* (/ h 3.0) (+ (f a)  
-                   (* 4.0 (sum f (+ a h) add-2h (- b h)))  
-                   (* 2.0 (sum f (add-2h a) add-2h (- b h)))  
-                   (f (+ a (* h n)))))) 
-</code></pre>
-
-<p>a2:Here&rsquo;s a version that sums over pairs of terms (2 y_k + 4 y_k+1). No conditionals or special cases are needed anywhere, but there&rsquo;s an extra term [f(b) - f(a)] to be added to the final count.</p>
-
-<pre><code class="language-scheme"> (define (simpson f a b n) 
-   (define h (/ (- b a) n)) 
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">another-simpson-integral</span> f a b n) 
+   (<span style="color:#66d9ef">define </span>h (/ (- b a) n))  
+   (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">add-2h</span> x) (+ x (* <span style="color:#ae81ff">2</span> h))) 
+   (* (/ h <span style="color:#ae81ff">3.0</span>) (+ (<span style="color:#a6e22e">f</span> a)  
+                   (* <span style="color:#ae81ff">4.0</span> (<span style="color:#a6e22e">sum</span> f (+ a h) add-2h (- b h)))  
+                   (* <span style="color:#ae81ff">2.0</span> (<span style="color:#a6e22e">sum</span> f (<span style="color:#a6e22e">add-2h</span> a) add-2h (- b h)))  
+                   (<span style="color:#a6e22e">f</span> (+ a (* h n)))))) 
+</code></pre></div><p>a2:Here's a version that sums over pairs of terms (2 y_k + 4 y_k+1). No conditionals or special cases are needed anywhere, but there's an extra term [f(b) - f(a)] to be added to the final count.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"> (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">simpson</span> f a b n) 
+   (<span style="color:#66d9ef">define </span>h (/ (- b a) n)) 
     
-   (define (y k) 
-     (f (+ a (* k h)))) 
+   (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">y</span> k) 
+     (<span style="color:#a6e22e">f</span> (+ a (* k h)))) 
     
-   (define (ypair k) 
-     (+ (* 2 (y k)) 
-        (* 4 (y (+ k 1))))) 
+   (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">ypair</span> k) 
+     (+ (* <span style="color:#ae81ff">2</span> (<span style="color:#a6e22e">y</span> k)) 
+        (* <span style="color:#ae81ff">4</span> (<span style="color:#a6e22e">y</span> (+ k <span style="color:#ae81ff">1</span>))))) 
     
-   (define (add-2 k) 
-     (+ k 2)) 
+   (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">add-2</span> k) 
+     (+ k <span style="color:#ae81ff">2</span>)) 
     
-   (* (/ h 3) (+ (sum ypair 0 add-2 (- n 1)) 
-                 (- (f b) (f a))))) 
-</code></pre>
-
-<p>当然也可以写成下面的格式：</p>
-
-<pre><code class="language-scheme"> (define (sim-integral f a b n) 
-     (define h (/ (- a b) n)) 
-     (define (y k) (f (+ a (* k h)))) 
-     (define (coeff k) (if (is-even? k) 2 4)) 
-     (define (part-term k) (* (coeff k) (y k))) 
-     (define part-value (sum part-term 1 inc (- n 1))) 
-     (* (/ h 3) (+ (y 0) (y n) part-value))) 
-</code></pre>
-
-<p>##下面是我重新写的一遍，包含一些计算问题的修正
-1. 加入了n的修正
-2. 重新认识了simpson算法的，当然还有些问题没有理解，比如f(b)-f(a),
-   在simpson-anthother-integrate中</p>
-
+   (* (/ h <span style="color:#ae81ff">3</span>) (+ (<span style="color:#a6e22e">sum</span> ypair <span style="color:#ae81ff">0</span> add-2 (- n <span style="color:#ae81ff">1</span>)) 
+                 (- (<span style="color:#a6e22e">f</span> b) (<span style="color:#a6e22e">f</span> a))))) 
+</code></pre></div><p>当然也可以写成下面的格式：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"> (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">sim-integral</span> f a b n) 
+     (<span style="color:#66d9ef">define </span>h (/ (- a b) n)) 
+     (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">y</span> k) (<span style="color:#a6e22e">f</span> (+ a (* k h)))) 
+     (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">coeff</span> k) (<span style="color:#66d9ef">if </span>(<span style="color:#a6e22e">is-even?</span> k) <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">4</span>)) 
+     (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">part-term</span> k) (* (<span style="color:#a6e22e">coeff</span> k) (<span style="color:#a6e22e">y</span> k))) 
+     (<span style="color:#66d9ef">define </span>part-value (<span style="color:#a6e22e">sum</span> part-term <span style="color:#ae81ff">1</span> inc (- n <span style="color:#ae81ff">1</span>))) 
+     (* (/ h <span style="color:#ae81ff">3</span>) (+ (<span style="color:#a6e22e">y</span> <span style="color:#ae81ff">0</span>) (<span style="color:#a6e22e">y</span> n) part-value))) 
+</code></pre></div><p>##下面是我重新写的一遍，包含一些计算问题的修正</p>
+<ol>
+<li>加入了n的修正</li>
+<li>重新认识了simpson算法的，当然还有些问题没有理解，比如f(b)-f(a),
+在simpson-anthother-integrate中</li>
+</ol>
 <p>新的源码如下:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">
+<span style="color:#75715e">;;; (let &lt;var&gt; &lt;bindings&gt; &lt;body&gt;)</span>
 
-<pre><code class="language-scheme">
-;;; (let &lt;var&gt; &lt;bindings&gt; &lt;body&gt;)
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">cube</span> x) (* x  x  x))
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">sum-integer</span> a b)
+  (<span style="color:#66d9ef">if </span>(&gt; a b)
+     <span style="color:#ae81ff">0</span>
+     (+ a (<span style="color:#a6e22e">sum-integer</span> (+ a <span style="color:#ae81ff">1</span>) b))))
+(<span style="color:#a6e22e">sum-integer</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">10</span>)
 
-(define (cube x) (* x  x  x))
-(define (sum-integer a b)
-  (if (&gt; a b)
-     0
-     (+ a (sum-integer (+ a 1) b))))
-(sum-integer 1 10)
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">sum-cube</span> a b)
+  (<span style="color:#66d9ef">if </span>(&gt; a b)
+     <span style="color:#ae81ff">0</span>
+     (+ (<span style="color:#a6e22e">cube</span> a) (<span style="color:#a6e22e">sum-cube</span> (+ a <span style="color:#ae81ff">1</span>) b))))
+(<span style="color:#a6e22e">sum-cube</span>  <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">3</span>)
 
-(define (sum-cube a b)
-  (if (&gt; a b)
-     0
-     (+ (cube a) (sum-cube (+ a 1) b))))
-(sum-cube  1 3)
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">sum-pi</span> a b)
+  (<span style="color:#66d9ef">if </span>(&gt; a b)
+     <span style="color:#ae81ff">0</span> 
+     (+ (/ <span style="color:#ae81ff">1.0</span> (* a (+ a <span style="color:#ae81ff">2</span>))) (<span style="color:#a6e22e">sum-pi</span> (+ a <span style="color:#ae81ff">4</span>) b))))
+(<span style="color:#a6e22e">sum-pi</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">10</span>)
+(<span style="color:#a6e22e">sum-pi</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">100</span>)
 
-(define (sum-pi a b)
-  (if (&gt; a b)
-     0 
-     (+ (/ 1.0 (* a (+ a 2))) (sum-pi (+ a 4) b))))
-(sum-pi 1 10)
-(sum-pi 1 100)
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">sum</span> term a next b)
+  (<span style="color:#66d9ef">if </span>(&gt; a b)
+     <span style="color:#ae81ff">0</span>
+     (+ (<span style="color:#a6e22e">term</span> a) (<span style="color:#a6e22e">sum</span> term  (<span style="color:#a6e22e">next</span> a) next b))))
 
-(define (sum term a next b)
-  (if (&gt; a b)
-     0
-     (+ (term a) (sum term  (next a) next b))))
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">sum-integer2</span> a b)
+  (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">identity</span> x) x)
+  (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">inc</span> x) (+ x <span style="color:#ae81ff">1</span>))
+  (<span style="color:#a6e22e">sum</span> identity a inc b))
+(<span style="color:#a6e22e">sum-integer2</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">10</span>)
 
-(define (sum-integer2 a b)
-  (define (identity x) x)
-  (define (inc x) (+ x 1))
-  (sum identity a inc b))
-(sum-integer2 1 10)
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">sum-cube2</span>  a b)
+  (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">cube</span> x) (* x x x))
+  (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">inc</span> x) (+ x <span style="color:#ae81ff">1</span>))
+  (<span style="color:#a6e22e">sum</span> cube a inc b))
+(<span style="color:#a6e22e">sum-cube2</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">3</span>)
 
-(define (sum-cube2  a b)
-  (define (cube x) (* x x x))
-  (define (inc x) (+ x 1))
-  (sum cube a inc b))
-(sum-cube2 1 3)
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">sum-pi2</span> a b)
+  (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">pi-term</span> x) (/ <span style="color:#ae81ff">1.0</span> (* x (+ x <span style="color:#ae81ff">2</span>))))
+  (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">pi-next</span> x) (+ x <span style="color:#ae81ff">4</span>))
+  (<span style="color:#a6e22e">sum</span> pi-term a pi-next b))
+(<span style="color:#a6e22e">sum-pi2</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">10</span>)
 
-(define (sum-pi2 a b)
-  (define (pi-term x) (/ 1.0 (* x (+ x 2))))
-  (define (pi-next x) (+ x 4))
-  (sum pi-term a pi-next b))
-(sum-pi2 1 10)
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">integral</span> f a b dx)
+  (<span style="color:#66d9ef">define </span>const_a (+ a (/ dx <span style="color:#ae81ff">2.0</span>)))
+  (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">add_dx</span> x) (+ x dx))
+  (* (<span style="color:#a6e22e">sum</span> f const_a add_dx b) dx))
 
-(define (integral f a b dx)
-  (define const_a (+ a (/ dx 2.0)))
-  (define (add_dx x) (+ x dx))
-  (* (sum f const_a add_dx b) dx))
+(<span style="color:#a6e22e">integral</span> cube <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">0.001</span>)
 
-(integral cube 0 1 0.001)
-
-(define (simpson-integral f a b n)
-  (define (round-to-next-even x) (+ x (remainder x 2)))
-  (define fixed-n (round-to-next-even n))
-  (define (inc x) (+ x 1))
-  (define h (/ (- b a) fixed-n))
-  (define (simpson-term k)
-    (define y (f (+ a (* h k))))
-    (cond 
-      ((or (= k 0) (= k fixed-n))
-       (*  1  y))
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">simpson-integral</span> f a b n)
+  (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">round-to-next-even</span> x) (+ x (remainder x <span style="color:#ae81ff">2</span>)))
+  (<span style="color:#66d9ef">define </span>fixed-n (<span style="color:#a6e22e">round-to-next-even</span> n))
+  (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">inc</span> x) (+ x <span style="color:#ae81ff">1</span>))
+  (<span style="color:#66d9ef">define </span>h (/ (- b a) fixed-n))
+  (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">simpson-term</span> k)
+    (<span style="color:#66d9ef">define </span>y (<span style="color:#a6e22e">f</span> (+ a (* h k))))
+    (<span style="color:#66d9ef">cond </span>
+      ((<span style="color:#66d9ef">or </span>(= k <span style="color:#ae81ff">0</span>) (= k fixed-n))
+       (*  <span style="color:#ae81ff">1</span>  y))
       ((even? k)
-       (* 2  y))
-      (else (* 4 y))))
- ; (* (/ h 3) (sum simpson-term 0 inc b))) ;;; 0的意思表示从k=0开始,不能写成b，如果写成b表示你没有理解，因为0 fixed-n都代表的是K
-  ;;这是次数的说法，而不是代表着a-b之间的求值范围，而是指求职的次数！
- (* (/ h 3) (sum simpson-term 0 inc fixed-n)))
-(simpson-integral cube 0 1 10)
-(simpson-integral cube 0 1 11)
+       (* <span style="color:#ae81ff">2</span>  y))
+      (<span style="color:#66d9ef">else </span>(* <span style="color:#ae81ff">4</span> y))))
+ <span style="color:#75715e">; (* (/ h 3) (sum simpson-term 0 inc b))) ;;; 0的意思表示从k=0开始,不能写成b，如果写成b表示你没有理解，因为0 fixed-n都代表的是K</span>
+  <span style="color:#75715e">;;这是次数的说法，而不是代表着a-b之间的求值范围，而是指求职的次数！</span>
+ (* (/ h <span style="color:#ae81ff">3</span>) (<span style="color:#a6e22e">sum</span> simpson-term <span style="color:#ae81ff">0</span> inc fixed-n)))
+(<span style="color:#a6e22e">simpson-integral</span> cube <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">10</span>)
+(<span style="color:#a6e22e">simpson-integral</span> cube <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">11</span>)
 
 
-;;一种变体 思路同上
-;; 比较有趣的地方是分为四个节点出
-;; 1  f(a)  ----》 y0
-;; 2  f(a+h) 奇数的开始地方   add-2h方式累加都是奇数 同时终点是b-h  为什么？因为b在下面被暂用--》把它看待是一个奇数累加的过程 y1 y3 y5
-;; 3  f(a+2h) 偶数的开始地方 add-2h方式累加都是偶数 同时终点是b-h--》把它看待是一个偶数累加的过程 y2 y4 y6..
-;; 4  f(b)    最后一部分  yn
-(define (simpson-another-integral f  a b n)
-  (define h (/ (- b a) n))
-  (define (add-2h x) (+  x (* 2.0 h)))  ;;; 
-  (* (/ h 3.0) (+ (f a)
-                          (* 4.0 (sum f (+ a h) add-2h (- b h)))  ;;; (+a h)表示起始点  (- b h) 表示的是终点
-                          (* 2.0 (sum f (add-2h a) add-2h (- b h))) ;; 注意这边的(add2h a)表示的是起始点
-                          (f (+ a (* h n))))))  ;; 也可以是(f b) 
+<span style="color:#75715e">;;一种变体 思路同上</span>
+<span style="color:#75715e">;; 比较有趣的地方是分为四个节点出</span>
+<span style="color:#75715e">;; 1  f(a)  ----》 y0</span>
+<span style="color:#75715e">;; 2  f(a+h) 奇数的开始地方   add-2h方式累加都是奇数 同时终点是b-h  为什么？因为b在下面被暂用--》把它看待是一个奇数累加的过程 y1 y3 y5</span>
+<span style="color:#75715e">;; 3  f(a+2h) 偶数的开始地方 add-2h方式累加都是偶数 同时终点是b-h--》把它看待是一个偶数累加的过程 y2 y4 y6..</span>
+<span style="color:#75715e">;; 4  f(b)    最后一部分  yn</span>
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">simpson-another-integral</span> f  a b n)
+  (<span style="color:#66d9ef">define </span>h (/ (- b a) n))
+  (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">add-2h</span> x) (+  x (* <span style="color:#ae81ff">2.0</span> h)))  <span style="color:#75715e">;;; </span>
+  (* (/ h <span style="color:#ae81ff">3.0</span>) (+ (<span style="color:#a6e22e">f</span> a)
+                          (* <span style="color:#ae81ff">4.0</span> (<span style="color:#a6e22e">sum</span> f (+ a h) add-2h (- b h)))  <span style="color:#75715e">;;; (+a h)表示起始点  (- b h) 表示的是终点</span>
+                          (* <span style="color:#ae81ff">2.0</span> (<span style="color:#a6e22e">sum</span> f (<span style="color:#a6e22e">add-2h</span> a) add-2h (- b h))) <span style="color:#75715e">;; 注意这边的(add2h a)表示的是起始点</span>
+                          (<span style="color:#a6e22e">f</span> (+ a (* h n))))))  <span style="color:#75715e">;; 也可以是(f b) </span>
 
-;&gt; (simpson-another-integral cube 0 1 11)
-;0.1782892789654623
-;&gt; (simpson-another-integral cube 0 1 12)
-;0.2499999999999999'
+<span style="color:#75715e">;&gt; (simpson-another-integral cube 0 1 11)</span>
+<span style="color:#75715e">;0.1782892789654623</span>
+<span style="color:#75715e">;&gt; (simpson-another-integral cube 0 1 12)</span>
+<span style="color:#75715e">;0.2499999999999999&#39;</span>
 
-(define (simpson-another-integral-improve f  a b n)
-  (define (round-to-next-even x) (+ x (remainder x 2)))
-  (define fixed-n  (round-to-next-even n))
-  (define h (/ (- b a) fixed-n))
-  (define (add-2h x) (+  x (* 2.0 h)))  ;;; 
-  (* (/ h 3.0) (+ (f a)
-                          (* 4.0 (sum f (+ a h) add-2h (- b h)))  ;;; (+a h)表示起始点  (- b h) 表示的是终点
-                          (* 2.0 (sum f (add-2h a) add-2h (- b h))) ;; 注意这边的(add2h a)表示的是起始点
-                          (f (+ a (* h fixed-n)))))) ;;; (f b)的效果是一样  但是不正确！ 现在
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">simpson-another-integral-improve</span> f  a b n)
+  (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">round-to-next-even</span> x) (+ x (remainder x <span style="color:#ae81ff">2</span>)))
+  (<span style="color:#66d9ef">define </span>fixed-n  (<span style="color:#a6e22e">round-to-next-even</span> n))
+  (<span style="color:#66d9ef">define </span>h (/ (- b a) fixed-n))
+  (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">add-2h</span> x) (+  x (* <span style="color:#ae81ff">2.0</span> h)))  <span style="color:#75715e">;;; </span>
+  (* (/ h <span style="color:#ae81ff">3.0</span>) (+ (<span style="color:#a6e22e">f</span> a)
+                          (* <span style="color:#ae81ff">4.0</span> (<span style="color:#a6e22e">sum</span> f (+ a h) add-2h (- b h)))  <span style="color:#75715e">;;; (+a h)表示起始点  (- b h) 表示的是终点</span>
+                          (* <span style="color:#ae81ff">2.0</span> (<span style="color:#a6e22e">sum</span> f (<span style="color:#a6e22e">add-2h</span> a) add-2h (- b h))) <span style="color:#75715e">;; 注意这边的(add2h a)表示的是起始点</span>
+                          (<span style="color:#a6e22e">f</span> (+ a (* h fixed-n)))))) <span style="color:#75715e">;;; (f b)的效果是一样  但是不正确！ 现在</span>
   
-  (simpson-another-integral cube 0 1 11)
-   (simpson-another-integral cube 0 1 12)
-    (simpson-another-integral cube 0 1 111);;; 如果是奇数的话，现在解决的办法就是多增加一些计算！
-   ;;;;;过程没错！！！ 不知道哪边多加了！
+  (<span style="color:#a6e22e">simpson-another-integral</span> cube <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">11</span>)
+   (<span style="color:#a6e22e">simpson-another-integral</span> cube <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">12</span>)
+    (<span style="color:#a6e22e">simpson-another-integral</span> cube <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">111</span>)<span style="color:#75715e">;;; 如果是奇数的话，现在解决的办法就是多增加一些计算！</span>
+   <span style="color:#75715e">;;;;;过程没错！！！ 不知道哪边多加了！</span>
    
     
- (define (simpson-pair-integral f a b n)
-   (define (round-to-next-even x) (+ x (remainder x 2)))
-   (define fixed-n  (round-to-next-even n))
-   (define h (/ (- b a) fixed-n))
-   (define (y k) ( f  (+ a (* k h))))
-   (define (ypair k)
-     (+ (* 2 (y k))
-          (* 4 (y (+ k 1)))))
-   (define (add-2 k)
-     (+ k 2))
-   (* (/ h 3) (+ (sum ypair 0 add-2 (- fixed-n 1))  
-                (- (f b) (f a)))))  ;;; 为什么是减号  你可以看到这边的思想是抽出中间的偶数对的数据（奇数加上偶数 理当是加起来的)
-                                          ;;;因为最后一个  为什么要计算 [f(b) - f(a)] 
- (simpson-pair-integral cube 1 3 1)
- (simpson-pair-integral cube 1 3 2)
+ (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">simpson-pair-integral</span> f a b n)
+   (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">round-to-next-even</span> x) (+ x (remainder x <span style="color:#ae81ff">2</span>)))
+   (<span style="color:#66d9ef">define </span>fixed-n  (<span style="color:#a6e22e">round-to-next-even</span> n))
+   (<span style="color:#66d9ef">define </span>h (/ (- b a) fixed-n))
+   (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">y</span> k) ( f  (+ a (* k h))))
+   (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">ypair</span> k)
+     (+ (* <span style="color:#ae81ff">2</span> (<span style="color:#a6e22e">y</span> k))
+          (* <span style="color:#ae81ff">4</span> (<span style="color:#a6e22e">y</span> (+ k <span style="color:#ae81ff">1</span>)))))
+   (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">add-2</span> k)
+     (+ k <span style="color:#ae81ff">2</span>))
+   (* (/ h <span style="color:#ae81ff">3</span>) (+ (<span style="color:#a6e22e">sum</span> ypair <span style="color:#ae81ff">0</span> add-2 (- fixed-n <span style="color:#ae81ff">1</span>))  
+                (- (<span style="color:#a6e22e">f</span> b) (<span style="color:#a6e22e">f</span> a)))))  <span style="color:#75715e">;;; 为什么是减号  你可以看到这边的思想是抽出中间的偶数对的数据（奇数加上偶数 理当是加起来的)</span>
+                                          <span style="color:#75715e">;;;因为最后一个  为什么要计算 [f(b) - f(a)] </span>
+ (<span style="color:#a6e22e">simpson-pair-integral</span> cube <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">1</span>)
+ (<span style="color:#a6e22e">simpson-pair-integral</span> cube <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">2</span>)
  
- ;;;sim-integral 提高版  加入了 round-to-next-even使得计算准确，先前的sim-integral有问题
- (define (sim-integral f a b n)
-   (define (round-to-next-even x) (+ x (remainder x 2))) ;;;得加上这个 才可以算准！！
-   (define fixed-n  (round-to-next-even n))
-   (define h (/ (- b a) fixed-n))
-   (define (y k) (f (+ a (* k h))))
-   (define (coeff k) (if (even? k) 2 4))
-   (define (part-term k) (* (coeff k) (y k)))
-   (define (inc x) (+ x 1))
-   (define part-value (sum part-term 1 inc (- fixed-n 1)))
-   (* (/ h 3) (+ (y 0) (y n) part-value)))
- (sim-integral cube 1 3 10)  ;;; 有问题 已解决
- (sim-integral cube 1 3 11) ;;; 有问题  已解决
-</code></pre>
+ <span style="color:#75715e">;;;sim-integral 提高版  加入了 round-to-next-even使得计算准确，先前的sim-integral有问题</span>
+ (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">sim-integral</span> f a b n)
+   (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">round-to-next-even</span> x) (+ x (remainder x <span style="color:#ae81ff">2</span>))) <span style="color:#75715e">;;;得加上这个 才可以算准！！</span>
+   (<span style="color:#66d9ef">define </span>fixed-n  (<span style="color:#a6e22e">round-to-next-even</span> n))
+   (<span style="color:#66d9ef">define </span>h (/ (- b a) fixed-n))
+   (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">y</span> k) (<span style="color:#a6e22e">f</span> (+ a (* k h))))
+   (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">coeff</span> k) (<span style="color:#66d9ef">if </span>(even? k) <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">4</span>))
+   (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">part-term</span> k) (* (<span style="color:#a6e22e">coeff</span> k) (<span style="color:#a6e22e">y</span> k)))
+   (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">inc</span> x) (+ x <span style="color:#ae81ff">1</span>))
+   (<span style="color:#66d9ef">define </span>part-value (<span style="color:#a6e22e">sum</span> part-term <span style="color:#ae81ff">1</span> inc (- fixed-n <span style="color:#ae81ff">1</span>)))
+   (* (/ h <span style="color:#ae81ff">3</span>) (+ (<span style="color:#a6e22e">y</span> <span style="color:#ae81ff">0</span>) (<span style="color:#a6e22e">y</span> n) part-value)))
+ (<span style="color:#a6e22e">sim-integral</span> cube <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">10</span>)  <span style="color:#75715e">;;; 有问题 已解决</span>
+ (<span style="color:#a6e22e">sim-integral</span> cube <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">11</span>) <span style="color:#75715e">;;; 有问题  已解决</span>
+</code></pre></div>
     </div>
  <div class="nav-links" style="padding:10;">
         
@@ -1345,7 +1304,7 @@ term其实就是涉及到你需要思考的三种情况
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

@@ -30,12 +30,10 @@
   
   <meta name="description" content="我们设定一个接口，该接口实现包括三个constructor和1个observer
 
-
 zero
 successor
 predecessor
 zero?
-
 
 当然也可以拓展该接口包括scheme-val-&gt;my-val,my-val-&gt;scheme-val,plus等。
 下面看一下如何实现三个相同接口的实现，从而体味data abstraction(data
@@ -130,12 +128,10 @@ representation or data boundary).">
   <meta property="og:title" content="Data Representation-The Same interface with Different implementation | Macro Life">
   <meta property="og:description" content="我们设定一个接口，该接口实现包括三个constructor和1个observer
 
-
 zero
 successor
 predecessor
 zero?
-
 
 当然也可以拓展该接口包括scheme-val-&gt;my-val,my-val-&gt;scheme-val,plus等。
 下面看一下如何实现三个相同接口的实现，从而体味data abstraction(data
@@ -588,18 +584,16 @@ representation or data boundary)."><meta property="og:image" content="https://ju
 <span class="article-metadata" >Reading time: 2 minutes and    29 seconds with 549 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#unary-implementation">unary implementation</a>
-<ul>
-<li><a href="#辅助测试程序">辅助测试程序</a></li>
-</ul></li>
-<li><a href="#scheme-value-implementation">scheme value implementation</a></li>
-<li><a href="#5-inverse-implementation">5-inverse implementation</a></li>
-<li><a href="#拓展整体的接口程序">拓展整体的接口程序</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#unary-implementation">unary implementation</a>
+      <ul>
+        <li><a href="#heading">辅助测试程序</a></li>
+      </ul>
+    </li>
+    <li><a href="#scheme-value-implementation">scheme value implementation</a></li>
+    <li><a href="#5-inverse-implementation">5-inverse implementation</a></li>
+    <li><a href="#heading-1">拓展整体的接口程序</a></li>
+  </ul>
 </nav>
     </aside>
   <div class="article-container">
@@ -607,134 +601,115 @@ representation or data boundary)."><meta property="og:image" content="https://ju
 
     <div class="article-style">
       <p>我们设定一个接口，该接口实现包括三个constructor和1个observer</p>
-
 <ol>
 <li>zero</li>
 <li>successor</li>
 <li>predecessor</li>
 <li>zero?</li>
 </ol>
-
 <p>当然也可以拓展该接口包括scheme-val-&gt;my-val,my-val-&gt;scheme-val,plus等。
 下面看一下如何实现三个相同接口的实现，从而体味data abstraction(data
 representation or data boundary).</p>
-
 <h2 id="unary-implementation">unary implementation</h2>
-
-<h3 id="辅助测试程序">辅助测试程序</h3>
-
-<pre><code class="language-scheme">(define-syntax equal??
-  (syntax-rules ()
-    ((_ test-exp correct-ans)
-     (let ((evaluate-ans test-exp))
-       (if (not (equal? evaluate-ans correct-ans))
-          (printf &quot;~s returned ~s~%, should have returned ~s~%&quot;
-                 'test-exp
+<h3 id="heading">辅助测试程序</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">define-syntax </span>equal??
+  (<span style="color:#66d9ef">syntax-rules </span>()
+    ((<span style="color:#a6e22e">_</span> test-exp correct-ans)
+     (<span style="color:#66d9ef">let </span>((<span style="color:#a6e22e">evaluate-ans</span> test-exp))
+       (<span style="color:#66d9ef">if </span>(not (equal? evaluate-ans correct-ans))
+          (<span style="color:#a6e22e">printf</span> <span style="color:#e6db74">&#34;~s returned ~s~%, should have returned ~s~%&#34;</span>
+                 <span style="color:#e6db74">&#39;test-exp</span>
                  evaluate-ans
                  correct-ans)
-          'OK)))))
+          <span style="color:#e6db74">&#39;OK</span>)))))
 
-(define report-unit-tests-completed
-(lambda (fn-name)
-  (printf &quot;unit tests completed: ~s~%&quot; fn-name)))
+(<span style="color:#66d9ef">define </span>report-unit-tests-completed
+(<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">fn-name</span>)
+  (<span style="color:#a6e22e">printf</span> <span style="color:#e6db74">&#34;unit tests completed: ~s~%&#34;</span> fn-name)))
 
-</code></pre>
-
-<pre><code class="language-scheme">(let ()
-  (define zero (lambda () '()))
-  (define is-zero? (lambda (n) (null? n)))
-  (define successor (lambda (n) (cons #t n)))
-  (define predecessor (lambda (n) (cdr n)))
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">let </span>()
+  (<span style="color:#66d9ef">define </span>zero (<span style="color:#66d9ef">lambda </span>() <span style="color:#f92672">&#39;</span>()))
+  (<span style="color:#66d9ef">define </span>is-zero? (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">n</span>) (null? n)))
+  (<span style="color:#66d9ef">define </span>successor (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">n</span>) (cons <span style="color:#66d9ef">#t</span> n)))
+  (<span style="color:#66d9ef">define </span>predecessor (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">n</span>) (cdr n)))
   
-  (define plus
-    (lambda (x  y)
-      (if (is-zero? x)
+  (<span style="color:#66d9ef">define </span>plus
+    (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">x</span>  y)
+      (<span style="color:#66d9ef">if </span>(<span style="color:#a6e22e">is-zero?</span> x)
          y
-         (successor (plus (predecessor x) y)))))
- (report-unit-tests-completed 'unary-representation)
+         (<span style="color:#a6e22e">successor</span> (<span style="color:#a6e22e">plus</span> (<span style="color:#a6e22e">predecessor</span> x) y)))))
+ (<span style="color:#a6e22e">report-unit-tests-completed</span> <span style="color:#e6db74">&#39;unary-representation</span>)
   )
 
-</code></pre>
+</code></pre></div><h2 id="scheme-value-implementation">scheme value implementation</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#a6e22e">let</span>()
+  (<span style="color:#66d9ef">define </span> zero (<span style="color:#66d9ef">lambda </span>() <span style="color:#ae81ff">0</span>))
+  (<span style="color:#66d9ef">define </span>is-zero? (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">n</span>) (zero? n)))
+  (<span style="color:#66d9ef">define </span>successor (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">n</span>) (+ n <span style="color:#ae81ff">1</span>)))
+  (<span style="color:#66d9ef">define </span>predecessor (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">n</span>) (- n <span style="color:#ae81ff">1</span>)))
 
-<h2 id="scheme-value-implementation">scheme value implementation</h2>
-
-<pre><code class="language-scheme">(let()
-  (define  zero (lambda () 0))
-  (define is-zero? (lambda (n) (zero? n)))
-  (define successor (lambda (n) (+ n 1)))
-  (define predecessor (lambda (n) (- n 1)))
-
-  (define plus
-    (lambda (x y)
-      (if (is-zero? x)
+  (<span style="color:#66d9ef">define </span>plus
+    (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">x</span> y)
+      (<span style="color:#66d9ef">if </span>(<span style="color:#a6e22e">is-zero?</span> x)
          y
-         (successor (plus (predecessor x) y)))))
+         (<span style="color:#a6e22e">successor</span> (<span style="color:#a6e22e">plus</span> (<span style="color:#a6e22e">predecessor</span> x) y)))))
 
-  (equal??  (plus 3 7) 10)
- (printf &quot;~s test completed.~% &quot; 'scheme-number-presentation)
+  (<span style="color:#a6e22e">equal??</span>  (<span style="color:#a6e22e">plus</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">7</span>) <span style="color:#ae81ff">10</span>)
+ (<span style="color:#a6e22e">printf</span> <span style="color:#e6db74">&#34;~s test completed.~% &#34;</span> <span style="color:#e6db74">&#39;scheme-number-presentation</span>)
   )
 
 
-</code></pre>
-
-<h2 id="5-inverse-implementation">5-inverse implementation</h2>
-
-<pre><code class="language-scheme">
-(let ()
-  (define zero (lambda () 5))
-  (define is-zero? (lambda (n) (=  n 5)))
-  (define successor (lambda (n) (- n 5)))
-  (define predecessor (lambda (n) (+ n 5)))
-  (define plus
-    (lambda (x y)
-      (if (is-zero? x)
+</code></pre></div><h2 id="5-inverse-implementation">5-inverse implementation</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">
+(<span style="color:#66d9ef">let </span>()
+  (<span style="color:#66d9ef">define </span>zero (<span style="color:#66d9ef">lambda </span>() <span style="color:#ae81ff">5</span>))
+  (<span style="color:#66d9ef">define </span>is-zero? (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">n</span>) (=  n <span style="color:#ae81ff">5</span>)))
+  (<span style="color:#66d9ef">define </span>successor (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">n</span>) (- n <span style="color:#ae81ff">5</span>)))
+  (<span style="color:#66d9ef">define </span>predecessor (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">n</span>) (+ n <span style="color:#ae81ff">5</span>)))
+  (<span style="color:#66d9ef">define </span>plus
+    (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">x</span> y)
+      (<span style="color:#66d9ef">if </span>(<span style="color:#a6e22e">is-zero?</span> x)
          y
-         (successor (plus (predecessor x) y)))))
+         (<span style="color:#a6e22e">successor</span> (<span style="color:#a6e22e">plus</span> (<span style="color:#a6e22e">predecessor</span> x) y)))))
 
-  (define scheme-int-&gt;my-int
-    (lambda (n)
-      (if (zero? n) (zero)
-         (successor (scheme-int-&gt;my-int  (- n 1))))))
+  (<span style="color:#66d9ef">define </span>scheme-int-&gt;my-int
+    (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">n</span>)
+      (<span style="color:#66d9ef">if </span>(zero? n) (<span style="color:#a6e22e">zero</span>)
+         (<span style="color:#a6e22e">successor</span> (<span style="color:#a6e22e">scheme-int-&gt;my-int</span>  (- n <span style="color:#ae81ff">1</span>))))))
 
-  (define my-int-&gt;scheme-int
-    (lambda  (n)
-      (if (is-zero? n) 0
-         (+ 1 (my-int-&gt;scheme-int (predecessor n))))))
+  (<span style="color:#66d9ef">define </span>my-int-&gt;scheme-int
+    (<span style="color:#66d9ef">lambda </span> (<span style="color:#a6e22e">n</span>)
+      (<span style="color:#66d9ef">if </span>(<span style="color:#a6e22e">is-zero?</span> n) <span style="color:#ae81ff">0</span>
+         (+ <span style="color:#ae81ff">1</span> (<span style="color:#a6e22e">my-int-&gt;scheme-int</span> (<span style="color:#a6e22e">predecessor</span> n))))))
 
-  (equal??
-   (my-int-&gt;scheme-int
-    (plus (scheme-int-&gt;my-int 3)
-         (scheme-int-&gt;my-int 7)))
-   10)
-(printf &quot;~s unit tested completed&quot; 'reverse-number-representation)
+  (<span style="color:#a6e22e">equal??</span>
+   (<span style="color:#a6e22e">my-int-&gt;scheme-int</span>
+    (<span style="color:#a6e22e">plus</span> (<span style="color:#a6e22e">scheme-int-&gt;my-int</span> <span style="color:#ae81ff">3</span>)
+         (<span style="color:#a6e22e">scheme-int-&gt;my-int</span> <span style="color:#ae81ff">7</span>)))
+   <span style="color:#ae81ff">10</span>)
+(<span style="color:#a6e22e">printf</span> <span style="color:#e6db74">&#34;~s unit tested completed&#34;</span> <span style="color:#e6db74">&#39;reverse-number-representation</span>)
   )
-</code></pre>
-
-<h2 id="拓展整体的接口程序">拓展整体的接口程序</h2>
-
+</code></pre></div><h2 id="heading-1">拓展整体的接口程序</h2>
 <p>在上面的(let &hellip;.) 中都可以添加如下的接口slots,
 你会发现他们的实现在任意一种实现都是一样的过程，只要4个基本接口
 实现一样那他们的result is the same.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">  (<span style="color:#66d9ef">define </span>scheme-int-&gt;my-int
+    (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">n</span>)
+      (<span style="color:#66d9ef">if </span>(zero? n) (<span style="color:#a6e22e">zero</span>)
+         (<span style="color:#a6e22e">successor</span> (<span style="color:#a6e22e">scheme-int-&gt;my-int</span>  (- n <span style="color:#ae81ff">1</span>))))))
 
-<pre><code class="language-scheme">  (define scheme-int-&gt;my-int
-    (lambda (n)
-      (if (zero? n) (zero)
-         (successor (scheme-int-&gt;my-int  (- n 1))))))
+  (<span style="color:#66d9ef">define </span>my-int-&gt;scheme-int
+    (<span style="color:#66d9ef">lambda </span> (<span style="color:#a6e22e">n</span>)
+      (<span style="color:#66d9ef">if </span>(<span style="color:#a6e22e">is-zero?</span> n) <span style="color:#ae81ff">0</span>
+         (+ <span style="color:#ae81ff">1</span> (<span style="color:#a6e22e">my-int-&gt;scheme-int</span> (<span style="color:#a6e22e">predecessor</span> n))))))
 
-  (define my-int-&gt;scheme-int
-    (lambda  (n)
-      (if (is-zero? n) 0
-         (+ 1 (my-int-&gt;scheme-int (predecessor n))))))
-
-  (define plus
-    (lambda (x y)
-      (if (is-zero? x)
+  (<span style="color:#66d9ef">define </span>plus
+    (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">x</span> y)
+      (<span style="color:#66d9ef">if </span>(<span style="color:#a6e22e">is-zero?</span> x)
          y
-         (successor (plus (predecessor x) y)))))
+         (<span style="color:#a6e22e">successor</span> (<span style="color:#a6e22e">plus</span> (<span style="color:#a6e22e">predecessor</span> x) y)))))
 
-</code></pre>
-
-<p>通过者三个实现过程认识[v] is the data representation of the v in certain
+</code></pre></div><p>通过者三个实现过程认识[v] is the data representation of the v in certain
 interface. 只要确定接口，那么实现有n种情况只要满足你的要求，从而达到问题的
 求解。</p>
     </div>
@@ -1140,7 +1115,7 @@ interface. 只要确定接口，那么实现有n种情况只要满足你的要�
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

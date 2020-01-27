@@ -563,89 +563,83 @@
 
 
 
-<span class="article-metadata" >Reading time: 21 minutes and    53 seconds with 4817 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+<span class="article-metadata" >Reading time: 22 minutes and    22 seconds with 4923 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
-        
+        <nav id="TableOfContents"></nav>
     </aside>
   <div class="article-container">
 
 
     <div class="article-style">
       <p>1: jquery的加载顺序</p>
-
 <p>IE中会有不同点
 结论：jquery中使用$(function(){})即可！其他知道即可</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">Html</span>&gt;
+  &lt;<span style="color:#f92672">Head</span>&gt;
+    &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/javascript&#34;</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;jquery-2.1.3.js&#34;</span>&gt;
+    &lt;/<span style="color:#f92672">script</span>&gt;
+    &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/javascript&#34;</span>&gt;
 
-<pre><code class="language-html">&lt;Html&gt;
-  &lt;Head&gt;
-    &lt;script type=&quot;text/javascript&quot; src=&quot;jquery-2.1.3.js&quot;&gt;
-    &lt;/script&gt;
-    &lt;script type=&quot;text/javascript&quot;&gt;
-
-      //javascript
-      //第四个加载
-      //在IE中居然无法加载！！！
-      //需要等待页面完全加载完毕才会触发
-      onload=function()
+      <span style="color:#75715e">//javascript
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">//第四个加载
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">//在IE中居然无法加载！！！
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">//需要等待页面完全加载完毕才会触发
+</span><span style="color:#75715e"></span>      <span style="color:#a6e22e">onload</span><span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>()
       {
-        //console的作用就是在浏览器的控制台 打印出结果
-        console.log('javascript\'s onload');
-        alert('javascript window.onload js ok 4');
+        <span style="color:#75715e">//console的作用就是在浏览器的控制台 打印出结果
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;javascript\&#39;s onload&#39;</span>);
+        <span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;javascript window.onload js ok 4&#39;</span>);
       };
-      //window object change into jQuery object
-      //第五个加载
-      $(window).load(function(){
-        console.log('window onload');
-        alert('$(window).load No 5');
+      <span style="color:#75715e">//window object change into jQuery object
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">//第五个加载
+</span><span style="color:#75715e"></span>      <span style="color:#a6e22e">$</span>(window).<span style="color:#a6e22e">load</span>(<span style="color:#66d9ef">function</span>(){
+        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;window onload&#39;</span>);
+        <span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;$(window).load No 5&#39;</span>);
       });
 
-//第二个加载
-      $(function()
+<span style="color:#75715e">//第二个加载
+</span><span style="color:#75715e"></span>      <span style="color:#a6e22e">$</span>(<span style="color:#66d9ef">function</span>()
         {
-          console.log('dom ready='+$('#span').html());
-          alert('$(function(){}niming hanshu! 2');
+          <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;dom ready=&#39;</span><span style="color:#f92672">+</span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;#span&#39;</span>).<span style="color:#a6e22e">html</span>());
+          <span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;$(function(){}niming hanshu! 2&#39;</span>);
         });
 
 
-      //Dom object change into Jquery Object
-      // 很是奇怪 第一个加载
-      //可以多次触发
-      $(document).ready(function(){
-        console.log('document ready')
-        alert('$(document).ready Ok 1');
+      <span style="color:#75715e">//Dom object change into Jquery Object
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">// 很是奇怪 第一个加载
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">//可以多次触发
+</span><span style="color:#75715e"></span>      <span style="color:#a6e22e">$</span>(document).<span style="color:#a6e22e">ready</span>(<span style="color:#66d9ef">function</span>(){
+        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;document ready&#39;</span>)
+        <span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;$(document).ready Ok 1&#39;</span>);
       });
 
-      // THe most common  and most convininet
-      //jQuery(function(){})
-           //第三个加载  跟第二个一样的  按照前后顺序进行布置
-      jQuery(function()
+      <span style="color:#75715e">// THe most common  and most convininet
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">//jQuery(function(){})
+</span><span style="color:#75715e"></span>           <span style="color:#75715e">//第三个加载  跟第二个一样的  按照前后顺序进行布置
+</span><span style="color:#75715e"></span>      <span style="color:#a6e22e">jQuery</span>(<span style="color:#66d9ef">function</span>()
        {
-        console.log('dom ready='+$('#span').html());
-        alert(' jQuery(function(){}niming hanshu 3!')
+        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;dom ready=&#39;</span><span style="color:#f92672">+</span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;#span&#39;</span>).<span style="color:#a6e22e">html</span>());
+        <span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39; jQuery(function(){}niming hanshu 3!&#39;</span>)
        });
 
-       function init()
+       <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">init</span>()
        {
-         console.log('body init');
+         <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;body init&#39;</span>);
        }
 
-    &lt;/script&gt;
+    &lt;/<span style="color:#f92672">script</span>&gt;
 
-  &lt;/Head&gt;
-  &lt;Body onload=&quot;init()&quot;&gt;
+  &lt;/<span style="color:#f92672">Head</span>&gt;
+  &lt;<span style="color:#f92672">Body</span> <span style="color:#a6e22e">onload</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;init()&#34;</span>&gt;
     
-    &lt;Span id=&quot;span&quot;&gt; Rupeng!&lt;/Span&gt;
-  &lt;/Body&gt;
-&lt;/Html&gt;
-</code></pre>
-
-<p>2：Map 和each函数的使用
+    &lt;<span style="color:#f92672">Span</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;span&#34;</span>&gt; Rupeng!&lt;/<span style="color:#f92672">Span</span>&gt;
+  &lt;/<span style="color:#f92672">Body</span>&gt;
+&lt;/<span style="color:#f92672">Html</span>&gt;
+</code></pre></div><p>2：Map 和each函数的使用
 map：用于修改
 each：用于遍历</p>
-
 <p>map:  value index
 each:  key  value</p>
-
 <pre><code>&lt;Html&gt;
   &lt;Head&gt;
     &lt;script type=&quot;text/javascript&quot; src=&quot;jquery-2.1.3.js&quot;&gt;&lt;/script&gt;
@@ -693,1166 +687,1121 @@ each:  key  value</p>
     &lt;/script&gt;
   &lt;/Head&gt;
 &lt;/Html&gt;
-</code></pre>
-
-<p>3:jquery和jsDom的互转</p>
-
+</code></pre><p>3:jquery和jsDom的互转</p>
 <p>1：jsDom -&gt; jquery       把jsDom对象放在$()括号中即可
 2： jquery -&gt; jsDom
-     两种方法
-         a:  $().get(0)
-         b: $()[0]</p>
+两种方法
+a:  $().get(0)
+b: $()[0]</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">Html</span>&gt;
+  &lt;<span style="color:#f92672">Head</span>&gt;
+    &lt;<span style="color:#f92672">Title</span>&gt; Test the transformation between jQuery and Dom &lt;/<span style="color:#f92672">Title</span>&gt;
+    &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/javascript&#34;</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;jquery-2.1.3.js&#34;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;
 
-<pre><code class="language-html">&lt;Html&gt;
-  &lt;Head&gt;
-    &lt;Title&gt; Test the transformation between jQuery and Dom &lt;/Title&gt;
-    &lt;script type=&quot;text/javascript&quot; src=&quot;jquery-2.1.3.js&quot;&gt;&lt;/script&gt;
-
-    &lt;script type=&quot;text/javascript&quot; &gt;
+    &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/javascript&#34;</span> &gt;
     
     
-      $(function(){
+      <span style="color:#a6e22e">$</span>(<span style="color:#66d9ef">function</span>(){
 
-  /*
-        document.getElementById('btn').onclick=function()
-        {
-          var dvObj=document.getElementById('dv');
-          //方法1  Dom
-          //dvObj.style.backgroundColor='black'; 
-         
-          //方法2 jQuery 方法
-           //Dom object change into jQuery
-//          var dvObjJquery=$(dvObj);
-//          dvObjJquery.css('backgroundColor','yellow');
+  <span style="color:#75715e">/*
+</span><span style="color:#75715e">        document.getElementById(&#39;btn&#39;).onclick=function()
+</span><span style="color:#75715e">        {
+</span><span style="color:#75715e">          var dvObj=document.getElementById(&#39;dv&#39;);
+</span><span style="color:#75715e">          //方法1  Dom
+</span><span style="color:#75715e">          //dvObj.style.backgroundColor=&#39;black&#39;; 
+</span><span style="color:#75715e">         
+</span><span style="color:#75715e">          //方法2 jQuery 方法
+</span><span style="color:#75715e">           //Dom object change into jQuery
+</span><span style="color:#75715e">//          var dvObjJquery=$(dvObj);
+</span><span style="color:#75715e">//          dvObjJquery.css(&#39;backgroundColor&#39;,&#39;yellow&#39;);
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">          // 把jquery对象转回到Dom对象
+</span><span style="color:#75715e">          var dvObjJquery=$(dvObj);
+</span><span style="color:#75715e">          //1  转回去dom的方法1
+</span><span style="color:#75715e">//          var dvObjAgain=dvObjJquery[0]; 
+</span><span style="color:#75715e">          //2  转回去dom的方法2
+</span><span style="color:#75715e">          var dvObjAgain=dvObjJquery.get(0); 
+</span><span style="color:#75715e">           dvObjAgain.style.backgroundColor=&#39;black&#39;; 
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">        
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">        }
+</span><span style="color:#75715e">   */</span>       
 
-          // 把jquery对象转回到Dom对象
-          var dvObjJquery=$(dvObj);
-          //1  转回去dom的方法1
-//          var dvObjAgain=dvObjJquery[0]; 
-          //2  转回去dom的方法2
-          var dvObjAgain=dvObjJquery.get(0); 
-           dvObjAgain.style.backgroundColor='black'; 
-
-        
-
-        }
-   */       
-
-        //1  省略了  等号
-        //2  省略了   Dom长长的函数名调用
-        //2  取而代之的是简易的jQuery语法  利用链式法则
-        $('#btn').click(function()
+        <span style="color:#75715e">//1  省略了  等号
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//2  省略了   Dom长长的函数名调用
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//2  取而代之的是简易的jQuery语法  利用链式法则
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;#btn&#39;</span>).<span style="color:#a6e22e">click</span>(<span style="color:#66d9ef">function</span>()
                         {
-                          $('#dv').css('backgroundColor','purple');
+                          <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;#dv&#39;</span>).<span style="color:#a6e22e">css</span>(<span style="color:#e6db74">&#39;backgroundColor&#39;</span>,<span style="color:#e6db74">&#39;purple&#39;</span>);
                         });
       })
-    &lt;/script&gt;
-  &lt;/Head&gt;
+    &lt;/<span style="color:#f92672">script</span>&gt;
+  &lt;/<span style="color:#f92672">Head</span>&gt;
 
-  &lt;Body&gt;
-    &lt;Input type=&quot;button&quot; id=&quot;btn&quot; value=&quot;changeColor&quot;/&gt;
-    &lt;Div id=&quot;dv&quot; style=&quot;width:300px; height:200px; background-color:green&quot;&gt;
+  &lt;<span style="color:#f92672">Body</span>&gt;
+    &lt;<span style="color:#f92672">Input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;button&#34;</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;btn&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;changeColor&#34;</span>/&gt;
+    &lt;<span style="color:#f92672">Div</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;dv&#34;</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;width:300px; height:200px; background-color:green&#34;</span>&gt;
       hello
-      &lt;/Div&gt;
-  &lt;/Body&gt;
-&lt;/Html&gt;
-</code></pre>
-
-<p>4多重选择器
+      &lt;/<span style="color:#f92672">Div</span>&gt;
+  &lt;/<span style="color:#f92672">Body</span>&gt;
+&lt;/<span style="color:#f92672">Html</span>&gt;
+</code></pre></div><p>4多重选择器
 注意：中间不能有空格  否则没有反应 这是需要注意的
-          text() 类似于jsDom的innerText()
-          html()类似于 innerHtml()</p>
+text() 类似于jsDom的innerText()
+html()类似于 innerHtml()</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">Html</span>&gt;
+  &lt;<span style="color:#f92672">Head</span>&gt;
+    &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/javascript&#34;</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;jquery-2.1.3.js&#34;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;
 
-<pre><code class="language-html">&lt;Html&gt;
-  &lt;Head&gt;
-    &lt;script type=&quot;text/javascript&quot; src=&quot;jquery-2.1.3.js&quot;&gt;&lt;/script&gt;
-
-    &lt;script type=&quot;text/javascript&quot;&gt;
-//      alert('hello')
-      $(function()
+    &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/javascript&#34;</span>&gt;
+<span style="color:#75715e">//      alert(&#39;hello&#39;)
+</span><span style="color:#75715e"></span>      <span style="color:#a6e22e">$</span>(<span style="color:#66d9ef">function</span>()
         {
-          $('#btn').click(function(){
-//            alert('hello');
-//            $('#cls').text('This is  a  layer');  // class selector
+          <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;#btn&#39;</span>).<span style="color:#a6e22e">click</span>(<span style="color:#66d9ef">function</span>(){
+<span style="color:#75715e">//            alert(&#39;hello&#39;);
+</span><span style="color:#75715e"></span><span style="color:#75715e">//            $(&#39;#cls&#39;).text(&#39;This is  a  layer&#39;);  // class selector
+</span><span style="color:#75715e"></span>
 
+            <span style="color:#75715e">//$(&#39;div#cls&#39;).css(&#39;backgroundColor&#39;,&#39;yellow&#39;);  // label with Id selector
+</span><span style="color:#75715e"></span><span style="color:#75715e">//            $(&#39;div #cls&#39;).css(&#39;backgroundColor&#39;,&#39;yellow&#39;); //中间不能有空格  否则没有反应 这是需要注意的
+</span><span style="color:#75715e"></span><span style="color:#75715e">//   同样的标签加上lei也不是不能加上空格
+</span><span style="color:#75715e"></span>
 
-            //$('div#cls').css('backgroundColor','yellow');  // label with Id selector
-//            $('div #cls').css('backgroundColor','yellow'); //中间不能有空格  否则没有反应 这是需要注意的
-//   同样的标签加上lei也不是不能加上空格
+            <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;div#cls&#39;</span>).<span style="color:#a6e22e">text</span>(<span style="color:#e6db74">&#39;InnerText方式添加&#39;</span>);
+            <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;div#cls&#39;</span>).<span style="color:#a6e22e">html</span>(<span style="color:#e6db74">&#39;&lt;H1&gt;InnerHTML方式添加&lt;/H1&gt;&#39;</span>);
 
-
-            $('div#cls').text('InnerText方式添加');
-            $('div#cls').html('&lt;H1&gt;InnerHTML方式添加&lt;/H1&gt;');
-
-            //标签选择器的隐式编程   隐式循环！ 这是一个jQuery的一个好处 implicit cycle
-            $('p').text('Set all the p the value');
+            <span style="color:#75715e">//标签选择器的隐式编程   隐式循环！ 这是一个jQuery的一个好处 implicit cycle
+</span><span style="color:#75715e"></span>            <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;p&#39;</span>).<span style="color:#a6e22e">text</span>(<span style="color:#e6db74">&#39;Set all the p the value&#39;</span>);
     
           });
         });
-    &lt;/script&gt;
+    &lt;/<span style="color:#f92672">script</span>&gt;
 
-    &lt;style type=&quot;text/css&quot;&gt;
+    &lt;<span style="color:#f92672">style</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/css&#34;</span>&gt;
        #cls
        {
-         width:300px;
-         height:200px;
-         background-color:green;
+         <span style="color:#66d9ef">width</span>:<span style="color:#ae81ff">300</span><span style="color:#66d9ef">px</span>;
+         <span style="color:#66d9ef">height</span>:<span style="color:#ae81ff">200</span><span style="color:#66d9ef">px</span>;
+         <span style="color:#66d9ef">background-color</span>:<span style="color:#66d9ef">green</span>;
        }
-    &lt;/style&gt;
-  &lt;/Head&gt;
+    &lt;/<span style="color:#f92672">style</span>&gt;
+  &lt;/<span style="color:#f92672">Head</span>&gt;
 
-  &lt;Body&gt;
-    &lt;input type=&quot;button&quot; id=&quot;btn&quot; value=&quot;change&quot;/&gt;
-    &lt;div id=&quot;cls&quot;&gt;
+  &lt;<span style="color:#f92672">Body</span>&gt;
+    &lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;button&#34;</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;btn&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;change&#34;</span>/&gt;
+    &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;cls&#34;</span>&gt;
 
-    &lt;/div&gt;
-    &lt;p class=&quot;name&quot;&gt;&lt;/p&gt;
-    &lt;p class=&quot;name&quot;&gt;&lt;/p&gt;
-    &lt;p class=&quot;name&quot;&gt;&lt;/p&gt;
-    &lt;p class=&quot;name&quot;&gt;&lt;/p&gt;
-    &lt;p class=&quot;name&quot;&gt;&lt;/p&gt;
-    &lt;p class=&quot;name&quot;&gt;&lt;/p&gt;
-    &lt;p class=&quot;name&quot;&gt;&lt;/p&gt;
-    &lt;p class=&quot;name&quot;&gt;&lt;/p&gt;
-  &lt;/Body&gt;
-&lt;/Html&gt;
-</code></pre>
-
-<p>5： 选择器  过滤器的使用
+    &lt;/<span style="color:#f92672">div</span>&gt;
+    &lt;<span style="color:#f92672">p</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;name&#34;</span>&gt;&lt;/<span style="color:#f92672">p</span>&gt;
+    &lt;<span style="color:#f92672">p</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;name&#34;</span>&gt;&lt;/<span style="color:#f92672">p</span>&gt;
+    &lt;<span style="color:#f92672">p</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;name&#34;</span>&gt;&lt;/<span style="color:#f92672">p</span>&gt;
+    &lt;<span style="color:#f92672">p</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;name&#34;</span>&gt;&lt;/<span style="color:#f92672">p</span>&gt;
+    &lt;<span style="color:#f92672">p</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;name&#34;</span>&gt;&lt;/<span style="color:#f92672">p</span>&gt;
+    &lt;<span style="color:#f92672">p</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;name&#34;</span>&gt;&lt;/<span style="color:#f92672">p</span>&gt;
+    &lt;<span style="color:#f92672">p</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;name&#34;</span>&gt;&lt;/<span style="color:#f92672">p</span>&gt;
+    &lt;<span style="color:#f92672">p</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;name&#34;</span>&gt;&lt;/<span style="color:#f92672">p</span>&gt;
+  &lt;/<span style="color:#f92672">Body</span>&gt;
+&lt;/<span style="color:#f92672">Html</span>&gt;
+</code></pre></div><p>5： 选择器  过滤器的使用
 :first   first()
 :last   last()
 :eq()
 :lt()
 :gt()</p>
-
 <p>注意：可不敢再把siblings()漏掉了！</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">html</span>&gt;
+  &lt;<span style="color:#f92672">head</span>&gt;
+    &lt;<span style="color:#f92672">title</span>&gt;  test  the start mark&lt;/<span style="color:#f92672">title</span>&gt;
+    &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/javascript&#34;</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;jquery-2.1.3.js&#34;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;
+    &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/javascript&#34;</span>&gt;
+      <span style="color:#a6e22e">$</span>(<span style="color:#66d9ef">function</span>(){
+        <span style="color:#75715e">//注意是tr  行
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;#tb tr:first&#39;</span>).<span style="color:#a6e22e">css</span>(<span style="color:#e6db74">&#39;backgroundColor&#39;</span>,<span style="color:#e6db74">&#39;green&#39;</span>).<span style="color:#a6e22e">css</span>(<span style="color:#e6db74">&#39;fontSize&#39;</span>,<span style="color:#e6db74">&#39;50px&#39;</span>);
+        <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;#tb tr:last&#39;</span>).<span style="color:#a6e22e">css</span>(<span style="color:#e6db74">&#39;color&#39;</span>,<span style="color:#e6db74">&#39;black&#39;</span>);
+        <span style="color:#75715e">// 0-3之间  0 1 2 3
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;#tb tr:gt(0):lt(3)&#39;</span>).<span style="color:#a6e22e">css</span>(<span style="color:#e6db74">&#39;fontSize&#39;</span>,<span style="color:#e6db74">&#39;25px&#39;</span>);
+        <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;#tb tr:odd&#39;</span>).<span style="color:#a6e22e">css</span>(<span style="color:#e6db74">&#39;backgroundColor&#39;</span>,<span style="color:#e6db74">&#39;yellow&#39;</span>);
 
-<pre><code class="language-html">&lt;html&gt;
-  &lt;head&gt;
-    &lt;title&gt;  test  the start mark&lt;/title&gt;
-    &lt;script type=&quot;text/javascript&quot; src=&quot;jquery-2.1.3.js&quot;&gt;&lt;/script&gt;
-    &lt;script type=&quot;text/javascript&quot;&gt;
-      $(function(){
-        //注意是tr  行
-        $('#tb tr:first').css('backgroundColor','green').css('fontSize','50px');
-        $('#tb tr:last').css('color','black');
-        // 0-3之间  0 1 2 3
-        $('#tb tr:gt(0):lt(3)').css('fontSize','25px');
-        $('#tb tr:odd').css('backgroundColor','yellow');
-
-        $('#tb tr').click(function(){
-          //可不敢再犯这种错误了！ ！ siblings()  加上括号
-          $(this).css('backgroundColor','red').siblings().css('backgroundColor','gray');
+        <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;#tb tr&#39;</span>).<span style="color:#a6e22e">click</span>(<span style="color:#66d9ef">function</span>(){
+          <span style="color:#75715e">//可不敢再犯这种错误了！ ！ siblings()  加上括号
+</span><span style="color:#75715e"></span>          <span style="color:#a6e22e">$</span>(<span style="color:#66d9ef">this</span>).<span style="color:#a6e22e">css</span>(<span style="color:#e6db74">&#39;backgroundColor&#39;</span>,<span style="color:#e6db74">&#39;red&#39;</span>).<span style="color:#a6e22e">siblings</span>().<span style="color:#a6e22e">css</span>(<span style="color:#e6db74">&#39;backgroundColor&#39;</span>,<span style="color:#e6db74">&#39;gray&#39;</span>);
         })
       })
-    &lt;/script&gt;
+    &lt;/<span style="color:#f92672">script</span>&gt;
 
     
-   &lt;style type=&quot;text/css&quot;&gt;
-      .cls
+   &lt;<span style="color:#f92672">style</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/css&#34;</span>&gt;
+      .<span style="color:#a6e22e">cls</span>
       {
-        background-color:black;
+        <span style="color:#66d9ef">background-color</span>:<span style="color:#66d9ef">black</span>;
       }
-      td
+      <span style="color:#f92672">td</span>
       {
-        border:1px solid red;
+        <span style="color:#66d9ef">border</span>:<span style="color:#ae81ff">1</span><span style="color:#66d9ef">px</span> <span style="color:#66d9ef">solid</span> <span style="color:#66d9ef">red</span>;
       }
-    &lt;/style&gt;
-  &lt;/head&gt;
+    &lt;/<span style="color:#f92672">style</span>&gt;
+  &lt;/<span style="color:#f92672">head</span>&gt;
 
-  &lt;body&gt;
-    &lt;table id=&quot;tb&quot; style=&quot;width:2\450px;height:20px;text-align:center; font-size:14px ;border:1px solid black;cursor:pointer&quot;&gt;
-      &lt;tr&gt;
-        &lt;td&gt;Name&lt;/td&gt;
-        &lt;td&gt;Mark&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-        &lt;td&gt;Chairman Mao&lt;/td&gt;
-        &lt;td&gt;89&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-        &lt;td&gt;Chairman Hu&lt;/td&gt;
-        &lt;td&gt;79&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-        &lt;td&gt;Chairman Deng&lt;/td&gt;
-        &lt;td&gt;99&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-        &lt;td&gt;Chairman Xi&lt;/td&gt;
-        &lt;td&gt;98&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-        &lt;td&gt;Chairman jiang&lt;/td&gt;
-        &lt;td&gt;76&lt;/td&gt;
-      &lt;/tr&gt;
+  &lt;<span style="color:#f92672">body</span>&gt;
+    &lt;<span style="color:#f92672">table</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;tb&#34;</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;width:2\450px;height:20px;text-align:center; font-size:14px ;border:1px solid black;cursor:pointer&#34;</span>&gt;
+      &lt;<span style="color:#f92672">tr</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;Name&lt;/<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;Mark&lt;/<span style="color:#f92672">td</span>&gt;
+      &lt;/<span style="color:#f92672">tr</span>&gt;
+      &lt;<span style="color:#f92672">tr</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;Chairman Mao&lt;/<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;89&lt;/<span style="color:#f92672">td</span>&gt;
+      &lt;/<span style="color:#f92672">tr</span>&gt;
+      &lt;<span style="color:#f92672">tr</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;Chairman Hu&lt;/<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;79&lt;/<span style="color:#f92672">td</span>&gt;
+      &lt;/<span style="color:#f92672">tr</span>&gt;
+      &lt;<span style="color:#f92672">tr</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;Chairman Deng&lt;/<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;99&lt;/<span style="color:#f92672">td</span>&gt;
+      &lt;/<span style="color:#f92672">tr</span>&gt;
+      &lt;<span style="color:#f92672">tr</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;Chairman Xi&lt;/<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;98&lt;/<span style="color:#f92672">td</span>&gt;
+      &lt;/<span style="color:#f92672">tr</span>&gt;
+      &lt;<span style="color:#f92672">tr</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;Chairman jiang&lt;/<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;76&lt;/<span style="color:#f92672">td</span>&gt;
+      &lt;/<span style="color:#f92672">tr</span>&gt;
 
-    &lt;/table&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-
-<p>6：相对容器 和绝对容器</p>
-
+    &lt;/<span style="color:#f92672">table</span>&gt;
+  &lt;/<span style="color:#f92672">body</span>&gt;
+&lt;/<span style="color:#f92672">html</span>&gt;
+</code></pre></div><p>6：相对容器 和绝对容器</p>
 <p>$(&lsquo;p div&rsquo;)  绝对容器  p的后代
 $(&lsquo;div&rsquo;,&lsquo;p&rsquo;)  相对容器   所有在p标签中的 div
 参考点不一样</p>
-
 <p>注意
-          //$(&lsquo;this&rsquo;).siblings.css(&lsquo;backgroundColor&rsquo;,&ldquo;);//可不敢再犯这个错误
-          //this不需要加上单引号
-          //为什么无法直接行t添加上 颜色？ 因为真正在表面显示的是td
-          //$(this).siblings().css(&lsquo;backgroundColor&rsquo;,&ldquo;);</p>
+//$(&lsquo;this&rsquo;).siblings.css(&lsquo;backgroundColor&rsquo;,'');//可不敢再犯这个错误
+//this不需要加上单引号
+//为什么无法直接行t添加上 颜色？ 因为真正在表面显示的是td
+//$(this).siblings().css(&lsquo;backgroundColor&rsquo;,'');</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">
+&lt;<span style="color:#f92672">html</span>&gt;
+  &lt;<span style="color:#f92672">head</span>&gt;
+    &lt;<span style="color:#f92672">title</span>&gt;  test  the start mark&lt;/<span style="color:#f92672">title</span>&gt;
+    &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/javascript&#34;</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;jquery-2.1.3.js&#34;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;
+    &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/javascript&#34;</span>&gt;
+      <span style="color:#a6e22e">$</span>(<span style="color:#66d9ef">function</span>(){
 
-<pre><code class="language-html">
-&lt;html&gt;
-  &lt;head&gt;
-    &lt;title&gt;  test  the start mark&lt;/title&gt;
-    &lt;script type=&quot;text/javascript&quot; src=&quot;jquery-2.1.3.js&quot;&gt;&lt;/script&gt;
-    &lt;script type=&quot;text/javascript&quot;&gt;
-      $(function(){
-
-        //绝对定位
-        // $('div p')表示div下的p元素
-        //相对定位
-        //相对div元素的p标签
-        //$('p','div') 表示在div层中的p元素
-
-        $('#tb tr').click(function(){
-          //$('this').siblings.css('backgroundColor','');//可不敢再犯这个错误
-          //this不需要加上单引号
-          //为什么无法直接行t添加上 颜色？ 因为真正在表面显示的是td
-          //$(this).siblings().css('backgroundColor','');
-
-          $('td',$(this).siblings()).css('backgroundColor','');
-          $('td:even',$(this)).css('backgroundColor','red');
-          $('td:odd',$(this)).css('backgroundColor','yellow');
+        <span style="color:#75715e">//绝对定位
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// $(&#39;div p&#39;)表示div下的p元素
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//相对定位
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//相对div元素的p标签
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//$(&#39;p&#39;,&#39;div&#39;) 表示在div层中的p元素
+</span><span style="color:#75715e"></span>
+        <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;#tb tr&#39;</span>).<span style="color:#a6e22e">click</span>(<span style="color:#66d9ef">function</span>(){
+          <span style="color:#75715e">//$(&#39;this&#39;).siblings.css(&#39;backgroundColor&#39;,&#39;&#39;);//可不敢再犯这个错误
+</span><span style="color:#75715e"></span>          <span style="color:#75715e">//this不需要加上单引号
+</span><span style="color:#75715e"></span>          <span style="color:#75715e">//为什么无法直接行t添加上 颜色？ 因为真正在表面显示的是td
+</span><span style="color:#75715e"></span>          <span style="color:#75715e">//$(this).siblings().css(&#39;backgroundColor&#39;,&#39;&#39;);
+</span><span style="color:#75715e"></span>
+          <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;td&#39;</span>,<span style="color:#a6e22e">$</span>(<span style="color:#66d9ef">this</span>).<span style="color:#a6e22e">siblings</span>()).<span style="color:#a6e22e">css</span>(<span style="color:#e6db74">&#39;backgroundColor&#39;</span>,<span style="color:#e6db74">&#39;&#39;</span>);
+          <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;td:even&#39;</span>,<span style="color:#a6e22e">$</span>(<span style="color:#66d9ef">this</span>)).<span style="color:#a6e22e">css</span>(<span style="color:#e6db74">&#39;backgroundColor&#39;</span>,<span style="color:#e6db74">&#39;red&#39;</span>);
+          <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;td:odd&#39;</span>,<span style="color:#a6e22e">$</span>(<span style="color:#66d9ef">this</span>)).<span style="color:#a6e22e">css</span>(<span style="color:#e6db74">&#39;backgroundColor&#39;</span>,<span style="color:#e6db74">&#39;yellow&#39;</span>);
         });
 
-        //学习了.hover(,) 函数的使用方式
-        //来的时候是第一个参数
-        //去的时候是第二个参数
-        $('tr').hover(function(){
-          $(this).find('td').addClass('hover');
-        },function(){
-          $(this).find('td').removeClass('hover');
+        <span style="color:#75715e">//学习了.hover(,) 函数的使用方式
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//来的时候是第一个参数
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//去的时候是第二个参数
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;tr&#39;</span>).<span style="color:#a6e22e">hover</span>(<span style="color:#66d9ef">function</span>(){
+          <span style="color:#a6e22e">$</span>(<span style="color:#66d9ef">this</span>).<span style="color:#a6e22e">find</span>(<span style="color:#e6db74">&#39;td&#39;</span>).<span style="color:#a6e22e">addClass</span>(<span style="color:#e6db74">&#39;hover&#39;</span>);
+        },<span style="color:#66d9ef">function</span>(){
+          <span style="color:#a6e22e">$</span>(<span style="color:#66d9ef">this</span>).<span style="color:#a6e22e">find</span>(<span style="color:#e6db74">&#39;td&#39;</span>).<span style="color:#a6e22e">removeClass</span>(<span style="color:#e6db74">&#39;hover&#39;</span>);
         });
 
 
-        //l列的追踪
-        $('td').hover(function(){
-          var $index=$(this).index();
-          $(this).addClass('hover');
-          $('td:nth-child('+($index+1)+')').addClass('hover');
-        },function(){
-          $('#tb tr').children().removeClass('hover');
+        <span style="color:#75715e">//l列的追踪
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;td&#39;</span>).<span style="color:#a6e22e">hover</span>(<span style="color:#66d9ef">function</span>(){
+          <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">$index</span><span style="color:#f92672">=</span><span style="color:#a6e22e">$</span>(<span style="color:#66d9ef">this</span>).<span style="color:#a6e22e">index</span>();
+          <span style="color:#a6e22e">$</span>(<span style="color:#66d9ef">this</span>).<span style="color:#a6e22e">addClass</span>(<span style="color:#e6db74">&#39;hover&#39;</span>);
+          <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;td:nth-child(&#39;</span><span style="color:#f92672">+</span>(<span style="color:#a6e22e">$index</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;)&#39;</span>).<span style="color:#a6e22e">addClass</span>(<span style="color:#e6db74">&#39;hover&#39;</span>);
+        },<span style="color:#66d9ef">function</span>(){
+          <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;#tb tr&#39;</span>).<span style="color:#a6e22e">children</span>().<span style="color:#a6e22e">removeClass</span>(<span style="color:#e6db74">&#39;hover&#39;</span>);
         });
-        alert('Total rows:'+$('#tb tr').length);
+        <span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;Total rows:&#39;</span><span style="color:#f92672">+</span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;#tb tr&#39;</span>).<span style="color:#a6e22e">length</span>);
 
 
       })
-    &lt;/script&gt;
+    &lt;/<span style="color:#f92672">script</span>&gt;
 
     
-   &lt;style type=&quot;text/css&quot;&gt;
-     .hover
+   &lt;<span style="color:#f92672">style</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/css&#34;</span>&gt;
+     .<span style="color:#a6e22e">hover</span>
      {
-       color:#fff;
-       background-color:gray;
+       <span style="color:#66d9ef">color</span>:<span style="color:#ae81ff">#fff</span>;
+       <span style="color:#66d9ef">background-color</span>:<span style="color:#66d9ef">gray</span>;
      }
-      .cls
+      .<span style="color:#a6e22e">cls</span>
       {
-        background-color:black;
+        <span style="color:#66d9ef">background-color</span>:<span style="color:#66d9ef">black</span>;
       }
-      td
+      <span style="color:#f92672">td</span>
       {
-        border:1px solid red;
+        <span style="color:#66d9ef">border</span>:<span style="color:#ae81ff">1</span><span style="color:#66d9ef">px</span> <span style="color:#66d9ef">solid</span> <span style="color:#66d9ef">red</span>;
       }
-    &lt;/style&gt;
-  &lt;/head&gt;
+    &lt;/<span style="color:#f92672">style</span>&gt;
+  &lt;/<span style="color:#f92672">head</span>&gt;
 
-  &lt;body&gt;
-    &lt;table id=&quot;tb&quot; style=&quot;width:2\450px;height:20px;text-align:center; font-size:14px ;border:1px solid black;cursor:pointer&quot;&gt;
-      &lt;tr&gt;
-        &lt;td&gt;First&lt;/td&gt;
-        &lt;td&gt;Second&lt;/td&gt;
-        &lt;td&gt;Third&lt;/td&gt;
-        &lt;td&gt;Fourth&lt;/td&gt;
-        &lt;td&gt;Fifth&lt;/td&gt;
-        &lt;td&gt;Sixth&lt;/td&gt;
-        &lt;td&gt;Seventh&lt;/td&gt;
-        &lt;td&gt;eighth&lt;/td&gt;
-        &lt;td&gt;nineth&lt;/td&gt;
-        &lt;td&gt;tenth&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-        &lt;td&gt;First&lt;/td&gt;
-        &lt;td&gt;Second&lt;/td&gt;
-        &lt;td&gt;Third&lt;/td&gt;
-        &lt;td&gt;Fourth&lt;/td&gt;
-        &lt;td&gt;Fifth&lt;/td&gt;
-        &lt;td&gt;Sixth&lt;/td&gt;
-        &lt;td&gt;Seventh&lt;/td&gt;
-        &lt;td&gt;eighth&lt;/td&gt;
-        &lt;td&gt;nineth&lt;/td&gt;
-        &lt;td&gt;tenth&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-        &lt;td&gt;First&lt;/td&gt;
-        &lt;td&gt;Second&lt;/td&gt;
-        &lt;td&gt;Third&lt;/td&gt;
-        &lt;td&gt;Fourth&lt;/td&gt;
-        &lt;td&gt;Fifth&lt;/td&gt;
-        &lt;td&gt;Sixth&lt;/td&gt;
-        &lt;td&gt;Seventh&lt;/td&gt;
-        &lt;td&gt;eighth&lt;/td&gt;
-        &lt;td&gt;nineth&lt;/td&gt;
-        &lt;td&gt;tenth&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-        &lt;td&gt;First&lt;/td&gt;
-        &lt;td&gt;Second&lt;/td&gt;
-        &lt;td&gt;Third&lt;/td&gt;
-        &lt;td&gt;Fourth&lt;/td&gt;
-        &lt;td&gt;Fifth&lt;/td&gt;
-        &lt;td&gt;Sixth&lt;/td&gt;
-        &lt;td&gt;Seventh&lt;/td&gt;
-        &lt;td&gt;eighth&lt;/td&gt;
-        &lt;td&gt;nineth&lt;/td&gt;
-        &lt;td&gt;tenth&lt;/td&gt;
-      &lt;/tr&gt;
+  &lt;<span style="color:#f92672">body</span>&gt;
+    &lt;<span style="color:#f92672">table</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;tb&#34;</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;width:2\450px;height:20px;text-align:center; font-size:14px ;border:1px solid black;cursor:pointer&#34;</span>&gt;
+      &lt;<span style="color:#f92672">tr</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;First&lt;/<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;Second&lt;/<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;Third&lt;/<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;Fourth&lt;/<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;Fifth&lt;/<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;Sixth&lt;/<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;Seventh&lt;/<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;eighth&lt;/<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;nineth&lt;/<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;tenth&lt;/<span style="color:#f92672">td</span>&gt;
+      &lt;/<span style="color:#f92672">tr</span>&gt;
+      &lt;<span style="color:#f92672">tr</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;First&lt;/<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;Second&lt;/<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;Third&lt;/<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;Fourth&lt;/<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;Fifth&lt;/<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;Sixth&lt;/<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;Seventh&lt;/<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;eighth&lt;/<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;nineth&lt;/<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;tenth&lt;/<span style="color:#f92672">td</span>&gt;
+      &lt;/<span style="color:#f92672">tr</span>&gt;
+      &lt;<span style="color:#f92672">tr</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;First&lt;/<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;Second&lt;/<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;Third&lt;/<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;Fourth&lt;/<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;Fifth&lt;/<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;Sixth&lt;/<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;Seventh&lt;/<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;eighth&lt;/<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;nineth&lt;/<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;tenth&lt;/<span style="color:#f92672">td</span>&gt;
+      &lt;/<span style="color:#f92672">tr</span>&gt;
+      &lt;<span style="color:#f92672">tr</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;First&lt;/<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;Second&lt;/<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;Third&lt;/<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;Fourth&lt;/<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;Fifth&lt;/<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;Sixth&lt;/<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;Seventh&lt;/<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;eighth&lt;/<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;nineth&lt;/<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;tenth&lt;/<span style="color:#f92672">td</span>&gt;
+      &lt;/<span style="color:#f92672">tr</span>&gt;
 
-    &lt;/table&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-
-<p>一个有趣的分页</p>
-
+    &lt;/<span style="color:#f92672">table</span>&gt;
+  &lt;/<span style="color:#f92672">body</span>&gt;
+&lt;/<span style="color:#f92672">html</span>&gt;
+</code></pre></div><p>一个有趣的分页</p>
 <p>奇巧淫技</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#75715e">&lt;!DOCTYPE html PUBLIC &#34;-//W3C//DTD XHTML 1.0 Transitional//EN&#34; &#34;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&#34;&gt;</span>
 
-<pre><code class="language-html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;
-
-&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
-&lt;head&gt;
-    &lt;title&gt;&lt;/title&gt;
-    &lt;style type=&quot;text/css&quot;&gt;
-   .page
+&lt;<span style="color:#f92672">html</span> <span style="color:#a6e22e">xmlns</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;http://www.w3.org/1999/xhtml&#34;</span>&gt;
+&lt;<span style="color:#f92672">head</span>&gt;
+    &lt;<span style="color:#f92672">title</span>&gt;&lt;/<span style="color:#f92672">title</span>&gt;
+    &lt;<span style="color:#f92672">style</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/css&#34;</span>&gt;
+   .<span style="color:#a6e22e">page</span>
    {
-       margin:5px;
+       <span style="color:#66d9ef">margin</span>:<span style="color:#ae81ff">5</span><span style="color:#66d9ef">px</span>;
    }
-   .hover
+   .<span style="color:#a6e22e">hover</span>
    {
-       background-color:#00f;
-       color:#fff;
-       cursor:hand;
+       <span style="color:#66d9ef">background-color</span>:<span style="color:#ae81ff">#00f</span>;
+       <span style="color:#66d9ef">color</span>:<span style="color:#ae81ff">#fff</span>;
+       <span style="color:#66d9ef">cursor</span>:hand;
    }
-    &lt;/style&gt;
+    &lt;/<span style="color:#f92672">style</span>&gt;
 
-     &lt;script src=&quot;jquery-2.1.3.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
-     &lt;script type=&quot;text/javascript&quot;&gt;
+     &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;jquery-2.1.3.js&#34;</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/javascript&#34;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;
+     &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/javascript&#34;</span>&gt;
 
-         $(document).ready(function () {
-           //实际的效果是在先前的表格中进行隐藏和显示的小伎俩！ 奇巧淫技
-           //get the rows
-             var $rows = $('table tbody tr').length;
-          // get the show lines  页面行数
-             var $pagesize = 2;
-          //总页数
-             var $pagecount = Math.ceil($rows / $pagesize);
-          //创建一个层
-             var $div = $('&lt;div id=&quot;pages&quot;&gt;&lt;/div&gt;');
-          //在层中加入page
-             for (var i = 0; i &lt; $pagecount; i++) {
-               //把创建的东西加入到层中
-                 $('&lt;span class=&quot;page&quot;&gt;' + (i + 1) + '&lt;/span&gt;').appendTo($div);
+         <span style="color:#a6e22e">$</span>(document).<span style="color:#a6e22e">ready</span>(<span style="color:#66d9ef">function</span> () {
+           <span style="color:#75715e">//实际的效果是在先前的表格中进行隐藏和显示的小伎俩！ 奇巧淫技
+</span><span style="color:#75715e"></span>           <span style="color:#75715e">//get the rows
+</span><span style="color:#75715e"></span>             <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">$rows</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;table tbody tr&#39;</span>).<span style="color:#a6e22e">length</span>;
+          <span style="color:#75715e">// get the show lines  页面行数
+</span><span style="color:#75715e"></span>             <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">$pagesize</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;
+          <span style="color:#75715e">//总页数
+</span><span style="color:#75715e"></span>             <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">$pagecount</span> <span style="color:#f92672">=</span> Math.<span style="color:#a6e22e">ceil</span>(<span style="color:#a6e22e">$rows</span> <span style="color:#f92672">/</span> <span style="color:#a6e22e">$pagesize</span>);
+          <span style="color:#75715e">//创建一个层
+</span><span style="color:#75715e"></span>             <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">$div</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;&lt;div id=&#34;pages&#34;&gt;&lt;/div&gt;&#39;</span>);
+          <span style="color:#75715e">//在层中加入page
+</span><span style="color:#75715e"></span>             <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">$pagecount</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) {
+               <span style="color:#75715e">//把创建的东西加入到层中
+</span><span style="color:#75715e"></span>                 <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;&lt;span class=&#34;page&#34;&gt;&#39;</span> <span style="color:#f92672">+</span> (<span style="color:#a6e22e">i</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;&lt;/span&gt;&#39;</span>).<span style="color:#a6e22e">appendTo</span>(<span style="color:#a6e22e">$div</span>);
              }
-             $div.appendTo('table');
+             <span style="color:#a6e22e">$div</span>.<span style="color:#a6e22e">appendTo</span>(<span style="color:#e6db74">&#39;table&#39;</span>);
 
-             //appendd the hover
-             //设置页面的数字的悬浮效果
-             $('.page').hover(function () {
-                 $(this).addClass('hover');
-             }, function () {
-                 $(this).removeClass('hover');
+             <span style="color:#75715e">//appendd the hover
+</span><span style="color:#75715e"></span>             <span style="color:#75715e">//设置页面的数字的悬浮效果
+</span><span style="color:#75715e"></span>             <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;.page&#39;</span>).<span style="color:#a6e22e">hover</span>(<span style="color:#66d9ef">function</span> () {
+                 <span style="color:#a6e22e">$</span>(<span style="color:#66d9ef">this</span>).<span style="color:#a6e22e">addClass</span>(<span style="color:#e6db74">&#39;hover&#39;</span>);
+             }, <span style="color:#66d9ef">function</span> () {
+                 <span style="color:#a6e22e">$</span>(<span style="color:#66d9ef">this</span>).<span style="color:#a6e22e">removeClass</span>(<span style="color:#e6db74">&#39;hover&#39;</span>);
              });
 
-             //增加了页面行的点击隐藏的事件
-             $('table tbody tr').click(function(){
-               $(this).hide();
+             <span style="color:#75715e">//增加了页面行的点击隐藏的事件
+</span><span style="color:#75715e"></span>             <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;table tbody tr&#39;</span>).<span style="color:#a6e22e">click</span>(<span style="color:#66d9ef">function</span>(){
+               <span style="color:#a6e22e">$</span>(<span style="color:#66d9ef">this</span>).<span style="color:#a6e22e">hide</span>();
 
              })
-             //隐藏所有行
-             $('table tbody tr').hide();
-             //获得所有的tr行对象
-             var tr = $('table tbody tr');
-             for (var i = 0; i &lt; $pagecount - 1; i++) {
-                 $(tr[i]).show();
+             <span style="color:#75715e">//隐藏所有行
+</span><span style="color:#75715e"></span>             <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;table tbody tr&#39;</span>).<span style="color:#a6e22e">hide</span>();
+             <span style="color:#75715e">//获得所有的tr行对象
+</span><span style="color:#75715e"></span>             <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">tr</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;table tbody tr&#39;</span>);
+             <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">$pagecount</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) {
+                 <span style="color:#a6e22e">$</span>(<span style="color:#a6e22e">tr</span>[<span style="color:#a6e22e">i</span>]).<span style="color:#a6e22e">show</span>();
              }
 
-             //设置页面的点击事件 效果
-             $('span').click(function () {
-                 $('table tbody tr').hide();
-                 for (i = ($(this).text() - 1) * $pagesize; i &lt;= $(this).text() * $pagesize - 1; i++) {
-                     $(tr[i]).show();
+             <span style="color:#75715e">//设置页面的点击事件 效果
+</span><span style="color:#75715e"></span>             <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;span&#39;</span>).<span style="color:#a6e22e">click</span>(<span style="color:#66d9ef">function</span> () {
+                 <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;table tbody tr&#39;</span>).<span style="color:#a6e22e">hide</span>();
+                 <span style="color:#66d9ef">for</span> (<span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">$</span>(<span style="color:#66d9ef">this</span>).<span style="color:#a6e22e">text</span>() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> <span style="color:#a6e22e">$pagesize</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;=</span> <span style="color:#a6e22e">$</span>(<span style="color:#66d9ef">this</span>).<span style="color:#a6e22e">text</span>() <span style="color:#f92672">*</span> <span style="color:#a6e22e">$pagesize</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) {
+                     <span style="color:#a6e22e">$</span>(<span style="color:#a6e22e">tr</span>[<span style="color:#a6e22e">i</span>]).<span style="color:#a6e22e">show</span>();
                  }
              })
          });
-     &lt;/script&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;table border=&quot;1&quot; width=&quot;200px&quot;&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;ID&lt;/th&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Mark&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;&lt;td&gt;100&lt;/td&gt;&lt;td&gt;Steven&lt;/td&gt;&lt;td&gt;100&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;101&lt;/td&gt;&lt;td&gt;Mike&lt;/td&gt;&lt;td&gt;70&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;102&lt;/td&gt;&lt;td&gt;Robot&lt;/td&gt;&lt;td&gt;80&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;103&lt;/td&gt;&lt;td&gt;Perry&lt;/td&gt;&lt;td&gt;100&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;104&lt;/td&gt;&lt;td&gt;Lion&lt;/td&gt;&lt;td&gt;90&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;105&lt;/td&gt;&lt;td&gt;Andy&lt;/td&gt;&lt;td&gt;85&lt;/td&gt;&lt;/tr&gt;
-&lt;/tbody&gt;
+     &lt;/<span style="color:#f92672">script</span>&gt;
+&lt;/<span style="color:#f92672">head</span>&gt;
+&lt;<span style="color:#f92672">body</span>&gt;
+&lt;<span style="color:#f92672">table</span> <span style="color:#a6e22e">border</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;1&#34;</span> <span style="color:#a6e22e">width</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;200px&#34;</span>&gt;
+&lt;<span style="color:#f92672">thead</span>&gt;
+&lt;<span style="color:#f92672">tr</span>&gt;
+&lt;<span style="color:#f92672">th</span>&gt;ID&lt;/<span style="color:#f92672">th</span>&gt;&lt;<span style="color:#f92672">th</span>&gt;Name&lt;/<span style="color:#f92672">th</span>&gt;&lt;<span style="color:#f92672">th</span>&gt;Mark&lt;/<span style="color:#f92672">th</span>&gt;
+&lt;/<span style="color:#f92672">tr</span>&gt;
+&lt;/<span style="color:#f92672">thead</span>&gt;
+&lt;<span style="color:#f92672">tbody</span>&gt;
+&lt;<span style="color:#f92672">tr</span>&gt;&lt;<span style="color:#f92672">td</span>&gt;100&lt;/<span style="color:#f92672">td</span>&gt;&lt;<span style="color:#f92672">td</span>&gt;Steven&lt;/<span style="color:#f92672">td</span>&gt;&lt;<span style="color:#f92672">td</span>&gt;100&lt;/<span style="color:#f92672">td</span>&gt;&lt;/<span style="color:#f92672">tr</span>&gt;
+&lt;<span style="color:#f92672">tr</span>&gt;&lt;<span style="color:#f92672">td</span>&gt;101&lt;/<span style="color:#f92672">td</span>&gt;&lt;<span style="color:#f92672">td</span>&gt;Mike&lt;/<span style="color:#f92672">td</span>&gt;&lt;<span style="color:#f92672">td</span>&gt;70&lt;/<span style="color:#f92672">td</span>&gt;&lt;/<span style="color:#f92672">tr</span>&gt;
+&lt;<span style="color:#f92672">tr</span>&gt;&lt;<span style="color:#f92672">td</span>&gt;102&lt;/<span style="color:#f92672">td</span>&gt;&lt;<span style="color:#f92672">td</span>&gt;Robot&lt;/<span style="color:#f92672">td</span>&gt;&lt;<span style="color:#f92672">td</span>&gt;80&lt;/<span style="color:#f92672">td</span>&gt;&lt;/<span style="color:#f92672">tr</span>&gt;
+&lt;<span style="color:#f92672">tr</span>&gt;&lt;<span style="color:#f92672">td</span>&gt;103&lt;/<span style="color:#f92672">td</span>&gt;&lt;<span style="color:#f92672">td</span>&gt;Perry&lt;/<span style="color:#f92672">td</span>&gt;&lt;<span style="color:#f92672">td</span>&gt;100&lt;/<span style="color:#f92672">td</span>&gt;&lt;/<span style="color:#f92672">tr</span>&gt;
+&lt;<span style="color:#f92672">tr</span>&gt;&lt;<span style="color:#f92672">td</span>&gt;104&lt;/<span style="color:#f92672">td</span>&gt;&lt;<span style="color:#f92672">td</span>&gt;Lion&lt;/<span style="color:#f92672">td</span>&gt;&lt;<span style="color:#f92672">td</span>&gt;90&lt;/<span style="color:#f92672">td</span>&gt;&lt;/<span style="color:#f92672">tr</span>&gt;
+&lt;<span style="color:#f92672">tr</span>&gt;&lt;<span style="color:#f92672">td</span>&gt;105&lt;/<span style="color:#f92672">td</span>&gt;&lt;<span style="color:#f92672">td</span>&gt;Andy&lt;/<span style="color:#f92672">td</span>&gt;&lt;<span style="color:#f92672">td</span>&gt;85&lt;/<span style="color:#f92672">td</span>&gt;&lt;/<span style="color:#f92672">tr</span>&gt;
+&lt;/<span style="color:#f92672">tbody</span>&gt;
 
-&lt;/table&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-
-<p>一个小练习： 东西部篮球队</p>
-
+&lt;/<span style="color:#f92672">table</span>&gt;
+&lt;/<span style="color:#f92672">body</span>&gt;
+&lt;/<span style="color:#f92672">html</span>&gt;
+</code></pre></div><p>一个小练习： 东西部篮球队</p>
 <p>注意：
-       //可不敢再犯这个错误   1  逗号写成了句话   2： siblings后直接街上css的参数
-          //$(this).css(&lsquo;backgroundColor&rsquo;.&lsquo;red&rsquo;).siblings()&lsquo;backgroundColor&rsquo;,&ldquo;);</p>
-
+//可不敢再犯这个错误   1  逗号写成了句话   2： siblings后直接街上css的参数
+//$(this).css(&lsquo;backgroundColor&rsquo;.&lsquo;red&rsquo;).siblings()&lsquo;backgroundColor&rsquo;,'');</p>
 <pre><code>      //由此错误可得到一个结论
       // jQuery分成两个部分一个是获得Dom对象  紧接着是设置CSS样式！
       // 也就是js其实就是把这两个部分按照链条一样一对一对的串起来了
       //一个Dom一个Css  然后再一个Dom 一个CSS
 </code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">Html</span>&gt;
+  &lt;<span style="color:#f92672">Head</span>&gt;
+    &lt;<span style="color:#f92672">Meta</span> <span style="color:#a6e22e">charset</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;utf-8&#34;</span>&gt;
+    &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/javascript&#34;</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;jquery-2.1.3.js&#34;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;
 
-<pre><code class="language-html">&lt;Html&gt;
-  &lt;Head&gt;
-    &lt;Meta charset=&quot;utf-8&quot;&gt;
-    &lt;script type=&quot;text/javascript&quot; src=&quot;jquery-2.1.3.js&quot;&gt;&lt;/script&gt;
-
-    &lt;script type=&quot;text/javascript&quot;&gt;
-      $(function(){
-        $('ol li').mouseover(function(){
-          //可不敢再犯这个错误   1  逗号写成了句话   2： siblings后直接街上css的参数
-          //$(this).css('backgroundColor'.'red').siblings()'backgroundColor','');
-
-          //由此错误可得到一个结论
-          // jQuery分成两个部分一个是获得Dom对象  紧接着是设置CSS样式！
-          // 也就是js其实就是把这两个部分按照链条一样一对一对的串起来了
-          //一个Dom一个Css  然后再一个Dom 一个CSS
-          $(this).css('backgroundColor','red').siblings().css('backgroundColor','');
+    &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/javascript&#34;</span>&gt;
+      <span style="color:#a6e22e">$</span>(<span style="color:#66d9ef">function</span>(){
+        <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;ol li&#39;</span>).<span style="color:#a6e22e">mouseover</span>(<span style="color:#66d9ef">function</span>(){
+          <span style="color:#75715e">//可不敢再犯这个错误   1  逗号写成了句话   2： siblings后直接街上css的参数
+</span><span style="color:#75715e"></span>          <span style="color:#75715e">//$(this).css(&#39;backgroundColor&#39;.&#39;red&#39;).siblings()&#39;backgroundColor&#39;,&#39;&#39;);
+</span><span style="color:#75715e"></span>
+          <span style="color:#75715e">//由此错误可得到一个结论
+</span><span style="color:#75715e"></span>          <span style="color:#75715e">// jQuery分成两个部分一个是获得Dom对象  紧接着是设置CSS样式！
+</span><span style="color:#75715e"></span>          <span style="color:#75715e">// 也就是js其实就是把这两个部分按照链条一样一对一对的串起来了
+</span><span style="color:#75715e"></span>          <span style="color:#75715e">//一个Dom一个Css  然后再一个Dom 一个CSS
+</span><span style="color:#75715e"></span>          <span style="color:#a6e22e">$</span>(<span style="color:#66d9ef">this</span>).<span style="color:#a6e22e">css</span>(<span style="color:#e6db74">&#39;backgroundColor&#39;</span>,<span style="color:#e6db74">&#39;red&#39;</span>).<span style="color:#a6e22e">siblings</span>().<span style="color:#a6e22e">css</span>(<span style="color:#e6db74">&#39;backgroundColor&#39;</span>,<span style="color:#e6db74">&#39;&#39;</span>);
         });
-        $('ol li').click(function()
+        <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;ol li&#39;</span>).<span style="color:#a6e22e">click</span>(<span style="color:#66d9ef">function</span>()
            {
 
-             //第一种写法
-//             $(this).prevAll().css('backgroundColor','blue');
-//             $(this).nextAll().css('backgroundColor','yellow');
-
-             //第二种写法
-             //end的作用就是从前面所有 又跳回到$(this)的作用！！关键点是end() 这样才可以帮助我们就你行链式编程
-             $(this).prevAll().css('backgroundColor','blue').end().nextAll().css('backgroundColor','yellow');
+             <span style="color:#75715e">//第一种写法
+</span><span style="color:#75715e"></span><span style="color:#75715e">//             $(this).prevAll().css(&#39;backgroundColor&#39;,&#39;blue&#39;);
+</span><span style="color:#75715e"></span><span style="color:#75715e">//             $(this).nextAll().css(&#39;backgroundColor&#39;,&#39;yellow&#39;);
+</span><span style="color:#75715e"></span>
+             <span style="color:#75715e">//第二种写法
+</span><span style="color:#75715e"></span>             <span style="color:#75715e">//end的作用就是从前面所有 又跳回到$(this)的作用！！关键点是end() 这样才可以帮助我们就你行链式编程
+</span><span style="color:#75715e"></span>             <span style="color:#a6e22e">$</span>(<span style="color:#66d9ef">this</span>).<span style="color:#a6e22e">prevAll</span>().<span style="color:#a6e22e">css</span>(<span style="color:#e6db74">&#39;backgroundColor&#39;</span>,<span style="color:#e6db74">&#39;blue&#39;</span>).<span style="color:#a6e22e">end</span>().<span style="color:#a6e22e">nextAll</span>().<span style="color:#a6e22e">css</span>(<span style="color:#e6db74">&#39;backgroundColor&#39;</span>,<span style="color:#e6db74">&#39;yellow&#39;</span>);
            })
       });
-    &lt;/script&gt;
+    &lt;/<span style="color:#f92672">script</span>&gt;
 
-  &lt;/Head&gt;
+  &lt;/<span style="color:#f92672">Head</span>&gt;
 
-  &lt;Body&gt;
-    &lt;Ol id=&quot;east&quot;&gt;
-      &lt;Li&gt;亚特兰大 老鹰&lt;/Li&gt;
-      &lt;Li&gt;芝加哥 公牛&lt;/Li&gt;
-      &lt;Li&gt;波士顿 凯尔特人&lt;/Li&gt;
-      &lt;Li&gt;夏洛特 黄蜂&lt;/Li&gt;
-      &lt;Li&gt;克利夫兰 骑士&lt;/Li&gt;
-      &lt;Li&gt;布鲁克林 篮网&lt;/Li&gt;
-      &lt;Li&gt;迈阿密 热火&lt;/Li&gt;
-      &lt;Li&gt;底特律 活塞&lt;/Li&gt;
-      &lt;Li&gt;纽约 尼克斯&lt;/Li&gt;
-      &lt;Li&gt;奥兰多 魔术&lt;/Li&gt;
-      &lt;Li&gt;印第安纳 步行者&lt;/Li&gt;
-      &lt;Li&gt;费城 76人&lt;/Li&gt;
-      &lt;Li&gt;华盛顿 奇才&lt;/Li&gt;
-      &lt;Li&gt;密尔沃基 雄鹿&lt;/Li&gt;
-      &lt;Li&gt;多伦多 猛龙&lt;/Li&gt;
-    &lt;/Ol&gt;
-    &lt;Ol id=&quot;west&quot;&gt;
-      &lt;Li&gt;金州 勇士&lt;/Li&gt;
-      &lt;Li&gt;丹佛 掘金&lt;/Li&gt;
-      &lt;Li&gt;达拉斯 小牛&lt;/Li&gt;
-      &lt;Li&gt;洛杉矶 快船&lt;/Li&gt;
-      &lt;Li&gt;明尼苏达 森林狼&lt;/Li&gt;
-      &lt;Li&gt;休斯顿 火箭&lt;/Li&gt;
-      &lt;Li&gt;洛杉矶 湖人&lt;/Li&gt;
-      &lt;Li&gt;奥克兰陈马成 雷霆&lt;/Li&gt;
-      &lt;Li&gt;孟菲斯 灰熊&lt;/Li&gt;
-      &lt;Li&gt;菲尼克斯 太阳&lt;/Li&gt;
-      &lt;Li&gt;波特兰 开拓者&lt;/Li&gt;
-      &lt;Li&gt;新奥尔良 鹈鹕&lt;/Li&gt;
-      &lt;Li&gt;萨克拉门托 国王&lt;/Li&gt;
-      &lt;Li&gt;犹他 爵士&lt;/Li&gt;
-      &lt;Li&gt;圣安东尼奥 马刺&lt;/Li&gt;
-    &lt;/Ol&gt;
-    &lt;Ul id=&quot;other&quot;&gt;
-      &lt;Li&gt;步行者&lt;/Li&gt;
-      &lt;Li&gt;山猫&lt;/Li&gt;
-    &lt;/Ul&gt;
-  &lt;/Body&gt;
-&lt;/Html&gt;
-</code></pre>
-
-<p>7：过滤器的练习</p>
-
+  &lt;<span style="color:#f92672">Body</span>&gt;
+    &lt;<span style="color:#f92672">Ol</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;east&#34;</span>&gt;
+      &lt;<span style="color:#f92672">Li</span>&gt;亚特兰大 老鹰&lt;/<span style="color:#f92672">Li</span>&gt;
+      &lt;<span style="color:#f92672">Li</span>&gt;芝加哥 公牛&lt;/<span style="color:#f92672">Li</span>&gt;
+      &lt;<span style="color:#f92672">Li</span>&gt;波士顿 凯尔特人&lt;/<span style="color:#f92672">Li</span>&gt;
+      &lt;<span style="color:#f92672">Li</span>&gt;夏洛特 黄蜂&lt;/<span style="color:#f92672">Li</span>&gt;
+      &lt;<span style="color:#f92672">Li</span>&gt;克利夫兰 骑士&lt;/<span style="color:#f92672">Li</span>&gt;
+      &lt;<span style="color:#f92672">Li</span>&gt;布鲁克林 篮网&lt;/<span style="color:#f92672">Li</span>&gt;
+      &lt;<span style="color:#f92672">Li</span>&gt;迈阿密 热火&lt;/<span style="color:#f92672">Li</span>&gt;
+      &lt;<span style="color:#f92672">Li</span>&gt;底特律 活塞&lt;/<span style="color:#f92672">Li</span>&gt;
+      &lt;<span style="color:#f92672">Li</span>&gt;纽约 尼克斯&lt;/<span style="color:#f92672">Li</span>&gt;
+      &lt;<span style="color:#f92672">Li</span>&gt;奥兰多 魔术&lt;/<span style="color:#f92672">Li</span>&gt;
+      &lt;<span style="color:#f92672">Li</span>&gt;印第安纳 步行者&lt;/<span style="color:#f92672">Li</span>&gt;
+      &lt;<span style="color:#f92672">Li</span>&gt;费城 76人&lt;/<span style="color:#f92672">Li</span>&gt;
+      &lt;<span style="color:#f92672">Li</span>&gt;华盛顿 奇才&lt;/<span style="color:#f92672">Li</span>&gt;
+      &lt;<span style="color:#f92672">Li</span>&gt;密尔沃基 雄鹿&lt;/<span style="color:#f92672">Li</span>&gt;
+      &lt;<span style="color:#f92672">Li</span>&gt;多伦多 猛龙&lt;/<span style="color:#f92672">Li</span>&gt;
+    &lt;/<span style="color:#f92672">Ol</span>&gt;
+    &lt;<span style="color:#f92672">Ol</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;west&#34;</span>&gt;
+      &lt;<span style="color:#f92672">Li</span>&gt;金州 勇士&lt;/<span style="color:#f92672">Li</span>&gt;
+      &lt;<span style="color:#f92672">Li</span>&gt;丹佛 掘金&lt;/<span style="color:#f92672">Li</span>&gt;
+      &lt;<span style="color:#f92672">Li</span>&gt;达拉斯 小牛&lt;/<span style="color:#f92672">Li</span>&gt;
+      &lt;<span style="color:#f92672">Li</span>&gt;洛杉矶 快船&lt;/<span style="color:#f92672">Li</span>&gt;
+      &lt;<span style="color:#f92672">Li</span>&gt;明尼苏达 森林狼&lt;/<span style="color:#f92672">Li</span>&gt;
+      &lt;<span style="color:#f92672">Li</span>&gt;休斯顿 火箭&lt;/<span style="color:#f92672">Li</span>&gt;
+      &lt;<span style="color:#f92672">Li</span>&gt;洛杉矶 湖人&lt;/<span style="color:#f92672">Li</span>&gt;
+      &lt;<span style="color:#f92672">Li</span>&gt;奥克兰陈马成 雷霆&lt;/<span style="color:#f92672">Li</span>&gt;
+      &lt;<span style="color:#f92672">Li</span>&gt;孟菲斯 灰熊&lt;/<span style="color:#f92672">Li</span>&gt;
+      &lt;<span style="color:#f92672">Li</span>&gt;菲尼克斯 太阳&lt;/<span style="color:#f92672">Li</span>&gt;
+      &lt;<span style="color:#f92672">Li</span>&gt;波特兰 开拓者&lt;/<span style="color:#f92672">Li</span>&gt;
+      &lt;<span style="color:#f92672">Li</span>&gt;新奥尔良 鹈鹕&lt;/<span style="color:#f92672">Li</span>&gt;
+      &lt;<span style="color:#f92672">Li</span>&gt;萨克拉门托 国王&lt;/<span style="color:#f92672">Li</span>&gt;
+      &lt;<span style="color:#f92672">Li</span>&gt;犹他 爵士&lt;/<span style="color:#f92672">Li</span>&gt;
+      &lt;<span style="color:#f92672">Li</span>&gt;圣安东尼奥 马刺&lt;/<span style="color:#f92672">Li</span>&gt;
+    &lt;/<span style="color:#f92672">Ol</span>&gt;
+    &lt;<span style="color:#f92672">Ul</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;other&#34;</span>&gt;
+      &lt;<span style="color:#f92672">Li</span>&gt;步行者&lt;/<span style="color:#f92672">Li</span>&gt;
+      &lt;<span style="color:#f92672">Li</span>&gt;山猫&lt;/<span style="color:#f92672">Li</span>&gt;
+    &lt;/<span style="color:#f92672">Ul</span>&gt;
+  &lt;/<span style="color:#f92672">Body</span>&gt;
+&lt;/<span style="color:#f92672">Html</span>&gt;
+</code></pre></div><p>7：过滤器的练习</p>
 <p>注意：
-   even和odd选择器     index从0开始。</p>
+even和odd选择器     index从0开始。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">html</span>&gt;
+  &lt;<span style="color:#f92672">head</span>&gt;
+    &lt;<span style="color:#f92672">title</span>&gt;  test  the start mark&lt;/<span style="color:#f92672">title</span>&gt;
+    &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/javascript&#34;</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;jquery-2.1.3.js&#34;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;
+    &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/javascript&#34;</span>&gt;
+      <span style="color:#a6e22e">$</span>(<span style="color:#66d9ef">function</span>(){
+        <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;#btnFirst&#39;</span>).<span style="color:#a6e22e">click</span>(<span style="color:#66d9ef">function</span>(){
+          <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;div:first&#39;</span>).<span style="color:#a6e22e">css</span>(<span style="color:#e6db74">&#39;backgroundColor&#39;</span>,<span style="color:#e6db74">&#39;green&#39;</span>).<span style="color:#a6e22e">siblings</span>().<span style="color:#a6e22e">css</span>(<span style="color:#e6db74">&#39;backgroundColor&#39;</span>,<span style="color:#e6db74">&#39;blue&#39;</span>);
+        });
+        <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;#btnFirst2&#39;</span>).<span style="color:#a6e22e">click</span>(<span style="color:#66d9ef">function</span>(){
+          <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;div&#39;</span>).<span style="color:#a6e22e">first</span>().<span style="color:#a6e22e">css</span>(<span style="color:#e6db74">&#39;backgroundColor&#39;</span>,<span style="color:#e6db74">&#39;red&#39;</span>).<span style="color:#a6e22e">siblings</span>().<span style="color:#a6e22e">css</span>(<span style="color:#e6db74">&#39;backgroundColor&#39;</span>,<span style="color:#e6db74">&#39;blue&#39;</span>);
+        });
+        <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;#Last&#39;</span>).<span style="color:#a6e22e">click</span>(<span style="color:#66d9ef">function</span>(){
+          <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;div:last&#39;</span>).<span style="color:#a6e22e">css</span>(<span style="color:#e6db74">&#39;backgroundColor&#39;</span>,<span style="color:#e6db74">&#39;purple&#39;</span>).<span style="color:#a6e22e">siblings</span>().<span style="color:#a6e22e">css</span>(<span style="color:#e6db74">&#39;backgroundColor&#39;</span>,<span style="color:#e6db74">&#39;blue&#39;</span>);
+        });
+        <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;#Last2&#39;</span>).<span style="color:#a6e22e">click</span>(<span style="color:#66d9ef">function</span>(){
+          <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;div&#39;</span>).<span style="color:#a6e22e">last</span>().<span style="color:#a6e22e">css</span>(<span style="color:#e6db74">&#39;backgroundColor&#39;</span>,<span style="color:#e6db74">&#39;red&#39;</span>).<span style="color:#a6e22e">siblings</span>().<span style="color:#a6e22e">css</span>(<span style="color:#e6db74">&#39;backgroundColor&#39;</span>,<span style="color:#e6db74">&#39;blue&#39;</span>);
+        });
 
-<pre><code class="language-html">&lt;html&gt;
-  &lt;head&gt;
-    &lt;title&gt;  test  the start mark&lt;/title&gt;
-    &lt;script type=&quot;text/javascript&quot; src=&quot;jquery-2.1.3.js&quot;&gt;&lt;/script&gt;
-    &lt;script type=&quot;text/javascript&quot;&gt;
-      $(function(){
-        $('#btnFirst').click(function(){
-          $('div:first').css('backgroundColor','green').siblings().css('backgroundColor','blue');
+        <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;#eq2&#39;</span>).<span style="color:#a6e22e">click</span>(<span style="color:#66d9ef">function</span>(){
+          <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;div:eq(2)&#39;</span>).<span style="color:#a6e22e">css</span>(<span style="color:#e6db74">&#39;backgroundColor&#39;</span>,<span style="color:#e6db74">&#39;black&#39;</span>).<span style="color:#a6e22e">siblings</span>().<span style="color:#a6e22e">css</span>(<span style="color:#e6db74">&#39;backgroundColor&#39;</span>,<span style="color:#e6db74">&#39;blue&#39;</span>);
         });
-        $('#btnFirst2').click(function(){
-          $('div').first().css('backgroundColor','red').siblings().css('backgroundColor','blue');
+        <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;#lt2&#39;</span>).<span style="color:#a6e22e">click</span>(<span style="color:#66d9ef">function</span>(){
+          <span style="color:#75715e">//范围性内容 不能用siblings
+</span><span style="color:#75715e"></span>          <span style="color:#75715e">//$(&#39;div:lt(2)&#39;).css(&#39;backgroundColor&#39;,&#39;black&#39;).siblings().css(&#39;backgroundColor&#39;,&#39;blue&#39;);
+</span><span style="color:#75715e"></span>          <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;div:lt(2)&#39;</span>).<span style="color:#a6e22e">css</span>(<span style="color:#e6db74">&#39;backgroundColor&#39;</span>,<span style="color:#e6db74">&#39;black&#39;</span>);
         });
-        $('#Last').click(function(){
-          $('div:last').css('backgroundColor','purple').siblings().css('backgroundColor','blue');
+        <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;#gt2&#39;</span>).<span style="color:#a6e22e">click</span>(<span style="color:#66d9ef">function</span>(){
+        <span style="color:#75715e">// $(&#39;div:gt(2)&#39;).css(&#39;backgroundColor&#39;,&#39;red&#39;).siblings().css(&#39;backgroundColor&#39;,&#39;blue&#39;);
+</span><span style="color:#75715e"></span>          <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;div:gt(2)&#39;</span>).<span style="color:#a6e22e">css</span>(<span style="color:#e6db74">&#39;backgroundColor&#39;</span>,<span style="color:#e6db74">&#39;red&#39;</span>);
         });
-        $('#Last2').click(function(){
-          $('div').last().css('backgroundColor','red').siblings().css('backgroundColor','blue');
+        <span style="color:#75715e">//下标从0开始  index 所以表面上even是第一个元素 
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;#even2&#39;</span>).<span style="color:#a6e22e">click</span>(<span style="color:#66d9ef">function</span>(){
+         <span style="color:#75715e">// $(&#39;div:even&#39;).css(&#39;backgroundColor&#39;,&#39;red&#39;).siblings().css(&#39;backgroundColor&#39;,&#39;blue&#39;);
+</span><span style="color:#75715e"></span>          <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;div:even&#39;</span>).<span style="color:#a6e22e">css</span>(<span style="color:#e6db74">&#39;backgroundColor&#39;</span>,<span style="color:#e6db74">&#39;red&#39;</span>);
         });
-
-        $('#eq2').click(function(){
-          $('div:eq(2)').css('backgroundColor','black').siblings().css('backgroundColor','blue');
+        <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;#odd2&#39;</span>).<span style="color:#a6e22e">click</span>(<span style="color:#66d9ef">function</span>(){
+          <span style="color:#75715e">//$(&#39;div:odd&#39;).css(&#39;backgroundColor&#39;,&#39;red&#39;).siblings().css(&#39;backgroundColor&#39;,&#39;blue&#39;);
+</span><span style="color:#75715e"></span>          <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;div:odd&#39;</span>).<span style="color:#a6e22e">css</span>(<span style="color:#e6db74">&#39;backgroundColor&#39;</span>,<span style="color:#e6db74">&#39;red&#39;</span>);
         });
-        $('#lt2').click(function(){
-          //范围性内容 不能用siblings
-          //$('div:lt(2)').css('backgroundColor','black').siblings().css('backgroundColor','blue');
-          $('div:lt(2)').css('backgroundColor','black');
+        <span style="color:#75715e">// 当然也是可以组合起来  $(&#39;div:gt(3):lt(2)&#39;)
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// $(&#39;div:not(.cls)&#39;)
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;#olivenot&#39;</span>).<span style="color:#a6e22e">click</span>(<span style="color:#66d9ef">function</span>(){
+          <span style="color:#75715e">//必须加上. 句话才是有效的
+</span><span style="color:#75715e"></span>          <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;div:not(.cls)&#39;</span>).<span style="color:#a6e22e">css</span>(<span style="color:#e6db74">&#39;backgroundColor&#39;</span>,<span style="color:#e6db74">&#39;yellow&#39;</span>);
         });
-        $('#gt2').click(function(){
-        // $('div:gt(2)').css('backgroundColor','red').siblings().css('backgroundColor','blue');
-          $('div:gt(2)').css('backgroundColor','red');
-        });
-        //下标从0开始  index 所以表面上even是第一个元素 
-        $('#even2').click(function(){
-         // $('div:even').css('backgroundColor','red').siblings().css('backgroundColor','blue');
-          $('div:even').css('backgroundColor','red');
-        });
-        $('#odd2').click(function(){
-          //$('div:odd').css('backgroundColor','red').siblings().css('backgroundColor','blue');
-          $('div:odd').css('backgroundColor','red');
-        });
-        // 当然也是可以组合起来  $('div:gt(3):lt(2)')
-        // $('div:not(.cls)')
-        $('#olivenot').click(function(){
-          //必须加上. 句话才是有效的
-          $('div:not(.cls)').css('backgroundColor','yellow');
-        });
-      $('#header1').click(function(){
-        $('h1,h2,h3,h4,h5,h6').css('backgroundColor','gray');
+      <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;#header1&#39;</span>).<span style="color:#a6e22e">click</span>(<span style="color:#66d9ef">function</span>(){
+        <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;h1,h2,h3,h4,h5,h6&#39;</span>).<span style="color:#a6e22e">css</span>(<span style="color:#e6db74">&#39;backgroundColor&#39;</span>,<span style="color:#e6db74">&#39;gray&#39;</span>);
       });
-      $('#header2').click(function(){
-        $(':header').css('backgroundColor','yellow');
+      <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;#header2&#39;</span>).<span style="color:#a6e22e">click</span>(<span style="color:#66d9ef">function</span>(){
+        <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;:header&#39;</span>).<span style="color:#a6e22e">css</span>(<span style="color:#e6db74">&#39;backgroundColor&#39;</span>,<span style="color:#e6db74">&#39;yellow&#39;</span>);
       });
 
 
 
       });
-    &lt;/script&gt;
-    &lt;style type=&quot;text/css&quot;&gt;
-      div
+    &lt;/<span style="color:#f92672">script</span>&gt;
+    &lt;<span style="color:#f92672">style</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/css&#34;</span>&gt;
+      <span style="color:#f92672">div</span>
       {
-        width:150px;
-        height:30px;
-        margin-bottom:10px;
-        background-color:blue;
+        <span style="color:#66d9ef">width</span>:<span style="color:#ae81ff">150</span><span style="color:#66d9ef">px</span>;
+        <span style="color:#66d9ef">height</span>:<span style="color:#ae81ff">30</span><span style="color:#66d9ef">px</span>;
+        <span style="color:#66d9ef">margin-bottom</span>:<span style="color:#ae81ff">10</span><span style="color:#66d9ef">px</span>;
+        <span style="color:#66d9ef">background-color</span>:<span style="color:#66d9ef">blue</span>;
       }
-      td
+      <span style="color:#f92672">td</span>
       {
-        border:1px solid red;
+        <span style="color:#66d9ef">border</span>:<span style="color:#ae81ff">1</span><span style="color:#66d9ef">px</span> <span style="color:#66d9ef">solid</span> <span style="color:#66d9ef">red</span>;
       }
-      .cls
+      .<span style="color:#a6e22e">cls</span>
       {
-           background-color:olive;
+           <span style="color:#66d9ef">background-color</span>:<span style="color:#66d9ef">olive</span>;
       }
-    &lt;/style&gt;
-  &lt;/head&gt;
+    &lt;/<span style="color:#f92672">style</span>&gt;
+  &lt;/<span style="color:#f92672">head</span>&gt;
 
 
-  &lt;body&gt;
-    &lt;Input type=&quot;button&quot; id=&quot;btnFirst&quot; value=&quot;divColorToGreenFirst&quot;/&gt;
-    &lt;Input type=&quot;button&quot; id=&quot;btnFirst2&quot; value=&quot;divColorToGreenFirst2&quot;/&gt;
-    &lt;Input type=&quot;button&quot; id=&quot;Last&quot; value=&quot;divColorToGreenLast&quot;/&gt;
-    &lt;Input type=&quot;button&quot; id=&quot;Last2&quot; value=&quot;divColorToGreenLast2&quot;/&gt;
-    &lt;Input type=&quot;button&quot; id=&quot;gt2&quot; value=&quot;divColorToGreenGreater2&quot;/&gt;
-    &lt;Input type=&quot;button&quot; id=&quot;eq2&quot; value=&quot;divColorToGreenEqual2&quot;/&gt;
-    &lt;Input type=&quot;button&quot; id=&quot;lt2&quot; value=&quot;divColorToGreenLess2&quot;/&gt;
-    &lt;Input type=&quot;button&quot; id=&quot;even2&quot; value=&quot;divColorToGreenEven&quot;/&gt;
-    &lt;Input type=&quot;button&quot; id=&quot;odd2&quot; value=&quot;divColorToGreenOdd&quot;/&gt;
-    &lt;Input type=&quot;button&quot; id=&quot;olivenot&quot; value=&quot;not olive&quot;/&gt;
-    &lt;Input type=&quot;button&quot; id=&quot;header1&quot; value=&quot;header1&quot;/&gt;
-    &lt;Input type=&quot;button&quot; id=&quot;header2&quot; value=&quot;header2&quot;/&gt;
-    &lt;Div&gt;&lt;/Div&gt;
-    &lt;Div&gt;&lt;/Div&gt;
-    &lt;Div class=&quot;cls&quot;&gt;&lt;/Div&gt;
-    &lt;Div&gt;&lt;/Div&gt;
-    &lt;Div&gt;&lt;/Div&gt;
+  &lt;<span style="color:#f92672">body</span>&gt;
+    &lt;<span style="color:#f92672">Input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;button&#34;</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;btnFirst&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;divColorToGreenFirst&#34;</span>/&gt;
+    &lt;<span style="color:#f92672">Input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;button&#34;</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;btnFirst2&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;divColorToGreenFirst2&#34;</span>/&gt;
+    &lt;<span style="color:#f92672">Input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;button&#34;</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Last&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;divColorToGreenLast&#34;</span>/&gt;
+    &lt;<span style="color:#f92672">Input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;button&#34;</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Last2&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;divColorToGreenLast2&#34;</span>/&gt;
+    &lt;<span style="color:#f92672">Input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;button&#34;</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;gt2&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;divColorToGreenGreater2&#34;</span>/&gt;
+    &lt;<span style="color:#f92672">Input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;button&#34;</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;eq2&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;divColorToGreenEqual2&#34;</span>/&gt;
+    &lt;<span style="color:#f92672">Input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;button&#34;</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;lt2&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;divColorToGreenLess2&#34;</span>/&gt;
+    &lt;<span style="color:#f92672">Input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;button&#34;</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;even2&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;divColorToGreenEven&#34;</span>/&gt;
+    &lt;<span style="color:#f92672">Input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;button&#34;</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;odd2&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;divColorToGreenOdd&#34;</span>/&gt;
+    &lt;<span style="color:#f92672">Input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;button&#34;</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;olivenot&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;not olive&#34;</span>/&gt;
+    &lt;<span style="color:#f92672">Input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;button&#34;</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;header1&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;header1&#34;</span>/&gt;
+    &lt;<span style="color:#f92672">Input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;button&#34;</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;header2&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;header2&#34;</span>/&gt;
+    &lt;<span style="color:#f92672">Div</span>&gt;&lt;/<span style="color:#f92672">Div</span>&gt;
+    &lt;<span style="color:#f92672">Div</span>&gt;&lt;/<span style="color:#f92672">Div</span>&gt;
+    &lt;<span style="color:#f92672">Div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;cls&#34;</span>&gt;&lt;/<span style="color:#f92672">Div</span>&gt;
+    &lt;<span style="color:#f92672">Div</span>&gt;&lt;/<span style="color:#f92672">Div</span>&gt;
+    &lt;<span style="color:#f92672">Div</span>&gt;&lt;/<span style="color:#f92672">Div</span>&gt;
 
-    &lt;H1&gt;Header 1&lt;/H1&gt;
-    &lt;H2&gt;Header 2&lt;/H2&gt;
-    &lt;H3&gt;Header 3&lt;/H3&gt;
-    &lt;H4&gt;Header 4&lt;/H4&gt;
-    &lt;H5&gt;Header 5&lt;/H5&gt;
-    &lt;H6&gt;Header 6&lt;/H6&gt;
+    &lt;<span style="color:#f92672">H1</span>&gt;Header 1&lt;/<span style="color:#f92672">H1</span>&gt;
+    &lt;<span style="color:#f92672">H2</span>&gt;Header 2&lt;/<span style="color:#f92672">H2</span>&gt;
+    &lt;<span style="color:#f92672">H3</span>&gt;Header 3&lt;/<span style="color:#f92672">H3</span>&gt;
+    &lt;<span style="color:#f92672">H4</span>&gt;Header 4&lt;/<span style="color:#f92672">H4</span>&gt;
+    &lt;<span style="color:#f92672">H5</span>&gt;Header 5&lt;/<span style="color:#f92672">H5</span>&gt;
+    &lt;<span style="color:#f92672">H6</span>&gt;Header 6&lt;/<span style="color:#f92672">H6</span>&gt;
       
-  &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
+  &lt;/<span style="color:#f92672">body</span>&gt;
+&lt;/<span style="color:#f92672">html</span>&gt;
+</code></pre></div><p>一个有趣的slideup and down 小案例：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#75715e">&lt;!DOCTYPE html PUBLIC &#34;-//W3C//DTD XHTML 1.0 Transitional//EN&#34; &#34;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&#34;&gt;</span>
 
-<p>一个有趣的slideup and down 小案例：</p>
-
-<pre><code class="language-html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;
-
-&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
-&lt;head&gt;
-    &lt;title&gt;&lt;/title&gt;
-    &lt;style type=&quot;text/css&quot;&gt;
-    &lt;/style&gt;
-     &lt;script src=&quot;jquery-2.1.3.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
-     &lt;script type=&quot;text/javascript&quot;&gt;
-         $(document).ready(function () {
-             $('#message1').css({ 'backgroundColor': '#f00', 'text-align': 'center','width':'200px' }).hide();
-             $(&quot;#message2&quot;).css({ 'backgroundColor': 'gray', 'text-align': 'center','width': '200px' }).click(function () {
-                 $(this).slideUp();
-                 $(&quot;#message1&quot;).slideDown();
+&lt;<span style="color:#f92672">html</span> <span style="color:#a6e22e">xmlns</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;http://www.w3.org/1999/xhtml&#34;</span>&gt;
+&lt;<span style="color:#f92672">head</span>&gt;
+    &lt;<span style="color:#f92672">title</span>&gt;&lt;/<span style="color:#f92672">title</span>&gt;
+    &lt;<span style="color:#f92672">style</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/css&#34;</span>&gt;
+    &lt;/<span style="color:#f92672">style</span>&gt;
+     &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;jquery-2.1.3.js&#34;</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/javascript&#34;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;
+     &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/javascript&#34;</span>&gt;
+         <span style="color:#a6e22e">$</span>(document).<span style="color:#a6e22e">ready</span>(<span style="color:#66d9ef">function</span> () {
+             <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;#message1&#39;</span>).<span style="color:#a6e22e">css</span>({ <span style="color:#e6db74">&#39;backgroundColor&#39;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;#f00&#39;</span>, <span style="color:#e6db74">&#39;text-align&#39;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;center&#39;</span>,<span style="color:#e6db74">&#39;width&#39;</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#39;200px&#39;</span> }).<span style="color:#a6e22e">hide</span>();
+             <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;#message2&#34;</span>).<span style="color:#a6e22e">css</span>({ <span style="color:#e6db74">&#39;backgroundColor&#39;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;gray&#39;</span>, <span style="color:#e6db74">&#39;text-align&#39;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;center&#39;</span>,<span style="color:#e6db74">&#39;width&#39;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;200px&#39;</span> }).<span style="color:#a6e22e">click</span>(<span style="color:#66d9ef">function</span> () {
+                 <span style="color:#a6e22e">$</span>(<span style="color:#66d9ef">this</span>).<span style="color:#a6e22e">slideUp</span>();
+                 <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;#message1&#34;</span>).<span style="color:#a6e22e">slideDown</span>();
              });
          });
-     &lt;/script&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;p id=&quot;message1&quot;&gt;Welome to My Blog&lt;/p&gt;
+     &lt;/<span style="color:#f92672">script</span>&gt;
+&lt;/<span style="color:#f92672">head</span>&gt;
+&lt;<span style="color:#f92672">body</span>&gt;
+&lt;<span style="color:#f92672">p</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;message1&#34;</span>&gt;Welome to My Blog&lt;/<span style="color:#f92672">p</span>&gt;
 
-&lt;p id=&quot;message2&quot;&gt;Welcome to My Facebook&lt;/p&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-
-<p>8： 评分和addClass</p>
-
+&lt;<span style="color:#f92672">p</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;message2&#34;</span>&gt;Welcome to My Facebook&lt;/<span style="color:#f92672">p</span>&gt;
+&lt;/<span style="color:#f92672">body</span>&gt;
+&lt;/<span style="color:#f92672">html</span>&gt;
+</code></pre></div><p>8： 评分和addClass</p>
 <p>.end()断链的使用，之所以要断链也是因为返回来的是集合，而不是原先的对象
 注意：
-      //测试开关灯
-      //隐含着规律是：jquery获得的都是集合的元素
-    //做判断一定得是 $(function(){})里面中</p>
-
+//测试开关灯
+//隐含着规律是：jquery获得的都是集合的元素
+//做判断一定得是 $(function(){})里面中</p>
 <p>五角星是直接输入，而不是通过图片</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">html</span>&gt;
+  &lt;<span style="color:#f92672">head</span>&gt;
+    &lt;<span style="color:#f92672">title</span>&gt;  test  the start mark&lt;/<span style="color:#f92672">title</span>&gt;
+    &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/javascript&#34;</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;jquery-2.1.3.js&#34;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;
+    &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/javascript&#34;</span>&gt;
 
-<pre><code class="language-html">&lt;html&gt;
-  &lt;head&gt;
-    &lt;title&gt;  test  the start mark&lt;/title&gt;
-    &lt;script type=&quot;text/javascript&quot; src=&quot;jquery-2.1.3.js&quot;&gt;&lt;/script&gt;
-    &lt;script type=&quot;text/javascript&quot;&gt;
-
-      // 测试评分
-      $(function(){
-        $('#tb td').mouseover(function(){
-            //$(this).prevall().css('backgroundcolor','red');
-            $(this).text('○').prevall().text('○').end().nextall().text('☆');
+      <span style="color:#75715e">// 测试评分
+</span><span style="color:#75715e"></span>      <span style="color:#a6e22e">$</span>(<span style="color:#66d9ef">function</span>(){
+        <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;#tb td&#39;</span>).<span style="color:#a6e22e">mouseover</span>(<span style="color:#66d9ef">function</span>(){
+            <span style="color:#75715e">//$(this).prevall().css(&#39;backgroundcolor&#39;,&#39;red&#39;);
+</span><span style="color:#75715e"></span>            <span style="color:#a6e22e">$</span>(<span style="color:#66d9ef">this</span>).<span style="color:#a6e22e">text</span>(<span style="color:#e6db74">&#39;○&#39;</span>).<span style="color:#a6e22e">prevall</span>().<span style="color:#a6e22e">text</span>(<span style="color:#e6db74">&#39;○&#39;</span>).<span style="color:#a6e22e">end</span>().<span style="color:#a6e22e">nextall</span>().<span style="color:#a6e22e">text</span>(<span style="color:#e6db74">&#39;☆&#39;</span>);
         });
-        $('#tb td').mouseout(function()
+        <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;#tb td&#39;</span>).<span style="color:#a6e22e">mouseout</span>(<span style="color:#66d9ef">function</span>()
         {
-          $('#tb td').text('☆');
+          <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;#tb td&#39;</span>).<span style="color:#a6e22e">text</span>(<span style="color:#e6db74">&#39;☆&#39;</span>);
         });
       });
-    &lt;/script&gt;
+    &lt;/<span style="color:#f92672">script</span>&gt;
 
     
-    &lt;script type=&quot;text/javascript&quot;&gt;
-      //测试开关灯
-      //隐含着规律是：jquery获得的都是集合的元素
-    //做判断一定得是 $(function(){})里面中
-    $(function(){
-      if($('#btn').length&gt;0)
+    &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/javascript&#34;</span>&gt;
+      <span style="color:#75715e">//测试开关灯
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">//隐含着规律是：jquery获得的都是集合的元素
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//做判断一定得是 $(function(){})里面中
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">$</span>(<span style="color:#66d9ef">function</span>(){
+      <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;#btn&#39;</span>).<span style="color:#a6e22e">length</span><span style="color:#f92672">&gt;</span><span style="color:#ae81ff">0</span>)
         {
-          alert('存在id=#tb的标签');
-        }else
+          <span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;存在id=#tb的标签&#39;</span>);
+        }<span style="color:#66d9ef">else</span>
         {
-          alert('不存在id=#tb的标签');
+          <span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;不存在id=#tb的标签&#39;</span>);
         }
-        $('#btnopen').click(function(){
-          $('body').addclass('cls');
+        <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;#btnopen&#39;</span>).<span style="color:#a6e22e">click</span>(<span style="color:#66d9ef">function</span>(){
+          <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;body&#39;</span>).<span style="color:#a6e22e">addclass</span>(<span style="color:#e6db74">&#39;cls&#39;</span>);
         });
-        $('#btnclose').click(function(){
-          $('body').removeclass('cls');
+        <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;#btnclose&#39;</span>).<span style="color:#a6e22e">click</span>(<span style="color:#66d9ef">function</span>(){
+          <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;body&#39;</span>).<span style="color:#a6e22e">removeclass</span>(<span style="color:#e6db74">&#39;cls&#39;</span>);
         });
-        $('#btncloseopen').click(function(){
-          if($('body').hasclass('cls'))
+        <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;#btncloseopen&#39;</span>).<span style="color:#a6e22e">click</span>(<span style="color:#66d9ef">function</span>(){
+          <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;body&#39;</span>).<span style="color:#a6e22e">hasclass</span>(<span style="color:#e6db74">&#39;cls&#39;</span>))
             {
-                $('body').removeclass('cls');
-            }else
+                <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;body&#39;</span>).<span style="color:#a6e22e">removeclass</span>(<span style="color:#e6db74">&#39;cls&#39;</span>);
+            }<span style="color:#66d9ef">else</span>
             {
-                $('body').addclass('cls');
+                <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;body&#39;</span>).<span style="color:#a6e22e">addclass</span>(<span style="color:#e6db74">&#39;cls&#39;</span>);
 
             }
         });
-        $('#btncloseopen2').click(function(){
-            $('body').toggleclass('cls');
+        <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;#btncloseopen2&#39;</span>).<span style="color:#a6e22e">click</span>(<span style="color:#66d9ef">function</span>(){
+            <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;body&#39;</span>).<span style="color:#a6e22e">toggleclass</span>(<span style="color:#e6db74">&#39;cls&#39;</span>);
         });
 
     });
 
 
-    &lt;/script&gt;
-    &lt;style type=&quot;text/css&quot;&gt;
-      .cls
+    &lt;/<span style="color:#f92672">script</span>&gt;
+    &lt;<span style="color:#f92672">style</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/css&#34;</span>&gt;
+      .<span style="color:#a6e22e">cls</span>
       {
-        background-color:black;
+        <span style="color:#66d9ef">background-color</span>:<span style="color:#66d9ef">black</span>;
       }
-      td
+      <span style="color:#f92672">td</span>
       {
-        border:1px solid red;
+        <span style="color:#66d9ef">border</span>:<span style="color:#ae81ff">1</span><span style="color:#66d9ef">px</span> <span style="color:#66d9ef">solid</span> <span style="color:#66d9ef">red</span>;
       }
-    &lt;/style&gt;
-  &lt;/head&gt;
+    &lt;/<span style="color:#f92672">style</span>&gt;
+  &lt;/<span style="color:#f92672">head</span>&gt;
 
-  &lt;body&gt;
-    &lt;table id=&quot;tb&quot; style=&quot;width:250px;height:20px;text-align:center; font-size:20px ;border:1px solid black;cursor:pointer&quot;&gt;
-      &lt;tr&gt;
-        &lt;td&gt;☆&lt;/td&gt;
-        &lt;td&gt;☆&lt;/td&gt;
-        &lt;td&gt;☆&lt;/td&gt;
-        &lt;td&gt;☆&lt;/td&gt;
-        &lt;td&gt;☆&lt;/td&gt;
-      &lt;/tr&gt;
-    &lt;/table&gt;
-    &lt;input type='button' name=&quot;hello&quot; value=&quot;hello&quot; id=&quot;btn&quot;/&gt;
-    &lt;input type='button' name=&quot;open&quot; value=&quot;turn on the light&quot; id=&quot;btnopen&quot;/&gt;
-    &lt;input type='button' name=&quot;close&quot; value=&quot;turn off the light&quot; id=&quot;btnclose&quot;/&gt;
-    &lt;input type='button' name=&quot;openclose&quot; value=&quot;turn off|on the light&quot; id=&quot;btncloseopen&quot;/&gt;
-    &lt;input type='button' name=&quot;openclose2&quot; value=&quot;turn off|on the light2&quot; id=&quot;btncloseopen2&quot;/&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-
-<p>两个综合实验：</p>
-
+  &lt;<span style="color:#f92672">body</span>&gt;
+    &lt;<span style="color:#f92672">table</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;tb&#34;</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;width:250px;height:20px;text-align:center; font-size:20px ;border:1px solid black;cursor:pointer&#34;</span>&gt;
+      &lt;<span style="color:#f92672">tr</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;☆&lt;/<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;☆&lt;/<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;☆&lt;/<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;☆&lt;/<span style="color:#f92672">td</span>&gt;
+        &lt;<span style="color:#f92672">td</span>&gt;☆&lt;/<span style="color:#f92672">td</span>&gt;
+      &lt;/<span style="color:#f92672">tr</span>&gt;
+    &lt;/<span style="color:#f92672">table</span>&gt;
+    &lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;button&#39;</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;hello&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;hello&#34;</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;btn&#34;</span>/&gt;
+    &lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;button&#39;</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;open&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;turn on the light&#34;</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;btnopen&#34;</span>/&gt;
+    &lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;button&#39;</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;close&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;turn off the light&#34;</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;btnclose&#34;</span>/&gt;
+    &lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;button&#39;</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;openclose&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;turn off|on the light&#34;</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;btncloseopen&#34;</span>/&gt;
+    &lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;button&#39;</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;openclose2&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;turn off|on the light2&#34;</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;btncloseopen2&#34;</span>/&gt;
+  &lt;/<span style="color:#f92672">body</span>&gt;
+&lt;/<span style="color:#f92672">html</span>&gt;
+</code></pre></div><p>两个综合实验：</p>
 <p>case1: 数组 练习join()
 append()
 sort()
 splice()
 hover()悬停事件
 concat()</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">Html</span>&gt;
+  &lt;<span style="color:#f92672">Head</span>&gt;
+    &lt;<span style="color:#f92672">Title</span>&gt;  test  the start mark&lt;/<span style="color:#f92672">Title</span>&gt;
+    &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/javascript&#34;</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;jquery-2.1.3.js&#34;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;
 
-<pre><code class="language-html">&lt;Html&gt;
-  &lt;Head&gt;
-    &lt;Title&gt;  test  the start mark&lt;/Title&gt;
-    &lt;script type=&quot;text/javascript&quot; src=&quot;jquery-2.1.3.js&quot;&gt;&lt;/script&gt;
-
-    &lt;!--1 touppercase--&gt;
-    &lt;style type=&quot;text/css&quot;&gt;
-      .hover
+    <span style="color:#75715e">&lt;!--</span><span style="color:#75715e">1 touppercase</span><span style="color:#75715e">--&gt;</span>
+    &lt;<span style="color:#f92672">style</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/css&#34;</span>&gt;
+      .<span style="color:#a6e22e">hover</span>
       {
-          background-color:red;
-          font-size:24px;
+          <span style="color:#66d9ef">background-color</span>:<span style="color:#66d9ef">red</span>;
+          <span style="color:#66d9ef">font-size</span>:<span style="color:#ae81ff">24</span><span style="color:#66d9ef">px</span>;
       }
-    &lt;/style&gt;
-    &lt;script type=&quot;text/javascript&quot;&gt;
-      $(function(){
-        //核心：touppercase
-        // Good!  Let the array become beautiful
-        var namePostion=$('#names'); 
-        var Member=['basket','foot','tennis','running','pingpong','net'];
-        // map() 迭代数组中每个元素  并为每个元素分别调用一次回调函数
-        Member =$.map(Member,function(value,index){
-          return(index+1+'.'+value.toUpperCase());
+    &lt;/<span style="color:#f92672">style</span>&gt;
+    &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/javascript&#34;</span>&gt;
+      <span style="color:#a6e22e">$</span>(<span style="color:#66d9ef">function</span>(){
+        <span style="color:#75715e">//核心：touppercase
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// Good!  Let the array become beautiful
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">namePostion</span><span style="color:#f92672">=</span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;#names&#39;</span>); 
+        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">Member</span><span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;basket&#39;</span>,<span style="color:#e6db74">&#39;foot&#39;</span>,<span style="color:#e6db74">&#39;tennis&#39;</span>,<span style="color:#e6db74">&#39;running&#39;</span>,<span style="color:#e6db74">&#39;pingpong&#39;</span>,<span style="color:#e6db74">&#39;net&#39;</span>];
+        <span style="color:#75715e">// map() 迭代数组中每个元素  并为每个元素分别调用一次回调函数
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">Member</span> <span style="color:#f92672">=</span><span style="color:#a6e22e">$</span>.<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">Member</span>,<span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">value</span>,<span style="color:#a6e22e">index</span>){
+          <span style="color:#66d9ef">return</span>(<span style="color:#a6e22e">index</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span><span style="color:#f92672">+</span><span style="color:#e6db74">&#39;.&#39;</span><span style="color:#f92672">+</span><span style="color:#a6e22e">value</span>.<span style="color:#a6e22e">toUpperCase</span>());
         });
-        $.each(Member,function(index,value){
-          namePostion.append($('&lt;Li class=&quot;sport&quot;&gt;'+value+'&lt;/Li&gt;'));
+        <span style="color:#a6e22e">$</span>.<span style="color:#a6e22e">each</span>(<span style="color:#a6e22e">Member</span>,<span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">index</span>,<span style="color:#a6e22e">value</span>){
+          <span style="color:#a6e22e">namePostion</span>.<span style="color:#a6e22e">append</span>(<span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;&lt;Li class=&#34;sport&#34;&gt;&#39;</span><span style="color:#f92672">+</span><span style="color:#a6e22e">value</span><span style="color:#f92672">+</span><span style="color:#e6db74">&#39;&lt;/Li&gt;&#39;</span>));
         });
 
-        //使用了悬停事件
-        $('.sport').hover(function(){
-           //   alert('ok');
-              $(this).addClass('hover');
-        },function(){
-              $(this).removeClass('hover');
-           //   alert('byel');
-        });
+        <span style="color:#75715e">//使用了悬停事件
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;.sport&#39;</span>).<span style="color:#a6e22e">hover</span>(<span style="color:#66d9ef">function</span>(){
+           <span style="color:#75715e">//   alert(&#39;ok&#39;);
+</span><span style="color:#75715e"></span>              <span style="color:#a6e22e">$</span>(<span style="color:#66d9ef">this</span>).<span style="color:#a6e22e">addClass</span>(<span style="color:#e6db74">&#39;hover&#39;</span>);
+        },<span style="color:#66d9ef">function</span>(){
+              <span style="color:#a6e22e">$</span>(<span style="color:#66d9ef">this</span>).<span style="color:#a6e22e">removeClass</span>(<span style="color:#e6db74">&#39;hover&#39;</span>);
+           <span style="color:#75715e">//   alert(&#39;byel&#39;);
+</span><span style="color:#75715e"></span>        });
 
       })
-    &lt;/script&gt;
-    &lt;!--2 grep--&gt;
-    &lt;style type=&quot;text/css&quot;&gt;
+    &lt;/<span style="color:#f92672">script</span>&gt;
+    <span style="color:#75715e">&lt;!--</span><span style="color:#75715e">2 grep</span><span style="color:#75715e">--&gt;</span>
+    &lt;<span style="color:#f92672">style</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/css&#34;</span>&gt;
       #All
       {
-        background-color:green;
+        <span style="color:#66d9ef">background-color</span>:<span style="color:#66d9ef">green</span>;
 
       }
       #Part
       {
-        background-color:gray;
+        <span style="color:#66d9ef">background-color</span>:<span style="color:#66d9ef">gray</span>;
       }
-    &lt;/style&gt;
-    &lt;script type=&quot;text/javascript&quot;&gt;
-      $(function(){
-        var Member=['basket','foot','tennis','running','pingpong','net'];
-        //一定要注意在p和#All不要加入空格
-        // join通过&lt;br&gt;来划分数组中的元素
-        $('p#All').append(Member.join('&lt;br/&gt;'));
-        //grep() 分析数组的所有元素，把不想要的元素过滤掉。
-        Member = $.grep(Member,function(value){
-          return value.length &gt; 6;
+    &lt;/<span style="color:#f92672">style</span>&gt;
+    &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/javascript&#34;</span>&gt;
+      <span style="color:#a6e22e">$</span>(<span style="color:#66d9ef">function</span>(){
+        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">Member</span><span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;basket&#39;</span>,<span style="color:#e6db74">&#39;foot&#39;</span>,<span style="color:#e6db74">&#39;tennis&#39;</span>,<span style="color:#e6db74">&#39;running&#39;</span>,<span style="color:#e6db74">&#39;pingpong&#39;</span>,<span style="color:#e6db74">&#39;net&#39;</span>];
+        <span style="color:#75715e">//一定要注意在p和#All不要加入空格
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// join通过&lt;br&gt;来划分数组中的元素
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;p#All&#39;</span>).<span style="color:#a6e22e">append</span>(<span style="color:#a6e22e">Member</span>.<span style="color:#a6e22e">join</span>(<span style="color:#e6db74">&#39;&lt;br/&gt;&#39;</span>));
+        <span style="color:#75715e">//grep() 分析数组的所有元素，把不想要的元素过滤掉。
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">Member</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">$</span>.<span style="color:#a6e22e">grep</span>(<span style="color:#a6e22e">Member</span>,<span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">value</span>){
+          <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">value</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">6</span>;
         });
-        $('p#Part').append(Member.join('&lt;br/&gt;'));
+        <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;p#Part&#39;</span>).<span style="color:#a6e22e">append</span>(<span style="color:#a6e22e">Member</span>.<span style="color:#a6e22e">join</span>(<span style="color:#e6db74">&#39;&lt;br/&gt;&#39;</span>));
       });
 
 
-    &lt;/script&gt;
+    &lt;/<span style="color:#f92672">script</span>&gt;
 
-    &lt;!--3 join sort--&gt;
+    <span style="color:#75715e">&lt;!--</span><span style="color:#75715e">3 join sort</span><span style="color:#75715e">--&gt;</span>
 
-    &lt;style type=&quot;text/css&quot;&gt;
+    &lt;<span style="color:#f92672">style</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/css&#34;</span>&gt;
       
-      .All
+      .<span style="color:#a6e22e">All</span>
       {
-        background-color:red;
+        <span style="color:#66d9ef">background-color</span>:<span style="color:#66d9ef">red</span>;
       }
-      .Part
+      .<span style="color:#a6e22e">Part</span>
       {
-        background-color:gray;
+        <span style="color:#66d9ef">background-color</span>:<span style="color:#66d9ef">gray</span>;
       }
-      .AllNumber
+      .<span style="color:#a6e22e">AllNumber</span>
       {
-        background-color:blue;
+        <span style="color:#66d9ef">background-color</span>:<span style="color:#66d9ef">blue</span>;
       }
-      .PartNumber
+      .<span style="color:#a6e22e">PartNumber</span>
       {
-        background-color:lime;
+        <span style="color:#66d9ef">background-color</span>:<span style="color:#66d9ef">lime</span>;
       }
-    &lt;/style&gt;
+    &lt;/<span style="color:#f92672">style</span>&gt;
 
 
 
-    &lt;script type=&quot;text/javascript&quot;&gt;
-      $(function(){
-        var Member=['basket','foot','tennis','running','pingpong','net'];
-        //重复的一个练习
-        $('p.All').append(Member.join('&lt;Br&gt;'));
-        $('p.Part').append(Member.sort().join('&lt;/Br&gt;'));
+    &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/javascript&#34;</span>&gt;
+      <span style="color:#a6e22e">$</span>(<span style="color:#66d9ef">function</span>(){
+        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">Member</span><span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;basket&#39;</span>,<span style="color:#e6db74">&#39;foot&#39;</span>,<span style="color:#e6db74">&#39;tennis&#39;</span>,<span style="color:#e6db74">&#39;running&#39;</span>,<span style="color:#e6db74">&#39;pingpong&#39;</span>,<span style="color:#e6db74">&#39;net&#39;</span>];
+        <span style="color:#75715e">//重复的一个练习
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;p.All&#39;</span>).<span style="color:#a6e22e">append</span>(<span style="color:#a6e22e">Member</span>.<span style="color:#a6e22e">join</span>(<span style="color:#e6db74">&#39;&lt;Br&gt;&#39;</span>));
+        <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;p.Part&#39;</span>).<span style="color:#a6e22e">append</span>(<span style="color:#a6e22e">Member</span>.<span style="color:#a6e22e">sort</span>().<span style="color:#a6e22e">join</span>(<span style="color:#e6db74">&#39;&lt;/Br&gt;&#39;</span>));
 
-        var Number1 = [12,43,2,34,6,34];
-        $('p.AllNumber').append(Number1.join('&lt;Br/&gt;'));
+        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">Number1</span> <span style="color:#f92672">=</span> [<span style="color:#ae81ff">12</span>,<span style="color:#ae81ff">43</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">34</span>,<span style="color:#ae81ff">6</span>,<span style="color:#ae81ff">34</span>];
+        <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;p.AllNumber&#39;</span>).<span style="color:#a6e22e">append</span>(<span style="color:#a6e22e">Number1</span>.<span style="color:#a6e22e">join</span>(<span style="color:#e6db74">&#39;&lt;Br/&gt;&#39;</span>));
 
-        // a b 两个值 进行比较  大的那个放在后排
-        Number1 =  Number1.sort(function(a,b){
-          return a-b;
+        <span style="color:#75715e">// a b 两个值 进行比较  大的那个放在后排
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">Number1</span> <span style="color:#f92672">=</span>  <span style="color:#a6e22e">Number1</span>.<span style="color:#a6e22e">sort</span>(<span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">a</span>,<span style="color:#a6e22e">b</span>){
+          <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">a</span><span style="color:#f92672">-</span><span style="color:#a6e22e">b</span>;
         });
-        $('p.partNumber').append(Number1.join('&lt;Br/&gt;'));
+        <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;p.partNumber&#39;</span>).<span style="color:#a6e22e">append</span>(<span style="color:#a6e22e">Number1</span>.<span style="color:#a6e22e">join</span>(<span style="color:#e6db74">&#39;&lt;Br/&gt;&#39;</span>));
         
       });
 
-    &lt;/script&gt;
+    &lt;/<span style="color:#f92672">script</span>&gt;
 
-    &lt;!--4 splice--&gt;
-    &lt;style type=&quot;text/css&quot;&gt;
+    <span style="color:#75715e">&lt;!--</span><span style="color:#75715e">4 splice</span><span style="color:#75715e">--&gt;</span>
+    &lt;<span style="color:#f92672">style</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/css&#34;</span>&gt;
      
-      .Part1
+      .<span style="color:#a6e22e">Part1</span>
       {
-        background-color:lime;
+        <span style="color:#66d9ef">background-color</span>:<span style="color:#66d9ef">lime</span>;
       }
 
-      .Remain
+      .<span style="color:#a6e22e">Remain</span>
       {
-        background-color:red;
+        <span style="color:#66d9ef">background-color</span>:<span style="color:#66d9ef">red</span>;
       }
-    &lt;/style&gt;
+    &lt;/<span style="color:#f92672">style</span>&gt;
 
 
 
-    &lt;script type=&quot;text/javascript&quot;&gt;
+    &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/javascript&#34;</span>&gt;
 
-      $(function(){
-        var Member=['basket','foot','tennis','running','pingpong','net'];
-        //第一个参数为索引开始   第二个参数为删除的个数     splice作用返回前两个成员到Filter数组
-        var Filter=Member.splice(0,2);
-        $('p.Part1').append(Filter.join('&lt;Br/&gt;'));
-        $('p.Remain').append(Member.join('&lt;Br/&gt;'));
+      <span style="color:#a6e22e">$</span>(<span style="color:#66d9ef">function</span>(){
+        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">Member</span><span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;basket&#39;</span>,<span style="color:#e6db74">&#39;foot&#39;</span>,<span style="color:#e6db74">&#39;tennis&#39;</span>,<span style="color:#e6db74">&#39;running&#39;</span>,<span style="color:#e6db74">&#39;pingpong&#39;</span>,<span style="color:#e6db74">&#39;net&#39;</span>];
+        <span style="color:#75715e">//第一个参数为索引开始   第二个参数为删除的个数     splice作用返回前两个成员到Filter数组
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">Filter</span><span style="color:#f92672">=</span><span style="color:#a6e22e">Member</span>.<span style="color:#a6e22e">splice</span>(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">2</span>);
+        <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;p.Part1&#39;</span>).<span style="color:#a6e22e">append</span>(<span style="color:#a6e22e">Filter</span>.<span style="color:#a6e22e">join</span>(<span style="color:#e6db74">&#39;&lt;Br/&gt;&#39;</span>));
+        <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;p.Remain&#39;</span>).<span style="color:#a6e22e">append</span>(<span style="color:#a6e22e">Member</span>.<span style="color:#a6e22e">join</span>(<span style="color:#e6db74">&#39;&lt;Br/&gt;&#39;</span>));
       })
 
-    &lt;/script&gt;
+    &lt;/<span style="color:#f92672">script</span>&gt;
 
-    &lt;!--5  concat --&gt;
-    &lt;style type=&quot;text/css&quot;&gt;
+    <span style="color:#75715e">&lt;!--</span><span style="color:#75715e">5  concat </span><span style="color:#75715e">--&gt;</span>
+    &lt;<span style="color:#f92672">style</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/css&#34;</span>&gt;
     
-      .First
+      .<span style="color:#a6e22e">First</span>
       {
-        background-color:lime;
+        <span style="color:#66d9ef">background-color</span>:<span style="color:#66d9ef">lime</span>;
       }
-      .Last
+      .<span style="color:#a6e22e">Last</span>
       {
-        background-color:gray;
+        <span style="color:#66d9ef">background-color</span>:<span style="color:#66d9ef">gray</span>;
       }
-      .Whole
+      .<span style="color:#a6e22e">Whole</span>
       {
-        background-color:red;
+        <span style="color:#66d9ef">background-color</span>:<span style="color:#66d9ef">red</span>;
       }
-    &lt;/style&gt;
+    &lt;/<span style="color:#f92672">style</span>&gt;
 
 
 
-    &lt;script type=&quot;text/javascript&quot;&gt;
-      $(function(){
-        var first=['basket','foot','tennis'];
-        var last=['running','pingpong','net'];
-        $('p.First').append(first.join('&lt;Br/&gt;'));
-        $('p.Last').append(last.join('&lt;Br/&gt;'));
-        var whole=first.concat(last);
-        $('p.Whole').append(whole.join('&lt;Br/&gt;'));
+    &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/javascript&#34;</span>&gt;
+      <span style="color:#a6e22e">$</span>(<span style="color:#66d9ef">function</span>(){
+        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">first</span><span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;basket&#39;</span>,<span style="color:#e6db74">&#39;foot&#39;</span>,<span style="color:#e6db74">&#39;tennis&#39;</span>];
+        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">last</span><span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;running&#39;</span>,<span style="color:#e6db74">&#39;pingpong&#39;</span>,<span style="color:#e6db74">&#39;net&#39;</span>];
+        <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;p.First&#39;</span>).<span style="color:#a6e22e">append</span>(<span style="color:#a6e22e">first</span>.<span style="color:#a6e22e">join</span>(<span style="color:#e6db74">&#39;&lt;Br/&gt;&#39;</span>));
+        <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;p.Last&#39;</span>).<span style="color:#a6e22e">append</span>(<span style="color:#a6e22e">last</span>.<span style="color:#a6e22e">join</span>(<span style="color:#e6db74">&#39;&lt;Br/&gt;&#39;</span>));
+        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">whole</span><span style="color:#f92672">=</span><span style="color:#a6e22e">first</span>.<span style="color:#a6e22e">concat</span>(<span style="color:#a6e22e">last</span>);
+        <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;p.Whole&#39;</span>).<span style="color:#a6e22e">append</span>(<span style="color:#a6e22e">whole</span>.<span style="color:#a6e22e">join</span>(<span style="color:#e6db74">&#39;&lt;Br/&gt;&#39;</span>));
       });
 
-    &lt;/script&gt;
+    &lt;/<span style="color:#f92672">script</span>&gt;
 
 
-    &lt;!--6  Json sort--&gt;
-    &lt;style type=&quot;text/css&quot;&gt;
-      .All1
+    <span style="color:#75715e">&lt;!--</span><span style="color:#75715e">6  Json sort</span><span style="color:#75715e">--&gt;</span>
+    &lt;<span style="color:#f92672">style</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/css&#34;</span>&gt;
+      .<span style="color:#a6e22e">All1</span>
       {
-        background-color:green;
+        <span style="color:#66d9ef">background-color</span>:<span style="color:#66d9ef">green</span>;
       }
 
     
-    &lt;/style&gt;
+    &lt;/<span style="color:#f92672">style</span>&gt;
 
 
 
-    &lt;script type=&quot;text/javascript&quot;&gt;
-      $(function(){
-        var students=[{Name:'Qianqian',Role:'Administrator',Age:'45'},
-          {Name:'Lilei',Role:'Programmer',Age:'15'},
-          {Name:'Dongyuliang',Role:'Seller',Age:'25'},
-          {Name:'LiFeng',Role:'manager',Age:'25'},
-          {Name:'zhaoli',Role:'Architector',Age:'35'}
+    &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/javascript&#34;</span>&gt;
+      <span style="color:#a6e22e">$</span>(<span style="color:#66d9ef">function</span>(){
+        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">students</span><span style="color:#f92672">=</span>[{<span style="color:#a6e22e">Name</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#39;Qianqian&#39;</span>,<span style="color:#a6e22e">Role</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#39;Administrator&#39;</span>,<span style="color:#a6e22e">Age</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#39;45&#39;</span>},
+          {<span style="color:#a6e22e">Name</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#39;Lilei&#39;</span>,<span style="color:#a6e22e">Role</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#39;Programmer&#39;</span>,<span style="color:#a6e22e">Age</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#39;15&#39;</span>},
+          {<span style="color:#a6e22e">Name</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#39;Dongyuliang&#39;</span>,<span style="color:#a6e22e">Role</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#39;Seller&#39;</span>,<span style="color:#a6e22e">Age</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#39;25&#39;</span>},
+          {<span style="color:#a6e22e">Name</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#39;LiFeng&#39;</span>,<span style="color:#a6e22e">Role</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#39;manager&#39;</span>,<span style="color:#a6e22e">Age</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#39;25&#39;</span>},
+          {<span style="color:#a6e22e">Name</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#39;zhaoli&#39;</span>,<span style="color:#a6e22e">Role</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#39;Architector&#39;</span>,<span style="color:#a6e22e">Age</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#39;35&#39;</span>}
         ];
 
-        //有点类似 Java中的treeset的作用  需要设置一个比较器
-        students=students.sort(function(studnetA,studentB){
-          if(studnetA.name&gt;studentB.name){
-            return 1;
-          }else if(studnetA.name &lt; studentB.name)
+        <span style="color:#75715e">//有点类似 Java中的treeset的作用  需要设置一个比较器
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">students</span><span style="color:#f92672">=</span><span style="color:#a6e22e">students</span>.<span style="color:#a6e22e">sort</span>(<span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">studnetA</span>,<span style="color:#a6e22e">studentB</span>){
+          <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">studnetA</span>.<span style="color:#a6e22e">name</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">studentB</span>.<span style="color:#a6e22e">name</span>){
+            <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;
+          }<span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">studnetA</span>.<span style="color:#a6e22e">name</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">studentB</span>.<span style="color:#a6e22e">name</span>)
           {
-            return -1;
-          }else
+            <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+          }<span style="color:#66d9ef">else</span>
           {
-            return 0;
+            <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
           }
         });
-        $.each(students,function(index,value){
-          $('p.All1').append('&lt;Tr&gt;&lt;Td&gt;&gt;'+value.Name+'&lt;/Td&gt;&lt;Td&gt;'+value.Role+'&lt;/Td&gt;&lt;Td&gt;'+value.Age+'&lt;/Td&gt;&lt;/Tr&gt;');
+        <span style="color:#a6e22e">$</span>.<span style="color:#a6e22e">each</span>(<span style="color:#a6e22e">students</span>,<span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">index</span>,<span style="color:#a6e22e">value</span>){
+          <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;p.All1&#39;</span>).<span style="color:#a6e22e">append</span>(<span style="color:#e6db74">&#39;&lt;Tr&gt;&lt;Td&gt;&gt;&#39;</span><span style="color:#f92672">+</span><span style="color:#a6e22e">value</span>.<span style="color:#a6e22e">Name</span><span style="color:#f92672">+</span><span style="color:#e6db74">&#39;&lt;/Td&gt;&lt;Td&gt;&#39;</span><span style="color:#f92672">+</span><span style="color:#a6e22e">value</span>.<span style="color:#a6e22e">Role</span><span style="color:#f92672">+</span><span style="color:#e6db74">&#39;&lt;/Td&gt;&lt;Td&gt;&#39;</span><span style="color:#f92672">+</span><span style="color:#a6e22e">value</span>.<span style="color:#a6e22e">Age</span><span style="color:#f92672">+</span><span style="color:#e6db74">&#39;&lt;/Td&gt;&lt;/Tr&gt;&#39;</span>);
         });
       });
 
-    &lt;/script&gt;
+    &lt;/<span style="color:#f92672">script</span>&gt;
 
-  &lt;/Head&gt;
+  &lt;/<span style="color:#f92672">Head</span>&gt;
 
-  &lt;Body&gt;
-    &lt;p id=&quot;names&quot;&gt;&lt;/P&gt;
+  &lt;<span style="color:#f92672">Body</span>&gt;
+    &lt;<span style="color:#f92672">p</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;names&#34;</span>&gt;&lt;/<span style="color:#f92672">P</span>&gt;
 
-    &lt;hr/&gt;
-    &lt;H3&gt; Member Name&lt;/H3&gt;
-    &lt;P id=&quot;All&quot;&gt;&lt;/P&gt;
-    &lt;H3&gt; Part Name&lt;/H3&gt;
-    &lt;P id=&quot;Part&quot;&gt;&lt;/P&gt;
-    &lt;Hr/&gt;
+    &lt;<span style="color:#f92672">hr</span>/&gt;
+    &lt;<span style="color:#f92672">H3</span>&gt; Member Name&lt;/<span style="color:#f92672">H3</span>&gt;
+    &lt;<span style="color:#f92672">P</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;All&#34;</span>&gt;&lt;/<span style="color:#f92672">P</span>&gt;
+    &lt;<span style="color:#f92672">H3</span>&gt; Part Name&lt;/<span style="color:#f92672">H3</span>&gt;
+    &lt;<span style="color:#f92672">P</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Part&#34;</span>&gt;&lt;/<span style="color:#f92672">P</span>&gt;
+    &lt;<span style="color:#f92672">Hr</span>/&gt;
 
-    &lt;H3&gt;Not sort string array&lt;/H3&gt;
-    &lt;P class=&quot;All&quot;&gt;&lt;/P&gt;
-    &lt;H3&gt; sort string array&lt;/H3&gt;
-    &lt;P class=&quot;Part&quot;&gt;&lt;/P&gt;
-    &lt;H3&gt;Not sort number&lt;/H3&gt;
-    &lt;P class=&quot;AllNumber&quot;&gt;&lt;/P&gt;
-    &lt;H3&gt; sort number&lt;/H3&gt;
-    &lt;P class=&quot;PartNumber&quot;&gt;&lt;/P&gt;
+    &lt;<span style="color:#f92672">H3</span>&gt;Not sort string array&lt;/<span style="color:#f92672">H3</span>&gt;
+    &lt;<span style="color:#f92672">P</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;All&#34;</span>&gt;&lt;/<span style="color:#f92672">P</span>&gt;
+    &lt;<span style="color:#f92672">H3</span>&gt; sort string array&lt;/<span style="color:#f92672">H3</span>&gt;
+    &lt;<span style="color:#f92672">P</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Part&#34;</span>&gt;&lt;/<span style="color:#f92672">P</span>&gt;
+    &lt;<span style="color:#f92672">H3</span>&gt;Not sort number&lt;/<span style="color:#f92672">H3</span>&gt;
+    &lt;<span style="color:#f92672">P</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;AllNumber&#34;</span>&gt;&lt;/<span style="color:#f92672">P</span>&gt;
+    &lt;<span style="color:#f92672">H3</span>&gt; sort number&lt;/<span style="color:#f92672">H3</span>&gt;
+    &lt;<span style="color:#f92672">P</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;PartNumber&#34;</span>&gt;&lt;/<span style="color:#f92672">P</span>&gt;
 
-    &lt;Hr/&gt;
-    &lt;H3&gt;get the  Filer array&lt;/H3&gt;
-    &lt;P class=&quot;Part1&quot;&gt;&lt;/P&gt;
-    &lt;H3&gt;get the remain array&lt;/H3&gt;
-    &lt;P class=&quot;Remain&quot;&gt;&lt;/P&gt;
+    &lt;<span style="color:#f92672">Hr</span>/&gt;
+    &lt;<span style="color:#f92672">H3</span>&gt;get the  Filer array&lt;/<span style="color:#f92672">H3</span>&gt;
+    &lt;<span style="color:#f92672">P</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Part1&#34;</span>&gt;&lt;/<span style="color:#f92672">P</span>&gt;
+    &lt;<span style="color:#f92672">H3</span>&gt;get the remain array&lt;/<span style="color:#f92672">H3</span>&gt;
+    &lt;<span style="color:#f92672">P</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Remain&#34;</span>&gt;&lt;/<span style="color:#f92672">P</span>&gt;
 
-    &lt;Hr/&gt;
-    &lt;H3&gt;Get the First part&lt;/H3&gt;
-    &lt;P class=&quot;First&quot;&gt;&lt;/P&gt;
-    &lt;H3&gt;Get the Last part&lt;/H3&gt;
-    &lt;P class=&quot;Last&quot;&gt;&lt;/P&gt;
-    &lt;H3&gt;Get the Whole part&lt;/H3&gt;
-    &lt;P class=&quot;Whole&quot;&gt;&lt;/P&gt;
-
-
-    &lt;Hr&gt;
-    &lt;H3&gt;Member Info&lt;/H3&gt;
-    &lt;P class=&quot;All1&quot;&gt;&lt;/P&gt;
+    &lt;<span style="color:#f92672">Hr</span>/&gt;
+    &lt;<span style="color:#f92672">H3</span>&gt;Get the First part&lt;/<span style="color:#f92672">H3</span>&gt;
+    &lt;<span style="color:#f92672">P</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;First&#34;</span>&gt;&lt;/<span style="color:#f92672">P</span>&gt;
+    &lt;<span style="color:#f92672">H3</span>&gt;Get the Last part&lt;/<span style="color:#f92672">H3</span>&gt;
+    &lt;<span style="color:#f92672">P</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Last&#34;</span>&gt;&lt;/<span style="color:#f92672">P</span>&gt;
+    &lt;<span style="color:#f92672">H3</span>&gt;Get the Whole part&lt;/<span style="color:#f92672">H3</span>&gt;
+    &lt;<span style="color:#f92672">P</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Whole&#34;</span>&gt;&lt;/<span style="color:#f92672">P</span>&gt;
 
 
-  &lt;/Body&gt;
+    &lt;<span style="color:#f92672">Hr</span>&gt;
+    &lt;<span style="color:#f92672">H3</span>&gt;Member Info&lt;/<span style="color:#f92672">H3</span>&gt;
+    &lt;<span style="color:#f92672">P</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;All1&#34;</span>&gt;&lt;/<span style="color:#f92672">P</span>&gt;
 
-&lt;/Html&gt;
-</code></pre>
 
-<p>case2: 事件触发</p>
+  &lt;/<span style="color:#f92672">Body</span>&gt;
 
+&lt;/<span style="color:#f92672">Html</span>&gt;
+</code></pre></div><p>case2: 事件触发</p>
 <p>bind()
 unbind()
 trigger()
-多类的设置 class=&rdquo;  &ldquo;</p>
+多类的设置 class=&rdquo;  &quot;</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">Html</span>&gt;
+  &lt;<span style="color:#f92672">Head</span>&gt;
+    &lt;<span style="color:#f92672">Title</span>&gt;  test  the common jQuery event &lt;/<span style="color:#f92672">Title</span>&gt;
+    &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/javascript&#34;</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;jquery-2.1.3.js&#34;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;
 
-<pre><code class="language-html">&lt;Html&gt;
-  &lt;Head&gt;
-    &lt;Title&gt;  test  the common jQuery event &lt;/Title&gt;
-    &lt;script type=&quot;text/javascript&quot; src=&quot;jquery-2.1.3.js&quot;&gt;&lt;/script&gt;
 
-
-    &lt;!--1  trigger   bind  unbind--&gt;
-    &lt;style type=&quot;text/css&quot;&gt;
-      .Red
+    <span style="color:#75715e">&lt;!--</span><span style="color:#75715e">1  trigger   bind  unbind</span><span style="color:#75715e">--&gt;</span>
+    &lt;<span style="color:#f92672">style</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/css&#34;</span>&gt;
+      .<span style="color:#a6e22e">Red</span>
       {
-          color:red;
+          <span style="color:#66d9ef">color</span>:<span style="color:#66d9ef">red</span>;
       }
-      .Green
+      .<span style="color:#a6e22e">Green</span>
       {
-        color:green;
+        <span style="color:#66d9ef">color</span>:<span style="color:#66d9ef">green</span>;
       }
-      .unbind
+      .<span style="color:#a6e22e">unbind</span>
       {
-        color:lime
+        <span style="color:#66d9ef">color</span>:<span style="color:#66d9ef">lime</span>
       }
-      .buttons
+      .<span style="color:#a6e22e">buttons</span>
       {
-        width:150px;
-        height:20px;
-        margin:5px;
-        border:2px solid;
-        float:left;
-        font-weight:bold;
-        background-color:gray;
+        <span style="color:#66d9ef">width</span>:<span style="color:#ae81ff">150</span><span style="color:#66d9ef">px</span>;
+        <span style="color:#66d9ef">height</span>:<span style="color:#ae81ff">20</span><span style="color:#66d9ef">px</span>;
+        <span style="color:#66d9ef">margin</span>:<span style="color:#ae81ff">5</span><span style="color:#66d9ef">px</span>;
+        <span style="color:#66d9ef">border</span>:<span style="color:#ae81ff">2</span><span style="color:#66d9ef">px</span> <span style="color:#66d9ef">solid</span>;
+        <span style="color:#66d9ef">float</span>:<span style="color:#66d9ef">left</span>;
+        <span style="color:#66d9ef">font-weight</span>:<span style="color:#66d9ef">bold</span>;
+        <span style="color:#66d9ef">background-color</span>:<span style="color:#66d9ef">gray</span>;
       }
-      .Down
+      .<span style="color:#a6e22e">Down</span>
       {
-        color:green;
+        <span style="color:#66d9ef">color</span>:<span style="color:#66d9ef">green</span>;
       }
-      .Up
+      .<span style="color:#a6e22e">Up</span>
       {
-        color:red;
+        <span style="color:#66d9ef">color</span>:<span style="color:#66d9ef">red</span>;
       }
-      .Over
+      .<span style="color:#a6e22e">Over</span>
       {
-        color:lime;
+        <span style="color:#66d9ef">color</span>:<span style="color:#66d9ef">lime</span>;
       }
-      .Mouses
+      .<span style="color:#a6e22e">Mouses</span>
       {
-        width:150px;
-        height:20px;
-        margin:5px;
-        border:2px solid;
-        float:left;
-        font-weight:bold;
-        background-color:gray;
+        <span style="color:#66d9ef">width</span>:<span style="color:#ae81ff">150</span><span style="color:#66d9ef">px</span>;
+        <span style="color:#66d9ef">height</span>:<span style="color:#ae81ff">20</span><span style="color:#66d9ef">px</span>;
+        <span style="color:#66d9ef">margin</span>:<span style="color:#ae81ff">5</span><span style="color:#66d9ef">px</span>;
+        <span style="color:#66d9ef">border</span>:<span style="color:#ae81ff">2</span><span style="color:#66d9ef">px</span> <span style="color:#66d9ef">solid</span>;
+        <span style="color:#66d9ef">float</span>:<span style="color:#66d9ef">left</span>;
+        <span style="color:#66d9ef">font-weight</span>:<span style="color:#66d9ef">bold</span>;
+        <span style="color:#66d9ef">background-color</span>:<span style="color:#66d9ef">gray</span>;
       }
 
-    &lt;/style&gt;
-    &lt;script type=&quot;text/javascript&quot;&gt;
-      //可不敢再犯这个错误
-      //$('.button').bind('click',function(){
-    $(function(){
-       $('.buttons').bind('click',function(){
-        alert('You have clicked '+$(this).text()); //innerText()
-        // trigger without click !!!  automated;
-      //可不敢再犯这个错误
-        //$(.Green).trigger('click');
-       // $('.Green').trigger('click');
-
-       // unbindf test
-        $('.Unbind').bind('click',function(){
-          alert('You have clicked the'+$(this).text()+'&lt;Br/&gt;After that the button will unbind the click event!');
-          $('.Unbind').unbind('click');
+    &lt;/<span style="color:#f92672">style</span>&gt;
+    &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/javascript&#34;</span>&gt;
+      <span style="color:#75715e">//可不敢再犯这个错误
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">//$(&#39;.button&#39;).bind(&#39;click&#39;,function(){
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">$</span>(<span style="color:#66d9ef">function</span>(){
+       <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;.buttons&#39;</span>).<span style="color:#a6e22e">bind</span>(<span style="color:#e6db74">&#39;click&#39;</span>,<span style="color:#66d9ef">function</span>(){
+        <span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;You have clicked &#39;</span><span style="color:#f92672">+</span><span style="color:#a6e22e">$</span>(<span style="color:#66d9ef">this</span>).<span style="color:#a6e22e">text</span>()); <span style="color:#75715e">//innerText()
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// trigger without click !!!  automated;
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">//可不敢再犯这个错误
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//$(.Green).trigger(&#39;click&#39;);
+</span><span style="color:#75715e"></span>       <span style="color:#75715e">// $(&#39;.Green&#39;).trigger(&#39;click&#39;);
+</span><span style="color:#75715e"></span>
+       <span style="color:#75715e">// unbindf test
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;.Unbind&#39;</span>).<span style="color:#a6e22e">bind</span>(<span style="color:#e6db74">&#39;click&#39;</span>,<span style="color:#66d9ef">function</span>(){
+          <span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;You have clicked the&#39;</span><span style="color:#f92672">+</span><span style="color:#a6e22e">$</span>(<span style="color:#66d9ef">this</span>).<span style="color:#a6e22e">text</span>()<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;&lt;Br/&gt;After that the button will unbind the click event!&#39;</span>);
+          <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;.Unbind&#39;</span>).<span style="color:#a6e22e">unbind</span>(<span style="color:#e6db74">&#39;click&#39;</span>);
 
         })
       });
        
-      //mouse event
-      $('.Mouses').bind('mousedown',function(){
-          alert('your mouse have been pressed down'+$(this).text());
+      <span style="color:#75715e">//mouse event
+</span><span style="color:#75715e"></span>      <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;.Mouses&#39;</span>).<span style="color:#a6e22e">bind</span>(<span style="color:#e6db74">&#39;mousedown&#39;</span>,<span style="color:#66d9ef">function</span>(){
+          <span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;your mouse have been pressed down&#39;</span><span style="color:#f92672">+</span><span style="color:#a6e22e">$</span>(<span style="color:#66d9ef">this</span>).<span style="color:#a6e22e">text</span>());
       });
 
-      $('.Mouses').bind('mouseup',function(){
-          alert('your mouse have been pressed up'+$(this).text());
+      <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;.Mouses&#39;</span>).<span style="color:#a6e22e">bind</span>(<span style="color:#e6db74">&#39;mouseup&#39;</span>,<span style="color:#66d9ef">function</span>(){
+          <span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;your mouse have been pressed up&#39;</span><span style="color:#f92672">+</span><span style="color:#a6e22e">$</span>(<span style="color:#66d9ef">this</span>).<span style="color:#a6e22e">text</span>());
       });
 
-      $('.Mouses').bind('mouseover',function(){
-          alert('your mouse have been pressed over'+$(this).text());
+      <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;.Mouses&#39;</span>).<span style="color:#a6e22e">bind</span>(<span style="color:#e6db74">&#39;mouseover&#39;</span>,<span style="color:#66d9ef">function</span>(){
+          <span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;your mouse have been pressed over&#39;</span><span style="color:#f92672">+</span><span style="color:#a6e22e">$</span>(<span style="color:#66d9ef">this</span>).<span style="color:#a6e22e">text</span>());
       });
 
 
-      //focus test
-      $('#btn').focus(function(){
-        alert('ol');
-        $('#btn').html('&lt;Font color=&quot;red&quot;&gt;&lt;Strong&gt;Focus&lt;/Strong&gt;&lt;/Font&gt;');
+      <span style="color:#75715e">//focus test
+</span><span style="color:#75715e"></span>      <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;#btn&#39;</span>).<span style="color:#a6e22e">focus</span>(<span style="color:#66d9ef">function</span>(){
+        <span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;ol&#39;</span>);
+        <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;#btn&#39;</span>).<span style="color:#a6e22e">html</span>(<span style="color:#e6db74">&#39;&lt;Font color=&#34;red&#34;&gt;&lt;Strong&gt;Focus&lt;/Strong&gt;&lt;/Font&gt;&#39;</span>);
       });
-      $('#btn').blur(function(){
-        alert('fuck');
-        $('#btn').html('&lt;Font color=&quot;gray&quot;&gt;&lt;Italic&gt;Focus&lt;/Italic&gt;&lt;/Font&gt;');
+      <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;#btn&#39;</span>).<span style="color:#a6e22e">blur</span>(<span style="color:#66d9ef">function</span>(){
+        <span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;fuck&#39;</span>);
+        <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;#btn&#39;</span>).<span style="color:#a6e22e">html</span>(<span style="color:#e6db74">&#39;&lt;Font color=&#34;gray&#34;&gt;&lt;Italic&gt;Focus&lt;/Italic&gt;&lt;/Font&gt;&#39;</span>);
       });
 
        
     });
-    &lt;/script&gt;
+    &lt;/<span style="color:#f92672">script</span>&gt;
 
 
 
-  &lt;/Head&gt;
+  &lt;/<span style="color:#f92672">Head</span>&gt;
 
-  &lt;Body&gt;
-    &lt;H3&gt;Test bind and trigger&lt;/H3&gt;
-    &lt;!--Multiple classes !!!　Take Note--&gt;
-    &lt;Span class=&quot;Red buttons&quot;&gt;Red&lt;/Span&gt;
-    &lt;Span class=&quot;Green buttons&quot;&gt;Green&lt;/Span&gt;
-    &lt;Span class=&quot;Unbind buttons&quot;&gt;Unbind it&lt;/Span&gt;
-    &lt;Br/&gt;
-    &lt;hr/&gt;
-    &lt;Br/&gt;
-    &lt;H3&gt;Test bind and trigger&lt;/H3&gt;
-    &lt;!--Multiple classes !!!　Take Note--&gt;
-    &lt;Span class=&quot;Mouses Down&quot;&gt;Mouse Down&lt;/Span&gt;
-    &lt;Span class=&quot;Mouses Up&quot;&gt;Mouse Up&lt;/Span&gt;
-    &lt;Span class=&quot;Mouses Over&quot;&gt;Mouse over&lt;/Span&gt;
+  &lt;<span style="color:#f92672">Body</span>&gt;
+    &lt;<span style="color:#f92672">H3</span>&gt;Test bind and trigger&lt;/<span style="color:#f92672">H3</span>&gt;
+    <span style="color:#75715e">&lt;!--</span><span style="color:#75715e">Multiple classes !!!　Take Note</span><span style="color:#75715e">--&gt;</span>
+    &lt;<span style="color:#f92672">Span</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Red buttons&#34;</span>&gt;Red&lt;/<span style="color:#f92672">Span</span>&gt;
+    &lt;<span style="color:#f92672">Span</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Green buttons&#34;</span>&gt;Green&lt;/<span style="color:#f92672">Span</span>&gt;
+    &lt;<span style="color:#f92672">Span</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Unbind buttons&#34;</span>&gt;Unbind it&lt;/<span style="color:#f92672">Span</span>&gt;
+    &lt;<span style="color:#f92672">Br</span>/&gt;
+    &lt;<span style="color:#f92672">hr</span>/&gt;
+    &lt;<span style="color:#f92672">Br</span>/&gt;
+    &lt;<span style="color:#f92672">H3</span>&gt;Test bind and trigger&lt;/<span style="color:#f92672">H3</span>&gt;
+    <span style="color:#75715e">&lt;!--</span><span style="color:#75715e">Multiple classes !!!　Take Note</span><span style="color:#75715e">--&gt;</span>
+    &lt;<span style="color:#f92672">Span</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Mouses Down&#34;</span>&gt;Mouse Down&lt;/<span style="color:#f92672">Span</span>&gt;
+    &lt;<span style="color:#f92672">Span</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Mouses Up&#34;</span>&gt;Mouse Up&lt;/<span style="color:#f92672">Span</span>&gt;
+    &lt;<span style="color:#f92672">Span</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Mouses Over&#34;</span>&gt;Mouse over&lt;/<span style="color:#f92672">Span</span>&gt;
 
-    &lt;Br/&gt;
-    &lt;hr/&gt;
-    &lt;Br/&gt;
-    &lt;H3&gt;Test focus and blur&lt;/H3&gt;
-    &lt;!--     Input cannot  html  --&gt;
-    &lt;Input type=&quot;text&quot; name=&quot;mouse&quot; id=&quot;btn&quot; values=&quot;focus&quot;/&gt;
+    &lt;<span style="color:#f92672">Br</span>/&gt;
+    &lt;<span style="color:#f92672">hr</span>/&gt;
+    &lt;<span style="color:#f92672">Br</span>/&gt;
+    &lt;<span style="color:#f92672">H3</span>&gt;Test focus and blur&lt;/<span style="color:#f92672">H3</span>&gt;
+    <span style="color:#75715e">&lt;!--</span><span style="color:#75715e">     Input cannot  html  </span><span style="color:#75715e">--&gt;</span>
+    &lt;<span style="color:#f92672">Input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text&#34;</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;mouse&#34;</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;btn&#34;</span> <span style="color:#a6e22e">values</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;focus&#34;</span>/&gt;
 
-    &lt;/Div&gt;
+    &lt;/<span style="color:#f92672">Div</span>&gt;
     
 
 
-  &lt;/Body&gt;
+  &lt;/<span style="color:#f92672">Body</span>&gt;
 
-&lt;/Html&gt;
-</code></pre>
+&lt;/<span style="color:#f92672">Html</span>&gt;
+</code></pre></div>
     </div>
  <div class="nav-links" style="padding:10;">
         
@@ -2258,7 +2207,7 @@ trigger()
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

@@ -30,17 +30,12 @@
   
   <meta name="description" content="As you all know we can use defun to define a function in the common lisp,
 
-
 (defun add (x)
     (&#43; x 1))
 (defun foo (a b c)
     (list  a b c))
-
-
 Definition above is the most essential method to create a function. Due to the
-
 convience we will have to think about the variables and functions again.
-
 Writing thinking path: from thinking the variables to functions and get the knowledge of the common lisp.">
 
   
@@ -132,17 +127,12 @@ Writing thinking path: from thinking the variables to functions and get the know
   <meta property="og:title" content="Think in the variable and macro in the common lisp | Macro Life">
   <meta property="og:description" content="As you all know we can use defun to define a function in the common lisp,
 
-
 (defun add (x)
     (&#43; x 1))
 (defun foo (a b c)
     (list  a b c))
-
-
 Definition above is the most essential method to create a function. Due to the
-
 convience we will have to think about the variables and functions again.
-
 Writing thinking path: from thinking the variables to functions and get the knowledge of the common lisp."><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
   <meta property="twitter:image" content="https://jueqingsizhe66.github.io/img/icon-192.png"><meta property="og:locale" content="en-us">
   
@@ -592,21 +582,19 @@ Writing thinking path: from thinking the variables to functions and get the know
 <span class="article-metadata" >Reading time: 2 minutes and    6 seconds with 463 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#i-variables">I. Variables</a>
-<ul>
-<li><a href="#keyword-variables">keyword variables</a></li>
-<li><a href="#optional-variables">optional variables</a></li>
-<li><a href="#rest-variables">rest variables</a></li>
-<li><a href="#body-variables">body  variables</a></li>
-<li><a href="#macro-definition">macro definition</a></li>
-</ul></li>
-<li><a href="#ii-functions">II. Functions</a></li>
-<li><a href="#iii-format-function">III. Format function</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#i-variables">I. Variables</a>
+      <ul>
+        <li><a href="#keyword-variables">keyword variables</a></li>
+        <li><a href="#optional-variables">optional variables</a></li>
+        <li><a href="#rest-variables">rest variables</a></li>
+        <li><a href="#body--variables">body  variables</a></li>
+        <li><a href="#macro-definition">macro definition</a></li>
+      </ul>
+    </li>
+    <li><a href="#ii-functions">II. Functions</a></li>
+    <li><a href="#iii-format-function">III. Format function</a></li>
+  </ul>
 </nav>
     </aside>
   <div class="article-container">
@@ -614,128 +602,86 @@ Writing thinking path: from thinking the variables to functions and get the know
 
     <div class="article-style">
       <p>As you all know we can use defun to define a function in the common lisp,</p>
-
-<pre><code class="language-common-lisp">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-common-lisp" data-lang="common-lisp">
 (defun add (x)
-    (+ x 1))
+    (<span style="color:#a6e22e">+</span> x <span style="color:#ae81ff">1</span>))
 (defun foo (a b c)
-    (list  a b c))
-</code></pre>
-
-<p>Definition above is the most essential method to create a function. Due to the</p>
-
+    (<span style="color:#a6e22e">list</span>  a b c))
+</code></pre></div><p>Definition above is the most essential method to create a function. Due to the</p>
 <p><strong>convience</strong> we will have to think about the variables and functions again.</p>
-
 <p>Writing thinking path: from thinking the variables to functions and get the knowledge of the common lisp.</p>
-
 <h2 id="i-variables">I. Variables</h2>
-
 <p>We we execute one function ,we should let the interpreter know:</p>
-
 <ol>
 <li>call the Mac first? or call the compiler first?</li>
 <li>Mac will not get the value of the variables ,but change the expression to  another forms</li>
 <li>But compiler will directly get the value of the variables.</li>
 </ol>
-
 <p>Variables can be shown with &amp;key,&amp;optional,&amp;rest,&amp;body forms etc.</p>
-
 <h3 id="keyword-variables">keyword variables</h3>
-
 <p>The variables start with colon( it means :) is the keyword variables, but there are exception,</p>
-
 <p>such as in the defsystem(asdf grammer), you can depends on other system (depends on :macro-utilities)</p>
-
 <p>here macro-utilities is called as a system,not the keyword variables.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-common-lisp" data-lang="common-lisp">
+(defun foo (<span style="color:#66d9ef">&amp;key</span> a (b <span style="color:#ae81ff">20</span>) (c <span style="color:#ae81ff">30</span> c-p)) 
+    (<span style="color:#a6e22e">list</span>  a b c c-p))
 
-<pre><code class="language-common-lisp">
-(defun foo (&amp;key a (b 20) (c 30 c-p)) 
-    (list  a b c c-p))
+</code></pre></div><h3 id="optional-variables">optional variables</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-common-lisp" data-lang="common-lisp">
+(defun foo (a <span style="color:#66d9ef">&amp;optional</span> (b <span style="color:#ae81ff">20</span>) (c <span style="color:#ae81ff">30</span> c-p))  <span style="color:#75715e">;;c-supplied-p</span>
 
-</code></pre>
+    (<span style="color:#a6e22e">list</span>  a b c c-p))
 
-<h3 id="optional-variables">optional variables</h3>
+<span style="color:#75715e">;; it means the variables b and c is optional ,if b is not written in the</span>
+<span style="color:#75715e">;; the parameter list, the interpreter will set b = 20,similary  c.</span>
 
-<pre><code class="language-common-lisp">
-(defun foo (a &amp;optional (b 20) (c 30 c-p))  ;;c-supplied-p
+(defun make-rectangle (width <span style="color:#66d9ef">&amp;optional</span> (height width)) <span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>)
 
-    (list  a b c c-p))
+<span style="color:#75715e">;;; the rectangle will set height =width when height is not supplied.</span>
 
-;; it means the variables b and c is optional ,if b is not written in the
-;; the parameter list, the interpreter will set b = 20,similary  c.
+(defun foo (a <span style="color:#66d9ef">&amp;optional</span> (b <span style="color:#ae81ff">20</span>) (c <span style="color:#ae81ff">30</span> c-supplied-p)) 
 
-(defun make-rectangle (width &amp;optional (height width)) ...)
-
-;;; the rectangle will set height =width when height is not supplied.
-
-(defun foo (a &amp;optional (b 20) (c 30 c-supplied-p)) 
-
-    (list  a b c c-supplied-p))
+    (<span style="color:#a6e22e">list</span>  a b c c-supplied-p))
 
 
-</code></pre>
+</code></pre></div><h3 id="rest-variables">rest variables</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-common-lisp" data-lang="common-lisp">
+(defun <span style="color:#a6e22e">format</span> (<span style="color:#a6e22e">stream</span> <span style="color:#a6e22e">string</span> <span style="color:#66d9ef">&amp;rest</span> <span style="color:#a6e22e">values</span>) <span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>)
 
-<h3 id="rest-variables">rest variables</h3>
+(defun <span style="color:#a6e22e">+</span> (<span style="color:#66d9ef">&amp;rest</span> numbers) <span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>)
 
-<pre><code class="language-common-lisp">
-(defun format (stream string &amp;rest values) ...)
+(defmacro when (<span style="color:#66d9ef">condition</span> <span style="color:#66d9ef">&amp;rest</span> body)
+    <span style="color:#f92672">`</span>(<span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">not</span> <span style="color:#f92672">,</span><span style="color:#66d9ef">condition</span>) (<span style="color:#66d9ef">progn</span> <span style="color:#f92672">,@</span>body) <span style="color:#75715e">;; The difference between , and ,@ in the `() is ,@ will delete the brace more than once </span>
 
-(defun + (&amp;rest numbers) ...)
-
-(defmacro when (condition &amp;rest body)
-    `(if (not ,condition) (progn ,@body) ;; The difference between , and ,@ in the `() is ,@ will delete the brace more than once 
-
-    ;; (if condition then-part [else-part])
+    <span style="color:#75715e">;; (if condition then-part [else-part])</span>
 )
 
-</code></pre>
+</code></pre></div><h3 id="body--variables">body  variables</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-common-lisp" data-lang="common-lisp">
 
-<h3 id="body-variables">body  variables</h3>
-
-<pre><code class="language-common-lisp">
-
-</code></pre>
-
-<h3 id="macro-definition">macro definition</h3>
-
+</code></pre></div><h3 id="macro-definition">macro definition</h3>
 <p>I think Mac(Macro-&gt; defmacro) is a form to change the input of the variables.Actually it is</p>
-
 <p>most powerful tool in the lisp programming</p>
-
-<pre><code class="language-common-lisp">
-(format t &quot;hello world&quot;)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-common-lisp" data-lang="common-lisp">
+(<span style="color:#a6e22e">format</span> <span style="color:#66d9ef">t</span> <span style="color:#e6db74">&#34;hello world&#34;</span>)
 
 (defun backwords (str) 
-    (reverse str))
+    (<span style="color:#a6e22e">reverse</span> str))
 
-(backwords (&quot;hello world&quot; t format))  ;; take care not (backwords '(&quot;hello world&quot; t format))
-</code></pre>
-
-<p>So when you execute the backwords macro, the interpreter will tell the Mac to do the works.</p>
-
+(backwords (<span style="color:#e6db74">&#34;hello world&#34;</span> <span style="color:#66d9ef">t</span> <span style="color:#a6e22e">format</span>))  <span style="color:#75715e">;; take care not (backwords &#39;(&#34;hello world&#34; t format))</span>
+</code></pre></div><p>So when you execute the backwords macro, the interpreter will tell the Mac to do the works.</p>
 <p>When  he finished his work. The compiler will continue execute the result of the Mac. That</p>
-
 <p>is the process of the macro function.</p>
-
 <h2 id="ii-functions">II. Functions</h2>
+<p>Orient Object Programming's CLOS is  to tell you how to rearrange the functions and variables into one class.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-common-lisp" data-lang="common-lisp">
 
-<p>Orient Object Programming&rsquo;s CLOS is  to tell you how to rearrange the functions and variables into one class.</p>
-
-<pre><code class="language-common-lisp">
-
-</code></pre>
-
-<h2 id="iii-format-function">III. Format function</h2>
-
+</code></pre></div><h2 id="iii-format-function">III. Format function</h2>
 <p>format is a most powerful decorate function to output in the common lisp.</p>
-
 <p>so every field in the format function , you should take note <em>~</em> ,such as <em>~a</em>, <em>~{~}</em>, <em>~%</em>, <em>~:a</em>, <em>~r</em>,<em>~d</em> etc</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-common-lisp" data-lang="common-lisp">
 
-<pre><code class="language-common-lisp">
-
-</code></pre>
-
-<p><strong>added-later</strong></p>
+</code></pre></div><p><strong>added-later</strong></p>
     </div>
  <div class="nav-links" style="padding:10;">
         
@@ -1139,7 +1085,7 @@ Writing thinking path: from thinking the variables to functions and get the know
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

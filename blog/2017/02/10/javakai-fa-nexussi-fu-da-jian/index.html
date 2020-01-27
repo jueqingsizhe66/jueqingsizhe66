@@ -29,7 +29,6 @@
     
   
   <meta name="description" content="针对一台全新的电脑，安装java开发的maven私服，记录如下，并在IDEA中进行测试。
-
 涉及到javase安装，maven安装，nexus私服安装，nexus本地配置，nexus界面介绍">
 
   
@@ -120,7 +119,6 @@
   <meta property="og:url" content="https://jueqingsizhe66.github.io/blog/2017/02/10/javakai-fa-nexussi-fu-da-jian/">
   <meta property="og:title" content="java开发nexus私服搭建 | Macro Life">
   <meta property="og:description" content="针对一台全新的电脑，安装java开发的maven私服，记录如下，并在IDEA中进行测试。
-
 涉及到javase安装，maven安装，nexus私服安装，nexus本地配置，nexus界面介绍"><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
   <meta property="twitter:image" content="https://jueqingsizhe66.github.io/img/icon-192.png"><meta property="og:locale" content="en-us">
   
@@ -567,82 +565,57 @@
 
 
 
-<span class="article-metadata" >Reading time: 6 minutes and    32 seconds with 1439 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+<span class="article-metadata" >Reading time: 5 minutes and    57 seconds with 1311 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
-        
+        <nav id="TableOfContents"></nav>
     </aside>
   <div class="article-container">
 
 
     <div class="article-style">
       <p>针对一台全新的电脑，安装java开发的maven私服，记录如下，并在IDEA中进行测试。</p>
-
 <p>涉及到javase安装，maven安装，nexus私服安装，nexus本地配置，nexus界面介绍</p>
-
 <ol>
-<li>安装JAVA jdk ,下载<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank">javaSE安装包</a>,注意JDK和JRE不要放在同一文件夹下</li>
+<li>安装JAVA jdk ,下载<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">javaSE安装包</a>,注意JDK和JRE不要放在同一文件夹下</li>
 <li>配置JAVA_HOME为JDk目录，并添加JDK的bin目录(%JAVA_HOME%\bin)到path中
-<img src="/images/java/nexus/java.png" alt="java" /></li>
-<li>下载<a href="http://maven.apache.org/" target="_blank">maven</a>,并解压缩，配置MAVEN_HOME为maven的根目录，并添加%MAVEN_HOME%\bin到path
+<img src="/images/java/nexus/java.png" alt="java"></li>
+<li>下载<a href="http://maven.apache.org/">maven</a>,并解压缩，配置MAVEN_HOME为maven的根目录，并添加%MAVEN_HOME%\bin到path
 中
-<img src="/images/java/nexus/home.png" alt="home" />
-<img src="/images/java/nexus/bin.png" alt="bin" />
-<img src="/images/java/nexus/java.png" alt="mvn" /></li>
+<img src="/images/java/nexus/home.png" alt="home">
+<img src="/images/java/nexus/bin.png" alt="bin">
+<img src="/images/java/nexus/java.png" alt="mvn"></li>
 </ol>
-
 <p>显示了<code>mvn -v</code>,也就表示装完了maven
-4. 下载<a href="https://www.sonatype.com/download-oss-sonatype" target="_blank">nexus2.14</a>,在windows下使用管理员身份打开cmd，并cd到nexus的bin目录，进行安装</p>
-
+4. 下载<a href="https://www.sonatype.com/download-oss-sonatype">nexus2.14</a>,在windows下使用管理员身份打开cmd，并cd到nexus的bin目录，进行安装</p>
 <pre><code>nexus install
 nexus start
-</code></pre>
-
-<p>注意一定得配置bin\jsw\wrapper.conf的java bin信息，否则出错。
-<img src="/images/java/nexus/wrapper.png" alt="wrapper" /></p>
-
+</code></pre><p>注意一定得配置bin\jsw\wrapper.conf的java bin信息，否则出错。
+<img src="/images/java/nexus/wrapper.png" alt="wrapper"></p>
 <p>出现的错误为无法启动，
-<img src="/images/java/nexus/success.png" alt="success" /></p>
-
-<hr/>
-
-<p>做完前面的几步之后只是，把配置环境弄完了，还得进行私服镜像配置。
-首先打开nexus私服页面，使用<code>http://localhost:8089/nexus/#welcome</code></p>
-
-<p><img src="/images/java/nexus/nexus.png" alt="nexus" /></p>
-
+<img src="/images/java/nexus/success.png" alt="success"></p>
+<!-- raw HTML omitted -->
+<p><img src="/images/java/nexus/nexus.png" alt="nexus"></p>
 <p>默认的登陆密码是
-    账号：admin
-    密码：admin123</p>
-
+账号：admin
+密码：admin123</p>
 <p>登陆完的界面
-<img src="/images/java/nexus/repositories.png" alt="login" /></p>
-
+<img src="/images/java/nexus/repositories.png" alt="login"></p>
 <p>配置中心仓库:</p>
-
 <p>中心仓库设置download remote indexes为真，为设置本地私服提供源。
-<img src="/images/java/nexus/central.png" alt="central" /></p>
-
+<img src="/images/java/nexus/central.png" alt="central"></p>
 <p>配置了release和snapshot仓库
-<img src="/images/java/nexus/release.png" alt="release" />
-<img src="/images/java/nexus/snapshot.png" alt="snapshot" /></p>
-
+<img src="/images/java/nexus/release.png" alt="release">
+<img src="/images/java/nexus/snapshot.png" alt="snapshot"></p>
 <p>然后配置了第三方插件
-<img src="/images/java/nexus/third.png" alt="third" /></p>
-
+<img src="/images/java/nexus/third.png" alt="third"></p>
 <p><strong>进入最关键的public Repositories设置</strong></p>
-
-<p><img src="/images/java/nexus/public.png" alt="public" /></p>
-
+<p><img src="/images/java/nexus/public.png" alt="public"></p>
 <p>有时候可以使用试用Scheduled Tasks观看库的index是否正常进行。
-<img src="/images/java/nexus/schedule.png" alt="scheduled" /></p>
-
-<hr/>
-
-<h2 id="imp">镜像私服配置</h2>
-
+<img src="/images/java/nexus/schedule.png" alt="scheduled"></p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
 <p>maven中的settings.xml登陆私服的账户密码设置
-<img src="/images/java/nexus/user.png" alt="user" /></p>
-
+<img src="/images/java/nexus/user.png" alt="user"></p>
 <pre><code>  &lt;servers&gt;
     &lt;server&gt; 
         &lt;id&gt;nexus-release&lt;/id&gt;
@@ -687,12 +660,8 @@ nexus start
   &lt;/servers&gt;
 
 
-</code></pre>
-
-<p><strong>镜像配置</strong></p>
-
+</code></pre><p><strong>镜像配置</strong></p>
 <p>注意url链接的端口设置</p>
-
 <pre><code>
 &lt;mirrors&gt;
 &lt;mirror&gt;
@@ -728,35 +697,22 @@ nexus start
 
 
 
-</code></pre>
-
-<p>在maven中一般是需要设置下载控件jar包放在哪里,在没有私服的情况下，我一般
+</code></pre><p>在maven中一般是需要设置下载控件jar包放在哪里,在没有私服的情况下，我一般
 可以在setting.xml中设置localRepository</p>
-
 <pre><code>   | Default: ${user.home}/.m2/repository
   &lt;localRepository&gt;/path/to/local/repo&lt;/localRepository&gt;
 
-</code></pre>
-
-<p>当然IDEA在导入项目或者新建项目的时候都会提醒Environment Variable,设置一下setting和local repository
+</code></pre><p>当然IDEA在导入项目或者新建项目的时候都会提醒Environment Variable,设置一下setting和local repository
 (类似的思路需要在myeclipse配置)
-<img src="/images/java/nexus/setting.png" alt="impo" />
-而私服nexus的存放地点，在nexus界面的时候就已经设置好了，所以也得在每台电脑操作一遍(<font color="red">一定不能错</font>)。</p>
-
+<img src="/images/java/nexus/setting.png" alt="impo">
+而私服nexus的存放地点，在nexus界面的时候就已经设置好了，所以也得在每台电脑操作一遍(<!-- raw HTML omitted -->一定不能错<!-- raw HTML omitted -->)。</p>
 <p>镜像的话，就不会执行maven的<code>mvn install</code>等命令还一直向外部仓库访问链接，结果是访问的链接
 都是本地的，可看下节测试。</p>
-
-<h2 id="ida">IDEA测试镜像私服</h2>
-现在只能通过这个激活了，下载license server
-![license][20]
-
-测试结果如下:
-`mvn site`
-
-![idea][23]
-
-```
-INFO] artifact org.springframework:spring-beans: checking for updates from nexus
+<!-- raw HTML omitted -->
+<p>测试结果如下:
+<code>mvn site</code></p>
+<p><img src="/images/java/nexus/idea.png" alt="idea"></p>
+<pre><code>INFO] artifact org.springframework:spring-beans: checking for updates from nexus
 [INFO] artifact org.springframework:spring-context: checking for updates from nexus
 [INFO] artifact org.springframework:spring-context-support: checking for updates from nexus
 [INFO] artifact org.springframework:spring-core: checking for updates from nexus
@@ -767,24 +723,19 @@ INFO] artifact org.springframework:spring-beans: checking for updates from nexus
 [INFO] artifact org.springframework:spring-jms: checking for updates from nexus
 [INFO] artifact org.springframework:spring-orm: checking for updates from nexus
 [INFO] artifact org.springframework:spring-oxm: checking for updates from nexus
-```
-
-<h2 id="result">结论</h2>
-
-<p>整个配置过程有效，测试通过，进一步可以参考<a href="http://vdisk.weibo.com/s/za2TN71LdL1tl" target="_blank">maven实战 许晓斌</a>,里面包含了maven的坐标空间概念等，详细介绍了
+</code></pre><!-- raw HTML omitted -->
+<p>整个配置过程有效，测试通过，进一步可以参考<a href="http://vdisk.weibo.com/s/za2TN71LdL1tl">maven实战 许晓斌</a>,里面包含了maven的坐标空间概念等，详细介绍了
 maven系统的各个组成和集成测试环境的搭建。</p>
-
-<p>可以拓展阅读<a href="http://blog.csdn.net/c1481118216/article/category/6250182" target="_blank">java blog</a>
+<p>可以拓展阅读<a href="http://blog.csdn.net/c1481118216/article/category/6250182">java blog</a>
 三个有用工具包:</p>
-
 <ul>
-<li><a href="https://github.com/venusdrogon/feilong-platform" target="_blank">飞龙 javase javaee(国产)</a></li>
-<li><a href="http://feilong-core.mydoc.io/?t=149471" target="_blank">飞龙特别用心的手册</a></li>
-<li><a href="https://github.com/venusdrogon/feilong-core/wiki/install" target="_blank">可以玩玩feilong-platform平台的安装 以及mvn site产生好看的javadoc</a></li>
-<li><a href="https://github.com/looly/hutool" target="_blank">Hutool javase(国产)</a></li>
-<li><a href="http://www.hutool.cn/apidocs/" target="_blank">hutool API手册</a>  <a href="http://hutool.mydoc.io/" target="_blank">Hutool Wiki</a></li>
-<li><a href="http://ibeetl.com/guide/#beetl" target="_blank">闲大赋 beetl 好用的模板引擎(国产)</a></li>
-<li><a href="http://cn.vuejs.org/" target="_blank">vue.js火热的前端js框架(国产)</a></li>
+<li><a href="https://github.com/venusdrogon/feilong-platform">飞龙 javase javaee(国产)</a></li>
+<li><a href="http://feilong-core.mydoc.io/?t=149471">飞龙特别用心的手册</a></li>
+<li><a href="https://github.com/venusdrogon/feilong-core/wiki/install">可以玩玩feilong-platform平台的安装 以及mvn site产生好看的javadoc</a></li>
+<li><a href="https://github.com/looly/hutool">Hutool javase(国产)</a></li>
+<li><a href="http://www.hutool.cn/apidocs/">hutool API手册</a>  <a href="http://hutool.mydoc.io/">Hutool Wiki</a></li>
+<li><a href="http://ibeetl.com/guide/#beetl">闲大赋 beetl 好用的模板引擎(国产)</a></li>
+<li><a href="http://cn.vuejs.org/">vue.js火热的前端js框架(国产)</a></li>
 </ul>
     </div>
  <div class="nav-links" style="padding:10;">
@@ -1191,7 +1142,7 @@ maven系统的各个组成和集成测试环境的搭建。</p>
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

@@ -567,123 +567,103 @@
 
 <span class="article-metadata" >Reading time: 7 minutes and    51 seconds with 1727 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
-        
+        <nav id="TableOfContents"></nav>
     </aside>
   <div class="article-container">
 
 
     <div class="article-style">
-      <p>Fast8.15在4-15又发布了新版本，增加了相关功能，具体参考<a href="https://nwtc.nrel.gov/FAST8" target="_blank">FastV8.15</a>.
+      <p>Fast8.15在4-15又发布了新版本，增加了相关功能，具体参考<a href="https://nwtc.nrel.gov/FAST8">FastV8.15</a>.
 下面就32bit ubuntu机子的安装过程做简要记录。</p>
-
 <ol>
-<li><p>运行fast源文件下的Compling 的makefile</p>
-
-<pre><code class="language-sh">gfortran: error: ../bin/libmap-1.20.10.so: 没有那个文件或目录
-makefile:733: recipe for target '../bin/FAST_glin32' failed
-make:  [../bin/FAST_glin32] Error 1
-
-</code></pre></li>
+<li>运行fast源文件下的Compling 的makefile</li>
 </ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">gfortran: error: ../bin/libmap-1.20.10.so: 没有那个文件或目录
+makefile:733: recipe <span style="color:#66d9ef">for</span> target <span style="color:#e6db74">&#39;../bin/FAST_glin32&#39;</span> failed
+make:  <span style="color:#f92672">[</span>../bin/FAST_glin32<span style="color:#f92672">]</span> Error <span style="color:#ae81ff">1</span>
 
-<p>直接运行make，缺少libmap,可以参考<a href="http://jueqingsizhe66.github.io/blog/2015/10/22/fast-in-ubuntu64bit-bian-yi-zhu-yi-shi-xiang/" target="_blank">fast安装</a></p>
-
-<ol>
+</code></pre></div><p>直接运行make，缺少libmap,可以参考<a href="http://jueqingsizhe66.github.io/blog/2015/10/22/fast-in-ubuntu64bit-bian-yi-zhu-yi-shi-xiang/">fast安装</a></p>
+<ol start="2">
 <li>安装LibMap</li>
 </ol>
-
 <p>把libMap-1的Compling底下的driver_makefile修改一下你的FAST本地路径。</p>
-
 <pre><code>#FAST_DIR     = ../Source
 #FAST_DIR     = C:/Users/bjonkman/Documents/DATA/DesignCodes/simulators/FAST/SVNdirectory/branches/BJonkman/Source
 FAST_DIR     = /paper/FAST_8.15/ 
 
-</code></pre>
-
-<p>直接定位到MapDir/src的makefile，进行make一下</p>
-
+</code></pre><p>直接定位到MapDir/src的makefile，进行make一下</p>
 <pre><code>/usr/bin/ld: cannot find -llapacke
 /usr/bin/ld: cannot find -llapacke
 collect2: error: ld returned 1 exit status
 makefile:81: recipe for target 'all' failed
 make: *** [all] Error 1
 
-</code></pre>
-
-<p>这个原因是因为缺少lapacke开发者库,参考<a href="http://jueqingsizhe66.github.io/blog/2015/10/22/fast-in-ubuntu64bit-bian-yi-zhu-yi-shi-xiang/" target="_blank">FAST安装</a>。</p>
-
+</code></pre><p>这个原因是因为缺少lapacke开发者库,参考<a href="http://jueqingsizhe66.github.io/blog/2015/10/22/fast-in-ubuntu64bit-bian-yi-zhu-yi-shi-xiang/">FAST安装</a>。</p>
 <pre><code>apt-get install lapacke-dev*
 
-</code></pre>
-
-<p>然后就可以make，并把生成的libmap-1.2.so放入到fastdir的bin文件夹，没有则创建。
+</code></pre><p>然后就可以make，并把生成的libmap-1.2.so放入到fastdir的bin文件夹，没有则创建。
 这样就完成了</p>
-
-<ol>
+<ol start="3">
 <li>测试</li>
 </ol>
-
 <ul>
-<li><p>Test02.fst</p>
-
+<li>Test02.fst</li>
+</ul>
 <pre><code>./FAST_glin32 Test02.fst 
 
-**************************************************************************************************
-FAST (v8.15.00a-bjj, 12-Apr-2016)
+ **************************************************************************************************
+ FAST (v8.15.00a-bjj, 12-Apr-2016)
 
-Copyright (C) 2016 National Renewable Energy Laboratory
+ Copyright (C) 2016 National Renewable Energy Laboratory
 
-This program comes with ABSOLUTELY NO WARRANTY. See the &quot;license.txt&quot; file distributed with this
-software for details.
-**************************************************************************************************
+ This program comes with ABSOLUTELY NO WARRANTY. See the &quot;license.txt&quot; file distributed with this
+ software for details.
+ **************************************************************************************************
 
-Running FAST (v8.15.00a-bjj, 12-Apr-2016), compiled as a 32-bit application using single
-precision
-linked with NWTC Subroutine Library (v2.08.00, 5-Apr-2016)
+  Running FAST (v8.15.00a-bjj, 12-Apr-2016), compiled as a 32-bit application using single
+  precision
+  linked with NWTC Subroutine Library (v2.08.00, 5-Apr-2016)
 
-Heading of the FAST input file:
-FAST Certification Test #02: AWT-27CR2 with many DOFs with startup and shutdown and steady wind
+  Heading of the FAST input file:
+    FAST Certification Test #02: AWT-27CR2 with many DOFs with startup and shutdown and steady wind
 
-Running ElastoDyn (v1.03.02a-bjj, 8-Apr-2016).
+  Running ElastoDyn (v1.03.02a-bjj, 8-Apr-2016).
 
-Running AeroDyn (v15.02.03, 12-Apr-2016).
+  Running AeroDyn (v15.02.03, 12-Apr-2016).
 
-Running AirfoilInfo (v1.01.00a-bjj, 5-Apr-2016).
+  Running AirfoilInfo (v1.01.00a-bjj, 5-Apr-2016).
 
-Running BEM (v1.01.00a, 12-Apr-2016).
+  Running BEM (v1.01.00a, 12-Apr-2016).
 
-Running InflowWind (v3.02.00a-bjj, 11-Apr-2016).
-Opening InflowWind input file:  ./AWT27/Test02_InflowWind.dat
+  Running InflowWind (v3.02.00a-bjj, 11-Apr-2016).
+  Opening InflowWind input file:  ./AWT27/Test02_InflowWind.dat
 
-Running ServoDyn (v1.05.00a-bjj, 11-Mar-2016).
-Timestep: 0 of 20 seconds.
+  Running ServoDyn (v1.05.00a-bjj, 11-Mar-2016).
+  Timestep: 0 of 20 seconds.
 
-Timestep: 2 of 20 seconds. Estimated final completion at 15:12:15.                               
-Timestep: 4 of 20 seconds. Estimated final completion at 15:12:14.                               
-Timestep: 6 of 20 seconds. Estimated final completion at 15:12:14.                               
-Timestep: 8 of 20 seconds. Estimated final completion at 15:12:14.                               
-Timestep: 10 of 20 seconds. Estimated final completion at 15:12:14.                              
-Timestep: 12 of 20 seconds. Estimated final completion at 15:12:14.                              
-Timestep: 14 of 20 seconds. Estimated final completion at 15:12:14.                              
-Timestep: 16 of 20 seconds. Estimated final completion at 15:12:14.                              
-Timestep: 18 of 20 seconds. Estimated final completion at 15:12:14.                              
-Timestep: 20 of 20 seconds. Estimated final completion at 15:12:14.                              
+ Timestep: 2 of 20 seconds. Estimated final completion at 15:12:15.                               
+ Timestep: 4 of 20 seconds. Estimated final completion at 15:12:14.                               
+ Timestep: 6 of 20 seconds. Estimated final completion at 15:12:14.                               
+ Timestep: 8 of 20 seconds. Estimated final completion at 15:12:14.                               
+ Timestep: 10 of 20 seconds. Estimated final completion at 15:12:14.                              
+ Timestep: 12 of 20 seconds. Estimated final completion at 15:12:14.                              
+ Timestep: 14 of 20 seconds. Estimated final completion at 15:12:14.                              
+ Timestep: 16 of 20 seconds. Estimated final completion at 15:12:14.                              
+ Timestep: 18 of 20 seconds. Estimated final completion at 15:12:14.                              
+ Timestep: 20 of 20 seconds. Estimated final completion at 15:12:14.                              
                                                                                                   
-Total Real Time:       9.788 seconds
-Total CPU Time:        9.708 seconds
-Simulation CPU Time:   9.636 seconds
-Simulated Time:        20 seconds
-Time Ratio (Sim/CPU):  2.0756
+  Total Real Time:       9.788 seconds
+  Total CPU Time:        9.708 seconds
+  Simulation CPU Time:   9.636 seconds
+  Simulated Time:        20 seconds
+  Time Ratio (Sim/CPU):  2.0756
 
-FAST terminated normally.
+  FAST terminated normally.
 
-</code></pre></li>
-
-<li><p>Test26.fst</p></li>
+</code></pre><ul>
+<li>Test26.fst</li>
 </ul>
-
 <p>不通过的原因是没有编译DISCON_DLL.</p>
-
 <pre><code>➞ ./FAST_glin32 Test26.fst 
 
  **************************************************************************************************
@@ -751,23 +731,16 @@ FAST terminated normally.
   Aborting FAST.
 
 
-</code></pre>
-
-<ol>
+</code></pre><ol start="4">
 <li>解决Test26无法运行</li>
 </ol>
-
 <p>首先，定位到Fast的Compling目录，基本尚不修改，测试make（默认32bit）,通过。</p>
-
 <pre><code>make -f makefile_DISCON_DLL 
 gfortran  -O2 -m32 -fbacktrace -ffree-line-length-none -x f95-cpp-input -C -DIMPLICIT_DLLEXPORT -fPIC -c ../CertTest/5MW_Baseline/ServoData/Source/DISCON.f90 -o Obj_lin32/DISCON.obj -J Obj_lin32 -B Obj_lin32
 gfortran -shared -O2 -m32 -fbacktrace -fPIC -I Obj_lin32 -o ../CertTest/5MW_Baseline/ServoData/DISCON_glin32.so \
  Obj_lin32/DISCON.obj
 
-</code></pre>
-
-<p>注意一定得把 生成的DISCON_glin32.so路径写入到对应的NREL5MW Servodata的配置文件，比如</p>
-
+</code></pre><p>注意一定得把 生成的DISCON_glin32.so路径写入到对应的NREL5MW Servodata的配置文件，比如</p>
 <pre><code>Test26.fst文件：
 
 &quot;5MW_Baseline/NRELOffshrBsline5MW_Onshore_ServoDyn.dat&quot;    ServoFile       - Name of file containing control and electrical-drive input parameters (quoted string)
@@ -776,10 +749,7 @@ gfortran -shared -O2 -m32 -fbacktrace -fPIC -I Obj_lin32 -o ../CertTest/5MW_Base
 
 NRELOffshrBsline5MW_Onshore_ServoDyn.dat 更改对应的DLL_FileName 为 ServoData/DISCON_glin32.so
 
-</code></pre>
-
-<p><strong>注意还是得按照FAST 非windows平台的编译顺序把register编译好,然后一次MAP++ 和FAST，以及DISCONDLL.</strong></p>
-
+</code></pre><p><strong>注意还是得按照FAST 非windows平台的编译顺序把register编译好,然后一次MAP++ 和FAST，以及DISCONDLL.</strong></p>
 <pre><code>─➞ ../bin/FAST_glin32 Test26.fst 
 
  **************************************************************************************************
@@ -1254,7 +1224,7 @@ NRELOffshrBsline5MW_Onshore_ServoDyn.dat 更改对应的DLL_FileName 为 ServoDa
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

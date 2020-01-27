@@ -569,7 +569,7 @@
 
 <span class="article-metadata" >Reading time: 1 minutes and    26 seconds with 318 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
-        
+        <nav id="TableOfContents"></nav>
     </aside>
   <div class="article-container">
 
@@ -578,68 +578,57 @@
       <p>尾递归的好处就是快速计算，尾递归实际上是在递归计算的过程中，
 （印象中递归过程[表示语法形式-调用自己]和递归计算过程[表正线性方式 和非线性方式]是不一样的）, 加入了迭代的思想，不断的修改了product和counter的值，
 不需要树形展开。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">fact</span> n)
+  (<span style="color:#a6e22e">cond</span>
+    ((= n <span style="color:#ae81ff">1</span>) <span style="color:#ae81ff">1</span>)
+    (<span style="color:#66d9ef">else </span>(* n (<span style="color:#a6e22e">fact</span> (- n <span style="color:#ae81ff">1</span>))))))
 
-<pre><code class="language-scheme">(define (fact n)
-  (cond
-    ((= n 1) 1)
-    (else (* n (fact (- n 1))))))
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">fact1</span> n)
+  (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">fact-iter</span> product counter)
+    (<span style="color:#a6e22e">cond</span>
+      ((= counter <span style="color:#ae81ff">1</span>) product)
+      (<span style="color:#66d9ef">else </span>(<span style="color:#a6e22e">fact-iter</span> (* product counter) (- counter <span style="color:#ae81ff">1</span>)))))
+  (<span style="color:#a6e22e">fact-iter</span> <span style="color:#ae81ff">1</span> n))
+<span style="color:#75715e">;;;Solve 4!</span>
+(<span style="color:#a6e22e">fact</span> <span style="color:#ae81ff">4</span>)
+(<span style="color:#a6e22e">fact1</span> <span style="color:#ae81ff">4</span>)
 
-(define (fact1 n)
-  (define (fact-iter product counter)
-    (cond
-      ((= counter 1) product)
-      (else (fact-iter (* product counter) (- counter 1)))))
-  (fact-iter 1 n))
-;;;Solve 4!
-(fact 4)
-(fact1 4)
+</code></pre></div><p>;;; 求幂</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">expr</span> b n)
+  (<span style="color:#66d9ef">if </span>(= n <span style="color:#ae81ff">0</span>)
+     <span style="color:#ae81ff">1</span>
+     (* b (expt b (- n <span style="color:#ae81ff">1</span>)))))
 
-</code></pre>
-
-<p>;;; 求幂</p>
-
-<pre><code class="language-scheme">(define (expr b n)
-  (if (= n 0)
-     1
-     (* b (expt b (- n 1)))))
-
-;;;iter form
-(define (expr1 b n)
-  (define (expr-iter b counter product)
-    (if (= counter 0)
+<span style="color:#75715e">;;;iter form</span>
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">expr1</span> b n)
+  (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">expr-iter</span> b counter product)
+    (<span style="color:#66d9ef">if </span>(= counter <span style="color:#ae81ff">0</span>)
        product
-       (expr-iter b (- counter 1) (* b product))))
-  (expr-iter b  n 1))
+       (<span style="color:#a6e22e">expr-iter</span> b (- counter <span style="color:#ae81ff">1</span>) (* b product))))
+  (<span style="color:#a6e22e">expr-iter</span> b  n <span style="color:#ae81ff">1</span>))
 
-(expr 4 5)
-(expr1 4 5)
-</code></pre>
-
-<p>===&gt;另外还有一种更快速的方法
+(<span style="color:#a6e22e">expr</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span>)
+(<span style="color:#a6e22e">expr1</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span>)
+</code></pre></div><p>===&gt;另外还有一种更快速的方法
 ;; b^n =(b^(n/2))^2, n is even
 ;; b^n =(b*b^(n-1)) , n is odd</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">fast-iter</span> b n)
+ (<span style="color:#66d9ef">cond </span>
+  ((= n <span style="color:#ae81ff">0</span>) <span style="color:#ae81ff">1</span>)
+  ((even? n) (<span style="color:#a6e22e">square</span> (<span style="color:#a6e22e">fast</span>)))
+  (<span style="color:#66d9ef">else </span>(* b (<span style="color:#a6e22e">fast-iter</span> b (- n <span style="color:#ae81ff">1</span>))))))
 
-<pre><code class="language-scheme">(define (fast-iter b n)
- (cond 
-  ((= n 0) 1)
-  ((even? n) (square (fast)))
-  (else (* b (fast-iter b (- n 1))))))
-
-</code></pre>
-
-<p>====&gt;并最终得到尾递归的一般形式
-结合<a href="jueqingsizhe66.github.io/2015/05/13/qiu-ding-ji-fen/" target="_blank">求定积分</a></p>
-
+</code></pre></div><p>====&gt;并最终得到尾递归的一般形式
+结合<a href="jueqingsizhe66.github.io/2015/05/13/qiu-ding-ji-fen/">求定积分</a></p>
 <p>===&gt;</p>
-
-<pre><code class="language-scheme">(define (sum term a  next b)
-    (define (sum-iter a result)
-     (if &lt;???&gt;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">sum</span> term a  next b)
+    (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">sum-iter</span> a result)
+     (<span style="color:#66d9ef">if </span>&lt;???&gt;
        &lt;???&gt; 
-       (iter &lt;???&gt; &lt;???&gt;)))
-    (sum-iter &lt;???&gt; &lt;???&gt;)
+       (<span style="color:#a6e22e">iter</span> &lt;???&gt; &lt;???&gt;)))
+    (<span style="color:#a6e22e">sum-iter</span> &lt;???&gt; &lt;???&gt;)
 )
-</code></pre>
+</code></pre></div>
     </div>
  <div class="nav-links" style="padding:10;">
         
@@ -1043,7 +1032,7 @@
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

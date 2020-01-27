@@ -5,7 +5,7 @@
     <link>https://jueqingsizhe66.github.io/tags/orgmode/</link>
       <atom:link href="https://jueqingsizhe66.github.io/tags/orgmode/index.xml" rel="self" type="application/rss+xml" />
     <description>orgmode</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>©2019</copyright><lastBuildDate>Thu, 11 Jun 2015 12:30:13 +0800</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>©2020</copyright><lastBuildDate>Thu, 11 Jun 2015 12:30:13 +0800</lastBuildDate>
     <image>
       <url>https://jueqingsizhe66.github.io/img/icon-192.png</url>
       <title>orgmode</title>
@@ -18,22 +18,19 @@
       <pubDate>Thu, 11 Jun 2015 12:30:13 +0800</pubDate>
       <guid>https://jueqingsizhe66.github.io/blog/2015/06/11/pandoc-mdzhu-yi-dian/</guid>
       <description>&lt;p&gt;pandoc是markdown升级版工具，用于制作幻灯片相当好用，然而使用过程需要注意以下几点。&lt;/p&gt;
-
 &lt;ol&gt;
 &lt;li&gt;markdown文件  # 大标题不能跟上文本   ## 二标题才可以跟文本，且是一张幻灯
 片。&lt;/li&gt;
 &lt;li&gt;org文件使用 &amp;mdash;&amp;mdash;&amp;mdash;来强制执行创建新的幻灯片&lt;/li&gt;
 &lt;/ol&gt;
-
 &lt;h2 id=&#34;markdown&#34;&gt;markdown&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;% Ye Zhaoliang
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;% Ye Zhaoliang
 % Openfoam Introduction
 % 11th June,2015
 
-# Openfoam简介
+&lt;span style=&#34;color:#75715e&#34;&gt;# Openfoam简介&lt;/span&gt;
 
-## 1求解器(Solver 数值结算)
+&lt;span style=&#34;color:#75715e&#34;&gt;## 1求解器(Solver 数值结算)&lt;/span&gt;
 
   openfoam采用c++编写的类库，开源免费。所以可以把它当作一种类似于String的基本类来使用。
  openfoam框架从使用级别来看主要分为两类：
@@ -45,7 +42,7 @@
     - 电磁场
     - 金融评估等
 
-## 2工具(Utility)
+&lt;span style=&#34;color:#75715e&#34;&gt;## 2工具(Utility)&lt;/span&gt;
 
     - 前处理
       + 建模
@@ -54,44 +51,44 @@
     - 后处理
       + 计算结果显示
 
-## cavity case
+&lt;span style=&#34;color:#75715e&#34;&gt;## cavity case&lt;/span&gt;
 
-cavity case的文件夹简介（等价于fluent的.cas,只不过fluent集成为一个文件，openfoam是一个文件夹)
+cavity case的文件夹简介（等价于fluent的.cas,只不过fluent集成为一个文件，openfoam是一个文件夹&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
 
-# 这便使用代码快包裹
-├── 0 (初始条件文件夹)
+&lt;span style=&#34;color:#75715e&#34;&gt;# 这便使用代码快包裹&lt;/span&gt;
+├── &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;初始条件文件夹&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
 │   ├── p
 │   └── U
 ├── constant
-│   ├── polyMesh(网格文件夹)
+│   ├── polyMesh&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;网格文件夹&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
 │   │   └── blockMeshDict
-│   └── transportProperties(流体物性参数 传热物性参数)
+│   └── transportProperties&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;流体物性参数 传热物性参数&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
 └── system
-    ├── controlDict(控制字典)
-    ├── fvSchemes(离散格式 更高级的运用)
-    └── fvSolution(求解方法)
+    ├── controlDict&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;控制字典&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+    ├── fvSchemes&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;离散格式 更高级的运用&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+    └── fvSolution&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;求解方法&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
 
-# 运用的三个级别[%]
+&lt;span style=&#34;color:#75715e&#34;&gt;# 运用的三个级别[%]&lt;/span&gt;
 
-## 三个级别
+&lt;span style=&#34;color:#75715e&#34;&gt;## 三个级别&lt;/span&gt;
 
-- [ ] 直接利用解释器(替代商业求解器 初始点)
-- [ ] 自定义求解器(关注点)
-      + 根据自己的求解流程组合求解器(类库调用)
+- &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; 直接利用解释器&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;替代商业求解器 初始点&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+- &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; 自定义求解器&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;关注点&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+      + 根据自己的求解流程组合求解器&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;类库调用&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
       + 不需要关心对流项和扩散项是如何离散的
       + 也不需要关心湍流模型
-- [ ] 更高级的运用:编写离散格式
+- &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; 更高级的运用:编写离散格式
 
-## 自定义求解器
+&lt;span style=&#34;color:#75715e&#34;&gt;## 自定义求解器&lt;/span&gt;
 
     按照自己的_求解流程_编写求解。
 
-##不关心
+&lt;span style=&#34;color:#75715e&#34;&gt;##不关心&lt;/span&gt;
 
-    + 离散格式(时间项和对流项)
+    + 离散格式&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;时间项和对流项&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
     + 大型代数方程的求解，如何加速等。
 
-## 传热求解
+&lt;span style=&#34;color:#75715e&#34;&gt;## 传热求解&lt;/span&gt;
 
 这边使用代码快包裹
     开始
@@ -104,13 +101,13 @@ cavity case的文件夹简介（等价于fluent的.cas,只不过fluent集成为�
     |                   |                          ^
     辐射传热计算Qri  导热计算Qcdi                  |
     |                   |                          |
-    由热平衡求新的对流传热量Qcvi^(m+1)             |
+    由热平衡求新的对流传热量Qcvi^&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;m+1&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;             |
     |                                              |
     收敛条件 --------&amp;gt;-----------------------------|
     |
     结束
 
-## 自定义离散格式
+&lt;span style=&#34;color:#75715e&#34;&gt;## 自定义离散格式&lt;/span&gt;
 
    针对于研究离散格式和代数求解器的用户
    目的： 创造更高效更精确的离散方法
@@ -118,18 +115,18 @@ cavity case的文件夹简介（等价于fluent的.cas,只不过fluent集成为�
           尤其是对流项。openfoam 提供了NVD和TVD的模板（40以上）
           对流项离散依然是一种研究方向。
 
-## cavity源码文件的主要构成部分
+&lt;span style=&#34;color:#75715e&#34;&gt;## cavity源码文件的主要构成部分&lt;/span&gt;
 
    +  location
-     - &amp;quot;system&amp;quot;
-     - &amp;quot;constant&amp;quot;
-     - &amp;quot;0&amp;quot;
+     - &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;system&amp;#34;&lt;/span&gt;
+     - &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;constant&amp;#34;&lt;/span&gt;
+     - &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;0&amp;#34;&lt;/span&gt;
    + class
      - dictionary
      - volVectorField
      - volScalarField
 
-##
+&lt;span style=&#34;color:#75715e&#34;&gt;##&lt;/span&gt;
 
    + object
      - dictionary
@@ -145,23 +142,20 @@ cavity case的文件夹简介（等价于fluent的.cas,只不过fluent集成为�
 
 
 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;org-mode&#34;&gt;org-mode&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;* Openfoam简介
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;org-mode&#34;&gt;org-mode&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;* Openfoam简介
   openfoam采用c++编写的类库，开源免费。所以可以把它当作一种类似于String的基本类来使用。
 
  openfoam框架从使用级别来看主要分为两类：
 ----------
-** 1求解器(Solver 数值结算)
+** 1求解器&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;Solver 数值结算&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
     - 流体计算
     - 化学反应
     - 换热
     - 结构动力学
     - 电磁场
     - 金融评估等
-** 2工具(Utility)
+** 2工具&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;Utility&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
     - 前处理
       + 建模
       + 网格
@@ -170,46 +164,46 @@ cavity case的文件夹简介（等价于fluent的.cas,只不过fluent集成为�
       + 计算结果显示
 
 ----------------------
-** cavity case
-cavity case的文件夹简介（等价于fluent的.cas,只不过fluent集成为一个文件，openfoam是一个文件夹)
+** cavity &lt;span style=&#34;color:#66d9ef&#34;&gt;case&lt;/span&gt;
+cavity case的文件夹简介（等价于fluent的.cas,只不过fluent集成为一个文件，openfoam是一个文件夹&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
 
-#+begin_src sh
-├── 0 (初始条件文件夹)
+&lt;span style=&#34;color:#75715e&#34;&gt;#+begin_src sh&lt;/span&gt;
+├── &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;初始条件文件夹&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
 │   ├── p
 │   └── U
 ├── constant
-│   ├── polyMesh(网格文件夹)
+│   ├── polyMesh&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;网格文件夹&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
 │   │   └── blockMeshDict
-│   └── transportProperties(流体物性参数 传热物性参数)
+│   └── transportProperties&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;流体物性参数 传热物性参数&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
 └── system
-    ├── controlDict(控制字典)
-    ├── fvSchemes(离散格式 更高级的运用)
-    └── fvSolution(求解方法)
-#+end_src 
+    ├── controlDict&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;控制字典&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+    ├── fvSchemes&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;离散格式 更高级的运用&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+    └── fvSolution&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;求解方法&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#+end_src&lt;/span&gt; 
 
 
-* 运用的三个级别[%]
+* 运用的三个级别&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;%&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
 
-- [ ] 直接利用解释器(替代商业求解器 初始点)
-- [ ] 自定义求解器(关注点)
+- &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; 直接利用解释器&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;替代商业求解器 初始点&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+- &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; 自定义求解器&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;关注点&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
 
-      + 根据自己的求解流程组合求解器(类库调用)
+      + 根据自己的求解流程组合求解器&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;类库调用&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
       + 不需要关心对流项和扩散项是如何离散的
       + 也不需要关心湍流模型
 
-- [ ] 更高级的运用:编写离散格式
+- &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; 更高级的运用:编写离散格式
 
 ---------
 ** 自定义求解器
     按照自己的_求解流程_编写求解。
 
 ** 不关心
-    + 离散格式(时间项和对流项)
+    + 离散格式&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;时间项和对流项&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
     + 大型代数方程的求解，如何加速等。
 
 ----------
 ** 传热求解
-#+begin_src sh
+&lt;span style=&#34;color:#75715e&#34;&gt;#+begin_src sh&lt;/span&gt;
     开始
     |
     初始值
@@ -220,12 +214,12 @@ cavity case的文件夹简介（等价于fluent的.cas,只不过fluent集成为�
     |                   |                          ^
     辐射传热计算Qri  导热计算Qcdi                  |
     |                   |                          |
-    由热平衡求新的对流传热量Qcvi^(m+1)             |
+    由热平衡求新的对流传热量Qcvi^&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;m+1&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;             |
     |                                              |
     收敛条件 --------&amp;gt;-----------------------------|
     |
     结束
-#+end_src
+&lt;span style=&#34;color:#75715e&#34;&gt;#+end_src&lt;/span&gt;
 --------------------------------
 ** 自定义离散格式
 
@@ -239,9 +233,9 @@ cavity case的文件夹简介（等价于fluent的.cas,只不过fluent集成为�
 ** cavity源码文件的主要组成部分
 
    +  location
-     - &amp;quot;system&amp;quot;
-     - &amp;quot;constant&amp;quot;
-     - &amp;quot;0&amp;quot;
+     - &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;system&amp;#34;&lt;/span&gt;
+     - &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;constant&amp;#34;&lt;/span&gt;
+     - &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;0&amp;#34;&lt;/span&gt;
   
    + class
      - dictionary
@@ -261,7 +255,7 @@ cavity case的文件夹简介（等价于fluent的.cas,只不过fluent集成为�
        + p对象
 
 
-&lt;/code&gt;&lt;/pre&gt;</description>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
     
   </channel>

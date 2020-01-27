@@ -29,7 +29,6 @@
     
   
   <meta name="description" content="Usage
-
 Andrew-&gt;China: Says Hello
 Note right of China: China thinks\nabout it
 China--&gt;Andrew: How are you?
@@ -124,7 +123,6 @@ Andrew-&gt;&gt;China: I am good thanks!
   <meta property="og:url" content="https://jueqingsizhe66.github.io/post/js-sequence-diagrams/">
   <meta property="og:title" content="JS Sequence Diagrams | Macro Life">
   <meta property="og:description" content="Usage
-
 Andrew-&gt;China: Says Hello
 Note right of China: China thinks\nabout it
 China--&gt;Andrew: How are you?
@@ -181,7 +179,7 @@ Andrew-&gt;&gt;China: I am good thanks!
       "url": "https://jueqingsizhe66.github.io/img/icon-512.png"
     }
   },
-  "description": "\u003ch2 id=\"usage\"\u003eUsage\u003c/h2\u003e\n\n\u003cpre\u003e\u003ccode class=\"language-sequence\"\u003eAndrew-\u0026gt;China: Says Hello\nNote right of China: China thinks\\nabout it\nChina--\u0026gt;Andrew: How are you?\nAndrew-\u0026gt;\u0026gt;China: I am good thanks!\n\u003c/code\u003e\u003c/pre\u003e"
+  "description": "\u003ch2 id=\"usage\"\u003eUsage\u003c/h2\u003e\n\u003cpre\u003e\u003ccode class=\"language-sequence\" data-lang=\"sequence\"\u003eAndrew-\u0026gt;China: Says Hello\r\nNote right of China: China thinks\\nabout it\r\nChina--\u0026gt;Andrew: How are you?\r\nAndrew-\u0026gt;\u0026gt;China: I am good thanks!\r\n\u003c/code\u003e\u003c/pre\u003e"
 }
 </script>
 
@@ -621,16 +619,17 @@ Andrew-&gt;&gt;China: I am good thanks!
 
 
 
-<span class="article-metadata" >Reading time: 1 minutes and    9 seconds with 256 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+<span class="article-metadata" >Reading time: 1 minutes and    7 seconds with 249 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#usage">Usage</a></li>
-</ul></li>
-<li><a href="#example-of-a-comment">Example of a comment.</a></li>
-</ul>
+  <ul>
+    <li><a href="#usage">Usage</a>
+      <ul>
+        <li><a href="#options">Options</a></li>
+      </ul>
+    </li>
+    <li><a href="#examples">Examples</a></li>
+  </ul>
 </nav>
     </aside>
   <div class="article-container">
@@ -638,14 +637,11 @@ Andrew-&gt;&gt;China: I am good thanks!
 
     <div class="article-style">
       <h2 id="usage">Usage</h2>
-
-<pre><code class="language-sequence">Andrew-&gt;China: Says Hello
+<pre><code class="language-sequence" data-lang="sequence">Andrew-&gt;China: Says Hello
 Note right of China: China thinks\nabout it
 China--&gt;Andrew: How are you?
 Andrew-&gt;&gt;China: I am good thanks!
-</code></pre>
-
-<pre><code class="language-sequence">    Andrew-&gt;China: Says Hello
+</code></pre><pre><code class="language-sequence" data-lang="sequence">    Andrew-&gt;China: Says Hello
     Note right of China: China thinks\nabout it
     China--&gt;Andrew: How are you?
     Andrew-&gt;&gt;China: I am good thanks!
@@ -655,75 +651,44 @@ Andrew-&gt;&gt;China: I am good thanks!
 
 Configure for all home and regular pages:
 
-</code></pre>
-
-<p>toml
+```toml
 [params.sequenceDiagrams]
   enable = true
-  options = &ldquo;{theme: &lsquo;hand&rsquo;}&rdquo;</p>
+  options = &quot;{theme: 'hand'}&quot;
+</code></pre><p>Configure for a single post in the front matter (<strong>Params in front matter have higher precedence</strong>):</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">sequenceDiagrams: 
+  enable: <span style="color:#66d9ef">true</span>
+  options: <span style="color:#e6db74">&#34;{theme: &#39;hand&#39;}&#34;</span>
+</code></pre></div><h3 id="options">Options</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">options</span> <span style="color:#f92672">=</span> {
+  <span style="color:#75715e">// Change the styling of the diagram, typically one of &#39;simple&#39;, &#39;hand&#39;. New themes can be registered with registerTheme(...).
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">theme</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">string</span>,
 
-<pre><code>
-Configure for a single post in the front matter (**Params in front matter have higher precedence**):
-
-</code></pre>
-
-<p>yaml
-sequenceDiagrams:
-  enable: true
-  options: &ldquo;{theme: &lsquo;hand&rsquo;}&rdquo;</p>
-
-<pre><code>
-### Options
-
-</code></pre>
-
-<p>js
-options = {
-  // Change the styling of the diagram, typically one of &lsquo;simple&rsquo;, &lsquo;hand&rsquo;. New themes can be registered with registerTheme(&hellip;).
-  theme: string,</p>
-
-<p>// CSS style to apply to the diagram&rsquo;s svg tag. (Only supported if using snap.svg)
-  css_class: string,
-}</p>
-
-<pre><code>
-See more information from https://github.com/bramp/js-sequence-diagrams.
-
-## Examples
-
-</code></pre>
-
-<p>sequence
+  <span style="color:#75715e">// CSS style to apply to the diagram&#39;s svg tag. (Only supported if using snap.svg)
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">css_class</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">string</span>,
+}
+</code></pre></div><p>See more information from <a href="https://github.com/bramp/js-sequence-diagrams">https://github.com/bramp/js-sequence-diagrams</a>.</p>
+<h2 id="examples">Examples</h2>
+<pre><code class="language-sequence" data-lang="sequence">Title: Here is a title
+A-&gt;B: Normal line
+B--&gt;C: Dashed line
+C-&gt;&gt;D: Open arrow
+D--&gt;&gt;A: Dashed open arrow
+</code></pre><pre><code>```sequence
 Title: Here is a title
 A-&gt;B: Normal line
-B&ndash;&gt;C: Dashed line
+B--&gt;C: Dashed line
 C-&gt;&gt;D: Open arrow
-D&ndash;&gt;&gt;A: Dashed open arrow</p>
-
-<pre><code>
-    ```sequence
-    Title: Here is a title
-    A-&gt;B: Normal line
-    B--&gt;C: Dashed line
-    C-&gt;&gt;D: Open arrow
-    D--&gt;&gt;A: Dashed open arrow
-    ```
-
----
-
+D--&gt;&gt;A: Dashed open arrow
+```
 </code></pre>
-
-<p>sequence</p>
-
-<h1 id="example-of-a-comment">Example of a comment.</h1>
-
-<p>Note left of A: Note to the\n left of A
+<hr>
+<pre><code class="language-sequence" data-lang="sequence"># Example of a comment.
+Note left of A: Note to the\n left of A
 Note right of A: Note to the\n right of A
 Note over A: Note over A
 Note over A,B: Note over both A and B
-```</p>
-
-<pre><code>```sequence
+</code></pre><pre><code>```sequence
 # Example of a comment.
 Note left of A: Note to the\n left of A
 Note right of A: Note to the\n right of A
@@ -1112,7 +1077,7 @@ Note over A,B: Note over both A and B
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

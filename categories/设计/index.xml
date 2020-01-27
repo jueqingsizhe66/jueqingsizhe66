@@ -5,7 +5,7 @@
     <link>https://jueqingsizhe66.github.io/categories/%E8%AE%BE%E8%AE%A1/</link>
       <atom:link href="https://jueqingsizhe66.github.io/categories/%E8%AE%BE%E8%AE%A1/index.xml" rel="self" type="application/rss+xml" />
     <description>设计</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>©2019</copyright><lastBuildDate>Sun, 10 Nov 2019 00:20:00 +0800</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>©2020</copyright><lastBuildDate>Sun, 10 Nov 2019 00:20:00 +0800</lastBuildDate>
     <image>
       <url>https://jueqingsizhe66.github.io/img/icon-192.png</url>
       <title>设计</title>
@@ -17,55 +17,42 @@
       <link>https://jueqingsizhe66.github.io/post/perl%E6%89%B9%E9%87%8F%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%99%A8%E7%A8%8B%E5%BA%8F/</link>
       <pubDate>Sun, 10 Nov 2019 00:20:00 +0800</pubDate>
       <guid>https://jueqingsizhe66.github.io/post/perl%E6%89%B9%E9%87%8F%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%99%A8%E7%A8%8B%E5%BA%8F/</guid>
-      <description>
-
-&lt;h2 id=&#34;背景分析&#34;&gt;背景分析&lt;/h2&gt;
-
+      <description>&lt;h2 id=&#34;背景分析&#34;&gt;背景分析&lt;/h2&gt;
 &lt;p&gt;很多时候，我们需要执行一条命令比如`batchFluent.bat`, `cfdpost -batch \*.cse`, `fluent 3d -i batchFluent2000`等， 在执行该命令时候，我们需要打开
 cmd或者terminal，然后切换到对应脚本目录，拷贝相应脚本需要的程序，甚是麻烦，可否把这个过程程序化？&lt;/p&gt;
-
 &lt;h2 id=&#34;单个文件处理&#34;&gt;单个文件处理&lt;/h2&gt;
-
 &lt;h3 id=&#34;管道1-转换openfoam结果为msh和dat&#34;&gt;管道1: 转换Openfoam结果为msh和dat&lt;/h3&gt;
-
-&lt;p&gt;通过下面的程序得到一个项目文件相关的msh, 比如YangJiang ,就会得到YangJiang.msh以及YangJiang.dat等， 也就是升华技术，可提取一个技术变量，projectName=&amp;ldquo;YangJiang&amp;rdquo;&lt;/p&gt;
-
+&lt;p&gt;通过下面的程序得到一个项目文件相关的msh, 比如YangJiang ,就会得到YangJiang.msh以及YangJiang.dat等， 也就是升华技术，可提取一个技术变量，projectName=&amp;quot;YangJiang&amp;rdquo;&lt;/p&gt;
 &lt;p&gt;batchFluent.bat(不需要修改!)&lt;/p&gt;
-
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;rem 路径相应修改为电脑上的安装文件夹路径
 set OPENFOAM_WIN_DIR&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;D:/Program Files &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;x86&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;/AIWind/solver/OpenFOAMv18.06
 set WM_PROJECT_DIR&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;%OPENFOAM_WIN_DIR%
 set PATH&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;%OPENFOAM_WIN_DIR%&lt;span style=&#34;color:#ae81ff&#34;&gt;\b&lt;/span&gt;in;%OPENFOAM_WIN_DIR%&lt;span style=&#34;color:#ae81ff&#34;&gt;\b&lt;/span&gt;in/mpi;%OPENFOAM_WIN_DIR%&lt;span style=&#34;color:#ae81ff&#34;&gt;\l&lt;/span&gt;ib;
-set MPI_BUFFER_SIZE&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;20000000&lt;/span&gt;
-rem 将foamDataToFluentDict放入算例&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;oTurbine&lt;span style=&#34;color:#ae81ff&#34;&gt;\1&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.00&lt;span style=&#34;color:#ae81ff&#34;&gt;\0\k&lt;/span&gt;h&lt;span style=&#34;color:#ae81ff&#34;&gt;\s&lt;/span&gt;ystem
+set MPI_BUFFER_SIZE&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;20000000
+rem 将foamDataToFluentDict放入算例&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;oTurbine&lt;span style=&#34;color:#ae81ff&#34;&gt;\1&lt;/span&gt;0.00&lt;span style=&#34;color:#ae81ff&#34;&gt;\0&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\k&lt;/span&gt;h&lt;span style=&#34;color:#ae81ff&#34;&gt;\s&lt;/span&gt;ystem
 rem 转换网格
 foamMeshToFluent
 rem 转换数据
 foamDataToFluent&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 &lt;p&gt;system/foamdatatofluentdict(不需要修改)&lt;/p&gt;
-
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;FoamFile
 &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
-  version     &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;.0;
+  version     2.0;
   format      ascii;
   note        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;OpenFOAM to Fluent interface control dictionary&amp;#34;&lt;/span&gt;;
   class       dictionary;
   object      foamDataToFluentDict;
 &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
 
-p               &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;;
-U               &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;;
-//T               &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;;//
-//h               &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;;//
-k               &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;;
-epsilon         &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;;
-//alpha1          &lt;span style=&#34;color:#ae81ff&#34;&gt;150&lt;/span&gt;;//&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
+p               1;
+U               2;
+//T               3;//
+//h               4;//
+k               5;
+epsilon         6;
+//alpha1          150;//&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3 id=&#34;管道2-转换msh和dat为fluent的cas-and-dat--需要修改&#34;&gt;管道2: 转换msh和dat为fluent的cas and dat(需要修改)&lt;/h3&gt;
-
 &lt;p&gt;YangJiang.msh 和 YangJiang2000.dat和 YangJiang20001.cas得适配，应需进行修正，把这个升级为&lt;/p&gt;
-
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;cx-gui-do cx-activate-item &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;MenuBar*ReadSubMenu*Mesh...&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;cx-gui-do cx-set-file-dialog-entries &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Select File&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;( &amp;#34;YangJiang.msh&amp;#34;) &amp;#34;Mesh Files (*.msh* *.MSH* )&amp;#34;)
 &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;(cx-gui-do cx-activate-item &amp;#34;MenuBar*ReadSubMenu*Data...&amp;#34;)
@@ -74,16 +61,11 @@ epsilon         &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;;
 &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;cx-gui-do cx-set-file-dialog-entries &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Select File&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;YangJiang20001.cas&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Case/Data Files (*.cas* *.pdat* )&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;cx-gui-do cx-activate-item &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;MenuBar*WriteSubMenu*Stop Journal&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;cx-gui-do cx-activate-item &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;MenuBar*FileMenu*Exit&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 &lt;p&gt;运行方式为 `fluent 3d -i batchFluent2000`&lt;/p&gt;
-
 &lt;p&gt;由此可得到YangJiang20001.cas和YangJiang20001.dat&lt;/p&gt;
-
 &lt;h3 id=&#34;管道3-提取post结果--需要修改-修改一次-然后进行循环即可&#34;&gt;管道3: 提取post结果(需要修改, 修改一次，然后进行循环即可)&lt;/h3&gt;
-
 &lt;p&gt;然后针对cas和dat进行线信息提取即可&lt;/p&gt;
-
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;!@processDir&lt;span style=&#34;color:#f92672&#34;&gt;=(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;D:\\AIwind\\AIWindCases\\Dongping20191105\\noTurbine\\10.00\\0\\YangJiang\\fluentInterface&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;!@processDir&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;D:\\AIwind\\AIWindCases\\Dongping20191105\\noTurbine\\10.00\\0\\YangJiang\\fluentInterface&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;;
 
 &lt;span style=&#34;color:#75715e&#34;&gt;################################################&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;## 文件过滤设置&lt;/span&gt;
@@ -91,7 +73,7 @@ epsilon         &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;;
 
 
 !$length&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;@processDir; &lt;span style=&#34;color:#75715e&#34;&gt;#get the length of the processDir array&lt;/span&gt;
-!for&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;$count&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;;$count&amp;lt;$length;$count++&lt;span style=&#34;color:#f92672&#34;&gt;){&lt;/span&gt;
+!for&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;$count&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;0;$count&amp;lt;$length;$count++&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
 
   !$pathDir &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $processDir&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;$count&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;;
   &lt;span style=&#34;color:#75715e&#34;&gt;#!$file = &amp;#34;huailai20m220001.dat&amp;#34;; ## for 814w and 1425w&lt;/span&gt;
@@ -101,24 +83,18 @@ epsilon         &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;;
   &lt;span style=&#34;color:#75715e&#34;&gt;###   Create output directory&lt;/span&gt;
   !$outputLine&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;forLinesOutput0&amp;#34;&lt;/span&gt;;
   !$outputLineDir&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;${&lt;/span&gt;pathDir&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;//&lt;/span&gt;$outputLine&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;;
-  !if&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;! -e $outputLineDir&lt;span style=&#34;color:#f92672&#34;&gt;){&lt;/span&gt;
+  !if&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;! -e $outputLineDir&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
     !mkdir $outputLineDir;
-    !print &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$outputLineDir&lt;span style=&#34;color:#e6db74&#34;&gt; create successfully!&amp;#34;&lt;/span&gt;;
+    !print &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$outputLineDir&lt;span style=&#34;color:#e6db74&#34;&gt; create successfully!&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;;
     !&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 &lt;h2 id=&#34;技术分解1-批量后处理openfoam结果到dat格式&#34;&gt;技术分解1&amp;mdash;- 批量后处理Openfoam结果到dat格式&lt;/h2&gt;
-
 &lt;ol&gt;
 &lt;li&gt;准备文件&lt;/li&gt;
 &lt;li&gt;链接目录，切换到脚本目录，执行脚本&lt;/li&gt;
 &lt;/ol&gt;
-
 &lt;h2 id=&#34;技术实现1&#34;&gt;技术实现1&lt;/h2&gt;
-
 &lt;h3 id=&#34;基础版本--初始版本&#34;&gt;基础版本(初始版本)&lt;/h3&gt;
-
 &lt;p&gt;事先拷贝好需要的文件放在指定位置处,使用system运行系统命令即可&lt;/p&gt;
-
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-perl&#34; data-lang=&#34;perl&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/usr/bin/env perl&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#===============================================================================&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#&lt;/span&gt;
@@ -135,7 +111,7 @@ epsilon         &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;;
 &lt;span style=&#34;color:#75715e&#34;&gt;#       AUTHOR: YOUR NAME (),&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;# ORGANIZATION:&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#      VERSION: 1.0&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;#      CREATED: 2019/9/24 1149&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#      CREATED: 2019/9/24 11:11:49&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#     REVISION: ---&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#===============================================================================&lt;/span&gt;
 
@@ -158,22 +134,15 @@ epsilon         &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;;
     &lt;span style=&#34;color:#75715e&#34;&gt;#system($tempBatchFile)&lt;/span&gt;
     system(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;batchFluent.bat&amp;#34;&lt;/span&gt;)
 }&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 &lt;h3 id=&#34;高级版本&#34;&gt;高级版本&lt;/h3&gt;
-
 &lt;p&gt;让程序在指定的位置自己拷贝需要的文件, 采用&amp;lt;:Copy函数&amp;gt;&lt;/p&gt;
-
 &lt;p&gt;根据目录结构可以进行对应修改&lt;/p&gt;
-
 &lt;h4 id=&#34;下面针对的是不同风速-相同扇区-0扇区-的结果&#34;&gt;下面针对的是不同风速，相同扇区【0扇区】的结果&lt;/h4&gt;
-
 &lt;ol&gt;
 &lt;li&gt;规律：找到noturbine文件夹&lt;/li&gt;
 &lt;li&gt;规律：找到项目文件名kh, yandun,YangJiang等&lt;/li&gt;
 &lt;/ol&gt;
-
-&lt;!--listend--&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-perl&#34; data-lang=&#34;perl&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/usr/bin/env perl&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#===============================================================================&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#&lt;/span&gt;
@@ -190,7 +159,7 @@ epsilon         &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;;
 &lt;span style=&#34;color:#75715e&#34;&gt;#       AUTHOR: YOUR NAME (),&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;# ORGANIZATION:&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#      VERSION: 1.0&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;#      CREATED: 2019/9/24 1149&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#      CREATED: 2019/9/24 11:11:49&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#     REVISION: ---&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#===============================================================================&lt;/span&gt;
 
@@ -222,15 +191,11 @@ epsilon         &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;;
     &lt;span style=&#34;color:#75715e&#34;&gt;#system($tempBatchFile)&lt;/span&gt;
     system(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;batchFluent.bat&amp;#34;&lt;/span&gt;)
 }&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 &lt;h4 id=&#34;相同风速-不同扇区的结果&#34;&gt;相同风速，不同扇区的结果&lt;/h4&gt;
-
 &lt;ol&gt;
 &lt;li&gt;找到noTurbine文件夹&lt;/li&gt;
 &lt;/ol&gt;
-
-&lt;!--listend--&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-perl&#34; data-lang=&#34;perl&#34;&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;#!/usr/bin/env perl&lt;/span&gt;
   &lt;span style=&#34;color:#75715e&#34;&gt;#===============================================================================&lt;/span&gt;
   &lt;span style=&#34;color:#75715e&#34;&gt;#&lt;/span&gt;
@@ -247,7 +212,7 @@ epsilon         &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;;
   &lt;span style=&#34;color:#75715e&#34;&gt;#       AUTHOR: YOUR NAME (),&lt;/span&gt;
   &lt;span style=&#34;color:#75715e&#34;&gt;# ORGANIZATION:&lt;/span&gt;
   &lt;span style=&#34;color:#75715e&#34;&gt;#      VERSION: 1.0&lt;/span&gt;
-  &lt;span style=&#34;color:#75715e&#34;&gt;#      CREATED: 2019/11/7 1843&lt;/span&gt;
+  &lt;span style=&#34;color:#75715e&#34;&gt;#      CREATED: 2019/11/7 18:47:43&lt;/span&gt;
   &lt;span style=&#34;color:#75715e&#34;&gt;#     REVISION: ---&lt;/span&gt;
   &lt;span style=&#34;color:#75715e&#34;&gt;#===============================================================================&lt;/span&gt;
 
@@ -283,35 +248,26 @@ epsilon         &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;;
       &lt;span style=&#34;color:#75715e&#34;&gt;#system($tempBatchFile)&lt;/span&gt;
       system(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;batchFluent.bat&amp;#34;&lt;/span&gt;);
   }&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 &lt;h2 id=&#34;技术分解2-批量处理dat文件到post格式&#34;&gt;技术分解2&amp;mdash;-批量处理dat文件到post格式&lt;/h2&gt;
-
 &lt;p&gt;需要执行fluent的journal命令核心是fluent脚本&lt;/p&gt;
-
 &lt;ol&gt;
 &lt;li&gt;读入msh&lt;/li&gt;
 &lt;li&gt;读入dat&lt;/li&gt;
 &lt;li&gt;保存cas &amp;amp; dat
 具体文件需要修改msh和dat前缀&lt;/li&gt;
 &lt;/ol&gt;
-
-&lt;!--listend--&gt;
-
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-C&#34; data-lang=&#34;C&#34;&gt;(cx&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;gui&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;do&lt;/span&gt; cx&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;activate&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;item &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;MenuBar*ReadSubMenu*Mesh...&amp;#34;&lt;/span&gt;)
-(cx&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;gui&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;do&lt;/span&gt; cx&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;set&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;file&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;dialog&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;entries &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Select File&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&amp;#39;&lt;/span&gt;( &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;huailai20m2.msh&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Mesh Files (*.msh* *.MSH* )&amp;#34;&lt;/span&gt;)
-  (cx&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;gui&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;do&lt;/span&gt; cx&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;activate&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;item &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;MenuBar*ReadSubMenu*Data...&amp;#34;&lt;/span&gt;)
-  (cx&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;gui&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;do&lt;/span&gt; cx&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;set&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;file&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;dialog&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;entries &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Select File&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&amp;#39;&lt;/span&gt;( &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;huailai20m22000.dat&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Data Files (*.dat* *.pdat* )&amp;#34;&lt;/span&gt;)
-  (cx&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;gui&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;do&lt;/span&gt; cx&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;activate&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;item &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;MenuBar*WriteSubMenu*Case &amp;amp; Data...&amp;#34;&lt;/span&gt;)
-  (cx&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;gui&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;do&lt;/span&gt; cx&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;set&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;file&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;dialog&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;entries &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Select File&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&amp;#39;&lt;/span&gt;( &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;huailai20m220001.cas&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Case/Data Files (*.cas* *.pdat* )&amp;#34;&lt;/span&gt;)
-  (cx&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;gui&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;do&lt;/span&gt; cx&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;activate&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;item &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;MenuBar*WriteSubMenu*Stop Journal&amp;#34;&lt;/span&gt;)
-  (cx&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;gui&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;do&lt;/span&gt; cx&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;activate&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;item &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;MenuBar*FileMenu*Exit&amp;#34;&lt;/span&gt;)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
+&lt;!-- raw HTML omitted --&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-C&#34; data-lang=&#34;C&#34;&gt;(cx&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;gui&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;do&lt;/span&gt; cx&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;activate&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;item &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;MenuBar*ReadSubMenu*Mesh...&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+(cx&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;gui&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;do&lt;/span&gt; cx&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;set&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;file&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;dialog&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;entries &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Select File&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&amp;#39;&lt;/span&gt;( &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;huailai20m2.msh&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Mesh Files (*.msh* *.MSH* )&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+  (cx&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;gui&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;do&lt;/span&gt; cx&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;activate&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;item &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;MenuBar*ReadSubMenu*Data...&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+  (cx&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;gui&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;do&lt;/span&gt; cx&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;set&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;file&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;dialog&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;entries &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Select File&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&amp;#39;&lt;/span&gt;( &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;huailai20m22000.dat&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Data Files (*.dat* *.pdat* )&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+  (cx&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;gui&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;do&lt;/span&gt; cx&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;activate&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;item &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;MenuBar*WriteSubMenu*Case &amp;amp; Data...&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+  (cx&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;gui&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;do&lt;/span&gt; cx&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;set&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;file&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;dialog&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;entries &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Select File&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&amp;#39;&lt;/span&gt;( &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;huailai20m220001.cas&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Case/Data Files (*.cas* *.pdat* )&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+  (cx&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;gui&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;do&lt;/span&gt; cx&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;activate&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;item &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;MenuBar*WriteSubMenu*Stop Journal&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+  (cx&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;gui&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;do&lt;/span&gt; cx&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;activate&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;item &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;MenuBar*FileMenu*Exit&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;核心命令： `fluent 3d -i batchFluent2000`&lt;/p&gt;
-
 &lt;h2 id=&#34;技术实现2&#34;&gt;技术实现2&lt;/h2&gt;
-
 &lt;h3 id=&#34;相同风速下-不同扇区处理&#34;&gt;相同风速下，不同扇区处理&lt;/h3&gt;
-
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-perl&#34; data-lang=&#34;perl&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/usr/bin/env perl&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#===============================================================================&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#&lt;/span&gt;
@@ -328,7 +284,7 @@ epsilon         &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;;
 &lt;span style=&#34;color:#75715e&#34;&gt;#       AUTHOR: YOUR NAME (),&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;# ORGANIZATION:&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#      VERSION: 1.0&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;#      CREATED: 2019/9/27 1535&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#      CREATED: 2019/9/27 15:43:35&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#     REVISION: ---&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#===============================================================================&lt;/span&gt;
 
@@ -358,13 +314,11 @@ epsilon         &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;;
     &lt;span style=&#34;color:#75715e&#34;&gt;#system($tempBatchFile)&lt;/span&gt;
     system(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;fluent 3d -i batchFluent2000&amp;#34;&lt;/span&gt;);
 }&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 &lt;h3 id=&#34;快速格式化项目的batchfluent2000&#34;&gt;快速格式化项目的batchFluent2000&lt;/h3&gt;
-
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-perl&#34; data-lang=&#34;perl&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; strict;
 &lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; warnings;
 
-&lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; File::Slurp &lt;span style=&#34;color:#e6db74&#34;&gt;qw(read_file write_file)&lt;/span&gt;;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; File::Slurp &lt;span style=&#34;color:#e6db74&#34;&gt;qw(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;read_file write_file&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;)&lt;/span&gt;;
 &lt;span style=&#34;color:#75715e&#34;&gt;#open(FEIJI,&amp;#34;C:\\Users\\yezhaoliang\\Desktop\\probe.cse&amp;#34;) or die &amp;#34;can&amp;#39;t open the file \n&amp;#34;;&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#my $car =&amp;#34;@lidarX1&amp;#34;;&lt;/span&gt;
 
@@ -373,80 +327,82 @@ epsilon         &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;;
 
 &lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt;  $projectOld&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;huailai20m2&amp;#34;&lt;/span&gt;;
 &lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt;  $projectNew&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;YangJiang&amp;#34;&lt;/span&gt;;
-&lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt; $data &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; read_file $filename, {binmode &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;utf8&amp;#39;&lt;/span&gt;};
+&lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt; $data &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; read_file $filename, {binmode &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;utf8&amp;#39;&lt;/span&gt;};
 &lt;span style=&#34;color:#75715e&#34;&gt;## 文件内容替换---- 也可以用IO:All-&amp;gt;slurp函数&lt;/span&gt;
 
 $data &lt;span style=&#34;color:#f92672&#34;&gt;=~&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;s/$projectOld/$projectNew/g&lt;/span&gt;;
 &lt;span style=&#34;color:#75715e&#34;&gt;## 删除掉^M&lt;/span&gt;
 $data &lt;span style=&#34;color:#f92672&#34;&gt;=~&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;s/\r//g&lt;/span&gt;;
-write_file $filename, {binmode &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;:utf8&amp;#39;&lt;/span&gt;},$data;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
+write_file $filename, {binmode &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;:utf8&amp;#39;&lt;/span&gt;},$data;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&#34;技术升维&#34;&gt;技术升维&lt;/h2&gt;
-
 &lt;ol&gt;
 &lt;li&gt;思考目录结构&lt;/li&gt;
 &lt;li&gt;思考要执行命令&lt;/li&gt;
 &lt;li&gt;思考命令执行的内容&amp;mdash;可升级对应文件内容的修改&lt;/li&gt;
 &lt;li&gt;一个可以生成你需要的可执行程序，并具备普适性!Macro programming&lt;/li&gt;
 &lt;/ol&gt;
-
 &lt;h2 id=&#34;附录&#34;&gt;附录&lt;/h2&gt;
-
 &lt;ol&gt;
-&lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/lxp90/article/details/76228104&#34; target=&#34;_blank&#34;&gt;perl单行替换文件内容&lt;/a&gt;(先temp，然后rename到原始文件名，删除temp备份)&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/blog%5Fabel/article/details/40589227&#34; target=&#34;_blank&#34;&gt;perl s替换&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://cn.perlmaven.com/how-to-replace-a-string-in-a-file-with-perl&#34; target=&#34;_blank&#34;&gt;perl slurp&lt;/a&gt;(输入s命令到slurp中，执行！ `cpanm &amp;lt;:Slurp&amp;gt;`)&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;:Slurphttps://metacpan.org/pod/File&#34; target=&#34;_blank&#34;&gt;File::Slurp&lt;/a&gt; edit_file command file&lt;/p&gt;
-
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-perl&#34; data-lang=&#34;perl&#34;&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; File::Slurp &lt;span style=&#34;color:#e6db74&#34;&gt;qw(edit_file)&lt;/span&gt;;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/lxp90/article/details/76228104&#34;&gt;perl单行替换文件内容&lt;/a&gt;(先temp，然后rename到原始文件名，删除temp备份)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/blog%5Fabel/article/details/40589227&#34;&gt;perl s替换&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://cn.perlmaven.com/how-to-replace-a-string-in-a-file-with-perl&#34;&gt;perl slurp&lt;/a&gt;(输入s命令到slurp中，执行！ `cpanm &amp;lt;:Slurp&amp;gt;`)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;:Slurphttps://metacpan.org/pod/File&#34;&gt;File::Slurp&lt;/a&gt; edit_file command file&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-perl&#34; data-lang=&#34;perl&#34;&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; File::Slurp &lt;span style=&#34;color:#e6db74&#34;&gt;qw(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;edit_file&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;)&lt;/span&gt;;
     &lt;span style=&#34;color:#75715e&#34;&gt;# perl -0777 -pi -e &amp;#39;s/foo/bar/g&amp;#39; /path/file&lt;/span&gt;
     edit_file { &lt;span style=&#34;color:#e6db74&#34;&gt;s/foo/bar/g&lt;/span&gt; } &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;/path/file&amp;#39;&lt;/span&gt;;
     edit_file &lt;span style=&#34;color:#66d9ef&#34;&gt;sub&lt;/span&gt; { &lt;span style=&#34;color:#e6db74&#34;&gt;s/foo/bar/g&lt;/span&gt; }, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;/path/file&amp;#39;&lt;/span&gt;;
     &lt;span style=&#34;color:#66d9ef&#34;&gt;sub&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;replace_foo&lt;/span&gt; { &lt;span style=&#34;color:#e6db74&#34;&gt;s/foo/bar/g&lt;/span&gt; }
-    edit_file &lt;span style=&#34;color:#f92672&#34;&gt;\&amp;amp;&lt;/span&gt;replace_foo, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;/path/file&amp;#39;&lt;/span&gt;;
-    &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://blogs.perl.org/users/leon%5Ftimmermans/2015/08/fileslurp-is-broken-and-wrong.html&#34; target=&#34;_blank&#34;&gt;perl slurp bugs and unmaintained&lt;/a&gt;  可以选用Slurper, &lt;a href=&#34;https://metacpan.org/pod/Path::Tiny&#34; target=&#34;_blank&#34;&gt;Path:Tiny&lt;/a&gt;  or &lt;a href=&#34;https://metacpan.org/pod/IO::All&#34; target=&#34;_blank&#34;&gt;Io:ALL&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;path::Tiny   `path(&amp;ldquo;foo.txt&amp;rdquo;)-&amp;gt;move(&amp;ldquo;bar.txt&amp;rdquo;);`&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;简单处理&lt;a href=&#34;https://www.perl.com/pub/2004/03/12/ioall.html/&#34; target=&#34;_blank&#34;&gt;IO::All&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;虽然slurp废弃了，但发现依然不错文件内容单行处理，所以无法循环，没有if判断等。但可以执行批处理，而IO:All使用
+    edit_file &lt;span style=&#34;color:#f92672&#34;&gt;\&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;replace_foo, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;/path/file&amp;#39;&lt;/span&gt;;
+    &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;http://blogs.perl.org/users/leon%5Ftimmermans/2015/08/fileslurp-is-broken-and-wrong.html&#34;&gt;perl slurp bugs and unmaintained&lt;/a&gt;  可以选用Slurper, &lt;a href=&#34;https://metacpan.org/pod/Path::Tiny&#34;&gt;Path:Tiny&lt;/a&gt;  or &lt;a href=&#34;https://metacpan.org/pod/IO::All&#34;&gt;Io:ALL&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;path::Tiny   `path(&amp;ldquo;foo.txt&amp;rdquo;)-&amp;gt;move(&amp;ldquo;bar.txt&amp;rdquo;);`&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;简单处理&lt;a href=&#34;https://www.perl.com/pub/2004/03/12/ioall.html/&#34;&gt;IO::All&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;虽然slurp废弃了，但发现依然不错文件内容单行处理，所以无法循环，没有if判断等。但可以执行批处理，而IO:All使用
 `my $line = $io-&amp;gt;getline` ,其实使用内置的函数即可`while(&amp;lt;$fh&amp;gt;)`即可&lt;/p&gt;
-
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-perl&#34; data-lang=&#34;perl&#34;&gt;         &lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; strict;
          &lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; warnings;
-         &lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; File::Slurp &lt;span style=&#34;color:#e6db74&#34;&gt;qw(read_file write_file)&lt;/span&gt;;
+         &lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; File::Slurp &lt;span style=&#34;color:#e6db74&#34;&gt;qw(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;read_file write_file&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;)&lt;/span&gt;;
          &lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt; $filename &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C:\\Users\\yezhaoliang\\Desktop\\probe.cse&amp;#34;&lt;/span&gt;;
 
     &lt;span style=&#34;color:#75715e&#34;&gt;##gbk or gb2312&lt;/span&gt;
-         &lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt; $data &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; read_file $filename, {binmode &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;gbk&amp;#39;&lt;/span&gt;};
+         &lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt; $data &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; read_file $filename, {binmode &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;gbk&amp;#39;&lt;/span&gt;};
          &lt;span style=&#34;color:#75715e&#34;&gt;## 文件内容替换---- 也可以用IO:All-&amp;gt;slurp函数&lt;/span&gt;
          $data &lt;span style=&#34;color:#f92672&#34;&gt;=~&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;s/风廓线/小心了/g&lt;/span&gt;;
          &lt;span style=&#34;color:#75715e&#34;&gt;## 删除掉^M&lt;/span&gt;
          $data &lt;span style=&#34;color:#f92672&#34;&gt;=~&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;s/\r//g&lt;/span&gt;;
-         write_file $filename, {binmode &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;:gbk&amp;#39;&lt;/span&gt;},$data;
+         write_file $filename, {binmode &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;:gbk&amp;#39;&lt;/span&gt;},$data;
     &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 &lt;p&gt;英文替换&lt;/p&gt;
-
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-perl&#34; data-lang=&#34;perl&#34;&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; strict;
     &lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; warnings;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; File::Slurp &lt;span style=&#34;color:#e6db74&#34;&gt;qw(read_file write_file)&lt;/span&gt;;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; File::Slurp &lt;span style=&#34;color:#e6db74&#34;&gt;qw(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;read_file write_file&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;)&lt;/span&gt;;
     &lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt; $filename &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C:\\Users\\yezhaoliang\\Desktop\\probe.cse&amp;#34;&lt;/span&gt;;
 
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt; $data &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; read_file $filename, {binmode &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;utf8&amp;#39;&lt;/span&gt;};
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt; $data &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; read_file $filename, {binmode &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;utf8&amp;#39;&lt;/span&gt;};
     &lt;span style=&#34;color:#75715e&#34;&gt;## 文件内容替换---- 也可以用IO:All-&amp;gt;slurp函数&lt;/span&gt;
     $data &lt;span style=&#34;color:#f92672&#34;&gt;=~&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;s/lidar/Leida/g&lt;/span&gt;;
     &lt;span style=&#34;color:#75715e&#34;&gt;## 删除掉^M&lt;/span&gt;
     $data &lt;span style=&#34;color:#f92672&#34;&gt;=~&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;s/\r//g&lt;/span&gt;;
-    write_file $filename, {binmode &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;:utf8&amp;#39;&lt;/span&gt;},$data;
-    &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;回归到原始程序，只用内置函数&lt;/p&gt;
-
+    write_file $filename, {binmode &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;:utf8&amp;#39;&lt;/span&gt;},$data;
+    &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;回归到原始程序，只用内置函数&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-perl&#34; data-lang=&#34;perl&#34;&gt;    open(F1,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;lt;test.txt&amp;#39;&lt;/span&gt;);
     open(F2,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;gt;test.txt.tmp&amp;#39;&lt;/span&gt;);
     &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; ($s&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;lt;F1&amp;gt;&lt;/span&gt;){
@@ -459,29 +415,25 @@ write_file $filename, {binmode &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;g
     unlink(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;test.txt&amp;#39;&lt;/span&gt;);
     rename(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;test.txt.tmp&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;test.txt&amp;#39;&lt;/span&gt;);
     &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;其实外置、内置的思路都是open、循环、删除、重命名的过程这样还可以不断拓展，增加判断等。&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;elisp通过defmacro生成一个&lt;a href=&#34;https://emacs-china.org/t/elisp/11023/3&#34; target=&#34;_blank&#34;&gt; 临时的defvar、defun &lt;/a&gt;等,即生成一个新的状态或者worker&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-elisp&#34;&gt;(defmacro defvar/os (name &amp;amp;rest args)
-`(defvar ,name
- (pcase system-type
-   ,@(mapcar (lambda (x)
-               (let ((a (car x))
-                     (b (cadr x)))
-                 `(,(ecase a
-                      (:windows &#39;&#39;windows-nt)
-                      (:macos &#39;&#39;darwin))
-                   ,b)))
-               (-partition-all 2 args)))))
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;p&gt;其实外置、内置的思路都是open、循环、删除、重命名的过程这样还可以不断拓展，增加判断等。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;elisp通过defmacro生成一个&lt;a href=&#34;https://emacs-china.org/t/elisp/11023/3&#34;&gt; 临时的defvar、defun &lt;/a&gt;等,即生成一个新的状态或者worker&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
-
-&lt;h3 id=&#34;增强版的自定义功能&#34;&gt;增强版的自定义功能&lt;/h3&gt;
-
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;(defmacro defvar/os (name &lt;span style=&#34;color:#66d9ef&#34;&gt;&amp;amp;rest&lt;/span&gt; args)
+  &lt;span style=&#34;color:#f92672&#34;&gt;`&lt;/span&gt;(defvar &lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt;name
+     (pcase system-type
+       &lt;span style=&#34;color:#f92672&#34;&gt;,@&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;mapcar&lt;/span&gt; (lambda (x)
+                   (let ((a (&lt;span style=&#34;color:#a6e22e&#34;&gt;car&lt;/span&gt; x))
+                         (b (cadr x)))
+                     &lt;span style=&#34;color:#f92672&#34;&gt;`&lt;/span&gt;(&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt;(ecase a
+                          (:windows &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;windows-nt&lt;/span&gt;)
+                          (:macos &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;darwin&lt;/span&gt;))
+                       &lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt;b)))
+                   (-partition-all &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; args)))))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;增强版的自定义功能&#34;&gt;增强版的自定义功能&lt;/h3&gt;
 &lt;p&gt;如果遇到某种条件下的文件则执行对应的修正&lt;/p&gt;
-
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-perl&#34; data-lang=&#34;perl&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; strict;
 &lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; warnings;
 
@@ -514,16 +466,12 @@ close  $output
     &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; warn &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;$0 : failed to close output file &amp;#39;$output_file_name&amp;#39; : $!\n&amp;#34;&lt;/span&gt;;
 close  $input
     &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; warn &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;$0 : failed to close input file &amp;#39;$input_file_name&amp;#39; : $!\n&amp;#34;&lt;/span&gt;;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 &lt;h3 id=&#34;案例1-批量修改batchfluent2000-替换-然后执行-完美版&#34;&gt;案例1：批量修改batchFluent2000、替换 然后执行【完美版】&lt;/h3&gt;
-
 &lt;ol&gt;
 &lt;li&gt;修改&lt;/li&gt;
 &lt;li&gt;执行&lt;/li&gt;
 &lt;/ol&gt;
-
-&lt;!--listend--&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-perl&#34; data-lang=&#34;perl&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; strict;
 &lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; warnings;
 &lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; utf8;
@@ -575,18 +523,13 @@ close  $input
     &lt;span style=&#34;color:#75715e&#34;&gt;#system($tempBatchFile)&lt;/span&gt;
     system(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;fluent 3d -i batchFluent2000&amp;#34;&lt;/span&gt;);
 }&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 &lt;h3 id=&#34;案例2-批量修改probelinesandexport-dot-cse-替换-然后执行-完美版&#34;&gt;案例2：批量修改probelinesAndexport.cse、替换 然后执行【完美版】&lt;/h3&gt;
-
 &lt;p&gt;原先是使用copy命令，现在完全用perl程序，控制不同扇区或者速度的修正，并更新到对应文件后，写入到具体目录， 最终执行即可!&lt;/p&gt;
-
 &lt;ol&gt;
 &lt;li&gt;修改&lt;/li&gt;
 &lt;li&gt;执行&lt;/li&gt;
 &lt;/ol&gt;
-
-&lt;!--listend--&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-perl&#34; data-lang=&#34;perl&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; strict;
 &lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; warnings;
 &lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; Cwd;
@@ -639,16 +582,12 @@ close  $input
     &lt;span style=&#34;color:#75715e&#34;&gt;#system(&amp;#34;fluent 3d -i batchFluent2000&amp;#34;);&lt;/span&gt;
     system(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;cfdpost -batch probeLinesAndExport.cse&amp;#34;&lt;/span&gt;);
 }&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 &lt;h3 id=&#34;上述两个过程案例1-2可以合并&#34;&gt;上述两个过程案例1、2可以合并&lt;/h3&gt;
-
 &lt;ol&gt;
 &lt;li&gt;确定处理哪个case, 烟墩? 怀来? 东平?&lt;/li&gt;
 &lt;li&gt;确定源文件是否存在! 原先的BatchFluent2000和cse文件在？&lt;/li&gt;
 &lt;/ol&gt;
-
-&lt;!--listend--&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-perl&#34; data-lang=&#34;perl&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/usr/bin/env perl&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#===============================================================================&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#&lt;/span&gt;
@@ -665,7 +604,7 @@ close  $input
 &lt;span style=&#34;color:#75715e&#34;&gt;#       AUTHOR: YOUR NAME (),&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;# ORGANIZATION:&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#      VERSION: 1.0&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;#      CREATED: 2019/9/27 1535&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#      CREATED: 2019/9/27 15:43:35&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#     REVISION: ---&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#===============================================================================&lt;/span&gt;
 
@@ -786,42 +725,29 @@ close  $input
       <link>https://jueqingsizhe66.github.io/blog/2015/10/24/zhong-guo-ban-de-the-design-of-everyday-things/</link>
       <pubDate>Sat, 24 Oct 2015 20:30:55 +0800</pubDate>
       <guid>https://jueqingsizhe66.github.io/blog/2015/10/24/zhong-guo-ban-de-the-design-of-everyday-things/</guid>
-      <description>&lt;p&gt;经常时不时地回去逛&lt;a href=&#34;http://www.yinwang.org/&#34; target=&#34;_blank&#34;&gt;王垠&lt;/a&gt;的博客，接触它并不是因为他特立独行，他从清华退学，主要是
-在通过他，认识了scheme的&lt;a href=&#34;http://www.yinwang.org/blog-cn/2012/08/01/interpreter/&#34; target=&#34;_blank&#34;&gt;简单和强大&lt;/a&gt;，当然这不是本文的主题。&lt;/p&gt;
-
-&lt;p&gt;当然也是因为他在其&lt;a href=&#34;http://www.yinwang.org/blog-cn/2014/07/17/rest/&#34; target=&#34;_blank&#34;&gt;博文&lt;/a&gt;介绍了&lt;a href=&#34;http://www.amazon.com/Design-Everyday-Things-Revised-Expanded-ebook/dp/B00E257T6C&#34; target=&#34;_blank&#34;&gt;The Design of Everyday Things&lt;/a&gt;.这本书的确对我很有启发,这是一本让你以人为本的设计书，程序员也需要经常阅读。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/life/design.png&#34; alt=&#34;TheDesign&#34; /&gt;&lt;/p&gt;
-
+      <description>&lt;p&gt;经常时不时地回去逛&lt;a href=&#34;http://www.yinwang.org/&#34;&gt;王垠&lt;/a&gt;的博客，接触它并不是因为他特立独行，他从清华退学，主要是
+在通过他，认识了scheme的&lt;a href=&#34;http://www.yinwang.org/blog-cn/2012/08/01/interpreter/&#34;&gt;简单和强大&lt;/a&gt;，当然这不是本文的主题。&lt;/p&gt;
+&lt;p&gt;当然也是因为他在其&lt;a href=&#34;http://www.yinwang.org/blog-cn/2014/07/17/rest/&#34;&gt;博文&lt;/a&gt;介绍了&lt;a href=&#34;http://www.amazon.com/Design-Everyday-Things-Revised-Expanded-ebook/dp/B00E257T6C&#34;&gt;The Design of Everyday Things&lt;/a&gt;.这本书的确对我很有启发,这是一本让你以人为本的设计书，程序员也需要经常阅读。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/life/design.png&#34; alt=&#34;TheDesign&#34;&gt;&lt;/p&gt;
 &lt;p&gt;知识分为外在知识(Knowledge in the world)和内在知识(Knowledge in the head).&lt;/p&gt;
-
 &lt;p&gt;我们每天可能带着目的(goal)|问题(problem),受到world的影响(1.signifier:信号 比如灯光、颜色  2.Constraints物理约束,文化约束等 3.Natural Mapping 正常的自然现象), 来观察我们在干什么，得到什么，亦或者从中得到我们想要的从而获得开心、幸福。&lt;/p&gt;
-
 &lt;p&gt;这是这本书给我的感觉。当然进一步地你可以继续去阅读他。&lt;/p&gt;
-
 &lt;p&gt;粗略感觉
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/life/goalRouph.png&#34; alt=&#34;goalRouph&#34; /&gt;
-1. Goal
-2. Plan        7. Perceive
-3. Specify     6. Interpret
-4. Perform     5. Perceive&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/life/goalDetail.png&#34; alt=&#34;goalDetail&#34; /&gt;&lt;/p&gt;
-
+&lt;img src=&#34;https://jueqingsizhe66.github.io/images/life/goalRouph.png&#34; alt=&#34;goalRouph&#34;&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Goal&lt;/li&gt;
+&lt;li&gt;Plan        7. Perceive&lt;/li&gt;
+&lt;li&gt;Specify     6. Interpret&lt;/li&gt;
+&lt;li&gt;Perform     5. Perceive&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/life/goalDetail.png&#34; alt=&#34;goalDetail&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Stage 2-4 is called execute stage (Feedforward process)&lt;/p&gt;
-
 &lt;p&gt;Stage 5-7 is called evaluation stage (Feedback process)&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/life/world.png&#34; alt=&#34;world&#34; /&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/life/world.png&#34; alt=&#34;world&#34;&gt;&lt;/p&gt;
 &lt;p&gt;2 and 7 is called Reflective Brain Conscious Control Processing&lt;/p&gt;
-
 &lt;p&gt;3 and 6 is called Behavioral Brain Conscious Control Processing&lt;/p&gt;
-
 &lt;p&gt;4 and 5 is called Visceral without Brain Processing(Muscles and your sense)&lt;/p&gt;
-
-&lt;p&gt;而今天看到了中国式感觉的解释&lt;a href=&#34;http://www.cnblogs.com/bluebbc/p/3364112.html&#34; target=&#34;_blank&#34;&gt;如何做事情&lt;/a&gt;.&lt;/p&gt;
-
+&lt;p&gt;而今天看到了中国式感觉的解释&lt;a href=&#34;http://www.cnblogs.com/bluebbc/p/3364112.html&#34;&gt;如何做事情&lt;/a&gt;.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;认清楚这件事情；&lt;/li&gt;
 &lt;li&gt;分析与这件事情有关的一切的一切；&lt;/li&gt;
@@ -829,9 +755,7 @@ close  $input
 &lt;li&gt;实施计划；&lt;/li&gt;
 &lt;li&gt;验证这件事情的结果；&lt;/li&gt;
 &lt;/ol&gt;
-
 &lt;p&gt;我们可以简化为：&lt;/p&gt;
-
 &lt;ol&gt;
 &lt;li&gt;认定你的事情&lt;/li&gt;
 &lt;li&gt;做它&lt;/li&gt;

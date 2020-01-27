@@ -29,27 +29,21 @@
     
   
   <meta name="description" content="Reference Here
-
 模块化，这样才能方便构建较大型的项目，解决更加复杂的问题。
 其中MyData.hs是模块文件
 注意，模块中添加类型时候使用(..);
 添加函数时候直接使用函数名
 TestMyData.hs是测试模块文件
-
 ##基本语法结构：
 module MyData
 (  类型(..) &hellip;.
-   函数名 &hellip;)
+函数名 &hellip;)
 where
 类型声明 &hellip;
 函数声明 &hellip;
-
 注意 MyData.hs一定是和module后面的MyData一样的！
-
 调用方式
-
 import MyData
-
 ">
 
   
@@ -140,27 +134,21 @@ import MyData
   <meta property="og:url" content="https://jueqingsizhe66.github.io/blog/2015/05/20/haskellmodule/">
   <meta property="og:title" content="HaskellModule | Macro Life">
   <meta property="og:description" content="Reference Here
-
 模块化，这样才能方便构建较大型的项目，解决更加复杂的问题。
 其中MyData.hs是模块文件
 注意，模块中添加类型时候使用(..);
 添加函数时候直接使用函数名
 TestMyData.hs是测试模块文件
-
 ##基本语法结构：
 module MyData
 (  类型(..) &hellip;.
-   函数名 &hellip;)
+函数名 &hellip;)
 where
 类型声明 &hellip;
 函数声明 &hellip;
-
 注意 MyData.hs一定是和module后面的MyData一样的！
-
 调用方式
-
 import MyData
-
 "><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
   <meta property="twitter:image" content="https://jueqingsizhe66.github.io/img/icon-192.png"><meta property="og:locale" content="en-us">
   
@@ -607,124 +595,107 @@ import MyData
 
 
 
-<span class="article-metadata" >Reading time: 2 minutes and    14 seconds with 493 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+<span class="article-metadata" >Reading time: 2 minutes and    14 seconds with 492 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#调用方式">调用方式</a></li>
-<li><a href="#运行结果">运行结果</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#heading">调用方式</a></li>
+    <li><a href="#heading-1">运行结果</a></li>
+  </ul>
 </nav>
     </aside>
   <div class="article-container">
 
 
     <div class="article-style">
-      <p>Reference <a href="http://www.shuklan.com/haskell/lec05.html#/0/21" target="_blank">Here</a></p>
-
+      <p>Reference <a href="http://www.shuklan.com/haskell/lec05.html#/0/21">Here</a></p>
 <p>模块化，这样才能方便构建较大型的项目，解决更加复杂的问题。
 其中MyData.hs是模块文件
 注意，模块中添加类型时候使用(..);
 添加函数时候直接使用函数名
 TestMyData.hs是测试模块文件</p>
-
 <p>##基本语法结构：
 module MyData
 (  类型(..) &hellip;.
-   函数名 &hellip;)
+函数名 &hellip;)
 where
 类型声明 &hellip;
 函数声明 &hellip;</p>
-
 <p>注意 MyData.hs一定是和module后面的MyData一样的！</p>
-
-<h2 id="调用方式">调用方式</h2>
-
+<h2 id="heading">调用方式</h2>
 <p>import MyData</p>
-
-<hr />
-
+<hr>
 <p>MyData.hs</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#66d9ef">module</span> MyData
+(<span style="color:#66d9ef">MetricUnit</span>(<span style="color:#f92672">..</span>),
+    <span style="color:#66d9ef">ImperialUnit</span>(<span style="color:#f92672">..</span>),
+    <span style="color:#66d9ef">Measurement</span>(<span style="color:#f92672">..</span>),
+    <span style="color:#a6e22e">convert</span>
+) <span style="color:#66d9ef">where</span>
+<span style="color:#75715e">-- How to use this module</span>
+<span style="color:#75715e">-- new File Test.hs  </span>
+<span style="color:#75715e">--    import MyData</span>
+<span style="color:#75715e">--    reportMeasurement :: Measurement-&gt;String</span>
+<span style="color:#75715e">--    reportMeasurement (MyData.MetricMeasurement x u)</span>
+<span style="color:#75715e">--    = (show  x) ++ &#34; &#34; ++ (show u)</span>
+<span style="color:#75715e">--    reportMesuarement m</span>
+<span style="color:#75715e">--    =reportMeasurement (convert m)</span>
+<span style="color:#75715e">-- N.B. If there are another file use Meter type,it will fail</span>
+<span style="color:#75715e">-- 1</span>
+<span style="color:#66d9ef">data</span> <span style="color:#66d9ef">MetricUnit</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">Meter</span><span style="color:#f92672">|</span><span style="color:#66d9ef">Liter</span><span style="color:#f92672">|</span><span style="color:#66d9ef">KiloGram</span> <span style="color:#66d9ef">deriving</span> (<span style="color:#66d9ef">Show</span>,<span style="color:#66d9ef">Eq</span>)
+<span style="color:#75715e">-- 2</span>
+<span style="color:#66d9ef">data</span> <span style="color:#66d9ef">ImperialUnit</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">Yard</span>
+                    <span style="color:#f92672">|</span> <span style="color:#66d9ef">Gallon</span>
+                    <span style="color:#f92672">|</span> <span style="color:#66d9ef">Pound</span> 
+                    <span style="color:#66d9ef">deriving</span> (<span style="color:#66d9ef">Show</span>,<span style="color:#66d9ef">Eq</span>)
+<span style="color:#75715e">-- 3</span>
+<span style="color:#66d9ef">data</span> <span style="color:#66d9ef">Measurement</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">MetricMeasurement</span> <span style="color:#66d9ef">Double</span> <span style="color:#66d9ef">MetricUnit</span>
+                    <span style="color:#f92672">|</span> <span style="color:#66d9ef">ImperialMeasurement</span> <span style="color:#66d9ef">Double</span> <span style="color:#66d9ef">ImperialUnit</span>
+                   <span style="color:#66d9ef">deriving</span> (<span style="color:#66d9ef">Show</span>)   <span style="color:#75715e">--If not,it will not show,Only</span>
+                            <span style="color:#75715e">--in the type defition,but not function</span>
 
-<pre><code class="language-haskell">module MyData
-(MetricUnit(..),
-    ImperialUnit(..),
-    Measurement(..),
-    convert
-) where
--- How to use this module
--- new File Test.hs  
---    import MyData
---    reportMeasurement :: Measurement-&gt;String
---    reportMeasurement (MyData.MetricMeasurement x u)
---    = (show  x) ++ &quot; &quot; ++ (show u)
---    reportMesuarement m
---    =reportMeasurement (convert m)
--- N.B. If there are another file use Meter type,it will fail
--- 1
-data MetricUnit = Meter|Liter|KiloGram deriving (Show,Eq)
--- 2
-data ImperialUnit = Yard
-                    | Gallon
-                    | Pound 
-                    deriving (Show,Eq)
--- 3
-data Measurement = MetricMeasurement Double MetricUnit
-                    | ImperialMeasurement Double ImperialUnit
-                   deriving (Show)   --If not,it will not show,Only
-                            --in the type defition,but not function
-
--- 4
-convert :: Measurement-&gt; Measurement
--- Take attention for the () brace
-convert (MetricMeasurement x u)
-        | u == Meter  = ImperialMeasurement (1.0936*x) Yard
-        | u == Liter  = ImperialMeasurement (0.2642*x) Gallon
-        | u == KiloGram = ImperialMeasurement (2.2046*x) Pound
---wrong!
---        | u == &quot;Meter&quot;  = ImperialMeasurement (1.0936*x) Yard
---        | u == &quot;Liter&quot;  = ImperialMeasurement (0.2642*x) Gallon
---        | u == &quot;KiloGram&quot; = ImperialMeasurement (2.2046*x) Pound
-convert (ImperialMeasurement x u)
-        | u == Yard  = MetricMeasurement (0.9144*x) Meter
-        | u == Gallon  = MetricMeasurement (3.7854*x) Liter
-        | u == Pound = MetricMeasurement (0.4536*x) KiloGram
+<span style="color:#75715e">-- 4</span>
+<span style="color:#a6e22e">convert</span> <span style="color:#f92672">::</span> <span style="color:#66d9ef">Measurement</span><span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">Measurement</span>
+<span style="color:#75715e">-- Take attention for the () brace</span>
+<span style="color:#a6e22e">convert</span> (<span style="color:#66d9ef">MetricMeasurement</span> x u)
+        <span style="color:#f92672">|</span> u <span style="color:#f92672">==</span> <span style="color:#66d9ef">Meter</span>  <span style="color:#f92672">=</span> <span style="color:#66d9ef">ImperialMeasurement</span> (<span style="color:#ae81ff">1.0936</span><span style="color:#f92672">*</span>x) <span style="color:#66d9ef">Yard</span>
+        <span style="color:#f92672">|</span> u <span style="color:#f92672">==</span> <span style="color:#66d9ef">Liter</span>  <span style="color:#f92672">=</span> <span style="color:#66d9ef">ImperialMeasurement</span> (<span style="color:#ae81ff">0.2642</span><span style="color:#f92672">*</span>x) <span style="color:#66d9ef">Gallon</span>
+        <span style="color:#f92672">|</span> u <span style="color:#f92672">==</span> <span style="color:#66d9ef">KiloGram</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">ImperialMeasurement</span> (<span style="color:#ae81ff">2.2046</span><span style="color:#f92672">*</span>x) <span style="color:#66d9ef">Pound</span>
+<span style="color:#75715e">--wrong!</span>
+<span style="color:#75715e">--        | u == &#34;Meter&#34;  = ImperialMeasurement (1.0936*x) Yard</span>
+<span style="color:#75715e">--        | u == &#34;Liter&#34;  = ImperialMeasurement (0.2642*x) Gallon</span>
+<span style="color:#75715e">--        | u == &#34;KiloGram&#34; = ImperialMeasurement (2.2046*x) Pound</span>
+<span style="color:#a6e22e">convert</span> (<span style="color:#66d9ef">ImperialMeasurement</span> x u)
+        <span style="color:#f92672">|</span> u <span style="color:#f92672">==</span> <span style="color:#66d9ef">Yard</span>  <span style="color:#f92672">=</span> <span style="color:#66d9ef">MetricMeasurement</span> (<span style="color:#ae81ff">0.9144</span><span style="color:#f92672">*</span>x) <span style="color:#66d9ef">Meter</span>
+        <span style="color:#f92672">|</span> u <span style="color:#f92672">==</span> <span style="color:#66d9ef">Gallon</span>  <span style="color:#f92672">=</span> <span style="color:#66d9ef">MetricMeasurement</span> (<span style="color:#ae81ff">3.7854</span><span style="color:#f92672">*</span>x) <span style="color:#66d9ef">Liter</span>
+        <span style="color:#f92672">|</span> u <span style="color:#f92672">==</span> <span style="color:#66d9ef">Pound</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">MetricMeasurement</span> (<span style="color:#ae81ff">0.4536</span><span style="color:#f92672">*</span>x) <span style="color:#66d9ef">KiloGram</span>
 
 
-</code></pre>
-
-<p>TestMyData.hs
-  <em>注意，一定不要把Measurement-写成了  Mesuarement等错误的文字</em></p>
-
-<pre><code class="language-haskell">import MyData
-reportMeasurement :: Measurement-&gt;String
-reportMeasurement (MyData.MetricMeasurement x u)
-                = (show x) ++ &quot; &quot; ++ (show u)
-reportMeasurement m =reportMeasurement (convert m)
---reportMeasurement (MyData.ImperialMeasurement x u)
---                = (show x) ++ &quot; &quot; ++ (show u)
----if imperial    let m = MetricMeasuremnt 2 Meter ...
+</code></pre></div><p>TestMyData.hs
+<em>注意，一定不要把Measurement-写成了  Mesuarement等错误的文字</em></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#66d9ef">import</span> MyData
+<span style="color:#a6e22e">reportMeasurement</span> <span style="color:#f92672">::</span> <span style="color:#66d9ef">Measurement</span><span style="color:#f92672">-&gt;</span><span style="color:#66d9ef">String</span>
+<span style="color:#a6e22e">reportMeasurement</span> (<span style="color:#66d9ef">MyData</span><span style="color:#f92672">.</span><span style="color:#66d9ef">MetricMeasurement</span> x u)
+                <span style="color:#f92672">=</span> (show x) <span style="color:#f92672">++</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74"> </span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">++</span> (show u)
+<span style="color:#a6e22e">reportMeasurement</span> m <span style="color:#f92672">=</span>reportMeasurement (convert m)
+<span style="color:#75715e">--reportMeasurement (MyData.ImperialMeasurement x u)</span>
+<span style="color:#75715e">--                = (show x) ++ &#34; &#34; ++ (show u)</span>
+<span style="color:#75715e">---if imperial    let m = MetricMeasuremnt 2 Meter ...</span>
 
 
 
-</code></pre>
-
-<h2 id="运行结果">运行结果</h2>
-
-<pre><code class="language-sh">--Main&gt; reportMeasurement (convert (ImperialMeasurement 5 Pound))
---&quot;2.268 KiloGram&quot;
+</code></pre></div><h2 id="heading-1">运行结果</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">--Main&gt; reportMeasurement <span style="color:#f92672">(</span>convert <span style="color:#f92672">(</span>ImperialMeasurement <span style="color:#ae81ff">5</span> Pound<span style="color:#f92672">)</span><span style="color:#f92672">)</span>
+--<span style="color:#e6db74">&#34;2.268 KiloGram&#34;</span>
  
-*Main&gt; let m = ImperialMeasurement 5 Pound
+*Main&gt; let m <span style="color:#f92672">=</span> ImperialMeasurement <span style="color:#ae81ff">5</span> Pound
 *Main&gt; reportMeasurement m
-&quot;2.268 KiloGram&quot;
+<span style="color:#e6db74">&#34;2.268 KiloGram&#34;</span>
 
-*Main&gt; reportMeasurement (MetricMeasurement 5 Meter)
-&quot;5.0 Meter&quot;
+*Main&gt; reportMeasurement <span style="color:#f92672">(</span>MetricMeasurement <span style="color:#ae81ff">5</span> Meter<span style="color:#f92672">)</span>
+<span style="color:#e6db74">&#34;5.0 Meter&#34;</span>
 
-</code></pre>
+</code></pre></div>
     </div>
  <div class="nav-links" style="padding:10;">
         
@@ -1128,7 +1099,7 @@ reportMeasurement m =reportMeasurement (convert m)
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

@@ -5,7 +5,7 @@
     <link>https://jueqingsizhe66.github.io/categories/%E8%AF%AD%E8%A8%80/</link>
       <atom:link href="https://jueqingsizhe66.github.io/categories/%E8%AF%AD%E8%A8%80/index.xml" rel="self" type="application/rss+xml" />
     <description>语言</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>©2019</copyright><lastBuildDate>Sat, 16 May 2015 14:30:22 +0800</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>©2020</copyright><lastBuildDate>Sat, 16 May 2015 14:30:22 +0800</lastBuildDate>
     <image>
       <url>https://jueqingsizhe66.github.io/img/icon-192.png</url>
       <title>语言</title>
@@ -18,106 +18,67 @@
       <pubDate>Sat, 16 May 2015 14:30:22 +0800</pubDate>
       <guid>https://jueqingsizhe66.github.io/blog/2015/05/16/haskellbi-ji/</guid>
       <description>&lt;p&gt;语言的表现力，简洁性，有效性。&lt;/p&gt;
-
-&lt;p&gt;2001年，出生于荷兰的计算机大师、图灵奖获得者&lt;strong&gt;EdsgerW.Dijkstra&lt;/strong&gt;给德州大学预算委员会写信，力劝不要将计算机入门课程改为Java。不幸的是，学校最终还是用Java课程替换了Haskell。Haskell真的不行了？国内有些人的&lt;a href=&#34;http://www.vaikan.com/why-haskell-is-worth-learning/&#34; target=&#34;_blank&#34;&gt;评论&lt;/a&gt;&lt;/p&gt;
-
+&lt;p&gt;2001年，出生于荷兰的计算机大师、图灵奖获得者__EdsgerW.Dijkstra__给德州大学预算委员会写信，力劝不要将计算机入门课程改为Java。不幸的是，学校最终还是用Java课程替换了Haskell。Haskell真的不行了？国内有些人的&lt;a href=&#34;http://www.vaikan.com/why-haskell-is-worth-learning/&#34;&gt;评论&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Haskell:函数式编程语言&lt;/li&gt;
 &lt;li&gt;Java  : 命令编程语言
 尽管Haskell不完美，但仍然比Java好几个数量级，Java就是一个大杂烩(它是通过大范围的广告和销售员夸张的宣传才达到它的商业接受)。&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;ol&gt;
-&lt;li&gt;&lt;p&gt;如果别人问你Haskell能够做什么？
-一个能够编程的编程语言，高级函数编程语言&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;如果别人问你Haskell和scheme有什么区别？
+&lt;li&gt;
+&lt;p&gt;如果别人问你Haskell能够做什么？
+一个能够编程的编程语言，高级函数编程语言&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如果别人问你Haskell和scheme有什么区别？
 比scheme更强调类型理论，但是相对scheme由于对于type theory的过度追求
-反而更加难于编程&lt;/p&gt;&lt;/li&gt;
+反而更加难于编程&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
+&lt;h3 id=&#34;haskell-----&#34;&gt;如果别人问你Haskell 如何实现冒泡法  直接排序  快速排序？&lt;/h3&gt;
+&lt;h4 id=&#34;heading&#34;&gt;冒泡排序&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;
+&lt;span style=&#34;color:#a6e22e&#34;&gt;sort1&lt;/span&gt; [x] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [x]
+&lt;span style=&#34;color:#a6e22e&#34;&gt;sort1&lt;/span&gt; (x&lt;span style=&#34;color:#66d9ef&#34;&gt;:&lt;/span&gt;x1&lt;span style=&#34;color:#66d9ef&#34;&gt;:&lt;/span&gt;xs)  &lt;span style=&#34;color:#75715e&#34;&gt;{-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;选取了一个x1temp 值  x当做首数，x1:temp&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-}&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; x&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;x1 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; x1&lt;span style=&#34;color:#66d9ef&#34;&gt;:&lt;/span&gt;sort1 (x&lt;span style=&#34;color:#66d9ef&#34;&gt;:&lt;/span&gt;xs)
+    &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; otherwise &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; x&lt;span style=&#34;color:#66d9ef&#34;&gt;:&lt;/span&gt;sort1 (x1&lt;span style=&#34;color:#66d9ef&#34;&gt;:&lt;/span&gt;xs)
+&lt;span style=&#34;color:#a6e22e&#34;&gt;mpsort&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;[]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;[]&lt;/span&gt;
+&lt;span style=&#34;color:#a6e22e&#34;&gt;mpsort&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; tmp &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; sort1 x &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt;
+           mpsort (init tmp) &lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt; [(last tmp)] 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;heading-1&#34;&gt;直接排序&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;import&lt;/span&gt; Data.List
+&lt;span style=&#34;color:#a6e22e&#34;&gt;selectsort&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;[&lt;span style=&#34;color:#66d9ef&#34;&gt;Int&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; [&lt;span style=&#34;color:#66d9ef&#34;&gt;Int&lt;/span&gt;]
+&lt;span style=&#34;color:#a6e22e&#34;&gt;selectsort&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;[]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;[]&lt;/span&gt;
+&lt;span style=&#34;color:#a6e22e&#34;&gt;selectsort&lt;/span&gt; [x] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [x]
+&lt;span style=&#34;color:#a6e22e&#34;&gt;selectsort&lt;/span&gt; xs &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; minimum xs &lt;span style=&#34;color:#66d9ef&#34;&gt;:&lt;/span&gt; selectsort ( delete ( minimum xs )  xs) 
 
-&lt;h3 id=&#34;如果别人问你haskell-如何实现冒泡法-直接排序-快速排序&#34;&gt;如果别人问你Haskell 如何实现冒泡法  直接排序  快速排序？&lt;/h3&gt;
-
-&lt;h4 id=&#34;冒泡排序&#34;&gt;冒泡排序&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;
-sort1 [x] = [x]
-sort1 (x:x1:xs)  {-选取了一个x1temp 值  x当做首数，x1:temp-}
-    | x&amp;gt;x1 = x1:sort1 (x:xs)
-    | otherwise = x:sort1 (x1:xs)
-mpsort [] = []
-mpsort x = let tmp = sort1 x in
-           mpsort (init tmp) ++ [(last tmp)] 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;直接排序&#34;&gt;直接排序&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;import Data.List
-selectsort::[Int] -&amp;gt; [Int]
-selectsort [] = []
-selectsort [x] = [x]
-selectsort xs = minimum xs : selectsort ( delete ( minimum xs )  xs) 
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;快速排序1&#34;&gt;快速排序1&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;
-quicksort :: (Ord a) =&amp;gt; [a] -&amp;gt; [a]   
-quicksort [] = []   
-quicksort (x:xs) =   
-  let smallerSorted = quicksort [a | a &amp;lt;- xs, a &amp;lt;= x]  
-      biggerSorted = quicksort [a | a &amp;lt;- xs, a &amp;gt; x]   
-  in smallerSorted ++ [x] ++ biggerSorted
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;快速排序2&#34;&gt;快速排序2&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;quicksort :: (Ord a) =&amp;gt; [a] -&amp;gt; [a]     
-quicksort [] = []     
-quicksort (x:xs) =      
-    let smallerSorted = quicksort (filter (&amp;lt;=x) xs) 
-        biggerSorted = quicksort (filter (&amp;gt;x) xs)    
-    in  smallerSorted ++ [x] ++ biggerSorted
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;如果别人问你递归是如何实现的&#34;&gt;如果别人问你递归是如何实现的？&lt;/h3&gt;
-
-&lt;h3 id=&#34;如果别人问你如何构造fibonaaci数&#34;&gt;如果别人问你如何构造Fibonaaci数？&lt;/h3&gt;
-
-&lt;h3 id=&#34;如果别人问你-是什么意思&#34;&gt;如果别人问你::  =&amp;gt; -&amp;gt;是什么意思？&lt;/h3&gt;
-
-&lt;dl&gt;
-&lt;dt&gt;a表示人意的类型 &amp;mdash;&amp;mdash;&amp;mdash;泛形 &amp;mdash;多态函数挂钩。。。。&lt;/dt&gt;
-&lt;/dl&gt;
-
-&lt;dl&gt;
-&lt;dt&gt;a表示人意的类型 &amp;mdash;&amp;mdash;&amp;mdash;泛形 &amp;mdash;多态函数挂钩。。。。&lt;/dt&gt;
-&lt;/dl&gt;
-
-&lt;dl&gt;
-&lt;dt&gt;a表示人意的类型 &amp;mdash;&amp;mdash;&amp;mdash;泛形 &amp;mdash;多态函数挂钩。。。。&lt;/dt&gt;
-&lt;/dl&gt;
-
-&lt;dl&gt;
-&lt;dt&gt;a表示人意的类型 &amp;mdash;&amp;mdash;&amp;mdash;泛形 &amp;mdash;多态函数挂钩。。。。&lt;/dt&gt;
-&lt;/dl&gt;
-
-&lt;dl&gt;
-&lt;dt&gt;a表示人意的类型 &amp;mdash;&amp;mdash;&amp;mdash;泛形 &amp;mdash;多态函数挂钩。。。。&lt;/dt&gt;
-&lt;/dl&gt;
-
-&lt;dl&gt;
-&lt;dt&gt;&amp;mdash;泛形 &amp;mdash;多态函数挂钩。。。。&lt;/dt&gt;
-&lt;/dl&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;1&#34;&gt;快速排序1&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;
+&lt;span style=&#34;color:#a6e22e&#34;&gt;quicksort&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;Ord&lt;/span&gt; a) &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; [a] &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; [a]   
+&lt;span style=&#34;color:#a6e22e&#34;&gt;quicksort&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;[]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;[]&lt;/span&gt;   
+&lt;span style=&#34;color:#a6e22e&#34;&gt;quicksort&lt;/span&gt; (x&lt;span style=&#34;color:#66d9ef&#34;&gt;:&lt;/span&gt;xs) &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;   
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; smallerSorted &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; quicksort [a &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; a &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;-&lt;/span&gt; xs, a &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; x]  
+      biggerSorted &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; quicksort [a &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; a &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;-&lt;/span&gt; xs, a &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; x]   
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; smallerSorted &lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt; [x] &lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt; biggerSorted
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;2&#34;&gt;快速排序2&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;quicksort&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;Ord&lt;/span&gt; a) &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; [a] &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; [a]     
+&lt;span style=&#34;color:#a6e22e&#34;&gt;quicksort&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;[]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;[]&lt;/span&gt;     
+&lt;span style=&#34;color:#a6e22e&#34;&gt;quicksort&lt;/span&gt; (x&lt;span style=&#34;color:#66d9ef&#34;&gt;:&lt;/span&gt;xs) &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;      
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; smallerSorted &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; quicksort (filter (&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt;x) xs) 
+        biggerSorted &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; quicksort (filter (&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;x) xs)    
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt;  smallerSorted &lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt; [x] &lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt; biggerSorted
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;heading-2&#34;&gt;如果别人问你递归是如何实现的？&lt;/h3&gt;
+&lt;h3 id=&#34;fibonaaci&#34;&gt;如果别人问你如何构造Fibonaaci数？&lt;/h3&gt;
+&lt;h3 id=&#34;----&#34;&gt;如果别人问你::  =&amp;gt; -&amp;gt;是什么意思？&lt;/h3&gt;
+&lt;p&gt;(==) :: Eq a =&amp;gt; a -&amp;gt; a -&amp;gt; Bool
+可以这样阅读：  相当函数的两个相同的类型值作为参数并返回一个bool值，而这两个参数的类型同在Eq类之中(即类型约束）
+eq这一类型 提供了判断相等性的接口，凡是可以比较相等性的类型嗯必属于Eq类
+（=&amp;gt;左边的部分叫做类型约束）
+a表示人意的类型 &amp;mdash;&amp;mdash;&amp;mdash;泛形 &amp;mdash;多态函数挂钩。。。。&lt;/p&gt;
 &lt;p&gt;::  读作他的类型为   （类似 !! 从list去除 第几个元素   &amp;lt;- 属于  &lt;code&gt;elem&lt;/code&gt;是什么的元素   &lt;code&gt;mod&lt;/code&gt; 可以和什么除。。&lt;/p&gt;
-
-&lt;h3 id=&#34;如果有人问你如何用haskell编写函数&#34;&gt;如果有人问你如何用haskell编写函数？&lt;/h3&gt;
-
+&lt;h3 id=&#34;haskell&#34;&gt;如果有人问你如何用haskell编写函数？&lt;/h3&gt;
 &lt;p&gt;他和scheme有很大的不同，scheme用的是(define)
 而haskell用的是模式匹配，比如下面的求最大值的程序&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;maximum&#39; :: (Ord a) =&amp;gt; [a] -&amp;gt; a   
 maximum&#39; [] = error &amp;quot;maximum of empty list&amp;quot;   
 maximum&#39; [x] = x   
@@ -125,115 +86,67 @@ maximum&#39; (x:xs)
     | x &amp;gt; maxTail = x   
     | otherwise = maxTail   
     where maxTail = maximum&#39; xs
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;如果别人叫你简化上面的maximum程序&#34;&gt;如果别人叫你简化上面的maximum程序&lt;/h3&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;maximum&#34;&gt;如果别人叫你简化上面的maximum程序&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;maximum&#39; :: (Ord a) =&amp;gt; [a] -&amp;gt; a   
 maximum&#39; [] = error &amp;quot;maximum of empty list&amp;quot;   
 maximum&#39; [x] = x   
 maximum&#39; (x:xs) = max x (maximum&#39; xs) 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;如果别人问你haskell到底长成啥子样子&#34;&gt;如果别人问你Haskell到底长成啥子样子？&lt;/h3&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;haskell-1&#34;&gt;如果别人问你Haskell到底长成啥子样子？&lt;/h3&gt;
 &lt;p&gt;你会告诉他他涨起来真的是一节一节的，一段一段的，有棱有角&lt;/p&gt;
-
-&lt;h3 id=&#34;如果有人问你replicate-3-5是如何实现的&#34;&gt;如果有人问你replicate 3 5是如何实现的？&lt;/h3&gt;
-
+&lt;h3 id=&#34;replicate-3-5&#34;&gt;如果有人问你replicate 3 5是如何实现的？&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;replicate&#39; :: (Num i, Ord i) =&amp;gt; i -&amp;gt; a -&amp;gt; [a]   
 replicate&#39; n x   
 | n &amp;lt;= 0    = []   
 | otherwise = x:replicate&#39; (n-1) x
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;如果有人问你take是如何实现的呢-drop&#34;&gt;如果有人问你take是如何实现的呢？ drop?&lt;/h3&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;take-drop&#34;&gt;如果有人问你take是如何实现的呢？ drop?&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;take&#39; :: (Num i, Ord i) =&amp;gt; i -&amp;gt; [a] -&amp;gt; [a]   
 take&#39; n _   
 | n &amp;lt;= 0   = []   
 take&#39; _ []     = []   
 take&#39; n (x:xs) = x : take&#39; (n-1) xs
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;如果有人问你-下划线表示什么意思&#34;&gt;如果有人问你_ 下划线表示什么意思？&lt;/h3&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;--&#34;&gt;如果有人问你_ 下划线表示什么意思？&lt;/h3&gt;
 &lt;p&gt;_ 代表任意东西&lt;/p&gt;
-
-&lt;h3 id=&#34;如果有人问你reverse如何实现&#34;&gt;如果有人问你reverse如何实现？&lt;/h3&gt;
-
+&lt;h3 id=&#34;reverse&#34;&gt;如果有人问你reverse如何实现？&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;reverse&#39; :: [a] -&amp;gt; [a]   
 reverse&#39; [] = []   
 reverse&#39; (x:xs) = reverse&#39; xs ++ [x]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;如果有人问你repeat如何实现&#34;&gt;如果有人问你repeat如何实现？&lt;/h3&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;repeat&#34;&gt;如果有人问你repeat如何实现？&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;repeat&#39; :: a -&amp;gt; [a]   
 repeat&#39; x = x:repeat&#39; x
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;如果有人做了一个tuple-想要用zip产生更多tuples&#34;&gt;如果有人做了一个tuple ，想要用zip产生更多tuples？&lt;/h3&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;tuple-ziptuples&#34;&gt;如果有人做了一个tuple ，想要用zip产生更多tuples？&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;zip&#39; :: [a] -&amp;gt; [b] -&amp;gt; [(a,b)]   
 zip&#39; _ [] = []   
 zip&#39; [] _ = []   
 zip&#39; (x:xs) (y:ys) = (x,y):zip&#39; xs ys
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;如果有人问你mod的类似函数-elem的实现&#34;&gt;如果有人问你mod的类似函数  elem的实现？&lt;/h3&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;mod--elem&#34;&gt;如果有人问你mod的类似函数  elem的实现？&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;elem&#39; :: (Eq a) =&amp;gt; a -&amp;gt; [a] -&amp;gt; Bool   
 elem&#39; a [] = False   
 elem&#39; a (x:xs)   
 | a == x    = True   
 | otherwise = a `elem&#39;` xs
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;如果有人问你typeclass有哪里类&#34;&gt;如果有人问你typeclass有哪里类？&lt;/h3&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;typeclass&#34;&gt;如果有人问你typeclass有哪里类？&lt;/h3&gt;
 &lt;p&gt;利用 type 自己查去&lt;/p&gt;
-
-&lt;h3 id=&#34;如果有人问你haskell有没有类似scheme的lambda函数&#34;&gt;如果有人问你Haskell有没有类似scheme的lambda函数？&lt;/h3&gt;
-
+&lt;h3 id=&#34;haskellschemelambda&#34;&gt;如果有人问你Haskell有没有类似scheme的lambda函数？&lt;/h3&gt;
 &lt;p&gt;告诉他有，而且更加直接，虽然刚开始书写起来不方便&lt;/p&gt;
-
 &lt;p&gt;scheme版的lambda:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;    (lambda (x y)
        (+ x y))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Haskell版的lambda:&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Haskell版的lambda:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;    (\y -&amp;gt; y + 3）
     其中\后面跟着参数  -&amp;gt;后面跟着函数体
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;18-如果有人问haskell有没有存在高阶函数&#34;&gt;18.如果有人问haskell有没有存在高阶函数？&lt;/h3&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;18haskell&#34;&gt;18.如果有人问haskell有没有存在高阶函数？&lt;/h3&gt;
 &lt;p&gt;有 。 map ,filter&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;map (\y-&amp;gt; y+3) [3,5,6]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;19-如果有人问你flip有什么含义&#34;&gt;19.如果有人问你flip有什么含义？&lt;/h3&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;19flip&#34;&gt;19.如果有人问你flip有什么含义？&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;let f x  y = x / y
 Prelude&amp;gt; map (f 2) [1,2,3]
 [2.0,1.0,0.6666666666666666]
 Prelude&amp;gt; map (flip f 2) [1,2,3]
 [0.5,1.0,1.5]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;20-如何有人问-如何运行-2048&#34;&gt;20. 如何有人问 如何运行 2048&lt;/h3&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;20---2048&#34;&gt;20. 如何有人问 如何运行 2048&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;$ runhaskell putchar_test.hs 
 use runhaskell to run the *.hs programme
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;21-如果有人问haskell实现递归的自然表达式&#34;&gt;21. 如果有人问haskell实现递归的自然表达式？&lt;/h3&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;21-haskell&#34;&gt;21. 如果有人问haskell实现递归的自然表达式？&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;quicksort (x:xs) =
 elem&#39; a (x:xs) 
 
@@ -243,46 +156,30 @@ reverse&#39; (x:xs) = reverse&#39; xs ++ [x]
 take&#39; n (x:xs) = x : take&#39; (n-1) xs
 maximum&#39; (x:xs) = max x (maximum&#39; xs)
 maximum&#39; (x:xs)   
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;你可以看见每一个形式都有函数名,函数使用方式,函数的参数表&lt;br /&gt;
-这是一种&lt;strong&gt;模式&lt;/strong&gt;,因为Haskell使用函数的时候，先写出函数，然后空格 写出变量 紧接着其他可选变量
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;你可以看见每一个形式都有函数名,函数使用方式,函数的参数表 &lt;br&gt;
+这是一种__模式__,因为Haskell使用函数的时候，先写出函数，然后空格 写出变量 紧接着其他可选变量
 所以你也函数匹配模式 也应该是这样来写
 基于这种思想，你重新回过头看函数定义，你会发现还真的是这样额？！
 从函数的定义知道他的用法，这就是Haskell与众不同的一点。&lt;/p&gt;
-
-&lt;h3 id=&#34;22-如果有人问如何写出阶乘形式&#34;&gt;22. 如果有人问如何写出阶乘形式？&lt;/h3&gt;
-
+&lt;h3 id=&#34;22-&#34;&gt;22. 如果有人问如何写出阶乘形式？&lt;/h3&gt;
 &lt;p&gt;告诉他用函数，告诉他用函数匹配，告诉他用递归。。。。。&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;factorial :: (Integral a) =&amp;gt; a -&amp;gt; a   
 factorial 0 = 1   
 factorial n = n * factorial (n - 1) 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;23-如果别人问你haskell如何新建一中类型&#34;&gt;23. 如果别人问你Haskell如何新建一中类型？&lt;/h3&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;23-haskell&#34;&gt;23. 如果别人问你Haskell如何新建一中类型？&lt;/h3&gt;
 &lt;p&gt;暂时不太懂
 但是我知道 Haskell使用 data来定义类别
 julia使用type来定义&lt;/p&gt;
-
-&lt;h3 id=&#34;24-如果别人问你monads-是什么玩意&#34;&gt;24. 如果别人问你monads 是什么玩意？&lt;/h3&gt;
-
+&lt;h3 id=&#34;24-monads-&#34;&gt;24. 如果别人问你monads 是什么玩意？&lt;/h3&gt;
 &lt;p&gt;其实这个是更加深层次的运用Haskell,在scheme也有. 比如IO monad,可以想象为一种抽象数据类型。&lt;/p&gt;
-
-&lt;h3 id=&#34;25-如果别人问你如何学习haskell&#34;&gt;25. 如果别人问你如何学习haskell？&lt;/h3&gt;
-
+&lt;h3 id=&#34;25-haskell&#34;&gt;25. 如果别人问你如何学习haskell？&lt;/h3&gt;
 &lt;p&gt;告诉他有一篇文章叫做 如此有趣的学习Haskell
-Haskell趣學指南   &lt;a href=&#34;http://learnyouahaskell-zh-tw.csie.org/zh-cn/chapters.html&#34; target=&#34;_blank&#34;&gt;http://learnyouahaskell-zh-tw.csie.org/zh-cn/chapters.html&lt;/a&gt;
+Haskell趣學指南   &lt;a href=&#34;http://learnyouahaskell-zh-tw.csie.org/zh-cn/chapters.html&#34;&gt;http://learnyouahaskell-zh-tw.csie.org/zh-cn/chapters.html&lt;/a&gt;
 还不错 ，这个教程&lt;/p&gt;
-
 &lt;p&gt;学习Haskell ，要是你能够对于空格特别敏感，会对你有所好处，因为很多地方都是用空格分开
 而不是（）  [] 之类的。空格有实际意义，分开不同的字段&lt;/p&gt;
-
-&lt;h3 id=&#34;26-如果别人问你-有什么意义&#34;&gt;26. 如果别人问你 | 有什么意义？&lt;/h3&gt;
-
+&lt;h3 id=&#34;26---&#34;&gt;26. 如果别人问你 | 有什么意义？&lt;/h3&gt;
 &lt;p&gt;分类说明&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;bmiTell :: (RealFloat a) =&amp;gt; a -&amp;gt; a -&amp;gt; String   
 bmiTell weight height   
     | weight / height ^ 2 &amp;lt;= 18.5 = &amp;quot;You&#39;re underweight, you emo, you!&amp;quot;   
@@ -290,21 +187,15 @@ bmiTell weight height
     | weight / height ^ 2 &amp;lt;= 30.0 = &amp;quot;You&#39;re fat! Lose some weight, fatty!&amp;quot;   
     | otherwise                   = &amp;quot;You&#39;re a whale, congratulations!&amp;quot;
 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;每一个函数定义的时候，在Haskell看来只是其中的一种模式，一个模式下可以有很多的分类，如果他找不到模式
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;每一个函数定义的时候，在Haskell看来只是其中的一种模式，一个模式下可以有很多的分类，如果他找不到模式
 就说找不到，所以定义的时候，尽可能的完善定义。
 比如下面的lucky函数 和sayMe 函数
 lucky函数:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;lucky :: (Integral a) =&amp;gt; a -&amp;gt; String   
 lucky 7 = &amp;quot;LUCKY NUMBER SEVEN!&amp;quot;   
 lucky x = &amp;quot;Sorry, you&#39;re out of luck, pal!&amp;quot; 
 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;sayme函数:&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;sayme函数:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;sayMe :: (Integral a) =&amp;gt; a -&amp;gt; String   
 sayMe 1 = &amp;quot;One!&amp;quot;   
 sayMe 2 = &amp;quot;Two!&amp;quot;   
@@ -312,12 +203,8 @@ sayMe 3 = &amp;quot;Three!&amp;quot;
 sayMe 4 = &amp;quot;Four!&amp;quot;   
 sayMe 5 = &amp;quot;Five!&amp;quot;   
 sayMe x = &amp;quot;Not between 1 and 5&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;27-如果别人叫你简化bmitell函数&#34;&gt;27. 如果别人叫你简化bmiTell函数&lt;/h3&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;27-bmitell&#34;&gt;27. 如果别人叫你简化bmiTell函数&lt;/h3&gt;
 &lt;p&gt;使用where&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;bmiTell :: (RealFloat a) =&amp;gt; a -&amp;gt; a -&amp;gt; String   
 bmiTell weight height   
     | bmi &amp;lt;= 18.5 = &amp;quot;You&#39;re underweight, you emo, you!&amp;quot;   
@@ -325,12 +212,8 @@ bmiTell weight height
     | bmi &amp;lt;= 30.0 = &amp;quot;You&#39;re fat! Lose some weight, fatty!&amp;quot;   
     | otherwise   = &amp;quot;You&#39;re a whale, congratulations!&amp;quot;   
     where bmi = weight / height ^ 2
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;28-如果别人问你-where可以跟多少个变量&#34;&gt;28. 如果别人问你 where可以跟多少个变量 ？&lt;/h3&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;28--where-&#34;&gt;28. 如果别人问你 where可以跟多少个变量 ？&lt;/h3&gt;
 &lt;p&gt;跟他说 很多个。&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;bmiTell :: (RealFloat a) =&amp;gt; a -&amp;gt; a -&amp;gt; String   
 bmiTell weight height   
     | bmi &amp;lt;= skinny = &amp;quot;You&#39;re underweight, you emo, you!&amp;quot;   
@@ -341,35 +224,22 @@ bmiTell weight height
           skinny = 18.5   
           normal = 25.0   
           fat = 30.0
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;函数在 where 绑定中定义的名字只对本函数可见，因此我们不必担心它会污染其他函数的命名空间。注意，其中的名字
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;函数在 where 绑定中定义的名字只对本函数可见，因此我们不必担心它会污染其他函数的命名空间。注意，其中的名字
 都是一列垂直排开，如果不这样规范，Haskell 就搞不清楚它们在哪个地方了&lt;/p&gt;
-
-&lt;h3 id=&#34;29-如果有人问你-where当中可以使用模式匹配吗&#34;&gt;29. 如果有人问你 where当中可以使用模式匹配吗？&lt;/h3&gt;
-
+&lt;h3 id=&#34;29--where&#34;&gt;29. 如果有人问你 where当中可以使用模式匹配吗？&lt;/h3&gt;
 &lt;p&gt;可以。&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;where bmi = weight / height ^ 2   
 (skinny, normal, fat) = (18.5, 25.0, 30.0) 
 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;30-如果别人叫你写一个show类型的函数&#34;&gt;30. 如果别人叫你写一个show类型的函数？&lt;/h3&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;30-show&#34;&gt;30. 如果别人叫你写一个show类型的函数？&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;tell :: (Show a) =&amp;gt; [a] -&amp;gt; String   
 tell [] = &amp;quot;The list is empty&amp;quot;   
 tell (x:[]) = &amp;quot;The list has one element: &amp;quot; ++ show x   
 tell (x:y:[]) = &amp;quot;The list has two elements: &amp;quot; ++ show x ++ &amp;quot; and &amp;quot; ++ show y   
 tell (x:y:_) = &amp;quot;This list is long. The first two elements are: &amp;quot; ++ show x ++ &amp;quot; and &amp;quot; ++ show y  
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;这个函数顾及了空 List，单元素 List，双元素 List 以及较长的 List，所以这个函数很安全。(x:[]) 与 (x:y:[]) 也可以写作 [x] 和 &lt;a href=&#34;有了语法糖，我们不必多加括号&#34; target=&#34;_blank&#34;&gt;x,y&lt;/a&gt;。不过 (x:y:_)这样的模式就不行了，因为它匹配的 List 长度不固定。&lt;/p&gt;
-
-&lt;h3 id=&#34;31-如果别人问你int-和integer的区别&#34;&gt;31. 如果别人问你Int 和Integer的区别？&lt;/h3&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这个函数顾及了空 List，单元素 List，双元素 List 以及较长的 List，所以这个函数很安全。(x:[]) 与 (x:y:[]) 也可以写作 [x] 和 [x,y] (有了语法糖，我们不必多加括号)。不过 (x:y:_)这样的模式就不行了，因为它匹配的 List 长度不固定。&lt;/p&gt;
+&lt;h3 id=&#34;31-int-integer&#34;&gt;31. 如果别人问你Int 和Integer的区别？&lt;/h3&gt;
 &lt;p&gt;Int 有上下线  Integer没有&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;Prelude&amp;gt; minBound :: Int
 -9223372036854775808
 Prelude&amp;gt; min
@@ -379,10 +249,7 @@ Prelude&amp;gt; minBound  :: Integer
 &amp;lt;interactive&amp;gt;:247:1:
     No instance for (Bounded Integer) arising from a use of `minBound&#39;
 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;32-如果别人问你char-and-char-的区别&#34;&gt;32. 如果别人问你char and [char] 的区别？&lt;/h3&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;32-char-and-char-&#34;&gt;32. 如果别人问你char and [char] 的区别？&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;Prelude&amp;gt; :t &#39;a&#39;
 &#39;a&#39; :: Char
 Prelude&amp;gt; :t &amp;quot;a&amp;quot;
@@ -390,44 +257,29 @@ Prelude&amp;gt; :t &amp;quot;a&amp;quot;
 Prelude&amp;gt; :t &amp;quot;dfasdf&amp;quot;
 &amp;quot;dfasdf&amp;quot; :: [Char]
 Prelude&amp;gt; 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;33-如果别人问你变量有类型-那么函数是不是也有类型&#34;&gt;33. 如果别人问你变量有类型，那么函数是不是也有类型？&lt;/h3&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;33-&#34;&gt;33. 如果别人问你变量有类型，那么函数是不是也有类型？&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;removeNonUppercase :: [Char] -&amp;gt; [Char]   
 removeNonUppercase st = [ c | c &amp;lt;- st, c `elem` [&#39;A&#39;..&#39;Z&#39;]]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;removeNonUppercase 的类型为 [Char]-&amp;gt;[Char]，从它的参数和回传值的类型上可以看出，
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;removeNonUppercase 的类型为 [Char]-&amp;gt;[Char]，从它的参数和回传值的类型上可以看出，
 它将一个字串映射为另一个字串。[Char] 与 String 是等价的，但使用 String 会更清晰：
 removeNonUppercase :: String -&amp;gt; String。编译器会自动检测出它的类型，我们还是标明了
 它的类型声明。要是多个参数的函数该怎样？如下便是一个将三个整数相加的简单函数
 参数之间由 -&amp;gt; 分隔，而与回传值之间并无特殊差异&lt;/p&gt;
-
-&lt;h3 id=&#34;34-如果别人问你有没有比较好用的编程工具&#34;&gt;34. 如果别人问你有没有比较好用的编程工具？&lt;/h3&gt;
-
+&lt;h3 id=&#34;34-&#34;&gt;34. 如果别人问你有没有比较好用的编程工具？&lt;/h3&gt;
 &lt;p&gt;告诉他Haskell！&lt;/p&gt;
-
 &lt;p&gt;该如何学习？
 告诉他安装 ghci,并且在软件中输入 :brower  就能观察到很多的类型
 并且支持tab键。
 :brower 会列出内置函数的 类型，以及他的基本使用方法&lt;/p&gt;
-
-&lt;h3 id=&#34;35-如果别人问你高阶函数是如何定义&#34;&gt;35. 如果别人问你高阶函数是如何定义？&lt;/h3&gt;
-
+&lt;h3 id=&#34;35-&#34;&gt;35. 如果别人问你高阶函数是如何定义？&lt;/h3&gt;
 &lt;p&gt;高阶函数&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;map f lst --将lst按照函数f映射得到一个新的数列
 map :: (a-&amp;gt;b) -&amp;gt; [a] -&amp;gt;
 map f [] = []
 map f (x:xs) = f x : map f xs
 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;36-如果别人问你如何使用-brower-提供的函数类型&#34;&gt;36. 如果别人问你如何使用 :brower 提供的函数类型？&lt;/h3&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;36--brower-&#34;&gt;36. 如果别人问你如何使用 :brower 提供的函数类型？&lt;/h3&gt;
 &lt;p&gt;比如：&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;36.1
 Prelude&amp;gt; :t product 
 product :: Num a =&amp;gt; [a] -&amp;gt; a
@@ -442,28 +294,18 @@ Prelude&amp;gt; let  d=readFile &amp;quot;/tmp/a.txt&amp;quot;
 Prelude&amp;gt; d
 &amp;quot;fdsf&amp;quot;
 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;37-如果别人问你如何切断一个数组在某个位置&#34;&gt;37.  如果别人问你如何切断一个数组在某个位置？&lt;/h3&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;37--&#34;&gt;37.  如果别人问你如何切断一个数组在某个位置？&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;splitAt :: Int -&amp;gt; [a] -&amp;gt; ([a], [a])
 Prelude&amp;gt; splitAt 3 [3,5,6,2,3,6,3]
 ([3,5,6],[2,3,6,3])
 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;38-如果别人问你为什么你这样使用subtract&#34;&gt;38.  如果别人问你为什么你这样使用subtract?&lt;/h3&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;38--subtract&#34;&gt;38.  如果别人问你为什么你这样使用subtract?&lt;/h3&gt;
 &lt;p&gt;告诉他，我是看着定义来使用的。&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;subtract :: Num a =&amp;gt; a -&amp;gt; a -&amp;gt; a
 Prelude&amp;gt; subtract 20 3
 -17
 Prelude&amp;gt; subtract [30,3] [3,3]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;39-如果别人问你-zip相关的函数&#34;&gt;39.  如果别人问你 zip相关的函数？&lt;/h3&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;39---zip&#34;&gt;39.  如果别人问你 zip相关的函数？&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;    Prelude&amp;gt; unzip [(3,4)]
     ([3],[4])
     Prelude&amp;gt; unzip [(3,4),(3,7)]
@@ -489,75 +331,49 @@ Prelude&amp;gt; subtract [30,3] [3,3]
         Couldn&#39;t match expected type `(a0, b0, c0)&#39;
                     with actual type `(t0, t1, t2, t3)&#39;
 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;40-如果别人问你un相关的函数&#34;&gt;40. 如果别人问你un相关的函数？&lt;/h3&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;40-un&#34;&gt;40. 如果别人问你un相关的函数？&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;Prelude&amp;gt; unlines [&amp;quot;ds&amp;quot;,&amp;quot;dfsf&amp;quot;]
 &amp;quot;ds\ndfsf\n&amp;quot;
 until :: (a -&amp;gt; Bool) -&amp;gt; (a -&amp;gt; a) -&amp;gt; a -&amp;gt; a
 unwords :: [String] -&amp;gt; String
 Prelude&amp;gt; unwords [&amp;quot;dsf&amp;quot;,&amp;quot;fdsf&amp;quot;]
 &amp;quot;dsf fdsf&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;41-如果比人问你如何使用-sin等三角函数&#34;&gt;41. 如果比人问你如何使用 sin等三角函数？&lt;/h3&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;41--sin&#34;&gt;41. 如果比人问你如何使用 sin等三角函数？&lt;/h3&gt;
 &lt;p&gt;转换为弧度制&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;Prelude&amp;gt; sin (45/180*pi)
 0.7071067811865475
 Prelude&amp;gt; sin (45*pi/180)
 0.7071067811865475
 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;42-如果别人问你haskell针对字符的函数&#34;&gt;42. 如果别人问你Haskell针对字符的函数？&lt;/h3&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;42-haskell&#34;&gt;42. 如果别人问你Haskell针对字符的函数？&lt;/h3&gt;
 &lt;p&gt;Haskell中预定义的针对字符的函数有:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;   isAscii, isLatin1, isControl, isPrint, isSpace, isUpper, isLower,
    isAlpha, isDigit, isOctDigit, isHexDigit, isAlphaNum,
    digitToInt, intToDigit,
    toUpper, toLower,
    ord, chr,等
    
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;ord将字母转换为数字, chr反之.&lt;/p&gt;
-
-&lt;h3 id=&#34;43-如果别人问你构造数组的几种方式&#34;&gt;43. 如果别人问你构造数组的几种方式？&lt;/h3&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;ord将字母转换为数字, chr反之.&lt;/p&gt;
+&lt;h3 id=&#34;43-&#34;&gt;43. 如果别人问你构造数组的几种方式？&lt;/h3&gt;
 &lt;p&gt;数列是通过[]来进行描述的&lt;/p&gt;
-
-&lt;h4 id=&#34;43-1-数组构造&#34;&gt;43.1 数组构造&lt;/h4&gt;
-
+&lt;h4 id=&#34;431-&#34;&gt;43.1 数组构造&lt;/h4&gt;
 &lt;p&gt;数列是用[]和(:)构造的, []是一个空的数列, x:xs的含义是元素x附加到数列xs的前面组成一个更长的数列.
 比如, 1:[] 等于[1], 2:3:1:[]等于[2,3,1], 运算符(:)是从右向左运算的. 所有的数列都可以看作是从[]开始,
 将各元素用(:)附到上面形成的. 在实际编程中有一些简记法可以快速地构造数列.&lt;/p&gt;
-
-&lt;h4 id=&#34;43-2-列举法&#34;&gt;43.2 列举法&lt;/h4&gt;
-
-&lt;p&gt;将数列的元素一一列举, 比如: [1,2,3], [&amp;lsquo;A&amp;rsquo;,&amp;lsquo;B&amp;rsquo;,&amp;rsquo;d&amp;rsquo;], [[1,2], [4,5,6]]等等,
+&lt;h4 id=&#34;432-&#34;&gt;43.2 列举法&lt;/h4&gt;
+&lt;p&gt;将数列的元素一一列举, 比如: [1,2,3], [&amp;lsquo;A&amp;rsquo;,&amp;lsquo;B&amp;rsquo;,&amp;lsquo;d&amp;rsquo;], [[1,2], [4,5,6]]等等,
 数列的类型用&amp;rdquo;[元素类型]&amp;ldquo;来表示, 这几个例子的类型依次为: [Int], [Char], [[Int]].&lt;/p&gt;
-
-&lt;h4 id=&#34;43-3-范围法&#34;&gt;43.3 范围法&lt;/h4&gt;
-
-&lt;p&gt;适用于构造等差数列, 比如: [1..5]等于[1,2,3,4,5], [&amp;lsquo;a&amp;rsquo;..&amp;rsquo;d&amp;rsquo;]等于[&amp;lsquo;a&amp;rsquo;,&amp;lsquo;b&amp;rsquo;,&amp;lsquo;c&amp;rsquo;,&amp;rsquo;d&amp;rsquo;]等于&amp;rdquo;abcd&amp;rdquo;因为type String=[Char].
+&lt;h4 id=&#34;433-&#34;&gt;43.3 范围法&lt;/h4&gt;
+&lt;p&gt;适用于构造等差数列, 比如: [1..5]等于[1,2,3,4,5], [&amp;lsquo;a&amp;rsquo;..&amp;lsquo;d&amp;rsquo;]等于[&amp;lsquo;a&amp;rsquo;,&amp;lsquo;b&amp;rsquo;,&amp;lsquo;c&amp;rsquo;,&amp;lsquo;d&amp;rsquo;]等于&amp;quot;abcd&amp;quot;因为type String=[Char].
 默认的等差为1, 也可以给出前两个元素指定等差, 比如: [2,4..8]等于[2,4,6,8], [2,4..7]等于[2,4,6], [2.5,4..9.5]等于
 [2.5,4.0,5.5,7.0,8.5,10.0].&lt;/p&gt;
-
-&lt;h3 id=&#34;43-3-描述法&#34;&gt;43.3 描述法&lt;/h3&gt;
-
+&lt;h3 id=&#34;433--1&#34;&gt;43.3 描述法&lt;/h3&gt;
 &lt;p&gt;描述法给出数列中元素取值的范围以及所满足的条件, 与数学中集合的描述法是一样的. 例如:
-[3*x+2| x&amp;lt;-[3,6,9]] &amp;ndash;记号&amp;rdquo;&amp;lt;-&amp;ldquo;表示属于,x依次取3,6,9,代入3*x+2,得到数列[11,20,29]
+[3*x+2| x&amp;lt;-[3,6,9]] &amp;ndash;记号&amp;quot;&amp;lt;-&amp;ldquo;表示属于,x依次取3,6,9,代入3*x+2,得到数列[11,20,29]
 [x*x| x&amp;lt;-[1..9], x `rem` 3==1] &amp;ndash;给出x的范围,还限定x除3余1
 [(x,y)|x&amp;lt;-[1,2,3],y&amp;lt;-[x..3]] &amp;ndash;等于 [(1,1),(1,2),(1,3),(2,2),(2,3),(3,3)]&lt;/p&gt;
-
-&lt;h3 id=&#34;44-如果别人跟你说haskell可以write-poet&#34;&gt;44. 如果别人跟你说Haskell可以write poet?&lt;/h3&gt;
-
+&lt;h3 id=&#34;44-haskellwrite-poet&#34;&gt;44. 如果别人跟你说Haskell可以write poet?&lt;/h3&gt;
 &lt;p&gt;第一次语文  数学   计算机的结合&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;Prelude&amp;gt;  let nouns = [&amp;quot;he&amp;quot;,&amp;quot;she&amp;quot;,&amp;quot;I&amp;quot;]
 Prelude&amp;gt; let adjectives=[&amp;quot;lazy&amp;quot;,&amp;quot;handsome&amp;quot;,&amp;quot;something&amp;quot;]
 Prelude&amp;gt; [adjective ++ &amp;quot; &amp;quot; ++ noun | adjective &amp;lt;-adjectives ,noun&amp;lt;-nouns]
@@ -567,82 +383,51 @@ Prelude&amp;gt; [adjective ++ &amp;quot; &amp;quot; ++ noun | adjective &amp;lt;
 *Main&amp;gt; let adjectives=[&amp;quot;lazy&amp;quot;,&amp;quot;handsome&amp;quot;,&amp;quot;something&amp;quot;]
 *Main&amp;gt; [adjective ++ &amp;quot; &amp;quot; ++ noun | adjective &amp;lt;-adjectives ,noun&amp;lt;-nouns]
 [&amp;quot;lazy he&amp;quot;,&amp;quot;lazy she&amp;quot;,&amp;quot;lazy I&amp;quot;,&amp;quot;handsome he&amp;quot;,&amp;quot;handsome she&amp;quot;,&amp;quot;handsome I&amp;quot;,&amp;quot;something he&amp;quot;,&amp;quot;something she&amp;quot;,&amp;quot;something I&amp;quot;]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;###45. 如果别人跟你说Haskell可以跟几何并轨？
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;###45. 如果别人跟你说Haskell可以跟几何并轨？
 第一次和几何的触碰&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;Prelude&amp;gt;  let triangels=[(a,b,c)|c&amp;lt;-[1..10],b&amp;lt;-[1..c],a&amp;lt;-[1..b],c^2==a^2+b^2,a+b+c==24]
 Prelude&amp;gt; triangels 
 [(6,8,10)]
 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;46-如果别人问你haskell的cabal是什么&#34;&gt;46. 如果别人问你Haskell的cabal是什么？&lt;/h3&gt;
-
-&lt;p&gt;类似于ubuntu的apt-get&lt;br /&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;46-haskellcabal&#34;&gt;46. 如果别人问你Haskell的cabal是什么？&lt;/h3&gt;
+&lt;p&gt;类似于ubuntu的apt-get&lt;br&gt;
 scilab  的atoms
 python的 easy_install  或者pip
 redhat 的yum&lt;/p&gt;
-
-&lt;h3 id=&#34;47-如果别人问你有几个基本的typeclass&#34;&gt;47. 如果别人问你有几个基本的TypeClass?&lt;/h3&gt;
-
+&lt;h3 id=&#34;47-typeclass&#34;&gt;47. 如果别人问你有几个基本的TypeClass?&lt;/h3&gt;
 &lt;p&gt;类型类是haskell中站在较高位置的语言认识。几种基本的类型类包括Eq,Ord,Show,Read,Enum等。&lt;/p&gt;
-
-&lt;h4 id=&#34;47-1-eq&#34;&gt;47.1 Eq&lt;/h4&gt;
-
+&lt;h4 id=&#34;471-eq&#34;&gt;47.1 Eq&lt;/h4&gt;
 &lt;p&gt;包含可判断相等性的类型。提供实现的函数是 == 和 /=。所以，
 只要一个函数有Eq类的类型限制，那么它就必定在定义中用到了 == 和 /=&lt;/p&gt;
-
-&lt;h4 id=&#34;47-2-ord&#34;&gt;47.2 Ord&lt;/h4&gt;
-
+&lt;h4 id=&#34;472-ord&#34;&gt;47.2 Ord&lt;/h4&gt;
 &lt;p&gt;包含可比较大小的类型。除了函数以外，我们目前所谈到的所有类型都属于 Ord 类。Ord 包中包含了
 &amp;lt;, &amp;gt;, &amp;lt;=, &amp;gt;= 之类用于比较大小的函数。compare 函数取两个
 Ord 类中的相同类型的值作参数，回传比较的结果。这个结果是如下三种类型之一：GT, LT, EQ。&lt;/p&gt;
-
-&lt;h4 id=&#34;47-3-show&#34;&gt;47.3 Show&lt;/h4&gt;
-
+&lt;h4 id=&#34;473-show&#34;&gt;47.3 Show&lt;/h4&gt;
 &lt;p&gt;的成员为可用字串表示的类型。目前为止，除函数以外的所有类型都是 Show 的成员。
 操作 Show Typeclass，最常用的函数表示 show。它可以取任一Show的成员类型并将其转为字串&lt;/p&gt;
-
-&lt;h4 id=&#34;47-4-read&#34;&gt;47.4 Read&lt;/h4&gt;
-
+&lt;h4 id=&#34;474-read&#34;&gt;47.4 Read&lt;/h4&gt;
 &lt;p&gt;是与 Show 相反的 Typeclass。read 函数可以将一个字串转为 Read 的某成员类型。&lt;/p&gt;
-
-&lt;h4 id=&#34;47-5-enum&#34;&gt;47.5 Enum&lt;/h4&gt;
-
+&lt;h4 id=&#34;475-enum&#34;&gt;47.5 Enum&lt;/h4&gt;
 &lt;p&gt;的成员都是连续的类型 &amp;ndash; 也就是可枚举。Enum 类存在的主要好处就在于我们可以在 Range 中用到它的成员类型：
 每个值都有后继子 (successer) 和前置子 (predecesor)，分别可以通过 succ 函数和 pred 函数得到。
 该 Typeclass 包含的类型有：(), Bool, Char, Ordering, Int, Integer, Float 和 Double。&lt;/p&gt;
-
-&lt;h4 id=&#34;47-6-bounded&#34;&gt;47.6 Bounded&lt;/h4&gt;
-
+&lt;h4 id=&#34;476-bounded&#34;&gt;47.6 Bounded&lt;/h4&gt;
 &lt;p&gt;的成员都有一个上限和下限。&lt;/p&gt;
-
-&lt;h4 id=&#34;47-7-num&#34;&gt;47.7 Num&lt;/h4&gt;
-
+&lt;h4 id=&#34;477-num&#34;&gt;47.7 Num&lt;/h4&gt;
 &lt;p&gt;Num 是表示数字的 Typeclass，它的成员类型都具有数字的特征。检查一个数字的类型：&lt;/p&gt;
-
-&lt;h4 id=&#34;47-8-integral&#34;&gt;47.8 Integral&lt;/h4&gt;
-
+&lt;h4 id=&#34;478-integral&#34;&gt;47.8 Integral&lt;/h4&gt;
 &lt;p&gt;同样是表示数字的 Typeclass。Num 包含所有的数字：实数和整数。而 Integral 仅包含整数，其中的成员类型有 Int 和 Integer。&lt;/p&gt;
-
-&lt;h4 id=&#34;47-9-floating&#34;&gt;47.9 Floating&lt;/h4&gt;
-
+&lt;h4 id=&#34;479-floating&#34;&gt;47.9 Floating&lt;/h4&gt;
 &lt;p&gt;仅包含浮点类型：Float 和 Double。
 可以用一张图来表示：
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/classes.gif&#34; alt=&#34;类图&#34; /&gt;&lt;/p&gt;
-
-&lt;h4 id=&#34;48-我想用haskell产生一个三角形&#34;&gt;48. 我想用Haskell产生一个三角形&lt;/h4&gt;
-
+&lt;img src=&#34;https://jueqingsizhe66.github.io/images/classes.gif&#34; alt=&#34;类图&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;48-haskell&#34;&gt;48. 我想用Haskell产生一个三角形&lt;/h4&gt;
 &lt;pre&gt;&lt;code&gt;let triangels=[(a,b,c)|c&amp;lt;-[1..10],b&amp;lt;-[1..10],a&amp;lt;-[1..10]]
 let righttriangels=[(a,b,c)|c&amp;lt;-[1..10],b&amp;lt;-[1..c],a&amp;lt;-[1..b],a^2+b^2==c^2]
 let righttriangelsc=[(a,b,c)|c&amp;lt;-[1..10],b&amp;lt;-[1..c],a&amp;lt;-[1..b],a^2+b^2==c^2,a+b+c==24]
 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;49-如果别人问你如何表示数学的集合&#34;&gt;49. 如果别人问你如何表示数学的集合？&lt;/h4&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;49-&#34;&gt;49. 如果别人问你如何表示数学的集合？&lt;/h4&gt;
 &lt;pre&gt;&lt;code&gt;Prelude&amp;gt; [x*2|x &amp;lt;- [1..10]]
 [2,4,6,8,10,12,14,16,18,20]
 Prelude&amp;gt; [x*2|x&amp;lt;- [1..10],x*2 &amp;gt;=12 ]
@@ -650,20 +435,13 @@ Prelude&amp;gt; [x*2|x&amp;lt;- [1..10],x*2 &amp;gt;=12 ]
 Prelude&amp;gt; [x | x &amp;lt;- [50..100], x `mod` 7 ==3]
 [52,59,66,73,80,87,94]
 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;50-如果别人问你-代表什么东西&#34;&gt;50. 如果别人问你!! 代表什么东西？&lt;/h4&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;50--&#34;&gt;50. 如果别人问你!! 代表什么东西？&lt;/h4&gt;
 &lt;pre&gt;&lt;code&gt;[3, 5,6] !!2
 *Main&amp;gt; [3, 5,6] !!2
 6
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;51-几个常用的数组提取函数&#34;&gt;51. 几个常用的数组提取函数？&lt;/h4&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;51-&#34;&gt;51. 几个常用的数组提取函数？&lt;/h4&gt;
 &lt;p&gt;并且是从0开始的
 常用几个list函数&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;*Main&amp;gt; head [5,6,4]
 5
 *Main&amp;gt; last [5,6,4]
@@ -674,10 +452,7 @@ Prelude&amp;gt; [x | x &amp;lt;- [50..100], x `mod` 7 ==3]
 [5,6,6,43]
 
 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;length  null  reverse  take等函数  具体说一下take&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;length  null  reverse  take等函数  具体说一下take&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;*Main&amp;gt; take 4 [5,6,7,4,3,8]
 [5,6,7,4]
 *Main&amp;gt; take 3 [5,6,7,4,3,8]
@@ -685,9 +460,7 @@ Prelude&amp;gt; [x | x &amp;lt;- [50..100], x `mod` 7 ==3]
 *Main&amp;gt; take 2 [5,6,7,4,3,8]
 [5,6]
 *Main&amp;gt; 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;同理类似的drop&lt;/p&gt;</description>
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;同理类似的drop&lt;/p&gt;</description>
     </item>
     
   </channel>

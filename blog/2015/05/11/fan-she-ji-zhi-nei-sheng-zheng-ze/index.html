@@ -563,9 +563,9 @@
 
 
 
-<span class="article-metadata" >Reading time: 21 minutes and    20 seconds with 4695 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+<span class="article-metadata" >Reading time: 21 minutes and    0 seconds with 4622 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
-        
+        <nav id="TableOfContents"></nav>
     </aside>
   <div class="article-container">
 
@@ -575,566 +575,522 @@
 不行，则逆着来.
 类（Class）
 三种方式</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">//Test class
+</span><span style="color:#75715e"></span>                <span style="color:#75715e">//*************************************************************
+</span><span style="color:#75715e"></span>                <span style="color:#75715e">//第一种方式获得类
+</span><span style="color:#75715e"></span>                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;//*************************************************************&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                Class clazz1 <span style="color:#f92672">=</span> Person<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">;</span>
+                <span style="color:#75715e">//第二种方式获得类
+</span><span style="color:#75715e"></span>                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;第一种方式获得类&#34;</span><span style="color:#f92672">+</span>clazz1<span style="color:#f92672">.</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                Person personClass <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Person<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                Class clazz2 <span style="color:#f92672">=</span> personClass<span style="color:#f92672">.</span><span style="color:#a6e22e">getClass</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;第二种方式获得类&#34;</span><span style="color:#f92672">+</span>clazz1<span style="color:#f92672">.</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#75715e">//第三种方式获得类
+</span><span style="color:#75715e"></span>                <span style="color:#66d9ef">try</span>
+                <span style="color:#f92672">{</span>
+                        Class clazz3 <span style="color:#f92672">=</span> Class<span style="color:#f92672">.</span><span style="color:#a6e22e">forName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;com.reflect.test.Person&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;第三种方式获得类&#34;</span><span style="color:#f92672">+</span>clazz1<span style="color:#f92672">.</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;三种类方式都是同一个类！因为类只加载一次&#34;</span><span style="color:#f92672">+</span><span style="color:#f92672">(</span>clazz2<span style="color:#f92672">=</span><span style="color:#f92672">=</span>clazz1<span style="color:#f92672">)</span><span style="color:#f92672">+</span><span style="color:#f92672">(</span>clazz2<span style="color:#f92672">=</span><span style="color:#f92672">=</span>clazz3<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;包的名字&#34;</span><span style="color:#f92672">+</span>clazz3<span style="color:#f92672">.</span><span style="color:#a6e22e">getPackage</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;简单类名字（不带包）&#34;</span><span style="color:#f92672">+</span>clazz3<span style="color:#f92672">.</span><span style="color:#a6e22e">getSimpleName</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
 
-<pre><code class="language-java">//Test class
-                //*************************************************************
-                //第一种方式获得类
-                System.out.println(&quot;//*************************************************************&quot;);
-                Class clazz1 = Person.class;
-                //第二种方式获得类
-                System.out.println(&quot;第一种方式获得类&quot;+clazz1.getName());
-                Person personClass = new Person();
-                Class clazz2 = personClass.getClass();
-                System.out.println(&quot;第二种方式获得类&quot;+clazz1.getName());
-                //第三种方式获得类
-                try
-                {
-                        Class clazz3 = Class.forName(&quot;com.reflect.test.Person&quot;);
-                        System.out.println(&quot;第三种方式获得类&quot;+clazz1.getName());
-                        System.out.println(&quot;三种类方式都是同一个类！因为类只加载一次&quot;+(clazz2==clazz1)+(clazz2==clazz3));
-                        System.out.println(&quot;包的名字&quot;+clazz3.getPackage().getName());
-                        System.out.println(&quot;简单类名字（不带包）&quot;+clazz3.getSimpleName());
+                        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span>
+                                        <span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;------------------------------通过Class对象获得类的构造函数---------------------&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        Constructor<span style="color:#f92672">[</span><span style="color:#f92672">]</span> constructors <span style="color:#f92672">=</span> clazz3<span style="color:#f92672">.</span><span style="color:#a6e22e">getConstructors</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span>Constructor constructor <span style="color:#f92672">:</span> constructors<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>constructor<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        <span style="color:#f92672">}</span>
 
-                        System.out
-                                        .println(&quot;------------------------------通过Class对象获得类的构造函数---------------------&quot;);
-                        Constructor[] constructors = clazz3.getConstructors();
-                        for (Constructor constructor : constructors) {
-                                System.out.println(constructor);
-                        }
+                        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;------------------通过Class对象获得类的字段----------------&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        Field<span style="color:#f92672">[</span><span style="color:#f92672">]</span> fields <span style="color:#f92672">=</span> clazz3<span style="color:#f92672">.</span><span style="color:#a6e22e">getDeclaredFields</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span>Field field <span style="color:#f92672">:</span> fields<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>field<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        <span style="color:#f92672">}</span>
 
-                        System.out.println(&quot;------------------通过Class对象获得类的字段----------------&quot;);
-                        Field[] fields = clazz3.getDeclaredFields();
-                        for (Field field : fields) {
-                                System.out.println(field);
-                        }
+                        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;--------通过Class对象获得类的方法----------&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
 
-                        System.out.println(&quot;--------通过Class对象获得类的方法----------&quot;);
+                        Method<span style="color:#f92672">[</span><span style="color:#f92672">]</span> methods <span style="color:#f92672">=</span> clazz3<span style="color:#f92672">.</span><span style="color:#a6e22e">getMethods</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span><span style="color:#75715e">// 返回所有的public 方法,包括父类声明的public方法
+</span><span style="color:#75715e"></span>                        <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span>Method method <span style="color:#f92672">:</span> methods<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>method<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        <span style="color:#f92672">}</span>
 
-                        Method[] methods = clazz3.getMethods();// 返回所有的public 方法,包括父类声明的public方法
-                        for (Method method : methods) {
-                                System.out.println(method);
-                        }
+                <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>ClassNotFoundException e1<span style="color:#f92672">)</span>
+                <span style="color:#f92672">{</span>
+                        <span style="color:#75715e">// TODO Auto-generated catch block
+</span><span style="color:#75715e"></span>                        e1<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span>
+<span style="color:#960050;background-color:#1e0010">`</span><span style="color:#960050;background-color:#1e0010">`</span><span style="color:#960050;background-color:#1e0010">`</span>java
+最主要的是Class<span style="color:#f92672">.</span><span style="color:#a6e22e">forName</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
 
-                } catch (ClassNotFoundException e1)
-                {
-                        // TODO Auto-generated catch block
-                        e1.printStackTrace();
-                }
-</code></pre>
+字段
 
-<p>java
-最主要的是Class.forName();</p>
-
-<p>字段</p>
-
-<p>设置字段的属性，并使用创建的对象调用方法.</p>
-
-<pre><code class="language-java">//*************************************************************
-                //TestField  测试字段开始
-                //*************************************************************
-                System.out.println(&quot;//*************************************************************&quot;);
-                try
-                {
-                        /**
-                         *  打印出所有字段
-                         *  
-                         *  字段类的一个特点设置
-                         */
-                        Field[] fields = clazz.getDeclaredFields();
-                        for(Field temp : fields)
-                        {
-                                System.out.println(temp);
-                        }
-                        Person personLiMing = (Person) clazz.newInstance();
-                        /**
-                         * 测试添加一个名字的字段
-                         */
-                        //Field nameField = clazz.getField(&quot;Name&quot;); //会报异常
-                        //Field nameField = clazz.getDeclaredField(&quot;name&quot;); //注意区分大小写
-                        Field nameField = clazz.getDeclaredField(&quot;Name&quot;);
-                        //一定得设置？
-                        nameField.setAccessible(true);
-                        nameField.set(personLiMing,&quot;李明&quot;);
+设置字段的属性<span style="color:#960050;background-color:#1e0010">，</span>并使用创建的对象调用方法<span style="color:#f92672">.</span>
+<span style="color:#960050;background-color:#1e0010">`</span><span style="color:#960050;background-color:#1e0010">`</span><span style="color:#960050;background-color:#1e0010">`</span>java
+<span style="color:#75715e">//*************************************************************
+</span><span style="color:#75715e"></span>                <span style="color:#75715e">//TestField  测试字段开始
+</span><span style="color:#75715e"></span>                <span style="color:#75715e">//*************************************************************
+</span><span style="color:#75715e"></span>                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;//*************************************************************&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#66d9ef">try</span>
+                <span style="color:#f92672">{</span>
+                        <span style="color:#75715e">/**
+</span><span style="color:#75715e">                         *  打印出所有字段
+</span><span style="color:#75715e">                         *  
+</span><span style="color:#75715e">                         *  字段类的一个特点设置
+</span><span style="color:#75715e">                         */</span>
+                        Field<span style="color:#f92672">[</span><span style="color:#f92672">]</span> fields <span style="color:#f92672">=</span> clazz<span style="color:#f92672">.</span><span style="color:#a6e22e">getDeclaredFields</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span>Field temp <span style="color:#f92672">:</span> fields<span style="color:#f92672">)</span>
+                        <span style="color:#f92672">{</span>
+                                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>temp<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        <span style="color:#f92672">}</span>
+                        Person personLiMing <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>Person<span style="color:#f92672">)</span> clazz<span style="color:#f92672">.</span><span style="color:#a6e22e">newInstance</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        <span style="color:#75715e">/**
+</span><span style="color:#75715e">                         * 测试添加一个名字的字段
+</span><span style="color:#75715e">                         */</span>
+                        <span style="color:#75715e">//Field nameField = clazz.getField(&#34;Name&#34;); //会报异常
+</span><span style="color:#75715e"></span>                        <span style="color:#75715e">//Field nameField = clazz.getDeclaredField(&#34;name&#34;); //注意区分大小写
+</span><span style="color:#75715e"></span>                        Field nameField <span style="color:#f92672">=</span> clazz<span style="color:#f92672">.</span><span style="color:#a6e22e">getDeclaredField</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Name&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        <span style="color:#75715e">//一定得设置？
+</span><span style="color:#75715e"></span>                        nameField<span style="color:#f92672">.</span><span style="color:#a6e22e">setAccessible</span><span style="color:#f92672">(</span><span style="color:#66d9ef">true</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        nameField<span style="color:#f92672">.</span><span style="color:#a6e22e">set</span><span style="color:#f92672">(</span>personLiMing<span style="color:#f92672">,</span><span style="color:#e6db74">&#34;李明&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
                         
-                        Object o = nameField.get(personLiMing);
-                        System.out.println(o);
-                        personLiMing.sayHi();
-                } catch (InstantiationException | IllegalAccessException e)
-                {
-                        // TODO Auto-generated catch block
-                        System.out.println(&quot;创建新的实例异常&quot;);
-                }catch( NoSuchFieldException | SecurityException e)
-                {
-                        System.out.println(&quot;没有那个字段&quot;);
-                }
-</code></pre>
+                        Object o <span style="color:#f92672">=</span> nameField<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span>personLiMing<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>o<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        personLiMing<span style="color:#f92672">.</span><span style="color:#a6e22e">sayHi</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>InstantiationException <span style="color:#f92672">|</span> IllegalAccessException e<span style="color:#f92672">)</span>
+                <span style="color:#f92672">{</span>
+                        <span style="color:#75715e">// TODO Auto-generated catch block
+</span><span style="color:#75715e"></span>                        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;创建新的实例异常&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span><span style="color:#66d9ef">catch</span><span style="color:#f92672">(</span> NoSuchFieldException <span style="color:#f92672">|</span> SecurityException e<span style="color:#f92672">)</span>
+                <span style="color:#f92672">{</span>
+                        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;没有那个字段&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span>
+<span style="color:#960050;background-color:#1e0010">`</span><span style="color:#960050;background-color:#1e0010">`</span><span style="color:#960050;background-color:#1e0010">`</span>java
 
-<p>java</p>
+构造函数
 
-<p>构造函数</p>
+主要作用<span style="color:#960050;background-color:#1e0010">：</span>产生对象
 
-<p>主要作用：产生对象</p>
-
-<pre><code class="language-java">/**
-                 *  分为两个部分测试构造函数 
-                 *  1：  有参的 ，注意有参的时候String.class int.class
-                 *  2：  无参的
-                 */
-                //TestConstructor
-                /**
-                 * 打印所有的类的构造函数
-                 */
-                try
-                {
-                        Constructor con1 = clazzConstructor.getDeclaredConstructor();
+<span style="color:#960050;background-color:#1e0010">`</span><span style="color:#960050;background-color:#1e0010">`</span><span style="color:#960050;background-color:#1e0010">`</span>java
+<span style="color:#75715e">/**
+</span><span style="color:#75715e">                 *  分为两个部分测试构造函数 
+</span><span style="color:#75715e">                 *  1：  有参的 ，注意有参的时候String.class int.class
+</span><span style="color:#75715e">                 *  2：  无参的
+</span><span style="color:#75715e">                 */</span>
+                <span style="color:#75715e">//TestConstructor
+</span><span style="color:#75715e"></span>                <span style="color:#75715e">/**
+</span><span style="color:#75715e">                 * 打印所有的类的构造函数
+</span><span style="color:#75715e">                 */</span>
+                <span style="color:#66d9ef">try</span>
+                <span style="color:#f92672">{</span>
+                        Constructor con1 <span style="color:#f92672">=</span> clazzConstructor<span style="color:#f92672">.</span><span style="color:#a6e22e">getDeclaredConstructor</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
                         
-                        Object o = con1.newInstance();
+                        Object o <span style="color:#f92672">=</span> con1<span style="color:#f92672">.</span><span style="color:#a6e22e">newInstance</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
                         
-                        Person personWanghao = (Person)o;
-                        personWanghao.sayHi();
+                        Person personWanghao <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>Person<span style="color:#f92672">)</span>o<span style="color:#f92672">;</span>
+                        personWanghao<span style="color:#f92672">.</span><span style="color:#a6e22e">sayHi</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
                         
-                        System.out.println(&quot;------------------------&quot;);
+                        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;------------------------&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
                         
-                        Constructor&lt;Person&gt; con2 = clazzConstructor.getDeclaredConstructor(String.class,int.class);
-                        Object o2 = con2.newInstance(&quot;汪峰&quot;,22);
-                        //很浅显的道理  只有构造函数可以新建对象！！上面的代码正是
-                        //体现如此！        
-                        Person personWangfeng = (Person)o2;
-                        personWangfeng.sayHi();
+                        Constructor<span style="color:#f92672">&lt;</span>Person<span style="color:#f92672">&gt;</span> con2 <span style="color:#f92672">=</span> clazzConstructor<span style="color:#f92672">.</span><span style="color:#a6e22e">getDeclaredConstructor</span><span style="color:#f92672">(</span>String<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">,</span><span style="color:#66d9ef">int</span><span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        Object o2 <span style="color:#f92672">=</span> con2<span style="color:#f92672">.</span><span style="color:#a6e22e">newInstance</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;汪峰&#34;</span><span style="color:#f92672">,</span>22<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        <span style="color:#75715e">//很浅显的道理  只有构造函数可以新建对象！！上面的代码正是
+</span><span style="color:#75715e"></span>                        <span style="color:#75715e">//体现如此！        
+</span><span style="color:#75715e"></span>                        Person personWangfeng <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>Person<span style="color:#f92672">)</span>o2<span style="color:#f92672">;</span>
+                        personWangfeng<span style="color:#f92672">.</span><span style="color:#a6e22e">sayHi</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
                         
-                } catch (NoSuchMethodException | SecurityException e)
-                {
-                        // TODO Auto-generated catch block
-                        System.out.println(&quot;获取构造函数异常&quot;);
-                }catch (InstantiationException | IllegalAccessException
-                                | IllegalArgumentException | InvocationTargetException e)
-                {
-                        // TODO Auto-generated catch block
-                        System.out.println(&quot;通过构造函数创建实例异常&quot;);
-                }
+                <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>NoSuchMethodException <span style="color:#f92672">|</span> SecurityException e<span style="color:#f92672">)</span>
+                <span style="color:#f92672">{</span>
+                        <span style="color:#75715e">// TODO Auto-generated catch block
+</span><span style="color:#75715e"></span>                        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;获取构造函数异常&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span><span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>InstantiationException <span style="color:#f92672">|</span> IllegalAccessException
+                                <span style="color:#f92672">|</span> IllegalArgumentException <span style="color:#f92672">|</span> InvocationTargetException e<span style="color:#f92672">)</span>
+                <span style="color:#f92672">{</span>
+                        <span style="color:#75715e">// TODO Auto-generated catch block
+</span><span style="color:#75715e"></span>                        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;通过构造函数创建实例异常&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span>
                
-</code></pre>
+<span style="color:#960050;background-color:#1e0010">`</span><span style="color:#960050;background-color:#1e0010">`</span><span style="color:#960050;background-color:#1e0010">`</span>java
 
-<p>java</p>
+方法
 
-<p>方法</p>
+Invoke函数<span style="color:#960050;background-color:#1e0010">，</span>调用对象的方法
 
-<p>Invoke函数，调用对象的方法</p>
-
-<pre><code class="language-java">//*************************************************************
-                //TestMethod
-                /**
-                 *  开始测试 所有Person类的普通方法
-                 *  
-                 *  方法类的一个特点，方法对应具体的参数！类似于构造函数
-                 *  都需要考虑重载的问题
-                 */
-                System.out.println(&quot;//*************************************************************&quot;);
-                System.out.println(&quot;开始测试 所有Person类的普通方法---------&quot;);
-                Method[] methods = clazzMethod.getDeclaredMethods();
+<span style="color:#960050;background-color:#1e0010">`</span><span style="color:#960050;background-color:#1e0010">`</span><span style="color:#960050;background-color:#1e0010">`</span>java
+<span style="color:#75715e">//*************************************************************
+</span><span style="color:#75715e"></span>                <span style="color:#75715e">//TestMethod
+</span><span style="color:#75715e"></span>                <span style="color:#75715e">/**
+</span><span style="color:#75715e">                 *  开始测试 所有Person类的普通方法
+</span><span style="color:#75715e">                 *  
+</span><span style="color:#75715e">                 *  方法类的一个特点，方法对应具体的参数！类似于构造函数
+</span><span style="color:#75715e">                 *  都需要考虑重载的问题
+</span><span style="color:#75715e">                 */</span>
+                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;//*************************************************************&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;开始测试 所有Person类的普通方法---------&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                Method<span style="color:#f92672">[</span><span style="color:#f92672">]</span> methods <span style="color:#f92672">=</span> clazzMethod<span style="color:#f92672">.</span><span style="color:#a6e22e">getDeclaredMethods</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
                 
-                for(Method temp: methods)
-                {
-                        System.out.println(temp);
-                }
+                <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span>Method temp<span style="color:#f92672">:</span> methods<span style="color:#f92672">)</span>
+                <span style="color:#f92672">{</span>
+                        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>temp<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span>
                 
-                //测试Person的sayHi方法
-                try
-                {
-                        Method sayHi = clazzMethod.getDeclaredMethod(&quot;sayHi&quot;);
-                        //Method singSong = clazz.getDeclaredMethod(&quot;singSong&quot;);
+                <span style="color:#75715e">//测试Person的sayHi方法
+</span><span style="color:#75715e"></span>                <span style="color:#66d9ef">try</span>
+                <span style="color:#f92672">{</span>
+                        Method sayHi <span style="color:#f92672">=</span> clazzMethod<span style="color:#f92672">.</span><span style="color:#a6e22e">getDeclaredMethod</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;sayHi&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        <span style="color:#75715e">//Method singSong = clazz.getDeclaredMethod(&#34;singSong&#34;);
+</span><span style="color:#75715e"></span>                        
+                        Object o <span style="color:#f92672">=</span> clazzMethod<span style="color:#f92672">.</span><span style="color:#a6e22e">newInstance</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
                         
-                        Object o = clazzMethod.newInstance();
-                        
-                        Person personPig = (Person)o;
-                        personPig.sayHi();
-                        System.out.println(&quot;通过普通方法1 进行Invoke1！！！&quot;);
+                        Person personPig <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>Person<span style="color:#f92672">)</span>o<span style="color:#f92672">;</span>
+                        personPig<span style="color:#f92672">.</span><span style="color:#a6e22e">sayHi</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;通过普通方法1 进行Invoke1！！！&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
 
-                        sayHi.invoke(o);
-                        System.out.println(&quot;通过普通方法1 进行Invoke2！！！&quot;);
-                        //反射的感觉有点像，逆着来的感觉
-                        //通过方法调用对象！！并执行某个动作！
-                        //而不是通过对象调用方法执行某个动作
-                        sayHi.invoke(personPig);
+                        sayHi<span style="color:#f92672">.</span><span style="color:#a6e22e">invoke</span><span style="color:#f92672">(</span>o<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;通过普通方法1 进行Invoke2！！！&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        <span style="color:#75715e">//反射的感觉有点像，逆着来的感觉
+</span><span style="color:#75715e"></span>                        <span style="color:#75715e">//通过方法调用对象！！并执行某个动作！
+</span><span style="color:#75715e"></span>                        <span style="color:#75715e">//而不是通过对象调用方法执行某个动作
+</span><span style="color:#75715e"></span>                        sayHi<span style="color:#f92672">.</span><span style="color:#a6e22e">invoke</span><span style="color:#f92672">(</span>personPig<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
 
-                        Class returnType = sayHi.getReturnType();
-                        System.out.println(&quot;Person类 sayHi的返回值类型&quot;+returnType);
+                        Class returnType <span style="color:#f92672">=</span> sayHi<span style="color:#f92672">.</span><span style="color:#a6e22e">getReturnType</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Person类 sayHi的返回值类型&#34;</span><span style="color:#f92672">+</span>returnType<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
                         
-                        int modifies = sayHi.getModifiers();
-                        //private 的值为0   public的值为1
-                        System.out.println(&quot;是private?:&quot;+Modifier.isPrivate(modifies));
-                        System.out.println(modifies);
+                        <span style="color:#66d9ef">int</span> modifies <span style="color:#f92672">=</span> sayHi<span style="color:#f92672">.</span><span style="color:#a6e22e">getModifiers</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        <span style="color:#75715e">//private 的值为0   public的值为1
+</span><span style="color:#75715e"></span>                        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;是private?:&#34;</span><span style="color:#f92672">+</span>Modifier<span style="color:#f92672">.</span><span style="color:#a6e22e">isPrivate</span><span style="color:#f92672">(</span>modifies<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>modifies<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
                         
-                        /**
-                         *  必须隐藏 ！否则下面的无法执行！ 有对应的参数  需要设置上 参数才可以
-                         *  否则找不到 singSong() 无参的函数
-                         */
-                /*        Method singSong = clazzMethod.getDeclaredMethod(&quot;singSong&quot;);
-                        System.out.println(singSong);*/
+                        <span style="color:#75715e">/**
+</span><span style="color:#75715e">                         *  必须隐藏 ！否则下面的无法执行！ 有对应的参数  需要设置上 参数才可以
+</span><span style="color:#75715e">                         *  否则找不到 singSong() 无参的函数
+</span><span style="color:#75715e">                         */</span>
+                <span style="color:#75715e">/*        Method singSong = clazzMethod.getDeclaredMethod(&#34;singSong&#34;);
+</span><span style="color:#75715e">                        System.out.println(singSong);*/</span>
                         
-                        Method singSong2 = clazzMethod.getDeclaredMethod(&quot;singSong&quot;, String.class);
-                        Person personDandan = new Person(&quot;淡淡&quot;,22);
-                        singSong2.invoke(personDandan, &quot;好汉歌&quot;);
-                        System.out.println(singSong2.getReturnType());
+                        Method singSong2 <span style="color:#f92672">=</span> clazzMethod<span style="color:#f92672">.</span><span style="color:#a6e22e">getDeclaredMethod</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;singSong&#34;</span><span style="color:#f92672">,</span> String<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        Person personDandan <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Person<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;淡淡&#34;</span><span style="color:#f92672">,</span>22<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        singSong2<span style="color:#f92672">.</span><span style="color:#a6e22e">invoke</span><span style="color:#f92672">(</span>personDandan<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;好汉歌&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>singSong2<span style="color:#f92672">.</span><span style="color:#a6e22e">getReturnType</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
                         
-                        //System.out.println(&quot;Person类singSong的返回值类型&quot;+clazz.getDeclaredMethod(&quot;singSong&quot;).getReturnType());
-                } catch (NoSuchMethodException | SecurityException e)
-                {
-                        // TODO Auto-generated catch block
-                        System.out.println(&quot;没有对应的方法&quot;+e.getMessage());
-                }catch (InstantiationException | IllegalAccessException e)
-                {
-                        // TODO Auto-generated catch block
-                        System.out.println(&quot;获取实例异常&quot;+e.getMessage());
-                }catch (IllegalArgumentException | InvocationTargetException e)
-                {
-                        // TODO Auto-generated catch block
-                        System.out.println(&quot;Invoke异常&quot;+e.getMessage());
-                }
-</code></pre>
-
-<p>一个餐厅的菜单实例：</p>
-
+                        <span style="color:#75715e">//System.out.println(&#34;Person类singSong的返回值类型&#34;+clazz.getDeclaredMethod(&#34;singSong&#34;).getReturnType());
+</span><span style="color:#75715e"></span>                <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>NoSuchMethodException <span style="color:#f92672">|</span> SecurityException e<span style="color:#f92672">)</span>
+                <span style="color:#f92672">{</span>
+                        <span style="color:#75715e">// TODO Auto-generated catch block
+</span><span style="color:#75715e"></span>                        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;没有对应的方法&#34;</span><span style="color:#f92672">+</span>e<span style="color:#f92672">.</span><span style="color:#a6e22e">getMessage</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span><span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>InstantiationException <span style="color:#f92672">|</span> IllegalAccessException e<span style="color:#f92672">)</span>
+                <span style="color:#f92672">{</span>
+                        <span style="color:#75715e">// TODO Auto-generated catch block
+</span><span style="color:#75715e"></span>                        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;获取实例异常&#34;</span><span style="color:#f92672">+</span>e<span style="color:#f92672">.</span><span style="color:#a6e22e">getMessage</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span><span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>IllegalArgumentException <span style="color:#f92672">|</span> InvocationTargetException e<span style="color:#f92672">)</span>
+                <span style="color:#f92672">{</span>
+                        <span style="color:#75715e">// TODO Auto-generated catch block
+</span><span style="color:#75715e"></span>                        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Invoke异常&#34;</span><span style="color:#f92672">+</span>e<span style="color:#f92672">.</span><span style="color:#a6e22e">getMessage</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span>
+</code></pre></div><p>一个餐厅的菜单实例：</p>
 <p>通过一个food接口，创建多样菜单，并且易于拓展性。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Food<span style="color:#f92672">.</span><span style="color:#a6e22e">properties</span><span style="color:#f92672">:</span>
+Apple<span style="color:#f92672">=</span>com<span style="color:#f92672">.</span><span style="color:#a6e22e">reflect</span><span style="color:#f92672">.</span><span style="color:#a6e22e">test</span><span style="color:#f92672">.</span><span style="color:#a6e22e">food</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Apple</span>
+Banana<span style="color:#f92672">=</span>com<span style="color:#f92672">.</span><span style="color:#a6e22e">reflect</span><span style="color:#f92672">.</span><span style="color:#a6e22e">test</span><span style="color:#f92672">.</span><span style="color:#a6e22e">food</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Banana</span>
+HongShaoRou<span style="color:#f92672">=</span>com<span style="color:#f92672">.</span><span style="color:#a6e22e">reflect</span><span style="color:#f92672">.</span><span style="color:#a6e22e">test</span><span style="color:#f92672">.</span><span style="color:#a6e22e">food</span><span style="color:#f92672">.</span><span style="color:#a6e22e">HongShaoRou</span>
+QingJiaoRouSi<span style="color:#f92672">=</span>com<span style="color:#f92672">.</span><span style="color:#a6e22e">reflect</span><span style="color:#f92672">.</span><span style="color:#a6e22e">test</span><span style="color:#f92672">.</span><span style="color:#a6e22e">food</span><span style="color:#f92672">.</span><span style="color:#a6e22e">QingJiaoRouSi</span>
+SuanTaiChaoRou<span style="color:#f92672">=</span>com<span style="color:#f92672">.</span><span style="color:#a6e22e">reflect</span><span style="color:#f92672">.</span><span style="color:#a6e22e">test</span><span style="color:#f92672">.</span><span style="color:#a6e22e">food</span><span style="color:#f92672">.</span><span style="color:#a6e22e">SuanTaiChaoRou</span>
+TangCuLiYu<span style="color:#f92672">=</span>com<span style="color:#f92672">.</span><span style="color:#a6e22e">reflect</span><span style="color:#f92672">.</span><span style="color:#a6e22e">test</span><span style="color:#f92672">.</span><span style="color:#a6e22e">food</span><span style="color:#f92672">.</span><span style="color:#a6e22e">TangCuLiYu</span>
+XiaoChaoRou<span style="color:#f92672">=</span>com<span style="color:#f92672">.</span><span style="color:#a6e22e">reflect</span><span style="color:#f92672">.</span><span style="color:#a6e22e">test</span><span style="color:#f92672">.</span><span style="color:#a6e22e">food</span><span style="color:#f92672">.</span><span style="color:#a6e22e">XiaoChaoRou</span>
+</code></pre></div><p>Food接口：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> com.reflect.test.food<span style="color:#f92672">;</span>
 
-<pre><code class="language-java">Food.properties:
-Apple=com.reflect.test.food.Apple
-Banana=com.reflect.test.food.Banana
-HongShaoRou=com.reflect.test.food.HongShaoRou
-QingJiaoRouSi=com.reflect.test.food.QingJiaoRouSi
-SuanTaiChaoRou=com.reflect.test.food.SuanTaiChaoRou
-TangCuLiYu=com.reflect.test.food.TangCuLiYu
-XiaoChaoRou=com.reflect.test.food.XiaoChaoRou
-</code></pre>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Food</span> <span style="color:#f92672">{</span>
 
-<p>Food接口：</p>
+        String <span style="color:#a6e22e">getFoodName</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
 
-<pre><code class="language-java">package com.reflect.test.food;
-
-public interface Food {
-
-        String getFoodName();
-
-}
-</code></pre>
-
-<p>依次创建各个食物：（类似方法）
+<span style="color:#f92672">}</span>
+</code></pre></div><p>依次创建各个食物：（类似方法）
 红烧肉：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> com.reflect.test.food<span style="color:#f92672">;</span>
 
-<pre><code class="language-java">package com.reflect.test.food;
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">HongShaoRou</span> <span style="color:#66d9ef">implements</span> Food <span style="color:#f92672">{</span>
 
-public class HongShaoRou implements Food {
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> String foodName <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;红烧肉&#34;</span><span style="color:#f92672">;</span>
 
-        public static final String foodName = &quot;红烧肉&quot;;
+        <span style="color:#a6e22e">@Override</span>
+        <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getFoodName</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> foodName<span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
 
-        @Override
-        public String getFoodName() {
-        return foodName;
-        }
+<span style="color:#f92672">}</span>
+</code></pre></div><p>青椒肉丝：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> com.reflect.test.food<span style="color:#f92672">;</span>
 
-}
-</code></pre>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">QingJiaoRouSi</span> <span style="color:#66d9ef">implements</span> Food <span style="color:#f92672">{</span>
 
-<p>青椒肉丝：</p>
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> String foodName <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;青椒肉丝&#34;</span><span style="color:#f92672">;</span>
 
-<pre><code class="language-java">package com.reflect.test.food;
+        <span style="color:#a6e22e">@Override</span>
+        <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getFoodName</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                <span style="color:#66d9ef">return</span> foodName<span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
 
-public class QingJiaoRouSi implements Food {
-
-        public static final String foodName = &quot;青椒肉丝&quot;;
-
-        @Override
-        public String getFoodName() {
-                return foodName;
-        }
-
-}
-</code></pre>
-
-<p>。。。。
+<span style="color:#f92672">}</span>
+</code></pre></div><p>。。。。
 餐厅类的实现：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">/**
+</span><span style="color:#75715e">* 情景 : 有一家餐厅,时常更换菜品 , 客人进店时向客人展示所有的菜品,
+</span><span style="color:#75715e">* 要求开发一个扩充性好的程序,就是更换菜品时只需要做一些简单的配置就可以
+</span><span style="color:#75715e">* 
+</span><span style="color:#75715e">* 反射基本上 自己自学 看的    视频没怎么听
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">*/</span>
+<span style="color:#f92672">package</span> com.reflect.test<span style="color:#f92672">;</span>
 
-<pre><code class="language-java">/**
-* 情景 : 有一家餐厅,时常更换菜品 , 客人进店时向客人展示所有的菜品,
-* 要求开发一个扩充性好的程序,就是更换菜品时只需要做一些简单的配置就可以
-* 
-* 反射基本上 自己自学 看的    视频没怎么听
-
-*/
-package com.reflect.test;
-
-import java.util.ArrayList;
-
-
-/**
-*  通过下面的餐厅类  很方便的通过Food接口 
-*  添加更多的新菜！ 只要你有新定义一个  食物.java 然后在
-*  food.properties添加一个键值对即可
-*/
+<span style="color:#f92672">import</span> java.util.ArrayList<span style="color:#f92672">;</span>
 
 
-
-/**
-* @author    叶昭良
-* @time      2015年3月3日下午4:44:15
-* @version   com.reflect.testRestaurant V1.0
-*/
-import com.reflect.test.food.*;
-
-import java.util.*;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+<span style="color:#75715e">/**
+</span><span style="color:#75715e">*  通过下面的餐厅类  很方便的通过Food接口 
+</span><span style="color:#75715e">*  添加更多的新菜！ 只要你有新定义一个  食物.java 然后在
+</span><span style="color:#75715e">*  food.properties添加一个键值对即可
+</span><span style="color:#75715e">*/</span>
 
 
-public class Restaurant 
-{
 
-        /**
-         * @param args
-         */
-        //没有想到用list表来接数据（一定要有集合的概念）
-        private List&lt;Food&gt;  foods = new ArrayList&lt;Food&gt;();
+<span style="color:#75715e">/**
+</span><span style="color:#75715e">* @author    叶昭良
+</span><span style="color:#75715e">* @time      2015年3月3日下午4:44:15
+</span><span style="color:#75715e">* @version   com.reflect.testRestaurant V1.0
+</span><span style="color:#75715e">*/</span>
+<span style="color:#f92672">import</span> com.reflect.test.food.*<span style="color:#f92672">;</span>
+
+<span style="color:#f92672">import</span> java.util.*<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> java.io.FileInputStream<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> java.io.IOException<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> java.io.InputStream<span style="color:#f92672">;</span>
+
+
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Restaurant</span> 
+<span style="color:#f92672">{</span>
+
+        <span style="color:#75715e">/**
+</span><span style="color:#75715e">         * @param args
+</span><span style="color:#75715e">         */</span>
+        <span style="color:#75715e">//没有想到用list表来接数据（一定要有集合的概念）
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">private</span> List<span style="color:#f92672">&lt;</span>Food<span style="color:#f92672">&gt;</span>  foods <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;</span>Food<span style="color:#f92672">&gt;</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
         
-        //定义一个init函数 用于在构造函数内部 调用，并初始化菜单！准备开张 开店铺
-        public Restaurant()
-        {
-        }
-        public void init()
-        {
-                try
-                {
-                        InputStream is = Restaurant.class.getResourceAsStream(&quot;food.properties&quot;);
-                        Properties prop = new Properties();
-                        /**
-                         *  要知道 food.properties 的key-value的写法
-                         *  Prop对象就是一个map对象
-                         *  先前只写上一个值是错误的！ 必须写上
-                         *  Apple=com.reflect.test.food.Apple
-                         */
-                        //必须加在src底下
-                        //prop.load(new FileInputStream(&quot;food.properties&quot;));
-                        try
-                        {
-                                prop.load(is);
-                        } catch (IOException e)
-                        {
-                                // TODO Auto-generated catch block
-                                e.printStackTrace();
-                        }
-                        Collection  coll1 = prop.values();
-                        for(Object foodClassName:coll1)
-                        {
-                                Class temp;
+        <span style="color:#75715e">//定义一个init函数 用于在构造函数内部 调用，并初始化菜单！准备开张 开店铺
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Restaurant</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span>
+        <span style="color:#f92672">{</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">init</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span>
+        <span style="color:#f92672">{</span>
+                <span style="color:#66d9ef">try</span>
+                <span style="color:#f92672">{</span>
+                        InputStream is <span style="color:#f92672">=</span> Restaurant<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getResourceAsStream</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;food.properties&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        Properties prop <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Properties<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        <span style="color:#75715e">/**
+</span><span style="color:#75715e">                         *  要知道 food.properties 的key-value的写法
+</span><span style="color:#75715e">                         *  Prop对象就是一个map对象
+</span><span style="color:#75715e">                         *  先前只写上一个值是错误的！ 必须写上
+</span><span style="color:#75715e">                         *  Apple=com.reflect.test.food.Apple
+</span><span style="color:#75715e">                         */</span>
+                        <span style="color:#75715e">//必须加在src底下
+</span><span style="color:#75715e"></span>                        <span style="color:#75715e">//prop.load(new FileInputStream(&#34;food.properties&#34;));
+</span><span style="color:#75715e"></span>                        <span style="color:#66d9ef">try</span>
+                        <span style="color:#f92672">{</span>
+                                prop<span style="color:#f92672">.</span><span style="color:#a6e22e">load</span><span style="color:#f92672">(</span>is<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>IOException e<span style="color:#f92672">)</span>
+                        <span style="color:#f92672">{</span>
+                                <span style="color:#75715e">// TODO Auto-generated catch block
+</span><span style="color:#75715e"></span>                                e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        <span style="color:#f92672">}</span>
+                        Collection  coll1 <span style="color:#f92672">=</span> prop<span style="color:#f92672">.</span><span style="color:#a6e22e">values</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span>Object foodClassName<span style="color:#f92672">:</span>coll1<span style="color:#f92672">)</span>
+                        <span style="color:#f92672">{</span>
+                                Class temp<span style="color:#f92672">;</span>
                         
-                                temp = Class.forName((String)(foodClassName));
+                                temp <span style="color:#f92672">=</span> Class<span style="color:#f92672">.</span><span style="color:#a6e22e">forName</span><span style="color:#f92672">(</span><span style="color:#f92672">(</span>String<span style="color:#f92672">)</span><span style="color:#f92672">(</span>foodClassName<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
                                 
-                                Food food = (Food)temp.newInstance();
-                                foods.add(food);
-                        }
-                }catch (ClassNotFoundException e)
-                {
-                        // TODO Auto-generated catch block
-                        System.out.println(&quot;未找到对应的类&quot;);
-                }catch (InstantiationException e)
-                {
-                        // TODO Auto-generated catch block
-                        System.out.println(&quot;产生实例的异常&quot;);
-                } catch (IllegalAccessException e)
-                {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                }
+                                Food food <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>Food<span style="color:#f92672">)</span>temp<span style="color:#f92672">.</span><span style="color:#a6e22e">newInstance</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                foods<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span>food<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        <span style="color:#f92672">}</span>
+                <span style="color:#f92672">}</span><span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>ClassNotFoundException e<span style="color:#f92672">)</span>
+                <span style="color:#f92672">{</span>
+                        <span style="color:#75715e">// TODO Auto-generated catch block
+</span><span style="color:#75715e"></span>                        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;未找到对应的类&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span><span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>InstantiationException e<span style="color:#f92672">)</span>
+                <span style="color:#f92672">{</span>
+                        <span style="color:#75715e">// TODO Auto-generated catch block
+</span><span style="color:#75715e"></span>                        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;产生实例的异常&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>IllegalAccessException e<span style="color:#f92672">)</span>
+                <span style="color:#f92672">{</span>
+                        <span style="color:#75715e">// TODO Auto-generated catch block
+</span><span style="color:#75715e"></span>                        e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span>
                 
-        }
-        public void showFoods()
-        {
-                for(Food temp:foods)
-                {
-                        //Food接口创建的一个唯一接口方法
-                        System.out.println(temp.getFoodName());
-                }
-        }
-        public static void main(String[] args)
-        {
-                // TODO Auto-generated method stub
-                //开了一家店
-                Restaurant res = new Restaurant();
-                System.out.println(&quot;欢饮各位宾客的到来-- 鞭炮响起&quot;);
-                System.out.println(&quot;******************************&quot;);
-                res.showFoods();
-        }
+        <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">showFoods</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span>
+        <span style="color:#f92672">{</span>
+                <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span>Food temp<span style="color:#f92672">:</span>foods<span style="color:#f92672">)</span>
+                <span style="color:#f92672">{</span>
+                        <span style="color:#75715e">//Food接口创建的一个唯一接口方法
+</span><span style="color:#75715e"></span>                        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>temp<span style="color:#f92672">.</span><span style="color:#a6e22e">getFoodName</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> args<span style="color:#f92672">)</span>
+        <span style="color:#f92672">{</span>
+                <span style="color:#75715e">// TODO Auto-generated method stub
+</span><span style="color:#75715e"></span>                <span style="color:#75715e">//开了一家店
+</span><span style="color:#75715e"></span>                Restaurant res <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Restaurant<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;欢饮各位宾客的到来-- 鞭炮响起&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;******************************&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                res<span style="color:#f92672">.</span><span style="color:#a6e22e">showFoods</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
 
-}
-</code></pre>
-
-<p>3：内省</p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p>3：内省</p>
 <p>在满足javaBean规范的类中，在不清楚字段的前提下，通过getter &amp;setter获得所有的字段，一般和反射联合使用。</p>
-
 <p>Javabean 其实就是满足规范，具体规范是有</p>
-
 <p>私有变量
 Getter andsetter方法
 至少有一个无参构造函数</p>
-
 <p>然后可以通过 类 Introspector 来获取某个对象的 BeanInfo 信息，然后通过 BeanInfo 来获取属性的描述器（ PropertyDescriptor ），通过这个属性描述器就可以获取某个属性对应的 getter/setter 方法，然后我们就可以通过反射机制来调用这些方法。javabean的实例对象称之为值对象（ValueObject）,因为这些bean中通常只有一些信息字段和存储方法，没有功能性方法。
 分为两种情况，只是设置或者得到某个具体的字段</p>
-
 <p>两外一种是获得所有的字段。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">/**
+</span><span style="color:#75715e">* 
+</span><span style="color:#75715e">*/</span>
+<span style="color:#f92672">package</span> com.introspect.test<span style="color:#f92672">;</span>
 
-<pre><code class="language-java">/**
-* 
-*/
-package com.introspect.test;
+<span style="color:#f92672">import</span> java.beans.BeanInfo<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> java.beans.IntrospectionException<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> java.beans.Introspector<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> java.beans.PropertyDescriptor<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> java.lang.reflect.InvocationTargetException<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> java.lang.reflect.Method<span style="color:#f92672">;</span>
 
-import java.beans.BeanInfo;
-import java.beans.IntrospectionException;
-import java.beans.Introspector;
-import java.beans.PropertyDescriptor;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+<span style="color:#75715e">/**
+</span><span style="color:#75715e">* @author    叶昭良
+</span><span style="color:#75715e">* @time      2015年3月3日下午6:34:08
+</span><span style="color:#75715e">* @version   com.introspect.testTestStudentIntrospect V1.0
+</span><span style="color:#75715e">*/</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TestStudentIntrospect</span>
+<span style="color:#f92672">{</span>
 
-/**
-* @author    叶昭良
-* @time      2015年3月3日下午6:34:08
-* @version   com.introspect.testTestStudentIntrospect V1.0
-*/
-public class TestStudentIntrospect
-{
-
-        /**
-         * @param args
-         */
-        public static void main(String[] args)
-        {
-                // TODO Auto-generated method stub
-                Student wangxiuyan = new Student();//new Student(&quot;001&quot;,&quot;王秀艳&quot;,30);
-                String fieldName=&quot;Age&quot;;
-                //通过javabeans--&gt;具体某个属性---&gt; 通过反射获取方法！ --&gt;再调用方法
-                getProperty(wangxiuyan, fieldName);
-                setProperty(wangxiuyan, fieldName);
-                getProperties(wangxiuyan, fieldName);
+        <span style="color:#75715e">/**
+</span><span style="color:#75715e">         * @param args
+</span><span style="color:#75715e">         */</span>
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> args<span style="color:#f92672">)</span>
+        <span style="color:#f92672">{</span>
+                <span style="color:#75715e">// TODO Auto-generated method stub
+</span><span style="color:#75715e"></span>                Student wangxiuyan <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Student<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span><span style="color:#75715e">//new Student(&#34;001&#34;,&#34;王秀艳&#34;,30);
+</span><span style="color:#75715e"></span>                String fieldName<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Age&#34;</span><span style="color:#f92672">;</span>
+                <span style="color:#75715e">//通过javabeans--&gt;具体某个属性---&gt; 通过反射获取方法！ --&gt;再调用方法
+</span><span style="color:#75715e"></span>                getProperty<span style="color:#f92672">(</span>wangxiuyan<span style="color:#f92672">,</span> fieldName<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                setProperty<span style="color:#f92672">(</span>wangxiuyan<span style="color:#f92672">,</span> fieldName<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                getProperties<span style="color:#f92672">(</span>wangxiuyan<span style="color:#f92672">,</span> fieldName<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
         
-        }
-        private static void getProperties(Student stu,String fieldName)
-        {
-                try
-                {
-                        BeanInfo  beanInfo = Introspector.getBeanInfo(stu.getClass());
-                        PropertyDescriptor[] pro = beanInfo.getPropertyDescriptors();
-                        for(PropertyDescriptor temp : pro)
-                        {
-                                if(temp.getName().equals(fieldName))
-                                {
-                                        Method methodx = temp.getReadMethod();
+        <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">getProperties</span><span style="color:#f92672">(</span>Student stu<span style="color:#f92672">,</span>String fieldName<span style="color:#f92672">)</span>
+        <span style="color:#f92672">{</span>
+                <span style="color:#66d9ef">try</span>
+                <span style="color:#f92672">{</span>
+                        BeanInfo  beanInfo <span style="color:#f92672">=</span> Introspector<span style="color:#f92672">.</span><span style="color:#a6e22e">getBeanInfo</span><span style="color:#f92672">(</span>stu<span style="color:#f92672">.</span><span style="color:#a6e22e">getClass</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        PropertyDescriptor<span style="color:#f92672">[</span><span style="color:#f92672">]</span> pro <span style="color:#f92672">=</span> beanInfo<span style="color:#f92672">.</span><span style="color:#a6e22e">getPropertyDescriptors</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span>PropertyDescriptor temp <span style="color:#f92672">:</span> pro<span style="color:#f92672">)</span>
+                        <span style="color:#f92672">{</span>
+                                <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>temp<span style="color:#f92672">.</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span>fieldName<span style="color:#f92672">)</span><span style="color:#f92672">)</span>
+                                <span style="color:#f92672">{</span>
+                                        Method methodx <span style="color:#f92672">=</span> temp<span style="color:#f92672">.</span><span style="color:#a6e22e">getReadMethod</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
 
-                                        System.out.println(methodx.invoke(stu)); 
+                                        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>methodx<span style="color:#f92672">.</span><span style="color:#a6e22e">invoke</span><span style="color:#f92672">(</span>stu<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span> 
                                         
-                                }
-                        }
-                } catch (IntrospectionException e)
-                {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                }catch (IllegalAccessException | IllegalArgumentException
-                                | InvocationTargetException e)
-                {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                }
+                                <span style="color:#f92672">}</span>
+                        <span style="color:#f92672">}</span>
+                <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>IntrospectionException e<span style="color:#f92672">)</span>
+                <span style="color:#f92672">{</span>
+                        <span style="color:#75715e">// TODO Auto-generated catch block
+</span><span style="color:#75715e"></span>                        e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span><span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>IllegalAccessException <span style="color:#f92672">|</span> IllegalArgumentException
+                                <span style="color:#f92672">|</span> InvocationTargetException e<span style="color:#f92672">)</span>
+                <span style="color:#f92672">{</span>
+                        <span style="color:#75715e">// TODO Auto-generated catch block
+</span><span style="color:#75715e"></span>                        e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span>
                 
-        }
+        <span style="color:#f92672">}</span>
         
-        private static void getProperty(Student stu,String fieldName)
-        {
-                try
-                {
-                        PropertyDescriptor pro = new PropertyDescriptor(fieldName, Student.class);
-                        Method methodx = pro.getReadMethod(); //
-                        Object ojx = methodx.invoke(stu);
-                        System.out.println(ojx);
-                } catch (IntrospectionException  e)
-                {
-                        // TODO Auto-generated catch block
-                        System.out.println(&quot;属性描述获取失败&quot;);
-                }catch(IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
-                {
-                        System.out.println(&quot;invoke调用失败！&quot;);
-                }
+        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">getProperty</span><span style="color:#f92672">(</span>Student stu<span style="color:#f92672">,</span>String fieldName<span style="color:#f92672">)</span>
+        <span style="color:#f92672">{</span>
+                <span style="color:#66d9ef">try</span>
+                <span style="color:#f92672">{</span>
+                        PropertyDescriptor pro <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> PropertyDescriptor<span style="color:#f92672">(</span>fieldName<span style="color:#f92672">,</span> Student<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        Method methodx <span style="color:#f92672">=</span> pro<span style="color:#f92672">.</span><span style="color:#a6e22e">getReadMethod</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>                        Object ojx <span style="color:#f92672">=</span> methodx<span style="color:#f92672">.</span><span style="color:#a6e22e">invoke</span><span style="color:#f92672">(</span>stu<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>ojx<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>IntrospectionException  e<span style="color:#f92672">)</span>
+                <span style="color:#f92672">{</span>
+                        <span style="color:#75715e">// TODO Auto-generated catch block
+</span><span style="color:#75715e"></span>                        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;属性描述获取失败&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span><span style="color:#66d9ef">catch</span><span style="color:#f92672">(</span>IllegalAccessException <span style="color:#f92672">|</span> IllegalArgumentException <span style="color:#f92672">|</span> InvocationTargetException e<span style="color:#f92672">)</span>
+                <span style="color:#f92672">{</span>
+                        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;invoke调用失败！&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span>
                 
-        }
-        private static void setProperty(Student stu,String fieldName)
-        {
-                try
-                {
-                        PropertyDescriptor pro = new PropertyDescriptor(fieldName, Student.class);
-                        Method methodx = pro.getWriteMethod(); //
-                        methodx.invoke(stu,8);
-                        System.out.println(stu.getAge());
-                } catch (IntrospectionException  e)
-                {
-                        // TODO Auto-generated catch block
-                        System.out.println(&quot;属性描述获取失败&quot;);
-                }catch(IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
-                {
-                        System.out.println(&quot;invoke调用失败！&quot;);
-                }        
-        }
+        <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setProperty</span><span style="color:#f92672">(</span>Student stu<span style="color:#f92672">,</span>String fieldName<span style="color:#f92672">)</span>
+        <span style="color:#f92672">{</span>
+                <span style="color:#66d9ef">try</span>
+                <span style="color:#f92672">{</span>
+                        PropertyDescriptor pro <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> PropertyDescriptor<span style="color:#f92672">(</span>fieldName<span style="color:#f92672">,</span> Student<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        Method methodx <span style="color:#f92672">=</span> pro<span style="color:#f92672">.</span><span style="color:#a6e22e">getWriteMethod</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>                        methodx<span style="color:#f92672">.</span><span style="color:#a6e22e">invoke</span><span style="color:#f92672">(</span>stu<span style="color:#f92672">,</span>8<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>stu<span style="color:#f92672">.</span><span style="color:#a6e22e">getAge</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>IntrospectionException  e<span style="color:#f92672">)</span>
+                <span style="color:#f92672">{</span>
+                        <span style="color:#75715e">// TODO Auto-generated catch block
+</span><span style="color:#75715e"></span>                        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;属性描述获取失败&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span><span style="color:#66d9ef">catch</span><span style="color:#f92672">(</span>IllegalAccessException <span style="color:#f92672">|</span> IllegalArgumentException <span style="color:#f92672">|</span> InvocationTargetException e<span style="color:#f92672">)</span>
+                <span style="color:#f92672">{</span>
+                        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;invoke调用失败！&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span>        
+        <span style="color:#f92672">}</span>
 
-}
-</code></pre>
-
-<p>ORM的实现在：<a href="http://www.rupeng.com/forum/thread-44526-1-1.html" target="_blank">http://www.rupeng.com/forum/thread-44526-1-1.html</a></p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p>ORM的实现在：http://www.rupeng.com/forum/thread-44526-1-1.html</p>
 <p>4：正则表达式</p>
-
 <p>字符串内置函数：</p>
-
 <p>String的split、replace、replaceAll函数。</p>
-
 <p>在正则表达式中$表示在另一个字符串中获取正则表达式字符串匹配的小组号，$1表示第一个。。</p>
-
 <pre><code>          \1 表示在同一个匹配正则表达式获得第一个匹配项(\2则表示在同一个匹配正则表达式获得第二个引用的匹配项)
 </code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">//字符串测试
+</span><span style="color:#75715e"></span>System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;fdasfsd&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">indexOf</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#39;d&#39;</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
 
-<pre><code class="language-java">//字符串测试
-System.out.println(&quot;fdasfsd&quot;.indexOf('d'));
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;fdasfsd&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">lastIndexOf</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#39;d&#39;</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
 
-        System.out.println(&quot;fdasfsd&quot;.lastIndexOf('d'));
+        String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> temp <span style="color:#f92672">=</span><span style="color:#e6db74">&#34;sdfddfdsgsdfddg&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">split</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;([a-z])\\1+&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span>String p <span style="color:#f92672">:</span> temp<span style="color:#f92672">)</span>
+        <span style="color:#f92672">{</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>p<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
 
-        String[] temp =&quot;sdfddfdsgsdfddg&quot;.split(&quot;([a-z])\\1+&quot;);
-        for(String p : temp)
-        {
-        System.out.println(p);
-        }
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;sdfddfdsgsdfddg&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">replaceAll</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;([a-z])\\1+&#34;</span><span style="color:#f92672">,</span><span style="color:#e6db74">&#34;*&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
 
-        System.out.println(&quot;sdfddfdsgsdfddg&quot;.replaceAll(&quot;([a-z])\\1+&quot;,&quot;*&quot;));
-
-        System.out.println(&quot;sdfddfdsgsdfddg&quot;.replaceAll(&quot;([a-z])\\1+&quot;,&quot;$1&quot;));
-</code></pre>
-
-<p>Pattern&amp;Matcher组合</p>
-
-<pre><code class="language-java">//工作中的  正则获取方式
-                System.out.println(&quot;2020&quot;.matches(&quot;\\d{3,10}&quot;));
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;sdfddfdsgsdfddg&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">replaceAll</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;([a-z])\\1+&#34;</span><span style="color:#f92672">,</span><span style="color:#e6db74">&#34;$1&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+</code></pre></div><p>Pattern&amp;Matcher组合</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">//工作中的  正则获取方式
+</span><span style="color:#75715e"></span>                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;2020&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">matches</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;\\d{3,10}&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
                 
-                String pat = &quot;Welcome to china to have a pinny lunch ! Start the lesson&quot;;
-                Pattern p = Pattern.compile(&quot;\\b[a-z]{5}\\b&quot;);
-                Matcher m = p.matcher(pat);
-                while(m.find())
-                {
-                        System.out.println(m.group());
-                }
-</code></pre>
-
-<p>常见的存储结构：</p>
-
+                String pat <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Welcome to china to have a pinny lunch ! Start the lesson&#34;</span><span style="color:#f92672">;</span>
+                Pattern p <span style="color:#f92672">=</span> Pattern<span style="color:#f92672">.</span><span style="color:#a6e22e">compile</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;\\b[a-z]{5}\\b&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                Matcher m <span style="color:#f92672">=</span> p<span style="color:#f92672">.</span><span style="color:#a6e22e">matcher</span><span style="color:#f92672">(</span>pat<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#66d9ef">while</span><span style="color:#f92672">(</span>m<span style="color:#f92672">.</span><span style="color:#a6e22e">find</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span>
+                <span style="color:#f92672">{</span>
+                        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>m<span style="color:#f92672">.</span><span style="color:#a6e22e">group</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span>
+</code></pre></div><p>常见的存储结构：</p>
 <p>|&mdash;&ndash;顺序存储结构 特点是借助于数据元素的相对存储位置来表示数据元素之间的逻辑结构；
 |&mdash;&ndash;链式存储结构 特点是借助于指示数据元素地址的指针表示数据元素之间的逻辑结构。
 |&mdash;&ndash;散列存储结构 顺序+算列。
 |&mdash;&ndash;索引存储结构 顺序+索引。</p>
-
 <p>常见的逻辑结构：
 对数据及其关系的抽象逻辑描述，对立与计算机，与机器实现无关。
 根据定义的关系不同，数据的逻辑结构分为四种：
@@ -1142,7 +1098,6 @@ System.out.println(&quot;fdasfsd&quot;.indexOf('d'));
 |&mdash;&ndash;线性结构。数据元素之间定义了次序关系的集合（全序集合），描述的是1对1关系。
 |&mdash;&ndash;树形结构。数据元素之间定义了层次关系的集合（偏序集合），描述的是1对多关系。
 |&mdash;&ndash;图状结构。数据元素之间定义了网状关系的集合，描述的是多对多关系。</p>
-
 <p>数据结构，就是相互之间存在一种或多种特定关系的数据元素的集合。可以简单表示为：数据结构 = 数据 + 关系。同一数据元素集合，所定一的关系不同，构成不同的数据结构。 数据结构包括逻辑结构和存储结构两个方面</p>
     </div>
  <div class="nav-links" style="padding:10;">
@@ -1547,7 +1502,7 @@ System.out.println(&quot;fdasfsd&quot;.indexOf('d'));
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

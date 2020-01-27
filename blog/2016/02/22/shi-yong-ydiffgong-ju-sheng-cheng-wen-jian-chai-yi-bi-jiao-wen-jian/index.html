@@ -563,97 +563,71 @@
 
 
 
-<span class="article-metadata" >Reading time: 4 minutes and    37 seconds with 1017 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+<span class="article-metadata" >Reading time: 4 minutes and    16 seconds with 941 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#单文件使用说明">单文件使用说明</a></li>
-<li><a href="#文件夹使用方式">文件夹使用方式</a></li>
-<li><a href="#数组引入进一步修改处理程序">数组引入进一步修改处理程序</a></li>
-<li><a href="#批处理解析scm文件">批处理解析scm文件</a>
-<ul>
-<li><a href="#有问题的数组下标">有问题的数组下标</a></li>
-</ul></li>
-<li><a href="#进一步修改ydiff">进一步修改YDiff？</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#heading">单文件使用说明</a></li>
+    <li><a href="#heading-1">文件夹使用方式</a></li>
+    <li><a href="#heading-2">数组引入进一步修改处理程序</a></li>
+    <li><a href="#scm">批处理解析scm文件</a></li>
+    <li><a href="#ydiff">进一步修改YDiff？</a></li>
+  </ul>
 </nav>
     </aside>
   <div class="article-container">
 
 
     <div class="article-style">
-      <p>Ydiff是一个不错的lisp语法分析工具(<a href="https://github.com/yinwang0/ydiff" target="_blank">王垠编制</a>).下面是该工具简单用途和使用说明。</p>
-
+      <p>Ydiff是一个不错的lisp语法分析工具(<a href="https://github.com/yinwang0/ydiff">王垠编制</a>).下面是该工具简单用途和使用说明。</p>
 <ol>
-<li><p>用途
-主要是js，cpp，和lisp的分析，现在也有<a href="https://github.com/yinwang0/pysonar2" target="_blank">python</a>,<a href="https://github.com/yinwang0/pysonar2" target="_blank">ruby</a>的分析工具。</p></li>
-
-<li><p>使用说明</p></li>
+<li>
+<p>用途
+主要是js，cpp，和lisp的分析，现在也有<a href="https://github.com/yinwang0/pysonar2">python</a>,<a href="https://github.com/yinwang0/pysonar2">ruby</a>的分析工具。</p>
+</li>
+<li>
+<p>使用说明</p>
+</li>
 </ol>
-
 <p>编译的时候仅仅在项目下载之后，make一下即可生成对应的diff-cpp,diff-js,diff-lisp分析工具.
 文件分为单文件和文件夹两种。</p>
-
-<h2 id="单文件使用说明">单文件使用说明</h2>
-
-<pre><code class="language-sh"> diff-lisp *.scm *1.scm 
-</code></pre>
-
-<h2 id="文件夹使用方式">文件夹使用方式</h2>
-
+<h2 id="heading">单文件使用说明</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"> diff-lisp *.scm *1.scm 
+</code></pre></div><h2 id="heading-1">文件夹使用方式</h2>
 <p>保存下面源代码为process-lisp.sh</p>
-
-<pre><code class="language-sh">
-dir1=let-lang
-dir2=letrec-lang
-for i in `ls ${dir1}/*.scm`
-do
-    export TestVari=$i
-    /home/happycamp-of-lisp/wangying/ydiff/diff-lisp $i ${dir2}/${TestVari##*\/}
-done
-
-
-</code></pre>
-
-<p>当然也可以改为</p>
-
-<pre><code class="language-sh">
-dir1=let-lang
-dir2=letrec-lang
-for i in `ls ${dir1}/*.scm`
-do
-    /home/happycamp-of-lisp/wangying/ydiff/diff-lisp $i ${dir2}/${i##*\/}
-done
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">
+dir1<span style="color:#f92672">=</span>let-lang
+dir2<span style="color:#f92672">=</span>letrec-lang
+<span style="color:#66d9ef">for</span> i in <span style="color:#e6db74">`</span>ls <span style="color:#e6db74">${</span>dir1<span style="color:#e6db74">}</span>/*.scm<span style="color:#e6db74">`</span>
+<span style="color:#66d9ef">do</span>
+    export TestVari<span style="color:#f92672">=</span>$i
+    /home/happycamp-of-lisp/wangying/ydiff/diff-lisp $i <span style="color:#e6db74">${</span>dir2<span style="color:#e6db74">}</span>/<span style="color:#e6db74">${</span>TestVari##*<span style="color:#ae81ff">\/</span><span style="color:#e6db74">}</span>
+<span style="color:#66d9ef">done</span>
 
 
-</code></pre>
+</code></pre></div><p>当然也可以改为</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">
+dir1<span style="color:#f92672">=</span>let-lang
+dir2<span style="color:#f92672">=</span>letrec-lang
+<span style="color:#66d9ef">for</span> i in <span style="color:#e6db74">`</span>ls <span style="color:#e6db74">${</span>dir1<span style="color:#e6db74">}</span>/*.scm<span style="color:#e6db74">`</span>
+<span style="color:#66d9ef">do</span>
+    /home/happycamp-of-lisp/wangying/ydiff/diff-lisp $i <span style="color:#e6db74">${</span>dir2<span style="color:#e6db74">}</span>/<span style="color:#e6db74">${</span>i##*<span style="color:#ae81ff">\/</span><span style="color:#e6db74">}</span>
+<span style="color:#66d9ef">done</span>
 
-<p>只要修改对应的文件夹dir1,dir2,就可以分析对应文件夹的scm所有文件,然后运用下面命令行，即可生成
+
+</code></pre></div><p>只要修改对应的文件夹dir1,dir2,就可以分析对应文件夹的scm所有文件,然后运用下面命令行，即可生成
 对应的html文件,方便阅读</p>
-
 <pre><code>bash process-lisp.sh
-</code></pre>
-
-<h2 id="数组引入进一步修改处理程序">数组引入进一步修改处理程序</h2>
-
-<p>数组的shell操作参考<a href="http://blog.csdn.net/liufei_learning/article/details/8000570" target="_blank">如下</a>,</p>
-
+</code></pre><h2 id="heading-2">数组引入进一步修改处理程序</h2>
+<p>数组的shell操作参考<a href="http://blog.csdn.net/liufei_learning/article/details/8000570">如下</a>,</p>
 <ul>
 <li>定义的时候通过小括号包裹</li>
 <li>调用的时候通过${}</li>
 </ul>
-
-<p>注意 <a href="http://blog.csdn.net/flowingflying/article/details/5146160" target="_blank">数据运算</a>和判断(<strong>注意只有在双括号的小于号才是小于号</strong>)的两个中括号</p>
-
+<p>注意 <a href="http://blog.csdn.net/flowingflying/article/details/5146160">数据运算</a>和判断(<strong>注意只有在双括号的小于号才是小于号</strong>)的两个中括号</p>
 <pre><code>seq 1 $((${#array1[@]}-1))
 
-</code></pre>
-
-<p>测试过很多错误的情况，比如</p>
-
+</code></pre><p>测试过很多错误的情况，比如</p>
 <pre><code>array1=(`ls -l|grep ^d|awk '{print $9}'`); 
 echo ${array1[@]:0:${#array1[@]}-1};
 export length1=${!array1[@]}; 
@@ -663,10 +637,7 @@ for i in ${array1[@]:1:length1-1}; do
     done;
 done;
 
-</code></pre>
-
-<p>原因在于,${!}操作并不是把它当作数组形式，所以改为数组即可，使用seq。</p>
-
+</code></pre><p>原因在于,${!}操作并不是把它当作数组形式，所以改为数组即可，使用seq。</p>
 <pre><code>length1=${!array1[@]}
 echo $length1 
     0 1 2 3
@@ -674,10 +645,7 @@ echo $length1
 echo ${#length1[@]}
     1
 
-</code></pre>
-
-<p>正确的过程(<strong>注意$i+1</strong>)</p>
-
+</code></pre><p>正确的过程(<strong>注意$i+1</strong>)</p>
 <pre><code>array1=(`ls -l|grep ^d|awk '{print $9}'`);  
 for i in `seq 1 $((${#array1[@]}-1))`; do 
     for j in ${array1[@]:$i+1:${#array1[@]}}; do 
@@ -685,10 +653,7 @@ for i in `seq 1 $((${#array1[@]}-1))`; do
     done;
 done;
 
-</code></pre>
-
-<p>结果,满足组合公式</p>
-
+</code></pre><p>结果,满足组合公式</p>
 <pre><code>1,letrec-lang
 1,lexaddr-lang
 1,proc-lang
@@ -696,59 +661,31 @@ done;
 2,proc-lang
 3,proc-lang
 
-</code></pre>
-
-<h2 id="批处理解析scm文件">批处理解析scm文件</h2>
-
+</code></pre><h2 id="scm">批处理解析scm文件</h2>
 <p>当文件夹下存在如下文件下，则可以进一步利用<a href="#pi">程序</a>进行分析，注意拷贝nav.js和diff.css进行渲染</p>
-
 <pre><code>ls┌─[root][canbetter-N53SM][±][master ?:10 ✗][2.2.1][/home/happycamp-of-lisp/EOPL2014/DF-eopl/chapter3/proc-lang/ds-rep]
 └─➞ ls
 compiled  data-structures.scm  drscheme-init.scm  environments.scm  interp.scm  lang.scm  tests.scm  top.scm
 
-</code></pre>
-
-<p><h3 id="pi">批处理程序</h3></p>
-
-<pre><code>array1=(`ls -l|grep ^d|awk '{print $9}'`); 
-# 遍历所有文件夹 除了最后一个
-for i in `seq 1 $((${#array1[@]}-1))`; do 
-    #遍历从i之后的文件
-    for j in ${array1[@]:$i:${#array1[@]}}; do 
-        #echo ${array1[$i]},$j;
-        dir1=${array1[$i]};
-        dir2=$j;
-        mkdir ${dir1}-${dir2}
-        # 选取对应文件夹下的scm文件
-        for k in `ls ${dir1}/*.scm`
-        do
-            #export TestVari=$i
-            /home/happycamp-of-lisp/wangying/ydiff/diff-lisp $k ${dir2}/${k##*\/} 
-        done
-
-        mv *.html ${dir1}-${dir2}
-        cp ./nav.js ./diff.css ${dir1}-${dir2}
-    done;
+</code></pre><!-- raw HTML omitted -->
+<pre><code>    mv *.html ${dir1}-${dir2}
+    cp ./nav.js ./diff.css ${dir1}-${dir2}
 done;
-
-
 </code></pre>
+<p>done;</p>
+<pre><code>
+然后可以在terminal运行
+</code></pre><p>python -m SimpleHTTPServer
+Serving HTTP on 0.0.0.0 port 8000 &hellip;</p>
+<pre><code>在浏览器输入
+    http://localhost:8000/ 
 
-<p>然后可以在terminal运行</p>
 
-<pre><code>python -m SimpleHTTPServer
-Serving HTTP on 0.0.0.0 port 8000 ...
+### 有问题的数组下标
 
-</code></pre>
+数组下表是从0开始的！
+``` sh
 
-<p>在浏览器输入
-    <a href="http://localhost:8000/" target="_blank">http://localhost:8000/</a></p>
-
-<h3 id="有问题的数组下标">有问题的数组下标</h3>
-
-<p>数组下表是从0开始的！</p>
-
-<pre><code class="language-sh">
 array1=(`ls -l|grep ^d|awk '{print $9}'`); 
 # 遍历所有文件夹 除了最后一个
 for i in `seq 0 $((${#array1[@]}-1))`; do 
@@ -781,11 +718,8 @@ for i in `seq 0 $((${#array1[@]}-1))`; do
     done;
 done;
 
-</code></pre>
-
-<p>这样就完成了文件夹下所有的文件对比操作，当然得确保该文件夹下存在scm文件。</p>
-
-<h2 id="进一步修改ydiff">进一步修改YDiff？</h2>
+</code></pre><p>这样就完成了文件夹下所有的文件对比操作，当然得确保该文件夹下存在scm文件。</p>
+<h2 id="ydiff">进一步修改YDiff？</h2>
     </div>
  <div class="nav-links" style="padding:10;">
         
@@ -1191,7 +1125,7 @@ done;
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

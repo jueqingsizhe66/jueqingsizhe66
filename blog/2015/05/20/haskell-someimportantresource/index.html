@@ -571,87 +571,78 @@ Maintains a central repository of open source Hakell libraries called Hackage.
 
 <span class="article-metadata" >Reading time: 2 minutes and    17 seconds with 505 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
-        
+        <nav id="TableOfContents"></nav>
     </aside>
   <div class="article-container">
 
 
     <div class="article-style">
       <ul>
-<li>The most important is:<a href="hackage.haskell.org" target="_blank">Hackage-haskell-Official</a>
+<li>The most important is:<a href="hackage.haskell.org">Hackage-haskell-Official</a>
 Maintains a central repository of open source Hakell libraries called Hackage.</li>
 </ul>
-
 <ul>
-<li><p><a href="https://www.haskell.org/hoogle" target="_blank">The hoogle-the haskell dictionary</a></p></li>
-
-<li><p><a href="http://haskell.org/haskelwiki/Applications_and_libraries" target="_blank">The hackage-wiki</a>
-contains a section dedicated to information about particular Haskell libraries</p></li>
-
-<li><p><a href="rwh.readthedocs.org/en/latest" target="_blank">一个中文Real-world-haskell翻译</a></p></li>
-
-<li><p>使用Cabal，一个命令行的安装工具，类似vim的bundles Install，ubuntu的apt-get install, redhat的yum install *等，来安装
+<li>
+<p><a href="https://www.haskell.org/hoogle">The hoogle-the haskell dictionary</a></p>
+</li>
+<li>
+<p><a href="http://haskell.org/haskelwiki/Applications_and_libraries">The hackage-wiki</a>
+contains a section dedicated to information about particular Haskell libraries</p>
+</li>
+<li>
+<p><a href="rwh.readthedocs.org/en/latest">一个中文Real-world-haskell翻译</a></p>
+</li>
+<li>
+<p>使用Cabal，一个命令行的安装工具，类似vim的bundles Install，ubuntu的apt-get install, redhat的yum install *等，来安装
 你需要的haskell的包和依赖
 比如 安装HTTP library</p>
-
-<pre><code class="language-sh">cabal install HTTP
-</code></pre>
-
-<p>cabal四个阶段：</p></li>
-
-<li><p>fetches 获取</p></li>
-
-<li><p>configures 配置</p></li>
-
-<li><p>compiles 编译</p></li>
-
-<li><p>installs 安装</p></li>
+</li>
 </ul>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">cabal install HTTP
+</code></pre></div><p>cabal四个阶段：</p>
+<ul>
+<li>fetches 获取</li>
+<li>configures 配置</li>
+<li>compiles 编译</li>
+<li>installs 安装</li>
+</ul>
 <p>所以安装HTTP库（一般库也是一样)</p>
-
 <ol>
-<li><p>Refresh the list
-Download the recent list of packages</p>
-
-<pre><code class="language-sh">cabal update
-</code></pre></li>
-
-<li><p>Install the package
-find any package from Hackage</p>
-
-<pre><code class="language-sh">cabal install HTTP
-</code></pre></li>
-
-<li><p>Use
-Cabal takes care of installing the package. The library can now be imported</p>
-
-<pre><code class="language-haskell">---new file.hs
-import Network.HTTP
-</code></pre></li>
-
-<li><p>使用<a href="hackage.haskell.org/packages/HTTP" target="_blank">hackage.haskell.org/packages/HTTP</a>查看HTTP的使用方式
+<li>Refresh the list
+Download the recent list of packages</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">cabal update
+</code></pre></div><ol start="2">
+<li>Install the package
+find any package from Hackage</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">cabal install HTTP
+</code></pre></div><ol start="3">
+<li>Use
+Cabal takes care of installing the package. The library can now be imported</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#75715e">---new file.hs</span>
+<span style="color:#66d9ef">import</span> Network.HTTP
+</code></pre></div><ol start="4">
+<li>使用<a href="hackage.haskell.org/packages/HTTP">hackage.haskell.org/packages/HTTP</a>查看HTTP的使用方式
 可以查看这个网页下的 Modules Network 包含着一些相关的函数。
 比如我们点击，Network.HTTP就会给我们一个详细的函数使用说明的网页，他接受什么类型，返回什么类型。
-SimpleHTTP 接受一个Request 对象，然后返回一个IO Monad。</p>
-
-<pre><code class="language-haskell">Prelude Network.HTTP&gt; import Network.HTTP
-Prelude Network.HTTP&gt; :t simpleHTTP
-simpleHTTP
-:: HStream ty =&gt;
-Request ty -&gt; IO (Network.Stream.Result (Response ty))
-Prelude Network.HTTP&gt; let myRequest=getRequest &quot;http://www.baidu.com&quot;
-Prelude Network.HTTP&gt; simpleHTTP myRequest &gt;&gt;= getResponseBody 
-就会得到很多的内容！！！
-&gt;&gt;=是什么玩意！！
-Prelude Network.HTTP&gt; :t (&gt;&gt;=)
-(&gt;&gt;=) :: Monad m =&gt; m a -&gt; (a -&gt; m b) -&gt; m b
-&gt;&gt;=其实就是网络编程的bind操作（绑定端口）
-
-</code></pre></li>
+SimpleHTTP 接受一个Request 对象，然后返回一个IO Monad。</li>
 </ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#66d9ef">Prelude</span> <span style="color:#66d9ef">Network</span><span style="color:#f92672">.</span><span style="color:#66d9ef">HTTP</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">import</span> Network.HTTP
+<span style="color:#66d9ef">Prelude</span> <span style="color:#66d9ef">Network</span><span style="color:#f92672">.</span><span style="color:#66d9ef">HTTP</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">:</span>t simpleHTTP
+<span style="color:#a6e22e">simpleHTTP</span>
+<span style="color:#f92672">::</span> <span style="color:#66d9ef">HStream</span> ty <span style="color:#f92672">=&gt;</span>
+ <span style="color:#66d9ef">Request</span> ty <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">IO</span> (<span style="color:#66d9ef">Network</span><span style="color:#f92672">.</span><span style="color:#66d9ef">Stream</span><span style="color:#f92672">.</span><span style="color:#66d9ef">Result</span> (<span style="color:#66d9ef">Response</span> ty))
+<span style="color:#66d9ef">Prelude</span> <span style="color:#66d9ef">Network</span><span style="color:#f92672">.</span><span style="color:#66d9ef">HTTP</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">let</span> myRequest<span style="color:#f92672">=</span>getRequest <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">http://www.baidu.com</span><span style="color:#e6db74">&#34;</span>
+<span style="color:#66d9ef">Prelude</span> <span style="color:#66d9ef">Network</span><span style="color:#f92672">.</span><span style="color:#66d9ef">HTTP</span><span style="color:#f92672">&gt;</span> simpleHTTP myRequest <span style="color:#f92672">&gt;&gt;=</span> getResponseBody 
+<span style="color:#960050;background-color:#1e0010">就</span><span style="color:#960050;background-color:#1e0010">会</span><span style="color:#960050;background-color:#1e0010">得</span><span style="color:#960050;background-color:#1e0010">到</span><span style="color:#960050;background-color:#1e0010">很</span><span style="color:#960050;background-color:#1e0010">多</span><span style="color:#960050;background-color:#1e0010">的</span><span style="color:#960050;background-color:#1e0010">内</span><span style="color:#960050;background-color:#1e0010">容</span><span style="color:#960050;background-color:#1e0010">！</span><span style="color:#960050;background-color:#1e0010">！</span><span style="color:#960050;background-color:#1e0010">！</span>
+<span style="color:#f92672">&gt;&gt;=</span><span style="color:#960050;background-color:#1e0010">是</span><span style="color:#960050;background-color:#1e0010">什</span><span style="color:#960050;background-color:#1e0010">么</span><span style="color:#960050;background-color:#1e0010">玩</span><span style="color:#960050;background-color:#1e0010">意</span><span style="color:#960050;background-color:#1e0010">！</span><span style="color:#960050;background-color:#1e0010">！</span>
+<span style="color:#66d9ef">Prelude</span> <span style="color:#66d9ef">Network</span><span style="color:#f92672">.</span><span style="color:#66d9ef">HTTP</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">:</span>t (<span style="color:#f92672">&gt;&gt;=</span>)
+(<span style="color:#f92672">&gt;&gt;=</span>) <span style="color:#f92672">::</span> <span style="color:#66d9ef">Monad</span> m <span style="color:#f92672">=&gt;</span> m a <span style="color:#f92672">-&gt;</span> (a <span style="color:#f92672">-&gt;</span> m b) <span style="color:#f92672">-&gt;</span> m b
+<span style="color:#f92672">&gt;&gt;=</span><span style="color:#960050;background-color:#1e0010">其</span><span style="color:#960050;background-color:#1e0010">实</span><span style="color:#960050;background-color:#1e0010">就</span><span style="color:#960050;background-color:#1e0010">是</span><span style="color:#960050;background-color:#1e0010">网</span><span style="color:#960050;background-color:#1e0010">络</span><span style="color:#960050;background-color:#1e0010">编</span><span style="color:#960050;background-color:#1e0010">程</span><span style="color:#960050;background-color:#1e0010">的</span>bind操作<span style="color:#960050;background-color:#1e0010">（</span><span style="color:#960050;background-color:#1e0010">绑</span><span style="color:#960050;background-color:#1e0010">定</span><span style="color:#960050;background-color:#1e0010">端</span><span style="color:#960050;background-color:#1e0010">口</span><span style="color:#960050;background-color:#1e0010">）</span>
 
-<p>Actually, go to <a href="https://wiki.haskell.org/Haskell" target="_blank">https://wiki.haskell.org/Haskell</a>, you will get resources you want.</p>
+</code></pre></div><p>Actually, go to <a href="https://wiki.haskell.org/Haskell">https://wiki.haskell.org/Haskell</a>, you will get resources you want.</p>
     </div>
  <div class="nav-links" style="padding:10;">
         
@@ -1055,7 +1046,7 @@ Prelude Network.HTTP&gt; :t (&gt;&gt;=)
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

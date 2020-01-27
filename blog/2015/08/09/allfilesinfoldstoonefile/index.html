@@ -569,9 +569,9 @@ find的使用
 
 
 
-<span class="article-metadata" >Reading time: 3 minutes and    0 seconds with 660 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+<span class="article-metadata" >Reading time: 3 minutes and    6 seconds with 685 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
-        
+        <nav id="TableOfContents"></nav>
     </aside>
   <div class="article-container">
 
@@ -581,109 +581,108 @@ find的使用
 <li>find的使用</li>
 <li>更新了注释</li>
 </ol>
-
-<pre><code class="language-sh">#!/bin/bash - 
-#===============================================================================
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e">#!/bin/bash - 
+</span><span style="color:#75715e"></span><span style="color:#75715e">#===============================================================================</span>
 #
-#          FILE: browserNew.sh
+<span style="color:#75715e">#          FILE: browserNew.sh</span>
 # 
-#         USAGE: ./browserNew.sh 
+<span style="color:#75715e">#         USAGE: ./browserNew.sh</span> 
 # 
-#   DESCRIPTION: 
+<span style="color:#75715e">#   DESCRIPTION:</span> 
 # 
-#       OPTIONS: ---
-#  REQUIREMENTS: ---
-#          BUGS: ---
-#         NOTES: ---
-#        AUTHOR: Ye Zhaoliang (), zhaoturkkey@163.com
-#  ORGANIZATION: YZL
-#       CREATED: 2015年06月27日 15:19
-#      REVISION:  ---
-#===============================================================================
+<span style="color:#75715e">#       OPTIONS: ---</span>
+<span style="color:#75715e">#  REQUIREMENTS: ---</span>
+<span style="color:#75715e">#          BUGS: ---</span>
+<span style="color:#75715e">#         NOTES: ---</span>
+<span style="color:#75715e">#        AUTHOR: Ye Zhaoliang (), zhaoturkkey@163.com</span>
+<span style="color:#75715e">#  ORGANIZATION: YZL</span>
+<span style="color:#75715e">#       CREATED: 2015年06月27日 15:19</span>
+<span style="color:#75715e">#      REVISION:  ---</span>
+<span style="color:#75715e">#===============================================================================</span>
 
-#---  FUNCTION  ----------------------------------------------------------------
-#          NAME:  generateChapter
-#   DESCRIPTION:  针对不同额文件采用不同的处理方法，判断目录 和判断脚本是一个重要的操作
-#                 但是更为重要的是 find获得文集拿的绝对路径(相对于当前文件)
-#    PARAMETERS:  
-#       RETURNS:  
-#-------------------------------------------------------------------------------
+<span style="color:#75715e">#---  FUNCTION  ----------------------------------------------------------------</span>
+<span style="color:#75715e">#          NAME:  generateChapter</span>
+<span style="color:#75715e">#   DESCRIPTION:  针对不同额文件采用不同的处理方法，判断目录 和判断脚本是一个重要的操作</span>
+<span style="color:#75715e">#                 但是更为重要的是 find获得文集拿的绝对路径(相对于当前文件)</span>
+<span style="color:#75715e">#    PARAMETERS:</span>  
+<span style="color:#75715e">#       RETURNS:</span>  
+<span style="color:#75715e">#-------------------------------------------------------------------------------</span>
 
-## Function definition 
+<span style="color:#75715e">## Function definition</span> 
 
-generateChapter() # @Description : 对不同文件进行不同处理
-                  # @usage       : generatechapter
-{
-    # 妙用find 得到当前目录的相对路径 不需要不断的进入目录
-    for var in `find . -name &quot;*&quot;`
-    do
-        if [[ -d  $var ]] # &lt; cannot . Error
-        then
-            echo &quot;${currentDir}${var#.}是一个目录&quot; # 使用#号来删除之前的点号
-    # 为什么会想到使用 ${var##*/}因为var是一个相对当前文件的绝对路径，所以经过测试发现他和${0}等效如果截取到最大长度的/的话
-        elif [[ &quot;${var##*/}&quot; == &quot;${0}&quot; ]] # 一定要注意等式两边有空格
-        then
-            echo &quot;${currentDir}${var#.} ${0} 脚本文件不处理&quot;
-        else
-            getFile ${currentDir}${var#.} # 这边需要去除到第一个点号,这是才得到的处理方法
-        fi
+generateChapter<span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#75715e"># @Description : 对不同文件进行不同处理</span>
+                  <span style="color:#75715e"># @usage       : generatechapter</span>
+<span style="color:#f92672">{</span>
+    <span style="color:#75715e"># 妙用find 得到当前目录的相对路径 不需要不断的进入目录</span>
+    <span style="color:#66d9ef">for</span> var in <span style="color:#e6db74">`</span>find . -name <span style="color:#e6db74">&#34;*&#34;</span><span style="color:#e6db74">`</span>
+    <span style="color:#66d9ef">do</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span><span style="color:#f92672">[</span> -d  $var <span style="color:#f92672">]</span><span style="color:#f92672">]</span> <span style="color:#75715e"># &lt; cannot . Error</span>
+        <span style="color:#66d9ef">then</span>
+            echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>currentDir<span style="color:#e6db74">}</span><span style="color:#e6db74">${</span>var#.<span style="color:#e6db74">}</span><span style="color:#e6db74">是一个目录</span><span style="color:#e6db74">&#34;</span> <span style="color:#75715e"># 使用#号来删除之前的点号</span>
+    <span style="color:#75715e"># 为什么会想到使用 ${var##*/}因为var是一个相对当前文件的绝对路径，所以经过测试发现他和${0}等效如果截取到最大长度的/的话</span>
+        <span style="color:#66d9ef">elif</span> <span style="color:#f92672">[</span><span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>var##*/<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">=</span><span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>0<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]</span><span style="color:#f92672">]</span> <span style="color:#75715e"># 一定要注意等式两边有空格</span>
+        <span style="color:#66d9ef">then</span>
+            echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>currentDir<span style="color:#e6db74">}</span><span style="color:#e6db74">${</span>var#.<span style="color:#e6db74">}</span><span style="color:#e6db74"> </span><span style="color:#e6db74">${</span>0<span style="color:#e6db74">}</span><span style="color:#e6db74"> 脚本文件不处理</span><span style="color:#e6db74">&#34;</span>
+        <span style="color:#66d9ef">else</span>
+            getFile <span style="color:#e6db74">${</span>currentDir<span style="color:#e6db74">}</span><span style="color:#e6db74">${</span>var#.<span style="color:#e6db74">}</span> <span style="color:#75715e"># 这边需要去除到第一个点号,这是才得到的处理方法</span>
+        <span style="color:#66d9ef">fi</span>
 
-    done
-}
+    <span style="color:#66d9ef">done</span>
+<span style="color:#f92672">}</span>
 
 
 
-#---  FUNCTION  ----------------------------------------------------------------
-#          NAME:  getFile
-#   DESCRIPTION:  在每个文件的头部添加一些信息
-#    PARAMETERS:  
-#       RETURNS:  
-#-------------------------------------------------------------------------------
-getFile() #@ Description: 细节处理  包括产生开头 产生边框等
-          #@ Usage      : getFile
-{
-    startString=&quot;# -------------------&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&quot;$1&quot; started&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;-------------------#&quot;
-    endString=&quot;# --------------------&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&quot;$1&quot; ended &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;-------------------#&quot;
-       #echo &quot;&quot; &gt;&gt;summary.sh
-    #echo -e &quot;\033[44;37m -------------------&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&quot;$1&quot; started&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;-------------------\033[0m&quot; &gt;&gt;summary.sh
-    #echo  &quot;# -------------------&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&quot;$1&quot; started&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;-------------------&quot; &gt;&gt;summary.sh
+<span style="color:#75715e">#---  FUNCTION  ----------------------------------------------------------------</span>
+<span style="color:#75715e">#          NAME:  getFile</span>
+<span style="color:#75715e">#   DESCRIPTION:  在每个文件的头部添加一些信息</span>
+<span style="color:#75715e">#    PARAMETERS:</span>  
+<span style="color:#75715e">#       RETURNS:</span>  
+<span style="color:#75715e">#-------------------------------------------------------------------------------</span>
+getFile<span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#75715e">#@ Description: 细节处理  包括产生开头 产生边框等</span>
+          <span style="color:#75715e">#@ Usage      : getFile</span>
+<span style="color:#f92672">{</span>
+    startString<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;# -------------------&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&#34;</span>$1<span style="color:#e6db74">&#34; started&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;-------------------#&#34;</span>
+    endString<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;# --------------------&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&#34;</span>$1<span style="color:#e6db74">&#34; ended &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;-------------------#&#34;</span>
+       <span style="color:#75715e">#echo &#34;&#34; &gt;&gt;summary.sh</span>
+    <span style="color:#75715e">#echo -e &#34;\033[44;37m -------------------&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&#34;$1&#34; started&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;-------------------\033[0m&#34; &gt;&gt;summary.sh</span>
+    <span style="color:#75715e">#echo  &#34;# -------------------&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&#34;$1&#34; started&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;-------------------&#34; &gt;&gt;summary.sh</span>
     echo $startString &gt;&gt; summary.sh
-    echo &quot;#`printf &quot;%$(( ${#startString}-2 ))s&quot; &quot; &quot;`#&quot; &gt;&gt;summary.sh
-    echo &quot;#`printf &quot;%$(( ${#startString}-2 ))s&quot; &quot; &quot;`#&quot; &gt;&gt;summary.sh
-    echo &quot;#`printf &quot;%$(( ${#startString}-2 ))s&quot; &quot; &quot;`#&quot; &gt;&gt;summary.sh ### 不加上$反而不行
-   # echo &quot;#&quot; &gt;&gt;summary.sh
-   # echo &quot;#&quot; &gt;&gt;summary.sh
-    sed '1,7d' $1 &gt;&gt; summary.sh
-    echo &quot;#`printf &quot;%$(( ${#endString}-2 ))s&quot; &quot; &quot;`#&quot; &gt;&gt;summary.sh
-    echo &quot;#`printf &quot;%$(( ${#endString}-2 ))s&quot; &quot; &quot;`#&quot; &gt;&gt;summary.sh
-    echo &quot;#`printf &quot;%$(( ${#endString}-2 ))s&quot; &quot; &quot;`#&quot; &gt;&gt;summary.sh
-    #echo &quot;#&quot; &gt;&gt;summary.sh
-    #echo &quot;#&quot; &gt;&gt;summary.sh
-    #echo -e &quot;\033[43;37m --------------------&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&quot;$1&quot; ended &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;-------------------\033[0m&quot; &gt;&gt; summary.sh
-    #echo &quot;# --------------------&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&quot;$1&quot; ended &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;-------------------&quot; &gt;&gt; summary.sh
+    echo <span style="color:#e6db74">&#34;#`printf &#34;</span>%<span style="color:#66d9ef">$((</span> <span style="color:#e6db74">${#</span>startString<span style="color:#e6db74">}</span><span style="color:#f92672">-</span><span style="color:#ae81ff">2</span> <span style="color:#66d9ef">))</span>s<span style="color:#e6db74">&#34; &#34;</span> <span style="color:#e6db74">&#34;`#&#34;</span> &gt;&gt;summary.sh
+    echo <span style="color:#e6db74">&#34;#`printf &#34;</span>%<span style="color:#66d9ef">$((</span> <span style="color:#e6db74">${#</span>startString<span style="color:#e6db74">}</span><span style="color:#f92672">-</span><span style="color:#ae81ff">2</span> <span style="color:#66d9ef">))</span>s<span style="color:#e6db74">&#34; &#34;</span> <span style="color:#e6db74">&#34;`#&#34;</span> &gt;&gt;summary.sh
+    echo <span style="color:#e6db74">&#34;#`printf &#34;</span>%<span style="color:#66d9ef">$((</span> <span style="color:#e6db74">${#</span>startString<span style="color:#e6db74">}</span><span style="color:#f92672">-</span><span style="color:#ae81ff">2</span> <span style="color:#66d9ef">))</span>s<span style="color:#e6db74">&#34; &#34;</span> <span style="color:#e6db74">&#34;`#&#34;</span> &gt;&gt;summary.sh <span style="color:#75715e">### 不加上$反而不行</span>
+   <span style="color:#75715e"># echo &#34;#&#34; &gt;&gt;summary.sh</span>
+   <span style="color:#75715e"># echo &#34;#&#34; &gt;&gt;summary.sh</span>
+    sed <span style="color:#e6db74">&#39;1,7d&#39;</span> $1 &gt;&gt; summary.sh
+    echo <span style="color:#e6db74">&#34;#`printf &#34;</span>%<span style="color:#66d9ef">$((</span> <span style="color:#e6db74">${#</span>endString<span style="color:#e6db74">}</span><span style="color:#f92672">-</span><span style="color:#ae81ff">2</span> <span style="color:#66d9ef">))</span>s<span style="color:#e6db74">&#34; &#34;</span> <span style="color:#e6db74">&#34;`#&#34;</span> &gt;&gt;summary.sh
+    echo <span style="color:#e6db74">&#34;#`printf &#34;</span>%<span style="color:#66d9ef">$((</span> <span style="color:#e6db74">${#</span>endString<span style="color:#e6db74">}</span><span style="color:#f92672">-</span><span style="color:#ae81ff">2</span> <span style="color:#66d9ef">))</span>s<span style="color:#e6db74">&#34; &#34;</span> <span style="color:#e6db74">&#34;`#&#34;</span> &gt;&gt;summary.sh
+    echo <span style="color:#e6db74">&#34;#`printf &#34;</span>%<span style="color:#66d9ef">$((</span> <span style="color:#e6db74">${#</span>endString<span style="color:#e6db74">}</span><span style="color:#f92672">-</span><span style="color:#ae81ff">2</span> <span style="color:#66d9ef">))</span>s<span style="color:#e6db74">&#34; &#34;</span> <span style="color:#e6db74">&#34;`#&#34;</span> &gt;&gt;summary.sh
+    <span style="color:#75715e">#echo &#34;#&#34; &gt;&gt;summary.sh</span>
+    <span style="color:#75715e">#echo &#34;#&#34; &gt;&gt;summary.sh</span>
+    <span style="color:#75715e">#echo -e &#34;\033[43;37m --------------------&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&#34;$1&#34; ended &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;-------------------\033[0m&#34; &gt;&gt; summary.sh</span>
+    <span style="color:#75715e">#echo &#34;# --------------------&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&#34;$1&#34; ended &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;-------------------&#34; &gt;&gt; summary.sh</span>
     echo $endString &gt;&gt; summary.sh
-    echo &quot;&quot; &gt;&gt;summary.sh
-    echo &quot;&quot; &gt;&gt;summary.sh
-    echo &quot;&quot; &gt;&gt;summary.sh
+    echo <span style="color:#e6db74">&#34;&#34;</span> &gt;&gt;summary.sh
+    echo <span style="color:#e6db74">&#34;&#34;</span> &gt;&gt;summary.sh
+    echo <span style="color:#e6db74">&#34;&#34;</span> &gt;&gt;summary.sh
     
-}
+<span style="color:#f92672">}</span>
 
-## variable initial 
-currentDir=`pwd`
+<span style="color:#75715e">## variable initial</span> 
+currentDir<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>pwd<span style="color:#e6db74">`</span>
 
 
-## processing information 
-# 如果存在 summary.sh 证明已经存在了，就先把删掉， 因为这里是
-# 采用追加的方式，而不是写入。
-if [[ -e ./summary.sh ]]
-then 
+<span style="color:#75715e">## processing information</span> 
+<span style="color:#75715e"># 如果存在 summary.sh 证明已经存在了，就先把删掉， 因为这里是</span>
+<span style="color:#75715e"># 采用追加的方式，而不是写入。</span>
+<span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span><span style="color:#f92672">[</span> -e ./summary.sh <span style="color:#f92672">]</span><span style="color:#f92672">]</span>
+<span style="color:#66d9ef">then</span> 
     rm -rf ./summary.sh
-fi
-# 调用产生所有的文件夹内的数据到一个文件中
+<span style="color:#66d9ef">fi</span>
+<span style="color:#75715e"># 调用产生所有的文件夹内的数据到一个文件中</span>
 generateChapter
 
 
-</code></pre>
+</code></pre></div>
     </div>
  <div class="nav-links" style="padding:10;">
         
@@ -1087,7 +1086,7 @@ generateChapter
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

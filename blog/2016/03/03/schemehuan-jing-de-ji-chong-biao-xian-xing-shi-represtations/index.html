@@ -563,20 +563,18 @@
 
 
 
-<span class="article-metadata" >Reading time: 7 minutes and    21 seconds with 1619 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+<span class="article-metadata" >Reading time: 7 minutes and    11 seconds with 1582 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#增加一个-has-binding-实现">增加一个<code>has-binding</code> 实现</a></li>
-<li><a href="#拓展一个列表输入的功能-extend-env">拓展一个列表输入的功能<code>extend-env*</code></a></li>
-</ul></li>
-<li><a href="#结论">结论</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#has-binding-">增加一个has-binding 实现</a></li>
+        <li><a href="#extend-env">拓展一个列表输入的功能extend-env*</a></li>
+      </ul>
+    </li>
+    <li><a href="#heading">结论</a></li>
+  </ul>
 </nav>
     </aside>
   <div class="article-container">
@@ -584,344 +582,305 @@
 
     <div class="article-style">
       <p>scheme的解释器的构造，都需要enviroment类型的参与，environment类型的抽象确是影响到语言的具体性能。</p>
-
 <p>主要有以下四种类型(另一种未实现)</p>
-
 <ol>
 <li><a href="#1">环境关联表形式出现(cons cons&hellip;)</a></li>
 <li><a href="#2">环境的列表出现 (list var val env)</a></li>
 <li><a href="#3">环境的过程实现(lambda ()形式)</a></li>
 <li><a href="#4">环境的一种较为特殊的形式成堆变量的实现(list (list var) (list val))</a></li>
 </ol>
-
-<h2 id="1"> 1. 环境关联表形式出现 </h2>
-
+<!-- raw HTML omitted -->
 <p>此时是每一次都把一个键值对存入到环境中，逐次存入的过程(采用 <em>cons cons的形式</em>)。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">((<span style="color:#a6e22e">a</span> <span style="color:#f92672">.</span> <span style="color:#ae81ff">1</span>) (<span style="color:#a6e22e">b</span> <span style="color:#f92672">.</span> <span style="color:#ae81ff">1</span>)  (<span style="color:#a6e22e">c</span> <span style="color:#f92672">.</span> <span style="color:#ae81ff">1</span>))
 
-<pre><code class="language-scheme">((a . 1) (b . 1)  (c . 1))
+empty-env  is <span style="color:#f92672">&#39;</span>()
+</code></pre></div><p>具体实现如下所示</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">
+(<span style="color:#66d9ef">define </span>empty-env
+  (<span style="color:#a6e22e">lambda</span>() <span style="color:#f92672">&#39;</span>()))
 
-empty-env  is '()
-</code></pre>
-
-<p>具体实现如下所示</p>
-
-<pre><code class="language-scheme">
-(define empty-env
-  (lambda() '()))
-
-(define extend-env
-  (lambda (var val env)
+(<span style="color:#66d9ef">define </span>extend-env
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">var</span> val env)
     (cons (cons var val)
 	  env)))
 
-(define apply-env
-  (lambda (env search-var)
-    (cond
+(<span style="color:#66d9ef">define </span>apply-env
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">env</span> search-var)
+    (<span style="color:#a6e22e">cond</span>
      ((null? env)
-      (report-no-binding-found search-var))
+      (<span style="color:#a6e22e">report-no-binding-found</span> search-var))
      ((eqv? (caar env) search-var)
       (cdr (car env)))
-     (else
-      (apply-env (cdr env) search-var)))))
+     (<span style="color:#a6e22e">else</span>
+      (<span style="color:#a6e22e">apply-env</span> (cdr env) search-var)))))
 
-(define report-no-binding-found
-  (lambda (search-var)
-    (error 'apply-env &quot;No binding for: &quot; search-var)))
+(<span style="color:#66d9ef">define </span>report-no-binding-found
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">search-var</span>)
+    (<span style="color:#a6e22e">error</span> <span style="color:#e6db74">&#39;apply-env</span> <span style="color:#e6db74">&#34;No binding for: &#34;</span> search-var)))
 
-(define e
-  (extend-env 'd 6
-    (extend-env 'y 8
-       (extend-env 'x 7
-	  (extend-env 'y 14
-	    (empty-env))))))
+(<span style="color:#66d9ef">define </span>e
+  (<span style="color:#a6e22e">extend-env</span> <span style="color:#e6db74">&#39;d</span> <span style="color:#ae81ff">6</span>
+    (<span style="color:#a6e22e">extend-env</span> <span style="color:#e6db74">&#39;y</span> <span style="color:#ae81ff">8</span>
+       (<span style="color:#a6e22e">extend-env</span> <span style="color:#e6db74">&#39;x</span> <span style="color:#ae81ff">7</span>
+	  (<span style="color:#a6e22e">extend-env</span> <span style="color:#e6db74">&#39;y</span> <span style="color:#ae81ff">14</span>
+	    (<span style="color:#a6e22e">empty-env</span>))))))
 
-(equal?? (apply-env e 'd) 6)
-(equal?? (apply-env e 'y) 8)
-(equal?? (apply-env e 'x) 7)
-(equal?? (apply-env e 'd) 6)
+(<span style="color:#a6e22e">equal??</span> (<span style="color:#a6e22e">apply-env</span> e <span style="color:#e6db74">&#39;d</span>) <span style="color:#ae81ff">6</span>)
+(<span style="color:#a6e22e">equal??</span> (<span style="color:#a6e22e">apply-env</span> e <span style="color:#e6db74">&#39;y</span>) <span style="color:#ae81ff">8</span>)
+(<span style="color:#a6e22e">equal??</span> (<span style="color:#a6e22e">apply-env</span> e <span style="color:#e6db74">&#39;x</span>) <span style="color:#ae81ff">7</span>)
+(<span style="color:#a6e22e">equal??</span> (<span style="color:#a6e22e">apply-env</span> e <span style="color:#e6db74">&#39;d</span>) <span style="color:#ae81ff">6</span>)
 
-</code></pre>
+</code></pre></div><p>一种比较特殊的就是</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"> a=1 b=2  a=3  c=5
 
-<p>一种比较特殊的就是</p>
+ ((<span style="color:#a6e22e">a</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">3</span>) (<span style="color:#a6e22e">b</span> <span style="color:#ae81ff">2</span>) (<span style="color:#a6e22e">c</span> <span style="color:#ae81ff">5</span>))
 
-<pre><code class="language-scheme"> a=1 b=2  a=3  c=5
-
- ((a 1 3) (b 2) (c 5))
-
- empty-env is '()
-</code></pre>
-
-<p>针对当前的关联表的一个很小的拓展</p>
-
-<h3 id="增加一个-has-binding-实现">增加一个<code>has-binding</code> 实现</h3>
-
-<pre><code class="language-scheme">
-(define has-binding?
-  (lambda (env var)
-    (cond
-     ((null? env) #f)
-     ((eqv? (caar env) var) #t)
-     (else
-      (has-binding? (cdr env) var)))))
+ empty-env is <span style="color:#f92672">&#39;</span>()
+</code></pre></div><p>针对当前的关联表的一个很小的拓展</p>
+<h3 id="has-binding-">增加一个<code>has-binding</code> 实现</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">
+(<span style="color:#66d9ef">define </span>has-binding?
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">env</span> var)
+    (<span style="color:#a6e22e">cond</span>
+     ((null? env) <span style="color:#66d9ef">#f</span>)
+     ((eqv? (caar env) var) <span style="color:#66d9ef">#t</span>)
+     (<span style="color:#a6e22e">else</span>
+      (<span style="color:#a6e22e">has-binding?</span> (cdr env) var)))))
 
 
-(define e
-  (extend-env 'd 6
-     (extend-env 'y 8
-        (extend-env 'x 7
-           (extend-env 'y 14
-              (empty-env))))))
+(<span style="color:#66d9ef">define </span>e
+  (<span style="color:#a6e22e">extend-env</span> <span style="color:#e6db74">&#39;d</span> <span style="color:#ae81ff">6</span>
+     (<span style="color:#a6e22e">extend-env</span> <span style="color:#e6db74">&#39;y</span> <span style="color:#ae81ff">8</span>
+        (<span style="color:#a6e22e">extend-env</span> <span style="color:#e6db74">&#39;x</span> <span style="color:#ae81ff">7</span>
+           (<span style="color:#a6e22e">extend-env</span> <span style="color:#e6db74">&#39;y</span> <span style="color:#ae81ff">14</span>
+              (<span style="color:#a6e22e">empty-env</span>))))))
 
-(equal?? (has-binding? e 'd) #t)
-(equal?? (has-binding? e 'y) #t)
-(equal?? (has-binding? e 'x) #t)
-(equal?? (has-binding? e 'z) #f)
+(<span style="color:#a6e22e">equal??</span> (<span style="color:#a6e22e">has-binding?</span> e <span style="color:#e6db74">&#39;d</span>) <span style="color:#66d9ef">#t</span>)
+(<span style="color:#a6e22e">equal??</span> (<span style="color:#a6e22e">has-binding?</span> e <span style="color:#e6db74">&#39;y</span>) <span style="color:#66d9ef">#t</span>)
+(<span style="color:#a6e22e">equal??</span> (<span style="color:#a6e22e">has-binding?</span> e <span style="color:#e6db74">&#39;x</span>) <span style="color:#66d9ef">#t</span>)
+(<span style="color:#a6e22e">equal??</span> (<span style="color:#a6e22e">has-binding?</span> e <span style="color:#e6db74">&#39;z</span>) <span style="color:#66d9ef">#f</span>)
 
-</code></pre>
-
-<h3 id="拓展一个列表输入的功能-extend-env">拓展一个列表输入的功能<code>extend-env*</code></h3>
-
-<pre><code class="language-scheme">(define extend-env*
-  (lambda (var-list val-list env)
-    (if (null? var-list)
+</code></pre></div><h3 id="extend-env">拓展一个列表输入的功能<code>extend-env*</code></h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">define </span>extend-env*
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">var-list</span> val-list env)
+    (<span style="color:#66d9ef">if </span>(null? var-list)
 	env
-	(let ((var (car var-list))
-	      (val (car val-list)))
-	  (extend-env* (cdr var-list)
+	(<span style="color:#66d9ef">let </span>((<span style="color:#a6e22e">var</span> (car var-list))
+	      (<span style="color:#a6e22e">val</span> (car val-list)))
+	  (<span style="color:#a6e22e">extend-env*</span> (cdr var-list)
 		       (cdr val-list)
-		       (extend-env var val env))))))
+		       (<span style="color:#a6e22e">extend-env</span> var val env))))))
 
-(equal?? (has-binding? (extend-env* '(A) '(1) e) 'A) #t)
-(equal?? (has-binding? (extend-env* '(A B C) '(1 2 3) e) 'C) #t)
+(<span style="color:#a6e22e">equal??</span> (<span style="color:#a6e22e">has-binding?</span> (<span style="color:#a6e22e">extend-env*</span> <span style="color:#f92672">&#39;</span>(A) <span style="color:#f92672">&#39;</span>(<span style="color:#ae81ff">1</span>) e) <span style="color:#e6db74">&#39;A</span>) <span style="color:#66d9ef">#t</span>)
+(<span style="color:#a6e22e">equal??</span> (<span style="color:#a6e22e">has-binding?</span> (<span style="color:#a6e22e">extend-env*</span> <span style="color:#f92672">&#39;</span>(A B C) <span style="color:#f92672">&#39;</span>(<span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span>) e) <span style="color:#e6db74">&#39;C</span>) <span style="color:#66d9ef">#t</span>)
 
-</code></pre>
+</code></pre></div><!-- raw HTML omitted -->
+<p>此时使用一个标志位<code>extend-env</code>每一次都把一个键值对存入到list环境中，<!-- raw HTML omitted -->嵌套<!-- raw HTML omitted -->存入的过程(采用 <em>cons cons的形式</em>)。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"> (<span style="color:#a6e22e">extend</span> 
+   (list <span style="color:#e6db74">&#39;extend-env</span> var exp (<span style="color:#a6e22e">extend</span>                        <span style="color:#75715e">;;;====其实&#39;extend-env 有点多余</span>
+                         (list <span style="color:#e6db74">&#39;extend-env</span> var exp (<span style="color:#a6e22e">extend</span>  <span style="color:#75715e">;;;====其实&#39;extend-env 有点多余</span>
+                                               (<span style="color:#a6e22e">empty-env</span>))))))
 
-<h2 id="2"> 2.环境的列表出现  </h2>
+ (<span style="color:#ae81ff">1</span> (<span style="color:#ae81ff">2</span> (<span style="color:#ae81ff">3</span> <span style="color:#ae81ff">6</span>)))
+</code></pre></div><p>且看具体实现如下</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#75715e">;; empty-env : () -&gt; Env</span>
+(<span style="color:#66d9ef">define </span>empty-env
+  (<span style="color:#66d9ef">lambda </span>() (list <span style="color:#e6db74">&#39;empty-env</span>)))
 
-<p>此时使用一个标志位<code>extend-env</code>每一次都把一个键值对存入到list环境中，<font color="red">嵌套</font>存入的过程(采用 <em>cons cons的形式</em>)。</p>
+<span style="color:#75715e">;; extend-env : Var * Schemeval * Env -&gt; Env</span>
+(<span style="color:#66d9ef">define </span>extend-env
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">var</span> val env)
+    (list <span style="color:#e6db74">&#39;extend-env</span> var val env)))     <span style="color:#75715e">;;;;;;;==================&gt;关键位置</span>
 
-<pre><code class="language-scheme"> (extend 
-   (list 'extend-env var exp (extend                        ;;;====其实'extend-env 有点多余
-                         (list 'extend-env var exp (extend  ;;;====其实'extend-env 有点多余
-                                               (empty-env))))))
-
- (1 (2 (3 6)))
-</code></pre>
-
-<p>且看具体实现如下</p>
-
-<pre><code class="language-scheme">;; empty-env : () -&gt; Env
-(define empty-env
-  (lambda () (list 'empty-env)))
-
-;; extend-env : Var * Schemeval * Env -&gt; Env
-(define extend-env
-  (lambda (var val env)
-    (list 'extend-env var val env)))     ;;;;;;;==================&gt;关键位置
-
-;; apply-env : Env * Var -&gt; Schemeval
-(define apply-env-rec
-  (lambda (env search-var all)
-    (cond
-     ((eqv? (car env) 'empty-env)
-      (report-no-binding-found search-var all))
-     ((eqv? (car env) 'extend-env)
-      (let ((saved-var (cadr env))        ;;;;;;;==================&gt;关键位置  
-	    (saved-val (caddr env))           ;;;;;;;==================&gt;关键位置
-	    (saved-env (cadddr env)))         ;;;;;;;==================&gt;关键位置
-	(if (eqv? search-var saved-var)
+<span style="color:#75715e">;; apply-env : Env * Var -&gt; Schemeval</span>
+(<span style="color:#66d9ef">define </span>apply-env-rec
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">env</span> search-var all)
+    (<span style="color:#a6e22e">cond</span>
+     ((eqv? (car env) <span style="color:#e6db74">&#39;empty-env</span>)
+      (<span style="color:#a6e22e">report-no-binding-found</span> search-var all))
+     ((eqv? (car env) <span style="color:#e6db74">&#39;extend-env</span>)
+      (<span style="color:#66d9ef">let </span>((<span style="color:#a6e22e">saved-var</span> (cadr env))        <span style="color:#75715e">;;;;;;;==================&gt;关键位置  </span>
+	    (<span style="color:#a6e22e">saved-val</span> (caddr env))           <span style="color:#75715e">;;;;;;;==================&gt;关键位置</span>
+	    (<span style="color:#a6e22e">saved-env</span> (cadddr env)))         <span style="color:#75715e">;;;;;;;==================&gt;关键位置</span>
+	(<span style="color:#66d9ef">if </span>(eqv? search-var saved-var)
 	    saved-val
-	    (apply-env-rec saved-env search-var all))))  ;;;;;;;==================&gt;不断更新最新的位置look up variable in the saved-env
-     (else
-      (report-invalid-env env)))))
+	    (<span style="color:#a6e22e">apply-env-rec</span> saved-env search-var all))))  <span style="color:#75715e">;;;;;;;==================&gt;不断更新最新的位置look up variable in the saved-env</span>
+     (<span style="color:#a6e22e">else</span>
+      (<span style="color:#a6e22e">report-invalid-env</span> env)))))
 
-(define apply-env
-  (lambda (env search-var)
-    (apply-env-rec env search-var env)))
-
-
-(define display-env-rec
-  (lambda (env)
-    (if (eqv? (car env) 'extend-env)
-	(let ((saved-var (cadr env))
-	      (saved-env (cadddr env)))
-	  (printf &quot; ~a &quot; saved-var)
-	  (display-env-rec saved-env)))))
+(<span style="color:#66d9ef">define </span>apply-env
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">env</span> search-var)
+    (<span style="color:#a6e22e">apply-env-rec</span> env search-var env)))
 
 
-(define display-env
-  (lambda (env)
-    (printf &quot;env: &quot;)
-    (display-env-rec env)
-    (newline)))
-
-(display-env e)
-
-(define report-no-binding-found
-  (lambda (search-var all)
-    (display-env all)
-    (error 'apply-env &quot;No binding for&quot; search-var)))
-
-(define report-invalid-env
-  (lambda (env)
-    (error 'apply-env &quot;Bad environment&quot; env)))
-
-(define e
-  (extend-env 'd 6
-      (extend-env 'y 8
-         (extend-env 'x 7
-            (extend-env 'y 14
-                (empty-env))))))
-
-(equal?? (apply-env e 'd) 6)
-(equal?? (apply-env e 'y) 8)
-(equal?? (apply-env e 'x) 7)
+(<span style="color:#66d9ef">define </span>display-env-rec
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">env</span>)
+    (<span style="color:#66d9ef">if </span>(eqv? (car env) <span style="color:#e6db74">&#39;extend-env</span>)
+	(<span style="color:#66d9ef">let </span>((<span style="color:#a6e22e">saved-var</span> (cadr env))
+	      (<span style="color:#a6e22e">saved-env</span> (cadddr env)))
+	  (<span style="color:#a6e22e">printf</span> <span style="color:#e6db74">&#34; ~a &#34;</span> saved-var)
+	  (<span style="color:#a6e22e">display-env-rec</span> saved-env)))))
 
 
-</code></pre>
+(<span style="color:#66d9ef">define </span>display-env
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">env</span>)
+    (<span style="color:#a6e22e">printf</span> <span style="color:#e6db74">&#34;env: &#34;</span>)
+    (<span style="color:#a6e22e">display-env-rec</span> env)
+    (<span style="color:#a6e22e">newline</span>)))
 
-<h2 id="3"> 3.环境的过程实现</h2>
+(<span style="color:#a6e22e">display-env</span> e)
 
+(<span style="color:#66d9ef">define </span>report-no-binding-found
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">search-var</span> all)
+    (<span style="color:#a6e22e">display-env</span> all)
+    (<span style="color:#a6e22e">error</span> <span style="color:#e6db74">&#39;apply-env</span> <span style="color:#e6db74">&#34;No binding for&#34;</span> search-var)))
+
+(<span style="color:#66d9ef">define </span>report-invalid-env
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">env</span>)
+    (<span style="color:#a6e22e">error</span> <span style="color:#e6db74">&#39;apply-env</span> <span style="color:#e6db74">&#34;Bad environment&#34;</span> env)))
+
+(<span style="color:#66d9ef">define </span>e
+  (<span style="color:#a6e22e">extend-env</span> <span style="color:#e6db74">&#39;d</span> <span style="color:#ae81ff">6</span>
+      (<span style="color:#a6e22e">extend-env</span> <span style="color:#e6db74">&#39;y</span> <span style="color:#ae81ff">8</span>
+         (<span style="color:#a6e22e">extend-env</span> <span style="color:#e6db74">&#39;x</span> <span style="color:#ae81ff">7</span>
+            (<span style="color:#a6e22e">extend-env</span> <span style="color:#e6db74">&#39;y</span> <span style="color:#ae81ff">14</span>
+                (<span style="color:#a6e22e">empty-env</span>))))))
+
+(<span style="color:#a6e22e">equal??</span> (<span style="color:#a6e22e">apply-env</span> e <span style="color:#e6db74">&#39;d</span>) <span style="color:#ae81ff">6</span>)
+(<span style="color:#a6e22e">equal??</span> (<span style="color:#a6e22e">apply-env</span> e <span style="color:#e6db74">&#39;y</span>) <span style="color:#ae81ff">8</span>)
+(<span style="color:#a6e22e">equal??</span> (<span style="color:#a6e22e">apply-env</span> e <span style="color:#e6db74">&#39;x</span>) <span style="color:#ae81ff">7</span>)
+
+
+</code></pre></div><!-- raw HTML omitted -->
 <p>环境的过程实现是比较难理解的，因为该过程更少了递归的逐渐减少的表像，感觉所有都不变。</p>
-
 <p>具体实现如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#75715e">;; data definition:</span>
+<span style="color:#75715e">;; Env = Var -&gt; Schemeval</span>
 
-<pre><code class="language-scheme">;; data definition:
-;; Env = Var -&gt; Schemeval
-
-;; empty-env : () -&gt; Env
-(define empty-env
-  (lambda ()
-    (cons (lambda (search-var)
-	    (report-no-binding-found search-var))
-	  (lambda ()
-	    #t))))
+<span style="color:#75715e">;; empty-env : () -&gt; Env</span>
+(<span style="color:#66d9ef">define </span>empty-env
+  (<span style="color:#66d9ef">lambda </span>()
+    (cons (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">search-var</span>)
+	    (<span style="color:#a6e22e">report-no-binding-found</span> search-var))
+	  (<span style="color:#66d9ef">lambda </span>()
+	    <span style="color:#66d9ef">#t</span>))))
 
 
-;; extend-env : Var * Schemeval * Env -&gt; Env
-(define extend-env
-  (lambda (saved-var saved-val saved-env)
-    (cons (lambda (search-var)
-	    (if (eqv? search-var saved-var)
+<span style="color:#75715e">;; extend-env : Var * Schemeval * Env -&gt; Env</span>
+(<span style="color:#66d9ef">define </span>extend-env
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">saved-var</span> saved-val saved-env)
+    (cons (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">search-var</span>)
+	    (<span style="color:#66d9ef">if </span>(eqv? search-var saved-var)
 		saved-val
-		(apply-env saved-env search-var)))
-	  (lambda ()
-	    #f))))
+		(<span style="color:#a6e22e">apply-env</span> saved-env search-var)))
+	  (<span style="color:#66d9ef">lambda </span>()
+	    <span style="color:#66d9ef">#f</span>))))
 
-;; apply-env : Env * Var -&gt; Schemeval
-(define apply-env
-  (lambda (env search-var)
+<span style="color:#75715e">;; apply-env : Env * Var -&gt; Schemeval</span>
+(<span style="color:#66d9ef">define </span>apply-env
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">env</span> search-var)
     ((car env) search-var)))
 
-(define empty-env?
-  (lambda (env)
+(<span style="color:#66d9ef">define </span>empty-env?
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">env</span>)
     ((cdr env))))
 
-(define report-no-binding-found
-  (lambda (search-var)
-    (error 'apply-env &quot;No binding for ~s&quot; search-var)))
+(<span style="color:#66d9ef">define </span>report-no-binding-found
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">search-var</span>)
+    (<span style="color:#a6e22e">error</span> <span style="color:#e6db74">&#39;apply-env</span> <span style="color:#e6db74">&#34;No binding for ~s&#34;</span> search-var)))
 
-(define report-invalid-env
-  (lambda (env)
-    (error 'apply-env &quot;Bad environment: ~s&quot; env)))
+(<span style="color:#66d9ef">define </span>report-invalid-env
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">env</span>)
+    (<span style="color:#a6e22e">error</span> <span style="color:#e6db74">&#39;apply-env</span> <span style="color:#e6db74">&#34;Bad environment: ~s&#34;</span> env)))
 
-(define e
-  (extend-env 'd 6
-     (extend-env 'y 8
-        (extend-env 'x 7
-           (extend-env 'y 14
-              (empty-env))))))
+(<span style="color:#66d9ef">define </span>e
+  (<span style="color:#a6e22e">extend-env</span> <span style="color:#e6db74">&#39;d</span> <span style="color:#ae81ff">6</span>
+     (<span style="color:#a6e22e">extend-env</span> <span style="color:#e6db74">&#39;y</span> <span style="color:#ae81ff">8</span>
+        (<span style="color:#a6e22e">extend-env</span> <span style="color:#e6db74">&#39;x</span> <span style="color:#ae81ff">7</span>
+           (<span style="color:#a6e22e">extend-env</span> <span style="color:#e6db74">&#39;y</span> <span style="color:#ae81ff">14</span>
+              (<span style="color:#a6e22e">empty-env</span>))))))
 
-(equal?? (apply-env e 'd) 6)
-(equal?? (apply-env e 'y) 8)
-(equal?? (apply-env e 'x) 7)
+(<span style="color:#a6e22e">equal??</span> (<span style="color:#a6e22e">apply-env</span> e <span style="color:#e6db74">&#39;d</span>) <span style="color:#ae81ff">6</span>)
+(<span style="color:#a6e22e">equal??</span> (<span style="color:#a6e22e">apply-env</span> e <span style="color:#e6db74">&#39;y</span>) <span style="color:#ae81ff">8</span>)
+(<span style="color:#a6e22e">equal??</span> (<span style="color:#a6e22e">apply-env</span> e <span style="color:#e6db74">&#39;x</span>) <span style="color:#ae81ff">7</span>)
 
-(equal?? (empty-env? (empty-env)) #t)
-(equal?? (empty-env? e) #f)
+(<span style="color:#a6e22e">equal??</span> (<span style="color:#a6e22e">empty-env?</span> (<span style="color:#a6e22e">empty-env</span>)) <span style="color:#66d9ef">#t</span>)
+(<span style="color:#a6e22e">equal??</span> (<span style="color:#a6e22e">empty-env?</span> e) <span style="color:#66d9ef">#f</span>)
 
-</code></pre>
-
-<h2 id="4"> 4.环境的一种较为特殊的形式的实现 </h2>
-
+</code></pre></div><!-- raw HTML omitted -->
 <p>如果若有的定义扎堆存在呢？也就是把所有变量放在一个列表中，值放在一个列表里面。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"> x=3 y=4 z=5 c=6
 
-<pre><code class="language-scheme"> x=3 y=4 z=5 c=6
-
- 表现为 ((x y z c) (3 4 5 6))
+ 表现为 ((<span style="color:#a6e22e">x</span> y z c) (<span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">6</span>))
 
  此时 empty-env is (()  ())
-</code></pre>
-
-<pre><code class="language-scheme">
-(define empty-env
-  (lambda() '()))
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">
+(<span style="color:#66d9ef">define </span>empty-env
+  (<span style="color:#a6e22e">lambda</span>() <span style="color:#f92672">&#39;</span>()))
 
 
-(define extend-env
-  (lambda (var val env)
-    (cons (list
+(<span style="color:#66d9ef">define </span>extend-env
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">var</span> val env)
+    (cons (<span style="color:#a6e22e">list</span>
 	   (list var) (list val))
           env)))
 
-(define extend-env*
-  (lambda (var-list val-list env)
-    (if (null? var-list)
+(<span style="color:#66d9ef">define </span>extend-env*
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">var-list</span> val-list env)
+    (<span style="color:#66d9ef">if </span>(null? var-list)
 	env
 	(cons (list var-list val-list)
 	      env))))
 
-;; return a pair, for distinguish with val is #f
-(define apply-current
-  (lambda (vars vals search-var)
-    (if (null? vars)
-	(cons #f '())
-	(if (eqv? (car vars) search-var)
-	    (cons #t (car vals))
-	    (apply-current (cdr vars) (cdr vals) search-var)))))
+<span style="color:#75715e">;; return a pair, for distinguish with val is #f</span>
+(<span style="color:#66d9ef">define </span>apply-current
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">vars</span> vals search-var)
+    (<span style="color:#66d9ef">if </span>(null? vars)
+	(cons <span style="color:#66d9ef">#f</span> <span style="color:#f92672">&#39;</span>())
+	(<span style="color:#66d9ef">if </span>(eqv? (car vars) search-var)
+	    (cons <span style="color:#66d9ef">#t</span> (car vals))
+	    (<span style="color:#a6e22e">apply-current</span> (cdr vars) (cdr vals) search-var)))))
 
-(define apply-env
-  (lambda (env search-var)
-    (if (null? env)
-     (report-no-binding-found search-var)
-     (let ((val (apply-current (caar env) (cadar env) search-var)))
-       (if (car val) (cdr val)
-	   (apply-env (cdr env) search-var))))))
+(<span style="color:#66d9ef">define </span>apply-env
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">env</span> search-var)
+    (<span style="color:#66d9ef">if </span>(null? env)
+     (<span style="color:#a6e22e">report-no-binding-found</span> search-var)
+     (<span style="color:#66d9ef">let </span>((<span style="color:#a6e22e">val</span> (<span style="color:#a6e22e">apply-current</span> (caar env) (cadar env) search-var)))
+       (<span style="color:#66d9ef">if </span>(car val) (cdr val)
+	   (<span style="color:#a6e22e">apply-env</span> (cdr env) search-var))))))
 
-(define report-no-binding-found
-  (lambda (search-var)
-    (error 'apply-env &quot;No binding for: &quot; search-var)))
-
-
-(define has-binding?
-  (lambda (env var)
-    (if (null? env)
-	#f
-	(let ((val (apply-current (caar env) (cadar env) var)))
-	  (if (car val)
-	      #t
-	      (has-binding? (cdr env) var))))))
+(<span style="color:#66d9ef">define </span>report-no-binding-found
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">search-var</span>)
+    (<span style="color:#a6e22e">error</span> <span style="color:#e6db74">&#39;apply-env</span> <span style="color:#e6db74">&#34;No binding for: &#34;</span> search-var)))
 
 
-(define e (empty-env))
-(equal?? e '())
+(<span style="color:#66d9ef">define </span>has-binding?
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">env</span> var)
+    (<span style="color:#66d9ef">if </span>(null? env)
+	<span style="color:#66d9ef">#f</span>
+	(<span style="color:#66d9ef">let </span>((<span style="color:#a6e22e">val</span> (<span style="color:#a6e22e">apply-current</span> (caar env) (cadar env) var)))
+	  (<span style="color:#66d9ef">if </span>(car val)
+	      <span style="color:#66d9ef">#t</span>
+	      (<span style="color:#a6e22e">has-binding?</span> (cdr env) var))))))
 
-(define e (extend-env 'z 10 e))
-(equal?? e '(((z) (10))))
 
-(define e (extend-env* '(a b c d) '(1 2 3 4) e))
-(equal?? e '(((a b c d) (1 2 3 4)) ((z) (10))))
+(<span style="color:#66d9ef">define </span>e (<span style="color:#a6e22e">empty-env</span>))
+(<span style="color:#a6e22e">equal??</span> e <span style="color:#f92672">&#39;</span>())
 
-(equal?? (apply-env e 'z) 10)
-(equal?? (apply-env e 'd) 4)
+(<span style="color:#66d9ef">define </span>e (<span style="color:#a6e22e">extend-env</span> <span style="color:#e6db74">&#39;z</span> <span style="color:#ae81ff">10</span> e))
+(<span style="color:#a6e22e">equal??</span> e <span style="color:#f92672">&#39;</span>(((<span style="color:#a6e22e">z</span>) (<span style="color:#ae81ff">10</span>))))
 
-(equal?? (has-binding? e 'z) #t)
-(equal?? (has-binding? e 'd) #t)
-(equal?? (has-binding? e 'm) #f)
+(<span style="color:#66d9ef">define </span>e (<span style="color:#a6e22e">extend-env*</span> <span style="color:#f92672">&#39;</span>(a b c d) <span style="color:#f92672">&#39;</span>(<span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span>) e))
+(<span style="color:#a6e22e">equal??</span> e <span style="color:#f92672">&#39;</span>(((<span style="color:#a6e22e">a</span> b c d) (<span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span>)) ((<span style="color:#a6e22e">z</span>) (<span style="color:#ae81ff">10</span>))))
 
-</code></pre>
+(<span style="color:#a6e22e">equal??</span> (<span style="color:#a6e22e">apply-env</span> e <span style="color:#e6db74">&#39;z</span>) <span style="color:#ae81ff">10</span>)
+(<span style="color:#a6e22e">equal??</span> (<span style="color:#a6e22e">apply-env</span> e <span style="color:#e6db74">&#39;d</span>) <span style="color:#ae81ff">4</span>)
 
-<h2 id="结论">结论</h2>
+(<span style="color:#a6e22e">equal??</span> (<span style="color:#a6e22e">has-binding?</span> e <span style="color:#e6db74">&#39;z</span>) <span style="color:#66d9ef">#t</span>)
+(<span style="color:#a6e22e">equal??</span> (<span style="color:#a6e22e">has-binding?</span> e <span style="color:#e6db74">&#39;d</span>) <span style="color:#66d9ef">#t</span>)
+(<span style="color:#a6e22e">equal??</span> (<span style="color:#a6e22e">has-binding?</span> e <span style="color:#e6db74">&#39;m</span>) <span style="color:#66d9ef">#f</span>)
 
+</code></pre></div><h2 id="heading">结论</h2>
 <p>上述所谈的4种环境的实现，其实也就对应着四种不同的解释器的实现。环境实现的不同，对应者整个解释器的提取过程也就不一样。
 整个解释器独立的解释每一个表达式的时候，所采用的方法也就会有所不一样。所以设计一个好的environment，对应的就是设计一个好的
 数据结构，用于程序program解析的时候需要使用到的变量或者表达式数据，至关重要！</p>
@@ -1328,7 +1287,7 @@ empty-env  is '()
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

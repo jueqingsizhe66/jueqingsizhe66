@@ -568,72 +568,51 @@
 <span class="article-metadata" >Reading time: 2 minutes and    22 seconds with 523 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#1-array">1 Array</a>
-<ul>
-<li><a href="#1-1-bash数组定义">1.1 Bash数组定义</a></li>
-<li><a href="#1-2-bash关联数组定义">1.2 Bash关联数组定义</a></li>
-<li><a href="#1-3-bash数组添加数据">1.3 Bash数组添加数据</a></li>
-<li><a href="#1-4-bash数组显示数据和便利">1.4 Bash数组显示数据和便利</a></li>
-<li><a href="#1-5-拓展的操作">1.5 拓展的操作</a></li>
-</ul></li>
-<li><a href="#2-pattern-match">2. PATTERN MATCH</a></li>
-<li><a href="#3-事情流程">3 事情流程</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#1-array">1 Array</a>
+      <ul>
+        <li><a href="#11-bash">1.1 Bash数组定义</a></li>
+        <li><a href="#12-bash">1.2 Bash关联数组定义</a></li>
+        <li><a href="#13-bash">1.3 Bash数组添加数据</a></li>
+        <li><a href="#14-bash">1.4 Bash数组显示数据和便利</a></li>
+        <li><a href="#15-">1.5 拓展的操作</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-pattern-match">2. PATTERN MATCH</a></li>
+    <li><a href="#3-">3 事情流程</a></li>
+  </ul>
 </nav>
     </aside>
   <div class="article-container">
 
 
     <div class="article-style">
-      <p>通过<a href="http://jueqingsizhe66.github.io/blog/2015/10/23/bash-support-idede-xin-fa-xian/" target="_blank">Bash_It</a>的学习，第一次意识到Shell数组的不一样的写法。
+      <p>通过<a href="http://jueqingsizhe66.github.io/blog/2015/10/23/bash-support-idede-xin-fa-xian/">Bash_It</a>的学习，第一次意识到Shell数组的不一样的写法。
 并且也看到Pattern Match的一些用途。</p>
-
 <h2 id="1-array">1 Array</h2>
-
-<h3 id="1-1-bash数组定义">1.1 Bash数组定义</h3>
-
+<h3 id="11-bash">1.1 Bash数组定义</h3>
 <p>通过(1,2,3)区分于fortran语言的(/1,2,3/).</p>
-
 <p>bash1=(34,5,6,4)</p>
-
 <p>bash2=(&ldquo;34&rdquo;,&ldquo;5&rdquo;,&ldquo;5&rdquo;,&ldquo;4&rdquo;)</p>
-
-<h3 id="1-2-bash关联数组定义">1.2 Bash关联数组定义</h3>
-
+<h3 id="12-bash">1.2 Bash关联数组定义</h3>
 <p>通过 -A开关选项定义一个关联数组。</p>
-
 <p>declare -A bash1</p>
-
-<p>bash1[&ldquo;34&rdquo;]=&ldquo;53&rdquo;</p>
-
-<p>bash1[&ldquo;56&rdquo;]=&ldquo;45&rdquo;</p>
-
+<p>bash1[&ldquo;34&rdquo;]=&quot;53&rdquo;</p>
+<p>bash1[&ldquo;56&rdquo;]=&quot;45&rdquo;</p>
 <pre><code>declare -A array
 for subscript in a b c d e
      do
          array[$subscript]=&quot;$subscript $RANDOM&quot;
      done
 
-</code></pre>
-
-<p>也可以在<em>命令行使用</em></p>
-
+</code></pre><p>也可以在<em>命令行使用</em></p>
 <pre><code>  a=($(ls))  #而不是a=$(ls)
 
   #这样就可以使用
   ${a[1]}
-</code></pre>
-
-<h3 id="1-3-bash数组添加数据">1.3 Bash数组添加数据</h3>
-
-<p>bash1+=&ldquo;54&rdquo;</p>
-
-<h3 id="1-4-bash数组显示数据和便利">1.4 Bash数组显示数据和便利</h3>
-
+</code></pre><h3 id="13-bash">1.3 Bash数组添加数据</h3>
+<p>bash1+=&quot;54&rdquo;</p>
+<h3 id="14-bash">1.4 Bash数组显示数据和便利</h3>
 <pre><code>##单个显示
 printf &quot;%s\n&quot; &quot;${array[&quot;c&quot;]}&quot;
 
@@ -641,64 +620,40 @@ printf &quot;%s\n&quot; &quot;${array[&quot;c&quot;]}&quot;
 printf &quot;%s\n&quot; &quot;${array[@]}&quot;
 printf &quot;%s\n&quot; &quot;${array[*]}&quot;
 
-</code></pre>
-
-<h3 id="1-5-拓展的操作">1.5 拓展的操作</h3>
-
+</code></pre><h3 id="15-">1.5 拓展的操作</h3>
 <p>#表示长度的作用</p>
-
 <ol>
-<li>${#array<a href="http://www.gnu.org/" target="_blank">2</a>}  现实第二个数组元素的长度</li>
+<li>${#array<a href="http://www.gnu.org/">2</a>}  现实第二个数组元素的长度</li>
 <li>${#array[@]}   显示全部数组元素的长度</li>
 <li>${#array[*]}  显示全部数组元素的长度</li>
 <li>${#array[@]:2:3}  获取第2个到3个的长度</li>
 <li>${!array[@]} !的作用是现实所有的key在数组当中。</li>
 </ol>
-
 <p>进一步参考</p>
-
-<p><a href="http://www.apress.com/9781484201220" target="_blank">pro_Bash_programming</a>第五章 array部分</p>
-
-<hr />
-
+<p><a href="http://www.apress.com/9781484201220">pro_Bash_programming</a>第五章 array部分</p>
+<hr>
 <h2 id="2-pattern-match">2. PATTERN MATCH</h2>
-
 <pre><code>?(pattern-list)   Matches zero or one occurrence of the given patterns
 *(pattern-list)   Matches zero or more occurrences of the given patterns
 +(pattern-list)   Matches one or more occurrences of the given patterns
 @(pattern-list)   Matches one of the given patterns
 !(pattern-list)   Matches anything except one of the given patterns
-</code></pre>
-
-<p>比如：</p>
-
+</code></pre><p>比如：</p>
 <pre><code>  $ ls +(ab|def)*+(.jpg|.gif)
-</code></pre>
-
-<p>进一步参考  ls使用<a href="http://www.linuxjournal.com/content/bash-extended-globbing" target="_blank">PATTERN-MATCH</a></p>
-
-<hr />
-
+</code></pre><p>进一步参考  ls使用<a href="http://www.linuxjournal.com/content/bash-extended-globbing">PATTERN-MATCH</a></p>
+<hr>
 <p>Linux基础资料参考</p>
-
-<p><a href="http://www.gnu.org/" target="_blank">GNU官网</a></p>
-
-<p><a href="http://linux.vbird.org/linux_basic/" target="_blank">鸟哥论坛</a></p>
-
-<p><a href="http://linux.about.com/" target="_blank">Linux_About</a></p>
-
-<p><a href="http://www.cnblogs.com/bluebbc/tag/linux" target="_blank">CN_Blogs的一个收集</a></p>
-
-<h2 id="3-事情流程">3 事情流程</h2>
-
+<p><a href="http://www.gnu.org/">GNU官网</a></p>
+<p><a href="http://linux.vbird.org/linux_basic/">鸟哥论坛</a></p>
+<p><a href="http://linux.about.com/">Linux_About</a></p>
+<p><a href="http://www.cnblogs.com/bluebbc/tag/linux">CN_Blogs的一个收集</a></p>
+<h2 id="3-">3 事情流程</h2>
 <ol>
 <li>认定你的事情</li>
 <li>做</li>
 <li>检验</li>
 </ol>
-
 <p>拓展为:</p>
-
 <ol>
 <li>认清楚这件事情；</li>
 <li>分析与这件事情有关的一切的一切；</li>
@@ -1109,7 +1064,7 @@ printf &quot;%s\n&quot; &quot;${array[*]}&quot;
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

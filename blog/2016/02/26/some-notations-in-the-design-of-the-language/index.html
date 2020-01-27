@@ -570,25 +570,24 @@ of the language.目的就是如何更简洁地定义语法。"><meta property="o
 <span class="article-metadata" >Reading time: 11 minutes and    48 seconds with 2599 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#几个基本字符">几个基本字符</a>
-<ul>
-<li><a href="#nonterminal-symbols">Nonterminal Symbols</a></li>
-<li><a href="#terminal-symbols">Terminal Symbols:</a></li>
-<li><a href="#production-the-rules">Production(The rules)</a></li>
-</ul></li>
-<li><a href="#语义推导-syntactic-derivation-练习">语义推导(Syntactic derivation)练习</a></li>
-<li><a href="#结论">结论</a></li>
-<li><a href="#subst采用kleene-star进行书写">subst采用kleene star进行书写</a></li>
-<li><a href="#define-datatype的运用">define-datatype的运用</a>
-<ul>
-<li><a href="#lc-exp-和s-list的具体实现">Lc-Exp 和S-list的具体实现</a></li>
-<li><a href="#expression-和-expval的具体定义和实现">expression 和 expval的具体定义和实现</a></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#heading">几个基本字符</a>
+      <ul>
+        <li><a href="#nonterminal-symbols">Nonterminal Symbols</a></li>
+        <li><a href="#terminal-symbols">Terminal Symbols:</a></li>
+        <li><a href="#productionthe-rules">Production(The rules)</a></li>
+      </ul>
+    </li>
+    <li><a href="#syntactic-derivation">语义推导(Syntactic derivation)练习</a></li>
+    <li><a href="#heading-1">结论</a></li>
+    <li><a href="#substkleene-star">subst采用kleene star进行书写</a></li>
+    <li><a href="#define-datatype">define-datatype的运用</a>
+      <ul>
+        <li><a href="#lc-exp-s-list">Lc-Exp 和S-list的具体实现</a></li>
+        <li><a href="#expression--expval">expression 和 expval的具体定义和实现</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
     </aside>
   <div class="article-container">
@@ -598,124 +597,97 @@ of the language.目的就是如何更简洁地定义语法。"><meta property="o
       <p>What does it mean by Kleene star? What can it be used for?
 It is not so important,but a good tools to record the grammer
 of the language.目的就是如何更简洁地定义语法。</p>
-
-<h2 id="几个基本字符">几个基本字符</h2>
-
+<h2 id="heading">几个基本字符</h2>
 <h3 id="nonterminal-symbols">Nonterminal Symbols</h3>
-
 <p>指代被定义的集合名字(These are the names of the sets being defined)，比如List-of-Int,List-of-Char&hellip;,
 这些集合有时候也被叫做语义分类(syntactic categories)</p>
-
 <p>而且一般是of连接词是小写，其他表征类型的是大写(capitalized)。
 这是一个习惯，当然如果指引某个单一的元素的时候我们会用小写字母，
 比如 Expression is a nonterminal, 可以写成</p>
-
 <pre><code>  e &lt;- Expression  or
   e is an expression
-</code></pre>
-
-<p>当然我们也可以写成更为简单的形式，叫做Backus-Naur Form(BNF),即用尖括号包裹小写字母表达式，</p>
-
+</code></pre><p>当然我们也可以写成更为简单的形式，叫做Backus-Naur Form(BNF),即用尖括号包裹小写字母表达式，</p>
 <pre><code> &lt;expression&gt;
-</code></pre>
-
-<h3 id="terminal-symbols">Terminal Symbols:</h3>
-
+</code></pre><h3 id="terminal-symbols">Terminal Symbols:</h3>
 <ul>
 <li>left parenthesis 左括号 <code>(</code></li>
 <li>right parenthesis 右括号 <code>)</code></li>
 <li>period 句号 点号  <code>.</code></li>
 </ul>
-
-<h3 id="production-the-rules">Production(The rules)</h3>
-
+<h3 id="productionthe-rules">Production(The rules)</h3>
 <p>The rules are called productions.每一个Production包含left-handside（lhs),right-handside(rhs),并用<code>::=</code>来连接
 lhs和rhs，<code>::=</code>也被读作<em>is or can be</em></p>
-
 <ul>
 <li>lhs一般是nonterminal symbol,表征的是语义类(syntactic category)</li>
 <li>rhs一般是由terminal symbols(比如left and right parenthesis ,or period)和nonterminal symbols 组合起来。</li>
 <li>rhs的主要作用是用来按照其他语义分类(每一行都叫做一种语义分类）和Terminal symbolsl指定(specify)对应语义类
 的构造成员的方法(a method of constructing the members of the syntactic category)</li>
 </ul>
-
 <ol>
-<li><p><code>Int ::= (1 2 3 ....)</code></p></li>
-
-<li><p><code>Double ::= (1.11246 1.2 1.3 ...)</code></p></li>
-
-<li><p><code>Char ::= (a b c ...)</code></p></li>
-
-<li><p><code>Float ::= (1.1 1.2 1.3 ...)</code></p></li>
-
-<li><p><code>List-of-Int ::= ()</code>
-<code>List-of-Int ::= (Int . List-of-Int)</code></p></li>
-
-<li><p><code>Lists ::= ()|(Scheme Val . List)</code></p></li>
+<li>
+<p><code>Int ::= (1 2 3 ....)</code></p>
+</li>
+<li>
+<p><code>Double ::= (1.11246 1.2 1.3 ...)</code></p>
+</li>
+<li>
+<p><code>Char ::= (a b c ...)</code></p>
+</li>
+<li>
+<p><code>Float ::= (1.1 1.2 1.3 ...)</code></p>
+</li>
+<li>
+<p><code>List-of-Int ::= ()</code>
+<code>List-of-Int ::= (Int . List-of-Int)</code></p>
+</li>
+<li>
+<p><code>Lists ::= ()|(Scheme Val . List)</code></p>
+</li>
 </ol>
-
 <p>当然有时候我们也可以忽略第二个语义类的List-of-Int,比如</p>
-
-<ol>
+<ol start="7">
 <li><code>List-of-Int ::= ()</code>
-<code>::= (Int . List-of-Int)</code></li>
+<code>            ::= (Int . List-of-Int)</code></li>
 </ol>
-
 <p>当然我们也可以只用一行来表示语义类（归一为一条语义）：使用vertical bar(| ),也被读作or</p>
-
-<ol>
+<ol start="8">
 <li><code>List-of-Int ::= ()|(Int . List-of-Int)</code></li>
 </ol>
-
 <p>另外我们也可以使用一种更为简洁的形式： 使用 Kleene Star利用大括号(flower braces), <code>{}*</code></p>
-
-<ol>
+<ol start="9">
 <li><code>List-of-Int ::= ({Int}*)</code></li>
 </ol>
-
 <p>其中<code>*</code>表示的是0个或者0个以上，也可以变换为<code>+</code>。
 <code>+</code>:表示的是一个或者一个以上.</p>
-
-<ol>
+<ol start="10">
 <li><code>List-of-Int ::= ({Int}+)</code></li>
 </ol>
-
 <p>当然我们也可以规定Int之间的分割标志,利用seperation list</p>
-
-<ol>
-<li><p><code>List-of-Int ::= ({Int}*(,))</code>
-表示的是</p>
-
+<ol start="11">
+<li><code>List-of-Int ::= ({Int}*(,))  </code>
+表示的是</li>
+</ol>
 <pre><code>8
 1,2
 3,4,6
-</code></pre>
-
-<p>List-of-Int ::= (<code>{Int}*(;)</code>)</p>
-
+</code></pre><p>List-of-Int ::= (<code>{Int}*(;)</code>)</p>
 <pre><code>8
 1;2
 3;4;6
-</code></pre></li>
-</ol>
-
-<hr />
-
-<h2 id="语义推导-syntactic-derivation-练习">语义推导(Syntactic derivation)练习</h2>
-
+</code></pre><hr>
+<h2 id="syntactic-derivation">语义推导(Syntactic derivation)练习</h2>
 <ul>
-<li><p>(14 . ()) is a List-of-Int?</p>
-
+<li>(14 . ()) is a List-of-Int?</li>
+</ul>
 <pre><code>List-of-Int
 =&gt; (Int . (List-of-Int))
 =&gt; (14  . (List-of-Int))
 =&gt; (14  . ())
 
 so, it is true.
-</code></pre></li>
-
-<li><p>(-7 . (3 . (14 . ()))) is a List-of-Int?</p>
-
+</code></pre><ul>
+<li>(-7 . (3 . (14 . ()))) is a List-of-Int?</li>
+</ul>
 <pre><code>List-of-Int
 =&gt; (Int . (List-of-Int))
 =&gt; (-7  . (List-of-Int))
@@ -724,18 +696,13 @@ so, it is true.
 =&gt; (-7  . (3 . (14 . ())))
 
 so, it is true.
-</code></pre></li>
-
-<li><p>(a b c) is a S-list?</p></li>
+</code></pre><ul>
+<li>(a b c) is a S-list?</li>
 </ul>
-
 <p>因为</p>
-
 <pre><code>S-list = ({S-exp}(`*`))
 S-exp  = Symbol | S-list
-</code></pre>
-
-<pre><code>S-list
+</code></pre><pre><code>S-list
 =&gt; ({S-exp}(*))
 =&gt; {Symbol | S-list}(*)
 =&gt; {a | S-list}(*)
@@ -743,19 +710,12 @@ S-exp  = Symbol | S-list
 =&gt; {a b c}
 
 so, it is S-list
-</code></pre>
-
-<ul>
+</code></pre><ul>
 <li>(bar (biz 4 6) (foo 1 2)) is a binary tree?</li>
 </ul>
-
 <p>二叉树是非常重要的数据结构，它的定义形式是</p>
-
 <pre><code>  Bintree ::= Int| (Symbol Bintree Bintree)
-</code></pre>
-
-<p>所以我们可以这样解析</p>
-
+</code></pre><p>所以我们可以这样解析</p>
 <pre><code> Bintree
 =&gt;(Int|(Symbol Bintree Bintree))
 =&gt;(bar (Int|(Symbol Bintree Bintree)) (Int|(Symbol Bintree Bintree)))
@@ -768,29 +728,20 @@ so, it is S-list
 
 So,it is true
 
-</code></pre>
-
-<ul>
+</code></pre><ul>
 <li>(lambda (x) (+ x 6)) is a lambda calculus</li>
 </ul>
-
 <p>lambda calculus 是程序语言设计中十分重要的小型语言。该门语言仅仅包含</p>
-
 <ol>
 <li>变量引用(varient references)</li>
 <li>单参过程(procedures that takes a single argument)</li>
 <li>过程调用(procedure calls)</li>
 </ol>
-
 <p>定义如下</p>
-
 <pre><code>   LcExp ::= Identifier
          ::= (lambda (Identifier) LcExp)
          ::= (LcExp LcExp)
-</code></pre>
-
-<p>所以我们可以判断如下</p>
-
+</code></pre><p>所以我们可以判断如下</p>
 <pre><code> LcExp
 =&gt; Identifier|(lambda (Identifier) LcExp)|(LcExp LcExp)
 =&gt; (lambda (Identifier) LcExp)
@@ -806,108 +757,83 @@ So,it is true
 So, it is true.
 
 
-</code></pre>
-
-<h2 id="结论">结论</h2>
-
+</code></pre><h2 id="heading-1">结论</h2>
 <p>上米那说的List-of-Int,Bintree，Lambda calculus等都可以叫做一种语义类，是一门语言
 包含的原始类型。上面的syntatic derivation也可以被用来当作理论证明的一种入门，本质是递归理论。</p>
-
 <p>而其实他们都可以当作最为基本的解释器，因为他们在不断的解析他们所识别的expressions，上面的LcExp,
 List-exp等都叫做expressions，也是解释器的元素。</p>
-
 <p>而假如我们有一个函数</p>
-
 <pre><code>nth-element : List * Int -&gt; SchemeVal
-</code></pre>
-
-<p>他说明的是nth-element是一个接受List和Int作为形参并返回SchemeVal的过程，也就是它属于LcExp范畴。</p>
-
-<h2 id="subst采用kleene-star进行书写">subst采用kleene star进行书写</h2>
-
+</code></pre><p>他说明的是nth-element是一个接受List和Int作为形参并返回SchemeVal的过程，也就是它属于LcExp范畴。</p>
+<h2 id="substkleene-star">subst采用kleene star进行书写</h2>
 <p>subst的定义是</p>
-
 <pre><code>subst : Sym * Sym * S-list -&gt; S-list
-</code></pre>
+</code></pre><p>下面的实现过程从最为原始的只能处理lat的形式变为能够处理任意嵌套的expressions形式。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#f92672">#</span>lang racket
 
-<p>下面的实现过程从最为原始的只能处理lat的形式变为能够处理任意嵌套的expressions形式。</p>
-
-<pre><code class="language-scheme">#lang racket
-
-;;替换在slist中old值出现的值为new值（引用值）
-(define subst-original
-  (lambda (new old slist)
-    (if (null? slist)
-	'()
-	(cons
-	       (if (eqv? (car slist) old)
+<span style="color:#75715e">;;替换在slist中old值出现的值为new值（引用值）</span>
+(<span style="color:#66d9ef">define </span>subst-original
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">new</span> old slist)
+    (<span style="color:#66d9ef">if </span>(null? slist)
+	<span style="color:#f92672">&#39;</span>()
+	(<span style="color:#a6e22e">cons</span>
+	       (<span style="color:#66d9ef">if </span>(eqv? (car slist) old)
                new
                (car slist))
-	 (subst new old (cdr slist))))))
+	 (<span style="color:#a6e22e">subst</span> new old (cdr slist))))))
 
-;;map改进失败
-(define subst-wrong
-  (lambda (new old lst)
-    (map (lambda (x) (if (eq? x old) new old)) lst)))
-;;通过map 简化subst-original的原始写法
-(define subst-map
-  (lambda (new old lst)
-    (map (lambda (x) (if (eq? x old) new x)) lst)))
+<span style="color:#75715e">;;map改进失败</span>
+(<span style="color:#66d9ef">define </span>subst-wrong
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">new</span> old lst)
+    (map (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">x</span>) (<span style="color:#66d9ef">if </span>(eq? x old) new old)) lst)))
+<span style="color:#75715e">;;通过map 简化subst-original的原始写法</span>
+(<span style="color:#66d9ef">define </span>subst-map
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">new</span> old lst)
+    (map (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">x</span>) (<span style="color:#66d9ef">if </span>(eq? x old) new x)) lst)))
 
-;;;通过subst改进S-expression to list-expression
-(define subst
-  (lambda (new old slist)
-    (if (null? slist)
-	'()
-	(cons
-	 (let ((sexp (car slist)))
-	   (if (symbol? sexp)
-	       (if (eqv? sexp old)
+<span style="color:#75715e">;;;通过subst改进S-expression to list-expression</span>
+(<span style="color:#66d9ef">define </span>subst
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">new</span> old slist)
+    (<span style="color:#66d9ef">if </span>(null? slist)
+	<span style="color:#f92672">&#39;</span>()
+	(<span style="color:#a6e22e">cons</span>
+	 (<span style="color:#66d9ef">let </span>((<span style="color:#a6e22e">sexp</span> (car slist)))
+	   (<span style="color:#66d9ef">if </span>(symbol? sexp)
+	       (<span style="color:#66d9ef">if </span>(eqv? sexp old)
                new
                sexp)
-	       (subst new old sexp)))
-	 (subst new old (cdr slist))))))
+	       (<span style="color:#a6e22e">subst</span> new old sexp)))
+	 (<span style="color:#a6e22e">subst</span> new old (cdr slist))))))
 
-;;;通过map 改进subst
-(define subst-map-improve
-  (lambda (new old lst)
-    (map (lambda (x) (if (symbol? x) (if (eq? x old) new x) (subst-map new old x))) lst)))
+<span style="color:#75715e">;;;通过map 改进subst</span>
+(<span style="color:#66d9ef">define </span>subst-map-improve
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">new</span> old lst)
+    (map (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">x</span>) (<span style="color:#66d9ef">if </span>(symbol? x) (<span style="color:#66d9ef">if </span>(eq? x old) new x) (<span style="color:#a6e22e">subst-map</span> new old x))) lst)))
 
-(subst-original  'a 'b '(a b c (b b) d b))
-;'(a a c (a a) d a)
-(subst-map 'a 'b '(a b c (b b) d b))
-;'(a a c (b b) d a)
-(subst-wrong 'a 'b '(a b c (b b) d b))  ;;;错误在于所有的非old值都替换为old值了
-;'(b a b b b a)
-(subst 'a 'b '(a b c (b b) d b))
-;;'(a a c (a a) d a)
-(subst-map-improve 'a 'b '(a b c (b b) d b))
-;'(a a c (a a) d a)
-</code></pre>
-
-<p>这个拓展的例子虽然和表达式的注释主题关系不大，但是确是对于递归递归理论的进一步阐述。递归要求满足两个条件。</p>
-
+(<span style="color:#a6e22e">subst-original</span>  <span style="color:#e6db74">&#39;a</span> <span style="color:#e6db74">&#39;b</span> <span style="color:#f92672">&#39;</span>(a b c (<span style="color:#a6e22e">b</span> b) d b))
+<span style="color:#75715e">;&#39;(a a c (a a) d a)</span>
+(<span style="color:#a6e22e">subst-map</span> <span style="color:#e6db74">&#39;a</span> <span style="color:#e6db74">&#39;b</span> <span style="color:#f92672">&#39;</span>(a b c (<span style="color:#a6e22e">b</span> b) d b))
+<span style="color:#75715e">;&#39;(a a c (b b) d a)</span>
+(<span style="color:#a6e22e">subst-wrong</span> <span style="color:#e6db74">&#39;a</span> <span style="color:#e6db74">&#39;b</span> <span style="color:#f92672">&#39;</span>(a b c (<span style="color:#a6e22e">b</span> b) d b))  <span style="color:#75715e">;;;错误在于所有的非old值都替换为old值了</span>
+<span style="color:#75715e">;&#39;(b a b b b a)</span>
+(<span style="color:#a6e22e">subst</span> <span style="color:#e6db74">&#39;a</span> <span style="color:#e6db74">&#39;b</span> <span style="color:#f92672">&#39;</span>(a b c (<span style="color:#a6e22e">b</span> b) d b))
+<span style="color:#75715e">;;&#39;(a a c (a a) d a)</span>
+(<span style="color:#a6e22e">subst-map-improve</span> <span style="color:#e6db74">&#39;a</span> <span style="color:#e6db74">&#39;b</span> <span style="color:#f92672">&#39;</span>(a b c (<span style="color:#a6e22e">b</span> b) d b))
+<span style="color:#75715e">;&#39;(a a c (a a) d a)</span>
+</code></pre></div><p>这个拓展的例子虽然和表达式的注释主题关系不大，但是确是对于递归递归理论的进一步阐述。递归要求满足两个条件。</p>
 <ol>
 <li>递归出口(null? slt)  (zero? (car lst)) &hellip;</li>
 <li>逐渐朝向递归出口的算子 (cdr lst) (- n 1) &hellip;</li>
 </ol>
-
-<h2 id="define-datatype的运用">define-datatype的运用</h2>
-
-<p>具体实现可以查看<a href="http://jueqingsizhe66.github.io/blog/2016/02/19/the-implementation-of-define-datetype/" target="_blank">The Implementation of Define-datatype</a>.</p>
-
-<h3 id="lc-exp-和s-list的具体实现">Lc-Exp 和S-list的具体实现</h3>
-
+<h2 id="define-datatype">define-datatype的运用</h2>
+<p>具体实现可以查看<a href="http://jueqingsizhe66.github.io/blog/2016/02/19/the-implementation-of-define-datetype/">The Implementation of Define-datatype</a>.</p>
+<h3 id="lc-exp-s-list">Lc-Exp 和S-list的具体实现</h3>
 <p>上文所提记得Lc-Exp的定义为：</p>
-
 <pre><code>    lc-exp  ::=identifier
             ::=(lambda (identifier) Lc-exp
             ::=(lc-exp lc-exp)
 
-</code></pre>
-
-<p>它使用define-datatype的实现如下：</p>
-
+</code></pre><p>它使用define-datatype的实现如下：</p>
 <pre><code>(define-datatype lc-exp lc-exp?
     (var-exp (var identifier?))
     (lambda-exp (bound-var identifier?)
@@ -916,16 +842,10 @@ List-exp等都叫做expressions，也是解释器的元素。</p>
              (rand lc-exp?))
 )
 
-</code></pre>
-
-<p>而S-list的定义再现：</p>
-
+</code></pre><p>而S-list的定义再现：</p>
 <pre><code>   S-list   ::=({S-exp}*) 
    S-exp:=Symbol|S-list
-</code></pre>
-
-<p>他对应的实现如下</p>
-
+</code></pre><p>他对应的实现如下</p>
 <pre><code>(define-datatype s-list s-list?
     (empty-s-list)
     (non-empty-s-list
@@ -937,13 +857,9 @@ List-exp等都叫做expressions，也是解释器的元素。</p>
     (s-list-s-exp (slst s-list?))
 )
 
-</code></pre>
-
-<h3 id="expression-和-expval的具体定义和实现">expression 和 expval的具体定义和实现</h3>
-
+</code></pre><h3 id="expression--expval">expression 和 expval的具体定义和实现</h3>
 <p>在Interpreter的过程中肯定涉及到expression的设计和value值的表现（<strong>把exp和val的键值对叫做解释器的字典</strong>）
 expression的具体定义是</p>
-
 <pre><code>expression ::= (var-exp ())
            ::= (const-exp ())
            ::= (zero?-exp ())
@@ -959,10 +875,7 @@ expression的具体定义是</p>
            ::= (proc-exp ())
            ::= (call-exp ())
            ::= (letrec-exp ())  ;;并未再此体现
-</code></pre>
-
-<p>具体实现如下所示:</p>
-
+</code></pre><p>具体实现如下所示:</p>
 <pre><code>;;; datatype ;;;
 (define-datatype expression expression?
   (var-exp
@@ -1001,19 +914,13 @@ expression的具体定义是</p>
    (rator expression?)
    (rand (list-of expression?))))
 
-</code></pre>
-
-<p>expval的定义(主要是用于scheme value)如下:</p>
-
+</code></pre><p>expval的定义(主要是用于scheme value)如下:</p>
 <pre><code> expval ::= (num-val ())
         ::= (bool-val ())
         ::= (proc-val ())
         ::= (pair-val ())
         ::= (emptylist-val)
-</code></pre>
-
-<p>具体实现如下 所示：</p>
-
+</code></pre><p>具体实现如下 所示：</p>
 <pre><code>;;; an expressed value is either a number, a boolean or a procval.
 (define-datatype expval expval?
   (num-val
@@ -1027,15 +934,9 @@ expression的具体定义是</p>
    (cdr expval?))
   (emptylist-val))
 
-</code></pre>
-
-<p>proc的具体定义如下，</p>
-
+</code></pre><p>proc的具体定义如下，</p>
 <pre><code>  proc ::= (procedure ())
-</code></pre>
-
-<p>proc的实现如下所示：</p>
-
+</code></pre><p>proc的实现如下所示：</p>
 <pre><code>;; proc? : SchemeVal -&gt; Bool
 ;; procedure : Var * Exp * Env -&gt; Proc
 (define-datatype proc proc?
@@ -1045,9 +946,7 @@ expression的具体定义是</p>
    (env environment?)))
 
 
-</code></pre>
-
-<p>当然具体的Define-datatype的定义还得配合<a href="http://jueqingsizhe66.github.io/blog/2016/02/23/casesde-zuo-yong/" target="_blank">cases的作用</a>进行实现。</p>
+</code></pre><p>当然具体的Define-datatype的定义还得配合<a href="http://jueqingsizhe66.github.io/blog/2016/02/23/casesde-zuo-yong/">cases的作用</a>进行实现。</p>
     </div>
  <div class="nav-links" style="padding:10;">
         
@@ -1451,7 +1350,7 @@ expression的具体定义是</p>
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

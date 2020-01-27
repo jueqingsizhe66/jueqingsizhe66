@@ -5,7 +5,7 @@
     <link>https://jueqingsizhe66.github.io/tags/openfoam/</link>
       <atom:link href="https://jueqingsizhe66.github.io/tags/openfoam/index.xml" rel="self" type="application/rss+xml" />
     <description>openfoam</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>©2019</copyright><lastBuildDate>Wed, 10 Jun 2015 23:19:42 +0800</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>©2020</copyright><lastBuildDate>Wed, 10 Jun 2015 23:19:42 +0800</lastBuildDate>
     <image>
       <url>https://jueqingsizhe66.github.io/img/icon-192.png</url>
       <title>openfoam</title>
@@ -21,167 +21,160 @@
 &lt;li&gt;当你阅读源代码你是否厌倦了cd来cd去，于是想把他们堆在一个文件内&lt;/li&gt;
 &lt;li&gt;而堆起来又不好看，于是想要打扮一下&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;于是写了下面的小程序，估计对于阅读有帮助，主要用到&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;shell变量处理&lt;/li&gt;
 &lt;li&gt;shell变量长度&lt;/li&gt;
 &lt;li&gt;find显示相对全路经&lt;/li&gt;
-&lt;li&gt;==两边&lt;strong&gt;不能有&lt;/strong&gt;空格，然而在赋值的时候必须没有空格&lt;/li&gt;
+&lt;li&gt;==两边__不能有__空格，然而在赋值的时候必须没有空格&lt;/li&gt;
 &lt;li&gt;利用函数思想，封装小寒数&lt;/li&gt;
 &lt;li&gt;美观，把一个文件当作一个夹子进行显示&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;&lt;strong&gt;注意针对每一个版本都需要进行适当的修改&lt;/strong&gt;.在getFile中有一个sed命令一定要注意，那是删除行首的7行，针对不同文件，需要适当修改.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;#!/bin/bash - 
-#===============================================================================
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/bin/bash - 
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#===============================================================================&lt;/span&gt;
 #
-#          FILE: browser.sh
+&lt;span style=&#34;color:#75715e&#34;&gt;#          FILE: browser.sh&lt;/span&gt;
 # 
-#         USAGE: ./browser.sh 
+&lt;span style=&#34;color:#75715e&#34;&gt;#         USAGE: ./browser.sh&lt;/span&gt; 
 # 
-#   DESCRIPTION:  注意针对每一个版本都需要进行适当的修改
+&lt;span style=&#34;color:#75715e&#34;&gt;#   DESCRIPTION:  注意针对每一个版本都需要进行适当的修改&lt;/span&gt;
 # 
-#       OPTIONS: ---
-#  REQUIREMENTS: ---
-#          BUGS: ---
-#         NOTES: ---
-#        AUTHOR: Ye Zhaoliang (), zhaoturkkey@163.com
-#  ORGANIZATION: YZL
-#       CREATED: 2015年06月10日 21:50
-#      REVISION:  ---
-#===============================================================================
-#---  FUNCTION  ----------------------------------------------------------------
-#          NAME:  generateChapter
-#   DESCRIPTION:  针对不同额文件采用不同的处理方法，判断目录 和判断脚本是一个重要的操作
-#                 但是更为重要的是 find获得文集拿的绝对路径(相对于当前文件)
-#    PARAMETERS:  
-#       RETURNS:  
-#-------------------------------------------------------------------------------
+&lt;span style=&#34;color:#75715e&#34;&gt;#       OPTIONS: ---&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#  REQUIREMENTS: ---&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#          BUGS: ---&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         NOTES: ---&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#        AUTHOR: Ye Zhaoliang (), zhaoturkkey@163.com&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#  ORGANIZATION: YZL&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#       CREATED: 2015年06月10日 21:50&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#      REVISION:  ---&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#===============================================================================&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#---  FUNCTION  ----------------------------------------------------------------&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#          NAME:  generateChapter&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#   DESCRIPTION:  针对不同额文件采用不同的处理方法，判断目录 和判断脚本是一个重要的操作&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#                 但是更为重要的是 find获得文集拿的绝对路径(相对于当前文件)&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#    PARAMETERS:&lt;/span&gt;  
+&lt;span style=&#34;color:#75715e&#34;&gt;#       RETURNS:&lt;/span&gt;  
+&lt;span style=&#34;color:#75715e&#34;&gt;#-------------------------------------------------------------------------------&lt;/span&gt;
 
-generateChapter()
-{
-    # 妙用find 得到当前目录的相对路径 不需要不断的进入目录
-    for var in `find . -name &amp;quot;*&amp;quot;`
-    do
-        if [[ -d  $var ]] # &amp;lt; cannot . Error
-        then
-            echo &amp;quot;${currentDir}${var#.}是一个目录&amp;quot; # 使用#号来删除之前的点号
-        elif [[ &amp;quot;${var##*/}&amp;quot; == &amp;quot;${0}&amp;quot; ]] # 一定要注意等式两边有空格
-        then
-            echo &amp;quot;${currentDir}${var#.} ${0} 脚本文件不处理&amp;quot;
-        else
-            getFile ${currentDir}${var#.}
-        fi
+generateChapter&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# 妙用find 得到当前目录的相对路径 不需要不断的进入目录&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; var in &lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;find . -name &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;*&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;do&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt; -d  $var &lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# &amp;lt; cannot . Error&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;then&lt;/span&gt;
+            echo &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;${&lt;/span&gt;currentDir&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;${&lt;/span&gt;var#.&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;是一个目录&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# 使用#号来删除之前的点号&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;${&lt;/span&gt;var##*/&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;${&lt;/span&gt;0&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# 一定要注意等式两边有空格&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;then&lt;/span&gt;
+            echo &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;${&lt;/span&gt;currentDir&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;${&lt;/span&gt;var#.&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;${&lt;/span&gt;0&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; 脚本文件不处理&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;
+            getFile &lt;span style=&#34;color:#e6db74&#34;&gt;${&lt;/span&gt;currentDir&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;${&lt;/span&gt;var#.&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;fi&lt;/span&gt;
 
-    done
-}
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;done&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
 
 
-#---  FUNCTION  ----------------------------------------------------------------
-#          NAME:  getFile
-#   DESCRIPTION:  在每个文件的头部添加一些信息
-#    PARAMETERS:  
-#       RETURNS:  
-#-------------------------------------------------------------------------------
-getFile()
-{
-    startString=&amp;quot;# -------------------&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;quot;$1&amp;quot; started&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;-------------------#&amp;quot;
-    endString=&amp;quot;# --------------------&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;quot;$1&amp;quot; ended &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;-------------------#&amp;quot;
-       #echo &amp;quot;&amp;quot; &amp;gt;&amp;gt;summary.sh
-    #echo -e &amp;quot;\033[44;37m -------------------&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;quot;$1&amp;quot; started&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;-------------------\033[0m&amp;quot; &amp;gt;&amp;gt;summary.sh
-    #echo  &amp;quot;# -------------------&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;quot;$1&amp;quot; started&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;-------------------&amp;quot; &amp;gt;&amp;gt;summary.sh
+&lt;span style=&#34;color:#75715e&#34;&gt;#---  FUNCTION  ----------------------------------------------------------------&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#          NAME:  getFile&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#   DESCRIPTION:  在每个文件的头部添加一些信息&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#    PARAMETERS:&lt;/span&gt;  
+&lt;span style=&#34;color:#75715e&#34;&gt;#       RETURNS:&lt;/span&gt;  
+&lt;span style=&#34;color:#75715e&#34;&gt;#-------------------------------------------------------------------------------&lt;/span&gt;
+getFile&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+    startString&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;# -------------------&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;#34;&lt;/span&gt;$1&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34; started&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;-------------------#&amp;#34;&lt;/span&gt;
+    endString&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;# --------------------&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;#34;&lt;/span&gt;$1&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34; ended &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;-------------------#&amp;#34;&lt;/span&gt;
+       &lt;span style=&#34;color:#75715e&#34;&gt;#echo &amp;#34;&amp;#34; &amp;gt;&amp;gt;summary.sh&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;#echo -e &amp;#34;\033[44;37m -------------------&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;#34;$1&amp;#34; started&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;-------------------\033[0m&amp;#34; &amp;gt;&amp;gt;summary.sh&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;#echo  &amp;#34;# -------------------&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;#34;$1&amp;#34; started&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;-------------------&amp;#34; &amp;gt;&amp;gt;summary.sh&lt;/span&gt;
     echo $startString &amp;gt;&amp;gt; summary.sh
-    echo &amp;quot;#`printf &amp;quot;%$(( ${#startString}-2 ))s&amp;quot; &amp;quot; &amp;quot;`#&amp;quot; &amp;gt;&amp;gt;summary.sh
-    echo &amp;quot;#`printf &amp;quot;%$(( ${#startString}-2 ))s&amp;quot; &amp;quot; &amp;quot;`#&amp;quot; &amp;gt;&amp;gt;summary.sh
-    echo &amp;quot;#`printf &amp;quot;%$(( ${#startString}-2 ))s&amp;quot; &amp;quot; &amp;quot;`#&amp;quot; &amp;gt;&amp;gt;summary.sh ### 不加上$反而不行
-   # echo &amp;quot;#&amp;quot; &amp;gt;&amp;gt;summary.sh
-   # echo &amp;quot;#&amp;quot; &amp;gt;&amp;gt;summary.sh
-    sed &#39;1,7d&#39; $1 &amp;gt;&amp;gt; summary.sh
-    echo &amp;quot;#`printf &amp;quot;%$(( ${#endString}-2 ))s&amp;quot; &amp;quot; &amp;quot;`#&amp;quot; &amp;gt;&amp;gt;summary.sh
-    echo &amp;quot;#`printf &amp;quot;%$(( ${#endString}-2 ))s&amp;quot; &amp;quot; &amp;quot;`#&amp;quot; &amp;gt;&amp;gt;summary.sh
-    echo &amp;quot;#`printf &amp;quot;%$(( ${#endString}-2 ))s&amp;quot; &amp;quot; &amp;quot;`#&amp;quot; &amp;gt;&amp;gt;summary.sh
-    #echo &amp;quot;#&amp;quot; &amp;gt;&amp;gt;summary.sh
-    #echo &amp;quot;#&amp;quot; &amp;gt;&amp;gt;summary.sh
-    #echo -e &amp;quot;\033[43;37m --------------------&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;quot;$1&amp;quot; ended &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;-------------------\033[0m&amp;quot; &amp;gt;&amp;gt; summary.sh
-    #echo &amp;quot;# --------------------&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;quot;$1&amp;quot; ended &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;-------------------&amp;quot; &amp;gt;&amp;gt; summary.sh
+    echo &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;#`printf &amp;#34;&lt;/span&gt;%&lt;span style=&#34;color:#66d9ef&#34;&gt;$((&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;${#&lt;/span&gt;startString&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;))&lt;/span&gt;s&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34; &amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;`#&amp;#34;&lt;/span&gt; &amp;gt;&amp;gt;summary.sh
+    echo &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;#`printf &amp;#34;&lt;/span&gt;%&lt;span style=&#34;color:#66d9ef&#34;&gt;$((&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;${#&lt;/span&gt;startString&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;))&lt;/span&gt;s&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34; &amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;`#&amp;#34;&lt;/span&gt; &amp;gt;&amp;gt;summary.sh
+    echo &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;#`printf &amp;#34;&lt;/span&gt;%&lt;span style=&#34;color:#66d9ef&#34;&gt;$((&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;${#&lt;/span&gt;startString&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;))&lt;/span&gt;s&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34; &amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;`#&amp;#34;&lt;/span&gt; &amp;gt;&amp;gt;summary.sh &lt;span style=&#34;color:#75715e&#34;&gt;### 不加上$反而不行&lt;/span&gt;
+   &lt;span style=&#34;color:#75715e&#34;&gt;# echo &amp;#34;#&amp;#34; &amp;gt;&amp;gt;summary.sh&lt;/span&gt;
+   &lt;span style=&#34;color:#75715e&#34;&gt;# echo &amp;#34;#&amp;#34; &amp;gt;&amp;gt;summary.sh&lt;/span&gt;
+    sed &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;1,7d&amp;#39;&lt;/span&gt; $1 &amp;gt;&amp;gt; summary.sh
+    echo &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;#`printf &amp;#34;&lt;/span&gt;%&lt;span style=&#34;color:#66d9ef&#34;&gt;$((&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;${#&lt;/span&gt;endString&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;))&lt;/span&gt;s&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34; &amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;`#&amp;#34;&lt;/span&gt; &amp;gt;&amp;gt;summary.sh
+    echo &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;#`printf &amp;#34;&lt;/span&gt;%&lt;span style=&#34;color:#66d9ef&#34;&gt;$((&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;${#&lt;/span&gt;endString&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;))&lt;/span&gt;s&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34; &amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;`#&amp;#34;&lt;/span&gt; &amp;gt;&amp;gt;summary.sh
+    echo &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;#`printf &amp;#34;&lt;/span&gt;%&lt;span style=&#34;color:#66d9ef&#34;&gt;$((&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;${#&lt;/span&gt;endString&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;))&lt;/span&gt;s&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34; &amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;`#&amp;#34;&lt;/span&gt; &amp;gt;&amp;gt;summary.sh
+    &lt;span style=&#34;color:#75715e&#34;&gt;#echo &amp;#34;#&amp;#34; &amp;gt;&amp;gt;summary.sh&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;#echo &amp;#34;#&amp;#34; &amp;gt;&amp;gt;summary.sh&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;#echo -e &amp;#34;\033[43;37m --------------------&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;#34;$1&amp;#34; ended &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;-------------------\033[0m&amp;#34; &amp;gt;&amp;gt; summary.sh&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;#echo &amp;#34;# --------------------&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;#34;$1&amp;#34; ended &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;-------------------&amp;#34; &amp;gt;&amp;gt; summary.sh&lt;/span&gt;
     echo $endString &amp;gt;&amp;gt; summary.sh
-    echo &amp;quot;&amp;quot; &amp;gt;&amp;gt;summary.sh
-    echo &amp;quot;&amp;quot; &amp;gt;&amp;gt;summary.sh
-    echo &amp;quot;&amp;quot; &amp;gt;&amp;gt;summary.sh
+    echo &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt; &amp;gt;&amp;gt;summary.sh
+    echo &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt; &amp;gt;&amp;gt;summary.sh
+    echo &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt; &amp;gt;&amp;gt;summary.sh
     
-}
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
 
-currentDir=`pwd`
+currentDir&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;pwd&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;
 
-# 如果存在 summary.sh 证明已经存在了，就先把删掉， 因为这里是
-# 采用追加的方式，而不是写入。
-if [[ -e ./summary.sh ]]
-then 
+&lt;span style=&#34;color:#75715e&#34;&gt;# 如果存在 summary.sh 证明已经存在了，就先把删掉， 因为这里是&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# 采用追加的方式，而不是写入。&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt; -e ./summary.sh &lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;then&lt;/span&gt; 
     rm -rf ./summary.sh
-fi
-# 调用产生所有的文件夹内的数据到一个文件中
+&lt;span style=&#34;color:#66d9ef&#34;&gt;fi&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# 调用产生所有的文件夹内的数据到一个文件中&lt;/span&gt;
 
 generateChapter
 
-#sed -i &#39;/C++/d&#39; summary |sed &#39;/=========/d&#39;|sed &#39;/OpenFOAM/d&#39; | sed &#39;/Version/d&#39; | sed &#39;/Web/d&#39;|sed &#39;/anipulation/d&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;结果显示&#34;&gt;结果显示&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# -------------------&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;/openfoamF708/tutorials/incompressible/icoFoam/cavity/system/fvSolution started&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;-------------------#
-#                                                                                                                                        #
-#                                                                                                                                        #
-#                                                                                                                                        #
+&lt;span style=&#34;color:#75715e&#34;&gt;#sed -i &amp;#39;/C++/d&amp;#39; summary |sed &amp;#39;/=========/d&amp;#39;|sed &amp;#39;/OpenFOAM/d&amp;#39; | sed &amp;#39;/Version/d&amp;#39; | sed &amp;#39;/Web/d&amp;#39;|sed &amp;#39;/anipulation/d&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;heading&#34;&gt;结果显示&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# -------------------&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;/openfoamF708/tutorials/incompressible/icoFoam/cavity/system/fvSolution started&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;-------------------#&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#                                                                                                                                        #&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#                                                                                                                                        #&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#                                                                                                                                        #&lt;/span&gt;
 FoamFile
-{
+&lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
     version     2.0;
     format      ascii;
     class       dictionary;
-    location    &amp;quot;system&amp;quot;;
+    location    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;system&amp;#34;&lt;/span&gt;;
     object      fvSolution;
-}
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 solvers
-{
+&lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
     p
-    {
+    &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
         solver          PCG;
         preconditioner  DIC;
         tolerance       1e-06;
         relTol          0;
-    }
+    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
 
     U
-    {
+    &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
         solver          smoothSolver;
         smoother        symGaussSeidel;
         tolerance       1e-05;
         relTol          0;
-    }
-}
+    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
 
 PISO
-{
+&lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
     nCorrectors     2;
     nNonOrthogonalCorrectors 0;
     pRefCell        0;
     pRefValue       0;
-}
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
 
 
-#                                                                                                                                        #
-#                                                                                                                                        #
-#                                                                                                                                        #
-# --------------------&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;/openfoamF708/tutorials/incompressible/icoFoam/cavity/system/fvSolution ended &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;-------------------#
+&lt;span style=&#34;color:#75715e&#34;&gt;#                                                                                                                                        #&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#                                                                                                                                        #&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#                                                                                                                                        #&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# --------------------&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;/openfoamF708/tutorials/incompressible/icoFoam/cavity/system/fvSolution ended &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;-------------------#&lt;/span&gt;
 
 
 
-# -------------------&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;/openfoamF708/tutorials/incompressible/icoFoam/cavity/system/fvSchemes started&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;-------------------#
-&lt;/code&gt;&lt;/pre&gt;</description>
+&lt;span style=&#34;color:#75715e&#34;&gt;# -------------------&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;/openfoamF708/tutorials/incompressible/icoFoam/cavity/system/fvSchemes started&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;-------------------#&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
     
   </channel>

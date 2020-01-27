@@ -563,33 +563,15 @@
 
 
 
-<span class="article-metadata" >Reading time: 12 minutes and    43 seconds with 2798 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+<span class="article-metadata" >Reading time: 12 minutes and    19 seconds with 2713 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
-        
+        <nav id="TableOfContents"></nav>
     </aside>
   <div class="article-container">
 
 
     <div class="article-style">
-      <p><Link type="text/css" rel="stylesheet" href="">
-    <Link type="javascript" rel="stylesheet" href="">
-    <!--
-     Link 控件
-       rel属性  ：目标文档与当前文档的关系
-       type属性 ： 文档类型
-    -->
-      <!--设background:url(b.jpg);置背景颜色 和文字字体-->
-    <!--定义样式-->
-    &lt;!&ndash;
-    学习的网站 ！
-<a href="http://www.w3school.com.cn/css/index.asp(用到的时候记得查红色关键字即可" target="_blank">http://www.w3school.com.cn/css/index.asp(用到的时候记得查红色关键字即可</a>)
-找颜色：<a href="http://www.114la.com/other/rgb.htm" target="_blank">http://www.114la.com/other/rgb.htm</a>
-       背景控件的修饰
-           注意background相关信息即可！
-                  background-color
-                  background-image
-                  background-position</p>
-
+      <!-- raw HTML omitted -->
 <pre><code>    文本控件的修饰
         一般注意text相关信息
                text-align
@@ -659,13 +641,11 @@
 
 所以其实在一个元素的外部有四重的包裹由内至外：  padding-&gt; border--&gt;outline--&gt;margin  注意你所设置的位置
 </code></pre>
-
 <p>综上所述： 所以在标签中一般有Id属性  ，也可能有Class属性
-                一般规律1是：（必须掌握）
-                            Style的内嵌入的修饰  &gt;   Id选择器&gt;  Class选择器 &gt; 标签选择器
-                   公式2：  selectors{属性名：属性值}   对应HTML的 标签&lt;属性名=属性值&gt;       CSS是用selectors来说标签， CSS使用冒号，HTML使用等号
-                     CSS+HTML使用得好在乎经验和功夫，非一天两天。</p>
-
+一般规律1是：（必须掌握）
+Style的内嵌入的修饰  &gt;   Id选择器&gt;  Class选择器 &gt; 标签选择器
+公式2：  selectors{属性名：属性值}   对应HTML的 标签&lt;属性名=属性值&gt;       CSS是用selectors来说标签， CSS使用冒号，HTML使用等号
+CSS+HTML使用得好在乎经验和功夫，非一天两天。</p>
 <p>CSS基本选择器：
 标签选择器
 id选择器   #id_name
@@ -676,211 +656,159 @@ CSS拓展选择器：
 属性选择器   a[href]{color:red}
 组合选择器   h1,h2,h3,h4{color:blue}（注意提取共性）
 伪选择器  主要针对于连接标签   （可用于控制界面的效果）
-                     ：linked       ：visited      :hover         :actived       :focus(获得焦点的时候）</p>
-
+：linked       ：visited      :hover         :actived       :focus(获得焦点的时候）</p>
 <p>两种外联式方式：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css"><span style="color:#f92672">&lt;</span><span style="color:#f92672">link</span> <span style="color:#f92672">rel</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;stylesheet&#34;</span> <span style="color:#f92672">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/css&#34;</span> <span style="color:#f92672">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;*.css&#34;</span><span style="color:#f92672">/</span><span style="color:#f92672">&gt;</span>    <span style="color:#f92672">常用</span>               
+@<span style="color:#66d9ef">import</span> <span style="color:#f92672">url</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;*.css&#34;</span><span style="color:#f92672">)</span>;  <span style="color:#f92672">必须写到</span><span style="color:#f92672">&lt;</span><span style="color:#f92672">style</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">&lt;</span><span style="color:#f92672">/</span><span style="color:#f92672">style</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">标签中</span>
+<span style="color:#f92672">第一种是界面直接加载全部</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#f92672">第二种是在页面加载完毕</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#f92672">然后在加载css文件</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#f92672">也就是刚开始没有样式</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#f92672">了解即可</span><span style="color:#960050;background-color:#1e0010">。</span>
 
-<pre><code class="language-css">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;*.css&quot;/&gt;    常用               
-@import url(&quot;*.css&quot;);  必须写到&lt;style&gt;&lt;/style&gt;标签中
-第一种是界面直接加载全部，第二种是在页面加载完毕，然后在加载css文件，也就是刚开始没有样式，了解即可。
+    <span style="color:#f92672">--</span><span style="color:#f92672">&gt;</span>
 
-    --&gt;
+<span style="color:#f92672">&lt;</span><span style="color:#f92672">Style</span> <span style="color:#f92672">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/css&#34;</span><span style="color:#f92672">&gt;</span>
+      <span style="color:#f92672">body</span>{<span style="color:#66d9ef">font-family</span>:<span style="color:#e6db74">&#34;微软雅黑&#34;</span>}
+      .<span style="color:#a6e22e">box</span>{<span style="color:#66d9ef">width</span>:<span style="color:#ae81ff">600</span><span style="color:#66d9ef">px</span>; <span style="color:#66d9ef">margin</span>:<span style="color:#ae81ff">0</span> <span style="color:#66d9ef">auto</span>; <span style="color:#66d9ef">padding-top</span>:<span style="color:#ae81ff">100</span><span style="color:#66d9ef">px</span>;<span style="color:#66d9ef">background-color</span>:<span style="color:#66d9ef">black</span>}
+      .<span style="color:#a6e22e">box</span> 
+      <span style="color:#f92672">H1</span>{<span style="color:#66d9ef">text-align</span>:<span style="color:#66d9ef">center</span> <span style="color:#66d9ef">text</span><span style="color:#f92672">-</span>shadow<span style="color:#f92672">:</span><span style="color:#ae81ff">2</span><span style="color:#66d9ef">px</span> <span style="color:#ae81ff">5</span><span style="color:#66d9ef">px</span> <span style="color:#ae81ff">5</span><span style="color:#66d9ef">px</span> 
+      rgba(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">1</span>);<span style="color:#66d9ef">color</span>:<span style="color:#66d9ef">white</span>; }
+      .<span style="color:#a6e22e">box</span> 
+      <span style="color:#f92672">p</span>{<span style="color:#66d9ef">background</span>:<span style="color:#ae81ff">#2c2c29</span>;<span style="color:#66d9ef">border-radius</span>:<span style="color:#ae81ff">10</span><span style="color:#66d9ef">px</span>;<span style="color:#66d9ef">border</span>:<span style="color:#ae81ff">1</span><span style="color:#66d9ef">px</span> <span style="color:#66d9ef">solid</span> <span style="color:#ae81ff">#222220</span>;
+      <span style="color:#66d9ef">line-height</span>:<span style="color:#ae81ff">38</span><span style="color:#66d9ef">px</span>;<span style="color:#66d9ef">margin-right</span>:<span style="color:#ae81ff">5</span><span style="color:#66d9ef">px</span>;<span style="color:#66d9ef">float</span>:<span style="color:#66d9ef">left</span>;<span style="color:#960050;background-color:#1e0010">w</span><span style="color:#960050;background-color:#1e0010">i</span><span style="color:#960050;background-color:#1e0010">d</span><span style="color:#960050;background-color:#1e0010">t</span><span style="color:#960050;background-color:#1e0010">h</span><span style="color:#960050;background-color:#1e0010">=</span><span style="color:#960050;background-color:#1e0010">6</span><span style="color:#960050;background-color:#1e0010">0</span><span style="color:#960050;background-color:#1e0010">0</span><span style="color:#960050;background-color:#1e0010">p</span><span style="color:#960050;background-color:#1e0010">x</span>;}
+      .<span style="color:#a6e22e">box</span> 
+      <span style="color:#f92672">span</span>{<span style="color:#66d9ef">float</span>:<span style="color:#66d9ef">left</span>;<span style="color:#66d9ef">display</span>:<span style="color:#66d9ef">block</span>;<span style="color:#66d9ef">text-align</span>:<span style="color:#66d9ef">right</span>;<span style="color:#66d9ef">background</span>:<span style="color:#ae81ff">#373733</span>
+      ;<span style="color:#66d9ef">width</span>:<span style="color:#ae81ff">70</span><span style="color:#66d9ef">px</span>;<span style="color:#66d9ef">height</span>:<span style="color:#ae81ff">40</span><span style="color:#66d9ef">px</span>;<span style="color:#66d9ef">color</span>:<span style="color:#ae81ff">#ffffff</span>;<span style="color:#66d9ef">border-right</span>:<span style="color:#ae81ff">1</span><span style="color:#66d9ef">px</span> <span style="color:#66d9ef">solid</span> <span style="color:#ae81ff">#222220</span>;}
+      .<span style="color:#a6e22e">input_box</span>{<span style="color:#66d9ef">width</span>:<span style="color:#ae81ff">167</span><span style="color:#66d9ef">px</span>;<span style="color:#66d9ef">padding-left</span>:<span style="color:#ae81ff">10</span><span style="color:#66d9ef">px</span>;<span style="color:#66d9ef">height</span>:<span style="color:#ae81ff">38</span><span style="color:#66d9ef">px</span>;<span style="color:#66d9ef">border</span>:<span style="color:#ae81ff">0</span><span style="color:#66d9ef">px</span>;<span style="color:#66d9ef">background</span>:
+      <span style="color:#ae81ff">#2c2c29</span>;<span style="color:#66d9ef">float</span>:<span style="color:#66d9ef">left</span>;<span style="color:#66d9ef">color</span>:<span style="color:#ae81ff">#ffffff</span>}
+      .<span style="color:#a6e22e">input_btn</span>{<span style="color:#66d9ef">width</span>:<span style="color:#ae81ff">500</span><span style="color:#66d9ef">px</span>;<span style="color:#66d9ef">height</span>:<span style="color:#ae81ff">40</span><span style="color:#66d9ef">px</span>;<span style="color:#66d9ef">margin-top</span>:<span style="color:#ae81ff">15</span><span style="color:#66d9ef">px</span>;<span style="color:#66d9ef">line-height</span>:<span style="color:#ae81ff">40</span><span style="color:#66d9ef">px</span>;
+      <span style="color:#66d9ef">background</span>:<span style="color:#ae81ff">#009900</span>;<span style="color:#66d9ef">border</span>:<span style="color:#ae81ff">1</span><span style="color:#66d9ef">px</span> <span style="color:#66d9ef">solid</span> <span style="color:#ae81ff">#009990</span><span style="color:#ae81ff">0</span>;<span style="color:#66d9ef">border-radius</span>:<span style="color:#ae81ff">10</span><span style="color:#66d9ef">px</span>;
+      <span style="color:#66d9ef">cursor</span>:<span style="color:#66d9ef">pointer</span>;}
+      .<span style="color:#a6e22e">input_btn</span>:<span style="color:#a6e22e">hover</span>{<span style="color:#66d9ef">background</span>:<span style="color:#ae81ff">#00CD00</span>}
 
-&lt;Style type=&quot;text/css&quot;&gt;
-      body{font-family:&quot;微软雅黑&quot;}
-      .box{width:600px; margin:0 auto; padding-top:100px;background-color:black}
-      .box 
-      H1{text-align:center text-shadow:2px 5px 5px 
-      rgba(0,0,2,1);color:white; }
-      .box 
-      p{background:#2c2c29;border-radius:10px;border:1px solid #222220;
-      line-height:38px;margin-right:5px;float:left;width=600px;}
-      .box 
-      span{float:left;display:block;text-align:right;background:#373733
-      ;width:70px;height:40px;color:#ffffff;border-right:1px solid #222220;}
-      .input_box{width:167px;padding-left:10px;height:38px;border:0px;background:
-      #2c2c29;float:left;color:#ffffff}
-      .input_btn{width:500px;height:40px;margin-top:15px;line-height:40px;
-      background:#009900;border:1px solid #0099900;border-radius:10px;
-      cursor:pointer;}
-      .input_btn:hover{background:#00CD00}
-
-    &lt;/Style&gt;
-</code></pre>
-
-<p>1.DOM（文档对象模型）是HTML和XML的应用程序</p>
-
+    <span style="color:#f92672">&lt;</span><span style="color:#f92672">/</span><span style="color:#f92672">Style</span><span style="color:#f92672">&gt;</span>
+</code></pre></div><p>1.DOM（文档对象模型）是HTML和XML的应用程序</p>
 <p>接口（API)所谓文档对象模型，其实就是对网页</p>
-
 <p>HTML中的各种元素的一种内部的表示，例如HTML</p>
-
 <p>中的头、段落、列表、风格、ID等，所有的元素</p>
-
 <p>都能通过DOM来访问
 document （计算机）文档
 DOM就是Html页面的模型，将每个标签都做为一个</p>
-
 <p>对象，JavaScript通过调用DOM中的属性、方法</p>
-
 <p>就可以对网页中的文本框、层等元素进行编程控</p>
-
 <p>制。</p>
-
 <p>2.所有变量，方法，元素等都属于window对象。</p>
-
 <p>都可以用window调用页面中定义的变量和方法都</p>
-
 <p>是window的</p>
-
 <p>3.CSS+JavaScript+DOM=DHtml</p>
-
 <p>4.onload 事件会在页面或图像加载完成后立即发</p>
-
 <p>生
 5.window对象的方法
 window.alert(‘大家好！’);//弹出警告对话</p>
-
 <p>框
 window.confirm(‘确定要删除吗？’);//确定</p>
-
 <p>、取消对话框，返回true或false;
 window.navigate(url);//将网页重新导航到</p>
-
 <p>url,支持IE、Opera11.6。并不推荐,有些浏览器</p>
-
 <p>不行,
 建议使用window.location.href=‘url’;//支</p>
-
 <p>持大多数浏览器
 6.计时器
 1&gt;var steId=setTimeout(function(){
-  alert(&lsquo;这是一次性的&rsquo;)
-  },1000);
-  clearTimeout(setId);//清除计时器
+alert(&lsquo;这是一次性的&rsquo;)
+},1000);
+clearTimeout(setId);//清除计时器
 2&gt;var setId=setInterval(function(){
-        alert(&lsquo;神州行，我看行&rsquo;);
+alert(&lsquo;神州行，我看行&rsquo;);
 },1000);</p>
-
 <p>//clearInterval(setId);//清除计时器
 7.onload（页面加载后触发
 onunload（页面卸载后触发）
 onbeforeunload（页面卸载前触发）</p>
-
 <p>8.window.location对象：
 window.location.href=‘’;//重新导航到新页</p>
-
 <p>面,可以取值，也可以赋值。
 window.location.reload();//刷新当前页
 对象的事件，所有元素的事件都可以通过event属</p>
-
 <p>性取到相关信息。//兼容IEwindow.event是IE下</p>
-
 <p>非常重要的属性，用来获得发生事件时的信息，</p>
-
 <p>事件不局限于window、Chrome，不兼容FF（用</p>
-
 <p>event参数）。
 window.event.altKey属性，bool类型，表示事</p>
-
 <p>件发生时是否按下了alt键。类似的还有</p>
-
 <p>ctrlKey,shiftKey。
 clientX、clientY 发生事件时鼠标在客户区的</p>
-
 <p>坐标；(页面左上角)不支持火狐
 screenX、screenY 发生事件时鼠标在屏幕上的</p>
-
 <p>坐标；（相对于屏幕）
 offsetX、offsetY 发生事件时鼠标相对于事件</p>
-
 <p>源（比如点击按钮时触发onclick）的坐标。</p>
-
-<pre><code class="language-html">onload=function(){
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">onload=function(){
 
     document.getElementById
 
-('dv').onmousedown=function(){
+(&#39;dv&#39;).onmousedown=function(){
 
       if(window.event.altKey){
-            alert('按下了alt键');
+            alert(&#39;按下了alt键&#39;);
 
        }else if(window.event.shiftKey){
-            alert('按下了shift键');
+            alert(&#39;按下了shift键&#39;);
 
        }else if(window.event.ctrlKey){
-            alert('按下了ctrl键');
+            alert(&#39;按下了ctrl键&#39;);
 
         }else{
-            alert('只是按下了鼠标了');
+            alert(&#39;只是按下了鼠标了&#39;);
         }
         alert(window.event.button);
 
     };
 };
-</code></pre>
+</code></pre></div><p>9.赋值和粘贴的控制</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/javascript&#34;</span>&gt;
+   &lt;/<span style="color:#f92672">script</span>&gt;
 
-<p>9.赋值和粘贴的控制</p>
+    &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/javascript&#34;</span>&gt;
 
-<pre><code class="language-html">&lt;script type=&quot;text/javascript&quot;&gt;
-   &lt;/script&gt;
-
-    &lt;script type=&quot;text/javascript&quot;&gt;
-
-        onload=function(){
+        <span style="color:#a6e22e">onload</span><span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(){
          
-document.body.oncopy=function(){
+document.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">oncopy</span><span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(){
 
-                setTimeout(function(){
-                  var tt= 
-clipboardData.getData('text')+'文本出自哪
+                <span style="color:#a6e22e">setTimeout</span>(<span style="color:#66d9ef">function</span>(){
+                  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">tt</span><span style="color:#f92672">=</span> 
+<span style="color:#a6e22e">clipboardData</span>.<span style="color:#a6e22e">getData</span>(<span style="color:#e6db74">&#39;text&#39;</span>)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;文本出自哪
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">里&#39;</span>;                    
 
-里';                    
-
-clipboardData.setData('text',tt);
-                },100);
+<span style="color:#a6e22e">clipboardData</span>.<span style="color:#a6e22e">setData</span>(<span style="color:#e6db74">&#39;text&#39;</span>,<span style="color:#a6e22e">tt</span>);
+                },<span style="color:#ae81ff">100</span>);
 
             };
         };
 
-    &lt;/script&gt;
-</code></pre>
-
-<p>10.tag(标签)
+    &lt;/<span style="color:#f92672">script</span>&gt;
+</code></pre></div><p>10.tag(标签)
 11.获取元素的三种方式
 getElementById(), （非常常用），根据元素的</p>
-
 <p>Id获得对象，网页中id不能重复。也可以直接通</p>
-
 <p>过元素的id来引用元素，但是有有效范围、
 getElementsByName()，根据元素的name获得对</p>
-
 <p>象，由于页面中元素的name可以重复，比如多个</p>
-
 <p>RadioButton的name一样，因此</p>
-
 <p>getElementsByName返回值是对象数组。
 getElementsByTagName()，获得指定标签名称的</p>
-
 <p>元素数组，比如getElementsByTagName(“input</p>
-
-<p>”)可以获得所有的<input>标签。*表示所有标签
+<p>”)可以获得所有的<!-- raw HTML omitted -->标签。*表示所有标签
 12.三个练习题，必须熟练
 1&gt;每隔一秒获得当前时间
-  onload=function(){</p>
-
+onload=function(){</p>
 <pre><code>        setInterval(function(){
 
             document.getElementById
 </code></pre>
-
 <p>(&lsquo;p1&rsquo;).innerText=new Date</p>
-
 <p>().toLocaleTimeString();</p>
-
 <pre><code>        },1000);
     };
 </code></pre>
-
 <p>13.事件冒泡</p>
     </div>
  <div class="nav-links" style="padding:10;">
@@ -1287,7 +1215,7 @@ getElementsByTagName()，获得指定标签名称的</p>
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

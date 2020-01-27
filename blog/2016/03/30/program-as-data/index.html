@@ -31,7 +31,6 @@
   <meta name="description" content="A program is like an essay. The first version is a draft, and drafts demand editing.
 Program is also can be seen as data.
 
-
 直觉认识proc,提取body。
 对比识别。
 加壳。
@@ -127,7 +126,6 @@ Program is also can be seen as data.
   <meta property="og:title" content="program-as-data | Macro Life">
   <meta property="og:description" content="A program is like an essay. The first version is a draft, and drafts demand editing.
 Program is also can be seen as data.
-
 
 直觉认识proc,提取body。
 对比识别。
@@ -579,157 +577,92 @@ Program is also can be seen as data.
 
 
 
-<span class="article-metadata" >Reading time: 3 minutes and    9 seconds with 696 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+<span class="article-metadata" >Reading time: 3 minutes and    2 seconds with 669 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#two-similar-functions">Two similar functions</a></li>
-<li><a href="#加壳">加壳</a></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#two-similar-functions">Two similar functions</a></li>
+        <li><a href="#heading">加壳</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
     </aside>
   <div class="article-container">
 
 
     <div class="article-style">
-      <p><a href="http://www.ccs.neu.edu/home/matthias/HtDP2e/part_three.html" target="_blank">A program is like an essay. The first version is a draft, and drafts demand editing.</a>
+      <p><a href="http://www.ccs.neu.edu/home/matthias/HtDP2e/part_three.html">A program is like an essay. The first version is a draft, and drafts demand editing.</a>
 Program is also can be seen as data.</p>
-
 <ol>
 <li>直觉认识proc,提取body。</li>
 <li>对比识别。</li>
 <li>加壳。</li>
 <li>三行表格，n列迭代。</li>
 </ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">
+(<span style="color:#a6e22e">value-of</span> (<span style="color:#a6e22e">proc</span> (<span style="color:#a6e22e">var</span> body)) env)
+ = (<span style="color:#a6e22e">value-of</span> (<span style="color:#a6e22e">proc-exp</span> (<span style="color:#a6e22e">procedure</span> (<span style="color:#a6e22e">var</span> body env)) val) env)
 
-<pre><code class="language-scheme">
-(value-of (proc (var body)) env)
- = (value-of (proc-exp (procedure (var body env)) val) env)
-
- = (value-of body ([var=val] env))
-</code></pre>
-
-<p>函数其实也是expression，它可以被consume也可以被produce.凭着这个脑中的
+ = (<span style="color:#a6e22e">value-of</span> body ([var=val] env))
+</code></pre></div><p>函数其实也是expression，它可以被consume也可以被produce.凭着这个脑中的
 印象是否可以帮助你继续理解abstration和程序即数据的思想。</p>
-
 <p>所有的函数和数据犹如花生的壳和仁的关系。</p>
-
-<p><img src="/images/lisp/peanut.jpeg" alt="peanut" /></p>
-
+<p><img src="/images/lisp/peanut.jpeg" alt="peanut"></p>
 <p>只有加壳就相当于是创建一层抽象，把类似的东西包裹起来，或者也可以换着一种思路
 （每个壳里面都包着类似的花生仁，只不过可能存在些许不同）</p>
-
 <h3 id="two-similar-functions">Two similar functions</h3>
-
-<pre><code class="language-scheme">; Los -&gt; Boolean
-; does l contain &quot;dog&quot;
-(define (contains-dog? l)
-  (cond
-    [(empty? l) #false]
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#75715e">; Los -&gt; Boolean</span>
+<span style="color:#75715e">; does l contain &#34;dog&#34;</span>
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">contains-dog?</span> l)
+  (<span style="color:#a6e22e">cond</span>
+    [(<span style="color:#a6e22e">empty?</span> l) <span style="color:#66d9ef">#f</span>alse]
     [else
-     (or
-       (string=? (first l) &quot;dog&quot;)
-       (contains-dog?
-         (rest l)))]))
+     (<span style="color:#a6e22e">or</span>
+       (string=? (<span style="color:#a6e22e">first</span> l) <span style="color:#e6db74">&#34;dog&#34;</span>)
+       (<span style="color:#a6e22e">contains-dog?</span>
+         (<span style="color:#a6e22e">rest</span> l)))]))
 
 	
-; Los -&gt; Boolean
-; does l contain &quot;cat&quot;
-(define (contains-cat? l)
-  (cond
-    [(empty? l) #false]
+<span style="color:#75715e">; Los -&gt; Boolean</span>
+<span style="color:#75715e">; does l contain &#34;cat&#34;</span>
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">contains-cat?</span> l)
+  (<span style="color:#a6e22e">cond</span>
+    [(<span style="color:#a6e22e">empty?</span> l) <span style="color:#66d9ef">#f</span>alse]
     [else
-     (or
-       (string=? (first l) &quot;cat&quot;)
-       (contains-cat?
-         (rest l)))]))
-</code></pre>
-
-<h3 id="加壳">加壳</h3>
-
+     (<span style="color:#a6e22e">or</span>
+       (string=? (<span style="color:#a6e22e">first</span> l) <span style="color:#e6db74">&#34;cat&#34;</span>)
+       (<span style="color:#a6e22e">contains-cat?</span>
+         (<span style="color:#a6e22e">rest</span> l)))]))
+</code></pre></div><h3 id="heading">加壳</h3>
 <p>加上一个函数皮，并封上一层。</p>
-
-<pre><code class="language-scheme">; String Los -&gt; Boolean
-; determines whether l contains the string s
-(define (contains? s l)
-  (cond
-    [(empty? l) #false]
-    [else (or (string=? (first l) s)
-              (contains? s (rest l)))]))
-</code></pre>
-
-<p>然后我们就可以类似的改写了</p>
-
-<pre><code class="language-scheme">; Los -&gt; Boolean
-; does l contain &quot;dog&quot;
-(define (contains-dog? l)
-  (contains? &quot;dog&quot; l))
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#75715e">; String Los -&gt; Boolean</span>
+<span style="color:#75715e">; determines whether l contains the string s</span>
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">contains?</span> s l)
+  (<span style="color:#a6e22e">cond</span>
+    [(<span style="color:#a6e22e">empty?</span> l) <span style="color:#66d9ef">#f</span>alse]
+    [<span style="color:#66d9ef">else </span>(<span style="color:#66d9ef">or </span>(string=? (<span style="color:#a6e22e">first</span> l) s)
+              (<span style="color:#a6e22e">contains?</span> s (<span style="color:#a6e22e">rest</span> l)))]))
+</code></pre></div><p>然后我们就可以类似的改写了</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#75715e">; Los -&gt; Boolean</span>
+<span style="color:#75715e">; does l contain &#34;dog&#34;</span>
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">contains-dog?</span> l)
+  (<span style="color:#a6e22e">contains?</span> <span style="color:#e6db74">&#34;dog&#34;</span> l))
 	
 	
-; Los -&gt; Boolean
-; does l contain &quot;cat&quot;
-(define (contains-cat? l)
-  (contains? &quot;cat&quot; l))
-</code></pre>
-
-<p>这个典型的过程就是函数抽象。进一步可以参考<a href="http://www.ccs.neu.edu/home/matthias/HtDP2e/part_three.html" target="_blank">HowToDesginProgram</a>和<a href="http://www.ccs.neu.edu/home/matthias/BTLS/" target="_blank">TheLittleScheme</a>.
+<span style="color:#75715e">; Los -&gt; Boolean</span>
+<span style="color:#75715e">; does l contain &#34;cat&#34;</span>
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">contains-cat?</span> l)
+  (<span style="color:#a6e22e">contains?</span> <span style="color:#e6db74">&#34;cat&#34;</span> l))
+</code></pre></div><p>这个典型的过程就是函数抽象。进一步可以参考<a href="http://www.ccs.neu.edu/home/matthias/HtDP2e/part_three.html">HowToDesginProgram</a>和<a href="http://www.ccs.neu.edu/home/matthias/BTLS/">TheLittleScheme</a>.
 Note: 你需要解析的其实是花生仁，但是你不得不先把壳打开或者通过另外一种方式，比如红外线等技术把它识别出来。</p>
-
 <p>也就是说进一步归纳的话，你首先得recognise识别出来，然后才能进行解析（提取其中的蛋白质、脂肪、热量等）。</p>
-
-<p><img src="/images/lisp/baby.png" alt="mybaby" /></p>
-
+<p><img src="/images/lisp/baby.png" alt="mybaby"></p>
 <p>保护它的壳，给它提供营养，防止它受到感染和伤害。</p>
-
-<p><a href="http://pressbin.com/tools/excel_to_html_table/index.html" target="_blank">表格转换链接</a>.</p>
-
-<table>
-      <tr>
-                <td>index</td>
-                <td>0</td>
-                <td>1</td>
-                <td>2</td>
-                <td>…</td>
-      </tr>
-      <tr>
-                <td>M</td>
-                <td>a+S</td>
-                <td>a+1*W+S</td>
-                <td>a+2*W+S</td>
-                <td>…</td>
-      </tr>
-      <tr>
-                <td>f at M</td>
-                <td>f(a+S)</td>
-                <td>f(a+1*W+S)</td>
-                <td>f(a+2*W+S)</td>
-                <td>…</td>
-      </tr>
-      <tr>
-                <td>Area</td>
-                <td>W*f(a+S)</td>
-                <td>W*f(a+1*W+S)</td>
-                <td>W*f(a+2*W+S)</td>
-                <td>…</td>
-      </tr>
-      <tr>
-                <td>residual</td>
-                <td>60.00%</td>
-                <td>50.00%</td>
-                <td>40.00%</td>
-                <td>…</td>
-      </tr>
-      <tr>
-                <td></td>
-      </tr>
-</table>
-
+<p><a href="http://pressbin.com/tools/excel_to_html_table/index.html">表格转换链接</a>.</p>
+<!-- raw HTML omitted -->
 <p>慢工才能出细活，通过三行表格n列迭代的形式(也可以进一步加大计算量变成n行表格n列迭代)理解递归迭代的过程,在一定的时间，进行一系列的列计算，并让时间推进，直到满足你想要的结果。</p>
     </div>
  <div class="nav-links" style="padding:10;">
@@ -1134,7 +1067,7 @@ Note: 你需要解析的其实是花生仁，但是你不得不先把壳打开�
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

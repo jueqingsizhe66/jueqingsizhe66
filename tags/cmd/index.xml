@@ -5,7 +5,7 @@
     <link>https://jueqingsizhe66.github.io/tags/cmd/</link>
       <atom:link href="https://jueqingsizhe66.github.io/tags/cmd/index.xml" rel="self" type="application/rss+xml" />
     <description>cmd</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>©2019</copyright><lastBuildDate>Thu, 15 May 2014 22:27:07 +0800</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>©2020</copyright><lastBuildDate>Thu, 15 May 2014 22:27:07 +0800</lastBuildDate>
     <image>
       <url>https://jueqingsizhe66.github.io/img/icon-192.png</url>
       <title>cmd</title>
@@ -22,40 +22,30 @@
 &lt;li&gt;reduce&lt;/li&gt;
 &lt;li&gt;deploy(by makefile)&lt;/li&gt;
 &lt;/ol&gt;
-
 &lt;p&gt;#map&amp;mdash;do   or map&amp;ndash;action#&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-makefile&#34;&gt;FC=gfortran
-FFLAGS=-O3
-split : ./f90split.f90 ./output/cmd.sh
-    $(FC) $(FFLAGS) $^ -o $@
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-makefile&#34; data-lang=&#34;makefile&#34;&gt;FC&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;gfortran
+FFLAGS&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;-O3
+&lt;span style=&#34;color:#a6e22e&#34;&gt;split &lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; ./f90split.f90 ./output/cmd.sh
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;FC&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;FFLAGS&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt; $^ -o $@
     mv $@ ./output/
     /bin/sh ./output/cmd.sh
 
-.PHONY: clean
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&#34;不是不适合-是超级适合-只不过你不会而已&#34;&gt;不是不适合，是超级适合，只不过你不会而已&lt;/h2&gt;
-
+&lt;span style=&#34;color:#a6e22e&#34;&gt;.PHONY&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; clean
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id=&#34;heading&#34;&gt;不是不适合，是超级适合，只不过你不会而已&lt;/h2&gt;
 &lt;p&gt;#makefile:(负责让对应的文件夹去做对应的事情)#&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-makefile&#34; data-lang=&#34;makefile&#34;&gt;FC&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;gfortran
+FFLAGS&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;-O3
+&lt;span style=&#34;color:#a6e22e&#34;&gt;split &lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; ./f90split.f90 ./output/cmd.sh
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;FC&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;FFLAGS&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt; $&amp;lt; -o $@                &lt;span style=&#34;color:#75715e&#34;&gt;# 造出一个工人出来！&lt;/span&gt;
+    cp $@ ./output/          &lt;span style=&#34;color:#75715e&#34;&gt;# 把一个高级技术工人调到现场 去干活去！  最好用cp 这样就可以派到其他工厂去了&lt;/span&gt;
+    cd ./output/ &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt;sh cmd.sh#切换到对应目录下 去做他该做的事情就可以了（而不是原先你想的
 
-&lt;pre&gt;&lt;code class=&#34;language-makefile&#34;&gt;FC=gfortran
-FFLAGS=-O3
-split : ./f90split.f90 ./output/cmd.sh
-    $(FC) $(FFLAGS) $&amp;lt; -o $@                # 造出一个工人出来！
-    cp $@ ./output/          # 把一个高级技术工人调到现场 去干活去！  最好用cp 这样就可以派到其他工厂去了
-    cd ./output/ &amp;amp;&amp;amp;sh cmd.sh#切换到对应目录下 去做他该做的事情就可以了（而不是原先你想的
+    &lt;span style=&#34;color:#75715e&#34;&gt;# sh .output/cmd.sh 这样是在当前的目录下产生所有的东西 而不是对应的目录）&lt;/span&gt;
+&lt;span style=&#34;color:#a6e22e&#34;&gt;.PHONY&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; clean
 
-    # sh .output/cmd.sh 这样是在当前的目录下产生所有的东西 而不是对应的目录）
-.PHONY: clean
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;#在我的output目录下新建了一个#
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;#在我的output目录下新建了一个#
 ##cmd.sh:(他只做本目录下的内容)##&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;#!/bin/sh
 # sh cmd.sh
 

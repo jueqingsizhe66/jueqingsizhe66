@@ -566,12 +566,9 @@
 <span class="article-metadata" >Reading time: 1 minutes and    13 seconds with 268 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#不是不适合-是超级适合-只不过你不会而已">不是不适合，是超级适合，只不过你不会而已</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#heading">不是不适合，是超级适合，只不过你不会而已</a></li>
+  </ul>
 </nav>
     </aside>
   <div class="article-container">
@@ -583,40 +580,30 @@
 <li>reduce</li>
 <li>deploy(by makefile)</li>
 </ol>
-
 <p>#map&mdash;do   or map&ndash;action#</p>
-
-<pre><code class="language-makefile">FC=gfortran
-FFLAGS=-O3
-split : ./f90split.f90 ./output/cmd.sh
-    $(FC) $(FFLAGS) $^ -o $@
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-makefile" data-lang="makefile">FC<span style="color:#f92672">=</span>gfortran
+FFLAGS<span style="color:#f92672">=</span>-O3
+<span style="color:#a6e22e">split </span><span style="color:#f92672">:</span> ./f90split.f90 ./output/cmd.sh
+    <span style="color:#66d9ef">$(</span>FC<span style="color:#66d9ef">)</span> <span style="color:#66d9ef">$(</span>FFLAGS<span style="color:#66d9ef">)</span> $^ -o $@
     mv $@ ./output/
     /bin/sh ./output/cmd.sh
 
-.PHONY: clean
-</code></pre>
-
-<hr />
-
-<h2 id="不是不适合-是超级适合-只不过你不会而已">不是不适合，是超级适合，只不过你不会而已</h2>
-
+<span style="color:#a6e22e">.PHONY</span><span style="color:#f92672">:</span> clean
+</code></pre></div><hr>
+<h2 id="heading">不是不适合，是超级适合，只不过你不会而已</h2>
 <p>#makefile:(负责让对应的文件夹去做对应的事情)#</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-makefile" data-lang="makefile">FC<span style="color:#f92672">=</span>gfortran
+FFLAGS<span style="color:#f92672">=</span>-O3
+<span style="color:#a6e22e">split </span><span style="color:#f92672">:</span> ./f90split.f90 ./output/cmd.sh
+    <span style="color:#66d9ef">$(</span>FC<span style="color:#66d9ef">)</span> <span style="color:#66d9ef">$(</span>FFLAGS<span style="color:#66d9ef">)</span> $&lt; -o $@                <span style="color:#75715e"># 造出一个工人出来！</span>
+    cp $@ ./output/          <span style="color:#75715e"># 把一个高级技术工人调到现场 去干活去！  最好用cp 这样就可以派到其他工厂去了</span>
+    cd ./output/ <span style="color:#f92672">&amp;&amp;</span>sh cmd.sh#切换到对应目录下 去做他该做的事情就可以了（而不是原先你想的
 
-<pre><code class="language-makefile">FC=gfortran
-FFLAGS=-O3
-split : ./f90split.f90 ./output/cmd.sh
-    $(FC) $(FFLAGS) $&lt; -o $@                # 造出一个工人出来！
-    cp $@ ./output/          # 把一个高级技术工人调到现场 去干活去！  最好用cp 这样就可以派到其他工厂去了
-    cd ./output/ &amp;&amp;sh cmd.sh#切换到对应目录下 去做他该做的事情就可以了（而不是原先你想的
+    <span style="color:#75715e"># sh .output/cmd.sh 这样是在当前的目录下产生所有的东西 而不是对应的目录）</span>
+<span style="color:#a6e22e">.PHONY</span><span style="color:#f92672">:</span> clean
 
-    # sh .output/cmd.sh 这样是在当前的目录下产生所有的东西 而不是对应的目录）
-.PHONY: clean
-
-</code></pre>
-
-<p>#在我的output目录下新建了一个#
+</code></pre></div><p>#在我的output目录下新建了一个#
 ##cmd.sh:(他只做本目录下的内容)##</p>
-
 <pre><code>#!/bin/sh
 # sh cmd.sh
 
@@ -1038,7 +1025,7 @@ done;
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

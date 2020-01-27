@@ -29,7 +29,6 @@
     
   
   <meta name="description" content="So beautiful
-
 (define (f x y)
 (define (f-helper a b)
   (&#43; (* (square a))
@@ -128,7 +127,6 @@
   <meta property="og:url" content="https://jueqingsizhe66.github.io/blog/2015/05/12/so-beautiful-code/">
   <meta property="og:title" content="So beautiful code | Macro Life">
   <meta property="og:description" content="So beautiful
-
 (define (f x y)
 (define (f-helper a b)
   (&#43; (* (square a))
@@ -585,64 +583,50 @@
 
 <span class="article-metadata" >Reading time: 0 minutes and    39 seconds with 143 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
-        
+        <nav id="TableOfContents"></nav>
     </aside>
   <div class="article-container">
 
 
     <div class="article-style">
       <p>So beautiful</p>
-
-<pre><code class="language-scheme">(define (f x y)
-(define (f-helper a b)
-  (+ (* (square a))
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">f</span> x y)
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">f-helper</span> a b)
+  (+ (* (<span style="color:#a6e22e">square</span> a))
       (* y b)
       (* a b)))
-  (f-helper (+ 1 (* x y))
-            (- 1 y)))
+  (<span style="color:#a6e22e">f-helper</span> (+ <span style="color:#ae81ff">1</span> (* x y))
+            (- <span style="color:#ae81ff">1</span> y)))
 
-</code></pre>
-
-<p>====&gt; f(x,y)=x(1+xy)^2 + y(1-y)+(1+xy)(1-y)
-       ==&gt;  a= 1+xy
-            b= (1-y)
-            f(x,y)=xa^2+yb+ab</p>
-
+</code></pre></div><p>====&gt; f(x,y)=x(1+xy)^2 + y(1-y)+(1+xy)(1-y)
+==&gt;  a= 1+xy
+b= (1-y)
+f(x,y)=xa^2+yb+ab</p>
 <p>====&gt;Continue</p>
-
-<pre><code class="language-scheme">(define (f x y)
-  ((lambda (a b)
-       (+ (* x (square a))
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">f</span> x y)
+  ((<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">a</span> b)
+       (+ (* x (<span style="color:#a6e22e">square</span> a))
           (* y b)
           (* a b)))
-    (+ 1 (* x y))
-    (- 1 y)))
-</code></pre>
-
-<p>====&gt;Use let to define the local variables</p>
-
-<pre><code class="language-scheme">(define (f x y)
-  (let ((a (+ 1 (* x y)))
-         (b (- 1 y)))
-       (+ (* x (square a))
+    (+ <span style="color:#ae81ff">1</span> (* x y))
+    (- <span style="color:#ae81ff">1</span> y)))
+</code></pre></div><p>====&gt;Use let to define the local variables</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">f</span> x y)
+  (<span style="color:#66d9ef">let </span>((<span style="color:#a6e22e">a</span> (+ <span style="color:#ae81ff">1</span> (* x y)))
+         (<span style="color:#a6e22e">b</span> (- <span style="color:#ae81ff">1</span> y)))
+       (+ (* x (<span style="color:#a6e22e">square</span> a))
           (* y b)
           (* a b))))
 
-</code></pre>
-
-<p>let is just the coat of the ((lambda (a b))</p>
-
+</code></pre></div><p>let is just the coat of the ((lambda (a b))</p>
 <p>Of course we can use define</p>
-
-<pre><code class="language-scheme">(define (f x y)
-   (define a (+ 1 (* x y)))
-   (define b (- 1 y))
- (+ (* x (square a))
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">f</span> x y)
+   (<span style="color:#66d9ef">define </span>a (+ <span style="color:#ae81ff">1</span> (* x y)))
+   (<span style="color:#66d9ef">define </span>b (- <span style="color:#ae81ff">1</span> y))
+ (+ (* x (<span style="color:#a6e22e">square</span> a))
     (* y b)
     (* a b)))
-</code></pre>
-
-<p>SICP_P42</p>
+</code></pre></div><p>SICP_P42</p>
     </div>
  <div class="nav-links" style="padding:10;">
         
@@ -1046,7 +1030,7 @@
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

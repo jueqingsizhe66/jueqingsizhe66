@@ -565,9 +565,9 @@
 
 
 
-<span class="article-metadata" >Reading time: 23 minutes and    48 seconds with 5237 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+<span class="article-metadata" >Reading time: 23 minutes and    29 seconds with 5167 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
-        
+        <nav id="TableOfContents"></nav>
     </aside>
   <div class="article-container">
 
@@ -575,699 +575,694 @@
     <div class="article-style">
       <p>有时候，可能需要做一个动态的代码演示的窗口，当然用ppt也可以做，用其他的相关软件也可以做。然而自己写代码也是可以的。相信大家在听杨老师讲解treeview的时候，老杨秀的代码分析小程序，凭着印象，自己也琢磨着写了这一个简易的代码运行模拟窗口。代码涉及到的主要是treeview和textview以及按钮事件控制，另外加上cairo的画图处理，当然也可以直接利用GtkImage载入图片（可能需要隐藏控件，达到箭头下移的目的）
 这边的缺点是，暂时不知道怎么销毁掉Cairo之前绘制的图形，其他还有很多缺点.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">import</span> com.rupeng.gtk4j.Cairo<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> com.rupeng.gtk4j.GTK<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> com.rupeng.gtk4j.IGCallBack<span style="color:#f92672">;</span>
 
-<pre><code class="language-java">import com.rupeng.gtk4j.Cairo;
-import com.rupeng.gtk4j.GTK;
-import com.rupeng.gtk4j.IGCallBack;
+<span style="color:#75715e">/**
+</span><span style="color:#75715e">* @author    叶昭良
+</span><span style="color:#75715e">* @time      2015年2月3日上午10:24:23
+</span><span style="color:#75715e">* @version   TestTeacher V1.0   一个简易的代码运行模拟窗口，未加入代码的高亮，采用图片控制
+</span><span style="color:#75715e">*                               主要采用textview  treeview    cairo三个技术关键点
+</span><span style="color:#75715e">*/</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TestTeacher</span>
+<span style="color:#f92672">{</span>
 
-/**
-* @author    叶昭良
-* @time      2015年2月3日上午10:24:23
-* @version   TestTeacher V1.0   一个简易的代码运行模拟窗口，未加入代码的高亮，采用图片控制
-*                               主要采用textview  treeview    cairo三个技术关键点
-*/
-public class TestTeacher
-{
+        <span style="color:#75715e">/**
+</span><span style="color:#75715e">         * @param args
+</span><span style="color:#75715e">         */</span>
+        <span style="color:#75715e">//部分类变量的定义
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> window<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> gridHouse<span style="color:#f92672">;</span>
 
-        /**
-         * @param args
-         */
-        //部分类变量的定义
-        static int window;
-        static int gridHouse;
-
-        static int liststore;
-        static int listiter;
-        static int treeViewApple;
-        static int imagePosition = 0;
-        static int rowPosition = 0;
-        //static int dan ;
-        static int start = 0;
-        static int circlePointx = 200;
-        static int circlePointy = 45;
+        <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> liststore<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> listiter<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> treeViewApple<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> imagePosition <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> rowPosition <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+        <span style="color:#75715e">//static int dan ;
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> start <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> circlePointx <span style="color:#f92672">=</span> 200<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> circlePointy <span style="color:#f92672">=</span> 45<span style="color:#f92672">;</span>
         
-        static int circleRectangex = 200;
-        static int circleRectangey = 0;
+        <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> circleRectangex <span style="color:#f92672">=</span> 200<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> circleRectangey <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
         
-        static int EndCirclex = 0;
-        static int EndCircley = 0;
-        static String note = &quot;指针下移&quot;;
-        static int labelResult;
+        <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> EndCirclex <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> EndCircley <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">static</span> String note <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;指针下移&#34;</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> labelResult<span style="color:#f92672">;</span>
         
-        //static String loveWords;
-        public static void main(String[] args)
-        {
-                // TODO Auto-generated method stub
-                //GTK初始化
-                GTK.gtk_init();
-                //窗口对象标识的创建
-                window= GTK.gtk_window_new(GTK.GTK_WINDOW_TOPLEVEL);
-                //显示窗口
-                GTK.gtk_widget_show(window);
-                //安静关闭窗口
-                GTK.g_signal_connect(window, &quot;destroy&quot;, new IGCallBack()
-                {
+        <span style="color:#75715e">//static String loveWords;
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> args<span style="color:#f92672">)</span>
+        <span style="color:#f92672">{</span>
+                <span style="color:#75715e">// TODO Auto-generated method stub
+</span><span style="color:#75715e"></span>                <span style="color:#75715e">//GTK初始化
+</span><span style="color:#75715e"></span>                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_init</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#75715e">//窗口对象标识的创建
+</span><span style="color:#75715e"></span>                window<span style="color:#f92672">=</span> GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_window_new</span><span style="color:#f92672">(</span>GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">GTK_WINDOW_TOPLEVEL</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#75715e">//显示窗口
+</span><span style="color:#75715e"></span>                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_widget_show</span><span style="color:#f92672">(</span>window<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#75715e">//安静关闭窗口
+</span><span style="color:#75715e"></span>                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">g_signal_connect</span><span style="color:#f92672">(</span>window<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;destroy&#34;</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">new</span> IGCallBack<span style="color:#f92672">(</span><span style="color:#f92672">)</span>
+                <span style="color:#f92672">{</span>
                         
-                        @Override
-                        public void execute(int instance, int eventData, Object object)
-                        {
-                                // TODO Auto-generated method stub
-                                GTK.gtk_main_quit();
-                        }
-                }, null);
+                        <span style="color:#a6e22e">@Override</span>
+                        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">execute</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> instance<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> eventData<span style="color:#f92672">,</span> Object object<span style="color:#f92672">)</span>
+                        <span style="color:#f92672">{</span>
+                                <span style="color:#75715e">// TODO Auto-generated method stub
+</span><span style="color:#75715e"></span>                                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_main_quit</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        <span style="color:#f92672">}</span>
+                <span style="color:#f92672">}</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
                 
-                //设置网格布局
-                gridHouse = GTK.gtk_grid_new();
-                GTK.gtk_widget_show(gridHouse);
-                //添加网格布局到window中
-                GTK.gtk_container_add(window, gridHouse);
+                <span style="color:#75715e">//设置网格布局
+</span><span style="color:#75715e"></span>                gridHouse <span style="color:#f92672">=</span> GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_grid_new</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_widget_show</span><span style="color:#f92672">(</span>gridHouse<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#75715e">//添加网格布局到window中
+</span><span style="color:#75715e"></span>                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_container_add</span><span style="color:#f92672">(</span>window<span style="color:#f92672">,</span> gridHouse<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
                 
-                //定义一些常用的控件
+                <span style="color:#75715e">//定义一些常用的控件
+</span><span style="color:#75715e"></span>                
+                <span style="color:#75715e">//创建一个treeview 用于显示用户信息
+</span><span style="color:#75715e"></span>                createSingleTreeView<span style="color:#f92672">(</span>gridHouse<span style="color:#f92672">,</span>start<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#75715e">//创建一个笑脸
+</span><span style="color:#75715e"></span>                createDrawLaughFace<span style="color:#f92672">(</span>window<span style="color:#f92672">,</span>gridHouse<span style="color:#f92672">,</span>start<span style="color:#f92672">,</span>circlePointx<span style="color:#f92672">,</span>circlePointy<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
                 
-                //创建一个treeview 用于显示用户信息
-                createSingleTreeView(gridHouse,start);
-                //创建一个笑脸
-                createDrawLaughFace(window,gridHouse,start,circlePointx,circlePointy);
+                start <span style="color:#f92672">=</span> 3<span style="color:#f92672">;</span>
+                <span style="color:#75715e">//创建一个标签
+</span><span style="color:#75715e"></span>                createLabel<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;源代码------&gt;&#34;</span><span style="color:#f92672">,</span>gridHouse<span style="color:#f92672">,</span>start<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                start <span style="color:#f92672">=</span> 4<span style="color:#f92672">;</span>
+                <span style="color:#75715e">//创建一个源码的textview窗口，不可编辑
+</span><span style="color:#75715e"></span>                createSingleTextView<span style="color:#f92672">(</span>window<span style="color:#f92672">,</span>gridHouse<span style="color:#f92672">,</span>start<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                createRectangleFace<span style="color:#f92672">(</span>window<span style="color:#f92672">,</span>gridHouse<span style="color:#f92672">,</span>3<span style="color:#f92672">,</span>circlePointx<span style="color:#f92672">,</span>circlePointy<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+
+                start <span style="color:#f92672">=</span> 4<span style="color:#f92672">;</span>
+                <span style="color:#75715e">//创建一个按钮
+</span><span style="color:#75715e"></span>                <span style="color:#66d9ef">int</span> textViewOutput <span style="color:#f92672">=</span> GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_text_view_new</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                createNextButton<span style="color:#f92672">(</span>gridHouse<span style="color:#f92672">,</span>textViewOutput<span style="color:#f92672">,</span>start<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
                 
-                start = 3;
-                //创建一个标签
-                createLabel(&quot;源代码------&gt;&quot;,gridHouse,start);
-                start = 4;
-                //创建一个源码的textview窗口，不可编辑
-                createSingleTextView(window,gridHouse,start);
-                createRectangleFace(window,gridHouse,3,circlePointx,circlePointy);
+                start <span style="color:#f92672">=</span>3<span style="color:#f92672">;</span>
+                <span style="color:#75715e">//创建一个标签
+</span><span style="color:#75715e"></span>                labelResult <span style="color:#f92672">=</span> GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_label_new</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;输出结果：&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_widget_show</span><span style="color:#f92672">(</span>labelResult<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_grid_attach</span><span style="color:#f92672">(</span>gridHouse<span style="color:#f92672">,</span> labelResult<span style="color:#f92672">,</span>7<span style="color:#f92672">,</span> start<span style="color:#f92672">,</span> 1<span style="color:#f92672">,</span> 1<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                start <span style="color:#f92672">=</span> 4<span style="color:#f92672">;</span>
 
-                start = 4;
-                //创建一个按钮
-                int textViewOutput = GTK.gtk_text_view_new();
-                createNextButton(gridHouse,textViewOutput,start);
-                
-                start =3;
-                //创建一个标签
-                labelResult = GTK.gtk_label_new(&quot;输出结果：&quot;);
-                GTK.gtk_widget_show(labelResult);
-                GTK.gtk_grid_attach(gridHouse, labelResult,7, start, 1, 1);
-                start = 4;
+                <span style="color:#75715e">//创建一个输出界面，用于显示源码输出地结果
+</span><span style="color:#75715e"></span>                createOutputTextView<span style="color:#f92672">(</span>window<span style="color:#f92672">,</span>gridHouse<span style="color:#f92672">,</span>start<span style="color:#f92672">,</span>textViewOutput<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#75715e">//启动循环
+</span><span style="color:#75715e"></span>                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_main</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#75715e">/**
+</span><span style="color:#75715e">         * 
+</span><span style="color:#75715e">         * @param labelName  标签显示的字符串
+</span><span style="color:#75715e">         * @param gridHouse  网格对象标识
+</span><span style="color:#75715e">         * @param start      标签在网格对象标识的起始位置
+</span><span style="color:#75715e">         * @purpose          创建一个标签对象表示，并显示在窗口中
+</span><span style="color:#75715e">         */</span>
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">createLabel</span><span style="color:#f92672">(</span>String labelName<span style="color:#f92672">,</span><span style="color:#66d9ef">int</span> gridHouse<span style="color:#f92672">,</span><span style="color:#66d9ef">int</span> start<span style="color:#f92672">)</span>
+        <span style="color:#f92672">{</span>
+                <span style="color:#66d9ef">int</span> labelTitle <span style="color:#f92672">=</span> GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_label_new</span><span style="color:#f92672">(</span>labelName<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_widget_show</span><span style="color:#f92672">(</span>labelTitle<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_grid_attach</span><span style="color:#f92672">(</span>gridHouse<span style="color:#f92672">,</span> labelTitle<span style="color:#f92672">,</span> 0<span style="color:#f92672">,</span> start<span style="color:#f92672">,</span> 1<span style="color:#f92672">,</span> 1<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
 
-                //创建一个输出界面，用于显示源码输出地结果
-                createOutputTextView(window,gridHouse,start,textViewOutput);
-                //启动循环
-                GTK.gtk_main();
-        }
-        /**
-         * 
-         * @param labelName  标签显示的字符串
-         * @param gridHouse  网格对象标识
-         * @param start      标签在网格对象标识的起始位置
-         * @purpose          创建一个标签对象表示，并显示在窗口中
-         */
-        public static void createLabel(String labelName,int gridHouse,int start)
-        {
-                int labelTitle = GTK.gtk_label_new(labelName);
-                GTK.gtk_widget_show(labelTitle);
-                GTK.gtk_grid_attach(gridHouse, labelTitle, 0, start, 1, 1);
+        <span style="color:#f92672">}</span>
+        <span style="color:#75715e">/**
+</span><span style="color:#75715e">         * 
+</span><span style="color:#75715e">         * @param scrolledBar    滚动条对象标识
+</span><span style="color:#75715e">         * @param textview        textview的对象标识
+</span><span style="color:#75715e">         * @param gridHouse       网格对象的对象标识
+</span><span style="color:#75715e">         * @param start          textview在网格对象布局的起始位置
+</span><span style="color:#75715e">         * @purpose              创建textView的滚动条
+</span><span style="color:#75715e">         */</span>
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">createTextviewScrollBar</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> scrolledBar<span style="color:#f92672">,</span><span style="color:#66d9ef">int</span> textview<span style="color:#f92672">,</span><span style="color:#66d9ef">int</span> gridHouse<span style="color:#f92672">,</span><span style="color:#66d9ef">int</span> start<span style="color:#f92672">)</span>
+        <span style="color:#f92672">{</span>
+                scrolledBar <span style="color:#f92672">=</span> GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_scrolled_window_new</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_widget_show</span><span style="color:#f92672">(</span>scrolledBar<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_grid_attach</span><span style="color:#f92672">(</span>gridHouse<span style="color:#f92672">,</span> scrolledBar<span style="color:#f92672">,</span> 0<span style="color:#f92672">,</span> start<span style="color:#f92672">,</span> 2<span style="color:#f92672">,</span> 2<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_widget_set_size_request</span><span style="color:#f92672">(</span>scrolledBar<span style="color:#f92672">,</span> 400<span style="color:#f92672">,</span> 400<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_container_add</span><span style="color:#f92672">(</span>scrolledBar<span style="color:#f92672">,</span>textview<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#75715e">/**
+</span><span style="color:#75715e">         * 
+</span><span style="color:#75715e">         * @param scrolledBar     滚动条对象标识
+</span><span style="color:#75715e">         * @param textview        textview的对象标识
+</span><span style="color:#75715e">         * @param gridHouse       网格对象的对象标识
+</span><span style="color:#75715e">         * @param start          textview在网格对象布局的起始位置
+</span><span style="color:#75715e">         * @purpose               创建带滚动条的treeview对象标识,用于输出信息
+</span><span style="color:#75715e">         */</span>
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">createTreeviewScrollBar</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> scrolledBar<span style="color:#f92672">,</span><span style="color:#66d9ef">int</span> textview<span style="color:#f92672">,</span><span style="color:#66d9ef">int</span> gridHouse<span style="color:#f92672">,</span><span style="color:#66d9ef">int</span> start<span style="color:#f92672">)</span>
+        <span style="color:#f92672">{</span>
+                scrolledBar <span style="color:#f92672">=</span> GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_scrolled_window_new</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_widget_show</span><span style="color:#f92672">(</span>scrolledBar<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_grid_attach</span><span style="color:#f92672">(</span>gridHouse<span style="color:#f92672">,</span> scrolledBar<span style="color:#f92672">,</span> 0<span style="color:#f92672">,</span> start<span style="color:#f92672">,</span> 2<span style="color:#f92672">,</span> 3<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_widget_set_size_request</span><span style="color:#f92672">(</span>scrolledBar<span style="color:#f92672">,</span> 200<span style="color:#f92672">,</span> 200<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_container_add</span><span style="color:#f92672">(</span>scrolledBar<span style="color:#f92672">,</span>textview<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#75715e">/**
+</span><span style="color:#75715e">         * 
+</span><span style="color:#75715e">         * @param scrolledBar    滚动条对象标识
+</span><span style="color:#75715e">         * @param textview       textview的对象标识
+</span><span style="color:#75715e">         * @param gridHouse      网格对象的对象标识
+</span><span style="color:#75715e">         * @param start          textview在网格对象布局的起始位置
+</span><span style="color:#75715e">         * @purpose              创建带滚动条的treeview对象标识，用于显示信息
+</span><span style="color:#75715e">         */</span>
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">createTreeviewOutputScrollBar</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> scrolledBar<span style="color:#f92672">,</span><span style="color:#66d9ef">int</span> textview<span style="color:#f92672">,</span><span style="color:#66d9ef">int</span> gridHouse<span style="color:#f92672">,</span><span style="color:#66d9ef">int</span> start<span style="color:#f92672">)</span>
+        <span style="color:#f92672">{</span>
+                scrolledBar <span style="color:#f92672">=</span> GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_scrolled_window_new</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_widget_show</span><span style="color:#f92672">(</span>scrolledBar<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_grid_attach</span><span style="color:#f92672">(</span>gridHouse<span style="color:#f92672">,</span> scrolledBar<span style="color:#f92672">,</span>8<span style="color:#f92672">,</span> start<span style="color:#f92672">,</span> 2<span style="color:#f92672">,</span> 3<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_widget_set_size_request</span><span style="color:#f92672">(</span>scrolledBar<span style="color:#f92672">,</span> 200<span style="color:#f92672">,</span> 200<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_container_add</span><span style="color:#f92672">(</span>scrolledBar<span style="color:#f92672">,</span>textview<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#75715e">/**
+</span><span style="color:#75715e">         * 
+</span><span style="color:#75715e">         * @param window     窗口对象标识
+</span><span style="color:#75715e">         * @param gridHouse  网格布局对象标识
+</span><span style="color:#75715e">         * @param start       textview对象在网格布局对象中的起始位置
+</span><span style="color:#75715e">         * @purpose          创建一个textview的源代码窗口对象
+</span><span style="color:#75715e">         */</span>
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">createSingleTextView</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> window<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> gridHouse<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> start<span style="color:#f92672">)</span>
+        <span style="color:#f92672">{</span>
 
-        }
-        /**
-         * 
-         * @param scrolledBar    滚动条对象标识
-         * @param textview        textview的对象标识
-         * @param gridHouse       网格对象的对象标识
-         * @param start          textview在网格对象布局的起始位置
-         * @purpose              创建textView的滚动条
-         */
-        public static void createTextviewScrollBar(int scrolledBar,int textview,int gridHouse,int start)
-        {
-                scrolledBar = GTK.gtk_scrolled_window_new();
-                GTK.gtk_widget_show(scrolledBar);
-                GTK.gtk_grid_attach(gridHouse, scrolledBar, 0, start, 2, 2);
-                GTK.gtk_widget_set_size_request(scrolledBar, 400, 400);
-                GTK.gtk_container_add(scrolledBar,textview);
-        }
-        /**
-         * 
-         * @param scrolledBar     滚动条对象标识
-         * @param textview        textview的对象标识
-         * @param gridHouse       网格对象的对象标识
-         * @param start          textview在网格对象布局的起始位置
-         * @purpose               创建带滚动条的treeview对象标识,用于输出信息
-         */
-        public static void createTreeviewScrollBar(int scrolledBar,int textview,int gridHouse,int start)
-        {
-                scrolledBar = GTK.gtk_scrolled_window_new();
-                GTK.gtk_widget_show(scrolledBar);
-                GTK.gtk_grid_attach(gridHouse, scrolledBar, 0, start, 2, 3);
-                GTK.gtk_widget_set_size_request(scrolledBar, 200, 200);
-                GTK.gtk_container_add(scrolledBar,textview);
-        }
-        /**
-         * 
-         * @param scrolledBar    滚动条对象标识
-         * @param textview       textview的对象标识
-         * @param gridHouse      网格对象的对象标识
-         * @param start          textview在网格对象布局的起始位置
-         * @purpose              创建带滚动条的treeview对象标识，用于显示信息
-         */
-        public static void createTreeviewOutputScrollBar(int scrolledBar,int textview,int gridHouse,int start)
-        {
-                scrolledBar = GTK.gtk_scrolled_window_new();
-                GTK.gtk_widget_show(scrolledBar);
-                GTK.gtk_grid_attach(gridHouse, scrolledBar,8, start, 2, 3);
-                GTK.gtk_widget_set_size_request(scrolledBar, 200, 200);
-                GTK.gtk_container_add(scrolledBar,textview);
-        }
-        /**
-         * 
-         * @param window     窗口对象标识
-         * @param gridHouse  网格布局对象标识
-         * @param start       textview对象在网格布局对象中的起始位置
-         * @purpose          创建一个textview的源代码窗口对象
-         */
-        public static void createSingleTextView(int window, int gridHouse, int start)
-        {
+                <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">int</span> tvGirl <span style="color:#f92672">=</span> GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_text_view_new</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_text_view_set_wrap_mode</span><span style="color:#f92672">(</span>tvGirl<span style="color:#f92672">,</span> GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">GTK_WRAP_WORD</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#66d9ef">int</span> scrollBar <span style="color:#f92672">=</span> 0 <span style="color:#f92672">;</span>
+                <span style="color:#75715e">//添加控件
+</span><span style="color:#75715e"></span>                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_text_view_set_editable</span><span style="color:#f92672">(</span>tvGirl<span style="color:#f92672">,</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                createTextviewScrollBar<span style="color:#f92672">(</span>scrollBar<span style="color:#f92672">,</span>tvGirl<span style="color:#f92672">,</span>gridHouse<span style="color:#f92672">,</span>start<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#75715e">//GTK.gtk_grid_attach(gridHouse, tvGirl, 0, start+1, 1, 1);
+</span><span style="color:#75715e"></span>
+                <span style="color:#75715e">//显示控件
+</span><span style="color:#75715e"></span>
+                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_widget_show</span><span style="color:#f92672">(</span>tvGirl<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
 
-                final int tvGirl = GTK.gtk_text_view_new();
-                GTK.gtk_text_view_set_wrap_mode(tvGirl, GTK.GTK_WRAP_WORD);
-                int scrollBar = 0 ;
-                //添加控件
-                GTK.gtk_text_view_set_editable(tvGirl, false);
-                createTextviewScrollBar(scrollBar,tvGirl,gridHouse,start);
-                //GTK.gtk_grid_attach(gridHouse, tvGirl, 0, start+1, 1, 1);
-
-                //显示控件
-
-                GTK.gtk_widget_show(tvGirl);
-
-                String loveWords = &quot;if(!GTK.gtk_tree_model_get_iter_first(liststore.listiter))&quot;
-                                + &quot;\n{\n\tSystem.out.println(\&quot;100块钱都不给，真坏！\&quot;);\n}\nelse\n{\n\tdo&quot;
-                                + &quot;\n\t{\n\t\tSystem.out.println(\&quot;我在do循环里面\&quot;);\n\t}while(GTK.gtk_tree_model_iter_next(liststore, iter));&quot;
-                                + &quot;\n}\nGTK.gtk_text_iter_free(iter);&quot;;
-                //读取文本框里面的内容 ，只适用小量的文本，一般用迭代器
-                //方法1   先从TextView获取int TextBuffer 
-                    //    然后再从TextBuffer获取text
-                final int textbuffer= GTK.gtk_text_view_get_buffer(tvGirl);
-
-                
-                //可以直接通过缓冲区编号  设置信息
-                GTK.gtk_text_buffer_set_text(textbuffer, loveWords);
-                
-                
-        }
-        /**
-         * 
-         * @param window     窗口对象标识（可省略）
-         * @param gridHouse  网格对象标识
-         * @param start      网格对象的起始位置标识
-         * @param tvGirl     treeview对象标识
-         * @purpose          创建一个TextView对象标识，加入滚动条，并显示。
-         */
-        public static void createOutputTextView(int window, int gridHouse, int start,int tvGirl)
-        {
-
-                //tvGirl = GTK.gtk_text_view_new();
-                GTK.gtk_text_view_set_wrap_mode(tvGirl, GTK.GTK_WRAP_WORD);
-                int scrollBar = 0 ;
-                //添加控件
-                GTK.gtk_text_view_set_editable(tvGirl, false);
-                createTreeviewOutputScrollBar(scrollBar,tvGirl,gridHouse,start);
-                //GTK.gtk_grid_attach(gridHouse, tvGirl, 0, start+1, 1, 1);
-
-                //显示控件
-
-                GTK.gtk_widget_show(tvGirl);
-
-                String loveWords = &quot;&quot;;
-                //读取文本框里面的内容 ，只适用小量的文本，一般用迭代器
-                //方法1   先从TextView获取int TextBuffer 
-                    //    然后再从TextBuffer获取text
-                final int textbuffer= GTK.gtk_text_view_get_buffer(tvGirl);
+                String loveWords <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;if(!GTK.gtk_tree_model_get_iter_first(liststore.listiter))&#34;</span>
+                                <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;\n{\n\tSystem.out.println(\&#34;100块钱都不给，真坏！\&#34;);\n}\nelse\n{\n\tdo&#34;</span>
+                                <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;\n\t{\n\t\tSystem.out.println(\&#34;我在do循环里面\&#34;);\n\t}while(GTK.gtk_tree_model_iter_next(liststore, iter));&#34;</span>
+                                <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;\n}\nGTK.gtk_text_iter_free(iter);&#34;</span><span style="color:#f92672">;</span>
+                <span style="color:#75715e">//读取文本框里面的内容 ，只适用小量的文本，一般用迭代器
+</span><span style="color:#75715e"></span>                <span style="color:#75715e">//方法1   先从TextView获取int TextBuffer 
+</span><span style="color:#75715e"></span>                    <span style="color:#75715e">//    然后再从TextBuffer获取text
+</span><span style="color:#75715e"></span>                <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">int</span> textbuffer<span style="color:#f92672">=</span> GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_text_view_get_buffer</span><span style="color:#f92672">(</span>tvGirl<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
 
                 
-                //可以直接通过缓冲区编号  设置信息
-                GTK.gtk_text_buffer_set_text(textbuffer, loveWords);
+                <span style="color:#75715e">//可以直接通过缓冲区编号  设置信息
+</span><span style="color:#75715e"></span>                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_text_buffer_set_text</span><span style="color:#f92672">(</span>textbuffer<span style="color:#f92672">,</span> loveWords<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
                 
                 
-        }
-        /**
-         * 
-         * @param gridHouse  网格对象标识
-         * @param start      网格对象的起始位置标识
-         * @purpose          创建一个TreeView对象标识，写入字段，添加记录，加入滚动条，并显示。
-         */
-        public static void createSingleTreeView(int gridHouse,int start)
-        {
-                //3  treeview   是一个界面，相当于是一个淘宝前台， V  V的作用
-                                treeViewApple = GTK.gtk_tree_view_new();
-                                //4 建立字段  比较费劲
-                                //4.1创建字段
-                                int columnID = GTK.gtk_tree_view_column_new_with_attributes(&quot;ID&quot;, GTK.gtk_cell_renderer_text_new(), 0);
-                                //4.2添加字段
-                                GTK.gtk_tree_view_append_column(treeViewApple, columnID);
-                                //4.3创建字段
-                                int columnName = GTK.gtk_tree_view_column_new_with_attributes(&quot;Names&quot;,GTK.gtk_cell_renderer_text_new(),1);
-                                //4.4添加字段
-                                GTK.gtk_tree_view_append_column(treeViewApple,columnName);
-                                //4.5创建字段
-                                int  columnAge = GTK.gtk_tree_view_column_new_with_attributes(&quot;Ages&quot;,GTK.gtk_cell_renderer_text_new(),2);
-                                GTK.gtk_tree_view_append_column(treeViewApple,columnAge);
+        <span style="color:#f92672">}</span>
+        <span style="color:#75715e">/**
+</span><span style="color:#75715e">         * 
+</span><span style="color:#75715e">         * @param window     窗口对象标识（可省略）
+</span><span style="color:#75715e">         * @param gridHouse  网格对象标识
+</span><span style="color:#75715e">         * @param start      网格对象的起始位置标识
+</span><span style="color:#75715e">         * @param tvGirl     treeview对象标识
+</span><span style="color:#75715e">         * @purpose          创建一个TextView对象标识，加入滚动条，并显示。
+</span><span style="color:#75715e">         */</span>
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">createOutputTextView</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> window<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> gridHouse<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> start<span style="color:#f92672">,</span><span style="color:#66d9ef">int</span> tvGirl<span style="color:#f92672">)</span>
+        <span style="color:#f92672">{</span>
+
+                <span style="color:#75715e">//tvGirl = GTK.gtk_text_view_new();
+</span><span style="color:#75715e"></span>                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_text_view_set_wrap_mode</span><span style="color:#f92672">(</span>tvGirl<span style="color:#f92672">,</span> GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">GTK_WRAP_WORD</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#66d9ef">int</span> scrollBar <span style="color:#f92672">=</span> 0 <span style="color:#f92672">;</span>
+                <span style="color:#75715e">//添加控件
+</span><span style="color:#75715e"></span>                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_text_view_set_editable</span><span style="color:#f92672">(</span>tvGirl<span style="color:#f92672">,</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                createTreeviewOutputScrollBar<span style="color:#f92672">(</span>scrollBar<span style="color:#f92672">,</span>tvGirl<span style="color:#f92672">,</span>gridHouse<span style="color:#f92672">,</span>start<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#75715e">//GTK.gtk_grid_attach(gridHouse, tvGirl, 0, start+1, 1, 1);
+</span><span style="color:#75715e"></span>
+                <span style="color:#75715e">//显示控件
+</span><span style="color:#75715e"></span>
+                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_widget_show</span><span style="color:#f92672">(</span>tvGirl<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+
+                String loveWords <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">;</span>
+                <span style="color:#75715e">//读取文本框里面的内容 ，只适用小量的文本，一般用迭代器
+</span><span style="color:#75715e"></span>                <span style="color:#75715e">//方法1   先从TextView获取int TextBuffer 
+</span><span style="color:#75715e"></span>                    <span style="color:#75715e">//    然后再从TextBuffer获取text
+</span><span style="color:#75715e"></span>                <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">int</span> textbuffer<span style="color:#f92672">=</span> GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_text_view_get_buffer</span><span style="color:#f92672">(</span>tvGirl<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+
+                
+                <span style="color:#75715e">//可以直接通过缓冲区编号  设置信息
+</span><span style="color:#75715e"></span>                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_text_buffer_set_text</span><span style="color:#f92672">(</span>textbuffer<span style="color:#f92672">,</span> loveWords<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                
+                
+        <span style="color:#f92672">}</span>
+        <span style="color:#75715e">/**
+</span><span style="color:#75715e">         * 
+</span><span style="color:#75715e">         * @param gridHouse  网格对象标识
+</span><span style="color:#75715e">         * @param start      网格对象的起始位置标识
+</span><span style="color:#75715e">         * @purpose          创建一个TreeView对象标识，写入字段，添加记录，加入滚动条，并显示。
+</span><span style="color:#75715e">         */</span>
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">createSingleTreeView</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> gridHouse<span style="color:#f92672">,</span><span style="color:#66d9ef">int</span> start<span style="color:#f92672">)</span>
+        <span style="color:#f92672">{</span>
+                <span style="color:#75715e">//3  treeview   是一个界面，相当于是一个淘宝前台， V  V的作用
+</span><span style="color:#75715e"></span>                                treeViewApple <span style="color:#f92672">=</span> GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_tree_view_new</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                <span style="color:#75715e">//4 建立字段  比较费劲
+</span><span style="color:#75715e"></span>                                <span style="color:#75715e">//4.1创建字段
+</span><span style="color:#75715e"></span>                                <span style="color:#66d9ef">int</span> columnID <span style="color:#f92672">=</span> GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_tree_view_column_new_with_attributes</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;ID&#34;</span><span style="color:#f92672">,</span> GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_cell_renderer_text_new</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">,</span> 0<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                <span style="color:#75715e">//4.2添加字段
+</span><span style="color:#75715e"></span>                                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_tree_view_append_column</span><span style="color:#f92672">(</span>treeViewApple<span style="color:#f92672">,</span> columnID<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                <span style="color:#75715e">//4.3创建字段
+</span><span style="color:#75715e"></span>                                <span style="color:#66d9ef">int</span> columnName <span style="color:#f92672">=</span> GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_tree_view_column_new_with_attributes</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Names&#34;</span><span style="color:#f92672">,</span>GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_cell_renderer_text_new</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">,</span>1<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                <span style="color:#75715e">//4.4添加字段
+</span><span style="color:#75715e"></span>                                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_tree_view_append_column</span><span style="color:#f92672">(</span>treeViewApple<span style="color:#f92672">,</span>columnName<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                <span style="color:#75715e">//4.5创建字段
+</span><span style="color:#75715e"></span>                                <span style="color:#66d9ef">int</span>  columnAge <span style="color:#f92672">=</span> GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_tree_view_column_new_with_attributes</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Ages&#34;</span><span style="color:#f92672">,</span>GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_cell_renderer_text_new</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">,</span>2<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_tree_view_append_column</span><span style="color:#f92672">(</span>treeViewApple<span style="color:#f92672">,</span>columnAge<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
                                 
-                                //创建控件
-                                //1  list_store  是一个数据结构库，相当于一个仓库  M model的作用
-                                liststore = GTK.gtk_list_store_new(3); //3代表三个字段：ID  Names   Age
-                        //        GTK.gtk_list_store_append(list_store, iter);
-                                //2  list_iter,list_iter是一个内部的数据迭代的控制过程，不需要显示 C的作用，控制
-                                listiter = GTK.gtk_tree_iter_new();
+                                <span style="color:#75715e">//创建控件
+</span><span style="color:#75715e"></span>                                <span style="color:#75715e">//1  list_store  是一个数据结构库，相当于一个仓库  M model的作用
+</span><span style="color:#75715e"></span>                                liststore <span style="color:#f92672">=</span> GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_list_store_new</span><span style="color:#f92672">(</span>3<span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">//3代表三个字段：ID  Names   Age
+</span><span style="color:#75715e"></span>                        <span style="color:#75715e">//        GTK.gtk_list_store_append(list_store, iter);
+</span><span style="color:#75715e"></span>                                <span style="color:#75715e">//2  list_iter,list_iter是一个内部的数据迭代的控制过程，不需要显示 C的作用，控制
+</span><span style="color:#75715e"></span>                                listiter <span style="color:#f92672">=</span> GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_tree_iter_new</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
 
-                                //5  第五步 把 iter和listStore联系起来
-                                          //GTK.gtk_text_buffer_get_end_iter 类似于treeview的buffer和iter联系起来
-                                           // 以后就可以通过GTK.gtk_text_buffer_insert默认是一个一个iter的执行。
-                                GTK.gtk_list_store_append(liststore, listiter); //指针开始指到第一个位置
-                                // 6 逐个iter添加数据到liststore当中:每个iter的意思，就是逐行或者逐个记录。
-                                GTK.gtk_list_store_set_value(liststore, listiter, 0, &quot;001&quot;);
-                                GTK.gtk_list_store_set_value(liststore, listiter, 1, &quot;YinMuHuaDao&quot;);
-                                GTK.gtk_list_store_set_value(liststore, listiter, 2, &quot;35&quot;);
-                                GTK.gtk_list_store_append(liststore, listiter); //如果不加入，指针不下移，只会覆盖掉前面的数据
-                                GTK.gtk_list_store_set_value(liststore, listiter, 0, &quot;002&quot;);
-                                GTK.gtk_list_store_set_value(liststore, listiter, 1, &quot;Taiyanghua&quot;);
-                                GTK.gtk_list_store_set_value(liststore, listiter, 2, &quot;29&quot;);
-                                GTK.gtk_list_store_append(liststore, listiter);
-                                GTK.gtk_list_store_set_value(liststore, listiter, 0 ,&quot;003&quot;);
-                                GTK.gtk_list_store_set_value(liststore, listiter, 1 ,&quot;Xiaojun&quot;);
-                                GTK.gtk_list_store_set_value(liststore, listiter, 2 ,&quot;10&quot;);
-                                // 之所以添加9次是因为  3个字段*3条记录 == 9
+                                <span style="color:#75715e">//5  第五步 把 iter和listStore联系起来
+</span><span style="color:#75715e"></span>                                          <span style="color:#75715e">//GTK.gtk_text_buffer_get_end_iter 类似于treeview的buffer和iter联系起来
+</span><span style="color:#75715e"></span>                                           <span style="color:#75715e">// 以后就可以通过GTK.gtk_text_buffer_insert默认是一个一个iter的执行。
+</span><span style="color:#75715e"></span>                                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_list_store_append</span><span style="color:#f92672">(</span>liststore<span style="color:#f92672">,</span> listiter<span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">//指针开始指到第一个位置
+</span><span style="color:#75715e"></span>                                <span style="color:#75715e">// 6 逐个iter添加数据到liststore当中:每个iter的意思，就是逐行或者逐个记录。
+</span><span style="color:#75715e"></span>                                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_list_store_set_value</span><span style="color:#f92672">(</span>liststore<span style="color:#f92672">,</span> listiter<span style="color:#f92672">,</span> 0<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;001&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_list_store_set_value</span><span style="color:#f92672">(</span>liststore<span style="color:#f92672">,</span> listiter<span style="color:#f92672">,</span> 1<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;YinMuHuaDao&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_list_store_set_value</span><span style="color:#f92672">(</span>liststore<span style="color:#f92672">,</span> listiter<span style="color:#f92672">,</span> 2<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;35&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_list_store_append</span><span style="color:#f92672">(</span>liststore<span style="color:#f92672">,</span> listiter<span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">//如果不加入，指针不下移，只会覆盖掉前面的数据
+</span><span style="color:#75715e"></span>                                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_list_store_set_value</span><span style="color:#f92672">(</span>liststore<span style="color:#f92672">,</span> listiter<span style="color:#f92672">,</span> 0<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;002&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_list_store_set_value</span><span style="color:#f92672">(</span>liststore<span style="color:#f92672">,</span> listiter<span style="color:#f92672">,</span> 1<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;Taiyanghua&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_list_store_set_value</span><span style="color:#f92672">(</span>liststore<span style="color:#f92672">,</span> listiter<span style="color:#f92672">,</span> 2<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;29&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_list_store_append</span><span style="color:#f92672">(</span>liststore<span style="color:#f92672">,</span> listiter<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_list_store_set_value</span><span style="color:#f92672">(</span>liststore<span style="color:#f92672">,</span> listiter<span style="color:#f92672">,</span> 0 <span style="color:#f92672">,</span><span style="color:#e6db74">&#34;003&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_list_store_set_value</span><span style="color:#f92672">(</span>liststore<span style="color:#f92672">,</span> listiter<span style="color:#f92672">,</span> 1 <span style="color:#f92672">,</span><span style="color:#e6db74">&#34;Xiaojun&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_list_store_set_value</span><span style="color:#f92672">(</span>liststore<span style="color:#f92672">,</span> listiter<span style="color:#f92672">,</span> 2 <span style="color:#f92672">,</span><span style="color:#e6db74">&#34;10&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                <span style="color:#75715e">// 之所以添加9次是因为  3个字段*3条记录 == 9
+</span><span style="color:#75715e"></span>                                
+                                <span style="color:#75715e">//7  使用完iter之后一定要记得 关掉它
+</span><span style="color:#75715e"></span>                                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_tree_iter_free</span><span style="color:#f92672">(</span>listiter<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
                                 
-                                //7  使用完iter之后一定要记得 关掉它
-                                GTK.gtk_tree_iter_free(listiter);
-                                
-                                //8 关键的一步，把数字显示出来
-                                GTK.gtk_tree_view_set_model(treeViewApple, liststore);
+                                <span style="color:#75715e">//8 关键的一步，把数字显示出来
+</span><span style="color:#75715e"></span>                                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_tree_view_set_model</span><span style="color:#f92672">(</span>treeViewApple<span style="color:#f92672">,</span> liststore<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
 
-                                //并同时把它显示出来，前台必须显示
-                                GTK.gtk_widget_show(treeViewApple);
+                                <span style="color:#75715e">//并同时把它显示出来，前台必须显示
+</span><span style="color:#75715e"></span>                                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_widget_show</span><span style="color:#f92672">(</span>treeViewApple<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
                                 
-                                //添加到滚动条中
-                                int scrolledbar2 = 0;
-                                createTreeviewScrollBar(scrolledbar2,treeViewApple,gridHouse,start);
+                                <span style="color:#75715e">//添加到滚动条中
+</span><span style="color:#75715e"></span>                                <span style="color:#66d9ef">int</span> scrolledbar2 <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+                                createTreeviewScrollBar<span style="color:#f92672">(</span>scrolledbar2<span style="color:#f92672">,</span>treeViewApple<span style="color:#f92672">,</span>gridHouse<span style="color:#f92672">,</span>start<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
                                 
-                                //设置部分参数
-                                int column =GTK.gtk_tree_view_get_column(treeViewApple, 1);
-                                GTK.gtk_tree_view_column_set_sort_column_id(column, 1);
-                                GTK.gtk_tree_view_column_set_resizable(column, true);
-                                GTK.gtk_tree_view_column_set_reorderable(column, true);
-        }
+                                <span style="color:#75715e">//设置部分参数
+</span><span style="color:#75715e"></span>                                <span style="color:#66d9ef">int</span> column <span style="color:#f92672">=</span>GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_tree_view_get_column</span><span style="color:#f92672">(</span>treeViewApple<span style="color:#f92672">,</span> 1<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_tree_view_column_set_sort_column_id</span><span style="color:#f92672">(</span>column<span style="color:#f92672">,</span> 1<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_tree_view_column_set_resizable</span><span style="color:#f92672">(</span>column<span style="color:#f92672">,</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_tree_view_column_set_reorderable</span><span style="color:#f92672">(</span>column<span style="color:#f92672">,</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
         
-        /**
-         * 
-         * @param window          窗口的对象标识
-         * @param gridHouse       网格布局的对象标识
-         * @param start           对象所在的网格布局起始位置
-         * @param circlePointx    画笔的x轴位置
-         * @param circlePointy    画笔的y轴位置
-         * @purpose               绘制一个笑脸
-         */
-        public static void createDrawLaughFace(int window,int gridHouse,int start,final int circlePointx,final int circlePointy) 
-        {
-                //创建画图板 或者叫画布
-                int dan  = GTK.gtk_drawing_area_new();
+        <span style="color:#75715e">/**
+</span><span style="color:#75715e">         * 
+</span><span style="color:#75715e">         * @param window          窗口的对象标识
+</span><span style="color:#75715e">         * @param gridHouse       网格布局的对象标识
+</span><span style="color:#75715e">         * @param start           对象所在的网格布局起始位置
+</span><span style="color:#75715e">         * @param circlePointx    画笔的x轴位置
+</span><span style="color:#75715e">         * @param circlePointy    画笔的y轴位置
+</span><span style="color:#75715e">         * @purpose               绘制一个笑脸
+</span><span style="color:#75715e">         */</span>
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">createDrawLaughFace</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> window<span style="color:#f92672">,</span><span style="color:#66d9ef">int</span> gridHouse<span style="color:#f92672">,</span><span style="color:#66d9ef">int</span> start<span style="color:#f92672">,</span><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">int</span> circlePointx<span style="color:#f92672">,</span><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">int</span> circlePointy<span style="color:#f92672">)</span> 
+        <span style="color:#f92672">{</span>
+                <span style="color:#75715e">//创建画图板 或者叫画布
+</span><span style="color:#75715e"></span>                <span style="color:#66d9ef">int</span> dan  <span style="color:#f92672">=</span> GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_drawing_area_new</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
                 
-                //创建源
-                //添加控件
-                start = 0;
-                GTK.gtk_grid_attach(gridHouse, dan, 1, start, 1, 1);
-                //显示画布
-                GTK.gtk_widget_show(dan);
-                
-
-                
-                //设置画布的大小
-                GTK.gtk_widget_set_size_request(dan, 300, 300);
-                
-                
-                //开始绘制  利用事件draw 来不断的绘制
-                
-                GTK.g_signal_connect(dan, &quot;draw&quot;,new IGCallBack() 
-                {
-                        @Override
-                        public void execute(int instance, int eventData, Object object)
-                        {
-                                // TODO 自动生成的方法存根
-                                //eventDate才是画布源
-                                //设置画笔的颜色
-                                //Cairo.cairo_destroy(eventData);
-                                Cairo.cairo_set_source_rgb(eventData, 1, 0, 0);
-                                //设置画笔的大小
-                                Cairo.cairo_set_line_width(eventData, 3);                        
-                                Cairo.cairo_move_to(eventData, circlePointx-20, circlePointy);
-                                Cairo.cairo_line_to(eventData, circlePointx-70, circlePointy);
-                                Cairo.cairo_line_to(eventData, circlePointx-60, circlePointy-5);
-                                Cairo.cairo_move_to(eventData, circlePointx-70, circlePointy);
-                                Cairo.cairo_line_to(eventData, circlePointx-60, circlePointy+5);
-                                Cairo.cairo_stroke(eventData);
-                                
-                                //画一个圆
-                                Cairo.cairo_arc(eventData, circlePointx, circlePointy, 10, 0, 2*3.1415926);
-                                //画一个圆弧
-                                //Cairo.cairo_arc(eventData, 200, 200, 70,1.5*3.1415925, 2*3.1415926);
-                                //显示画笔
-                                Cairo.cairo_stroke(eventData); //Cairo.cairo_fill(eventData)不同的效果
-                                
-                                
-                                //画一个圆弧  有下面实验知道是从x轴沿顺时针开始画图
-
-                                //嘴巴的绘制
-                                double Pi = 3.1415926;
-                                Cairo.cairo_arc(eventData, circlePointx, circlePointy, 5, 0.25*Pi, 0.75*Pi);
-                                Cairo.cairo_fill(eventData);
-                                
-                                //绘制两只眼睛
-                                Cairo.cairo_arc(eventData, circlePointx-5, circlePointy-5, 3, 0, 2*Pi);
-                                Cairo.cairo_arc(eventData, circlePointx+5, circlePointy-5, 3, 0, 2*Pi);
-                                Cairo.cairo_fill(eventData);
-                                
-                                
-
-                                //画文字
-                                Cairo.cairo_move_to(eventData, circlePointx+10, circlePointy+5);
-                                Cairo.cairo_set_source_rgb(eventData, 0.4, 0.3, 0.2);
-                                Cairo.cairo_set_font_size(eventData, 16);
-                                //选择文字类型
-                                Cairo.cairo_select_font_face(eventData, &quot;宋体&quot;, Cairo.CAIRO_FONT_SLANT_ITALIC, Cairo.CAIRO_FONT_WEIGHT_BOLD);
-                                Cairo.cairo_show_text(eventData,note);
-                                //Cairo.cairo_stroke(eventData);  //不需要这句话也可以
-                                
-                        }
-                }, null);
-                
-                
-        }
-        /**
-         * 
-         * @param window          窗口的对象标识
-         * @param gridHouse       网格布局的对象标识
-         * @param start           矩形对象所在的网格布局起始位置
-         * @param circlePointx    画笔的x轴位置
-         * @param circlePointy    画笔的y轴位置
-         * @purpose               绘制一个矩形图像
-         */
-        public static void createRectangleFace(int window,int gridHouse,int start,final int circlePointx,final int circlePointy) 
-        {
-                //创建画图板 或者叫画布
-                int dan  = GTK.gtk_drawing_area_new();
-                
-                //创建源
-                //添加控件
-                start = 4;
-                GTK.gtk_grid_attach(gridHouse, dan, 0, start, 1, 1);
-                //显示画布
-                GTK.gtk_widget_show(dan);
+                <span style="color:#75715e">//创建源
+</span><span style="color:#75715e"></span>                <span style="color:#75715e">//添加控件
+</span><span style="color:#75715e"></span>                start <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_grid_attach</span><span style="color:#f92672">(</span>gridHouse<span style="color:#f92672">,</span> dan<span style="color:#f92672">,</span> 1<span style="color:#f92672">,</span> start<span style="color:#f92672">,</span> 1<span style="color:#f92672">,</span> 1<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#75715e">//显示画布
+</span><span style="color:#75715e"></span>                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_widget_show</span><span style="color:#f92672">(</span>dan<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
                 
 
                 
-                //设置画布的大小
-                GTK.gtk_widget_set_size_request(dan, 300, 300);
+                <span style="color:#75715e">//设置画布的大小
+</span><span style="color:#75715e"></span>                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_widget_set_size_request</span><span style="color:#f92672">(</span>dan<span style="color:#f92672">,</span> 300<span style="color:#f92672">,</span> 300<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
                 
                 
-                //开始绘制  利用事件draw 来不断的绘制
-                
-                GTK.g_signal_connect(dan, &quot;draw&quot;,new IGCallBack() 
-                {
-                        @Override
-                        public void execute(int instance, int eventData, Object object)
-                        {
-                                // TODO 自动生成的方法存根
-                                //eventDate才是画布源
-                                //设置画笔的颜色
-                                //Cairo.cairo_destroy(eventData);
-                                Cairo.cairo_set_source_rgb(eventData, 0, 1, 0);
-                                //设置画笔的大小
-                                Cairo.cairo_set_line_width(eventData, 3);                        
-                                //Cairo.cairo_move_to(eventData, circlePointx-20, circlePointy);
+                <span style="color:#75715e">//开始绘制  利用事件draw 来不断的绘制
+</span><span style="color:#75715e"></span>                
+                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">g_signal_connect</span><span style="color:#f92672">(</span>dan<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;draw&#34;</span><span style="color:#f92672">,</span><span style="color:#66d9ef">new</span> IGCallBack<span style="color:#f92672">(</span><span style="color:#f92672">)</span> 
+                <span style="color:#f92672">{</span>
+                        <span style="color:#a6e22e">@Override</span>
+                        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">execute</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> instance<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> eventData<span style="color:#f92672">,</span> Object object<span style="color:#f92672">)</span>
+                        <span style="color:#f92672">{</span>
+                                <span style="color:#75715e">// TODO 自动生成的方法存根
+</span><span style="color:#75715e"></span>                                <span style="color:#75715e">//eventDate才是画布源
+</span><span style="color:#75715e"></span>                                <span style="color:#75715e">//设置画笔的颜色
+</span><span style="color:#75715e"></span>                                <span style="color:#75715e">//Cairo.cairo_destroy(eventData);
+</span><span style="color:#75715e"></span>                                Cairo<span style="color:#f92672">.</span><span style="color:#a6e22e">cairo_set_source_rgb</span><span style="color:#f92672">(</span>eventData<span style="color:#f92672">,</span> 1<span style="color:#f92672">,</span> 0<span style="color:#f92672">,</span> 0<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                <span style="color:#75715e">//设置画笔的大小
+</span><span style="color:#75715e"></span>                                Cairo<span style="color:#f92672">.</span><span style="color:#a6e22e">cairo_set_line_width</span><span style="color:#f92672">(</span>eventData<span style="color:#f92672">,</span> 3<span style="color:#f92672">)</span><span style="color:#f92672">;</span>                        
+                                Cairo<span style="color:#f92672">.</span><span style="color:#a6e22e">cairo_move_to</span><span style="color:#f92672">(</span>eventData<span style="color:#f92672">,</span> circlePointx<span style="color:#f92672">-</span>20<span style="color:#f92672">,</span> circlePointy<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                Cairo<span style="color:#f92672">.</span><span style="color:#a6e22e">cairo_line_to</span><span style="color:#f92672">(</span>eventData<span style="color:#f92672">,</span> circlePointx<span style="color:#f92672">-</span>70<span style="color:#f92672">,</span> circlePointy<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                Cairo<span style="color:#f92672">.</span><span style="color:#a6e22e">cairo_line_to</span><span style="color:#f92672">(</span>eventData<span style="color:#f92672">,</span> circlePointx<span style="color:#f92672">-</span>60<span style="color:#f92672">,</span> circlePointy<span style="color:#f92672">-</span>5<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                Cairo<span style="color:#f92672">.</span><span style="color:#a6e22e">cairo_move_to</span><span style="color:#f92672">(</span>eventData<span style="color:#f92672">,</span> circlePointx<span style="color:#f92672">-</span>70<span style="color:#f92672">,</span> circlePointy<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                Cairo<span style="color:#f92672">.</span><span style="color:#a6e22e">cairo_line_to</span><span style="color:#f92672">(</span>eventData<span style="color:#f92672">,</span> circlePointx<span style="color:#f92672">-</span>60<span style="color:#f92672">,</span> circlePointy<span style="color:#f92672">+</span>5<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                Cairo<span style="color:#f92672">.</span><span style="color:#a6e22e">cairo_stroke</span><span style="color:#f92672">(</span>eventData<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                
+                                <span style="color:#75715e">//画一个圆
+</span><span style="color:#75715e"></span>                                Cairo<span style="color:#f92672">.</span><span style="color:#a6e22e">cairo_arc</span><span style="color:#f92672">(</span>eventData<span style="color:#f92672">,</span> circlePointx<span style="color:#f92672">,</span> circlePointy<span style="color:#f92672">,</span> 10<span style="color:#f92672">,</span> 0<span style="color:#f92672">,</span> 2<span style="color:#f92672">*</span>3<span style="color:#f92672">.</span><span style="color:#a6e22e">1415926</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                <span style="color:#75715e">//画一个圆弧
+</span><span style="color:#75715e"></span>                                <span style="color:#75715e">//Cairo.cairo_arc(eventData, 200, 200, 70,1.5*3.1415925, 2*3.1415926);
+</span><span style="color:#75715e"></span>                                <span style="color:#75715e">//显示画笔
+</span><span style="color:#75715e"></span>                                Cairo<span style="color:#f92672">.</span><span style="color:#a6e22e">cairo_stroke</span><span style="color:#f92672">(</span>eventData<span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">//Cairo.cairo_fill(eventData)不同的效果
+</span><span style="color:#75715e"></span>                                
+                                
+                                <span style="color:#75715e">//画一个圆弧  有下面实验知道是从x轴沿顺时针开始画图
+</span><span style="color:#75715e"></span>
+                                <span style="color:#75715e">//嘴巴的绘制
+</span><span style="color:#75715e"></span>                                <span style="color:#66d9ef">double</span> Pi <span style="color:#f92672">=</span> 3<span style="color:#f92672">.</span><span style="color:#a6e22e">1415926</span><span style="color:#f92672">;</span>
+                                Cairo<span style="color:#f92672">.</span><span style="color:#a6e22e">cairo_arc</span><span style="color:#f92672">(</span>eventData<span style="color:#f92672">,</span> circlePointx<span style="color:#f92672">,</span> circlePointy<span style="color:#f92672">,</span> 5<span style="color:#f92672">,</span> 0<span style="color:#f92672">.</span><span style="color:#a6e22e">25</span><span style="color:#f92672">*</span>Pi<span style="color:#f92672">,</span> 0<span style="color:#f92672">.</span><span style="color:#a6e22e">75</span><span style="color:#f92672">*</span>Pi<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                Cairo<span style="color:#f92672">.</span><span style="color:#a6e22e">cairo_fill</span><span style="color:#f92672">(</span>eventData<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                
+                                <span style="color:#75715e">//绘制两只眼睛
+</span><span style="color:#75715e"></span>                                Cairo<span style="color:#f92672">.</span><span style="color:#a6e22e">cairo_arc</span><span style="color:#f92672">(</span>eventData<span style="color:#f92672">,</span> circlePointx<span style="color:#f92672">-</span>5<span style="color:#f92672">,</span> circlePointy<span style="color:#f92672">-</span>5<span style="color:#f92672">,</span> 3<span style="color:#f92672">,</span> 0<span style="color:#f92672">,</span> 2<span style="color:#f92672">*</span>Pi<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                Cairo<span style="color:#f92672">.</span><span style="color:#a6e22e">cairo_arc</span><span style="color:#f92672">(</span>eventData<span style="color:#f92672">,</span> circlePointx<span style="color:#f92672">+</span>5<span style="color:#f92672">,</span> circlePointy<span style="color:#f92672">-</span>5<span style="color:#f92672">,</span> 3<span style="color:#f92672">,</span> 0<span style="color:#f92672">,</span> 2<span style="color:#f92672">*</span>Pi<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                Cairo<span style="color:#f92672">.</span><span style="color:#a6e22e">cairo_fill</span><span style="color:#f92672">(</span>eventData<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                
+                                
 
-                                
-                                //画一个矩形
-                                Cairo.cairo_rectangle(eventData, circleRectangex-150, circleRectangey+120, 250, 20);
-                                Cairo.cairo_stroke(eventData);
-                                //画文字
-                                Cairo.cairo_move_to(eventData, circleRectangex+10, circleRectangey+100);
-                                Cairo.cairo_set_source_rgb(eventData, 0, 0, 1);
-                                Cairo.cairo_set_font_size(eventData, 18);
-                                //选择文字类型
-                                Cairo.cairo_select_font_face(eventData, &quot;宋体&quot;, Cairo.CAIRO_FONT_SLANT_NORMAL, Cairo.CAIRO_FONT_WEIGHT_BOLD);
-                                Cairo.cairo_show_text(eventData,&quot;循环第&quot;+Integer.toString(rowPosition)+&quot;次&quot;);//
-                                //Cairo.cairo_stroke(eventData);  //不需要这句话也可以
-                                
-                        }
-                }, null);
+                                <span style="color:#75715e">//画文字
+</span><span style="color:#75715e"></span>                                Cairo<span style="color:#f92672">.</span><span style="color:#a6e22e">cairo_move_to</span><span style="color:#f92672">(</span>eventData<span style="color:#f92672">,</span> circlePointx<span style="color:#f92672">+</span>10<span style="color:#f92672">,</span> circlePointy<span style="color:#f92672">+</span>5<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                Cairo<span style="color:#f92672">.</span><span style="color:#a6e22e">cairo_set_source_rgb</span><span style="color:#f92672">(</span>eventData<span style="color:#f92672">,</span> 0<span style="color:#f92672">.</span><span style="color:#a6e22e">4</span><span style="color:#f92672">,</span> 0<span style="color:#f92672">.</span><span style="color:#a6e22e">3</span><span style="color:#f92672">,</span> 0<span style="color:#f92672">.</span><span style="color:#a6e22e">2</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                Cairo<span style="color:#f92672">.</span><span style="color:#a6e22e">cairo_set_font_size</span><span style="color:#f92672">(</span>eventData<span style="color:#f92672">,</span> 16<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                <span style="color:#75715e">//选择文字类型
+</span><span style="color:#75715e"></span>                                Cairo<span style="color:#f92672">.</span><span style="color:#a6e22e">cairo_select_font_face</span><span style="color:#f92672">(</span>eventData<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;宋体&#34;</span><span style="color:#f92672">,</span> Cairo<span style="color:#f92672">.</span><span style="color:#a6e22e">CAIRO_FONT_SLANT_ITALIC</span><span style="color:#f92672">,</span> Cairo<span style="color:#f92672">.</span><span style="color:#a6e22e">CAIRO_FONT_WEIGHT_BOLD</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                Cairo<span style="color:#f92672">.</span><span style="color:#a6e22e">cairo_show_text</span><span style="color:#f92672">(</span>eventData<span style="color:#f92672">,</span>note<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                <span style="color:#75715e">//Cairo.cairo_stroke(eventData);  //不需要这句话也可以
+</span><span style="color:#75715e"></span>                                
+                        <span style="color:#f92672">}</span>
+                <span style="color:#f92672">}</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
                 
                 
-        }
-        /**
-         * 
-         * @param window          窗口的对象标识
-         * @param gridHouse       网格布局的对象标识
-         * @param start           矩形对象所在的网格布局起始位置
-         * @param circlePointx    画笔的x轴位置
-         * @param circlePointy    画笔的y轴位置
-         * @purpose               绘制一个圆圈图像 + 终止表示！
-         */
-        public static void createCircleFace(int window,int gridHouse,int start,final int circlePointx,final int circlePointy) 
-        {
-                //创建画图板 或者叫画布
-                int dan  = GTK.gtk_drawing_area_new();
+        <span style="color:#f92672">}</span>
+        <span style="color:#75715e">/**
+</span><span style="color:#75715e">         * 
+</span><span style="color:#75715e">         * @param window          窗口的对象标识
+</span><span style="color:#75715e">         * @param gridHouse       网格布局的对象标识
+</span><span style="color:#75715e">         * @param start           矩形对象所在的网格布局起始位置
+</span><span style="color:#75715e">         * @param circlePointx    画笔的x轴位置
+</span><span style="color:#75715e">         * @param circlePointy    画笔的y轴位置
+</span><span style="color:#75715e">         * @purpose               绘制一个矩形图像
+</span><span style="color:#75715e">         */</span>
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">createRectangleFace</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> window<span style="color:#f92672">,</span><span style="color:#66d9ef">int</span> gridHouse<span style="color:#f92672">,</span><span style="color:#66d9ef">int</span> start<span style="color:#f92672">,</span><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">int</span> circlePointx<span style="color:#f92672">,</span><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">int</span> circlePointy<span style="color:#f92672">)</span> 
+        <span style="color:#f92672">{</span>
+                <span style="color:#75715e">//创建画图板 或者叫画布
+</span><span style="color:#75715e"></span>                <span style="color:#66d9ef">int</span> dan  <span style="color:#f92672">=</span> GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_drawing_area_new</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
                 
-                //创建源
-                //添加控件
-                start = 4;
-                GTK.gtk_grid_attach(gridHouse, dan, 0, start, 1, 1);
-                //显示画布
-                GTK.gtk_widget_show(dan);
+                <span style="color:#75715e">//创建源
+</span><span style="color:#75715e"></span>                <span style="color:#75715e">//添加控件
+</span><span style="color:#75715e"></span>                start <span style="color:#f92672">=</span> 4<span style="color:#f92672">;</span>
+                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_grid_attach</span><span style="color:#f92672">(</span>gridHouse<span style="color:#f92672">,</span> dan<span style="color:#f92672">,</span> 0<span style="color:#f92672">,</span> start<span style="color:#f92672">,</span> 1<span style="color:#f92672">,</span> 1<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#75715e">//显示画布
+</span><span style="color:#75715e"></span>                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_widget_show</span><span style="color:#f92672">(</span>dan<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
                 
 
                 
-                //设置画布的大小
-                GTK.gtk_widget_set_size_request(dan, 300, 300);
+                <span style="color:#75715e">//设置画布的大小
+</span><span style="color:#75715e"></span>                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_widget_set_size_request</span><span style="color:#f92672">(</span>dan<span style="color:#f92672">,</span> 300<span style="color:#f92672">,</span> 300<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
                 
                 
-                //开始绘制  利用事件draw 来不断的绘制
+                <span style="color:#75715e">//开始绘制  利用事件draw 来不断的绘制
+</span><span style="color:#75715e"></span>                
+                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">g_signal_connect</span><span style="color:#f92672">(</span>dan<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;draw&#34;</span><span style="color:#f92672">,</span><span style="color:#66d9ef">new</span> IGCallBack<span style="color:#f92672">(</span><span style="color:#f92672">)</span> 
+                <span style="color:#f92672">{</span>
+                        <span style="color:#a6e22e">@Override</span>
+                        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">execute</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> instance<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> eventData<span style="color:#f92672">,</span> Object object<span style="color:#f92672">)</span>
+                        <span style="color:#f92672">{</span>
+                                <span style="color:#75715e">// TODO 自动生成的方法存根
+</span><span style="color:#75715e"></span>                                <span style="color:#75715e">//eventDate才是画布源
+</span><span style="color:#75715e"></span>                                <span style="color:#75715e">//设置画笔的颜色
+</span><span style="color:#75715e"></span>                                <span style="color:#75715e">//Cairo.cairo_destroy(eventData);
+</span><span style="color:#75715e"></span>                                Cairo<span style="color:#f92672">.</span><span style="color:#a6e22e">cairo_set_source_rgb</span><span style="color:#f92672">(</span>eventData<span style="color:#f92672">,</span> 0<span style="color:#f92672">,</span> 1<span style="color:#f92672">,</span> 0<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                <span style="color:#75715e">//设置画笔的大小
+</span><span style="color:#75715e"></span>                                Cairo<span style="color:#f92672">.</span><span style="color:#a6e22e">cairo_set_line_width</span><span style="color:#f92672">(</span>eventData<span style="color:#f92672">,</span> 3<span style="color:#f92672">)</span><span style="color:#f92672">;</span>                        
+                                <span style="color:#75715e">//Cairo.cairo_move_to(eventData, circlePointx-20, circlePointy);
+</span><span style="color:#75715e"></span>
+                                
+                                <span style="color:#75715e">//画一个矩形
+</span><span style="color:#75715e"></span>                                Cairo<span style="color:#f92672">.</span><span style="color:#a6e22e">cairo_rectangle</span><span style="color:#f92672">(</span>eventData<span style="color:#f92672">,</span> circleRectangex<span style="color:#f92672">-</span>150<span style="color:#f92672">,</span> circleRectangey<span style="color:#f92672">+</span>120<span style="color:#f92672">,</span> 250<span style="color:#f92672">,</span> 20<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                Cairo<span style="color:#f92672">.</span><span style="color:#a6e22e">cairo_stroke</span><span style="color:#f92672">(</span>eventData<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                <span style="color:#75715e">//画文字
+</span><span style="color:#75715e"></span>                                Cairo<span style="color:#f92672">.</span><span style="color:#a6e22e">cairo_move_to</span><span style="color:#f92672">(</span>eventData<span style="color:#f92672">,</span> circleRectangex<span style="color:#f92672">+</span>10<span style="color:#f92672">,</span> circleRectangey<span style="color:#f92672">+</span>100<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                Cairo<span style="color:#f92672">.</span><span style="color:#a6e22e">cairo_set_source_rgb</span><span style="color:#f92672">(</span>eventData<span style="color:#f92672">,</span> 0<span style="color:#f92672">,</span> 0<span style="color:#f92672">,</span> 1<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                Cairo<span style="color:#f92672">.</span><span style="color:#a6e22e">cairo_set_font_size</span><span style="color:#f92672">(</span>eventData<span style="color:#f92672">,</span> 18<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                <span style="color:#75715e">//选择文字类型
+</span><span style="color:#75715e"></span>                                Cairo<span style="color:#f92672">.</span><span style="color:#a6e22e">cairo_select_font_face</span><span style="color:#f92672">(</span>eventData<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;宋体&#34;</span><span style="color:#f92672">,</span> Cairo<span style="color:#f92672">.</span><span style="color:#a6e22e">CAIRO_FONT_SLANT_NORMAL</span><span style="color:#f92672">,</span> Cairo<span style="color:#f92672">.</span><span style="color:#a6e22e">CAIRO_FONT_WEIGHT_BOLD</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                Cairo<span style="color:#f92672">.</span><span style="color:#a6e22e">cairo_show_text</span><span style="color:#f92672">(</span>eventData<span style="color:#f92672">,</span><span style="color:#e6db74">&#34;循环第&#34;</span><span style="color:#f92672">+</span>Integer<span style="color:#f92672">.</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(</span>rowPosition<span style="color:#f92672">)</span><span style="color:#f92672">+</span><span style="color:#e6db74">&#34;次&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span><span style="color:#75715e">//
+</span><span style="color:#75715e"></span>                                <span style="color:#75715e">//Cairo.cairo_stroke(eventData);  //不需要这句话也可以
+</span><span style="color:#75715e"></span>                                
+                        <span style="color:#f92672">}</span>
+                <span style="color:#f92672">}</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
                 
-                GTK.g_signal_connect(dan, &quot;draw&quot;,new IGCallBack() 
-                {
-                        @Override
-                        public void execute(int instance, int eventData, Object object)
-                        {
-                                // TODO 自动生成的方法存根
-                                //eventDate才是画布源
-                                //设置画笔的颜色
-                                //Cairo.cairo_destroy(eventData);
-                                Cairo.cairo_set_source_rgb(eventData, 1, 0, 1);
-                                //设置画笔的大小
-                                Cairo.cairo_set_line_width(eventData, 3);                        
-                                //Cairo.cairo_move_to(eventData, circlePointx-20, circlePointy);
+                
+        <span style="color:#f92672">}</span>
+        <span style="color:#75715e">/**
+</span><span style="color:#75715e">         * 
+</span><span style="color:#75715e">         * @param window          窗口的对象标识
+</span><span style="color:#75715e">         * @param gridHouse       网格布局的对象标识
+</span><span style="color:#75715e">         * @param start           矩形对象所在的网格布局起始位置
+</span><span style="color:#75715e">         * @param circlePointx    画笔的x轴位置
+</span><span style="color:#75715e">         * @param circlePointy    画笔的y轴位置
+</span><span style="color:#75715e">         * @purpose               绘制一个圆圈图像 + 终止表示！
+</span><span style="color:#75715e">         */</span>
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">createCircleFace</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> window<span style="color:#f92672">,</span><span style="color:#66d9ef">int</span> gridHouse<span style="color:#f92672">,</span><span style="color:#66d9ef">int</span> start<span style="color:#f92672">,</span><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">int</span> circlePointx<span style="color:#f92672">,</span><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">int</span> circlePointy<span style="color:#f92672">)</span> 
+        <span style="color:#f92672">{</span>
+                <span style="color:#75715e">//创建画图板 或者叫画布
+</span><span style="color:#75715e"></span>                <span style="color:#66d9ef">int</span> dan  <span style="color:#f92672">=</span> GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_drawing_area_new</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                
+                <span style="color:#75715e">//创建源
+</span><span style="color:#75715e"></span>                <span style="color:#75715e">//添加控件
+</span><span style="color:#75715e"></span>                start <span style="color:#f92672">=</span> 4<span style="color:#f92672">;</span>
+                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_grid_attach</span><span style="color:#f92672">(</span>gridHouse<span style="color:#f92672">,</span> dan<span style="color:#f92672">,</span> 0<span style="color:#f92672">,</span> start<span style="color:#f92672">,</span> 1<span style="color:#f92672">,</span> 1<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#75715e">//显示画布
+</span><span style="color:#75715e"></span>                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_widget_show</span><span style="color:#f92672">(</span>dan<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                
 
-                                
-                                //画一个矩形
-                                Cairo.cairo_arc(eventData, EndCirclex+150, EndCircley+200, 100, 0, 6.28);
-                                Cairo.cairo_stroke(eventData);
-                                //画文字
-                                Cairo.cairo_move_to(eventData, EndCirclex+50, EndCircley+200);
-                                Cairo.cairo_set_source_rgb(eventData, 1, 0, 1);
-                                Cairo.cairo_set_font_size(eventData, 18);
-                                //选择文字类型
-                                Cairo.cairo_select_font_face(eventData, &quot;宋体&quot;, Cairo.CAIRO_FONT_SLANT_NORMAL, Cairo.CAIRO_FONT_WEIGHT_BOLD);
-                                Cairo.cairo_show_text(eventData,&quot;循环第&quot;+Integer.toString(rowPosition+1)+&quot;次,程序终止退出！&quot;);//
-                                //Cairo.cairo_stroke(eventData);  //不需要这句话也可以
-                                
-                        }
-                }, null);
+                
+                <span style="color:#75715e">//设置画布的大小
+</span><span style="color:#75715e"></span>                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_widget_set_size_request</span><span style="color:#f92672">(</span>dan<span style="color:#f92672">,</span> 300<span style="color:#f92672">,</span> 300<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
                 
                 
-        }
-        /**
-         * 
-         * @param gridHouse         网格布局对象标识
-         * @param textViewOutput    textview的对象标识
-         * @param start             textview对象在网格布局的起始位置
-         * @purpose                 创建一个下一步button，并添加事件监听
-         */
-        public static void createNextButton(int gridHouse,int textViewOutput,int start)
-        {
-                int btnApple = GTK.gtk_button_new_with_label(&quot;下一步&quot;);
-                GTK.gtk_widget_show(btnApple);
-                GTK.gtk_grid_attach(gridHouse, btnApple, 6, start, 1, 1);
-                insertNextEvent(btnApple,textViewOutput);
-        }
-        /**
-         * 
-         * @param btnSin            button下一步的对象标识
-         * @param textViewOutput    textview的对象标识
-         * @purpose                 建立button下一步的事件监听
-         */
-        public static void insertNextEvent(final int btnSin,final int textViewOutput)
-        {
-                GTK.g_signal_connect(btnSin, &quot;clicked&quot;,new IGCallBack()
-                {
-                        @Override
-                        public void execute(int instance, int eventData, Object object)
-                        {
+                <span style="color:#75715e">//开始绘制  利用事件draw 来不断的绘制
+</span><span style="color:#75715e"></span>                
+                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">g_signal_connect</span><span style="color:#f92672">(</span>dan<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;draw&#34;</span><span style="color:#f92672">,</span><span style="color:#66d9ef">new</span> IGCallBack<span style="color:#f92672">(</span><span style="color:#f92672">)</span> 
+                <span style="color:#f92672">{</span>
+                        <span style="color:#a6e22e">@Override</span>
+                        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">execute</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> instance<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> eventData<span style="color:#f92672">,</span> Object object<span style="color:#f92672">)</span>
+                        <span style="color:#f92672">{</span>
+                                <span style="color:#75715e">// TODO 自动生成的方法存根
+</span><span style="color:#75715e"></span>                                <span style="color:#75715e">//eventDate才是画布源
+</span><span style="color:#75715e"></span>                                <span style="color:#75715e">//设置画笔的颜色
+</span><span style="color:#75715e"></span>                                <span style="color:#75715e">//Cairo.cairo_destroy(eventData);
+</span><span style="color:#75715e"></span>                                Cairo<span style="color:#f92672">.</span><span style="color:#a6e22e">cairo_set_source_rgb</span><span style="color:#f92672">(</span>eventData<span style="color:#f92672">,</span> 1<span style="color:#f92672">,</span> 0<span style="color:#f92672">,</span> 1<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                <span style="color:#75715e">//设置画笔的大小
+</span><span style="color:#75715e"></span>                                Cairo<span style="color:#f92672">.</span><span style="color:#a6e22e">cairo_set_line_width</span><span style="color:#f92672">(</span>eventData<span style="color:#f92672">,</span> 3<span style="color:#f92672">)</span><span style="color:#f92672">;</span>                        
+                                <span style="color:#75715e">//Cairo.cairo_move_to(eventData, circlePointx-20, circlePointy);
+</span><span style="color:#75715e"></span>
                                 
-                                // TODO 自动生成的方法存根
-                                //double sbValue = GTK.gtk_spin_button_get_value(spinbox);
-                                if(rowPosition &lt; getNumberOfListstore(liststore))
-                                {
-                                        circlePointy = circlePointy+20;
-                                        //创建笑脸
-                                        createDrawLaughFace(window,gridHouse,start,circlePointx,circlePointy);
-                                        //创建矩形框
-                                        createRectangleFace(window,gridHouse,start+1,circleRectangex,circleRectangey);
-                                        printRecord(liststore);
-                                        InsertStringToTextViewFunction(textViewOutput,&quot;我在do循环里面  \n&quot;);
-                                        rowPosition =  rowPosition +1;
-                                }
-                                else 
-                                {
+                                <span style="color:#75715e">//画一个矩形
+</span><span style="color:#75715e"></span>                                Cairo<span style="color:#f92672">.</span><span style="color:#a6e22e">cairo_arc</span><span style="color:#f92672">(</span>eventData<span style="color:#f92672">,</span> EndCirclex<span style="color:#f92672">+</span>150<span style="color:#f92672">,</span> EndCircley<span style="color:#f92672">+</span>200<span style="color:#f92672">,</span> 100<span style="color:#f92672">,</span> 0<span style="color:#f92672">,</span> 6<span style="color:#f92672">.</span><span style="color:#a6e22e">28</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                Cairo<span style="color:#f92672">.</span><span style="color:#a6e22e">cairo_stroke</span><span style="color:#f92672">(</span>eventData<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                <span style="color:#75715e">//画文字
+</span><span style="color:#75715e"></span>                                Cairo<span style="color:#f92672">.</span><span style="color:#a6e22e">cairo_move_to</span><span style="color:#f92672">(</span>eventData<span style="color:#f92672">,</span> EndCirclex<span style="color:#f92672">+</span>50<span style="color:#f92672">,</span> EndCircley<span style="color:#f92672">+</span>200<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                Cairo<span style="color:#f92672">.</span><span style="color:#a6e22e">cairo_set_source_rgb</span><span style="color:#f92672">(</span>eventData<span style="color:#f92672">,</span> 1<span style="color:#f92672">,</span> 0<span style="color:#f92672">,</span> 1<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                Cairo<span style="color:#f92672">.</span><span style="color:#a6e22e">cairo_set_font_size</span><span style="color:#f92672">(</span>eventData<span style="color:#f92672">,</span> 18<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                <span style="color:#75715e">//选择文字类型
+</span><span style="color:#75715e"></span>                                Cairo<span style="color:#f92672">.</span><span style="color:#a6e22e">cairo_select_font_face</span><span style="color:#f92672">(</span>eventData<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;宋体&#34;</span><span style="color:#f92672">,</span> Cairo<span style="color:#f92672">.</span><span style="color:#a6e22e">CAIRO_FONT_SLANT_NORMAL</span><span style="color:#f92672">,</span> Cairo<span style="color:#f92672">.</span><span style="color:#a6e22e">CAIRO_FONT_WEIGHT_BOLD</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                Cairo<span style="color:#f92672">.</span><span style="color:#a6e22e">cairo_show_text</span><span style="color:#f92672">(</span>eventData<span style="color:#f92672">,</span><span style="color:#e6db74">&#34;循环第&#34;</span><span style="color:#f92672">+</span>Integer<span style="color:#f92672">.</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(</span>rowPosition<span style="color:#f92672">+</span>1<span style="color:#f92672">)</span><span style="color:#f92672">+</span><span style="color:#e6db74">&#34;次,程序终止退出！&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span><span style="color:#75715e">//
+</span><span style="color:#75715e"></span>                                <span style="color:#75715e">//Cairo.cairo_stroke(eventData);  //不需要这句话也可以
+</span><span style="color:#75715e"></span>                                
+                        <span style="color:#f92672">}</span>
+                <span style="color:#f92672">}</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                
+                
+        <span style="color:#f92672">}</span>
+        <span style="color:#75715e">/**
+</span><span style="color:#75715e">         * 
+</span><span style="color:#75715e">         * @param gridHouse         网格布局对象标识
+</span><span style="color:#75715e">         * @param textViewOutput    textview的对象标识
+</span><span style="color:#75715e">         * @param start             textview对象在网格布局的起始位置
+</span><span style="color:#75715e">         * @purpose                 创建一个下一步button，并添加事件监听
+</span><span style="color:#75715e">         */</span>
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">createNextButton</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> gridHouse<span style="color:#f92672">,</span><span style="color:#66d9ef">int</span> textViewOutput<span style="color:#f92672">,</span><span style="color:#66d9ef">int</span> start<span style="color:#f92672">)</span>
+        <span style="color:#f92672">{</span>
+                <span style="color:#66d9ef">int</span> btnApple <span style="color:#f92672">=</span> GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_button_new_with_label</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;下一步&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_widget_show</span><span style="color:#f92672">(</span>btnApple<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_grid_attach</span><span style="color:#f92672">(</span>gridHouse<span style="color:#f92672">,</span> btnApple<span style="color:#f92672">,</span> 6<span style="color:#f92672">,</span> start<span style="color:#f92672">,</span> 1<span style="color:#f92672">,</span> 1<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                insertNextEvent<span style="color:#f92672">(</span>btnApple<span style="color:#f92672">,</span>textViewOutput<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#75715e">/**
+</span><span style="color:#75715e">         * 
+</span><span style="color:#75715e">         * @param btnSin            button下一步的对象标识
+</span><span style="color:#75715e">         * @param textViewOutput    textview的对象标识
+</span><span style="color:#75715e">         * @purpose                 建立button下一步的事件监听
+</span><span style="color:#75715e">         */</span>
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">insertNextEvent</span><span style="color:#f92672">(</span><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">int</span> btnSin<span style="color:#f92672">,</span><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">int</span> textViewOutput<span style="color:#f92672">)</span>
+        <span style="color:#f92672">{</span>
+                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">g_signal_connect</span><span style="color:#f92672">(</span>btnSin<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;clicked&#34;</span><span style="color:#f92672">,</span><span style="color:#66d9ef">new</span> IGCallBack<span style="color:#f92672">(</span><span style="color:#f92672">)</span>
+                <span style="color:#f92672">{</span>
+                        <span style="color:#a6e22e">@Override</span>
+                        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">execute</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> instance<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> eventData<span style="color:#f92672">,</span> Object object<span style="color:#f92672">)</span>
+                        <span style="color:#f92672">{</span>
+                                
+                                <span style="color:#75715e">// TODO 自动生成的方法存根
+</span><span style="color:#75715e"></span>                                <span style="color:#75715e">//double sbValue = GTK.gtk_spin_button_get_value(spinbox);
+</span><span style="color:#75715e"></span>                                <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>rowPosition <span style="color:#f92672">&lt;</span> getNumberOfListstore<span style="color:#f92672">(</span>liststore<span style="color:#f92672">)</span><span style="color:#f92672">)</span>
+                                <span style="color:#f92672">{</span>
+                                        circlePointy <span style="color:#f92672">=</span> circlePointy<span style="color:#f92672">+</span>20<span style="color:#f92672">;</span>
+                                        <span style="color:#75715e">//创建笑脸
+</span><span style="color:#75715e"></span>                                        createDrawLaughFace<span style="color:#f92672">(</span>window<span style="color:#f92672">,</span>gridHouse<span style="color:#f92672">,</span>start<span style="color:#f92672">,</span>circlePointx<span style="color:#f92672">,</span>circlePointy<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                        <span style="color:#75715e">//创建矩形框
+</span><span style="color:#75715e"></span>                                        createRectangleFace<span style="color:#f92672">(</span>window<span style="color:#f92672">,</span>gridHouse<span style="color:#f92672">,</span>start<span style="color:#f92672">+</span>1<span style="color:#f92672">,</span>circleRectangex<span style="color:#f92672">,</span>circleRectangey<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                        printRecord<span style="color:#f92672">(</span>liststore<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                        InsertStringToTextViewFunction<span style="color:#f92672">(</span>textViewOutput<span style="color:#f92672">,</span><span style="color:#e6db74">&#34;我在do循环里面  \n&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                        rowPosition <span style="color:#f92672">=</span>  rowPosition <span style="color:#f92672">+</span>1<span style="color:#f92672">;</span>
+                                <span style="color:#f92672">}</span>
+                                <span style="color:#66d9ef">else</span> 
+                                <span style="color:#f92672">{</span>
                                         
-                                        //note = &quot;指针无法下移&quot;;
-                                        circlePointy = circlePointy+20;
-                                        if(rowPosition &gt; getNumberOfListstore(liststore))
-                                        {
-                                                createDrawLaughFace(window,gridHouse,start,circlePointx,circlePointy);
-                                        }
+                                        <span style="color:#75715e">//note = &#34;指针无法下移&#34;;
+</span><span style="color:#75715e"></span>                                        circlePointy <span style="color:#f92672">=</span> circlePointy<span style="color:#f92672">+</span>20<span style="color:#f92672">;</span>
+                                        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>rowPosition <span style="color:#f92672">&gt;</span> getNumberOfListstore<span style="color:#f92672">(</span>liststore<span style="color:#f92672">)</span><span style="color:#f92672">)</span>
+                                        <span style="color:#f92672">{</span>
+                                                createDrawLaughFace<span style="color:#f92672">(</span>window<span style="color:#f92672">,</span>gridHouse<span style="color:#f92672">,</span>start<span style="color:#f92672">,</span>circlePointx<span style="color:#f92672">,</span>circlePointy<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                        <span style="color:#f92672">}</span>
                                         
-                                        createRectangleFace(window,gridHouse,start+1,circleRectangex,circleRectangey);
-                                        createCircleFace(window,gridHouse,start,EndCirclex,EndCircley);
-                                        InsertStringToTextViewFunction(textViewOutput,&quot;别嗯了！程序没有数据了\n&quot;);
-                                        showInfo(&quot;没有数据了&quot;,&quot;指针无法下移&quot;);
-                                }
+                                        createRectangleFace<span style="color:#f92672">(</span>window<span style="color:#f92672">,</span>gridHouse<span style="color:#f92672">,</span>start<span style="color:#f92672">+</span>1<span style="color:#f92672">,</span>circleRectangex<span style="color:#f92672">,</span>circleRectangey<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                        createCircleFace<span style="color:#f92672">(</span>window<span style="color:#f92672">,</span>gridHouse<span style="color:#f92672">,</span>start<span style="color:#f92672">,</span>EndCirclex<span style="color:#f92672">,</span>EndCircley<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                        InsertStringToTextViewFunction<span style="color:#f92672">(</span>textViewOutput<span style="color:#f92672">,</span><span style="color:#e6db74">&#34;别嗯了！程序没有数据了\n&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                        showInfo<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;没有数据了&#34;</span><span style="color:#f92672">,</span><span style="color:#e6db74">&#34;指针无法下移&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                <span style="color:#f92672">}</span>
 
-                        }
-                }, null);
-        }
-        /**
-         * 
-         * @param liststore   liststore是treeview的原始数据
-         * @return            返回liststore的记录个数
-         */
-        public static int getNumberOfListstore(int liststore)
-        {
-                int sum = 0;
-                int iter = GTK.gtk_tree_iter_new();
-                if(!GTK.gtk_tree_model_get_iter_first(liststore, iter))
-                {
-                        return sum;
-                }
-                do
-                {
-                        sum++;
-                }while(GTK.gtk_tree_model_iter_next(liststore, iter));
-                return sum;
-        }
-        /**
-         * 
-         * @param liststore   liststore是treeview的原始数据
-         * @purpose           打印liststore的所有内容
-         */
-        public static void printRecord(int liststore)
-        {
-                //必须新建，不能利用原先的listiter,哪边需要用控制，就需要建一个控件。！！！否则报错！！不能用全局的 listiter
-                int iter = GTK.gtk_tree_iter_new();
-                int i  =0;
-/*                if(GTK.gtk_tree_model_get_iter_first(liststore, listiter))
-                {
-                        do
-                        {
-                                String ID = GTK.gtk_tree_model_get_value(liststore, listiter, 0);
-                                String Names = GTK.gtk_tree_model_get_value(liststore, listiter, 1);
-                                String Ages = GTK.gtk_tree_model_get_value(liststore, listiter, 2);
-                                //showInfo(&quot;这个员工的ID是&quot;+ID+&quot;,他的名字是&quot;+Names+&quot;,并且它的年龄是&quot;+Ages,&quot;显示员工信息&quot;);
-                                System.out.println(&quot;这个员工的ID是&quot;+ID+&quot;,他的名字是&quot;+Names+&quot;,并且它的年龄是&quot;+Ages);
-                                
-                        }while(GTK.gtk_tree_model_iter_next(liststore,listiter));
-                }else
-                {
-                        System.out.println(&quot;表中无数据&quot;);
-                }*/
-                // 减少代码的深度。
-                if(!GTK.gtk_tree_model_get_iter_first(liststore, iter))
-                {
-                        System.out.println(&quot;treeview没有数据  请添加记录&quot;);
-                        return;
-                }
-                do
-                {
-                        if(rowPosition == i)
-                        {
-                                String ID = GTK.gtk_tree_model_get_value(liststore, iter, 0);
-                                String Names = GTK.gtk_tree_model_get_value(liststore, iter, 1);
-                                String Ages = GTK.gtk_tree_model_get_value(liststore, iter, 2);
-                                showInfo(&quot;这个员工的ID是&quot;+ID+&quot;,他的名字是&quot;+Names+&quot;,并且它的年龄是&quot;+Ages,&quot;显示员工信息&quot;);
-                                //System.out.println(&quot;这个员工的ID是&quot;+ID+&quot;,他的名字是&quot;+Names+&quot;,并且它的年龄是&quot;+Ages);
-                                return;
-                        }
-                        i++;
+                        <span style="color:#f92672">}</span>
+                <span style="color:#f92672">}</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#75715e">/**
+</span><span style="color:#75715e">         * 
+</span><span style="color:#75715e">         * @param liststore   liststore是treeview的原始数据
+</span><span style="color:#75715e">         * @return            返回liststore的记录个数
+</span><span style="color:#75715e">         */</span>
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getNumberOfListstore</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> liststore<span style="color:#f92672">)</span>
+        <span style="color:#f92672">{</span>
+                <span style="color:#66d9ef">int</span> sum <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+                <span style="color:#66d9ef">int</span> iter <span style="color:#f92672">=</span> GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_tree_iter_new</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span><span style="color:#f92672">!</span>GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_tree_model_get_iter_first</span><span style="color:#f92672">(</span>liststore<span style="color:#f92672">,</span> iter<span style="color:#f92672">)</span><span style="color:#f92672">)</span>
+                <span style="color:#f92672">{</span>
+                        <span style="color:#66d9ef">return</span> sum<span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span>
+                <span style="color:#66d9ef">do</span>
+                <span style="color:#f92672">{</span>
+                        sum<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span><span style="color:#66d9ef">while</span><span style="color:#f92672">(</span>GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_tree_model_iter_next</span><span style="color:#f92672">(</span>liststore<span style="color:#f92672">,</span> iter<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#66d9ef">return</span> sum<span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#75715e">/**
+</span><span style="color:#75715e">         * 
+</span><span style="color:#75715e">         * @param liststore   liststore是treeview的原始数据
+</span><span style="color:#75715e">         * @purpose           打印liststore的所有内容
+</span><span style="color:#75715e">         */</span>
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printRecord</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> liststore<span style="color:#f92672">)</span>
+        <span style="color:#f92672">{</span>
+                <span style="color:#75715e">//必须新建，不能利用原先的listiter,哪边需要用控制，就需要建一个控件。！！！否则报错！！不能用全局的 listiter
+</span><span style="color:#75715e"></span>                <span style="color:#66d9ef">int</span> iter <span style="color:#f92672">=</span> GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_tree_iter_new</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#66d9ef">int</span> i  <span style="color:#f92672">=</span>0<span style="color:#f92672">;</span>
+<span style="color:#75715e">/*                if(GTK.gtk_tree_model_get_iter_first(liststore, listiter))
+</span><span style="color:#75715e">                {
+</span><span style="color:#75715e">                        do
+</span><span style="color:#75715e">                        {
+</span><span style="color:#75715e">                                String ID = GTK.gtk_tree_model_get_value(liststore, listiter, 0);
+</span><span style="color:#75715e">                                String Names = GTK.gtk_tree_model_get_value(liststore, listiter, 1);
+</span><span style="color:#75715e">                                String Ages = GTK.gtk_tree_model_get_value(liststore, listiter, 2);
+</span><span style="color:#75715e">                                //showInfo(&#34;这个员工的ID是&#34;+ID+&#34;,他的名字是&#34;+Names+&#34;,并且它的年龄是&#34;+Ages,&#34;显示员工信息&#34;);
+</span><span style="color:#75715e">                                System.out.println(&#34;这个员工的ID是&#34;+ID+&#34;,他的名字是&#34;+Names+&#34;,并且它的年龄是&#34;+Ages);
+</span><span style="color:#75715e">                                
+</span><span style="color:#75715e">                        }while(GTK.gtk_tree_model_iter_next(liststore,listiter));
+</span><span style="color:#75715e">                }else
+</span><span style="color:#75715e">                {
+</span><span style="color:#75715e">                        System.out.println(&#34;表中无数据&#34;);
+</span><span style="color:#75715e">                }*/</span>
+                <span style="color:#75715e">// 减少代码的深度。
+</span><span style="color:#75715e"></span>                <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span><span style="color:#f92672">!</span>GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_tree_model_get_iter_first</span><span style="color:#f92672">(</span>liststore<span style="color:#f92672">,</span> iter<span style="color:#f92672">)</span><span style="color:#f92672">)</span>
+                <span style="color:#f92672">{</span>
+                        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;treeview没有数据  请添加记录&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span>
+                <span style="color:#66d9ef">do</span>
+                <span style="color:#f92672">{</span>
+                        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>rowPosition <span style="color:#f92672">=</span><span style="color:#f92672">=</span> i<span style="color:#f92672">)</span>
+                        <span style="color:#f92672">{</span>
+                                String ID <span style="color:#f92672">=</span> GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_tree_model_get_value</span><span style="color:#f92672">(</span>liststore<span style="color:#f92672">,</span> iter<span style="color:#f92672">,</span> 0<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                String Names <span style="color:#f92672">=</span> GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_tree_model_get_value</span><span style="color:#f92672">(</span>liststore<span style="color:#f92672">,</span> iter<span style="color:#f92672">,</span> 1<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                String Ages <span style="color:#f92672">=</span> GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_tree_model_get_value</span><span style="color:#f92672">(</span>liststore<span style="color:#f92672">,</span> iter<span style="color:#f92672">,</span> 2<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                showInfo<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;这个员工的ID是&#34;</span><span style="color:#f92672">+</span>ID<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;,他的名字是&#34;</span><span style="color:#f92672">+</span>Names<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;,并且它的年龄是&#34;</span><span style="color:#f92672">+</span>Ages<span style="color:#f92672">,</span><span style="color:#e6db74">&#34;显示员工信息&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                                <span style="color:#75715e">//System.out.println(&#34;这个员工的ID是&#34;+ID+&#34;,他的名字是&#34;+Names+&#34;,并且它的年龄是&#34;+Ages);
+</span><span style="color:#75715e"></span>                                <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+                        <span style="color:#f92672">}</span>
+                        i<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">;</span>
                         
-                }while(GTK.gtk_tree_model_iter_next(liststore,iter));
+                <span style="color:#f92672">}</span><span style="color:#66d9ef">while</span><span style="color:#f92672">(</span>GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_tree_model_iter_next</span><span style="color:#f92672">(</span>liststore<span style="color:#f92672">,</span>iter<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
                 
-                GTK.gtk_tree_iter_free(iter);//释放了 还是有错误。。。
-        }
-        /**
-         * 
-         * @param message    输入一个消息，显示在消息框
-         * @param title      消息框的标题
-         * @purpose          创建一个消息提示对话框
-         */
-        public static void showInfo(  String  message,String title)
-        {
-                int msgDlg = GTK.gtk_message_dialog_new(0, GTK.GTK_DIALOG_DESTROY_WITH_PARENT|
-                                GTK.GTK_DIALOG_MODAL,GTK.GTK_MESSAGE_INFO, GTK.GTK_BUTTONS_OK,message);
-                GTK.gtk_window_set_title(msgDlg, title);
-                int ret = GTK.gtk_dialog_run(msgDlg);
+                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_tree_iter_free</span><span style="color:#f92672">(</span>iter<span style="color:#f92672">)</span><span style="color:#f92672">;</span><span style="color:#75715e">//释放了 还是有错误。。。
+</span><span style="color:#75715e"></span>        <span style="color:#f92672">}</span>
+        <span style="color:#75715e">/**
+</span><span style="color:#75715e">         * 
+</span><span style="color:#75715e">         * @param message    输入一个消息，显示在消息框
+</span><span style="color:#75715e">         * @param title      消息框的标题
+</span><span style="color:#75715e">         * @purpose          创建一个消息提示对话框
+</span><span style="color:#75715e">         */</span>
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">showInfo</span><span style="color:#f92672">(</span>  String  message<span style="color:#f92672">,</span>String title<span style="color:#f92672">)</span>
+        <span style="color:#f92672">{</span>
+                <span style="color:#66d9ef">int</span> msgDlg <span style="color:#f92672">=</span> GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_message_dialog_new</span><span style="color:#f92672">(</span>0<span style="color:#f92672">,</span> GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">GTK_DIALOG_DESTROY_WITH_PARENT</span><span style="color:#f92672">|</span>
+                                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">GTK_DIALOG_MODAL</span><span style="color:#f92672">,</span>GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">GTK_MESSAGE_INFO</span><span style="color:#f92672">,</span> GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">GTK_BUTTONS_OK</span><span style="color:#f92672">,</span>message<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_window_set_title</span><span style="color:#f92672">(</span>msgDlg<span style="color:#f92672">,</span> title<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#66d9ef">int</span> ret <span style="color:#f92672">=</span> GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_dialog_run</span><span style="color:#f92672">(</span>msgDlg<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
                  
-                if( ret == GTK.GTK_RESPONSE_OK)
-                {
-                        GTK.gtk_widget_destroy(msgDlg);
-                }else
-                {
-                        GTK.gtk_widget_destroy(msgDlg);
-                }
+                <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span> ret <span style="color:#f92672">=</span><span style="color:#f92672">=</span> GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">GTK_RESPONSE_OK</span><span style="color:#f92672">)</span>
+                <span style="color:#f92672">{</span>
+                        GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_widget_destroy</span><span style="color:#f92672">(</span>msgDlg<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span><span style="color:#66d9ef">else</span>
+                <span style="color:#f92672">{</span>
+                        GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_widget_destroy</span><span style="color:#f92672">(</span>msgDlg<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span>
 
-        }
+        <span style="color:#f92672">}</span>
         
-        public static void createSelection(int gridHouse,int start)
-        {
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">createSelection</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> gridHouse<span style="color:#f92672">,</span><span style="color:#66d9ef">int</span> start<span style="color:#f92672">)</span>
+        <span style="color:#f92672">{</span>
                 
-        }
-        /**
-         * 
-         * @param textview   textview对象标识
-         * @param temp       待插入textview的字符串
-         * @purpose          插入一行数据岛textview当中
-         */
-        public static void InsertStringToTextViewFunction(int textview,String temp)
-        {
-                //TextIter是一个TextView的迭代器。
-                int textBuffer =  GTK.gtk_text_view_get_buffer(textview);
-                int textIter = GTK.gtk_text_iter_new();  //这是一个空的iter，需要用textBuffer进行赋值
-                //GTK.gtk_text_iter_forward_to_end(textIter);
-                GTK.gtk_text_buffer_get_end_iter(textBuffer, textIter);// 或者textview的textBuffer的末尾！
-                GTK.gtk_text_buffer_insert(textBuffer, textIter, temp);
+        <span style="color:#f92672">}</span>
+        <span style="color:#75715e">/**
+</span><span style="color:#75715e">         * 
+</span><span style="color:#75715e">         * @param textview   textview对象标识
+</span><span style="color:#75715e">         * @param temp       待插入textview的字符串
+</span><span style="color:#75715e">         * @purpose          插入一行数据岛textview当中
+</span><span style="color:#75715e">         */</span>
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">InsertStringToTextViewFunction</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> textview<span style="color:#f92672">,</span>String temp<span style="color:#f92672">)</span>
+        <span style="color:#f92672">{</span>
+                <span style="color:#75715e">//TextIter是一个TextView的迭代器。
+</span><span style="color:#75715e"></span>                <span style="color:#66d9ef">int</span> textBuffer <span style="color:#f92672">=</span>  GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_text_view_get_buffer</span><span style="color:#f92672">(</span>textview<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#66d9ef">int</span> textIter <span style="color:#f92672">=</span> GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_text_iter_new</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>  <span style="color:#75715e">//这是一个空的iter，需要用textBuffer进行赋值
+</span><span style="color:#75715e"></span>                <span style="color:#75715e">//GTK.gtk_text_iter_forward_to_end(textIter);
+</span><span style="color:#75715e"></span>                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_text_buffer_get_end_iter</span><span style="color:#f92672">(</span>textBuffer<span style="color:#f92672">,</span> textIter<span style="color:#f92672">)</span><span style="color:#f92672">;</span><span style="color:#75715e">// 或者textview的textBuffer的末尾！
+</span><span style="color:#75715e"></span>                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_text_buffer_insert</span><span style="color:#f92672">(</span>textBuffer<span style="color:#f92672">,</span> textIter<span style="color:#f92672">,</span> temp<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
                 
-                //GTK.gtk_text_buffer_g
-                GTK.gtk_text_iter_free(textIter);
+                <span style="color:#75715e">//GTK.gtk_text_buffer_g
+</span><span style="color:#75715e"></span>                GTK<span style="color:#f92672">.</span><span style="color:#a6e22e">gtk_text_iter_free</span><span style="color:#f92672">(</span>textIter<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
                 
-        }
+        <span style="color:#f92672">}</span>
         
         
-}
+<span style="color:#f92672">}</span>
 
-</code></pre>
-
-<p>复制代码</p>
-
+</code></pre></div><p>复制代码</p>
 <p>有什么意见，欢迎交流，有什么想法，欢迎交流。~-~</p>
-
-<p><img src="/images/java/chushi.gif" alt="初始时刻" />
-<img src="/images/java/diyici.gif" alt="运行第一次" />
-<img src="/images/java/chengxujiesu.gif" alt="程序结束" /></p>
+<p><img src="/images/java/chushi.gif" alt="初始时刻">
+<img src="/images/java/diyici.gif" alt="运行第一次">
+<img src="/images/java/chengxujiesu.gif" alt="程序结束"></p>
     </div>
  <div class="nav-links" style="padding:10;">
         
@@ -1671,7 +1666,7 @@ public class TestTeacher
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

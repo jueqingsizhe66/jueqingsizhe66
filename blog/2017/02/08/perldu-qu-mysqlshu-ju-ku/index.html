@@ -569,9 +569,9 @@
 
 
 
-<span class="article-metadata" >Reading time: 7 minutes and    31 seconds with 1657 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+<span class="article-metadata" >Reading time: 7 minutes and    24 seconds with 1630 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
-        
+        <nav id="TableOfContents"></nav>
     </aside>
   <div class="article-container">
 
@@ -581,9 +581,7 @@
 数据保存和打开的时候，就得借助数据库的使用，提供缓存的功能，并
 使得保存的数据占用量最少，访问更快捷。下面就perl的mysql数据库访问
 做一个简要的介绍。</p>
-
-<h2 id="perldbi">1. 数据库访问原理</h2>
-
+<!-- raw HTML omitted -->
 <ol>
 <li>加载对应数据库驱动</li>
 <li>获得相应的连接</li>
@@ -591,53 +589,42 @@
 <li>执行sql语句</li>
 <li>获得相应的结果</li>
 </ol>
-
-<h2 id="perldbi">2. perl DBI mysql实现</h2>
-
+<!-- raw HTML omitted -->
 <p>What is DBI?
-    &ldquo;The DBI is the standard database interface module for Perl.
-    It defines a set of methods, variables and conventions that provide a
-    consistent database interface independent of the actual database being used.&rdquo;
-    &ndash; Tim Bunce</p>
-
+&ldquo;The DBI is the standard database interface module for Perl.
+It defines a set of methods, variables and conventions that provide a
+consistent database interface independent of the actual database being used.&rdquo;
+&ndash; Tim Bunce</p>
 <ol>
 <li>安装perl dbi</li>
 <li>安装perl dbd:mysql驱动</li>
 <li>加载数据库驱动dsn</li>
 <li>从dsn获取相应的链接connect方法</li>
 <li>执行相应的sql语句</li>
-<li>注意，处理完毕最好做一个关闭操作(<font color="red"><strong>这是一个技术问题，也是德行问题和习惯问题，编程的很多技术都是需要打开和关闭两个过程配对呈现</strong></font>)</li>
+<li>注意，处理完毕最好做一个关闭操作(<!-- raw HTML omitted --><strong>这是一个技术问题，也是德行问题和习惯问题，编程的很多技术都是需要打开和关闭两个过程配对呈现</strong><!-- raw HTML omitted -->)</li>
 </ol>
-
 <p>具体可以参考</p>
-
 <ul>
-<li><a href="http://dbi.perl.org/" target="_blank">perl dbi官网手册</a></li>
-<li><a href="http://log4think.com/perl_and_dbi/" target="_blank">Perl与数据库DBI快速入门</a></li>
-<li><a href="http://www.perl.com/pub/1999/10/DBI.html" target="_blank">A short guid of the dbi programming</a></li>
-<li><a href="http://www.cnblogs.com/homezzm/archive/2011/07/22/2113618.html" target="_blank">perl DBI 总结</a></li>
-<li><a href="http://blog.sina.com.cn/s/blog_54dd80920102v8f5.html" target="_blank">perl dbi链接mysql中文乱码</a></li>
-<li><a href="http://www.jb51.net/article/65791.htm" target="_blank">使用Perl DBI操作MySQL的一些建议</a></li>
-<li><a href="http://log4think.com/perl_fast_tutorial/" target="_blank">perl快速入门</a><font color="red">** 给出了所有的技术语言都可以由main函数引出很多其他的, 把技术当成你的习惯**</font></li>
-
-<li><p><a href="http://vdisk.weibo.com/s/ah8r1yUxop3dO" target="_blank">一本perl参考书: Programming_the_Perl_DBI </a>
-该建议使用binmode解决乱码问题，</p>
-
-<pre><code class="language-perl">use utf8;
-binmode(STDOUT, ':encoding(utf8)');
-binmode(STDIN, ':encoding(utf8)');
-binmode(STDERR, ':encoding(utf8)');
-</code></pre></li>
-
-<li><p><a href="http://blog.csdn.net/zzq900503/article/details/14454963" target="_blank">perl DBI使用详解</a></p></li>
+<li><a href="http://dbi.perl.org/">perl dbi官网手册</a></li>
+<li><a href="http://log4think.com/perl_and_dbi/">Perl与数据库DBI快速入门</a></li>
+<li><a href="http://www.perl.com/pub/1999/10/DBI.html">A short guid of the dbi programming</a></li>
+<li><a href="http://www.cnblogs.com/homezzm/archive/2011/07/22/2113618.html">perl DBI 总结</a></li>
+<li><a href="http://blog.sina.com.cn/s/blog_54dd80920102v8f5.html">perl dbi链接mysql中文乱码</a></li>
+<li><a href="http://www.jb51.net/article/65791.htm">使用Perl DBI操作MySQL的一些建议</a></li>
+<li><a href="http://log4think.com/perl_fast_tutorial/">perl快速入门</a><!-- raw HTML omitted -->** 给出了所有的技术语言都可以由main函数引出很多其他的, 把技术当成你的习惯**<!-- raw HTML omitted --></li>
+<li><a href="http://vdisk.weibo.com/s/ah8r1yUxop3dO">一本perl参考书: Programming_the_Perl_DBI </a>
+该建议使用binmode解决乱码问题，</li>
 </ul>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#66d9ef">use</span> utf8;
+binmode(STDOUT, <span style="color:#e6db74">&#39;:encoding(utf8)&#39;</span>);
+binmode(STDIN, <span style="color:#e6db74">&#39;:encoding(utf8)&#39;</span>);
+binmode(STDERR, <span style="color:#e6db74">&#39;:encoding(utf8)&#39;</span>);
+</code></pre></div><ul>
+<li><a href="http://blog.csdn.net/zzq900503/article/details/14454963">perl DBI使用详解</a></li>
+</ul>
 <p>也可以直接在命令行使用<code>perldoc dbi</code> 查看dbi文档信息</p>
-
-<h2 id="perltest"> 3. 技术解决方案</h2>
-
+<!-- raw HTML omitted -->
 <p>feiji.txt:</p>
-
 <pre><code>汽车在高速行驶时，根据空气动力学原理，在行驶过程中会遇到空气阻力，围绕汽车重心同时产生纵向、侧向和垂直上升的三个方向的空气动力量，其中纵向为空气阻力。
 为了有效地减少并克服汽车高速行驶时空气阻力的影响，人们设计使用了汽车尾翼，其作用就是使空气对汽车产生第四种作用力，即产生较大的对地面的附着力，它能抵消一部分升力，有效控制汽车上浮，使风阻系数相应减小，使汽车能紧贴在道路地面行驶，从而提高行驶的稳定性能。
 
@@ -649,144 +636,141 @@ binmode(STDERR, ':encoding(utf8)');
 铝合金尾翼：这类尾翼导流和散热效果不错，而且价格适中，不过重量要比其他材质的尾翼稍重些。
 碳纤维尾翼：碳纤维尾翼刚性和耐久性都非常好．不仅重量轻而且也是最美观的一种尾翼．现在广泛被F1赛车采用不过价格比较昂贵。[1] 
 
-</code></pre>
+</code></pre><p>source code for perl:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#75715e">#!/usr/bin/env perl </span>
+<span style="color:#75715e">#===============================================================================</span>
+<span style="color:#75715e">#</span>
+<span style="color:#75715e">#         FILE: testdbi.pl</span>
+<span style="color:#75715e">#</span>
+<span style="color:#75715e">#        USAGE: ./testdbi.pl  </span>
+<span style="color:#75715e">#</span>
+<span style="color:#75715e">#  DESCRIPTION: </span>
+<span style="color:#75715e">#</span>
+<span style="color:#75715e">#      OPTIONS: ---</span>
+<span style="color:#75715e"># REQUIREMENTS: ---</span>
+<span style="color:#75715e">#         BUGS: ---</span>
+<span style="color:#75715e">#        NOTES: ---</span>
+<span style="color:#75715e">#    Author:  Ye Zhaoliang</span>
+<span style="color:#75715e"># ORGANIZATION: </span>
+<span style="color:#75715e">#      VERSION: 1.0</span>
+<span style="color:#75715e">#      CREATED: 2016/12/31 1:44:24</span>
+<span style="color:#75715e">#     REVISION: ---</span>
+<span style="color:#75715e">#===============================================================================</span>
 
-<p>source code for perl:</p>
+<span style="color:#66d9ef">use</span> strict;
+<span style="color:#66d9ef">use</span> warnings;
+<span style="color:#66d9ef">use</span> utf8;
 
-<pre><code class="language-perl">#!/usr/bin/env perl 
-#===============================================================================
-#
-#         FILE: testdbi.pl
-#
-#        USAGE: ./testdbi.pl  
-#
-#  DESCRIPTION: 
-#
-#      OPTIONS: ---
-# REQUIREMENTS: ---
-#         BUGS: ---
-#        NOTES: ---
-#    Author:  Ye Zhaoliang
-# ORGANIZATION: 
-#      VERSION: 1.0
-#      CREATED: 2016/12/31 1:44:24
-#     REVISION: ---
-#===============================================================================
+<span style="color:#66d9ef">use</span> CGI::Carp <span style="color:#e6db74">&#34;fatalsToBrowser&#34;</span>;
+<span style="color:#66d9ef">use</span> strict;
+<span style="color:#66d9ef">use</span> warnings;
+<span style="color:#66d9ef">use</span> DBI;
+<span style="color:#66d9ef">use</span> CGI <span style="color:#e6db74">qw (:standard </span>escapeHTML escape);
+<span style="color:#66d9ef">my</span> ($driver_name, $db_name, $db_host, $db_sock, $db_port, $db_user, $db_pswd, $dsn);
+$driver_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;mysql&#39;</span>;
+$db_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;mysql&#39;</span>; <span style="color:#75715e"># database name</span>
+$db_host <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;localhost&#39;</span>;
+$db_sock <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/tmp/mysql.sock&#39;</span>;
+$db_port <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;3306&#39;</span>;
+$db_user <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;root&#39;</span>;
+$db_pswd <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;root&#39;</span>;
+<span style="color:#75715e"># data source</span>
+$dsn <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;dbi:mysql:database=${db_name};hostname=${db_host};mysql_socket=${db_sock};port=${db_port}&#34;</span>;
+<span style="color:#75715e"># ... set up connection to database (not shown) ...</span>
+<span style="color:#75715e"># connect mysql database</span>
+<span style="color:#66d9ef">my</span> $dbh <span style="color:#f92672">=</span> DBI <span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span> connect ($dsn, $db_user, $db_pswd,
+{ RaiseError <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>, PrintError <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> });
+<span style="color:#75715e"># put out initial part of page</span>
+<span style="color:#66d9ef">my</span> $title <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;$db_name Database Browser&#34;</span>;
+<span style="color:#75715e"># html header and start_html h1</span>
+<span style="color:#66d9ef">print</span> header ();
+<span style="color:#66d9ef">print</span> start_html (<span style="color:#f92672">-</span>titlk <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> $title, <span style="color:#f92672">-</span>bgcolor <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> <span style="color:#e6db74">&#34;white&#34;</span>);
+<span style="color:#66d9ef">print</span> h1 ($title);
+<span style="color:#75715e"># parameters to look for in URL</span>
+<span style="color:#66d9ef">my</span> $tbl_name <span style="color:#f92672">=</span> param (<span style="color:#e6db74">&#34;tbl_name&#34;</span>);
+<span style="color:#66d9ef">my</span> $sort_col <span style="color:#f92672">=</span> param (<span style="color:#e6db74">&#34;sort_col&#34;</span>);
+<span style="color:#75715e"># If $tbl_name has no value, display a clickable list of tables.</span>
+<span style="color:#75715e"># Otherwise, display contents of the given table. $sort_col, if</span>
+<span style="color:#75715e"># set, indicates which column to sort by.</span>
 
-use strict;
-use warnings;
-use utf8;
-
-use CGI::Carp &quot;fatalsToBrowser&quot;;
-use strict;
-use warnings;
-use DBI;
-use CGI qw (:standard escapeHTML escape);
-my ($driver_name, $db_name, $db_host, $db_sock, $db_port, $db_user, $db_pswd, $dsn);
-$driver_name = 'mysql';
-$db_name = 'mysql'; # database name
-$db_host = 'localhost';
-$db_sock = '/tmp/mysql.sock';
-$db_port = '3306';
-$db_user = 'root';
-$db_pswd = 'root';
-# data source
-$dsn = &quot;dbi:mysql:database=${db_name};hostname=${db_host};mysql_socket=${db_sock};port=${db_port}&quot;;
-# ... set up connection to database (not shown) ...
-# connect mysql database
-my $dbh = DBI -&gt; connect ($dsn, $db_user, $db_pswd,
-{ RaiseError =&gt; 1, PrintError =&gt; 0 });
-# put out initial part of page
-my $title = &quot;$db_name Database Browser&quot;;
-# html header and start_html h1
-print header ();
-print start_html (-titlk =&gt; $title, -bgcolor =&gt; &quot;white&quot;);
-print h1 ($title);
-# parameters to look for in URL
-my $tbl_name = param (&quot;tbl_name&quot;);
-my $sort_col = param (&quot;sort_col&quot;);
-# If $tbl_name has no value, display a clickable list of tables.
-# Otherwise, display contents of the given table. $sort_col, if
-# set, indicates which column to sort by.
-
-!defined ($tbl_name) ? display_table_names ($dbh, $db_name) : display_table_contents ($dbh, $tbl_name, $sort_col);
-print end_html ();
-sub display_table_names
+<span style="color:#f92672">!</span>defined ($tbl_name) ? display_table_names ($dbh, $db_name) : display_table_contents ($dbh, $tbl_name, $sort_col);
+<span style="color:#66d9ef">print</span> end_html ();
+<span style="color:#66d9ef">sub</span> <span style="color:#a6e22e">display_table_names</span>
 {
-my ($dbh, $db_name) = @_;
+<span style="color:#66d9ef">my</span> ($dbh, $db_name) <span style="color:#f92672">=</span> @_;
 
-## html p paragraph
-print p (&quot;Select a table by clicking on its name:&quot;);
-# retrieve reference to single-column array of table names
-my $ary_ref = $dbh -&gt; selectcol_arrayref (qq{ SHOW TABLES FROM $db_name });
-# Construct a bullet list using the ul() (unordered list) and
-# li() (list item) functions. Each item is a hyperlink that
-# re-invokes the script to display a particular table.
-my @item;
-foreach my $tbl_name (@{$ary_ref})
+<span style="color:#75715e">## html p paragraph</span>
+<span style="color:#66d9ef">print</span> p (<span style="color:#e6db74">&#34;Select a table by clicking on its name:&#34;</span>);
+<span style="color:#75715e"># retrieve reference to single-column array of table names</span>
+<span style="color:#66d9ef">my</span> $ary_ref <span style="color:#f92672">=</span> $dbh <span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span> selectcol_arrayref (<span style="color:#e6db74">qq{</span><span style="color:#e6db74"> SHOW TABLES FROM $db_name </span><span style="color:#e6db74">}</span>);
+<span style="color:#75715e"># Construct a bullet list using the ul() (unordered list) and</span>
+<span style="color:#75715e"># li() (list item) functions. Each item is a hyperlink that</span>
+<span style="color:#75715e"># re-invokes the script to display a particular table.</span>
+<span style="color:#66d9ef">my</span> @item;
+<span style="color:#66d9ef">foreach</span> <span style="color:#66d9ef">my</span> $tbl_name (@{$ary_ref})
 {
-my $url = sprintf (&quot;%s?tbl_name=%s&quot;, url (), escape ($tbl_name));
-my $link = a ({-href =&gt; $url}, escapeHTML ($tbl_name));
+<span style="color:#66d9ef">my</span> $url <span style="color:#f92672">=</span> sprintf (<span style="color:#e6db74">&#34;%s?tbl_name=%s&#34;</span>, url (), escape ($tbl_name));
+<span style="color:#66d9ef">my</span> $link <span style="color:#f92672">=</span> a ({<span style="color:#f92672">-</span>href <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> $url}, escapeHTML ($tbl_name));
 push (@item, li ($link));
 }
-## list control
-print ul (@item);
+<span style="color:#75715e">## list control</span>
+<span style="color:#66d9ef">print</span> ul (@item);
 }
-sub display_table_contents
+<span style="color:#66d9ef">sub</span> <span style="color:#a6e22e">display_table_contents</span>
 {
-my ($dbh, $tbl_name, $sort_col) = @_;
-my @rows;
-my @cells;
-# if sort column not specified, use first column
-$sort_col = &quot;1&quot; if !defined ($sort_col);
-# present a link that returns user to table list page
-# p control widget
-print p (a ({-href =&gt; url ()}, &quot;Show Table List&quot;));
-print p (strong (&quot;Contents of $tbl_name table:&quot;));
-## select from database
-my $sth = $dbh -&gt; prepare (qq{
-SELECT * FROM $tbl_name ORDER BY $sort_col
-LIMIT 200
-});
-$sth -&gt; execute ();
-# Use the names of the columns in the database table as the
-# headings in an HTML table. Make each name a hyperlink that
-# causes the script to be reinvoked to redisplay the table,
-# sorted by the named column.
-foreach my $col_name (@{$sth -&gt; {NAME}})
+<span style="color:#66d9ef">my</span> ($dbh, $tbl_name, $sort_col) <span style="color:#f92672">=</span> @_;
+<span style="color:#66d9ef">my</span> @rows;
+<span style="color:#66d9ef">my</span> @cells;
+<span style="color:#75715e"># if sort column not specified, use first column</span>
+$sort_col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;1&#34;</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">!</span>defined ($sort_col);
+<span style="color:#75715e"># present a link that returns user to table list page</span>
+<span style="color:#75715e"># p control widget</span>
+<span style="color:#66d9ef">print</span> p (a ({<span style="color:#f92672">-</span>href <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> url ()}, <span style="color:#e6db74">&#34;Show Table List&#34;</span>));
+<span style="color:#66d9ef">print</span> p (strong (<span style="color:#e6db74">&#34;Contents of $tbl_name table:&#34;</span>));
+<span style="color:#75715e">## select from database</span>
+<span style="color:#66d9ef">my</span> $sth <span style="color:#f92672">=</span> $dbh <span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span> prepare (<span style="color:#e6db74">qq{</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">SELECT * FROM $tbl_name ORDER BY $sort_col
+</span><span style="color:#e6db74">LIMIT 200
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">}</span>);
+$sth <span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span> execute ();
+<span style="color:#75715e"># Use the names of the columns in the database table as the</span>
+<span style="color:#75715e"># headings in an HTML table. Make each name a hyperlink that</span>
+<span style="color:#75715e"># causes the script to be reinvoked to redisplay the table,</span>
+<span style="color:#75715e"># sorted by the named column.</span>
+<span style="color:#66d9ef">foreach</span> <span style="color:#66d9ef">my</span> $col_name (@{$sth <span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span> {NAME}})
 {
-my $url = sprintf (&quot;%s?tbl_name=%s;sort_col=%s&quot;,
+<span style="color:#66d9ef">my</span> $url <span style="color:#f92672">=</span> sprintf (<span style="color:#e6db74">&#34;%s?tbl_name=%s;sort_col=%s&#34;</span>,
 url (),
 escape ($tbl_name),
 escape ($col_name));
-my $link = a ({-href =&gt; $url}, escapeHTML ($col_name));
+<span style="color:#66d9ef">my</span> $link <span style="color:#f92672">=</span> a ({<span style="color:#f92672">-</span>href <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> $url}, escapeHTML ($col_name));
 push (@cells, th ($link));
 }
 push (@rows, Tr (@cells));
-# display table rows
-while (my @ary = $sth -&gt; fetchrow_array ())
+<span style="color:#75715e"># display table rows</span>
+<span style="color:#66d9ef">while</span> (<span style="color:#66d9ef">my</span> @ary <span style="color:#f92672">=</span> $sth <span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span> fetchrow_array ())
 {
-@cells = ();
-foreach my $val (@ary)
+@cells <span style="color:#f92672">=</span> ();
+<span style="color:#66d9ef">foreach</span> <span style="color:#66d9ef">my</span> $val (@ary)
 {
-# display value if non-empty, else display non-breaking space
-if (defined ($val) &amp;&amp; $val ne &quot;&quot;)
+<span style="color:#75715e"># display value if non-empty, else display non-breaking space</span>
+<span style="color:#66d9ef">if</span> (defined ($val) <span style="color:#f92672">&amp;&amp;</span> $val <span style="color:#f92672">ne</span> <span style="color:#e6db74">&#34;&#34;</span>)
 {
-$val = escapeHTML ($val);
+$val <span style="color:#f92672">=</span> escapeHTML ($val);
 }
-else
+<span style="color:#66d9ef">else</span>
 {
-$val = &quot; &quot;;
+$val <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34; &#34;</span>;
 }
 push (@cells, td ($val));
 }
 push (@rows, Tr (@cells));
 }
-# display table with a border
-print table ({-border =&gt; &quot;1&quot;}, @rows);
+<span style="color:#75715e"># display table with a border</span>
+<span style="color:#66d9ef">print</span> table ({<span style="color:#f92672">-</span>border <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> <span style="color:#e6db74">&#34;1&#34;</span>}, @rows);
 }
 
-</code></pre>
+</code></pre></div>
     </div>
  <div class="nav-links" style="padding:10;">
         
@@ -1192,7 +1176,7 @@ print table ({-border =&gt; &quot;1&quot;}, @rows);
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

@@ -29,12 +29,9 @@
     
   
   <meta name="description" content="TurbSim,是NREL提供的一个小的开源工具， 用于产生湍流风，设置的时候可能对于不同模型会有不同的参数，基于范本进行了一番分析。当然测试文件在TurbSim的Test文件下的inp文件夹下。
-
 如果对那些湍流模型做一个对比，那样是否可以更加清晰的看出不同呢？
 于是就有了下面的shell分析脚本。
-
 TurbSim产生的风力机一圈的入流截面模型（仅仅一个截面，全场是因为捕捉了很多个截面）
-
 ">
 
   
@@ -125,12 +122,9 @@ TurbSim产生的风力机一圈的入流截面模型（仅仅一个截面，全�
   <meta property="og:url" content="https://jueqingsizhe66.github.io/blog/2015/08/10/turbsim-8ge-tuan-liu-mo-xing-de-dui-bi/">
   <meta property="og:title" content="TurbSim 8个湍流模型的对比 | Macro Life">
   <meta property="og:description" content="TurbSim,是NREL提供的一个小的开源工具， 用于产生湍流风，设置的时候可能对于不同模型会有不同的参数，基于范本进行了一番分析。当然测试文件在TurbSim的Test文件下的inp文件夹下。
-
 如果对那些湍流模型做一个对比，那样是否可以更加清晰的看出不同呢？
 于是就有了下面的shell分析脚本。
-
 TurbSim产生的风力机一圈的入流截面模型（仅仅一个截面，全场是因为捕捉了很多个截面）
-
 "><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
   <meta property="twitter:image" content="https://jueqingsizhe66.github.io/img/icon-192.png"><meta property="og:locale" content="en-us">
   
@@ -577,190 +571,176 @@ TurbSim产生的风力机一圈的入流截面模型（仅仅一个截面，全�
 
 
 
-<span class="article-metadata" >Reading time: 8 minutes and    45 seconds with 1926 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+<span class="article-metadata" >Reading time: 8 minutes and    44 seconds with 1923 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#shell解析脚本">Shell解析脚本</a>
-<ul>
-<li><a href="#改进">改进</a></li>
-</ul></li>
-<li><a href="#shell产生的结果如下">shell产生的结果如下：</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#shell">Shell解析脚本</a>
+      <ul>
+        <li><a href="#heading">改进</a></li>
+      </ul>
+    </li>
+    <li><a href="#shell-1">shell产生的结果如下：</a></li>
+  </ul>
 </nav>
     </aside>
   <div class="article-container">
 
 
     <div class="article-style">
-      <p><a href="https://nwtc.nrel.gov/TurbSim" target="_blank">TurbSim</a>,是NREL提供的一个小的开源工具， 用于产生湍流风，设置的时候可能对于不同模型会有不同的参数，基于范本进行了一番分析。当然测试文件在TurbSim的Test文件下的inp文件夹下。</p>
-
+      <p><a href="https://nwtc.nrel.gov/TurbSim">TurbSim</a>,是NREL提供的一个小的开源工具， 用于产生湍流风，设置的时候可能对于不同模型会有不同的参数，基于范本进行了一番分析。当然测试文件在TurbSim的Test文件下的inp文件夹下。</p>
 <p>如果对那些湍流模型做一个对比，那样是否可以更加清晰的看出不同呢？
 于是就有了下面的shell分析脚本。</p>
-
 <p>TurbSim产生的风力机一圈的入流截面模型（仅仅一个截面，全场是因为捕捉了很多个截面）</p>
-
-<p><img src="/images/fast/turbsim.png" alt="Turbsim" /></p>
-
-<h2 id="shell解析脚本">Shell解析脚本</h2>
-
-<pre><code class="language-sh">#!/bin/bash - 
-#===============================================================================
+<p><img src="/images/fast/turbsim.png" alt="Turbsim"></p>
+<h2 id="shell">Shell解析脚本</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e">#!/bin/bash - 
+</span><span style="color:#75715e"></span><span style="color:#75715e">#===============================================================================</span>
 #
-#          FILE: a.sh
+<span style="color:#75715e">#          FILE: a.sh</span>
 # 
-#         USAGE: ./a.sh 
+<span style="color:#75715e">#         USAGE: ./a.sh</span> 
 # 
-#   DESCRIPTION: 
+<span style="color:#75715e">#   DESCRIPTION:</span> 
 # 
-#       OPTIONS: ---
-#  REQUIREMENTS: ---
-#          BUGS: ---
-#         NOTES: ---
-#        AUTHOR: Ye Zhaoliang (), zhaoturkkey@163.com
-#  ORGANIZATION: YZL
-#       CREATED: 2015年08月10日 00:26
-#      REVISION:  ---
-#===============================================================================
+<span style="color:#75715e">#       OPTIONS: ---</span>
+<span style="color:#75715e">#  REQUIREMENTS: ---</span>
+<span style="color:#75715e">#          BUGS: ---</span>
+<span style="color:#75715e">#         NOTES: ---</span>
+<span style="color:#75715e">#        AUTHOR: Ye Zhaoliang (), zhaoturkkey@163.com</span>
+<span style="color:#75715e">#  ORGANIZATION: YZL</span>
+<span style="color:#75715e">#       CREATED: 2015年08月10日 00:26</span>
+<span style="color:#75715e">#      REVISION:  ---</span>
+<span style="color:#75715e">#===============================================================================</span>
 
-#---  FUNCTION  ----------------------------------------------------------------
-#          NAME:  _repeat1
-#   DESCRIPTION:  优化版本
-#    PARAMETERS:  
-#       RETURNS:  
-#-------------------------------------------------------------------------------
-_repeat1()
-{
-    #@ 使用方式： _repeat 要重复的字符串  重复次数
-    #@  Usage : _repeat string number
-    _REPEAT1=$1  #set and not empty, or unlimit recycle
-    while [[ ${#_REPEAT1} -lt $2 ]]
-    do
-        _REPEAT1=$_REPEAT1$_REPEAT1$_REPEAT1 ## 3次优化
-    done
-    _REPEAT1=${_REPEAT1:0:$2} ##Trim到我们需要的长度
-}
+<span style="color:#75715e">#---  FUNCTION  ----------------------------------------------------------------</span>
+<span style="color:#75715e">#          NAME:  _repeat1</span>
+<span style="color:#75715e">#   DESCRIPTION:  优化版本</span>
+<span style="color:#75715e">#    PARAMETERS:</span>  
+<span style="color:#75715e">#       RETURNS:</span>  
+<span style="color:#75715e">#-------------------------------------------------------------------------------</span>
+_repeat1<span style="color:#f92672">(</span><span style="color:#f92672">)</span>
+<span style="color:#f92672">{</span>
+    <span style="color:#75715e">#@ 使用方式： _repeat 要重复的字符串  重复次数</span>
+    <span style="color:#75715e">#@  Usage : _repeat string number</span>
+    _REPEAT1<span style="color:#f92672">=</span>$1  <span style="color:#75715e">#set and not empty, or unlimit recycle</span>
+    <span style="color:#66d9ef">while</span> <span style="color:#f92672">[</span><span style="color:#f92672">[</span> <span style="color:#e6db74">${#</span>_REPEAT1<span style="color:#e6db74">}</span> -lt $2 <span style="color:#f92672">]</span><span style="color:#f92672">]</span>
+    <span style="color:#66d9ef">do</span>
+        _REPEAT1<span style="color:#f92672">=</span>$_REPEAT1$_REPEAT1$_REPEAT1 <span style="color:#75715e">## 3次优化</span>
+    <span style="color:#66d9ef">done</span>
+    _REPEAT1<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>_REPEAT1:0:$2<span style="color:#e6db74">}</span> <span style="color:#75715e">##Trim到我们需要的长度</span>
+<span style="color:#f92672">}</span>
 
-alert() #@ Description    产生一个方框的注释
-{       #@ Usage    alert &quot;话语&quot;
-    _repeat1 &quot;${2:-#}&quot; $(( ${#1} + 8 )) ## ${2:-#} 如果$2未定义则使用#
-    printf '%s\n' &quot;$_REPEAT1&quot; ## \a=BEL
-    printf '%2.2s %s %2.2s\n' &quot;$_REPEAT1&quot; &quot;$1&quot; &quot;$_REPEAT1&quot; ## \a=BEL
-    printf '%s\n' &quot;$_REPEAT1&quot;
-}
-
-
-#alert &quot;Do you really want to delete all the files?&quot;
+alert<span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#75715e">#@ Description    产生一个方框的注释</span>
+<span style="color:#f92672">{</span>       <span style="color:#75715e">#@ Usage    alert &#34;话语&#34;</span>
+    _repeat1 <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>2<span style="color:#66d9ef">:-</span>#<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#66d9ef">$((</span> <span style="color:#e6db74">${#</span>1<span style="color:#e6db74">}</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">8</span> <span style="color:#66d9ef">))</span> <span style="color:#75715e">## ${2:-#} 如果$2未定义则使用#</span>
+    printf <span style="color:#e6db74">&#39;%s\n&#39;</span> <span style="color:#e6db74">&#34;</span>$_REPEAT1<span style="color:#e6db74">&#34;</span> <span style="color:#75715e">## \a=BEL</span>
+    printf <span style="color:#e6db74">&#39;%2.2s %s %2.2s\n&#39;</span> <span style="color:#e6db74">&#34;</span>$_REPEAT1<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span>$_REPEAT1<span style="color:#e6db74">&#34;</span> <span style="color:#75715e">## \a=BEL</span>
+    printf <span style="color:#e6db74">&#39;%s\n&#39;</span> <span style="color:#e6db74">&#34;</span>$_REPEAT1<span style="color:#e6db74">&#34;</span>
+<span style="color:#f92672">}</span>
 
 
-## RandSeed1 在不同湍流模型配置的不同
-{
-alert  &quot;RandSeed1&quot; 
-grep -n &quot;RandSeed1&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
-alert  &quot;RandSeed2&quot; 
-grep -n &quot;RandSeed2&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
-alert  &quot;WrBHHTP&quot; 
-grep -n &quot;WrBHHTP&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
-alert  &quot;WrFHHTP&quot; 
-grep -n &quot;WrFHHTP&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
-alert  &quot;WrADHH&quot; 
-grep -n &quot;WrADHH&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
-alert  &quot;WrADFF&quot; 
-grep -n &quot;WrADFF&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
-alert  &quot;WrBLFF&quot; 
-grep -n &quot;WrBLFF&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
-alert  &quot;WrADTWR&quot; 
-grep -n &quot;WrADTWR&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
-alert  &quot;WrFMTFF&quot; 
-grep -n &quot;WrFMTFF&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
-alert  &quot;WrACT&quot; 
-grep -n &quot;WrACT&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
-alert  &quot;NumGrid_Z&quot; 
-grep -n &quot;NumGrid_Z&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
-alert  &quot;NumGrid_Y&quot; 
-grep -n &quot;NumGrid_Y&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
-alert  &quot;HubHt&quot; 
-grep -n &quot;HubHt&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
-alert  &quot;GridHeight&quot; 
-grep -n &quot;GridHeight&quot; *.inp|awk -F: '{print $1,$3}'|sed '/HubHt/d'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
-alert  &quot;GridWidth&quot; 
-grep -n &quot;GridWidth&quot; *.inp|awk -F: '{print $1,$3}'|sed '/HubHt/d'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
-alert  &quot;VFlowAng&quot; 
-grep -n &quot;VFlowAng&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
-alert  &quot;HFlowAng&quot; 
-grep -n &quot;HFlowAng&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
-alert  &quot;TurbModel&quot; 
-grep -n &quot;TurbModel&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
-alert  &quot;IECstandard&quot; 
-grep -n &quot;IECstandard&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
-alert  &quot;IECturbc&quot; 
-grep -n &quot;IECturbc&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
-alert  &quot;IEC_WindType&quot; 
-grep -n &quot;IEC_WindType&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
-alert  &quot;ETMc&quot; 
-grep -n &quot;ETMc&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
-alert  &quot;WindProfileType&quot; 
-grep -n &quot;WindProfileType&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
-alert  &quot;RefHt&quot; 
-grep -n &quot;RefHt&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
-alert  &quot;URef&quot; 
-grep -n &quot;URef&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
-alert  &quot;ZJetMax&quot; 
-grep -n &quot;ZJetMax&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
-alert  &quot;PLExp&quot; 
-grep -n &quot;PLExp&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
-alert  &quot;Z0&quot; 
-grep -n &quot;Z0&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
-alert  &quot;RICH_NO&quot; 
-grep -n &quot;RICH_NO&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
-alert  &quot;ZI&quot; 
-grep -n &quot;ZI&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
-alert  &quot;PC_UW&quot; 
-grep -n &quot;PC_UW&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
-alert  &quot;PC_UV&quot; 
-grep -n &quot;PC_UV&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
-alert  &quot;PC_VW&quot; 
-grep -n &quot;PC_VW&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
-alert  &quot;CohExp&quot; 
-grep -n &quot;CohExp&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
-alert  &quot;CTEventPath&quot; 
-grep -n &quot;CTEventPath&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
-alert  &quot;CTEventFile&quot; 
-grep -n &quot;CTEventFile&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
-alert  &quot;Randomize&quot; 
-grep -n &quot;Randomize&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
-alert  &quot;DistScl&quot; 
-grep -n &quot;DistScl&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
-alert  &quot;CTLy&quot; 
-grep -n &quot;CTLy&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
-alert  &quot;CTLz&quot; 
-grep -n &quot;CTLz&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
-alert  &quot;CTStartTime&quot; 
-grep -n &quot;CTStartTime&quot; *.inp|awk -F: '{print $1,$3}'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
-} &gt; summary.out
+<span style="color:#75715e">#alert &#34;Do you really want to delete all the files?&#34;</span>
 
-</code></pre>
 
-<h3 id="改进">改进</h3>
+<span style="color:#75715e">## RandSeed1 在不同湍流模型配置的不同</span>
+<span style="color:#f92672">{</span>
+alert  <span style="color:#e6db74">&#34;RandSeed1&#34;</span> 
+grep -n <span style="color:#e6db74">&#34;RandSeed1&#34;</span> *.inp|awk -F: <span style="color:#e6db74">&#39;{print $1,$3}&#39;</span>|awk <span style="color:#e6db74">&#39;{print substr($1,0,length($1)-4),&#34;\t\t&#34;,$2}&#39;</span>|column -t
+alert  <span style="color:#e6db74">&#34;RandSeed2&#34;</span> 
+grep -n <span style="color:#e6db74">&#34;RandSeed2&#34;</span> *.inp|awk -F: <span style="color:#e6db74">&#39;{print $1,$3}&#39;</span>|awk <span style="color:#e6db74">&#39;{print substr($1,0,length($1)-4),&#34;\t\t&#34;,$2}&#39;</span>|column -t
+alert  <span style="color:#e6db74">&#34;WrBHHTP&#34;</span> 
+grep -n <span style="color:#e6db74">&#34;WrBHHTP&#34;</span> *.inp|awk -F: <span style="color:#e6db74">&#39;{print $1,$3}&#39;</span>|awk <span style="color:#e6db74">&#39;{print substr($1,0,length($1)-4),&#34;\t\t&#34;,$2}&#39;</span>|column -t
+alert  <span style="color:#e6db74">&#34;WrFHHTP&#34;</span> 
+grep -n <span style="color:#e6db74">&#34;WrFHHTP&#34;</span> *.inp|awk -F: <span style="color:#e6db74">&#39;{print $1,$3}&#39;</span>|awk <span style="color:#e6db74">&#39;{print substr($1,0,length($1)-4),&#34;\t\t&#34;,$2}&#39;</span>|column -t
+alert  <span style="color:#e6db74">&#34;WrADHH&#34;</span> 
+grep -n <span style="color:#e6db74">&#34;WrADHH&#34;</span> *.inp|awk -F: <span style="color:#e6db74">&#39;{print $1,$3}&#39;</span>|awk <span style="color:#e6db74">&#39;{print substr($1,0,length($1)-4),&#34;\t\t&#34;,$2}&#39;</span>|column -t
+alert  <span style="color:#e6db74">&#34;WrADFF&#34;</span> 
+grep -n <span style="color:#e6db74">&#34;WrADFF&#34;</span> *.inp|awk -F: <span style="color:#e6db74">&#39;{print $1,$3}&#39;</span>|awk <span style="color:#e6db74">&#39;{print substr($1,0,length($1)-4),&#34;\t\t&#34;,$2}&#39;</span>|column -t
+alert  <span style="color:#e6db74">&#34;WrBLFF&#34;</span> 
+grep -n <span style="color:#e6db74">&#34;WrBLFF&#34;</span> *.inp|awk -F: <span style="color:#e6db74">&#39;{print $1,$3}&#39;</span>|awk <span style="color:#e6db74">&#39;{print substr($1,0,length($1)-4),&#34;\t\t&#34;,$2}&#39;</span>|column -t
+alert  <span style="color:#e6db74">&#34;WrADTWR&#34;</span> 
+grep -n <span style="color:#e6db74">&#34;WrADTWR&#34;</span> *.inp|awk -F: <span style="color:#e6db74">&#39;{print $1,$3}&#39;</span>|awk <span style="color:#e6db74">&#39;{print substr($1,0,length($1)-4),&#34;\t\t&#34;,$2}&#39;</span>|column -t
+alert  <span style="color:#e6db74">&#34;WrFMTFF&#34;</span> 
+grep -n <span style="color:#e6db74">&#34;WrFMTFF&#34;</span> *.inp|awk -F: <span style="color:#e6db74">&#39;{print $1,$3}&#39;</span>|awk <span style="color:#e6db74">&#39;{print substr($1,0,length($1)-4),&#34;\t\t&#34;,$2}&#39;</span>|column -t
+alert  <span style="color:#e6db74">&#34;WrACT&#34;</span> 
+grep -n <span style="color:#e6db74">&#34;WrACT&#34;</span> *.inp|awk -F: <span style="color:#e6db74">&#39;{print $1,$3}&#39;</span>|awk <span style="color:#e6db74">&#39;{print substr($1,0,length($1)-4),&#34;\t\t&#34;,$2}&#39;</span>|column -t
+alert  <span style="color:#e6db74">&#34;NumGrid_Z&#34;</span> 
+grep -n <span style="color:#e6db74">&#34;NumGrid_Z&#34;</span> *.inp|awk -F: <span style="color:#e6db74">&#39;{print $1,$3}&#39;</span>|awk <span style="color:#e6db74">&#39;{print substr($1,0,length($1)-4),&#34;\t\t&#34;,$2}&#39;</span>|column -t
+alert  <span style="color:#e6db74">&#34;NumGrid_Y&#34;</span> 
+grep -n <span style="color:#e6db74">&#34;NumGrid_Y&#34;</span> *.inp|awk -F: <span style="color:#e6db74">&#39;{print $1,$3}&#39;</span>|awk <span style="color:#e6db74">&#39;{print substr($1,0,length($1)-4),&#34;\t\t&#34;,$2}&#39;</span>|column -t
+alert  <span style="color:#e6db74">&#34;HubHt&#34;</span> 
+grep -n <span style="color:#e6db74">&#34;HubHt&#34;</span> *.inp|awk -F: <span style="color:#e6db74">&#39;{print $1,$3}&#39;</span>|awk <span style="color:#e6db74">&#39;{print substr($1,0,length($1)-4),&#34;\t\t&#34;,$2}&#39;</span>|column -t
+alert  <span style="color:#e6db74">&#34;GridHeight&#34;</span> 
+grep -n <span style="color:#e6db74">&#34;GridHeight&#34;</span> *.inp|awk -F: <span style="color:#e6db74">&#39;{print $1,$3}&#39;</span>|sed <span style="color:#e6db74">&#39;/HubHt/d&#39;</span>|awk <span style="color:#e6db74">&#39;{print substr($1,0,length($1)-4),&#34;\t\t&#34;,$2}&#39;</span>|column -t
+alert  <span style="color:#e6db74">&#34;GridWidth&#34;</span> 
+grep -n <span style="color:#e6db74">&#34;GridWidth&#34;</span> *.inp|awk -F: <span style="color:#e6db74">&#39;{print $1,$3}&#39;</span>|sed <span style="color:#e6db74">&#39;/HubHt/d&#39;</span>|awk <span style="color:#e6db74">&#39;{print substr($1,0,length($1)-4),&#34;\t\t&#34;,$2}&#39;</span>|column -t
+alert  <span style="color:#e6db74">&#34;VFlowAng&#34;</span> 
+grep -n <span style="color:#e6db74">&#34;VFlowAng&#34;</span> *.inp|awk -F: <span style="color:#e6db74">&#39;{print $1,$3}&#39;</span>|awk <span style="color:#e6db74">&#39;{print substr($1,0,length($1)-4),&#34;\t\t&#34;,$2}&#39;</span>|column -t
+alert  <span style="color:#e6db74">&#34;HFlowAng&#34;</span> 
+grep -n <span style="color:#e6db74">&#34;HFlowAng&#34;</span> *.inp|awk -F: <span style="color:#e6db74">&#39;{print $1,$3}&#39;</span>|awk <span style="color:#e6db74">&#39;{print substr($1,0,length($1)-4),&#34;\t\t&#34;,$2}&#39;</span>|column -t
+alert  <span style="color:#e6db74">&#34;TurbModel&#34;</span> 
+grep -n <span style="color:#e6db74">&#34;TurbModel&#34;</span> *.inp|awk -F: <span style="color:#e6db74">&#39;{print $1,$3}&#39;</span>|awk <span style="color:#e6db74">&#39;{print substr($1,0,length($1)-4),&#34;\t\t&#34;,$2}&#39;</span>|column -t
+alert  <span style="color:#e6db74">&#34;IECstandard&#34;</span> 
+grep -n <span style="color:#e6db74">&#34;IECstandard&#34;</span> *.inp|awk -F: <span style="color:#e6db74">&#39;{print $1,$3}&#39;</span>|awk <span style="color:#e6db74">&#39;{print substr($1,0,length($1)-4),&#34;\t\t&#34;,$2}&#39;</span>|column -t
+alert  <span style="color:#e6db74">&#34;IECturbc&#34;</span> 
+grep -n <span style="color:#e6db74">&#34;IECturbc&#34;</span> *.inp|awk -F: <span style="color:#e6db74">&#39;{print $1,$3}&#39;</span>|awk <span style="color:#e6db74">&#39;{print substr($1,0,length($1)-4),&#34;\t\t&#34;,$2}&#39;</span>|column -t
+alert  <span style="color:#e6db74">&#34;IEC_WindType&#34;</span> 
+grep -n <span style="color:#e6db74">&#34;IEC_WindType&#34;</span> *.inp|awk -F: <span style="color:#e6db74">&#39;{print $1,$3}&#39;</span>|awk <span style="color:#e6db74">&#39;{print substr($1,0,length($1)-4),&#34;\t\t&#34;,$2}&#39;</span>|column -t
+alert  <span style="color:#e6db74">&#34;ETMc&#34;</span> 
+grep -n <span style="color:#e6db74">&#34;ETMc&#34;</span> *.inp|awk -F: <span style="color:#e6db74">&#39;{print $1,$3}&#39;</span>|awk <span style="color:#e6db74">&#39;{print substr($1,0,length($1)-4),&#34;\t\t&#34;,$2}&#39;</span>|column -t
+alert  <span style="color:#e6db74">&#34;WindProfileType&#34;</span> 
+grep -n <span style="color:#e6db74">&#34;WindProfileType&#34;</span> *.inp|awk -F: <span style="color:#e6db74">&#39;{print $1,$3}&#39;</span>|awk <span style="color:#e6db74">&#39;{print substr($1,0,length($1)-4),&#34;\t\t&#34;,$2}&#39;</span>|column -t
+alert  <span style="color:#e6db74">&#34;RefHt&#34;</span> 
+grep -n <span style="color:#e6db74">&#34;RefHt&#34;</span> *.inp|awk -F: <span style="color:#e6db74">&#39;{print $1,$3}&#39;</span>|awk <span style="color:#e6db74">&#39;{print substr($1,0,length($1)-4),&#34;\t\t&#34;,$2}&#39;</span>|column -t
+alert  <span style="color:#e6db74">&#34;URef&#34;</span> 
+grep -n <span style="color:#e6db74">&#34;URef&#34;</span> *.inp|awk -F: <span style="color:#e6db74">&#39;{print $1,$3}&#39;</span>|awk <span style="color:#e6db74">&#39;{print substr($1,0,length($1)-4),&#34;\t\t&#34;,$2}&#39;</span>|column -t
+alert  <span style="color:#e6db74">&#34;ZJetMax&#34;</span> 
+grep -n <span style="color:#e6db74">&#34;ZJetMax&#34;</span> *.inp|awk -F: <span style="color:#e6db74">&#39;{print $1,$3}&#39;</span>|awk <span style="color:#e6db74">&#39;{print substr($1,0,length($1)-4),&#34;\t\t&#34;,$2}&#39;</span>|column -t
+alert  <span style="color:#e6db74">&#34;PLExp&#34;</span> 
+grep -n <span style="color:#e6db74">&#34;PLExp&#34;</span> *.inp|awk -F: <span style="color:#e6db74">&#39;{print $1,$3}&#39;</span>|awk <span style="color:#e6db74">&#39;{print substr($1,0,length($1)-4),&#34;\t\t&#34;,$2}&#39;</span>|column -t
+alert  <span style="color:#e6db74">&#34;Z0&#34;</span> 
+grep -n <span style="color:#e6db74">&#34;Z0&#34;</span> *.inp|awk -F: <span style="color:#e6db74">&#39;{print $1,$3}&#39;</span>|awk <span style="color:#e6db74">&#39;{print substr($1,0,length($1)-4),&#34;\t\t&#34;,$2}&#39;</span>|column -t
+alert  <span style="color:#e6db74">&#34;RICH_NO&#34;</span> 
+grep -n <span style="color:#e6db74">&#34;RICH_NO&#34;</span> *.inp|awk -F: <span style="color:#e6db74">&#39;{print $1,$3}&#39;</span>|awk <span style="color:#e6db74">&#39;{print substr($1,0,length($1)-4),&#34;\t\t&#34;,$2}&#39;</span>|column -t
+alert  <span style="color:#e6db74">&#34;ZI&#34;</span> 
+grep -n <span style="color:#e6db74">&#34;ZI&#34;</span> *.inp|awk -F: <span style="color:#e6db74">&#39;{print $1,$3}&#39;</span>|awk <span style="color:#e6db74">&#39;{print substr($1,0,length($1)-4),&#34;\t\t&#34;,$2}&#39;</span>|column -t
+alert  <span style="color:#e6db74">&#34;PC_UW&#34;</span> 
+grep -n <span style="color:#e6db74">&#34;PC_UW&#34;</span> *.inp|awk -F: <span style="color:#e6db74">&#39;{print $1,$3}&#39;</span>|awk <span style="color:#e6db74">&#39;{print substr($1,0,length($1)-4),&#34;\t\t&#34;,$2}&#39;</span>|column -t
+alert  <span style="color:#e6db74">&#34;PC_UV&#34;</span> 
+grep -n <span style="color:#e6db74">&#34;PC_UV&#34;</span> *.inp|awk -F: <span style="color:#e6db74">&#39;{print $1,$3}&#39;</span>|awk <span style="color:#e6db74">&#39;{print substr($1,0,length($1)-4),&#34;\t\t&#34;,$2}&#39;</span>|column -t
+alert  <span style="color:#e6db74">&#34;PC_VW&#34;</span> 
+grep -n <span style="color:#e6db74">&#34;PC_VW&#34;</span> *.inp|awk -F: <span style="color:#e6db74">&#39;{print $1,$3}&#39;</span>|awk <span style="color:#e6db74">&#39;{print substr($1,0,length($1)-4),&#34;\t\t&#34;,$2}&#39;</span>|column -t
+alert  <span style="color:#e6db74">&#34;CohExp&#34;</span> 
+grep -n <span style="color:#e6db74">&#34;CohExp&#34;</span> *.inp|awk -F: <span style="color:#e6db74">&#39;{print $1,$3}&#39;</span>|awk <span style="color:#e6db74">&#39;{print substr($1,0,length($1)-4),&#34;\t\t&#34;,$2}&#39;</span>|column -t
+alert  <span style="color:#e6db74">&#34;CTEventPath&#34;</span> 
+grep -n <span style="color:#e6db74">&#34;CTEventPath&#34;</span> *.inp|awk -F: <span style="color:#e6db74">&#39;{print $1,$3}&#39;</span>|awk <span style="color:#e6db74">&#39;{print substr($1,0,length($1)-4),&#34;\t\t&#34;,$2}&#39;</span>|column -t
+alert  <span style="color:#e6db74">&#34;CTEventFile&#34;</span> 
+grep -n <span style="color:#e6db74">&#34;CTEventFile&#34;</span> *.inp|awk -F: <span style="color:#e6db74">&#39;{print $1,$3}&#39;</span>|awk <span style="color:#e6db74">&#39;{print substr($1,0,length($1)-4),&#34;\t\t&#34;,$2}&#39;</span>|column -t
+alert  <span style="color:#e6db74">&#34;Randomize&#34;</span> 
+grep -n <span style="color:#e6db74">&#34;Randomize&#34;</span> *.inp|awk -F: <span style="color:#e6db74">&#39;{print $1,$3}&#39;</span>|awk <span style="color:#e6db74">&#39;{print substr($1,0,length($1)-4),&#34;\t\t&#34;,$2}&#39;</span>|column -t
+alert  <span style="color:#e6db74">&#34;DistScl&#34;</span> 
+grep -n <span style="color:#e6db74">&#34;DistScl&#34;</span> *.inp|awk -F: <span style="color:#e6db74">&#39;{print $1,$3}&#39;</span>|awk <span style="color:#e6db74">&#39;{print substr($1,0,length($1)-4),&#34;\t\t&#34;,$2}&#39;</span>|column -t
+alert  <span style="color:#e6db74">&#34;CTLy&#34;</span> 
+grep -n <span style="color:#e6db74">&#34;CTLy&#34;</span> *.inp|awk -F: <span style="color:#e6db74">&#39;{print $1,$3}&#39;</span>|awk <span style="color:#e6db74">&#39;{print substr($1,0,length($1)-4),&#34;\t\t&#34;,$2}&#39;</span>|column -t
+alert  <span style="color:#e6db74">&#34;CTLz&#34;</span> 
+grep -n <span style="color:#e6db74">&#34;CTLz&#34;</span> *.inp|awk -F: <span style="color:#e6db74">&#39;{print $1,$3}&#39;</span>|awk <span style="color:#e6db74">&#39;{print substr($1,0,length($1)-4),&#34;\t\t&#34;,$2}&#39;</span>|column -t
+alert  <span style="color:#e6db74">&#34;CTStartTime&#34;</span> 
+grep -n <span style="color:#e6db74">&#34;CTStartTime&#34;</span> *.inp|awk -F: <span style="color:#e6db74">&#39;{print $1,$3}&#39;</span>|awk <span style="color:#e6db74">&#39;{print substr($1,0,length($1)-4),&#34;\t\t&#34;,$2}&#39;</span>|column -t
+<span style="color:#f92672">}</span> &gt; summary.out
 
+</code></pre></div><h3 id="heading">改进</h3>
 <ol>
 <li>去除无用的Turbulence and Boundary</li>
-
-<li><p>增加了对GridWidth and GridHeight的处理</p>
-
+<li>增加了对GridWidth and GridHeight的处理</li>
+</ol>
 <pre><code>grep -n &quot;GridHeight&quot; *.inp|awk -F: '{print $1,$3}'|sed '/HubHt/d'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
 grep -n &quot;GridWidth&quot; *.inp|awk -F: '{print $1,$3}'|sed '/HubHt/d'|awk '{print substr($1,0,length($1)-4),&quot;\t\t&quot;,$2}'|column -t
 
-</code></pre></li>
+</code></pre><ol start="3">
+<li></li>
 </ol>
-
-<p>3.</p>
-
-<h2 id="shell产生的结果如下">shell产生的结果如下：</h2>
-
+<h2 id="shell-1">shell产生的结果如下：</h2>
 <pre><code>#################
 ## RandSeed1 ##
 #################
@@ -1232,9 +1212,7 @@ KHtest       0.0
 smooth       10.0
 vonKarm_15   30.0
 vonKarm      30.0
-</code></pre>
-
-<p>进一步的细节可以参考<a href="https://nwtc.nrel.gov/system/files/TurbSim.pdf" target="_blank">Turbsim UserGuide</a></p>
+</code></pre><p>进一步的细节可以参考<a href="https://nwtc.nrel.gov/system/files/TurbSim.pdf">Turbsim UserGuide</a></p>
     </div>
  <div class="nav-links" style="padding:10;">
         
@@ -1640,7 +1618,7 @@ vonKarm      30.0
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

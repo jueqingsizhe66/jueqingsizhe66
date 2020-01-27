@@ -570,13 +570,10 @@
 <span class="article-metadata" >Reading time: 1 minutes and    50 seconds with 405 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#搜索内容">搜索内容</a></li>
-<li><a href="#结果">结果</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#heading">搜索内容</a></li>
+    <li><a href="#heading-1">结果</a></li>
+  </ul>
 </nav>
     </aside>
   <div class="article-container">
@@ -586,13 +583,10 @@
       <p>有时候我们需要统计一篇论文当中某个字符串的出现频率。
 试验了，grep，awk，sed，wc -l等，最终发现awk的RS
 完美的解决了问题。</p>
-
-<p><a href="http://www.cnblogs.com/fhefh/archive/2011/11/16/2251656.html" target="_blank">RS的用法</a>
-<a href="http://blog.163.com/facteur@126/blog/static/23208030201282085943698/" target="_blank">统计次数</a></p>
-
+<p><a href="http://www.cnblogs.com/fhefh/archive/2011/11/16/2251656.html">RS的用法</a>
+<a href="http://blog.163.com/facteur@126/blog/static/23208030201282085943698/">统计次数</a></p>
 <p>关键字文件（可以不断的添加你要分析的字段):</p>
-
-<pre><code class="language-sh">风力机
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">风力机
 气动力
 失谐
 偏航
@@ -607,67 +601,58 @@
 升阻比
 
 
-</code></pre>
-
-<p>短短的几行shell语句解决了问题，优雅。
+</code></pre></div><p>短短的几行shell语句解决了问题，优雅。
 shell文件：</p>
-
-<pre><code class="language-sh">
-#!/bin/bash - 
-#===============================================================================
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">
+<span style="color:#75715e">#!/bin/bash -</span> 
+<span style="color:#75715e">#===============================================================================</span>
 #
-#          FILE: analysis.sh
+<span style="color:#75715e">#          FILE: analysis.sh</span>
 # 
-#         USAGE: ./analysis.sh 
+<span style="color:#75715e">#         USAGE: ./analysis.sh</span> 
 # 
-#   DESCRIPTION: 
+<span style="color:#75715e">#   DESCRIPTION:</span> 
 # 
-#       OPTIONS: ---
-#  REQUIREMENTS: ---
-#          BUGS: ---
-#         NOTES: ---
-#        AUTHOR: Ye Zhaoliang (), zhaoturkkey@163.com
-#  ORGANIZATION: YZL
-#       CREATED: 2015年06月14日 01:18
-#      REVISION:  ---
-#===============================================================================
+<span style="color:#75715e">#       OPTIONS: ---</span>
+<span style="color:#75715e">#  REQUIREMENTS: ---</span>
+<span style="color:#75715e">#          BUGS: ---</span>
+<span style="color:#75715e">#         NOTES: ---</span>
+<span style="color:#75715e">#        AUTHOR: Ye Zhaoliang (), zhaoturkkey@163.com</span>
+<span style="color:#75715e">#  ORGANIZATION: YZL</span>
+<span style="color:#75715e">#       CREATED: 2015年06月14日 01:18</span>
+<span style="color:#75715e">#      REVISION:  ---</span>
+<span style="color:#75715e">#===============================================================================</span>
 
-while read lines
-do
-    awk -v RS=&quot;$lines&quot; 'END{print RS,--NR}' qiu.org #减减表示减1
-done &lt; &quot;analysis.data&quot;
+<span style="color:#66d9ef">while</span> read lines
+<span style="color:#66d9ef">do</span>
+    awk -v RS<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$lines<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#39;END{print RS,--NR}&#39;</span> qiu.org <span style="color:#75715e">#减减表示减1</span>
+<span style="color:#66d9ef">done</span> &lt; <span style="color:#e6db74">&#34;analysis.data&#34;</span>
 
-</code></pre>
-
-<h2 id="搜索内容">搜索内容</h2>
-
+</code></pre></div><h2 id="heading">搜索内容</h2>
 <ol>
 <li>grep -n &ldquo;内容关键字&rdquo; 文件名路径</li>
 <li>awk &lsquo;{if($0~关键字){}}&rsquo;</li>
 </ol>
-
 <p>等。
 3. sed &lsquo;/关键字/p&rsquo;</p>
-
-<h2 id="结果">结果</h2>
-
-<pre><code class="language-sh">┌─[root][javazhao-N53SM][/paper]
+<h2 id="heading-1">结果</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">┌─<span style="color:#f92672">[</span>root<span style="color:#f92672">]</span><span style="color:#f92672">[</span>javazhao-N53SM<span style="color:#f92672">]</span><span style="color:#f92672">[</span>/paper<span style="color:#f92672">]</span>
 └─➞ sh analysis.sh 
-风力机 379
-气动力 397
-失谐 31
-偏航 353
-阵风 63
-扭矩 171
-功率 139
-风切变 59
-转速 172
-风速 353
-升力系数 27
-阻力系数 13
-升阻比 2
+风力机 <span style="color:#ae81ff">379</span>
+气动力 <span style="color:#ae81ff">397</span>
+失谐 <span style="color:#ae81ff">31</span>
+偏航 <span style="color:#ae81ff">353</span>
+阵风 <span style="color:#ae81ff">63</span>
+扭矩 <span style="color:#ae81ff">171</span>
+功率 <span style="color:#ae81ff">139</span>
+风切变 <span style="color:#ae81ff">59</span>
+转速 <span style="color:#ae81ff">172</span>
+风速 <span style="color:#ae81ff">353</span>
+升力系数 <span style="color:#ae81ff">27</span>
+阻力系数 <span style="color:#ae81ff">13</span>
+升阻比 <span style="color:#ae81ff">2</span>
 
-</code></pre>
+</code></pre></div>
     </div>
  <div class="nav-links" style="padding:10;">
         
@@ -1071,7 +1056,7 @@ done &lt; &quot;analysis.data&quot;
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

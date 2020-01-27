@@ -569,22 +569,21 @@
 
 <span class="article-metadata" >Reading time: 2 minutes and    44 seconds with 602 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
-        
+        <nav id="TableOfContents"></nav>
     </aside>
   <div class="article-container">
 
 
     <div class="article-style">
-      <p>词法编程最开始是有1984，Donald Knuth提出的<a href="http://comjnl.oxfordjournals.org/content/27/2/97.full.pdf" target="_blank">词法编程</a>.
-另外可以参考<a href="http://www.howardism.org/Technical/LP/introduction.html" target="_blank">emacs org-mode 词法编程</a>和 <a href="http://www.howardism.org/Technical/Emacs/literate-devops.html" target="_blank">emacs orgmode的高级词法编程</a>
+      <p>词法编程最开始是有1984，Donald Knuth提出的<a href="http://comjnl.oxfordjournals.org/content/27/2/97.full.pdf">词法编程</a>.
+另外可以参考<a href="http://www.howardism.org/Technical/LP/introduction.html">emacs org-mode 词法编程</a>和 <a href="http://www.howardism.org/Technical/Emacs/literate-devops.html">emacs orgmode的高级词法编程</a>
 我的理解是词法编程，就是在文本和代码中交叉实现，不让代码只是代码，文本只是文本，其实这根函数式编成的思想是相似的，<strong>代码即数据，数据即代码</strong>。</p>
-
-<pre><code class="language-sh">#+begin_src sh
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e">#+begin_src sh</span>
 ls
 hostname -I
-#+end_src
+<span style="color:#75715e">#+end_src</span>
 
-#+results:
+<span style="color:#75715e">#+results:</span>
 | activate.org                   |
 | activate.png                   |
 | activity.png                   |
@@ -599,7 +598,7 @@ hostname -I
 | emacs-notes                    |
 | gnuplot.org                    |
 | gnuplot.png                    |
-| #GTD.org#                      |
+| <span style="color:#75715e">#GTD.org#                      |</span>
 | gv01.png                       |
 | javaTalentTest.org             |
 | javaweb5.org                   |
@@ -656,40 +655,38 @@ hostname -I
 ** You must add the section :properties: and 🔚 ,or
 nothing show.
 :PROPERTIES:
-:var: name1=&quot;hello&quot;
+:var: name1<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;hello&#34;</span>
 :END:
-#+begin_src sh :var hosts=&quot;10.0.2.1&quot;
+<span style="color:#75715e">#+begin_src sh :var hosts=&#34;10.0.2.1&#34;</span>
 echo $hosts
 echo $name1
-#+end_src
+<span style="color:#75715e">#+end_src</span>
 
-#+results:
+<span style="color:#75715e">#+results:</span>
 | 10.0.2.1 |
 |    hello |
 
 
-#+header: :var Dir=&quot;/home/&quot;
-#+begin_src sh
+<span style="color:#75715e">#+header: :var Dir=&#34;/home/&#34;</span>
+<span style="color:#75715e">#+begin_src sh</span>
 cd $Dir
 ls -lsh
-#+end_src
+<span style="color:#75715e">#+end_src</span>
 
-#+results:
+<span style="color:#75715e">#+results:</span>
 | 总用量 | 28K        |    |          |          |      |     |    |       |                      |
-| 4.0K   | drwx------ | 43 | root     | root     | 4.0K | 5月 | 30 | 15:19 | happycamp-of-fortran |
-| 4.0K   | drwx------ |  5 | root     | root     | 4.0K | 5月 | 30 | 15:36 | happycamp-of-gnuplot |
-| 4.0K   | drwx------ | 31 | root     | root     | 4.0K | 6月 |  3 | 13:32 | happycamp-of-lisp    |
-| 4.0K   | drwxr-xr-x | 50 | javazhao | javazhao | 4.0K | 6月 |  3 | 14:22 | javazhao             |
-| 4.0K   | drwxr-xr-x |  7 | javazhao | javazhao | 4.0K | 4月 | 30 | 16:28 | lispbox-0.7          |
-| 4.0K   | -rw-r--r-- |  1 | root     | root     | 1    | 5月 | 13 | 23:37 | MyOrgHome            |
-| 4.0K   | drwxr-xr-x |  7 | root     | root     | 4.0K | 4月 | 10 | 22:18 | StudyCenter          |
+| 4.0K   | drwx------ | <span style="color:#ae81ff">43</span> | root     | root     | 4.0K | 5月 | <span style="color:#ae81ff">30</span> | 15:19 | happycamp-of-fortran |
+| 4.0K   | drwx------ |  <span style="color:#ae81ff">5</span> | root     | root     | 4.0K | 5月 | <span style="color:#ae81ff">30</span> | 15:36 | happycamp-of-gnuplot |
+| 4.0K   | drwx------ | <span style="color:#ae81ff">31</span> | root     | root     | 4.0K | 6月 |  <span style="color:#ae81ff">3</span> | 13:32 | happycamp-of-lisp    |
+| 4.0K   | drwxr-xr-x | <span style="color:#ae81ff">50</span> | javazhao | javazhao | 4.0K | 6月 |  <span style="color:#ae81ff">3</span> | 14:22 | javazhao             |
+| 4.0K   | drwxr-xr-x |  <span style="color:#ae81ff">7</span> | javazhao | javazhao | 4.0K | 4月 | <span style="color:#ae81ff">30</span> | 16:28 | lispbox-0.7          |
+| 4.0K   | -rw-r--r-- |  <span style="color:#ae81ff">1</span> | root     | root     | <span style="color:#ae81ff">1</span>    | 5月 | <span style="color:#ae81ff">13</span> | 23:37 | MyOrgHome            |
+| 4.0K   | drwxr-xr-x |  <span style="color:#ae81ff">7</span> | root     | root     | 4.0K | 4月 | <span style="color:#ae81ff">10</span> | 22:18 | StudyCenter          |
 
 
-</code></pre>
-
-<p>当然emacs中也是可以结合gnuplot ,latex, plantuml,graphviz等。
+</code></pre></div><p>当然emacs中也是可以结合gnuplot ,latex, plantuml,graphviz等。
 具体可以参看
-<a href="http://www.3zso.com/archives/orgmode-babel.html" target="_blank">http://www.3zso.com/archives/orgmode-babel.html</a></p>
+<a href="http://www.3zso.com/archives/orgmode-babel.html">http://www.3zso.com/archives/orgmode-babel.html</a></p>
     </div>
  <div class="nav-links" style="padding:10;">
         
@@ -1093,7 +1090,7 @@ ls -lsh
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

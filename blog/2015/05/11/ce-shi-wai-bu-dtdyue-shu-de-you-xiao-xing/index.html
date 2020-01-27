@@ -563,296 +563,269 @@
 
 
 
-<span class="article-metadata" >Reading time: 13 minutes and    20 seconds with 2934 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+<span class="article-metadata" >Reading time: 13 minutes and    16 seconds with 2922 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
-        
+        <nav id="TableOfContents"></nav>
     </aside>
   <div class="article-container">
 
 
     <div class="article-style">
       <p>问题来源：
-        我本想着查查网上有没有什么方法可以用来验证dtd，于是就搜到这篇，然后开始练习。遇到的问题还真不少，java IO有些忘了，就重新查（这是一点收获） 但是现在遇到的最大的问题是 db.parse()一直提示person.xml不存在，我已经在多个地方都存放着person.xml, 也知道fileInputStream读取的相对路径应该是java项目的跟路径，甚至我把文件名的全路径都给写上，但是报的错误就是  person.xml not  found</p>
-
+我本想着查查网上有没有什么方法可以用来验证dtd，于是就搜到这篇，然后开始练习。遇到的问题还真不少，java IO有些忘了，就重新查（这是一点收获） 但是现在遇到的最大的问题是 db.parse()一直提示person.xml不存在，我已经在多个地方都存放着person.xml, 也知道fileInputStream读取的相对路径应该是java项目的跟路径，甚至我把文件名的全路径都给写上，但是报的错误就是  person.xml not  found</p>
 <p>问题的产生项目文件：（我把所有的文件都放在TestDTD的包下面）
 person.xml   :第一个测试dtd的xml文件
 worker.xml   ：第二个测试dtd的xml文件
 person.dtd   ：dtd的约束文件
 ValidateDTD.java   :用于验证person.xml  和work.xml 是否正确的收到person.dtd的约束</p>
-
 <p>所有源文件：
 person.dtd:</p>
-
-<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;!ELEMENT person (name,sex,birthday)*&gt;
-&lt;!ELEMENT name (#PCDATA)&gt;
-&lt;!ELEMENT sex (#PCDATA)&gt;
-&lt;!ELEMENT birthday (#PCDATA)&gt;
-</code></pre>
-
-<p>复制代码
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+<span style="color:#75715e">&lt;!ELEMENT person (name,sex,birthday)*&gt;</span>
+<span style="color:#75715e">&lt;!ELEMENT name (#PCDATA)&gt;</span>
+<span style="color:#75715e">&lt;!ELEMENT sex (#PCDATA)&gt;</span>
+<span style="color:#75715e">&lt;!ELEMENT birthday (#PCDATA)&gt;</span>
+</code></pre></div><p>复制代码
 person.xml:</p>
-
-<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;!DOCTYPE person SYSTEM &quot;person.dtd&quot;&gt;        
-&lt;person&gt;
-        &lt;name&gt;Tom&lt;/name&gt;
-        &lt;sex&gt;male&lt;/sex&gt;
-        &lt;birthday&gt;1990-01-07&lt;/birthday&gt;
-&lt;/person&gt;
-</code></pre>
-
-<p>复制代码
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+<span style="color:#75715e">&lt;!DOCTYPE person SYSTEM &#34;person.dtd&#34;&gt;</span>        
+<span style="color:#f92672">&lt;person</span><span style="color:#f92672">&gt;</span>
+        <span style="color:#f92672">&lt;name</span><span style="color:#f92672">&gt;</span>Tom<span style="color:#f92672">&lt;/name&gt;</span>
+        <span style="color:#f92672">&lt;sex</span><span style="color:#f92672">&gt;</span>male<span style="color:#f92672">&lt;/sex&gt;</span>
+        <span style="color:#f92672">&lt;birthday</span><span style="color:#f92672">&gt;</span>1990-01-07<span style="color:#f92672">&lt;/birthday&gt;</span>
+<span style="color:#f92672">&lt;/person&gt;</span>
+</code></pre></div><p>复制代码
 worker.xml:(多了一条job字段，但是是不需要的)</p>
-
-<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;!DOCTYPE person SYSTEM &quot;person.dtd&quot;&gt;        
-&lt;person&gt;
-        &lt;name&gt;Tom&lt;/name&gt;
-        &lt;sex&gt;male&lt;/sex&gt;
-        &lt;birthday&gt;1990-01-07&lt;/birthday&gt;
-        &lt;job&gt;Painting&lt;/job&gt;
-&lt;/person&gt;
-</code></pre>
-
-<p>复制代码</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+<span style="color:#75715e">&lt;!DOCTYPE person SYSTEM &#34;person.dtd&#34;&gt;</span>        
+<span style="color:#f92672">&lt;person</span><span style="color:#f92672">&gt;</span>
+        <span style="color:#f92672">&lt;name</span><span style="color:#f92672">&gt;</span>Tom<span style="color:#f92672">&lt;/name&gt;</span>
+        <span style="color:#f92672">&lt;sex</span><span style="color:#f92672">&gt;</span>male<span style="color:#f92672">&lt;/sex&gt;</span>
+        <span style="color:#f92672">&lt;birthday</span><span style="color:#f92672">&gt;</span>1990-01-07<span style="color:#f92672">&lt;/birthday&gt;</span>
+        <span style="color:#f92672">&lt;job</span><span style="color:#f92672">&gt;</span>Painting<span style="color:#f92672">&lt;/job&gt;</span>
+<span style="color:#f92672">&lt;/person&gt;</span>
+</code></pre></div><p>复制代码</p>
 <p>ValidateDTD.java:（已修正的ValidateDTD程序）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> TestDTD<span style="color:#f92672">;</span>
 
-<pre><code class="language-java">package TestDTD;
+<span style="color:#f92672">import</span> java.io.File<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> java.io.IOException<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> java.net.URL<span style="color:#f92672">;</span>
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
+<span style="color:#f92672">import</span> javax.xml.parsers.DocumentBuilder<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> javax.xml.parsers.DocumentBuilderFactory<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> javax.xml.parsers.ParserConfigurationException<span style="color:#f92672">;</span>
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
+<span style="color:#f92672">import</span> org.xml.sax.SAXException<span style="color:#f92672">;</span>
 
-import org.xml.sax.SAXException;
+<span style="color:#75715e">/**
+</span><span style="color:#75715e">* @author 叶昭良
+</span><span style="color:#75715e">* @time 2015年4月26日上午3:48:53
+</span><span style="color:#75715e">* @version TestDTDValidataDTD V1.0 功能： 步骤1： 步骤2： 注意： 掌握： 思考1： 思考2： 回顾：
+</span><span style="color:#75715e">*/</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ValidataDTD</span>
+<span style="color:#f92672">{</span>
 
-/**
-* @author 叶昭良
-* @time 2015年4月26日上午3:48:53
-* @version TestDTDValidataDTD V1.0 功能： 步骤1： 步骤2： 注意： 掌握： 思考1： 思考2： 回顾：
-*/
-public class ValidataDTD
-{
+        <span style="color:#75715e">/**
+</span><span style="color:#75715e">         * @param args
+</span><span style="color:#75715e">         */</span>
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> args<span style="color:#f92672">)</span>
+        <span style="color:#f92672">{</span>
+                <span style="color:#75715e">// TODO Auto-generated method stub
+</span><span style="color:#75715e"></span>                <span style="color:#75715e">// 最好是事先打印当前的路径实在哪里
+</span><span style="color:#75715e"></span>                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> File<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;.&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getAbsolutePath</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
 
-        /**
-         * @param args
-         */
-        public static void main(String[] args)
-        {
-                // TODO Auto-generated method stub
-                // 最好是事先打印当前的路径实在哪里
-                System.out.println(new File(&quot;.&quot;).getAbsolutePath());
+                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> File<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;.&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> File<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;.&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getPath</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;开始测试person.xml&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                testPerson1<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;开始测试worker.xml&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                testWorker<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
 
-                System.out.println(new File(&quot;.&quot;).getName());
-                System.out.println(new File(&quot;.&quot;).getPath());
-                System.out.println(&quot;开始测试person.xml&quot;);
-                testPerson1();
-                System.out.println(&quot;开始测试worker.xml&quot;);
-                testWorker();
-        }
+        <span style="color:#75715e">// 利用工厂类DocumentBuilderFactory来判断DTD书写的正确性
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">testPerson1</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span>
+        <span style="color:#f92672">{</span>
+                <span style="color:#66d9ef">try</span>
+                <span style="color:#f92672">{</span>
+                        DocumentBuilderFactory dbf <span style="color:#f92672">=</span> DocumentBuilderFactory<span style="color:#f92672">.</span><span style="color:#a6e22e">newInstance</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        dbf<span style="color:#f92672">.</span><span style="color:#a6e22e">setValidating</span><span style="color:#f92672">(</span><span style="color:#66d9ef">true</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        <span style="color:#75715e">// 利用dbf建立一个documentBuilder对象
+</span><span style="color:#75715e"></span>
+                        DocumentBuilder db <span style="color:#f92672">=</span> dbf<span style="color:#f92672">.</span><span style="color:#a6e22e">newDocumentBuilder</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        <span style="color:#75715e">// 错误1
+</span><span style="color:#75715e"></span>                        <span style="color:#75715e">// db.parse(new FileInputStream(new File(&#34;.&#34;).getAbsoluteFile()+
+</span><span style="color:#75715e"></span>                        <span style="color:#75715e">// &#34;//TestDTD//person.xml&#34;));
+</span><span style="color:#75715e"></span>                        <span style="color:#75715e">// 错误2
+</span><span style="color:#75715e"></span>                        <span style="color:#75715e">// InputStream is = ValidataDTD.class.getClassLoader()
+</span><span style="color:#75715e"></span>                        <span style="color:#75715e">// .getResourceAsStream(&#34;person.xml&#34;);
+</span><span style="color:#75715e"></span>                        <span style="color:#75715e">/**
+</span><span style="color:#75715e">                         * 最常用读取properties文件的方法 InputStream in =
+</span><span style="color:#75715e">                         * getClass().getResourceAsStream
+</span><span style="color:#75715e">                         * (&#34;资源Name&#34;);这种方式要求properties文件和当前类在同一文件夹下面。如果在不同的包中，必须使用：
+</span><span style="color:#75715e">                         * InputStream ins = this.getClass().getResourceAsStream(
+</span><span style="color:#75715e">                         * &#34;/cn/zhao/properties/testPropertiesPath2.properties&#34;);
+</span><span style="color:#75715e">                         */</span>
 
-        // 利用工厂类DocumentBuilderFactory来判断DTD书写的正确性
-        public static void testPerson1()
-        {
-                try
-                {
-                        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-                        dbf.setValidating(true);
-                        // 利用dbf建立一个documentBuilder对象
+                        <span style="color:#75715e">// 错误3
+</span><span style="color:#75715e"></span>                        <span style="color:#75715e">// db.parse(new FileInputStream(&#34;./src/TestDTD/person.xml&#34;));
+</span><span style="color:#75715e"></span>                        <span style="color:#75715e">// 错误4
+</span><span style="color:#75715e"></span>                        <span style="color:#75715e">// db.parse(new FileInputStream(
+</span><span style="color:#75715e"></span>                        <span style="color:#75715e">// &#34;C:\\Users\\708\\git\\Day2015-4-14\\src\\TestDTD\\person.xml&#34;));
+</span><span style="color:#75715e"></span>                        <span style="color:#75715e">// db.parse(new FileInputStream(new File(&#34;E://person.xml&#34;)));
+</span><span style="color:#75715e"></span>                        URL fileURLPerson <span style="color:#f92672">=</span> ResourceAccessSecond<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getClassLoader</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getResource</span><span style="color:#f92672">(</span>
+                                        <span style="color:#e6db74">&#34;TestDTD/person.xml&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
 
-                        DocumentBuilder db = dbf.newDocumentBuilder();
-                        // 错误1
-                        // db.parse(new FileInputStream(new File(&quot;.&quot;).getAbsoluteFile()+
-                        // &quot;//TestDTD//person.xml&quot;));
-                        // 错误2
-                        // InputStream is = ValidataDTD.class.getClassLoader()
-                        // .getResourceAsStream(&quot;person.xml&quot;);
-                        /**
-                         * 最常用读取properties文件的方法 InputStream in =
-                         * getClass().getResourceAsStream
-                         * (&quot;资源Name&quot;);这种方式要求properties文件和当前类在同一文件夹下面。如果在不同的包中，必须使用：
-                         * InputStream ins = this.getClass().getResourceAsStream(
-                         * &quot;/cn/zhao/properties/testPropertiesPath2.properties&quot;);
-                         */
+                        db<span style="color:#f92672">.</span><span style="color:#a6e22e">parse</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> File<span style="color:#f92672">(</span>fileURLPerson<span style="color:#f92672">.</span><span style="color:#a6e22e">getFile</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>ParserConfigurationException e<span style="color:#f92672">)</span>
+                <span style="color:#f92672">{</span>
+                        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;DocumentBuilder 建立失败&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>IOException e<span style="color:#f92672">)</span>
+                <span style="color:#f92672">{</span>
+                        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;person.xml文件不存在&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>SAXException e<span style="color:#f92672">)</span>
+                <span style="color:#f92672">{</span> <span style="color:#75715e">// TODO Auto-generated catch block
+</span><span style="color:#75715e"></span>                        e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span>
 
-                        // 错误3
-                        // db.parse(new FileInputStream(&quot;./src/TestDTD/person.xml&quot;));
-                        // 错误4
-                        // db.parse(new FileInputStream(
-                        // &quot;C:\\Users\\708\\git\\Day2015-4-14\\src\\TestDTD\\person.xml&quot;));
-                        // db.parse(new FileInputStream(new File(&quot;E://person.xml&quot;)));
-                        URL fileURLPerson = ResourceAccessSecond.class.getClassLoader().getResource(
-                                        &quot;TestDTD/person.xml&quot;);
+        <span style="color:#f92672">}</span>
 
-                        db.parse(new File(fileURLPerson.getFile()));
-                } catch (ParserConfigurationException e)
-                {
-                        System.out.println(&quot;DocumentBuilder 建立失败&quot;);
-                } catch (IOException e)
-                {
-                        System.out.println(&quot;person.xml文件不存在&quot;);
-                } catch (SAXException e)
-                { // TODO Auto-generated catch block
-                        e.printStackTrace();
-                }
+        <span style="color:#75715e">// 利用工厂类DocumentBuilderFactory来判断DTD书写的正确性
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">testWorker</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span>
+        <span style="color:#f92672">{</span>
+                <span style="color:#66d9ef">try</span>
+                <span style="color:#f92672">{</span>
+                        DocumentBuilderFactory dbf <span style="color:#f92672">=</span> DocumentBuilderFactory<span style="color:#f92672">.</span><span style="color:#a6e22e">newInstance</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        dbf<span style="color:#f92672">.</span><span style="color:#a6e22e">setValidating</span><span style="color:#f92672">(</span><span style="color:#66d9ef">true</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        <span style="color:#75715e">// 利用dbf建立一个documentBuilder对象
+</span><span style="color:#75715e"></span>
+                        DocumentBuilder db <span style="color:#f92672">=</span> dbf<span style="color:#f92672">.</span><span style="color:#a6e22e">newDocumentBuilder</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
 
-        }
+                        URL fileURLPerson <span style="color:#f92672">=</span> ResourceAccessSecond<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getClassLoader</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getResource</span><span style="color:#f92672">(</span>
+                                        <span style="color:#e6db74">&#34;TestDTD/worker.xml&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
 
-        // 利用工厂类DocumentBuilderFactory来判断DTD书写的正确性
-        public static void testWorker()
-        {
-                try
-                {
-                        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-                        dbf.setValidating(true);
-                        // 利用dbf建立一个documentBuilder对象
+                        db<span style="color:#f92672">.</span><span style="color:#a6e22e">parse</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> File<span style="color:#f92672">(</span>fileURLPerson<span style="color:#f92672">.</span><span style="color:#a6e22e">getFile</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>ParserConfigurationException e<span style="color:#f92672">)</span>
+                <span style="color:#f92672">{</span>
+                        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;DocumentBuilder 建立失败&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>IOException e<span style="color:#f92672">)</span>
+                <span style="color:#f92672">{</span>
+                        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;person.xml文件不存在&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>SAXException e<span style="color:#f92672">)</span>
+                <span style="color:#f92672">{</span> <span style="color:#75715e">// TODO Auto-generated catch block
+</span><span style="color:#75715e"></span>                        e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span>
 
-                        DocumentBuilder db = dbf.newDocumentBuilder();
+        <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
 
-                        URL fileURLPerson = ResourceAccessSecond.class.getClassLoader().getResource(
-                                        &quot;TestDTD/worker.xml&quot;);
-
-                        db.parse(new File(fileURLPerson.getFile()));
-                } catch (ParserConfigurationException e)
-                {
-                        System.out.println(&quot;DocumentBuilder 建立失败&quot;);
-                } catch (IOException e)
-                {
-                        System.out.println(&quot;person.xml文件不存在&quot;);
-                } catch (SAXException e)
-                { // TODO Auto-generated catch block
-                        e.printStackTrace();
-                }
-
-        }
-}
-
-</code></pre>
-
-<p>复制代码</p>
-
+</code></pre></div><p>复制代码</p>
 <p>1： 查阅了 dtd的语法规范，也注意到了空格要把元素和圆括号分开写，检查基本上没有拼写错误，但是还是报了person.xml的
 2： 查阅了FileInputStream的用法， 有三种参数  String，Files ,另外一种比较少用，也就是既可以直接使用文件名字符串，也可以使用
-       new File(文件名字符串) 又或者第三种。 未找到解决办法
+new File(文件名字符串) 又或者第三种。 未找到解决办法
 补充：    之前我们一直训练的是在项目中读取的是properties（然后利用prop.load(in)的方法）,而在非项目文件中读取的是全路径问题（比如e:/person.xml)，第一次想到如果我们用FileInputStream是否读取java项目中的文件。</p>
-
 <p>补充2：  myeclipse并不会报警我在使用外部约束DTD的不存在的元素，自己又不知道xml解析器是否真的晓得dtd的文件的存在，于是就想着自己               测试一下
 3：于是求教 Professor Du   ，给了我两个读取项目文件的视频
 视频1： 用  当前类 ValidateDTD.class.getResource()方法
-<a href="http://v.polyv.net/uc/video/iframeview?vid=e46d36780492b6d4ec8ed55f4fb04583_e&amp;playerwidth=100" target="_blank">http://v.polyv.net/uc/video/iframeview?vid=e46d36780492b6d4ec8ed55f4fb04583_e&amp;playerwidth=100</a>
-          注意： bin目录表示类加载根目录（要知道我在说什么，打开window-&gt; show view&ndash;&gt;navigator<br />
-                    你会发现navigator现实的bin文件夹和  src文件夹基本上是对应的，只不过是把java文件，都变成了
-                     class文件，其他文件保持原样，这也就是bin根目录的所在地和他的文档结构）   在使用 此方法必须加上斜杠开头
+<a href="http://v.polyv.net/uc/video/iframeview?vid=e46d36780492b6d4ec8ed55f4fb04583_e&amp;playerwidth=100">http://v.polyv.net/uc/video/iframeview?vid=e46d36780492b6d4ec8ed55f4fb04583_e&amp;playerwidth=100</a>
+注意： bin目录表示类加载根目录（要知道我在说什么，打开window-&gt; show view&ndash;&gt;navigator<br>
+你会发现navigator现实的bin文件夹和  src文件夹基本上是对应的，只不过是把java文件，都变成了
+class文件，其他文件保持原样，这也就是bin根目录的所在地和他的文档结构）   在使用 此方法必须加上斜杠开头
 视频2 ： 用 当前类 ValidateDTD.class.classLoader().getResource()方法
-<a href="http://v.polyv.net/uc/video/iframeview?vid=e46d367804795fd7b389ade7541a9db7_e&amp;playerwidth=100" target="_blank">http://v.polyv.net/uc/video/iframeview?vid=e46d367804795fd7b389ade7541a9db7_e&amp;playerwidth=100</a>
-         注意： 与上面方法不同的是，在加载bin目录的时候，不需要使用斜杠  直接写上包名或者文件名（按照文件结构，
-                         把bin目录当做根目录即可）</p>
-
+<a href="http://v.polyv.net/uc/video/iframeview?vid=e46d367804795fd7b389ade7541a9db7_e&amp;playerwidth=100">http://v.polyv.net/uc/video/iframeview?vid=e46d367804795fd7b389ade7541a9db7_e&amp;playerwidth=100</a>
+注意： 与上面方法不同的是，在加载bin目录的时候，不需要使用斜杠  直接写上包名或者文件名（按照文件结构，
+把bin目录当做根目录即可）</p>
 <p>视频一的测试源文件：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> TestDTD<span style="color:#f92672">;</span>
 
-<pre><code class="language-java">package TestDTD;
+<span style="color:#f92672">import</span> java.io.BufferedReader<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> java.io.File<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> java.io.FileReader<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> java.net.URL<span style="color:#f92672">;</span>
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.net.URL;
+<span style="color:#75715e">/*
+</span><span style="color:#75715e">* 打开navigator试图，才能知道我在讲什么 window--&gt;show view---&gt;navigator
+</span><span style="color:#75715e">* 可以看到bin和src基本上是java文件变成了class其他一一对应
+</span><span style="color:#75715e">* 也就是一个java文件一经编译， 变成class文件都会到bin文件（规律1）
+</span><span style="color:#75715e">* 另外的bin文件也叫做类加载根目录（下面可以进行测试）
+</span><span style="color:#75715e">* 其他的比如xml dtd  txt等文件 则是直接会在bin根目录下显示
+</span><span style="color:#75715e">* 
+</span><span style="color:#75715e">* 
+</span><span style="color:#75715e">* 所以我们的问题是：
+</span><span style="color:#75715e">*          如何动态加载项目的根目录下的文件（也就是我把文件放在TestDTD下，如果
+</span><span style="color:#75715e">*          TestDTD包的路径一直改变（体现动态）我如何能够加载得上？
+</span><span style="color:#75715e">*          
+</span><span style="color:#75715e">*          反着来思考
+</span><span style="color:#75715e">*        1： 我需要FileReader或者FileInputStream 等
+</span><span style="color:#75715e">*        2： 也许我还需要用BufferedReader  或者BufferedInputStream来缓冲加载文件
+</span><span style="color:#75715e">*        3： 我需要使用FileReader还需要一个File对象
+</span><span style="color:#75715e">*        4： 我需要File对象  我就同时需要知道资源的全路径
+</span><span style="color:#75715e">*        5： 资源全路径的问题，就是如何加载bin根目录的问题！ 也就是我已经知道java编译器是如何解析相对路径
+</span><span style="color:#75715e">*        6： 于是我只要按照上述思路让类加载器去加载文件即可！
+</span><span style="color:#75715e">*        
+</span><span style="color:#75715e">*        注意：/ 表示的bin根目录  所以你需要在包的资源文件的开头是斜杠/
+</span><span style="color:#75715e">*/</span>
 
-/*
-* 打开navigator试图，才能知道我在讲什么 window--&gt;show view---&gt;navigator
-* 可以看到bin和src基本上是java文件变成了class其他一一对应
-* 也就是一个java文件一经编译， 变成class文件都会到bin文件（规律1）
-* 另外的bin文件也叫做类加载根目录（下面可以进行测试）
-* 其他的比如xml dtd  txt等文件 则是直接会在bin根目录下显示
-* 
-* 
-* 所以我们的问题是：
-*          如何动态加载项目的根目录下的文件（也就是我把文件放在TestDTD下，如果
-*          TestDTD包的路径一直改变（体现动态）我如何能够加载得上？
-*          
-*          反着来思考
-*        1： 我需要FileReader或者FileInputStream 等
-*        2： 也许我还需要用BufferedReader  或者BufferedInputStream来缓冲加载文件
-*        3： 我需要使用FileReader还需要一个File对象
-*        4： 我需要File对象  我就同时需要知道资源的全路径
-*        5： 资源全路径的问题，就是如何加载bin根目录的问题！ 也就是我已经知道java编译器是如何解析相对路径
-*        6： 于是我只要按照上述思路让类加载器去加载文件即可！
-*        
-*        注意：/ 表示的bin根目录  所以你需要在包的资源文件的开头是斜杠/
-*/
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ResourceAccess</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> args<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> Exception <span style="color:#f92672">{</span>
+                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>ResourceAccess<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getResource</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                URL fileUrl <span style="color:#f92672">=</span> ResourceAccess<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getResource</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/TestDTD/person.dtd&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>fileUrl<span style="color:#f92672">.</span><span style="color:#a6e22e">getFile</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
 
-public class ResourceAccess {
-        public static void main(String[] args) throws Exception {
-                System.out.println(ResourceAccess.class.getResource(&quot;&quot;));
-                URL fileUrl = ResourceAccess.class.getResource(&quot;/TestDTD/person.dtd&quot;);
-                System.out.println(fileUrl.getFile());
+                <span style="color:#75715e">// FileReader fr = new FileReader(new File(fileUrl));
+</span><span style="color:#75715e"></span>                FileReader fr <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> FileReader<span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> File<span style="color:#f92672">(</span>fileUrl<span style="color:#f92672">.</span><span style="color:#a6e22e">getFile</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                BufferedReader br <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> BufferedReader<span style="color:#f92672">(</span>fr<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                String line <span style="color:#f92672">=</span> br<span style="color:#f92672">.</span><span style="color:#a6e22e">readLine</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Read by BufferedReader(FileReader(File....)))&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>line<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;YEs it works!&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
 
-                // FileReader fr = new FileReader(new File(fileUrl));
-                FileReader fr = new FileReader(new File(fileUrl.getFile()));
-                BufferedReader br = new BufferedReader(fr);
-                String line = br.readLine();
-                System.out.println(&quot;Read by BufferedReader(FileReader(File....)))&quot;);
-                System.out.println(line);
-                System.out.println(&quot;YEs it works!&quot;);
-        }
+<span style="color:#f92672">}</span>
+</code></pre></div><p>视频二的测试源文件：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> TestDTD<span style="color:#f92672">;</span>
 
-}
-</code></pre>
+<span style="color:#f92672">import</span> java.net.URL<span style="color:#f92672">;</span>
 
-<p>视频二的测试源文件：</p>
+<span style="color:#75715e">/**
+</span><span style="color:#75715e">* @author 叶昭良
+</span><span style="color:#75715e">* @time 2015年4月26日下午1:25:32
+</span><span style="color:#75715e">* @version TestDTDResourceAccessSecond V1.0 功能： 步骤1： 步骤2： 注意： 掌握： 思考1： 思考2： 回顾：
+</span><span style="color:#75715e">*          第一种加载项目根目录资源的方式 类.class.getResource(FileName);
+</span><span style="color:#75715e">*/</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ResourceAccessSecond</span>
+<span style="color:#f92672">{</span>
 
-<pre><code class="language-java">package TestDTD;
+        <span style="color:#75715e">/**
+</span><span style="color:#75715e">         * @param args
+</span><span style="color:#75715e">         */</span>
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> args<span style="color:#f92672">)</span>
+        <span style="color:#f92672">{</span>
+                <span style="color:#75715e">// TODO Auto-generated method stub
+</span><span style="color:#75715e"></span>                <span style="color:#75715e">// 通过类加载器 classloader加载项目资源
+</span><span style="color:#75715e"></span>                <span style="color:#75715e">// 首先classloader指定的项目的路径是什么？做一个测试
+</span><span style="color:#75715e"></span>                <span style="color:#75715e">/*
+</span><span style="color:#75715e">                 * URL fileURL =
+</span><span style="color:#75715e">                 * ResourceAccessSecond.class.getClassLoader().getResource(&#34;&#34;); //
+</span><span style="color:#75715e">                 * 默认是bin目录 // fd System.out.println(fileURL);
+</span><span style="color:#75715e">                 */</span>
+                <span style="color:#75715e">// 加了斜杠反而不行！！！原來classloader类不同于class的方法！
+</span><span style="color:#75715e"></span>                <span style="color:#75715e">// 1 他不需要使用斜杠
+</span><span style="color:#75715e"></span>                <span style="color:#75715e">// 2 他多了一个功能 getResources()
+</span><span style="color:#75715e"></span>                URL fileURLPerson <span style="color:#f92672">=</span> ResourceAccessSecond<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getClassLoader</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getResource</span><span style="color:#f92672">(</span>
+                                <span style="color:#e6db74">&#34;TestDTD/person.dtd&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>fileURLPerson<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
 
-import java.net.URL;
+        <span style="color:#f92672">}</span>
 
-/**
-* @author 叶昭良
-* @time 2015年4月26日下午1:25:32
-* @version TestDTDResourceAccessSecond V1.0 功能： 步骤1： 步骤2： 注意： 掌握： 思考1： 思考2： 回顾：
-*          第一种加载项目根目录资源的方式 类.class.getResource(FileName);
-*/
-public class ResourceAccessSecond
-{
-
-        /**
-         * @param args
-         */
-        public static void main(String[] args)
-        {
-                // TODO Auto-generated method stub
-                // 通过类加载器 classloader加载项目资源
-                // 首先classloader指定的项目的路径是什么？做一个测试
-                /*
-                 * URL fileURL =
-                 * ResourceAccessSecond.class.getClassLoader().getResource(&quot;&quot;); //
-                 * 默认是bin目录 // fd System.out.println(fileURL);
-                 */
-                // 加了斜杠反而不行！！！原來classloader类不同于class的方法！
-                // 1 他不需要使用斜杠
-                // 2 他多了一个功能 getResources()
-                URL fileURLPerson = ResourceAccessSecond.class.getClassLoader().getResource(
-                                &quot;TestDTD/person.dtd&quot;);
-                System.out.println(fileURLPerson);
-
-        }
-
-}
-</code></pre>
-
-<p>经过这样一倒腾：
+<span style="color:#f92672">}</span>
+</code></pre></div><p>经过这样一倒腾：
 就可以使用下面方法</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">URL fileURLPerson <span style="color:#f92672">=</span> ResourceAccessSecond<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getClassLoader</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getResource</span><span style="color:#f92672">(</span>
+<span style="color:#e6db74">&#34;TestDTD/worker.xml&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
 
-<pre><code class="language-java">URL fileURLPerson = ResourceAccessSecond.class.getClassLoader().getResource(
-&quot;TestDTD/worker.xml&quot;);
-
-db.parse(new File(fileURLPerson.getFile()));
-</code></pre>
-
-<p>测试结果：
+db<span style="color:#f92672">.</span><span style="color:#a6e22e">parse</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> File<span style="color:#f92672">(</span>fileURLPerson<span style="color:#f92672">.</span><span style="color:#a6e22e">getFile</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+</code></pre></div><p>测试结果：
 开始测试person.xml
 开始测试worker.xml
 Warning: validation was turned on but an org.xml.sax.ErrorHandler was not
@@ -863,7 +836,6 @@ Error: URI=file:/C:/Users/708/git/Day2015-4-14/bin/TestDTD/worker.xml Line=7: �
 Error: URI=file:/C:/Users/708/git/Day2015-4-14/bin/TestDTD/worker.xml Line=8: 元素类型为 &ldquo;person&rdquo; 的内容必须匹配 &ldquo;(name,sex,birthday)*&rdquo;
 复制代码
 可以发现worker加了job字段，的确是检测出来了。</p>
-
 <p>问题总算解决了：
 主要问题还是FileInputStream并没有读入文件的问题。</p>
     </div>
@@ -1269,7 +1241,7 @@ Error: URI=file:/C:/Users/708/git/Day2015-4-14/bin/TestDTD/worker.xml Line=8: �
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

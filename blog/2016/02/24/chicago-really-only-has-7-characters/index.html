@@ -565,82 +565,68 @@
 
 
 
-<span class="article-metadata" >Reading time: 4 minutes and    48 seconds with 1059 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+<span class="article-metadata" >Reading time: 4 minutes and    51 seconds with 1069 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#value">Value</a></li>
-<li><a href="#源语言到目标语言的转变">源语言到目标语言的转变</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#value">Value</a></li>
+    <li><a href="#heading">源语言到目标语言的转变</a></li>
+  </ul>
 </nav>
     </aside>
   <div class="article-container">
 
 
     <div class="article-style">
-      <p>我在听<a href="http://v.youku.com/v_show/id_XMTQ3NDEwODUyNA==.html" target="_blank">SICP的优酷视频</a>时，听到“芝加哥也可以说是具有7个字符，同时他也可以表述为美国的中西部伊利诺伊州的全美第三大国际大都市”.
+      <p>我在听<a href="http://v.youku.com/v_show/id_XMTQ3NDEwODUyNA==.html">SICP的优酷视频</a>时，听到“芝加哥也可以说是具有7个字符，同时他也可以表述为美国的中西部伊利诺伊州的全美第三大国际大都市”.
 它可以仅仅表示语言的表面意思，也可以表示语言中的隐含意思。这体现了语言实现的一种魅力，Chicago really only has 7 characters?</p>
-
 <h2 id="value">Value</h2>
-
 <ul>
 <li>Value，价值。</li>
 <li>scheme的每一个程序都是由exressions构成，每一个expression都对应一个expression value，简称expval。</li>
 <li>expval对应的有exp-val和den-val。</li>
 <li>exp-val表示表达式的值，也就是可能是变量绑定也可能是列表(表达式)的值；而den-val单单只是变量绑定。</li>
 </ul>
-
-<p>为了分析每一个价值的过程，姑且把程序写为&lt;<expressions>&gt;</p>
-
+<p>为了分析每一个价值的过程，姑且把程序写为&laquo;expressions&raquo;</p>
 <p>如果<code>expressions=((lambda (x) (+ x 3)) 10)</code></p>
-
 <p>那么scheme如何解析？</p>
-
 <p>假定我们的解析程序叫做value-of,init-env是我们的初始环境(变量绑定或者字典),[10]表示scheme-val(每一种语言都有着自己的value),
 [x=10]init-env表示拓展的环境</p>
-
-<pre><code class="language-scheme">(value-of &lt;&lt;expressions&gt;&gt;)
-         =(value-of &lt;&lt;((lambda (x) (+ x 3)) 10)&gt;&gt;)
-         =(value-of ((lambda (x) (+ x 3)) 10) init-env)
-         =(apply-procedure (value-of &lt;&lt;(lambda (x) (+ x 3))&gt;&gt; init-env) 
-                           (value-of 10 init-env))
-         =(apply-procedure (procedure x &lt;&lt;(+ x 3))&gt;&gt; init-env) 
-                           [10])
-         =(value-of &lt;&lt;(+ x 3))&gt;&gt; [x=10]init-env) 
-         =(apply-procedure (value-of + [x=10]init-env)
-                           (value-of x [x=10]init-env)
-                           (value-of 3 [x=10]init-env)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#a6e22e">value-of</span> &lt;&lt;expressions&gt;&gt;)
+         =(<span style="color:#a6e22e">value-of</span> &lt;&lt;((<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">x</span>) (+ x <span style="color:#ae81ff">3</span>)) <span style="color:#ae81ff">10</span>)&gt;&gt;)
+         =(<span style="color:#a6e22e">value-of</span> ((<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">x</span>) (+ x <span style="color:#ae81ff">3</span>)) <span style="color:#ae81ff">10</span>) init-env)
+         =(<span style="color:#a6e22e">apply-procedure</span> (<span style="color:#a6e22e">value-of</span> &lt;&lt;(<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">x</span>) (+ x <span style="color:#ae81ff">3</span>))&gt;&gt; init-env) 
+                           (<span style="color:#a6e22e">value-of</span> <span style="color:#ae81ff">10</span> init-env))
+         =(<span style="color:#a6e22e">apply-procedure</span> (<span style="color:#a6e22e">procedure</span> x &lt;&lt;(+ x <span style="color:#ae81ff">3</span>))&gt;&gt; init-env) 
+                           [<span style="color:#ae81ff">10</span>])
+         =(<span style="color:#a6e22e">value-of</span> &lt;&lt;(+ x <span style="color:#ae81ff">3</span>))&gt;&gt; [x=10]init-env) 
+         =(<span style="color:#a6e22e">apply-procedure</span> (<span style="color:#a6e22e">value-of</span> + [x=10]init-env)
+                           (<span style="color:#a6e22e">value-of</span> x [x=10]init-env)
+                           (<span style="color:#a6e22e">value-of</span> <span style="color:#ae81ff">3</span> [x=10]init-env)
                 )
-         = (apply-procedure (procedure + [x=10]init-env)
-                           [10]
-                           [3] 
+         = (<span style="color:#a6e22e">apply-procedure</span> (<span style="color:#a6e22e">procedure</span> + [x=10]init-env)
+                           [<span style="color:#ae81ff">10</span>]
+                           [<span style="color:#ae81ff">3</span>] 
                 )
-         =(+ (val-num [10])  (val-num [3]))
-         =(+ 10 3)
+         =(+ (<span style="color:#a6e22e">val-num</span> [<span style="color:#ae81ff">10</span>])  (<span style="color:#a6e22e">val-num</span> [<span style="color:#ae81ff">3</span>]))
+         =(+ <span style="color:#ae81ff">10</span> <span style="color:#ae81ff">3</span>)
 
-</code></pre>
-
-<p>刚开始
-+ 也许你不可能替代&lt;&lt;&gt;&gt;表达式的意思，
-+ 你也可能不理解解析10的过程，
-+ 你也分不清出解析lambda和+的不同（一种是自定义程序，一种是内置operator），
-+ 甚至你不可以静下心来好好分析我正在说的话。</p>
-
+</code></pre></div><p>刚开始</p>
+<ul>
+<li>也许你不可能替代&laquo;&raquo;表达式的意思，</li>
+<li>你也可能不理解解析10的过程，</li>
+<li>你也分不清出解析lambda和+的不同（一种是自定义程序，一种是内置operator），</li>
+<li>甚至你不可以静下心来好好分析我正在说的话。</li>
+</ul>
 <p>我想表达的是，程序给你的是program or data，而你作为语言的创造者或者使用者，你需要进一步体味program是什么？
 <strong>Does program really has only 7 characters?</strong>(思考你写过的程序的各个部分的用途，如何来的？)</p>
-
-<p>进一步的解析可以<a href="http://jueqingsizhe66.github.io/blog/2016/02/09/its-a-dead-program-dot-how-to-let-it-alive/#4" target="_blank">参考</a>。</p>
-
-<h2 id="源语言到目标语言的转变">源语言到目标语言的转变</h2>
-
+<p>进一步的解析可以<a href="http://jueqingsizhe66.github.io/blog/2016/02/09/its-a-dead-program-dot-how-to-let-it-alive/#4">参考</a>。</p>
+<h2 id="heading">源语言到目标语言的转变</h2>
 <p>有一种程序员喜欢利用各种语言所具有的特色，组合使用语言形成自己的程序，内部是控制流动和数据流动。而从第一种语言
 也就是源语言(source language)开始，利用变换，输入到第二种、第三种…… ，最终输入到目标语言(target language).程序并不是
 我们想的单一性的语言调用，每一个问题都可以通过新构造一种新的语言进行求解(持保留意见)。现在已经有人能够作出输入一种输入和输出
-结果，从而产生你要的scheme程序，也就是产生对应的语言解决这个问题。然而我们更需要思考的是变的表面含义。&rdquo;变&rdquo;的是什么？
-可深入了解Dan. Friedman的<a href="http://www.eopl3.com/" target="_blank">EOPL</a>程序设计书籍。</p>
+结果，从而产生你要的scheme程序，也就是产生对应的语言解决这个问题。然而我们更需要思考的是变的表面含义。&ldquo;变&quot;的是什么？
+可深入了解Dan. Friedman的<a href="http://www.eopl3.com/">EOPL</a>程序设计书籍。</p>
     </div>
  <div class="nav-links" style="padding:10;">
         
@@ -1044,7 +1030,7 @@
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

@@ -5,7 +5,7 @@
     <link>https://jueqingsizhe66.github.io/tags/fast/</link>
       <atom:link href="https://jueqingsizhe66.github.io/tags/fast/index.xml" rel="self" type="application/rss+xml" />
     <description>Fast</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>©2019</copyright><lastBuildDate>Wed, 05 Jul 2017 23:01:13 +0800</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>©2020</copyright><lastBuildDate>Wed, 05 Jul 2017 23:01:13 +0800</lastBuildDate>
     <image>
       <url>https://jueqingsizhe66.github.io/img/icon-192.png</url>
       <title>Fast</title>
@@ -18,8 +18,7 @@
       <pubDate>Wed, 05 Jul 2017 23:01:13 +0800</pubDate>
       <guid>https://jueqingsizhe66.github.io/blog/2017/07/05/windows-fast0816bian-yi-shi-bai/</guid>
       <description>&lt;p&gt;在之前的fast使用中一直没有碰到编译proj file失败的事情，但再816却出现了，于是添加了额外的编译debug路径，解决了 问题。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/fast/fast816.png&#34; alt=&#34;fast debug&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/fast/fast816.png&#34; alt=&#34;fast debug&#34;&gt;&lt;/p&gt;
 </description>
     </item>
     
@@ -29,24 +28,20 @@
       <pubDate>Fri, 19 May 2017 19:31:22 +0800</pubDate>
       <guid>https://jueqingsizhe66.github.io/blog/2017/05/19/ubuntu17-dot-04-install-fast8-dot-16/</guid>
       <description>&lt;p&gt;Something Noted in the process of installation FAST8.16 in the 32bit ubuntu17.04 system.&lt;/p&gt;
-
 &lt;ol&gt;
-&lt;li&gt;&lt;p&gt;Download  &lt;a href=&#34;https://nwtc.nrel.gov/FAST8&#34; target=&#34;_blank&#34;&gt; Fast8.16 &lt;/a&gt; and decompress&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;
+&lt;li&gt;Download  &lt;a href=&#34;https://nwtc.nrel.gov/FAST8&#34;&gt; Fast8.16 &lt;/a&gt; and decompress&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;
 mkdir FAST-816
 cd FAST-816
 mv FAST*.tar.gz FAST-816
 tar -xvf FAST*.tar.gz
 
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Download  &lt;a href=&#34;https://nwtc.nrel.gov/system/files/MAP_v1.20.10.tar.gz&#34; target=&#34;_blank&#34;&gt; Map &lt;/a&gt; for generating map.so and decompress&lt;/p&gt;&lt;/li&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;Download  &lt;a href=&#34;https://nwtc.nrel.gov/system/files/MAP_v1.20.10.tar.gz&#34;&gt; Map &lt;/a&gt; for generating map.so and decompress&lt;/li&gt;
 &lt;/ol&gt;
-
 &lt;p&gt;FAST_DIR 告诉MAP FAST项目存在哪里&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;
 cd FAST-816
 mkdir LIBMAP
 cd LIBMAP
@@ -54,197 +49,166 @@ mv ../../*.MAP*.tar.gz .
 tar -xvf *MAP*.tar.gz
 
 cd compiling
-vim driver_makefile&amp;lt;&amp;lt;EOF
-
------ FAST_DIR     = ../Source
-+++++ FAST_DIR     = /paper/FAST-816/
-
-EOF
+vim driver_makefile&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;lt;&amp;lt;EOF
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;----- FAST_DIR     = ../Source
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;+++++ FAST_DIR     = /paper/FAST-816/
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;EOF&lt;/span&gt;
 
 cd ../src/
 
-vim makefile&amp;lt;&amp;lt;EOF
-
------ BITS = -m64
-+++++ BITS = -m32  32bit系统
-
-EOF
+vim makefile&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;lt;&amp;lt;EOF
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;----- BITS = -m64
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;+++++ BITS = -m32  32bit系统
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;EOF&lt;/span&gt;
 
 make#################something error here
 
 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;make Libmap.so something error here&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;a.o mapinit.o maperror.o lineroutines.o numeric.o outputstream.o mapapi.o lmroutines.o jacobian.o residual.o  -lm -llapacke 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;make Libmap.so something error here&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;a.o mapinit.o maperror.o lineroutines.o numeric.o outputstream.o mapapi.o lmroutines.o jacobian.o residual.o  -lm -llapacke 
 /usr/bin/ld: 找不到 -llapacke
 /usr/bin/ld: 找不到 -llapacke
-collect2: error: ld returned 1 exit status
-makefile:81: recipe for target &#39;all&#39; failed
-make: *** [all] Error 1
+collect2: error: ld returned &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; exit status
+makefile:81: recipe &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; target &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;all&amp;#39;&lt;/span&gt; failed
+make: *** &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;all&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; Error &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://jueqingsizhe66.github.io/blog/2016/04/15/ubuntu15-dot-10-32bit-an-zhuang-fastv8-dot-15/&#34; target=&#34;_blank&#34;&gt; fixed it &lt;/a&gt;:&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;a href=&#34;http://jueqingsizhe66.github.io/blog/2016/04/15/ubuntu15-dot-10-32bit-an-zhuang-fastv8-dot-15/&#34;&gt; fixed it &lt;/a&gt;:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;
 apt-get install lapacke-dev*
 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;make again&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;make ### OK generate libmap-1.2.so
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;make again&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;make &lt;span style=&#34;color:#75715e&#34;&gt;### OK generate libmap-1.2.so&lt;/span&gt;
 
 mkdir /paper/FAST-816/bin
 cp libmap-1.20.10.so /paper/FAST-816/bin
 
 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;Now Install FAST&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;Now Install FAST&lt;/li&gt;
+&lt;/ol&gt;
 &lt;pre&gt;&lt;code&gt;
 cd /paper/FAST-816/compiling/
 make 
 make -f makefile_DISCON_DLL ## for Test18-26.fst case
 
 
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;code&gt;gcc -fbacktrack FAST_Subs&lt;/code&gt; 可能再gcc-6会有点问题，部分f90文件得删除该选项 删掉-fbacktrace测试通过&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;
- 2 &amp;gt; make
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;code&gt;gcc -fbacktrack FAST_Subs&lt;/code&gt; 可能再gcc-6会有点问题，部分f90文件得删除该选项 删掉-fbacktrace测试通过&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;
+ &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &amp;gt; make
 gfortran -I Obj_lin32 -O2 -m32 -fbacktrace -ffree-line-length-none -x f95-cpp-input -DNO_LibLoad -DUSE_DLL_INTERFACE -c ../Source/FAST_Subs.f90 -o Obj_lin32/FAST_Subs.o -J Obj_lin32 -B Obj_lin32
-gfortran: internal compiler error: 已杀死 (program f951)
+gfortran: internal compiler error: 已杀死 &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;program f951&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
 Please submit a full bug report,
-with preprocessed source if appropriate.
-See &amp;lt;file:///usr/share/doc/gcc-6/README.Bugs&amp;gt; for instructions.
-makefile:416: recipe for target &#39;FAST_Subs.o&#39; failed
-make: *** [FAST_Subs.o] Error 4
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ol&gt;
+with preprocessed source &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; appropriate.
+See &amp;lt;file:///usr/share/doc/gcc-6/README.Bugs&amp;gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; instructions.
+makefile:416: recipe &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; target &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;FAST_Subs.o&amp;#39;&lt;/span&gt; failed
+make: *** &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;FAST_Subs.o&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; Error &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;4&#34;&gt;
 &lt;li&gt;Run Test1-18.fst&lt;/li&gt;
 &lt;/ol&gt;
-
 &lt;p&gt;You can go to /paper/FAST-816/bin to check whether FAST_Glin32 and libmap.so have been generated or not&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;cd /paper/FAST-816/bin
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;cd /paper/FAST-816/bin
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;
 ❯ ./FAST_glin32 ../CertTest/Test02.fst
 
  **************************************************************************************************
- FAST (v8.16.00a-bjj, 27-Jul-2016)
+ FAST &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;v8.16.00a-bjj, 27-Jul-2016&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
 
- Copyright (C) 2016 National Renewable Energy Laboratory
+ Copyright &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;C&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2016&lt;/span&gt; National Renewable Energy Laboratory
 
- This program comes with ABSOLUTELY NO WARRANTY. See the &amp;quot;license.txt&amp;quot; file distributed with this
- software for details.
+ This program comes with ABSOLUTELY NO WARRANTY. See the &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;license.txt&amp;#34;&lt;/span&gt; file distributed with this
+ software &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; details.
  **************************************************************************************************
 
-  Running FAST (v8.16.00a-bjj, 27-Jul-2016), compiled as a 32-bit application using single
+  Running FAST &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;v8.16.00a-bjj, 27-Jul-2016&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;, compiled as a 32-bit application using single
   precision
-  linked with NWTC Subroutine Library (v2.09.00, 23-Jul-2016)
+  linked with NWTC Subroutine Library &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;v2.09.00, 23-Jul-2016&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
 
   Heading of the FAST input file:
-    FAST Certification Test #02: AWT-27CR2 with many DOFs with startup and shutdown and steady wind
+    FAST Certification Test &lt;span style=&#34;color:#75715e&#34;&gt;#02: AWT-27CR2 with many DOFs with startup and shutdown and steady wind&lt;/span&gt;
 
-  Running ElastoDyn (v1.04.00a-bjj, 26-Jul-2016).
+  Running ElastoDyn &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;v1.04.00a-bjj, 26-Jul-2016&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;.
 
-  Running AeroDyn (v15.03.00, 27-Jul-2016).
+  Running AeroDyn &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;v15.03.00, 27-Jul-2016&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;.
 
-  Running AirfoilInfo (v1.01.00a-bjj, 5-Apr-2016).
+  Running AirfoilInfo &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;v1.01.00a-bjj, 5-Apr-2016&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;.
 
-  Running BEM (v1.02.00, 29-Jun-2016).
+  Running BEM &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;v1.02.00, 29-Jun-2016&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;.
 
-  Running InflowWind (v3.03.00, 26-Jul-2016).
+  Running InflowWind &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;v3.03.00, 26-Jul-2016&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;.
   Opening InflowWind input file:  ../CertTest/AWT27/Test02_InflowWind.dat
 
-  Running ServoDyn (v1.06.00a-bjj, 26-Jul-2016).
-  Timestep: 0 of 20 seconds.
+  Running ServoDyn &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;v1.06.00a-bjj, 26-Jul-2016&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;.
+  Timestep: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; of &lt;span style=&#34;color:#ae81ff&#34;&gt;20&lt;/span&gt; seconds.
 
- Timestep: 2 of 20 seconds. Estimated final completion at 16:05:13.                               
- Timestep: 4 of 20 seconds. Estimated final completion at 16:05:12.    
+ Timestep: &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; of &lt;span style=&#34;color:#ae81ff&#34;&gt;20&lt;/span&gt; seconds. Estimated final completion at 16:05:13.                               
+ Timestep: &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt; of &lt;span style=&#34;color:#ae81ff&#34;&gt;20&lt;/span&gt; seconds. Estimated final completion at 16:05:12.    
 
 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;Modify the ServoData for servo module
-&lt;a href=&#34;http://jueqingsizhe66.github.io/blog/2015/10/22/fast-in-ubuntu64bit-bian-yi-zhu-yi-shi-xiang/&#34; target=&#34;_blank&#34;&gt; DISON_DLL running &lt;/a&gt; 因为FAST在运行Test18-26.fst的case时候会去读取5MW_BASELINE[只针对的是5MW]底下的ServoData的文件, 所以对应dll-filename得修改一下。&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;Modify the ServoData for servo module
+&lt;a href=&#34;http://jueqingsizhe66.github.io/blog/2015/10/22/fast-in-ubuntu64bit-bian-yi-zhu-yi-shi-xiang/&#34;&gt; DISON_DLL running &lt;/a&gt; 因为FAST在运行Test18-26.fst的case时候会去读取5MW_BASELINE[只针对的是5MW]底下的ServoData的文件, 所以对应dll-filename得修改一下。&lt;/p&gt;
 &lt;p&gt;make DISCON SO file&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;❯ make -f makefile_DISCON_DLL
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;❯ make -f makefile_DISCON_DLL
 gfortran  -O2 -m32 -fbacktrace -ffree-line-length-none -x f95-cpp-input -C -DIMPLICIT_DLLEXPORT -fPIC -c ../CertTest/5MW_Baseline/ServoData/Source/DISCON.f90 -o Obj_lin32/DISCON.obj -J Obj_lin32 -B Obj_lin32
-gfortran -shared -O2 -m32 -fbacktrace -fPIC -I Obj_lin32 -o ../CertTest/5MW_Baseline/ServoData/DISCON_glin32.so \
-Obj_lin32/DISCON.obj
+gfortran -shared -O2 -m32 -fbacktrace -fPIC -I Obj_lin32 -o ../CertTest/5MW_Baseline/ServoData/DISCON_glin32.so &lt;span style=&#34;color:#ae81ff&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;&lt;/span&gt; Obj_lin32/DISCON.obj
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;Change DLL_FileName in the configure data file
 &lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Change DLL_FileName in the configure data file&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;cd /paper/FAST-816/CertTest/5MW_Baseline
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;cd /paper/FAST-816/CertTest/5MW_Baseline
 vim NRELOffshrBsline5MW_Onshore_ServoDyn.dat 
 
 修改DLL_FileName为 ServoData/DISCON_glin32.so
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ol&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Test RESULT:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;
+  Running BeamDyn &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;v1.01.04, 26-Jul-2016&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;.
 
-&lt;p&gt;Test RESULT:&lt;/p&gt;
+  Running AeroDyn &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;v15.03.00, 27-Jul-2016&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;.
 
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;
-  Running BeamDyn (v1.01.04, 26-Jul-2016).
+  Running AirfoilInfo &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;v1.01.00a-bjj, 5-Apr-2016&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;.
 
-  Running AeroDyn (v15.03.00, 27-Jul-2016).
+  Running BEM &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;v1.02.00, 29-Jun-2016&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;.
+ Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; 1, Blade &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+ Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; 2, Blade &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+ Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; 3, Blade &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+ Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; 4, Blade &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+ Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; 1, Blade &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+ Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; 2, Blade &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+ Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; 3, Blade &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+ Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; 4, Blade &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+ Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; 1, Blade &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;
+ Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; 2, Blade &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;
+ Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; 3, Blade &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;
+ Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; 4, Blade &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;
 
-  Running AirfoilInfo (v1.01.00a-bjj, 5-Apr-2016).
-
-  Running BEM (v1.02.00, 29-Jun-2016).
- Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode = 1, Blade = 1
- Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode = 2, Blade = 1
- Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode = 3, Blade = 1
- Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode = 4, Blade = 1
- Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode = 1, Blade = 2
- Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode = 2, Blade = 2
- Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode = 3, Blade = 2
- Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode = 4, Blade = 2
- Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode = 1, Blade = 3
- Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode = 2, Blade = 3
- Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode = 3, Blade = 3
- Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode = 4, Blade = 3
-
-  Running InflowWind (v3.03.00, 26-Jul-2016).
+  Running InflowWind &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;v3.03.00, 26-Jul-2016&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;.
   Opening InflowWind input file:  ../CertTest/5MW_Baseline/NRELOffshrBsline5MW_InflowWind_12mps.dat
 
-    Reading a 31x31 grid (145 m wide, 17.5 m to 162.5 m above ground) with a characteristic wind
-    speed of 12 m/s. This full-field file was generated by TurbSim (v1.06.00, 21-Sep-2012) on
+    Reading a 31x31 grid &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;145&lt;/span&gt; m wide, 17.5 m to 162.5 m above ground&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; with a characteristic wind
+    speed of &lt;span style=&#34;color:#ae81ff&#34;&gt;12&lt;/span&gt; m/s. This full-field file was generated by TurbSim &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;v1.06.00, 21-Sep-2012&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; on
     07-Jan-2014 at 12:50:45.
 
-    Processed 1442 time steps of 20-Hz full-field data (72.05 seconds).
+    Processed &lt;span style=&#34;color:#ae81ff&#34;&gt;1442&lt;/span&gt; time steps of 20-Hz full-field data &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;72.05 seconds&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;.
 
-  Running ServoDyn (v1.06.00a-bjj, 26-Jul-2016).
+  Running ServoDyn &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;v1.06.00a-bjj, 26-Jul-2016&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;.
 
-  Running ServoDyn Interface for Bladed Controllers (using GNU Fortran for Linux, 14-Oct-2015).
-  Timestep: 0 of 20 seconds.
+  Running ServoDyn Interface &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; Bladed Controllers &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;using GNU Fortran &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; Linux, 14-Oct-2015&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;.
+  Timestep: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; of &lt;span style=&#34;color:#ae81ff&#34;&gt;20&lt;/span&gt; seconds.
 
  FAST_Solution0:CalcOutputs_And_SolveForInputs:SolveOption2:SrvD_CalcOutput:Running with torque
  and pitch control of the NREL offshore 5MW baseline wind turbine from DISCON.dll as written by J.
- Jonkman of NREL/NWTC for use in the IEA Annex XXIII OC3 studies.
+ Jonkman of NREL/NWTC &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; use in the IEA Annex XXIII OC3 studies.
 
 
- Timestep: 1 of 20 seconds. Estimated final completion at 16:20:36.                               
+ Timestep: &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; of &lt;span style=&#34;color:#ae81ff&#34;&gt;20&lt;/span&gt; seconds. Estimated final completion at 16:20:36.                               
 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Okay, All things have been done.&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Okay, All things have been done.&lt;/p&gt;
 &lt;p&gt;Happy FAST programming.&lt;/p&gt;</description>
     </item>
     
@@ -253,77 +217,58 @@ vim NRELOffshrBsline5MW_Onshore_ServoDyn.dat
       <link>https://jueqingsizhe66.github.io/blog/2017/02/07/fastdiao-shi/</link>
       <pubDate>Tue, 07 Feb 2017 20:01:15 +0800</pubDate>
       <guid>https://jueqingsizhe66.github.io/blog/2017/02/07/fastdiao-shi/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://nwtc.nrel.gov/FAST8&#34; target=&#34;_blank&#34;&gt;NREL FAST&lt;/a&gt;的调试一直存在问题，关键是不知道怎么设置选项，查阅了Visual Studio和一些基本知识整理了
+      <description>&lt;p&gt;&lt;a href=&#34;https://nwtc.nrel.gov/FAST8&#34;&gt;NREL FAST&lt;/a&gt;的调试一直存在问题，关键是不知道怎么设置选项，查阅了Visual Studio和一些基本知识整理了
 NREL项目的调试方法。&lt;/p&gt;
-
-&lt;h2 id=&#34;fortran工作路径问题&#34;&gt;fortran工作路径问题&lt;/h2&gt;
-
-&lt;p&gt;&lt;font color=&#34;green&#34;&gt;&lt;strong&gt;工作路径对于任何的可执行文件都很重要。&lt;/strong&gt;&lt;/font&gt;
-    当然事先可能得了解一下软件编译链接的过程（即编写源代码&amp;ndash;调用编译器编译源代码&amp;ndash;
-    &amp;gt;调用链接器连接相关代码块生成可执行文件&amp;ndash;&amp;gt;运行可执行文件）(IDE隐藏了上述过程)&lt;/p&gt;
-
+&lt;h2 id=&#34;fortran&#34;&gt;fortran工作路径问题&lt;/h2&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;__工作路径对于任何的可执行文件都很重要。__&lt;!-- raw HTML omitted --&gt;
+当然事先可能得了解一下软件编译链接的过程（即编写源代码&amp;ndash;调用编译器编译源代码&amp;ndash;
+&amp;gt;调用链接器连接相关代码块生成可执行文件&amp;ndash;&amp;gt;运行可执行文件）(IDE隐藏了上述过程)&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;如果不带任何路径，则被认为是当前路径(&lt;font color=&#34;green&#34;&gt;&lt;strong&gt;working directory&lt;/strong&gt;&lt;/font&gt;)。&lt;/li&gt;
+&lt;li&gt;如果不带任何路径，则被认为是当前路径(&lt;!-- raw HTML omitted --&gt;&lt;strong&gt;working directory&lt;/strong&gt;&lt;!-- raw HTML omitted --&gt;)。&lt;/li&gt;
 &lt;li&gt;如果带相对路径，则以当前路径为基准。&lt;/li&gt;
-&lt;li&gt;通过命令行执行，当前路径一般在提示符上(或&lt;font color=&#34;red&#34;&gt;pwd&lt;/font&gt;命令查看)&lt;/li&gt;
-&lt;li&gt;直接&lt;font color=&#34;red&#34;&gt;&lt;strong&gt;双击&lt;/strong&gt;&lt;/font&gt;,当前路径在exe所在的文件夹。&lt;/li&gt;
-&lt;li&gt;通过&lt;font color=&#34;red&#34;&gt;&lt;strong&gt;IDE&lt;/strong&gt;&lt;/font&gt;方式运行，当前路径一般在&lt;font color=&#34;red&#34;&gt;&lt;strong&gt;工程所在文件夹&lt;/strong&gt;&lt;/font&gt;&lt;/li&gt;
+&lt;li&gt;通过命令行执行，当前路径一般在提示符上(或&lt;!-- raw HTML omitted --&gt;pwd&lt;!-- raw HTML omitted --&gt;命令查看)&lt;/li&gt;
+&lt;li&gt;直接&lt;!-- raw HTML omitted --&gt;&lt;strong&gt;双击&lt;/strong&gt;&lt;!-- raw HTML omitted --&gt;,当前路径在exe所在的文件夹。&lt;/li&gt;
+&lt;li&gt;通过&lt;!-- raw HTML omitted --&gt;&lt;strong&gt;IDE&lt;/strong&gt;&lt;!-- raw HTML omitted --&gt;方式运行，当前路径一般在&lt;!-- raw HTML omitted --&gt;&lt;strong&gt;工程所在文件夹&lt;/strong&gt;&lt;!-- raw HTML omitted --&gt;&lt;/li&gt;
 &lt;li&gt;一些IDE还允许设置当前路径(只对IDE方式运行有效)。&lt;/li&gt;
 &lt;li&gt;右键exe名字也是可以指定运行路径的（这样就可以加载对应的配置文件)&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;p&gt;比如:&lt;br/&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/fortrandebug/idewd.png&#34; alt=&#34;IDE working directory&#34; /&gt;&lt;br/&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;代码层级改变文件路径&#34;&gt;代码层级改变文件路径&lt;/h2&gt;
-
+&lt;p&gt;比如:&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/fortrandebug/idewd.png&#34; alt=&#34;IDE working directory&#34;&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;h2 id=&#34;heading&#34;&gt;代码层级改变文件路径&lt;/h2&gt;
 &lt;p&gt;在程序中可以通过一些手段，动态的更改当前路径。&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;IVF: changeDirQQ&lt;/li&gt;
 &lt;li&gt;gfortran: ChDir&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;也可以通过一些手段，获得当前路径，&lt;/p&gt;
-
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;IVF/gforran: GetCWD&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-fortran&#34;&gt;
-program testDir
-Implicit none
-CHARACTER(len=512) ::  working_path
-call GET_COMMAND_ARGUMENT(0 , working_path);
-write(*,&#39;(a,/,a)&#39;) &#39;exe path: &#39;, trim(working_path);
-call GETCWD(working_path)
-write(*,&#39;(a,/,a)&#39;) &#39;Working Directory: &#39;, trim(working_path);
-end program testDir
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;IVF/gforran: GetCWD&lt;/li&gt;
 &lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-fortran&#34; data-lang=&#34;fortran&#34;&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;program &lt;/span&gt;testDir
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;Implicit &lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;none
+&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;CHARACTER&lt;/span&gt;(len&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;512&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;::&lt;/span&gt;  working_path
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;call &lt;/span&gt;GET_COMMAND_ARGUMENT(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; , working_path);
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;write&lt;/span&gt;(&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;(a,/,a)&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;exe path: &amp;#39;&lt;/span&gt;, trim(working_path);
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;call &lt;/span&gt;GETCWD(working_path)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;write&lt;/span&gt;(&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;(a,/,a)&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Working Directory: &amp;#39;&lt;/span&gt;, trim(working_path);
+&lt;span style=&#34;color:#66d9ef&#34;&gt;end &lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;program &lt;/span&gt;testDir
 
-&lt;p&gt;输出:&lt;br\&gt;&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;输出:&amp;lt;br&amp;gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;exe path:
 
 D:\testCWD\Debug\test_cwd.exe
 
 working directory:
 D:\testCWD
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;调试fast&#34;&gt;调试FAST&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/fortrandebug/fast.jpg&#34; alt=&#34;fast&#34; /&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;fast&#34;&gt;调试FAST&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/fortrandebug/fast.jpg&#34; alt=&#34;fast&#34;&gt;
 最关键的是一个对应两个设置&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;一个对应指的是第二步的Linker的output File的exe名字和第三步的General底下的TargetName对应上&lt;/li&gt;
 &lt;li&gt;两个设置是指在Debuging对Command Arguments和Working Directory的设置。Command Argument指定文件名字
 Working Directory指定文件路径。&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;设置完就可以开始调试了。&lt;/p&gt;</description>
     </item>
     
@@ -332,117 +277,97 @@ Working Directory指定文件路径。&lt;/li&gt;
       <link>https://jueqingsizhe66.github.io/blog/2016/04/15/ubuntu15-dot-10-32bit-an-zhuang-fastv8-dot-15/</link>
       <pubDate>Fri, 15 Apr 2016 14:46:04 +0800</pubDate>
       <guid>https://jueqingsizhe66.github.io/blog/2016/04/15/ubuntu15-dot-10-32bit-an-zhuang-fastv8-dot-15/</guid>
-      <description>&lt;p&gt;Fast8.15在4-15又发布了新版本，增加了相关功能，具体参考&lt;a href=&#34;https://nwtc.nrel.gov/FAST8&#34; target=&#34;_blank&#34;&gt;FastV8.15&lt;/a&gt;.
+      <description>&lt;p&gt;Fast8.15在4-15又发布了新版本，增加了相关功能，具体参考&lt;a href=&#34;https://nwtc.nrel.gov/FAST8&#34;&gt;FastV8.15&lt;/a&gt;.
 下面就32bit ubuntu机子的安装过程做简要记录。&lt;/p&gt;
-
 &lt;ol&gt;
-&lt;li&gt;&lt;p&gt;运行fast源文件下的Compling 的makefile&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;gfortran: error: ../bin/libmap-1.20.10.so: 没有那个文件或目录
-makefile:733: recipe for target &#39;../bin/FAST_glin32&#39; failed
-make:  [../bin/FAST_glin32] Error 1
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;运行fast源文件下的Compling 的makefile&lt;/li&gt;
 &lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;gfortran: error: ../bin/libmap-1.20.10.so: 没有那个文件或目录
+makefile:733: recipe &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; target &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;../bin/FAST_glin32&amp;#39;&lt;/span&gt; failed
+make:  &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;../bin/FAST_glin32&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; Error &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
 
-&lt;p&gt;直接运行make，缺少libmap,可以参考&lt;a href=&#34;http://jueqingsizhe66.github.io/blog/2015/10/22/fast-in-ubuntu64bit-bian-yi-zhu-yi-shi-xiang/&#34; target=&#34;_blank&#34;&gt;fast安装&lt;/a&gt;&lt;/p&gt;
-
-&lt;ol&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;直接运行make，缺少libmap,可以参考&lt;a href=&#34;http://jueqingsizhe66.github.io/blog/2015/10/22/fast-in-ubuntu64bit-bian-yi-zhu-yi-shi-xiang/&#34;&gt;fast安装&lt;/a&gt;&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
 &lt;li&gt;安装LibMap&lt;/li&gt;
 &lt;/ol&gt;
-
 &lt;p&gt;把libMap-1的Compling底下的driver_makefile修改一下你的FAST本地路径。&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;#FAST_DIR     = ../Source
 #FAST_DIR     = C:/Users/bjonkman/Documents/DATA/DesignCodes/simulators/FAST/SVNdirectory/branches/BJonkman/Source
 FAST_DIR     = /paper/FAST_8.15/ 
 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;直接定位到MapDir/src的makefile，进行make一下&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;直接定位到MapDir/src的makefile，进行make一下&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;/usr/bin/ld: cannot find -llapacke
 /usr/bin/ld: cannot find -llapacke
 collect2: error: ld returned 1 exit status
 makefile:81: recipe for target &#39;all&#39; failed
 make: *** [all] Error 1
 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;这个原因是因为缺少lapacke开发者库,参考&lt;a href=&#34;http://jueqingsizhe66.github.io/blog/2015/10/22/fast-in-ubuntu64bit-bian-yi-zhu-yi-shi-xiang/&#34; target=&#34;_blank&#34;&gt;FAST安装&lt;/a&gt;。&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这个原因是因为缺少lapacke开发者库,参考&lt;a href=&#34;http://jueqingsizhe66.github.io/blog/2015/10/22/fast-in-ubuntu64bit-bian-yi-zhu-yi-shi-xiang/&#34;&gt;FAST安装&lt;/a&gt;。&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;apt-get install lapacke-dev*
 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;然后就可以make，并把生成的libmap-1.2.so放入到fastdir的bin文件夹，没有则创建。
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;然后就可以make，并把生成的libmap-1.2.so放入到fastdir的bin文件夹，没有则创建。
 这样就完成了&lt;/p&gt;
-
-&lt;ol&gt;
+&lt;ol start=&#34;3&#34;&gt;
 &lt;li&gt;测试&lt;/li&gt;
 &lt;/ol&gt;
-
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Test02.fst&lt;/p&gt;
-
+&lt;li&gt;Test02.fst&lt;/li&gt;
+&lt;/ul&gt;
 &lt;pre&gt;&lt;code&gt;./FAST_glin32 Test02.fst 
 
-**************************************************************************************************
-FAST (v8.15.00a-bjj, 12-Apr-2016)
+ **************************************************************************************************
+ FAST (v8.15.00a-bjj, 12-Apr-2016)
 
-Copyright (C) 2016 National Renewable Energy Laboratory
+ Copyright (C) 2016 National Renewable Energy Laboratory
 
-This program comes with ABSOLUTELY NO WARRANTY. See the &amp;quot;license.txt&amp;quot; file distributed with this
-software for details.
-**************************************************************************************************
+ This program comes with ABSOLUTELY NO WARRANTY. See the &amp;quot;license.txt&amp;quot; file distributed with this
+ software for details.
+ **************************************************************************************************
 
-Running FAST (v8.15.00a-bjj, 12-Apr-2016), compiled as a 32-bit application using single
-precision
-linked with NWTC Subroutine Library (v2.08.00, 5-Apr-2016)
+  Running FAST (v8.15.00a-bjj, 12-Apr-2016), compiled as a 32-bit application using single
+  precision
+  linked with NWTC Subroutine Library (v2.08.00, 5-Apr-2016)
 
-Heading of the FAST input file:
-FAST Certification Test #02: AWT-27CR2 with many DOFs with startup and shutdown and steady wind
+  Heading of the FAST input file:
+    FAST Certification Test #02: AWT-27CR2 with many DOFs with startup and shutdown and steady wind
 
-Running ElastoDyn (v1.03.02a-bjj, 8-Apr-2016).
+  Running ElastoDyn (v1.03.02a-bjj, 8-Apr-2016).
 
-Running AeroDyn (v15.02.03, 12-Apr-2016).
+  Running AeroDyn (v15.02.03, 12-Apr-2016).
 
-Running AirfoilInfo (v1.01.00a-bjj, 5-Apr-2016).
+  Running AirfoilInfo (v1.01.00a-bjj, 5-Apr-2016).
 
-Running BEM (v1.01.00a, 12-Apr-2016).
+  Running BEM (v1.01.00a, 12-Apr-2016).
 
-Running InflowWind (v3.02.00a-bjj, 11-Apr-2016).
-Opening InflowWind input file:  ./AWT27/Test02_InflowWind.dat
+  Running InflowWind (v3.02.00a-bjj, 11-Apr-2016).
+  Opening InflowWind input file:  ./AWT27/Test02_InflowWind.dat
 
-Running ServoDyn (v1.05.00a-bjj, 11-Mar-2016).
-Timestep: 0 of 20 seconds.
+  Running ServoDyn (v1.05.00a-bjj, 11-Mar-2016).
+  Timestep: 0 of 20 seconds.
 
-Timestep: 2 of 20 seconds. Estimated final completion at 15:12:15.                               
-Timestep: 4 of 20 seconds. Estimated final completion at 15:12:14.                               
-Timestep: 6 of 20 seconds. Estimated final completion at 15:12:14.                               
-Timestep: 8 of 20 seconds. Estimated final completion at 15:12:14.                               
-Timestep: 10 of 20 seconds. Estimated final completion at 15:12:14.                              
-Timestep: 12 of 20 seconds. Estimated final completion at 15:12:14.                              
-Timestep: 14 of 20 seconds. Estimated final completion at 15:12:14.                              
-Timestep: 16 of 20 seconds. Estimated final completion at 15:12:14.                              
-Timestep: 18 of 20 seconds. Estimated final completion at 15:12:14.                              
-Timestep: 20 of 20 seconds. Estimated final completion at 15:12:14.                              
+ Timestep: 2 of 20 seconds. Estimated final completion at 15:12:15.                               
+ Timestep: 4 of 20 seconds. Estimated final completion at 15:12:14.                               
+ Timestep: 6 of 20 seconds. Estimated final completion at 15:12:14.                               
+ Timestep: 8 of 20 seconds. Estimated final completion at 15:12:14.                               
+ Timestep: 10 of 20 seconds. Estimated final completion at 15:12:14.                              
+ Timestep: 12 of 20 seconds. Estimated final completion at 15:12:14.                              
+ Timestep: 14 of 20 seconds. Estimated final completion at 15:12:14.                              
+ Timestep: 16 of 20 seconds. Estimated final completion at 15:12:14.                              
+ Timestep: 18 of 20 seconds. Estimated final completion at 15:12:14.                              
+ Timestep: 20 of 20 seconds. Estimated final completion at 15:12:14.                              
                                                                                                   
-Total Real Time:       9.788 seconds
-Total CPU Time:        9.708 seconds
-Simulation CPU Time:   9.636 seconds
-Simulated Time:        20 seconds
-Time Ratio (Sim/CPU):  2.0756
+  Total Real Time:       9.788 seconds
+  Total CPU Time:        9.708 seconds
+  Simulation CPU Time:   9.636 seconds
+  Simulated Time:        20 seconds
+  Time Ratio (Sim/CPU):  2.0756
 
-FAST terminated normally.
+  FAST terminated normally.
 
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Test26.fst&lt;/p&gt;&lt;/li&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;Test26.fst&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;不通过的原因是没有编译DISCON_DLL.&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;➞ ./FAST_glin32 Test26.fst 
 
  **************************************************************************************************
@@ -510,23 +435,16 @@ FAST terminated normally.
   Aborting FAST.
 
 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ol&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;ol start=&#34;4&#34;&gt;
 &lt;li&gt;解决Test26无法运行&lt;/li&gt;
 &lt;/ol&gt;
-
 &lt;p&gt;首先，定位到Fast的Compling目录，基本尚不修改，测试make（默认32bit）,通过。&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;make -f makefile_DISCON_DLL 
 gfortran  -O2 -m32 -fbacktrace -ffree-line-length-none -x f95-cpp-input -C -DIMPLICIT_DLLEXPORT -fPIC -c ../CertTest/5MW_Baseline/ServoData/Source/DISCON.f90 -o Obj_lin32/DISCON.obj -J Obj_lin32 -B Obj_lin32
 gfortran -shared -O2 -m32 -fbacktrace -fPIC -I Obj_lin32 -o ../CertTest/5MW_Baseline/ServoData/DISCON_glin32.so \
  Obj_lin32/DISCON.obj
 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;注意一定得把 生成的DISCON_glin32.so路径写入到对应的NREL5MW Servodata的配置文件，比如&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;注意一定得把 生成的DISCON_glin32.so路径写入到对应的NREL5MW Servodata的配置文件，比如&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;Test26.fst文件：
 
 &amp;quot;5MW_Baseline/NRELOffshrBsline5MW_Onshore_ServoDyn.dat&amp;quot;    ServoFile       - Name of file containing control and electrical-drive input parameters (quoted string)
@@ -535,10 +453,7 @@ gfortran -shared -O2 -m32 -fbacktrace -fPIC -I Obj_lin32 -o ../CertTest/5MW_Base
 
 NRELOffshrBsline5MW_Onshore_ServoDyn.dat 更改对应的DLL_FileName 为 ServoData/DISCON_glin32.so
 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;注意还是得按照FAST 非windows平台的编译顺序把register编译好,然后一次MAP++ 和FAST，以及DISCONDLL.&lt;/strong&gt;&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;注意还是得按照FAST 非windows平台的编译顺序把register编译好,然后一次MAP++ 和FAST，以及DISCONDLL.&lt;/strong&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;─➞ ../bin/FAST_glin32 Test26.fst 
 
  **************************************************************************************************
@@ -617,55 +532,32 @@ NRELOffshrBsline5MW_Onshore_ServoDyn.dat 更改对应的DLL_FileName 为 ServoDa
       <link>https://jueqingsizhe66.github.io/blog/2015/10/22/fast-in-ubuntu64bit-bian-yi-zhu-yi-shi-xiang/</link>
       <pubDate>Thu, 22 Oct 2015 23:38:33 +0800</pubDate>
       <guid>https://jueqingsizhe66.github.io/blog/2015/10/22/fast-in-ubuntu64bit-bian-yi-zhu-yi-shi-xiang/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://nwtc.nrel.gov/FAST8&#34; target=&#34;_blank&#34;&gt;FAST(Fatigue,Aerodynamic,Struture,Turbulence)&lt;/a&gt;,是一款风力机的气动、水动力、
-励磁、结构等几个部分的模拟&lt;a href=&#34;http://www.nrel.gov/docs/fy13osti/57228.pdf&#34; target=&#34;_blank&#34;&gt;工具&lt;/a&gt;&lt;/p&gt;
-
+      <description>&lt;p&gt;&lt;a href=&#34;https://nwtc.nrel.gov/FAST8&#34;&gt;FAST(Fatigue,Aerodynamic,Struture,Turbulence)&lt;/a&gt;,是一款风力机的气动、水动力、
+励磁、结构等几个部分的模拟&lt;a href=&#34;http://www.nrel.gov/docs/fy13osti/57228.pdf&#34;&gt;工具&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;风力机系统的整体带入流风物理流动现象:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/fast/WTSystem.png&#34; alt=&#34;Physical phenomena affecting a floating wind turbine system&#34; /&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/fast/WTSystem.png&#34; alt=&#34;Physical phenomena affecting a floating wind turbine system&#34;&gt;&lt;/p&gt;
 &lt;p&gt;而本文主要讲的是如何在ubuntu64bit系统编译FAST使其可以使用。&lt;/p&gt;
-
-&lt;h2 id=&#34;1-操作系统的位数&#34;&gt;1 操作系统的位数&lt;/h2&gt;
-
+&lt;h2 id=&#34;1-&#34;&gt;1 操作系统的位数&lt;/h2&gt;
 &lt;pre&gt;&lt;code&gt;找到Compiling文件夹下的makefile，然后将bits=32 改为64
 &lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;2-register-exe编译&#34;&gt;2.register.exe编译&lt;/h2&gt;
-
+&lt;h2 id=&#34;2registerexe&#34;&gt;2.register.exe编译&lt;/h2&gt;
 &lt;p&gt;首先编译Source/dependecy/Registry 的makefile，然后生成一个register.exe 供给fast makefile使用&lt;/p&gt;
-
-&lt;h2 id=&#34;3-map-生成libmap-so&#34;&gt;3. MAP++生成libmap.so&lt;/h2&gt;
-
-&lt;p&gt;从官网&lt;a href=&#34;https://nwtc.nrel.gov/MAP&#34; target=&#34;_blank&#34;&gt;https://nwtc.nrel.gov/MAP&lt;/a&gt; 下载map源文件，然后编译 生成一个libmap.so
- 注意： 必须是 lapack developer版本才可以，&lt;/p&gt;
-
+&lt;h2 id=&#34;3-maplibmapso&#34;&gt;3. MAP++生成libmap.so&lt;/h2&gt;
+&lt;p&gt;从官网https://nwtc.nrel.gov/MAP 下载map源文件，然后编译 生成一个libmap.so
+注意： 必须是 lapack developer版本才可以，&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt; apt-get install lapack*
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;并把so文件放到FAST目录下的bin文件夹（没有则创建），然后make fast的makefile即可。&lt;/p&gt;
-
-&lt;h2 id=&#34;4-discon-dll编译使得nrel-5mw也能运行&#34;&gt;4 DISCON_DLL编译使得NREL 5MW也能运行&lt;/h2&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;并把so文件放到FAST目录下的bin文件夹（没有则创建），然后make fast的makefile即可。&lt;/p&gt;
+&lt;h2 id=&#34;4-discon-dllnrel-5mw&#34;&gt;4 DISCON_DLL编译使得NREL 5MW也能运行&lt;/h2&gt;
 &lt;p&gt;之前的三个步骤,在bin目录生成的FAST_glint64只能运行Test1-18.fst对应的机型.&lt;/p&gt;
-
 &lt;p&gt;如果想运行Nrel-5MW（Test18-26.fst)必须是编译makefile_DISCON_DLL,并修改
-  CertTest/5MW_Baseline/ServDyn 的CertTest/5MW_Baseline/NRELOffshrBsline5MW_Onshore_ServoDyn.dat 更改对应的&lt;strong&gt;DLL_FileName&lt;/strong&gt; 为 &lt;em&gt;ServoData/DISCON_glin64.so&lt;/em&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;4-1-编译方式&#34;&gt;4.1 编译方式&lt;/h3&gt;
-
+CertTest/5MW_Baseline/ServDyn 的CertTest/5MW_Baseline/NRELOffshrBsline5MW_Onshore_ServoDyn.dat 更改对应的&lt;strong&gt;DLL_FileName&lt;/strong&gt; 为 &lt;em&gt;ServoData/DISCON_glin64.so&lt;/em&gt;&lt;/p&gt;
+&lt;h3 id=&#34;41-&#34;&gt;4.1 编译方式&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;    make -f makefile_DISCON_DLL
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;4-2注意有可能编译不通过&#34;&gt;4.2注意有可能编译不通过：&lt;/h3&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;42&#34;&gt;4.2注意有可能编译不通过：&lt;/h3&gt;
 &lt;p&gt;必须在makefile_DISCON_DLL中的  FFLAGS加入  -fPIC&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;FFLAGS  = -O2 -m$(BITS) -fbacktrace -ffree-line-length-none -x f95-cpp-input -fPIC -C
 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;针对与Fast开发者可以参考&lt;a href=&#34;https://nwtc.nrel.gov/FAST-Developers&#34; target=&#34;_blank&#34;&gt;FAST-Developers&lt;/a&gt;&lt;/p&gt;</description>
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;针对与Fast开发者可以参考&lt;a href=&#34;https://nwtc.nrel.gov/FAST-Developers&#34;&gt;FAST-Developers&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -673,171 +565,159 @@ NRELOffshrBsline5MW_Onshore_ServoDyn.dat 更改对应的DLL_FileName 为 ServoDa
       <link>https://jueqingsizhe66.github.io/blog/2015/08/10/turbsim-8ge-tuan-liu-mo-xing-de-dui-bi/</link>
       <pubDate>Mon, 10 Aug 2015 01:00:47 +0800</pubDate>
       <guid>https://jueqingsizhe66.github.io/blog/2015/08/10/turbsim-8ge-tuan-liu-mo-xing-de-dui-bi/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://nwtc.nrel.gov/TurbSim&#34; target=&#34;_blank&#34;&gt;TurbSim&lt;/a&gt;,是NREL提供的一个小的开源工具， 用于产生湍流风，设置的时候可能对于不同模型会有不同的参数，基于范本进行了一番分析。当然测试文件在TurbSim的Test文件下的inp文件夹下。&lt;/p&gt;
-
+      <description>&lt;p&gt;&lt;a href=&#34;https://nwtc.nrel.gov/TurbSim&#34;&gt;TurbSim&lt;/a&gt;,是NREL提供的一个小的开源工具， 用于产生湍流风，设置的时候可能对于不同模型会有不同的参数，基于范本进行了一番分析。当然测试文件在TurbSim的Test文件下的inp文件夹下。&lt;/p&gt;
 &lt;p&gt;如果对那些湍流模型做一个对比，那样是否可以更加清晰的看出不同呢？
 于是就有了下面的shell分析脚本。&lt;/p&gt;
-
 &lt;p&gt;TurbSim产生的风力机一圈的入流截面模型（仅仅一个截面，全场是因为捕捉了很多个截面）&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/fast/turbsim.png&#34; alt=&#34;Turbsim&#34; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;shell解析脚本&#34;&gt;Shell解析脚本&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;#!/bin/bash - 
-#===============================================================================
+&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/fast/turbsim.png&#34; alt=&#34;Turbsim&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;shell&#34;&gt;Shell解析脚本&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/bin/bash - 
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#===============================================================================&lt;/span&gt;
 #
-#          FILE: a.sh
+&lt;span style=&#34;color:#75715e&#34;&gt;#          FILE: a.sh&lt;/span&gt;
 # 
-#         USAGE: ./a.sh 
+&lt;span style=&#34;color:#75715e&#34;&gt;#         USAGE: ./a.sh&lt;/span&gt; 
 # 
-#   DESCRIPTION: 
+&lt;span style=&#34;color:#75715e&#34;&gt;#   DESCRIPTION:&lt;/span&gt; 
 # 
-#       OPTIONS: ---
-#  REQUIREMENTS: ---
-#          BUGS: ---
-#         NOTES: ---
-#        AUTHOR: Ye Zhaoliang (), zhaoturkkey@163.com
-#  ORGANIZATION: YZL
-#       CREATED: 2015年08月10日 00:26
-#      REVISION:  ---
-#===============================================================================
+&lt;span style=&#34;color:#75715e&#34;&gt;#       OPTIONS: ---&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#  REQUIREMENTS: ---&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#          BUGS: ---&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         NOTES: ---&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#        AUTHOR: Ye Zhaoliang (), zhaoturkkey@163.com&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#  ORGANIZATION: YZL&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#       CREATED: 2015年08月10日 00:26&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#      REVISION:  ---&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#===============================================================================&lt;/span&gt;
 
-#---  FUNCTION  ----------------------------------------------------------------
-#          NAME:  _repeat1
-#   DESCRIPTION:  优化版本
-#    PARAMETERS:  
-#       RETURNS:  
-#-------------------------------------------------------------------------------
-_repeat1()
-{
-    #@ 使用方式： _repeat 要重复的字符串  重复次数
-    #@  Usage : _repeat string number
-    _REPEAT1=$1  #set and not empty, or unlimit recycle
-    while [[ ${#_REPEAT1} -lt $2 ]]
-    do
-        _REPEAT1=$_REPEAT1$_REPEAT1$_REPEAT1 ## 3次优化
-    done
-    _REPEAT1=${_REPEAT1:0:$2} ##Trim到我们需要的长度
-}
+&lt;span style=&#34;color:#75715e&#34;&gt;#---  FUNCTION  ----------------------------------------------------------------&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#          NAME:  _repeat1&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#   DESCRIPTION:  优化版本&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#    PARAMETERS:&lt;/span&gt;  
+&lt;span style=&#34;color:#75715e&#34;&gt;#       RETURNS:&lt;/span&gt;  
+&lt;span style=&#34;color:#75715e&#34;&gt;#-------------------------------------------------------------------------------&lt;/span&gt;
+_repeat1&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;#@ 使用方式： _repeat 要重复的字符串  重复次数&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;#@  Usage : _repeat string number&lt;/span&gt;
+    _REPEAT1&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;$1  &lt;span style=&#34;color:#75715e&#34;&gt;#set and not empty, or unlimit recycle&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;${#&lt;/span&gt;_REPEAT1&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt; -lt $2 &lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;do&lt;/span&gt;
+        _REPEAT1&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;$_REPEAT1$_REPEAT1$_REPEAT1 &lt;span style=&#34;color:#75715e&#34;&gt;## 3次优化&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;done&lt;/span&gt;
+    _REPEAT1&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;${&lt;/span&gt;_REPEAT1:0:$2&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;##Trim到我们需要的长度&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
 
-alert() #@ Description    产生一个方框的注释
-{       #@ Usage    alert &amp;quot;话语&amp;quot;
-    _repeat1 &amp;quot;${2:-#}&amp;quot; $(( ${#1} + 8 )) ## ${2:-#} 如果$2未定义则使用#
-    printf &#39;%s\n&#39; &amp;quot;$_REPEAT1&amp;quot; ## \a=BEL
-    printf &#39;%2.2s %s %2.2s\n&#39; &amp;quot;$_REPEAT1&amp;quot; &amp;quot;$1&amp;quot; &amp;quot;$_REPEAT1&amp;quot; ## \a=BEL
-    printf &#39;%s\n&#39; &amp;quot;$_REPEAT1&amp;quot;
-}
-
-
-#alert &amp;quot;Do you really want to delete all the files?&amp;quot;
+alert&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;#@ Description    产生一个方框的注释&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;       &lt;span style=&#34;color:#75715e&#34;&gt;#@ Usage    alert &amp;#34;话语&amp;#34;&lt;/span&gt;
+    _repeat1 &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;${&lt;/span&gt;2&lt;span style=&#34;color:#66d9ef&#34;&gt;:-&lt;/span&gt;#&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;$((&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;${#&lt;/span&gt;1&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;))&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;## ${2:-#} 如果$2未定义则使用#&lt;/span&gt;
+    printf &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;%s\n&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$_REPEAT1&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;## \a=BEL&lt;/span&gt;
+    printf &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;%2.2s %s %2.2s\n&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$_REPEAT1&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$1&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$_REPEAT1&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;## \a=BEL&lt;/span&gt;
+    printf &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;%s\n&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$_REPEAT1&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
 
 
-## RandSeed1 在不同湍流模型配置的不同
-{
-alert  &amp;quot;RandSeed1&amp;quot; 
-grep -n &amp;quot;RandSeed1&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
-alert  &amp;quot;RandSeed2&amp;quot; 
-grep -n &amp;quot;RandSeed2&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
-alert  &amp;quot;WrBHHTP&amp;quot; 
-grep -n &amp;quot;WrBHHTP&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
-alert  &amp;quot;WrFHHTP&amp;quot; 
-grep -n &amp;quot;WrFHHTP&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
-alert  &amp;quot;WrADHH&amp;quot; 
-grep -n &amp;quot;WrADHH&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
-alert  &amp;quot;WrADFF&amp;quot; 
-grep -n &amp;quot;WrADFF&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
-alert  &amp;quot;WrBLFF&amp;quot; 
-grep -n &amp;quot;WrBLFF&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
-alert  &amp;quot;WrADTWR&amp;quot; 
-grep -n &amp;quot;WrADTWR&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
-alert  &amp;quot;WrFMTFF&amp;quot; 
-grep -n &amp;quot;WrFMTFF&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
-alert  &amp;quot;WrACT&amp;quot; 
-grep -n &amp;quot;WrACT&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
-alert  &amp;quot;NumGrid_Z&amp;quot; 
-grep -n &amp;quot;NumGrid_Z&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
-alert  &amp;quot;NumGrid_Y&amp;quot; 
-grep -n &amp;quot;NumGrid_Y&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
-alert  &amp;quot;HubHt&amp;quot; 
-grep -n &amp;quot;HubHt&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
-alert  &amp;quot;GridHeight&amp;quot; 
-grep -n &amp;quot;GridHeight&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|sed &#39;/HubHt/d&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
-alert  &amp;quot;GridWidth&amp;quot; 
-grep -n &amp;quot;GridWidth&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|sed &#39;/HubHt/d&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
-alert  &amp;quot;VFlowAng&amp;quot; 
-grep -n &amp;quot;VFlowAng&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
-alert  &amp;quot;HFlowAng&amp;quot; 
-grep -n &amp;quot;HFlowAng&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
-alert  &amp;quot;TurbModel&amp;quot; 
-grep -n &amp;quot;TurbModel&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
-alert  &amp;quot;IECstandard&amp;quot; 
-grep -n &amp;quot;IECstandard&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
-alert  &amp;quot;IECturbc&amp;quot; 
-grep -n &amp;quot;IECturbc&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
-alert  &amp;quot;IEC_WindType&amp;quot; 
-grep -n &amp;quot;IEC_WindType&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
-alert  &amp;quot;ETMc&amp;quot; 
-grep -n &amp;quot;ETMc&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
-alert  &amp;quot;WindProfileType&amp;quot; 
-grep -n &amp;quot;WindProfileType&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
-alert  &amp;quot;RefHt&amp;quot; 
-grep -n &amp;quot;RefHt&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
-alert  &amp;quot;URef&amp;quot; 
-grep -n &amp;quot;URef&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
-alert  &amp;quot;ZJetMax&amp;quot; 
-grep -n &amp;quot;ZJetMax&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
-alert  &amp;quot;PLExp&amp;quot; 
-grep -n &amp;quot;PLExp&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
-alert  &amp;quot;Z0&amp;quot; 
-grep -n &amp;quot;Z0&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
-alert  &amp;quot;RICH_NO&amp;quot; 
-grep -n &amp;quot;RICH_NO&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
-alert  &amp;quot;ZI&amp;quot; 
-grep -n &amp;quot;ZI&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
-alert  &amp;quot;PC_UW&amp;quot; 
-grep -n &amp;quot;PC_UW&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
-alert  &amp;quot;PC_UV&amp;quot; 
-grep -n &amp;quot;PC_UV&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
-alert  &amp;quot;PC_VW&amp;quot; 
-grep -n &amp;quot;PC_VW&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
-alert  &amp;quot;CohExp&amp;quot; 
-grep -n &amp;quot;CohExp&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
-alert  &amp;quot;CTEventPath&amp;quot; 
-grep -n &amp;quot;CTEventPath&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
-alert  &amp;quot;CTEventFile&amp;quot; 
-grep -n &amp;quot;CTEventFile&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
-alert  &amp;quot;Randomize&amp;quot; 
-grep -n &amp;quot;Randomize&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
-alert  &amp;quot;DistScl&amp;quot; 
-grep -n &amp;quot;DistScl&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
-alert  &amp;quot;CTLy&amp;quot; 
-grep -n &amp;quot;CTLy&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
-alert  &amp;quot;CTLz&amp;quot; 
-grep -n &amp;quot;CTLz&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
-alert  &amp;quot;CTStartTime&amp;quot; 
-grep -n &amp;quot;CTStartTime&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
-} &amp;gt; summary.out
+&lt;span style=&#34;color:#75715e&#34;&gt;#alert &amp;#34;Do you really want to delete all the files?&amp;#34;&lt;/span&gt;
 
-&lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;改进&#34;&gt;改进&lt;/h3&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;## RandSeed1 在不同湍流模型配置的不同&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+alert  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;RandSeed1&amp;#34;&lt;/span&gt; 
+grep -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;RandSeed1&amp;#34;&lt;/span&gt; *.inp|awk -F: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $1,$3}&amp;#39;&lt;/span&gt;|awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print substr($1,0,length($1)-4),&amp;#34;\t\t&amp;#34;,$2}&amp;#39;&lt;/span&gt;|column -t
+alert  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;RandSeed2&amp;#34;&lt;/span&gt; 
+grep -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;RandSeed2&amp;#34;&lt;/span&gt; *.inp|awk -F: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $1,$3}&amp;#39;&lt;/span&gt;|awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print substr($1,0,length($1)-4),&amp;#34;\t\t&amp;#34;,$2}&amp;#39;&lt;/span&gt;|column -t
+alert  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;WrBHHTP&amp;#34;&lt;/span&gt; 
+grep -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;WrBHHTP&amp;#34;&lt;/span&gt; *.inp|awk -F: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $1,$3}&amp;#39;&lt;/span&gt;|awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print substr($1,0,length($1)-4),&amp;#34;\t\t&amp;#34;,$2}&amp;#39;&lt;/span&gt;|column -t
+alert  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;WrFHHTP&amp;#34;&lt;/span&gt; 
+grep -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;WrFHHTP&amp;#34;&lt;/span&gt; *.inp|awk -F: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $1,$3}&amp;#39;&lt;/span&gt;|awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print substr($1,0,length($1)-4),&amp;#34;\t\t&amp;#34;,$2}&amp;#39;&lt;/span&gt;|column -t
+alert  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;WrADHH&amp;#34;&lt;/span&gt; 
+grep -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;WrADHH&amp;#34;&lt;/span&gt; *.inp|awk -F: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $1,$3}&amp;#39;&lt;/span&gt;|awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print substr($1,0,length($1)-4),&amp;#34;\t\t&amp;#34;,$2}&amp;#39;&lt;/span&gt;|column -t
+alert  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;WrADFF&amp;#34;&lt;/span&gt; 
+grep -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;WrADFF&amp;#34;&lt;/span&gt; *.inp|awk -F: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $1,$3}&amp;#39;&lt;/span&gt;|awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print substr($1,0,length($1)-4),&amp;#34;\t\t&amp;#34;,$2}&amp;#39;&lt;/span&gt;|column -t
+alert  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;WrBLFF&amp;#34;&lt;/span&gt; 
+grep -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;WrBLFF&amp;#34;&lt;/span&gt; *.inp|awk -F: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $1,$3}&amp;#39;&lt;/span&gt;|awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print substr($1,0,length($1)-4),&amp;#34;\t\t&amp;#34;,$2}&amp;#39;&lt;/span&gt;|column -t
+alert  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;WrADTWR&amp;#34;&lt;/span&gt; 
+grep -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;WrADTWR&amp;#34;&lt;/span&gt; *.inp|awk -F: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $1,$3}&amp;#39;&lt;/span&gt;|awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print substr($1,0,length($1)-4),&amp;#34;\t\t&amp;#34;,$2}&amp;#39;&lt;/span&gt;|column -t
+alert  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;WrFMTFF&amp;#34;&lt;/span&gt; 
+grep -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;WrFMTFF&amp;#34;&lt;/span&gt; *.inp|awk -F: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $1,$3}&amp;#39;&lt;/span&gt;|awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print substr($1,0,length($1)-4),&amp;#34;\t\t&amp;#34;,$2}&amp;#39;&lt;/span&gt;|column -t
+alert  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;WrACT&amp;#34;&lt;/span&gt; 
+grep -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;WrACT&amp;#34;&lt;/span&gt; *.inp|awk -F: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $1,$3}&amp;#39;&lt;/span&gt;|awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print substr($1,0,length($1)-4),&amp;#34;\t\t&amp;#34;,$2}&amp;#39;&lt;/span&gt;|column -t
+alert  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;NumGrid_Z&amp;#34;&lt;/span&gt; 
+grep -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;NumGrid_Z&amp;#34;&lt;/span&gt; *.inp|awk -F: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $1,$3}&amp;#39;&lt;/span&gt;|awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print substr($1,0,length($1)-4),&amp;#34;\t\t&amp;#34;,$2}&amp;#39;&lt;/span&gt;|column -t
+alert  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;NumGrid_Y&amp;#34;&lt;/span&gt; 
+grep -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;NumGrid_Y&amp;#34;&lt;/span&gt; *.inp|awk -F: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $1,$3}&amp;#39;&lt;/span&gt;|awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print substr($1,0,length($1)-4),&amp;#34;\t\t&amp;#34;,$2}&amp;#39;&lt;/span&gt;|column -t
+alert  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;HubHt&amp;#34;&lt;/span&gt; 
+grep -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;HubHt&amp;#34;&lt;/span&gt; *.inp|awk -F: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $1,$3}&amp;#39;&lt;/span&gt;|awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print substr($1,0,length($1)-4),&amp;#34;\t\t&amp;#34;,$2}&amp;#39;&lt;/span&gt;|column -t
+alert  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;GridHeight&amp;#34;&lt;/span&gt; 
+grep -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;GridHeight&amp;#34;&lt;/span&gt; *.inp|awk -F: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $1,$3}&amp;#39;&lt;/span&gt;|sed &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;/HubHt/d&amp;#39;&lt;/span&gt;|awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print substr($1,0,length($1)-4),&amp;#34;\t\t&amp;#34;,$2}&amp;#39;&lt;/span&gt;|column -t
+alert  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;GridWidth&amp;#34;&lt;/span&gt; 
+grep -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;GridWidth&amp;#34;&lt;/span&gt; *.inp|awk -F: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $1,$3}&amp;#39;&lt;/span&gt;|sed &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;/HubHt/d&amp;#39;&lt;/span&gt;|awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print substr($1,0,length($1)-4),&amp;#34;\t\t&amp;#34;,$2}&amp;#39;&lt;/span&gt;|column -t
+alert  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;VFlowAng&amp;#34;&lt;/span&gt; 
+grep -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;VFlowAng&amp;#34;&lt;/span&gt; *.inp|awk -F: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $1,$3}&amp;#39;&lt;/span&gt;|awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print substr($1,0,length($1)-4),&amp;#34;\t\t&amp;#34;,$2}&amp;#39;&lt;/span&gt;|column -t
+alert  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;HFlowAng&amp;#34;&lt;/span&gt; 
+grep -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;HFlowAng&amp;#34;&lt;/span&gt; *.inp|awk -F: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $1,$3}&amp;#39;&lt;/span&gt;|awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print substr($1,0,length($1)-4),&amp;#34;\t\t&amp;#34;,$2}&amp;#39;&lt;/span&gt;|column -t
+alert  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;TurbModel&amp;#34;&lt;/span&gt; 
+grep -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;TurbModel&amp;#34;&lt;/span&gt; *.inp|awk -F: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $1,$3}&amp;#39;&lt;/span&gt;|awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print substr($1,0,length($1)-4),&amp;#34;\t\t&amp;#34;,$2}&amp;#39;&lt;/span&gt;|column -t
+alert  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;IECstandard&amp;#34;&lt;/span&gt; 
+grep -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;IECstandard&amp;#34;&lt;/span&gt; *.inp|awk -F: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $1,$3}&amp;#39;&lt;/span&gt;|awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print substr($1,0,length($1)-4),&amp;#34;\t\t&amp;#34;,$2}&amp;#39;&lt;/span&gt;|column -t
+alert  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;IECturbc&amp;#34;&lt;/span&gt; 
+grep -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;IECturbc&amp;#34;&lt;/span&gt; *.inp|awk -F: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $1,$3}&amp;#39;&lt;/span&gt;|awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print substr($1,0,length($1)-4),&amp;#34;\t\t&amp;#34;,$2}&amp;#39;&lt;/span&gt;|column -t
+alert  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;IEC_WindType&amp;#34;&lt;/span&gt; 
+grep -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;IEC_WindType&amp;#34;&lt;/span&gt; *.inp|awk -F: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $1,$3}&amp;#39;&lt;/span&gt;|awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print substr($1,0,length($1)-4),&amp;#34;\t\t&amp;#34;,$2}&amp;#39;&lt;/span&gt;|column -t
+alert  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;ETMc&amp;#34;&lt;/span&gt; 
+grep -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;ETMc&amp;#34;&lt;/span&gt; *.inp|awk -F: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $1,$3}&amp;#39;&lt;/span&gt;|awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print substr($1,0,length($1)-4),&amp;#34;\t\t&amp;#34;,$2}&amp;#39;&lt;/span&gt;|column -t
+alert  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;WindProfileType&amp;#34;&lt;/span&gt; 
+grep -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;WindProfileType&amp;#34;&lt;/span&gt; *.inp|awk -F: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $1,$3}&amp;#39;&lt;/span&gt;|awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print substr($1,0,length($1)-4),&amp;#34;\t\t&amp;#34;,$2}&amp;#39;&lt;/span&gt;|column -t
+alert  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;RefHt&amp;#34;&lt;/span&gt; 
+grep -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;RefHt&amp;#34;&lt;/span&gt; *.inp|awk -F: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $1,$3}&amp;#39;&lt;/span&gt;|awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print substr($1,0,length($1)-4),&amp;#34;\t\t&amp;#34;,$2}&amp;#39;&lt;/span&gt;|column -t
+alert  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;URef&amp;#34;&lt;/span&gt; 
+grep -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;URef&amp;#34;&lt;/span&gt; *.inp|awk -F: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $1,$3}&amp;#39;&lt;/span&gt;|awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print substr($1,0,length($1)-4),&amp;#34;\t\t&amp;#34;,$2}&amp;#39;&lt;/span&gt;|column -t
+alert  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;ZJetMax&amp;#34;&lt;/span&gt; 
+grep -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;ZJetMax&amp;#34;&lt;/span&gt; *.inp|awk -F: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $1,$3}&amp;#39;&lt;/span&gt;|awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print substr($1,0,length($1)-4),&amp;#34;\t\t&amp;#34;,$2}&amp;#39;&lt;/span&gt;|column -t
+alert  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;PLExp&amp;#34;&lt;/span&gt; 
+grep -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;PLExp&amp;#34;&lt;/span&gt; *.inp|awk -F: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $1,$3}&amp;#39;&lt;/span&gt;|awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print substr($1,0,length($1)-4),&amp;#34;\t\t&amp;#34;,$2}&amp;#39;&lt;/span&gt;|column -t
+alert  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Z0&amp;#34;&lt;/span&gt; 
+grep -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Z0&amp;#34;&lt;/span&gt; *.inp|awk -F: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $1,$3}&amp;#39;&lt;/span&gt;|awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print substr($1,0,length($1)-4),&amp;#34;\t\t&amp;#34;,$2}&amp;#39;&lt;/span&gt;|column -t
+alert  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;RICH_NO&amp;#34;&lt;/span&gt; 
+grep -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;RICH_NO&amp;#34;&lt;/span&gt; *.inp|awk -F: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $1,$3}&amp;#39;&lt;/span&gt;|awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print substr($1,0,length($1)-4),&amp;#34;\t\t&amp;#34;,$2}&amp;#39;&lt;/span&gt;|column -t
+alert  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;ZI&amp;#34;&lt;/span&gt; 
+grep -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;ZI&amp;#34;&lt;/span&gt; *.inp|awk -F: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $1,$3}&amp;#39;&lt;/span&gt;|awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print substr($1,0,length($1)-4),&amp;#34;\t\t&amp;#34;,$2}&amp;#39;&lt;/span&gt;|column -t
+alert  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;PC_UW&amp;#34;&lt;/span&gt; 
+grep -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;PC_UW&amp;#34;&lt;/span&gt; *.inp|awk -F: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $1,$3}&amp;#39;&lt;/span&gt;|awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print substr($1,0,length($1)-4),&amp;#34;\t\t&amp;#34;,$2}&amp;#39;&lt;/span&gt;|column -t
+alert  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;PC_UV&amp;#34;&lt;/span&gt; 
+grep -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;PC_UV&amp;#34;&lt;/span&gt; *.inp|awk -F: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $1,$3}&amp;#39;&lt;/span&gt;|awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print substr($1,0,length($1)-4),&amp;#34;\t\t&amp;#34;,$2}&amp;#39;&lt;/span&gt;|column -t
+alert  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;PC_VW&amp;#34;&lt;/span&gt; 
+grep -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;PC_VW&amp;#34;&lt;/span&gt; *.inp|awk -F: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $1,$3}&amp;#39;&lt;/span&gt;|awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print substr($1,0,length($1)-4),&amp;#34;\t\t&amp;#34;,$2}&amp;#39;&lt;/span&gt;|column -t
+alert  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;CohExp&amp;#34;&lt;/span&gt; 
+grep -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;CohExp&amp;#34;&lt;/span&gt; *.inp|awk -F: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $1,$3}&amp;#39;&lt;/span&gt;|awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print substr($1,0,length($1)-4),&amp;#34;\t\t&amp;#34;,$2}&amp;#39;&lt;/span&gt;|column -t
+alert  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;CTEventPath&amp;#34;&lt;/span&gt; 
+grep -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;CTEventPath&amp;#34;&lt;/span&gt; *.inp|awk -F: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $1,$3}&amp;#39;&lt;/span&gt;|awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print substr($1,0,length($1)-4),&amp;#34;\t\t&amp;#34;,$2}&amp;#39;&lt;/span&gt;|column -t
+alert  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;CTEventFile&amp;#34;&lt;/span&gt; 
+grep -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;CTEventFile&amp;#34;&lt;/span&gt; *.inp|awk -F: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $1,$3}&amp;#39;&lt;/span&gt;|awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print substr($1,0,length($1)-4),&amp;#34;\t\t&amp;#34;,$2}&amp;#39;&lt;/span&gt;|column -t
+alert  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Randomize&amp;#34;&lt;/span&gt; 
+grep -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Randomize&amp;#34;&lt;/span&gt; *.inp|awk -F: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $1,$3}&amp;#39;&lt;/span&gt;|awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print substr($1,0,length($1)-4),&amp;#34;\t\t&amp;#34;,$2}&amp;#39;&lt;/span&gt;|column -t
+alert  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;DistScl&amp;#34;&lt;/span&gt; 
+grep -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;DistScl&amp;#34;&lt;/span&gt; *.inp|awk -F: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $1,$3}&amp;#39;&lt;/span&gt;|awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print substr($1,0,length($1)-4),&amp;#34;\t\t&amp;#34;,$2}&amp;#39;&lt;/span&gt;|column -t
+alert  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;CTLy&amp;#34;&lt;/span&gt; 
+grep -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;CTLy&amp;#34;&lt;/span&gt; *.inp|awk -F: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $1,$3}&amp;#39;&lt;/span&gt;|awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print substr($1,0,length($1)-4),&amp;#34;\t\t&amp;#34;,$2}&amp;#39;&lt;/span&gt;|column -t
+alert  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;CTLz&amp;#34;&lt;/span&gt; 
+grep -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;CTLz&amp;#34;&lt;/span&gt; *.inp|awk -F: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $1,$3}&amp;#39;&lt;/span&gt;|awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print substr($1,0,length($1)-4),&amp;#34;\t\t&amp;#34;,$2}&amp;#39;&lt;/span&gt;|column -t
+alert  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;CTStartTime&amp;#34;&lt;/span&gt; 
+grep -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;CTStartTime&amp;#34;&lt;/span&gt; *.inp|awk -F: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $1,$3}&amp;#39;&lt;/span&gt;|awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print substr($1,0,length($1)-4),&amp;#34;\t\t&amp;#34;,$2}&amp;#39;&lt;/span&gt;|column -t
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt; &amp;gt; summary.out
 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;heading&#34;&gt;改进&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;去除无用的Turbulence and Boundary&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;增加了对GridWidth and GridHeight的处理&lt;/p&gt;
-
+&lt;li&gt;增加了对GridWidth and GridHeight的处理&lt;/li&gt;
+&lt;/ol&gt;
 &lt;pre&gt;&lt;code&gt;grep -n &amp;quot;GridHeight&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|sed &#39;/HubHt/d&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
 grep -n &amp;quot;GridWidth&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|sed &#39;/HubHt/d&#39;|awk &#39;{print substr($1,0,length($1)-4),&amp;quot;\t\t&amp;quot;,$2}&#39;|column -t
 
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;&lt;/li&gt;
 &lt;/ol&gt;
-
-&lt;p&gt;3.&lt;/p&gt;
-
-&lt;h2 id=&#34;shell产生的结果如下&#34;&gt;shell产生的结果如下：&lt;/h2&gt;
-
+&lt;h2 id=&#34;shell-1&#34;&gt;shell产生的结果如下：&lt;/h2&gt;
 &lt;pre&gt;&lt;code&gt;#################
 ## RandSeed1 ##
 #################
@@ -1309,9 +1189,7 @@ KHtest       0.0
 smooth       10.0
 vonKarm_15   30.0
 vonKarm      30.0
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;进一步的细节可以参考&lt;a href=&#34;https://nwtc.nrel.gov/system/files/TurbSim.pdf&#34; target=&#34;_blank&#34;&gt;Turbsim UserGuide&lt;/a&gt;&lt;/p&gt;</description>
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;进一步的细节可以参考&lt;a href=&#34;https://nwtc.nrel.gov/system/files/TurbSim.pdf&#34;&gt;Turbsim UserGuide&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

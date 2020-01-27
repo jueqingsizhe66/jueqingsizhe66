@@ -29,7 +29,6 @@
     
   
   <meta name="description" content="mysql是一个中型的数据库操作系统平台,他的基本组成由存储引擎、各个命令模块、优化器、缓存器、解析器、用户模块、链接器(connector)等组成，
-
 ">
 
   
@@ -120,7 +119,6 @@
   <meta property="og:url" content="https://jueqingsizhe66.github.io/blog/2017/02/13/mysqlluan-ma-hui-gu/">
   <meta property="og:title" content="Mysql乱码回顾 | Macro Life">
   <meta property="og:description" content="mysql是一个中型的数据库操作系统平台,他的基本组成由存储引擎、各个命令模块、优化器、缓存器、解析器、用户模块、链接器(connector)等组成，
-
 "><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
   <meta property="twitter:image" content="https://jueqingsizhe66.github.io/img/icon-192.png"><meta property="og:locale" content="en-us">
   
@@ -564,42 +562,31 @@
 
 <span class="article-metadata" >Reading time: 5 minutes and    43 seconds with 1259 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
-        
+        <nav id="TableOfContents"></nav>
     </aside>
   <div class="article-container">
 
 
     <div class="article-style">
-      <p>mysql是一个中型的数据库操作系统平台,他的<a href="http://www.linuxidc.com/Linux/2013-04/83581.htm" target="_blank">基本组成</a>由存储引擎、各个命令模块、优化器、缓存器、解析器、用户模块、链接器(connector)等组成，</p>
-
-<p><img src="/images/mysql/mysql-archetype.png" alt="mysql architect" /></p>
-
-<p>其中存储引擎现在一般选用innodb居多(具体可以查看<a href="http://c.biancheng.net/cpp/html/1465.html" target="_blank">各个存储引擎的区别</a>)</p>
-
+      <p>mysql是一个中型的数据库操作系统平台,他的<a href="http://www.linuxidc.com/Linux/2013-04/83581.htm">基本组成</a>由存储引擎、各个命令模块、优化器、缓存器、解析器、用户模块、链接器(connector)等组成，</p>
+<p><img src="/images/mysql/mysql-archetype.png" alt="mysql architect"></p>
+<p>其中存储引擎现在一般选用innodb居多(具体可以查看<a href="http://c.biancheng.net/cpp/html/1465.html">各个存储引擎的区别</a>)</p>
 <p>mysql操作级别：</p>
-
 <ol>
 <li>数据库级别</li>
 <li>表级别</li>
 <li>字段级别</li>
 </ol>
-
-<p>而这三个级别就影响这数据库的乱码级别。 一般事先使用<code>show variables like '%char%'</code>, 来查看mysql的所有字符信息，参考<a href="http://www.jb51.net/article/74769.htm" target="_blank">mysql乱码解决</a>, 根据该文基本上可以解决问题，另外可以进一步查看各个字符集和mysql查询涉及到的各个字符集的关系(对应命令的求解), 查阅了<a href="http://www.pc6.com/infoview/Article_63586.html" target="_blank">多个链接</a>,都显示
+<p>而这三个级别就影响这数据库的乱码级别。 一般事先使用<code>show variables like '%char%'</code>, 来查看mysql的所有字符信息，参考<a href="http://www.jb51.net/article/74769.htm">mysql乱码解决</a>, 根据该文基本上可以解决问题，另外可以进一步查看各个字符集和mysql查询涉及到的各个字符集的关系(对应命令的求解), 查阅了<a href="http://www.pc6.com/infoview/Article_63586.html">多个链接</a>,都显示
 <code>set names gbk</code>对最终的显示有影响，根据我的使用经验来讲，</p>
-
 <p>当你使用<code>set names gbk</code>则可以显示正常，而<code>set names utf8</code>则出现乱码</p>
-
 <p>我在建立数据库的时候也使用了<code>create database rupeng chracter set utf8</code>等，但试过一遍只有最终加上<code>set names gbk</code>有效果。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">set</span> character_set_database<span style="color:#f92672">=</span>utf8;
+<span style="color:#66d9ef">set</span> character_set_server<span style="color:#f92672">=</span>utf8;
+<span style="color:#66d9ef">set</span> character_set_client<span style="color:#f92672">=</span>gbk;
+<span style="color:#66d9ef">set</span> character_set_connection<span style="color:#f92672">=</span>gbk;
 
-<pre><code class="language-sql">set character_set_database=utf8;
-set character_set_server=utf8;
-set character_set_client=gbk;
-set character_set_connection=gbk;
-
-</code></pre>
-
-<p>系统变量：</p>
-
+</code></pre></div><p>系统变量：</p>
 <pre><code>
 client    为客户端使用的字符集。
 connection    为连接数据库的字符集设置类型，如果程序没有指明连接数据库使用的字符集类型则按照服务器端默认的字符集设置。
@@ -615,10 +602,7 @@ system    为数据库系统使用的字符集设定。
 – character_set_server：默认的内部操作字符集
 – character_set_system：系统元数据(字段名等)字符集
 
-</code></pre>
-
-<p><a href="http://blog.csdn.net/sunqing0316/article/details/46680617" target="_blank">mysql字符集转换过程</a></p>
-
+</code></pre><p><a href="http://blog.csdn.net/sunqing0316/article/details/46680617">mysql字符集转换过程</a></p>
 <pre><code>
 1. MySQL Server收到请求时将请求数据从character_set_client转换为character_set_connection；
 2. 进行内部操作前将请求数据从character_set_connection转换为内部操作字符集，其确定方法如下：
@@ -628,17 +612,13 @@ system    为数据库系统使用的字符集设定。
 • 若上述值不存在，则使用character_set_server设定值。
 3. 将操作结果从内部操作字符集转换为character_set_results。
 
-</code></pre>
-
-<p>参考<a href="http://www.2cto.com/database/201410/341144.html" target="_blank"> myeclipse-mysql </a>,有一个原则就是不要让你的character出现latin1编码即可</p>
-
+</code></pre><p>参考<a href="http://www.2cto.com/database/201410/341144.html"> myeclipse-mysql </a>,有一个原则就是不要让你的character出现latin1编码即可</p>
 <p>我们操作所有数据库mysql中型,sqlite,postgreSql流行,db2(IBM)企业级,oracle大型运用企业级,informix(IBM), sql server</p>
-
 <ol>
-<li><a href="http://www.yiibai.com/mysql/mysql_quick_start.html" target="_blank"> mysql快速入门学习 </a></li>
-<li><a href="http://www.w3school.com.cn/sql/sql_intro.asp" target="_blank"> W3C sql入门教程 </a></li>
-<li><a href="http://blog.csdn.net/hgd613/article/details/50433135" target="_blank"> 左连接 </a></li>
-<li><a href="http://database.51cto.com/art/200511/12708.htm" target="_blank"> 51cto数据库论坛 </a></li>
+<li><a href="http://www.yiibai.com/mysql/mysql_quick_start.html"> mysql快速入门学习 </a></li>
+<li><a href="http://www.w3school.com.cn/sql/sql_intro.asp"> W3C sql入门教程 </a></li>
+<li><a href="http://blog.csdn.net/hgd613/article/details/50433135"> 左连接 </a></li>
+<li><a href="http://database.51cto.com/art/200511/12708.htm"> 51cto数据库论坛 </a></li>
 </ol>
     </div>
  <div class="nav-links" style="padding:10;">
@@ -1043,7 +1023,7 @@ system    为数据库系统使用的字符集设定。
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

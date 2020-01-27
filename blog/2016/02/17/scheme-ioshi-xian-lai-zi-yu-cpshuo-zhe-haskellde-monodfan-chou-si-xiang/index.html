@@ -566,14 +566,11 @@
 <span class="article-metadata" >Reading time: 2 minutes and    3 seconds with 452 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#original-style">original style</a></li>
-<li><a href="#cps-style">cps style</a></li>
-<li><a href="#其他io语法">其他IO语法</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#original-style">original style</a></li>
+    <li><a href="#cps-style">cps style</a></li>
+    <li><a href="#io">其他IO语法</a></li>
+  </ul>
 </nav>
     </aside>
   <div class="article-container">
@@ -581,134 +578,115 @@
 
     <div class="article-style">
       <p>scheme中IO的实现类似于CPS在原来函数的基础上增加了一个控制变量。</p>
-
-<p>之前曾经写过<a href="http://jueqingsizhe66.github.io/blog/2016/02/09/its-a-dead-program-dot-how-to-let-it-alive/" target="_blank">CPS的控制过程</a></p>
-
+<p>之前曾经写过<a href="http://jueqingsizhe66.github.io/blog/2016/02/09/its-a-dead-program-dot-how-to-let-it-alive/">CPS的控制过程</a></p>
 <h2 id="original-style">original style</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">define </span>rember8
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">ls</span>)
+    (<span style="color:#a6e22e">cond</span>
+      [(null? ls) <span style="color:#f92672">&#39;</span>()]
+      [(= (car ls) <span style="color:#ae81ff">8</span>) (cdr ls)]
+      [<span style="color:#66d9ef">else </span>(cons (car ls) (<span style="color:#a6e22e">rember8</span> (cdr ls)))])))
 
-<pre><code class="language-scheme">(define rember8
-  (lambda (ls)
-    (cond
-      [(null? ls) '()]
-      [(= (car ls) 8) (cdr ls)]
-      [else (cons (car ls) (rember8 (cdr ls)))])))
+</code></pre></div><h2 id="cps-style">cps style</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">
+<span style="color:#75715e">;1</span>
+(<span style="color:#66d9ef">define </span>rember8
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">ls</span> k)
+    (<span style="color:#a6e22e">cond</span>
+      [(null? ls) (<span style="color:#a6e22e">k</span> <span style="color:#f92672">&#39;</span>())]                           ==&gt; k
+      [(= (car ls) <span style="color:#ae81ff">8</span>) (cdr ls)]
+      [<span style="color:#66d9ef">else </span>(cons (car ls) (<span style="color:#a6e22e">rember8</span> (cdr ls)))])))
 
-</code></pre>
+<span style="color:#75715e">;2</span>
+(<span style="color:#66d9ef">define </span>rember8
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">ls</span> k)
+    (<span style="color:#a6e22e">cond</span>
+      [(null? ls) (<span style="color:#a6e22e">k</span> <span style="color:#f92672">&#39;</span>())]
+      [(= (car ls) <span style="color:#ae81ff">8</span>) (<span style="color:#a6e22e">k</span> (cdr ls))]                  ==&gt;k
+      [<span style="color:#66d9ef">else </span>(<span style="color:#a6e22e">rember8</span> (cdr ls) (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">x</span>) (cons (car ls) x)))]))) ==&gt; rember8
 
-<h2 id="cps-style">cps style</h2>
-
-<pre><code class="language-scheme">
-;1
-(define rember8
-  (lambda (ls k)
-    (cond
-      [(null? ls) (k '())]                           ==&gt; k
-      [(= (car ls) 8) (cdr ls)]
-      [else (cons (car ls) (rember8 (cdr ls)))])))
-
-;2
-(define rember8
-  (lambda (ls k)
-    (cond
-      [(null? ls) (k '())]
-      [(= (car ls) 8) (k (cdr ls))]                  ==&gt;k
-      [else (rember8 (cdr ls) (lambda (x) (cons (car ls) x)))]))) ==&gt; rember8
-
-;3
-(define rember8
-  (lambda (ls k)
-    (cond
-      [(null? ls) (k '())]
-      [(= (car ls) 8) (k (cdr ls))]
-      [else (rember8 (cdr ls) (lambda (x) (k (cons (car ls) x)))]))) ==&gt;  k 
-</code></pre>
-
-<p>这个k的作用将在IO中体现出来。</p>
-
-<pre><code class="language-scheme">
-(define o (open-output-file &quot;greeting.txt&quot;))
-(display &quot;hello&quot; o)
-(write-char #\space o)
-(display 'world o)
+<span style="color:#75715e">;3</span>
+(<span style="color:#66d9ef">define </span>rember8
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">ls</span> k)
+    (<span style="color:#a6e22e">cond</span>
+      [(null? ls) (<span style="color:#a6e22e">k</span> <span style="color:#f92672">&#39;</span>())]
+      [(= (car ls) <span style="color:#ae81ff">8</span>) (<span style="color:#a6e22e">k</span> (cdr ls))]
+      [<span style="color:#66d9ef">else </span>(<span style="color:#a6e22e">rember8</span> (cdr ls) (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">x</span>) (<span style="color:#a6e22e">k</span> (cons (car ls) x)))]))) ==&gt;  k 
+</code></pre></div><p>这个k的作用将在IO中体现出来。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">
+(<span style="color:#66d9ef">define </span>o (open-output-file <span style="color:#e6db74">&#34;greeting.txt&#34;</span>))
+(display <span style="color:#e6db74">&#34;hello&#34;</span> o)
+(write-char <span style="color:#e6db74">#\space</span> o)
+(display <span style="color:#e6db74">&#39;world</span> o)
 (newline o)
 (close-output-port o)
 
 
+</code></pre></div><pre><code>结果：
 </code></pre>
-
-<pre><code>结果：
-</code></pre>
-
-<p><img src="/images/greeting.png" alt="result" /></p>
-
-<h2 id="其他io语法">其他IO语法</h2>
-
+<p><img src="/images/greeting.png" alt="result"></p>
+<h2 id="io">其他IO语法</h2>
 <ul>
-<li><p>open-input-file</p>
-
-<pre><code class="language-scheme">
-;;打开文件句柄 用于读操作
-(define in10 (open-input-file &quot;greeting.txt&quot;))
-;;利用read-char 读取单个字符char
-(read-char in10)
-(read-char in10)
-(read-char in10)
-;;利用read 读取一个字word
-(read in10)
-(read in10)
-;;利用read-line读取一行字符
-(read-line in10)
-(read-line in10)
-(read in10)
-
-;;结果
-#\h             ==&gt;read-char
-#\e             ==&gt;read-char
-#\l             ==&gt;read-char
-'lo             ==&gt;read
-'world          ==&gt;read
-&quot;&quot;              ==&gt;read-line
-&quot;made in DaXi&quot;  ==&gt;read-line
-#&lt;eof&gt;          ==&gt;read
-</code></pre></li>
-
-<li><p>open-input-string</p>
-
-<pre><code class="language-scheme">(define i (open-input-string &quot;hello world&quot;))
-(read-char i)
-#\h       ==&gt;read-char
-(read-char i)
-#\e       ==&gt;read-char
-(read-char i)
-#\l       ==&gt;read-char
-(read i)
-'lo       ==&gt;read
-(read i)
-'world    ==&gt;read
-(read i)
-#&lt;eof&gt;    ==&gt;read
-</code></pre></li>
-
-<li><p>open-output-string</p>
-
-<pre><code class="language-scheme">
-;;;定义字符串变量
-(define op (open-output-string))
-(write 'hello op)
-(write-char #\, op)
-(display &quot; &quot; op)
-(display &quot;world&quot; op)
-
-;;获取存取的值
-(get-output-string op)
-
-
-;;结果
-&quot;hello,world&quot;    ==&gt; get-output-string
-</code></pre></li>
+<li>open-input-file</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">
+<span style="color:#75715e">;;打开文件句柄 用于读操作</span>
+(<span style="color:#66d9ef">define </span>in10 (open-input-file <span style="color:#e6db74">&#34;greeting.txt&#34;</span>))
+<span style="color:#75715e">;;利用read-char 读取单个字符char</span>
+(read-char in10)
+(read-char in10)
+(read-char in10)
+<span style="color:#75715e">;;利用read 读取一个字word</span>
+(read in10)
+(read in10)
+<span style="color:#75715e">;;利用read-line读取一行字符</span>
+(<span style="color:#a6e22e">read-line</span> in10)
+(<span style="color:#a6e22e">read-line</span> in10)
+(read in10)
 
-<p>其中o的作用其实就是类似于k的作用，都是体现者一种程序的控制一种续延（具体未讲的十分清楚，待以后补充load等）。</p>
+<span style="color:#75715e">;;结果</span>
+    <span style="color:#e6db74">#\h</span>             ==&gt;read-char
+    <span style="color:#e6db74">#\e</span>             ==&gt;read-char
+    <span style="color:#e6db74">#\l</span>             ==&gt;read-char
+    <span style="color:#e6db74">&#39;lo</span>             ==&gt;read
+    <span style="color:#e6db74">&#39;world</span>          ==&gt;read
+    <span style="color:#e6db74">&#34;&#34;</span>              ==&gt;read-line
+    <span style="color:#e6db74">&#34;made in DaXi&#34;</span>  ==&gt;read-line
+    <span style="color:#f92672">#</span>&lt;eof&gt;          ==&gt;read
+</code></pre></div><ul>
+<li>open-input-string</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"> (<span style="color:#66d9ef">define </span>i (<span style="color:#a6e22e">open-input-string</span> <span style="color:#e6db74">&#34;hello world&#34;</span>))
+ (read-char i)
+    <span style="color:#e6db74">#\h</span>       ==&gt;read-char
+ (read-char i)
+    <span style="color:#e6db74">#\e</span>       ==&gt;read-char
+ (read-char i)
+    <span style="color:#e6db74">#\l</span>       ==&gt;read-char
+ (read i)
+    <span style="color:#e6db74">&#39;lo</span>       ==&gt;read
+ (read i)
+    <span style="color:#e6db74">&#39;world</span>    ==&gt;read
+ (read i)
+    <span style="color:#f92672">#</span>&lt;eof&gt;    ==&gt;read
+</code></pre></div><ul>
+<li>open-output-string</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">
+<span style="color:#75715e">;;;定义字符串变量</span>
+(<span style="color:#66d9ef">define </span>op (<span style="color:#a6e22e">open-output-string</span>))
+(write <span style="color:#e6db74">&#39;hello</span> op)
+(write-char <span style="color:#f92672">#</span><span style="color:#960050;background-color:#1e0010">\</span><span style="color:#f92672">,</span> op)
+(display <span style="color:#e6db74">&#34; &#34;</span> op)
+(display <span style="color:#e6db74">&#34;world&#34;</span> op)
+
+<span style="color:#75715e">;;获取存取的值</span>
+(<span style="color:#a6e22e">get-output-string</span> op)
+
+
+<span style="color:#75715e">;;结果</span>
+    <span style="color:#e6db74">&#34;hello,world&#34;</span>    ==&gt; get-output-string
+</code></pre></div><p>其中o的作用其实就是类似于k的作用，都是体现者一种程序的控制一种续延（具体未讲的十分清楚，待以后补充load等）。</p>
     </div>
  <div class="nav-links" style="padding:10;">
         
@@ -1112,7 +1090,7 @@
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

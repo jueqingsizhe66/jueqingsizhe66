@@ -617,32 +617,23 @@
 <span class="article-metadata" >Reading time: 6 minutes and    15 seconds with 1376 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#背景介绍">背景介绍</a></li>
-<li><a href="#原始数据分析">原始数据分析</a></li>
-<li><a href="#技术需求梳理">技术需求梳理</a></li>
-<li><a href="#技术实现">技术实现</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#背景介绍">背景介绍</a></li>
+    <li><a href="#原始数据分析">原始数据分析</a></li>
+    <li><a href="#技术需求梳理">技术需求梳理</a></li>
+    <li><a href="#技术实现">技术实现</a></li>
+  </ul>
 </nav>
     </aside>
   <div class="article-container">
 
 
     <div class="article-style">
-      
-
-<h2 id="背景介绍">背景介绍</h2>
-
+      <h2 id="背景介绍">背景介绍</h2>
 <p>在风资源分析中，经常需要导出测风塔和风机点位不同扇区下的风速风向、湍流度等风资源信息，而这些信息导出后糅合在同一个大的文件下不好分析，为此需要进行拆分.</p>
-
 <p>数据文件也有一些规律和关键信息，看下面的原始数据片段(通过windsim计算导出的wind vertical profile,)</p>
-
 <p>适合任意风场！</p>
-
-<pre><code class="language-text">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">
 WECS number        :          1
 WECS name          : T12
 Manufacturer       : GW121.1
@@ -692,12 +683,8 @@ sector:   337
    1        4.545        1.902       -3.359       -0.050        3.860       -0.744        0.325        0.849        0.064        0.412       19.205        0.127       0.0235
    2       13.636        1.984       -3.970       -0.124        4.438       -1.595        0.045        0.064        0.025        0.418       16.813        0.113       0.0076
    3       22.727        1.986       -4.226       -0.166        4.670       -2.035        0.022        0.025        0.018        0.450       16.586        0.101       0.0046
-</code></pre>
-
-<h2 id="原始数据分析">原始数据分析</h2>
-
+</code></pre></div><h2 id="原始数据分析">原始数据分析</h2>
 <p>通过分析发现，数据具有以下特点</p>
-
 <ol>
 <li>存在WECS name ，代表新的机位点</li>
 <li>每个机位点 有很多的扇区，sector开头，并用冒号划分</li>
@@ -705,25 +692,20 @@ sector:   337
 <li>存在WECS name 表示停止打印标记</li>
 <li>Sector之下的一行到数据信息截止【下一个扇区前或者WECS name前】需要保存到一个文件内</li>
 </ol>
-
 <h2 id="技术需求梳理">技术需求梳理</h2>
-
 <ol>
-<li>每个文件起名标准，&rdquo;风机名-扇区名.csv&rdquo;</li>
+<li>每个文件起名标准，&ldquo;风机名-扇区名.csv&rdquo;</li>
 <li>什么时候修改风机名？ 遇到WECS name的时候； 但因为还需要提取x,y信息放入headname所以增加一个skip的标记号
-
 <ol>
 <li>skip==1 表示在sector数据范围内,开始打印到文件名内【此时用于提取核心数据】</li>
 <li>skip==2 表示在新风机位置处[此时用于提取x, y坐标信息]</li>
 <li>skip==3 表示停止打印，遇到WECS number【此时用于截断数据打印】</li>
-</ol></li>
+</ol>
+</li>
 <li>得到扇区名字后，开始进行文件读取命令</li>
 </ol>
-
 <h2 id="技术实现">技术实现</h2>
-
 <p>为此设计了需求字段</p>
-
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#66d9ef">my</span>  $specialSectorTag<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;sector&#34;</span>;
 <span style="color:#66d9ef">my</span>  $specialHeadTag<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;WECS name&#34;</span>;
 <span style="color:#75715e">#my  $specialHeadTag=&#34;Clim name&#34;;</span>
@@ -733,14 +715,10 @@ sector:   337
 <span style="color:#66d9ef">my</span>  $specialStopPrintTag<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;WECS number&#34;</span>;
 <span style="color:#75715e">#my  $specialStopPrintTag=&#34;Climatology number&#34;;</span>
 <span style="color:#66d9ef">my</span>  $skip<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;</code></pre></div>
-
 <p>其中SectorTag表示得到扇区信息,开始生成文件名，创建文件指针，
 SpecialHeadTag可设置多个，当前只需要提取头部两个信息，分别为WECS name风机名字和全局坐标点，所以设置了HeadTag 和HeadTag1，理论上无数多个</p>
-
 <p>PrintTag用于打印核心数据； StopPrintTag用于停止打印核心数据</p>
-
 <p>所有源代码</p>
-
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#75715e">#!/usr/bin/env perl</span>
 <span style="color:#75715e">#===============================================================================</span>
 <span style="color:#75715e">#</span>
@@ -757,7 +735,7 @@ SpecialHeadTag可设置多个，当前只需要提取头部两个信息，分别
 <span style="color:#75715e">#       AUTHOR: Ye Zhaoliang (Ye Zhaoliang), yezhaoliang@ncepu.edu.cn</span>
 <span style="color:#75715e"># ORGANIZATION:</span>
 <span style="color:#75715e">#      VERSION: 1.0</span>
-<span style="color:#75715e">#      CREATED: 2019-10-15 1413</span>
+<span style="color:#75715e">#      CREATED: 2019-10-15 14:31:13</span>
 <span style="color:#75715e">#     REVISION: ---</span>
 <span style="color:#75715e">#===============================================================================</span>
 
@@ -1259,7 +1237,7 @@ close  $INPUTDATA
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

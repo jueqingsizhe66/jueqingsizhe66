@@ -5,7 +5,7 @@
     <link>https://jueqingsizhe66.github.io/tags/markdown/</link>
       <atom:link href="https://jueqingsizhe66.github.io/tags/markdown/index.xml" rel="self" type="application/rss+xml" />
     <description>markdown</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>©2019</copyright><lastBuildDate>Thu, 11 Jun 2015 12:30:13 +0800</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>©2020</copyright><lastBuildDate>Thu, 11 Jun 2015 12:30:13 +0800</lastBuildDate>
     <image>
       <url>https://jueqingsizhe66.github.io/img/icon-192.png</url>
       <title>markdown</title>
@@ -18,22 +18,19 @@
       <pubDate>Thu, 11 Jun 2015 12:30:13 +0800</pubDate>
       <guid>https://jueqingsizhe66.github.io/blog/2015/06/11/pandoc-mdzhu-yi-dian/</guid>
       <description>&lt;p&gt;pandoc是markdown升级版工具，用于制作幻灯片相当好用，然而使用过程需要注意以下几点。&lt;/p&gt;
-
 &lt;ol&gt;
 &lt;li&gt;markdown文件  # 大标题不能跟上文本   ## 二标题才可以跟文本，且是一张幻灯
 片。&lt;/li&gt;
 &lt;li&gt;org文件使用 &amp;mdash;&amp;mdash;&amp;mdash;来强制执行创建新的幻灯片&lt;/li&gt;
 &lt;/ol&gt;
-
 &lt;h2 id=&#34;markdown&#34;&gt;markdown&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;% Ye Zhaoliang
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;% Ye Zhaoliang
 % Openfoam Introduction
 % 11th June,2015
 
-# Openfoam简介
+&lt;span style=&#34;color:#75715e&#34;&gt;# Openfoam简介&lt;/span&gt;
 
-## 1求解器(Solver 数值结算)
+&lt;span style=&#34;color:#75715e&#34;&gt;## 1求解器(Solver 数值结算)&lt;/span&gt;
 
   openfoam采用c++编写的类库，开源免费。所以可以把它当作一种类似于String的基本类来使用。
  openfoam框架从使用级别来看主要分为两类：
@@ -45,7 +42,7 @@
     - 电磁场
     - 金融评估等
 
-## 2工具(Utility)
+&lt;span style=&#34;color:#75715e&#34;&gt;## 2工具(Utility)&lt;/span&gt;
 
     - 前处理
       + 建模
@@ -54,44 +51,44 @@
     - 后处理
       + 计算结果显示
 
-## cavity case
+&lt;span style=&#34;color:#75715e&#34;&gt;## cavity case&lt;/span&gt;
 
-cavity case的文件夹简介（等价于fluent的.cas,只不过fluent集成为一个文件，openfoam是一个文件夹)
+cavity case的文件夹简介（等价于fluent的.cas,只不过fluent集成为一个文件，openfoam是一个文件夹&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
 
-# 这便使用代码快包裹
-├── 0 (初始条件文件夹)
+&lt;span style=&#34;color:#75715e&#34;&gt;# 这便使用代码快包裹&lt;/span&gt;
+├── &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;初始条件文件夹&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
 │   ├── p
 │   └── U
 ├── constant
-│   ├── polyMesh(网格文件夹)
+│   ├── polyMesh&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;网格文件夹&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
 │   │   └── blockMeshDict
-│   └── transportProperties(流体物性参数 传热物性参数)
+│   └── transportProperties&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;流体物性参数 传热物性参数&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
 └── system
-    ├── controlDict(控制字典)
-    ├── fvSchemes(离散格式 更高级的运用)
-    └── fvSolution(求解方法)
+    ├── controlDict&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;控制字典&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+    ├── fvSchemes&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;离散格式 更高级的运用&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+    └── fvSolution&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;求解方法&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
 
-# 运用的三个级别[%]
+&lt;span style=&#34;color:#75715e&#34;&gt;# 运用的三个级别[%]&lt;/span&gt;
 
-## 三个级别
+&lt;span style=&#34;color:#75715e&#34;&gt;## 三个级别&lt;/span&gt;
 
-- [ ] 直接利用解释器(替代商业求解器 初始点)
-- [ ] 自定义求解器(关注点)
-      + 根据自己的求解流程组合求解器(类库调用)
+- &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; 直接利用解释器&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;替代商业求解器 初始点&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+- &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; 自定义求解器&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;关注点&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+      + 根据自己的求解流程组合求解器&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;类库调用&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
       + 不需要关心对流项和扩散项是如何离散的
       + 也不需要关心湍流模型
-- [ ] 更高级的运用:编写离散格式
+- &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; 更高级的运用:编写离散格式
 
-## 自定义求解器
+&lt;span style=&#34;color:#75715e&#34;&gt;## 自定义求解器&lt;/span&gt;
 
     按照自己的_求解流程_编写求解。
 
-##不关心
+&lt;span style=&#34;color:#75715e&#34;&gt;##不关心&lt;/span&gt;
 
-    + 离散格式(时间项和对流项)
+    + 离散格式&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;时间项和对流项&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
     + 大型代数方程的求解，如何加速等。
 
-## 传热求解
+&lt;span style=&#34;color:#75715e&#34;&gt;## 传热求解&lt;/span&gt;
 
 这边使用代码快包裹
     开始
@@ -104,13 +101,13 @@ cavity case的文件夹简介（等价于fluent的.cas,只不过fluent集成为�
     |                   |                          ^
     辐射传热计算Qri  导热计算Qcdi                  |
     |                   |                          |
-    由热平衡求新的对流传热量Qcvi^(m+1)             |
+    由热平衡求新的对流传热量Qcvi^&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;m+1&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;             |
     |                                              |
     收敛条件 --------&amp;gt;-----------------------------|
     |
     结束
 
-## 自定义离散格式
+&lt;span style=&#34;color:#75715e&#34;&gt;## 自定义离散格式&lt;/span&gt;
 
    针对于研究离散格式和代数求解器的用户
    目的： 创造更高效更精确的离散方法
@@ -118,18 +115,18 @@ cavity case的文件夹简介（等价于fluent的.cas,只不过fluent集成为�
           尤其是对流项。openfoam 提供了NVD和TVD的模板（40以上）
           对流项离散依然是一种研究方向。
 
-## cavity源码文件的主要构成部分
+&lt;span style=&#34;color:#75715e&#34;&gt;## cavity源码文件的主要构成部分&lt;/span&gt;
 
    +  location
-     - &amp;quot;system&amp;quot;
-     - &amp;quot;constant&amp;quot;
-     - &amp;quot;0&amp;quot;
+     - &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;system&amp;#34;&lt;/span&gt;
+     - &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;constant&amp;#34;&lt;/span&gt;
+     - &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;0&amp;#34;&lt;/span&gt;
    + class
      - dictionary
      - volVectorField
      - volScalarField
 
-##
+&lt;span style=&#34;color:#75715e&#34;&gt;##&lt;/span&gt;
 
    + object
      - dictionary
@@ -145,23 +142,20 @@ cavity case的文件夹简介（等价于fluent的.cas,只不过fluent集成为�
 
 
 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;org-mode&#34;&gt;org-mode&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;* Openfoam简介
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;org-mode&#34;&gt;org-mode&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;* Openfoam简介
   openfoam采用c++编写的类库，开源免费。所以可以把它当作一种类似于String的基本类来使用。
 
  openfoam框架从使用级别来看主要分为两类：
 ----------
-** 1求解器(Solver 数值结算)
+** 1求解器&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;Solver 数值结算&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
     - 流体计算
     - 化学反应
     - 换热
     - 结构动力学
     - 电磁场
     - 金融评估等
-** 2工具(Utility)
+** 2工具&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;Utility&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
     - 前处理
       + 建模
       + 网格
@@ -170,46 +164,46 @@ cavity case的文件夹简介（等价于fluent的.cas,只不过fluent集成为�
       + 计算结果显示
 
 ----------------------
-** cavity case
-cavity case的文件夹简介（等价于fluent的.cas,只不过fluent集成为一个文件，openfoam是一个文件夹)
+** cavity &lt;span style=&#34;color:#66d9ef&#34;&gt;case&lt;/span&gt;
+cavity case的文件夹简介（等价于fluent的.cas,只不过fluent集成为一个文件，openfoam是一个文件夹&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
 
-#+begin_src sh
-├── 0 (初始条件文件夹)
+&lt;span style=&#34;color:#75715e&#34;&gt;#+begin_src sh&lt;/span&gt;
+├── &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;初始条件文件夹&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
 │   ├── p
 │   └── U
 ├── constant
-│   ├── polyMesh(网格文件夹)
+│   ├── polyMesh&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;网格文件夹&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
 │   │   └── blockMeshDict
-│   └── transportProperties(流体物性参数 传热物性参数)
+│   └── transportProperties&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;流体物性参数 传热物性参数&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
 └── system
-    ├── controlDict(控制字典)
-    ├── fvSchemes(离散格式 更高级的运用)
-    └── fvSolution(求解方法)
-#+end_src 
+    ├── controlDict&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;控制字典&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+    ├── fvSchemes&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;离散格式 更高级的运用&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+    └── fvSolution&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;求解方法&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#+end_src&lt;/span&gt; 
 
 
-* 运用的三个级别[%]
+* 运用的三个级别&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;%&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
 
-- [ ] 直接利用解释器(替代商业求解器 初始点)
-- [ ] 自定义求解器(关注点)
+- &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; 直接利用解释器&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;替代商业求解器 初始点&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+- &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; 自定义求解器&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;关注点&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
 
-      + 根据自己的求解流程组合求解器(类库调用)
+      + 根据自己的求解流程组合求解器&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;类库调用&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
       + 不需要关心对流项和扩散项是如何离散的
       + 也不需要关心湍流模型
 
-- [ ] 更高级的运用:编写离散格式
+- &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; 更高级的运用:编写离散格式
 
 ---------
 ** 自定义求解器
     按照自己的_求解流程_编写求解。
 
 ** 不关心
-    + 离散格式(时间项和对流项)
+    + 离散格式&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;时间项和对流项&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
     + 大型代数方程的求解，如何加速等。
 
 ----------
 ** 传热求解
-#+begin_src sh
+&lt;span style=&#34;color:#75715e&#34;&gt;#+begin_src sh&lt;/span&gt;
     开始
     |
     初始值
@@ -220,12 +214,12 @@ cavity case的文件夹简介（等价于fluent的.cas,只不过fluent集成为�
     |                   |                          ^
     辐射传热计算Qri  导热计算Qcdi                  |
     |                   |                          |
-    由热平衡求新的对流传热量Qcvi^(m+1)             |
+    由热平衡求新的对流传热量Qcvi^&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;m+1&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;             |
     |                                              |
     收敛条件 --------&amp;gt;-----------------------------|
     |
     结束
-#+end_src
+&lt;span style=&#34;color:#75715e&#34;&gt;#+end_src&lt;/span&gt;
 --------------------------------
 ** 自定义离散格式
 
@@ -239,9 +233,9 @@ cavity case的文件夹简介（等价于fluent的.cas,只不过fluent集成为�
 ** cavity源码文件的主要组成部分
 
    +  location
-     - &amp;quot;system&amp;quot;
-     - &amp;quot;constant&amp;quot;
-     - &amp;quot;0&amp;quot;
+     - &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;system&amp;#34;&lt;/span&gt;
+     - &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;constant&amp;#34;&lt;/span&gt;
+     - &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;0&amp;#34;&lt;/span&gt;
   
    + class
      - dictionary
@@ -261,7 +255,7 @@ cavity case的文件夹简介（等价于fluent的.cas,只不过fluent集成为�
        + p对象
 
 
-&lt;/code&gt;&lt;/pre&gt;</description>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
     
     <item>
@@ -270,52 +264,41 @@ cavity case的文件夹简介（等价于fluent的.cas,只不过fluent集成为�
       <pubDate>Sun, 07 Jun 2015 17:34:49 +0800</pubDate>
       <guid>https://jueqingsizhe66.github.io/blog/2015/06/07/pandoczhi-zuo-huan-deng-pian-with-revealjs/</guid>
       <description>&lt;p&gt;第一次看到github.io居然可以放上幻灯片,有点觉得不可思议
-&lt;a href=&#34;http://dongweiming.github.io/sed_and_awk/&#34; target=&#34;_blank&#34;&gt;sed_and_awk教程&lt;/a&gt;。后来调研发现这是采用了
-+ &lt;a href=&#34;http://foxswily.iteye.com/blog/1997397&#34; target=&#34;_blank&#34;&gt;轻量slideshow（by markdown、pandoc、revealjs）&lt;/a&gt;
-+ &lt;a href=&#34;http://www.soimort.org/posts/165/&#34; target=&#34;_blank&#34;&gt;Markdown+Pandoc→HTML幻灯片速成 &lt;/a&gt;
-+ &lt;a href=&#34;http://www.tuicool.com/articles/Bbiu22U&#34; target=&#34;_blank&#34;&gt;pandoc将markdown转换输出HTML slide &lt;/a&gt;&lt;/p&gt;
-
+&lt;a href=&#34;http://dongweiming.github.io/sed_and_awk/&#34;&gt;sed_and_awk教程&lt;/a&gt;。后来调研发现这是采用了&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://foxswily.iteye.com/blog/1997397&#34;&gt;轻量slideshow（by markdown、pandoc、revealjs）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.soimort.org/posts/165/&#34;&gt;Markdown+Pandoc→HTML幻灯片速成 &lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.tuicool.com/articles/Bbiu22U&#34;&gt;pandoc将markdown转换输出HTML slide &lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;我新建了一个文件夹&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;mkdir genereateSlides
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;mkdir genereateSlides
 cd generateSlides
 mkdir targets
 
-#并在targets中放上reveal.js,相信大家知道怎么下载
+&lt;span style=&#34;color:#75715e&#34;&gt;#并在targets中放上reveal.js,相信大家知道怎么下载&lt;/span&gt;
  git clone https://github.com/hakimel/reveal.js
 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;然后我抛弃掉dzslides,s5,slideous,slidy等，现在只是使用reveal.js&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后我抛弃掉dzslides,s5,slideous,slidy等，现在只是使用reveal.js&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;它支持md和org格式，这是我欣赏的&lt;/li&gt;
 &lt;li&gt;它支持一标题是水平切换，二标题是纵向切换，这也是我所欣赏，影响我的思维
-
 &lt;ul&gt;
 &lt;li&gt;所以针对markdown你需要思考何时使用#号个数&lt;/li&gt;
 &lt;li&gt;很对org-mode你需要考虑何时使用*号个数&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;li&gt;它支持列表 逐个显示，也就是+/-/1. 等如果变异的时候加上-i选项则会逐个显示。&lt;/li&gt;
 &lt;li&gt;可以用 &amp;mdash;&amp;mdash;&amp;mdash;-多个破折号强制生成新的幻灯片&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;在开始写作之前首先得注意md开头的前三行：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;% Ye Zhaoliang 
+% Direct Numerical Simulation &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; Homogenuous Turbulence
+% June 07, &lt;span style=&#34;color:#ae81ff&#34;&gt;2015&lt;/span&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;% Ye Zhaoliang 
-% Direct Numerical Simulation for Homogenuous Turbulence
-% June 07, 2015
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;pandoc slides.md -o targets/slides.html -t revealjs -s -V theme=beige
 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;pandoc slides.md -o targets/slides.html -t revealjs -s -V theme=beige
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;之前，进行几次实验，发现结果不对！但是其实就是用了上述的命令，而多试几遍又可以了，This is strange!But now it works&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;几种不同的幻灯片样式&#34;&gt;几种不同的幻灯片样式:&lt;/h2&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;之前，进行几次实验，发现结果不对！但是其实就是用了上述的命令，而多试几遍又可以了，This is strange!But now it works&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;heading&#34;&gt;几种不同的幻灯片样式:&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;default：（默认）深灰色背景，白色文字&lt;/li&gt;
 &lt;li&gt;beige：米色背景，深色文字&lt;/li&gt;
@@ -325,9 +308,7 @@ mkdir targets
 &lt;li&gt;simple：白色背景，黑色文字&lt;/li&gt;
 &lt;li&gt;solarized：奶油色背景，深青色文字&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;h2 id=&#34;控制代码高亮风格的选项有&#34;&gt;控制代码高亮风格的选项有：&lt;/h2&gt;
-
+&lt;h2 id=&#34;heading-1&#34;&gt;控制代码高亮风格的选项有：&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&amp;ndash;highlight-style pygments&lt;/li&gt;
 &lt;li&gt;&amp;ndash;highlight-style kate&lt;/li&gt;
@@ -344,68 +325,45 @@ mkdir targets
       <link>https://jueqingsizhe66.github.io/blog/2014/05/15/mdge-ren-pian-jian/</link>
       <pubDate>Thu, 15 May 2014 22:57:56 +0800</pubDate>
       <guid>https://jueqingsizhe66.github.io/blog/2014/05/15/mdge-ren-pian-jian/</guid>
-      <description>&lt;p&gt;###嵌套的列表###
-1. 有序   数字
-2. 无序   * + 注意在写法上的增加缩进&lt;/p&gt;
-
+      <description>&lt;p&gt;###嵌套的列表###&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;有序   数字&lt;/li&gt;
+&lt;li&gt;无序   * + 注意在写法上的增加缩进&lt;/li&gt;
+&lt;/ol&gt;
 &lt;p&gt;###四个部分：###&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;重点&lt;/li&gt;
 &lt;li&gt;分类&lt;/li&gt;
 &lt;li&gt;链接&lt;/li&gt;
 &lt;li&gt;图片&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;blockquote&gt;
-&lt;p&gt;markdown基本上没有下划线，也没有颜色，因为hacker不需要？ 其实也需要！只不过更关注的是重点（着重  真正的问题 大小和重量）和分类（列表） 链接（源自哪边）  需要一些图片（也许颜色和下划线 可以这样引入） 还有更重要的是真实的代码快（这个地方特别讲究，所以每种语言有不同的标记，也许代码的颜色才是黑客真正的颜色），一般他们还特别注意版权（也就是引用快，所以还有&amp;gt; , &amp;gt;&amp;gt; etc的选项）其他的工作就由html标记，但是特别区域快的摆放，特别注意前后的空行.&lt;/p&gt;
+&lt;p&gt;markdown基本上没有下划线，也没有颜色，因为hacker不需要？ 其实也需要！只不过更关注的是重点（着重  真正的问题 大小和重量）和分类（列表） 链接（源自哪边）  需要一些图片（也许颜色和下划线 可以这样引入） 还有更重要的是真实的代码快（这个地方特别讲究，所以每种语言有不同的标记，也许代码的颜色才是黑客真正的颜色），一般他们还特别注意版权（也就是引用快，所以还有&amp;gt; , &amp;raquo; etc的选项）其他的工作就由html标记，但是特别区域快的摆放，特别注意前后的空行.&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;如果加入空行就会显示空行，如果不加入空行会把前后的数据叠加在一起，除非是加入标题。空行和加标题的一个效果类似，会使前后的数据用空行分开，另起一行！&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;在&amp;gt; 缩进的前方加入多余空格会造成*代码块*的效果&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;在&amp;gt; 缩进的前方加入多余空格会造成&lt;em&gt;代码块&lt;/em&gt;的效果&lt;/strong&gt;&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;如果&lt;code&gt;&amp;lt;table&amp;gt;&lt;/code&gt;标签没有&lt;code&gt;&amp;lt;td&amp;gt;&lt;/code&gt;的加入没有表格的效果，还是一堆数据&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;blockquote&gt;
-&lt;p&gt;&lt;a href=&#34;http://daringfireball.net/projects/markdown/syntax&#34; target=&#34;_blank&#34;&gt;For any markup that is not covered by Markdown’s syntax, you simply use HTML itself&lt;/a&gt;. There’s no need to preface it or delimit it to indicate that you’re switching from Markdown to HTML; you just use the tags.&lt;/p&gt;
-
+&lt;p&gt;&lt;a href=&#34;http://daringfireball.net/projects/markdown/syntax&#34;&gt;For any markup that is not covered by Markdown’s syntax, you simply use HTML itself&lt;/a&gt;. There’s no need to preface it or delimit it to indicate that you’re switching from Markdown to HTML; you just use the tags.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
 &lt;p&gt;The only restrictions are that block-level HTML elements — e.g.&lt;code&gt;&amp;lt;div&amp;gt;&lt;/code&gt;, &lt;code&gt;&amp;lt;table&amp;gt;&lt;/code&gt;, &lt;code&gt;&amp;lt;pre&amp;gt;&lt;/code&gt;, &lt;code&gt;&amp;lt;p&amp;gt;&lt;/code&gt;,etc. — must be separated from surrounding content by blank lines, and the start and end tags of the block should not be indented** with tabs or spaces**. Markdown is smart enough not to add extra (unwanted) &lt;code&gt;&amp;lt;p&amp;gt;&lt;/code&gt; tags around HTML block-level tags.&lt;/p&gt;
 &lt;/blockquote&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;##&lt;a href=&#34;http://hi.baidu.com/zolyfxughcbdkpq/item/85ea887c03081c2bd7a89cc1&#34; target=&#34;_blank&#34;&gt;&lt;u&gt;一些常用的markdown没有的编辑操作：&lt;/u&gt;&lt;/a&gt;###&lt;/p&gt;
-
+&lt;hr&gt;
+&lt;p&gt;##&lt;a href=&#34;http://hi.baidu.com/zolyfxughcbdkpq/item/85ea887c03081c2bd7a89cc1&#34;&gt;&lt;!-- raw HTML omitted --&gt;一些常用的markdown没有的编辑操作：&lt;!-- raw HTML omitted --&gt;&lt;/a&gt;###&lt;/p&gt;
 &lt;p&gt;###下划线###&lt;/p&gt;
-
-&lt;p&gt;&lt;u&gt;代码:《u》下划线《/u》 &lt;/u&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;代码:《u》下划线《/u》 &lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
 &lt;p&gt;中间标明:要加下划线的文字.&lt;/p&gt;
-
 &lt;p&gt;###删除线###
 代码:《s》删除线《/s》&lt;/p&gt;
-
-&lt;p&gt;&lt;s&gt;中间标明:要加删除线的文字.&lt;/s&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;中间标明:要加删除线的文字.&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
 &lt;p&gt;###更改字体颜色：###&lt;/p&gt;
-
-&lt;p&gt;《font color=&amp;ldquo;#value&amp;rdquo;》写上你想写的字《/font》
+&lt;p&gt;《font color=&amp;rdquo;#value&amp;rdquo;》写上你想写的字《/font》
 (其中value值在000000与FFFFFF(16位进制)之间修改#后面的数值，就可以改变字体的颜色。&lt;/p&gt;
-
 &lt;p&gt;###部分常用颜色代码：###&lt;/p&gt;
-
-&lt;table&gt;
-&lt;tr&gt;&lt;td&gt;&lt;font color=&#34;#ff0000&#34;&gt;#ff0000 红色的字喔！&lt;/td&gt;&lt;/font&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;&lt;font color=&#34;#ff8000&#34;&gt;#ff8000 橙色的字喔！&lt;/td&gt;&lt;/font&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;&lt;font color=&#34;#ffff00&#34;&gt;#ffff00 黄色的字喔！&lt;/td&gt; &lt;/font&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;&lt;font color=&#34;#00ff00&#34;&gt;#00ff00 绿色的字喔！&lt;/td&gt;&lt;/font&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;&lt;font color=&#34;#0080ff&#34;&gt;#0080ff 蓝色的字喔！&lt;/td&gt; &lt;/font&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;&lt;font color=&#34;#0000a0&#34;&gt;#0000a0 靛色的字喔！&lt;/td&gt;&lt;/font&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;&lt;font color=&#34;#8000ff&#34;&gt;#8000ff 紫色的字喔！&lt;/td&gt; &lt;/font&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;&lt;font color=&#34;#000000&#34;&gt;#000000 黑色的字喔！&lt;/td&gt;&lt;/font&gt; &lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;&lt;font color=&#34;#c0c0c0&#34;&gt;#c0c0c0 灰色的字喔！&lt;/td&gt;&lt;/font&gt;&lt;/tr&gt;
-&lt;/table&gt;</description>
+&lt;!-- raw HTML omitted --&gt;</description>
     </item>
     
     <item>
@@ -414,8 +372,7 @@ mkdir targets
       <pubDate>Tue, 13 May 2014 16:43:37 +0800</pubDate>
       <guid>https://jueqingsizhe66.github.io/blog/2014/05/13/md-learning/</guid>
       <description>&lt;p&gt;#markdown code part start&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;* emphasize
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;* emphasize
 * seperate line
 * auto link
 * picture
@@ -429,7 +386,7 @@ mkdir targets
   
   **********
   
-  use the `printf()` function
+  use the &lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;printf&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;function&lt;/span&gt;
   
   这是一个普通段落。
 
@@ -447,75 +404,65 @@ mkdir targets
 &amp;gt;
 &amp;gt; Back to the first level.
 
-I get 10 times more traffic from [Google] [1] than from
-[Yahoo] [2] or [MSN] [3].
+I get &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt; times more traffic from &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;Google&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;1&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; than from
+&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;Yahoo&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;2&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; or &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;MSN&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;3&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;.
 
-  [1]: http://google.com/        &amp;quot;Google&amp;quot;
-  [2]: http://search.yahoo.com/  &amp;quot;Yahoo Search&amp;quot;
-  [3]: http://search.msn.com/    &amp;quot;MSN Search&amp;quot;
+  &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;1&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;: http://google.com/        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Google&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;2&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;: http://search.yahoo.com/  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Yahoo Search&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;3&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;: http://search.msn.com/    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;MSN Search&amp;#34;&lt;/span&gt;
   
-  ![Alt text][4]
-  [4]:   http://image.baidu.com/detail/newindex?col=%E5%A3%81%E7%BA%B8&amp;amp;tag=%E5%88%9B%E6%84%8F&amp;amp;pn=1&amp;amp;pid=9433162230&amp;amp;aid=329840961&amp;amp;from=1&amp;amp;tag3=%E6%8A%A4%E7%9C%BC&amp;amp;app_id=578130&amp;amp;user_id=851997103&amp;amp;is_album=0&amp;amp;sortlog=0&amp;amp;width=1280&amp;amp;height=800&amp;amp;ic=0
+  !&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;Alt text&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;4&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;4&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;:   http://image.baidu.com/detail/newindex?col&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;%E5%A3%81%E7%BA%B8&amp;amp;tag&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;%E5%88%9B%E6%84%8F&amp;amp;pn&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;1&amp;amp;pid&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;9433162230&amp;amp;aid&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;329840961&amp;amp;from&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;1&amp;amp;tag3&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;%E6%8A%A4%E7%9C%BC&amp;amp;app_id&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;578130&amp;amp;user_id&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;851997103&amp;amp;is_album&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;0&amp;amp;sortlog&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;0&amp;amp;width&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;1280&amp;amp;height&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;800&amp;amp;ic&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;0
   
   ___________________
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr /&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
 &lt;p&gt;#code part end#&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;emphasize&lt;/li&gt;
 &lt;li&gt;seperate line&lt;/li&gt;
 &lt;li&gt;auto link&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;picture&lt;/p&gt;
-
-&lt;hr /&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;emphaize
-&amp;gt; + &lt;strong&gt;You&lt;/strong&gt; are strong
-&amp;gt; + &lt;strong&gt;he&lt;/strong&gt; is strong
-&amp;gt; + &lt;em&gt;she&lt;/em&gt; is em
-&amp;gt; + &lt;em&gt;it&lt;/em&gt; is em
-&amp;gt; &amp;gt; - xinran comes from hebei
-&amp;gt; &amp;gt; - xinran is a beautiful and smart girl&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;picture&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;hr /&gt;
-
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;emphaize
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;You&lt;/strong&gt; are strong&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;he&lt;/strong&gt; is strong&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;she&lt;/em&gt; is em&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;it&lt;/em&gt; is em&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;xinran comes from hebei&lt;/li&gt;
+&lt;li&gt;xinran is a beautiful and smart girl&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
 &lt;p&gt;use the &lt;code&gt;printf()&lt;/code&gt; function&lt;/p&gt;
-
 &lt;p&gt;这是一个普通段落。&lt;/p&gt;
-
 &lt;ol&gt;
 &lt;li&gt;youxu&lt;/li&gt;
 &lt;li&gt;lie&lt;/li&gt;
 &lt;li&gt;biao&lt;/li&gt;
 &lt;/ol&gt;
-
-&lt;table&gt;
-    &lt;tr&gt;
-        &lt;td&gt;Foo&lt;/td&gt;
-    &lt;/tr&gt;
-&lt;/table&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;这是另一个普通段落。&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;This is the first level of quoting.&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;This is nested blockquote.&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;Back to the first level.&lt;/p&gt;
 &lt;/blockquote&gt;
-
-&lt;p&gt;I get 10 times more traffic from &lt;a href=&#34;http://google.com/&#34; title=&#34;Google&#34; target=&#34;_blank&#34;&gt;Google&lt;/a&gt; than from
-&lt;a href=&#34;http://search.yahoo.com/&#34; title=&#34;Yahoo Search&#34; target=&#34;_blank&#34;&gt;Yahoo&lt;/a&gt; or &lt;a href=&#34;http://search.msn.com/&#34; title=&#34;MSN Search&#34; target=&#34;_blank&#34;&gt;MSN&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://image.baidu.com/detail/newindex?col=%E5%A3%81%E7%BA%B8&amp;amp;tag=%E5%88%9B%E6%84%8F&amp;amp;pn=1&amp;amp;pid=9433162230&amp;amp;aid=329840961&amp;amp;from=1&amp;amp;tag3=%E6%8A%A4%E7%9C%BC&amp;amp;app_id=578130&amp;amp;user_id=851997103&amp;amp;is_album=0&amp;amp;sortlog=0&amp;amp;width=1280&amp;amp;height=800&amp;amp;ic=0&#34; alt=&#34;Alt text&#34; /&gt;&lt;/p&gt;</description>
+&lt;p&gt;I get 10 times more traffic from [Google] &lt;a href=&#34;http://google.com/&#34; title=&#34;Google&#34;&gt;1&lt;/a&gt; than from
+[Yahoo] &lt;a href=&#34;http://search.yahoo.com/&#34; title=&#34;Yahoo Search&#34;&gt;2&lt;/a&gt; or [MSN] &lt;a href=&#34;http://search.msn.com/&#34; title=&#34;MSN Search&#34;&gt;3&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;![Alt text][4]
+[4]:   &lt;a href=&#34;http://image.baidu.com/detail/newindex?col=%E5%A3%81%E7%BA%B8&amp;amp;tag=%E5%88%9B%E6%84%8F&amp;amp;pn=1&amp;amp;pid=9433162230&amp;amp;aid=329840961&amp;amp;from=1&amp;amp;tag3=%E6%8A%A4%E7%9C%BC&amp;amp;app_id=578130&amp;amp;user_id=851997103&amp;amp;is_album=0&amp;amp;sortlog=0&amp;amp;width=1280&amp;amp;height=800&amp;amp;ic=0&#34;&gt;http://image.baidu.com/detail/newindex?col=%E5%A3%81%E7%BA%B8&amp;amp;tag=%E5%88%9B%E6%84%8F&amp;amp;pn=1&amp;amp;pid=9433162230&amp;amp;aid=329840961&amp;amp;from=1&amp;amp;tag3=%E6%8A%A4%E7%9C%BC&amp;amp;app_id=578130&amp;amp;user_id=851997103&amp;amp;is_album=0&amp;amp;sortlog=0&amp;amp;width=1280&amp;amp;height=800&amp;amp;ic=0&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

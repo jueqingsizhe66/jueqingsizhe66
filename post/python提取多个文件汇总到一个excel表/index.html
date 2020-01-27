@@ -617,54 +617,40 @@
 <span class="article-metadata" >Reading time: 1 minutes and    13 seconds with 268 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#背景介绍">背景介绍</a></li>
-<li><a href="#技术分解">技术分解</a></li>
-<li><a href="#技术实现">技术实现</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#背景介绍">背景介绍</a></li>
+    <li><a href="#技术分解">技术分解</a></li>
+    <li><a href="#技术实现">技术实现</a></li>
+  </ul>
 </nav>
     </aside>
   <div class="article-container">
 
 
     <div class="article-style">
-      
-
-<h2 id="背景介绍">背景介绍</h2>
-
-<p>在<a href="https://jueqingsizhe66.github.io/post/perl拆分大文件到excel表/" target="_blank">perl拆分大文件</a>后我们得到下图信息</p>
-
-<p><img src="/images/windsim/windsimResults.png" alt="windsim处理结果" /></p>
-
+      <h2 id="背景介绍">背景介绍</h2>
+<p>在<a href="https://jueqingsizhe66.github.io/post/perl%E6%8B%86%E5%88%86%E5%A4%A7%E6%96%87%E4%BB%B6%E5%88%B0excel%E8%A1%A8/">perl拆分大文件</a>后我们得到下图信息</p>
+<p><img src="/images/windsim/windsimResults.png" alt="windsim处理结果"></p>
 <p>我们希望单独提取三列信息到一个excel表大文件夹内，方便比较数据</p>
-
 <p>适合任何风电场！</p>
-
 <h2 id="技术分解">技术分解</h2>
-
 <ol>
 <li>遍历</li>
 <li>提却对应文件标识信息，并保存计算结果到xlsx文件</li>
 </ol>
-
 <h2 id="技术实现">技术实现</h2>
-
 <p>主要用到pandas的ExcelWriter函数</p>
-
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
 <span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
 <span style="color:#f92672">import</span> os
 
 
 <span style="color:#75715e">#headDir=r&#34;C:\Users\yezhaoliang\Desktop\work\AIWind\CompareCloseTOSingle\8.00&#34;</span>
-headDir<span style="color:#f92672">=</span><span style="color:#e6db74">r</span><span style="color:#e6db74">&#34;C:\Users\yezhaoliang\Desktop\work\AIWind\processWindSim\HuaiLaiTurbine&#34;</span>
+headDir<span style="color:#f92672">=</span><span style="color:#e6db74">r</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">C:</span><span style="color:#e6db74">\</span><span style="color:#e6db74">Users</span><span style="color:#e6db74">\</span><span style="color:#e6db74">yezhaoliang</span><span style="color:#e6db74">\</span><span style="color:#e6db74">Desktop</span><span style="color:#e6db74">\</span><span style="color:#e6db74">work</span><span style="color:#e6db74">\</span><span style="color:#e6db74">AIWind</span><span style="color:#e6db74">\</span><span style="color:#e6db74">processWindSim</span><span style="color:#e6db74">\</span><span style="color:#e6db74">HuaiLaiTurbine</span><span style="color:#e6db74">&#34;</span>
 <span style="color:#75715e">#headDir=r&#34;D:\BoundaryLines&#34;</span>
 
 
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_files</span>(path<span style="color:#f92672">=</span>headDir, rule<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;.csv&#34;</span>):
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_files</span>(path<span style="color:#f92672">=</span>headDir, rule<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">.csv</span><span style="color:#e6db74">&#34;</span>):
     all <span style="color:#f92672">=</span> []
     <span style="color:#66d9ef">for</span> fpathe,dirs,fs <span style="color:#f92672">in</span> os<span style="color:#f92672">.</span>walk(path):   <span style="color:#75715e"># os.walk是获取所有的目录</span>
         <span style="color:#66d9ef">for</span> f <span style="color:#f92672">in</span> fs:
@@ -673,15 +659,15 @@ headDir<span style="color:#f92672">=</span><span style="color:#e6db74">r</span><
                 all<span style="color:#f92672">.</span>append(filename)
     <span style="color:#66d9ef">return</span> all
 
-<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#34;</span>:
     b <span style="color:#f92672">=</span> get_files()
-    writer<span style="color:#f92672">=</span>pd<span style="color:#f92672">.</span>ExcelWriter(<span style="color:#e6db74">&#34;Results-WindSimHuaiLaiTurbine.xlsx&#34;</span>)
+    writer<span style="color:#f92672">=</span>pd<span style="color:#f92672">.</span>ExcelWriter(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Results-WindSimHuaiLaiTurbine.xlsx</span><span style="color:#e6db74">&#34;</span>)
     altitudesName<span style="color:#f92672">=</span>[]
     <span style="color:#75715e"># googleEarthAltitude=[]</span>
     <span style="color:#75715e"># computedAltitude=[]</span>
     <span style="color:#75715e"># deltaAltitude=[]</span>
     <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> b:
-        them<span style="color:#f92672">=</span>i<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">&#34;</span>)
+        them<span style="color:#f92672">=</span>i<span style="color:#f92672">.</span>split(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">&#34;</span>)
         <span style="color:#75715e">#secondPart=them[them.__len__()-2]</span>
         <span style="color:#75715e"># sheetName=them[them.__len__()-3]+them[them.__len__()-2]+them[them.__len__()-1]</span>
         <span style="color:#75715e">#sheetName=them[them.__len__()-3]+them[them.__len__()-2]+them[them.__len__()-1]</span>
@@ -692,9 +678,9 @@ headDir<span style="color:#f92672">=</span><span style="color:#e6db74">r</span><
         <span style="color:#75715e">#squeezeZseries = sdNotNull.iloc[0:300, 2] - sdNotNull.iat[0, 2]  ## 减去海拔值</span>
 
         result <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame({
-            <span style="color:#e6db74">&#39;Velocity v/(m/s)&#39;</span>:sd<span style="color:#f92672">.</span>iloc[:,<span style="color:#ae81ff">5</span>],
-            <span style="color:#e6db74">&#39;KE /(m*2/s*2)&#39;</span>:sd<span style="color:#f92672">.</span>iloc[:,<span style="color:#ae81ff">10</span>],
-            <span style="color:#e6db74">&#39;Z/(m)&#39;</span>:sd<span style="color:#f92672">.</span>iloc[:,<span style="color:#ae81ff">1</span>]})
+            <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Velocity v/(m/s)</span><span style="color:#e6db74">&#39;</span>:sd<span style="color:#f92672">.</span>iloc[:,<span style="color:#ae81ff">5</span>],
+            <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">KE /(m*2/s*2)</span><span style="color:#e6db74">&#39;</span>:sd<span style="color:#f92672">.</span>iloc[:,<span style="color:#ae81ff">10</span>],
+            <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Z/(m)</span><span style="color:#e6db74">&#39;</span>:sd<span style="color:#f92672">.</span>iloc[:,<span style="color:#ae81ff">1</span>]})
         result<span style="color:#f92672">.</span>to_excel(writer,sheet_name<span style="color:#f92672">=</span>sheetName)
     writer<span style="color:#f92672">.</span>save()
     writer<span style="color:#f92672">.</span>close()</code></pre></div>
@@ -1102,7 +1088,7 @@ headDir<span style="color:#f92672">=</span><span style="color:#e6db74">r</span><
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

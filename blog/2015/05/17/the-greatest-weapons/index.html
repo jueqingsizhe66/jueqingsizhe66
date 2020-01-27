@@ -30,7 +30,6 @@
   
   <meta name="description" content="Everything in Haskell has a Type
 Here are some Type declarations.
-
 These are your greatest weapons.">
 
   
@@ -122,7 +121,6 @@ These are your greatest weapons.">
   <meta property="og:title" content="The greatest weapons | Macro Life">
   <meta property="og:description" content="Everything in Haskell has a Type
 Here are some Type declarations.
-
 These are your greatest weapons."><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
   <meta property="twitter:image" content="https://jueqingsizhe66.github.io/img/icon-192.png"><meta property="og:locale" content="en-us">
   
@@ -569,28 +567,20 @@ These are your greatest weapons."><meta property="og:image" content="https://jue
 
 
 
-<span class="article-metadata" >Reading time: 6 minutes and    20 seconds with 1394 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+<span class="article-metadata" >Reading time: 6 minutes and    21 seconds with 1398 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#数学中λ-calculus的表示法为">数学中λ-calculus的表示法为：</a></li>
-<li><a href="#代入数值p的表示法为">代入数值p的表示法为：</a></li>
-<li><a href="#lisp-scheme的λ表示法与数值代入">Lisp|scheme的λ表示法与数值代入：</a></li>
-<li><a href="#haskell">Haskell：</a></li>
-<li><a href="#lambda-calculus">Lambda Calculus</a>
-<ul>
-<li><a href="#基本的语法-lambda-calculus的核心是表达式-expression-用fp语言写的程序执行的过程-本质上就是对表达式求值的过程">基本的语法：Lambda Calculus的核心是表达式(Expression)，用FP语言写的程序执行的过程，本质上就是对表达式求值的过程</a></li>
-<li><a href="#变量的bound与free">变量的bound与free:</a></li>
-<li><a href="#表达式化简-reduction-的基本法则">表达式化简（Reduction)的基本法则:</a></li>
-<li><a href="#变量替换">变量替换</a></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#-calculus">数学中λ-calculus的表示法为：</a></li>
+        <li><a href="#p">代入数值p的表示法为：</a></li>
+        <li><a href="#lispscheme">Lisp|scheme的λ表示法与数值代入：</a></li>
+        <li><a href="#haskell">Haskell：</a></li>
+        <li><a href="#lambda-calculus">Lambda Calculus</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
     </aside>
   <div class="article-container">
@@ -599,125 +589,85 @@ These are your greatest weapons."><meta property="og:image" content="https://jue
     <div class="article-style">
       <p>Everything in Haskell has a Type
 Here are some Type declarations.</p>
-
 <p>These are your greatest weapons.</p>
-
 <p>head :: [a] -&gt; a &ndash; gets the first element of a list</p>
-
 <p>tail :: [a] -&gt; [a] &ndash; gets everything but the first element</p>
-
 <p>last :: [a] -&gt; a &ndash; gets the last element of a list</p>
-
 <p>init :: [a] -&gt; [a] &ndash; gets everything but the last element</p>
-
 <p>(++) :: [a] -&gt; [a] -&gt; [a] &ndash; concatenates two lists together</p>
-
 <p>(:) :: a -&gt; [a] -&gt; [a] &ndash; prepends an element to a list</p>
-
 <p>fst  :: (a,b) -&gt; a &ndash; gets the first element of a tuple</p>
-
 <p>snd  :: (a,b) -&gt; b &ndash; gets the second element of a tuple</p>
-
 <p>(!!) :: [a]-&gt;Int a</p>
-
-<h3 id="数学中λ-calculus的表示法为">数学中λ-calculus的表示法为：</h3>
-
+<h3 id="-calculus">数学中λ-calculus的表示法为：</h3>
 <ol>
 <li>λx.t</li>
 <li>λx[t]</li>
 </ol>
-
 <p>“λ”不具有任何特殊意思，标识着其表达式中的可取一数值x带入。
 t是表达式（例如x+3、x^2+2x+1等）。</p>
-
-<h3 id="代入数值p的表示法为">代入数值p的表示法为：</h3>
-
+<h3 id="p">代入数值p的表示法为：</h3>
 <ol>
 <li>(λx.t)p</li>
 <li>(λx[t])p</li>
 </ol>
+<hr>
+<h3 id="lispscheme">Lisp|scheme的λ表示法与数值代入：</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">x</span>) (+ x <span style="color:#ae81ff">1</span>))
+((<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">x</span>) (+ x <span style="color:#ae81ff">1</span>) <span style="color:#ae81ff">10</span>))
+</code></pre></div><h3 id="haskell">Haskell：</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#a6e22e">\</span>x <span style="color:#f92672">-&gt;</span> x<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
+(<span style="color:#a6e22e">\</span>x <span style="color:#f92672">-&gt;</span> x<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)<span style="color:#ae81ff">10</span>
 
-<hr />
+<span style="color:#66d9ef">Prelude</span><span style="color:#f92672">&gt;</span> map (<span style="color:#a6e22e">\</span>x<span style="color:#f92672">-&gt;</span>x<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>) [<span style="color:#ae81ff">1</span><span style="color:#f92672">..</span><span style="color:#ae81ff">10</span>]
+[<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">6</span>,<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">9</span>,<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">11</span>]
 
-<h3 id="lisp-scheme的λ表示法与数值代入">Lisp|scheme的λ表示法与数值代入：</h3>
-
-<pre><code class="language-scheme">(lambda (x) (+ x 1))
-((lambda (x) (+ x 1) 10))
-</code></pre>
-
-<h3 id="haskell">Haskell：</h3>
-
-<pre><code class="language-haskell">\x -&gt; x+1
-(\x -&gt; x+1)10
-
-Prelude&gt; map (\x-&gt;x+1) [1..10]
-[2,3,4,5,6,7,8,9,10,11]
-
-\ para1 para2-&gt;(return value) 
-\ (para1,para2) -&gt; (return value)
-</code></pre>
-
-<h3 id="lambda-calculus">Lambda Calculus</h3>
-
-<p>前面提到了Haskell是基于<strong>Lambda Calculus</strong>的，所以在学习Haskell之前，我们有必要了解一下Lambda Caculus的一些基本的内容，方便我们后面正式介绍Haskell。其实，Lambda Calculus是所有函数式语言的基础，要学习FP，最好都了解一下Lambda Calculus。下面对Lambda Calculus做一个简单的介绍：</p>
-
-<h4 id="基本的语法-lambda-calculus的核心是表达式-expression-用fp语言写的程序执行的过程-本质上就是对表达式求值的过程">基本的语法：Lambda Calculus的核心是表达式(Expression)，用FP语言写的程序执行的过程，本质上就是对表达式求值的过程</h4>
-
+<span style="color:#a6e22e">\</span> para1 para2<span style="color:#f92672">-&gt;</span>(return value) 
+<span style="color:#a6e22e">\</span> (para1,para2) <span style="color:#f92672">-&gt;</span> (return value)
+</code></pre></div><h3 id="lambda-calculus">Lambda Calculus</h3>
+<p>前面提到了Haskell是基于__Lambda Calculus__的，所以在学习Haskell之前，我们有必要了解一下Lambda Caculus的一些基本的内容，方便我们后面正式介绍Haskell。其实，Lambda Calculus是所有函数式语言的基础，要学习FP，最好都了解一下Lambda Calculus。下面对Lambda Calculus做一个简单的介绍：</p>
+<h4 id="lambda-calculusexpressionfp">基本的语法：Lambda Calculus的核心是表达式(Expression)，用FP语言写的程序执行的过程，本质上就是对表达式求值的过程</h4>
 <p>expression := variable | function | application
 funciton := λvariable.expression (.前面部分为定义(definition)，后面部分为函数体(body))
 application := expression expression</p>
-
 <p>另外一种表述方法:</p>
-
-<pre><code class="language-sh">&lt;expr&gt; ::= &lt;identifier&gt; 
-&lt;expr&gt; ::= lambda &lt;identifier-list&gt;. &lt;expr&gt; 
-&lt;expr&gt; ::= (&lt;expr&gt; &lt;expr&gt;)
-</code></pre>
-
-<p>前两条语法用于生成lambda表达式（lambda函数），如：
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">&lt;expr&gt; ::<span style="color:#f92672">=</span> &lt;identifier&gt; 
+&lt;expr&gt; ::<span style="color:#f92672">=</span> lambda &lt;identifier-list&gt;. &lt;expr&gt; 
+&lt;expr&gt; ::<span style="color:#f92672">=</span> <span style="color:#f92672">(</span>&lt;expr&gt; &lt;expr&gt;<span style="color:#f92672">)</span>
+</code></pre></div><p>前两条语法用于生成lambda表达式（lambda函数），如：
 lambda x y. x + y
 haskell里面为了简洁起见用“\”来代替希腊字母lambda，它们形状比较相似。故而上面的定义也可以写成：
 \ x y. x + y</p>
-
-<h4 id="变量的bound与free">变量的bound与free:</h4>
-
+<h4 id="boundfree">变量的bound与free:</h4>
 <p>λx.xy →x is bound, y is free</p>
-
-<h4 id="表达式化简-reduction-的基本法则">表达式化简（Reduction)的基本法则:</h4>
-
-<pre><code class="language-sh">α−reduction: λx.E→λy.E[y/x]
-β−reduction:((λx.E)z)→E[z/x]
-η−reduction(if x is not free in E): λx.(Ex)→E
-</code></pre>
-
-<ul>
-<li><p>Alpha转换公理：例如，“lambda x y. x + y”转换为“lambda a b. a + b”。换句话说，函数的参数起什么名字没有关系，可以随意替换，只要函数体里面对参数的使用的地方也同时注意相应替换掉就是了。</p></li>
-
-<li><p>Beta转换公理：例如，“(lambda x y. x + y) 2 3”转换为“2 + 3”。这个就更简单了，也就是说，当把一个lambda函数用到参数身上时，只需用实际的参数来替换掉其函数体中的相应变量即可。</p></li>
+<h4 id="reduction">表达式化简（Reduction)的基本法则:</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">α−reduction: λx.E→λy.E<span style="color:#f92672">[</span>y/x<span style="color:#f92672">]</span>
+β−reduction:<span style="color:#f92672">(</span><span style="color:#f92672">(</span>λx.E<span style="color:#f92672">)</span>z<span style="color:#f92672">)</span>→E<span style="color:#f92672">[</span>z/x<span style="color:#f92672">]</span>
+η−reduction<span style="color:#f92672">(</span><span style="color:#66d9ef">if</span> x is not free in E<span style="color:#f92672">)</span>: λx.<span style="color:#f92672">(</span>Ex<span style="color:#f92672">)</span>→E
+</code></pre></div><ul>
+<li>
+<p>Alpha转换公理：例如，“lambda x y. x + y”转换为“lambda a b. a + b”。换句话说，函数的参数起什么名字没有关系，可以随意替换，只要函数体里面对参数的使用的地方也同时注意相应替换掉就是了。</p>
+</li>
+<li>
+<p>Beta转换公理：例如，“(lambda x y. x + y) 2 3”转换为“2 + 3”。这个就更简单了，也就是说，当把一个lambda函数用到参数身上时，只需用实际的参数来替换掉其函数体中的相应变量即可。</p>
+</li>
 </ul>
-
-<p><a href="http://mindhacks.cn/2006/10/15/cantor-godel-turing-an-eternal-golden-diagonal/" target="_blank">软件工程里面的一条黄金定律：“任何问题都可以通过增加一个间接层来解决</a></p>
-
-<h4 id="变量替换">变量替换</h4>
-
+<p><a href="http://mindhacks.cn/2006/10/15/cantor-godel-turing-an-eternal-golden-diagonal/">软件工程里面的一条黄金定律：“任何问题都可以通过增加一个间接层来解决</a></p>
+<h4 id="heading">变量替换</h4>
 <p>[y/x]E →  substitute  all occurrences of x in E to y</p>
-
-<p>以上是Lambda Calculus的一些基础知识，读者朋友现在不理解没有关系，等后面讲到Haskell中相关的部分就可以理解了。对于抑制不住自已的好奇心的朋友，可以在这里：<a href="http://en.wikipedia.org/wiki/Lambda_calculus" target="_blank">http://en.wikipedia.org/wiki/Lambda_calculus</a>做进一步的了解。</p>
-
-<p>在之前做的<a href="http://jueqingsizhe66.github.io/blog/2015/05/17/cong-lambdadao-simple-plus-complexjie-shi-qi-zai-dao-shu-xing-chou-xiang/" target="_blank">lambda的推导</a>其实都只是针对单个参数，包括<a href="http://shuklan.com/haskell/lec03.html#/0/15" target="_blank">Haskell也是强调单参数的调用</a>，如果多惨数那就是用curry来解决(funny多参数)
+<p>以上是Lambda Calculus的一些基础知识，读者朋友现在不理解没有关系，等后面讲到Haskell中相关的部分就可以理解了。对于抑制不住自已的好奇心的朋友，可以在这里：<a href="http://en.wikipedia.org/wiki/Lambda_calculus">http://en.wikipedia.org/wiki/Lambda_calculus</a>做进一步的了解。</p>
+<p>在之前做的<a href="http://jueqingsizhe66.github.io/blog/2015/05/17/cong-lambdadao-simple-plus-complexjie-shi-qi-zai-dao-shu-xing-chou-xiang/">lambda的推导</a>其实都只是针对单个参数，包括<a href="http://shuklan.com/haskell/lec03.html#/0/15">Haskell也是强调单参数的调用</a>，如果多惨数那就是用curry来解决(funny多参数)
 关于多参数的lambda推到比较少见，但是多参数都是可以通过curry实现。</p>
-
 <p>比如Haskell的实现:</p>
-
-<pre><code class="language-haskell">Prelude&gt; :type take
-take :: Int -&gt; [a] -&gt; [a]
-Prelude&gt; let takeFive = take 5
-Prelude&gt; :type takeFive
-takeFive :: [a] -&gt; [a]
-Prelude&gt; takeFive [1..]
-[1,2,3,4,5]
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#66d9ef">Prelude</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">:</span><span style="color:#66d9ef">type</span> take
+<span style="color:#a6e22e">take</span> <span style="color:#f92672">::</span> <span style="color:#66d9ef">Int</span> <span style="color:#f92672">-&gt;</span> [a] <span style="color:#f92672">-&gt;</span> [a]
+<span style="color:#66d9ef">Prelude</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">let</span> takeFive <span style="color:#f92672">=</span> take <span style="color:#ae81ff">5</span>
+<span style="color:#66d9ef">Prelude</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">:</span><span style="color:#66d9ef">type</span> takeFive
+<span style="color:#a6e22e">takeFive</span> <span style="color:#f92672">::</span> [a] <span style="color:#f92672">-&gt;</span> [a]
+<span style="color:#66d9ef">Prelude</span><span style="color:#f92672">&gt;</span> takeFive [<span style="color:#ae81ff">1</span><span style="color:#f92672">..</span>]
+[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>]
 	   
-</code></pre>
+</code></pre></div>
     </div>
  <div class="nav-links" style="padding:10;">
         
@@ -1121,7 +1071,7 @@ Prelude&gt; takeFive [1..]
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

@@ -569,53 +569,44 @@ main对应的类型是IO Something
 
 <span class="article-metadata" >Reading time: 0 minutes and    59 seconds with 218 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
-        
+        <nav id="TableOfContents"></nav>
     </aside>
   <div class="article-container">
 
 
     <div class="article-style">
       <p>main在Haskell充当类似c系列语言的exe文件的头函数
-main对应的类型是<a href="http://learnyoua.haskell.sg/content/zh-tw/ch09/input-and-output.html" target="_blank">IO Something</a>
+main对应的类型是<a href="http://learnyoua.haskell.sg/content/zh-tw/ch09/input-and-output.html">IO Something</a>
 比如下列源码：</p>
-
-<pre><code class="language-haskell">main = do 
-    putStrLn &quot;Hello Hello&quot; 
-    putStrLn &quot;Hello, what's your name?&quot; 
-    name &lt;- getLine 
-    putStrLn $ &quot;Read this carefully, because this is your future: &quot; ++  name 
-</code></pre>
-
-<p>Windows 输出：</p>
-
-<pre><code class="language-sh">c:\&gt;ghc --make hello.hs -o Hello 
-[1 of 1] Compiling Main             ( hello.hs, hello.o ) 
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#a6e22e">main</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">do</span> 
+    putStrLn <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Hello Hello</span><span style="color:#e6db74">&#34;</span> 
+    putStrLn <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Hello, what&#39;s your name?</span><span style="color:#e6db74">&#34;</span> 
+    name <span style="color:#f92672">&lt;-</span> getLine 
+    putStrLn <span style="color:#f92672">$</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Read this carefully, because this is your future: </span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">++</span>  name 
+</code></pre></div><p>Windows 输出：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">c:<span style="color:#ae81ff">\&gt;</span>ghc --make hello.hs -o Hello 
+<span style="color:#f92672">[</span><span style="color:#ae81ff">1</span> of 1<span style="color:#f92672">]</span> Compiling Main             <span style="color:#f92672">(</span> hello.hs, hello.o <span style="color:#f92672">)</span> 
 Linking Hello.exe ... 
 
-c:\&gt;Hello.exe 
+c:<span style="color:#ae81ff">\&gt;</span>Hello.exe 
 Hello Hello 
-Hello, what's your name? 
+Hello, what<span style="color:#960050;background-color:#1e0010">&#39;</span>s your name? 
 yezhaoliang 
 Read this carefully, because this is your future: yezhaoliang 
-</code></pre>
-
-<p>Ubuntu 输出:</p>
-
-<pre><code class="language-sh">root at javazhao-N53SM [21:52:10ä��午] in /home/happycamp-of-lisp on git:develop+?
+</code></pre></div><p>Ubuntu 输出:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">root at javazhao-N53SM <span style="color:#f92672">[</span>21:52:10ä��午<span style="color:#f92672">]</span> in /home/happycamp-of-lisp on git:develop+?
 $ ghc --make hello12.hs -o hello12
-[1 of 1] Compiling Main ( hello12.hs, hello12.o )
+<span style="color:#f92672">[</span><span style="color:#ae81ff">1</span> of 1<span style="color:#f92672">]</span> Compiling Main <span style="color:#f92672">(</span> hello12.hs, hello12.o <span style="color:#f92672">)</span>
 Linking hello12 ...
 
-root at javazhao-N53SM [21:52:25ä��午] in /home/happycamp-of-lisp on git:develop+?
+root at javazhao-N53SM <span style="color:#f92672">[</span>21:52:25ä��午<span style="color:#f92672">]</span> in /home/happycamp-of-lisp on git:develop+?
 $ ./hello12
 Hello Hello
-Hello, what's your name?
+Hello, what<span style="color:#960050;background-color:#1e0010">&#39;</span>s your name?
 yezhaoliang
 Read this carefully, because this is your future: yezhaoliang
 
-</code></pre>
-
-<p>Haskell天生的具备跨平台的特点</p>
+</code></pre></div><p>Haskell天生的具备跨平台的特点</p>
     </div>
  <div class="nav-links" style="padding:10;">
         
@@ -1019,7 +1010,7 @@ Read this carefully, because this is your future: yezhaoliang
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

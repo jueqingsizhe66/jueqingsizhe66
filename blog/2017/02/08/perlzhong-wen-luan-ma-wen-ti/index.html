@@ -563,78 +563,76 @@
 
 
 
-<span class="article-metadata" >Reading time: 1 minutes and    10 seconds with 258 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+<span class="article-metadata" >Reading time: 1 minutes and    14 seconds with 272 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
-        
+        <nav id="TableOfContents"></nav>
     </aside>
   <div class="article-container">
 
 
     <div class="article-style">
-      <p>binmode可以很好的解决perl中问题，采用<a href="http://blog.chinaunix.net/uid-20735106-id-3438892.html" target="_blank">Encode1</a>,<a href="http://www.jb51.net/article/16041.htm" target="_blank">Encode</a>等方式不管用</p>
-
+      <p>binmode可以很好的解决perl中问题，采用<a href="http://blog.chinaunix.net/uid-20735106-id-3438892.html">Encode1</a>,<a href="http://www.jb51.net/article/16041.htm">Encode</a>等方式不管用</p>
 <p>PerlFile.pl测试源码：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#75715e">#!/usr/bin/env perl </span>
+<span style="color:#75715e">#===============================================================================</span>
+<span style="color:#75715e">#</span>
+<span style="color:#75715e">#         FILE: perlFile.pl</span>
+<span style="color:#75715e">#</span>
+<span style="color:#75715e">#        USAGE: ./perlFile.pl  </span>
+<span style="color:#75715e">#</span>
+<span style="color:#75715e">#  DESCRIPTION: </span>
+<span style="color:#75715e">#</span>
+<span style="color:#75715e">#      OPTIONS: ---</span>
+<span style="color:#75715e"># REQUIREMENTS: ---</span>
+<span style="color:#75715e">#         BUGS: ---</span>
+<span style="color:#75715e">#        NOTES: ---</span>
+<span style="color:#75715e">#       AUTHOR: YOUR NAME (), </span>
+<span style="color:#75715e"># ORGANIZATION: </span>
+<span style="color:#75715e">#      VERSION: 1.0</span>
+<span style="color:#75715e">#      CREATED: 2017/2/8 9:49:51</span>
+<span style="color:#75715e">#     REVISION: ---</span>
+<span style="color:#75715e">#===============================================================================</span>
 
-<pre><code class="language-perl">#!/usr/bin/env perl 
-#===============================================================================
-#
-#         FILE: perlFile.pl
-#
-#        USAGE: ./perlFile.pl  
-#
-#  DESCRIPTION: 
-#
-#      OPTIONS: ---
-# REQUIREMENTS: ---
-#         BUGS: ---
-#        NOTES: ---
-#       AUTHOR: YOUR NAME (), 
-# ORGANIZATION: 
-#      VERSION: 1.0
-#      CREATED: 2017/2/8 9:49:51
-#     REVISION: ---
-#===============================================================================
-
-use strict;
-use warnings;
-use utf8;
-
+<span style="color:#66d9ef">use</span> strict;
+<span style="color:#66d9ef">use</span> warnings;
+<span style="color:#66d9ef">use</span> utf8;
 
 
-binmode(STDIN,&quot;:encoding(gb2312)&quot;);
-binmode(STDOUT,&quot;:encoding(gb2312)&quot;);
 
-while ( &lt;&gt; ) {
+binmode(STDIN,<span style="color:#e6db74">&#34;:encoding(gb2312)&#34;</span>);
+binmode(STDOUT,<span style="color:#e6db74">&#34;:encoding(gb2312)&#34;</span>);
+
+<span style="color:#66d9ef">while</span> ( <span style="color:#f92672">&lt;</span><span style="color:#f92672">&gt;</span> ) {
     chomp;
-    print $_,&quot;\n&quot;;
-    last if $_ =~ m/q/xm;
+    <span style="color:#66d9ef">print</span> $_,<span style="color:#e6db74">&#34;\n&#34;</span>;
+    <span style="color:#66d9ef">last</span> <span style="color:#66d9ef">if</span> $_ <span style="color:#f92672">=~</span> <span style="color:#e6db74">m/q/xm</span>;
 }
 
-open(FEIJI,&quot;E:\\feiji.txt&quot;) or die &quot;can't open the file \n&quot;;
-my $car =&quot;尾翼&quot;;
+open(FEIJI,<span style="color:#e6db74">&#34;E:\\feiji.txt&#34;</span>) <span style="color:#f92672">or</span> die <span style="color:#e6db74">&#34;can&#39;t open the file \n&#34;</span>;
+<span style="color:#66d9ef">my</span> $car <span style="color:#f92672">=</span><span style="color:#e6db74">&#34;尾翼&#34;</span>;
 
-	• binmode(FEIJI,&quot;:encoding(gb2312)&quot;);
-# binmode( STDIN,  ':encoding(gbk2312)' );
- #binmode( FEIJI,  ':encoding(utf8)' );
- #binmode( STDOUT, ':encoding(gbk2312)' );   
- #binmode( STDERR, ':encoding(gbk2312)' ); 
-#while( my $line = &lt;FEIJI&gt;){
-#my $re = Encode::decode('GB2312','汽车');
- my $count=1;
- while( &lt;FEIJI&gt;){
-     #print &quot;$_ \n&quot; ;
-    #     print &quot;$_ \n&quot; if $_ =~ /.*$re.*/;
-#    Encode::_utf8_on($_);
-    #    Encode::decode_utf8($_);
-    #print &quot;$_\n&quot; ;#if $_ =~ m/$car/xm;
-    #print &quot;$count: $_\n&quot; if $_ =~ m/$car/xm;
-    #$count +=1;
+	<span style="color:#960050;background-color:#1e0010">•</span> binmode(FEIJI,<span style="color:#e6db74">&#34;:encoding(gb2312)&#34;</span>);
+<span style="color:#75715e"># binmode( STDIN,  &#39;:encoding(gbk2312)&#39; );</span>
+ <span style="color:#75715e">#binmode( FEIJI,  &#39;:encoding(utf8)&#39; );</span>
+ <span style="color:#75715e">#binmode( STDOUT, &#39;:encoding(gbk2312)&#39; );   </span>
+ <span style="color:#75715e">#binmode( STDERR, &#39;:encoding(gbk2312)&#39; ); </span>
+<span style="color:#75715e">#while( my $line = &lt;FEIJI&gt;){</span>
+<span style="color:#75715e">#my $re = Encode::decode(&#39;GB2312&#39;,&#39;汽车&#39;);</span>
+ <span style="color:#66d9ef">my</span> $count<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>;
+ <span style="color:#66d9ef">while</span>( <span style="color:#e6db74">&lt;FEIJI&gt;</span>){
+     <span style="color:#75715e">#print &#34;$_ \n&#34; ;</span>
+    <span style="color:#75715e">#     print &#34;$_ \n&#34; if $_ =~ /.*$re.*/;</span>
+<span style="color:#75715e">#    Encode::_utf8_on($_);</span>
+    <span style="color:#75715e">#    Encode::decode_utf8($_);</span>
+    <span style="color:#75715e">#print &#34;$_\n&#34; ;#if $_ =~ m/$car/xm;</span>
+    <span style="color:#75715e">#print &#34;$count: $_\n&#34; if $_ =~ m/$car/xm;</span>
+    <span style="color:#75715e">#$count +=1;</span>
 
-     s/汽车/风力机/g;
-    print;
+     <span style="color:#e6db74">s/汽车/风力机/g</span>;
+    <span style="color:#66d9ef">print</span>;
     }
 
-</code></pre>
+</code></pre></div>
     </div>
  <div class="nav-links" style="padding:10;">
         
@@ -1038,7 +1036,7 @@ my $car =&quot;尾翼&quot;;
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

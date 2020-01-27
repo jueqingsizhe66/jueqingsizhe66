@@ -565,35 +565,35 @@
 
 <span class="article-metadata" >Reading time: 0 minutes and    18 seconds with 67 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
-        
+        <nav id="TableOfContents"></nav>
     </aside>
   <div class="article-container">
 
 
     <div class="article-style">
-      <pre><code class="language-makefile">FC = gfortran
-FFLAGS = -g -Wall -O3 --free-form
-modFFLAGS =  --free-form
+      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-makefile" data-lang="makefile">FC <span style="color:#f92672">=</span> gfortran
+FFLAGS <span style="color:#f92672">=</span> -g -Wall -O3 --free-form
+modFFLAGS <span style="color:#f92672">=</span>  --free-form
 
-OPTFC = -O3 -funroll-loops -ftree-vectorize -fcray-pointer -cpp
-#src = $(wildcard *.f90)
-src = secdmo.f90 record.f90
-obj = $(src:.f90=.o )
-secd : $(obj)
-    $(FC) $(FFLAGS) -o $@ $^
+OPTFC <span style="color:#f92672">=</span> -O3 -funroll-loops -ftree-vectorize -fcray-pointer -cpp
+<span style="color:#75715e">#src = $(wildcard *.f90)
+</span><span style="color:#75715e"></span>src <span style="color:#f92672">=</span> secdmo.f90 record.f90
+obj <span style="color:#f92672">=</span> <span style="color:#66d9ef">$(</span>src:.f90<span style="color:#f92672">=</span>.o <span style="color:#66d9ef">)</span>
+<span style="color:#a6e22e">secd </span><span style="color:#f92672">:</span> <span style="color:#66d9ef">$(</span>obj<span style="color:#66d9ef">)</span>
+    <span style="color:#66d9ef">$(</span>FC<span style="color:#66d9ef">)</span> <span style="color:#66d9ef">$(</span>FFLAGS<span style="color:#66d9ef">)</span> -o $@ $^
 
-%.o : %.f90
-    $(FC) $(modFFLAGS) $(OPTFC) -c $&lt;
+<span style="color:#a6e22e">%.o </span><span style="color:#f92672">:</span> %.f90
+    <span style="color:#66d9ef">$(</span>FC<span style="color:#66d9ef">)</span> <span style="color:#66d9ef">$(</span>modFFLAGS<span style="color:#66d9ef">)</span> <span style="color:#66d9ef">$(</span>OPTFC<span style="color:#66d9ef">)</span> -c $&lt;
 
-#secdmo.mod : secdmo.f
-#	$(FC) $(modFFLAGS) @ $&lt;
+<span style="color:#75715e">#secdmo.mod : secdmo.f
+</span><span style="color:#75715e"></span><span style="color:#75715e">#	$(FC) $(modFFLAGS) @ $&lt;
+</span><span style="color:#75715e"></span>
+<span style="color:#a6e22e">.phony</span><span style="color:#f92672">:</span> clean
 
-.phony: clean
-
-clean:
+<span style="color:#a6e22e">clean</span><span style="color:#f92672">:</span>
     rm -rf secd secdmo.mod funct.plo accu* fort* ./errdi* *.o
 
-</code></pre>
+</code></pre></div>
     </div>
  <div class="nav-links" style="padding:10;">
         
@@ -1001,7 +1001,7 @@ clean:
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

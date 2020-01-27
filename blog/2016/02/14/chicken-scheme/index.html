@@ -568,12 +568,9 @@
 <span class="article-metadata" >Reading time: 0 minutes and    35 seconds with 130 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#产生可运行文件">产生可运行文件</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#heading">产生可运行文件</a></li>
+  </ul>
 </nav>
     </aside>
   <div class="article-container">
@@ -582,27 +579,22 @@
     <div class="article-style">
       <p>它的主要住用适用于产生exe文件，并且对应产生的c代码更加的有效，
 运行效率较高。</p>
-
-<h2 id="产生可运行文件">产生可运行文件</h2>
-
+<h2 id="heading">产生可运行文件</h2>
 <p>该可运行的文件是通过chicken生成egg文件，也就是c语言,然后编译成机器代码。
 所以运行效率更高一些。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#75715e">;;; hello-world.scm</span>
+(<span style="color:#a6e22e">print</span> <span style="color:#e6db74">&#34;Hello, world!&#34;</span>)
 
-<pre><code class="language-scheme">;;; hello-world.scm
-(print &quot;Hello, world!&quot;)
-
-;;; Running it interpreted:
-$ csi -s hello-world.scm 
+<span style="color:#75715e">;;; Running it interpreted:</span>
+$ csi -s hello-world<span style="color:#f92672">.</span>scm 
 Hello, world!
 
-;;; Compiling and running the executable binary:
-$ csc hello-world.scm 
+<span style="color:#75715e">;;; Compiling and running the executable binary:</span>
+$ csc hello-world<span style="color:#f92672">.</span>scm 
 
-$ ./hello-world
+$ <span style="color:#f92672">.</span>/hello-world
 Hello, world!
-</code></pre>
-
-<p><a href="http://www.call-cc.org/" target="_blank">chicken-scheme</a></p>
+</code></pre></div><p><a href="http://www.call-cc.org/">chicken-scheme</a></p>
     </div>
  <div class="nav-links" style="padding:10;">
         
@@ -1006,7 +998,7 @@ Hello, world!
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

@@ -568,14 +568,11 @@ to add,delete,modify the content referred."><meta property="og:image" content="h
 <span class="article-metadata" >Reading time: 1 minutes and    58 seconds with 436 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#list">List</a></li>
-<li><a href="#vector">Vector</a></li>
-<li><a href="#the-box-function-in-the-tss">The box function in the TSS</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#list">List</a></li>
+    <li><a href="#vector">Vector</a></li>
+    <li><a href="#the-box-function-in-the-tss">The box function in the TSS</a></li>
+  </ul>
 </nav>
     </aside>
   <div class="article-container">
@@ -584,83 +581,63 @@ to add,delete,modify the content referred."><meta property="og:image" content="h
     <div class="article-style">
       <p>Data types such as list,vector,array,linkedlist,tree etc, all have the self operations
 to add,delete,modify the content referred.</p>
-
 <h2 id="list">List</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">    (<span style="color:#66d9ef">define </span>list-sum
+     (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">lst</span>)
+      (<span style="color:#66d9ef">if </span>(null? lst)
+       <span style="color:#ae81ff">0</span>
+       (+ (car lst) (<span style="color:#a6e22e">list-sum</span> (cdr lst))))))
+    (<span style="color:#a6e22e">list-sum</span> <span style="color:#f92672">&#39;</span>(<span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span>))
 
-<pre><code class="language-scheme">    (define list-sum
-     (lambda (lst)
-      (if (null? lst)
-       0
-       (+ (car lst) (list-sum (cdr lst))))))
-    (list-sum '(1 2 3 4))
+</code></pre></div><h2 id="vector">Vector</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">    (<span style="color:#66d9ef">define </span>vector-sum
+     (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">vec</span>)
+      (<span style="color:#66d9ef">define </span>vector-sum-help
+       (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">vec</span> n)
+        <span style="color:#75715e">;(if (eq? n 0)</span>
+            (<span style="color:#66d9ef">if </span>(zero? n)
+             (vector-ref vec <span style="color:#ae81ff">0</span>)
+             (+ (vector-ref vec n) (<span style="color:#a6e22e">vector-sum-help</span> vec (- n <span style="color:#ae81ff">1</span>))))))
+       (<span style="color:#66d9ef">let </span>((<span style="color:#a6e22e">n</span> (vector-length vec)))
+        (<span style="color:#66d9ef">if </span>(zero? n)
+         <span style="color:#ae81ff">0</span>
+         (<span style="color:#a6e22e">vector-sum-help</span> vec (- n <span style="color:#ae81ff">1</span>)))))) <span style="color:#75715e">;;;wrong  (n)</span>
+     (<span style="color:#a6e22e">vector-sum</span> (vector <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span>))
+</code></pre></div><h2 id="the-box-function-in-the-tss">The box function in the TSS</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">     box 的作用虽然有点类似 kons kar kdr
+     (<span style="color:#66d9ef">define </span>kons (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">kar</span> kdr) (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">selector</span>) (<span style="color:#a6e22e">selector</span> kar kdr))))
+    (<span style="color:#66d9ef">define </span>kar (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">c</span>) (<span style="color:#a6e22e">c</span> (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">a</span> d) a))))
+    (<span style="color:#66d9ef">define </span>kdr (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">c</span>) (<span style="color:#a6e22e">c</span> (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">a</span> d) d))))
+(<span style="color:#66d9ef">define </span>kdr2 (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">c</span>) (<span style="color:#a6e22e">c</span> (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">a</span> d) (<span style="color:#66d9ef">quote </span>d)))))
 
+    (<span style="color:#a6e22e">kar</span> (<span style="color:#a6e22e">kons</span> <span style="color:#e6db74">&#39;a</span> <span style="color:#e6db74">&#39;b</span>))
+    (<span style="color:#a6e22e">kdr</span> (<span style="color:#a6e22e">kons</span> <span style="color:#e6db74">&#39;a</span> <span style="color:#e6db74">&#39;b</span>))
+    (<span style="color:#a6e22e">kdr2</span> (<span style="color:#a6e22e">kons</span> <span style="color:#e6db74">&#39;a</span> <span style="color:#e6db74">&#39;b</span>))
+</code></pre></div><pre><code>Now let's see the function of the box.
 </code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">
+    (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">box</span> it)
+     (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">sel</span>)
+      (<span style="color:#a6e22e">sel</span> it (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">new</span>)
+               (<span style="color:#66d9ef">set! </span>it new)))))
 
-<h2 id="vector">Vector</h2>
+    (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">setbox</span> box new)
+     (<span style="color:#a6e22e">box</span> (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">it</span> set)
+           (<span style="color:#a6e22e">set</span> new))))
 
-<pre><code class="language-scheme">    (define vector-sum
-     (lambda (vec)
-      (define vector-sum-help
-       (lambda (vec n)
-        ;(if (eq? n 0)
-            (if (zero? n)
-             (vector-ref vec 0)
-             (+ (vector-ref vec n) (vector-sum-help vec (- n 1))))))
-       (let ((n (vector-length vec)))
-        (if (zero? n)
-         0
-         (vector-sum-help vec (- n 1)))))) ;;;wrong  (n)
-     (vector-sum (vector 1 2 3 4))
-</code></pre>
-
-<h2 id="the-box-function-in-the-tss">The box function in the TSS</h2>
-
-<pre><code class="language-scheme">     box 的作用虽然有点类似 kons kar kdr
-     (define kons (lambda (kar kdr) (lambda (selector) (selector kar kdr))))
-    (define kar (lambda (c) (c (lambda (a d) a))))
-    (define kdr (lambda (c) (c (lambda (a d) d))))
-(define kdr2 (lambda (c) (c (lambda (a d) (quote d)))))
-
-    (kar (kons 'a 'b))
-    (kdr (kons 'a 'b))
-    (kdr2 (kons 'a 'b))
-</code></pre>
-
-<pre><code>Now let's see the function of the box.
-</code></pre>
-
-<pre><code class="language-scheme">
-    (define (box it)
-     (lambda (sel)
-      (sel it (lambda (new)
-               (set! it new)))))
-
-    (define (setbox box new)
-     (box (lambda (it set)
-           (set new))))
-
-    (define (unbox box)
-     (box (lambda (it set)
+    (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">unbox</span> box)
+     (<span style="color:#a6e22e">box</span> (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">it</span> set)
            it)))
-</code></pre>
-
-<pre><code>我们使用的前提是通过box进行cons的作用
+</code></pre></div><pre><code>我们使用的前提是通过box进行cons的作用
 比如setbox
 </code></pre>
-
 <pre><code>    ((lambda (it set) (set new)) it (lambda (new) (set! it new)))
-</code></pre>
-
-<p>也就是 it对一个it 而set对应 (lambda (new) (set! it new))
-    所以这边真正起作用的就是第一个lambda里面的(set new)返回值
-    比如unbox</p>
-
+</code></pre><p>也就是 it对一个it 而set对应 (lambda (new) (set! it new))
+所以这边真正起作用的就是第一个lambda里面的(set new)返回值
+比如unbox</p>
 <pre><code>    ((lambda (it set) it) it (lambda (new) (set! it new)))
-</code></pre>
-
-<p>也就是此时 it依然对应it set对应的是(lambda (new) (set! it new))
-    所以这边真正起作用的就是第一个lambda里面的it返回值</p>
-
+</code></pre><p>也就是此时 it依然对应it set对应的是(lambda (new) (set! it new))
+所以这边真正起作用的就是第一个lambda里面的it返回值</p>
 <pre><code>所以box只不过是提供了一种映射结构，想到那关于数据结构的创建，把所有的基于这个框架的
 变体放入首个位置，类似closure的table位置
 </code></pre>
@@ -1067,7 +1044,7 @@ to add,delete,modify the content referred.</p>
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

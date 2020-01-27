@@ -29,7 +29,6 @@
     
   
   <meta name="description" content="关于shell的summary参看Linux Shell Summary
-
 以下是关于bash的一些比较特殊的地方。">
 
   
@@ -120,7 +119,6 @@
   <meta property="og:url" content="https://jueqingsizhe66.github.io/blog/2016/09/25/bash-special-annotation/">
   <meta property="og:title" content="bash special annotation | Macro Life">
   <meta property="og:description" content="关于shell的summary参看Linux Shell Summary
-
 以下是关于bash的一些比较特殊的地方。"><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
   <meta property="twitter:image" content="https://jueqingsizhe66.github.io/img/icon-192.png"><meta property="og:locale" content="en-us">
   
@@ -567,74 +565,54 @@
 
 
 
-<span class="article-metadata" >Reading time: 6 minutes and    19 seconds with 1392 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+<span class="article-metadata" >Reading time: 6 minutes and    18 seconds with 1389 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#1-bash数组再理解">1. bash数组再理解</a>
-<ul>
-<li><a href="#定义数组">定义数组</a></li>
-<li><a href="#引用数组">引用数组</a></li>
-<li><a href="#添加数组">添加数组</a></li>
-</ul></li>
-<li><a href="#2-bash变量截取和变量替换">2. bash变量截取和变量替换</a></li>
-<li><a href="#3-bash接受键盘操作">3. bash接受键盘操作</a></li>
-<li><a href="#4-tac反向">4. tac反向</a></li>
-<li><a href="#5-if当中也可以使用双括号进行算术判断">5. if当中也可以使用双括号进行算术判断</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#1-bash">1. bash数组再理解</a>
+      <ul>
+        <li><a href="#heading">定义数组</a></li>
+        <li><a href="#heading-1">引用数组</a></li>
+        <li><a href="#heading-2">添加数组</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-bash">2. bash变量截取和变量替换</a></li>
+    <li><a href="#3-bash">3. bash接受键盘操作</a></li>
+    <li><a href="#4-tac">4. tac反向</a></li>
+    <li><a href="#5-if">5. if当中也可以使用双括号进行算术判断</a></li>
+  </ul>
 </nav>
     </aside>
   <div class="article-container">
 
 
     <div class="article-style">
-      <p>关于shell的summary参看<a href="http://jueqingsizhe66.github.io/blog/2016/08/06/linux-shell-summary/#kernel" target="_blank">Linux Shell Summary</a></p>
-
+      <p>关于shell的summary参看<a href="http://jueqingsizhe66.github.io/blog/2016/08/06/linux-shell-summary/#kernel">Linux Shell Summary</a></p>
 <p>以下是关于bash的一些比较特殊的地方。</p>
-
-<h2 id="1-bash数组再理解">1. bash数组再理解</h2>
-
-<p><code>declare -a</code>表示声明一个数组，类似于 <code>declare -i</code> 声明一个整数和<code>declare -x</code>声明一个环境变量。</p>
-
-<p><font color="red">bash数组定义时候使用小括号来赋值，而在引用数组的时候反而使用中括号（不同于其他编程语言)</font></p>
-
-<h3 id="定义数组">定义数组</h3>
-
-<pre><code class="language-sh">bash2=(&quot;34&quot;,&quot;5&quot;,&quot;5&quot;,&quot;4&quot;)
-</code></pre>
-
-<h3 id="引用数组">引用数组</h3>
-
-<pre><code class="language-sh">echo ${array[n]}
+<h2 id="1-bash">1. bash数组再理解</h2>
+<p><code>declare -a</code>表示声明一个数组，类似于 <code>declare -i</code> 声明一个整数和<code>declare -x </code>声明一个环境变量。</p>
+<p><!-- raw HTML omitted -->bash数组定义时候使用小括号来赋值，而在引用数组的时候反而使用中括号（不同于其他编程语言)<!-- raw HTML omitted --></p>
+<h3 id="heading">定义数组</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">bash2<span style="color:#f92672">=</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;34&#34;</span>,<span style="color:#e6db74">&#34;5&#34;</span>,<span style="color:#e6db74">&#34;5&#34;</span>,<span style="color:#e6db74">&#34;4&#34;</span><span style="color:#f92672">)</span>
+</code></pre></div><h3 id="heading-1">引用数组</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">echo <span style="color:#e6db74">${</span>array[n]<span style="color:#e6db74">}</span>
 遍历数组：
-filename=(`ls`)
-for var in ${filename[@]};do
+filename<span style="color:#f92672">=</span><span style="color:#f92672">(</span><span style="color:#e6db74">`</span>ls<span style="color:#e6db74">`</span><span style="color:#f92672">)</span>
+<span style="color:#66d9ef">for</span> var in <span style="color:#e6db74">${</span>filename[@]<span style="color:#e6db74">}</span>;<span style="color:#66d9ef">do</span>
 echo $var
-done
+<span style="color:#66d9ef">done</span>
 
-</code></pre>
-
-<h3 id="添加数组">添加数组</h3>
-
-<pre><code class="language-sh">bash1+=&quot;45&quot;; #赋值两边不能有空格
-</code></pre>
-
-<h2 id="2-bash变量截取和变量替换">2. bash变量截取和变量替换</h2>
-
-<p><font color="red">bash使用井号代表开头(这和正则表达式有点不同，使用caret)
+</code></pre></div><h3 id="heading-2">添加数组</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">bash1<span style="color:#f92672">+=</span><span style="color:#e6db74">&#34;45&#34;</span>; <span style="color:#75715e">#赋值两边不能有空格</span>
+</code></pre></div><h2 id="2-bash">2. bash变量截取和变量替换</h2>
+<p><!-- raw HTML omitted -->bash使用井号代表开头(这和正则表达式有点不同，使用caret)
 而结尾则使用百分号(不同于正则表达式的dollar符号$)。并且在当使用两个重叠的井号，表示最大长度（从头开始的最大删除都删掉）
 而使用两个百分号则表达反方向的最大长度删除（从尾到头删除匹配字符串）</p>
-
 <ol>
 <li>#表示正向最短匹配，##表示正向最大匹配</li>
 <li>%表示反向最短匹配，%%表示反向最大匹配</li>
 </ol>
-
 <p>而这一点也体现在变量替换当中，</p>
-
 <pre><code>子串替换：
 ${string/substring/replacement}
 使用$replacement来替换第一个匹配的$substring.
@@ -657,82 +635,64 @@ ${string:position}
 ${string:position:length}
 在$string中从位置$position开始提取$length长度的子串.
 
-</code></pre>
-
-<ol>
+</code></pre><ol>
 <li>除号表示最短替换，双除号表示最长替换</li>
 <li>匹配项第一个位置出现#井号表示开头部分</li>
 <li>匹配项最后一个位置出现%百分号表示结尾部分</li>
 </ol>
-
-<h2 id="3-bash接受键盘操作">3. bash接受键盘操作</h2>
-
+<h2 id="3-bash">3. bash接受键盘操作</h2>
 <p>用一个read命令即可(类似于matlab的input命令)
 通常的风格是 <code>read -p &quot;prompt for reminding&quot; variable-name</code></p>
-
-<pre><code class="language-sh">接收键盘输入：
-    read [选项] [变量名]
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">接收键盘输入：
+    read <span style="color:#f92672">[</span>选项<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>变量名<span style="color:#f92672">]</span>
     选项：
-        -p &quot;提示信息&quot;：在等待read输入时，输出提示信息
+        -p <span style="color:#e6db74">&#34;提示信息&#34;</span>：在等待read输入时，输出提示信息
         -t 秒数：read命令会一直等待用户输入，使用此选项可以指定等待时间
         -n 字符数：read命令只接受指定的字符数，就会执行
         -s：隐藏输入的数据，适用于机密信息的输入
 
 read.sh：
-#!/bin/bash
+<span style="color:#75715e">#!/bin/bash</span>
 
-read -p &quot;please input your name:&quot; -t 30 name
+read -p <span style="color:#e6db74">&#34;please input your name:&#34;</span> -t <span style="color:#ae81ff">30</span> name
 echo $name
 
-read -p &quot;please input your passwd:&quot; -s passwd
-echo -e &quot;\n&quot;
+read -p <span style="color:#e6db74">&#34;please input your passwd:&#34;</span> -s passwd
+echo -e <span style="color:#e6db74">&#34;\n&#34;</span>
 echo $passwd
 
-read -p &quot;please input your sex [M/F]:&quot; sex
-echo -e &quot;\n&quot;
+read -p <span style="color:#e6db74">&#34;please input your sex [M/F]:&#34;</span> sex
+echo -e <span style="color:#e6db74">&#34;\n&#34;</span>
 echo $sex
 
-</code></pre>
+</code></pre></div><h2 id="4-tac">4. tac反向</h2>
+<p>cat在bash中是打印文本信息的作用，而<a href="http://bbs.chinaunix.net/thread-250407-1-1.html">tac</a>则是反向输出文件流</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">cat old_file|awk <span style="color:#e6db74">&#39;{print NR,$0}&#39;</span>|sort -r -n|awk <span style="color:#e6db74">&#39;{print $2}&#39;</span>
 
-<h2 id="4-tac反向">4. tac反向</h2>
-
-<p>cat在bash中是打印文本信息的作用，而<a href="http://bbs.chinaunix.net/thread-250407-1-1.html" target="_blank">tac</a>则是反向输出文件流</p>
-
-<pre><code class="language-sh">cat old_file|awk '{print NR,$0}'|sort -r -n|awk '{print $2}'
-
-</code></pre>
-
-<ol>
+</code></pre></div><ol>
 <li>添加每行的行号</li>
 <li>逆向排列</li>
 <li>输出每行</li>
 </ol>
-
-<h2 id="5-if当中也可以使用双括号进行算术判断">5. if当中也可以使用双括号进行算术判断</h2>
-
+<h2 id="5-if">5. if当中也可以使用双括号进行算术判断</h2>
 <p>if并不是支持正则表达式？还是只有变量支持？</p>
-
-<pre><code class="language-sh">root at javazhao-N53SM [13:26:46ä��午] in /MyBashWork/clean on git:develop?
-$ if [ -f &quot;All.sh&quot; ] ;then echo &quot;hei&quot;; else echo &quot;no&quot; ;fi;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">root at javazhao-N53SM <span style="color:#f92672">[</span>13:26:46ä��午<span style="color:#f92672">]</span> in /MyBashWork/clean on git:develop?
+$ <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -f <span style="color:#e6db74">&#34;All.sh&#34;</span> <span style="color:#f92672">]</span> ;<span style="color:#66d9ef">then</span> echo <span style="color:#e6db74">&#34;hei&#34;</span>; <span style="color:#66d9ef">else</span> echo <span style="color:#e6db74">&#34;no&#34;</span> ;<span style="color:#66d9ef">fi</span>;
 
 hei
 
-root at javazhao-N53SM [13:26:52ä��午] in /MyBashWork/clean on git:develop?
-$ if [ -f &quot;*.sh&quot; ] ;then echo &quot;hei&quot;; else echo &quot;no&quot; ;fi;
+root at javazhao-N53SM <span style="color:#f92672">[</span>13:26:52ä��午<span style="color:#f92672">]</span> in /MyBashWork/clean on git:develop?
+$ <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -f <span style="color:#e6db74">&#34;*.sh&#34;</span> <span style="color:#f92672">]</span> ;<span style="color:#66d9ef">then</span> echo <span style="color:#e6db74">&#34;hei&#34;</span>; <span style="color:#66d9ef">else</span> echo <span style="color:#e6db74">&#34;no&#34;</span> ;<span style="color:#66d9ef">fi</span>;
 
 no
 
 
 但是对于变量是可以的
-[root@bj_manager ~]# a=123a;if [[ $a =~ ^[0-9]+$ ]]; then echo ok; fi
-[root@bj_manager ~]# a=123;if [[ $a =~ ^[0-9]+$ ]]; then echo ok; fi  
-</code></pre>
-
-<p><font color="red">实际情况是只有在双中括号的时候才支持正则表达式</font>。<font color="green">一般是使用双中括号进行文件判断，目录判断，
-文件大小判断等</font></p>
-
+<span style="color:#f92672">[</span>root@bj_manager ~<span style="color:#f92672">]</span><span style="color:#75715e"># a=123a;if [[ $a =~ ^[0-9]+$ ]]; then echo ok; fi</span>
+<span style="color:#f92672">[</span>root@bj_manager ~<span style="color:#f92672">]</span><span style="color:#75715e"># a=123;if [[ $a =~ ^[0-9]+$ ]]; then echo ok; fi</span>  
+</code></pre></div><p><!-- raw HTML omitted -->实际情况是只有在双中括号的时候才支持正则表达式<!-- raw HTML omitted -->。<!-- raw HTML omitted -->一般是使用双中括号进行文件判断，目录判断，
+文件大小判断等<!-- raw HTML omitted --></p>
 <p>if另外一个特殊地方就是使用双括号执行算术比较</p>
-
 <pre><code>708@708-PC MINGW64 /e/plGraphViz (master)
   if (( 1&lt;2 )) ;then echo &quot;zero&quot;;   echo &quot;a=2&quot;; echo &quot;a=3&quot; ;else echo &quot;no&quot;; fi;
 zero
@@ -745,9 +705,7 @@ $   if [[ 1&lt;2 ]] ;then echo &quot;zero&quot;;   echo &quot;a=2&quot;; echo &q
 bash: unexpected token 284 in conditional command
 bash: syntax error near `1&lt;'
 
-</code></pre>
-
-<p>而bash也一般是使用<code>$((...))</code> 进行算术的运算.</p>
+</code></pre><p>而bash也一般是使用<code>$((...))</code> 进行算术的运算.</p>
     </div>
  <div class="nav-links" style="padding:10;">
         
@@ -1151,7 +1109,7 @@ bash: syntax error near `1&lt;'
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

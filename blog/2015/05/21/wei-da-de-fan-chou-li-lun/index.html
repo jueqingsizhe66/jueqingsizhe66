@@ -32,7 +32,6 @@
 对于程序员来说，它是另一种思考方式，一种极度有效的方式来提取规律(Extremely
 efficient for generalization)
 Programming is doing Math.编成的工作其实就是数学的工作。
-
 范畴是一种表达事物(things) 和路径(ways)  to go between things.
 这可以参考thinking like a git，因为他也是一种基于范畴理论，
 而延伸出来的实际产物，方便程序员对于development的管理。">
@@ -128,7 +127,6 @@ Programming is doing Math.编成的工作其实就是数学的工作。
 对于程序员来说，它是另一种思考方式，一种极度有效的方式来提取规律(Extremely
 efficient for generalization)
 Programming is doing Math.编成的工作其实就是数学的工作。
-
 范畴是一种表达事物(things) 和路径(ways)  to go between things.
 这可以参考thinking like a git，因为他也是一种基于范畴理论，
 而延伸出来的实际产物，方便程序员对于development的管理。"><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
@@ -580,68 +578,52 @@ Programming is doing Math.编成的工作其实就是数学的工作。
 <span class="article-metadata" >Reading time: 1 minutes and    28 seconds with 324 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#categories-and-functors-form-a-category-cat">Categories and functors form a category: Cat</a></li>
-<li><a href="#a-haskell-functor-is-a-type-f-which-belong-to-the-type-class-functor-thus-instantiate-fmap-a-b-f-a-f-b">A Haskell Functor is a type F :: * -&gt; * which belong to the type class Functor ; thus instantiate fmap :: (a -&gt; b) -&gt; (F a -&gt; F b).</a></li>
-<li><a href="#the-couple-f-fmap-is-a-hask-s-functor-if-for-any-x-f-a">The couple (F,fmap) is a Hask&rsquo;s functor if for any x :: F a:</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#categories-and-functors-form-a-category-cat">Categories and functors form a category: Cat</a></li>
+    <li><a href="#a-haskell-functor-is-a-type-f------which-belong-to-the-type-class-functor--thus-instantiate-fmap--a---b---f-a---f-b">A Haskell Functor is a type F :: * -> * which belong to the type class Functor ; thus instantiate fmap :: (a -> b) -> (F a -> F b).</a></li>
+    <li><a href="#the-couple-ffmap-is-a-hasks-functor-if-for-any-x--f-a">The couple (F,fmap) is a Hask's functor if for any x :: F a:</a></li>
+  </ul>
 </nav>
     </aside>
   <div class="article-container">
 
 
     <div class="article-style">
-      <p><a href="http://yogsototh.github.io/Category-Theory-Presentation/" target="_blank">范畴理论</a>是数学上的一种新的语言和框架结构.
+      <p><a href="http://yogsototh.github.io/Category-Theory-Presentation/">范畴理论</a>是数学上的一种新的语言和框架结构.
 对于程序员来说，它是另一种思考方式，一种极度有效的方式来提取规律(Extremely
 efficient for generalization)
 Programming is doing Math.编成的工作其实就是数学的工作。</p>
-
 <p>范畴是一种表达事物(things) 和路径(ways)  to go between things.
-这可以参考<a href="http://think-like-a-git.net/" target="_blank">thinking like a git</a>，因为他也是一种基于范畴理论，
+这可以参考<a href="http://think-like-a-git.net/">thinking like a git</a>，因为他也是一种基于范畴理论，
 而延伸出来的实际产物，方便程序员对于development的管理。</p>
-
 <p>A Category C is defined by:</p>
-
 <ul>
 <li>Objects ob(C),</li>
 <li>Morphisms hom(C),</li>
 <li>a Composition law (∘)</li>
 </ul>
-
 <p>Functor : (ob-&gt;ob)
-<img src="http://yogsototh.github.io/Category-Theory-Presentation/categories/img/mp/functor.png" alt="Functor part1" /></p>
-
+<img src="http://yogsototh.github.io/Category-Theory-Presentation/categories/img/mp/functor.png" alt="Functor part1"></p>
 <p>Functor : (hom-&gt;hom)
-<img src="http://yogsototh.github.io/Category-Theory-Presentation/categories/img/mp/functor-morphism.png" alt="Functor part2" /></p>
-
+<img src="http://yogsototh.github.io/Category-Theory-Presentation/categories/img/mp/functor-morphism.png" alt="Functor part2"></p>
 <p>Endofunctors:
-<img src="http://yogsototh.github.io/Category-Theory-Presentation/categories/img/mp/functor-morphism.png" alt="自指" /></p>
-
-<p><img src="http://yogsototh.github.io/Category-Theory-Presentation/categories/img/fractalcat.jpg" alt="一只可爱的猫" /></p>
-
+<img src="http://yogsototh.github.io/Category-Theory-Presentation/categories/img/mp/functor-morphism.png" alt="自指"></p>
+<p><img src="http://yogsototh.github.io/Category-Theory-Presentation/categories/img/fractalcat.jpg" alt="一只可爱的猫"></p>
 <h2 id="categories-and-functors-form-a-category-cat">Categories and functors form a category: Cat</h2>
-
 <ul>
 <li>ob(Cat) are categories</li>
 <li>hom(Cat) are functors</li>
 <li>∘ is functor composition</li>
 </ul>
-
-<h2 id="a-haskell-functor-is-a-type-f-which-belong-to-the-type-class-functor-thus-instantiate-fmap-a-b-f-a-f-b">A Haskell Functor is a type F :: * -&gt; * which belong to the type class Functor ; thus instantiate fmap :: (a -&gt; b) -&gt; (F a -&gt; F b).</h2>
-
+<h2 id="a-haskell-functor-is-a-type-f------which-belong-to-the-type-class-functor--thus-instantiate-fmap--a---b---f-a---f-b">A Haskell Functor is a type F :: * -&gt; * which belong to the type class Functor ; thus instantiate fmap :: (a -&gt; b) -&gt; (F a -&gt; F b).</h2>
 <ul>
 <li>F: ob(Hask)→ob(Hask)</li>
 <li>&amp; fmap: hom(Hask)→hom(Hask)</li>
 </ul>
-
-<h2 id="the-couple-f-fmap-is-a-hask-s-functor-if-for-any-x-f-a">The couple (F,fmap) is a Hask&rsquo;s functor if for any x :: F a:</h2>
-
-<pre><code class="language-haskell">fmap id x = x
-fmap (f.g) x= (fmap f . fmap g) x
-</code></pre>
+<h2 id="the-couple-ffmap-is-a-hasks-functor-if-for-any-x--f-a">The couple (F,fmap) is a Hask's functor if for any x :: F a:</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#a6e22e">fmap</span> id x <span style="color:#f92672">=</span> x
+<span style="color:#a6e22e">fmap</span> (f<span style="color:#f92672">.</span>g) x<span style="color:#f92672">=</span> (fmap f <span style="color:#f92672">.</span> fmap g) x
+</code></pre></div>
     </div>
  <div class="nav-links" style="padding:10;">
         
@@ -1045,7 +1027,7 @@ fmap (f.g) x= (fmap f . fmap g) x
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

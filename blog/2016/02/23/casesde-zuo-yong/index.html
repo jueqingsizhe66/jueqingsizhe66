@@ -566,124 +566,106 @@
 <span class="article-metadata" >Reading time: 3 minutes and    7 seconds with 686 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#原先的程序">原先的程序</a></li>
-<li><a href="#简化的程序">简化的程序</a></li>
-<li><a href="#value-of实现">value-of实现</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#heading">原先的程序</a></li>
+    <li><a href="#heading-1">简化的程序</a></li>
+    <li><a href="#value-of">value-of实现</a></li>
+  </ul>
 </nav>
     </aside>
   <div class="article-container">
 
 
     <div class="article-style">
-      <p>为什么要实现<a href="http://jueqingsizhe66.github.io/blog/2016/02/19/the-implementation-of-define-datetype/" target="_blank">cases</a>,目的在于进一步抽象简化过程。</p>
-
-<h2 id="原先的程序">原先的程序</h2>
-
+      <p>为什么要实现<a href="http://jueqingsizhe66.github.io/blog/2016/02/19/the-implementation-of-define-datetype/">cases</a>,目的在于进一步抽象简化过程。</p>
+<h2 id="heading">原先的程序</h2>
 <pre><code>      procedure :   Var * Exp * Env -&gt;  Proc
 apply-procedure :   Proc * ExpVal   -&gt;  ExpVal
 </code></pre>
-
-<pre><code class="language-scheme"> ;; procedure : Var * Exp * Env -&gt; Proc
- ;; Page: 79
-  (define procedure
-    (lambda (var body env)
-      (lambda (val)
-        (value-of body (extend-env var val env)))))
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"> <span style="color:#75715e">;; procedure : Var * Exp * Env -&gt; Proc</span>
+ <span style="color:#75715e">;; Page: 79</span>
+  (<span style="color:#66d9ef">define </span>procedure
+    (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">var</span> body env)
+      (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">val</span>)
+        (<span style="color:#a6e22e">value-of</span> body (<span style="color:#a6e22e">extend-env</span> var val env)))))
   
-  ;; apply-procedure : Proc * ExpVal -&gt; ExpVal
-  ;; Page: 79
-  (define apply-procedure
-    (lambda (proc val)
-      (proc val)))
-</code></pre>
-
-<h2 id="简化的程序">简化的程序</h2>
-
+  <span style="color:#75715e">;; apply-procedure : Proc * ExpVal -&gt; ExpVal</span>
+  <span style="color:#75715e">;; Page: 79</span>
+  (<span style="color:#66d9ef">define </span>apply-procedure
+    (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">proc</span> val)
+      (<span style="color:#a6e22e">proc</span> val)))
+</code></pre></div><h2 id="heading-1">简化的程序</h2>
 <pre><code>apply-procedure : Proc * ExpVal -&gt; ExpVal
 </code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">  <span style="color:#75715e">;; apply-procedure : Proc * ExpVal -&gt; ExpVal</span>
+  <span style="color:#75715e">;; Page: 79</span>
+  (<span style="color:#66d9ef">define </span>apply-procedure
+    (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">proc1</span> val)
+      (<span style="color:#a6e22e">cases</span> proc proc1
+        (<span style="color:#a6e22e">procedure</span> (<span style="color:#a6e22e">var</span> body saved-env)
+          (<span style="color:#a6e22e">value-of</span> body (<span style="color:#a6e22e">extend-env</span> var val saved-env))))))
 
-<pre><code class="language-scheme">  ;; apply-procedure : Proc * ExpVal -&gt; ExpVal
-  ;; Page: 79
-  (define apply-procedure
-    (lambda (proc1 val)
-      (cases proc proc1
-        (procedure (var body saved-env)
-          (value-of body (extend-env var val saved-env))))))
-
-</code></pre>
-
-<ul>
+</code></pre></div><ul>
 <li>通过cases的proc1找到输入的expressions（scheme的expressions即是数据）,转移val分配到extend-env中，</li>
 <li>通过变量名和变量列表<code>(var body...)</code>引入var，</li>
 <li>并形成<code>(var val)</code>词汇表打入saved-env，</li>
 <li>最后利用value-of解析body，也就是解析由<code>(var body saved-env)</code>构成的closure，递归解析所有的body,
 如果proc1满足<code>(procedure (var body saved-env))</code>的形式，则通过value-of进行解析.</li>
 </ul>
-
 <p>saved-env是假定的保存的环境变量，而对应的apply-procedure的最终结果是<code>(proc1 val)</code></p>
-
-<h2 id="value-of实现">value-of实现</h2>
-
+<h2 id="value-of">value-of实现</h2>
 <p>它是在语言设计阶段比较重要的实现，在其中可以存在很多的变种。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">  <span style="color:#75715e">;; value-of : Exp * Env -&gt; ExpVal</span>
+  (<span style="color:#66d9ef">define </span>value-of
+    (<span style="color:#66d9ef">lambda </span>(exp env)
+      (<span style="color:#a6e22e">cases</span> expression exp
 
-<pre><code class="language-scheme">  ;; value-of : Exp * Env -&gt; ExpVal
-  (define value-of
-    (lambda (exp env)
-      (cases expression exp
+        <span style="color:#75715e">;\commentbox{ (value-of (const-exp \n{}) \r) = \n{}}</span>
+        (<span style="color:#a6e22e">const-exp</span> (<span style="color:#a6e22e">num</span>) (<span style="color:#a6e22e">num-val</span> num))
 
-        ;\commentbox{ (value-of (const-exp \n{}) \r) = \n{}}
-        (const-exp (num) (num-val num))
+        <span style="color:#75715e">;\commentbox{ (value-of (var-exp \x{}) \r) = (apply-env \r \x{})}</span>
+        (<span style="color:#a6e22e">var-exp</span> (<span style="color:#a6e22e">var</span>) (<span style="color:#a6e22e">apply-env</span> env var))
 
-        ;\commentbox{ (value-of (var-exp \x{}) \r) = (apply-env \r \x{})}
-        (var-exp (var) (apply-env env var))
-
-        ;\commentbox{\diffspec}
-        (diff-exp (exp1 exp2)
-          (let ((val1 (value-of exp1 env))
-                (val2 (value-of exp2 env)))
-            (let ((num1 (expval-&gt;num val1))
-                  (num2 (expval-&gt;num val2)))
-              (num-val
+        <span style="color:#75715e">;\commentbox{\diffspec}</span>
+        (<span style="color:#a6e22e">diff-exp</span> (<span style="color:#a6e22e">exp1</span> exp2)
+          (<span style="color:#66d9ef">let </span>((<span style="color:#a6e22e">val1</span> (<span style="color:#a6e22e">value-of</span> exp1 env))
+                (<span style="color:#a6e22e">val2</span> (<span style="color:#a6e22e">value-of</span> exp2 env)))
+            (<span style="color:#66d9ef">let </span>((<span style="color:#a6e22e">num1</span> (<span style="color:#a6e22e">expval-&gt;num</span> val1))
+                  (<span style="color:#a6e22e">num2</span> (<span style="color:#a6e22e">expval-&gt;num</span> val2)))
+              (<span style="color:#a6e22e">num-val</span>
                 (- num1 num2)))))
 
-        ;\commentbox{\zerotestspec}
-        (zero?-exp (exp1)
-          (let ((val1 (value-of exp1 env)))
-            (let ((num1 (expval-&gt;num val1)))
-              (if (zero? num1)
-                (bool-val #t)
-                (bool-val #f)))))
+        <span style="color:#75715e">;\commentbox{\zerotestspec}</span>
+        (<span style="color:#a6e22e">zero?-exp</span> (<span style="color:#a6e22e">exp1</span>)
+          (<span style="color:#66d9ef">let </span>((<span style="color:#a6e22e">val1</span> (<span style="color:#a6e22e">value-of</span> exp1 env)))
+            (<span style="color:#66d9ef">let </span>((<span style="color:#a6e22e">num1</span> (<span style="color:#a6e22e">expval-&gt;num</span> val1)))
+              (<span style="color:#66d9ef">if </span>(zero? num1)
+                (<span style="color:#a6e22e">bool-val</span> <span style="color:#66d9ef">#t</span>)
+                (<span style="color:#a6e22e">bool-val</span> <span style="color:#66d9ef">#f</span>)))))
               
-        ;\commentbox{\ma{\theifspec}}
-        (if-exp (exp1 exp2 exp3)
-          (let ((val1 (value-of exp1 env)))
-            (if (expval-&gt;bool val1)
-              (value-of exp2 env)
-              (value-of exp3 env))))
+        <span style="color:#75715e">;\commentbox{\ma{\theifspec}}</span>
+        (<span style="color:#a6e22e">if-exp</span> (<span style="color:#a6e22e">exp1</span> exp2 exp3)
+          (<span style="color:#66d9ef">let </span>((<span style="color:#a6e22e">val1</span> (<span style="color:#a6e22e">value-of</span> exp1 env)))
+            (<span style="color:#66d9ef">if </span>(<span style="color:#a6e22e">expval-&gt;bool</span> val1)
+              (<span style="color:#a6e22e">value-of</span> exp2 env)
+              (<span style="color:#a6e22e">value-of</span> exp3 env))))
 
-        ;\commentbox{\ma{\theletspecsplit}}
-        (let-exp (var exp1 body)       
-          (let ((val1 (value-of exp1 env)))
-            (value-of body
-              (extend-env var val1 env))))
+        <span style="color:#75715e">;\commentbox{\ma{\theletspecsplit}}</span>
+        (<span style="color:#a6e22e">let-exp</span> (<span style="color:#a6e22e">var</span> exp1 body)       
+          (<span style="color:#66d9ef">let </span>((<span style="color:#a6e22e">val1</span> (<span style="color:#a6e22e">value-of</span> exp1 env)))
+            (<span style="color:#a6e22e">value-of</span> body
+              (<span style="color:#a6e22e">extend-env</span> var val1 env))))
         
-        (proc-exp (var body)
-          (proc-val (procedure var body env)))
+        (<span style="color:#a6e22e">proc-exp</span> (<span style="color:#a6e22e">var</span> body)
+          (<span style="color:#a6e22e">proc-val</span> (<span style="color:#a6e22e">procedure</span> var body env)))
 
-        (call-exp (rator rand)
-          (let ((proc (expval-&gt;proc (value-of rator env)))
-                (arg (value-of rand env)))
-            (apply-procedure proc arg)))
+        (<span style="color:#a6e22e">call-exp</span> (<span style="color:#a6e22e">rator</span> rand)
+          (<span style="color:#66d9ef">let </span>((<span style="color:#a6e22e">proc</span> (<span style="color:#a6e22e">expval-&gt;proc</span> (<span style="color:#a6e22e">value-of</span> rator env)))
+                (<span style="color:#a6e22e">arg</span> (<span style="color:#a6e22e">value-of</span> rand env)))
+            (<span style="color:#a6e22e">apply-procedure</span> proc arg)))
 
         )))
-</code></pre>
-
-<ul>
+</code></pre></div><ul>
 <li>在value-of中，如果exp满足<code>if-exp (exp1 exp2 exp3)</code>则解析乘对应的，</li>
 <li>依次类推,当看到<code>let-exp (va exp1 body)</code>的形式则对应的进行演变.</li>
 </ul>
@@ -1090,7 +1072,7 @@ apply-procedure :   Proc * ExpVal   -&gt;  ExpVal
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

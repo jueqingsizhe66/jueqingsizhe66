@@ -29,8 +29,8 @@
     
   
   <meta name="description" content="The notes is published for rethinking what I am reading
-in the book called 《Teach Yourself Scheme in Fixnum Days》.
-It is a good book for introducing scheme(you&rsquo;d better have read
+in the book called [《Teach Yourself Scheme in Fixnum Days》][3].
+It is a good book for introducing scheme(you&#39;d better have read
 the TLS)">
 
   
@@ -121,8 +121,8 @@ the TLS)">
   <meta property="og:url" content="https://jueqingsizhe66.github.io/blog/2016/02/14/notes-from-teach-yourself-scheme/">
   <meta property="og:title" content="Notes from Teach yourself scheme | Macro Life">
   <meta property="og:description" content="The notes is published for rethinking what I am reading
-in the book called 《Teach Yourself Scheme in Fixnum Days》.
-It is a good book for introducing scheme(you&rsquo;d better have read
+in the book called [《Teach Yourself Scheme in Fixnum Days》][3].
+It is a good book for introducing scheme(you&#39;d better have read
 the TLS)"><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
   <meta property="twitter:image" content="https://jueqingsizhe66.github.io/img/icon-192.png"><meta property="og:locale" content="en-us">
   
@@ -569,19 +569,16 @@ the TLS)"><meta property="og:image" content="https://jueqingsizhe66.github.io/im
 
 
 
-<span class="article-metadata" >Reading time: 2 minutes and    6 seconds with 464 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+<span class="article-metadata" >Reading time: 2 minutes and    12 seconds with 487 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#forms">Forms</a></li>
-<li><a href="#data-types">Data Types</a></li>
-<li><a href="#implicit-and-explicit">implicit and explicit</a></li>
-<li><a href="#macro-expansion">macro expansion</a></li>
-<li><a href="#jumps-cps">Jumps(CPS)</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#forms">Forms</a></li>
+    <li><a href="#data-types">Data Types</a></li>
+    <li><a href="#implicit-and-explicit">implicit and explicit</a></li>
+    <li><a href="#macro-expansion">macro expansion</a></li>
+    <li><a href="#jumpscps">Jumps(CPS)</a></li>
+  </ul>
 </nav>
     </aside>
   <div class="article-container">
@@ -589,27 +586,21 @@ the TLS)"><meta property="og:image" content="https://jueqingsizhe66.github.io/im
 
     <div class="article-style">
       <p>The notes is published for rethinking what I am reading
-in the book called <a href="http://ds26gte.github.io/tyscheme/index.html" target="_blank">《Teach Yourself Scheme in Fixnum Days》</a>.
-It is a good book for introducing scheme(you&rsquo;d better have read
+in the book called [《Teach Yourself Scheme in Fixnum Days》][3].
+It is a good book for introducing scheme(you'd better have read
 the TLS)</p>
-
 <h2 id="forms">Forms</h2>
-
 <p>All expression can be inducted into Forms,such as define,begin,set! forms.
 Before, I only said the define,begin,set! expression without forms.</p>
-
 <h2 id="data-types">Data Types</h2>
-
 <ol>
 <li>list</li>
 <li>vector</li>
 <li>procedure</li>
 <li>port (原来port也是数据类型的一种，这样就并入了文件的IO)
-当然也包括open-string-port相当于创建了fortran的<a href="http://v.fcode.cn/video-internal_file.html" target="_blank">内部文件</a>的作用。</li>
+当然也包括open-string-port相当于创建了fortran的[内部文件][4]的作用。</li>
 </ol>
-
 <p>所有的形式(forms)在scheme其实都是一种对于数据的representation.要反复思考这个过程。</p>
-
 <blockquote>
 <p>Data abstraction divides a data type into two pieces: an interface
 and an implementation. The interface tells us what the data of the type
@@ -618,32 +609,28 @@ operations may be relied to have.The implementation provides a specific
 representation of the data and code for the operations that make use
 of that data representation.</p>
 </blockquote>
-
 <h2 id="implicit-and-explicit">implicit and explicit</h2>
-
 <p>lambda 的内部自带(begin &hellip;)的作用，也就是可以连接多个expressions（forms）。
 而if没有，对应的when，unless conditions则是存在隐式的implicit begin的作用。
 并且when和unless其实就差在一个not表达式</p>
-
 <ul>
 <li>lambda implicit begin</li>
 <li>when   implicit begin</li>
 <li>unless implicit begin</li>
 <li>if     explicit begin</li>
 </ul>
-
 <h2 id="macro-expansion">macro expansion</h2>
-
 <ol>
 <li>`(.. , &hellip;)    叫做comon 形式</li>
 <li>`(&hellip; ,@ &hellip;)  叫做comon slice形式</li>
 </ol>
-
-<h2 id="jumps-cps">Jumps(CPS)</h2>
-
+<h2 id="jumpscps">Jumps(CPS)</h2>
 <p>Continuation is the special contribution of the book.</p>
-
-<p><a href="http://tunes.org/wiki/scheme.html" target="_blank">很多其他的scheme解释器和编译器.</a> <a href="http://groups.csail.mit.edu/mac/projects/scheme/index.html" target="_blank">Mit_scheme</a></p>
+<p>[很多其他的scheme解释器和编译器.][1] [Mit_scheme][2]
+[1]: <a href="http://tunes.org/wiki/scheme.html">http://tunes.org/wiki/scheme.html</a>
+[2]: <a href="http://groups.csail.mit.edu/mac/projects/scheme/index.html">http://groups.csail.mit.edu/mac/projects/scheme/index.html</a>
+[3]: <a href="http://ds26gte.github.io/tyscheme/index.html">http://ds26gte.github.io/tyscheme/index.html</a>
+[4]: <a href="http://v.fcode.cn/video-internal_file.html">http://v.fcode.cn/video-internal_file.html</a></p>
     </div>
  <div class="nav-links" style="padding:10;">
         
@@ -1047,7 +1034,7 @@ of that data representation.</p>
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

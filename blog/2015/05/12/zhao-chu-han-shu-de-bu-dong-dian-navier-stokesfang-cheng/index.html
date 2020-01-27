@@ -29,10 +29,9 @@
     
   
   <meta name="description" content="##Beautiful code!
-
 数x为函数的f的不动点（f可以代表N-S方程），如果满足f(x)=x,则称x
 为函数f的不动点。
-性质 f(x),f(f(x)),f(f(f(x)))&hellip;., change the x&rsquo;s value if f(x)=x,then
+性质 f(x),f(f(x)),f(f(f(x)))&hellip;., change the x&#39;s value if f(x)=x,then
 you found!">
 
   
@@ -123,10 +122,9 @@ you found!">
   <meta property="og:url" content="https://jueqingsizhe66.github.io/blog/2015/05/12/zhao-chu-han-shu-de-bu-dong-dian-navier-stokesfang-cheng/">
   <meta property="og:title" content="找出函数的不动点--Navier-Stokes方程 | Macro Life">
   <meta property="og:description" content="##Beautiful code!
-
 数x为函数的f的不动点（f可以代表N-S方程），如果满足f(x)=x,则称x
 为函数f的不动点。
-性质 f(x),f(f(x)),f(f(f(x)))&hellip;., change the x&rsquo;s value if f(x)=x,then
+性质 f(x),f(f(x)),f(f(f(x)))&hellip;., change the x&#39;s value if f(x)=x,then
 you found!"><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
   <meta property="twitter:image" content="https://jueqingsizhe66.github.io/img/icon-192.png"><meta property="og:locale" content="en-us">
   
@@ -576,12 +574,9 @@ you found!"><meta property="og:image" content="https://jueqingsizhe66.github.io/
 <span class="article-metadata" >Reading time: 1 minutes and    38 seconds with 362 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#source-code">Source code</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#source-code">Source code</a></li>
+  </ul>
 </nav>
     </aside>
   <div class="article-container">
@@ -589,89 +584,86 @@ you found!"><meta property="og:image" content="https://jueqingsizhe66.github.io/
 
     <div class="article-style">
       <p>##Beautiful code!</p>
-
 <p>数x为函数的f的不动点（f可以代表N-S方程），如果满足f(x)=x,则称x
 为函数f的不动点。
-性质 f(x),f(f(x)),f(f(f(x)))&hellip;., change the x&rsquo;s value if f(x)=x,then
+性质 f(x),f(f(x)),f(f(f(x)))&hellip;., change the x's value if f(x)=x,then
 you found!</p>
-
 <h2 id="source-code">Source code</h2>
-
-<pre><code class="language-scheme">(define tolerance 0.000001)
-(define (fixed-point f first-guess)
-  (define (close-enough? v1 v2)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">define </span>tolerance <span style="color:#ae81ff">0.000001</span>)
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">fixed-point</span> f first-guess)
+  (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">close-enough?</span> v1 v2)
     (&lt; (abs (-  v1 v2)) tolerance))
-  (define (try guess)
-    (let ((next (f guess)))
-      (if (close-enough? guess next)
+  (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">try</span> guess)
+    (<span style="color:#66d9ef">let </span>((<span style="color:#a6e22e">next</span> (<span style="color:#a6e22e">f</span> guess)))
+      (<span style="color:#66d9ef">if </span>(<span style="color:#a6e22e">close-enough?</span> guess next)
          next
-         (try next))))
-  (try first-guess))
+         (<span style="color:#a6e22e">try</span> next))))
+  (<span style="color:#a6e22e">try</span> first-guess))
 
-;;;solve cos(x)=x
-(fixed-point cos 1.0)
-
-
-;;(cos 0.7390855263619245)
-;;0.7390848683867142
-;;(abs (-  (cos 0.7390855263619245) 0.7390855263619245))
-;;6.579752103164083e-07
+<span style="color:#75715e">;;;solve cos(x)=x</span>
+(<span style="color:#a6e22e">fixed-point</span> cos <span style="color:#ae81ff">1.0</span>)
 
 
-;;;solve y=siny+cosy   x=f(x) ====&gt; Navier Stokes equation
-(fixed-point (lambda (y) (+ (sin y) (cos y))) 1.0)
-
-;;It is what we want!!!
-;;;(abs (- ((lambda (y) (+ (sin y) (cos y))) 1.2587277968014188) 1.2587277968014188)) 
-;;6.26112570678572e-07
+<span style="color:#75715e">;;(cos 0.7390855263619245)</span>
+<span style="color:#75715e">;;0.7390848683867142</span>
+<span style="color:#75715e">;;(abs (-  (cos 0.7390855263619245) 0.7390855263619245))</span>
+<span style="color:#75715e">;;6.579752103164083e-07</span>
 
 
-;;;;One method to calculate the square value
-;;because x^2 = y  so x = y/x (x =f (x) next we  will use the fixed-point thinking) we should continue change the x's value!
-(define (sqrt-iter guess x)
-  (if (good-enough? guess x)
+<span style="color:#75715e">;;;solve y=siny+cosy   x=f(x) ====&gt; Navier Stokes equation</span>
+(<span style="color:#a6e22e">fixed-point</span> (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">y</span>) (+ (sin y) (cos y))) <span style="color:#ae81ff">1.0</span>)
+
+<span style="color:#75715e">;;It is what we want!!!</span>
+<span style="color:#75715e">;;;(abs (- ((lambda (y) (+ (sin y) (cos y))) 1.2587277968014188) 1.2587277968014188)) </span>
+<span style="color:#75715e">;;6.26112570678572e-07</span>
+
+
+<span style="color:#75715e">;;;;One method to calculate the square value</span>
+<span style="color:#75715e">;;because x^2 = y  so x = y/x (x =f (x) next we  will use the fixed-point thinking) we should continue change the x&#39;s value!</span>
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">sqrt-iter</span> guess x)
+  (<span style="color:#66d9ef">if </span>(<span style="color:#a6e22e">good-enough?</span> guess x)
      guess
-     (sqrt-iter (improve guess x)
+     (<span style="color:#a6e22e">sqrt-iter</span> (<span style="color:#a6e22e">improve</span> guess x)
                x)))
 
-(define (square x)
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">square</span> x)
   (* x x))
-;;;good-enough? is similar to close-enough？
-(define (good-enough? x y)
-  (&lt; (abs (- (square x) y)) 0.00001))
+<span style="color:#75715e">;;;good-enough? is similar to close-enough？</span>
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">good-enough?</span> x y)
+  (&lt; (abs (- (<span style="color:#a6e22e">square</span> x) y)) <span style="color:#ae81ff">0.00001</span>))
 
-;;x^2=y   x=y/x   x+x=y/x+x  x=(y/x+x)/2
-(define (improve guess x)
-  (average guess (/ x guess)))
+<span style="color:#75715e">;;x^2=y   x=y/x   x+x=y/x+x  x=(y/x+x)/2</span>
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">improve</span> guess x)
+  (<span style="color:#a6e22e">average</span> guess (/ x guess)))
 
-(define (mysqrt x)
-  (sqrt-iter 1.0 x))
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">mysqrt</span> x)
+  (<span style="color:#a6e22e">sqrt-iter</span> <span style="color:#ae81ff">1.0</span> x))
 
 
-;;(mysqrt 4)
-;;2.0000000929222947
+<span style="color:#75715e">;;(mysqrt 4)</span>
+<span style="color:#75715e">;;2.0000000929222947</span>
 
-;;;Use fixed-point thinking 
+<span style="color:#75715e">;;;Use fixed-point thinking </span>
 
-(define (mysqrt_death_fixed x)
-  (fixed-point (lambda (y) (/ x y))
-              1.0))
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">mysqrt_death_fixed</span> x)
+  (<span style="color:#a6e22e">fixed-point</span> (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">y</span>) (/ x y))
+              <span style="color:#ae81ff">1.0</span>))
 
-;;(mysqrt_death_fixed 4)
-;;;wrong !!!  can not convenge!!!! why?
+<span style="color:#75715e">;;(mysqrt_death_fixed 4)</span>
+<span style="color:#75715e">;;;wrong !!!  can not convenge!!!! why?</span>
 
-;;because   y2= x/y1  y3=x/y2=x/(x/y1)=y1 ====&gt;death recycle===&gt; so we use average
+<span style="color:#75715e">;;because   y2= x/y1  y3=x/y2=x/(x/y1)=y1 ====&gt;death recycle===&gt; so we use average</span>
 
-(define (mysqrt_fixed x)
-  (fixed-point (lambda (y) (average y (/  x y)))
-              1.0))
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">mysqrt_fixed</span> x)
+  (<span style="color:#a6e22e">fixed-point</span> (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">y</span>) (<span style="color:#a6e22e">average</span> y (/  x y)))
+              <span style="color:#ae81ff">1.0</span>))
 
-(mysqrt_fixed 4)
+(<span style="color:#a6e22e">mysqrt_fixed</span> <span style="color:#ae81ff">4</span>)
 
-;;;ok fine
-;;2.000000000000002====&gt;这也叫做平均阻尼定义！常用于数值计算当中
-;;在不动点的搜寻中，作为帮助收敛的手段！！！！
-</code></pre>
+<span style="color:#75715e">;;;ok fine</span>
+<span style="color:#75715e">;;2.000000000000002====&gt;这也叫做平均阻尼定义！常用于数值计算当中</span>
+<span style="color:#75715e">;;在不动点的搜寻中，作为帮助收敛的手段！！！！</span>
+</code></pre></div>
     </div>
  <div class="nav-links" style="padding:10;">
         
@@ -1075,7 +1067,7 @@ you found!</p>
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

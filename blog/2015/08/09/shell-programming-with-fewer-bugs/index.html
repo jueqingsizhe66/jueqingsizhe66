@@ -31,14 +31,12 @@
   <meta name="description" content="shell的强大之处在于短小精悍，对于IO处理相当方便，当然也可以兼杂小型的数值计算（很少）。
 shell脚本在编写过程中也会产生很多bug。本文借鉴《Pro-Bash-Programming》一书所提倡的：
 
-
 comment  写上开头注释
 Initialization of variables 变量初始化
 Function definitions  函数定义
 Runtime configuration 解析选项，读取配置文件等
 Sanity Check  经过Runtime配置之后，可能修改某些值，比如shift操作，所以需要判断变量的合理性
 Process information   最后才是计算、IO等
-
 
 通过这中编写框架，可以减少错误。">
 
@@ -132,14 +130,12 @@ Process information   最后才是计算、IO等
   <meta property="og:description" content="shell的强大之处在于短小精悍，对于IO处理相当方便，当然也可以兼杂小型的数值计算（很少）。
 shell脚本在编写过程中也会产生很多bug。本文借鉴《Pro-Bash-Programming》一书所提倡的：
 
-
 comment  写上开头注释
 Initialization of variables 变量初始化
 Function definitions  函数定义
 Runtime configuration 解析选项，读取配置文件等
 Sanity Check  经过Runtime配置之后，可能修改某些值，比如shift操作，所以需要判断变量的合理性
 Process information   最后才是计算、IO等
-
 
 通过这中编写框架，可以减少错误。"><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
   <meta property="twitter:image" content="https://jueqingsizhe66.github.io/img/icon-192.png"><meta property="og:locale" content="en-us">
@@ -587,9 +583,9 @@ Process information   最后才是计算、IO等
 
 
 
-<span class="article-metadata" >Reading time: 3 minutes and    24 seconds with 750 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+<span class="article-metadata" >Reading time: 3 minutes and    24 seconds with 749 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
-        
+        <nav id="TableOfContents"></nav>
     </aside>
   <div class="article-container">
 
@@ -597,7 +593,6 @@ Process information   最后才是计算、IO等
     <div class="article-style">
       <p>shell的强大之处在于短小精悍，对于IO处理相当方便，当然也可以兼杂小型的数值计算（很少）。
 shell脚本在编写过程中也会产生很多bug。本文借鉴《Pro-Bash-Programming》一书所提倡的：</p>
-
 <ol>
 <li>comment  写上开头注释</li>
 <li>Initialization of variables 变量初始化</li>
@@ -606,22 +601,16 @@ shell脚本在编写过程中也会产生很多bug。本文借鉴《Pro-Bash-Pro
 <li>Sanity Check  经过Runtime配置之后，可能修改某些值，比如shift操作，所以需要判断变量的合理性</li>
 <li>Process information   最后才是计算、IO等</li>
 </ol>
-
 <p>通过这中编写框架，可以减少错误。</p>
-
 <p>a. 首先保存最后的shell代码到一个文件wfe.sh
 b. 其次下载所需要的字典文件</p>
-
 <pre><code>  mkdir ~/words
   cd ~/words
  wget http://cfaj.freeshell.org/wordfinder/Compounds
  wget http://cfaj.freeshell.org/wordfinder/singlewords
 
-</code></pre>
-
-<p>c. 运行脚本</p>
-
-<pre><code class="language-sh">
+</code></pre><p>c. 运行脚本</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">
 1. 获取帮助
   bash wfe.sh -h
 2. 获取版本信息
@@ -630,111 +619,108 @@ b. 其次下载所需要的字典文件</p>
   bash wfe.sh bro
 4. 复合单词内查找（包含单个单词）
   bash wfe.sh -c bro 
-</code></pre>
-
-<p>d. 源码文件：</p>
-
-<pre><code class="language-sh">
-#:    Title: wfe - List words ending with PATTERN
-#: Synopsis: wfe [-c|-h|-v] REGEX
-#:     Date: 2009-04-13
-#:  Version: 1.0
-#:   Author: Chris F.A. Johnson
-#:  Options: -c - Include compound words
-#:           -h - Print usage information
-#:           -v - Print version number
+</code></pre></div><p>d. 源码文件：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">
+<span style="color:#75715e">#:    Title: wfe - List words ending with PATTERN</span>
+<span style="color:#75715e">#: Synopsis: wfe [-c|-h|-v] REGEX</span>
+<span style="color:#75715e">#:     Date: 2009-04-13</span>
+<span style="color:#75715e">#:  Version: 1.0</span>
+<span style="color:#75715e">#:   Author: Chris F.A. Johnson</span>
+<span style="color:#75715e">#:  Options: -c - Include compound words</span>
+<span style="color:#75715e">#:           -h - Print usage information</span>
+<span style="color:#75715e">#:           -v - Print version number</span>
 
 set -x
-export PS4='+ $LINENO : '
+export PS4<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;+ $LINENO : &#39;</span>
 
-## 变量初始化
-## Script metadata
-scriptname=${0##*/}
-description=&quot;List words ending with REGEX&quot;
-usage=&quot;$scriptname [-c|-h|-v] REGEX&quot;
-date_of_creation=2009-04-13
-version=1.0
-author=&quot;Chris F.A. Johnson&quot;
+<span style="color:#75715e">## 变量初始化</span>
+<span style="color:#75715e">## Script metadata</span>
+scriptname<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>0##*/<span style="color:#e6db74">}</span>
+description<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;List words ending with REGEX&#34;</span>
+usage<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$scriptname<span style="color:#e6db74"> [-c|-h|-v] REGEX</span><span style="color:#e6db74">&#34;</span>
+date_of_creation<span style="color:#f92672">=</span>2009-04-13
+version<span style="color:#f92672">=</span>1.0
+author<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Chris F.A. Johnson&#34;</span>
 
-## File locations
-dict=$HOME/words
-wordfile=$dict/singlewords
-compoundfile=$dict/Compounds  # 源代码作者在这边设下陷阱1  con--&gt;com
+<span style="color:#75715e">## File locations</span>
+dict<span style="color:#f92672">=</span>$HOME/words
+wordfile<span style="color:#f92672">=</span>$dict/singlewords
+compoundfile<span style="color:#f92672">=</span>$dict/Compounds  <span style="color:#75715e"># 源代码作者在这边设下陷阱1  con--&gt;com</span>
 
-## Default is not to show compound words
-compounds=
+<span style="color:#75715e">## Default is not to show compound words</span>
+compounds<span style="color:#f92672">=</span>
 
-## Reular expression supplied on the command line
-pattern=$1
+<span style="color:#75715e">## Reular expression supplied on the command line</span>
+pattern<span style="color:#f92672">=</span>$1
 
-## Function definitions 函数定义 
+<span style="color:#75715e">## Function definitions 函数定义</span> 
 
-#提倡使用这样编写函数@ Description @Usage：
-die() #@ DESCRIPTION: print error message and exit with supplied return code
-{     #@ USAGE: die STATUS [MESSAGE]
-  error=$1
+<span style="color:#75715e">#提倡使用这样编写函数@ Description @Usage：</span>
+die<span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#75715e">#@ DESCRIPTION: print error message and exit with supplied return code</span>
+<span style="color:#f92672">{</span>     <span style="color:#75715e">#@ USAGE: die STATUS [MESSAGE]</span>
+  error<span style="color:#f92672">=</span>$1
   shift
-  [ -n &quot;$*&quot; ] printf &quot;%s\n&quot; &quot;$*&quot; &gt;&amp;2
-  exit &quot;$error&quot;
-}
+  <span style="color:#f92672">[</span> -n <span style="color:#e6db74">&#34;</span>$*<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]</span> printf <span style="color:#e6db74">&#34;%s\n&#34;</span> <span style="color:#e6db74">&#34;</span>$*<span style="color:#e6db74">&#34;</span> &gt;&amp;<span style="color:#ae81ff">2</span>
+  exit <span style="color:#e6db74">&#34;</span>$error<span style="color:#e6db74">&#34;</span>
+<span style="color:#f92672">}</span>
 
-usage() #@ DESCRIPTION: print usage information
-{       #@ USAGE: usage
-        #@ REQUIRES: variable defined: $scriptname
-  printf &quot;%s - %s\n&quot; &quot;$scriptname&quot; &quot;$description&quot;
-  printf &quot;USAGE: %s\n&quot; &quot;$usage&quot;
-}
+usage<span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#75715e">#@ DESCRIPTION: print usage information</span>
+<span style="color:#f92672">{</span>       <span style="color:#75715e">#@ USAGE: usage</span>
+        <span style="color:#75715e">#@ REQUIRES: variable defined: $scriptname</span>
+  printf <span style="color:#e6db74">&#34;%s - %s\n&#34;</span> <span style="color:#e6db74">&#34;</span>$scriptname<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span>$description<span style="color:#e6db74">&#34;</span>
+  printf <span style="color:#e6db74">&#34;USAGE: %s\n&#34;</span> <span style="color:#e6db74">&#34;</span>$usage<span style="color:#e6db74">&#34;</span>
+<span style="color:#f92672">}</span>
 
-version() #@ DESCRIPTION: print version information
-{          #@ USAGE: version
-           #@ REQUIRES: variables defined: $scriptname, $author and $version
-  printf &quot;%s version %s\n&quot; &quot;$scriptname&quot; &quot;$version&quot;
-  printf &quot;by %s, %d\n&quot; &quot;$author&quot; &quot;${date_of_creation%%-*}&quot;
-  #printf &quot;by %s, %d\n&quot; &quot;$author&quot; &quot;${date_of_creation%%-*&quot;   指的那边错误不是真正的错误！一般需要往上找
-}
+version<span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#75715e">#@ DESCRIPTION: print version information</span>
+<span style="color:#f92672">{</span>          <span style="color:#75715e">#@ USAGE: version</span>
+           <span style="color:#75715e">#@ REQUIRES: variables defined: $scriptname, $author and $version</span>
+  printf <span style="color:#e6db74">&#34;%s version %s\n&#34;</span> <span style="color:#e6db74">&#34;</span>$scriptname<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span>$version<span style="color:#e6db74">&#34;</span>
+  printf <span style="color:#e6db74">&#34;by %s, %d\n&#34;</span> <span style="color:#e6db74">&#34;</span>$author<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>date_of_creation%%-*<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+  <span style="color:#75715e">#printf &#34;by %s, %d\n&#34; &#34;$author&#34; &#34;${date_of_creation%%-*&#34;   指的那边错误不是真正的错误！一般需要往上找</span>
+<span style="color:#f92672">}</span>
 
-## parse command-line options, -c, -h, and -v 解析
+<span style="color:#75715e">## parse command-line options, -c, -h, and -v 解析</span>
 
-echo $(( $OPTIND ))
-while getopts chv var
-do
-   case $var in
-     c) compounds=$compoundfile ;;
-     h) usage; exit ;;
-     v) version; exit ;;
-   esac
-done
-shift $(( $OPTIND - 1 ))  ## move out one parameter and then position to the right by one step
-                          ## 右移操作
-regex=$1           ## 设下陷阱2 没有注册regex变量，却直接调用$regex
-echo $(( $regex ))
+echo <span style="color:#66d9ef">$((</span> $OPTIND <span style="color:#66d9ef">))</span>
+<span style="color:#66d9ef">while</span> getopts chv var
+<span style="color:#66d9ef">do</span>
+   <span style="color:#66d9ef">case</span> $var in
+     c<span style="color:#f92672">)</span> compounds<span style="color:#f92672">=</span>$compoundfile ;;
+     h<span style="color:#f92672">)</span> usage; exit ;;
+     v<span style="color:#f92672">)</span> version; exit ;;
+   <span style="color:#66d9ef">esac</span>
+<span style="color:#66d9ef">done</span>
+shift <span style="color:#66d9ef">$((</span> $OPTIND <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">))</span>  <span style="color:#75715e">## move out one parameter and then position to the right by one step</span>
+                          <span style="color:#75715e">## 右移操作</span>
+regex<span style="color:#f92672">=</span>$1           <span style="color:#75715e">## 设下陷阱2 没有注册regex变量，却直接调用$regex</span>
+echo <span style="color:#66d9ef">$((</span> $regex <span style="color:#66d9ef">))</span>
 
-## sanity check   设下陷阱3 没有进行错误检查
+<span style="color:#75715e">## sanity check   设下陷阱3 没有进行错误检查</span>
 
-if [ -z &quot;$pattern&quot; ]
-then 
-    {
-        echo &quot;Search term missing&quot;
+<span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -z <span style="color:#e6db74">&#34;</span>$pattern<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]</span>
+<span style="color:#66d9ef">then</span> 
+    <span style="color:#f92672">{</span>
+        echo <span style="color:#e6db74">&#34;Search term missing&#34;</span>
         usage
-    } &gt;&amp;2
-    exit 1
-fi
+    <span style="color:#f92672">}</span> &gt;&amp;<span style="color:#ae81ff">2</span>
+    exit <span style="color:#ae81ff">1</span>
+<span style="color:#66d9ef">fi</span>
 
 
-## Search $wordfile and $compounds if it is defined
-{
-   cat &quot;$wordfile&quot;
-   if [ -n &quot;$compounds&quot; ]  # not null  -n ~ -z   n :nonzero  z:zero
-   then
-      cut -f1 &quot;$compounds&quot;
-   fi
-#}| grep -i &quot;.$regex$&quot; |sort -fu   #errror
-}| grep -i &quot;.$regex$&quot; |sort -fu 
+<span style="color:#75715e">## Search $wordfile and $compounds if it is defined</span>
+<span style="color:#f92672">{</span>
+   cat <span style="color:#e6db74">&#34;</span>$wordfile<span style="color:#e6db74">&#34;</span>
+   <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -n <span style="color:#e6db74">&#34;</span>$compounds<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]</span>  <span style="color:#75715e"># not null  -n ~ -z   n :nonzero  z:zero</span>
+   <span style="color:#66d9ef">then</span>
+      cut -f1 <span style="color:#e6db74">&#34;</span>$compounds<span style="color:#e6db74">&#34;</span>
+   <span style="color:#66d9ef">fi</span>
+<span style="color:#75715e">#}| grep -i &#34;.$regex$&#34; |sort -fu   #errror</span>
+<span style="color:#f92672">}</span>| grep -i <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">.</span>$regex$<span style="color:#e6db74">&#34;</span> |sort -fu 
 
-## Case-insensitive sort; remove duplicates
+<span style="color:#75715e">## Case-insensitive sort; remove duplicates</span>
 
 
-</code></pre>
+</code></pre></div>
     </div>
  <div class="nav-links" style="padding:10;">
         
@@ -1140,7 +1126,7 @@ fi
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

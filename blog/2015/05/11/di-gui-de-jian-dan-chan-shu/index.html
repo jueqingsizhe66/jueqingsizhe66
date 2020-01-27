@@ -563,9 +563,9 @@
 
 
 
-<span class="article-metadata" >Reading time: 9 minutes and    35 seconds with 2109 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+<span class="article-metadata" >Reading time: 9 minutes and    31 seconds with 2097 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
-        
+        <nav id="TableOfContents"></nav>
     </aside>
   <div class="article-container">
 
@@ -574,357 +574,333 @@
       <p>递归和迭代的区别：
 递归需要调用自己
 迭代不断修正自己的返回值</p>
-
 <p>递归伪代码：
 (define factoral
-   (lambda (x)
-        (if (&lt;=  x 1)    //1.必须有一个输出口
-        1                  //出口值
-        (* x (factoral (- x 1)))</p>
-
+(lambda (x)
+(if (&lt;=  x 1)    //1.必须有一个输出口
+1                  //出口值
+(* x (factoral (- x 1)))</p>
 <p>所以递归就看两个部分：1 输出口（递归终止条件）  2：循环表达式，并且一定要减减 或者++ 直到能够达到递归终止条件</p>
-
 <p>进一步通过java比较递归和尾递归的执行过程：
 尾递归代码：
 /**
-         *<br />
-         * @param n          计算5！ 则n =5
-         * @param product    一般是设置为1  比如 计算5! factail1(5,1)
-         * @return           返回递归结果
-         */
-    public static long facttail1(int n, int product)
-    {
-    if(n&lt;0)
-    {
-        return 0;
-    }
-    if(1 == n)
-   {
-       return product;
-   }
-  else
-  {
-        return  facttail1(n-1, product*n);
-   }
-    }</p>
-
+*<br>
+* @param n          计算5！ 则n =5
+* @param product    一般是设置为1  比如 计算5! factail1(5,1)
+* @return           返回递归结果
+*/
+public static long facttail1(int n, int product)
+{
+if(n&lt;0)
+{
+return 0;
+}
+if(1 == n)
+{
+return product;
+}
+else
+{
+return  facttail1(n-1, product*n);
+}
+}</p>
 <p>普通递归代码：
 /**
-         *
-         * @param n   5! 则 n = 5
-         * @return    返回阶乘的计算结果
-         */
-    public static long facttail1(int n)
-    {
-     long a = 0;// 用于调试，可注释
-     if(n==1)
-     {
-         a = 1;// 用于调试，可注释
-         return 1;
-     }
-     a =n*facttail1(n-1);  // 用于调试，可注释
-     return n*facttail1(n-1);
-    }</p>
-
+*
+* @param n   5! 则 n = 5
+* @return    返回阶乘的计算结果
+*/
+public static long facttail1(int n)
+{
+long a = 0;// 用于调试，可注释
+if(n==1)
+{
+a = 1;// 用于调试，可注释
+return 1;
+}
+a =n*facttail1(n-1);  // 用于调试，可注释
+return n*facttail1(n-1);
+}</p>
 <p>无递归的阶乘：
 /**
-         *
-         * @param n   计算 5！ 则n=5
-         * @return
-         */
-        public static int fact2(int n)
-        {
-   if(n &lt; 0)
-  {
-      throw new IllegalArgumentException();
-   }
-   int result = 1;
-   for(int i = 1; i &lt;= n; i++)
-  {
-     result = result*i;
-   }
-     return result;
-        }</p>
-
+*
+* @param n   计算 5！ 则n=5
+* @return
+*/
+public static int fact2(int n)
+{
+if(n &lt; 0)
+{
+throw new IllegalArgumentException();
+}
+int result = 1;
+for(int i = 1; i &lt;= n; i++)
+{
+result = result*i;
+}
+return result;
+}</p>
 <p>主程序：
 public static void main(String[] args)
-        {
-                // TODO 自动生成的方法存根
-             long Apple =facttail(5,1);
-             System.out.println(&ldquo;Apple get by 尾递归：&rdquo;+Apple);
-             long Banana =facttail1(5);
-             System.out.println(&ldquo;Banana get by 递归：&rdquo;+Banana);
-        }</p>
-
+{
+// TODO 自动生成的方法存根
+long Apple =facttail(5,1);
+System.out.println(&ldquo;Apple get by 尾递归：&ldquo;+Apple);
+long Banana =facttail1(5);
+System.out.println(&ldquo;Banana get by 递归：&ldquo;+Banana);
+}</p>
 <p>通过调试可以看到，尾递归的执行过程为:
 看下图   尾递归的调试过程
 而普通的递归方式为：
 看下图   [size=14.4444446563721px]普通的递归运行方式</p>
-
 <p>通过上述调试发现，尾递归的确是比较快的。</p>
-
 <p>另外不知道java中的大的数值范围该如何表示，比如 [size=14.4444446563721px]facttail(32,1); 就运行不出来结果？ long无法解决问题。估计java不适合进行大型的数值运算
-<img src="/images/java/尾递归.png" alt="尾递归的调试过程" />
-<img src="/images/java/普通的递归.png" alt="普通的递归运行方式" /></p>
-
+<img src="/images/java/%E5%B0%BE%E9%80%92%E5%BD%92.png" alt="尾递归的调试过程">
+<img src="/images/java/%E6%99%AE%E9%80%9A%E7%9A%84%E9%80%92%E5%BD%92.png" alt="普通的递归运行方式"></p>
 <p>利用BigInteger类型的改造版本：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">import</span> java.math.BigInteger<span style="color:#f92672">;</span>
 
-<pre><code class="language-java">import java.math.BigInteger;
+<span style="color:#75715e">/**
+</span><span style="color:#75715e">* @author 叶昭良
+</span><span style="color:#75715e">*
+</span><span style="color:#75715e">*/</span>        
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TestRecursive</span>
+<span style="color:#f92672">{</span>
 
-/**
-* @author 叶昭良
-*
-*/        
-public class TestRecursive
-{
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> args<span style="color:#f92672">)</span>
+        <span style="color:#f92672">{</span>
+                <span style="color:#75715e">// TODO 自动生成的方法存根
+</span><span style="color:#75715e"></span>             BigInteger Apple <span style="color:#f92672">=</span>fact<span style="color:#f92672">(</span>100l<span style="color:#f92672">,</span>BigInteger<span style="color:#f92672">.</span><span style="color:#a6e22e">valueOf</span><span style="color:#f92672">(</span>1<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Apple get by 尾递归：&#34;</span><span style="color:#f92672">+</span>Apple<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            BigInteger Banana <span style="color:#f92672">=</span>facttail<span style="color:#f92672">(</span>100l<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+           System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Banana get by  递归：&#34;</span><span style="color:#f92672">+</span>Banana<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#75715e">// 尾递归方式
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">/**
+</span><span style="color:#75715e">         * 
+</span><span style="color:#75715e">         * @param n        待计算的阶乘  比如5！ 则n=5
+</span><span style="color:#75715e">         * @param product  中间变量
+</span><span style="color:#75715e">         * @return         一个BigInteger对象,包含阶乘的计算结果
+</span><span style="color:#75715e">         */</span>
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> BigInteger <span style="color:#a6e22e">fact</span><span style="color:#f92672">(</span><span style="color:#66d9ef">long</span> n<span style="color:#f92672">,</span> BigInteger product<span style="color:#f92672">)</span>
+        <span style="color:#f92672">{</span>
+                <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>n<span style="color:#f92672">&lt;</span>0<span style="color:#f92672">)</span>
+                <span style="color:#f92672">{</span>
+                      <span style="color:#66d9ef">return</span> BigInteger<span style="color:#f92672">.</span><span style="color:#a6e22e">valueOf</span><span style="color:#f92672">(</span>0<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span>
+                <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>n<span style="color:#f92672">=</span><span style="color:#f92672">=</span>1<span style="color:#f92672">)</span>
+                     <span style="color:#66d9ef">return</span> product<span style="color:#f92672">;</span>
+                <span style="color:#66d9ef">else</span>
+                     <span style="color:#66d9ef">return</span> fact<span style="color:#f92672">(</span>n<span style="color:#f92672">-</span>1<span style="color:#f92672">,</span>product<span style="color:#f92672">.</span><span style="color:#a6e22e">multiply</span><span style="color:#f92672">(</span>BigInteger<span style="color:#f92672">.</span><span style="color:#a6e22e">valueOf</span><span style="color:#f92672">(</span>n<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#75715e">//递归方式
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">/**
+</span><span style="color:#75715e">         * 
+</span><span style="color:#75715e">         * @param n   待计算的阶乘  比如5！ 则n=5
+</span><span style="color:#75715e">         * @return    一个BigInteger对象,包含阶乘的计算结果
+</span><span style="color:#75715e">         */</span>
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> BigInteger <span style="color:#a6e22e">facttail</span><span style="color:#f92672">(</span><span style="color:#66d9ef">long</span> n<span style="color:#f92672">)</span>
+        <span style="color:#f92672">{</span>
+          <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>n<span style="color:#f92672">=</span><span style="color:#f92672">=</span>1<span style="color:#f92672">)</span>
+                <span style="color:#f92672">{</span>
+                     <span style="color:#66d9ef">return</span> BigInteger<span style="color:#f92672">.</span><span style="color:#a6e22e">valueOf</span><span style="color:#f92672">(</span>1<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span><span style="color:#66d9ef">else</span>
+                <span style="color:#f92672">{</span>
+                     <span style="color:#75715e">//a =n*facttail1(n-1);
+</span><span style="color:#75715e"></span>                    <span style="color:#66d9ef">return</span> facttail<span style="color:#f92672">(</span>n<span style="color:#f92672">-</span>1<span style="color:#f92672">)</span><span style="color:#f92672">.</span><span style="color:#a6e22e">multiply</span><span style="color:#f92672">(</span>BigInteger<span style="color:#f92672">.</span><span style="color:#a6e22e">valueOf</span><span style="color:#f92672">(</span>n<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span>
 
-        public static void main(String[] args)
-        {
-                // TODO 自动生成的方法存根
-             BigInteger Apple =fact(100l,BigInteger.valueOf(1));
-            System.out.println(&quot;Apple get by 尾递归：&quot;+Apple);
-            BigInteger Banana =facttail(100l);
-           System.out.println(&quot;Banana get by  递归：&quot;+Banana);
-        }
-        // 尾递归方式
-        /**
-         * 
-         * @param n        待计算的阶乘  比如5！ 则n=5
-         * @param product  中间变量
-         * @return         一个BigInteger对象,包含阶乘的计算结果
-         */
-        public static BigInteger fact(long n, BigInteger product)
-        {
-                if(n&lt;0)
-                {
-                      return BigInteger.valueOf(0);
-                }
-                else if(n==1)
-                     return product;
-                else
-                     return fact(n-1,product.multiply(BigInteger.valueOf(n)));
-        }
-        //递归方式
-        /**
-         * 
-         * @param n   待计算的阶乘  比如5！ 则n=5
-         * @return    一个BigInteger对象,包含阶乘的计算结果
-         */
-        public static BigInteger facttail(long n)
-        {
-          if(n==1)
-                {
-                     return BigInteger.valueOf(1);
-                }else
-                {
-                     //a =n*facttail1(n-1);
-                    return facttail(n-1).multiply(BigInteger.valueOf(n));
-                }
+        <span style="color:#f92672">}</span>        
 
-        }        
-
-}
-</code></pre>
-
-<p>运行结果：</p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p>运行结果：</p>
 <p>Apple get by 尾递归：93326215443944152681699238856266700490715968264381621468592963895217599993229915608941463976156518286253697920827223758251185210916864000000000000000000000000
 Banana get by  递归：93326215443944152681699238856266700490715968264381621468592963895217599993229915608941463976156518286253697920827223758251185210916864000000000000000000000000</p>
-
 <p>真的是可以要有多大就有多大。
 java 在eclipse使用ctrl+o 调用multiply发现他需要传递一个BigInteger对象。
-[c#版本 BigInteger:][<a href="https://msdn.microsoft.com/zh-cn/library/system.numerics.biginteger.aspx" target="_blank">https://msdn.microsoft.com/zh-cn/library/system.numerics.biginteger.aspx</a>]</p>
-
+[c#版本 BigInteger:][<a href="https://msdn.microsoft.com/zh-cn/library/system.numerics.biginteger.aspx">https://msdn.microsoft.com/zh-cn/library/system.numerics.biginteger.aspx</a>]</p>
 <p>补充杨老师串讲的内容，补上参数说明，并归结为方法，进行独立测试</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">import</span> java.util.Arrays<span style="color:#f92672">;</span>
 
-<pre><code class="language-java">import java.util.Arrays;
 
+<span style="color:#75715e">/**
+</span><span style="color:#75715e">* @author 叶昭良
+</span><span style="color:#75715e">*
+</span><span style="color:#75715e">*/</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TestChuangjian2</span>
+<span style="color:#f92672">{</span>
 
-/**
-* @author 叶昭良
-*
-*/
-public abstract class TestChuangjian2
-{
-
-        /**
-         * @param args
-         */
-        public static void main(String[] args)
-        {
-                // TODO 自动生成的方法存根
-                //第一部分 递归
-                // case1讲故事
-                tellStory(1);
-                System.out.println(fact(5));
-                System.out.println(fact2(5));
-                System.out.println(fact3(5,1));
-                System.out.println(&quot;fibnacii1 :&quot;+fib1(5));
-                System.out.println(fib2(5));
-                System.out.println(fib3(5));
-        }
-        //第一部分  递归
-        //case 1*讲故事
-        /**
-         * 
-         * @param i  讲故事的次数
-         */
-        public static void tellStory(int i)
-        {
-                System.out.println(&quot;从前有座山，山里有座庙，。。。。&quot;);
-                if(i &lt; 3)
-                {
-                        tellStory(++i);
-                }
-                System.out.println(&quot;完了&quot;);
-        }
-        //case2  阶乘
-        /**
-         * 
-         * @param n  计算 5！ 则n=5
-         * @return  返回阶乘的计算结果
-         */
-        public static int fact(int n)
-        {
-                if(n &lt; 0)
-                {
-                        throw new IllegalArgumentException();
-                }
-                if( 1 == n)
-                {
-                        return 1;
-                }else
-                {
-                        return n*fact(n-1);
-                }
-        }
+        <span style="color:#75715e">/**
+</span><span style="color:#75715e">         * @param args
+</span><span style="color:#75715e">         */</span>
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> args<span style="color:#f92672">)</span>
+        <span style="color:#f92672">{</span>
+                <span style="color:#75715e">// TODO 自动生成的方法存根
+</span><span style="color:#75715e"></span>                <span style="color:#75715e">//第一部分 递归
+</span><span style="color:#75715e"></span>                <span style="color:#75715e">// case1讲故事
+</span><span style="color:#75715e"></span>                tellStory<span style="color:#f92672">(</span>1<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>fact<span style="color:#f92672">(</span>5<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>fact2<span style="color:#f92672">(</span>5<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>fact3<span style="color:#f92672">(</span>5<span style="color:#f92672">,</span>1<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;fibnacii1 :&#34;</span><span style="color:#f92672">+</span>fib1<span style="color:#f92672">(</span>5<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>fib2<span style="color:#f92672">(</span>5<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>fib3<span style="color:#f92672">(</span>5<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#75715e">//第一部分  递归
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//case 1*讲故事
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">/**
+</span><span style="color:#75715e">         * 
+</span><span style="color:#75715e">         * @param i  讲故事的次数
+</span><span style="color:#75715e">         */</span>
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">tellStory</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i<span style="color:#f92672">)</span>
+        <span style="color:#f92672">{</span>
+                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;从前有座山，山里有座庙，。。。。&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>i <span style="color:#f92672">&lt;</span> 3<span style="color:#f92672">)</span>
+                <span style="color:#f92672">{</span>
+                        tellStory<span style="color:#f92672">(</span><span style="color:#f92672">+</span><span style="color:#f92672">+</span>i<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span>
+                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;完了&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#75715e">//case2  阶乘
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">/**
+</span><span style="color:#75715e">         * 
+</span><span style="color:#75715e">         * @param n  计算 5！ 则n=5
+</span><span style="color:#75715e">         * @return  返回阶乘的计算结果
+</span><span style="color:#75715e">         */</span>
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">fact</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> n<span style="color:#f92672">)</span>
+        <span style="color:#f92672">{</span>
+                <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>n <span style="color:#f92672">&lt;</span> 0<span style="color:#f92672">)</span>
+                <span style="color:#f92672">{</span>
+                        <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> IllegalArgumentException<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span>
+                <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span> 1 <span style="color:#f92672">=</span><span style="color:#f92672">=</span> n<span style="color:#f92672">)</span>
+                <span style="color:#f92672">{</span>
+                        <span style="color:#66d9ef">return</span> 1<span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span><span style="color:#66d9ef">else</span>
+                <span style="color:#f92672">{</span>
+                        <span style="color:#66d9ef">return</span> n<span style="color:#f92672">*</span>fact<span style="color:#f92672">(</span>n<span style="color:#f92672">-</span>1<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span>
         
-        // case3  无递归的阶乘
-        /**
-         * 
-         * @param n   计算 5！ 则n=5
-         * @return
-         */
-        public static int fact2(int n)
-        {
-                if(n &lt; 0)
-                {
-                        throw new IllegalArgumentException();
-                }
-                int result = 1;
-                for(int i = 1; i &lt;= n; i++)
-                {
-                        result = result*i;
-                }
-                return result;
-        }
-        // case 4  尾递归方式
-        /**
-         * 
-         * @param n      计算 5！ 则n=5
-         * @param result  存储阶乘的计算结果，并作为中间变量
-         * @return       返回阶乘计算结果
-         */
-        public static int fact3(int n, int result)
-        {
-                if(n &lt;= 0)
-                {
-                        throw new IllegalArgumentException(&quot;胡算的阶乘数&lt;=0&quot;);
-                }
-                if(1== n)
-                {
-                        return result;
-                }else
-                {
-                        return fact3(n-1,result*n);
-                }
-        }
+        <span style="color:#75715e">// case3  无递归的阶乘
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">/**
+</span><span style="color:#75715e">         * 
+</span><span style="color:#75715e">         * @param n   计算 5！ 则n=5
+</span><span style="color:#75715e">         * @return
+</span><span style="color:#75715e">         */</span>
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">fact2</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> n<span style="color:#f92672">)</span>
+        <span style="color:#f92672">{</span>
+                <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>n <span style="color:#f92672">&lt;</span> 0<span style="color:#f92672">)</span>
+                <span style="color:#f92672">{</span>
+                        <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> IllegalArgumentException<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span>
+                <span style="color:#66d9ef">int</span> result <span style="color:#f92672">=</span> 1<span style="color:#f92672">;</span>
+                <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 1<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span><span style="color:#f92672">=</span> n<span style="color:#f92672">;</span> i<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">)</span>
+                <span style="color:#f92672">{</span>
+                        result <span style="color:#f92672">=</span> result<span style="color:#f92672">*</span>i<span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span>
+                <span style="color:#66d9ef">return</span> result<span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#75715e">// case 4  尾递归方式
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">/**
+</span><span style="color:#75715e">         * 
+</span><span style="color:#75715e">         * @param n      计算 5！ 则n=5
+</span><span style="color:#75715e">         * @param result  存储阶乘的计算结果，并作为中间变量
+</span><span style="color:#75715e">         * @return       返回阶乘计算结果
+</span><span style="color:#75715e">         */</span>
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">fact3</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> n<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> result<span style="color:#f92672">)</span>
+        <span style="color:#f92672">{</span>
+                <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>n <span style="color:#f92672">&lt;</span><span style="color:#f92672">=</span> 0<span style="color:#f92672">)</span>
+                <span style="color:#f92672">{</span>
+                        <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> IllegalArgumentException<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;胡算的阶乘数&lt;=0&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span>
+                <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>1<span style="color:#f92672">=</span><span style="color:#f92672">=</span> n<span style="color:#f92672">)</span>
+                <span style="color:#f92672">{</span>
+                        <span style="color:#66d9ef">return</span> result<span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span><span style="color:#66d9ef">else</span>
+                <span style="color:#f92672">{</span>
+                        <span style="color:#66d9ef">return</span> fact3<span style="color:#f92672">(</span>n<span style="color:#f92672">-</span>1<span style="color:#f92672">,</span>result<span style="color:#f92672">*</span>n<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span>
         
-        //case 5 Fibnacci1
-        /**
-         * 
-         * @param n  fibnacci的个数n
-         * @return   fibnacci数
-         */
-        public static int fib1(int n)
-        {
-                if(n &lt; 0)
-                {
-                        throw new IllegalArgumentException(&quot;n不可以小于0&quot;);
-                }
-                if(1 == n || 2 == n)
-                {
-                        return 1;
-                }
-                else
-                {
-                        return fib1(n-1)+fib1(n-2);
-                }
-        }
-        /**
-         * 
-         * @param n  fibnacci的计算数
-         * @return   fibanacci数
-         */
-        public static int fib2(int n)
-        {
-                int[] nums = new int[n+1];
-                nums[0] = 1;
-                nums[1] = 1;
-                System.out.println(Arrays.toString(nums));
-                for(int i = 2; i &lt; n ; i++)
-                {
-                        nums[i] = nums[i-1]+ nums[i-2];
-                        System.out.println(Arrays.toString(nums));
-                }
-                return nums[n-1];
-        }
-        /**
-         * 
-         * @param n   fibnacci的计算数
-         * @return    fibanacci数
-         */
-        public static int fib3(int n)
-        {
-                int apple = 1;
-                int banana = 1;
-                int temp = 1;
-                for (int i = 2 ; i &lt; n; i++)
-                {
-                        temp = apple + banana;
-                        banana = apple;
-                    apple = temp;
-                }
-                return temp;
-        }
-}
+        <span style="color:#75715e">//case 5 Fibnacci1
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">/**
+</span><span style="color:#75715e">         * 
+</span><span style="color:#75715e">         * @param n  fibnacci的个数n
+</span><span style="color:#75715e">         * @return   fibnacci数
+</span><span style="color:#75715e">         */</span>
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">fib1</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> n<span style="color:#f92672">)</span>
+        <span style="color:#f92672">{</span>
+                <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>n <span style="color:#f92672">&lt;</span> 0<span style="color:#f92672">)</span>
+                <span style="color:#f92672">{</span>
+                        <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> IllegalArgumentException<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;n不可以小于0&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span>
+                <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>1 <span style="color:#f92672">=</span><span style="color:#f92672">=</span> n <span style="color:#f92672">|</span><span style="color:#f92672">|</span> 2 <span style="color:#f92672">=</span><span style="color:#f92672">=</span> n<span style="color:#f92672">)</span>
+                <span style="color:#f92672">{</span>
+                        <span style="color:#66d9ef">return</span> 1<span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span>
+                <span style="color:#66d9ef">else</span>
+                <span style="color:#f92672">{</span>
+                        <span style="color:#66d9ef">return</span> fib1<span style="color:#f92672">(</span>n<span style="color:#f92672">-</span>1<span style="color:#f92672">)</span><span style="color:#f92672">+</span>fib1<span style="color:#f92672">(</span>n<span style="color:#f92672">-</span>2<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#75715e">/**
+</span><span style="color:#75715e">         * 
+</span><span style="color:#75715e">         * @param n  fibnacci的计算数
+</span><span style="color:#75715e">         * @return   fibanacci数
+</span><span style="color:#75715e">         */</span>
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">fib2</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> n<span style="color:#f92672">)</span>
+        <span style="color:#f92672">{</span>
+                <span style="color:#66d9ef">int</span><span style="color:#f92672">[</span><span style="color:#f92672">]</span> nums <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[</span>n<span style="color:#f92672">+</span>1<span style="color:#f92672">]</span><span style="color:#f92672">;</span>
+                nums<span style="color:#f92672">[</span>0<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> 1<span style="color:#f92672">;</span>
+                nums<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> 1<span style="color:#f92672">;</span>
+                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>Arrays<span style="color:#f92672">.</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(</span>nums<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 2<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">;</span> i<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">)</span>
+                <span style="color:#f92672">{</span>
+                        nums<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> nums<span style="color:#f92672">[</span>i<span style="color:#f92672">-</span>1<span style="color:#f92672">]</span><span style="color:#f92672">+</span> nums<span style="color:#f92672">[</span>i<span style="color:#f92672">-</span>2<span style="color:#f92672">]</span><span style="color:#f92672">;</span>
+                        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>Arrays<span style="color:#f92672">.</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(</span>nums<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span>
+                <span style="color:#66d9ef">return</span> nums<span style="color:#f92672">[</span>n<span style="color:#f92672">-</span>1<span style="color:#f92672">]</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#75715e">/**
+</span><span style="color:#75715e">         * 
+</span><span style="color:#75715e">         * @param n   fibnacci的计算数
+</span><span style="color:#75715e">         * @return    fibanacci数
+</span><span style="color:#75715e">         */</span>
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">fib3</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> n<span style="color:#f92672">)</span>
+        <span style="color:#f92672">{</span>
+                <span style="color:#66d9ef">int</span> apple <span style="color:#f92672">=</span> 1<span style="color:#f92672">;</span>
+                <span style="color:#66d9ef">int</span> banana <span style="color:#f92672">=</span> 1<span style="color:#f92672">;</span>
+                <span style="color:#66d9ef">int</span> temp <span style="color:#f92672">=</span> 1<span style="color:#f92672">;</span>
+                <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 2 <span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> n<span style="color:#f92672">;</span> i<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">)</span>
+                <span style="color:#f92672">{</span>
+                        temp <span style="color:#f92672">=</span> apple <span style="color:#f92672">+</span> banana<span style="color:#f92672">;</span>
+                        banana <span style="color:#f92672">=</span> apple<span style="color:#f92672">;</span>
+                    apple <span style="color:#f92672">=</span> temp<span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span>
+                <span style="color:#66d9ef">return</span> temp<span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
 
-</code></pre>
-
-<p><img src="/images/java/讲故事的执行顺序.png" alt="讲故事的顺序 先执行完红的 再反过来执行黄色的线" />
-<img src="/images/java/杨老师手绘递归图的缺陷反复计算占用空间.png" alt="普通递归的缺陷：重复计算 空间占用 （于是尾递归 和一些其他的非递归方法的引入）" /></p>
-
+</code></pre></div><p><img src="/images/java/%E8%AE%B2%E6%95%85%E4%BA%8B%E7%9A%84%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F.png" alt="讲故事的顺序 先执行完红的 再反过来执行黄色的线">
+<img src="/images/java/%E6%9D%A8%E8%80%81%E5%B8%88%E6%89%8B%E7%BB%98%E9%80%92%E5%BD%92%E5%9B%BE%E7%9A%84%E7%BC%BA%E9%99%B7%E5%8F%8D%E5%A4%8D%E8%AE%A1%E7%AE%97%E5%8D%A0%E7%94%A8%E7%A9%BA%E9%97%B4.png" alt="普通递归的缺陷：重复计算 空间占用 （于是尾递归 和一些其他的非递归方法的引入）"></p>
 <p>一个反例：栈溢出 stackOverFlowError
 一般要求的StackSize是1MB</p>
-
 <p>反例：</p>
-
-<pre><code class="language-java">        /**
-         * 
-         * @param i  讲故事的次数
-         */
-        public static void tellStory(int i)
-        {
-                System.out.println(&quot;从前有座山，山里有座庙.....&quot;);
-                {
-                        tellStory(++i);  // i+1
-                }        
-                System.out.println(&quot;Time Over in &quot;+i);
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">        <span style="color:#75715e">/**
+</span><span style="color:#75715e">         * 
+</span><span style="color:#75715e">         * @param i  讲故事的次数
+</span><span style="color:#75715e">         */</span>
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">tellStory</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i<span style="color:#f92672">)</span>
+        <span style="color:#f92672">{</span>
+                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;从前有座山，山里有座庙.....&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">{</span>
+                        tellStory<span style="color:#f92672">(</span><span style="color:#f92672">+</span><span style="color:#f92672">+</span>i<span style="color:#f92672">)</span><span style="color:#f92672">;</span>  <span style="color:#75715e">// i+1
+</span><span style="color:#75715e"></span>                <span style="color:#f92672">}</span>        
+                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Time Over in &#34;</span><span style="color:#f92672">+</span>i<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
                 
-        }
-</code></pre>
-
-<p>运行完之后会报错，问题原因是栈溢出，达到栈的最大容量限制。
+        <span style="color:#f92672">}</span>
+</code></pre></div><p>运行完之后会报错，问题原因是栈溢出，达到栈的最大容量限制。
 结论：在递归中必须设置终止条件，这样才不至于引起栈溢出。</p>
     </div>
  <div class="nav-links" style="padding:10;">
@@ -1329,7 +1305,7 @@ public abstract class TestChuangjian2
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

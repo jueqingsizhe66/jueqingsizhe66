@@ -617,35 +617,26 @@
 <span class="article-metadata" >Reading time: 4 minutes and    19 seconds with 950 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#背景分析">背景分析</a></li>
-<li><a href="#速度分仓">速度分仓</a></li>
-<li><a href="#悟空-条件">悟空[条件]</a></li>
-<li><a href="#手算两条功率的k值">手算两条功率的k值</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#背景分析">背景分析</a></li>
+    <li><a href="#速度分仓">速度分仓</a></li>
+    <li><a href="#悟空-条件">悟空[条件]</a></li>
+    <li><a href="#手算两条功率的k值">手算两条功率的k值</a></li>
+  </ul>
 </nav>
     </aside>
   <div class="article-container">
 
 
     <div class="article-style">
-      
-
-<h2 id="背景分析">背景分析</h2>
-
+      <h2 id="背景分析">背景分析</h2>
 <p>有时候需要根据一条功率曲线，手算scada速度序列的发电量</p>
-
 <ol>
 <li>设计功率曲线</li>
 <li>scada风速序列</li>
 </ol>
-
-<p><img src="/images/aiwind/CFDAEP.PNG" alt="CFD发电量计算" />
-<!--listend--></p>
-
+<p><img src="/images/aiwind/CFDAEP.PNG" alt="CFD发电量计算"></p>
+<!-- raw HTML omitted -->
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
 <span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
 
@@ -653,7 +644,7 @@
 <span style="color:#75715e">#powerlaw=pd.read_csv(r&#39;C:\Users\yezhaoliang\Desktop\power12.csv&#39;)</span>
 <span style="color:#75715e">## Dongping</span>
 <span style="color:#75715e">#powerlaw=pd.read_csv(r&#39;C:\Users\yezhaoliang\Desktop\my89_12.csv&#39;)</span>
-powerlaw<span style="color:#f92672">=</span>pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;C:\Users\yezhaoliang\Desktop\SL3000_121.pws.csv&#39;</span>)
+powerlaw<span style="color:#f92672">=</span>pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">C:</span><span style="color:#e6db74">\</span><span style="color:#e6db74">Users</span><span style="color:#e6db74">\</span><span style="color:#e6db74">yezhaoliang</span><span style="color:#e6db74">\</span><span style="color:#e6db74">Desktop</span><span style="color:#e6db74">\</span><span style="color:#e6db74">SL3000_121.pws.csv</span><span style="color:#e6db74">&#39;</span>)
 
 cpVs <span style="color:#f92672">=</span> powerlaw<span style="color:#f92672">.</span>iloc[:, <span style="color:#ae81ff">0</span>]
 cpPs <span style="color:#f92672">=</span> powerlaw<span style="color:#f92672">.</span>iloc[:, <span style="color:#ae81ff">1</span>]
@@ -676,7 +667,7 @@ cpPs <span style="color:#f92672">=</span> powerlaw<span style="color:#f92672">.<
         count<span style="color:#f92672">=</span>count<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">getMean</span>(cpVs,cpPs,vel):
-    <span style="color:#66d9ef">if</span>(vel<span style="color:#f92672">&lt;=</span><span style="color:#ae81ff">2</span>):
+    <span style="color:#66d9ef">if</span>(vel<span style="color:#f92672">&lt;</span><span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>):
         rePower<span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
         <span style="color:#66d9ef">return</span> rePower
     index <span style="color:#f92672">=</span> find(vel, cpVs)
@@ -703,7 +694,7 @@ cpPs <span style="color:#f92672">=</span> powerlaw<span style="color:#f92672">.<
         calVel[count]<span style="color:#f92672">=</span>modify(vel)
         count<span style="color:#f92672">=</span>count<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
     calPowerSeries<span style="color:#f92672">=</span>pd<span style="color:#f92672">.</span>DataFrame([calVel,calPower])<span style="color:#f92672">.</span>T
-    calPowerSeries<span style="color:#f92672">.</span>to_csv(str(i)<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;-power.csv&#34;</span>)
+    calPowerSeries<span style="color:#f92672">.</span>to_csv(str(i)<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">-power.csv</span><span style="color:#e6db74">&#34;</span>)
     <span style="color:#66d9ef">return</span> np<span style="color:#f92672">.</span>sum(calPower)<span style="color:#f92672">/</span><span style="color:#ae81ff">6000</span>
 <span style="color:#75715e">############################################################</span>
 <span style="color:#75715e">##  Velocity Bin Method ####################################</span>
@@ -721,10 +712,10 @@ cpPs <span style="color:#f92672">=</span> powerlaw<span style="color:#f92672">.<
     velocityMagnitude<span style="color:#f92672">=</span><span style="color:#ae81ff">25.0</span><span style="color:#f92672">/</span>zones
     <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(zones):
         <span style="color:#66d9ef">if</span>(<span style="color:#ae81ff">0</span><span style="color:#f92672">==</span>i):
-            <span style="color:#66d9ef">if</span>(vel<span style="color:#f92672">&gt;=</span><span style="color:#ae81ff">0</span> <span style="color:#f92672">and</span> vel <span style="color:#f92672">&lt;</span>velocityMagnitude<span style="color:#f92672">/</span><span style="color:#ae81ff">2.0</span>):
+            <span style="color:#66d9ef">if</span>(vel<span style="color:#f92672">&gt;</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> <span style="color:#f92672">and</span> vel <span style="color:#f92672">&lt;</span>velocityMagnitude<span style="color:#f92672">/</span><span style="color:#ae81ff">2.0</span>):
                 power<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
         <span style="color:#66d9ef">else</span>:
-            <span style="color:#66d9ef">if</span>(vel<span style="color:#f92672">&gt;=</span>(velocityZones[i]<span style="color:#f92672">-</span>velocityMagnitude<span style="color:#f92672">/</span><span style="color:#ae81ff">2.0</span>)  <span style="color:#f92672">and</span>
+            <span style="color:#66d9ef">if</span>(vel<span style="color:#f92672">&gt;</span><span style="color:#f92672">=</span>(velocityZones[i]<span style="color:#f92672">-</span>velocityMagnitude<span style="color:#f92672">/</span><span style="color:#ae81ff">2.0</span>)  <span style="color:#f92672">and</span>
                     vel<span style="color:#f92672">&lt;</span>(velocityZones[i]<span style="color:#f92672">+</span>velocityMagnitude<span style="color:#f92672">/</span><span style="color:#ae81ff">2.0</span>) ):
                 power <span style="color:#f92672">=</span> powerZones[i]
     <span style="color:#66d9ef">return</span> power
@@ -736,21 +727,21 @@ cpPs <span style="color:#f92672">=</span> powerlaw<span style="color:#f92672">.<
     count<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
     [velocityZones,powerZones]<span style="color:#f92672">=</span>powerLawIntoZones(zones)
     cps<span style="color:#f92672">=</span>pd<span style="color:#f92672">.</span>DataFrame([velocityZones,powerZones])<span style="color:#f92672">.</span>T
-    cps<span style="color:#f92672">.</span>to_excel(f<span style="color:#e6db74">&#34;powerVelocityBin{zones}.xlsx&#34;</span>)
+    cps<span style="color:#f92672">.</span>to_excel(f<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">powerVelocityBin{zones}.xlsx</span><span style="color:#e6db74">&#34;</span>)
     <span style="color:#66d9ef">for</span> vel <span style="color:#f92672">in</span> nac:
         <span style="color:#75715e">#calPower[count]=getMean(cpVs,cpPs,vel)</span>
         calVel[count]<span style="color:#f92672">=</span>vel
         calPower[count]<span style="color:#f92672">=</span>whichZones(modify(vel),velocityZones,powerZones,zones)
         count<span style="color:#f92672">=</span>count<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
     calPowerSeries<span style="color:#f92672">=</span>pd<span style="color:#f92672">.</span>DataFrame([calVel,calPower])<span style="color:#f92672">.</span>T
-    calPowerSeries<span style="color:#f92672">.</span>to_csv(str(i)<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;-powerBin.csv&#34;</span>)
+    calPowerSeries<span style="color:#f92672">.</span>to_csv(str(i)<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">-powerBin.csv</span><span style="color:#e6db74">&#34;</span>)
     <span style="color:#66d9ef">return</span> np<span style="color:#f92672">.</span>sum(calPower)<span style="color:#f92672">/</span><span style="color:#ae81ff">6000</span>
 <span style="color:#75715e"># nac8 = velocitySet.iloc[:, 0]</span>
 <span style="color:#75715e"># power1 = getPower(nac8,0)</span>
 <span style="color:#75715e"># print(power1)</span>
 <span style="color:#75715e"># 烟墩6台机组 ：0-6</span>
 <span style="color:#75715e">#velocitySet=pd.read_csv(r&#39;C:\Users\yezhaoliang\Desktop\nacVelocity.csv&#39;,skiprows=1)</span>
-velocitySet<span style="color:#f92672">=</span>pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;C:\Users\yezhaoliang\Desktop\nacVelocity220.csv&#39;</span>,skiprows<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+velocitySet<span style="color:#f92672">=</span>pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">C:</span><span style="color:#e6db74">\</span><span style="color:#e6db74">Users</span><span style="color:#e6db74">\</span><span style="color:#e6db74">yezhaoliang</span><span style="color:#e6db74">\</span><span style="color:#e6db74">Desktop</span><span style="color:#e6db74">\</span><span style="color:#e6db74">nacVelocity220.csv</span><span style="color:#e6db74">&#39;</span>,skiprows<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
 <span style="color:#75715e"># 东平10台机组 ： 0-10</span>
 <span style="color:#75715e">#velocitySet=pd.read_csv(r&#39;C:\Users\yezhaoliang\Desktop\VP.csv&#39;,skiprows=1)</span>
 
@@ -760,56 +751,43 @@ velocitySet<span style="color:#f92672">=</span>pd<span style="color:#f92672">.</
     power1 <span style="color:#f92672">=</span> getPower(nac8,i)
     <span style="color:#75715e">#power1 = getPowerVelocityBin(nac8,i,50)</span>
     <span style="color:#66d9ef">print</span>(power1)</code></pre></div>
-
 <h2 id="速度分仓">速度分仓</h2>
-
 <ol>
 <li>设计功率曲线按照分仓个数bin,进行分仓</li>
 <li>按照分仓大小，设置速度范围多少归入一个仓中，比如50个分仓，仓大小为0.5, 那么第二个分仓也就是0.5，得满足所有大于等于0.25 小于0.75的速度序列术语第二个分仓</li>
 <li>结果发现速度分仓超过25仓之后，对功率曲线计算结果基本上和线性插值类似。</li>
 </ol>
-
 <h2 id="悟空-条件">悟空[条件]</h2>
-
 <p>注意判断中大于号和小于号都不能写错，涉及到判断、抉择、条件、空的时候一定得注意思考对，曾经我就犯过错误!</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">if</span>(vel<span style="color:#f92672">&gt;=</span>(velocityZones[i]<span style="color:#f92672">-</span>velocityMagnitude<span style="color:#f92672">/</span><span style="color:#ae81ff">2.0</span>)  <span style="color:#f92672">and</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">if</span>(vel<span style="color:#f92672">&gt;</span><span style="color:#f92672">=</span>(velocityZones[i]<span style="color:#f92672">-</span>velocityMagnitude<span style="color:#f92672">/</span><span style="color:#ae81ff">2.0</span>)  <span style="color:#f92672">and</span>
         vel<span style="color:#f92672">&lt;</span>(velocityZones[i]<span style="color:#f92672">+</span>velocityMagnitude<span style="color:#f92672">/</span><span style="color:#ae81ff">2.0</span>) ):</code></pre></div>
-
 <h2 id="手算两条功率的k值">手算两条功率的k值</h2>
-
 <p>实际功率曲线[一般是scada的风速和功率的散点图]和设计功率曲线之比如果达到1，也就是k值，那么认为是最好的，如果大点也可以，但是最好不要少于，为了计算这个k值，简单编写了下面代码</p>
-
 <p>核心的地方在于比较提取的过程，即</p>
-
 <ol>
 <li>scada的风速-功率关系散点图</li>
 <li>设计功率曲线</li>
 </ol>
-
-<!--listend-->
-
+<!-- raw HTML omitted -->
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">for</span> vel <span style="color:#f92672">in</span> range(nac<span style="color:#f92672">.</span>__len__()):
     <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(zones):
-        <span style="color:#66d9ef">if</span>(<span style="color:#ae81ff">0</span><span style="color:#f92672">==</span>j <span style="color:#f92672">and</span> nac[vel]<span style="color:#f92672">&gt;=</span><span style="color:#ae81ff">0</span> <span style="color:#f92672">and</span> nac[vel] <span style="color:#f92672">&lt;</span>velocityMagnitude<span style="color:#f92672">/</span><span style="color:#ae81ff">2.0</span>):
+        <span style="color:#66d9ef">if</span>(<span style="color:#ae81ff">0</span><span style="color:#f92672">==</span>j <span style="color:#f92672">and</span> nac[vel]<span style="color:#f92672">&gt;</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> <span style="color:#f92672">and</span> nac[vel] <span style="color:#f92672">&lt;</span>velocityMagnitude<span style="color:#f92672">/</span><span style="color:#ae81ff">2.0</span>):
             counts[j]<span style="color:#f92672">=</span>counts[j]<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
             velocitySum[j]<span style="color:#f92672">=</span>velocitySum[j]<span style="color:#f92672">+</span>nac[vel]
             powerSum[j]<span style="color:#f92672">=</span>powerSum[j]<span style="color:#f92672">+</span>power[vel]
             <span style="color:#66d9ef">break</span>
-        <span style="color:#66d9ef">elif</span>(nac[vel]<span style="color:#f92672">&gt;=</span>(velocityZones[j]<span style="color:#f92672">-</span>velocityMagnitude<span style="color:#f92672">/</span><span style="color:#ae81ff">2.0</span>)  <span style="color:#f92672">and</span>
+        <span style="color:#66d9ef">elif</span>(nac[vel]<span style="color:#f92672">&gt;</span><span style="color:#f92672">=</span>(velocityZones[j]<span style="color:#f92672">-</span>velocityMagnitude<span style="color:#f92672">/</span><span style="color:#ae81ff">2.0</span>)  <span style="color:#f92672">and</span>
             nac[vel]<span style="color:#f92672">&lt;</span>(velocityZones[j]<span style="color:#f92672">+</span>velocityMagnitude<span style="color:#f92672">/</span><span style="color:#ae81ff">2.0</span>)):
             counts[j]<span style="color:#f92672">=</span>counts[j]<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
             velocitySum[j]<span style="color:#f92672">=</span>velocitySum[j]<span style="color:#f92672">+</span>nac[vel]
             powerSum[j]<span style="color:#f92672">=</span>powerSum[j]<span style="color:#f92672">+</span>power[vel]
             <span style="color:#66d9ef">break</span></code></pre></div>
-
 <p>全部代码如下：</p>
-
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
 <span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
 
 <span style="color:#75715e">### 规定风速范围从0-25 不能少于25</span>
-powerlaw<span style="color:#f92672">=</span>pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;C:\Users\yezhaoliang\Desktop\my89_12.csv&#39;</span>)
+powerlaw<span style="color:#f92672">=</span>pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">C:</span><span style="color:#e6db74">\</span><span style="color:#e6db74">Users</span><span style="color:#e6db74">\</span><span style="color:#e6db74">yezhaoliang</span><span style="color:#e6db74">\</span><span style="color:#e6db74">Desktop</span><span style="color:#e6db74">\</span><span style="color:#e6db74">my89_12.csv</span><span style="color:#e6db74">&#39;</span>)
 
 cpVs <span style="color:#f92672">=</span> powerlaw<span style="color:#f92672">.</span>iloc[:, <span style="color:#ae81ff">0</span>]
 cpPs <span style="color:#f92672">=</span> powerlaw<span style="color:#f92672">.</span>iloc[:, <span style="color:#ae81ff">1</span>]
@@ -832,7 +810,7 @@ cpPs <span style="color:#f92672">=</span> powerlaw<span style="color:#f92672">.<
         count<span style="color:#f92672">=</span>count<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">getMean</span>(cpVs,cpPs,vel):
-    <span style="color:#66d9ef">if</span>(vel<span style="color:#f92672">&lt;=</span><span style="color:#ae81ff">2</span>):
+    <span style="color:#66d9ef">if</span>(vel<span style="color:#f92672">&lt;</span><span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>):
         rePower<span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
         <span style="color:#66d9ef">return</span> rePower
     index <span style="color:#f92672">=</span> find(vel, cpVs)
@@ -859,7 +837,7 @@ cpPs <span style="color:#f92672">=</span> powerlaw<span style="color:#f92672">.<
         calVel[count]<span style="color:#f92672">=</span>vel
         count<span style="color:#f92672">=</span>count<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
     calPowerSeries<span style="color:#f92672">=</span>pd<span style="color:#f92672">.</span>DataFrame([calVel,calPower])<span style="color:#f92672">.</span>T
-    calPowerSeries<span style="color:#f92672">.</span>to_csv(str(i)<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;-power.csv&#34;</span>)
+    calPowerSeries<span style="color:#f92672">.</span>to_csv(str(i)<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">-power.csv</span><span style="color:#e6db74">&#34;</span>)
     <span style="color:#66d9ef">return</span> np<span style="color:#f92672">.</span>sum(calPower)<span style="color:#f92672">/</span><span style="color:#ae81ff">6000</span>
 <span style="color:#75715e">############################################################</span>
 <span style="color:#75715e">##  Velocity Bin Method ####################################</span>
@@ -888,12 +866,12 @@ cpPs <span style="color:#f92672">=</span> powerlaw<span style="color:#f92672">.<
     AEPTheory<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>zeros(zones)
     <span style="color:#66d9ef">for</span> vel <span style="color:#f92672">in</span> range(nac<span style="color:#f92672">.</span>__len__()):
         <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(zones):
-            <span style="color:#66d9ef">if</span>(<span style="color:#ae81ff">0</span><span style="color:#f92672">==</span>j <span style="color:#f92672">and</span> nac[vel]<span style="color:#f92672">&gt;=</span><span style="color:#ae81ff">0</span> <span style="color:#f92672">and</span> nac[vel] <span style="color:#f92672">&lt;</span>velocityMagnitude<span style="color:#f92672">/</span><span style="color:#ae81ff">2.0</span>):
+            <span style="color:#66d9ef">if</span>(<span style="color:#ae81ff">0</span><span style="color:#f92672">==</span>j <span style="color:#f92672">and</span> nac[vel]<span style="color:#f92672">&gt;</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> <span style="color:#f92672">and</span> nac[vel] <span style="color:#f92672">&lt;</span>velocityMagnitude<span style="color:#f92672">/</span><span style="color:#ae81ff">2.0</span>):
                 counts[j]<span style="color:#f92672">=</span>counts[j]<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
                 velocitySum[j]<span style="color:#f92672">=</span>velocitySum[j]<span style="color:#f92672">+</span>nac[vel]
                 powerSum[j]<span style="color:#f92672">=</span>powerSum[j]<span style="color:#f92672">+</span>power[vel]
                 <span style="color:#66d9ef">break</span>
-            <span style="color:#66d9ef">elif</span>(nac[vel]<span style="color:#f92672">&gt;=</span>(velocityZones[j]<span style="color:#f92672">-</span>velocityMagnitude<span style="color:#f92672">/</span><span style="color:#ae81ff">2.0</span>)  <span style="color:#f92672">and</span>
+            <span style="color:#66d9ef">elif</span>(nac[vel]<span style="color:#f92672">&gt;</span><span style="color:#f92672">=</span>(velocityZones[j]<span style="color:#f92672">-</span>velocityMagnitude<span style="color:#f92672">/</span><span style="color:#ae81ff">2.0</span>)  <span style="color:#f92672">and</span>
                  nac[vel]<span style="color:#f92672">&lt;</span>(velocityZones[j]<span style="color:#f92672">+</span>velocityMagnitude<span style="color:#f92672">/</span><span style="color:#ae81ff">2.0</span>)):
                 counts[j]<span style="color:#f92672">=</span>counts[j]<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
                 velocitySum[j]<span style="color:#f92672">=</span>velocitySum[j]<span style="color:#f92672">+</span>nac[vel]
@@ -922,10 +900,10 @@ cpPs <span style="color:#f92672">=</span> powerlaw<span style="color:#f92672">.<
     velocityMagnitude<span style="color:#f92672">=</span><span style="color:#ae81ff">25.0</span><span style="color:#f92672">/</span>zones
     <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(zones):
         <span style="color:#66d9ef">if</span>(<span style="color:#ae81ff">0</span><span style="color:#f92672">==</span>i):
-            <span style="color:#66d9ef">if</span>(vel<span style="color:#f92672">&gt;=</span><span style="color:#ae81ff">0</span> <span style="color:#f92672">and</span> vel <span style="color:#f92672">&lt;</span>velocityMagnitude<span style="color:#f92672">/</span><span style="color:#ae81ff">2.0</span>):
+            <span style="color:#66d9ef">if</span>(vel<span style="color:#f92672">&gt;</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> <span style="color:#f92672">and</span> vel <span style="color:#f92672">&lt;</span>velocityMagnitude<span style="color:#f92672">/</span><span style="color:#ae81ff">2.0</span>):
                 power<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
         <span style="color:#66d9ef">else</span>:
-            <span style="color:#66d9ef">if</span>(vel<span style="color:#f92672">&gt;=</span>(velocityZones[i]<span style="color:#f92672">-</span>velocityMagnitude<span style="color:#f92672">/</span><span style="color:#ae81ff">2.0</span>)  <span style="color:#f92672">and</span>
+            <span style="color:#66d9ef">if</span>(vel<span style="color:#f92672">&gt;</span><span style="color:#f92672">=</span>(velocityZones[i]<span style="color:#f92672">-</span>velocityMagnitude<span style="color:#f92672">/</span><span style="color:#ae81ff">2.0</span>)  <span style="color:#f92672">and</span>
                     vel<span style="color:#f92672">&lt;</span>(velocityZones[i]<span style="color:#f92672">+</span>velocityMagnitude<span style="color:#f92672">/</span><span style="color:#ae81ff">2.0</span>) ):
                 power <span style="color:#f92672">=</span> powerZones[i]
     <span style="color:#66d9ef">return</span> power
@@ -936,20 +914,20 @@ cpPs <span style="color:#f92672">=</span> powerlaw<span style="color:#f92672">.<
     count<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
     [velocityZones,powerZones]<span style="color:#f92672">=</span>powerLawIntoZones(zones)
     cps<span style="color:#f92672">=</span>pd<span style="color:#f92672">.</span>DataFrame([velocityZones,powerZones])<span style="color:#f92672">.</span>T
-    cps<span style="color:#f92672">.</span>to_excel(f<span style="color:#e6db74">&#34;powerVelocityBin{zones}.xlsx&#34;</span>)
+    cps<span style="color:#f92672">.</span>to_excel(f<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">powerVelocityBin{zones}.xlsx</span><span style="color:#e6db74">&#34;</span>)
     <span style="color:#66d9ef">for</span> vel <span style="color:#f92672">in</span> nac:
         <span style="color:#75715e">#calPower[count]=getMean(cpVs,cpPs,vel)</span>
         calVel[count]<span style="color:#f92672">=</span>vel
         calPower[count]<span style="color:#f92672">=</span>whichZones(modify(vel),velocityZones,powerZones,zones)
         count<span style="color:#f92672">=</span>count<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
     calPowerSeries<span style="color:#f92672">=</span>pd<span style="color:#f92672">.</span>DataFrame([calVel,calPower])<span style="color:#f92672">.</span>T
-    calPowerSeries<span style="color:#f92672">.</span>to_csv(str(i)<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;-powerBin.csv&#34;</span>)
+    calPowerSeries<span style="color:#f92672">.</span>to_csv(str(i)<span style="color:#f92672">+</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">-powerBin.csv</span><span style="color:#e6db74">&#34;</span>)
     <span style="color:#66d9ef">return</span> np<span style="color:#f92672">.</span>sum(calPower)<span style="color:#f92672">/</span><span style="color:#ae81ff">6000</span>
 <span style="color:#75715e"># nac8 = velocitySet.iloc[:, 0]</span>
 <span style="color:#75715e"># power1 = getPower(nac8,0)</span>
 <span style="color:#75715e"># print(power1)</span>
-velocitySet<span style="color:#f92672">=</span>pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;C:\Users\yezhaoliang\Desktop\nacVelocity.csv&#39;</span>,skiprows<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
-velocityPowerSeries<span style="color:#f92672">=</span>pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;C:\Users\yezhaoliang\Desktop\vp.csv&#39;</span>)
+velocitySet<span style="color:#f92672">=</span>pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">C:</span><span style="color:#e6db74">\</span><span style="color:#e6db74">Users</span><span style="color:#e6db74">\</span><span style="color:#e6db74">yezhaoliang</span><span style="color:#e6db74">\</span><span style="color:#e6db74">Desktop</span><span style="color:#e6db74">\</span><span style="color:#e6db74">nacVelocity.csv</span><span style="color:#e6db74">&#39;</span>,skiprows<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+velocityPowerSeries<span style="color:#f92672">=</span>pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">C:</span><span style="color:#e6db74">\</span><span style="color:#e6db74">Users</span><span style="color:#e6db74">\</span><span style="color:#e6db74">yezhaoliang</span><span style="color:#e6db74">\</span><span style="color:#e6db74">Desktop</span><span style="color:#e6db74">\</span><span style="color:#e6db74">vp.csv</span><span style="color:#e6db74">&#39;</span>)
 
 kvalues<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>zeros(<span style="color:#ae81ff">10</span>)
 <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">10</span>):
@@ -959,12 +937,12 @@ kvalues<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span
     [probability,velocitySet,PowerSet,k] <span style="color:#f92672">=</span> velocitySeriesSplitIntoZones(nac8,power8,<span style="color:#ae81ff">50</span>)
     kvalues[i] <span style="color:#f92672">=</span> k
     <span style="color:#66d9ef">print</span>(np<span style="color:#f92672">.</span>sum(probability))
-    <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#34;k value is {k}&#34;</span>)
+    <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">k value is {k}</span><span style="color:#e6db74">&#34;</span>)
     <span style="color:#75715e">#power1 = getPower(nac8,i)</span>
 <span style="color:#75715e">#    power1 = getPowerVelocityBin(nac8,i,125)</span>
 <span style="color:#75715e">#    print(power1)</span>
 kset<span style="color:#f92672">=</span>pd<span style="color:#f92672">.</span>Series(kvalues)
-kset<span style="color:#f92672">.</span>to_csv(<span style="color:#e6db74">&#34;kvalues.csv&#34;</span>)</code></pre></div>
+kset<span style="color:#f92672">.</span>to_csv(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">kvalues.csv</span><span style="color:#e6db74">&#34;</span>)</code></pre></div>
 
     </div>
  <div class="nav-links" style="padding:10;">
@@ -1369,7 +1347,7 @@ kset<span style="color:#f92672">.</span>to_csv(<span style="color:#e6db74">&#34;
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

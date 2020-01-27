@@ -31,7 +31,6 @@
   <meta name="description" content="Bash是linux底下的一种shell实现，可以方便linux用户进行系统管理。他的核心就是
 调用最有效的命令组合形成更加强大完美的管理和应用程序,这也是unix的哲学,通过调用between programs的关系来get its power而不是通过自己的程序。
 shell编成的目的减少unix相关系统的管理员的人物
-
 下面介绍主要是bash语法，以及有bash语法调用awk，sed，grep等linux底下强大的工具实现一个文件智能分类，并对相应文件夹取平均。">
 
   
@@ -124,7 +123,6 @@ shell编成的目的减少unix相关系统的管理员的人物
   <meta property="og:description" content="Bash是linux底下的一种shell实现，可以方便linux用户进行系统管理。他的核心就是
 调用最有效的命令组合形成更加强大完美的管理和应用程序,这也是unix的哲学,通过调用between programs的关系来get its power而不是通过自己的程序。
 shell编成的目的减少unix相关系统的管理员的人物
-
 下面介绍主要是bash语法，以及有bash语法调用awk，sed，grep等linux底下强大的工具实现一个文件智能分类，并对相应文件夹取平均。"><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
   <meta property="twitter:image" content="https://jueqingsizhe66.github.io/img/icon-192.png"><meta property="og:locale" content="en-us">
   
@@ -571,24 +569,12 @@ shell编成的目的减少unix相关系统的管理员的人物
 
 
 
-<span class="article-metadata" >Reading time: 20 minutes and    5 seconds with 4420 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+<span class="article-metadata" >Reading time: 20 minutes and    18 seconds with 4467 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
-<ul>
-<li><a href="#无用的分号命令">无用的分号命令</a></li>
-<li><a href="#特殊的点号">特殊的点号</a></li>
-<li><a href="#关于大括号和小括号的区别">关于大括号和小括号的区别</a></li>
-<li><a href="#中括号用于判断">中括号用于判断</a></li>
-<li><a href="#关于-单括号和双中括号的区别">关于 单括号和双中括号的区别</a>
-<ul>
-<li><a href="#两者的主要区别如下">两者的主要区别如下：</a></li>
-</ul></li>
-<li><a href="#双中括号和双小括号">双中括号和双小括号</a></li>
-<li><a href="#find跳过指定目录">find跳过指定目录</a></li>
-<li><a href="#unix-tutorial-for-beginner-www-ee-surrey-ac-uk-teaching-unix"><a href="www.ee.surrey.ac.uk/Teaching/Unix" target="_blank">Unix Tutorial for Beginner</a></a></li>
-<li><a href="#常用的bash命令学习-http-vbird-dic-ksu-edu-tw-linux-basic-0320bash-php"><a href="http://vbird.dic.ksu.edu.tw/linux_basic/0320bash.php" target="_blank">常用的bash命令学习</a></a></li>
-<li><a href="#一个综合性的案例">一个综合性的案例</a></li>
-</ul>
+  <ul>
+    <li><a href="#heading-4">两者的主要区别如下：</a></li>
+  </ul>
 </nav>
     </aside>
   <div class="article-container">
@@ -598,28 +584,25 @@ shell编成的目的减少unix相关系统的管理员的人物
       <p>Bash是linux底下的一种shell实现，可以方便linux用户进行系统管理。他的核心就是
 调用最有效的命令组合形成更加强大完美的管理和应用程序,这也是unix的哲学,通过调用between programs的<strong>关系</strong>来<strong>get its power</strong>而不是通过自己的程序。
 shell编成的目的减少unix相关系统的管理员的人物</p>
-
 <p>下面介绍主要是bash语法，以及有bash语法调用awk，sed，grep等linux底下强大的工具实现一个文件智能分类，并对相应文件夹取平均。</p>
-
 <p>一些基本语法,虽然扎成一团，却静心选择。</p>
-
-<pre><code class="language-sh"> 在单行模式下可以
-echo {userA,userB,userC}-{home,bin,data}
-echo {&quot;userA&quot;,&quot;userB&quot;,&quot;userC&quot;}-{&quot;home&quot;,&quot;bin&quot;,&quot;data&quot;}
-echo `{userA,userB,userC}-{home,bin,data}` #error
-echo '{userA,userB,userC}-{home,bin,data}'
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"> 在单行模式下可以
+echo <span style="color:#f92672">{</span>userA,userB,userC<span style="color:#f92672">}</span>-<span style="color:#f92672">{</span>home,bin,data<span style="color:#f92672">}</span>
+echo <span style="color:#f92672">{</span><span style="color:#e6db74">&#34;userA&#34;</span>,<span style="color:#e6db74">&#34;userB&#34;</span>,<span style="color:#e6db74">&#34;userC&#34;</span><span style="color:#f92672">}</span>-<span style="color:#f92672">{</span><span style="color:#e6db74">&#34;home&#34;</span>,<span style="color:#e6db74">&#34;bin&#34;</span>,<span style="color:#e6db74">&#34;data&#34;</span><span style="color:#f92672">}</span>
+echo <span style="color:#e6db74">`</span><span style="color:#f92672">{</span>userA,userB,userC<span style="color:#f92672">}</span>-<span style="color:#f92672">{</span>home,bin,data<span style="color:#f92672">}</span><span style="color:#e6db74">`</span> <span style="color:#75715e">#error</span>
+echo <span style="color:#e6db74">&#39;{userA,userB,userC}-{home,bin,data}&#39;</span>
  分号的作用 挡任连续指令的功能！（其实也可以用换行代替）
 
 
  一定要注意的bash的if语法，有空格：
- if [ &quot;$?&quot; != 0 ] 等价于  if test &quot;$?&quot; != 0    一定要注意[]之间有空格
+ <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;</span>$?<span style="color:#e6db74">&#34;</span> !<span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">]</span> 等价于  <span style="color:#66d9ef">if</span> test <span style="color:#e6db74">&#34;</span>$?<span style="color:#e6db74">&#34;</span> !<span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>    一定要注意<span style="color:#f92672">[</span><span style="color:#f92672">]</span>之间有空格
 
  等价关系有条件：
- `command` 等价于 $(command)
- &quot;&quot; 约等于 ''  但是单引号不转义特殊字符  双引号不转义特殊字符
+ <span style="color:#e6db74">`</span>command<span style="color:#e6db74">`</span> 等价于 <span style="color:#66d9ef">$(</span>command<span style="color:#66d9ef">)</span>
+ <span style="color:#e6db74">&#34;&#34;</span> 约等于 <span style="color:#e6db74">&#39;&#39;</span>  但是单引号不转义特殊字符  双引号不转义特殊字符
 
- 另外需要注意这种情况，${var} 和$var的区别：
-  基本上一样，$1...$9这个没区别，但是$10呢，${var}的这种就是${10}
+ 另外需要注意这种情况，<span style="color:#e6db74">${</span>var<span style="color:#e6db74">}</span> 和$var的区别：
+  基本上一样，$1...$9这个没区别，但是$10呢，<span style="color:#e6db74">${</span>var<span style="color:#e6db74">}</span>的这种就是<span style="color:#e6db74">${</span>10<span style="color:#e6db74">}</span>
 而$var却是$10是$1后边带个0
 
 
@@ -629,128 +612,106 @@ echo '{userA,userB,userC}-{home,bin,data}'
  $#  传给shell程序的位置参数个数
  $0  脚本名称
  $n  脚本的第几个参数
- $((...))  ==&gt; x=$(($x+1)) 对括号内的表达式求值
+ <span style="color:#66d9ef">$((</span>...<span style="color:#66d9ef">))</span>  <span style="color:#f92672">=</span><span style="color:#f92672">=</span>&gt; x<span style="color:#f92672">=</span><span style="color:#66d9ef">$((</span>$x<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span><span style="color:#66d9ef">))</span> 对括号内的表达式求值
 
  逻辑操作符相关:
- and   statement &amp;&amp; statement &amp;&amp; .. 
- or statement || statement || .. 
+ and   statement <span style="color:#f92672">&amp;&amp;</span> statement <span style="color:#f92672">&amp;&amp;</span> .. 
+ or statement <span style="color:#f92672">||</span> statement <span style="color:#f92672">||</span> .. 
 
  最常用的分支判断：
- if [ -f file_one ]  &amp;&amp; [ -f file_two ]
- then
- echo &quot;in if&quot;
- else
- echo &quot;in else
- fi
-
- bash也在改进,比如：
- [[]] 是提高版的test  比如\&gt;必须在[]和test中使用  在[[]]直接使用！
-   #  所以以后改用[[]]
-
- 下面几个${}开头的都是针对字符串的操作，可以剪切替换
-${name:-default} 使用一个默认值（一般是空值）来代替那些空的或者没有赋值的变量name；
-${name:=default}使用指定值来代替空的或者没有赋值的变量name；
-${name:?message}如果变量为空或者未赋值，那么就会显示出错误信息并中止脚本的执行同时返回退出码1。
-${#name} 给出name的长度
-${name%word} 从name的尾部开始删除与word匹配的最小部分，然后返回剩余部分
-${name%%word} 从name的尾部开始删除与word匹配的最长部分，然后返回剩余部分
-${name#word} 从name的头部开始删除与word匹配的最小部分，然后返回剩余部分
-${name##word} 从name的头部开始删除与word匹配的最长部分，然后返回剩余部分
-
-（注，name为变量名，word为要匹配的字符串）
-case${tao} in
-a)      echo “a” ;;
-b)      echo “b” ;;
-esac
-
-## 一些当行运行的指令，只在prompt运行窗口才有效
-1 let
-let &quot;sus=2**3&quot;
-echo &quot;sus = $sus&quot; 
-sus=[[2**3]]
-echo &quot;2**3&quot;
-echo &quot;sus = $sus&quot;,$sus
-if [ 2**3 == 8] 
-then  echo &quot;hello&quot;
-else
-    echo &quot;fuck&quot;
-fi
- 注意在shell #的命令行运行可以写上分号 
-
-
-
-##  虽然有人说函数创建可以使用  
- [function] function_name[()]{
- commands
- [return ...]
-}
- 但是我发现加入function反而不行，于是使用 function_name(){}的风格
-
-</code></pre>
-
-<h1 id="无用的分号命令">无用的分号命令</h1>
-
+ <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -f file_one <span style="color:#f92672">]</span>  <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">[</span> -f file_two <span style="color:#f92672">]</span>
+ <span style="color:#66d9ef">then</span>
+ echo <span style="color:#e6db74">&#34;in if&#34;</span>
+ <span style="color:#66d9ef">else</span>
+ echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">in else
+</span><span style="color:#e6db74"> fi
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"> bash也在改进,比如：
+</span><span style="color:#e6db74"> [[]] 是提高版的test  比如\&gt;必须在[]和test中使用  在[[]]直接使用！
+</span><span style="color:#e6db74">   #  所以以后改用[[]]
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"> 下面几个</span><span style="color:#e6db74">${</span><span style="color:#e6db74">}</span><span style="color:#e6db74">开头的都是针对字符串的操作，可以剪切替换
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">${</span>name<span style="color:#66d9ef">:-</span>default<span style="color:#e6db74">}</span><span style="color:#e6db74"> 使用一个默认值（一般是空值）来代替那些空的或者没有赋值的变量name；
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">${</span>name:=default<span style="color:#e6db74">}</span><span style="color:#e6db74">使用指定值来代替空的或者没有赋值的变量name；
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">${</span>name:?message<span style="color:#e6db74">}</span><span style="color:#e6db74">如果变量为空或者未赋值，那么就会显示出错误信息并中止脚本的执行同时返回退出码1。
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">${#</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74"> 给出name的长度
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">${</span>name%word<span style="color:#e6db74">}</span><span style="color:#e6db74"> 从name的尾部开始删除与word匹配的最小部分，然后返回剩余部分
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">${</span>name%%word<span style="color:#e6db74">}</span><span style="color:#e6db74"> 从name的尾部开始删除与word匹配的最长部分，然后返回剩余部分
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">${</span>name#word<span style="color:#e6db74">}</span><span style="color:#e6db74"> 从name的头部开始删除与word匹配的最小部分，然后返回剩余部分
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">${</span>name##word<span style="color:#e6db74">}</span><span style="color:#e6db74"> 从name的头部开始删除与word匹配的最长部分，然后返回剩余部分
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">（注，name为变量名，word为要匹配的字符串）
+</span><span style="color:#e6db74">case</span><span style="color:#e6db74">${</span>tao<span style="color:#e6db74">}</span><span style="color:#e6db74"> in
+</span><span style="color:#e6db74">a)      echo “a” ;;
+</span><span style="color:#e6db74">b)      echo “b” ;;
+</span><span style="color:#e6db74">esac
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">## 一些当行运行的指令，只在prompt运行窗口才有效
+</span><span style="color:#e6db74">1 let
+</span><span style="color:#e6db74">let </span><span style="color:#e6db74">&#34;</span>sus<span style="color:#f92672">=</span>2**3<span style="color:#e6db74">&#34;
+</span><span style="color:#e6db74">echo &#34;</span>sus <span style="color:#f92672">=</span> $sus<span style="color:#e6db74">&#34; 
+</span><span style="color:#e6db74">sus=[[2**3]]
+</span><span style="color:#e6db74">echo &#34;</span>2**3<span style="color:#e6db74">&#34;
+</span><span style="color:#e6db74">echo &#34;</span>sus <span style="color:#f92672">=</span> $sus<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">,</span>$sus<span style="color:#e6db74">
+</span><span style="color:#e6db74">if [ 2**3 == 8] 
+</span><span style="color:#e6db74">then  echo </span><span style="color:#e6db74">&#34;</span>hello<span style="color:#e6db74">&#34;
+</span><span style="color:#e6db74">else
+</span><span style="color:#e6db74">    echo &#34;</span>fuck<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">fi
+</span><span style="color:#e6db74"> 注意在shell #的命令行运行可以写上分号 
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">##  虽然有人说函数创建可以使用  
+</span><span style="color:#e6db74"> [function] function_name[()]{
+</span><span style="color:#e6db74"> commands
+</span><span style="color:#e6db74"> [return ...]
+</span><span style="color:#e6db74">}
+</span><span style="color:#e6db74"> 但是我发现加入function反而不行，于是使用 function_name(){}的风格
+</span><span style="color:#e6db74">
+</span></code></pre></div><h1 id="heading">无用的分号命令</h1>
 <p>： 该命令什么都不做，但执行后会返回一个正确的退出代码，即exit 0。比如在if语句中，then后面不想做任何操作，但是又不能空着，这时就可以使用“:”来解决，如下</p>
-
-<pre><code class="language-sh">if [ &quot;$i&quot; -ne 1 ];then
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;</span>$i<span style="color:#e6db74">&#34;</span> -ne <span style="color:#ae81ff">1</span> <span style="color:#f92672">]</span>;<span style="color:#66d9ef">then</span>
     :
-else
-    echo &quot;$i is not equal 1&quot;
-fi
-</code></pre>
-
-<h1 id="特殊的点号">特殊的点号</h1>
-
+<span style="color:#66d9ef">else</span>
+    echo <span style="color:#e6db74">&#34;</span>$i<span style="color:#e6db74"> is not equal 1</span><span style="color:#e6db74">&#34;</span>
+<span style="color:#66d9ef">fi</span>
+</code></pre></div><h1 id="heading-1">特殊的点号</h1>
 <p>点号+ 文件名的作用 和 source+文件名的作用一样，都是在当前的shell执行命令
 而 ./filename.sh 则是在子shell执行命令。
 所以如果想要设置环境变量得用source+文件名或者. 文件名的方式。</p>
-
-<h1 id="关于大括号和小括号的区别">关于大括号和小括号的区别</h1>
-
+<h1 id="heading-2">关于大括号和小括号的区别</h1>
 <p>大括号和小括号的作用都一样，都是把几个命令组合在一起，然而他们也有所区别。
 ()是在产生的子shell下执行，而{}是在当前的shell下执行
-与前面讲到是使用&rdquo;.  filename.sh&rdquo;和&rdquo;./filename.sh&rdquo;的区别一样</p>
-
-<pre><code class="language-sh">
-# A=123
-# (A=abc;echo $A);echo $A
+与前面讲到是使用&rdquo;.  filename.sh&quot;和&rdquo;./filename.sh&quot;的区别一样</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">
+<span style="color:#75715e"># A=123</span>
+<span style="color:#75715e"># (A=abc;echo $A);echo $A</span>
 abc
-123
-# { A=abc;echo $A; };echo $A
+<span style="color:#ae81ff">123</span>
+<span style="color:#75715e"># { A=abc;echo $A; };echo $A</span>
 abc
 abc
-</code></pre>
-
-<p>由此可见，() 子shell设置完，不会影响到父shell，因为父不会继承子，影响的只是
+</code></pre></div><p>由此可见，() 子shell设置完，不会影响到父shell，因为父不会继承子，影响的只是
 自身的shell。
 <em>注意：()里面两边可以不使用空格，{}里面两边必须使用空格，且最后一个命令也需要以“；”结尾，表示命令结束。</em></p>
-
-<h1 id="中括号用于判断">中括号用于判断</h1>
-
+<h1 id="heading-3">中括号用于判断</h1>
 <p>[] 与test命令一样，用于比较值以及检查文件类型。如下</p>
-
 <ol>
-<li>[ &ldquo;$A&rdquo; = 123 ]：是字符串的测试，以测试 $A 是否为 1、2、3 这三个连续的&rdquo;文字&rdquo;。</li>
-<li>[ &ldquo;$A&rdquo; -eq 123 ]：是整数的测试，以测试 $A 是否等于&rdquo;一百二十三&rdquo;。</li>
-<li>[ -e &ldquo;$A&rdquo; ]：是关于文件的测试，以测试 123 这份&rdquo;文件&rdquo;是否存在</li>
+<li>[ &ldquo;$A&rdquo; = 123 ]：是字符串的测试，以测试 $A 是否为 1、2、3 这三个连续的&quot;文字&rdquo;。</li>
+<li>[ &ldquo;$A&rdquo; -eq 123 ]：是整数的测试，以测试 $A 是否等于&quot;一百二十三&rdquo;。</li>
+<li>[ -e &ldquo;$A&rdquo; ]：是关于文件的测试，以测试 123 这份&quot;文件&quot;是否存在</li>
 <li>[ -f &ldquo;$A&rdquo; ] : 判断是否存在文件</li>
 <li>[ -d &ldquo;$A&rdquo; ] : 判断是否存在文件夹</li>
 </ol>
-
-<h1 id="关于-单括号和双中括号的区别">关于 单括号和双中括号的区别</h1>
-
+<h1 id="-">关于 单括号和双中括号的区别</h1>
 <p>[[]]可以说是[]的“增强版”，它能够将多个test命令支持的测试组合起来.</p>
-
-<pre><code class="language-sh">
-# [[ (-d &quot;$HOME&quot;) &amp;&amp; (-w &quot;$HOME&quot;) ]] &amp;&amp; echo echo &quot;home is a writable directory&quot;  
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">
+<span style="color:#75715e"># [[ (-d &#34;$HOME&#34;) &amp;&amp; (-w &#34;$HOME&#34;) ]] &amp;&amp; echo echo &#34;home is a writable directory&#34;</span>  
 home is a writable directory
-</code></pre>
-
-<h2 id="两者的主要区别如下">两者的主要区别如下：</h2>
-
+</code></pre></div><h2 id="heading-4">两者的主要区别如下：</h2>
 <ul>
-<li>数字测试： -eq -ne -lt -le -gt -ge，[[ ]]同 [ ]一致
-
+<li>数字测试： -eq -ne -lt -le -gt -ge，[<input disabled="" type="checkbox">]同 <input disabled="" type="checkbox">一致
 <ul>
 <li>test int1 -eq int2  测试整数是否相等</li>
 <li>test int1 -ge int2  测试int1是否&gt;=int2</li>
@@ -758,9 +719,9 @@ home is a writable directory
 <li>test int1 -le  int2 测试int1是否&lt;=int2</li>
 <li>test int1 -lt int2  测试int1是否&lt;int2</li>
 <li>test int1 -ne int2  测试整数是否不相等</li>
-</ul></li>
-<li>文件测试： -r、-l、-w、-x、-f、-d、-s、-nt、-ot，[[ ]]同 [ ]一致
-
+</ul>
+</li>
+<li>文件测试： -r、-l、-w、-x、-f、-d、-s、-nt、-ot，[<input disabled="" type="checkbox">]同 <input disabled="" type="checkbox">一致
 <ul>
 <li>test -d file 指定文件是否目录</li>
 <li>test -f file 指定文件是否常规文件</li>
@@ -769,64 +730,51 @@ home is a writable directory
 <li>test -w file 指定文件是否可写</li>
 <li>test -a file 指定文件是否存在</li>
 <li>test -s file 文件的大小是否非0</li>
-</ul></li>
-<li>字符串测试： &gt; &lt; =(同==) != -n -z，不可使用“&lt;=”和“&gt;=”，[[ ]]同 [ ]一致，但在[]中，&gt;和&lt;必须使用\进行转义，即&gt;和&lt;
-
+</ul>
+</li>
+<li>字符串测试： &gt; &lt; =(同==) != -n -z，不可使用“&lt;=”和“&gt;=”，[<input disabled="" type="checkbox">]同 <input disabled="" type="checkbox">一致，但在[]中，&gt;和&lt;必须使用\进行转义，即&gt;和&lt;
 <ul>
 <li>test str1=str2  测试字符串是否相等</li>
 <li>test str1!=str2  测试字符串是否不相等</li>
 <li>test str1 测试字符串是否不为空</li>
 <li>test -n str1 测试字符串是否不为空</li>
 <li>test -z str1 测试字符串是否为空</li>
-</ul></li>
-<li>逻辑测试： []为 -a -o ! [[ ]] 为&amp;&amp; || !</li>
-<li>数学运算： [] 不可以使用 [[ ]]可以使用+ - * / %</li>
-
-<li><p>组合： 均可用各自逻辑符号连接的数字（运算）测试、文件测试、字符测试</p>
-
-<pre><code class="language-sh">
-# [ a \&gt; 1 ] &amp;&amp; echo ture || echo false
-ture
-# [[ a &gt; 1 ]] &amp;&amp; echo ture || echo false
-ture
-</code></pre></li>
 </ul>
-
-<h1 id="双中括号和双小括号">双中括号和双小括号</h1>
-
+</li>
+<li>逻辑测试： []为 -a -o ! [<input disabled="" type="checkbox">] 为&amp;&amp; || !</li>
+<li>数学运算： [] 不可以使用 [<input disabled="" type="checkbox">]可以使用+ - * / %</li>
+<li>组合： 均可用各自逻辑符号连接的数字（运算）测试、文件测试、字符测试</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">
+<span style="color:#75715e"># [ a \&gt; 1 ] &amp;&amp; echo ture || echo false</span>
+ture
+<span style="color:#75715e"># [[ a &gt; 1 ]] &amp;&amp; echo ture || echo false</span>
+ture
+</code></pre></div><h1 id="heading-5">双中括号和双小括号</h1>
 <p>(())专门来做数值运算，如果表达式求值为 0，则设置退出状态为 1；如果求值为非 0 值，则设置为 0。不需要对 (( 和 )) 之间的操作符转义。算术只对整数进行。除 0 会产生错误，但不会产生溢出。可以执行 C 语言中常见的算术、逻辑和位操作。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#f92672">(</span><span style="color:#f92672">(</span>i<span style="color:#f92672">=</span>1+99<span style="color:#f92672">)</span><span style="color:#f92672">)</span>;echo $i
+<span style="color:#ae81ff">100</span>
 
-<pre><code class="language-sh">((i=1+99));echo $i
-100
+i<span style="color:#f92672">=</span>99;<span style="color:#f92672">(</span><span style="color:#f92672">(</span>i++<span style="color:#f92672">)</span><span style="color:#f92672">)</span>;echo $i
+<span style="color:#ae81ff">100</span>
 
-i=99;((i++));echo $i
-100
+echo <span style="color:#66d9ef">$((</span><span style="color:#ae81ff">2</span><span style="color:#f92672">*</span><span style="color:#f92672">*</span><span style="color:#ae81ff">3</span><span style="color:#66d9ef">))</span>
+<span style="color:#ae81ff">8</span>
 
-echo $((2**3))
-8
-
-</code></pre>
-
-<p><em>注意：使用 (( )) 时，不需要空格分隔各值和运算符，使用[]和[[ ]] 时需要用空格分隔各值和运算符</em></p>
-
-<h1 id="find跳过指定目录">find跳过指定目录</h1>
-
+</code></pre></div><p><em>注意：使用 (( )) 时，不需要空格分隔各值和运算符，使用[]和[[ ]] 时需要用空格分隔各值和运算符</em></p>
+<h1 id="find">find跳过指定目录</h1>
 <p>如果在查找文件时希望忽略某个目录，因为你知道那个目录中没有你所要查找的文件，那么可以使用-prune选项来指出需要忽略的目录。
 在使用 -prune选项时要当心，因为如果你同时使用了-depth选项，那么-prune选项就会被find命令忽略。</p>
-
-<h1 id="unix-tutorial-for-beginner-www-ee-surrey-ac-uk-teaching-unix"><a href="www.ee.surrey.ac.uk/Teaching/Unix" target="_blank">Unix Tutorial for Beginner</a></h1>
-
-<h1 id="常用的bash命令学习-http-vbird-dic-ksu-edu-tw-linux-basic-0320bash-php"><a href="http://vbird.dic.ksu.edu.tw/linux_basic/0320bash.php" target="_blank">常用的bash命令学习</a></h1>
-
+<h1 id="unix-tutorial-for-beginnerwwweesurreyacukteachingunix"><a href="www.ee.surrey.ac.uk/Teaching/Unix">Unix Tutorial for Beginner</a></h1>
+<h1 id="bashhttpvbirddicksuedutwlinux-basic0320bashphp-"><a href="http://vbird.dic.ksu.edu.tw/linux_basic/0320bash.php">常用的bash命令学习</a></h1>
 <ol>
 <li>wc -l</li>
 <li>sort -rn -t 2 -k :</li>
 <li>grep -n &ldquo;bash&rdquo; src</li>
 <li>join a.txt b.txt 两个文件有一列是相同的</li>
-<li>find /usr -name &ldquo;hello&rdquo; -type d -exec ls -l {} \;  使用-ok更为安全。</li>
+<li>find /usr -name &ldquo;hello&rdquo; -type d -exec ls -l {} ;  使用-ok更为安全。</li>
 <li>find . -type f -atime -7 -print   7天前被访问的</li>
-<li>find . -type f -size -100M   +100M 大于100M  -100M小于10M<br />
-
+<li>find . -type f -size -100M   +100M 大于100M  -100M小于10M
 <ul>
 <li>b&mdash;&ndash;块（512字节）</li>
 <li>c&mdash;&ndash;字节</li>
@@ -834,214 +782,211 @@ echo $((2**3))
 <li>k&mdash;&mdash;千字节（1024个字节）</li>
 <li>M&mdash;&ndash;兆字节</li>
 <li>G&mdash;&mdash;吉字节（1024M）</li>
-</ul></li>
-<li>tr &lsquo;A-Z&rsquo; &lsquo;a-z&rsquo;<br /></li>
-<li>echo &lsquo;this is my passwd&rsquo; |tr &lsquo;abcdefghijklmnopqrstuvwxyz&rdquo;zyxwvutsrqponmlkjihgfedcba&rsquo;   tr也可以用于加密
+</ul>
+</li>
+<li>tr &lsquo;A-Z&rsquo; &lsquo;a-z&rsquo;</li>
+<li>echo &lsquo;this is my passwd&rsquo; |tr &lsquo;abcdefghijklmnopqrstuvwxyz'&lsquo;zyxwvutsrqponmlkjihgfedcba&rsquo;   tr也可以用于加密
 解密：
-echo &lsquo;gsrh rh nb kzhhdw&rsquo; |tr &lsquo;zyxwvutsrqponmlkjihgfedcba&rdquo;abcdefghijklmnopqrstuvwxyz&rsquo;<br />
-<br /></li>
+echo &lsquo;gsrh rh nb kzhhdw&rsquo; |tr &lsquo;zyxwvutsrqponmlkjihgfedcba'&lsquo;abcdefghijklmnopqrstuvwxyz&rsquo;</li>
 </ol>
-
-<p>tr -d SET1 #用tr删除字符<br />
-echo &lsquo;Hello1234 World11111 44&rsquo; |tr -d &lsquo;0-9&rsquo;<br />
-HelloWorld<br />
-10. grep -oP &lsquo;(?&lt;=+)fx&rsquo; *<br />
-    grep -oP &lsquo;(?&lt;=+)fx(?=()&rsquo; *
-    grep -onP &lsquo;(?&lt;=+)fx(?=()&rsquo; *
+<p>tr -d SET1 #用tr删除字符<br>
+echo &lsquo;Hello1234 World11111 44&rsquo; |tr -d &lsquo;0-9&rsquo;<br>
+HelloWorld<br>
+10. grep -oP &lsquo;(?&lt;=+)fx&rsquo; *<br>
+grep -oP &lsquo;(?&lt;=+)fx(?=()&rsquo; *
+grep -onP &lsquo;(?&lt;=+)fx(?=()&rsquo; *
 11. cut -d &ldquo;:&rdquo; -f 1,3 /etc/passwd   类似于awk的字域
-    cut -d &ldquo;:&rdquo; -f 1,3,7 /etc/passwd</p>
-
-<h1 id="一个综合性的案例">一个综合性的案例</h1>
-
-<pre><code class="language-sh">
-#---  FUNCTION  ----------------------------------------------------------------
-#          NAME:  deleteDensity
-#   DESCRIPTION:  去除密度和来流经验等行  采用  awk和sed组合删除！ 并把有用信息导入modified文件夹下
-#                 iconv主要是考虑到windows下的中文字符无法被识别的问题
-#                  这个步骤是复制，而第三个fileintoDirNew是通过mv来操作的
-#    PARAMETERS:  
-#       RETURNS:  
-#-------------------------------------------------------------------------------
-deleteDensity()
-{
-echo  &quot;删除密度和来流&quot;
-if [ -d &quot;modified&quot; ]
-then echo &quot;modified文件夹已存在&quot;
-else 
+cut -d &ldquo;:&rdquo; -f 1,3,7 /etc/passwd</p>
+<h1 id="heading-6">一个综合性的案例</h1>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">
+<span style="color:#75715e">#---  FUNCTION  ----------------------------------------------------------------</span>
+<span style="color:#75715e">#          NAME:  deleteDensity</span>
+<span style="color:#75715e">#   DESCRIPTION:  去除密度和来流经验等行  采用  awk和sed组合删除！ 并把有用信息导入modified文件夹下</span>
+<span style="color:#75715e">#                 iconv主要是考虑到windows下的中文字符无法被识别的问题</span>
+<span style="color:#75715e">#                  这个步骤是复制，而第三个fileintoDirNew是通过mv来操作的</span>
+<span style="color:#75715e">#    PARAMETERS:</span>  
+<span style="color:#75715e">#       RETURNS:</span>  
+<span style="color:#75715e">#-------------------------------------------------------------------------------</span>
+deleteDensity<span style="color:#f92672">(</span><span style="color:#f92672">)</span>
+<span style="color:#f92672">{</span>
+echo  <span style="color:#e6db74">&#34;删除密度和来流&#34;</span>
+<span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -d <span style="color:#e6db74">&#34;modified&#34;</span> <span style="color:#f92672">]</span>
+<span style="color:#66d9ef">then</span> echo <span style="color:#e6db74">&#34;modified文件夹已存在&#34;</span>
+<span style="color:#66d9ef">else</span> 
 mkdir modified
-fi
-for i in `ls *.txt`
-    do 
-        iconv -f gb18030 -t utf-8 $i|awk '{print}'|awk '{if ($0 ~ /攻角/) {print $3;}else if($0 ~ /升力/){print $1,$4,$5}else if($0 ~ /^$/){print ''}else {print $3,$5;}}'   |sed '/密度/d'|sed '/来流动压/d'|sed '/^$/d' &gt;modified/$i 
-    done
-}
+<span style="color:#66d9ef">fi</span>
+<span style="color:#66d9ef">for</span> i in <span style="color:#e6db74">`</span>ls *.txt<span style="color:#e6db74">`</span>
+    <span style="color:#66d9ef">do</span> 
+        iconv -f gb18030 -t utf-8 $i|awk <span style="color:#e6db74">&#39;{print}&#39;</span>|awk <span style="color:#e6db74">&#39;{if ($0 ~ /攻角/) {print $3;}else if($0 ~ /升力/){print $1,$4,$5}else if($0 ~ /^$/){print &#39;</span><span style="color:#e6db74">&#39;}else {print $3,$5;}}&#39;</span>   |sed <span style="color:#e6db74">&#39;/密度/d&#39;</span>|sed <span style="color:#e6db74">&#39;/来流动压/d&#39;</span>|sed <span style="color:#e6db74">&#39;/^$/d&#39;</span> &gt;modified/$i 
+    <span style="color:#66d9ef">done</span>
+<span style="color:#f92672">}</span>
 
-# 创建文件夹 从-10攻角到25度攻角
+<span style="color:#75715e"># 创建文件夹 从-10攻角到25度攻角</span>
 
-#---  FUNCTION  ----------------------------------------------------------------
-#          NAME:  fenLei
-#   DESCRIPTION:  对攻角实行分类，按照不同的攻角创建不同的文件夹
-#    PARAMETERS:  
-#       RETURNS:  
-#-------------------------------------------------------------------------------
-fenLei(){
-cd modified  # 注意下面的所有函数 都运行在modified文件夹下
-for j in -10.00 -9.00 -8.00 -7.00 -6.00 -5.00 -4.00 -3.00 -2.00 -1.00 0.00 1.00 2.00 3.00 4.00 5.00 6.00 7.00 8.00 9.00 10.00 11.00 12.00 13.00 14.00 15.00 16.00 17.00 18.00 19.00 20.00 21.00 22.00 23.00 24.00 25.00
-    do 
-        if ! [ -d &quot;a&quot;$j ]
-        then    mkdir &quot;a&quot;$j
-        fi
-    done
-}
+<span style="color:#75715e">#---  FUNCTION  ----------------------------------------------------------------</span>
+<span style="color:#75715e">#          NAME:  fenLei</span>
+<span style="color:#75715e">#   DESCRIPTION:  对攻角实行分类，按照不同的攻角创建不同的文件夹</span>
+<span style="color:#75715e">#    PARAMETERS:</span>  
+<span style="color:#75715e">#       RETURNS:</span>  
+<span style="color:#75715e">#-------------------------------------------------------------------------------</span>
+fenLei<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+cd modified  <span style="color:#75715e"># 注意下面的所有函数 都运行在modified文件夹下</span>
+<span style="color:#66d9ef">for</span> j in -10.00 -9.00 -8.00 -7.00 -6.00 -5.00 -4.00 -3.00 -2.00 -1.00 0.00 1.00 2.00 3.00 4.00 5.00 6.00 7.00 8.00 9.00 10.00 11.00 12.00 13.00 14.00 15.00 16.00 17.00 18.00 19.00 20.00 21.00 22.00 23.00 24.00 25.00
+    <span style="color:#66d9ef">do</span> 
+        <span style="color:#66d9ef">if</span> ! <span style="color:#f92672">[</span> -d <span style="color:#e6db74">&#34;a&#34;</span>$j <span style="color:#f92672">]</span>
+        <span style="color:#66d9ef">then</span>    mkdir <span style="color:#e6db74">&#34;a&#34;</span>$j
+        <span style="color:#66d9ef">fi</span>
+    <span style="color:#66d9ef">done</span>
+<span style="color:#f92672">}</span>
 
-# 导入对应攻角文件到文件夹内
+<span style="color:#75715e"># 导入对应攻角文件到文件夹内</span>
 
-#---  FUNCTION  ----------------------------------------------------------------
-#          NAME:  getFileIntoDir
-#   DESCRIPTION:  使用Awk按照不同的攻角值 利用 print的功能调用shell，把对应文件拷贝到对应攻角文件夹下
-#                注意-v在awk表示定义变量的间隔符
-#    PARAMETERS:  
-#       RETURNS:  
-#-------------------------------------------------------------------------------
+<span style="color:#75715e">#---  FUNCTION  ----------------------------------------------------------------</span>
+<span style="color:#75715e">#          NAME:  getFileIntoDir</span>
+<span style="color:#75715e">#   DESCRIPTION:  使用Awk按照不同的攻角值 利用 print的功能调用shell，把对应文件拷贝到对应攻角文件夹下</span>
+<span style="color:#75715e">#                注意-v在awk表示定义变量的间隔符</span>
+<span style="color:#75715e">#    PARAMETERS:</span>  
+<span style="color:#75715e">#       RETURNS:</span>  
+<span style="color:#75715e">#-------------------------------------------------------------------------------</span>
 
-getFileIntoDir(){
-#cd modified
-for j in -10.00 -9.00 -8.00 -7.00 -6.00 -5.00 -4.00 -3.00 -2.00 -1.00 0.00 1.00 2.00 3.00 4.00 5.00 6.00 7.00 8.00 9.00 10.00 11.00 12.00 13.00 14.00 15.00 16.00 17.00 18.00 19.00 20.00 21.00 22.00 23.00 24.00 25.00
-do 
-    for i in `ls *.txt`
-        do 
-            awk '{print}' $i |awk -v B=&quot;$i&quot; -v A=&quot;攻角：&quot;&quot;$j&quot; -v C=&quot;a&quot;&quot;$j&quot; '$0~A{print &quot;cp &quot;,B,&quot; &quot;C&quot;/&quot;B|&quot;/bin/bash&quot;}'
-        done
-done
-}
+getFileIntoDir<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+<span style="color:#75715e">#cd modified</span>
+<span style="color:#66d9ef">for</span> j in -10.00 -9.00 -8.00 -7.00 -6.00 -5.00 -4.00 -3.00 -2.00 -1.00 0.00 1.00 2.00 3.00 4.00 5.00 6.00 7.00 8.00 9.00 10.00 11.00 12.00 13.00 14.00 15.00 16.00 17.00 18.00 19.00 20.00 21.00 22.00 23.00 24.00 25.00
+<span style="color:#66d9ef">do</span> 
+    <span style="color:#66d9ef">for</span> i in <span style="color:#e6db74">`</span>ls *.txt<span style="color:#e6db74">`</span>
+        <span style="color:#66d9ef">do</span> 
+            awk <span style="color:#e6db74">&#39;{print}&#39;</span> $i |awk -v B<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$i<span style="color:#e6db74">&#34;</span> -v A<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;攻角：&#34;</span><span style="color:#e6db74">&#34;</span>$j<span style="color:#e6db74">&#34;</span> -v C<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;a&#34;</span><span style="color:#e6db74">&#34;</span>$j<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#39;$0~A{print &#34;cp &#34;,B,&#34; &#34;C&#34;/&#34;B|&#34;/bin/bash&#34;}&#39;</span>
+        <span style="color:#66d9ef">done</span>
+<span style="color:#66d9ef">done</span>
+<span style="color:#f92672">}</span>
 
-#---  FUNCTION  ----------------------------------------------------------------
-#          NAME:  getFileIntoDirNew
-#   DESCRIPTION:  新版本的getFileIntoDir 方式
-#    PARAMETERS:  
-#       RETURNS:  
-#-------------------------------------------------------------------------------
-#grep &quot;攻角：25.00&quot; *.txt|awk -F[:] '{print $1}'
+<span style="color:#75715e">#---  FUNCTION  ----------------------------------------------------------------</span>
+<span style="color:#75715e">#          NAME:  getFileIntoDirNew</span>
+<span style="color:#75715e">#   DESCRIPTION:  新版本的getFileIntoDir 方式</span>
+<span style="color:#75715e">#    PARAMETERS:</span>  
+<span style="color:#75715e">#       RETURNS:</span>  
+<span style="color:#75715e">#-------------------------------------------------------------------------------</span>
+<span style="color:#75715e">#grep &#34;攻角：25.00&#34; *.txt|awk -F[:] &#39;{print $1}&#39;</span>
 
-getFileIntoDirNew(){
-for j in -10.00 -9.00 -8.00 -7.00 -6.00 -5.00 -4.00 -3.00 -2.00 -1.00 0.00 1.00 2.00 3.00 4.00 5.00 6.00 7.00 8.00 9.00 10.00 11.00 12.00 13.00 14.00 15.00 16.00 17.00 18.00 19.00 20.00 21.00 22.00 23.00 24.00 25.00
-do 
-        grep &quot;攻角：$j&quot; *.txt|awk -F[:] '{print $1}'|xargs -i mv {} &quot;a&quot;&quot;$j&quot;
-done
+getFileIntoDirNew<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+<span style="color:#66d9ef">for</span> j in -10.00 -9.00 -8.00 -7.00 -6.00 -5.00 -4.00 -3.00 -2.00 -1.00 0.00 1.00 2.00 3.00 4.00 5.00 6.00 7.00 8.00 9.00 10.00 11.00 12.00 13.00 14.00 15.00 16.00 17.00 18.00 19.00 20.00 21.00 22.00 23.00 24.00 25.00
+<span style="color:#66d9ef">do</span> 
+        grep <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">攻角：</span>$j<span style="color:#e6db74">&#34;</span> *.txt|awk -F<span style="color:#f92672">[</span>:<span style="color:#f92672">]</span> <span style="color:#e6db74">&#39;{print $1}&#39;</span>|xargs -i mv <span style="color:#f92672">{</span><span style="color:#f92672">}</span> <span style="color:#e6db74">&#34;a&#34;</span><span style="color:#e6db74">&#34;</span>$j<span style="color:#e6db74">&#34;</span>
+<span style="color:#66d9ef">done</span>
 
-}
-## 清除空行
+<span style="color:#f92672">}</span>
+<span style="color:#75715e">## 清除空行</span>
 
-#---  FUNCTION  ----------------------------------------------------------------
-#          NAME:  blankEmptyLine
-#   DESCRIPTION:  利用sed -i命令直接处理文件中多余的空行
-#    PARAMETERS:  
-#       RETURNS:  
-#-------------------------------------------------------------------------------
-blankEmptyLine(){
-# 在每个文件夹运行这些命令 清除空行 
-#cd modified
-for i in `ls -d */`
-    do 
-        sed -i '/^\s*$/d' $i/*.txt
-    done
-}
+<span style="color:#75715e">#---  FUNCTION  ----------------------------------------------------------------</span>
+<span style="color:#75715e">#          NAME:  blankEmptyLine</span>
+<span style="color:#75715e">#   DESCRIPTION:  利用sed -i命令直接处理文件中多余的空行</span>
+<span style="color:#75715e">#    PARAMETERS:</span>  
+<span style="color:#75715e">#       RETURNS:</span>  
+<span style="color:#75715e">#-------------------------------------------------------------------------------</span>
+blankEmptyLine<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+<span style="color:#75715e"># 在每个文件夹运行这些命令 清除空行</span> 
+<span style="color:#75715e">#cd modified</span>
+<span style="color:#66d9ef">for</span> i in <span style="color:#e6db74">`</span>ls -d */<span style="color:#e6db74">`</span>
+    <span style="color:#66d9ef">do</span> 
+        sed -i <span style="color:#e6db74">&#39;/^\s*$/d&#39;</span> $i/*.txt
+    <span style="color:#66d9ef">done</span>
+<span style="color:#f92672">}</span>
 
-#---  FUNCTION  ----------------------------------------------------------------
-#          NAME:  cal
-#   DESCRIPTION:  把每个攻角下的文件，利用awk执行攻角平均  升力系数平均  和压力系数平均
-#    PARAMETERS:  
-#       RETURNS:  
-#-------------------------------------------------------------------------------
-cal(){
-# 在每个文件夹下都运行此计算平均值 程序
-#cd modified
+<span style="color:#75715e">#---  FUNCTION  ----------------------------------------------------------------</span>
+<span style="color:#75715e">#          NAME:  cal</span>
+<span style="color:#75715e">#   DESCRIPTION:  把每个攻角下的文件，利用awk执行攻角平均  升力系数平均  和压力系数平均</span>
+<span style="color:#75715e">#    PARAMETERS:</span>  
+<span style="color:#75715e">#       RETURNS:</span>  
+<span style="color:#75715e">#-------------------------------------------------------------------------------</span>
+cal<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+<span style="color:#75715e"># 在每个文件夹下都运行此计算平均值 程序</span>
+<span style="color:#75715e">#cd modified</span>
 
-for i in `ls -d */`
-    do 
-        awk -F&quot;[ ：]&quot; 'BEGIN{num=0;}{if($0 ~/攻角/){f[FNR]=$1;g[FNR]=$4;num+=1;}else if($0 ~/升力系数/){f[fNR]=$1;g[FNR]+=$4;a[FNR]=$5;b[FNR]+=$9;}else if($0 ~/压力系数/){f[FNR]=$1;g[FNR]=$2}else{f[FNR]+=$1;g[FNR]+=$2;if(nbr&lt;FNR) {nbr=FNR;}}}END{for(i=0;i&lt;=nbr;i++){print f[i]/num,g[i]/num,a[i]/num,b[i]/num;} print num;};' $i/*.txt&gt;$i/modified.txt
-    done
-}
-
-
-#---  FUNCTION  ----------------------------------------------------------------
-#          NAME:  plot
-#   DESCRIPTION:  函数用于画图 调用gnuplot
-#                 使用下面函数之前得安装gnuplot
-#    PARAMETERS:  
-#       RETURNS:  
-#-------------------------------------------------------------------------------
-plot(){
-
- #for i in `ls`;do num=`ls $i|wc -l`;let num=$[$num-1];sed -n '2p' $i/&quot;modified.txt&quot;|awk -v A=$i -v B=$num-2 '{print A,$2*B}' &gt;&gt; a.txt;sed -n '3p' $i/&quot;modified.txt&quot;|awk '{print $2}' &gt;&gt; a.txt;done; 
-
- #   sed 'N;s/\n/ :/' a.txt
+<span style="color:#66d9ef">for</span> i in <span style="color:#e6db74">`</span>ls -d */<span style="color:#e6db74">`</span>
+    <span style="color:#66d9ef">do</span> 
+        awk -F<span style="color:#e6db74">&#34;[ ：]&#34;</span> <span style="color:#e6db74">&#39;BEGIN{num=0;}{if($0 ~/攻角/){f[FNR]=$1;g[FNR]=$4;num+=1;}else if($0 ~/升力系数/){f[fNR]=$1;g[FNR]+=$4;a[FNR]=$5;b[FNR]+=$9;}else if($0 ~/压力系数/){f[FNR]=$1;g[FNR]=$2}else{f[FNR]+=$1;g[FNR]+=$2;if(nbr&lt;FNR) {nbr=FNR;}}}END{for(i=0;i&lt;=nbr;i++){print f[i]/num,g[i]/num,a[i]/num,b[i]/num;} print num;};&#39;</span> $i/*.txt&gt;$i/modified.txt
+    <span style="color:#66d9ef">done</span>
+<span style="color:#f92672">}</span>
 
 
-# for i in `ls`;do num=`ls $i|wc -l`;let num=$[$num-1];sed -n '2p' $i/&quot;modified.txt&quot;|awk -v A=$i -v B=$num-2 '{print $2*B}' &gt;&gt; a.txt;sed -n '3p' $i/&quot;modified.txt&quot;|awk '{print $2}' &gt;&gt; a.txt;done; 
- for i in `ls`
-    do 
-        num=`ls $i|wc -l`
-        num=$(($num-1))
-        #print $i,$num
-        sed -n '2p' $i/&quot;modified.txt&quot;|awk -v A=$i -v B=$num '{print $2*B}' &gt;&gt; shengli.txt
-        sed -n '3p' $i/&quot;modified.txt&quot;|awk '{print $2}' &gt;&gt; shengli.txt
-        sed -n '2p' $i/&quot;modified.txt&quot;|awk -v A=$i -v B=$num '{print $2*B}' &gt;&gt; zuli.txt
-        sed -n '3p' $i/&quot;modified.txt&quot;|awk '{print $4}' &gt;&gt; zuli.txt
-    done
+<span style="color:#75715e">#---  FUNCTION  ----------------------------------------------------------------</span>
+<span style="color:#75715e">#          NAME:  plot</span>
+<span style="color:#75715e">#   DESCRIPTION:  函数用于画图 调用gnuplot</span>
+<span style="color:#75715e">#                 使用下面函数之前得安装gnuplot</span>
+<span style="color:#75715e">#    PARAMETERS:</span>  
+<span style="color:#75715e">#       RETURNS:</span>  
+<span style="color:#75715e">#-------------------------------------------------------------------------------</span>
+plot<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
 
-sed -i 'N;s/\n/ /' shengli.txt
+ <span style="color:#75715e">#for i in `ls`;do num=`ls $i|wc -l`;let num=$[$num-1];sed -n &#39;2p&#39; $i/&#34;modified.txt&#34;|awk -v A=$i -v B=$num-2 &#39;{print A,$2*B}&#39; &gt;&gt; a.txt;sed -n &#39;3p&#39; $i/&#34;modified.txt&#34;|awk &#39;{print $2}&#39; &gt;&gt; a.txt;done;</span> 
+
+ <span style="color:#75715e">#   sed &#39;N;s/\n/ :/&#39; a.txt</span>
+
+
+<span style="color:#75715e"># for i in `ls`;do num=`ls $i|wc -l`;let num=$[$num-1];sed -n &#39;2p&#39; $i/&#34;modified.txt&#34;|awk -v A=$i -v B=$num-2 &#39;{print $2*B}&#39; &gt;&gt; a.txt;sed -n &#39;3p&#39; $i/&#34;modified.txt&#34;|awk &#39;{print $2}&#39; &gt;&gt; a.txt;done;</span> 
+ <span style="color:#66d9ef">for</span> i in <span style="color:#e6db74">`</span>ls<span style="color:#e6db74">`</span>
+    <span style="color:#66d9ef">do</span> 
+        num<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>ls $i|wc -l<span style="color:#e6db74">`</span>
+        num<span style="color:#f92672">=</span><span style="color:#66d9ef">$((</span>$num<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#66d9ef">))</span>
+        <span style="color:#75715e">#print $i,$num</span>
+        sed -n <span style="color:#e6db74">&#39;2p&#39;</span> $i/<span style="color:#e6db74">&#34;modified.txt&#34;</span>|awk -v A<span style="color:#f92672">=</span>$i -v B<span style="color:#f92672">=</span>$num <span style="color:#e6db74">&#39;{print $2*B}&#39;</span> &gt;&gt; shengli.txt
+        sed -n <span style="color:#e6db74">&#39;3p&#39;</span> $i/<span style="color:#e6db74">&#34;modified.txt&#34;</span>|awk <span style="color:#e6db74">&#39;{print $2}&#39;</span> &gt;&gt; shengli.txt
+        sed -n <span style="color:#e6db74">&#39;2p&#39;</span> $i/<span style="color:#e6db74">&#34;modified.txt&#34;</span>|awk -v A<span style="color:#f92672">=</span>$i -v B<span style="color:#f92672">=</span>$num <span style="color:#e6db74">&#39;{print $2*B}&#39;</span> &gt;&gt; zuli.txt
+        sed -n <span style="color:#e6db74">&#39;3p&#39;</span> $i/<span style="color:#e6db74">&#34;modified.txt&#34;</span>|awk <span style="color:#e6db74">&#39;{print $4}&#39;</span> &gt;&gt; zuli.txt
+    <span style="color:#66d9ef">done</span>
+
+sed -i <span style="color:#e6db74">&#39;N;s/\n/ /&#39;</span> shengli.txt
 sort -n shengli.txt &gt; shenglimodified.txt
-sed -i 'N;s/\n/ /' zuli.txt
+sed -i <span style="color:#e6db74">&#39;N;s/\n/ /&#39;</span> zuli.txt
 sort -n zuli.txt &gt; zulimodified.txt
 
-gnuplot&lt;&lt;EOF 
-set ter 'png' 
-set out 'shengli.png' 
-plot &quot;shenglimodified.txt&quot; t 'cl' w lp
-EOF
-gnuplot&lt;&lt;EOF 
-set ter 'png' 
-set out 'zuli.png' 
-plot &quot;zulimodified.txt&quot; t 'cd' w lp
-EOF
+gnuplot<span style="color:#e6db74">&lt;&lt;EOF 
+</span><span style="color:#e6db74">set ter &#39;png&#39; 
+</span><span style="color:#e6db74">set out &#39;shengli.png&#39; 
+</span><span style="color:#e6db74">plot &#34;shenglimodified.txt&#34; t &#39;cl&#39; w lp
+</span><span style="color:#e6db74">EOF</span>
+gnuplot<span style="color:#e6db74">&lt;&lt;EOF 
+</span><span style="color:#e6db74">set ter &#39;png&#39; 
+</span><span style="color:#e6db74">set out &#39;zuli.png&#39; 
+</span><span style="color:#e6db74">plot &#34;zulimodified.txt&#34; t &#39;cd&#39; w lp
+</span><span style="color:#e6db74">EOF</span>
 rm -rf zuli.txt
 rm -rf shengli.txt
-}
+<span style="color:#f92672">}</span>
 
 
-#---  FUNCTION  ----------------------------------------------------------------
-#          NAME:  plotCp
-#   DESCRIPTION:  用于打印cp曲线
-#    PARAMETERS:  
-#       RETURNS:  
-#-------------------------------------------------------------------------------
-plotCp(){
- for i in `ls`
-    do 
-        if [ -d $i ]
-            then sed -n '6,47p' $i/&quot;modified.txt&quot; &gt;&gt; $i/&quot;cpUp.txt&quot;;sed -n '49,93p' $i/&quot;modified.txt&quot; |sort -k 2 -nr &gt;&gt; $i/&quot;cpUp.txt&quot;;cpGrid
-            fi
-    done
+<span style="color:#75715e">#---  FUNCTION  ----------------------------------------------------------------</span>
+<span style="color:#75715e">#          NAME:  plotCp</span>
+<span style="color:#75715e">#   DESCRIPTION:  用于打印cp曲线</span>
+<span style="color:#75715e">#    PARAMETERS:</span>  
+<span style="color:#75715e">#       RETURNS:</span>  
+<span style="color:#75715e">#-------------------------------------------------------------------------------</span>
+plotCp<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+ <span style="color:#66d9ef">for</span> i in <span style="color:#e6db74">`</span>ls<span style="color:#e6db74">`</span>
+    <span style="color:#66d9ef">do</span> 
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -d $i <span style="color:#f92672">]</span>
+            <span style="color:#66d9ef">then</span> sed -n <span style="color:#e6db74">&#39;6,47p&#39;</span> $i/<span style="color:#e6db74">&#34;modified.txt&#34;</span> &gt;&gt; $i/<span style="color:#e6db74">&#34;cpUp.txt&#34;</span>;sed -n <span style="color:#e6db74">&#39;49,93p&#39;</span> $i/<span style="color:#e6db74">&#34;modified.txt&#34;</span> |sort -k <span style="color:#ae81ff">2</span> -nr &gt;&gt; $i/<span style="color:#e6db74">&#34;cpUp.txt&#34;</span>;cpGrid
+            <span style="color:#66d9ef">fi</span>
+    <span style="color:#66d9ef">done</span>
 
-}
+<span style="color:#f92672">}</span>
 
-#---  FUNCTION  ----------------------------------------------------------------
-#          NAME:  cpGrid
-#   DESCRIPTION:  注意  gnuplot必须放在句首
-#    PARAMETERS:  
-#       RETURNS:  
-#-------------------------------------------------------------------------------
-cpGrid(){
-gnuplot&lt;&lt;EOF 
-set ter 'png' 
-set out '$i/cpUp.png'
-set xtics rotate by -45
-set ytics rotate by -45
-plot &quot;$i/cpUp.txt&quot; t 'cp' w lp
-EOF
-}
-# 执行函数
+<span style="color:#75715e">#---  FUNCTION  ----------------------------------------------------------------</span>
+<span style="color:#75715e">#          NAME:  cpGrid</span>
+<span style="color:#75715e">#   DESCRIPTION:  注意  gnuplot必须放在句首</span>
+<span style="color:#75715e">#    PARAMETERS:</span>  
+<span style="color:#75715e">#       RETURNS:</span>  
+<span style="color:#75715e">#-------------------------------------------------------------------------------</span>
+cpGrid<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+gnuplot<span style="color:#e6db74">&lt;&lt;EOF 
+</span><span style="color:#e6db74">set ter &#39;png&#39; 
+</span><span style="color:#e6db74">set out &#39;$i/cpUp.png&#39;
+</span><span style="color:#e6db74">set xtics rotate by -45
+</span><span style="color:#e6db74">set ytics rotate by -45
+</span><span style="color:#e6db74">plot &#34;$i/cpUp.txt&#34; t &#39;cp&#39; w lp
+</span><span style="color:#e6db74">EOF</span>
+<span style="color:#f92672">}</span>
+<span style="color:#75715e"># 执行函数</span>
 deleteDensity
 fenLei
 getFileIntoDirNew
@@ -1051,11 +996,9 @@ plot
 plotCp
 
 
-</code></pre>
-
-<p><a href="http://dngood.blog.51cto.com/446195/703347" target="_blank">shell脚本集合1</a>
-<a href="http://dngood.blog.51cto.com/446195/764563" target="_blank">shell脚本集合2</a>
-<a href="http://dngood.blog.51cto.com/446195/1107458" target="_blank">shell脚本集合3</a></p>
+</code></pre></div><p><a href="http://dngood.blog.51cto.com/446195/703347">shell脚本集合1</a>
+<a href="http://dngood.blog.51cto.com/446195/764563">shell脚本集合2</a>
+<a href="http://dngood.blog.51cto.com/446195/1107458">shell脚本集合3</a></p>
     </div>
  <div class="nav-links" style="padding:10;">
         
@@ -1459,7 +1402,7 @@ plotCp
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

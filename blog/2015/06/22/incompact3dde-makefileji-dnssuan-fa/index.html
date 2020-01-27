@@ -569,192 +569,177 @@ Incompact3d整体框架的介绍可以参考软件的user-guide和文献High-ord
 
 <span class="article-metadata" >Reading time: 6 minutes and    54 seconds with 1518 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
-        
+        <nav id="TableOfContents"></nav>
     </aside>
   <div class="article-container">
 
 
     <div class="article-style">
-      <p><a href="https://code.google.com/p/incompact3d" target="_blank">Incompact3d</a>是一个开源的基于fortran语言编写的DNS求解器，也是我研究生期间使用的开源源代码。
-Incompact3d整体框架的介绍可以参考软件的<a href="https://code.google.com/p/incompact3d/downloads/detail?name=user_guide_incompact3d_V1-1.pdf&amp;can=2&amp;q=" target="_blank">user-guide</a>和文献<a href="http://www.imperial.ac.uk/media/imperial-college/research-centres-and-groups/turbulence-mixing-and-flow-control-group/2009_LAIZET_JCP.pdf" target="_blank">High-order-compact schemes for incompressible flows: a simple and effcient method with the quasi-spectral accuary</a>,还可以搜索<a href="http://www.imperial.ac.uk/tmfc" target="_blank">sylvain Laziet</a> 相关的文章 ，只不过他并不是成熟的软件，很多的编译和后处理都可能出现问题，下面是我使用过程遇到的一些问题。
+      <p><a href="https://code.google.com/p/incompact3d">Incompact3d</a>是一个开源的基于fortran语言编写的DNS求解器，也是我研究生期间使用的开源源代码。
+Incompact3d整体框架的介绍可以参考软件的<a href="https://code.google.com/p/incompact3d/downloads/detail?name=user_guide_incompact3d_V1-1.pdf&amp;can=2&amp;q=">user-guide</a>和文献<a href="http://www.imperial.ac.uk/media/imperial-college/research-centres-and-groups/turbulence-mixing-and-flow-control-group/2009_LAIZET_JCP.pdf">High-order-compact schemes for incompressible flows: a simple and effcient method with the quasi-spectral accuary</a>,还可以搜索<a href="http://www.imperial.ac.uk/tmfc">sylvain Laziet</a> 相关的文章 ，只不过他并不是成熟的软件，很多的编译和后处理都可能出现问题，下面是我使用过程遇到的一些问题。
 当然主要过程是，通过makefile编译，然后运行incompact3d，最后处理计算结果。</p>
-
 <p>#1 如何模拟？</p>
-
 <p>以周期性槽道流动(当然我也就会这么一种，其他都只是走了一小半）为例。</p>
-
 <ol>
 <li>首先是得到(不得不说，我也有点忘记)一个完全发展的旋转槽道流动(注意旋转源项的添加) (一般设置20000步可以了，只要收敛即可 大概一天)</li>
 <li>然后是获得完全发展槽道流动(也就是不加上旋转源项)(估计得三万步以上 大概一天)</li>
 <li>最后是获得统计的完全发展槽道流动.因为DNS获得的结果是非定常的，所以你得进行时均处理(当然时均程序得打开时均统计项 umean等)(我统计了20万步，大概花了4天时间。)</li>
 </ol>
-
 <p>步骤就是这样,大概一个较小的流程需要一周左右。</p>
-
-<p>Incompact3d比较特殊的是收敛性判定问题，上面的几个过程都需要使用实时<a href="http://jueqingsizhe66.github.io/blog/2015/05/31/u-plus-y-plus/" target="_blank">监控小程序</a>
+<p>Incompact3d比较特殊的是收敛性判定问题，上面的几个过程都需要使用实时<a href="http://jueqingsizhe66.github.io/blog/2015/05/31/u-plus-y-plus/">监控小程序</a>
 来观看速度散度和质量流量(质量流量是周期性槽道流动所特有的，所以最好进行实时显示)的收敛情况.另外你可以通过python的一个小脚本
-来获得实时显示的图片，这样就能看到程序模拟得怎么样了，具体查看<a href="http://jueqingsizhe66.github.io/blog/2015/06/11/ji-yu-pythonde-ju-yu-wang-wen-jian-gong-xiang-ruan-jian-simplehttpserverwithupload/" target="_blank">python局域网上传和下载</a>.</p>
-
+来获得实时显示的图片，这样就能看到程序模拟得怎么样了，具体查看<a href="http://jueqingsizhe66.github.io/blog/2015/06/11/ji-yu-pythonde-ju-yu-wang-wen-jian-gong-xiang-ruan-jian-simplehttpserverwithupload/">python局域网上传和下载</a>.</p>
 <p>#2 后处理方法
-参考我的<a href="http://jueqingsizhe66.github.io/blog/2015/06/22/incompact3dru-he-tong-guo-jie-guo-chu-li-chu-ji-xian" target="_blank">pathline处理方法</a>
+参考我的<a href="http://jueqingsizhe66.github.io/blog/2015/06/22/incompact3dru-he-tong-guo-jie-guo-chu-li-chu-ji-xian">pathline处理方法</a>
 一定要注意(real 8) 否则得到的结果肯定是错误的，这也是困扰我几星期的问题。</p>
-
 <p>#3 关于Makefile编译</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-makefile" data-lang="makefile"><span style="color:#75715e">#=======================================================================
+</span><span style="color:#75715e"></span><span style="color:#75715e"># Makefile for Imcompact3D
+</span><span style="color:#75715e"></span><span style="color:#75715e">#=======================================================================
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e"># Choose pre-processing options
+</span><span style="color:#75715e"></span><span style="color:#75715e">#   -DSHM	   - enable shared-memory implementation
+</span><span style="color:#75715e"></span><span style="color:#75715e">#   -DDOUBLE_PREC  - use double-precision
+</span><span style="color:#75715e"></span>OPTIONS <span style="color:#f92672">=</span> -DDOUBLE_PREC
 
-<pre><code class="language-makefile">#=======================================================================
-# Makefile for Imcompact3D
-#=======================================================================
+<span style="color:#75715e"># Choose an FFT engine, available options are:
+</span><span style="color:#75715e"></span><span style="color:#75715e">#   essl       - IBM Blue Gene ESSL Library
+</span><span style="color:#75715e"></span><span style="color:#75715e">#   fftw3      - FFTW version 3.x
+</span><span style="color:#75715e"></span><span style="color:#75715e">#   generic    - A general FFT algorithm (no 3rd-party library needed)
+</span><span style="color:#75715e"></span><span style="color:#75715e">#FFT= essl # I ignore
+</span><span style="color:#75715e"></span>FFT <span style="color:#f92672">=</span> generic
 
-# Choose pre-processing options
-#   -DSHM	   - enable shared-memory implementation
-#   -DDOUBLE_PREC  - use double-precision
-OPTIONS = -DDOUBLE_PREC
+<span style="color:#75715e"># Paths to FFTW 3
+</span><span style="color:#75715e"></span>FFTW3_PATH<span style="color:#f92672">=</span>   <span style="color:#75715e"># full path of FFTW installation if using fftw3 engine above</span>
+FFTW3_INCLUDE <span style="color:#f92672">=</span> -I<span style="color:#66d9ef">$(</span>FFTW3_PATH<span style="color:#66d9ef">)</span>/include
+FFTW3_LIB <span style="color:#f92672">=</span> -L<span style="color:#66d9ef">$(</span>FFTW3_PATH<span style="color:#66d9ef">)</span>/lib -lfftw3 -lfftw3f
 
-# Choose an FFT engine, available options are:
-#   essl       - IBM Blue Gene ESSL Library
-#   fftw3      - FFTW version 3.x
-#   generic    - A general FFT algorithm (no 3rd-party library needed)
-#FFT= essl # I ignore
-FFT = generic
+<span style="color:#75715e"># Paths to ESSL
+</span><span style="color:#75715e"></span>ESSL_PATH<span style="color:#f92672">=</span>/bgsys/drivers/ppcfloor/comm/xl
+ESSL_INCLUDE <span style="color:#f92672">=</span>
+ESSL_LIB <span style="color:#f92672">=</span> -L<span style="color:#66d9ef">$(</span>ESSL_PATH<span style="color:#66d9ef">)</span>/lib -L/opt/ibmmath/lib64 -lesslbg
 
-# Paths to FFTW 3
-FFTW3_PATH=   # full path of FFTW installation if using fftw3 engine above
-FFTW3_INCLUDE = -I$(FFTW3_PATH)/include
-FFTW3_LIB = -L$(FFTW3_PATH)/lib -lfftw3 -lfftw3f
+<span style="color:#75715e"># Specify Fortran and C compiler names and flags here
+</span><span style="color:#75715e"></span><span style="color:#75715e"># Normally, use MPI wrappers rather than compilers themselves 
+</span><span style="color:#75715e"></span><span style="color:#75715e"># Supply a Fortran pre-processing flag together with optimisation level flags
+</span><span style="color:#75715e"></span><span style="color:#75715e"># Some examples are given below:
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">#FC =  
+</span><span style="color:#75715e"></span><span style="color:#75715e">#OPTFC = 
+</span><span style="color:#75715e"></span><span style="color:#75715e">#CC = 
+</span><span style="color:#75715e"></span><span style="color:#75715e">#CFLAGS = 
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e"># PGI
+</span><span style="color:#75715e"></span><span style="color:#75715e">#FC = ftn
+</span><span style="color:#75715e"></span><span style="color:#75715e">#OPTFC = -fast -O3 -Mpreprocess
+</span><span style="color:#75715e"></span><span style="color:#75715e">#CC = cc
+</span><span style="color:#75715e"></span><span style="color:#75715e">#CFLAGS = -O3
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e"># PathScale
+</span><span style="color:#75715e"></span><span style="color:#75715e">#FC = ftn
+</span><span style="color:#75715e"></span><span style="color:#75715e">#OPTFC = -Ofast -cpp
+</span><span style="color:#75715e"></span><span style="color:#75715e">#CC = cc
+</span><span style="color:#75715e"></span><span style="color:#75715e">#CFLAGS = -O3
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e"># GNU 选用mpif90进行编译
+</span><span style="color:#75715e"></span>FC <span style="color:#f92672">=</span> mpif90
+OPTFC <span style="color:#f92672">=</span> -O0 -g  -fdefault-real-8 -fdefault-double-8 -funroll-loops -ftree-vectorize -fcray-pointer -cpp
+CC <span style="color:#f92672">=</span> mpicc
+CFLAGS <span style="color:#f92672">=</span> -O0
+PLATFORM<span style="color:#f92672">=</span>gnu
 
-# Paths to ESSL
-ESSL_PATH=/bgsys/drivers/ppcfloor/comm/xl
-ESSL_INCLUDE =
-ESSL_LIB = -L$(ESSL_PATH)/lib -L/opt/ibmmath/lib64 -lesslbg
+<span style="color:#75715e">#Blue Gene/Q : EDF R&amp;D
+</span><span style="color:#75715e"></span><span style="color:#75715e">#PREP=/bgsys/drivers/ppcfloor/comm/xl/bin/
+</span><span style="color:#75715e"></span><span style="color:#75715e">#FC = $(PREP)mpixlf95_r
+</span><span style="color:#75715e"></span><span style="color:#75715e">#OPTFC= -O3 -qsuffix=cpp=f90 -qinitauto -qautodbl=dbl4
+</span><span style="color:#75715e"></span><span style="color:#75715e">##OPT_LK= -O3 -qinitauto -qautodbl=dbl4
+</span><span style="color:#75715e"></span><span style="color:#75715e">#CFLAGS= -O3 -qinitauto -qautodbl=dbl4
+</span><span style="color:#75715e"></span><span style="color:#75715e">#CC=$(PREP)mpixlc_r
+</span><span style="color:#75715e"></span><span style="color:#75715e">#PLATFORM=bgq_xlf
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e"># Cray
+</span><span style="color:#75715e"></span><span style="color:#75715e">#FC = ftn
+</span><span style="color:#75715e"></span><span style="color:#75715e">#OPTFC = -e Fm
+</span><span style="color:#75715e"></span><span style="color:#75715e">#CC = cc
+</span><span style="color:#75715e"></span><span style="color:#75715e">#CFLAGS = 
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">#-----------------------------------------------------------------------
+</span><span style="color:#75715e"></span><span style="color:#75715e"># Normally no need to change anything below
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e"># include PATH 
+</span><span style="color:#75715e"></span><span style="color:#960050;background-color:#1e0010">i</span><span style="color:#960050;background-color:#1e0010">f</span><span style="color:#960050;background-color:#1e0010">e</span><span style="color:#960050;background-color:#1e0010">q</span> <span style="color:#960050;background-color:#1e0010">(</span><span style="color:#66d9ef">$(</span>FFT<span style="color:#66d9ef">)</span><span style="color:#960050;background-color:#1e0010">,</span><span style="color:#960050;background-color:#1e0010">g</span><span style="color:#960050;background-color:#1e0010">e</span><span style="color:#960050;background-color:#1e0010">n</span><span style="color:#960050;background-color:#1e0010">e</span><span style="color:#960050;background-color:#1e0010">r</span><span style="color:#960050;background-color:#1e0010">i</span><span style="color:#960050;background-color:#1e0010">c</span><span style="color:#960050;background-color:#1e0010">)</span>
+  INC<span style="color:#f92672">=</span>
+<span style="color:#960050;background-color:#1e0010">e</span><span style="color:#960050;background-color:#1e0010">l</span><span style="color:#960050;background-color:#1e0010">s</span><span style="color:#960050;background-color:#1e0010">e</span> <span style="color:#960050;background-color:#1e0010">i</span><span style="color:#960050;background-color:#1e0010">f</span><span style="color:#960050;background-color:#1e0010">e</span><span style="color:#960050;background-color:#1e0010">q</span> <span style="color:#960050;background-color:#1e0010">(</span><span style="color:#66d9ef">$(</span>FFT<span style="color:#66d9ef">)</span><span style="color:#960050;background-color:#1e0010">,</span><span style="color:#960050;background-color:#1e0010">f</span><span style="color:#960050;background-color:#1e0010">f</span><span style="color:#960050;background-color:#1e0010">t</span><span style="color:#960050;background-color:#1e0010">w</span><span style="color:#960050;background-color:#1e0010">3</span><span style="color:#960050;background-color:#1e0010">)</span>
+  INC<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>FFTW3_INCLUDE<span style="color:#66d9ef">)</span>
+<span style="color:#960050;background-color:#1e0010">e</span><span style="color:#960050;background-color:#1e0010">l</span><span style="color:#960050;background-color:#1e0010">s</span><span style="color:#960050;background-color:#1e0010">e</span> <span style="color:#960050;background-color:#1e0010">i</span><span style="color:#960050;background-color:#1e0010">f</span><span style="color:#960050;background-color:#1e0010">e</span><span style="color:#960050;background-color:#1e0010">q</span> <span style="color:#960050;background-color:#1e0010">(</span><span style="color:#66d9ef">$(</span>FFT<span style="color:#66d9ef">)</span><span style="color:#960050;background-color:#1e0010">,</span><span style="color:#960050;background-color:#1e0010">e</span><span style="color:#960050;background-color:#1e0010">s</span><span style="color:#960050;background-color:#1e0010">s</span><span style="color:#960050;background-color:#1e0010">l</span><span style="color:#960050;background-color:#1e0010">)</span>
+  INC<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>ESSL_INCLUDE<span style="color:#66d9ef">)</span>
+<span style="color:#960050;background-color:#1e0010">e</span><span style="color:#960050;background-color:#1e0010">n</span><span style="color:#960050;background-color:#1e0010">d</span><span style="color:#960050;background-color:#1e0010">i</span><span style="color:#960050;background-color:#1e0010">f</span>
 
-# Specify Fortran and C compiler names and flags here
-# Normally, use MPI wrappers rather than compilers themselves 
-# Supply a Fortran pre-processing flag together with optimisation level flags
-# Some examples are given below:
+<span style="color:#75715e"># library path
+</span><span style="color:#75715e"></span><span style="color:#960050;background-color:#1e0010">i</span><span style="color:#960050;background-color:#1e0010">f</span><span style="color:#960050;background-color:#1e0010">e</span><span style="color:#960050;background-color:#1e0010">q</span> <span style="color:#960050;background-color:#1e0010">(</span><span style="color:#66d9ef">$(</span>FFT<span style="color:#66d9ef">)</span><span style="color:#960050;background-color:#1e0010">,</span><span style="color:#960050;background-color:#1e0010">g</span><span style="color:#960050;background-color:#1e0010">e</span><span style="color:#960050;background-color:#1e0010">n</span><span style="color:#960050;background-color:#1e0010">e</span><span style="color:#960050;background-color:#1e0010">r</span><span style="color:#960050;background-color:#1e0010">i</span><span style="color:#960050;background-color:#1e0010">c</span><span style="color:#960050;background-color:#1e0010">)</span>
+   LIBFFT<span style="color:#f92672">=</span>
+<span style="color:#960050;background-color:#1e0010">e</span><span style="color:#960050;background-color:#1e0010">l</span><span style="color:#960050;background-color:#1e0010">s</span><span style="color:#960050;background-color:#1e0010">e</span> <span style="color:#960050;background-color:#1e0010">i</span><span style="color:#960050;background-color:#1e0010">f</span><span style="color:#960050;background-color:#1e0010">e</span><span style="color:#960050;background-color:#1e0010">q</span> <span style="color:#960050;background-color:#1e0010">(</span><span style="color:#66d9ef">$(</span>FFT<span style="color:#66d9ef">)</span><span style="color:#960050;background-color:#1e0010">,</span><span style="color:#960050;background-color:#1e0010">f</span><span style="color:#960050;background-color:#1e0010">f</span><span style="color:#960050;background-color:#1e0010">t</span><span style="color:#960050;background-color:#1e0010">w</span><span style="color:#960050;background-color:#1e0010">3</span><span style="color:#960050;background-color:#1e0010">)</span>
+   LIBFFT<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>FFTW3_LIB<span style="color:#66d9ef">)</span>
+<span style="color:#960050;background-color:#1e0010">e</span><span style="color:#960050;background-color:#1e0010">l</span><span style="color:#960050;background-color:#1e0010">s</span><span style="color:#960050;background-color:#1e0010">e</span> <span style="color:#960050;background-color:#1e0010">i</span><span style="color:#960050;background-color:#1e0010">f</span><span style="color:#960050;background-color:#1e0010">e</span><span style="color:#960050;background-color:#1e0010">q</span> <span style="color:#960050;background-color:#1e0010">(</span><span style="color:#66d9ef">$(</span>FFT<span style="color:#66d9ef">)</span><span style="color:#960050;background-color:#1e0010">,</span><span style="color:#960050;background-color:#1e0010">e</span><span style="color:#960050;background-color:#1e0010">s</span><span style="color:#960050;background-color:#1e0010">s</span><span style="color:#960050;background-color:#1e0010">l</span><span style="color:#960050;background-color:#1e0010">)</span>
+   LIBFFT<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>ESSL_LIB<span style="color:#66d9ef">)</span>
+<span style="color:#960050;background-color:#1e0010">e</span><span style="color:#960050;background-color:#1e0010">n</span><span style="color:#960050;background-color:#1e0010">d</span><span style="color:#960050;background-color:#1e0010">i</span><span style="color:#960050;background-color:#1e0010">f</span>
 
-#FC =  
-#OPTFC = 
-#CC = 
-#CFLAGS = 
+<span style="color:#75715e"># List of source files
+</span><span style="color:#75715e"></span><span style="color:#75715e"># 注意这边编译的模块，一般是需要的mod生成放在前面首先编译，如果不放前面会报错，解决办法 就是文件名放在前面即可,具体可以查看关于Makefile Fortran
+</span><span style="color:#75715e"></span>SRC <span style="color:#f92672">=</span> decomp_2d.f90 glassman.f90 fft_<span style="color:#66d9ef">$(</span>FFT<span style="color:#66d9ef">)</span>.f90 module_param.f90 io.f90 variables.f90 poisson.f90 schemes.f90 implicit.f90 convdiff.f90 user_module.f90 incompact3d.f90 navier.f90 derive.f90 parameters.f90 tools.f90 visu.f90
 
-# PGI
-#FC = ftn
-#OPTFC = -fast -O3 -Mpreprocess
-#CC = cc
-#CFLAGS = -O3
+<span style="color:#75715e">#-----------------------------------------------------------------------
+</span><span style="color:#75715e"></span><span style="color:#75715e"># Normally no need to change anything below
+</span><span style="color:#75715e"></span>
+<span style="color:#960050;background-color:#1e0010">i</span><span style="color:#960050;background-color:#1e0010">f</span><span style="color:#960050;background-color:#1e0010">n</span><span style="color:#960050;background-color:#1e0010">e</span><span style="color:#960050;background-color:#1e0010">q</span> <span style="color:#960050;background-color:#1e0010">(</span><span style="color:#960050;background-color:#1e0010">,</span><span style="color:#66d9ef">$(</span>findstring DSHM,<span style="color:#66d9ef">$</span><span style="color:#66d9ef">(</span>OPTIONS<span style="color:#66d9ef">)</span><span style="color:#66d9ef">)</span><span style="color:#960050;background-color:#1e0010">)</span>
+SRC <span style="color:#f92672">:=</span> FreeIPC.f90 <span style="color:#66d9ef">$(</span>SRC<span style="color:#66d9ef">)</span>  
+OBJ <span style="color:#f92672">=</span>	<span style="color:#66d9ef">$(</span>SRC:.f90<span style="color:#f92672">=</span>.o<span style="color:#66d9ef">)</span> alloc_shm.o FreeIPC_c.o
+<span style="color:#960050;background-color:#1e0010">e</span><span style="color:#960050;background-color:#1e0010">l</span><span style="color:#960050;background-color:#1e0010">s</span><span style="color:#960050;background-color:#1e0010">e</span>
+OBJ <span style="color:#f92672">=</span>	<span style="color:#66d9ef">$(</span>SRC:.f90<span style="color:#f92672">=</span>.o<span style="color:#66d9ef">)</span>
+<span style="color:#960050;background-color:#1e0010">e</span><span style="color:#960050;background-color:#1e0010">n</span><span style="color:#960050;background-color:#1e0010">d</span><span style="color:#960050;background-color:#1e0010">i</span><span style="color:#960050;background-color:#1e0010">f</span>	
 
-# PathScale
-#FC = ftn
-#OPTFC = -Ofast -cpp
-#CC = cc
-#CFLAGS = -O3
+OPTION<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>OPTIONS<span style="color:#66d9ef">)</span>
+from<span style="color:#f92672">:=</span>-D
+to<span style="color:#f92672">:=</span>-WF,-D
+TMP<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>subst <span style="color:#66d9ef">$(</span>from<span style="color:#66d9ef">)</span>,<span style="color:#66d9ef">$(</span>to<span style="color:#66d9ef">)</span>,<span style="color:#66d9ef">$(</span>OPTIONS<span style="color:#66d9ef">)</span><span style="color:#66d9ef">)</span>
+<span style="color:#960050;background-color:#1e0010">i</span><span style="color:#960050;background-color:#1e0010">f</span><span style="color:#960050;background-color:#1e0010">e</span><span style="color:#960050;background-color:#1e0010">q</span> <span style="color:#960050;background-color:#1e0010">(</span><span style="color:#66d9ef">$(</span>PLATFORM<span style="color:#66d9ef">)</span><span style="color:#960050;background-color:#1e0010">,</span><span style="color:#960050;background-color:#1e0010">b</span><span style="color:#960050;background-color:#1e0010">g</span><span style="color:#960050;background-color:#1e0010">p</span><span style="color:#960050;background-color:#1e0010">_</span><span style="color:#960050;background-color:#1e0010">x</span><span style="color:#960050;background-color:#1e0010">l</span><span style="color:#960050;background-color:#1e0010">f</span><span style="color:#960050;background-color:#1e0010">)</span>
+   OPTION<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>TMP<span style="color:#66d9ef">)</span>
+<span style="color:#960050;background-color:#1e0010">e</span><span style="color:#960050;background-color:#1e0010">n</span><span style="color:#960050;background-color:#1e0010">d</span><span style="color:#960050;background-color:#1e0010">i</span><span style="color:#960050;background-color:#1e0010">f</span>
+<span style="color:#960050;background-color:#1e0010">i</span><span style="color:#960050;background-color:#1e0010">f</span><span style="color:#960050;background-color:#1e0010">e</span><span style="color:#960050;background-color:#1e0010">q</span> <span style="color:#960050;background-color:#1e0010">(</span><span style="color:#66d9ef">$(</span>PLATFORM<span style="color:#66d9ef">)</span><span style="color:#960050;background-color:#1e0010">,</span><span style="color:#960050;background-color:#1e0010">b</span><span style="color:#960050;background-color:#1e0010">g</span><span style="color:#960050;background-color:#1e0010">q</span><span style="color:#960050;background-color:#1e0010">_</span><span style="color:#960050;background-color:#1e0010">x</span><span style="color:#960050;background-color:#1e0010">l</span><span style="color:#960050;background-color:#1e0010">f</span><span style="color:#960050;background-color:#1e0010">)</span>
+   OPTION<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>TMP<span style="color:#66d9ef">)</span>
+<span style="color:#960050;background-color:#1e0010">e</span><span style="color:#960050;background-color:#1e0010">n</span><span style="color:#960050;background-color:#1e0010">d</span><span style="color:#960050;background-color:#1e0010">i</span><span style="color:#960050;background-color:#1e0010">f</span>
 
-# GNU 选用mpif90进行编译
-FC = mpif90
-OPTFC = -O0 -g  -fdefault-real-8 -fdefault-double-8 -funroll-loops -ftree-vectorize -fcray-pointer -cpp
-CC = mpicc
-CFLAGS = -O0
-PLATFORM=gnu
+<span style="color:#a6e22e">all</span><span style="color:#f92672">:</span> incompact3d
 
-#Blue Gene/Q : EDF R&amp;D
-#PREP=/bgsys/drivers/ppcfloor/comm/xl/bin/
-#FC = $(PREP)mpixlf95_r
-#OPTFC= -O3 -qsuffix=cpp=f90 -qinitauto -qautodbl=dbl4
-##OPT_LK= -O3 -qinitauto -qautodbl=dbl4
-#CFLAGS= -O3 -qinitauto -qautodbl=dbl4
-#CC=$(PREP)mpixlc_r
-#PLATFORM=bgq_xlf
+<span style="color:#a6e22e">alloc_shm.o</span><span style="color:#f92672">:</span> alloc_shm.c
+	<span style="color:#66d9ef">$(</span>CC<span style="color:#66d9ef">)</span> <span style="color:#66d9ef">$(</span>CFLAGS<span style="color:#66d9ef">)</span> -c $&lt;
 
-# Cray
-#FC = ftn
-#OPTFC = -e Fm
-#CC = cc
-#CFLAGS = 
+<span style="color:#a6e22e">FreeIPC_c.o</span><span style="color:#f92672">:</span> FreeIPC_c.c
+	<span style="color:#66d9ef">$(</span>CC<span style="color:#66d9ef">)</span> <span style="color:#66d9ef">$(</span>CFLAGS<span style="color:#66d9ef">)</span> -c $&lt;
 
-#-----------------------------------------------------------------------
-# Normally no need to change anything below
+<span style="color:#a6e22e">incompact3d </span><span style="color:#f92672">:</span> <span style="color:#66d9ef">$(</span>OBJ<span style="color:#66d9ef">)</span>
+	<span style="color:#66d9ef">$(</span>FC<span style="color:#66d9ef">)</span> -O0 -g -o $@ <span style="color:#66d9ef">$(</span>OBJ<span style="color:#66d9ef">)</span> <span style="color:#66d9ef">$(</span>LIBFFT<span style="color:#66d9ef">)</span>
 
-# include PATH 
-ifeq ($(FFT),generic)
-  INC=
-else ifeq ($(FFT),fftw3)
-  INC=$(FFTW3_INCLUDE)
-else ifeq ($(FFT),essl)
-  INC=$(ESSL_INCLUDE)
-endif
+<span style="color:#a6e22e">%.o </span><span style="color:#f92672">:</span> %.f90
+	<span style="color:#66d9ef">$(</span>FC<span style="color:#66d9ef">)</span> <span style="color:#66d9ef">$(</span>OPTFC<span style="color:#66d9ef">)</span> <span style="color:#66d9ef">$(</span>OPTION<span style="color:#66d9ef">)</span> <span style="color:#66d9ef">$(</span>INC<span style="color:#66d9ef">)</span> -c $&lt;
 
-# library path
-ifeq ($(FFT),generic)
-   LIBFFT=
-else ifeq ($(FFT),fftw3)
-   LIBFFT=$(FFTW3_LIB)
-else ifeq ($(FFT),essl)
-   LIBFFT=$(ESSL_LIB)
-endif
-
-# List of source files
-# 注意这边编译的模块，一般是需要的mod生成放在前面首先编译，如果不放前面会报错，解决办法 就是文件名放在前面即可,具体可以查看关于Makefile Fortran
-SRC = decomp_2d.f90 glassman.f90 fft_$(FFT).f90 module_param.f90 io.f90 variables.f90 poisson.f90 schemes.f90 implicit.f90 convdiff.f90 user_module.f90 incompact3d.f90 navier.f90 derive.f90 parameters.f90 tools.f90 visu.f90
-
-#-----------------------------------------------------------------------
-# Normally no need to change anything below
-
-ifneq (,$(findstring DSHM,$(OPTIONS)))
-SRC := FreeIPC.f90 $(SRC)  
-OBJ =	$(SRC:.f90=.o) alloc_shm.o FreeIPC_c.o
-else
-OBJ =	$(SRC:.f90=.o)
-endif	
-
-OPTION=$(OPTIONS)
-from:=-D
-to:=-WF,-D
-TMP=$(subst $(from),$(to),$(OPTIONS))
-ifeq ($(PLATFORM),bgp_xlf)
-   OPTION=$(TMP)
-endif
-ifeq ($(PLATFORM),bgq_xlf)
-   OPTION=$(TMP)
-endif
-
-all: incompact3d
-
-alloc_shm.o: alloc_shm.c
-	$(CC) $(CFLAGS) -c $&lt;
-
-FreeIPC_c.o: FreeIPC_c.c
-	$(CC) $(CFLAGS) -c $&lt;
-
-incompact3d : $(OBJ)
-	$(FC) -O0 -g -o $@ $(OBJ) $(LIBFFT)
-
-%.o : %.f90
-	$(FC) $(OPTFC) $(OPTION) $(INC) -c $&lt;
-
-.PHONY: clean 
-clean:
+<span style="color:#a6e22e">.PHONY</span><span style="color:#f92672">:</span> clean 
+<span style="color:#a6e22e">clean</span><span style="color:#f92672">:</span>
 	rm -f *~ *.o *.mod incompact3d
 
-.PHONY: realclean
-realclean: clean
-	rm -f *~ \#*\#
-</code></pre>
-
-<p>运行方式:
+<span style="color:#a6e22e">.PHONY</span><span style="color:#f92672">:</span> realclean
+<span style="color:#a6e22e">realclean</span><span style="color:#f92672">:</span> clean
+	rm -f *~ <span style="color:#ae81ff">\#</span>*<span style="color:#ae81ff">\#</span>
+</code></pre></div><p>运行方式:
 我的电脑刚好是8线程，就用8线程运行，你也可以选用4或者更多.</p>
-
-<pre><code class="language-sh">mpirun -np 8  incompact3d  &gt; tail.out &amp;
-</code></pre>
-
-<p>#4 The Algorithm of the DNS in Incompact3d</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">mpirun -np <span style="color:#ae81ff">8</span>  incompact3d  &gt; tail.out &amp;
+</code></pre></div><p>#4 The Algorithm of the DNS in Incompact3d</p>
 <p>Incompact3d的执行流程基本上是下面几个(当然得仔细阅读，并反复比对).我写得这段英文大体能够对得上.</p>
-
-<pre><code class="language-sh">1. Initial the velocity field with noise(init subroutine).
-2. Start the iterative process by guessing the pressure field. First we use convdiff subroutine take convection and diffusion of the flow into consideration.And then use pre_correc subroutine to correction the velocity value with the specified boundary condition.
-3. Use the values of u,v,and w to get the initialize of the pp3 in the spectral space from subroutine divergence(…pp3,1…)(first sign to turbulent spot).Then we use poisson solver decomp_2d_poisson_stag to get the value of the pp3 in the spectral space.
-4. Since they were obtained from the guessed values of u,v,w,the values pp3,when substituted into the divergence equation,will not necessarily satisfy that that equation.Hence ,using the gradp subroutine,get the pressure gradients in the physics space,then using corgp subroutine ,get the velocity correction by the pressure gradient in the physics space.Use subroutine divergence(…dv3,2…) to do another monitor for turbulent spot(second sign to turbulent spot) .At the end of the current step, we go to step2 again until the simulation have been fully developed.
-</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">1. Initial the velocity field with noise<span style="color:#f92672">(</span>init subroutine<span style="color:#f92672">)</span>.
+2. Start the iterative process by guessing the pressure field. First we use convdiff subroutine take convection and diffusion of the flow into consideration.And <span style="color:#66d9ef">then</span> use pre_correc subroutine to correction the velocity value with the specified boundary condition.
+3. Use the values of u,v,and w to get the initialize of the pp3 in the spectral space from subroutine divergence<span style="color:#f92672">(</span>…pp3,1…<span style="color:#f92672">)</span><span style="color:#f92672">(</span>first sign to turbulent spot<span style="color:#f92672">)</span>.Then we use poisson solver decomp_2d_poisson_stag to get the value of the pp3 in the spectral space.
+4. Since they were obtained from the guessed values of u,v,w,the values pp3,when substituted into the divergence equation,will not necessarily satisfy that that equation.Hence ,using the gradp subroutine,get the pressure gradients in the physics space,then using corgp subroutine ,get the velocity correction by the pressure gradient in the physics space.Use subroutine divergence<span style="color:#f92672">(</span>…dv3,2…<span style="color:#f92672">)</span> to <span style="color:#66d9ef">do</span> another monitor <span style="color:#66d9ef">for</span> turbulent spot<span style="color:#f92672">(</span>second sign to turbulent spot<span style="color:#f92672">)</span> .At the end of the current step, we go to step2 again <span style="color:#66d9ef">until</span> the simulation have been fully developed.
+</code></pre></div>
     </div>
  <div class="nav-links" style="padding:10;">
         
@@ -1162,7 +1147,7 @@ realclean: clean
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

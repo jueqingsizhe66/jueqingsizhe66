@@ -563,94 +563,89 @@
 
 
 
-<span class="article-metadata" >Reading time: 5 minutes and    56 seconds with 1306 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+<span class="article-metadata" >Reading time: 5 minutes and    51 seconds with 1288 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#运行结果">运行结果</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#heading">运行结果</a></li>
+  </ul>
 </nav>
     </aside>
   <div class="article-container">
 
 
     <div class="article-style">
-      <p>这个程序是参考<a href="http://www.oschina.net/code/snippet_2363209_47912" target="_blank">洗牌</a>而来，主要定位于scheme的算法运用实现。</p>
-
+      <p>这个程序是参考<a href="http://www.oschina.net/code/snippet_2363209_47912">洗牌</a>而来，主要定位于scheme的算法运用实现。</p>
 <p>源代码如下：</p>
-
-<pre><code class="language-scheme">#lang racket
-;四种花色分别为黑桃(spade)、红心(heart)、梅花(club)、方块(diamond)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#f92672">#</span>lang racket
+<span style="color:#75715e">;四种花色分别为黑桃(spade)、红心(heart)、梅花(club)、方块(diamond)</span>
  
-(define suits '(&quot;王&quot; &quot;黑桃&quot; &quot;红桃&quot; &quot;梅花&quot; &quot;方块&quot;))
-(define faces '(&quot;B&quot; &quot;L&quot; &quot;A&quot; &quot;2&quot; &quot;3&quot; &quot;4&quot; &quot;5&quot; &quot;6&quot; &quot;7&quot; &quot;8&quot; &quot;9&quot; &quot;10&quot; &quot;J&quot; &quot;Q&quot; &quot;K&quot;))
+(<span style="color:#66d9ef">define </span>suits <span style="color:#f92672">&#39;</span>(<span style="color:#e6db74">&#34;王&#34;</span> <span style="color:#e6db74">&#34;黑桃&#34;</span> <span style="color:#e6db74">&#34;红桃&#34;</span> <span style="color:#e6db74">&#34;梅花&#34;</span> <span style="color:#e6db74">&#34;方块&#34;</span>))
+(<span style="color:#66d9ef">define </span>faces <span style="color:#f92672">&#39;</span>(<span style="color:#e6db74">&#34;B&#34;</span> <span style="color:#e6db74">&#34;L&#34;</span> <span style="color:#e6db74">&#34;A&#34;</span> <span style="color:#e6db74">&#34;2&#34;</span> <span style="color:#e6db74">&#34;3&#34;</span> <span style="color:#e6db74">&#34;4&#34;</span> <span style="color:#e6db74">&#34;5&#34;</span> <span style="color:#e6db74">&#34;6&#34;</span> <span style="color:#e6db74">&#34;7&#34;</span> <span style="color:#e6db74">&#34;8&#34;</span> <span style="color:#e6db74">&#34;9&#34;</span> <span style="color:#e6db74">&#34;10&#34;</span> <span style="color:#e6db74">&#34;J&#34;</span> <span style="color:#e6db74">&#34;Q&#34;</span> <span style="color:#e6db74">&#34;K&#34;</span>))
  
-;生成一张牌
-(define (creat-card suit face)
+<span style="color:#75715e">;生成一张牌</span>
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">creat-card</span> suit face)
     (cons suit face)
 )
-;生成n副牌
-(define (creat-cards n mysuits myfaces)
-        (define (afaces suit myfaces)
-                (if (null? myfaces)
+<span style="color:#75715e">;生成n副牌</span>
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">creat-cards</span> n mysuits myfaces)
+        (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">afaces</span> suit myfaces)
+                (<span style="color:#66d9ef">if </span>(null? myfaces)
                     myfaces
-                    (append (list (creat-card suit (car myfaces))) 
-                             (afaces suit (cdr myfaces))
+                    (append (list (<span style="color:#a6e22e">creat-card</span> suit (car myfaces))) 
+                             (<span style="color:#a6e22e">afaces</span> suit (cdr myfaces))
                      
                     )
                 )
         )
-        (define (asuits suits myfaces)
-                (if (null? suits)
+        (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">asuits</span> suits myfaces)
+                (<span style="color:#66d9ef">if </span>(null? suits)
                     suits
-                    (append  (afaces (car suits) myfaces)
-                             (asuits (cdr suits) myfaces)
+                    (append  (<span style="color:#a6e22e">afaces</span> (car suits) myfaces)
+                             (<span style="color:#a6e22e">asuits</span> (cdr suits) myfaces)
                     )
                  
                 )
          
         )
          
-        ;(make-list n (asuits mysuits myfaces))
-        (define (n-cards n alist return) 
-                (if (= n 0)
+        <span style="color:#75715e">;(make-list n (asuits mysuits myfaces))</span>
+        (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">n-cards</span> n alist return) 
+                (<span style="color:#66d9ef">if </span>(= n <span style="color:#ae81ff">0</span>)
                     return
-                    (n-cards (- n 1) alist (append return alist))
+                    (<span style="color:#a6e22e">n-cards</span> (- n <span style="color:#ae81ff">1</span>) alist (append return alist))
                 )
         )
-        ;(n-cards 4 '(a b c d e) '())
-        (n-cards n (asuits mysuits myfaces) '())
+        <span style="color:#75715e">;(n-cards 4 &#39;(a b c d e) &#39;())</span>
+        (<span style="color:#a6e22e">n-cards</span> n (<span style="color:#a6e22e">asuits</span> mysuits myfaces) <span style="color:#f92672">&#39;</span>())
 )
-;显示牌 
-(define (print-cards alist . number)
-        (define (iter alist n num)
-                (if (= 0 (remainder n num))
-                    (newline)
-                    'ok
+<span style="color:#75715e">;显示牌 </span>
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">print-cards</span> alist <span style="color:#f92672">.</span> number)
+        (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">iter</span> alist n num)
+                (<span style="color:#66d9ef">if </span>(= <span style="color:#ae81ff">0</span> (remainder n num))
+                    (<span style="color:#a6e22e">newline</span>)
+                    <span style="color:#e6db74">&#39;ok</span>
                 )
-                (if (null? alist)
-                    (newline)
-                    (begin (display (car alist)) 
-                           (display &quot;  &quot;)
-                           (iter (cdr alist) (+ n 1) num)
+                (<span style="color:#66d9ef">if </span>(null? alist)
+                    (<span style="color:#a6e22e">newline</span>)
+                    (<span style="color:#66d9ef">begin </span>(display (car alist)) 
+                           (display <span style="color:#e6db74">&#34;  &#34;</span>)
+                           (<span style="color:#a6e22e">iter</span> (cdr alist) (+ n <span style="color:#ae81ff">1</span>) num)
                     )
                 )
         )
-        (if (null? number)
-            (iter alist 0 5)
-            (iter alist 0 (car number))
+        (<span style="color:#66d9ef">if </span>(null? number)
+            (<span style="color:#a6e22e">iter</span> alist <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">5</span>)
+            (<span style="color:#a6e22e">iter</span> alist <span style="color:#ae81ff">0</span> (car number))
         )
 )
-;获取牌的花色
-(define (get-suit card)
-    ((lambda (x) (cond ((equal? x &quot;黑桃&quot;) 4)
-                       ((equal? x &quot;红桃&quot;) 3)
-                       ((equal? x &quot;梅花&quot;) 2)
-                       ((equal? x &quot;方块&quot;) 1)
-                       ((equal? x &quot;王&quot;)   0)
+<span style="color:#75715e">;获取牌的花色</span>
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">get-suit</span> card)
+    ((<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">x</span>) (<span style="color:#66d9ef">cond </span>((equal? x <span style="color:#e6db74">&#34;黑桃&#34;</span>) <span style="color:#ae81ff">4</span>)
+                       ((equal? x <span style="color:#e6db74">&#34;红桃&#34;</span>) <span style="color:#ae81ff">3</span>)
+                       ((equal? x <span style="color:#e6db74">&#34;梅花&#34;</span>) <span style="color:#ae81ff">2</span>)
+                       ((equal? x <span style="color:#e6db74">&#34;方块&#34;</span>) <span style="color:#ae81ff">1</span>)
+                       ((equal? x <span style="color:#e6db74">&#34;王&#34;</span>)   <span style="color:#ae81ff">0</span>)
                  )
      )
      
@@ -658,36 +653,36 @@
     )
 )
  
-;获取牌的数值
-(define (get-face card)
-    ((lambda (x) (cond ((equal? x &quot;A&quot;) 1)
-                       ((equal? x &quot;2&quot;) 2)
-                       ((equal? x &quot;3&quot;) 3)
-                       ((equal? x &quot;4&quot;) 4)
-                       ((equal? x &quot;5&quot;) 5)
-                       ((equal? x &quot;6&quot;) 6)
-                       ((equal? x &quot;7&quot;) 7)
-                       ((equal? x &quot;8&quot;) 8)
-                       ((equal? x &quot;9&quot;) 9)
-                       ((equal? x &quot;10&quot;) 10)
-                       ((equal? x &quot;J&quot;) 11)
-                       ((equal? x &quot;Q&quot;) 12)
-                       ((equal? x &quot;K&quot;) 13)
-                       ((equal? x &quot;B&quot;) 30)
-                       ((equal? x &quot;L&quot;) 20)
+<span style="color:#75715e">;获取牌的数值</span>
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">get-face</span> card)
+    ((<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">x</span>) (<span style="color:#66d9ef">cond </span>((equal? x <span style="color:#e6db74">&#34;A&#34;</span>) <span style="color:#ae81ff">1</span>)
+                       ((equal? x <span style="color:#e6db74">&#34;2&#34;</span>) <span style="color:#ae81ff">2</span>)
+                       ((equal? x <span style="color:#e6db74">&#34;3&#34;</span>) <span style="color:#ae81ff">3</span>)
+                       ((equal? x <span style="color:#e6db74">&#34;4&#34;</span>) <span style="color:#ae81ff">4</span>)
+                       ((equal? x <span style="color:#e6db74">&#34;5&#34;</span>) <span style="color:#ae81ff">5</span>)
+                       ((equal? x <span style="color:#e6db74">&#34;6&#34;</span>) <span style="color:#ae81ff">6</span>)
+                       ((equal? x <span style="color:#e6db74">&#34;7&#34;</span>) <span style="color:#ae81ff">7</span>)
+                       ((equal? x <span style="color:#e6db74">&#34;8&#34;</span>) <span style="color:#ae81ff">8</span>)
+                       ((equal? x <span style="color:#e6db74">&#34;9&#34;</span>) <span style="color:#ae81ff">9</span>)
+                       ((equal? x <span style="color:#e6db74">&#34;10&#34;</span>) <span style="color:#ae81ff">10</span>)
+                       ((equal? x <span style="color:#e6db74">&#34;J&#34;</span>) <span style="color:#ae81ff">11</span>)
+                       ((equal? x <span style="color:#e6db74">&#34;Q&#34;</span>) <span style="color:#ae81ff">12</span>)
+                       ((equal? x <span style="color:#e6db74">&#34;K&#34;</span>) <span style="color:#ae81ff">13</span>)
+                       ((equal? x <span style="color:#e6db74">&#34;B&#34;</span>) <span style="color:#ae81ff">30</span>)
+                       ((equal? x <span style="color:#e6db74">&#34;L&#34;</span>) <span style="color:#ae81ff">20</span>)
                  )
      )
      
      (cdr card)
     )
 )
-;洗牌
-(define (shuffle-card cards)
-        (define (append-amb x y return)
-                (cond ((and (null? x) (null? y)) return)
+<span style="color:#75715e">;洗牌</span>
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">shuffle-card</span> cards)
+        (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">append-amb</span> x y return)
+                (<span style="color:#66d9ef">cond </span>((<span style="color:#66d9ef">and </span>(null? x) (null? y)) return)
                       ((null? x) (append return y))
                       ((null? y) (append return x))
-                      (else      (append-amb (cdr y) 
+                      (<span style="color:#66d9ef">else </span>     (<span style="color:#a6e22e">append-amb</span> (cdr y) 
                                              (cdr x) 
                                              (append return (append (list (car x)) (list (car y))))
                                  )
@@ -696,61 +691,58 @@
                 )
              
         )
-        ;--
-        (define (shuffle scards)
-                ((lambda (x) 
-                        (append-amb (list-tail scards x) (list-head scards x) '()))
-                 (random (length scards))
+        <span style="color:#75715e">;--</span>
+        (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">shuffle</span> scards)
+                ((<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">x</span>) 
+                        (<span style="color:#a6e22e">append-amb</span> (list-tail scards x) (<span style="color:#a6e22e">list-head</span> scards x) <span style="color:#f92672">&#39;</span>()))
+                 (<span style="color:#a6e22e">random</span> (length scards))
                   
                 )
         )
-        ;--
-        (define (iter cards n)
-                (if (= n 0)
+        <span style="color:#75715e">;--</span>
+        (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">iter</span> cards n)
+                (<span style="color:#66d9ef">if </span>(= n <span style="color:#ae81ff">0</span>)
                     cards
-                    (iter (shuffle cards) (- n 1))
+                    (<span style="color:#a6e22e">iter</span> (<span style="color:#a6e22e">shuffle</span> cards) (- n <span style="color:#ae81ff">1</span>))
                 )
         )
-        ;--
-        (iter cards (length cards))
-        ;(shuffle cards)
+        <span style="color:#75715e">;--</span>
+        (<span style="color:#a6e22e">iter</span> cards (length cards))
+        <span style="color:#75715e">;(shuffle cards)</span>
 )
-;分牌(deal-card '(1 2 3 4 5 6 7 8) 4) =&gt; return ((1 5) (2 6) (3 7) (4 8))
-;;还没完成
-(define (deal-card alist n)
-        (define (iter alist n return)
-            (if (null? alist)
+<span style="color:#75715e">;分牌(deal-card &#39;(1 2 3 4 5 6 7 8) 4) =&gt; return ((1 5) (2 6) (3 7) (4 8))</span>
+<span style="color:#75715e">;;还没完成</span>
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">deal-card</span> alist n)
+        (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">iter</span> alist n return)
+            (<span style="color:#66d9ef">if </span>(null? alist)
                 return
-                ;(append )
-                'ok
+                <span style="color:#75715e">;(append )</span>
+                <span style="color:#e6db74">&#39;ok</span>
             )
         )
-        (iter alist n '())
+        (<span style="color:#a6e22e">iter</span> alist n <span style="color:#f92672">&#39;</span>())
              
 )
-;--------------------------------
-;返回list中k以前的sublist
-(define (list-head lst k)
-    (if (zero? k)
-        '()
-        (append (list (car lst)) (list-head (cdr lst) (- k 1)) )
+<span style="color:#75715e">;--------------------------------</span>
+<span style="color:#75715e">;返回list中k以前的sublist</span>
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">list-head</span> lst k)
+    (<span style="color:#66d9ef">if </span>(zero? k)
+        <span style="color:#f92672">&#39;</span>()
+        (append (list (car lst)) (<span style="color:#a6e22e">list-head</span> (cdr lst) (- k <span style="color:#ae81ff">1</span>)) )
      
     )
 )
-;-------------test---------------
-(define x (creat-card &quot;梅花&quot; &quot;8&quot;))
-(define k (creat-cards 1 (cdr suits) (cdr (cdr faces))))
-(define n '(1 2 3 4 5 6 7 8 9 10))
-(print-cards k)
-(print-cards (list-head k 9))
-(print-cards (list-tail k 9) 13)
-;(print-cards (shuffle-card k))
-;------------------
-;(display (shuffle-card n))
-</code></pre>
-
-<h2 id="运行结果">运行结果</h2>
-
+<span style="color:#75715e">;-------------test---------------</span>
+(<span style="color:#66d9ef">define </span>x (<span style="color:#a6e22e">creat-card</span> <span style="color:#e6db74">&#34;梅花&#34;</span> <span style="color:#e6db74">&#34;8&#34;</span>))
+(<span style="color:#66d9ef">define </span>k (<span style="color:#a6e22e">creat-cards</span> <span style="color:#ae81ff">1</span> (cdr suits) (cdr (cdr faces))))
+(<span style="color:#66d9ef">define </span>n <span style="color:#f92672">&#39;</span>(<span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">6</span> <span style="color:#ae81ff">7</span> <span style="color:#ae81ff">8</span> <span style="color:#ae81ff">9</span> <span style="color:#ae81ff">10</span>))
+(<span style="color:#a6e22e">print-cards</span> k)
+(<span style="color:#a6e22e">print-cards</span> (<span style="color:#a6e22e">list-head</span> k <span style="color:#ae81ff">9</span>))
+(<span style="color:#a6e22e">print-cards</span> (list-tail k <span style="color:#ae81ff">9</span>) <span style="color:#ae81ff">13</span>)
+<span style="color:#75715e">;(print-cards (shuffle-card k))</span>
+<span style="color:#75715e">;------------------</span>
+<span style="color:#75715e">;(display (shuffle-card n))</span>
+</code></pre></div><h2 id="heading">运行结果</h2>
 <pre><code>(黑桃 . A)  (黑桃 . 2)  (黑桃 . 3)  (黑桃 . 4)  (黑桃 . 5)  
 (黑桃 . 6)  (黑桃 . 7)  (黑桃 . 8)  (黑桃 . 9)  (黑桃 . 10)  
 (黑桃 . J)  (黑桃 . Q)  (黑桃 . K)  (红桃 . A)  (红桃 . 2)  
@@ -1174,7 +1166,7 @@
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

@@ -31,7 +31,6 @@
   <meta name="description" content="All programs are data.
 All intepreters are program.
 All Handware and software,or type checkers etc are interpreter.
-
 I think data conceives the soul,not only the fixed process,but changing vari-language.">
 
   
@@ -124,7 +123,6 @@ I think data conceives the soul,not only the fixed process,but changing vari-lan
   <meta property="og:description" content="All programs are data.
 All intepreters are program.
 All Handware and software,or type checkers etc are interpreter.
-
 I think data conceives the soul,not only the fixed process,but changing vari-language."><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
   <meta property="twitter:image" content="https://jueqingsizhe66.github.io/img/icon-192.png"><meta property="og:locale" content="en-us">
   
@@ -571,9 +569,9 @@ I think data conceives the soul,not only the fixed process,but changing vari-lan
 
 
 
-<span class="article-metadata" >Reading time: 12 minutes and    43 seconds with 2799 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+<span class="article-metadata" >Reading time: 12 minutes and    33 seconds with 2764 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
-        
+        <nav id="TableOfContents"></nav>
     </aside>
   <div class="article-container">
 
@@ -582,790 +580,751 @@ I think data conceives the soul,not only the fixed process,but changing vari-lan
       <p>All programs are data.
 All intepreters are program.
 All Handware and software,or type checkers etc are interpreter.</p>
-
 <p>I think data conceives the soul,not only the fixed process,but changing vari-language.</p>
-
 <ul>
 <li><a href="#1">1.The Little Scheme interpreter</a></li>
 <li><a href="#2">2.The Season Scheme interpreter</a></li>
 <li><a href="#3">3.The CPS control struture</a>
-
 <ul>
 <li><a href="#3.1">3.1 how to add arguments?</a></li>
 <li><a href="#3.2">3.2 what is the small stuff?</a></li>
-</ul></li>
+</ul>
+</li>
 <li><a href="#4">4. how to evaluate or interpreter  a procedre?</a>
-
 <ul>
 <li><a href="#4.1">4.1 ordinary tracing</a></li>
 <li><a href="#4.2">4.2 cps tracing</a></li>
-</ul></li>
+</ul>
+</li>
 <li><a href="#5">5. It is not the end</a></li>
 </ul>
-
-<h2 id="1">The Little Scheme</h2>
-
+<!-- raw HTML omitted -->
 <p>Here below is the interpreter from TLS</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#f92672">#</span>lang racket
+<span style="color:#75715e">;;简单环境配置</span>
+    (<span style="color:#66d9ef">define </span>atom?
+     (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">x</span>)
+      (<span style="color:#66d9ef">and </span>(not (pair? x)) (not (null? x)))))
 
-<pre><code class="language-scheme">#lang racket
-;;简单环境配置
-    (define atom?
-     (lambda (x)
-      (and (not (pair? x)) (not (null? x)))))
 
+    <span style="color:#75715e">;第一大部分 定义好整体框架</span>
+    (<span style="color:#66d9ef">define </span>value
+     (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">e</span>)
+      (<span style="color:#a6e22e">meaning</span> e (<span style="color:#66d9ef">quote </span>()))))
+    (<span style="color:#66d9ef">define </span>meaning
+     (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">e</span> table)
+      ((<span style="color:#a6e22e">expression-to-action</span> e) e table)))
 
-    ;第一大部分 定义好整体框架
-    (define value
-     (lambda (e)
-      (meaning e (quote ()))))
-    (define meaning
-     (lambda (e table)
-      ((expression-to-action e) e table)))
+    <span style="color:#75715e">;;第二大部分 解析atom and list action</span>
 
-    ;;第二大部分 解析atom and list action
-
-    (define expression-to-action
-     (lambda (e)
-      (cond
-       ((atom? e) (atom-to-action e))
-       (else (list-to-action e)))))
-    (define atom-to-action
-     (lambda (e)
-      (cond
+    (<span style="color:#66d9ef">define </span>expression-to-action
+     (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">e</span>)
+      (<span style="color:#a6e22e">cond</span>
+       ((<span style="color:#a6e22e">atom?</span> e) (<span style="color:#a6e22e">atom-to-action</span> e))
+       (<span style="color:#66d9ef">else </span>(<span style="color:#a6e22e">list-to-action</span> e)))))
+    (<span style="color:#66d9ef">define </span>atom-to-action
+     (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">e</span>)
+      (<span style="color:#a6e22e">cond</span>
        ((number? e) *const)
-       ((eq? e #t) *const)
-       ((eq? e #f) *const)
-       ((eq? e (quote cons)) *const)
-       ((eq? e (quote car)) *const)
-       ((eq? e (quote cdr)) *const)
-       ((eq? e (quote null?)) *const)
-       ((eq? e (quote eq?)) *const)
-       ((eq? e (quote atom?)) *const)
-       ((eq? e (quote zero?)) *const)
-       ((eq? e (quote add1)) *const)
-       ((eq? e (quote sub1)) *const)
-       ((eq? e (quote number?)) *const)
-       (else *identifier))))
-    (define list-to-action
-     (lambda (e)
-      (cond
-       ((atom? (car e))
-        (cond
-         ((eq? (car e) (quote quote))
+       ((eq? e <span style="color:#66d9ef">#t</span>) *const)
+       ((eq? e <span style="color:#66d9ef">#f</span>) *const)
+       ((eq? e (<span style="color:#66d9ef">quote </span>cons)) *const)
+       ((eq? e (<span style="color:#66d9ef">quote </span>car)) *const)
+       ((eq? e (<span style="color:#66d9ef">quote </span>cdr)) *const)
+       ((eq? e (<span style="color:#66d9ef">quote </span>null?)) *const)
+       ((eq? e (<span style="color:#66d9ef">quote </span>eq?)) *const)
+       ((eq? e (<span style="color:#66d9ef">quote </span>atom?)) *const)
+       ((eq? e (<span style="color:#66d9ef">quote </span>zero?)) *const)
+       ((eq? e (<span style="color:#66d9ef">quote </span>add1)) *const)
+       ((eq? e (<span style="color:#66d9ef">quote </span>sub1)) *const)
+       ((eq? e (<span style="color:#66d9ef">quote </span>number?)) *const)
+       (<span style="color:#66d9ef">else </span>*identifier))))
+    (<span style="color:#66d9ef">define </span>list-to-action
+     (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">e</span>)
+      (<span style="color:#a6e22e">cond</span>
+       ((<span style="color:#a6e22e">atom?</span> (car e))
+        (<span style="color:#a6e22e">cond</span>
+         ((eq? (car e) (<span style="color:#66d9ef">quote </span>quote))
           *quote)
-         ((eq? (car e) (quote lambda))
+         ((eq? (car e) (<span style="color:#66d9ef">quote </span>lambda))
           *lambda)
-         ((eq? (car e) (quote cond))
+         ((eq? (car e) (<span style="color:#66d9ef">quote </span>cond))
           *cond)
-         (else *application)))
-       (else *application))))
+         (<span style="color:#66d9ef">else </span>*application)))
+       (<span style="color:#66d9ef">else </span>*application))))
 
-    ;; 第三大部分 定义 6星==5个special forms 和一个general forms（*application)
+    <span style="color:#75715e">;; 第三大部分 定义 6星==5个special forms 和一个general forms（*application)</span>
 
-    ;;;环境额外配置 这些配置仅仅是为了增加可读性 无任何编程技巧
-    (define first
-     (lambda (p)
-      (cond
-       (else (car p)))))
-    (define second
-     (lambda (p)
-      (cond
-       (else car (cdr p)))))
-    (define third
-     (lambda (p)
-      (cond
-       (else car (cdr (cdr p))))))
-(define text-of second)
-    ;; *identifier
-    (define table-of first)
-    (define formals-of second)
-(define body-of third)
-    ;;*cond
-    (define question-of first)
-    (define answer-of second)
-(define cond-lines-of cdr)
-    ;;*application
-    (define function-of car)
-(define arguments-of cdr)
+    <span style="color:#75715e">;;;环境额外配置 这些配置仅仅是为了增加可读性 无任何编程技巧</span>
+    (<span style="color:#66d9ef">define </span>first
+     (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">p</span>)
+      (<span style="color:#a6e22e">cond</span>
+       (<span style="color:#66d9ef">else </span>(car p)))))
+    (<span style="color:#66d9ef">define </span>second
+     (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">p</span>)
+      (<span style="color:#a6e22e">cond</span>
+       (<span style="color:#66d9ef">else </span>car (cdr p)))))
+    (<span style="color:#66d9ef">define </span>third
+     (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">p</span>)
+      (<span style="color:#a6e22e">cond</span>
+       (<span style="color:#66d9ef">else </span>car (cdr (cdr p))))))
+(<span style="color:#66d9ef">define </span>text-of second)
+    <span style="color:#75715e">;; *identifier</span>
+    (<span style="color:#66d9ef">define </span>table-of first)
+    (<span style="color:#66d9ef">define </span>formals-of second)
+(<span style="color:#66d9ef">define </span>body-of third)
+    <span style="color:#75715e">;;*cond</span>
+    (<span style="color:#66d9ef">define </span>question-of first)
+    (<span style="color:#66d9ef">define </span>answer-of second)
+(<span style="color:#66d9ef">define </span>cond-lines-of cdr)
+    <span style="color:#75715e">;;*application</span>
+    (<span style="color:#66d9ef">define </span>function-of car)
+(<span style="color:#66d9ef">define </span>arguments-of cdr)
 
-    (define build
-     (lambda (s1 s2)
-      (cond
-       (else (cons s1
-              (cons s2 (quote ())))))))
-    ;;1st star
-    (define *const
-     (lambda (e table)
-      (cond
+    (<span style="color:#66d9ef">define </span>build
+     (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">s1</span> s2)
+      (<span style="color:#a6e22e">cond</span>
+       (<span style="color:#66d9ef">else </span>(cons s1
+              (cons s2 (<span style="color:#66d9ef">quote </span>())))))))
+    <span style="color:#75715e">;;1st star</span>
+    (<span style="color:#66d9ef">define </span>*const
+     (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">e</span> table)
+      (<span style="color:#a6e22e">cond</span>
        ((number? e) e)
-       ((eq? e #t) #t)
-       ((eq? e #f) #f)
-       (else (build (quote primitive) e)))))
-    ;;2nd star
-    (define *quote
-     (lambda (e table)
-      (text-of e)))
-    ;;3rd star
-    (define *lambda
-     (lambda (e table)
-      (build (quote non-primitive)
+       ((eq? e <span style="color:#66d9ef">#t</span>) <span style="color:#66d9ef">#t</span>)
+       ((eq? e <span style="color:#66d9ef">#f</span>) <span style="color:#66d9ef">#f</span>)
+       (<span style="color:#66d9ef">else </span>(<span style="color:#a6e22e">build</span> (<span style="color:#66d9ef">quote </span>primitive) e)))))
+    <span style="color:#75715e">;;2nd star</span>
+    (<span style="color:#66d9ef">define </span>*quote
+     (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">e</span> table)
+      (<span style="color:#a6e22e">text-of</span> e)))
+    <span style="color:#75715e">;;3rd star</span>
+    (<span style="color:#66d9ef">define </span>*lambda
+     (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">e</span> table)
+      (<span style="color:#a6e22e">build</span> (<span style="color:#66d9ef">quote </span>non-primitive)
        (cons table (cdr e)))))
-    ;;4th star
-    (define *identifier
-     (lambda (e table)
-      (lookup-in-table e table initial-table)))
-    (define initial-table
-     (lambda (name)
-      (car (quote ()))))
-    (define lookup-in-table
-     (lambda (name table table-f)
-      (cond
-       ((null? table) (table-f name))
-       (else (lookup-in-entry name
+    <span style="color:#75715e">;;4th star</span>
+    (<span style="color:#66d9ef">define </span>*identifier
+     (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">e</span> table)
+      (<span style="color:#a6e22e">lookup-in-table</span> e table initial-table)))
+    (<span style="color:#66d9ef">define </span>initial-table
+     (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">name</span>)
+      (car (<span style="color:#66d9ef">quote </span>()))))
+    (<span style="color:#66d9ef">define </span>lookup-in-table
+     (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">name</span> table table-f)
+      (<span style="color:#a6e22e">cond</span>
+       ((null? table) (<span style="color:#a6e22e">table-f</span> name))
+       (<span style="color:#66d9ef">else </span>(<span style="color:#a6e22e">lookup-in-entry</span> name
               (car table)
-              ; (lambda (name)
-                  ; (cdr table)
-                  ; (table-f)))))))
-(lambda (name)
- (lookup-in-table name
+              <span style="color:#75715e">; (lambda (name)</span>
+                  <span style="color:#75715e">; (cdr table)</span>
+                  <span style="color:#75715e">; (table-f)))))))</span>
+(<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">name</span>)
+ (<span style="color:#a6e22e">lookup-in-table</span> name
   (cdr table)
   table-f)))))))
-    (define lookup-in-entry
-     (lambda (name entry entry-f)
-      (lookup-in-entry-help name
-       (first entry)
-       (second entry)
+    (<span style="color:#66d9ef">define </span>lookup-in-entry
+     (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">name</span> entry entry-f)
+      (<span style="color:#a6e22e">lookup-in-entry-help</span> name
+       (<span style="color:#a6e22e">first</span> entry)
+       (<span style="color:#a6e22e">second</span> entry)
        entry-f)))
-    (define lookup-in-entry-help
-     (lambda (name names values entry-f)
-      (cond
-       ((null? names) (entry-f name))
+    (<span style="color:#66d9ef">define </span>lookup-in-entry-help
+     (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">name</span> names values entry-f)
+      (<span style="color:#a6e22e">cond</span>
+       ((null? names) (<span style="color:#a6e22e">entry-f</span> name))
        ((eq? (car names) name)
         (car values))
-       (else (lookup-in-entry-help name
+       (<span style="color:#66d9ef">else </span>(<span style="color:#a6e22e">lookup-in-entry-help</span> name
               (cdr names)
               (cdr values)
               entry-f)))))
 
-    ;; 5th star
-    (define *cond
-     (lambda (e table)
-      (evcon (cond-lines-of e) table)))
-    (define evcon
-     (lambda (lines table)
-      (cond
-       ((else? (question-of (car lines)))
-        (meaning (answer-of (car lines))
+    <span style="color:#75715e">;; 5th star</span>
+    (<span style="color:#66d9ef">define </span>*cond
+     (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">e</span> table)
+      (<span style="color:#a6e22e">evcon</span> (<span style="color:#a6e22e">cond-lines-of</span> e) table)))
+    (<span style="color:#66d9ef">define </span>evcon
+     (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">lines</span> table)
+      (<span style="color:#a6e22e">cond</span>
+       ((<span style="color:#a6e22e">else?</span> (<span style="color:#a6e22e">question-of</span> (car lines)))
+        (<span style="color:#a6e22e">meaning</span> (<span style="color:#a6e22e">answer-of</span> (car lines))
          table))
-       ((meaning (question-of (car lines))
+       ((<span style="color:#a6e22e">meaning</span> (<span style="color:#a6e22e">question-of</span> (car lines))
          table)
-        (meaning (answer-of (car lines))
+        (<span style="color:#a6e22e">meaning</span> (<span style="color:#a6e22e">answer-of</span> (car lines))
          table))
-       (else (evcon (cdr lines) table)))))
+       (<span style="color:#66d9ef">else </span>(<span style="color:#a6e22e">evcon</span> (cdr lines) table)))))
 
-    (define else?
-     (lambda (x)
-      (cond
-       ((atom? x) (eq? x (quote else)))
-       (else #f))))
-
-
-    ;;6th star 你需要解析arguments的各个部分这是evlis的工作
-    (define *application
-     (lambda (e table)
-      (apply
-       (meaning (function-of e) table)
-       (evlis (arguments-of e) table))))
-
-    (define evlis
-     (lambda (args table)
-      (cond
-       ((null? args) (quote ()))
-       (else
-        (cons (meaning (car args) table)
-         (evlis (cdr args) table))))))
+    (<span style="color:#66d9ef">define </span>else?
+     (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">x</span>)
+      (<span style="color:#a6e22e">cond</span>
+       ((<span style="color:#a6e22e">atom?</span> x) (eq? x (<span style="color:#66d9ef">quote </span>else)))
+       (<span style="color:#66d9ef">else </span><span style="color:#66d9ef">#f</span>))))
 
 
-    ;;第四大部分 进行 apply的定义 反向运用primitive和non-primitive 去除核心的primitive和non-primitive前缀，并升级环境
+    <span style="color:#75715e">;;6th star 你需要解析arguments的各个部分这是evlis的工作</span>
+    (<span style="color:#66d9ef">define </span>*application
+     (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">e</span> table)
+      (<span style="color:#a6e22e">apply</span>
+       (<span style="color:#a6e22e">meaning</span> (<span style="color:#a6e22e">function-of</span> e) table)
+       (<span style="color:#a6e22e">evlis</span> (<span style="color:#a6e22e">arguments-of</span> e) table))))
 
-    (define apply
-     (lambda (fun vals)
-      (cond
-       ((primitive? fun)
-        (apply-primitive
-         (second fun) vals))
-       ((non-primitive? fun)
-        (apply-closure
-         (second fun) vals)))))
+    (<span style="color:#66d9ef">define </span>evlis
+     (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">args</span> table)
+      (<span style="color:#a6e22e">cond</span>
+       ((null? args) (<span style="color:#66d9ef">quote </span>()))
+       (<span style="color:#a6e22e">else</span>
+        (cons (<span style="color:#a6e22e">meaning</span> (car args) table)
+         (<span style="color:#a6e22e">evlis</span> (cdr args) table))))))
 
-    (define primitive?
-     (lambda (l)
-      (eq? (first l) (quote primitive))))
-    (define non-primitive?
-     (lambda (l)
-      (eq? (first l) (quote non-primitive))))
-    (define apply-primitive
-     (lambda (name vals)
-      (cond
-       ((eq? name (quote cons))
-        (cons (first vals) (second vals)))
-       ((eq? name (quote car))
-        (car (first vals)))
-       ((eq? name (quote cdr))
-        ((eq? name (quote cdr))
-         (cdr (first vals)))
-        ((eq? name (quote null?))
-         (null? (first vals)))
-        ((eq? name (quote eq?))
-         (eq? (first vals) (second vals)))
-        ((eq? name (quote atom?))
-         (:atom? (first vals)))
-        ((eq? name (quote zero?))
-         (zero? (first vals)))
-        ((eq? name (quote add1))
-         (add1 (first vals)))
-        ((eq? name (quote sub1))
-         (sub1 (first vals)))
-        ((eq? name (quote number?))
-         (number? (first vals)))))))
-    (define :atom?
-     (lambda (x)
-      (cond
-       ((atom? x) #t)
-       ((null? x) #f)
-       ((eq? (car x) (quote primitive))
-#t)
-       ((eq? (car x) (quote non-primitive))
-#t)
-       (else #f))))
 
-    ;;closure=table+arguments+body ;;arguments 通过formals-of获取 body-of获取body
-    (define apply-closure
-     (lambda (closure vals)
-      (meaning (body-of closure)
-       (extend-table
-        (new-entry
-         (formals-of closure)
+    <span style="color:#75715e">;;第四大部分 进行 apply的定义 反向运用primitive和non-primitive 去除核心的primitive和non-primitive前缀，并升级环境</span>
+
+    (<span style="color:#66d9ef">define </span>apply
+     (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">fun</span> vals)
+      (<span style="color:#a6e22e">cond</span>
+       ((<span style="color:#a6e22e">primitive?</span> fun)
+        (<span style="color:#a6e22e">apply-primitive</span>
+         (<span style="color:#a6e22e">second</span> fun) vals))
+       ((<span style="color:#a6e22e">non-primitive?</span> fun)
+        (<span style="color:#a6e22e">apply-closure</span>
+         (<span style="color:#a6e22e">second</span> fun) vals)))))
+
+    (<span style="color:#66d9ef">define </span>primitive?
+     (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">l</span>)
+      (eq? (<span style="color:#a6e22e">first</span> l) (<span style="color:#66d9ef">quote </span>primitive))))
+    (<span style="color:#66d9ef">define </span>non-primitive?
+     (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">l</span>)
+      (eq? (<span style="color:#a6e22e">first</span> l) (<span style="color:#66d9ef">quote </span>non-primitive))))
+    (<span style="color:#66d9ef">define </span>apply-primitive
+     (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">name</span> vals)
+      (<span style="color:#a6e22e">cond</span>
+       ((eq? name (<span style="color:#66d9ef">quote </span>cons))
+        (cons (<span style="color:#a6e22e">first</span> vals) (<span style="color:#a6e22e">second</span> vals)))
+       ((eq? name (<span style="color:#66d9ef">quote </span>car))
+        (car (<span style="color:#a6e22e">first</span> vals)))
+       ((eq? name (<span style="color:#66d9ef">quote </span>cdr))
+        ((eq? name (<span style="color:#66d9ef">quote </span>cdr))
+         (cdr (<span style="color:#a6e22e">first</span> vals)))
+        ((eq? name (<span style="color:#66d9ef">quote </span>null?))
+         (null? (<span style="color:#a6e22e">first</span> vals)))
+        ((eq? name (<span style="color:#66d9ef">quote </span>eq?))
+         (eq? (<span style="color:#a6e22e">first</span> vals) (<span style="color:#a6e22e">second</span> vals)))
+        ((eq? name (<span style="color:#66d9ef">quote </span>atom?))
+         (<span style="color:#a6e22e">:atom?</span> (<span style="color:#a6e22e">first</span> vals)))
+        ((eq? name (<span style="color:#66d9ef">quote </span>zero?))
+         (zero? (<span style="color:#a6e22e">first</span> vals)))
+        ((eq? name (<span style="color:#66d9ef">quote </span>add1))
+         (<span style="color:#a6e22e">add1</span> (<span style="color:#a6e22e">first</span> vals)))
+        ((eq? name (<span style="color:#66d9ef">quote </span>sub1))
+         (<span style="color:#a6e22e">sub1</span> (<span style="color:#a6e22e">first</span> vals)))
+        ((eq? name (<span style="color:#66d9ef">quote </span>number?))
+         (number? (<span style="color:#a6e22e">first</span> vals)))))))
+    (<span style="color:#66d9ef">define </span>:atom?
+     (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">x</span>)
+      (<span style="color:#a6e22e">cond</span>
+       ((<span style="color:#a6e22e">atom?</span> x) <span style="color:#66d9ef">#t</span>)
+       ((null? x) <span style="color:#66d9ef">#f</span>)
+       ((eq? (car x) (<span style="color:#66d9ef">quote </span>primitive))
+<span style="color:#66d9ef">#t</span>)
+       ((eq? (car x) (<span style="color:#66d9ef">quote </span>non-primitive))
+<span style="color:#66d9ef">#t</span>)
+       (<span style="color:#66d9ef">else </span><span style="color:#66d9ef">#f</span>))))
+
+    <span style="color:#75715e">;;closure=table+arguments+body ;;arguments 通过formals-of获取 body-of获取body</span>
+    (<span style="color:#66d9ef">define </span>apply-closure
+     (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">closure</span> vals)
+      (<span style="color:#a6e22e">meaning</span> (<span style="color:#a6e22e">body-of</span> closure)
+       (<span style="color:#a6e22e">extend-table</span>
+        (<span style="color:#a6e22e">new-entry</span>
+         (<span style="color:#a6e22e">formals-of</span> closure)
          vals)
-        (table-of closure)))))
-    (define new-entry build)
-(define extend-table cons)
+        (<span style="color:#a6e22e">table-of</span> closure)))))
+    (<span style="color:#66d9ef">define </span>new-entry build)
+(<span style="color:#66d9ef">define </span>extend-table cons)
 
 
-    ;;测试这个解释器
-    ;(value (cons (* (+ 1 3) 4) 'hello)) ;;不通过
-    (value (+ 2 4))
-(value (* 15 (+ 2 4)))
-    ;;(value (cons (quote (* (+ 1 3) 4)) (cons 'h '()))) ;;测试不通过
+    <span style="color:#75715e">;;测试这个解释器</span>
+    <span style="color:#75715e">;(value (cons (* (+ 1 3) 4) &#39;hello)) ;;不通过</span>
+    (<span style="color:#a6e22e">value</span> (+ <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">4</span>))
+(<span style="color:#a6e22e">value</span> (* <span style="color:#ae81ff">15</span> (+ <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">4</span>)))
+    <span style="color:#75715e">;;(value (cons (quote (* (+ 1 3) 4)) (cons &#39;h &#39;()))) ;;测试不通过</span>
 
-</code></pre>
-
-<h2 id="2"> The Season scheme</h2>
-
+</code></pre></div><!-- raw HTML omitted -->
 <p>Here below is the interpreter from TLS</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#f92672">#</span>lang racket
+<span style="color:#75715e">;; The Seasoned Schemer</span>
+<span style="color:#75715e">;; chapter 20</span>
+<span style="color:#75715e">;; What&#39;s in Store ?</span>
 
-<pre><code class="language-scheme">#lang racket
-;; The Seasoned Schemer
-;; chapter 20
-;; What's in Store ?
+(<span style="color:#66d9ef">define </span>abort <span style="color:#f92672">&#39;</span>())
 
-(define abort '())
+(<span style="color:#66d9ef">define </span>global-table <span style="color:#f92672">&#39;</span>())
 
-(define global-table '())
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">add1</span> n)
+ (+ n <span style="color:#ae81ff">1</span>))
 
-(define (add1 n)
- (+ n 1))
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">sub1</span> n)
+ (- n <span style="color:#ae81ff">1</span>))
 
-(define (sub1 n)
- (- n 1))
-
-    (define (atom? a)
-     (and (not (pair? a))
+    (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">atom?</span> a)
+     (<span style="color:#66d9ef">and </span>(not (pair? a))
       (not (null? a))))
 
-(define (text-of x)
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">text-of</span> x)
  (cadr x))
 
-(define (formals-of x)
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">formals-of</span> x)
  (cadr x))
 
-(define (body-of x)
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">body-of</span> x)
  (cddr x))
 
-(define (ccbody-of x)
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">ccbody-of</span> x)
  (cddr x))
 
-(define (name-of x)
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">name-of</span> x)
  (cadr x))
 
-    (define (right-side-of x)
-     (if (null? (cddr x))
-      0
+    (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">right-side-of</span> x)
+     (<span style="color:#66d9ef">if </span>(null? (cddr x))
+      <span style="color:#ae81ff">0</span>
       (caddr x)))
 
-(define (cond-lines-of x)
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">cond-lines-of</span> x)
  (cdr x))
 
-    (define (else? x)
-     (if (atom? x)
-      (eq? x 'else)
-#f))
+    (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">else?</span> x)
+     (<span style="color:#66d9ef">if </span>(<span style="color:#a6e22e">atom?</span> x)
+      (eq? x <span style="color:#e6db74">&#39;else</span>)
+<span style="color:#66d9ef">#f</span>))
 
-(define (question-of x)
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">question-of</span> x)
  (car x))
 
-(define (answer-of x)
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">answer-of</span> x)
  (cadr x))
 
-(define (function-of x)
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">function-of</span> x)
  (car x))
 
-(define (arguments-of x)
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">arguments-of</span> x)
  (cdr x))
 
 
-(define (lookup table name)
- (table name))
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">lookup</span> table name)
+ (<span style="color:#a6e22e">table</span> name))
 
-    (define (extend name1 val table)
-     (lambda (name2)
-      (if (eq? name1 name2)
+    (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">extend</span> name1 val table)
+     (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">name2</span>)
+      (<span style="color:#66d9ef">if </span>(eq? name1 name2)
        val
-       (table name2))))
+       (<span style="color:#a6e22e">table</span> name2))))
 
-    (define (define? e)
-     (eq? (and (pair? e)
-           (car e)) 'def))
+    (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">define?</span> e)
+     (eq? (<span style="color:#66d9ef">and </span>(pair? e)
+           (car e)) <span style="color:#e6db74">&#39;def</span>))
 
-(define (*define e)
- (set! global-table
-  (extend (name-of e)
-   (box (the-meaning (right-side-of e)))
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">*define</span> e)
+ (<span style="color:#66d9ef">set! </span>global-table
+  (<span style="color:#a6e22e">extend</span> (<span style="color:#a6e22e">name-of</span> e)
+   (<span style="color:#a6e22e">box</span> (<span style="color:#a6e22e">the-meaning</span> (<span style="color:#a6e22e">right-side-of</span> e)))
    global-table)))
 
-    (define (box it)
-     (lambda (sel)
-      (sel it (lambda (new)
-               (set! it new)))))
+    (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">box</span> it)
+     (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">sel</span>)
+      (<span style="color:#a6e22e">sel</span> it (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">new</span>)
+               (<span style="color:#66d9ef">set! </span>it new)))))
 
-    (define (setbox box new)
-     (box (lambda (it set)
-           (set new))))
+    (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">setbox</span> box new)
+     (<span style="color:#a6e22e">box</span> (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">it</span> set)
+           (<span style="color:#a6e22e">set</span> new))))
 
-    (define (unbox box)
-     (box (lambda (it set)
+    (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">unbox</span> box)
+     (<span style="color:#a6e22e">box</span> (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">it</span> set)
            it)))
 
-(define (the-meaning e)
- (meaning e lookup-in-global-table))
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">the-meaning</span> e)
+ (<span style="color:#a6e22e">meaning</span> e lookup-in-global-table))
 
-(define (lookup-in-global-table name)
- (lookup global-table name))
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">lookup-in-global-table</span> name)
+ (<span style="color:#a6e22e">lookup</span> global-table name))
 
-(define (meaning e table)
- ((expression-to-action e) e table))
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">meaning</span> e table)
+ ((<span style="color:#a6e22e">expression-to-action</span> e) e table))
 
-(define (*quote e table)
- (text-of e))
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">*quote</span> e table)
+ (<span style="color:#a6e22e">text-of</span> e))
 
-(define (*identifier e table)
- (unbox (lookup table e)))
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">*identifier</span> e table)
+ (<span style="color:#a6e22e">unbox</span> (<span style="color:#a6e22e">lookup</span> table e)))
 
-(define (*set e table)
- (setbox
-  (lookup table (name-of e))
-  (meaning (right-side-of e) table)))
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">*set</span> e table)
+ (<span style="color:#a6e22e">setbox</span>
+  (<span style="color:#a6e22e">lookup</span> table (<span style="color:#a6e22e">name-of</span> e))
+  (<span style="color:#a6e22e">meaning</span> (<span style="color:#a6e22e">right-side-of</span> e) table)))
 
-    (define (*lambda e table)
-     (lambda (args)
-      (beglis (body-of e)
-       (multi-extend (formals-of e)
-        (box-all args)
+    (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">*lambda</span> e table)
+     (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">args</span>)
+      (<span style="color:#a6e22e">beglis</span> (<span style="color:#a6e22e">body-of</span> e)
+       (<span style="color:#a6e22e">multi-extend</span> (<span style="color:#a6e22e">formals-of</span> e)
+        (<span style="color:#a6e22e">box-all</span> args)
         table))))
 
-    ;; (define (beglis es table)
-            ;; (cond
-                ;; ((null? (cdr es))
-                    ;; (meaning (car es) table))
-                ;; (else ((lambda (val)
-                            ;; (beglis (cdr es) table))
-                        ;; (meaning (car es) table)))))
+    <span style="color:#75715e">;; (define (beglis es table)</span>
+            <span style="color:#75715e">;; (cond</span>
+                <span style="color:#75715e">;; ((null? (cdr es))</span>
+                    <span style="color:#75715e">;; (meaning (car es) table))</span>
+                <span style="color:#75715e">;; (else ((lambda (val)</span>
+                            <span style="color:#75715e">;; (beglis (cdr es) table))</span>
+                        <span style="color:#75715e">;; (meaning (car es) table)))))</span>
 
-    ;; (define (beglis es table)
-            ;; (let ((m (meaning (car es) table)))
-                ;; (if (null? (cdr es))
-                    ;; m
-                    ;; ((lambda (val)
-                            ;; (beglis (cdr es) table)) m))))
+    <span style="color:#75715e">;; (define (beglis es table)</span>
+            <span style="color:#75715e">;; (let ((m (meaning (car es) table)))</span>
+                <span style="color:#75715e">;; (if (null? (cdr es))</span>
+                    <span style="color:#75715e">;; m</span>
+                    <span style="color:#75715e">;; ((lambda (val)</span>
+                            <span style="color:#75715e">;; (beglis (cdr es) table)) m))))</span>
 
-    ;; (define (beglis es table)
-            ;; (let ((m (meaning (car es) table)))
-                ;; (if (null? (cdr es))
-                    ;; m
-                    ;; (let ((val m))
-                        ;; (beglis (cdr es) table)))))
+    <span style="color:#75715e">;; (define (beglis es table)</span>
+            <span style="color:#75715e">;; (let ((m (meaning (car es) table)))</span>
+                <span style="color:#75715e">;; (if (null? (cdr es))</span>
+                    <span style="color:#75715e">;; m</span>
+                    <span style="color:#75715e">;; (let ((val m))</span>
+                        <span style="color:#75715e">;; (beglis (cdr es) table)))))</span>
 
-    (define (beglis es table)
-     (let ((m (meaning (car es) table))
-           (d (cdr es)))
-      (if (null? d)
+    (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">beglis</span> es table)
+     (<span style="color:#66d9ef">let </span>((<span style="color:#a6e22e">m</span> (<span style="color:#a6e22e">meaning</span> (car es) table))
+           (<span style="color:#a6e22e">d</span> (cdr es)))
+      (<span style="color:#66d9ef">if </span>(null? d)
        m
-       (beglis d table))))
+       (<span style="color:#a6e22e">beglis</span> d table))))
 
-    ;; (define (box-all vals)
-            ;; (if (null? vals)
-                ;; '()
-                ;; (cons (box (car vals))
-                    ;; (box-all (cdr vals)))))
+    <span style="color:#75715e">;; (define (box-all vals)</span>
+            <span style="color:#75715e">;; (if (null? vals)</span>
+                <span style="color:#75715e">;; &#39;()</span>
+                <span style="color:#75715e">;; (cons (box (car vals))</span>
+                    <span style="color:#75715e">;; (box-all (cdr vals)))))</span>
 
-    ;; (define (box-all vals)
-            ;; (letrec
-                ;; ((rec
-                        ;; (lambda (vals acc)
-                            ;; (if (null? vals)
-                                ;; acc
-                                ;; (rec (cdr vals)
-                                    ;; (cons (box (car vals)) acc))))))
-                ;; (rec (reverse vals) '())))
+    <span style="color:#75715e">;; (define (box-all vals)</span>
+            <span style="color:#75715e">;; (letrec</span>
+                <span style="color:#75715e">;; ((rec</span>
+                        <span style="color:#75715e">;; (lambda (vals acc)</span>
+                            <span style="color:#75715e">;; (if (null? vals)</span>
+                                <span style="color:#75715e">;; acc</span>
+                                <span style="color:#75715e">;; (rec (cdr vals)</span>
+                                    <span style="color:#75715e">;; (cons (box (car vals)) acc))))))</span>
+                <span style="color:#75715e">;; (rec (reverse vals) &#39;())))</span>
 
-    (define (box-all vals)
-     (let loop ((vals (reverse vals))
-                (acc '()))
-      (if (null? vals)
+    (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">box-all</span> vals)
+     (<span style="color:#66d9ef">let </span>loop ((<span style="color:#a6e22e">vals</span> (reverse vals))
+                (<span style="color:#a6e22e">acc</span> <span style="color:#f92672">&#39;</span>()))
+      (<span style="color:#66d9ef">if </span>(null? vals)
        acc
-       (loop (cdr vals)
-        (cons (box (car vals)) acc)))))
+       (<span style="color:#a6e22e">loop</span> (cdr vals)
+        (cons (<span style="color:#a6e22e">box</span> (car vals)) acc)))))
 
-    (define (multi-extend names vals table)
-     (if (null? names)
+    (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">multi-extend</span> names vals table)
+     (<span style="color:#66d9ef">if </span>(null? names)
       table
-      (extend (car names)(car vals)
-       (multi-extend (cdr names)(cdr vals)
+      (<span style="color:#a6e22e">extend</span> (car names)(car vals)
+       (<span style="color:#a6e22e">multi-extend</span> (cdr names)(cdr vals)
         table))))
 
-    (define (*application e table)
-     ((meaning (function-of e) table)
-      (evlis (arguments-of e) table)))
+    (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">*application</span> e table)
+     ((<span style="color:#a6e22e">meaning</span> (<span style="color:#a6e22e">function-of</span> e) table)
+      (<span style="color:#a6e22e">evlis</span> (<span style="color:#a6e22e">arguments-of</span> e) table)))
 
-    ;; (define (evlis args table)
-            ;; (if (null? args)
-                ;; '()
-                ;; ((lambda (val)
-                        ;; (cons val
-                            ;; (evlis (cdr args) table)))
-                    ;; (meaning (car args) table))))
+    <span style="color:#75715e">;; (define (evlis args table)</span>
+            <span style="color:#75715e">;; (if (null? args)</span>
+                <span style="color:#75715e">;; &#39;()</span>
+                <span style="color:#75715e">;; ((lambda (val)</span>
+                        <span style="color:#75715e">;; (cons val</span>
+                            <span style="color:#75715e">;; (evlis (cdr args) table)))</span>
+                    <span style="color:#75715e">;; (meaning (car args) table))))</span>
 
-    ;; (define (evlis args table)
-            ;; (if (null? args)
-                ;; '()
-                ;; (cons (meaning (car args) table)
-                    ;; (evlis (cdr args) table))))
+    <span style="color:#75715e">;; (define (evlis args table)</span>
+            <span style="color:#75715e">;; (if (null? args)</span>
+                <span style="color:#75715e">;; &#39;()</span>
+                <span style="color:#75715e">;; (cons (meaning (car args) table)</span>
+                    <span style="color:#75715e">;; (evlis (cdr args) table))))</span>
 
-    ;; (define (evlis args table)
-            ;; (letrec
-                ;; ((rec
-                        ;; (lambda (args table acc)
-                            ;; (if (null? args)
-                                ;; acc
-                                ;; (rec (cdr args)
-                                    ;; table
-                                    ;; (cons (meaning (car args) table)
-                                        ;; acc))))))
-                ;; (rec (reverse args) table '())))
+    <span style="color:#75715e">;; (define (evlis args table)</span>
+            <span style="color:#75715e">;; (letrec</span>
+                <span style="color:#75715e">;; ((rec</span>
+                        <span style="color:#75715e">;; (lambda (args table acc)</span>
+                            <span style="color:#75715e">;; (if (null? args)</span>
+                                <span style="color:#75715e">;; acc</span>
+                                <span style="color:#75715e">;; (rec (cdr args)</span>
+                                    <span style="color:#75715e">;; table</span>
+                                    <span style="color:#75715e">;; (cons (meaning (car args) table)</span>
+                                        <span style="color:#75715e">;; acc))))))</span>
+                <span style="color:#75715e">;; (rec (reverse args) table &#39;())))</span>
 
-    (define (evlis args table)
-     (let loop ((args (reverse args))
-                (table table)
-                (acc '()))
-      (if (null? args)
+    (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">evlis</span> args table)
+     (<span style="color:#66d9ef">let </span>loop ((<span style="color:#a6e22e">args</span> (reverse args))
+                (<span style="color:#a6e22e">table</span> table)
+                (<span style="color:#a6e22e">acc</span> <span style="color:#f92672">&#39;</span>()))
+      (<span style="color:#66d9ef">if </span>(null? args)
        acc
-       (loop (cdr args) table
-        (cons (meaning (car args) table)
+       (<span style="color:#a6e22e">loop</span> (cdr args) table
+        (cons (<span style="color:#a6e22e">meaning</span> (car args) table)
          acc)))))
 
-    (define (a-prim p)
-     (lambda (args-in-a-list)
-      (p (car args-in-a-list))))
+    (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">a-prim</span> p)
+     (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">args-in-a-list</span>)
+      (<span style="color:#a6e22e">p</span> (car args-in-a-list))))
 
-    (define (b-prim p)
-     (lambda (args-in-a-list)
-      (p (car args-in-a-list)
+    (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">b-prim</span> p)
+     (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">args-in-a-list</span>)
+      (<span style="color:#a6e22e">p</span> (car args-in-a-list)
        (cadr args-in-a-list))))
 
-(define (*const e table)
- (cond
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">*const</span> e table)
+ (<span style="color:#a6e22e">cond</span>
   ((number? e) e)
-  ((eq? e #t) #t)
-  ((eq? e #f) #f)
-  ((eq? e 'cons)(b-prim cons))
-  ((eq? e 'car )(a-prim car))
-  ((eq? e 'cdr)(a-prim cdr))
-  ((eq? e 'eq?)(b-prim eq?))
-  ((eq? e 'atom?)(a-prim atom?))
-  ((eq? e 'null?)(a-prim null?))
-  ((eq? e 'zero?)(a-prim zero?))
-  ((eq? e 'add1)(a-prim add1))
-  ((eq? e 'sub1)(a-prim sub1))
-  ((eq? e 'number)(a-prim number?))))
+  ((eq? e <span style="color:#66d9ef">#t</span>) <span style="color:#66d9ef">#t</span>)
+  ((eq? e <span style="color:#66d9ef">#f</span>) <span style="color:#66d9ef">#f</span>)
+  ((eq? e <span style="color:#e6db74">&#39;cons</span>)(<span style="color:#a6e22e">b-prim</span> cons))
+  ((eq? e <span style="color:#e6db74">&#39;car</span> )(<span style="color:#a6e22e">a-prim</span> car))
+  ((eq? e <span style="color:#e6db74">&#39;cdr</span>)(<span style="color:#a6e22e">a-prim</span> cdr))
+  ((eq? e <span style="color:#e6db74">&#39;eq?</span>)(<span style="color:#a6e22e">b-prim</span> eq?))
+  ((eq? e <span style="color:#e6db74">&#39;atom?</span>)(<span style="color:#a6e22e">a-prim</span> atom?))
+  ((eq? e <span style="color:#e6db74">&#39;null?</span>)(<span style="color:#a6e22e">a-prim</span> null?))
+  ((eq? e <span style="color:#e6db74">&#39;zero?</span>)(<span style="color:#a6e22e">a-prim</span> zero?))
+  ((eq? e <span style="color:#e6db74">&#39;add1</span>)(<span style="color:#a6e22e">a-prim</span> add1))
+  ((eq? e <span style="color:#e6db74">&#39;sub1</span>)(<span style="color:#a6e22e">a-prim</span> sub1))
+  ((eq? e <span style="color:#e6db74">&#39;number</span>)(<span style="color:#a6e22e">a-prim</span> number?))))
 
-(define (*cond e table)
- (evcon (cond-lines-of e) table))
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">*cond</span> e table)
+ (<span style="color:#a6e22e">evcon</span> (<span style="color:#a6e22e">cond-lines-of</span> e) table))
 
-(define (evcon lines table)
- (cond
-  ((else? (question-of (car lines)))
-   (meaning (answer-of (car lines)) table))
-  ((meaning (question-of (car lines)) table)
-   (meaning (answer-of (car lines)) table))
-  (else (evcon (cdr lines) table))))
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">evcon</span> lines table)
+ (<span style="color:#a6e22e">cond</span>
+  ((<span style="color:#a6e22e">else?</span> (<span style="color:#a6e22e">question-of</span> (car lines)))
+   (<span style="color:#a6e22e">meaning</span> (<span style="color:#a6e22e">answer-of</span> (car lines)) table))
+  ((<span style="color:#a6e22e">meaning</span> (<span style="color:#a6e22e">question-of</span> (car lines)) table)
+   (<span style="color:#a6e22e">meaning</span> (<span style="color:#a6e22e">answer-of</span> (car lines)) table))
+  (<span style="color:#66d9ef">else </span>(<span style="color:#a6e22e">evcon</span> (cdr lines) table))))
 
-(define (*letcc e table)
- (let/cc skip
-  (beglis (ccbody-of e)
-   (extend (name-of e)
-    (box (a-prim skip) table)))))
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">*letcc</span> e table)
+ (<span style="color:#a6e22e">let/cc</span> skip
+  (<span style="color:#a6e22e">beglis</span> (<span style="color:#a6e22e">ccbody-of</span> e)
+   (<span style="color:#a6e22e">extend</span> (<span style="color:#a6e22e">name-of</span> e)
+    (<span style="color:#a6e22e">box</span> (<span style="color:#a6e22e">a-prim</span> skip) table)))))
 
-(define (value e)
- (let/cc the-end
-  (set! abort the-end)
-  (if (define? e)
-   (*define e)
-   (the-meaning e))))
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">value</span> e)
+ (<span style="color:#a6e22e">let/cc</span> the-end
+  (<span style="color:#66d9ef">set! </span>abort the-end)
+  (<span style="color:#66d9ef">if </span>(<span style="color:#a6e22e">define?</span> e)
+   (<span style="color:#a6e22e">*define</span> e)
+   (<span style="color:#a6e22e">the-meaning</span> e))))
 
-(define (the-empty-table name)
- (abort
-  (cons 'no-answer
-   (cons name '()))))
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">the-empty-table</span> name)
+ (<span style="color:#a6e22e">abort</span>
+  (cons <span style="color:#e6db74">&#39;no-answer</span>
+   (cons name <span style="color:#f92672">&#39;</span>()))))
 
-    (define (expression-to-action e)
-     (if (atom? e)
-      (atom-to-action e)
-      (list-to-action e)))
+    (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">expression-to-action</span> e)
+     (<span style="color:#66d9ef">if </span>(<span style="color:#a6e22e">atom?</span> e)
+      (<span style="color:#a6e22e">atom-to-action</span> e)
+      (<span style="color:#a6e22e">list-to-action</span> e)))
 
-(define (atom-to-action e)
- (cond
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">atom-to-action</span> e)
+ (<span style="color:#a6e22e">cond</span>
   ((number? e) *const)
-  ((eq? e #t) *const)
-  ((eq? e #f) *const)
-  ((eq? e 'cons) *const)
-  ((eq? e 'car) *const)
-  ((eq? e 'cdr) *const)
-  ((eq? e 'null?) *const)
-  ((eq? e 'eq?) *const)
-  ((eq? e 'atom?) *const)
-  ((eq? e 'zero?) *const)
-  ((eq? e 'add1) *const)
-  ((eq? e 'sub1) *const)
-  ((eq? e 'number?) *const)
-  (else *identifier)))
+  ((eq? e <span style="color:#66d9ef">#t</span>) *const)
+  ((eq? e <span style="color:#66d9ef">#f</span>) *const)
+  ((eq? e <span style="color:#e6db74">&#39;cons</span>) *const)
+  ((eq? e <span style="color:#e6db74">&#39;car</span>) *const)
+  ((eq? e <span style="color:#e6db74">&#39;cdr</span>) *const)
+  ((eq? e <span style="color:#e6db74">&#39;null?</span>) *const)
+  ((eq? e <span style="color:#e6db74">&#39;eq?</span>) *const)
+  ((eq? e <span style="color:#e6db74">&#39;atom?</span>) *const)
+  ((eq? e <span style="color:#e6db74">&#39;zero?</span>) *const)
+  ((eq? e <span style="color:#e6db74">&#39;add1</span>) *const)
+  ((eq? e <span style="color:#e6db74">&#39;sub1</span>) *const)
+  ((eq? e <span style="color:#e6db74">&#39;number?</span>) *const)
+  (<span style="color:#66d9ef">else </span>*identifier)))
 
-    (define (list-to-action e)
-     (let ((a (car e)))
-      (if (atom? a)
-       (let ((prim-of? (lambda (x) (eq? x a ))))
-        (cond
-         ((prim-of? 'quote) *quote)
-         ((prim-of? 'lambda) *lambda)
-         ((prim-of? 'letcc) *letcc)
-         ((prim-of? 'set!) *set)
-         ((prim-of? 'cond) *cond)
-         (else *application)))
+    (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">list-to-action</span> e)
+     (<span style="color:#66d9ef">let </span>((<span style="color:#a6e22e">a</span> (car e)))
+      (<span style="color:#66d9ef">if </span>(<span style="color:#a6e22e">atom?</span> a)
+       (<span style="color:#66d9ef">let </span>((<span style="color:#a6e22e">prim-of?</span> (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">x</span>) (eq? x a ))))
+        (<span style="color:#a6e22e">cond</span>
+         ((<span style="color:#a6e22e">prim-of?</span> <span style="color:#e6db74">&#39;quote</span>) *quote)
+         ((<span style="color:#a6e22e">prim-of?</span> <span style="color:#e6db74">&#39;lambda</span>) *lambda)
+         ((<span style="color:#a6e22e">prim-of?</span> <span style="color:#e6db74">&#39;letcc</span>) *letcc)
+         ((<span style="color:#a6e22e">prim-of?</span> <span style="color:#e6db74">&#39;set!</span>) *set)
+         ((<span style="color:#a6e22e">prim-of?</span> <span style="color:#e6db74">&#39;cond</span>) *cond)
+         (<span style="color:#66d9ef">else </span>*application)))
        *application)))
 
 
-(set! global-table (lambda (name)
-                    (the-empty-table name)))
-    (value (cons 'a 'b))
-(value (+ (- 3 2) 6))
+(<span style="color:#66d9ef">set! </span>global-table (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">name</span>)
+                    (<span style="color:#a6e22e">the-empty-table</span> name)))
+    (<span style="color:#a6e22e">value</span> (cons <span style="color:#e6db74">&#39;a</span> <span style="color:#e6db74">&#39;b</span>))
+(<span style="color:#a6e22e">value</span> (+ (- <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">2</span>) <span style="color:#ae81ff">6</span>))
 
 
-</code></pre>
-
-<h2 id="3">The CPS control struture</h2>
-
-<p>Here below is the method how to change the ordinary subroutine to the continuation passing style <a href="https://cgi.soic.indiana.edu/~c311/lib/exe/fetch.php?media=cps-notes.scm" target="_blank">Ref.</a>.</p>
-
+</code></pre></div><!-- raw HTML omitted -->
+<p>Here below is the method how to change the ordinary subroutine to the continuation passing style <a href="https://cgi.soic.indiana.edu/~c311/lib/exe/fetch.php?media=cps-notes.scm">Ref.</a>.</p>
 <ul>
-<li>First rule: whenever we see a lambda in the code we want to CPS, we have to add an argument, and then process the body<br /></li>
-<li>Second rule: &ldquo;Don&rsquo;t sweat the small stuff!&rdquo;</li>
+<li>First rule: whenever we see a lambda in the code we want to CPS, we have to add an argument, and then process the body</li>
+<li>Second rule: &ldquo;Don't sweat the small stuff!&rdquo;</li>
 </ul>
-
-<h3 id="3.1">how to add argument?</h3>
-
+<!-- raw HTML omitted -->
 <ul>
-<li><p>orignial style:</p>
-
-<pre><code class="language-scheme">(define rember8
-(lambda (ls)
-(cond
-  [(null? ls) '()]
-  [(= (car ls) 8) (cdr ls)]
-  [else (cons (car ls) (rember8 (cdr ls)))])))
-</code></pre></li>
-
-<li><p>incompleted cps style:</p>
-
-<pre><code class="language-scheme">(define rember8
-(lambda (ls k)
-(cond
-  [(null? ls) '()]
-  [(= (car ls) 8) (cdr ls)]
-  [else (cons (car ls) (rember8 (cdr ls)))])))
-</code></pre></li>
+<li>orignial style:</li>
 </ul>
-
-<h3 id="3.2">what is the small stuff?</h3>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">define </span>rember8
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">ls</span>)
+    (<span style="color:#a6e22e">cond</span>
+      [(null? ls) <span style="color:#f92672">&#39;</span>()]
+      [(= (car ls) <span style="color:#ae81ff">8</span>) (cdr ls)]
+      [<span style="color:#66d9ef">else </span>(cons (car ls) (<span style="color:#a6e22e">rember8</span> (cdr ls)))])))
+</code></pre></div><ul>
+<li>incompleted cps style:</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">define </span>rember8
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">ls</span> k)
+    (<span style="color:#a6e22e">cond</span>
+      [(null? ls) <span style="color:#f92672">&#39;</span>()]
+      [(= (car ls) <span style="color:#ae81ff">8</span>) (cdr ls)]
+      [<span style="color:#66d9ef">else </span>(cons (car ls) (<span style="color:#a6e22e">rember8</span> (cdr ls)))])))
+</code></pre></div><!-- raw HTML omitted -->
 <p>Small stuff is stuff we know will terminate right away.
-Don&rsquo;t sweat the small stuff if we know it will be evaluated.
-Don&rsquo;t sweat the small stuff if it <em>might</em> be evaluated, but instead
+Don't sweat the small stuff if we know it will be evaluated.
+Don't sweat the small stuff if it <em>might</em> be evaluated, but instead
 pass it to k.</p>
-
 <p>为了更好辨别，我们改为如下形式</p>
-
-<pre><code class="language-scheme">
-(define rember8
-  (lambda (ls k)
-    (cond
-      [(null? ls) (*k* '())]
-      [(= (car ls) 8) (*k* (cdr ls))]
-      [else (*rember8* (cdr ls) (lambda (x) (*k* (cons (car ls) x))))])))
-</code></pre>
-
-<p>凡是加上*号的，都代表者continuation的过程。
-    Why don&rsquo;t null?, =, car, cdr, and cons count? Because they&rsquo;re just
-    small stuff, and when we combine small stuff together in small ways,
-    the combination remains small.</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">
+(<span style="color:#66d9ef">define </span>rember8
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">ls</span> k)
+    (<span style="color:#a6e22e">cond</span>
+      [(null? ls) (<span style="color:#a6e22e">*k*</span> <span style="color:#f92672">&#39;</span>())]
+      [(= (car ls) <span style="color:#ae81ff">8</span>) (<span style="color:#a6e22e">*k*</span> (cdr ls))]
+      [<span style="color:#66d9ef">else </span>(<span style="color:#a6e22e">*rember8*</span> (cdr ls) (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">x</span>) (<span style="color:#a6e22e">*k*</span> (cons (car ls) x))))])))
+</code></pre></div><p>凡是加上*号的，都代表者continuation的过程。
+Why don't null?, =, car, cdr, and cons count? Because they're just
+small stuff, and when we combine small stuff together in small ways,
+the combination remains small.</p>
 <pre><code>Second, all arguments are small stuff. Yep, even the lambda in the
 else line, because lambda is *always* small stuff.
 </code></pre>
-
 <ul>
-<li><p>complete cps style:</p>
-
-<pre><code class="language-scheme">
-(define rember8
-(lambda (ls k)
-(cond
-  [(null? ls) (k '())]
-  [(= (car ls) 8) (k (cdr ls))]
-  [else (rember8 (cdr ls) (lambda (x) (k (cons (car ls) x)))])))
-</code></pre></li>
+<li>complete cps style:</li>
 </ul>
-
-<h2 id="4">how to evaluate or interpreter  a procedre?</h2>
-
-<h3 id="4.1">ordinary tracing</h3>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">
+(<span style="color:#66d9ef">define </span>rember8
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">ls</span> k)
+    (<span style="color:#a6e22e">cond</span>
+      [(null? ls) (<span style="color:#a6e22e">k</span> <span style="color:#f92672">&#39;</span>())]
+      [(= (car ls) <span style="color:#ae81ff">8</span>) (<span style="color:#a6e22e">k</span> (cdr ls))]
+      [<span style="color:#66d9ef">else </span>(<span style="color:#a6e22e">rember8</span> (cdr ls) (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">x</span>) (<span style="color:#a6e22e">k</span> (cons (car ls) x)))])))
+</code></pre></div><!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
 <p>we will develop a unimplemented language to do give an explanation to it.</p>
-
 <p>Here below is the main language(we can change it ,but now it is not the main cause.)</p>
-
-<pre><code class="language-scheme">
-;1 eval
-(define eval
-   (lambda (Exp Env )
- (cond 
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">
+<span style="color:#75715e">;1 eval</span>
+(<span style="color:#66d9ef">define </span>eval
+   (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">Exp</span> Env )
+ (<span style="color:#66d9ef">cond </span>
     ((number? Exp)  Exp)
-    ((symbol? Exp) (looking Exp Env))
-    ((eq? (car Exp) 'QUADE) (cadr Exp))
-    ((eq? (car Exp) 'lambda) 
-        (list 'Closure (cdr Exp) Env))
-    ((eq? (car Exp) 'Cond) 
-        （Evcond (cadr Exp） Env))
-    (else
+    ((symbol? Exp) (<span style="color:#a6e22e">looking</span> Exp Env))
+    ((eq? (car Exp) <span style="color:#e6db74">&#39;QUADE</span>) (cadr Exp))
+    ((eq? (car Exp) <span style="color:#e6db74">&#39;lambda</span>) 
+        (list <span style="color:#e6db74">&#39;Closure</span> (cdr Exp) Env))
+    ((eq? (car Exp) <span style="color:#e6db74">&#39;Cond</span>) 
+        <span style="color:#960050;background-color:#1e0010">（</span>Evcond (cadr Exp<span style="color:#960050;background-color:#1e0010">）</span> Env))
+    (<span style="color:#a6e22e">else</span>
         (apply  
            (eval (car Exp) Env)
-           (Evlist (cdr Exp) Env)))))) 
+           (<span style="color:#a6e22e">Evlist</span> (cdr Exp) Env)))))) 
 
-;2 apply
-(define apply
-   (lambda (PROC ARGS)
-     (cond 
-        ((primitive? PROC) 
-          (Apply-primitive Proc ARGS))
-        ((EQ? (car proc) 'closure)
-          (EVAL  (cadadr proc)
-            (Bind (caadr proc) 
+<span style="color:#75715e">;2 apply</span>
+(<span style="color:#66d9ef">define </span>apply
+   (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">PROC</span> ARGS)
+     (<span style="color:#66d9ef">cond </span>
+        ((<span style="color:#a6e22e">primitive?</span> PROC) 
+          (<span style="color:#a6e22e">Apply-primitive</span> Proc ARGS))
+        ((<span style="color:#a6e22e">EQ?</span> (car proc) <span style="color:#e6db74">&#39;closure</span>)
+          (<span style="color:#a6e22e">EVAL</span>  (cadadr proc)
+            (<span style="color:#a6e22e">Bind</span> (caadr proc) 
                 ARGS
-               (Caddr proc))))
-         (else error)))))
+               (<span style="color:#a6e22e">Caddr</span> proc))))
+         (<span style="color:#66d9ef">else </span>error)))))
 
-;;;Attention, primitvie?  apply-primitive  is not finished
+<span style="color:#75715e">;;;Attention, primitvie?  apply-primitive  is not finished</span>
 
-;3 Evlist
-(define Evlist
-  (lambda (l Env)
-    (cond 
-      ((eq? (car l) '()) '())
-      (else
+<span style="color:#75715e">;3 Evlist</span>
+(<span style="color:#66d9ef">define </span>Evlist
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">l</span> Env)
+    (<span style="color:#66d9ef">cond </span>
+      ((eq? (car l) <span style="color:#f92672">&#39;</span>()) <span style="color:#f92672">&#39;</span>())
+      (<span style="color:#a6e22e">else</span>
          (cons (eval (car l) Env)
                (eval (cdr l) Env))))))
 
-;4 Evcond
-(define Evcond
-   (lambda (clauses Env)
-     (cond
-        ((eq? clauses '()) '())
-        ((eq? (caar clauses) 'else) 
+<span style="color:#75715e">;4 Evcond</span>
+(<span style="color:#66d9ef">define </span>Evcond
+   (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">clauses</span> Env)
+     (<span style="color:#a6e22e">cond</span>
+        ((eq? clauses <span style="color:#f92672">&#39;</span>()) <span style="color:#f92672">&#39;</span>())
+        ((eq? (caar clauses) <span style="color:#e6db74">&#39;else</span>) 
             (eval (cadar clauses) Env))
-         ((false? (Eval (caar clauses) Env))
-            (Evcond (cdr clauses) Env))
-         (else
-            (Eval (cadar clauses) Env)))))
+         ((<span style="color:#a6e22e">false?</span> (<span style="color:#a6e22e">Eval</span> (caar clauses) Env))
+            (<span style="color:#a6e22e">Evcond</span> (cdr clauses) Env))
+         (<span style="color:#a6e22e">else</span>
+            (<span style="color:#a6e22e">Eval</span> (cadar clauses) Env)))))
 
-;;;Attention false? is not finished.
+<span style="color:#75715e">;;;Attention false? is not finished.</span>
 
-;5 looking
-(define looking
-   (lambda (sym env)
-     (cond 
-       ((eq? env '()) (error 'unbound-value))
-       (else
-         ((lambda (vcell)
-             (cond 
-               ((eq? vcell '())
-                  (looking sym (cdr env)))
-               (else (cdr vcell))))
+<span style="color:#75715e">;5 looking</span>
+(<span style="color:#66d9ef">define </span>looking
+   (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">sym</span> env)
+     (<span style="color:#66d9ef">cond </span>
+       ((eq? env <span style="color:#f92672">&#39;</span>()) (<span style="color:#a6e22e">error</span> <span style="color:#e6db74">&#39;unbound-value</span>))
+       (<span style="color:#a6e22e">else</span>
+         ((<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">vcell</span>)
+             (<span style="color:#66d9ef">cond </span>
+               ((eq? vcell <span style="color:#f92672">&#39;</span>())
+                  (<span style="color:#a6e22e">looking</span> sym (cdr env)))
+               (<span style="color:#66d9ef">else </span>(cdr vcell))))
            (assq sym (car env)))))))
 
-;6 assq
-(define assq
-    (lambda (syms alist)
-       (cond
-         ((eq? alist '()) '())
+<span style="color:#75715e">;6 assq</span>
+(<span style="color:#66d9ef">define </span>assq
+    (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">syms</span> alist)
+       (<span style="color:#a6e22e">cond</span>
+         ((eq? alist <span style="color:#f92672">&#39;</span>()) <span style="color:#f92672">&#39;</span>())
          ((eq? syms (caar alist)) (car alist))
-         (else (assq syms (cdr alist))))))
+         (<span style="color:#66d9ef">else </span>(assq syms (cdr alist))))))
 
 
-;7 Bind
-(define Bind
-   (lambda (vars vals Env)
-     (cons (pair-up  vars vals) env)))
+<span style="color:#75715e">;7 Bind</span>
+(<span style="color:#66d9ef">define </span>Bind
+   (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">vars</span> vals Env)
+     (cons (<span style="color:#a6e22e">pair-up</span>  vars vals) env)))
 
-;8 Pair-up
-(define Pair-up
-   (lambda (vars vals)
-     (cond 
-        ((eq? vars '())
-            (cond 
-               ((eq? vals? '()) '())
-               (else (error 'Too-much-arguments))))
-         ((eq? vals '()) (error 'Too-few-arguments))
-         (else 
+<span style="color:#75715e">;8 Pair-up</span>
+(<span style="color:#66d9ef">define </span>Pair-up
+   (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">vars</span> vals)
+     (<span style="color:#66d9ef">cond </span>
+        ((eq? vars <span style="color:#f92672">&#39;</span>())
+            (<span style="color:#66d9ef">cond </span>
+               ((eq? vals? <span style="color:#f92672">&#39;</span>()) <span style="color:#f92672">&#39;</span>())
+               (<span style="color:#66d9ef">else </span>(<span style="color:#a6e22e">error</span> <span style="color:#e6db74">&#39;Too-much-arguments</span>))))
+         ((eq? vals <span style="color:#f92672">&#39;</span>()) (<span style="color:#a6e22e">error</span> <span style="color:#e6db74">&#39;Too-few-arguments</span>))
+         (<span style="color:#66d9ef">else </span>
            (cons (cons (car vars)  (car vals))
-                  (pair-up (cdr vars) (cdr vals))))))
-</code></pre>
-
-<p>So now we can use the language below to interpret the form</p>
-
+                  (<span style="color:#a6e22e">pair-up</span> (cdr vars) (cdr vals))))))
+</code></pre></div><p>So now we can use the language below to interpret the form</p>
 <pre><code>(eval '(((lambda (x）（lambda (y) (+  x y))) 3) 4) e0)
 
-</code></pre>
-
-<p>Good explanation begin(kernal part)：</p>
-
+</code></pre><p>Good explanation begin(kernal part)：</p>
 <pre><code>
 
 (apply (eval '((lambda (x) (lambda (y) (+ x y))） 3）  e0)
@@ -1403,12 +1362,8 @@ else line, because lambda is *always* small stuff.
 
 
 （+ 3 4） = 7
-</code></pre>
-
-<p>Finished~  Good ~  Well done.</p>
-
-<h3 id="4.2">cps tracing</h3>
-
+</code></pre><p>Finished~  Good ~  Well done.</p>
+<!-- raw HTML omitted -->
 <pre><code>Let's trace (rember8  (lambda (x) x))
 
 ls | k
@@ -1426,10 +1381,7 @@ Once we hit the 8, we apply (k (cdr ls)) where k is k3 and ls is '(8 3
 
 And we're done.
 
-</code></pre>
-
-<h2 id="5"> It is not the end</h2>
-
+</code></pre><!-- raw HTML omitted -->
 <p>how to change the procedure above? Leave to you.</p>
     </div>
  <div class="nav-links" style="padding:10;">
@@ -1834,7 +1786,7 @@ And we're done.
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

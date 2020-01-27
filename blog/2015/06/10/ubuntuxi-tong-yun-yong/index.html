@@ -29,12 +29,8 @@
     
   
   <meta name="description" content="ubuntu系统，比如你用
-
 tar -cvf \*.tar.gz 某个文件夹
-
-
 会发现可以多窗口地执行。其实这也说明了一点linux系统的多用户、多线程地开发系统、使用系统。
-
 shell-script是一个比较有用的工具，沟通着用户(user)和内核(kernel)之间,我的理解是shell就是一个解释器(从lisp的解释器的角度来说,相互学习从函数式过渡到命令式)">
 
   
@@ -125,12 +121,8 @@ shell-script是一个比较有用的工具，沟通着用户(user)和内核(kern
   <meta property="og:url" content="https://jueqingsizhe66.github.io/blog/2015/06/10/ubuntuxi-tong-yun-yong/">
   <meta property="og:title" content="ubuntu系统运用 | Macro Life">
   <meta property="og:description" content="ubuntu系统，比如你用
-
 tar -cvf \*.tar.gz 某个文件夹
-
-
 会发现可以多窗口地执行。其实这也说明了一点linux系统的多用户、多线程地开发系统、使用系统。
-
 shell-script是一个比较有用的工具，沟通着用户(user)和内核(kernel)之间,我的理解是shell就是一个解释器(从lisp的解释器的角度来说,相互学习从函数式过渡到命令式)"><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
   <meta property="twitter:image" content="https://jueqingsizhe66.github.io/img/icon-192.png"><meta property="og:locale" content="en-us">
   
@@ -577,23 +569,21 @@ shell-script是一个比较有用的工具，沟通着用户(user)和内核(kern
 
 
 
-<span class="article-metadata" >Reading time: 4 minutes and    49 seconds with 1063 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+<span class="article-metadata" >Reading time: 4 minutes and    52 seconds with 1074 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#1系统的git管理">1系统的Git管理</a></li>
-<li><a href="#2图形部分">2图形部分</a></li>
-<li><a href="#3语言部分">3语言部分</a></li>
-<li><a href="#4编辑部分">4编辑部分</a></li>
-<li><a href="#5配置部分">5配置部分</a>
-<ul>
-<li><a href="#补充一个操作">补充一个操作</a></li>
-<li><a href="#谨记一个失误">谨记一个失误</a></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#1git">1系统的Git管理</a></li>
+    <li><a href="#2">2图形部分</a></li>
+    <li><a href="#3">3语言部分</a></li>
+    <li><a href="#4">4编辑部分</a></li>
+    <li><a href="#5">5配置部分</a>
+      <ul>
+        <li><a href="#heading">补充一个操作</a></li>
+        <li><a href="#heading-1">谨记一个失误</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
     </aside>
   <div class="article-container">
@@ -601,18 +591,11 @@ shell-script是一个比较有用的工具，沟通着用户(user)和内核(kern
 
     <div class="article-style">
       <p>ubuntu系统，比如你用</p>
-
-<pre><code class="language-sh">tar -cvf \*.tar.gz 某个文件夹
-</code></pre>
-
-<p>会发现可以多窗口地执行。其实这也说明了一点linux系统的多用户、多线程地开发系统、使用系统。</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">tar -cvf <span style="color:#ae81ff">\*</span>.tar.gz 某个文件夹
+</code></pre></div><p>会发现可以多窗口地执行。其实这也说明了一点linux系统的多用户、多线程地开发系统、使用系统。</p>
 <p>shell-script是一个比较有用的工具，沟通着用户(user)和内核(kernel)之间,我的理解是shell就是一个解释器(从lisp的解释器的角度来说,相互学习从函数式过渡到命令式)</p>
-
 <p>所以我会尝试着把我所有需要安装的software(app),都囊括在一个sh文件当中，所以我重装的时候只需要一个批处理即可。</p>
-
 <p>下面我分成以下5个部分</p>
-
 <ul>
 <li>1系统的Git管理</li>
 <li>2图形部分</li>
@@ -620,100 +603,70 @@ shell-script是一个比较有用的工具，沟通着用户(user)和内核(kern
 <li>4编辑部分</li>
 <li>5配置部分</li>
 </ul>
-
 <p>一一写上我会执行的操作，当然这些程序组合成为我自己使用的linux系统。方便我和linux的内核进行交流。</p>
+<h2 id="1git">1系统的Git管理</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">apt-get install git,gitk,git-doc <span style="color:#75715e">#rememeber how to configure</span>
+apt-get install git-flow <span style="color:#75715e">#升级版的管理</span>
 
-<h2 id="1系统的git管理">1系统的Git管理</h2>
-
-<pre><code class="language-sh">apt-get install git,gitk,git-doc #rememeber how to configure
-apt-get install git-flow #升级版的管理
-
-git config --global user.name &quot;ye zhaoliang&quot;
-git config --global user.email &quot;zhaoturkkey@163.com&quot;
-ssh-keygen -t rsa -C &quot;zhaoturkkey@163.com&quot;
-</code></pre>
-
-<h2 id="2图形部分">2图形部分</h2>
-
+git config --global user.name <span style="color:#e6db74">&#34;ye zhaoliang&#34;</span>
+git config --global user.email <span style="color:#e6db74">&#34;zhaoturkkey@163.com&#34;</span>
+ssh-keygen -t rsa -C <span style="color:#e6db74">&#34;zhaoturkkey@163.com&#34;</span>
+</code></pre></div><h2 id="2">2图形部分</h2>
 <p>有时候你希望把你的相关数据打印成图片，这样方便交流</p>
-
-<pre><code class="language-sh">apt-get install gnuplot
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">apt-get install gnuplot
 apt-get install graphviz
-</code></pre>
-
-<h2 id="3语言部分">3语言部分</h2>
-
-<pre><code class="language-sh">apt-get install gfortran 
+</code></pre></div><h2 id="3">3语言部分</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">apt-get install gfortran 
 apt-get install gcc 
 apt-get install python
-# drracket
-# haskell
-</code></pre>
-
-<h2 id="4编辑部分">4编辑部分</h2>
-
-<pre><code class="language-sh">apt-get install vim   #rememeber how to configure
+<span style="color:#75715e"># drracket</span>
+<span style="color:#75715e"># haskell</span>
+</code></pre></div><h2 id="4">4编辑部分</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">apt-get install vim   <span style="color:#75715e">#rememeber how to configure</span>
 apt-get install vim-gtk
 
 apt-get install emacs
-</code></pre>
-
-<h2 id="5配置部分">5配置部分</h2>
-
+</code></pre></div><h2 id="5">5配置部分</h2>
 <p>在ubuntu管理系统经常会需要配置用户目录下的dotfiles，
 比如登录相关文件.bashrc,.bash_logout,.bash_profile.
 我会尝试着把我相关需要的文件夹备份在一个tar包。</p>
-
-<pre><code class="language-sh">tar -xvf ./bash-it.tar.gz -C ~ # remember vcprompt
-tar -xvf ./vim.tar.gz -C ~ # remember vim :BundleInstall
-</code></pre>
-
-<p>#结论
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">tar -xvf ./bash-it.tar.gz -C ~ <span style="color:#75715e"># remember vcprompt</span>
+tar -xvf ./vim.tar.gz -C ~ <span style="color:#75715e"># remember vim :BundleInstall</span>
+</code></pre></div><p>#结论
 通过上面五个部分，无法体现我使用linux的基本感觉</p>
-
-<pre><code class="language-sh">recur()
-{
- 查找(进入某个目录)
- 判断(If,case)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">recur<span style="color:#f92672">(</span><span style="color:#f92672">)</span>
+<span style="color:#f92672">{</span>
+ 查找<span style="color:#f92672">(</span>进入某个目录<span style="color:#f92672">)</span>
+ 判断<span style="color:#f92672">(</span>If,case<span style="color:#f92672">)</span>
  修改（配置 export 设置环境变量）
  recur
-}
-</code></pre>
-
-<p>cfaj写的<shell-script:>和<pro-bash-programming>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>cfaj写的<a href="shell-script:">shell-script:</a>和<!-- raw HTML omitted -->
 主要教会我们的是我使用下划线新建一个临时函数，并使用下划线函数的大写字母来表征函数的返回值。然后使用${}变量引用来实现
 版本号的截取并使用case进行分类选择，还有比如不同的系统的case选择。</p>
-
-<h3 id="补充一个操作">补充一个操作</h3>
-
+<h3 id="heading">补充一个操作</h3>
 <p>如果你想要使得子程序可以掉哦你个函数，必须使用export命令导出，类似于变量</p>
-
-<pre><code class="language-sh">
-function func()
-{
-    echo &quot;导出函数&quot;
-    }
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">
+<span style="color:#66d9ef">function</span> func<span style="color:#f92672">(</span><span style="color:#f92672">)</span>
+<span style="color:#f92672">{</span>
+    echo <span style="color:#e6db74">&#34;导出函数&#34;</span>
+    <span style="color:#f92672">}</span>
 
 export -f func
-# 使用export -f 导出函数，只用于bash
-# 使用export  DATE  等，导出系统变量
+<span style="color:#75715e"># 使用export -f 导出函数，只用于bash</span>
+<span style="color:#75715e"># 使用export  DATE  等，导出系统变量</span>
 
-</code></pre>
-
-<p>只有经过这样你的func才变成公有化。当然你也可以把脚本添加到path路径中。</p>
-
-<h3 id="谨记一个失误">谨记一个失误</h3>
-
+</code></pre></div><p>只有经过这样你的func才变成公有化。当然你也可以把脚本添加到path路径中。</p>
+<h3 id="heading-1">谨记一个失误</h3>
 <p>无论是使用tar -cvf 打包，还是生成某个程序等，一定要检查一遍，是否能够运行，
 当时就确认你的操作无误，否则后来会后悔(曾经打包了一个系统 发现都不能用了！
 而那个系统也被我删掉了，可见我有多懊恼)</p>
-
-<pre><code class="language-sh">tar: 跳转到下一个头
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">tar: 跳转到下一个头
 tar: 由于前次错误，将以上次的错误状态退出
 
 当然有人说看看是不是需要使用tar -zxvf 而不是tar -xvf
 我说我压缩的时候根本就没有用gzip，当然我也试了没效果，后来都删掉了。
-</code></pre>
+</code></pre></div>
     </div>
  <div class="nav-links" style="padding:10;">
         
@@ -1117,7 +1070,7 @@ tar: 由于前次错误，将以上次的错误状态退出
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

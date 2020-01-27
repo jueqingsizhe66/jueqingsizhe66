@@ -563,496 +563,438 @@
 
 
 
-<span class="article-metadata" >Reading time: 32 minutes and    45 seconds with 7205 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+<span class="article-metadata" >Reading time: 32 minutes and    28 seconds with 7145 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
-        
+        <nav id="TableOfContents"></nav>
     </aside>
   <div class="article-container">
 
 
     <div class="article-style">
       <p>一、IO基础
-        1.File在Java中，既可以表示文件，也可以表示目录。可以通过File对象来判定文件是否可读，可写，存在等。
-        2.File对象的mkdirs()推荐使用这个方法，此方法可以创建多层次的目录。而mkdir()只能一层一层创建。
-        3.File的createNewfile()是创建的文件。
-        4.File的delete()删除的File的构造函数String的那最后的一级，如果是文件，可以删除。如果是目录，需要这个目录是空的才能够删除。
-        5.File的listFiles()返回的是File构造函数指定路径下的所有File对象，包括了目录，也包括了文件。
-        6.File的静态方法，listRoots()可以获取所有的盘符。
-        7.OutputStream和InputStream都是字节流。
-        8.以后对于流的关闭等操作，还是使用JDK1.6的形式。1.7的怕以后公司不用。
-        9.NullPointerException是空指针异常。
-        10.当通过InputStream的read()方法读取值的时候他是一个byte一个byte的读取的，所以对于汉字读取会出现乱码。
-        11.java中数字是1个byte，汉字和汉字标点是2个byte。
-        12.可以通过System.currentTimMillis()来获取1970年1月1日到现在的毫秒数。
-        13.在Java中，字节流的读取推荐使用read方法，对于read方法，是把一个流的内容读取到byte[] 这种缓冲区中。且如果读取到了最后，返回值是-1.C#是0.所以如果使用do-while需要判定下！
-        14.缓冲区也不是越大越好！一般来说1M就够了！1024*1024
-        15.closeable为哪些可以关闭流的接口。所以封装finally中的close方法的时候，可以使用closeable的多态来表示完成。
-        16.对于output流，不用写创建一个File。会自动覆盖。
-        17.对于InputStream每次读取的是一个byte，就是一个byte一个byte的读，本质来说，其实是非常费时间的。
-        18.FileInputStream在read到最后返回值是-1.如果不是-1的话，那么返回值为int。int代表的是ASCII(?)的char。所以强制转成char就可以获取汉字。
-        19.InputStream在读取汉字的时候，内部是在做判定的，本质来说他也是一个byte一个byte的在读，但是没读取一个byte，他会判定是否是中文特征码，如果是那么会在读下一个byte。合起来返回一个char。
-        20.为了规避乱码问题，用什么编码来写，就用什么编码来读。
-        21.ANSI编码不是一种真正意义上的编码，而是根据不同的操作系统来设定不同的编码。就是default编码。
-        22.关于字符串编码的设置是在InputStreamReader或者OutputStreamWriter中。
-        23.在关闭流的时候，推荐从外到内依次关闭。
-        24.BufferedReader读取到最后，返回时是null。
-        25.获取默认编码的2个方法 System.getProperty(&ldquo;file.encoding&rdquo;)  还有一个是 Charset.defaultCharset().toString()</p>
-
-<ol>
+1.File在Java中，既可以表示文件，也可以表示目录。可以通过File对象来判定文件是否可读，可写，存在等。
+2.File对象的mkdirs()推荐使用这个方法，此方法可以创建多层次的目录。而mkdir()只能一层一层创建。
+3.File的createNewfile()是创建的文件。
+4.File的delete()删除的File的构造函数String的那最后的一级，如果是文件，可以删除。如果是目录，需要这个目录是空的才能够删除。
+5.File的listFiles()返回的是File构造函数指定路径下的所有File对象，包括了目录，也包括了文件。
+6.File的静态方法，listRoots()可以获取所有的盘符。
+7.OutputStream和InputStream都是字节流。
+8.以后对于流的关闭等操作，还是使用JDK1.6的形式。1.7的怕以后公司不用。
+9.NullPointerException是空指针异常。
+10.当通过InputStream的read()方法读取值的时候他是一个byte一个byte的读取的，所以对于汉字读取会出现乱码。
+11.java中数字是1个byte，汉字和汉字标点是2个byte。
+12.可以通过System.currentTimMillis()来获取1970年1月1日到现在的毫秒数。
+13.在Java中，字节流的读取推荐使用read方法，对于read方法，是把一个流的内容读取到byte[] 这种缓冲区中。且如果读取到了最后，返回值是-1.C#是0.所以如果使用do-while需要判定下！
+14.缓冲区也不是越大越好！一般来说1M就够了！1024*1024
+15.closeable为哪些可以关闭流的接口。所以封装finally中的close方法的时候，可以使用closeable的多态来表示完成。
+16.对于output流，不用写创建一个File。会自动覆盖。
+17.对于InputStream每次读取的是一个byte，就是一个byte一个byte的读，本质来说，其实是非常费时间的。
+18.FileInputStream在read到最后返回值是-1.如果不是-1的话，那么返回值为int。int代表的是ASCII(?)的char。所以强制转成char就可以获取汉字。
+19.InputStream在读取汉字的时候，内部是在做判定的，本质来说他也是一个byte一个byte的在读，但是没读取一个byte，他会判定是否是中文特征码，如果是那么会在读下一个byte。合起来返回一个char。
+20.为了规避乱码问题，用什么编码来写，就用什么编码来读。
+21.ANSI编码不是一种真正意义上的编码，而是根据不同的操作系统来设定不同的编码。就是default编码。
+22.关于字符串编码的设置是在InputStreamReader或者OutputStreamWriter中。
+23.在关闭流的时候，推荐从外到内依次关闭。
+24.BufferedReader读取到最后，返回时是null。
+25.获取默认编码的2个方法 System.getProperty(&ldquo;file.encoding&rdquo;)  还有一个是 Charset.defaultCharset().toString()</p>
+<ol start="26">
 <li>文件夹的遍历  可以通过listFiles(), 如果是文件夹，则递归调用该定义方法
 27.BufferedReader 需要一个Reader对象充当其参数，一般是InputStreamReader, 而InputStreamReader又需要一个InputStream（抽象方法不能new处对象）类的对象，一般采用InputStream的子类FileInputStream，类似的BufferedWriter
 28.通过创建Properties对象可以载入项目的配置文件。一般有两种方法载入文件 ，1是 直接通过项目文件载入 调用当前类的getClass方法，并接着调用getResourceAsStream载入文件流  ，通过Properites对象的load方法载入 。（得写好b.properties的路径  com/rupeng/b.properties 表示在com.rupeng这个包下的b.properties文件） 2 直接通过FileInputStream创建一个文件流，然后再用Properties对象的load方法载入。两者区别未知，效果一样。</li>
 </ol>
-
 <p>CommonsIO的学习
 统一说明：
 import org.apache.commons.io.IOUtils; // 加载类库
 import org.apache.commons.io.FilesUtils; // 加载类库</p>
-
 <p>1： IOUtils
 案例1：从一个URL中读取字节并打印
 主要代码：</p>
-
-<pre><code class="language-java">InputStream in = null;
-                try
-                {
-                        in = new URL(&quot;http://www.rupeng.com&quot;).openStream();
-                        System.out.println(IOUtils.toString(in,&quot;utf-8&quot;));
-                } catch (MalformedURLException e)
-                {
-                        // TODO 自动生成的 catch 块
-                        
-                } catch (IOException e)
-                {
-                        // TODO 自动生成的 catch 块
-                        e.printStackTrace();
-                }finally
-                {
-                        IOUtils.closeQuietly(in);
-                }
-</code></pre>
-
-<p>在大多数的运用领域，上述的CommonsIO操作是非常常见的，并且会节省很多的时间。对于工具代码，比如IOUtils,灵活性和速度
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">InputStream in <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+                <span style="color:#66d9ef">try</span>
+                <span style="color:#f92672">{</span>
+                        in <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> URL<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;http://www.rupeng.com&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">.</span><span style="color:#a6e22e">openStream</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>IOUtils<span style="color:#f92672">.</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(</span>in<span style="color:#f92672">,</span><span style="color:#e6db74">&#34;utf-8&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>MalformedURLException e<span style="color:#f92672">)</span>
+                <span style="color:#f92672">{</span>
+                        <span style="color:#75715e">// TODO 自动生成的 catch 块
+</span><span style="color:#75715e"></span>                        
+                <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>IOException e<span style="color:#f92672">)</span>
+                <span style="color:#f92672">{</span>
+                        <span style="color:#75715e">// TODO 自动生成的 catch 块
+</span><span style="color:#75715e"></span>                        e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span><span style="color:#66d9ef">finally</span>
+                <span style="color:#f92672">{</span>
+                        IOUtils<span style="color:#f92672">.</span><span style="color:#a6e22e">closeQuietly</span><span style="color:#f92672">(</span>in<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span>
+</code></pre></div><p>在大多数的运用领域，上述的CommonsIO操作是非常常见的，并且会节省很多的时间。对于工具代码，比如IOUtils,灵活性和速度
 占据主要的作用。然而，在使用过程中也需要注意他的缺点，比如如果使用上述的技术读取一个1GB的大文件，将导致产生一个
 1GB的字符串对象。</p>
-
 <p>案例2:复制文件
 主要代码</p>
-
-<pre><code class="language-java">                try
-                {
-                        fis = new FileInputStream(&quot;e://a.txt&quot;);
-                        fos = new FileOutputStream(&quot;e://acopyByStream.txt&quot;);
-                        IOUtils.copy(fis, fos); // 把e盘下的a.txt复制到e://的acopyByStream.txt
-                }
-</code></pre>
-
-<p>2：FileUtils
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">                <span style="color:#66d9ef">try</span>
+                <span style="color:#f92672">{</span>
+                        fis <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> FileInputStream<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;e://a.txt&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        fos <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> FileOutputStream<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;e://acopyByStream.txt&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        IOUtils<span style="color:#f92672">.</span><span style="color:#a6e22e">copy</span><span style="color:#f92672">(</span>fis<span style="color:#f92672">,</span> fos<span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">// 把e盘下的a.txt复制到e://的acopyByStream.txt
+</span><span style="color:#75715e"></span>                <span style="color:#f92672">}</span>
+</code></pre></div><p>2：FileUtils
 案例1：复制url内容链接到文件
 主要代码</p>
-
-<pre><code class="language-java">URL url1 = null;
-                File newFile = new File(&quot;e://rupeng.html&quot;);
-                try
-                {
-                        url1  = new URL(&quot;http://www.rupeng.com&quot;);
-                        FileUtils.copyURLToFile(url1, newFile); //把如鹏网首页写入e盘下的rupeng.html
-                }
-</code></pre>
-
-<p>案例2：复制文本、文件夹
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">URL url1 <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+                File newFile <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> File<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;e://rupeng.html&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#66d9ef">try</span>
+                <span style="color:#f92672">{</span>
+                        url1  <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> URL<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;http://www.rupeng.com&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        FileUtils<span style="color:#f92672">.</span><span style="color:#a6e22e">copyURLToFile</span><span style="color:#f92672">(</span>url1<span style="color:#f92672">,</span> newFile<span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">//把如鹏网首页写入e盘下的rupeng.html
+</span><span style="color:#75715e"></span>                <span style="color:#f92672">}</span>
+</code></pre></div><p>案例2：复制文本、文件夹
 主要代码：</p>
-
-<pre><code class="language-java">                // TODO 自动生成的方法存根
-                File input = new File(&quot;e://a.txt&quot;);
-                File output = new File(&quot;e://acopy.txt&quot;);
-                File Input1 = new File(&quot;e://a&quot;);  //文件夹
-                File Output1 = new File(&quot;e://TestFile&quot;);//文件夹
-                String loveWord = &quot;love you,my girl&quot;;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">                <span style="color:#75715e">// TODO 自动生成的方法存根
+</span><span style="color:#75715e"></span>                File input <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> File<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;e://a.txt&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                File output <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> File<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;e://acopy.txt&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                File Input1 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> File<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;e://a&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>  <span style="color:#75715e">//文件夹
+</span><span style="color:#75715e"></span>                File Output1 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> File<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;e://TestFile&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span><span style="color:#75715e">//文件夹
+</span><span style="color:#75715e"></span>                String loveWord <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;love you,my girl&#34;</span><span style="color:#f92672">;</span>
                 
-                try
-                {
-                        //FileUtils.cleanDirectory(readyToDeleteDir); // 保留文件夹
-                        System.out.println(&quot;目录e://a的大小：&quot;+FileUtils.sizeOfDirectory(readyToDeleteDir)/1024.0+&quot;KB&quot;);
-                        //FileUtils.deleteDirectory(readyToDeleteDir); // 连文件夹多没有
-                        FileUtils.copyFile(input, output);  //复制文件
-                        FileUtils.copyDirectory(Input1, Output1); //复制文件夹
-                        FileUtils.copyFileToDirectory(input, Output1); //复制文件到文件夹
-                        FileUtils.writeStringToFile(output, loveWord, true); // 追加写入
-                }
-</code></pre>
-
-<p>IOUtils是采用流方式进行复制，FileUtils把文本文件作为参数（省去中间流的创建，估计有）</p>
-
+                <span style="color:#66d9ef">try</span>
+                <span style="color:#f92672">{</span>
+                        <span style="color:#75715e">//FileUtils.cleanDirectory(readyToDeleteDir); // 保留文件夹
+</span><span style="color:#75715e"></span>                        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;目录e://a的大小：&#34;</span><span style="color:#f92672">+</span>FileUtils<span style="color:#f92672">.</span><span style="color:#a6e22e">sizeOfDirectory</span><span style="color:#f92672">(</span>readyToDeleteDir<span style="color:#f92672">)</span><span style="color:#f92672">/</span>1024<span style="color:#f92672">.</span><span style="color:#a6e22e">0</span><span style="color:#f92672">+</span><span style="color:#e6db74">&#34;KB&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        <span style="color:#75715e">//FileUtils.deleteDirectory(readyToDeleteDir); // 连文件夹多没有
+</span><span style="color:#75715e"></span>                        FileUtils<span style="color:#f92672">.</span><span style="color:#a6e22e">copyFile</span><span style="color:#f92672">(</span>input<span style="color:#f92672">,</span> output<span style="color:#f92672">)</span><span style="color:#f92672">;</span>  <span style="color:#75715e">//复制文件
+</span><span style="color:#75715e"></span>                        FileUtils<span style="color:#f92672">.</span><span style="color:#a6e22e">copyDirectory</span><span style="color:#f92672">(</span>Input1<span style="color:#f92672">,</span> Output1<span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">//复制文件夹
+</span><span style="color:#75715e"></span>                        FileUtils<span style="color:#f92672">.</span><span style="color:#a6e22e">copyFileToDirectory</span><span style="color:#f92672">(</span>input<span style="color:#f92672">,</span> Output1<span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">//复制文件到文件夹
+</span><span style="color:#75715e"></span>                        FileUtils<span style="color:#f92672">.</span><span style="color:#a6e22e">writeStringToFile</span><span style="color:#f92672">(</span>output<span style="color:#f92672">,</span> loveWord<span style="color:#f92672">,</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">// 追加写入
+</span><span style="color:#75715e"></span>                <span style="color:#f92672">}</span>
+</code></pre></div><p>IOUtils是采用流方式进行复制，FileUtils把文本文件作为参数（省去中间流的创建，估计有）</p>
 <p>3：Directory-walker
 DirectoryWalker 是一个抽象类，无法直接创建对象。通过创建一个继承类，并实现类中的抽象方法。
 案例1：递归删除某个文件夹下的文件
 全部代码：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">/**
+</span><span style="color:#75715e">* @author 叶昭良
+</span><span style="color:#75715e">*
+</span><span style="color:#75715e">*/</span>
+<span style="color:#f92672">import</span> java.io.*<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> java.util.ArrayList<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> java.util.Collection<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> java.util.Iterator<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> java.util.List<span style="color:#f92672">;</span>
 
-<pre><code class="language-java">/**
-* @author 叶昭良
-*
-*/
-import java.io.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
+<span style="color:#f92672">import</span> org.apache.commons.io.DirectoryWalker<span style="color:#f92672">;</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TestCommonIODiretoryWalk</span> <span style="color:#66d9ef">extends</span> DirectoryWalker
+<span style="color:#f92672">{</span>
 
-import org.apache.commons.io.DirectoryWalker;
-public class TestCommonIODiretoryWalk extends DirectoryWalker
-{
-
-        /**
-         * @param args
-         */
-        public TestCommonIODiretoryWalk() 
-        {
-                     super();
-    }
-        public List reName(File startDirectory) 
-        {
-                List results = new ArrayList();
-                try
-                {
-                        walk(startDirectory,results        );
-                } catch (IOException e)
-                {
-                        // TODO 自动生成的 catch 块
-                        e.printStackTrace();
-                }
-                return results;
-        }
+        <span style="color:#75715e">/**
+</span><span style="color:#75715e">         * @param args
+</span><span style="color:#75715e">         */</span>
+        <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">TestCommonIODiretoryWalk</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> 
+        <span style="color:#f92672">{</span>
+                     <span style="color:#66d9ef">super</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">public</span> List <span style="color:#a6e22e">reName</span><span style="color:#f92672">(</span>File startDirectory<span style="color:#f92672">)</span> 
+        <span style="color:#f92672">{</span>
+                List results <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#66d9ef">try</span>
+                <span style="color:#f92672">{</span>
+                        walk<span style="color:#f92672">(</span>startDirectory<span style="color:#f92672">,</span>results        <span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>IOException e<span style="color:#f92672">)</span>
+                <span style="color:#f92672">{</span>
+                        <span style="color:#75715e">// TODO 自动生成的 catch 块
+</span><span style="color:#75715e"></span>                        e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span>
+                <span style="color:#66d9ef">return</span> results<span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
         
-        protected boolean handleDirectory(File directory,int depth,Collection results)
-        {
-                //save.svn directories and then skip 不会删除.svn文件夹下的任何信息
-                if(&quot;fasf&quot;.equals(directory.getName())) // 如果你想要保存某个文件夹
-                                                        //就添加elseif即可！！当然文件架构还在
-                {
-                        directory.delete();
-                        return false;
-                }else
-                {
-                        return true;
-                }
-        }
+        <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">handleDirectory</span><span style="color:#f92672">(</span>File directory<span style="color:#f92672">,</span><span style="color:#66d9ef">int</span> depth<span style="color:#f92672">,</span>Collection results<span style="color:#f92672">)</span>
+        <span style="color:#f92672">{</span>
+                <span style="color:#75715e">//save.svn directories and then skip 不会删除.svn文件夹下的任何信息
+</span><span style="color:#75715e"></span>                <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;fasf&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span>directory<span style="color:#f92672">.</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span> <span style="color:#75715e">// 如果你想要保存某个文件夹
+</span><span style="color:#75715e"></span>                                                        <span style="color:#75715e">//就添加elseif即可！！当然文件架构还在
+</span><span style="color:#75715e"></span>                <span style="color:#f92672">{</span>
+                        directory<span style="color:#f92672">.</span><span style="color:#a6e22e">delete</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span><span style="color:#66d9ef">else</span>
+                <span style="color:#f92672">{</span>
+                        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span>
         
-        protected void handleFile(File file,int depth, Collection results)
-        {
-                file.delete();
-                results.add(file);
-        }
-        // 使用Directory Walker来遍历一个目录并进行相应操作步骤如下
-        // 1:创建一个继承DirectoryWalker的类，并在构造函数调用super()
-        // 2:定义一个业务入口方法，比如clean，这个方法调用walk方法
-        // 3:重写handleDiretory方法  提供相应的业务逻辑
-        // 4:重写handleFile方法，提供相应处理逻辑
-        
-        // 其中最为关键的是walk方法，该方法制定入口路径，
-        // 并提供一个用于接受处理结构的参数。
-        // 在walk方法的内部：针对目录对象调用handleDirectory
-        //                       文件对象调用handleFile
-        public static void main(String[] args)
-        {
-                // TODO 自动生成的方法存根
-                TestCommonIODiretoryWalk dw = new TestCommonIODiretoryWalk() ;
-                List l1 = dw.reName(new File(&quot;e://b&quot;));
-                Iterator it = l1.iterator();
-                while(it.hasNext())
-                {
-                        System.out.println(it.next());
-                }
-        }
+        <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">handleFile</span><span style="color:#f92672">(</span>File file<span style="color:#f92672">,</span><span style="color:#66d9ef">int</span> depth<span style="color:#f92672">,</span> Collection results<span style="color:#f92672">)</span>
+        <span style="color:#f92672">{</span>
+                file<span style="color:#f92672">.</span><span style="color:#a6e22e">delete</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                results<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span>file<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#75715e">// 使用Directory Walker来遍历一个目录并进行相应操作步骤如下
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// 1:创建一个继承DirectoryWalker的类，并在构造函数调用super()
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// 2:定义一个业务入口方法，比如clean，这个方法调用walk方法
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// 3:重写handleDiretory方法  提供相应的业务逻辑
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// 4:重写handleFile方法，提供相应处理逻辑
+</span><span style="color:#75715e"></span>        
+        <span style="color:#75715e">// 其中最为关键的是walk方法，该方法制定入口路径，
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// 并提供一个用于接受处理结构的参数。
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// 在walk方法的内部：针对目录对象调用handleDirectory
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//                       文件对象调用handleFile
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> args<span style="color:#f92672">)</span>
+        <span style="color:#f92672">{</span>
+                <span style="color:#75715e">// TODO 自动生成的方法存根
+</span><span style="color:#75715e"></span>                TestCommonIODiretoryWalk dw <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> TestCommonIODiretoryWalk<span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">;</span>
+                List l1 <span style="color:#f92672">=</span> dw<span style="color:#f92672">.</span><span style="color:#a6e22e">reName</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> File<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;e://b&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                Iterator it <span style="color:#f92672">=</span> l1<span style="color:#f92672">.</span><span style="color:#a6e22e">iterator</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#66d9ef">while</span><span style="color:#f92672">(</span>it<span style="color:#f92672">.</span><span style="color:#a6e22e">hasNext</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span>
+                <span style="color:#f92672">{</span>
+                        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>it<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span>
 
-}
-</code></pre>
-
-<p>案例2：修改一个文件加下的所有以txt结尾的修改为doc结尾的
+<span style="color:#f92672">}</span>
+</code></pre></div><p>案例2：修改一个文件加下的所有以txt结尾的修改为doc结尾的
 主要代码：（基本上 框架类似于案例1  主要修改handleFile的子程序 其他地方不需要怎么修改）</p>
-
-<pre><code class="language-java">protected void handleFile(File file,int depth, Collection results)
-        {
-                String banana = file.getName();
-                String newFilename= file.getParent()+File.separator+banana.replaceAll(&quot;.txt&quot;+&quot;[        DISCUZ_CODE_5        ]quot;, &quot;.doc&quot;);
-                file.renameTo(new File(newFilename));
-                results.add(file);
-        }
-</code></pre>
-
-<p>4.Filters
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">handleFile</span><span style="color:#f92672">(</span>File file<span style="color:#f92672">,</span><span style="color:#66d9ef">int</span> depth<span style="color:#f92672">,</span> Collection results<span style="color:#f92672">)</span>
+        <span style="color:#f92672">{</span>
+                String banana <span style="color:#f92672">=</span> file<span style="color:#f92672">.</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                String newFilename<span style="color:#f92672">=</span> file<span style="color:#f92672">.</span><span style="color:#a6e22e">getParent</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">+</span>File<span style="color:#f92672">.</span><span style="color:#a6e22e">separator</span><span style="color:#f92672">+</span>banana<span style="color:#f92672">.</span><span style="color:#a6e22e">replaceAll</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;.txt&#34;</span><span style="color:#f92672">+</span><span style="color:#e6db74">&#34;[        DISCUZ_CODE_5        ]quot;, &#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">doc</span><span style="color:#960050;background-color:#1e0010">&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                file<span style="color:#f92672">.</span><span style="color:#a6e22e">renameTo</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> File<span style="color:#f92672">(</span>newFilename<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                results<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span>file<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+</code></pre></div><p>4.Filters
 过滤器：过滤在这边的意思是指保留那些满足某个条件的文件(而不是取消）
 Org.apache.commons.io.filefilter 包定义了一个接口（IOFileFilter）用于连接java.io.FileFilter和java.io.FilenameFilter.除了这个之外，包中提供了一系列可以使用的IOFileFilter接口的实现，包括允许你连接其他过滤器的实现。这些过滤器可以被用于列出文件或者在FileDialog
 全部代码</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">/**
+</span><span style="color:#75715e">* @author 叶昭良
+</span><span style="color:#75715e">*
+</span><span style="color:#75715e">*/</span>
+<span style="color:#f92672">import</span> java.io.File<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> java.io.FilenameFilter<span style="color:#f92672">;</span>
 
-<pre><code class="language-java">/**
-* @author 叶昭良
-*
-*/
-import java.io.File;
-import java.io.FilenameFilter;
+<span style="color:#f92672">import</span> org.apache.commons.io.filefilter.SuffixFileFilter<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> org.apache.commons.io.filefilter.IOFileFilter<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> org.apache.commons.io.filefilter.NotFileFilter<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> org.apache.commons.io.filefilter.OrFileFilter<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> org.apache.commons.io.filefilter.AndFileFilter<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> org.apache.commons.io.filefilter.DirectoryFileFilter<span style="color:#f92672">;</span>
 
-import org.apache.commons.io.filefilter.SuffixFileFilter;
-import org.apache.commons.io.filefilter.IOFileFilter;
-import org.apache.commons.io.filefilter.NotFileFilter;
-import org.apache.commons.io.filefilter.OrFileFilter;
-import org.apache.commons.io.filefilter.AndFileFilter;
-import org.apache.commons.io.filefilter.DirectoryFileFilter;
+<span style="color:#f92672">import</span> java.io.*<span style="color:#f92672">;</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TestCommonIOgetTxtFiles</span>
+<span style="color:#f92672">{</span>
 
-import java.io.*;
-public class TestCommonIOgetTxtFiles
-{
-
-        /**
-         * @param args
-         */        
-public static void main(String[] args)
-        {
-                // TODO 自动生成的方法存根
-                
-                File rootDir = new File(&quot;e://&quot;);
-                // 列出所有的java结尾的所有文件（当前目录）
-                // SuffixFileFilter的使用，定义了一个FilenameFilter接口
-                FilenameFilter fileFilter = new SuffixFileFilter(&quot;.java&quot;); // 满足.java结尾的文件，这也正好符合过滤在当前情况下的定义。
-                String[] txtFiles = rootDir.list(fileFilter);
-                for(int i = 0 ; i &lt; txtFiles.length; i++)
-                {
-                        System.out.println(rootDir+File.separator+txtFiles[i]);
-                }
-                // 列出所有的html和htm的文件（在当前文件目录下）
-                // IOFileFilter、OrFileFilter、NotFileFilter、AndFileFilter的使用（and or 逻辑）
-                IOFileFilter htmlFilter =   // 定义了一个IOFileFilter接口接口
-                                new OrFileFilter(new SuffixFileFilter(&quot;.html&quot;),new SuffixFileFilter(&quot;.htm&quot;));  // 为什么有时候用IOFileFilter 而有时候用FilenameFilter?
-                IOFileFilter notDirectory = new NotFileFilter(DirectoryFileFilter.INSTANCE);
-                // 拒绝选择目录
-                FilenameFilter fileFilter1= new AndFileFilter(htmlFilter,notDirectory); // 利用AndFileFilter连接两个过滤器接口
-                File[] htmlfiles = rootDir.listFiles(fileFilter1);
-                for(int i = 0; i&lt; htmlfiles.length; i++)
-                {
-                        System.out.println(htmlfiles[i]);
-                }
-        }
-</code></pre>
-
-<p>代码说明：
+        <span style="color:#75715e">/**
+</span><span style="color:#75715e">         * @param args
+</span><span style="color:#75715e">         */</span>        
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> args<span style="color:#f92672">)</span>
+        <span style="color:#f92672">{</span>
+                <span style="color:#75715e">// TODO 自动生成的方法存根
+</span><span style="color:#75715e"></span>                
+                File rootDir <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> File<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;e://&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#75715e">// 列出所有的java结尾的所有文件（当前目录）
+</span><span style="color:#75715e"></span>                <span style="color:#75715e">// SuffixFileFilter的使用，定义了一个FilenameFilter接口
+</span><span style="color:#75715e"></span>                FilenameFilter fileFilter <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> SuffixFileFilter<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;.java&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">// 满足.java结尾的文件，这也正好符合过滤在当前情况下的定义。
+</span><span style="color:#75715e"></span>                String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> txtFiles <span style="color:#f92672">=</span> rootDir<span style="color:#f92672">.</span><span style="color:#a6e22e">list</span><span style="color:#f92672">(</span>fileFilter<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0 <span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> txtFiles<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span> i<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">)</span>
+                <span style="color:#f92672">{</span>
+                        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>rootDir<span style="color:#f92672">+</span>File<span style="color:#f92672">.</span><span style="color:#a6e22e">separator</span><span style="color:#f92672">+</span>txtFiles<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span>
+                <span style="color:#75715e">// 列出所有的html和htm的文件（在当前文件目录下）
+</span><span style="color:#75715e"></span>                <span style="color:#75715e">// IOFileFilter、OrFileFilter、NotFileFilter、AndFileFilter的使用（and or 逻辑）
+</span><span style="color:#75715e"></span>                IOFileFilter htmlFilter <span style="color:#f92672">=</span>   <span style="color:#75715e">// 定义了一个IOFileFilter接口接口
+</span><span style="color:#75715e"></span>                                <span style="color:#66d9ef">new</span> OrFileFilter<span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> SuffixFileFilter<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;.html&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">,</span><span style="color:#66d9ef">new</span> SuffixFileFilter<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;.htm&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>  <span style="color:#75715e">// 为什么有时候用IOFileFilter 而有时候用FilenameFilter?
+</span><span style="color:#75715e"></span>                IOFileFilter notDirectory <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> NotFileFilter<span style="color:#f92672">(</span>DirectoryFileFilter<span style="color:#f92672">.</span><span style="color:#a6e22e">INSTANCE</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#75715e">// 拒绝选择目录
+</span><span style="color:#75715e"></span>                FilenameFilter fileFilter1<span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> AndFileFilter<span style="color:#f92672">(</span>htmlFilter<span style="color:#f92672">,</span>notDirectory<span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">// 利用AndFileFilter连接两个过滤器接口
+</span><span style="color:#75715e"></span>                File<span style="color:#f92672">[</span><span style="color:#f92672">]</span> htmlfiles <span style="color:#f92672">=</span> rootDir<span style="color:#f92672">.</span><span style="color:#a6e22e">listFiles</span><span style="color:#f92672">(</span>fileFilter1<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span> i<span style="color:#f92672">&lt;</span> htmlfiles<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span> i<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">)</span>
+                <span style="color:#f92672">{</span>
+                        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>htmlfiles<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span>
+</code></pre></div><p>代码说明：
 接口是一个更高级别的类，所以可以定义类型变量。具体看filename.gif</p>
-
 <p>案例2： 当前文件夹下的一天前的所有文件
 AgeFileFilter : 通过一个cutoff截止时间来过滤文件，可以过滤出更新的 更旧的 或者就是某一个时间点的信息。
 比如下面的  打印所有当前文件夹内的早于一天前创建的文件和文件夹
 主要代码：
 查看主要代码的图片。</p>
-
 <p>案例3： 获取文件夹下的可读 可写   目录文件（普通文件类似） 空文件  隐藏文件
 说明：最好是在打印时候(for 循环)加上异常的判断（NullPointerException)
 主要代码：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">import</span> org.apache.commons.io.filefilter.CanReadFileFilter<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> org.apache.commons.io.filefilter.CanWriteFileFilter<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> org.apache.commons.io.filefilter.DirectoryFileFilter<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> org.apache.commons.io.filefilter.EmptyFileFilter<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> org.apache.commons.io.filefilter.HiddenFileFilter<span style="color:#f92672">;</span>
+                <span style="color:#75715e">// TODO 自动生成的方法存根
+</span><span style="color:#75715e"></span>                 File dirBanana <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> File<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;E:\\测试目录&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                 String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> filesBanana <span style="color:#f92672">=</span> dirBanana<span style="color:#f92672">.</span><span style="color:#a6e22e">list</span><span style="color:#f92672">(</span>CanReadFileFilter<span style="color:#f92672">.</span><span style="color:#a6e22e">CAN_READ</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                 <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> filesBanana<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span> i<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">)</span>
+                 <span style="color:#f92672">{</span>
+                         System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Banana可读文件:&#34;</span><span style="color:#f92672">+</span>filesBanana<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                 <span style="color:#f92672">}</span>
+                 System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;分割线--------------------------&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                 File dirOrange <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> File<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;E:\\测试目录&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                 String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> filesOrange <span style="color:#f92672">=</span> dirOrange<span style="color:#f92672">.</span><span style="color:#a6e22e">list</span><span style="color:#f92672">(</span>CanReadFileFilter<span style="color:#f92672">.</span><span style="color:#a6e22e">READ_ONLY</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                 <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> filesOrange<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span> i<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">)</span>
+                 <span style="color:#f92672">{</span>
+                         System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Orange只读文件:&#34;</span><span style="color:#f92672">+</span>filesOrange<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                 <span style="color:#f92672">}</span>
+                 
+                 System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;分割线--------------------------&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                 File dirApple <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> File<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;E:\\测试目录&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                 String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> filesApple <span style="color:#f92672">=</span> dirApple<span style="color:#f92672">.</span><span style="color:#a6e22e">list</span><span style="color:#f92672">(</span>CanReadFileFilter<span style="color:#f92672">.</span><span style="color:#a6e22e">CANNOT_READ</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                 <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>filesApple<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span> <span style="color:#f92672">=</span><span style="color:#f92672">=</span> 0<span style="color:#f92672">)</span>
+                 <span style="color:#f92672">{</span>
+                          System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Apple未找到不可读文件&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                 <span style="color:#f92672">}</span><span style="color:#66d9ef">else</span>
+                 <span style="color:#f92672">{</span>
+                         <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> filesApple<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span> i<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">)</span>
+                         <span style="color:#f92672">{</span>
+                                 System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Apple不可读文件:&#34;</span><span style="color:#f92672">+</span>filesApple<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                         <span style="color:#f92672">}</span>
+                 <span style="color:#f92672">}</span>
+                 
+                 
+                 File dirEgg <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> File<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;E:\\测试目录&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                 String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> filesEgg <span style="color:#f92672">=</span> dirEgg<span style="color:#f92672">.</span><span style="color:#a6e22e">list</span><span style="color:#f92672">(</span>CanWriteFileFilter<span style="color:#f92672">.</span><span style="color:#a6e22e">CAN_WRITE</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                 <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0 <span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> filesEgg<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span> i<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">)</span>
+                 <span style="color:#f92672">{</span>
+                         System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Egg 找到了可写文件:&#34;</span><span style="color:#f92672">+</span>filesEgg<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                 <span style="color:#f92672">}</span>
+                 
+                 File dirChichen <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> File<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;E:\\测试目录&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                 String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> filesChichen <span style="color:#f92672">=</span> dirChichen<span style="color:#f92672">.</span><span style="color:#a6e22e">list</span><span style="color:#f92672">(</span>CanWriteFileFilter<span style="color:#f92672">.</span><span style="color:#a6e22e">CANNOT_WRITE</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                 <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0 <span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> filesChichen<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span> i<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">)</span>
+                 <span style="color:#f92672">{</span>
+                         System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Chichen 找到了不可写文件:&#34;</span><span style="color:#f92672">+</span>filesChichen<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                 <span style="color:#f92672">}</span>
+                 
+                 File dirDirectory <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> File<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;E:\\&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                 String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> filesDirectory <span style="color:#f92672">=</span> dirDirectory<span style="color:#f92672">.</span><span style="color:#a6e22e">list</span><span style="color:#f92672">(</span>DirectoryFileFilter<span style="color:#f92672">.</span><span style="color:#a6e22e">INSTANCE</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                 <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> filesDirectory<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span> i<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">)</span>
+                 <span style="color:#f92672">{</span>
+                         System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;列出所有E盘下的文件夹名字:&#34;</span><span style="color:#f92672">+</span>filesDirectory<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                 <span style="color:#f92672">}</span>
+                 
+                 File dirEmpty <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> File<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;E:\\&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                 String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> filesEmpty <span style="color:#f92672">=</span> dirEmpty<span style="color:#f92672">.</span><span style="color:#a6e22e">list</span><span style="color:#f92672">(</span>EmptyFileFilter<span style="color:#f92672">.</span><span style="color:#a6e22e">EMPTY</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                 <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> filesEmpty<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span> i<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">)</span>
+                 <span style="color:#f92672">{</span>
+                         System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;dirEmpty列出所有E盘下的空文件名字（包括空文件夹）:&#34;</span><span style="color:#f92672">+</span>filesEmpty<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                 <span style="color:#f92672">}</span>
+                 
+                 File dirNotEmpty <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> File<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;E:\\&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                 String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> filesNotEmpty <span style="color:#f92672">=</span> dirNotEmpty<span style="color:#f92672">.</span><span style="color:#a6e22e">list</span><span style="color:#f92672">(</span>EmptyFileFilter<span style="color:#f92672">.</span><span style="color:#a6e22e">NOT_EMPTY</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                 <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> filesNotEmpty<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span> i<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">)</span>
+                 <span style="color:#f92672">{</span>
+                         System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;dirNotEmpty列出所有E盘下的非空文件名字（包括空文件夹）:&#34;</span><span style="color:#f92672">+</span>filesNotEmpty<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                 <span style="color:#f92672">}</span>
+                 
+                 File dirHidden <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> File<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;E:\\测试目录&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                 String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> filesHidden <span style="color:#f92672">=</span> dirHidden<span style="color:#f92672">.</span><span style="color:#a6e22e">list</span><span style="color:#f92672">(</span>HiddenFileFilter<span style="color:#f92672">.</span><span style="color:#a6e22e">HIDDEN</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                 <span style="color:#66d9ef">try</span>
+                 <span style="color:#f92672">{</span>
+                         <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> filesHidden<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span> i<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">)</span>
+                         <span style="color:#f92672">{</span>
+                                 System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;dirHidden列出所有E盘下的隐藏名字（包括空文件夹）:&#34;</span><span style="color:#f92672">+</span>filesHidden<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                         <span style="color:#f92672">}</span>
+                 <span style="color:#f92672">}</span><span style="color:#66d9ef">catch</span><span style="color:#f92672">(</span>NullPointerException e<span style="color:#f92672">)</span>
+                 <span style="color:#f92672">{</span>
+                         System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;未找到任何隐藏文件 在测试目录下&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                 <span style="color:#f92672">}</span>
+                 
+                 File dirVisible <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> File<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;E:\\测试目录&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                 String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> filesVisible <span style="color:#f92672">=</span> dirHidden<span style="color:#f92672">.</span><span style="color:#a6e22e">list</span><span style="color:#f92672">(</span>HiddenFileFilter<span style="color:#f92672">.</span><span style="color:#a6e22e">VISIBLE</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                 <span style="color:#66d9ef">try</span>
+                 <span style="color:#f92672">{</span>
+                         <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> filesVisible<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span> i<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">)</span>
+                         <span style="color:#f92672">{</span>
+                                 System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;dirHidden列出所有E盘下的隐藏名字（包括空文件夹）:&#34;</span><span style="color:#f92672">+</span>filesHidden<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                         <span style="color:#f92672">}</span>
+                 <span style="color:#f92672">}</span><span style="color:#66d9ef">catch</span><span style="color:#f92672">(</span>NullPointerException e<span style="color:#f92672">)</span>
+                 <span style="color:#f92672">{</span>
+                         System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;未找到任何隐藏文件 在测试目录下&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                 <span style="color:#f92672">}</span>
 
-<pre><code class="language-java">import org.apache.commons.io.filefilter.CanReadFileFilter;
-import org.apache.commons.io.filefilter.CanWriteFileFilter;
-import org.apache.commons.io.filefilter.DirectoryFileFilter;
-import org.apache.commons.io.filefilter.EmptyFileFilter;
-import org.apache.commons.io.filefilter.HiddenFileFilter;
-                // TODO 自动生成的方法存根
-                 File dirBanana = new File(&quot;E:\\测试目录&quot;);
-                 String[] filesBanana = dirBanana.list(CanReadFileFilter.CAN_READ);
-                 for(int i = 0; i &lt; filesBanana.length; i++)
-                 {
-                         System.out.println(&quot;Banana可读文件:&quot;+filesBanana[i]);
-                 }
-                 System.out.println(&quot;分割线--------------------------&quot;);
-                 File dirOrange = new File(&quot;E:\\测试目录&quot;);
-                 String[] filesOrange = dirOrange.list(CanReadFileFilter.READ_ONLY);
-                 for(int i = 0; i &lt; filesOrange.length; i++)
-                 {
-                         System.out.println(&quot;Orange只读文件:&quot;+filesOrange[i]);
-                 }
-                 
-                 System.out.println(&quot;分割线--------------------------&quot;);
-                 File dirApple = new File(&quot;E:\\测试目录&quot;);
-                 String[] filesApple = dirApple.list(CanReadFileFilter.CANNOT_READ);
-                 if(filesApple.length == 0)
-                 {
-                          System.out.println(&quot;Apple未找到不可读文件&quot;);
-                 }else
-                 {
-                         for(int i = 0; i &lt; filesApple.length; i++)
-                         {
-                                 System.out.println(&quot;Apple不可读文件:&quot;+filesApple[i]);
-                         }
-                 }
-                 
-                 
-                 File dirEgg = new File(&quot;E:\\测试目录&quot;);
-                 String[] filesEgg = dirEgg.list(CanWriteFileFilter.CAN_WRITE);
-                 for(int i = 0 ; i &lt; filesEgg.length; i++)
-                 {
-                         System.out.println(&quot;Egg 找到了可写文件:&quot;+filesEgg[i]);
-                 }
-                 
-                 File dirChichen = new File(&quot;E:\\测试目录&quot;);
-                 String[] filesChichen = dirChichen.list(CanWriteFileFilter.CANNOT_WRITE);
-                 for(int i = 0 ; i &lt; filesChichen.length; i++)
-                 {
-                         System.out.println(&quot;Chichen 找到了不可写文件:&quot;+filesChichen[i]);
-                 }
-                 
-                 File dirDirectory = new File(&quot;E:\\&quot;);
-                 String[] filesDirectory = dirDirectory.list(DirectoryFileFilter.INSTANCE);
-                 for(int i = 0; i &lt; filesDirectory.length; i++)
-                 {
-                         System.out.println(&quot;列出所有E盘下的文件夹名字:&quot;+filesDirectory[i]);
-                 }
-                 
-                 File dirEmpty = new File(&quot;E:\\&quot;);
-                 String[] filesEmpty = dirEmpty.list(EmptyFileFilter.EMPTY);
-                 for(int i = 0; i &lt; filesEmpty.length; i++)
-                 {
-                         System.out.println(&quot;dirEmpty列出所有E盘下的空文件名字（包括空文件夹）:&quot;+filesEmpty[i]);
-                 }
-                 
-                 File dirNotEmpty = new File(&quot;E:\\&quot;);
-                 String[] filesNotEmpty = dirNotEmpty.list(EmptyFileFilter.NOT_EMPTY);
-                 for(int i = 0; i &lt; filesNotEmpty.length; i++)
-                 {
-                         System.out.println(&quot;dirNotEmpty列出所有E盘下的非空文件名字（包括空文件夹）:&quot;+filesNotEmpty[i]);
-                 }
-                 
-                 File dirHidden = new File(&quot;E:\\测试目录&quot;);
-                 String[] filesHidden = dirHidden.list(HiddenFileFilter.HIDDEN);
-                 try
-                 {
-                         for(int i = 0; i &lt; filesHidden.length; i++)
-                         {
-                                 System.out.println(&quot;dirHidden列出所有E盘下的隐藏名字（包括空文件夹）:&quot;+filesHidden[i]);
-                         }
-                 }catch(NullPointerException e)
-                 {
-                         System.out.println(&quot;未找到任何隐藏文件 在测试目录下&quot;);
-                 }
-                 
-                 File dirVisible = new File(&quot;E:\\测试目录&quot;);
-                 String[] filesVisible = dirHidden.list(HiddenFileFilter.VISIBLE);
-                 try
-                 {
-                         for(int i = 0; i &lt; filesVisible.length; i++)
-                         {
-                                 System.out.println(&quot;dirHidden列出所有E盘下的隐藏名字（包括空文件夹）:&quot;+filesHidden[i]);
-                         }
-                 }catch(NullPointerException e)
-                 {
-                         System.out.println(&quot;未找到任何隐藏文件 在测试目录下&quot;);
-                 }
-
-        }
-</code></pre>
-
-<p>文件过滤器的规律是: 都是以FileFilter结尾的 比如SuffixFileFilter   AndFileFilter,OrFileFilter, NotFileFilter,AgeFileFilter,CanWriteFileFilter,CanReadFileFilter,DirectoryFileFilter,FileFileFilter,NameFileFilter,WildcardFileFilter。。。
-有些接口需要new出来一个对象，比如new  SuffixFileFilter(&ldquo;.txt&rdquo;)  ,new NameFileFilter(&ldquo;TestFile&rdquo;) 、new SizeFileFilter(1024*1024) 、new And,Or,NotFileFilter&hellip;等有些接口是直接使用，比如HiddenFileFilter.HIDDEN|VISIBLE   CanReadFileFilter.CANREAD|CANNOTREAD     CanWriteFileFilter.CANWRITE|CANNOTWRITE   EmptyFileFilter.EMPTY|NOTEMPTY   DirectoryFileFilter.INSTANCE   FileFileFilter.FILE等</p>
-
+        <span style="color:#f92672">}</span>
+</code></pre></div><p>文件过滤器的规律是: 都是以FileFilter结尾的 比如SuffixFileFilter   AndFileFilter,OrFileFilter, NotFileFilter,AgeFileFilter,CanWriteFileFilter,CanReadFileFilter,DirectoryFileFilter,FileFileFilter,NameFileFilter,WildcardFileFilter。。。
+有些接口需要new出来一个对象，比如new  SuffixFileFilter(&quot;.txt&rdquo;)  ,new NameFileFilter(&ldquo;TestFile&rdquo;) 、new SizeFileFilter(1024*1024) 、new And,Or,NotFileFilter&hellip;等有些接口是直接使用，比如HiddenFileFilter.HIDDEN|VISIBLE   CanReadFileFilter.CANREAD|CANNOTREAD     CanWriteFileFilter.CANWRITE|CANNOTWRITE   EmptyFileFilter.EMPTY|NOTEMPTY   DirectoryFileFilter.INSTANCE   FileFileFilter.FILE等</p>
 <p>5.Stream部分：
 主要测试了CountingInputStream 、  CountingOutputStream、TeeOutputStream、TeeInputStream</p>
-
 <p>CountingInputStream :统计输出流的字节个数（Counting InputStream），可用于网络收费
 CountingOutputStream:测量输入流的统计，可用于网络收费
 TeeOutputStream:需要输入两个OutputStreams，同时输出到两个硬盘文件
 TeeOutputStream：一个inputStream 一个OutputStream,在读取InputStream的同时，也输出到硬盘上的另一个文件，充当备份。</p>
-
 <p>TeeInputStream:
 CommonsIO刚刚接触，只是一些浅显的知识，跟大家分享了,可以通过比较传统的IO流的实现，
 CommonsIO流的确为我们封装了很多有用而且快捷的类方法，当然前提是得对基本的IO流有一定的基础性认识。
 有问题的，求指教。
-<img src="/images/java/filename.gif" alt="过滤器接口的说明" />
-<img src="/images/java/主要代码.gif" alt="打印所有当前文件夹内的早于一天前创建的文件和文件夹" /></p>
-
+<img src="/images/java/filename.gif" alt="过滤器接口的说明">
+<img src="/images/java/%E4%B8%BB%E8%A6%81%E4%BB%A3%E7%A0%81.gif" alt="打印所有当前文件夹内的早于一天前创建的文件和文件夹"></p>
 <p>另外的,WildcardFileFilter类似于RegexFileFilter可以模糊的定位当前文件夹下的所有符合模糊条件的文件，
 比如</p>
-
-<pre><code class="language-java">WildcardFileFilter
-         //列出所有的文件大小大于*test*.java*的文件
-                 File dirWildcard = new File(&quot;E:\\测试目录&quot;);
-                 String[] filesWildcard = dirWildcard.list(new WildcardFileFilter(&quot;*test*.java*&quot;)); //正则表达式
-                 try
-                 {
-                         for(int i = 0; i &lt; filesWildcard.length; i++)
-                         {
-                                 System.out.println(&quot;dirWildcard列出所有E盘下的隐藏名字（包括空文件夹）:&quot;+filesWildcard[i]);
-                         }
-                 }catch(NullPointerException e)
-                 {
-                         System.out.println(&quot;未找到任何普通文件 在测试目录下&quot;);
-                 }
-</code></pre>
-
-<p>RegexFileFilter:</p>
-
-<pre><code class="language-java">//列出所有的文件包含*test*.java的文件
-                 File dirRegex = new File(&quot;E:\\测试目录&quot;);
-                 FileFilter ff = new RegexFileFilter(&quot;.*test.*\\.java.*&quot;); //正则表达式 不能写成*test*
-                 File[] filesRegex = dirRegex.listFiles(ff);
-                 try
-                 {
-                         for(int i = 0; i &lt; filesRegex.length; i++)
-                         {
-                                 System.out.println(&quot;dirRegex列出所有E盘下的隐藏名字（包括空文件夹）:&quot;+filesRegex[i]);
-                         }
-                 }catch(NullPointerException e)
-                 {
-                         System.out.println(&quot;未找到任何普通文件 在测试目录下&quot;);
-                 }
-</code></pre>
-
-<p>说明：FileFilter ff = new RegexFileFilter(&ldquo;.<em>test.</em>\.java&rdquo;);  ff可以作为listFiles的参数类型，但是RegexFileFilter这个FileFilter的子类产生的对象无法充当listFiles的参数，这边体现着多态的概念，而且是接口的多态。有一个问题：不明白为什么不能用RegexFileFilter 的对象？？？？ RegexFileFilter查阅源码的确是继承FileFilter和FilenameFilter的，难道是说多态一般只是使用在赋值语句，而在构造函数必须使用对应的类型   listFiles函数的声明为 public File[] listFiles(FileFilter filter){..}  或者public File[] listFiles(FilenameFilter filter){..} ）   求指教~-~</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">WildcardFileFilter
+         <span style="color:#75715e">//列出所有的文件大小大于*test*.java*的文件
+</span><span style="color:#75715e"></span>                 File dirWildcard <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> File<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;E:\\测试目录&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                 String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> filesWildcard <span style="color:#f92672">=</span> dirWildcard<span style="color:#f92672">.</span><span style="color:#a6e22e">list</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> WildcardFileFilter<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;*test*.java*&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">//正则表达式
+</span><span style="color:#75715e"></span>                 <span style="color:#66d9ef">try</span>
+                 <span style="color:#f92672">{</span>
+                         <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> filesWildcard<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span> i<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">)</span>
+                         <span style="color:#f92672">{</span>
+                                 System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;dirWildcard列出所有E盘下的隐藏名字（包括空文件夹）:&#34;</span><span style="color:#f92672">+</span>filesWildcard<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                         <span style="color:#f92672">}</span>
+                 <span style="color:#f92672">}</span><span style="color:#66d9ef">catch</span><span style="color:#f92672">(</span>NullPointerException e<span style="color:#f92672">)</span>
+                 <span style="color:#f92672">{</span>
+                         System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;未找到任何普通文件 在测试目录下&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                 <span style="color:#f92672">}</span>
+</code></pre></div><p>RegexFileFilter:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">//列出所有的文件包含*test*.java的文件
+</span><span style="color:#75715e"></span>                 File dirRegex <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> File<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;E:\\测试目录&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                 FileFilter ff <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> RegexFileFilter<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;.*test.*\\.java.*&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">//正则表达式 不能写成*test*
+</span><span style="color:#75715e"></span>                 File<span style="color:#f92672">[</span><span style="color:#f92672">]</span> filesRegex <span style="color:#f92672">=</span> dirRegex<span style="color:#f92672">.</span><span style="color:#a6e22e">listFiles</span><span style="color:#f92672">(</span>ff<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                 <span style="color:#66d9ef">try</span>
+                 <span style="color:#f92672">{</span>
+                         <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> filesRegex<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span> i<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">)</span>
+                         <span style="color:#f92672">{</span>
+                                 System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;dirRegex列出所有E盘下的隐藏名字（包括空文件夹）:&#34;</span><span style="color:#f92672">+</span>filesRegex<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                         <span style="color:#f92672">}</span>
+                 <span style="color:#f92672">}</span><span style="color:#66d9ef">catch</span><span style="color:#f92672">(</span>NullPointerException e<span style="color:#f92672">)</span>
+                 <span style="color:#f92672">{</span>
+                         System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;未找到任何普通文件 在测试目录下&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                 <span style="color:#f92672">}</span>
+</code></pre></div><p>说明：FileFilter ff = new RegexFileFilter(&quot;.<em>test.</em>\.java&rdquo;);  ff可以作为listFiles的参数类型，但是RegexFileFilter这个FileFilter的子类产生的对象无法充当listFiles的参数，这边体现着多态的概念，而且是接口的多态。有一个问题：不明白为什么不能用RegexFileFilter 的对象？？？？ RegexFileFilter查阅源码的确是继承FileFilter和FilenameFilter的，难道是说多态一般只是使用在赋值语句，而在构造函数必须使用对应的类型   listFiles函数的声明为 public File[] listFiles(FileFilter filter){..}  或者public File[] listFiles(FilenameFilter filter){..} ）   求指教~-~</p>
 <p>首先感谢杨老师的远控解决了我的一个困惑。
 其实自己也应该猜到，分享一下讲解过程
-public class RegexFileFilter extends AbstractFileFilter<br />
+public class RegexFileFilter extends AbstractFileFilter<br>
 复制代码
 RegexFileFilter继承了AbstractFileFilter</p>
-
 <p>public abstract class AbstractFileFilter implements IOFileFilter
 复制代码</p>
-
 <p>AbstractFileFilter实现了IOFileFilter  接口可以实现多继承，于是进一步观看了IOFileFilter
 public interface IOFileFilter extends FileFilter, FilenameFilter
 复制代码</p>
-
 <p>IOFileFilter又继承了FileFilter和FilenameFilter这两个接口，并且这两个接口已经是祖先级的接口</p>
-
 <p>之前我一直用RegexFileFilter定义ff变量，传到listFiles()中死活报错，如下：
-RegexFileFilter ff = new RegexFileFilter(&ldquo;.<em>test.</em>\.java.*&ldquo;);
+RegexFileFilter ff = new RegexFileFilter(&quot;.<em>test.</em>\.java.*&quot;);
 复制代码
 原因是RegexFileFilter继承了两个接口FileFilter,FilenameFilter,而listFiles也是实现了两种方式的重载（可以进入listFiles类，利用神健组合ctrl+o观看到   listFiles(FileFilte)  listFiles(FileFilename))
 所以如果ff不显示指定的话，listFiles怎么知道要重载哪个函数？</p>
-
 <p>三种解决方法：
 1：</p>
-
-<pre><code class="language-java">   File[] filesRegex = dirRegex.listFiles((FilenameFilter)ff);
-</code></pre>
-
-<p>2：</p>
-
-<pre><code class="language-java">   File[] filesRegex = dirRegex.listFiles((FileFilter)ff);
-</code></pre>
-
-<p>都是可以的，也可以用上面的多态的方法
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">   File<span style="color:#f92672">[</span><span style="color:#f92672">]</span> filesRegex <span style="color:#f92672">=</span> dirRegex<span style="color:#f92672">.</span><span style="color:#a6e22e">listFiles</span><span style="color:#f92672">(</span><span style="color:#f92672">(</span>FilenameFilter<span style="color:#f92672">)</span>ff<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+</code></pre></div><p>2：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">   File<span style="color:#f92672">[</span><span style="color:#f92672">]</span> filesRegex <span style="color:#f92672">=</span> dirRegex<span style="color:#f92672">.</span><span style="color:#a6e22e">listFiles</span><span style="color:#f92672">(</span><span style="color:#f92672">(</span>FileFilter<span style="color:#f92672">)</span>ff<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+</code></pre></div><p>都是可以的，也可以用上面的多态的方法
 3：</p>
-
-<pre><code class="language-java">   FileFilter ff = new RegexFileFilter(&quot;.*test.*\\.java&quot;);
-</code></pre>
-
-<p>问题的根源：重载+显示指定类型</p>
-
-<hr />
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">   FileFilter ff <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> RegexFileFilter<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;.*test.*\\.java&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+</code></pre></div><p>问题的根源：重载+显示指定类型</p>
+<hr>
 <p>学习了    /**  然后摁下 Enter键 在eclipse中自动加入注释段，并且 敲击@可以产生想要的注释字段。
 较专业写法，代码的注释，必须学习
 /**
-         * 输入流中的内容到输出流去
-         * @param input
-         * @param out
-         * @throws Exception
-         */</p>
+* 输入流中的内容到输出流去
+* @param input
+* @param out
+* @throws Exception
+*/</p>
     </div>
  <div class="nav-links" style="padding:10;">
         
@@ -1456,7 +1398,7 @@ RegexFileFilter ff = new RegexFileFilter(&ldquo;.<em>test.</em>\.java.*&ldquo;);
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

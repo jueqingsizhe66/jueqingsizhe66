@@ -617,47 +617,33 @@
 <span class="article-metadata" >Reading time: 1 minutes and    43 seconds with 381 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#text绘制添加增加动画效果">text绘制添加增加动画效果</a></li>
-<li><a href="#mp4格式导出">mp4格式导出</a></li>
-<li><a href="#技术实现">技术实现</a></li>
-<li><a href="#结果展示">结果展示</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#text绘制添加增加动画效果">text绘制添加增加动画效果</a></li>
+    <li><a href="#mp4格式导出">mp4格式导出</a></li>
+    <li><a href="#技术实现">技术实现</a></li>
+    <li><a href="#结果展示">结果展示</a></li>
+  </ul>
 </nav>
     </aside>
   <div class="article-container">
 
 
     <div class="article-style">
-      
-
-<p>动画是一个比较直观的方式展示你的设计过程，下文的codes可以方便按照你规定的点序进行逐点绘制</p>
-
+      <p>动画是一个比较直观的方式展示你的设计过程，下文的codes可以方便按照你规定的点序进行逐点绘制</p>
 <p>编写的步骤如下技术路线图</p>
-
-<p><img src="/images/python/hugoAnimation.png" alt="技术路线" /></p>
-
+<p><img src="/images/python/hugoAnimation.png" alt="技术路线"></p>
 <h2 id="text绘制添加增加动画效果">text绘制添加增加动画效果</h2>
-
-<p><a href="https://www.cnblogs.com/endlesscoding/p/10308111.html" target="_blank">如何在运动过程中添加背景点text</a></p>
-
+<p><a href="https://www.cnblogs.com/endlesscoding/p/10308111.html">如何在运动过程中添加背景点text</a></p>
 <h2 id="mp4格式导出">mp4格式导出</h2>
-
 <p>在Ubuntu或者mac系统可以试用image
-注意控制<a href="https://blog.csdn.net/sailist/article/details/79502007" target="_blank">ffmpeg</a>的路径</p>
-
+注意控制<a href="https://blog.csdn.net/sailist/article/details/79502007">ffmpeg</a>的路径</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">## 设置ffmpeg路径</span>
-  ffmpegpath <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>abspath(<span style="color:#e6db74">&#34;./ffmpeg/bin/ffmpeg.exe&#34;</span>)
-  plt<span style="color:#f92672">.</span>rcParams[<span style="color:#e6db74">&#34;animation.ffmpeg_path&#34;</span>] <span style="color:#f92672">=</span> ffmpegpath
+  ffmpegpath <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>abspath(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">./ffmpeg/bin/ffmpeg.exe</span><span style="color:#e6db74">&#34;</span>)
+  plt<span style="color:#f92672">.</span>rcParams[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">animation.ffmpeg_path</span><span style="color:#e6db74">&#34;</span>] <span style="color:#f92672">=</span> ffmpegpath
   writer <span style="color:#f92672">=</span> animation<span style="color:#f92672">.</span>FFMpegWriter()
 <span style="color:#75715e">## 在sava函数中设置执行者</span>
-  anim<span style="color:#f92672">.</span>save(<span style="color:#e6db74">&#39;test_animation.mp4&#39;</span>,writer<span style="color:#f92672">=</span>writer)</code></pre></div>
-
+  anim<span style="color:#f92672">.</span>save(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">test_animation.mp4</span><span style="color:#e6db74">&#39;</span>,writer<span style="color:#f92672">=</span>writer)</code></pre></div>
 <h2 id="技术实现">技术实现</h2>
-
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
 <span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt
 <span style="color:#f92672">import</span> matplotlib.animation <span style="color:#f92672">as</span> animation
@@ -668,8 +654,8 @@
 fig, ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplots(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span>))
 <span style="color:#75715e">#https://blog.csdn.net/xiaosebi1111/article/details/50617433  控制子图</span>
 xdata, ydata <span style="color:#f92672">=</span> [], []
-ln, <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>plot([], [], <span style="color:#e6db74">&#39;rs&#39;</span>,animated<span style="color:#f92672">=</span>True)
-text_pt <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>text(<span style="color:#ae81ff">8</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>, <span style="color:#e6db74">&#39;&#39;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">18</span>)
+ln, <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>plot([], [], <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">rs</span><span style="color:#e6db74">&#39;</span>,animated<span style="color:#f92672">=</span>True)
+text_pt <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>text(<span style="color:#ae81ff">8</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#39;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">18</span>)
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">init</span>():
     ax<span style="color:#f92672">.</span>set_xlim(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">18</span>)
@@ -690,7 +676,7 @@ text_pt <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</s
     <span style="color:#75715e">#ydata.append(np.sin(frame))</span>
     ydata<span style="color:#f92672">.</span>append(math<span style="color:#f92672">.</span>floor(frame<span style="color:#f92672">/</span><span style="color:#ae81ff">16</span>) )
     ln<span style="color:#f92672">.</span>set_data(xdata, ydata)
-    text_pt<span style="color:#f92672">.</span>set_text(f<span style="color:#e6db74">&#34;Sector={frame%16+1}, VelocityBin={math.floor(frame/16)+1}&#34;</span> )
+    text_pt<span style="color:#f92672">.</span>set_text(f<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Sector={frame</span><span style="color:#e6db74">%</span><span style="color:#e6db74">16+1}, VelocityBin={math.floor(frame/16)+1}</span><span style="color:#e6db74">&#34;</span> )
     <span style="color:#66d9ef">return</span> ln,text_pt,
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">generateFrames</span>(rows<span style="color:#f92672">=</span><span style="color:#ae81ff">16</span>,cols<span style="color:#f92672">=</span><span style="color:#ae81ff">25</span>):
    count<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
@@ -705,13 +691,13 @@ text_pt <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</s
    <span style="color:#66d9ef">return</span> dataArray
 
 <span style="color:#75715e"># 16控制点数</span>
-ffmpegpath <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>abspath(<span style="color:#e6db74">&#34;./ffmpeg/bin/ffmpeg.exe&#34;</span>)
-plt<span style="color:#f92672">.</span>grid(ls<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;--&#34;</span>)
-plt<span style="color:#f92672">.</span>tick_params(axis<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;both&#39;</span>, which<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;major&#39;</span>, labelsize<span style="color:#f92672">=</span><span style="color:#ae81ff">18</span>)
+ffmpegpath <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>abspath(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">./ffmpeg/bin/ffmpeg.exe</span><span style="color:#e6db74">&#34;</span>)
+plt<span style="color:#f92672">.</span>grid(ls<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">--</span><span style="color:#e6db74">&#34;</span>)
+plt<span style="color:#f92672">.</span>tick_params(axis<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">both</span><span style="color:#e6db74">&#39;</span>, which<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">major</span><span style="color:#e6db74">&#39;</span>, labelsize<span style="color:#f92672">=</span><span style="color:#ae81ff">18</span>)
 x<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>linspace(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">16</span>)
 y<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span><span style="color:#f92672">*</span>np<span style="color:#f92672">.</span>ones(<span style="color:#ae81ff">16</span>)
-plt<span style="color:#f92672">.</span>plot(x,y,<span style="color:#e6db74">&#39;r--&#39;</span>)
-plt<span style="color:#f92672">.</span>rcParams[<span style="color:#e6db74">&#34;animation.ffmpeg_path&#34;</span>] <span style="color:#f92672">=</span> ffmpegpath
+plt<span style="color:#f92672">.</span>plot(x,y,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">r--</span><span style="color:#e6db74">&#39;</span>)
+plt<span style="color:#f92672">.</span>rcParams[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">animation.ffmpeg_path</span><span style="color:#e6db74">&#34;</span>] <span style="color:#f92672">=</span> ffmpegpath
 
 <span style="color:#75715e">##https://blog.csdn.net/sailist/article/details/79502007  ffmpeg路径</span>
 <span style="color:#75715e">##https://www.cnblogs.com/endlesscoding/p/10308111.html   改进</span>
@@ -725,15 +711,11 @@ anim <span style="color:#f92672">=</span> animation<span style="color:#f92672">.
 <span style="color:#75715e"># anim = animation.FuncAnimation(fig, update, frames=np.linspace(-np.pi,np.pi, 16),interval=10,</span>
 <span style="color:#75715e">#                                init_func=init,blit=True)</span>
 <span style="color:#75715e">#anim.save(&#39;test_animation.gif&#39;,writer=&#39;imagemagick&#39;)</span>
-anim<span style="color:#f92672">.</span>save(<span style="color:#e6db74">&#39;test_animation.mp4&#39;</span>,writer<span style="color:#f92672">=</span>writer)
+anim<span style="color:#f92672">.</span>save(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">test_animation.mp4</span><span style="color:#e6db74">&#39;</span>,writer<span style="color:#f92672">=</span>writer)
 <span style="color:#75715e">#plt.show()</span></code></pre></div>
-
 <h2 id="结果展示">结果展示</h2>
-
-<p><img src="/images/python/dotSeries.png" alt="点序结果" /></p>
-
+<p><img src="/images/python/dotSeries.png" alt="点序结果"></p>
 <p>小结</p>
-
 <p>只要修改好update函数，使其根据你设定的frames，就可以得到符合你需要的动画</p>
 
     </div>
@@ -1139,7 +1121,7 @@ anim<span style="color:#f92672">.</span>save(<span style="color:#e6db74">&#39;te
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

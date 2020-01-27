@@ -617,31 +617,21 @@
 <span class="article-metadata" >Reading time: 4 minutes and    32 seconds with 998 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#原始数据格式">原始数据格式</a></li>
-<li><a href="#结论">结论</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#原始数据格式">原始数据格式</a></li>
+    <li><a href="#结论">结论</a></li>
+  </ul>
 </nav>
     </aside>
   <div class="article-container">
 
 
     <div class="article-style">
-      
-
-<p><a href="https://jueqingsizhe66.github.io/post/玩转python-datetime/" target="_blank">玩转Python datetime</a>已针对时间序列进行了相关处理，得到了满足AIWIND计算要求的测风塔时间序列</p>
-
-<p><a href="https://www.semanticscholar.org/paper/Atmospheric-boundary-layer-stability-and-its-to-Breedt/9bfd308031989e2a7f31dc54779182a4f8735980" target="_blank">Atmospheric Boundary Layer Stability</a>一文我们知道地表边界层在昼夜存在不同；白天由于地表被加热，边界层较薄，反之亦然；为此需要对雷达的测量结果提取昼夜的分布信息</p>
-
-<p><a href="https://www.jianshu.com/p/3d1d648406f3" target="_blank">Astral库计算日出日落时间</a>一文解决获取当天日出日落时间，进一步可参考<a href="https://astral.readthedocs.io/en/stable/index.html" target="_blank">Astral手册</a></p>
-
+      <p><a href="https://jueqingsizhe66.github.io/post/%E7%8E%A9%E8%BD%ACpython-datetime/">玩转Python datetime</a>已针对时间序列进行了相关处理，得到了满足AIWIND计算要求的测风塔时间序列</p>
+<p><a href="https://www.semanticscholar.org/paper/Atmospheric-boundary-layer-stability-and-its-to-Breedt/9bfd308031989e2a7f31dc54779182a4f8735980">Atmospheric Boundary Layer Stability</a>一文我们知道地表边界层在昼夜存在不同；白天由于地表被加热，边界层较薄，反之亦然；为此需要对雷达的测量结果提取昼夜的分布信息</p>
+<p><a href="https://www.jianshu.com/p/3d1d648406f3">Astral库计算日出日落时间</a>一文解决获取当天日出日落时间，进一步可参考<a href="https://astral.readthedocs.io/en/stable/index.html">Astral手册</a></p>
 <h2 id="原始数据格式">原始数据格式</h2>
-
-<p><img src="/images/aiwind/dataFormatDayNight.png" alt="原始数据格式" />：第一列为时间序列，2,3列分别为雷达40m处的风向风速，依次类推</p>
-
+<p><img src="/images/aiwind/dataFormatDayNight.png" alt="原始数据格式">：第一列为时间序列，2,3列分别为雷达40m处的风向风速，依次类推</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">  <span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
   <span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
   <span style="color:#f92672">import</span> datetime
@@ -650,25 +640,25 @@
   <span style="color:#75715e">##https://www.jianshu.com/p/3d1d648406f3</span>
   longititude<span style="color:#f92672">=</span><span style="color:#ae81ff">21.45</span> <span style="color:#75715e">## 城市经度信息</span>
   latitude<span style="color:#f92672">=</span><span style="color:#ae81ff">112.15</span> <span style="color:#75715e">## 城市纬度度信息</span>
-  location_yangjiang <span style="color:#f92672">=</span> astral<span style="color:#f92672">.</span>Location((<span style="color:#e6db74">&#39;Yangjiang&#39;</span>, <span style="color:#e6db74">&#39;China&#39;</span>,<span style="color:#ae81ff">21.45</span> ,<span style="color:#ae81ff">112.15</span> , <span style="color:#e6db74">&#39;Asia/Shanghai&#39;</span>, <span style="color:#ae81ff">0</span>))
+  location_yangjiang <span style="color:#f92672">=</span> astral<span style="color:#f92672">.</span>Location((<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Yangjiang</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">China</span><span style="color:#e6db74">&#39;</span>,<span style="color:#ae81ff">21.45</span> ,<span style="color:#ae81ff">112.15</span> , <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Asia/Shanghai</span><span style="color:#e6db74">&#39;</span>, <span style="color:#ae81ff">0</span>))
   <span style="color:#75715e">#location_yangjiang = astral.Location((&#39;YanDun&#39;, &#39;China&#39;,42.3369 ,94.382 , &#39;Asia/Shanghai&#39;, 0))</span>
   <span style="color:#75715e">#location_yangjiang = astral.Location((&#39;huailai&#39;, &#39;China&#39;,42.242 ,115.35 , &#39;Asia/Shanghai&#39;, 0))</span>
   <span style="color:#75715e">#time_sunrise=location_yangjiang.sunrise(date=datetime.date.today(),local=True)</span>
   time_sunrise<span style="color:#f92672">=</span>location_yangjiang<span style="color:#f92672">.</span>sunrise(date<span style="color:#f92672">=</span>datetime<span style="color:#f92672">.</span>date(<span style="color:#ae81ff">2019</span>,<span style="color:#ae81ff">6</span>,<span style="color:#ae81ff">15</span>),local<span style="color:#f92672">=</span>True)
   time_sunrise_update<span style="color:#f92672">=</span>time_sunrise <span style="color:#f92672">+</span> datetime<span style="color:#f92672">.</span>timedelta(hours<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>) <span style="color:#75715e">#提前/延后日出时间量</span>
   time_sunrise_new<span style="color:#f92672">=</span>str(time_sunrise_update)
-  <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#34;日出时间:{time_sunrise_new}&#34;</span>)
+  <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">日出时间:{time_sunrise_new}</span><span style="color:#e6db74">&#34;</span>)
 
   <span style="color:#75715e">#time_sunset=location_yangjiang.sunset(date=datetime.date.today(),local=True)</span>
   time_sunset<span style="color:#f92672">=</span>location_yangjiang<span style="color:#f92672">.</span>sunset(date<span style="color:#f92672">=</span>datetime<span style="color:#f92672">.</span>date(<span style="color:#ae81ff">2019</span>,<span style="color:#ae81ff">6</span>,<span style="color:#ae81ff">15</span>),local<span style="color:#f92672">=</span>True)
 
   time_sunset_update<span style="color:#f92672">=</span>time_sunset <span style="color:#f92672">+</span> datetime<span style="color:#f92672">.</span>timedelta(hours<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>) <span style="color:#75715e">#提前/延后日落时间量</span>
   time_sunset_new<span style="color:#f92672">=</span>str(time_sunset_update)
-  <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#34;日落时间:{time_sunset_new}&#34;</span>)
+  <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">日落时间:{time_sunset_new}</span><span style="color:#e6db74">&#34;</span>)
 
 
   <span style="color:#75715e">#dongpingLidar=pd.read_excel(r&#34;C:\Users\yezhaoliang\Desktop\dongpingLidar67.xlsx&#34;)</span>
-  dongpingLidar<span style="color:#f92672">=</span>pd<span style="color:#f92672">.</span>read_excel(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#34;C:\Users\yezhaoliang\Desktop\work\AIWind\功率曲线\手算白天黑夜\dongpingLidar14WithTime.xlsx&#34;</span>)
+  dongpingLidar<span style="color:#f92672">=</span>pd<span style="color:#f92672">.</span>read_excel(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">C:</span><span style="color:#e6db74">\</span><span style="color:#e6db74">Users</span><span style="color:#e6db74">\</span><span style="color:#e6db74">yezhaoliang</span><span style="color:#e6db74">\</span><span style="color:#e6db74">Desktop</span><span style="color:#e6db74">\</span><span style="color:#e6db74">work</span><span style="color:#e6db74">\</span><span style="color:#e6db74">AIWind</span><span style="color:#e6db74">\</span><span style="color:#e6db74">功率曲线</span><span style="color:#e6db74">\</span><span style="color:#e6db74">手算白天黑夜</span><span style="color:#e6db74">\</span><span style="color:#e6db74">dongpingLidar14WithTime.xlsx</span><span style="color:#e6db74">&#34;</span>)
   positions<span style="color:#f92672">=</span>[<span style="color:#ae81ff">40</span>,<span style="color:#ae81ff">65</span>,<span style="color:#ae81ff">90</span>,<span style="color:#ae81ff">115</span>,<span style="color:#ae81ff">140</span>,<span style="color:#ae81ff">150</span>,<span style="color:#ae81ff">160</span>,<span style="color:#ae81ff">170</span>,<span style="color:#ae81ff">180</span>,<span style="color:#ae81ff">190</span>,<span style="color:#ae81ff">200</span>,<span style="color:#ae81ff">210</span>]
   windDirection<span style="color:#f92672">=</span><span style="color:#ae81ff">180</span>
   minusPlus<span style="color:#f92672">=</span><span style="color:#ae81ff">30</span>
@@ -706,7 +696,7 @@
 
       <span style="color:#75715e"># dayIndex = [idx for (idx, val) in enumerate(timeseries) if val[9:19] &gt;= time_sunrise_new[11:19] and val[9:19] &lt;=time_sunset_new[11:19]]</span>
       <span style="color:#75715e"># nightIndex = [idx for (idx, val) in enumerate(timeseries) if val[9:19] &lt; time_sunrise_new[11:19] or val[9:19] &gt; time_sunset_new[11:19]]</span>
-      dayIndex <span style="color:#f92672">=</span> [idx <span style="color:#66d9ef">for</span> (idx, val) <span style="color:#f92672">in</span> enumerate(timeseries) <span style="color:#66d9ef">if</span> val[<span style="color:#ae81ff">9</span>:<span style="color:#ae81ff">19</span>] <span style="color:#f92672">&gt;=</span> getSunriseFromDay(val) <span style="color:#f92672">and</span> val[<span style="color:#ae81ff">9</span>:<span style="color:#ae81ff">19</span>] <span style="color:#f92672">&lt;=</span>getSunsetFromDay(val)]
+      dayIndex <span style="color:#f92672">=</span> [idx <span style="color:#66d9ef">for</span> (idx, val) <span style="color:#f92672">in</span> enumerate(timeseries) <span style="color:#66d9ef">if</span> val[<span style="color:#ae81ff">9</span>:<span style="color:#ae81ff">19</span>] <span style="color:#f92672">&gt;</span><span style="color:#f92672">=</span> getSunriseFromDay(val) <span style="color:#f92672">and</span> val[<span style="color:#ae81ff">9</span>:<span style="color:#ae81ff">19</span>] <span style="color:#f92672">&lt;</span><span style="color:#f92672">=</span>getSunsetFromDay(val)]
       nightIndex <span style="color:#f92672">=</span> [idx <span style="color:#66d9ef">for</span> (idx, val) <span style="color:#f92672">in</span> enumerate(timeseries) <span style="color:#66d9ef">if</span> val[<span style="color:#ae81ff">9</span>:<span style="color:#ae81ff">19</span>] <span style="color:#f92672">&lt;</span> getSunriseFromDay(val) <span style="color:#f92672">or</span> val[<span style="color:#ae81ff">9</span>:<span style="color:#ae81ff">19</span>] <span style="color:#f92672">&gt;</span> getSunsetFromDay(val)]
       <span style="color:#66d9ef">return</span> dayIndex,nightIndex
 
@@ -714,7 +704,7 @@
       timeseries<span style="color:#f92672">=</span>dongpingLidar<span style="color:#f92672">.</span>iloc[:,<span style="color:#ae81ff">0</span>]
 
       <span style="color:#75715e">## timeSeries 9-19 为小时：分钟:秒      time_sunset_new 11:19为小时:分钟:秒</span>
-      dayIndex <span style="color:#f92672">=</span> [idx <span style="color:#66d9ef">for</span> (idx, val) <span style="color:#f92672">in</span> enumerate(timeseries) <span style="color:#66d9ef">if</span> val[<span style="color:#ae81ff">9</span>:<span style="color:#ae81ff">19</span>] <span style="color:#f92672">&gt;=</span> time_sunrise_new[<span style="color:#ae81ff">11</span>:<span style="color:#ae81ff">19</span>] <span style="color:#f92672">and</span> val[<span style="color:#ae81ff">9</span>:<span style="color:#ae81ff">19</span>] <span style="color:#f92672">&lt;=</span>time_sunset_new[<span style="color:#ae81ff">11</span>:<span style="color:#ae81ff">19</span>]]
+      dayIndex <span style="color:#f92672">=</span> [idx <span style="color:#66d9ef">for</span> (idx, val) <span style="color:#f92672">in</span> enumerate(timeseries) <span style="color:#66d9ef">if</span> val[<span style="color:#ae81ff">9</span>:<span style="color:#ae81ff">19</span>] <span style="color:#f92672">&gt;</span><span style="color:#f92672">=</span> time_sunrise_new[<span style="color:#ae81ff">11</span>:<span style="color:#ae81ff">19</span>] <span style="color:#f92672">and</span> val[<span style="color:#ae81ff">9</span>:<span style="color:#ae81ff">19</span>] <span style="color:#f92672">&lt;</span><span style="color:#f92672">=</span>time_sunset_new[<span style="color:#ae81ff">11</span>:<span style="color:#ae81ff">19</span>]]
       nightIndex <span style="color:#f92672">=</span> [idx <span style="color:#66d9ef">for</span> (idx, val) <span style="color:#f92672">in</span> enumerate(timeseries) <span style="color:#66d9ef">if</span> val[<span style="color:#ae81ff">9</span>:<span style="color:#ae81ff">19</span>] <span style="color:#f92672">&lt;</span> time_sunrise_new[<span style="color:#ae81ff">11</span>:<span style="color:#ae81ff">19</span>] <span style="color:#f92672">or</span> val[<span style="color:#ae81ff">9</span>:<span style="color:#ae81ff">19</span>] <span style="color:#f92672">&gt;</span> time_sunset_new[<span style="color:#ae81ff">11</span>:<span style="color:#ae81ff">19</span>]]
       <span style="color:#66d9ef">return</span> dayIndex,nightIndex
 
@@ -724,7 +714,7 @@
 <span style="color:#75715e">##2. 测试期中间日期跟踪日落日出</span>
   <span style="color:#75715e"># dayIndex,nightIndex=getDayArrayCursor()</span>
   <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(positions)):
-      <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#34;{i}:&#34;</span>)
+      <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{i}:</span><span style="color:#e6db74">&#34;</span>)
       dir1 <span style="color:#f92672">=</span> dongpingLidar<span style="color:#f92672">.</span>iloc[:, <span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>]
       vel <span style="color:#f92672">=</span> dongpingLidar<span style="color:#f92672">.</span>iloc[:, <span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>i<span style="color:#f92672">+</span><span style="color:#ae81ff">2</span>]
 
@@ -733,7 +723,7 @@
 
       <span style="color:#75715e"># dayDir1=dir1[nightIndex]</span>
       <span style="color:#75715e"># dayVel=vel[nightIndex]</span>
-      idx <span style="color:#f92672">=</span> [idx <span style="color:#66d9ef">for</span> (idx, val) <span style="color:#f92672">in</span> enumerate(dayDir1) <span style="color:#66d9ef">if</span> val <span style="color:#f92672">&gt;=</span> (windDirection<span style="color:#f92672">-</span>minusPlus) <span style="color:#f92672">and</span> val <span style="color:#f92672">&lt;=</span>(windDirection<span style="color:#f92672">+</span>minusPlus)]
+      idx <span style="color:#f92672">=</span> [idx <span style="color:#66d9ef">for</span> (idx, val) <span style="color:#f92672">in</span> enumerate(dayDir1) <span style="color:#66d9ef">if</span> val <span style="color:#f92672">&gt;</span><span style="color:#f92672">=</span> (windDirection<span style="color:#f92672">-</span>minusPlus) <span style="color:#f92672">and</span> val <span style="color:#f92672">&lt;</span><span style="color:#f92672">=</span>(windDirection<span style="color:#f92672">+</span>minusPlus)]
       <span style="color:#75715e">## dir1[idx]  vel[idx]</span>
       countVel<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
       <span style="color:#66d9ef">for</span> cursor1 <span style="color:#f92672">in</span> range(len(idx)):
@@ -743,17 +733,13 @@
       velMean[i]<span style="color:#f92672">=</span>countVel<span style="color:#f92672">/</span>len(idx)
 
   profiles<span style="color:#f92672">=</span>pd<span style="color:#f92672">.</span>DataFrame([velMean,positions])<span style="color:#f92672">.</span>T
-  profiles<span style="color:#f92672">.</span>to_csv(<span style="color:#e6db74">&#34;Lidar387Profiles14Day30.csv&#34;</span>)</code></pre></div>
-
+  profiles<span style="color:#f92672">.</span>to_csv(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Lidar387Profiles14Day30.csv</span><span style="color:#e6db74">&#34;</span>)</code></pre></div>
 <h2 id="结论">结论</h2>
-
 <ol>
 <li>1-2个月的雷达用中间日期即可，差别不大；如果全年的话，最好是跟踪每日。</li>
 <li>白天的计算速度边界层较薄，夜晚较厚一些，原因是白天的地表收到加热效应。</li>
 </ol>
-
 <p>顺便提及，我喜欢用TotalCommander对文件夹和文件进行颜色控制</p>
-
 <ol>
 <li>凡是有备注的都显示粉色</li>
 <li>凡是一周之内有变动的文件和文件夹都显示蓝色</li>
@@ -1160,7 +1146,7 @@
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

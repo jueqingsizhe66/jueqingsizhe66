@@ -614,45 +614,35 @@
 
 
 
-<span class="article-metadata" >Reading time: 1 minutes and    9 seconds with 254 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+<span class="article-metadata" >Reading time: 1 minutes and    7 seconds with 248 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#背景介绍">背景介绍</a></li>
-<li><a href="#技术分解">技术分解</a></li>
-<li><a href="#技术实现">技术实现</a></li>
-<li><a href="#附录">附录</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#背景介绍">背景介绍</a></li>
+    <li><a href="#技术分解">技术分解</a></li>
+    <li><a href="#技术实现">技术实现</a></li>
+    <li><a href="#附录">附录</a></li>
+  </ul>
 </nav>
     </aside>
   <div class="article-container">
 
 
     <div class="article-style">
-      
-
-<h2 id="背景介绍">背景介绍</h2>
-
+      <h2 id="背景介绍">背景介绍</h2>
 <p>需要把文本数据格式的时间转变为空格划分的时间信息，见下图
-<img src="/images/aiwind/t1.png" alt="功能实现" /></p>
-
+<img src="/images/aiwind/t1.png" alt="功能实现"></p>
 <h2 id="技术分解">技术分解</h2>
-
 <ol>
 <li>提取时间信息</li>
 <li>字符串处理，头信息组装</li>
 <li>datetime格式转变，运用</li>
 </ol>
-
 <h2 id="技术实现">技术实现</h2>
-
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    <span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
 
     <span style="color:#f92672">import</span> datetime<span style="color:#f92672">,</span>time
-    csvFile<span style="color:#f92672">=</span><span style="color:#e6db74">r</span><span style="color:#e6db74">&#34;C:\Users\yezhaoliang\Desktop\ew.csv&#34;</span>
+    csvFile<span style="color:#f92672">=</span><span style="color:#e6db74">r</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">C:</span><span style="color:#e6db74">\</span><span style="color:#e6db74">Users</span><span style="color:#e6db74">\</span><span style="color:#e6db74">yezhaoliang</span><span style="color:#e6db74">\</span><span style="color:#e6db74">Desktop</span><span style="color:#e6db74">\</span><span style="color:#e6db74">ew.csv</span><span style="color:#e6db74">&#34;</span>
 
     csvData<span style="color:#f92672">=</span>pd<span style="color:#f92672">.</span>read_csv(csvFile,skiprows<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
 
@@ -663,48 +653,46 @@
     <span style="color:#75715e">#</span>
     <span style="color:#75715e"># print(timeArray[1])</span>
     <span style="color:#75715e"># print(csvDatum)</span>
-    versionName<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;version&#39;</span>
-    versionNumber<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;01&#39;</span>
-    sitename<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;site name&#39;</span>
-    measureTimeName<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;measure period&#39;</span>
-    siteposName<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;site position&#39;</span>
-    coorName<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;coordinate system&#39;</span>
-    measureHeightName<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;measurement height&#39;</span>
+    versionName<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">version</span><span style="color:#e6db74">&#39;</span>
+    versionNumber<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">01</span><span style="color:#e6db74">&#39;</span>
+    sitename<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">site name</span><span style="color:#e6db74">&#39;</span>
+    measureTimeName<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">measure period</span><span style="color:#e6db74">&#39;</span>
+    siteposName<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">site position</span><span style="color:#e6db74">&#39;</span>
+    coorName<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">coordinate system</span><span style="color:#e6db74">&#39;</span>
+    measureHeightName<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">measurement height</span><span style="color:#e6db74">&#39;</span>
 
     <span style="color:#75715e">### 必须填对测风塔位置！</span>
-    sitePositionX<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;20379022.37&#39;</span>
-    sitePositionY<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;4475481.11&#39;</span>
-    bakFile <span style="color:#f92672">=</span> open(<span style="color:#e6db74">&#34;./testOutput2.tws&#34;</span>, <span style="color:#e6db74">&#39;w&#39;</span>)
+    sitePositionX<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">20379022.37</span><span style="color:#e6db74">&#39;</span>
+    sitePositionY<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">4475481.11</span><span style="color:#e6db74">&#39;</span>
+    bakFile <span style="color:#f92672">=</span> open(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">./testOutput2.tws</span><span style="color:#e6db74">&#34;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">w</span><span style="color:#e6db74">&#39;</span>)
   <span style="color:#75715e">## 用于字符串的填充！打印效果好看些</span>
     NameListLength<span style="color:#f92672">=</span><span style="color:#ae81ff">22</span>
     earlistDay<span style="color:#f92672">=</span>csvData<span style="color:#f92672">.</span>iloc[<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>]
-    earlistDate <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>strptime(earlistDay, <span style="color:#e6db74">&#39;%Y%m</span><span style="color:#e6db74">%d</span><span style="color:#e6db74"> %H:%M:%S&#39;</span>)
+    earlistDate <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>strptime(earlistDay, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%</span><span style="color:#e6db74">Y</span><span style="color:#e6db74">%</span><span style="color:#e6db74">m</span><span style="color:#e6db74">%d</span><span style="color:#e6db74"> </span><span style="color:#e6db74">%</span><span style="color:#e6db74">H:</span><span style="color:#e6db74">%</span><span style="color:#e6db74">M:</span><span style="color:#e6db74">%</span><span style="color:#e6db74">S</span><span style="color:#e6db74">&#39;</span>)
     latestDay<span style="color:#f92672">=</span>csvData<span style="color:#f92672">.</span>iloc[len(csvData)<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0</span>]
-    latestDate <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>strptime(latestDay, <span style="color:#e6db74">&#39;%Y%m</span><span style="color:#e6db74">%d</span><span style="color:#e6db74"> %H:%M:%S&#39;</span>)
-    <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;{versionName.ljust(NameListLength,&#34; &#34;)}: {versionNumber}&#39;</span>,file<span style="color:#f92672">=</span>bakFile)
-    <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;{sitename.ljust(NameListLength,&#34; &#34;)}: Tower_wind_{earlistDate.year:04}{earlistDate.month:02}{earlistDate.day:02}&#39;</span>
-          f<span style="color:#e6db74">&#39;-{latestDate.year:04}{latestDate.month:02}{latestDate.day:02}.tim&#39;</span>,file<span style="color:#f92672">=</span>bakFile)
-    <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;{measureTimeName.ljust(NameListLength,&#34; &#34;)}: {earlistDate:%m/</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">/%Y %H:%M}-{latestDate:%m/</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">/%Y %H:%m}&#39;</span>,file<span style="color:#f92672">=</span>bakFile)
-    <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;{siteposName.ljust(NameListLength,&#34; &#34;)}: {sitePositionX} {sitePositionY}&#39;</span>,file<span style="color:#f92672">=</span>bakFile)
-    <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;{coorName.ljust(NameListLength,&#34; &#34;)}: 3&#39;</span>,file<span style="color:#f92672">=</span>bakFile)
-    <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;{measureHeightName.ljust(NameListLength,&#34; &#34;)}: 90.0&#39;</span>,file<span style="color:#f92672">=</span>bakFile)
-    <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;&#39;</span>,file<span style="color:#f92672">=</span>bakFile)
-    <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;rec nr:</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">year:</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">mon:</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">date:</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">hour:</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">min:</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">dir:</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">speed:&#39;</span>,file<span style="color:#f92672">=</span>bakFile)
+    latestDate <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>strptime(latestDay, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%</span><span style="color:#e6db74">Y</span><span style="color:#e6db74">%</span><span style="color:#e6db74">m</span><span style="color:#e6db74">%d</span><span style="color:#e6db74"> </span><span style="color:#e6db74">%</span><span style="color:#e6db74">H:</span><span style="color:#e6db74">%</span><span style="color:#e6db74">M:</span><span style="color:#e6db74">%</span><span style="color:#e6db74">S</span><span style="color:#e6db74">&#39;</span>)
+    <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{versionName.ljust(NameListLength,</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74"> </span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">)}: {versionNumber}</span><span style="color:#e6db74">&#39;</span>,file<span style="color:#f92672">=</span>bakFile)
+    <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{sitename.ljust(NameListLength,</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74"> </span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">)}: Tower_wind_{earlistDate.year:04}{earlistDate.month:02}{earlistDate.day:02}</span><span style="color:#e6db74">&#39;</span>
+          f<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">-{latestDate.year:04}{latestDate.month:02}{latestDate.day:02}.tim</span><span style="color:#e6db74">&#39;</span>,file<span style="color:#f92672">=</span>bakFile)
+    <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{measureTimeName.ljust(NameListLength,</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74"> </span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">)}: {earlistDate:</span><span style="color:#e6db74">%</span><span style="color:#e6db74">m/</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">/</span><span style="color:#e6db74">%</span><span style="color:#e6db74">Y </span><span style="color:#e6db74">%</span><span style="color:#e6db74">H:</span><span style="color:#e6db74">%</span><span style="color:#e6db74">M}-{latestDate:</span><span style="color:#e6db74">%</span><span style="color:#e6db74">m/</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">/</span><span style="color:#e6db74">%</span><span style="color:#e6db74">Y </span><span style="color:#e6db74">%</span><span style="color:#e6db74">H:</span><span style="color:#e6db74">%</span><span style="color:#e6db74">m}</span><span style="color:#e6db74">&#39;</span>,file<span style="color:#f92672">=</span>bakFile)
+    <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{siteposName.ljust(NameListLength,</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74"> </span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">)}: {sitePositionX} {sitePositionY}</span><span style="color:#e6db74">&#39;</span>,file<span style="color:#f92672">=</span>bakFile)
+    <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{coorName.ljust(NameListLength,</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74"> </span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">)}: 3</span><span style="color:#e6db74">&#39;</span>,file<span style="color:#f92672">=</span>bakFile)
+    <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{measureHeightName.ljust(NameListLength,</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74"> </span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">)}: 90.0</span><span style="color:#e6db74">&#39;</span>,file<span style="color:#f92672">=</span>bakFile)
+    <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#39;</span>,file<span style="color:#f92672">=</span>bakFile)
+    <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">rec nr:</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">year:</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">mon:</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">date:</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">hour:</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">min:</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">dir:</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">speed:</span><span style="color:#e6db74">&#39;</span>,file<span style="color:#f92672">=</span>bakFile)
 <span style="color:#75715e">###正式打入需要的数据</span>
     <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(csvData)):
         a <span style="color:#f92672">=</span> csvData<span style="color:#f92672">.</span>iloc[i, <span style="color:#ae81ff">0</span>]
         direction <span style="color:#f92672">=</span> csvData<span style="color:#f92672">.</span>iloc[i, <span style="color:#ae81ff">1</span>]
         velocity <span style="color:#f92672">=</span> csvData<span style="color:#f92672">.</span>iloc[i, <span style="color:#ae81ff">2</span>]
-        d1 <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>strptime(a, <span style="color:#e6db74">&#39;%Y%m</span><span style="color:#e6db74">%d</span><span style="color:#e6db74"> %H:%M:%S&#39;</span>)
-        <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;{i}</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">{d1.year:04}</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">{d1.month:02}</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">{d1.day:02}</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">{d1.hour:02}</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">{d1.minute:02}</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">{direction}</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">{velocity}&#39;</span>,file<span style="color:#f92672">=</span>bakFile)
+        d1 <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>strptime(a, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%</span><span style="color:#e6db74">Y</span><span style="color:#e6db74">%</span><span style="color:#e6db74">m</span><span style="color:#e6db74">%d</span><span style="color:#e6db74"> </span><span style="color:#e6db74">%</span><span style="color:#e6db74">H:</span><span style="color:#e6db74">%</span><span style="color:#e6db74">M:</span><span style="color:#e6db74">%</span><span style="color:#e6db74">S</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{i}</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">{d1.year:04}</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">{d1.month:02}</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">{d1.day:02}</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">{d1.hour:02}</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">{d1.minute:02}</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">{direction}</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">{velocity}</span><span style="color:#e6db74">&#39;</span>,file<span style="color:#f92672">=</span>bakFile)
     bakFile<span style="color:#f92672">.</span>close()</code></pre></div>
-
 <h2 id="附录">附录</h2>
-
 <ol>
-<li><a href="https://blog.csdn.net/qq%5F35711912/article/details/80477950" target="_blank">补全字符串</a></li>
-<li><a href="https://blog.csdn.net/sunxb10/article/details/81036693" target="_blank">Python格式化字符串f-string概览</a></li>
-<li><a href="https://segmentfault.com/a/1190000010310346" target="_blank">输出print信息到文件</a></li>
+<li><a href="https://blog.csdn.net/qq%5F35711912/article/details/80477950">补全字符串</a></li>
+<li><a href="https://blog.csdn.net/sunxb10/article/details/81036693">Python格式化字符串f-string概览</a></li>
+<li><a href="https://segmentfault.com/a/1190000010310346">输出print信息到文件</a></li>
 </ol>
 
     </div>
@@ -1110,7 +1098,7 @@
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

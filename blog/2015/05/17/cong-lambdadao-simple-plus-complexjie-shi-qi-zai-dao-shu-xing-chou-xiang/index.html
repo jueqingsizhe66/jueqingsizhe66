@@ -29,12 +29,9 @@
     
   
   <meta name="description" content="定义一个eternity函数，并尝试是否可以执行
-
 (define eternity
 (lambda (x)
    (eternity x)))
-
-
 其实eternity永远在执行着，无法退出">
 
   
@@ -125,12 +122,9 @@
   <meta property="og:url" content="https://jueqingsizhe66.github.io/blog/2015/05/17/cong-lambdadao-simple-plus-complexjie-shi-qi-zai-dao-shu-xing-chou-xiang/">
   <meta property="og:title" content="从lambda到simple&#43;complex解释器再到树形抽象 | Macro Life">
   <meta property="og:description" content="定义一个eternity函数，并尝试是否可以执行
-
 (define eternity
 (lambda (x)
    (eternity x)))
-
-
 其实eternity永远在执行着，无法退出"><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
   <meta property="twitter:image" content="https://jueqingsizhe66.github.io/img/icon-192.png"><meta property="og:locale" content="en-us">
   
@@ -577,104 +571,89 @@
 
 
 
-<span class="article-metadata" >Reading time: 13 minutes and    23 seconds with 2946 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+<span class="article-metadata" >Reading time: 13 minutes and    21 seconds with 2940 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#定义一个eternity函数-并尝试是否可以执行">定义一个eternity函数，并尝试是否可以执行</a>
-<ul>
-<li><a href="#1-下面式子只能计算列表的长度-0的-且永远不会调用eternity">1.下面式子只能计算列表的长度&lt;=0的,且永远不会调用eternity</a></li>
-<li><a href="#2-下面式子只能计算列表的长度-1的-且永远不会调用eternity">2.下面式子只能计算列表的长度&lt;=1的,且永远不会调用eternity</a></li>
-<li><a href="#3-下面式子只能计算列表的长度-2的-且永远不会调用eternity">3.下面式子只能计算列表的长度&lt;=2的,且永远不会调用eternity</a></li>
-</ul></li>
-<li><a href="#如果我们进行一次变换">如果我们进行一次变换</a>
-<ul>
-<li><a href="#1-把eternity替换成mk-length">1.把eternity替换成mk-length</a></li>
-<li><a href="#然而我们对他进一步提取发现报错了">然而我们对他进一步提取发现报错了</a></li>
-<li><a href="#为什么不行">为什么不行？</a></li>
-<li><a href="#let宏">let宏</a></li>
-<li><a href="#然而其实我的想法只不过是他的复制">然而其实我的想法只不过是他的复制</a></li>
-</ul></li>
-<li><a href="#简单计算器解释器">简单计算器解释器</a></li>
-<li><a href="#复杂解释器">复杂解释器</a></li>
-<li><a href="#树形抽象">树形抽象</a>
-<ul>
-<li><a href="#额外话题-insertleft-insertright-eventonly比较上面的rember-理解col">额外话题 insertleft insertright eventonly比较上面的rember,理解col</a></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#eternity">定义一个eternity函数，并尝试是否可以执行</a>
+      <ul>
+        <li><a href="#10eternity">1.下面式子只能计算列表的长度<=0的,且永远不会调用eternity</a></li>
+        <li><a href="#21eternity">2.下面式子只能计算列表的长度<=1的,且永远不会调用eternity</a></li>
+        <li><a href="#32eternity">3.下面式子只能计算列表的长度<=2的,且永远不会调用eternity</a></li>
+      </ul>
+    </li>
+    <li><a href="#heading">如果我们进行一次变换</a>
+      <ul>
+        <li><a href="#1eternitymk-length">1.把eternity替换成mk-length</a></li>
+        <li><a href="#heading-1">然而我们对他进一步提取发现报错了</a></li>
+        <li><a href="#heading-2">为什么不行？</a></li>
+        <li><a href="#let">let宏</a></li>
+        <li><a href="#heading-3">然而其实我的想法只不过是他的复制</a></li>
+      </ul>
+    </li>
+    <li><a href="#heading-4">简单计算器解释器</a></li>
+    <li><a href="#heading-5">复杂解释器</a></li>
+    <li><a href="#heading-6">树形抽象</a>
+      <ul>
+        <li><a href="#-insertleft-insertright-eventonlyrembercol">额外话题 insertleft insertright eventonly比较上面的rember,理解col</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
     </aside>
   <div class="article-container">
 
 
     <div class="article-style">
-      <h2 id="定义一个eternity函数-并尝试是否可以执行">定义一个eternity函数，并尝试是否可以执行</h2>
-
-<pre><code class="language-scheme">(define eternity
-(lambda (x)
-   (eternity x)))
-</code></pre>
-
-<p>其实eternity永远在执行着，无法退出</p>
-
-<h3 id="1-下面式子只能计算列表的长度-0的-且永远不会调用eternity">1.下面式子只能计算列表的长度&lt;=0的,且永远不会调用eternity</h3>
-
+      <h2 id="eternity">定义一个eternity函数，并尝试是否可以执行</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">define </span>eternity
+(<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">x</span>)
+   (<span style="color:#a6e22e">eternity</span> x)))
+</code></pre></div><p>其实eternity永远在执行着，无法退出</p>
+<h3 id="10eternity">1.下面式子只能计算列表的长度&lt;=0的,且永远不会调用eternity</h3>
 <p>; Function to calculate length of just empty list.
 ;
 ((lambda (len)
-  (lambda (l)
-    (cond
-      ((null? l) 0)
-      (else (+ 1 (len (cdr l)))))))
- eternity)</p>
-
-<h3 id="2-下面式子只能计算列表的长度-1的-且永远不会调用eternity">2.下面式子只能计算列表的长度&lt;=1的,且永远不会调用eternity</h3>
-
-<pre><code class="language-scheme">; For lists with length &lt;= 1
-;
-((lambda (mk-length)
-  (mk-length mk-length))
- (lambda (mk-length)
-   (lambda (l)
-     (cond
-       ((null? l) 0)
-       (else (+ 1 ((mk-length eternity) (cdr l))))))))
+(lambda (l)
+(cond
+((null? l) 0)
+(else (+ 1 (len (cdr l)))))))
+eternity)</p>
+<h3 id="21eternity">2.下面式子只能计算列表的长度&lt;=1的,且永远不会调用eternity</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#75715e">; For lists with length &lt;= 1</span>
+<span style="color:#75715e">;</span>
+((<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">mk-length</span>)
+  (<span style="color:#a6e22e">mk-length</span> mk-length))
+ (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">mk-length</span>)
+   (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">l</span>)
+     (<span style="color:#a6e22e">cond</span>
+       ((null? l) <span style="color:#ae81ff">0</span>)
+       (<span style="color:#66d9ef">else </span>(+ <span style="color:#ae81ff">1</span> ((<span style="color:#a6e22e">mk-length</span> eternity) (cdr l))))))))
 
 
-</code></pre>
-
-<h3 id="3-下面式子只能计算列表的长度-2的-且永远不会调用eternity">3.下面式子只能计算列表的长度&lt;=2的,且永远不会调用eternity</h3>
-
-<pre><code class="language-scheme">; For lists with length &lt;= 2
-;
-((lambda (len)
-  (lambda (l)
-    (cond
-      ((null? l) 0)
-      (else (+ 1 (len (cdr l)))))))
- ((lambda (len)
-   (lambda (l)
-     (cond
-       ((null? l) 0)
-       (else (+ 1 (len (cdr l)))))))
-  ((lambda (len)
-    (lambda (l)
-      (cond
-        ((null? l) 0)
-        (else (+ 1 (len (cdr l)))))))
+</code></pre></div><h3 id="32eternity">3.下面式子只能计算列表的长度&lt;=2的,且永远不会调用eternity</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#75715e">; For lists with length &lt;= 2</span>
+<span style="color:#75715e">;</span>
+((<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">len</span>)
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">l</span>)
+    (<span style="color:#a6e22e">cond</span>
+      ((null? l) <span style="color:#ae81ff">0</span>)
+      (<span style="color:#66d9ef">else </span>(+ <span style="color:#ae81ff">1</span> (<span style="color:#a6e22e">len</span> (cdr l)))))))
+ ((<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">len</span>)
+   (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">l</span>)
+     (<span style="color:#a6e22e">cond</span>
+       ((null? l) <span style="color:#ae81ff">0</span>)
+       (<span style="color:#66d9ef">else </span>(+ <span style="color:#ae81ff">1</span> (<span style="color:#a6e22e">len</span> (cdr l)))))))
+  ((<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">len</span>)
+    (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">l</span>)
+      (<span style="color:#a6e22e">cond</span>
+        ((null? l) <span style="color:#ae81ff">0</span>)
+        (<span style="color:#66d9ef">else </span>(+ <span style="color:#ae81ff">1</span> (<span style="color:#a6e22e">len</span> (cdr l)))))))
    eternity)))
  
-</code></pre>
-
-<h2 id="如果我们进行一次变换">如果我们进行一次变换</h2>
-
-<h3 id="1-把eternity替换成mk-length">1.把eternity替换成mk-length</h3>
-
+</code></pre></div><h2 id="heading">如果我们进行一次变换</h2>
+<h3 id="1eternitymk-length">1.把eternity替换成mk-length</h3>
 <p>我们发现结果是它可以变成处理无限长度的列表了。</p>
-
 <pre><code>(((lambda (mk-length)
   (mk-length mk-length))
  (lambda (mk-length)
@@ -684,733 +663,658 @@
        (else (+ 1 ((mk-length mk-length) (cdr l))))))))
  '(a b c 1 g))  ; 5
 
-</code></pre>
+</code></pre><h3 id="heading-1">然而我们对他进一步提取发现报错了</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">((<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">mk-length</span>)
+  (<span style="color:#a6e22e">mk-length</span> mk-length))
+ (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">mk-length</span>)
+   ((<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">len</span>)
+     (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">l</span>)
+       (<span style="color:#a6e22e">cond</span>
+         ((null? l) <span style="color:#ae81ff">0</span>)
+         (<span style="color:#66d9ef">else </span>(+ <span style="color:#ae81ff">1</span> (<span style="color:#a6e22e">len</span> (cdr l)))))))
+    (<span style="color:#a6e22e">mk-length</span> mk-length)))) <span style="color:#75715e">; Aborting!: maximum recursion depth exceeded</span>
 
-<h3 id="然而我们对他进一步提取发现报错了">然而我们对他进一步提取发现报错了</h3>
-
-<pre><code class="language-scheme">((lambda (mk-length)
-  (mk-length mk-length))
- (lambda (mk-length)
-   ((lambda (len)
-     (lambda (l)
-       (cond
-         ((null? l) 0)
-         (else (+ 1 (len (cdr l)))))))
-    (mk-length mk-length)))) ; Aborting!: maximum recursion depth exceeded
-
-</code></pre>
-
-<h3 id="为什么不行">为什么不行？</h3>
-
+</code></pre></div><h3 id="heading-2">为什么不行？</h3>
 <p>原因在于 我们需要的是lambda类型的procedure才可以，而函数调用形式则是不行。
 然而有一种转换方式如下：</p>
-
 <p>(f x) ==&gt; (lambda (arg) (f arg) x)</p>
-
 <p>于是我们得到新的升级版的mk-length</p>
-
-<pre><code class="language-scheme">
-((lambda (mk-length)
-  (mk-length mk-length))
- (lambda (mk-length)
-   ((lambda (len)
-     (lambda (l)
-       (cond
-         ((null? l) 0)
-         (else (+ 1 (len (cdr l)))))))
-    (lambda (x) ((mk-length mk-length) x)))))
-</code></pre>
-
-<p>我们发现还是不够满意，我们想把中间的一坨拿到后面去，于是再次抽象一层
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">
+((<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">mk-length</span>)
+  (<span style="color:#a6e22e">mk-length</span> mk-length))
+ (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">mk-length</span>)
+   ((<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">len</span>)
+     (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">l</span>)
+       (<span style="color:#a6e22e">cond</span>
+         ((null? l) <span style="color:#ae81ff">0</span>)
+         (<span style="color:#66d9ef">else </span>(+ <span style="color:#ae81ff">1</span> (<span style="color:#a6e22e">len</span> (cdr l)))))))
+    (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">x</span>) ((<span style="color:#a6e22e">mk-length</span> mk-length) x)))))
+</code></pre></div><p>我们发现还是不够满意，我们想把中间的一坨拿到后面去，于是再次抽象一层
 也就是我们需要 把(lambda (len) &hellip; (cdr l))部分 移到最外头</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">((<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">le</span>)
+  ((<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">mk-length</span>)
+    (<span style="color:#a6e22e">mk-length</span> mk-length))
+   (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">mk-length</span>)
+     (<span style="color:#a6e22e">le</span> (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">x</span>) ((<span style="color:#a6e22e">mk-length</span> mk-length) x))))))
+ (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">len</span>)
+   (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">l</span>)
+     (<span style="color:#a6e22e">cond</span>
+       ((null? l) <span style="color:#ae81ff">0</span>)
+       (<span style="color:#66d9ef">else </span>(+ <span style="color:#ae81ff">1</span> (<span style="color:#a6e22e">len</span> (cdr l))))))))
 
-<pre><code class="language-scheme">((lambda (le)
-  ((lambda (mk-length)
-    (mk-length mk-length))
-   (lambda (mk-length)
-     (le (lambda (x) ((mk-length mk-length) x))))))
- (lambda (len)
-   (lambda (l)
-     (cond
-       ((null? l) 0)
-       (else (+ 1 (len (cdr l))))))))
+</code></pre></div><p>然而如果我们把后面的(lambda (len))部分去掉</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">le</span>)
+  ((<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">mk-length</span>)
+    (<span style="color:#a6e22e">mk-length</span> mk-length))
+   (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">mk-length</span>)
+     (<span style="color:#a6e22e">le</span> (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">x</span>) ((<span style="color:#a6e22e">mk-length</span> mk-length) x))))))
 
-</code></pre>
-
-<p>然而如果我们把后面的(lambda (len))部分去掉</p>
-
-<pre><code class="language-scheme">(lambda (le)
-  ((lambda (mk-length)
-    (mk-length mk-length))
-   (lambda (mk-length)
-     (le (lambda (x) ((mk-length mk-length) x))))))
-
-</code></pre>
-
-<p>他其实就是下面的骨架：</p>
-
-<pre><code class="language-scheme">(lambda (le)
-  ((lambda ()
+</code></pre></div><p>他其实就是下面的骨架：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">le</span>)
+  ((<span style="color:#66d9ef">lambda </span>()
     ())
-   (lambda ()
-     (le (lambda (x) (() x))))))
-</code></pre>
+   (<span style="color:#66d9ef">lambda </span>()
+     (<span style="color:#a6e22e">le</span> (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">x</span>) (() x))))))
+</code></pre></div><p>如果我们使用f来填加：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">le</span>)
+    ((<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">f</span>)
+      (<span style="color:#a6e22e">f</span> f))
+     (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">f</span>)
+       (<span style="color:#a6e22e">le</span> (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">x</span>) ((<span style="color:#a6e22e">f</span> f) x))))))
+</code></pre></div><p>他其实就是Y-lambda. 我们所谓的define，let,set!都可以从lambda 推出来。</p>
+<h3 id="let">let宏</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">
+(<span style="color:#a6e22e">define-syntax</span>
+    (<span style="color:#66d9ef">syntax-rules </span>()
+        ((<span style="color:#66d9ef">let </span>((<span style="color:#a6e22e">var</span> expr) <span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>) body <span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>) ((<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">var</span> <span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>) body <span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>) expr <span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>))))
 
-<p>如果我们使用f来填加：</p>
-
-<pre><code class="language-scheme">(lambda (le)
-    ((lambda (f)
-      (f f))
-     (lambda (f)
-       (le (lambda (x) ((f f) x))))))
-</code></pre>
-
-<p>他其实就是Y-lambda. 我们所谓的define，let,set!都可以从lambda 推出来。</p>
-
-<h3 id="let宏">let宏</h3>
-
-<pre><code class="language-scheme">
-(define-syntax
-    (syntax-rules ()
-        ((let ((var expr) ...) body ...) ((lambda (var ...) body ...) expr ...))))
-
-</code></pre>
-
-<p>也就是我们以后完全可以用</p>
-
-<pre><code class="language-scheme">
-(define Y
-  (lambda (le)
-    ((lambda (f) (f f))
-     (lambda (f)
-       (le (lambda (x) ((f f) x)))))))
-</code></pre>
-
-<p>Y-lambda 执行一个 代表lambda的函数子f。</p>
-
+</code></pre></div><p>也就是我们以后完全可以用</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">
+(<span style="color:#66d9ef">define </span>Y
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">le</span>)
+    ((<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">f</span>) (<span style="color:#a6e22e">f</span> f))
+     (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">f</span>)
+       (<span style="color:#a6e22e">le</span> (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">x</span>) ((<span style="color:#a6e22e">f</span> f) x)))))))
+</code></pre></div><p>Y-lambda 执行一个 代表lambda的函数子f。</p>
 <p>比如,求最大值(<em>注意：(lambda (func-arg) func-arg是可以不存在的部分,永远不会被执行</em>)):</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#75715e">;; 求个数</span>
 
-<pre><code class="language-scheme">;; 求个数
+((<span style="color:#a6e22e">Y</span> (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">len</span>)
+   (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">l</span>)
+     (<span style="color:#a6e22e">cond</span>
+       ((null? l) <span style="color:#ae81ff">0</span>)
+       (<span style="color:#66d9ef">else </span>(+ <span style="color:#ae81ff">1</span> (<span style="color:#a6e22e">len</span> (cdr l))))))))  <span style="color:#f92672">&#39;</span>(<span style="color:#ae81ff">3</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span>  <span style="color:#ae81ff">6</span> <span style="color:#ae81ff">1</span>))
 
-((Y (lambda (len)
-   (lambda (l)
-     (cond
-       ((null? l) 0)
-       (else (+ 1 (len (cdr l))))))))  '(3 2 3  6 1))
-
-;;; 求最大值
- ((Y (lambda (func-arg)
-        (lambda (l)
-          (cond
-            ((null? l) 'no-list)
+<span style="color:#75715e">;;; 求最大值</span>
+ ((<span style="color:#a6e22e">Y</span> (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">func-arg</span>)
+        (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">l</span>)
+          (<span style="color:#a6e22e">cond</span>
+            ((null? l) <span style="color:#e6db74">&#39;no-list</span>)
             ((null? (cdr l)) (car l))
-            (else (max (car l) (func-arg (cdr l)))))))) '(3 2 5 3 425))
-</code></pre>
+            (<span style="color:#66d9ef">else </span>(max (car l) (<span style="color:#a6e22e">func-arg</span> (cdr l)))))))) <span style="color:#f92672">&#39;</span>(<span style="color:#ae81ff">3</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">425</span>))
+</code></pre></div><p>另外我们发现y-lambda可以写成更优雅、对称的形式:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">define </span>Y
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">le</span>)
+    ((<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">f</span>)
+      (<span style="color:#a6e22e">le</span> (<span style="color:#a6e22e">f</span> f))) <span style="color:#75715e">;;; </span>
+     (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">f</span>)
+       (<span style="color:#a6e22e">le</span> (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">x</span>) ((<span style="color:#a6e22e">f</span> f) x)))))))
 
-<p>另外我们发现y-lambda可以写成更优雅、对称的形式:</p>
-
-<pre><code class="language-scheme">(define Y
-  (lambda (le)
-    ((lambda (f)
-      (le (f f))) ;;; 
-     (lambda (f)
-       (le (lambda (x) ((f f) x)))))))
-
-</code></pre>
-
-<p>Add le()  is not necessay
+</code></pre></div><p>Add le()  is not necessay
 But the code can be
 More beautiful and symmetry</p>
+<h3 id="heading-3">然而其实我的想法只不过是他的复制</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">define </span>Y1
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">le</span>)
+    ((<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">fun</span>)
+      (<span style="color:#a6e22e">fun</span> fun))  <span style="color:#75715e">;; 这是基于抽象的方式,也就是把后面的(lambda (f))  带入其中</span>
 
-<h3 id="然而其实我的想法只不过是他的复制">然而其实我的想法只不过是他的复制</h3>
+     (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">f</span>)
+       (<span style="color:#a6e22e">le</span> (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">x</span>) ((<span style="color:#a6e22e">f</span> f) x)))))))
 
-<pre><code class="language-scheme">(define Y1
-  (lambda (le)
-    ((lambda (fun)
-      (fun fun))  ;; 这是基于抽象的方式,也就是把后面的(lambda (f))  带入其中
+((<span style="color:#a6e22e">Y1</span> 
+ (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">fun-arg</span>)
+   (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">l</span>)
+     (<span style="color:#a6e22e">cond</span>
+       ((null? l) <span style="color:#ae81ff">0</span>)
+       (<span style="color:#66d9ef">else </span>(+ <span style="color:#ae81ff">1</span> (<span style="color:#a6e22e">fun-arg</span> (cdr l)))))))) <span style="color:#f92672">&#39;</span>(<span style="color:#ae81ff">3</span> <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">42</span>))
+</code></pre></div><h2 id="heading-4">简单计算器解释器</h2>
+<p>来自<a href="http://pythoner.org/wiki/774/">wangyin</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#f92672">#</span>lang racket
+<span style="color:#75715e">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
 
-     (lambda (f)
-       (le (lambda (x) ((f f) x)))))))
+<span style="color:#75715e">;;; 以下三个定义 env0, ent-env, lookup 是对环境(environment)的基本操作:</span>
 
-((Y1 
- (lambda (fun-arg)
-   (lambda (l)
-     (cond
-       ((null? l) 0)
-       (else (+ 1 (fun-arg (cdr l)))))))) '(3 5 2 42))
-</code></pre>
+<span style="color:#75715e">;; 空环境</span>
+(<span style="color:#66d9ef">define </span>env0 <span style="color:#f92672">&#39;</span>())
 
-<h2 id="简单计算器解释器">简单计算器解释器</h2>
+<span style="color:#75715e">;; 扩展。对环境 env 进行扩展，把 x 映射到 v，得到一个新的环境</span>
+(<span style="color:#66d9ef">define </span>ext-env
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">x</span> v env)
+    (cons <span style="color:#f92672">`</span>(<span style="color:#f92672">,</span>x <span style="color:#f92672">.</span> <span style="color:#f92672">,</span>v) env)))
 
-<p>来自<a href="http://pythoner.org/wiki/774/" target="_blank">wangyin</a></p>
-
-<pre><code class="language-scheme">#lang racket
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;;; 以下三个定义 env0, ent-env, lookup 是对环境(environment)的基本操作:
-
-;; 空环境
-(define env0 '())
-
-;; 扩展。对环境 env 进行扩展，把 x 映射到 v，得到一个新的环境
-(define ext-env
-  (lambda (x v env)
-    (cons `(,x . ,v) env)))
-
-;; 查找。在环境中 env 中查找 x 的值
-(define lookup
-  (lambda (x env)
-    (let ([p (assq x env)])
-      (cond
+<span style="color:#75715e">;; 查找。在环境中 env 中查找 x 的值</span>
+(<span style="color:#66d9ef">define </span>lookup
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">x</span> env)
+    (<span style="color:#66d9ef">let </span>([p (assq x env)])
+      (<span style="color:#a6e22e">cond</span>
        [(not p) x]
-       [else (cdr p)]))))
+       [<span style="color:#66d9ef">else </span>(cdr p)]))))
 
-;; 闭包的数据结构定义，包含一个函数定义 f 和它定义时所在的环境
-(struct Closure (f env))
+<span style="color:#75715e">;; 闭包的数据结构定义，包含一个函数定义 f 和它定义时所在的环境</span>
+(<span style="color:#a6e22e">struct</span> Closure (<span style="color:#a6e22e">f</span> env))
 
-;; 解释器的递归定义（接受两个参数，表达式 exp 和环境 env）
-;; 共 5 种情况（变量，函数，调用，数字，算术表达式）
-(define interp1
-  (lambda (exp env)
-    (match exp                                          ; 模式匹配 exp 的以下情况（分支）
-      [(? symbol? x) (lookup x env)]                    ; 变量
-      [(? number? x) x]                                 ; 数字
-      [`(lambda (,x) ,e)                                ; 函数
-       (Closure exp env)]
-      [`(,e1 ,e2)                                       ; 调用
-       (let ([v1 (interp1 e1 env)]
-             [v2 (interp1 e2 env)])
-         (match v1
-           [(Closure `(lambda (,x) ,e) env1)
-            (interp1 e (ext-env x v2 env1))]))]
-      [`(,op ,e1 ,e2)                                   ; 算术表达式
-       (let ([v1 (interp1 e1 env)]
-             [v2 (interp1 e2 env)])
-         (match op
-           ['+ (+ v1 v2)]
-           ['- (- v1 v2)]
-           ['* (* v1 v2)]
-           ['/ (/ v1 v2)]))])))
+<span style="color:#75715e">;; 解释器的递归定义（接受两个参数，表达式 exp 和环境 env）</span>
+<span style="color:#75715e">;; 共 5 种情况（变量，函数，调用，数字，算术表达式）</span>
+(<span style="color:#66d9ef">define </span>interp1
+  (<span style="color:#66d9ef">lambda </span>(exp env)
+    (<span style="color:#a6e22e">match</span> exp                                          <span style="color:#75715e">; 模式匹配 exp 的以下情况（分支）</span>
+      [(<span style="color:#a6e22e">?</span> symbol? x) (<span style="color:#a6e22e">lookup</span> x env)]                    <span style="color:#75715e">; 变量</span>
+      [(<span style="color:#a6e22e">?</span> number? x) x]                                 <span style="color:#75715e">; 数字</span>
+      [<span style="color:#f92672">`</span>(<span style="color:#66d9ef">lambda </span>(<span style="color:#f92672">,</span>x) <span style="color:#f92672">,</span>e)                                <span style="color:#75715e">; 函数</span>
+       (<span style="color:#a6e22e">Closure</span> exp env)]
+      [<span style="color:#f92672">`</span>(<span style="color:#f92672">,</span>e1 <span style="color:#f92672">,</span>e2)                                       <span style="color:#75715e">; 调用</span>
+       (<span style="color:#66d9ef">let </span>([v1 (<span style="color:#a6e22e">interp1</span> e1 env)]
+             [v2 (<span style="color:#a6e22e">interp1</span> e2 env)])
+         (<span style="color:#a6e22e">match</span> v1
+           [(<span style="color:#a6e22e">Closure</span> <span style="color:#f92672">`</span>(<span style="color:#66d9ef">lambda </span>(<span style="color:#f92672">,</span>x) <span style="color:#f92672">,</span>e) env1)
+            (<span style="color:#a6e22e">interp1</span> e (<span style="color:#a6e22e">ext-env</span> x v2 env1))]))]
+      [<span style="color:#f92672">`</span>(<span style="color:#f92672">,</span>op <span style="color:#f92672">,</span>e1 <span style="color:#f92672">,</span>e2)                                   <span style="color:#75715e">; 算术表达式</span>
+       (<span style="color:#66d9ef">let </span>([v1 (<span style="color:#a6e22e">interp1</span> e1 env)]
+             [v2 (<span style="color:#a6e22e">interp1</span> e2 env)])
+         (<span style="color:#a6e22e">match</span> op
+           [<span style="color:#e6db74">&#39;+</span> (+ v1 v2)]
+           [<span style="color:#e6db74">&#39;-</span> (- v1 v2)]
+           [<span style="color:#e6db74">&#39;*</span> (* v1 v2)]
+           [<span style="color:#e6db74">&#39;/</span> (/ v1 v2)]))])))
 
-;; 解释器的“用户界面”函数。它把 interp1 包装起来，掩盖第二个参数，初始值为 env0
-(define interp
-  (lambda (exp)
-    (interp1 exp env0)))
+<span style="color:#75715e">;; 解释器的“用户界面”函数。它把 interp1 包装起来，掩盖第二个参数，初始值为 env0</span>
+(<span style="color:#66d9ef">define </span>interp
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">exp</span>)
+    (<span style="color:#a6e22e">interp1</span> exp env0)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(interp (+ 2 65))
-(interp (* 3 2))
-(interp (/ 3 23))
+<span style="color:#75715e">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+(<span style="color:#a6e22e">interp</span> (+ <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">65</span>))
+(<span style="color:#a6e22e">interp</span> (* <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">2</span>))
+(<span style="color:#a6e22e">interp</span> (/ <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">23</span>))
 
 
 
-</code></pre>
-
-<h2 id="复杂解释器">复杂解释器</h2>
-
-<p>分为五个部分
-+ *const
-+ *cond
-+ *identifier(loop-up-evironment)
-+ *quote
-+ *lambda
-+ *Aplication(Not Promitive)</p>
-
-<p>具体可以看<The little scheme></p>
-
-<pre><code class="language-scheme">#lang racket
-;;don't look down on it, it is the full interpretor!
-;;Take care to read it!
-(define atom?
-  (lambda (x)
-    (and (not (pair? x)) (not (null? x)))))
+</code></pre></div><h2 id="heading-5">复杂解释器</h2>
+<p>分为五个部分</p>
+<ul>
+<li>*const</li>
+<li>*cond</li>
+<li>*identifier(loop-up-evironment)</li>
+<li>*quote</li>
+<li>*lambda</li>
+<li>*Aplication(Not Promitive)</li>
+</ul>
+<p>具体可以看<!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#f92672">#</span>lang racket
+<span style="color:#75715e">;;don&#39;t look down on it, it is the full interpretor!</span>
+<span style="color:#75715e">;;Take care to read it!</span>
+(<span style="color:#66d9ef">define </span>atom?
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">x</span>)
+    (<span style="color:#66d9ef">and </span>(not (pair? x)) (not (null? x)))))
   
-(define build
-  (lambda (s1 s2)
-    (cond
-      (else (cons s1
-                  (cons s2 (quote ())))))))
-((lambda (nothing)
-     (cond
-       (nothing (quote something))
-       (else (quote nothing))))
-   #t)
+(<span style="color:#66d9ef">define </span>build
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">s1</span> s2)
+    (<span style="color:#a6e22e">cond</span>
+      (<span style="color:#66d9ef">else </span>(cons s1
+                  (cons s2 (<span style="color:#66d9ef">quote </span>())))))))
+((<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">nothing</span>)
+     (<span style="color:#a6e22e">cond</span>
+       (<span style="color:#a6e22e">nothing</span> (<span style="color:#66d9ef">quote </span>something))
+       (<span style="color:#66d9ef">else </span>(<span style="color:#66d9ef">quote </span>nothing))))
+   <span style="color:#66d9ef">#t</span>)
 
-(define lookup-in-entry
-  (lambda (name entry entry-f)
-    (lookup-in-entry-help name
-                          (first entry)
-                          (second entry)
-                          (entry-f))))
-(define lookup-in-entry-help
-  (lambda (name names values entry-f)
-    (cond
-      ((null? names) (entry-f name))
+(<span style="color:#66d9ef">define </span>lookup-in-entry
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">name</span> entry entry-f)
+    (<span style="color:#a6e22e">lookup-in-entry-help</span> name
+                          (<span style="color:#a6e22e">first</span> entry)
+                          (<span style="color:#a6e22e">second</span> entry)
+                          (<span style="color:#a6e22e">entry-f</span>))))
+(<span style="color:#66d9ef">define </span>lookup-in-entry-help
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">name</span> names values entry-f)
+    (<span style="color:#a6e22e">cond</span>
+      ((null? names) (<span style="color:#a6e22e">entry-f</span> name))
       ((eq? (car names) name)
        (car values))
-      (else (lookup-in-entry-help name
+      (<span style="color:#66d9ef">else </span>(<span style="color:#a6e22e">lookup-in-entry-help</span> name
                                   (cdr names)
                                   (cdr values)
                                   entry-f)))))
-(define lookup-in-table
-  (lambda (name table table-f)
-    (cond 
-      ((null? table) (table-f name))
-      (else (lookup-in-entry name
+(<span style="color:#66d9ef">define </span>lookup-in-table
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">name</span> table table-f)
+    (<span style="color:#66d9ef">cond </span>
+      ((null? table) (<span style="color:#a6e22e">table-f</span> name))
+      (<span style="color:#66d9ef">else </span>(<span style="color:#a6e22e">lookup-in-entry</span> name
                              (car table)
-                             (lambda (name)
+                             (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">name</span>)
                                                 (cdr table)
-                                                (table-f))))))))
-(lambda (name table table-f)
-    (lookup-in-table name
+                                                (<span style="color:#a6e22e">table-f</span>))))))))
+(<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">name</span> table table-f)
+    (<span style="color:#a6e22e">lookup-in-table</span> name
                      (cdr table)
-                     (table-f)))
-(define expression-to-action
-  (lambda (e)
-    (cond
-      ((atom? e) (atom-to-action e))
-      (else (list-to-action e)))))
-(define *const
-  (lambda (e table)
-    (cond 
+                     (<span style="color:#a6e22e">table-f</span>)))
+(<span style="color:#66d9ef">define </span>expression-to-action
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">e</span>)
+    (<span style="color:#a6e22e">cond</span>
+      ((<span style="color:#a6e22e">atom?</span> e) (<span style="color:#a6e22e">atom-to-action</span> e))
+      (<span style="color:#66d9ef">else </span>(<span style="color:#a6e22e">list-to-action</span> e)))))
+(<span style="color:#66d9ef">define </span>*const
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">e</span> table)
+    (<span style="color:#66d9ef">cond </span>
       ((number? e) e)
-      ((eq? e #t) #t)
-      ((eq? e #f) #f)
-      (else (build (quote primitive) e)))))
-(define atom-to-action
-  (lambda (e)
-    (cond
+      ((eq? e <span style="color:#66d9ef">#t</span>) <span style="color:#66d9ef">#t</span>)
+      ((eq? e <span style="color:#66d9ef">#f</span>) <span style="color:#66d9ef">#f</span>)
+      (<span style="color:#66d9ef">else </span>(<span style="color:#a6e22e">build</span> (<span style="color:#66d9ef">quote </span>primitive) e)))))
+(<span style="color:#66d9ef">define </span>atom-to-action
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">e</span>)
+    (<span style="color:#a6e22e">cond</span>
       ((number? e) *const)
-      ((eq? e #t) *const)
-      ((eq? e #f) *const)
-      ((eq? e (quote cons)) *const)
-      ((eq? e (quote car)) *const)
-      ((eq? e (quote cdr)) *const)
-      ((eq? e (quote null?)) *const)
-      ((eq? e (quote eq?)) *const)
-      ((eq? e (quote atom?)) *const)
-      ((eq? e (quote zero?)) *const)
-      ((eq? e (quote add1)) *const)
-      ((eq? e (quote sub1)) *const)
-      ((eq? e (quote number?)) *const)
-      (else *identifier))))
-(define list-to-action
-  (lambda (e)
-    (cond
-      ((atom? (car e))
-       (cond
-         ((eq? (car e) (quote quote))
+      ((eq? e <span style="color:#66d9ef">#t</span>) *const)
+      ((eq? e <span style="color:#66d9ef">#f</span>) *const)
+      ((eq? e (<span style="color:#66d9ef">quote </span>cons)) *const)
+      ((eq? e (<span style="color:#66d9ef">quote </span>car)) *const)
+      ((eq? e (<span style="color:#66d9ef">quote </span>cdr)) *const)
+      ((eq? e (<span style="color:#66d9ef">quote </span>null?)) *const)
+      ((eq? e (<span style="color:#66d9ef">quote </span>eq?)) *const)
+      ((eq? e (<span style="color:#66d9ef">quote </span>atom?)) *const)
+      ((eq? e (<span style="color:#66d9ef">quote </span>zero?)) *const)
+      ((eq? e (<span style="color:#66d9ef">quote </span>add1)) *const)
+      ((eq? e (<span style="color:#66d9ef">quote </span>sub1)) *const)
+      ((eq? e (<span style="color:#66d9ef">quote </span>number?)) *const)
+      (<span style="color:#66d9ef">else </span>*identifier))))
+(<span style="color:#66d9ef">define </span>list-to-action
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">e</span>)
+    (<span style="color:#a6e22e">cond</span>
+      ((<span style="color:#a6e22e">atom?</span> (car e))
+       (<span style="color:#a6e22e">cond</span>
+         ((eq? (car e) (<span style="color:#66d9ef">quote </span>quote))
           *quote)
-         ((eq? (car e) (quote lambda))
+         ((eq? (car e) (<span style="color:#66d9ef">quote </span>lambda))
           *lambda)
-         ((eq? (car e) (quote cond))
+         ((eq? (car e) (<span style="color:#66d9ef">quote </span>cond))
           *cond)
-         (else *application)))
-      (else *application))))
+         (<span style="color:#66d9ef">else </span>*application)))
+      (<span style="color:#66d9ef">else </span>*application))))
 
-(define *quote
-  (lambda (e table)
-    (text-of e)))
-(define first
-  (lambda (p)
-    (cond 
-      (else (car p)))))
-(define second
-  (lambda (p)
-    (cond
-      (else car (cdr p)))))
-(define third
-  (lambda (p)
-    (cond 
-      (else car (cdr (cdr p))))))
-(define text-of second)
+(<span style="color:#66d9ef">define </span>*quote
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">e</span> table)
+    (<span style="color:#a6e22e">text-of</span> e)))
+(<span style="color:#66d9ef">define </span>first
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">p</span>)
+    (<span style="color:#66d9ef">cond </span>
+      (<span style="color:#66d9ef">else </span>(car p)))))
+(<span style="color:#66d9ef">define </span>second
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">p</span>)
+    (<span style="color:#a6e22e">cond</span>
+      (<span style="color:#66d9ef">else </span>car (cdr p)))))
+(<span style="color:#66d9ef">define </span>third
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">p</span>)
+    (<span style="color:#66d9ef">cond </span>
+      (<span style="color:#66d9ef">else </span>car (cdr (cdr p))))))
+(<span style="color:#66d9ef">define </span>text-of second)
 
-(define table-of first)
-(define formals-of second)
-(define body-of third)
-(define *identifier
-  (lambda (e table)
-    (lookup-in-table e table initial-table)))
-(define initial-table
-  (lambda (name)
-    (car (quote ()))))
-(define *lambda
-  (lambda (e table)
-    (build (quote non-primitive)
+(<span style="color:#66d9ef">define </span>table-of first)
+(<span style="color:#66d9ef">define </span>formals-of second)
+(<span style="color:#66d9ef">define </span>body-of third)
+(<span style="color:#66d9ef">define </span>*identifier
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">e</span> table)
+    (<span style="color:#a6e22e">lookup-in-table</span> e table initial-table)))
+(<span style="color:#66d9ef">define </span>initial-table
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">name</span>)
+    (car (<span style="color:#66d9ef">quote </span>()))))
+(<span style="color:#66d9ef">define </span>*lambda
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">e</span> table)
+    (<span style="color:#a6e22e">build</span> (<span style="color:#66d9ef">quote </span>non-primitive)
            (cons table (cdr e)))))
 
-(define evcon
-  (lambda (lines table)
-    (cond 
-      ((else? (question-of (car lines)))
-       (meaning (answer-of (car lines))
+(<span style="color:#66d9ef">define </span>evcon
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">lines</span> table)
+    (<span style="color:#66d9ef">cond </span>
+      ((<span style="color:#a6e22e">else?</span> (<span style="color:#a6e22e">question-of</span> (car lines)))
+       (<span style="color:#a6e22e">meaning</span> (<span style="color:#a6e22e">answer-of</span> (car lines))
                 table))
-      ((meaning (question-of (car lines))
+      ((<span style="color:#a6e22e">meaning</span> (<span style="color:#a6e22e">question-of</span> (car lines))
                 table)
-       (meaning (answer-of (car lines))
+       (<span style="color:#a6e22e">meaning</span> (<span style="color:#a6e22e">answer-of</span> (car lines))
                 table))
-      (else (evcon (cdr lines) table)))))
+      (<span style="color:#66d9ef">else </span>(<span style="color:#a6e22e">evcon</span> (cdr lines) table)))))
 
-(define else?
-  (lambda (x)
-    (cond
-      ((atom? x) (eq? x (quote else)))
-      (else #f))))
-(define question-of first)
-(define answer-of second)
+(<span style="color:#66d9ef">define </span>else?
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">x</span>)
+    (<span style="color:#a6e22e">cond</span>
+      ((<span style="color:#a6e22e">atom?</span> x) (eq? x (<span style="color:#66d9ef">quote </span>else)))
+      (<span style="color:#66d9ef">else </span><span style="color:#66d9ef">#f</span>))))
+(<span style="color:#66d9ef">define </span>question-of first)
+(<span style="color:#66d9ef">define </span>answer-of second)
 
-(define *cond
-  (lambda (e table)
-    (evcon (cond-lines-of e) table)))
-(define cond-lines-of cdr)
+(<span style="color:#66d9ef">define </span>*cond
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">e</span> table)
+    (<span style="color:#a6e22e">evcon</span> (<span style="color:#a6e22e">cond-lines-of</span> e) table)))
+(<span style="color:#66d9ef">define </span>cond-lines-of cdr)
 
-(define evlis
-  (lambda (args table)
-    (cond
-      ((null? args) (quote ()))
-      (else
-       (cons (meaning (car args) table)
-             (evlis (cdr args) table))))))
-(define *application
-  (lambda (e table)
-    (apply
-     (meaning (function-of e) table)
-     (evlis (arguments-of e) table))))
-(define function-of car)
-(define arguments-of cdr)
-(define primitive?
-  (lambda (l)
-    (eq? (first l) (quote primitive))))
-(define non-primitive?
-  (lambda (l)
-    (eq? (first l) (quote non-primitive))))
-(define apply
-  (lambda (fun vals)
-    (cond
-      ((primitive? fun)
-       (apply-primitive
-        (second fun) vals))
-      ((non-primitive? fun)
-       (apply-closure
-        (second fun) vals)))))
+(<span style="color:#66d9ef">define </span>evlis
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">args</span> table)
+    (<span style="color:#a6e22e">cond</span>
+      ((null? args) (<span style="color:#66d9ef">quote </span>()))
+      (<span style="color:#a6e22e">else</span>
+       (cons (<span style="color:#a6e22e">meaning</span> (car args) table)
+             (<span style="color:#a6e22e">evlis</span> (cdr args) table))))))
+(<span style="color:#66d9ef">define </span>*application
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">e</span> table)
+    (<span style="color:#a6e22e">apply</span>
+     (<span style="color:#a6e22e">meaning</span> (<span style="color:#a6e22e">function-of</span> e) table)
+     (<span style="color:#a6e22e">evlis</span> (<span style="color:#a6e22e">arguments-of</span> e) table))))
+(<span style="color:#66d9ef">define </span>function-of car)
+(<span style="color:#66d9ef">define </span>arguments-of cdr)
+(<span style="color:#66d9ef">define </span>primitive?
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">l</span>)
+    (eq? (<span style="color:#a6e22e">first</span> l) (<span style="color:#66d9ef">quote </span>primitive))))
+(<span style="color:#66d9ef">define </span>non-primitive?
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">l</span>)
+    (eq? (<span style="color:#a6e22e">first</span> l) (<span style="color:#66d9ef">quote </span>non-primitive))))
+(<span style="color:#66d9ef">define </span>apply
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">fun</span> vals)
+    (<span style="color:#a6e22e">cond</span>
+      ((<span style="color:#a6e22e">primitive?</span> fun)
+       (<span style="color:#a6e22e">apply-primitive</span>
+        (<span style="color:#a6e22e">second</span> fun) vals))
+      ((<span style="color:#a6e22e">non-primitive?</span> fun)
+       (<span style="color:#a6e22e">apply-closure</span>
+        (<span style="color:#a6e22e">second</span> fun) vals)))))
 
-(define apply-primitive
-  (lambda (name vals)
-    (cond
-      ((eq? name (quote cons))
-       (cons (first vals) (second vals)))
-      ((eq? name (quote car))
-       (car (first vals)))
-      ((eq? name (quote cdr))
-      ((eq? name (quote cdr))
-       (cdr (first vals)))
-      ((eq? name (quote null?))
-       (null? (first vals)))
-      ((eq? name (quote eq?))
-       (eq? (first vals) (second vals)))
-      ((eq? name (quote atom?))
-       (:atom? (first vals)))
-      ((eq? name (quote zero?))
-       (zero? (first vals)))
-      ((eq? name (quote add1))
-       (add1 (first vals)))
-      ((eq? name (quote sub1))
-       (sub1 (first vals)))
-      ((eq? name (quote number?))
-       (number? (first vals))))))
-(define :atom?
-  (lambda (x)
-    (cond
-      ((atom? x) #t)
-      ((null? x) #f)
-      ((eq? (car x) (quote primitive))
-       #t)
-      ((eq? (car x) (quote non-primitive))
-       #t)
-      (else #f))))
-(define apply-closure
-  (lambda (closure vals)
-    (meaning (body-of closure)
-             (extend-table
-              (new-entry
-               (formals-of closure)
+(<span style="color:#66d9ef">define </span>apply-primitive
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">name</span> vals)
+    (<span style="color:#a6e22e">cond</span>
+      ((eq? name (<span style="color:#66d9ef">quote </span>cons))
+       (cons (<span style="color:#a6e22e">first</span> vals) (<span style="color:#a6e22e">second</span> vals)))
+      ((eq? name (<span style="color:#66d9ef">quote </span>car))
+       (car (<span style="color:#a6e22e">first</span> vals)))
+      ((eq? name (<span style="color:#66d9ef">quote </span>cdr))
+      ((eq? name (<span style="color:#66d9ef">quote </span>cdr))
+       (cdr (<span style="color:#a6e22e">first</span> vals)))
+      ((eq? name (<span style="color:#66d9ef">quote </span>null?))
+       (null? (<span style="color:#a6e22e">first</span> vals)))
+      ((eq? name (<span style="color:#66d9ef">quote </span>eq?))
+       (eq? (<span style="color:#a6e22e">first</span> vals) (<span style="color:#a6e22e">second</span> vals)))
+      ((eq? name (<span style="color:#66d9ef">quote </span>atom?))
+       (<span style="color:#a6e22e">:atom?</span> (<span style="color:#a6e22e">first</span> vals)))
+      ((eq? name (<span style="color:#66d9ef">quote </span>zero?))
+       (zero? (<span style="color:#a6e22e">first</span> vals)))
+      ((eq? name (<span style="color:#66d9ef">quote </span>add1))
+       (<span style="color:#a6e22e">add1</span> (<span style="color:#a6e22e">first</span> vals)))
+      ((eq? name (<span style="color:#66d9ef">quote </span>sub1))
+       (<span style="color:#a6e22e">sub1</span> (<span style="color:#a6e22e">first</span> vals)))
+      ((eq? name (<span style="color:#66d9ef">quote </span>number?))
+       (number? (<span style="color:#a6e22e">first</span> vals))))))
+(<span style="color:#66d9ef">define </span>:atom?
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">x</span>)
+    (<span style="color:#a6e22e">cond</span>
+      ((<span style="color:#a6e22e">atom?</span> x) <span style="color:#66d9ef">#t</span>)
+      ((null? x) <span style="color:#66d9ef">#f</span>)
+      ((eq? (car x) (<span style="color:#66d9ef">quote </span>primitive))
+       <span style="color:#66d9ef">#t</span>)
+      ((eq? (car x) (<span style="color:#66d9ef">quote </span>non-primitive))
+       <span style="color:#66d9ef">#t</span>)
+      (<span style="color:#66d9ef">else </span><span style="color:#66d9ef">#f</span>))))
+(<span style="color:#66d9ef">define </span>apply-closure
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">closure</span> vals)
+    (<span style="color:#a6e22e">meaning</span> (<span style="color:#a6e22e">body-of</span> closure)
+             (<span style="color:#a6e22e">extend-table</span>
+              (<span style="color:#a6e22e">new-entry</span>
+               (<span style="color:#a6e22e">formals-of</span> closure)
                vals)
-              (table-of closure)))))
-(define new-entry build)
-(define extend-table cons)
+              (<span style="color:#a6e22e">table-of</span> closure)))))
+(<span style="color:#66d9ef">define </span>new-entry build)
+(<span style="color:#66d9ef">define </span>extend-table cons)
 
-(define value
-  (lambda (e)
-    (meaning e (quote ()))))
-(define meaning
-  (lambda (e table)
-    ((expression-to-action e) e table)))
+(<span style="color:#66d9ef">define </span>value
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">e</span>)
+    (<span style="color:#a6e22e">meaning</span> e (<span style="color:#66d9ef">quote </span>()))))
+(<span style="color:#66d9ef">define </span>meaning
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">e</span> table)
+    ((<span style="color:#a6e22e">expression-to-action</span> e) e table)))
 
-(value (+ 3 4 (* 3 1)))
+(<span style="color:#a6e22e">value</span> (+ <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span> (* <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">1</span>)))
 
-</code></pre>
-
-<h2 id="树形抽象">树形抽象</h2>
-
+</code></pre></div><h2 id="heading-6">树形抽象</h2>
 <ol>
-<li><p>一个lat 中的一个删除</p>
-
-<pre><code class="language-scheme">
-(define rember3
-(lambda (s l)
-(cond 
-  ((null? l) (quote ()))
-  ((equal? (car l) s) (cdr l))
-  (else (cons (car l)
-              (rember3 s (cdr l)))))))
-
-</code></pre></li>
-
-<li><p>一个list中的一个删除</p>
-
-<pre><code class="language-scheme">
-(define multirember
-(lambda (a lat)
-(cond
-  ((null? lat) (quote ()))
-  (else
-   (cond
-     ((eq? (car lat) a)
-      (multirember a (cdr lat)))
-     (else (cons (car lat)
-                 (multirember a (cdr lat)))))))))
-
-</code></pre></li>
-
-<li><p>一个list中的全部删除</p>
-
-<pre><code class="language-scheme">
-
-(define rember*
-(lambda (a l)
-(cond
-  ((null? l) (quote ()))
-  ((atom? (car l))
-   (cond 
-     ((eq? (car l) a)
-      (rember* a (cdr l)))
-     (else (cons (car l)
-                 (rember* a (cdr l))))))
- (else (cons (rember* a (car l))
-       (rember* a (cdr l)))))))
-
-
-</code></pre></li>
+<li>一个lat 中的一个删除</li>
 </ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">
+(<span style="color:#66d9ef">define </span>rember3
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">s</span> l)
+    (<span style="color:#66d9ef">cond </span>
+      ((null? l) (<span style="color:#66d9ef">quote </span>()))
+      ((equal? (car l) s) (cdr l))
+      (<span style="color:#66d9ef">else </span>(cons (car l)
+                  (<span style="color:#a6e22e">rember3</span> s (cdr l)))))))
 
-<p>4 1中的rember升级
+</code></pre></div><ol start="2">
+<li>一个list中的一个删除</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">
+(<span style="color:#66d9ef">define </span>multirember
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">a</span> lat)
+    (<span style="color:#a6e22e">cond</span>
+      ((null? lat) (<span style="color:#66d9ef">quote </span>()))
+      (<span style="color:#a6e22e">else</span>
+       (<span style="color:#a6e22e">cond</span>
+         ((eq? (car lat) a)
+          (<span style="color:#a6e22e">multirember</span> a (cdr lat)))
+         (<span style="color:#66d9ef">else </span>(cons (car lat)
+                     (<span style="color:#a6e22e">multirember</span> a (cdr lat)))))))))
+
+</code></pre></div><ol start="3">
+<li>一个list中的全部删除</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">
+
+(<span style="color:#66d9ef">define </span>rember*
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">a</span> l)
+    (<span style="color:#a6e22e">cond</span>
+      ((null? l) (<span style="color:#66d9ef">quote </span>()))
+      ((<span style="color:#a6e22e">atom?</span> (car l))
+       (<span style="color:#66d9ef">cond </span>
+         ((eq? (car l) a)
+          (<span style="color:#a6e22e">rember*</span> a (cdr l)))
+         (<span style="color:#66d9ef">else </span>(cons (car l)
+                     (<span style="color:#a6e22e">rember*</span> a (cdr l))))))
+     (<span style="color:#66d9ef">else </span>(cons (<span style="color:#a6e22e">rember*</span> a (car l))
+           (<span style="color:#a6e22e">rember*</span> a (cdr l)))))))
+
+
+</code></pre></div><p>4 1中的rember升级
 加入谓词表达式的参数</p>
-
-<pre><code class="language-scheme">(define rember-f
-  (lambda (test? a l)
-    (cond 
-      ((null? l) (quote ()))
-      (else
-       (cond 
-         ((test? (car l) a) (cdr l));;I think here needs atom2function
-         (else (cons (car l)
-                     (rember-f test? a 
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">define </span>rember-f
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">test?</span> a l)
+    (<span style="color:#66d9ef">cond </span>
+      ((null? l) (<span style="color:#66d9ef">quote </span>()))
+      (<span style="color:#a6e22e">else</span>
+       (<span style="color:#66d9ef">cond </span>
+         ((<span style="color:#a6e22e">test?</span> (car l) a) (cdr l))<span style="color:#75715e">;;I think here needs atom2function</span>
+         (<span style="color:#66d9ef">else </span>(cons (car l)
+                     (<span style="color:#a6e22e">rember-f</span> test? a 
                                (cdr l)))))))))
 
-</code></pre>
-
-<ol>
-<li><p>2中的multirember升级</p>
-
-<pre><code class="language-scheme">
-(define multirember-f
-(lambda (test?)
-(lambda (a lat)
-  (cond 
-    ((null? lat) (quote ()))
-    ((test? a (car lat))
-     ((multirember-f test?) a
-                           (cdr lat)))
-    (else (cons (car lat)
-                ((multirember test?)  a 
-                                      (cdr lat))))))))
-
-(define multirember-eq? (multirember-f 'eq?))
-
-</code></pre></li>
-
-<li><p>5中的multirember-f进一步升级</p></li>
+</code></pre></div><ol start="5">
+<li>2中的multirember升级</li>
 </ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">
+(<span style="color:#66d9ef">define </span>multirember-f
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">test?</span>)
+    (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">a</span> lat)
+      (<span style="color:#66d9ef">cond </span>
+        ((null? lat) (<span style="color:#66d9ef">quote </span>()))
+        ((<span style="color:#a6e22e">test?</span> a (car lat))
+         ((<span style="color:#a6e22e">multirember-f</span> test?) a
+                               (cdr lat)))
+        (<span style="color:#66d9ef">else </span>(cons (car lat)
+                    ((<span style="color:#a6e22e">multirember</span> test?)  a 
+                                          (cdr lat))))))))
 
+(<span style="color:#66d9ef">define </span>multirember-eq? (<span style="color:#a6e22e">multirember-f</span> <span style="color:#e6db74">&#39;eq?</span>))
+
+</code></pre></div><ol start="6">
+<li>5中的multirember-f进一步升级</li>
+</ol>
 <p>加入了可以处理的col,作为一个后处理小程序</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">
 
-<pre><code class="language-scheme">
-
-(define multiremberco
-  (lambda (a lat col)
-    (cond 
+(<span style="color:#66d9ef">define </span>multiremberco
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">a</span> lat col)
+    (<span style="color:#66d9ef">cond </span>
       ((null? lat)
-       (col (quote ()) (quote ())))
+       (<span style="color:#a6e22e">col</span> (<span style="color:#66d9ef">quote </span>()) (<span style="color:#66d9ef">quote </span>())))
       ((eq? (car lat) a)
-       (multiremberco a 
+       (<span style="color:#a6e22e">multiremberco</span> a 
                       (cdr lat)
-                      (lambda (newlat seen) 
-                        (col newlat (cons (car lat) seen)))))
-      (else
-       (multiremberco a 
+                      (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">newlat</span> seen) 
+                        (<span style="color:#a6e22e">col</span> newlat (cons (car lat) seen)))))
+      (<span style="color:#a6e22e">else</span>
+       (<span style="color:#a6e22e">multiremberco</span> a 
                       (cdr lat)
-                      (lambda (newlat seen)
-                        (col (cons (car lat) newlat)
+                      (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">newlat</span> seen)
+                        (<span style="color:#a6e22e">col</span> (cons (car lat) newlat)
                              seen)))))))
 
-(define a-friend
-  (lambda (x y)
+(<span style="color:#66d9ef">define </span>a-friend
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">x</span> y)
     (null? y)))
-;(multiremberco 'tuna '(sfds tuna fsd jif) a-friend)
-;#f
-;&gt; (multiremberco 'tuna '(sfds tuna1 fsd jif) a-friend)
-;#t
-;;how can  you get another value in the col
-(define new-friend
-  (lambda (newlat seen)
-    (a-friend newlat
-         (cons (quote tuna) seen))))
+<span style="color:#75715e">;(multiremberco &#39;tuna &#39;(sfds tuna fsd jif) a-friend)</span>
+<span style="color:#75715e">;#f</span>
+<span style="color:#75715e">;&gt; (multiremberco &#39;tuna &#39;(sfds tuna1 fsd jif) a-friend)</span>
+<span style="color:#75715e">;#t</span>
+<span style="color:#75715e">;;how can  you get another value in the col</span>
+(<span style="color:#66d9ef">define </span>new-friend
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">newlat</span> seen)
+    (<span style="color:#a6e22e">a-friend</span> newlat
+         (cons (<span style="color:#66d9ef">quote </span>tuna) seen))))
 
-</code></pre>
-
-<h3 id="额外话题-insertleft-insertright-eventonly比较上面的rember-理解col">额外话题 insertleft insertright eventonly比较上面的rember,理解col</h3>
-
-<pre><code class="language-scheme">
-(define multiinsertLR
-  (lambda (new oldL oldR lat)
-    (cond
-      ((null? lat) (quote ()))
+</code></pre></div><h3 id="-insertleft-insertright-eventonlyrembercol">额外话题 insertleft insertright eventonly比较上面的rember,理解col</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">
+(<span style="color:#66d9ef">define </span>multiinsertLR
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">new</span> oldL oldR lat)
+    (<span style="color:#a6e22e">cond</span>
+      ((null? lat) (<span style="color:#66d9ef">quote </span>()))
       ((eq? (car lat) oldL)
        (cons new 
              (cons oldL
-                   (multiinsertLR new oldL oldR
+                   (<span style="color:#a6e22e">multiinsertLR</span> new oldL oldR
                                   (cdr lat)))))
       ((eq? (car lat) oldR)
        (cons oldR
              (cons new
-                   (multiinsertLR new oldL oldR
+                   (<span style="color:#a6e22e">multiinsertLR</span> new oldL oldR
                                  (cdr lat))))))))
 
-(define multiinsertLRco
-  (lambda (new oldL oldR lat col)
-    (cond
+(<span style="color:#66d9ef">define </span>multiinsertLRco
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">new</span> oldL oldR lat col)
+    (<span style="color:#a6e22e">cond</span>
       ((null? lat)
-       (col (quote ()) 0 0))
+       (<span style="color:#a6e22e">col</span> (<span style="color:#66d9ef">quote </span>()) <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span>))
       ((eq? (car lat) oldL)
-       (multiinsertLRco new oldL oldR
+       (<span style="color:#a6e22e">multiinsertLRco</span> new oldL oldR
                         (cdr lat)
-                        (lambda (newlat L R)
-                          (col (cons new 
+                        (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">newlat</span> L R)
+                          (<span style="color:#a6e22e">col</span> (cons new 
                                      (cons oldL newlat))
-                               (+ 1 L) R))))
+                               (+ <span style="color:#ae81ff">1</span> L) R))))
       ((eq? (car lat) oldR)
-       (multiinsertLRco new oldL oldR
+       (<span style="color:#a6e22e">multiinsertLRco</span> new oldL oldR
                         (cdr lat)
-                        (lambda (newlat L R)
-                          (col (cons oldR
+                        (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">newlat</span> L R)
+                          (<span style="color:#a6e22e">col</span> (cons oldR
                                      (cons new newlat))
-                               L (+ 1 R)))))
-      (else
-       (multiinsertLRco new oldL oldR 
+                               L (+ <span style="color:#ae81ff">1</span> R)))))
+      (<span style="color:#a6e22e">else</span>
+       (<span style="color:#a6e22e">multiinsertLRco</span> new oldL oldR 
                         (cdr lat)
-                        (lambda (newlat L R)
-                          (col (cons (car lat) newlat)
+                        (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">newlat</span> L R)
+                          (<span style="color:#a6e22e">col</span> (cons (car lat) newlat)
                                L R)))))))
 
 
-(define evens-only*co
-  (lambda (l col)
-    (cond
+(<span style="color:#66d9ef">define </span>evens-only*co
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">l</span> col)
+    (<span style="color:#a6e22e">cond</span>
       ((null? l)
-       (col (quote ()) 1 0))
-      ((atom? (car l))
-       (cond 
+       (<span style="color:#a6e22e">col</span> (<span style="color:#66d9ef">quote </span>()) <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">0</span>))
+      ((<span style="color:#a6e22e">atom?</span> (car l))
+       (<span style="color:#66d9ef">cond </span>
          ((even? (car l))
-          (evens-only*co (cdr l)
-                         (lambda (newl p s)
-                           (col (cons (car l) newl);if it is evens ,so cons it into the newl
+          (<span style="color:#a6e22e">evens-only*co</span> (cdr l)
+                         (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">newl</span> p s)
+                           (<span style="color:#a6e22e">col</span> (cons (car l) newl)<span style="color:#75715e">;if it is evens ,so cons it into the newl</span>
                                 (* (car l) p) s))))
-         (else (evens-only*co (cdr l)
-                              (lambda (newl p s)
-                                (col newl p (+ (car l) s)))))))
-       (else (evens-only*co (car l)
-                            (lambda (al ap as)
-                              (evens-only*co (cdr l)
-                                             (lambda (dl dp ds)
-                                               (col (cons al dl)
+         (<span style="color:#66d9ef">else </span>(<span style="color:#a6e22e">evens-only*co</span> (cdr l)
+                              (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">newl</span> p s)
+                                (<span style="color:#a6e22e">col</span> newl p (+ (car l) s)))))))
+       (<span style="color:#66d9ef">else </span>(<span style="color:#a6e22e">evens-only*co</span> (car l)
+                            (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">al</span> ap as)
+                              (<span style="color:#a6e22e">evens-only*co</span> (cdr l)
+                                             (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">dl</span> dp ds)
+                                               (<span style="color:#a6e22e">col</span> (cons al dl)
                                                     (* ap dp)
                                                     (+ as ds))))))))))
-;the fourth collector :: the last-last-friend
-(define the-last-last-friend
-  (lambda (newl product sum)
+<span style="color:#75715e">;the fourth collector :: the last-last-friend</span>
+(<span style="color:#66d9ef">define </span>the-last-last-friend
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">newl</span> product sum)
     (cons sum 
           (cons product 
                 newl))))
-;&gt; (evens-only*co '(45389 63 45 6 4 234  6 4 23 52 43) the-last-last-friend)
-;'(45563 7008768 6 4 234 6 4 52)
+<span style="color:#75715e">;&gt; (evens-only*co &#39;(45389 63 45 6 4 234  6 4 23 52 43) the-last-last-friend)</span>
+<span style="color:#75715e">;&#39;(45563 7008768 6 4 234 6 4 52)</span>
 
 
-</code></pre>
-
-<ol>
+</code></pre></div><ol start="7">
 <li>进一步升级multirember 提取公共形式</li>
 </ol>
-
 <p>insert-g可以变幻出 rember
- insert-r insert-l  subset等</p>
-
-<pre><code class="language-scheme">
-(define rembern
-  (lambda (a l)
-    ((insert-g seqrem) #f a l)));;seqrem doesn't need (seqrem solve my ?.
-(define seqrem
-  (lambda (new old l) 
+insert-r insert-l  subset等</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">
+(<span style="color:#66d9ef">define </span>rembern
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">a</span> l)
+    ((<span style="color:#a6e22e">insert-g</span> seqrem) <span style="color:#66d9ef">#f</span> a l)))<span style="color:#75715e">;;seqrem doesn&#39;t need (seqrem solve my ?.</span>
+(<span style="color:#66d9ef">define </span>seqrem
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">new</span> old l) 
     l))
 
-</code></pre>
-
-<p><em>那么insert-g到底是什么?</em></p>
-
-<pre><code class="language-scheme">
-(define insert-g
-  (lambda (seq)
-    (lambda (new old l)
-      (cond
-        ((null? l) (quote ()))
+</code></pre></div><p><em>那么insert-g到底是什么?</em></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">
+(<span style="color:#66d9ef">define </span>insert-g
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">seq</span>)
+    (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">new</span> old l)
+      (<span style="color:#a6e22e">cond</span>
+        ((null? l) (<span style="color:#66d9ef">quote </span>()))
         ((eq? (car l) old)
-         (seq new old (cdr l)))
-        (else (cons (car l)
-                    ((insert-g seq) new old
+         (<span style="color:#a6e22e">seq</span> new old (cdr l)))
+        (<span style="color:#66d9ef">else </span>(cons (car l)
+                    ((<span style="color:#a6e22e">insert-g</span> seq) new old
                                     (cdr l))))))))
 
-</code></pre>
-
-<p>所以现在我们可以定义subst</p>
-
-<pre><code class="language-scheme">(define seqS
-  (lambda (new old l)
+</code></pre></div><p>所以现在我们可以定义subst</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">define </span>seqS
+  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">new</span> old l)
     (cons new l)))
 
-(define seqL
-    (lambda (new old l)
+(<span style="color:#66d9ef">define </span>seqL
+    (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">new</span> old l)
      (cons new (cons old l))))
 
-(define seqR
-    (lambda (new old l)
-        (cons (old (cons new l)))))
+(<span style="color:#66d9ef">define </span>seqR
+    (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">new</span> old l)
+        (cons (<span style="color:#a6e22e">old</span> (cons new l)))))
 
-(define subst1 (insert-g seqS))
-(define insertL (insert-g seqL))
-(define insertR (insert-g seqR))
+(<span style="color:#66d9ef">define </span>subst1 (<span style="color:#a6e22e">insert-g</span> seqS))
+(<span style="color:#66d9ef">define </span>insertL (<span style="color:#a6e22e">insert-g</span> seqL))
+(<span style="color:#66d9ef">define </span>insertR (<span style="color:#a6e22e">insert-g</span> seqR))
 
-</code></pre>
-
-<p>经过这四个级别的抽象我们得到一般的具备公共模式的insert-g
+</code></pre></div><p>经过这四个级别的抽象我们得到一般的具备公共模式的insert-g
 当然该函数还可以继续抽象。</p>
     </div>
  <div class="nav-links" style="padding:10;">
@@ -1815,7 +1719,7 @@ More beautiful and symmetry</p>
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

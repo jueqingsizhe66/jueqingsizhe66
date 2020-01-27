@@ -38,8 +38,6 @@ README
 Informative text file
 LICENCE
 Software licence statement
-
-
 下面是我的建立过程:">
 
   
@@ -139,8 +137,6 @@ README
 Informative text file
 LICENCE
 Software licence statement
-
-
 下面是我的建立过程:"><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
   <meta property="twitter:image" content="https://jueqingsizhe66.github.io/img/icon-192.png"><meta property="og:locale" content="en-us">
   
@@ -590,15 +586,12 @@ Software licence statement
 <span class="article-metadata" >Reading time: 4 minutes and    31 seconds with 997 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#1新建一个hello文件夹-在hello文件夹新建一个src">1新建一个HELLO文件夹,在HELLO文件夹新建一个src</a></li>
-<li><a href="#2-main-hs-在src内新建一个main-hs">2 main.hs  在src内新建一个main.hs</a></li>
-<li><a href="#3-cabal-init">3 cabal init</a></li>
-<li><a href="#一个提醒-https-www-haskell-org-haddock-doc-html-markup-html-id564988"><a href="https://www.haskell.org/haddock/doc/html/markup.html#id564988" target="_blank">一个提醒</a></a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#1hellohellosrc">1新建一个HELLO文件夹,在HELLO文件夹新建一个src</a></li>
+    <li><a href="#2-mainhs--srcmainhs">2 main.hs  在src内新建一个main.hs</a></li>
+    <li><a href="#3-cabal-init">3 cabal init</a></li>
+    <li><a href="#httpswwwhaskellorghaddockdochtmlmarkuphtmlid564988-">一个提醒</a></li>
+  </ul>
 </nav>
     </aside>
   <div class="article-container">
@@ -615,36 +608,25 @@ README
 Informative text file
 LICENCE
 Software licence statement
-</code></pre>
-
-<p>下面是我的建立过程:</p>
-
-<h2 id="1新建一个hello文件夹-在hello文件夹新建一个src">1新建一个HELLO文件夹,在HELLO文件夹新建一个src</h2>
-
-<pre><code class="language-sh">mkdir HELLO
+</code></pre><p>下面是我的建立过程:</p>
+<h2 id="1hellohellosrc">1新建一个HELLO文件夹,在HELLO文件夹新建一个src</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">mkdir HELLO
 cd HELLO
 mdkir src
-</code></pre>
+</code></pre></div><h2 id="2-mainhs--srcmainhs">2 main.hs  在src内新建一个main.hs</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#66d9ef">module</span> Main <span style="color:#66d9ef">where</span>
 
-<h2 id="2-main-hs-在src内新建一个main-hs">2 main.hs  在src内新建一个main.hs</h2>
+<span style="color:#66d9ef">import</span> Control.Monad
 
-<pre><code class="language-haskell">module Main where
-
-import Control.Monad
-
-main=do
-  putStrLn &quot;Quit? y/n&quot;
-  ans &lt;- getLine
-  when (ans /= &quot;y&quot;) $ do
-       putStrLn &quot;not quiting&quot;
+<span style="color:#a6e22e">main</span><span style="color:#f92672">=</span><span style="color:#66d9ef">do</span>
+  putStrLn <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Quit? y/n</span><span style="color:#e6db74">&#34;</span>
+  ans <span style="color:#f92672">&lt;-</span> getLine
+  when (ans <span style="color:#f92672">/=</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">y</span><span style="color:#e6db74">&#34;</span>) <span style="color:#f92672">$</span> <span style="color:#66d9ef">do</span>
+       putStrLn <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">not quiting</span><span style="color:#e6db74">&#34;</span>
        main
-</code></pre>
-
-<h2 id="3-cabal-init">3 cabal init</h2>
-
+</code></pre></div><h2 id="3-cabal-init">3 cabal init</h2>
 <p>Return to the* top* directory, and run cabal init.
 It helps you fill out the following information:</p>
-
 <ul>
 <li>Package name</li>
 <li>Package version</li>
@@ -653,39 +635,26 @@ It helps you fill out the following information:</p>
 <li>Maintainer email</li>
 <li>Project homepage URL</li>
 <li>Project synopsis</li>
-
-<li><p>Build type</p>
-
-<pre><code class="language-sh">cabal init
-</code></pre></li>
+<li>Build type</li>
 </ul>
-
-<p><a href="https://github.com/CGenie/haskell-snake/blob/master/snake.cabal" target="_blank">一个填写模板</a></p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">cabal init
+</code></pre></div><p><a href="https://github.com/CGenie/haskell-snake/blob/master/snake.cabal">一个填写模板</a></p>
 <p>至此现在你的文件结构应该是</p>
-
-<pre><code class="language-sh">$ tree
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ tree
 .
 |-- HELLO.cabal
 |-- LICENSE
 |-- Setup.hs
-`-- src
-    `-- Main.hs
+<span style="color:#e6db74">`</span>-- src
+    <span style="color:#e6db74">`</span>-- Main.hs
 
-</code></pre>
-
-<p>现在你就可以分享你的程序，而如果你要安装，则可以继续看下面简单操作</p>
-
+</code></pre></div><p>现在你就可以分享你的程序，而如果你要安装，则可以继续看下面简单操作</p>
 <p>Run +cabal install+ at the project directory
 然后就会把你的执行程序放在~/.cabal/bin中了</p>
-
-<pre><code class="language-sh">cabal install
-</code></pre>
-
-<p>一定要注意 修改HELLO.cabal中的main-is,不要注释他，默认是注释
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">cabal install
+</code></pre></div><p>一定要注意 修改HELLO.cabal中的main-is,不要注释他，默认是注释
 并且填入src的主文件名 Main.hs</p>
-
-<pre><code class="language-sh">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">
 
 executable HELLO
   -- .hs or .lhs file containing the Main module.
@@ -695,135 +664,108 @@ executable HELLO
   -- other-modules:       
   
   -- Other library packages from which modules are imported.
-  build-depends:       base ==4.6.*
+  build-depends:       base <span style="color:#f92672">=</span><span style="color:#f92672">=</span>4.6.*
   
   -- Directories containing source files.
   hs-source-dirs:      src
   
-</code></pre>
-
-<p>结果是：</p>
-
-<pre><code class="language-sh">$ cabal install
+</code></pre></div><p>结果是：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ cabal install
 Resolving dependencies...
 Configuring HELLO-1.0.0...
 Building HELLO-1.0.0...
-Preprocessing executable 'HELLO' for HELLO-1.0.0...
-[1 of 1] Compiling Main             ( src/Main.hs, dist/build/HELLO/HELLO-tmp/Main.o )
+Preprocessing executable <span style="color:#e6db74">&#39;HELLO&#39;</span> <span style="color:#66d9ef">for</span> HELLO-1.0.0...
+<span style="color:#f92672">[</span><span style="color:#ae81ff">1</span> of 1<span style="color:#f92672">]</span> Compiling Main             <span style="color:#f92672">(</span> src/Main.hs, dist/build/HELLO/HELLO-tmp/Main.o <span style="color:#f92672">)</span>
 Linking dist/build/HELLO/HELLO ...
-Installing executable(s) in /home/javazhao/.cabal/bin
+Installing executable<span style="color:#f92672">(</span>s<span style="color:#f92672">)</span> in /home/javazhao/.cabal/bin
 Installed HELLO-1.0.0
 
-</code></pre>
-
-<p>此时的文档结构如下:</p>
-
-<pre><code class="language-haskell">$ tree
-.
-|-- dist
-|   |-- build
-|   |   |-- autogen
-|   |   |   |-- cabal_macros.h
-|   |   |   `-- Paths_HELLO.hs
-|   |   `-- HELLO
-|   |       |-- HELLO
-|   |       `-- HELLO-tmp
-|   |           |-- Main.hi
-|   |           `-- Main.o
-|   |-- package.conf.inplace
-|   `-- setup-config
-|-- HELLO.cabal
-|-- LICENSE
-|-- Setup.hs
-`-- src
-    `-- Main.hs
-</code></pre>
-
-<p>一些额外知识：</p>
-
+</code></pre></div><p>此时的文档结构如下:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#f92672">$</span> tree
+<span style="color:#f92672">.</span>
+<span style="color:#f92672">|--</span> dist
+<span style="color:#f92672">|</span>   <span style="color:#f92672">|--</span> build
+<span style="color:#f92672">|</span>   <span style="color:#f92672">|</span>   <span style="color:#f92672">|--</span> autogen
+<span style="color:#f92672">|</span>   <span style="color:#f92672">|</span>   <span style="color:#f92672">|</span>   <span style="color:#f92672">|--</span> cabal_macros<span style="color:#f92672">.</span>h
+<span style="color:#f92672">|</span>   <span style="color:#f92672">|</span>   <span style="color:#f92672">|</span>   `<span style="color:#75715e">-- Paths_HELLO.hs</span>
+<span style="color:#f92672">|</span>   <span style="color:#f92672">|</span>   `<span style="color:#75715e">-- HELLO</span>
+<span style="color:#f92672">|</span>   <span style="color:#f92672">|</span>       <span style="color:#f92672">|--</span> <span style="color:#66d9ef">HELLO</span>
+<span style="color:#f92672">|</span>   <span style="color:#f92672">|</span>       `<span style="color:#75715e">-- HELLO-tmp</span>
+<span style="color:#f92672">|</span>   <span style="color:#f92672">|</span>           <span style="color:#f92672">|--</span> <span style="color:#66d9ef">Main</span><span style="color:#f92672">.</span>hi
+<span style="color:#f92672">|</span>   <span style="color:#f92672">|</span>           `<span style="color:#75715e">-- Main.o</span>
+<span style="color:#f92672">|</span>   <span style="color:#f92672">|--</span> package<span style="color:#f92672">.</span>conf<span style="color:#f92672">.</span>inplace
+<span style="color:#f92672">|</span>   `<span style="color:#75715e">-- setup-config</span>
+<span style="color:#f92672">|--</span> <span style="color:#66d9ef">HELLO</span><span style="color:#f92672">.</span>cabal
+<span style="color:#f92672">|--</span> <span style="color:#66d9ef">LICENSE</span>
+<span style="color:#f92672">|--</span> <span style="color:#66d9ef">Setup</span><span style="color:#f92672">.</span>hs
+`<span style="color:#75715e">-- src</span>
+    `<span style="color:#75715e">-- Main.hs</span>
+</code></pre></div><p>一些额外知识：</p>
 <p>Open up Main.hs and add some documentation
 &ndash; | is the syntax for documenting function type signature, type declaration, or class declaration,记住&ndash;和|中间有一个空格</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#66d9ef">module</span> Main <span style="color:#66d9ef">where</span>
 
-<pre><code class="language-haskell">module Main where
-
--- |This is the main function
-main :: IO()
-main = do
-  putStrLn &quot;What's your name?&quot;
-  name &lt;- getLine
-  putStrLn (&quot;Hi &quot; ++ name)
-</code></pre>
-
-<p>然后就可以使用Haddock(前提是你运行了cabal install,这样你的文件夹下才有dist)
+<span style="color:#75715e">-- |This is the main function</span>
+<span style="color:#a6e22e">main</span> <span style="color:#f92672">::</span> <span style="color:#66d9ef">IO</span>()
+<span style="color:#a6e22e">main</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">do</span>
+  putStrLn <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">What&#39;s your name?</span><span style="color:#e6db74">&#34;</span>
+  name <span style="color:#f92672">&lt;-</span> getLine
+  putStrLn (<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Hi </span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">++</span> name)
+</code></pre></div><p>然后就可以使用Haddock(前提是你运行了cabal install,这样你的文件夹下才有dist)
 Haddock is a documentation engine</p>
-
 <p>首先需要安装alex：</p>
-
-<pre><code class="language-sh">cabal install alex
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">cabal install alex
 Linking dist/build/alex/alex ...
-Installing executable(s) in /home/javazhao/.cabal/bin
+Installing executable<span style="color:#f92672">(</span>s<span style="color:#f92672">)</span> in /home/javazhao/.cabal/bin
 Installed alex-3.1.4
 
-</code></pre>
-
-<p>然后安装happy</p>
-
-<pre><code class="language-sh">cabal install happy
+</code></pre></div><p>然后安装happy</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">cabal install happy
 
 Linking dist/build/happy/happy ...
-Installing executable(s) in /home/javazhao/.cabal/bin
+Installing executable<span style="color:#f92672">(</span>s<span style="color:#f92672">)</span> in /home/javazhao/.cabal/bin
 Installed happy-1.19.5
 
-</code></pre>
-
-<p>最后安装haddock：</p>
-
-<pre><code class="language-sh">cabal install haddock
+</code></pre></div><p>最后安装haddock：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">cabal install haddock
 Linking dist/build/haddock/haddock ...
 Installing library in /home/javazhao/.cabal/lib/haddock-2.13.2.1/ghc-7.6.3
-Installing executable(s) in /home/javazhao/.cabal/bin
+Installing executable<span style="color:#f92672">(</span>s<span style="color:#f92672">)</span> in /home/javazhao/.cabal/bin
 Registering haddock-2.13.2.1...
 Installed haddock-2.13.2.1
-</code></pre>
-
-<p>最后运行结果</p>
-
-<pre><code class="language-sh"> cabal haddock --executables
+</code></pre></div><p>最后运行结果</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"> cabal haddock --executables
 $ cabal haddock --executables 
-Running Haddock for HELLO-1.0.0...
-Preprocessing executable 'HELLO' for HELLO-1.0.0...
-Warning: The documentation for the following packages are not installed. No
+Running Haddock <span style="color:#66d9ef">for</span> HELLO-1.0.0...
+Preprocessing executable <span style="color:#e6db74">&#39;HELLO&#39;</span> <span style="color:#66d9ef">for</span> HELLO-1.0.0...
+Warning: The documentation <span style="color:#66d9ef">for</span> the following packages are not installed. No
 links will be generated to these packages: base-4.6.0.1, rts-1.0,
 ghc-prim-0.3.0.0, integer-gmp-0.5.0.0
 Haddock coverage:
-  50% (  1 /  2) in 'Main'
-Warning: Main: could not find link destinations for:
+  50% <span style="color:#f92672">(</span>  <span style="color:#ae81ff">1</span> /  2<span style="color:#f92672">)</span> in <span style="color:#e6db74">&#39;Main&#39;</span>
+Warning: Main: could not find link destinations <span style="color:#66d9ef">for</span>:
     GHC.Types.IO
 Documentation created: dist/doc/html/HELLO/HELLO/index.html
 
-</code></pre>
-
-<p>然后你的文档就会存在dist/doc/html/HELLO/HELLO/index.html
+</code></pre></div><p>然后你的文档就会存在dist/doc/html/HELLO/HELLO/index.html
 这其实就是官网的那些类库网页的的产生方式.</p>
-
 <p>最终的文档结构：</p>
-
-<pre><code class="language-sh">$ tree
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ tree
 .
 |-- dist
 |   |-- build
 |   |   |-- autogen
 |   |   |   |-- cabal_macros.h
-|   |   |   `-- Paths_HELLO.hs
-|   |   `-- HELLO
+|   |   |   <span style="color:#e6db74">`</span>-- Paths_HELLO.hs
+|   |   <span style="color:#e6db74">`</span>-- HELLO
 |   |       |-- HELLO
-|   |       `-- HELLO-tmp
+|   |       <span style="color:#e6db74">`</span>-- HELLO-tmp
 |   |           |-- Main.hi
-|   |           `-- Main.o
+|   |           <span style="color:#e6db74">`</span>-- Main.o
 |   |-- doc
-|   |   `-- html
-|   |       `-- HELLO
-|   |           `-- HELLO
+|   |   <span style="color:#e6db74">`</span>-- html
+|   |       <span style="color:#e6db74">`</span>-- HELLO
+|   |           <span style="color:#e6db74">`</span>-- HELLO
 |   |               |-- doc-index.html
 |   |               |-- frames.html
 |   |               |-- haddock-util.js
@@ -836,27 +778,22 @@ Documentation created: dist/doc/html/HELLO/HELLO/index.html
 |   |               |-- minus.gif
 |   |               |-- ocean.css
 |   |               |-- plus.gif
-|   |               `-- synopsis.png
+|   |               <span style="color:#e6db74">`</span>-- synopsis.png
 |   |-- package.conf.inplace
-|   `-- setup-config
+|   <span style="color:#e6db74">`</span>-- setup-config
 |-- HELLO.cabal
 |-- LICENSE
 |-- Setup.hs
-`-- src
-    `-- Main.hs
+<span style="color:#e6db74">`</span>-- src
+    <span style="color:#e6db74">`</span>-- Main.hs
 
-</code></pre>
-
-<h2 id="一个提醒-https-www-haskell-org-haddock-doc-html-markup-html-id564988"><a href="https://www.haskell.org/haddock/doc/html/markup.html#id564988" target="_blank">一个提醒</a></h2>
-
+</code></pre></div><h2 id="httpswwwhaskellorghaddockdochtmlmarkuphtmlid564988-"><a href="https://www.haskell.org/haddock/doc/html/markup.html#id564988">一个提醒</a></h2>
 <p>以后写代码的时候，一定要注意标注</p>
-
 <ul>
 <li>使用&ndash; |</li>
 <li>使用{- -} 针对快注释</li>
 </ul>
-
-<p><a href="https://www.haskell.org/haddock/doc/html/index.html" target="_blank">一个链接关于haddock的用户指南</a></p>
+<p><a href="https://www.haskell.org/haddock/doc/html/index.html">一个链接关于haddock的用户指南</a></p>
     </div>
  <div class="nav-links" style="padding:10;">
         
@@ -1260,7 +1197,7 @@ Documentation created: dist/doc/html/HELLO/HELLO/index.html
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

@@ -30,10 +30,7 @@
   
   <meta name="description" content="FAST(Fatigue,Aerodynamic,Struture,Turbulence),是一款风力机的气动、水动力、
 励磁、结构等几个部分的模拟工具
-
 风力机系统的整体带入流风物理流动现象:
-
-
 
 而本文主要讲的是如何在ubuntu64bit系统编译FAST使其可以使用。">
 
@@ -126,10 +123,7 @@
   <meta property="og:title" content="FAST In Ubuntu64Bit 编译注意事项 | Macro Life">
   <meta property="og:description" content="FAST(Fatigue,Aerodynamic,Struture,Turbulence),是一款风力机的气动、水动力、
 励磁、结构等几个部分的模拟工具
-
 风力机系统的整体带入流风物理流动现象:
-
-
 
 而本文主要讲的是如何在ubuntu64bit系统编译FAST使其可以使用。"><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
   <meta property="twitter:image" content="https://jueqingsizhe66.github.io/img/icon-192.png"><meta property="og:locale" content="en-us">
@@ -580,74 +574,49 @@
 <span class="article-metadata" >Reading time: 3 minutes and    17 seconds with 725 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#1-操作系统的位数">1 操作系统的位数</a></li>
-<li><a href="#2-register-exe编译">2.register.exe编译</a></li>
-<li><a href="#3-map-生成libmap-so">3. MAP++生成libmap.so</a></li>
-<li><a href="#4-discon-dll编译使得nrel-5mw也能运行">4 DISCON_DLL编译使得NREL 5MW也能运行</a>
-<ul>
-<li><a href="#4-1-编译方式">4.1 编译方式</a></li>
-<li><a href="#4-2注意有可能编译不通过">4.2注意有可能编译不通过：</a></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#1-">1 操作系统的位数</a></li>
+    <li><a href="#2registerexe">2.register.exe编译</a></li>
+    <li><a href="#3-maplibmapso">3. MAP++生成libmap.so</a></li>
+    <li><a href="#4-discon-dllnrel-5mw">4 DISCON_DLL编译使得NREL 5MW也能运行</a>
+      <ul>
+        <li><a href="#41-">4.1 编译方式</a></li>
+        <li><a href="#42">4.2注意有可能编译不通过：</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
     </aside>
   <div class="article-container">
 
 
     <div class="article-style">
-      <p><a href="https://nwtc.nrel.gov/FAST8" target="_blank">FAST(Fatigue,Aerodynamic,Struture,Turbulence)</a>,是一款风力机的气动、水动力、
-励磁、结构等几个部分的模拟<a href="http://www.nrel.gov/docs/fy13osti/57228.pdf" target="_blank">工具</a></p>
-
+      <p><a href="https://nwtc.nrel.gov/FAST8">FAST(Fatigue,Aerodynamic,Struture,Turbulence)</a>,是一款风力机的气动、水动力、
+励磁、结构等几个部分的模拟<a href="http://www.nrel.gov/docs/fy13osti/57228.pdf">工具</a></p>
 <p>风力机系统的整体带入流风物理流动现象:</p>
-
-<p><img src="/images/fast/WTSystem.png" alt="Physical phenomena affecting a floating wind turbine system" /></p>
-
+<p><img src="/images/fast/WTSystem.png" alt="Physical phenomena affecting a floating wind turbine system"></p>
 <p>而本文主要讲的是如何在ubuntu64bit系统编译FAST使其可以使用。</p>
-
-<h2 id="1-操作系统的位数">1 操作系统的位数</h2>
-
+<h2 id="1-">1 操作系统的位数</h2>
 <pre><code>找到Compiling文件夹下的makefile，然后将bits=32 改为64
 </code></pre>
-
-<h2 id="2-register-exe编译">2.register.exe编译</h2>
-
+<h2 id="2registerexe">2.register.exe编译</h2>
 <p>首先编译Source/dependecy/Registry 的makefile，然后生成一个register.exe 供给fast makefile使用</p>
-
-<h2 id="3-map-生成libmap-so">3. MAP++生成libmap.so</h2>
-
-<p>从官网<a href="https://nwtc.nrel.gov/MAP" target="_blank">https://nwtc.nrel.gov/MAP</a> 下载map源文件，然后编译 生成一个libmap.so
- 注意： 必须是 lapack developer版本才可以，</p>
-
+<h2 id="3-maplibmapso">3. MAP++生成libmap.so</h2>
+<p>从官网https://nwtc.nrel.gov/MAP 下载map源文件，然后编译 生成一个libmap.so
+注意： 必须是 lapack developer版本才可以，</p>
 <pre><code> apt-get install lapack*
-</code></pre>
-
-<p>并把so文件放到FAST目录下的bin文件夹（没有则创建），然后make fast的makefile即可。</p>
-
-<h2 id="4-discon-dll编译使得nrel-5mw也能运行">4 DISCON_DLL编译使得NREL 5MW也能运行</h2>
-
+</code></pre><p>并把so文件放到FAST目录下的bin文件夹（没有则创建），然后make fast的makefile即可。</p>
+<h2 id="4-discon-dllnrel-5mw">4 DISCON_DLL编译使得NREL 5MW也能运行</h2>
 <p>之前的三个步骤,在bin目录生成的FAST_glint64只能运行Test1-18.fst对应的机型.</p>
-
 <p>如果想运行Nrel-5MW（Test18-26.fst)必须是编译makefile_DISCON_DLL,并修改
-  CertTest/5MW_Baseline/ServDyn 的CertTest/5MW_Baseline/NRELOffshrBsline5MW_Onshore_ServoDyn.dat 更改对应的<strong>DLL_FileName</strong> 为 <em>ServoData/DISCON_glin64.so</em></p>
-
-<h3 id="4-1-编译方式">4.1 编译方式</h3>
-
+CertTest/5MW_Baseline/ServDyn 的CertTest/5MW_Baseline/NRELOffshrBsline5MW_Onshore_ServoDyn.dat 更改对应的<strong>DLL_FileName</strong> 为 <em>ServoData/DISCON_glin64.so</em></p>
+<h3 id="41-">4.1 编译方式</h3>
 <pre><code>    make -f makefile_DISCON_DLL
-</code></pre>
-
-<h3 id="4-2注意有可能编译不通过">4.2注意有可能编译不通过：</h3>
-
+</code></pre><h3 id="42">4.2注意有可能编译不通过：</h3>
 <p>必须在makefile_DISCON_DLL中的  FFLAGS加入  -fPIC</p>
-
 <pre><code>FFLAGS  = -O2 -m$(BITS) -fbacktrace -ffree-line-length-none -x f95-cpp-input -fPIC -C
 
-</code></pre>
-
-<p>针对与Fast开发者可以参考<a href="https://nwtc.nrel.gov/FAST-Developers" target="_blank">FAST-Developers</a></p>
+</code></pre><p>针对与Fast开发者可以参考<a href="https://nwtc.nrel.gov/FAST-Developers">FAST-Developers</a></p>
     </div>
  <div class="nav-links" style="padding:10;">
         
@@ -1051,7 +1020,7 @@
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

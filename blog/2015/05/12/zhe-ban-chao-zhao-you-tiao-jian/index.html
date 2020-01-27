@@ -567,7 +567,7 @@ if f(a)&lt;0&lt;f(b), so the value must be inside the [a,b]."><meta property="og
 
 <span class="article-metadata" >Reading time: 0 minutes and    40 seconds with 147 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
-        
+        <nav id="TableOfContents"></nav>
     </aside>
   <div class="article-container">
 
@@ -575,39 +575,38 @@ if f(a)&lt;0&lt;f(b), so the value must be inside the [a,b]."><meta property="og
     <div class="article-style">
       <p>You want to solve F(x)=0,
 if f(a)&lt;0&lt;f(b), so the value must be inside the [a,b].</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#f92672">#</span>lang racket
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">close-enough?</span> x  y)
+  (&lt; (abs (-  x y)) <span style="color:#ae81ff">0.00001</span>))
 
-<pre><code class="language-scheme">#lang racket
-(define (close-enough? x  y)
-  (&lt; (abs (-  x y)) 0.00001))
-
-(define (average a b)
-  (/ (+  a b) 2.0))
-(define (search f neg-point pos-point)
-   (let ((midpoint (average neg-point pos-point)))
-     (if (close-enough? neg-point pos-point)
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">average</span> a b)
+  (/ (+  a b) <span style="color:#ae81ff">2.0</span>))
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">search</span> f neg-point pos-point)
+   (<span style="color:#66d9ef">let </span>((<span style="color:#a6e22e">midpoint</span> (<span style="color:#a6e22e">average</span> neg-point pos-point)))
+     (<span style="color:#66d9ef">if </span>(<span style="color:#a6e22e">close-enough?</span> neg-point pos-point)
         midpoint
-        (let ((test-value (f midpoint)))
-          (cond ((positive? test-value)
-                 (search f neg-point midpoint))
+        (<span style="color:#66d9ef">let </span>((<span style="color:#a6e22e">test-value</span> (<span style="color:#a6e22e">f</span> midpoint)))
+          (<span style="color:#66d9ef">cond </span>((positive? test-value)
+                 (<span style="color:#a6e22e">search</span> f neg-point midpoint))
                ((negative? test-value) 
-                (search f midpoint pos-point))
-               (else midpoint))))))
+                (<span style="color:#a6e22e">search</span> f midpoint pos-point))
+               (<span style="color:#66d9ef">else </span>midpoint))))))
 
-;;必须判断一下，如果同号则无法使用折半查找
-(define (half-interval-method f a b)
-  (let ((a-value (f a))
-          (b-value (f b)))
-     (cond ((and (negative? a-value) (positive? b-value))
-            (search f a b))
-          ((and (negative? b-value) (positive? a-value))
-           (search f  a b))
-          (else
-           (error &quot;values are not of opposite sign&quot; a b)))))
+<span style="color:#75715e">;;必须判断一下，如果同号则无法使用折半查找</span>
+(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">half-interval-method</span> f a b)
+  (<span style="color:#66d9ef">let </span>((<span style="color:#a6e22e">a-value</span> (<span style="color:#a6e22e">f</span> a))
+          (<span style="color:#a6e22e">b-value</span> (<span style="color:#a6e22e">f</span> b)))
+     (<span style="color:#66d9ef">cond </span>((<span style="color:#66d9ef">and </span>(negative? a-value) (positive? b-value))
+            (<span style="color:#a6e22e">search</span> f a b))
+          ((<span style="color:#66d9ef">and </span>(negative? b-value) (positive? a-value))
+           (<span style="color:#a6e22e">search</span> f  a b))
+          (<span style="color:#a6e22e">else</span>
+           (<span style="color:#a6e22e">error</span> <span style="color:#e6db74">&#34;values are not of opposite sign&#34;</span> a b)))))
 
-(half-interval-method (lambda (x) (- (* x x x) (* 2 x) 3))
-                       1.0
-                       2.0)
-</code></pre>
+(<span style="color:#a6e22e">half-interval-method</span> (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">x</span>) (- (* x x x) (* <span style="color:#ae81ff">2</span> x) <span style="color:#ae81ff">3</span>))
+                       <span style="color:#ae81ff">1.0</span>
+                       <span style="color:#ae81ff">2.0</span>)
+</code></pre></div>
     </div>
  <div class="nav-links" style="padding:10;">
         
@@ -1011,7 +1010,7 @@ if f(a)&lt;0&lt;f(b), so the value must be inside the [a,b].</p>
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

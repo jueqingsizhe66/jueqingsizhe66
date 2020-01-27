@@ -569,22 +569,19 @@ cfaj network"><meta property="og:image" content="https://jueqingsizhe66.github.i
 
 
 
-<span class="article-metadata" >Reading time: 8 minutes and    7 seconds with 1788 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+<span class="article-metadata" >Reading time: 8 minutes and    9 seconds with 1795 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#bit">bit</a></li>
-<li><a href="#word">word</a></li>
-<li><a href="#line">line</a></li>
-<li><a href="#content">content</a></li>
-<li><a href="#file">file</a></li>
-<li><a href="#fildfolder">fildfolder</a></li>
-<li><a href="#system">system</a></li>
-<li><a href="#network-topology">Network topology</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#bit">bit</a></li>
+    <li><a href="#word">word</a></li>
+    <li><a href="#line">line</a></li>
+    <li><a href="#content">content</a></li>
+    <li><a href="#file">file</a></li>
+    <li><a href="#fildfolder">fildfolder</a></li>
+    <li><a href="#system">system</a></li>
+    <li><a href="#network-topology">Network topology</a></li>
+  </ul>
 </nav>
     </aside>
   <div class="article-container">
@@ -593,78 +590,71 @@ cfaj network"><meta property="og:image" content="https://jueqingsizhe66.github.i
     <div class="article-style">
       <p>I have many years experience in the shell command, so I categoried some commands into
 many categories,which let me understand the commands more clearly.
-You can first practice <a href="http://blog.chinaunix.net/uid-25932176-id-2973818.html" target="_blank">how to play with bash shell</a>,then you can catch the topic afterward
-<a href="http://cfajohnson.com/" target="_blank">cfaj network</a></p>
-
+You can first practice <a href="http://blog.chinaunix.net/uid-25932176-id-2973818.html">how to play with bash shell</a>,then you can catch the topic afterward
+<a href="http://cfajohnson.com/">cfaj network</a></p>
 <h2 id="bit">bit</h2>
-
 <ul>
 <li>programming language :
-
 <ul>
 <li>c ,c++ c#,java</li>
 <li>lisp,scheme,haskell etc</li>
 <li>bash,python,perl,ruby,etc</li>
 <li>javascript</li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <h2 id="word">word</h2>
-
 <ul>
-<li><p>programming language :</p>
-
+<li>programming language :
 <ul>
 <li>c ,c++ c#,java</li>
 <li>lisp,scheme,haskell etc</li>
-
-<li><p><a href="http://www.vaikan.com/bash-scripting" target="_blank">bash</a>,python,perl,ruby,etc</p>
-
+<li><a href="http://www.vaikan.com/bash-scripting">bash</a>,python,perl,ruby,etc
 <ul>
-<li>$() == () == `` means in the <strong>subshell</strong> closure the commands; $((  )) == ((  )): mainly some algorithm operations</li>
-
-<li><p>${} == {} means in the <strong>current shell</strong> closure the commands;  ${{  }} == {{  }}</p>
-
+<li>
+<p>$() == () == `` means in the <strong>subshell</strong> closure the commands; $((  )) == ((  )): mainly some algorithm operations</p>
+</li>
+<li>
+<p>${} == {} means in the <strong>current shell</strong> closure the commands;  ${{  }} == {{  }}</p>
 <ul>
-<li>${#f}  calculate the variable f&rsquo;s length</li>
+<li>${#f}  calculate the variable f's length</li>
 <li>${f:6}  get the string from 6 to end of the string</li>
 <li>${f:6:4} get the string from 6 to (6+4) of the string. ${f:${pos}:${len}}</li>
-<li>${f: -8} get the reverse from end to end+8&rsquo;s string.</li>
+<li>${f: -8} get the reverse from end to end+8's string.</li>
 <li>${f/path?/x}  &ndash;single replace</li>
 <li>${f//path?/x} &ndash;globle replace</li>
 <li>${f#*/}  delete the characters until get across a  / from left to right(<strong>From means start point. To means end point</strong>)
-
 <ul>
 <li>${var#*o}  remove the shortest string that matches PATTERN (the character &lsquo;o&rsquo;) from the begining of the expanded value</li>
-</ul></li>
+</ul>
+</li>
 <li>${f##*/} delete the caaracters until all the / symbols have been got across from left to right.
-
 <ul>
 <li>${0##*/} extract the name of a script from the $0 parameter,which contains the full path to the script</li>
-<li>similarly, you can use &ldquo;${1%/<em>}&ldquo;,&rdquo;${2%/</em>}&rdquo;  &hellip;.</li>
-</ul></li>
+<li>similarly, you can use &ldquo;${1%/<em>}&quot;,&ldquo;${2%/</em>}&rdquo;  &hellip;.</li>
+</ul>
+</li>
 <li>${f%*/}  delete the characters until get across a  /  from right to left</li>
 <li>${f%%*/} delete the caaracters until all the / symbols have been got across from right to left.</li>
 <li>variable (<strong>- is used to set the unset value; + is used to set the set value</strong>)
-
 <ul>
 <li>${var:-default} checks to see whether a variable is <strong>unset or empty</strong>,if yes,then expands to a default string to var(if omit the colon? see below)<code>unset var or var=</code>
-
 <ul>
 <li>${var:=default} 和${var:-default}很像，只不过他还多做了一个额外的功能，<strong>assign the default value to the variable</strong>.而在${var:-|+default}的情况下，并没有指派给变量值。</li>
-</ul></li>
+</ul>
+</li>
 <li>${var-default} checks to see whether a variable is <strong>unset</strong>,if yes,then expands to a default string to var, <code>unset var</code>,almost the same with colon</li>
 <li>${var:+alternative} use alternative value if $var <strong>is set and  not empty</strong></li>
 <li>${var+alternative} use alternative value if $var <strong>is set</strong>,it does matter whether $var is  empty or not</li>
-</ul></li>
-<li>${var<sup class="footnote-ref" id="fnref:a-m"><a href="#fn:a-m">1</a></sup>}</li>
-<li>${var^<sup class="footnote-ref" id="fnref:a-m"><a href="#fn:a-m">2</a></sup>} ## matches all characters from a to m inclusive! if match change to uppercase.NOTE:<strong>Only in Bash &gt;=4.0</strong></li>
+</ul>
+</li>
+<li>${var^[a-m]}</li>
+<li>${var^^[a-m]} ## matches all characters from a to m inclusive! if match change to uppercase.NOTE:<strong>Only in Bash &gt;=4.0</strong></li>
 <li>${var^^}  uppercase the string,such as toronto change to TORONTO</li>
 <li>${var^} Captitalize the string, such as toronto change to Toronto</li>
 <li>${var,,}  such as var=TORONTO change to toronto</li>
 <li>${var,,[N-Q]} such as var=TORONTO changes to ToRonTo</li>
 <li>ARRAY(use ${} to get the value of the array) Note: <strong>not POSIX standard ,but fit for bash shell</strong>
-
 <ul>
 <li>printf &ldquo;%s\n&rdquo; &ldquo;${BASH_VERSINFO[0]}&rdquo;    print the first element of the array BASH_VERSINFO bulit in the shell bash</li>
 <li>printf &ldquo;%s\n&rdquo; &ldquo;${BASH_VERSINFO[1]}&rdquo;    print the second element of the array BASH_VERSINFO bulit in the shell bash</li>
@@ -673,39 +663,44 @@ You can first practice <a href="http://blog.chinaunix.net/uid-25932176-id-297381
 <li>printf &ldquo;%s\n&rdquo; &ldquo;${BASH_VERSINFO[@]:1:2}&rdquo;    print the secondth and thirdth line element of the array BASH_VERSINFO bulit in the shell bash</li>
 <li>printf &ldquo;%s\n&rdquo; &ldquo;${#BASH_VERSINFO[*]}&rdquo;    print the length of the array BASH_VERSINFO bulit in the shell bash</li>
 <li>construct an array 1
-
 <ul>
 <li>unset a</li>
-<li>a[${#a[@]}]=&ldquo;1 $RANDOM&rdquo; ## #{#a[@]} is 0</li>
-<li>a[${#a[@]}]=&ldquo;2 $RANDOM&rdquo; ## #{#a[@]} is 1</li>
-<li>a[${#a[@]}]=&ldquo;3 $RANDOM&rdquo; ## #{#a[@]} is 2</li>
-<li>a[${#a[@]}]=&ldquo;4 $RANDOM&rdquo; ## #{#a[@]} is 3  &mdash;&gt; finally we have a fourth element array a</li>
+<li>a[${#a[@]}]=&quot;1 $RANDOM&rdquo; ## #{#a[@]} is 0</li>
+<li>a[${#a[@]}]=&quot;2 $RANDOM&rdquo; ## #{#a[@]} is 1</li>
+<li>a[${#a[@]}]=&quot;3 $RANDOM&rdquo; ## #{#a[@]} is 2</li>
+<li>a[${#a[@]}]=&quot;4 $RANDOM&rdquo; ## #{#a[@]} is 3  &mdash;&gt; finally we have a fourth element array a</li>
 <li>printf &ldquo;%s\n&rdquo; &ldquo;${a[@]}&rdquo;</li>
-</ul></li>
+</ul>
+</li>
 <li>construct an array 2
-
 <ul>
 <li>province=(Beijing Fujian Liaoning)</li>
 <li>printf &ldquo;%s\n&rdquo; &ldquo;${province[@]}&rdquo;</li>
-</ul></li>
+</ul>
+</li>
 <li>construct an array (Associative Arrays must be declared before)
-
 <ul>
 <li>declare -A array1  ## <strong>if not declare -A array1 only keep the last one assignment operation</strong>.</li>
 <li>for subsricpt in a b c d e</li>
 <li>do</li>
-<li>array[$subscript]=&ldquo;$subscript $RANDOM&rdquo;</li>
+<li>
+<pre><code>array[$subscript]=&quot;$subscript $RANDOM&quot;
+</code></pre>
+</li>
 <li>done</li>
 <li>printf &ldquo;:%s:\n&rdquo; &ldquo;${array[&ldquo;c&rdquo;]}&rdquo; ## print one value</li>
 <li>printf &ldquo;:%s:\n&rdquo; &ldquo;${array[@]}&rdquo; ## print one value</li>
-</ul></li>
-</ul></li>
-</ul></li>
-
-<li><p>$[[  ]] == [[  ]] &ndash;&gt; <a href="you can use variable match the regex expressions inside the  [[]]" target="_blank">[ =~ ]</a></p></li>
-
-<li><p>some special remarks:</p>
-
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>$[[  ]] == [[  ]] &ndash;&gt; [[ =~ ]] (you can use variable match the regex expressions inside the  [[]])</p>
+</li>
+<li>
+<p>some special remarks:</p>
 <ul>
 <li>*(pattern [|pattern] &hellip;)  the match occurence &gt;=0</li>
 <li>+(pattern [|pattern] &hellip;)  the match occurence &gt;=1</li>
@@ -714,54 +709,51 @@ You can first practice <a href="http://blog.chinaunix.net/uid-25932176-id-297381
 <li>&amp;   let the command execute backward</li>
 <li>``  redirect an command output to the argument of another command</li>
 <li>; command separator</li>
-<li>| pipe symbol, put a command output redirect to another command&rsquo;s input</li>
+<li>| pipe symbol, put a command output redirect to another command's input</li>
 <li>$# the numbers of the parameters while execute the shell scripts</li>
 <li>$@ the parameters  while execute the shell scripts(know every parameters) .Note use &ldquo;$@&rdquo;</li>
 <li>$* the parameters as a string while execute the shell scripts</li>
 <li>$! the PID number
-
 <ul>
 <li>${!var} 表示的是间接调用变量var,比如x=yes,var=x,如果直接使用echo $x得到yes,如果直接echo $var 得到的是x，如果使用echo ${!var}则是yes</li>
 <li><strong>${!}给你的感觉会好象是函数式变量，不断的变化中,类似的比如set &ndash;具有更换positional parameters的作用</strong>。</li>
-</ul></li>
-<li>case中<em>[!0-9]</em>) 表示 非数字 ，在正则表达式中一般是使用[^0-9]</li>
-<li>&rdquo;&rdquo; 字符串中加上双引号的作用是&rdquo;$a&rdquo; ，[ &ldquo;$a&rdquo; == &ldquo;abc str&rdquo;] 避免太多参数的报错！&rdquo;&ldquo;起着连接的作用,变量的值包起来，防止中间有空格，一般字符串反而不需要.这边又扯到<a href="http://blog.jobbole.com/46191" target="_blank">另一个问题</a>，比如[[ $foo == bar ]]不会展开foo的值,也就是把空格也当作字符串字面值的整体，而[ $foo == bar ] 则会展开foo的值,也就空格会分隔原来的foo字符串，这样可能会出现多参数错误。所以加上双引号有好处，暂时无坏(针对变量)</li>
-</ul></li>
-</ul></li>
-
-<li><p>javascript</p></li>
-</ul></li>
-
-<li><p>tr</p>
-
+</ul>
+</li>
+<li>case中*[!0-9]*) 表示 非数字 ，在正则表达式中一般是使用[^0-9]</li>
+<li>&quot;&rdquo; 字符串中加上双引号的作用是&quot;$a&rdquo; ，[ &ldquo;$a&rdquo; == &ldquo;abc str&rdquo;] 避免太多参数的报错！&ldquo;&ldquo;起着连接的作用,变量的值包起来，防止中间有空格，一般字符串反而不需要.这边又扯到<a href="http://blog.jobbole.com/46191">另一个问题</a>，比如[[ $foo == bar ]]不会展开foo的值,也就是把空格也当作字符串字面值的整体，而[ $foo == bar ] 则会展开foo的值,也就空格会分隔原来的foo字符串，这样可能会出现多参数错误。所以加上双引号有好处，暂时无坏(针对变量)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>javascript</li>
+</ul>
+</li>
+<li>tr
 <ul>
 <li>tr -d &lsquo;abc&rsquo;</li>
 <li>tr &lsquo;[a-z]&rsquo; &lsquo;[A-Z]&rsquo;</li>
-</ul></li>
-
-<li><p>seq</p></li>
 </ul>
-
-<p>类似的可以参考<a href="http://blog.useasp.net/archive/2014/06/02/summary-of-the-special-characters-in-shell-on-linux.aspx" target="_blank">shell符号</a>,并且注意shell当中一个
+</li>
+<li>seq</li>
+</ul>
+<p>类似的可以参考<a href="http://blog.useasp.net/archive/2014/06/02/summary-of-the-special-characters-in-shell-on-linux.aspx">shell符号</a>,并且注意shell当中一个
 比较大的书写问题是：等号两边不能有空格，括号和中括号两边最好有空格(比如最多的if判断）。</p>
-
 <h2 id="line">line</h2>
-
 <ul>
 <li>head</li>
 <li>tail</li>
 <li>sed</li>
 <li>grep(egrep)
-
 <ul>
 <li>grep -nR &ldquo;neededWord&rdquo; *</li>
-</ul></li>
+</ul>
+</li>
 <li>awk(actually it can be categoried into word manipulation)</li>
 <li>sort
-
 <ul>
 <li>sort -r -t :  -k 2</li>
-</ul></li>
+</ul>
+</li>
 <li>cut -d&rdquo;:&rdquo;  -f5</li>
 <li>read</li>
 <li>echo</li>
@@ -769,38 +761,37 @@ You can first practice <a href="http://blog.chinaunix.net/uid-25932176-id-297381
 <li>join</li>
 <li>paste  (much simpler than join , just separte two parts with Tab)</li>
 <li>shift
-
 <ul>
 <li>shift 3    To remove the first three parameters(<strong>To means going to do,it is a target</strong>)</li>
 <li>shift &ldquo;$#&rdquo;  To remove all the parameters,$# contains the number of all the positional parameters</li>
 <li>shift $(( $# - 2 ))   Remove all but the last two positional parameters.Remember there are blank between (( and $  also between 2 and  )).</li>
-</ul></li>
-<li>set &ndash;  Newparameters ## which is just replace the parameters with Newparameters
-
-<ul>
-<li><code>sh \_max3(){ 
-[ $# -ne 3 ] &amp;&amp; return 5
-[ $1 -gt $2 ] &amp;&amp; { set -- $2 $1 $3; } ## line a   if $1&gt;$2    replace $2 with $1  ,$1 with $2, the bigger in the righter
-[ $2 -gt $3 ] &amp;&amp; { set -- $1 $3 $2; } ## line b:  $1 is the last time's $1 ,but $3 is the last time's $3(in line a)
-[ $1 -gt $2 ] &amp;&amp; { set -- $2 $1 $3; } ## line c
-_MAX3=$3
-_MID3=$2
-_MIN3=$1
-}</code></li>
-</ul></li>
 </ul>
+</li>
+<li>set &ndash;  Newparameters ## which is just replace the parameters with Newparameters
+<ul>
+<li>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#f92672">[</span> $# -ne <span style="color:#ae81ff">3</span> <span style="color:#f92672">]</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">5</span>
+<span style="color:#f92672">[</span> $1 -gt $2 <span style="color:#f92672">]</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">{</span> set -- $2 $1 $3; <span style="color:#f92672">}</span> <span style="color:#75715e">## line a   if $1&gt;$2    replace $2 with $1  ,$1 with $2, the bigger in the righter</span>
+<span style="color:#f92672">[</span> $2 -gt $3 <span style="color:#f92672">]</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">{</span> set -- $1 $3 $2; <span style="color:#f92672">}</span> <span style="color:#75715e">## line b:  $1 is the last time&#39;s $1 ,but $3 is the last time&#39;s $3(in line a)</span>
+<span style="color:#f92672">[</span> $1 -gt $2 <span style="color:#f92672">]</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">{</span> set -- $2 $1 $3; <span style="color:#f92672">}</span> <span style="color:#75715e">## line c</span>
+_MAX3<span style="color:#f92672">=</span>$3
+_MID3<span style="color:#f92672">=</span>$2
+_MIN3<span style="color:#f92672">=</span>$1
+<span style="color:#f92672">}</span> <span style="color:#e6db74">`</span><span style="color:#e6db74">`</span><span style="color:#e6db74">`</span>
 
+
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
 <h2 id="content">content</h2>
-
 <ul>
 <li>cat</li>
 </ul>
-
 <h2 id="file">file</h2>
-
 <ul>
 <li>ls</li>
-<li>find -name &ldquo;&rdquo; src/</li>
+<li>find -name &quot;&rdquo; src/</li>
 <li>locate</li>
 <li>touch</li>
 <li>wc -l</li>
@@ -809,21 +800,19 @@ _MIN3=$1
 <li>mv</li>
 <li>source == .  ==&gt; sourch *.sh  == . *.sh     source .bashrc == . bashrc</li>
 <li>&gt;  == 1&gt;</li>
-<li>&gt;&gt; == 1&gt;&gt;</li>
+<li>&gt;&gt; == 1&raquo;</li>
 <li>&lt;  == &lt;1</li>
 <li>split
-
 <ul>
 <li>split -b 300k &hellip;</li>
 <li>split -l 300   (line=300 as an file)</li>
-</ul></li>
+</ul>
+</li>
 <li>vim</li>
 <li>gnuplot</li>
 <li>graghviz</li>
 </ul>
-
 <h2 id="fildfolder">fildfolder</h2>
-
 <ul>
 <li>cd</li>
 <li>mkdir</li>
@@ -831,15 +820,13 @@ _MIN3=$1
 <li>cp -r</li>
 <li>mv</li>
 <li>tar
-
 <ul>
 <li>tar -cvf  src.tar.gz src/</li>
 <li>tar -xvf  src.tar.gz</li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <h2 id="system">system</h2>
-
 <ul>
 <li>alias (make the command become convinient)</li>
 <li>unalias</li>
@@ -848,12 +835,12 @@ _MIN3=$1
 <li>unset</li>
 <li>env</li>
 <li>history
-
 <ul>
 <li>!!  the last command(you can use the up and down arrow)</li>
 <li>!66 the 66th command  !line-number</li>
 <li>!al run the command begin with &lsquo;al&rsquo; nearest.!command</li>
-</ul></li>
+</ul>
+</li>
 <li>type</li>
 <li>kill -9</li>
 <li>crontab -e</li>
@@ -864,53 +851,39 @@ _MIN3=$1
 <li>make  (for compiling the system)</li>
 <li>fsck -c</li>
 <li>System Transplant
-
 <ul>
 <li>wget -R [website]</li>
 <li>curl -l</li>
 <li>git clone</li>
 <li>hg clone</li>
 <li>svn clone</li>
-</ul></li>
+</ul>
+</li>
 <li>system enter
-
 <ul>
 <li>ssh</li>
 <li>telnet</li>
 <li>ftp</li>
-</ul></li>
+</ul>
+</li>
 <li>ifconfig</li>
 <li>all files with map relationship can form an ecosystem.</li>
 </ul>
-
 <h2 id="network-topology">Network topology</h2>
-
 <ul>
 <li>node (one computer one system)</li>
 <li>server (only supply with services)</li>
 <li>NIC (network interface card)  RJ-45
-
 <ul>
 <li>network interface port   which abstracted by the NIC .</li>
-</ul></li>
+</ul>
+</li>
 <li>route -n</li>
 </ul>
-
-<hr />
-
+<hr>
 <p>bit &ndash;&gt; word &ndash;&gt; line &ndash;&gt; content &ndash;&gt; file &ndash;&gt; system.  ++Actually, you can use the function to abstraction several command.
-What&rsquo;s more ,you can use module or filefolder to do another bigger abstraction++.</p>
-
+What's more ,you can use module or filefolder to do another bigger abstraction++.</p>
 <p><strong>you can find that from bit manipulation to file manipulation,there are many commands used in the Linux system</strong></p>
-<div class="footnotes">
-
-<hr />
-
-<ol>
-<li id="fn:a-m">a-m <a class="footnote-return" href="#fnref:a-m"><sup>^</sup></a></li>
-<li id="fn:a-m">a-m <a class="footnote-return" href="#fnref:a-m"><sup>^</sup></a></li>
-</ol>
-</div>
     </div>
  <div class="nav-links" style="padding:10;">
         
@@ -1314,7 +1287,7 @@ What&rsquo;s more ,you can use module or filefolder to do another bigger abstrac
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

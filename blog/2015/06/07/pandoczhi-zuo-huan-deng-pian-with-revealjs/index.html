@@ -30,9 +30,11 @@
   
   <meta name="description" content="第一次看到github.io居然可以放上幻灯片,有点觉得不可思议
 sed_and_awk教程。后来调研发现这是采用了
-&#43; 轻量slideshow（by markdown、pandoc、revealjs）
-&#43; Markdown&#43;Pandoc→HTML幻灯片速成 
-&#43; pandoc将markdown转换输出HTML slide ">
+
+轻量slideshow（by markdown、pandoc、revealjs）
+Markdown&#43;Pandoc→HTML幻灯片速成 
+pandoc将markdown转换输出HTML slide 
+">
 
   
   <link rel="alternate" hreflang="en-us" href="https://jueqingsizhe66.github.io/blog/2015/06/07/pandoczhi-zuo-huan-deng-pian-with-revealjs/">
@@ -123,9 +125,11 @@ sed_and_awk教程。后来调研发现这是采用了
   <meta property="og:title" content="pandoc制作幻灯片with revealjs | Macro Life">
   <meta property="og:description" content="第一次看到github.io居然可以放上幻灯片,有点觉得不可思议
 sed_and_awk教程。后来调研发现这是采用了
-&#43; 轻量slideshow（by markdown、pandoc、revealjs）
-&#43; Markdown&#43;Pandoc→HTML幻灯片速成 
-&#43; pandoc将markdown转换输出HTML slide "><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
+
+轻量slideshow（by markdown、pandoc、revealjs）
+Markdown&#43;Pandoc→HTML幻灯片速成 
+pandoc将markdown转换输出HTML slide 
+"><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
   <meta property="twitter:image" content="https://jueqingsizhe66.github.io/img/icon-192.png"><meta property="og:locale" content="en-us">
   
     
@@ -571,16 +575,13 @@ sed_and_awk教程。后来调研发现这是采用了
 
 
 
-<span class="article-metadata" >Reading time: 3 minutes and    6 seconds with 682 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+<span class="article-metadata" >Reading time: 3 minutes and    5 seconds with 679 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#几种不同的幻灯片样式">几种不同的幻灯片样式:</a></li>
-<li><a href="#控制代码高亮风格的选项有">控制代码高亮风格的选项有：</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#heading">几种不同的幻灯片样式:</a></li>
+    <li><a href="#heading-1">控制代码高亮风格的选项有：</a></li>
+  </ul>
 </nav>
     </aside>
   <div class="article-container">
@@ -588,52 +589,41 @@ sed_and_awk教程。后来调研发现这是采用了
 
     <div class="article-style">
       <p>第一次看到github.io居然可以放上幻灯片,有点觉得不可思议
-<a href="http://dongweiming.github.io/sed_and_awk/" target="_blank">sed_and_awk教程</a>。后来调研发现这是采用了
-+ <a href="http://foxswily.iteye.com/blog/1997397" target="_blank">轻量slideshow（by markdown、pandoc、revealjs）</a>
-+ <a href="http://www.soimort.org/posts/165/" target="_blank">Markdown+Pandoc→HTML幻灯片速成 </a>
-+ <a href="http://www.tuicool.com/articles/Bbiu22U" target="_blank">pandoc将markdown转换输出HTML slide </a></p>
-
+<a href="http://dongweiming.github.io/sed_and_awk/">sed_and_awk教程</a>。后来调研发现这是采用了</p>
+<ul>
+<li><a href="http://foxswily.iteye.com/blog/1997397">轻量slideshow（by markdown、pandoc、revealjs）</a></li>
+<li><a href="http://www.soimort.org/posts/165/">Markdown+Pandoc→HTML幻灯片速成 </a></li>
+<li><a href="http://www.tuicool.com/articles/Bbiu22U">pandoc将markdown转换输出HTML slide </a></li>
+</ul>
 <p>我新建了一个文件夹</p>
-
-<pre><code class="language-sh">mkdir genereateSlides
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">mkdir genereateSlides
 cd generateSlides
 mkdir targets
 
-#并在targets中放上reveal.js,相信大家知道怎么下载
+<span style="color:#75715e">#并在targets中放上reveal.js,相信大家知道怎么下载</span>
  git clone https://github.com/hakimel/reveal.js
 
-</code></pre>
-
-<p>然后我抛弃掉dzslides,s5,slideous,slidy等，现在只是使用reveal.js</p>
-
+</code></pre></div><p>然后我抛弃掉dzslides,s5,slideous,slidy等，现在只是使用reveal.js</p>
 <ul>
 <li>它支持md和org格式，这是我欣赏的</li>
 <li>它支持一标题是水平切换，二标题是纵向切换，这也是我所欣赏，影响我的思维
-
 <ul>
 <li>所以针对markdown你需要思考何时使用#号个数</li>
 <li>很对org-mode你需要考虑何时使用*号个数</li>
-</ul></li>
+</ul>
+</li>
 <li>它支持列表 逐个显示，也就是+/-/1. 等如果变异的时候加上-i选项则会逐个显示。</li>
 <li>可以用 &mdash;&mdash;&mdash;-多个破折号强制生成新的幻灯片</li>
 </ul>
-
 <p>在开始写作之前首先得注意md开头的前三行：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">% Ye Zhaoliang 
+% Direct Numerical Simulation <span style="color:#66d9ef">for</span> Homogenuous Turbulence
+% June 07, <span style="color:#ae81ff">2015</span>
 
-<pre><code class="language-sh">% Ye Zhaoliang 
-% Direct Numerical Simulation for Homogenuous Turbulence
-% June 07, 2015
+</code></pre></div><pre><code>pandoc slides.md -o targets/slides.html -t revealjs -s -V theme=beige
 
-</code></pre>
-
-<pre><code>pandoc slides.md -o targets/slides.html -t revealjs -s -V theme=beige
-
-</code></pre>
-
-<p><strong>之前，进行几次实验，发现结果不对！但是其实就是用了上述的命令，而多试几遍又可以了，This is strange!But now it works</strong></p>
-
-<h2 id="几种不同的幻灯片样式">几种不同的幻灯片样式:</h2>
-
+</code></pre><p><strong>之前，进行几次实验，发现结果不对！但是其实就是用了上述的命令，而多试几遍又可以了，This is strange!But now it works</strong></p>
+<h2 id="heading">几种不同的幻灯片样式:</h2>
 <ul>
 <li>default：（默认）深灰色背景，白色文字</li>
 <li>beige：米色背景，深色文字</li>
@@ -643,9 +633,7 @@ mkdir targets
 <li>simple：白色背景，黑色文字</li>
 <li>solarized：奶油色背景，深青色文字</li>
 </ul>
-
-<h2 id="控制代码高亮风格的选项有">控制代码高亮风格的选项有：</h2>
-
+<h2 id="heading-1">控制代码高亮风格的选项有：</h2>
 <ul>
 <li>&ndash;highlight-style pygments</li>
 <li>&ndash;highlight-style kate</li>
@@ -1058,7 +1046,7 @@ mkdir targets
   
 
   <p class="powered-by">
-    &copy;2019 &middot; 
+    ©2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
