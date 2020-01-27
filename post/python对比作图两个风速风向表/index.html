@@ -114,9 +114,9 @@
   <meta property="twitter:site" content="@jueqingsizhe66">
   <meta property="twitter:creator" content="@jueqingsizhe66">
   
-  <meta property="og:site_name" content="Macro Life">
+  <meta property="og:site_name" content="简约派">
   <meta property="og:url" content="https://jueqingsizhe66.github.io/post/python%E5%AF%B9%E6%AF%94%E4%BD%9C%E5%9B%BE%E4%B8%A4%E4%B8%AA%E9%A3%8E%E9%80%9F%E9%A3%8E%E5%90%91%E8%A1%A8/">
-  <meta property="og:title" content="python对比作图两个风速风向表 | Macro Life">
+  <meta property="og:title" content="python对比作图两个风速风向表 | 简约派">
   <meta property="og:description" content="背景介绍 在前面python得到风速风向图一文中，我们得到风速风向表后， 有时候我们需要快速比较一个扇区或者多个扇区的不同机位点风速图或者风向图"><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
   <meta property="twitter:image" content="https://jueqingsizhe66.github.io/img/icon-192.png"><meta property="og:locale" content="en-us">
   
@@ -163,7 +163,7 @@
   
   "publisher": {
     "@type": "Organization",
-    "name": "Macro Life",
+    "name": "简约派",
     "logo": {
       "@type": "ImageObject",
       "url": "https://jueqingsizhe66.github.io/img/icon-512.png"
@@ -187,7 +187,7 @@
 
 
 
-  <title>python对比作图两个风速风向表 | Macro Life</title>
+  <title>python对比作图两个风速风向表 | 简约派</title>
 
 </head>
 
@@ -230,7 +230,7 @@
   <div class="container">
 
     
-      <a class="navbar-brand" href="/">Macro Life</a>
+      <a class="navbar-brand" href="/">简约派</a>
       
       <button type="button" class="navbar-toggler" data-toggle="collapse"
               data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -622,7 +622,7 @@
     <li><a href="#技术分解">技术分解</a></li>
     <li><a href="#技术实现">技术实现</a></li>
     <li><a href="#改为批处理版本">改为批处理版本</a></li>
-    <li><a href="#heading">曲线数据导出</a></li>
+    <li><a href="#曲线数据导出">曲线数据导出</a></li>
   </ul>
 </nav>
     </aside>
@@ -760,7 +760,7 @@ plt<span style="color:#f92672">.</span>show()
     ylimMax<span style="color:#f92672">=</span>tempArray<span style="color:#f92672">.</span>max()
 <span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span></code></pre></div>
 <p><img src="/images/aiwind/sectorAngleTurbines.png" alt="最终结果"></p>
-<h2 id="heading">曲线数据导出</h2>
+<h2 id="曲线数据导出">曲线数据导出</h2>
 <p>数据导出方便进行比较。
 使用了pandas的concat的功能，注意axis的用法，默认是行记录导入，axis=1相当于列记录导入.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    sdf<span style="color:#f92672">=</span>pd<span style="color:#f92672">.</span>concat([pd<span style="color:#f92672">.</span>Series(x_axisChange),pd<span style="color:#f92672">.</span>Series(windsimYaxis),pd<span style="color:#f92672">.</span>Series(aiwindYaxis)],axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)

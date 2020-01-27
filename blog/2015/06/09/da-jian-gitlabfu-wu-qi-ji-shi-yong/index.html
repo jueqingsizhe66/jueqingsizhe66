@@ -123,9 +123,9 @@ Haskell开发的Darcs
   <meta property="twitter:site" content="@jueqingsizhe66">
   <meta property="twitter:creator" content="@jueqingsizhe66">
   
-  <meta property="og:site_name" content="Macro Life">
+  <meta property="og:site_name" content="简约派">
   <meta property="og:url" content="https://jueqingsizhe66.github.io/blog/2015/06/09/da-jian-gitlabfu-wu-qi-ji-shi-yong/">
-  <meta property="og:title" content="搭建gitlab服务器及使用 | Macro Life">
+  <meta property="og:title" content="搭建gitlab服务器及使用 | 简约派">
   <meta property="og:description" content="现在有很多的公开的代码服务器
 比如最为出名的是github
 Haskell开发的Darcs
@@ -141,7 +141,7 @@ Haskell开发的Darcs
     
       <meta property="article:published_time" content="2015-06-09T19:22:07&#43;08:00">
     
-    <meta property="article:modified_time" content="2019-10-27T20:50:56&#43;08:00">
+    <meta property="article:modified_time" content="2015-06-09T19:22:07&#43;08:00">
   
 
   
@@ -160,7 +160,7 @@ Haskell开发的Darcs
 
 
 
-  <title>搭建gitlab服务器及使用 | Macro Life</title>
+  <title>搭建gitlab服务器及使用 | 简约派</title>
 
 </head>
 
@@ -203,7 +203,7 @@ Haskell开发的Darcs
   <div class="container">
 
     
-      <a class="navbar-brand" href="/">Macro Life</a>
+      <a class="navbar-brand" href="/">简约派</a>
       
       <button type="button" class="navbar-toggler" data-toggle="collapse"
               data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -534,10 +534,8 @@ Haskell开发的Darcs
     
     
       
-          Last updated on
-      
     
-    Oct 27, 2019
+    Jun 9, 2015
   </span>
 
   
@@ -585,29 +583,29 @@ Haskell开发的Darcs
     <aside>
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#heading">参考链接</a>
+    <li><a href="#参考链接">参考链接</a>
       <ul>
-        <li><a href="#heading-1">开始安装</a></li>
+        <li><a href="#开始安装">开始安装</a></li>
       </ul>
     </li>
-    <li><a href="#ssh">安装完毕，进行ssh配置的注意点</a>
+    <li><a href="#安装完毕进行ssh配置的注意点">安装完毕，进行ssh配置的注意点</a>
       <ul>
-        <li><a href="#rakegemesrbblock-rake-is-not-the-part-of-the-gem">问题是rakegemes.rb里的一个block 有问题，提醒rake is not the part of the gem</a></li>
+        <li><a href="#问题是rakegemesrb里的一个block-有问题提醒rake-is-not-the-part-of-the-gem">问题是rakegemes.rb里的一个block 有问题，提醒rake is not the part of the gem</a></li>
       </ul>
     </li>
-    <li><a href="#heading-2">开始使用</a>
+    <li><a href="#开始使用">开始使用</a>
       <ul>
-        <li><a href="#heading-3">我在网页上创建了一个项目</a></li>
-        <li><a href="#heading-4">测试是否走通了</a></li>
-        <li><a href="#reate-repository">reate Repository（创建仓库）</a></li>
-        <li><a href="#git">对于已存在Git项目：</a></li>
+        <li><a href="#我在网页上创建了一个项目">我在网页上创建了一个项目</a></li>
+        <li><a href="#测试是否走通了">测试是否走通了</a></li>
+        <li><a href="#reate-repository创建仓库">reate Repository（创建仓库）</a></li>
+        <li><a href="#对于已存在git项目">对于已存在Git项目：</a></li>
       </ul>
     </li>
-    <li><a href="#heading-5">多用户问题</a>
+    <li><a href="#多用户问题">多用户问题</a>
       <ul>
-        <li><a href="#heading-6">注意验证用户</a></li>
-        <li><a href="#heading-7">我的目录分门别类(目的是一个项目一个文件夹)</a></li>
-        <li><a href="#heading-8">我的一次使用提交</a></li>
+        <li><a href="#注意验证用户">注意验证用户</a></li>
+        <li><a href="#我的目录分门别类目的是一个项目一个文件夹">我的目录分门别类(目的是一个项目一个文件夹)</a></li>
+        <li><a href="#我的一次使用提交">我的一次使用提交</a></li>
       </ul>
     </li>
   </ul>
@@ -627,14 +625,14 @@ Haskell开发的<a href="http://darcs.net/Binaries">Darcs</a>
 </ul>
 <p>然而，很多时候我们并不想把所有的东西都公开，于是想有一个私有的云平台，这样
 我们就可以让很多内部的人员(局域网)使用了，gitlab正是为一堆比较懒的人设计的基于git的平台搭建。</p>
-<h2 id="heading">参考链接</h2>
+<h2 id="参考链接">参考链接</h2>
 <ul>
 <li><a href="http://blog.csdn.net/yanjiangbo/article/details/39154573">CentOS下一键安装GitLab</a></li>
 <li><a href="http://www.2cto.com/os/201411/353292.html">gitlab一键安装笔记</a></li>
 <li><a href="http://segmentfault.com/a/1190000002439923">使用Gitlab一键安装包后的日常备份恢复与迁移</a></li>
 <li><a href="http://www.2cto.com/os/201408/323795.html">一键安装 gitlab7 on rhel6.4 并设置邮件发送</a></li>
 </ul>
-<h3 id="heading-1">开始安装</h3>
+<h3 id="开始安装">开始安装</h3>
 <p>官网下载(我现在下载的版本是7.11.4.0  之前用的是7.1.1.0)
 <a href="https://bitnami.com/stack/gitlab/installer">https://bitnami.com/stack/gitlab/installer</a></p>
 <pre><code>gitlab(更新版本的采用的是图形界面，之前的版本采用的是命令流,全面的图形化更方便些。现在是连启动都是图形界面了,比如gitlabci 也直接不需要用./ctlscript.sh start)
@@ -645,8 +643,8 @@ passowrd:+++++++
 配置gmail（省的自己配置)
 </code></pre><p>使用的过程既可以是在网页中直接使用，也可以直接使用类似github的命令流操作，
 但是前提是必须配置好服务器，类似于<a href="https://help.github.com/articles/set-up-git/">github的配置过程</a></p>
-<h2 id="ssh">安装完毕，进行ssh配置的注意点</h2>
-<h3 id="rakegemesrbblock-rake-is-not-the-part-of-the-gem">问题是rakegemes.rb里的一个block 有问题，提醒rake is not the part of the gem</h3>
+<h2 id="安装完毕进行ssh配置的注意点">安装完毕，进行ssh配置的注意点</h2>
+<h3 id="问题是rakegemesrb里的一个block-有问题提醒rake-is-not-the-part-of-the-gem">问题是rakegemes.rb里的一个block 有问题，提醒rake is not the part of the gem</h3>
 <p>我分享一下解决方法，我的登录用户假如是fluid,那么我们现在使用</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">ssh-keygen -t rsa -C <span style="color:#e6db74">&#34;你的登录邮箱gitlab账户&#34;</span>
 
@@ -655,8 +653,8 @@ passowrd:+++++++
 你得是在登录用户fluid才是可以git push等基本操作，而在root用户则是有权限限制，但是紧接着我在root用户下再次ssh-keygen…
 这样在/root/.ssh/id_rsa.pub又有一个新的key，你只要也把他添加到gitlab管理界面的profile setting里的ssh keys 添加一下就可以了.
 所以变成和github一样可以用root用户，其实罗嗦那么久还是ssh-keygen问题，还有记得对应用户的key问题</p>
-<h2 id="heading-2">开始使用</h2>
-<h3 id="heading-3">我在网页上创建了一个项目</h3>
+<h2 id="开始使用">开始使用</h2>
+<h3 id="我在网页上创建了一个项目">我在网页上创建了一个项目</h3>
 <p>得到了如下信息:</p>
 <p>Global Setting</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">git config --global user.name <span style="color:#e6db74">&#34;Administrator&#34;</span>
@@ -675,7 +673,7 @@ git remote add origin git@127.0.1.1:xinran/f708OpenFoam.git git push -u origin m
 </code></pre></div><p>然后我cd /root/.ssh/
 因为我之前已经设置好了git配置，不懂的人可以参考<a href="http://jueqingsizhe66.github.io/blog/2015/05/29/githe-githubpei-zhi">git和github的配置</a>
 然后拷贝id.pub的内容</p>
-<h3 id="heading-4">测试是否走通了</h3>
+<h3 id="测试是否走通了">测试是否走通了</h3>
 <p>我们很想知道到底我们已经配置好了服务器?也很想知道局域网内的客户端是否可以访问服务器？</p>
 <p>测试方法：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">root at fluidman-OptiPlex-990 in /opt/gitlab-7.1.1-0<span style="color:#f92672">[</span>21:17:36下午<span style="color:#f92672">]</span> 
@@ -683,7 +681,7 @@ $ ssh -T git@127.0.1.1
 Welcome to GitLab, Anonymous!
 </code></pre></div><p>局域网人员测试:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">比如我的127.195.172.64别人只要在浏览器输入 127.195.172.64:80然后就可以了！！
-</code></pre></div><h3 id="reate-repository">reate Repository（创建仓库）</h3>
+</code></pre></div><h3 id="reate-repository创建仓库">reate Repository（创建仓库）</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">mkdir common-util
 cd common-util
 git init
@@ -692,7 +690,7 @@ git add README
 git commit -m <span style="color:#e6db74">&#39;first commit&#39;</span>
 git remote add origin git@127.0.0.1:devteam/common-util.git
 git push -u origin master
-</code></pre></div><h3 id="git">对于已存在Git项目：</h3>
+</code></pre></div><h3 id="对于已存在git项目">对于已存在Git项目：</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">cd existing_git_repo 
 git remote add origin git@127.0.0.1:devteam/common-util.git 
 git push -u origin master
@@ -704,8 +702,8 @@ git push -u origin master
 <li>再测试等过程</li>
 </ul>
 <p>还需要进行提交.</p>
-<h2 id="heading-5">多用户问题</h2>
-<h3 id="heading-6">注意验证用户</h3>
+<h2 id="多用户问题">多用户问题</h2>
+<h3 id="注意验证用户">注意验证用户</h3>
 <p>会被弄到垃圾邮件当中，
 并且验证链接需要注意的是一定得改一下IP，
 比如：</p>
@@ -715,7 +713,7 @@ git push -u origin master
 那么就变为</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">http://121.195.172.217/users/confirmation?confirmation_token<span style="color:#f92672">=</span>AEHLjx2WR21sb3zULW5h
 </code></pre></div><p><strong>这步的一个完美解决方案是在装gitlab的时候domain不要填127.0.1.1而应该填你的固有IP（动态获取的IP的话，最好保持不断网，基本上也能够维持IP不变）这样以后就不许要修改了</strong></p>
-<h3 id="heading-7">我的目录分门别类(目的是一个项目一个文件夹)</h3>
+<h3 id="我的目录分门别类目的是一个项目一个文件夹">我的目录分门别类(目的是一个项目一个文件夹)</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">/
 ├── dns-of-incompact3d
 ├── dns-of-semtex
@@ -723,7 +721,7 @@ git push -u origin master
 ├── lisper
 ├── nreal-fast
 
-</code></pre></div><h3 id="heading-8">我的一次使用提交</h3>
+</code></pre></div><h3 id="我的一次使用提交">我的一次使用提交</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">root at fluidman-OptiPlex-990 in /latex-chines-english<span style="color:#f92672">[</span>10:05:08上午<span style="color:#f92672">]</span>  on git:develop running make, make, make, and make
 $ git push -u origin develop
 Counting objects: 208, <span style="color:#66d9ef">done</span>.

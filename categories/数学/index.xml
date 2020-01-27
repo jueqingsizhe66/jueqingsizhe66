@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>数学 | Macro Life</title>
+    <title>数学 | 简约派</title>
     <link>https://jueqingsizhe66.github.io/categories/%E6%95%B0%E5%AD%A6/</link>
       <atom:link href="https://jueqingsizhe66.github.io/categories/%E6%95%B0%E5%AD%A6/index.xml" rel="self" type="application/rss+xml" />
     <description>数学</description>
@@ -42,7 +42,7 @@
 于是就有了下面的shell分析脚本。&lt;/p&gt;
 &lt;p&gt;TurbSim产生的风力机一圈的入流截面模型（仅仅一个截面，全场是因为捕捉了很多个截面）&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/fast/turbsim.png&#34; alt=&#34;Turbsim&#34;&gt;&lt;/p&gt;
-&lt;h2 id=&#34;shell&#34;&gt;Shell解析脚本&lt;/h2&gt;
+&lt;h2 id=&#34;shell解析脚本&#34;&gt;Shell解析脚本&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/bin/bash - 
 &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#===============================================================================&lt;/span&gt;
 #
@@ -178,7 +178,7 @@ alert  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;CTStartTime&amp;#34;&l
 grep -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;CTStartTime&amp;#34;&lt;/span&gt; *.inp|awk -F: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $1,$3}&amp;#39;&lt;/span&gt;|awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print substr($1,0,length($1)-4),&amp;#34;\t\t&amp;#34;,$2}&amp;#39;&lt;/span&gt;|column -t
 &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt; &amp;gt; summary.out
 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;heading&#34;&gt;改进&lt;/h3&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;改进&#34;&gt;改进&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;去除无用的Turbulence and Boundary&lt;/li&gt;
 &lt;li&gt;增加了对GridWidth and GridHeight的处理&lt;/li&gt;
@@ -189,7 +189,7 @@ grep -n &amp;quot;GridWidth&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|sed 
 &lt;/code&gt;&lt;/pre&gt;&lt;ol start=&#34;3&#34;&gt;
 &lt;li&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2 id=&#34;shell-1&#34;&gt;shell产生的结果如下：&lt;/h2&gt;
+&lt;h2 id=&#34;shell产生的结果如下&#34;&gt;shell产生的结果如下：&lt;/h2&gt;
 &lt;pre&gt;&lt;code&gt;#################
 ## RandSeed1 ##
 #################
@@ -944,7 +944,7 @@ ENDDO
       <pubDate>Sun, 31 May 2015 09:31:05 +0800</pubDate>
       <guid>https://jueqingsizhe66.github.io/blog/2015/05/31/u-plus-y-plus/</guid>
       <description>&lt;p&gt;这个gnuplot脚本是我用于处理Incompact3d产生出来的统计结果(如何统计部分，暂时未写)的画图脚本。&lt;/p&gt;
-&lt;h2 id=&#34;heading&#34;&gt;数据段&lt;/h2&gt;
+&lt;h2 id=&#34;数据段&#34;&gt;数据段&lt;/h2&gt;
 &lt;p&gt;注意gnuplot处理数据文件按照空行划分index部分。所以下面的部分总共有四个index，调用方式是&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;plot &amp;ldquo;文件名&amp;rdquo; index 0   第一部分文件信息的打印&lt;/li&gt;
@@ -1031,7 +1031,7 @@ ENDDO
 &lt;span style=&#34;color:#ae81ff&#34;&gt;120&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
 &lt;span style=&#34;color:#ae81ff&#34;&gt;120&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;20&lt;/span&gt;
 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;gnuplot&#34;&gt;gnuplot处理部分&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;gnuplot处理部分&#34;&gt;gnuplot处理部分&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-gnuplot&#34; data-lang=&#34;gnuplot&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; ter &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;png&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
 &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; out &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;fit1.png&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
 &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;
@@ -1059,13 +1059,13 @@ ENDDO
 &lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;plot&lt;/span&gt;  [&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;148&lt;/span&gt;][&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;20&lt;/span&gt;]  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;umfit.dat&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; index &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; w lp pt &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;  t &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;U+--Y+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;f&lt;/span&gt;(x) w l lt &lt;span style=&#34;color:#ae81ff&#34;&gt;-1&lt;/span&gt; lw &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; t &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;linear-fit&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;g&lt;/span&gt;(x)  w  l lt &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt; lw &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; t &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;log-fit&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt;\
  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; index &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; w l lt &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; t &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;linear-fit-end&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; index &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; w l lt &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; t &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;log-law-start&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; index &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt; w l lt &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; t &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;log-law-end&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
 &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;heading-1&#34;&gt;处理结果&lt;/h2&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;处理结果&#34;&gt;处理结果&lt;/h2&gt;
 &lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/incompact3d/fit1.png&#34; alt=&#34;处理结果&#34;&gt;&lt;/p&gt;
-&lt;h2 id=&#34;heading-2&#34;&gt;一些实时监测部分&lt;/h2&gt;
-&lt;h3 id=&#34;heading-3&#34;&gt;执行部分：&lt;/h3&gt;
+&lt;h2 id=&#34;一些实时监测部分&#34;&gt;一些实时监测部分&lt;/h2&gt;
+&lt;h3 id=&#34;执行部分&#34;&gt;执行部分：&lt;/h3&gt;
 &lt;p&gt;&lt;strong&gt;a.sh&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;mpirun -np &lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;  incompact3d  &amp;gt;&amp;gt; tail.out &amp;amp;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;heading-4&#34;&gt;获取信息部分&lt;/h3&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;获取信息部分&#34;&gt;获取信息部分&lt;/h3&gt;
 &lt;p&gt;&lt;strong&gt;image.sh&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;more tail.out | grep DIV | grep U* |grep Max|sed &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;/final/d&amp;#39;&lt;/span&gt;| awk -F&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;=&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $2}&amp;#39;&lt;/span&gt; |sed &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;1,3d&amp;#39;&lt;/span&gt;&amp;gt; divu
 more tail.out | grep UT | awk  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $4}&amp;#39;&lt;/span&gt;|sed &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;1,2d&amp;#39;&lt;/span&gt; &amp;gt; flow-rate-correction-factor
@@ -1078,7 +1078,7 @@ more tail.out | grep PHI|grep MOYEN | awk  -F&lt;span style=&#34;color:#e6db74&#
 &lt;span style=&#34;color:#75715e&#34;&gt;#gnuplot monitorFLOWRATE.gnu&lt;/span&gt;
 
 bash monitor.sh
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;heading-5&#34;&gt;打印部分&lt;/h3&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;打印部分&#34;&gt;打印部分&lt;/h3&gt;
 &lt;p&gt;&lt;strong&gt;monitor.sh&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/bin/bash
 &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#===============================================================================&lt;/span&gt;
@@ -1166,12 +1166,12 @@ mainpoint PHImoyen
 &lt;span style=&#34;color:#75715e&#34;&gt;#mainpoint stressuv&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#mainpoint stressuw&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#mainpoint stressvw&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;heading-6&#34;&gt;整合部分&lt;/h3&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;整合部分&#34;&gt;整合部分&lt;/h3&gt;
 &lt;p&gt;cut -c的目的是获取具体对应的时间步,然后把所有的png相关信息 放到对应时间步文件夹中。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;cd /home/Cedric/diric/src &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; more tail.out |grep Time|awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $4}&amp;#39;&lt;/span&gt; |tail -1|cut -c 1-6 |awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{cmd=&amp;#34;mkdir step&amp;#34;$1;system(cmd);system(&amp;#34;sh image.sh&amp;#34;);cmd2=&amp;#34;mv *.png step&amp;#34;$1;system(cmd2);} &amp;#39;&lt;/span&gt;
 
 &lt;span style=&#34;color:#75715e&#34;&gt;# END{cmd3=&amp;#34;mv dudy* umean stress step&amp;#34;$1;system(cmd3)}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;heading-7&#34;&gt;实时浏览&lt;/h3&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;实时浏览&#34;&gt;实时浏览&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;切换到对应的文件夹
 $ python -m SimpleHTTPServer 
 
@@ -1218,20 +1218,20 @@ Here are some Type declarations.&lt;/p&gt;
 &lt;p&gt;fst  :: (a,b) -&amp;gt; a &amp;ndash; gets the first element of a tuple&lt;/p&gt;
 &lt;p&gt;snd  :: (a,b) -&amp;gt; b &amp;ndash; gets the second element of a tuple&lt;/p&gt;
 &lt;p&gt;(!!) :: [a]-&amp;gt;Int a&lt;/p&gt;
-&lt;h3 id=&#34;-calculus&#34;&gt;数学中λ-calculus的表示法为：&lt;/h3&gt;
+&lt;h3 id=&#34;数学中λ-calculus的表示法为&#34;&gt;数学中λ-calculus的表示法为：&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;λx.t&lt;/li&gt;
 &lt;li&gt;λx[t]&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;“λ”不具有任何特殊意思，标识着其表达式中的可取一数值x带入。
 t是表达式（例如x+3、x^2+2x+1等）。&lt;/p&gt;
-&lt;h3 id=&#34;p&#34;&gt;代入数值p的表示法为：&lt;/h3&gt;
+&lt;h3 id=&#34;代入数值p的表示法为&#34;&gt;代入数值p的表示法为：&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;(λx.t)p&lt;/li&gt;
 &lt;li&gt;(λx[t])p&lt;/li&gt;
 &lt;/ol&gt;
 &lt;hr&gt;
-&lt;h3 id=&#34;lispscheme&#34;&gt;Lisp|scheme的λ表示法与数值代入：&lt;/h3&gt;
+&lt;h3 id=&#34;lispscheme的λ表示法与数值代入&#34;&gt;Lisp|scheme的λ表示法与数值代入：&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-scheme&#34; data-lang=&#34;scheme&#34;&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;lambda &lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;x&lt;/span&gt;) (+ x &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;))
 ((&lt;span style=&#34;color:#66d9ef&#34;&gt;lambda &lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;x&lt;/span&gt;) (+ x &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;) &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;))
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;haskell&#34;&gt;Haskell：&lt;/h3&gt;
@@ -1245,7 +1245,7 @@ t是表达式（例如x+3、x^2+2x+1等）。&lt;/p&gt;
 &lt;span style=&#34;color:#a6e22e&#34;&gt;\&lt;/span&gt; (para1,para2) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; (return value)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;lambda-calculus&#34;&gt;Lambda Calculus&lt;/h3&gt;
 &lt;p&gt;前面提到了Haskell是基于__Lambda Calculus__的，所以在学习Haskell之前，我们有必要了解一下Lambda Caculus的一些基本的内容，方便我们后面正式介绍Haskell。其实，Lambda Calculus是所有函数式语言的基础，要学习FP，最好都了解一下Lambda Calculus。下面对Lambda Calculus做一个简单的介绍：&lt;/p&gt;
-&lt;h4 id=&#34;lambda-calculusexpressionfp&#34;&gt;基本的语法：Lambda Calculus的核心是表达式(Expression)，用FP语言写的程序执行的过程，本质上就是对表达式求值的过程&lt;/h4&gt;
+&lt;h4 id=&#34;基本的语法lambda-calculus的核心是表达式expression用fp语言写的程序执行的过程本质上就是对表达式求值的过程&#34;&gt;基本的语法：Lambda Calculus的核心是表达式(Expression)，用FP语言写的程序执行的过程，本质上就是对表达式求值的过程&lt;/h4&gt;
 &lt;p&gt;expression := variable | function | application
 funciton := λvariable.expression (.前面部分为定义(definition)，后面部分为函数体(body))
 application := expression expression&lt;/p&gt;
@@ -1257,9 +1257,9 @@ application := expression expression&lt;/p&gt;
 lambda x y. x + y
 haskell里面为了简洁起见用“\”来代替希腊字母lambda，它们形状比较相似。故而上面的定义也可以写成：
 \ x y. x + y&lt;/p&gt;
-&lt;h4 id=&#34;boundfree&#34;&gt;变量的bound与free:&lt;/h4&gt;
+&lt;h4 id=&#34;变量的bound与free&#34;&gt;变量的bound与free:&lt;/h4&gt;
 &lt;p&gt;λx.xy →x is bound, y is free&lt;/p&gt;
-&lt;h4 id=&#34;reduction&#34;&gt;表达式化简（Reduction)的基本法则:&lt;/h4&gt;
+&lt;h4 id=&#34;表达式化简reduction的基本法则&#34;&gt;表达式化简（Reduction)的基本法则:&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;α−reduction: λx.E→λy.E&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;y/x&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
 β−reduction:&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;λx.E&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;z&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;→E&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;z/x&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
 η−reduction&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; x is not free in E&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;: λx.&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;Ex&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;→E
@@ -1272,7 +1272,7 @@ haskell里面为了简洁起见用“\”来代替希腊字母lambda，它们形
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;a href=&#34;http://mindhacks.cn/2006/10/15/cantor-godel-turing-an-eternal-golden-diagonal/&#34;&gt;软件工程里面的一条黄金定律：“任何问题都可以通过增加一个间接层来解决&lt;/a&gt;&lt;/p&gt;
-&lt;h4 id=&#34;heading&#34;&gt;变量替换&lt;/h4&gt;
+&lt;h4 id=&#34;变量替换&#34;&gt;变量替换&lt;/h4&gt;
 &lt;p&gt;[y/x]E →  substitute  all occurrences of x in E to y&lt;/p&gt;
 &lt;p&gt;以上是Lambda Calculus的一些基础知识，读者朋友现在不理解没有关系，等后面讲到Haskell中相关的部分就可以理解了。对于抑制不住自已的好奇心的朋友，可以在这里：&lt;a href=&#34;http://en.wikipedia.org/wiki/Lambda_calculus&#34;&gt;http://en.wikipedia.org/wiki/Lambda_calculus&lt;/a&gt;做进一步的了解。&lt;/p&gt;
 &lt;p&gt;在之前做的&lt;a href=&#34;http://jueqingsizhe66.github.io/blog/2015/05/17/cong-lambdadao-simple-plus-complexjie-shi-qi-zai-dao-shu-xing-chou-xiang/&#34;&gt;lambda的推导&lt;/a&gt;其实都只是针对单个参数，包括&lt;a href=&#34;http://shuklan.com/haskell/lec03.html#/0/15&#34;&gt;Haskell也是强调单参数的调用&lt;/a&gt;，如果多惨数那就是用curry来解决(funny多参数)
@@ -1303,7 +1303,7 @@ if-else  这其实是一种控制语句，不能说Haskell放掉了控制语句�
 &lt;li&gt;一切都是函数。
 根据monad的内置结构，函数可以组合生成类似于数学的组合函数（埋藏内部的lambda结构）&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h3 id=&#34;heading&#34;&gt;函数只是关系的表示，可以说它是过程、变换、运动（从泛函的角度解释）&lt;/h3&gt;
+&lt;h3 id=&#34;函数只是关系的表示可以说它是过程变换运动从泛函的角度解释&#34;&gt;函数只是关系的表示，可以说它是过程、变换、运动（从泛函的角度解释）&lt;/h3&gt;
 &lt;p&gt;本来函数式变成是不考虑空间的， 而面向对象则是引入不必要的空间问题，来挂上函数，最终都是为了实现函数变换或者函数过程，或者统称为运动。
 假如宇宙存在根节点，越靠近根节点的肯定越抽象，我们现在是工作在底层的具象节点下。&lt;/p&gt;
 &lt;blockquote&gt;
@@ -1316,11 +1316,11 @@ if-else  这其实是一种控制语句，不能说Haskell放掉了控制语句�
 &lt;p&gt;再看看老子道德经的一段：三十幅共一毂，当其无，有车之用。埏埴以为器，当其无，有器之用。凿户牖以为室，当其无，有室之用。故有之以为利，无之   以为用。
 这段话意思是：三十根棍子做成的圆轱辘，只有忽视圆轱辘内部这种结构，着眼于圆轱辘外部，才会发现它原来是可以做车的轮子这一用处，两个轱辘与车    架组合成一辆车。比如门窗，只有忽视其内部如何结构的构建，才会从外部想到用它在房间组合中。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h3 id=&#34;heading-1&#34;&gt;树形结构抽象细节&lt;/h3&gt;
+&lt;h3 id=&#34;树形结构抽象细节&#34;&gt;树形结构抽象细节&lt;/h3&gt;
 &lt;p&gt;我们之所以使用树形结构，用一个根节点代表其聚合群体，用组长代表所有组员，用名字代表人的全部，等等这些组合抽象的办法就是让我们大脑去除大量   对象内部的细节，用一个符号代替它们，这样我们才能基于这个树的根节点再组合成新的树形结构。&lt;/p&gt;
-&lt;h2 id=&#34;-&#34;&gt;范畴理论-交际的互联网&lt;/h2&gt;
+&lt;h2 id=&#34;范畴理论-交际的互联网&#34;&gt;范畴理论-交际的互联网&lt;/h2&gt;
 &lt;p&gt;范畴理论(Category)总是鼓励我们从对象内部细节中转移开来，在范畴理论中 一个对象是一个抽象模糊的实体，你所有需要知道的只是它如何和其他对象交互(关系)，它是怎么使用箭头和其他对象连接的，这就是为什么互联网搜索引擎 Google Baidu等能够通过分析链入和链出的链接来排名网站一样。&lt;/p&gt;
-&lt;h2 id=&#34;--&#34;&gt;无以为用&amp;ndash;组合思想&lt;/h2&gt;
+&lt;h2 id=&#34;无以为用--组合思想&#34;&gt;无以为用&amp;ndash;组合思想&lt;/h2&gt;
 &lt;p&gt;归根到底，还是“无以为用”这个范畴的组合本质很多人都没有搞清楚。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;只有忘记对象的细节才能用好它。两个原因总结一下：
@@ -1344,7 +1344,7 @@ if-else  这其实是一种控制语句，不能说Haskell放掉了控制语句�
 &lt;li&gt;&lt;a href=&#34;https://acm.wustl.edu/functional/haskell.php&#34;&gt;How to learn haskell&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;http://learnyouahaskell.com/chapters&#34;&gt;相当棒的趣味指南&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;-httpwwwjdoncom45608&#34;&gt;从现实世界走入计算机，经过计算机思考，再从计算机走出并融入现实世界，这就是&lt;a href=&#34;http://www.jdon.com/45608&#34;&gt; 函数式思维&lt;/a&gt;。&lt;/h3&gt;
+&lt;h3 id=&#34;从现实世界走入计算机经过计算机思考再从计算机走出并融入现实世界这就是-函数式思维httpwwwjdoncom45608&#34;&gt;从现实世界走入计算机，经过计算机思考，再从计算机走出并融入现实世界，这就是&lt;a href=&#34;http://www.jdon.com/45608&#34;&gt; 函数式思维&lt;/a&gt;。&lt;/h3&gt;
 &lt;p&gt;函数的context引入了时间的关系。&lt;a href=&#34;http://www.jdon.com/45608&#34;&gt; 我们思考逻辑的时候，定义已经是确定的了。也正因为是确定的，才可以逻辑思考&lt;/a&gt;。
 函数不存在状态，所以计算机加入了一个特殊的东西：时钟。值++时间=状态++，在可以忽视时序问题时，可以直接有值=状态。忽视时序问题，就相当于我们平时说的异步。若果单单使用锁，只是一种耗费资源手段。而我们看到无论是唤醒线程，还是延时读取，都是依赖时钟
 ##+ 小结：&lt;/p&gt;
@@ -1352,10 +1352,10 @@ if-else  这其实是一种控制语句，不能说Haskell放掉了控制语句�
 一张桌子为案例，分解思维的人看到后首先想到这张桌子由什么构成，长宽高和材质，这些都是桌子的内部细节；而组合思维的人看到后，环顾四周，看看其处于什么环境，如果放在教室中，他判断这是一张课桌，如果放在食堂，他判断这是一张饭桌。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;从这个例子可以看出组合是从行为（运动、变化、时间）角度看待 世界的，“课桌”、“饭桌”中的“课”和“饭”在这里是动词，意为“上课用”、“吃饭用”的意思，“用”是动词，同一个桌子出现在不同的环境中发挥不同的 作用。而分解思维只研究空间，只研究桌子的空间结构是什么，甚至不研究为什么是四条腿，为什么每条腿长度相同，分解思维根本不考虑这些，不用考虑任何桌子 之外的世界，在分解思维中没有万有引力、没有地面的水平、没有书房和餐厅，只有空间，分解只考虑空间的组成结构。看来分解和组合是相互依存的，分解时研究 的是空间，组合时研究的是行为，把桌子放进餐厅的意义是期待使用它吃饭这样一种运动&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;组合运动？&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;。 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;范畴英文是Category，也是++分类++的意思，打个比喻，Google能根据哪些网站引用你的网站这个外部信息进行PageRank评分，从而对你的网站权重进行排序，这个道理和我们评价一个人有些类似，看一个不认识的人怎么样，那就看看他交往的什么朋友，什么环境，近墨者黑，人以群分，物以类聚，这些都是从事物所在的分类类别中判断其价值，而不是从事物内部细节。（评判个人的价值标准跟不同的人在一起，意味着你的价值不一样.）&lt;/p&gt;
-&lt;h3 id=&#34;monad-lambda&#34;&gt;monad 隐藏lambda&lt;/h3&gt;
+&lt;h3 id=&#34;monad-隐藏lambda&#34;&gt;monad 隐藏lambda&lt;/h3&gt;
 &lt;p&gt;Monad是一种结构，这种结构能够将一个值放入一个可计算的上下文中。因为Lambda是一个和上下文环境有关的表达式，所以，这里对Monad的上下文理解就比较容易。
 monad是从范畴论引入， 范畴其实就是一个集合，只不过对这个集合有一些约束定义，如果 熟悉业务建模的人可能对这种思维方式不陌生，经常我们会对抽象的事物进行定义，数学上基本就是用集合概念，实际上从罗素悖论拯救了数学开始，数学离不开集合，对于一个国家社会，个人与社会也是不同的概念，社会是一个++集合++概念，从++集合角度++考虑问题和从__个人元素角度__考虑问题是两种截然不同的思路，如果你平时注 重这种区别，你可能会有两种人生观。祝你脑洞大开。&lt;/p&gt;
-&lt;h3 id=&#34;sql&#34;&gt;函数式替代sql？&lt;/h3&gt;
+&lt;h3 id=&#34;函数式替代sql&#34;&gt;函数式替代sql？&lt;/h3&gt;
 &lt;p&gt;&lt;a href=&#34;http://www.jdon.com/44842&#34;&gt;函数的逻辑性&lt;/a&gt;与关系数据库的是一致的，而逻辑在不同语言之间是自然贯穿的，也就是说若果所有都用函数来表达的，可以使sql消失，那么由于sql引发的问题自然就消失。
 数据库 = 一个集合,这就是面向集合，mongodb就是这样的思想&lt;/p&gt;</description>
     </item>
@@ -1458,7 +1458,7 @@ monad是从范畴论引入， 范畴其实就是一个集合，只不过对这�
 &lt;span style=&#34;color:#75715e&#34;&gt;;;  0&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;;;  (+ (&amp;lt;term&amp;gt; a) (&amp;lt;name&amp;gt; (&amp;lt;next&amp;gt;a) b))))&lt;/span&gt;
 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;heading&#34;&gt;于是我们可以得到&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;于是我们可以得到&#34;&gt;于是我们可以得到&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-scheme&#34; data-lang=&#34;scheme&#34;&gt;
 (&lt;span style=&#34;color:#66d9ef&#34;&gt;define &lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;sum&lt;/span&gt; term a next b)
   (&lt;span style=&#34;color:#66d9ef&#34;&gt;if &lt;/span&gt;(&amp;gt;  a b)
@@ -1578,7 +1578,7 @@ term其实就是涉及到你需要思考的三种情况
                    (* &lt;span style=&#34;color:#ae81ff&#34;&gt;4.0&lt;/span&gt; (&lt;span style=&#34;color:#a6e22e&#34;&gt;sum&lt;/span&gt; f (+ a h) add-2h (- b h)))  
                    (* &lt;span style=&#34;color:#ae81ff&#34;&gt;2.0&lt;/span&gt; (&lt;span style=&#34;color:#a6e22e&#34;&gt;sum&lt;/span&gt; f (&lt;span style=&#34;color:#a6e22e&#34;&gt;add-2h&lt;/span&gt; a) add-2h (- b h)))  
                    (&lt;span style=&#34;color:#a6e22e&#34;&gt;f&lt;/span&gt; (+ a (* h n)))))) 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;a2:Here&#39;s a version that sums over pairs of terms (2 y_k + 4 y_k+1). No conditionals or special cases are needed anywhere, but there&#39;s an extra term [f(b) - f(a)] to be added to the final count.&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;a2:Here&amp;rsquo;s a version that sums over pairs of terms (2 y_k + 4 y_k+1). No conditionals or special cases are needed anywhere, but there&amp;rsquo;s an extra term [f(b) - f(a)] to be added to the final count.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-scheme&#34; data-lang=&#34;scheme&#34;&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;define &lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;simpson&lt;/span&gt; f a b n) 
    (&lt;span style=&#34;color:#66d9ef&#34;&gt;define &lt;/span&gt;h (/ (- b a) n)) 
     
@@ -1757,7 +1757,7 @@ term其实就是涉及到你需要思考的三种情况
       <description>&lt;p&gt;##Beautiful code!&lt;/p&gt;
 &lt;p&gt;数x为函数的f的不动点（f可以代表N-S方程），如果满足f(x)=x,则称x
 为函数f的不动点。
-性质 f(x),f(f(x)),f(f(f(x)))&amp;hellip;., change the x&#39;s value if f(x)=x,then
+性质 f(x),f(f(x)),f(f(f(x)))&amp;hellip;., change the x&amp;rsquo;s value if f(x)=x,then
 you found!&lt;/p&gt;
 &lt;h2 id=&#34;source-code&#34;&gt;Source code&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-scheme&#34; data-lang=&#34;scheme&#34;&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;define &lt;/span&gt;tolerance &lt;span style=&#34;color:#ae81ff&#34;&gt;0.000001&lt;/span&gt;)

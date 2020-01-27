@@ -116,9 +116,9 @@
   <meta property="twitter:site" content="@jueqingsizhe66">
   <meta property="twitter:creator" content="@jueqingsizhe66">
   
-  <meta property="og:site_name" content="Macro Life">
+  <meta property="og:site_name" content="简约派">
   <meta property="og:url" content="https://jueqingsizhe66.github.io/blog/2016/02/16/let-and-letrec-makes-programming-orient-object/">
-  <meta property="og:title" content="let and letrec makes programming orient object | Macro Life">
+  <meta property="og:title" content="let and letrec makes programming orient object | 简约派">
   <meta property="og:description" content="面向对象已经大行其道，而在scheme是如何实现，本文仅仅是刹那的思路，
 可以通过let来定义局部变量，而可以通过letrec定义method的过程来实现
 面向对象的数据抽象的能力。"><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
@@ -127,7 +127,7 @@
     
       <meta property="article:published_time" content="2016-02-16T21:35:15&#43;08:00">
     
-    <meta property="article:modified_time" content="2019-10-27T20:50:56&#43;08:00">
+    <meta property="article:modified_time" content="2016-02-16T21:35:15&#43;08:00">
   
 
   
@@ -146,7 +146,7 @@
 
 
 
-  <title>let and letrec makes programming orient object | Macro Life</title>
+  <title>let and letrec makes programming orient object | 简约派</title>
 
 </head>
 
@@ -189,7 +189,7 @@
   <div class="container">
 
     
-      <a class="navbar-brand" href="/">Macro Life</a>
+      <a class="navbar-brand" href="/">简约派</a>
       
       <button type="button" class="navbar-toggler" data-toggle="collapse"
               data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -520,10 +520,8 @@
     
     
       
-          Last updated on
-      
     
-    Oct 27, 2019
+    Feb 16, 2016
   </span>
 
   
@@ -571,18 +569,18 @@
     <aside>
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#let-">let 不具备局部传递功能</a>
+    <li><a href="#let-不具备局部传递功能">let 不具备局部传递功能</a>
       <ul>
-        <li><a href="#let">第一次注意看let的实现</a></li>
+        <li><a href="#第一次注意看let的实现">第一次注意看let的实现</a></li>
       </ul>
     </li>
-    <li><a href="#let-star-">let star 具备局部传递功能</a></li>
-    <li><a href="#letrec-">letrec 具备自指的能力(递归)</a>
+    <li><a href="#let-star-具备局部传递功能">let star 具备局部传递功能</a></li>
+    <li><a href="#letrec-具备自指的能力递归">letrec 具备自指的能力(递归)</a>
       <ul>
-        <li><a href="#named-let-letrec">Named Let 一种更加紧凑的letrec</a></li>
+        <li><a href="#named-let-一种更加紧凑的letrec">Named Let 一种更加紧凑的letrec</a></li>
       </ul>
     </li>
-    <li><a href="#heading">进一步实现留待以后</a></li>
+    <li><a href="#进一步实现留待以后">进一步实现留待以后</a></li>
   </ul>
 </nav>
     </aside>
@@ -593,7 +591,7 @@
       <p>面向对象已经大行其道，而在scheme是如何实现，本文仅仅是刹那的思路，
 可以通过let来定义局部变量，而可以通过letrec定义method的过程来实现
 面向对象的数据抽象的能力。</p>
-<h2 id="let-">let 不具备局部传递功能</h2>
+<h2 id="let-不具备局部传递功能">let 不具备局部传递功能</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">define </span> x <span style="color:#ae81ff">10</span>)  <span style="color:#75715e">;;; x的值不会影响到局部变量的值</span>
 (<span style="color:#66d9ef">let </span>((<span style="color:#a6e22e">x</span> <span style="color:#ae81ff">1</span>) (<span style="color:#a6e22e">y</span> <span style="color:#ae81ff">2</span>) (<span style="color:#a6e22e">z</span> <span style="color:#ae81ff">3</span>))
    (list  x y z))
@@ -605,14 +603,14 @@
 <span style="color:#75715e">;结果</span>
     (<span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span>)
     (<span style="color:#ae81ff">1</span> <span style="color:#ae81ff">10</span> <span style="color:#ae81ff">3</span>) 
-</code></pre></div><h3 id="let">第一次注意看let的实现</h3>
+</code></pre></div><h3 id="第一次注意看let的实现">第一次注意看let的实现</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">
 (<span style="color:#a6e22e">define-syntax</span>
     (<span style="color:#66d9ef">syntax-rules </span>()
         ((<span style="color:#66d9ef">let </span>((<span style="color:#a6e22e">var</span> expr) <span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>) body <span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>) ((<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">var</span> <span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>) body <span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>) expr <span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>))))
 </code></pre></div><p>(let ((x 2) (y 3)) (+  x y)) 转变为
 ((lambda (x y) (+ x y)) 2 3) 的形式.</p>
-<h2 id="let-star-">let star 具备局部传递功能</h2>
+<h2 id="let-star-具备局部传递功能">let star 具备局部传递功能</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">let* </span>(( x  <span style="color:#ae81ff">1</span>) (<span style="color:#a6e22e">y</span>  x) (<span style="color:#a6e22e">z</span> <span style="color:#ae81ff">3</span>))
   (list x  y z))
 
@@ -620,7 +618,7 @@
 <span style="color:#75715e">;结果</span>
     (<span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">3</span>)
 </code></pre></div><p>另外有一种叫做fluid-let的暂时没有在这边出现</p>
-<h2 id="letrec-">letrec 具备自指的能力(递归)</h2>
+<h2 id="letrec-具备自指的能力递归">letrec 具备自指的能力(递归)</h2>
 <p>如果想定义一个procedure局部变量？
 如果用let 或者let*都无法达到此目的，因为他们不能自指（也就是没有递归的能力）
 而如果是letrec则是拥有此功能</p>
@@ -638,7 +636,7 @@
 
 <span style="color:#75715e">;结果</span>
     <span style="color:#66d9ef">#f</span>
-</code></pre></div><h3 id="named-let-letrec">Named Let 一种更加紧凑的letrec</h3>
+</code></pre></div><h3 id="named-let-一种更加紧凑的letrec">Named Let 一种更加紧凑的letrec</h3>
 <p>在上文，let是用来指定局部变量，而letrec是来指定procedure，
 现在我们可以用Named let来使letrec写起来更加紧凑些，但是
 不适合书写多个局部方法的情况，比如：</p>
@@ -681,7 +679,7 @@
     <span style="color:#ae81ff">2</span>
     <span style="color:#ae81ff">1</span>
     <span style="color:#e6db74">&#39;ole</span>
-</code></pre></div><h2 id="heading">进一步实现留待以后</h2>
+</code></pre></div><h2 id="进一步实现留待以后">进一步实现留待以后</h2>
     </div>
  <div class="nav-links" style="padding:10;">
         

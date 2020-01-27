@@ -117,9 +117,9 @@ shell编成的目的减少unix相关系统的管理员的人物
   <meta property="twitter:site" content="@jueqingsizhe66">
   <meta property="twitter:creator" content="@jueqingsizhe66">
   
-  <meta property="og:site_name" content="Macro Life">
+  <meta property="og:site_name" content="简约派">
   <meta property="og:url" content="https://jueqingsizhe66.github.io/blog/2015/05/27/bashzhi-neng-fen-lei-wen-jian-bing-qiu-zhi/">
-  <meta property="og:title" content="Bash智能分类文件并求值 | Macro Life">
+  <meta property="og:title" content="Bash智能分类文件并求值 | 简约派">
   <meta property="og:description" content="Bash是linux底下的一种shell实现，可以方便linux用户进行系统管理。他的核心就是
 调用最有效的命令组合形成更加强大完美的管理和应用程序,这也是unix的哲学,通过调用between programs的关系来get its power而不是通过自己的程序。
 shell编成的目的减少unix相关系统的管理员的人物
@@ -129,7 +129,7 @@ shell编成的目的减少unix相关系统的管理员的人物
     
       <meta property="article:published_time" content="2015-05-27T10:36:24&#43;08:00">
     
-    <meta property="article:modified_time" content="2019-10-27T20:50:56&#43;08:00">
+    <meta property="article:modified_time" content="2015-05-27T10:36:24&#43;08:00">
   
 
   
@@ -148,7 +148,7 @@ shell编成的目的减少unix相关系统的管理员的人物
 
 
 
-  <title>Bash智能分类文件并求值 | Macro Life</title>
+  <title>Bash智能分类文件并求值 | 简约派</title>
 
 </head>
 
@@ -191,7 +191,7 @@ shell编成的目的减少unix相关系统的管理员的人物
   <div class="container">
 
     
-      <a class="navbar-brand" href="/">Macro Life</a>
+      <a class="navbar-brand" href="/">简约派</a>
       
       <button type="button" class="navbar-toggler" data-toggle="collapse"
               data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -522,10 +522,8 @@ shell编成的目的减少unix相关系统的管理员的人物
     
     
       
-          Last updated on
-      
     
-    Oct 27, 2019
+    May 27, 2015
   </span>
 
   
@@ -573,7 +571,7 @@ shell编成的目的减少unix相关系统的管理员的人物
     <aside>
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#heading-4">两者的主要区别如下：</a></li>
+    <li><a href="#两者的主要区别如下">两者的主要区别如下：</a></li>
   </ul>
 </nav>
     </aside>
@@ -669,18 +667,18 @@ echo <span style="color:#e6db74">&#39;{userA,userB,userC}-{home,bin,data}&#39;</
 </span><span style="color:#e6db74">}
 </span><span style="color:#e6db74"> 但是我发现加入function反而不行，于是使用 function_name(){}的风格
 </span><span style="color:#e6db74">
-</span></code></pre></div><h1 id="heading">无用的分号命令</h1>
+</span></code></pre></div><h1 id="无用的分号命令">无用的分号命令</h1>
 <p>： 该命令什么都不做，但执行后会返回一个正确的退出代码，即exit 0。比如在if语句中，then后面不想做任何操作，但是又不能空着，这时就可以使用“:”来解决，如下</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;</span>$i<span style="color:#e6db74">&#34;</span> -ne <span style="color:#ae81ff">1</span> <span style="color:#f92672">]</span>;<span style="color:#66d9ef">then</span>
     :
 <span style="color:#66d9ef">else</span>
     echo <span style="color:#e6db74">&#34;</span>$i<span style="color:#e6db74"> is not equal 1</span><span style="color:#e6db74">&#34;</span>
 <span style="color:#66d9ef">fi</span>
-</code></pre></div><h1 id="heading-1">特殊的点号</h1>
+</code></pre></div><h1 id="特殊的点号">特殊的点号</h1>
 <p>点号+ 文件名的作用 和 source+文件名的作用一样，都是在当前的shell执行命令
 而 ./filename.sh 则是在子shell执行命令。
 所以如果想要设置环境变量得用source+文件名或者. 文件名的方式。</p>
-<h1 id="heading-2">关于大括号和小括号的区别</h1>
+<h1 id="关于大括号和小括号的区别">关于大括号和小括号的区别</h1>
 <p>大括号和小括号的作用都一样，都是把几个命令组合在一起，然而他们也有所区别。
 ()是在产生的子shell下执行，而{}是在当前的shell下执行
 与前面讲到是使用&rdquo;.  filename.sh&quot;和&rdquo;./filename.sh&quot;的区别一样</p>
@@ -695,7 +693,7 @@ abc
 </code></pre></div><p>由此可见，() 子shell设置完，不会影响到父shell，因为父不会继承子，影响的只是
 自身的shell。
 <em>注意：()里面两边可以不使用空格，{}里面两边必须使用空格，且最后一个命令也需要以“；”结尾，表示命令结束。</em></p>
-<h1 id="heading-3">中括号用于判断</h1>
+<h1 id="中括号用于判断">中括号用于判断</h1>
 <p>[] 与test命令一样，用于比较值以及检查文件类型。如下</p>
 <ol>
 <li>[ &ldquo;$A&rdquo; = 123 ]：是字符串的测试，以测试 $A 是否为 1、2、3 这三个连续的&quot;文字&rdquo;。</li>
@@ -704,12 +702,12 @@ abc
 <li>[ -f &ldquo;$A&rdquo; ] : 判断是否存在文件</li>
 <li>[ -d &ldquo;$A&rdquo; ] : 判断是否存在文件夹</li>
 </ol>
-<h1 id="-">关于 单括号和双中括号的区别</h1>
+<h1 id="关于-单括号和双中括号的区别">关于 单括号和双中括号的区别</h1>
 <p>[[]]可以说是[]的“增强版”，它能够将多个test命令支持的测试组合起来.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">
 <span style="color:#75715e"># [[ (-d &#34;$HOME&#34;) &amp;&amp; (-w &#34;$HOME&#34;) ]] &amp;&amp; echo echo &#34;home is a writable directory&#34;</span>  
 home is a writable directory
-</code></pre></div><h2 id="heading-4">两者的主要区别如下：</h2>
+</code></pre></div><h2 id="两者的主要区别如下">两者的主要区别如下：</h2>
 <ul>
 <li>数字测试： -eq -ne -lt -le -gt -ge，[<input disabled="" type="checkbox">]同 <input disabled="" type="checkbox">一致
 <ul>
@@ -750,7 +748,7 @@ home is a writable directory
 ture
 <span style="color:#75715e"># [[ a &gt; 1 ]] &amp;&amp; echo ture || echo false</span>
 ture
-</code></pre></div><h1 id="heading-5">双中括号和双小括号</h1>
+</code></pre></div><h1 id="双中括号和双小括号">双中括号和双小括号</h1>
 <p>(())专门来做数值运算，如果表达式求值为 0，则设置退出状态为 1；如果求值为非 0 值，则设置为 0。不需要对 (( 和 )) 之间的操作符转义。算术只对整数进行。除 0 会产生错误，但不会产生溢出。可以执行 C 语言中常见的算术、逻辑和位操作。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#f92672">(</span><span style="color:#f92672">(</span>i<span style="color:#f92672">=</span>1+99<span style="color:#f92672">)</span><span style="color:#f92672">)</span>;echo $i
 <span style="color:#ae81ff">100</span>
@@ -762,11 +760,11 @@ echo <span style="color:#66d9ef">$((</span><span style="color:#ae81ff">2</span><
 <span style="color:#ae81ff">8</span>
 
 </code></pre></div><p><em>注意：使用 (( )) 时，不需要空格分隔各值和运算符，使用[]和[[ ]] 时需要用空格分隔各值和运算符</em></p>
-<h1 id="find">find跳过指定目录</h1>
+<h1 id="find跳过指定目录">find跳过指定目录</h1>
 <p>如果在查找文件时希望忽略某个目录，因为你知道那个目录中没有你所要查找的文件，那么可以使用-prune选项来指出需要忽略的目录。
 在使用 -prune选项时要当心，因为如果你同时使用了-depth选项，那么-prune选项就会被find命令忽略。</p>
 <h1 id="unix-tutorial-for-beginnerwwweesurreyacukteachingunix"><a href="www.ee.surrey.ac.uk/Teaching/Unix">Unix Tutorial for Beginner</a></h1>
-<h1 id="bashhttpvbirddicksuedutwlinux-basic0320bashphp-"><a href="http://vbird.dic.ksu.edu.tw/linux_basic/0320bash.php">常用的bash命令学习</a></h1>
+<h1 id="常用的bash命令学习httpvbirddicksuedutwlinux_basic0320bashphp-"><a href="http://vbird.dic.ksu.edu.tw/linux_basic/0320bash.php">常用的bash命令学习</a></h1>
 <ol>
 <li>wc -l</li>
 <li>sort -rn -t 2 -k :</li>
@@ -797,7 +795,7 @@ grep -oP &lsquo;(?&lt;=+)fx(?=()&rsquo; *
 grep -onP &lsquo;(?&lt;=+)fx(?=()&rsquo; *
 11. cut -d &ldquo;:&rdquo; -f 1,3 /etc/passwd   类似于awk的字域
 cut -d &ldquo;:&rdquo; -f 1,3,7 /etc/passwd</p>
-<h1 id="heading-6">一个综合性的案例</h1>
+<h1 id="一个综合性的案例">一个综合性的案例</h1>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">
 <span style="color:#75715e">#---  FUNCTION  ----------------------------------------------------------------</span>
 <span style="color:#75715e">#          NAME:  deleteDensity</span>

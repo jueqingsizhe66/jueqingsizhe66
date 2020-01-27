@@ -115,9 +115,9 @@
   <meta property="twitter:site" content="@jueqingsizhe66">
   <meta property="twitter:creator" content="@jueqingsizhe66">
   
-  <meta property="og:site_name" content="Macro Life">
+  <meta property="og:site_name" content="简约派">
   <meta property="og:url" content="https://jueqingsizhe66.github.io/blog/2016/09/25/bash-special-annotation/">
-  <meta property="og:title" content="bash special annotation | Macro Life">
+  <meta property="og:title" content="bash special annotation | 简约派">
   <meta property="og:description" content="关于shell的summary参看Linux Shell Summary
 以下是关于bash的一些比较特殊的地方。"><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
   <meta property="twitter:image" content="https://jueqingsizhe66.github.io/img/icon-192.png"><meta property="og:locale" content="en-us">
@@ -125,7 +125,7 @@
     
       <meta property="article:published_time" content="2016-09-25T23:15:01&#43;08:00">
     
-    <meta property="article:modified_time" content="2019-10-27T20:50:56&#43;08:00">
+    <meta property="article:modified_time" content="2016-09-25T23:15:01&#43;08:00">
   
 
   
@@ -144,7 +144,7 @@
 
 
 
-  <title>bash special annotation | Macro Life</title>
+  <title>bash special annotation | 简约派</title>
 
 </head>
 
@@ -187,7 +187,7 @@
   <div class="container">
 
     
-      <a class="navbar-brand" href="/">Macro Life</a>
+      <a class="navbar-brand" href="/">简约派</a>
       
       <button type="button" class="navbar-toggler" data-toggle="collapse"
               data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -518,10 +518,8 @@
     
     
       
-          Last updated on
-      
     
-    Oct 27, 2019
+    Sep 25, 2016
   </span>
 
   
@@ -569,17 +567,17 @@
     <aside>
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#1-bash">1. bash数组再理解</a>
+    <li><a href="#1-bash数组再理解">1. bash数组再理解</a>
       <ul>
-        <li><a href="#heading">定义数组</a></li>
-        <li><a href="#heading-1">引用数组</a></li>
-        <li><a href="#heading-2">添加数组</a></li>
+        <li><a href="#定义数组">定义数组</a></li>
+        <li><a href="#引用数组">引用数组</a></li>
+        <li><a href="#添加数组">添加数组</a></li>
       </ul>
     </li>
-    <li><a href="#2-bash">2. bash变量截取和变量替换</a></li>
-    <li><a href="#3-bash">3. bash接受键盘操作</a></li>
-    <li><a href="#4-tac">4. tac反向</a></li>
-    <li><a href="#5-if">5. if当中也可以使用双括号进行算术判断</a></li>
+    <li><a href="#2-bash变量截取和变量替换">2. bash变量截取和变量替换</a></li>
+    <li><a href="#3-bash接受键盘操作">3. bash接受键盘操作</a></li>
+    <li><a href="#4-tac反向">4. tac反向</a></li>
+    <li><a href="#5-if当中也可以使用双括号进行算术判断">5. if当中也可以使用双括号进行算术判断</a></li>
   </ul>
 </nav>
     </aside>
@@ -589,12 +587,12 @@
     <div class="article-style">
       <p>关于shell的summary参看<a href="http://jueqingsizhe66.github.io/blog/2016/08/06/linux-shell-summary/#kernel">Linux Shell Summary</a></p>
 <p>以下是关于bash的一些比较特殊的地方。</p>
-<h2 id="1-bash">1. bash数组再理解</h2>
+<h2 id="1-bash数组再理解">1. bash数组再理解</h2>
 <p><code>declare -a</code>表示声明一个数组，类似于 <code>declare -i</code> 声明一个整数和<code>declare -x </code>声明一个环境变量。</p>
 <p><!-- raw HTML omitted -->bash数组定义时候使用小括号来赋值，而在引用数组的时候反而使用中括号（不同于其他编程语言)<!-- raw HTML omitted --></p>
-<h3 id="heading">定义数组</h3>
+<h3 id="定义数组">定义数组</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">bash2<span style="color:#f92672">=</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;34&#34;</span>,<span style="color:#e6db74">&#34;5&#34;</span>,<span style="color:#e6db74">&#34;5&#34;</span>,<span style="color:#e6db74">&#34;4&#34;</span><span style="color:#f92672">)</span>
-</code></pre></div><h3 id="heading-1">引用数组</h3>
+</code></pre></div><h3 id="引用数组">引用数组</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">echo <span style="color:#e6db74">${</span>array[n]<span style="color:#e6db74">}</span>
 遍历数组：
 filename<span style="color:#f92672">=</span><span style="color:#f92672">(</span><span style="color:#e6db74">`</span>ls<span style="color:#e6db74">`</span><span style="color:#f92672">)</span>
@@ -602,9 +600,9 @@ filename<span style="color:#f92672">=</span><span style="color:#f92672">(</span>
 echo $var
 <span style="color:#66d9ef">done</span>
 
-</code></pre></div><h3 id="heading-2">添加数组</h3>
+</code></pre></div><h3 id="添加数组">添加数组</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">bash1<span style="color:#f92672">+=</span><span style="color:#e6db74">&#34;45&#34;</span>; <span style="color:#75715e">#赋值两边不能有空格</span>
-</code></pre></div><h2 id="2-bash">2. bash变量截取和变量替换</h2>
+</code></pre></div><h2 id="2-bash变量截取和变量替换">2. bash变量截取和变量替换</h2>
 <p><!-- raw HTML omitted -->bash使用井号代表开头(这和正则表达式有点不同，使用caret)
 而结尾则使用百分号(不同于正则表达式的dollar符号$)。并且在当使用两个重叠的井号，表示最大长度（从头开始的最大删除都删掉）
 而使用两个百分号则表达反方向的最大长度删除（从尾到头删除匹配字符串）</p>
@@ -640,7 +638,7 @@ ${string:position:length}
 <li>匹配项第一个位置出现#井号表示开头部分</li>
 <li>匹配项最后一个位置出现%百分号表示结尾部分</li>
 </ol>
-<h2 id="3-bash">3. bash接受键盘操作</h2>
+<h2 id="3-bash接受键盘操作">3. bash接受键盘操作</h2>
 <p>用一个read命令即可(类似于matlab的input命令)
 通常的风格是 <code>read -p &quot;prompt for reminding&quot; variable-name</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">接收键盘输入：
@@ -665,7 +663,7 @@ read -p <span style="color:#e6db74">&#34;please input your sex [M/F]:&#34;</span
 echo -e <span style="color:#e6db74">&#34;\n&#34;</span>
 echo $sex
 
-</code></pre></div><h2 id="4-tac">4. tac反向</h2>
+</code></pre></div><h2 id="4-tac反向">4. tac反向</h2>
 <p>cat在bash中是打印文本信息的作用，而<a href="http://bbs.chinaunix.net/thread-250407-1-1.html">tac</a>则是反向输出文件流</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">cat old_file|awk <span style="color:#e6db74">&#39;{print NR,$0}&#39;</span>|sort -r -n|awk <span style="color:#e6db74">&#39;{print $2}&#39;</span>
 
@@ -674,7 +672,7 @@ echo $sex
 <li>逆向排列</li>
 <li>输出每行</li>
 </ol>
-<h2 id="5-if">5. if当中也可以使用双括号进行算术判断</h2>
+<h2 id="5-if当中也可以使用双括号进行算术判断">5. if当中也可以使用双括号进行算术判断</h2>
 <p>if并不是支持正则表达式？还是只有变量支持？</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">root at javazhao-N53SM <span style="color:#f92672">[</span>13:26:46ä��午<span style="color:#f92672">]</span> in /MyBashWork/clean on git:develop?
 $ <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -f <span style="color:#e6db74">&#34;All.sh&#34;</span> <span style="color:#f92672">]</span> ;<span style="color:#66d9ef">then</span> echo <span style="color:#e6db74">&#34;hei&#34;</span>; <span style="color:#66d9ef">else</span> echo <span style="color:#e6db74">&#34;no&#34;</span> ;<span style="color:#66d9ef">fi</span>;

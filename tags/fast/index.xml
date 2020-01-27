@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Fast | Macro Life</title>
+    <title>Fast | 简约派</title>
     <link>https://jueqingsizhe66.github.io/tags/fast/</link>
       <atom:link href="https://jueqingsizhe66.github.io/tags/fast/index.xml" rel="self" type="application/rss+xml" />
     <description>Fast</description>
@@ -219,7 +219,7 @@ vim NRELOffshrBsline5MW_Onshore_ServoDyn.dat
       <guid>https://jueqingsizhe66.github.io/blog/2017/02/07/fastdiao-shi/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://nwtc.nrel.gov/FAST8&#34;&gt;NREL FAST&lt;/a&gt;的调试一直存在问题，关键是不知道怎么设置选项，查阅了Visual Studio和一些基本知识整理了
 NREL项目的调试方法。&lt;/p&gt;
-&lt;h2 id=&#34;fortran&#34;&gt;fortran工作路径问题&lt;/h2&gt;
+&lt;h2 id=&#34;fortran工作路径问题&#34;&gt;fortran工作路径问题&lt;/h2&gt;
 &lt;p&gt;&lt;!-- raw HTML omitted --&gt;__工作路径对于任何的可执行文件都很重要。__&lt;!-- raw HTML omitted --&gt;
 当然事先可能得了解一下软件编译链接的过程（即编写源代码&amp;ndash;调用编译器编译源代码&amp;ndash;
 &amp;gt;调用链接器连接相关代码块生成可执行文件&amp;ndash;&amp;gt;运行可执行文件）(IDE隐藏了上述过程)&lt;/p&gt;
@@ -234,7 +234,7 @@ NREL项目的调试方法。&lt;/p&gt;
 &lt;/ul&gt;
 &lt;p&gt;比如:&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/fortrandebug/idewd.png&#34; alt=&#34;IDE working directory&#34;&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;h2 id=&#34;heading&#34;&gt;代码层级改变文件路径&lt;/h2&gt;
+&lt;h2 id=&#34;代码层级改变文件路径&#34;&gt;代码层级改变文件路径&lt;/h2&gt;
 &lt;p&gt;在程序中可以通过一些手段，动态的更改当前路径。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;IVF: changeDirQQ&lt;/li&gt;
@@ -261,7 +261,7 @@ D:\testCWD\Debug\test_cwd.exe
 
 working directory:
 D:\testCWD
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;fast&#34;&gt;调试FAST&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;调试fast&#34;&gt;调试FAST&lt;/h2&gt;
 &lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/fortrandebug/fast.jpg&#34; alt=&#34;fast&#34;&gt;
 最关键的是一个对应两个设置&lt;/p&gt;
 &lt;ul&gt;
@@ -537,23 +537,23 @@ NRELOffshrBsline5MW_Onshore_ServoDyn.dat 更改对应的DLL_FileName 为 ServoDa
 &lt;p&gt;风力机系统的整体带入流风物理流动现象:&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/fast/WTSystem.png&#34; alt=&#34;Physical phenomena affecting a floating wind turbine system&#34;&gt;&lt;/p&gt;
 &lt;p&gt;而本文主要讲的是如何在ubuntu64bit系统编译FAST使其可以使用。&lt;/p&gt;
-&lt;h2 id=&#34;1-&#34;&gt;1 操作系统的位数&lt;/h2&gt;
+&lt;h2 id=&#34;1-操作系统的位数&#34;&gt;1 操作系统的位数&lt;/h2&gt;
 &lt;pre&gt;&lt;code&gt;找到Compiling文件夹下的makefile，然后将bits=32 改为64
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h2 id=&#34;2registerexe&#34;&gt;2.register.exe编译&lt;/h2&gt;
+&lt;h2 id=&#34;2registerexe编译&#34;&gt;2.register.exe编译&lt;/h2&gt;
 &lt;p&gt;首先编译Source/dependecy/Registry 的makefile，然后生成一个register.exe 供给fast makefile使用&lt;/p&gt;
-&lt;h2 id=&#34;3-maplibmapso&#34;&gt;3. MAP++生成libmap.so&lt;/h2&gt;
+&lt;h2 id=&#34;3-map生成libmapso&#34;&gt;3. MAP++生成libmap.so&lt;/h2&gt;
 &lt;p&gt;从官网https://nwtc.nrel.gov/MAP 下载map源文件，然后编译 生成一个libmap.so
 注意： 必须是 lapack developer版本才可以，&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt; apt-get install lapack*
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;并把so文件放到FAST目录下的bin文件夹（没有则创建），然后make fast的makefile即可。&lt;/p&gt;
-&lt;h2 id=&#34;4-discon-dllnrel-5mw&#34;&gt;4 DISCON_DLL编译使得NREL 5MW也能运行&lt;/h2&gt;
+&lt;h2 id=&#34;4-discon_dll编译使得nrel-5mw也能运行&#34;&gt;4 DISCON_DLL编译使得NREL 5MW也能运行&lt;/h2&gt;
 &lt;p&gt;之前的三个步骤,在bin目录生成的FAST_glint64只能运行Test1-18.fst对应的机型.&lt;/p&gt;
 &lt;p&gt;如果想运行Nrel-5MW（Test18-26.fst)必须是编译makefile_DISCON_DLL,并修改
 CertTest/5MW_Baseline/ServDyn 的CertTest/5MW_Baseline/NRELOffshrBsline5MW_Onshore_ServoDyn.dat 更改对应的&lt;strong&gt;DLL_FileName&lt;/strong&gt; 为 &lt;em&gt;ServoData/DISCON_glin64.so&lt;/em&gt;&lt;/p&gt;
-&lt;h3 id=&#34;41-&#34;&gt;4.1 编译方式&lt;/h3&gt;
+&lt;h3 id=&#34;41-编译方式&#34;&gt;4.1 编译方式&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;    make -f makefile_DISCON_DLL
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;42&#34;&gt;4.2注意有可能编译不通过：&lt;/h3&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;42注意有可能编译不通过&#34;&gt;4.2注意有可能编译不通过：&lt;/h3&gt;
 &lt;p&gt;必须在makefile_DISCON_DLL中的  FFLAGS加入  -fPIC&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;FFLAGS  = -O2 -m$(BITS) -fbacktrace -ffree-line-length-none -x f95-cpp-input -fPIC -C
 
@@ -570,7 +570,7 @@ CertTest/5MW_Baseline/ServDyn 的CertTest/5MW_Baseline/NRELOffshrBsline5MW_Onsho
 于是就有了下面的shell分析脚本。&lt;/p&gt;
 &lt;p&gt;TurbSim产生的风力机一圈的入流截面模型（仅仅一个截面，全场是因为捕捉了很多个截面）&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/fast/turbsim.png&#34; alt=&#34;Turbsim&#34;&gt;&lt;/p&gt;
-&lt;h2 id=&#34;shell&#34;&gt;Shell解析脚本&lt;/h2&gt;
+&lt;h2 id=&#34;shell解析脚本&#34;&gt;Shell解析脚本&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/bin/bash - 
 &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#===============================================================================&lt;/span&gt;
 #
@@ -706,7 +706,7 @@ alert  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;CTStartTime&amp;#34;&l
 grep -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;CTStartTime&amp;#34;&lt;/span&gt; *.inp|awk -F: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $1,$3}&amp;#39;&lt;/span&gt;|awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print substr($1,0,length($1)-4),&amp;#34;\t\t&amp;#34;,$2}&amp;#39;&lt;/span&gt;|column -t
 &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt; &amp;gt; summary.out
 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;heading&#34;&gt;改进&lt;/h3&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;改进&#34;&gt;改进&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;去除无用的Turbulence and Boundary&lt;/li&gt;
 &lt;li&gt;增加了对GridWidth and GridHeight的处理&lt;/li&gt;
@@ -717,7 +717,7 @@ grep -n &amp;quot;GridWidth&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|sed 
 &lt;/code&gt;&lt;/pre&gt;&lt;ol start=&#34;3&#34;&gt;
 &lt;li&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2 id=&#34;shell-1&#34;&gt;shell产生的结果如下：&lt;/h2&gt;
+&lt;h2 id=&#34;shell产生的结果如下&#34;&gt;shell产生的结果如下：&lt;/h2&gt;
 &lt;pre&gt;&lt;code&gt;#################
 ## RandSeed1 ##
 #################

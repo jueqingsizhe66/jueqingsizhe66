@@ -118,9 +118,9 @@ TurbSim产生的风力机一圈的入流截面模型（仅仅一个截面，全�
   <meta property="twitter:site" content="@jueqingsizhe66">
   <meta property="twitter:creator" content="@jueqingsizhe66">
   
-  <meta property="og:site_name" content="Macro Life">
+  <meta property="og:site_name" content="简约派">
   <meta property="og:url" content="https://jueqingsizhe66.github.io/blog/2015/08/10/turbsim-8ge-tuan-liu-mo-xing-de-dui-bi/">
-  <meta property="og:title" content="TurbSim 8个湍流模型的对比 | Macro Life">
+  <meta property="og:title" content="TurbSim 8个湍流模型的对比 | 简约派">
   <meta property="og:description" content="TurbSim,是NREL提供的一个小的开源工具， 用于产生湍流风，设置的时候可能对于不同模型会有不同的参数，基于范本进行了一番分析。当然测试文件在TurbSim的Test文件下的inp文件夹下。
 如果对那些湍流模型做一个对比，那样是否可以更加清晰的看出不同呢？
 于是就有了下面的shell分析脚本。
@@ -131,7 +131,7 @@ TurbSim产生的风力机一圈的入流截面模型（仅仅一个截面，全�
     
       <meta property="article:published_time" content="2015-08-10T01:00:47&#43;08:00">
     
-    <meta property="article:modified_time" content="2019-10-27T20:50:56&#43;08:00">
+    <meta property="article:modified_time" content="2015-08-10T01:00:47&#43;08:00">
   
 
   
@@ -150,7 +150,7 @@ TurbSim产生的风力机一圈的入流截面模型（仅仅一个截面，全�
 
 
 
-  <title>TurbSim 8个湍流模型的对比 | Macro Life</title>
+  <title>TurbSim 8个湍流模型的对比 | 简约派</title>
 
 </head>
 
@@ -193,7 +193,7 @@ TurbSim产生的风力机一圈的入流截面模型（仅仅一个截面，全�
   <div class="container">
 
     
-      <a class="navbar-brand" href="/">Macro Life</a>
+      <a class="navbar-brand" href="/">简约派</a>
       
       <button type="button" class="navbar-toggler" data-toggle="collapse"
               data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -524,10 +524,8 @@ TurbSim产生的风力机一圈的入流截面模型（仅仅一个截面，全�
     
     
       
-          Last updated on
-      
     
-    Oct 27, 2019
+    Aug 10, 2015
   </span>
 
   
@@ -575,12 +573,12 @@ TurbSim产生的风力机一圈的入流截面模型（仅仅一个截面，全�
     <aside>
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#shell">Shell解析脚本</a>
+    <li><a href="#shell解析脚本">Shell解析脚本</a>
       <ul>
-        <li><a href="#heading">改进</a></li>
+        <li><a href="#改进">改进</a></li>
       </ul>
     </li>
-    <li><a href="#shell-1">shell产生的结果如下：</a></li>
+    <li><a href="#shell产生的结果如下">shell产生的结果如下：</a></li>
   </ul>
 </nav>
     </aside>
@@ -593,7 +591,7 @@ TurbSim产生的风力机一圈的入流截面模型（仅仅一个截面，全�
 于是就有了下面的shell分析脚本。</p>
 <p>TurbSim产生的风力机一圈的入流截面模型（仅仅一个截面，全场是因为捕捉了很多个截面）</p>
 <p><img src="/images/fast/turbsim.png" alt="Turbsim"></p>
-<h2 id="shell">Shell解析脚本</h2>
+<h2 id="shell解析脚本">Shell解析脚本</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e">#!/bin/bash - 
 </span><span style="color:#75715e"></span><span style="color:#75715e">#===============================================================================</span>
 #
@@ -729,7 +727,7 @@ alert  <span style="color:#e6db74">&#34;CTStartTime&#34;</span>
 grep -n <span style="color:#e6db74">&#34;CTStartTime&#34;</span> *.inp|awk -F: <span style="color:#e6db74">&#39;{print $1,$3}&#39;</span>|awk <span style="color:#e6db74">&#39;{print substr($1,0,length($1)-4),&#34;\t\t&#34;,$2}&#39;</span>|column -t
 <span style="color:#f92672">}</span> &gt; summary.out
 
-</code></pre></div><h3 id="heading">改进</h3>
+</code></pre></div><h3 id="改进">改进</h3>
 <ol>
 <li>去除无用的Turbulence and Boundary</li>
 <li>增加了对GridWidth and GridHeight的处理</li>
@@ -740,7 +738,7 @@ grep -n &quot;GridWidth&quot; *.inp|awk -F: '{print $1,$3}'|sed '/HubHt/d'|awk '
 </code></pre><ol start="3">
 <li></li>
 </ol>
-<h2 id="shell-1">shell产生的结果如下：</h2>
+<h2 id="shell产生的结果如下">shell产生的结果如下：</h2>
 <pre><code>#################
 ## RandSeed1 ##
 #################

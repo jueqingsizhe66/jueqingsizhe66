@@ -119,9 +119,9 @@ The Second Interpreter from on第一次扩展了基础的let-language，实现�
   <meta property="twitter:site" content="@jueqingsizhe66">
   <meta property="twitter:creator" content="@jueqingsizhe66">
   
-  <meta property="og:site_name" content="Macro Life">
+  <meta property="og:site_name" content="简约派">
   <meta property="og:url" content="https://jueqingsizhe66.github.io/blog/2016/02/27/the-third-interpreter-implementing-proc/">
-  <meta property="og:title" content="The third Interpreter implementing Proc | Macro Life">
+  <meta property="og:title" content="The third Interpreter implementing Proc | 简约派">
   <meta property="og:description" content="Scheme解释器的好处是可以不断的拓展自己语言的能力，
 
 通过The First-interpreter-from-eopl创建了一个较为简单let-language，实现了较为简单的减法运算和let局部变量赋值等功能。
@@ -133,7 +133,7 @@ The Second Interpreter from on第一次扩展了基础的let-language，实现�
     
       <meta property="article:published_time" content="2016-02-27T14:35:50&#43;08:00">
     
-    <meta property="article:modified_time" content="2019-10-27T20:50:56&#43;08:00">
+    <meta property="article:modified_time" content="2016-02-27T14:35:50&#43;08:00">
   
 
   
@@ -152,7 +152,7 @@ The Second Interpreter from on第一次扩展了基础的let-language，实现�
 
 
 
-  <title>The third Interpreter implementing Proc | Macro Life</title>
+  <title>The third Interpreter implementing Proc | 简约派</title>
 
 </head>
 
@@ -195,7 +195,7 @@ The Second Interpreter from on第一次扩展了基础的let-language，实现�
   <div class="container">
 
     
-      <a class="navbar-brand" href="/">Macro Life</a>
+      <a class="navbar-brand" href="/">简约派</a>
       
       <button type="button" class="navbar-toggler" data-toggle="collapse"
               data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -526,10 +526,8 @@ The Second Interpreter from on第一次扩展了基础的let-language，实现�
     
     
       
-          Last updated on
-      
     
-    Oct 27, 2019
+    Feb 27, 2016
   </span>
 
   
@@ -579,19 +577,19 @@ The Second Interpreter from on第一次扩展了基础的let-language，实现�
   <ul>
     <li>
       <ul>
-        <li><a href="#langscm">lang.scm增加了过程定义和调用</a></li>
-        <li><a href="#interpscm">interp.scm增加了过程定义和调用</a></li>
+        <li><a href="#langscm增加了过程定义和调用">lang.scm增加了过程定义和调用</a></li>
+        <li><a href="#interpscm增加了过程定义和调用">interp.scm增加了过程定义和调用</a></li>
       </ul>
     </li>
-    <li><a href="#data-structuresscm">data-structures.scm增加了过程定义和调用</a></li>
-    <li><a href="#heading">增加过程定义和调用的测试结果</a>
+    <li><a href="#data-structuresscm增加了过程定义和调用">data-structures.scm增加了过程定义和调用</a></li>
+    <li><a href="#增加过程定义和调用的测试结果">增加过程定义和调用的测试结果</a>
       <ul>
-        <li><a href="#2">错误2</a></li>
-        <li><a href="#heading-1">正确的测试结果</a></li>
-        <li><a href="#y-comb">Y-comb基本思想</a></li>
+        <li><a href="#错误2">错误2</a></li>
+        <li><a href="#正确的测试结果">正确的测试结果</a></li>
+        <li><a href="#y-comb基本思想">Y-comb基本思想</a></li>
       </ul>
     </li>
-    <li><a href="#heading-2">结论</a></li>
+    <li><a href="#结论">结论</a></li>
   </ul>
 </nav>
     </aside>
@@ -611,7 +609,7 @@ The Second Interpreter from on第一次扩展了基础的let-language，实现�
 <li><a href="#3">3. 新语言的Y+实现</a></li>
 </ul>
 <!-- raw HTML omitted -->
-<h3 id="langscm">lang.scm增加了过程定义和调用</h3>
+<h3 id="langscm增加了过程定义和调用">lang.scm增加了过程定义和调用</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">    <span style="color:#75715e">;;;new stuff</span>
       (<span style="color:#a6e22e">expression</span>
        (<span style="color:#e6db74">&#34;proc&#34;</span> <span style="color:#e6db74">&#34;(&#34;</span> identifier <span style="color:#e6db74">&#34;)&#34;</span> expression)
@@ -620,7 +618,7 @@ The Second Interpreter from on第一次扩展了基础的let-language，实现�
       (<span style="color:#a6e22e">expression</span>
        (<span style="color:#e6db74">&#34;(&#34;</span> expression expression <span style="color:#e6db74">&#34;)&#34;</span>)
        call-exp)
-</code></pre></div><h3 id="interpscm">interp.scm增加了过程定义和调用</h3>
+</code></pre></div><h3 id="interpscm增加了过程定义和调用">interp.scm增加了过程定义和调用</h3>
 <ul>
 <li>value-of 增加了proc-exp和call-exp的内部语言形式</li>
 </ul>
@@ -643,7 +641,7 @@ The Second Interpreter from on第一次扩展了基础的let-language，实现�
       (<span style="color:#a6e22e">cases</span> proc proc1
         (<span style="color:#a6e22e">procedure</span> (<span style="color:#a6e22e">var</span> body saved-env)
           (<span style="color:#a6e22e">value-of</span> body (<span style="color:#a6e22e">extend-env</span> var val saved-env))))))
-</code></pre></div><h2 id="data-structuresscm">data-structures.scm增加了过程定义和调用</h2>
+</code></pre></div><h2 id="data-structuresscm增加了过程定义和调用">data-structures.scm增加了过程定义和调用</h2>
 <ul>
 <li>在expval中拓展了proc?的判断</li>
 </ul>
@@ -680,10 +678,10 @@ The Second Interpreter from on第一次扩展了基础的let-language，实现�
      (<span style="color:#a6e22e">var</span> symbol?)
      (<span style="color:#a6e22e">body</span> expression?)
      (<span style="color:#a6e22e">env</span> environment?)))
-</code></pre></div><h2 id="heading">增加过程定义和调用的测试结果</h2>
+</code></pre></div><h2 id="增加过程定义和调用的测试结果">增加过程定义和调用的测试结果</h2>
 <!-- raw HTML omitted -->
 <pre><code>. data-structures.scm:102:11: expression?: unbound identifier in module in: expression?
-</code></pre><h3 id="2">错误2</h3>
+</code></pre><h3 id="错误2">错误2</h3>
 <p>如果按照错误1,把具体的expression?实现放入<code>data-structures.scm</code>中，则会出现<a href="#error1">错误1</a>的问题。</p>
 <p>expression?现在定义如下,具体参考<a href="http://jueqingsizhe66.github.io/blog/2016/02/26/some-notations-in-the-design-of-the-language/">Some notations</a>:</p>
 <pre><code>expression ::= (var-exp ())
@@ -820,7 +818,7 @@ module: identifier already imported from a different source in:
 所以如果在<code>top.scm</code>中同时导入<code>lang.scm</code> 和<code>data-structures.scm</code>则会报错，重复定义。
 <strong><code>于是仅仅在data-structures.scm中增加require &quot;lang.scm&quot;即可</code></strong>,
 <!-- raw HTML omitted -->结果通过！<!-- raw HTML omitted --></p>
-<h3 id="heading-1">正确的测试结果</h3>
+<h3 id="正确的测试结果">正确的测试结果</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#a6e22e">run</span> <span style="color:#e6db74">&#34;proc(x) -(x, 1)&#34;</span>)
 (<span style="color:#a6e22e">run</span> <span style="color:#e6db74">&#34;(proc(x) -(x,1)  30)&#34;</span>)
 (<span style="color:#a6e22e">run</span> <span style="color:#e6db74">&#34;(proc(f)(f 30)  proc(x)-(x,1))&#34;</span>)
@@ -843,7 +841,7 @@ module: identifier already imported from a different source in:
 <li>Matthias Felleisen 和 Matthew Flatt 的[《Programming Languages and Lambda Calculi》] <a href="http://www.cs.utah.edu/~mflatt/past-courses/cs7520/public_html/s06/notes.pdf">8</a> 教你认识lambda</li>
 <li>[最经典的Y combinator] <a href="http://www.ece.uc.edu/~franco/C511/html/Scheme/ycomb.html">9</a> 看了10遍以上</li>
 </ul>
-<h3 id="y-comb">Y-comb基本思想</h3>
+<h3 id="y-comb基本思想">Y-comb基本思想</h3>
 <ol>
 <li>通过增加一层lambda表达式，进行更高一级抽象</li>
 <li>beta规约原则</li>
@@ -1019,7 +1017,7 @@ module: identifier already imported from a different source in:
 </span><span style="color:#e6db74">      in let times4 = (makerec maketimes4) in (times4 3)&#34;</span>)
 
     (<span style="color:#a6e22e">num-val</span> <span style="color:#ae81ff">12</span>)
-</code></pre></div><h2 id="heading-2">结论</h2>
+</code></pre></div><h2 id="结论">结论</h2>
 <p>Y-comb是一个痛苦和希望的承载者(持保留意见)，韵味十足.又像一个走过岁月年轮，在家等待着归家儿女的思妇，祈祷，承担。
 Y-Comb需要丝丝宁静,雨夜飘过。</p>
     </div>

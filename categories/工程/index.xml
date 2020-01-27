@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>工程 | Macro Life</title>
+    <title>工程 | 简约派</title>
     <link>https://jueqingsizhe66.github.io/categories/%E5%B7%A5%E7%A8%8B/</link>
       <atom:link href="https://jueqingsizhe66.github.io/categories/%E5%B7%A5%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
     <description>工程</description>
@@ -22,7 +22,7 @@
 于是就有了下面的shell分析脚本。&lt;/p&gt;
 &lt;p&gt;TurbSim产生的风力机一圈的入流截面模型（仅仅一个截面，全场是因为捕捉了很多个截面）&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/fast/turbsim.png&#34; alt=&#34;Turbsim&#34;&gt;&lt;/p&gt;
-&lt;h2 id=&#34;shell&#34;&gt;Shell解析脚本&lt;/h2&gt;
+&lt;h2 id=&#34;shell解析脚本&#34;&gt;Shell解析脚本&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/bin/bash - 
 &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#===============================================================================&lt;/span&gt;
 #
@@ -158,7 +158,7 @@ alert  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;CTStartTime&amp;#34;&l
 grep -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;CTStartTime&amp;#34;&lt;/span&gt; *.inp|awk -F: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $1,$3}&amp;#39;&lt;/span&gt;|awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print substr($1,0,length($1)-4),&amp;#34;\t\t&amp;#34;,$2}&amp;#39;&lt;/span&gt;|column -t
 &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt; &amp;gt; summary.out
 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;heading&#34;&gt;改进&lt;/h3&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;改进&#34;&gt;改进&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;去除无用的Turbulence and Boundary&lt;/li&gt;
 &lt;li&gt;增加了对GridWidth and GridHeight的处理&lt;/li&gt;
@@ -169,7 +169,7 @@ grep -n &amp;quot;GridWidth&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|sed 
 &lt;/code&gt;&lt;/pre&gt;&lt;ol start=&#34;3&#34;&gt;
 &lt;li&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2 id=&#34;shell-1&#34;&gt;shell产生的结果如下：&lt;/h2&gt;
+&lt;h2 id=&#34;shell产生的结果如下&#34;&gt;shell产生的结果如下：&lt;/h2&gt;
 &lt;pre&gt;&lt;code&gt;#################
 ## RandSeed1 ##
 #################
@@ -663,29 +663,29 @@ vonKarm      30.0
 &lt;li&gt;5配置部分&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;一一写上我会执行的操作，当然这些程序组合成为我自己使用的linux系统。方便我和linux的内核进行交流。&lt;/p&gt;
-&lt;h2 id=&#34;1git&#34;&gt;1系统的Git管理&lt;/h2&gt;
+&lt;h2 id=&#34;1系统的git管理&#34;&gt;1系统的Git管理&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;apt-get install git,gitk,git-doc &lt;span style=&#34;color:#75715e&#34;&gt;#rememeber how to configure&lt;/span&gt;
 apt-get install git-flow &lt;span style=&#34;color:#75715e&#34;&gt;#升级版的管理&lt;/span&gt;
 
 git config --global user.name &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;ye zhaoliang&amp;#34;&lt;/span&gt;
 git config --global user.email &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;zhaoturkkey@163.com&amp;#34;&lt;/span&gt;
 ssh-keygen -t rsa -C &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;zhaoturkkey@163.com&amp;#34;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;2&#34;&gt;2图形部分&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;2图形部分&#34;&gt;2图形部分&lt;/h2&gt;
 &lt;p&gt;有时候你希望把你的相关数据打印成图片，这样方便交流&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;apt-get install gnuplot
 apt-get install graphviz
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;3&#34;&gt;3语言部分&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;3语言部分&#34;&gt;3语言部分&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;apt-get install gfortran 
 apt-get install gcc 
 apt-get install python
 &lt;span style=&#34;color:#75715e&#34;&gt;# drracket&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;# haskell&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;4&#34;&gt;4编辑部分&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;4编辑部分&#34;&gt;4编辑部分&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;apt-get install vim   &lt;span style=&#34;color:#75715e&#34;&gt;#rememeber how to configure&lt;/span&gt;
 apt-get install vim-gtk
 
 apt-get install emacs
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;5&#34;&gt;5配置部分&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;5配置部分&#34;&gt;5配置部分&lt;/h2&gt;
 &lt;p&gt;在ubuntu管理系统经常会需要配置用户目录下的dotfiles，
 比如登录相关文件.bashrc,.bash_logout,.bash_profile.
 我会尝试着把我相关需要的文件夹备份在一个tar包。&lt;/p&gt;
@@ -703,7 +703,7 @@ tar -xvf ./vim.tar.gz -C ~ &lt;span style=&#34;color:#75715e&#34;&gt;# remember 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;cfaj写的&lt;a href=&#34;shell-script:&#34;&gt;shell-script:&lt;/a&gt;和&lt;!-- raw HTML omitted --&gt;
 主要教会我们的是我使用下划线新建一个临时函数，并使用下划线函数的大写字母来表征函数的返回值。然后使用${}变量引用来实现
 版本号的截取并使用case进行分类选择，还有比如不同的系统的case选择。&lt;/p&gt;
-&lt;h3 id=&#34;heading&#34;&gt;补充一个操作&lt;/h3&gt;
+&lt;h3 id=&#34;补充一个操作&#34;&gt;补充一个操作&lt;/h3&gt;
 &lt;p&gt;如果你想要使得子程序可以掉哦你个函数，必须使用export命令导出，类似于变量&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;
 &lt;span style=&#34;color:#66d9ef&#34;&gt;function&lt;/span&gt; func&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
@@ -716,7 +716,7 @@ export -f func
 &lt;span style=&#34;color:#75715e&#34;&gt;# 使用export  DATE  等，导出系统变量&lt;/span&gt;
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;只有经过这样你的func才变成公有化。当然你也可以把脚本添加到path路径中。&lt;/p&gt;
-&lt;h3 id=&#34;heading-1&#34;&gt;谨记一个失误&lt;/h3&gt;
+&lt;h3 id=&#34;谨记一个失误&#34;&gt;谨记一个失误&lt;/h3&gt;
 &lt;p&gt;无论是使用tar -cvf 打包，还是生成某个程序等，一定要检查一遍，是否能够运行，
 当时就确认你的操作无误，否则后来会后悔(曾经打包了一个系统 发现都不能用了！
 而那个系统也被我删掉了，可见我有多懊恼)&lt;/p&gt;

@@ -115,9 +115,9 @@ NREL项目的调试方法。">
   <meta property="twitter:site" content="@jueqingsizhe66">
   <meta property="twitter:creator" content="@jueqingsizhe66">
   
-  <meta property="og:site_name" content="Macro Life">
+  <meta property="og:site_name" content="简约派">
   <meta property="og:url" content="https://jueqingsizhe66.github.io/blog/2017/02/07/fastdiao-shi/">
-  <meta property="og:title" content="FAST调试 | Macro Life">
+  <meta property="og:title" content="FAST调试 | 简约派">
   <meta property="og:description" content="NREL FAST的调试一直存在问题，关键是不知道怎么设置选项，查阅了Visual Studio和一些基本知识整理了
 NREL项目的调试方法。"><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
   <meta property="twitter:image" content="https://jueqingsizhe66.github.io/img/icon-192.png"><meta property="og:locale" content="en-us">
@@ -125,7 +125,7 @@ NREL项目的调试方法。"><meta property="og:image" content="https://jueqing
     
       <meta property="article:published_time" content="2017-02-07T20:01:15&#43;08:00">
     
-    <meta property="article:modified_time" content="2019-10-27T20:50:56&#43;08:00">
+    <meta property="article:modified_time" content="2017-02-07T20:01:15&#43;08:00">
   
 
   
@@ -144,7 +144,7 @@ NREL项目的调试方法。"><meta property="og:image" content="https://jueqing
 
 
 
-  <title>FAST调试 | Macro Life</title>
+  <title>FAST调试 | 简约派</title>
 
 </head>
 
@@ -187,7 +187,7 @@ NREL项目的调试方法。"><meta property="og:image" content="https://jueqing
   <div class="container">
 
     
-      <a class="navbar-brand" href="/">Macro Life</a>
+      <a class="navbar-brand" href="/">简约派</a>
       
       <button type="button" class="navbar-toggler" data-toggle="collapse"
               data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -518,10 +518,8 @@ NREL项目的调试方法。"><meta property="og:image" content="https://jueqing
     
     
       
-          Last updated on
-      
     
-    Oct 27, 2019
+    Feb 7, 2017
   </span>
 
   
@@ -569,9 +567,9 @@ NREL项目的调试方法。"><meta property="og:image" content="https://jueqing
     <aside>
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#fortran">fortran工作路径问题</a></li>
-    <li><a href="#heading">代码层级改变文件路径</a></li>
-    <li><a href="#fast">调试FAST</a></li>
+    <li><a href="#fortran工作路径问题">fortran工作路径问题</a></li>
+    <li><a href="#代码层级改变文件路径">代码层级改变文件路径</a></li>
+    <li><a href="#调试fast">调试FAST</a></li>
   </ul>
 </nav>
     </aside>
@@ -581,7 +579,7 @@ NREL项目的调试方法。"><meta property="og:image" content="https://jueqing
     <div class="article-style">
       <p><a href="https://nwtc.nrel.gov/FAST8">NREL FAST</a>的调试一直存在问题，关键是不知道怎么设置选项，查阅了Visual Studio和一些基本知识整理了
 NREL项目的调试方法。</p>
-<h2 id="fortran">fortran工作路径问题</h2>
+<h2 id="fortran工作路径问题">fortran工作路径问题</h2>
 <p><!-- raw HTML omitted -->__工作路径对于任何的可执行文件都很重要。__<!-- raw HTML omitted -->
 当然事先可能得了解一下软件编译链接的过程（即编写源代码&ndash;调用编译器编译源代码&ndash;
 &gt;调用链接器连接相关代码块生成可执行文件&ndash;&gt;运行可执行文件）(IDE隐藏了上述过程)</p>
@@ -596,7 +594,7 @@ NREL项目的调试方法。</p>
 </ul>
 <p>比如:<!-- raw HTML omitted --></p>
 <p><img src="/images/fortrandebug/idewd.png" alt="IDE working directory"><!-- raw HTML omitted --></p>
-<h2 id="heading">代码层级改变文件路径</h2>
+<h2 id="代码层级改变文件路径">代码层级改变文件路径</h2>
 <p>在程序中可以通过一些手段，动态的更改当前路径。</p>
 <ul>
 <li>IVF: changeDirQQ</li>
@@ -623,7 +621,7 @@ D:\testCWD\Debug\test_cwd.exe
 
 working directory:
 D:\testCWD
-</code></pre><h2 id="fast">调试FAST</h2>
+</code></pre><h2 id="调试fast">调试FAST</h2>
 <p><img src="/images/fortrandebug/fast.jpg" alt="fast">
 最关键的是一个对应两个设置</p>
 <ul>

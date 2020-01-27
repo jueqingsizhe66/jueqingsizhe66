@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Mysql | Macro Life</title>
+    <title>mysql | 简约派</title>
     <link>https://jueqingsizhe66.github.io/tags/mysql/</link>
       <atom:link href="https://jueqingsizhe66.github.io/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
-    <description>Mysql</description>
+    <description>mysql</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>©2020</copyright><lastBuildDate>Mon, 13 Feb 2017 10:04:33 +0800</lastBuildDate>
     <image>
       <url>https://jueqingsizhe66.github.io/img/icon-192.png</url>
-      <title>Mysql</title>
+      <title>mysql</title>
       <link>https://jueqingsizhe66.github.io/tags/mysql/</link>
     </image>
     
@@ -3725,7 +3725,7 @@ alter table grade drop primary key;
     curi &lt;span style=&#34;color:#66d9ef&#34;&gt;varchar&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;20&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;not&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;null&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;default&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#66d9ef&#34;&gt;constraint&lt;/span&gt; hello1 &lt;span style=&#34;color:#66d9ef&#34;&gt;foreign&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;key&lt;/span&gt;
      (curi) &lt;span style=&#34;color:#66d9ef&#34;&gt;references&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;curriculum&lt;/span&gt;(curriculum_no),
      score &lt;span style=&#34;color:#66d9ef&#34;&gt;real&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;not&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;null&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;default&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt;);
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;ERROR 1022 (23000): Can&#39;t write; duplicate key in table &amp;lsquo;grade&#39;的解决方案：外键名字改成没用过的就可以（整个数据库exam范围内）
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;ERROR 1022 (23000): Can&amp;rsquo;t write; duplicate key in table &amp;lsquo;grade&#39;的解决方案：外键名字改成没用过的就可以（整个数据库exam范围内）
 下面再次新建一张表grade2 ,目的是测试不同表是不是可以使用字段名字相同的充当外键，当然是没问题啦！
 因为在设计表的时候，曾经怕如果curi改为curriculum_no会不会报错的问题。所以就一起尝试了&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-mysql&#34; data-lang=&#34;mysql&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;create&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;table&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;grade2&lt;/span&gt;(

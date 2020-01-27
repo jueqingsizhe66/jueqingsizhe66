@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Linux | Macro Life</title>
+    <title>Linux | 简约派</title>
     <link>https://jueqingsizhe66.github.io/tags/linux/</link>
       <atom:link href="https://jueqingsizhe66.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     <description>Linux</description>
@@ -18,7 +18,7 @@
       <pubDate>Wed, 05 Jul 2017 13:44:15 +0800</pubDate>
       <guid>https://jueqingsizhe66.github.io/blog/2017/07/05/pi-liang-xiu-gai-pdfwen-jian-ming-yi-ji-chuang-jian-wiki-links/</guid>
       <description>&lt;p&gt;bash、awk、sed等的好处，就是可以专一的完成你的需求，但是也存在很多不足，借着批量重命令和批量导出链接到vimwiki的wiki中，形成[[local:文件名路径]]的过程，巩固学习linux命令, it is homework(learning process)。&lt;/p&gt;
-&lt;h1 id=&#34;vimwiki&#34;&gt;提取路径，用于vimwiki中，当作快速链接&lt;/h1&gt;
+&lt;h1 id=&#34;提取路径用于vimwiki中当作快速链接&#34;&gt;提取路径，用于vimwiki中，当作快速链接&lt;/h1&gt;
 &lt;p&gt;如果IFS是”“，那么相当于一个文件名特别长会分成很多行显示，所以这边设置为 IFS=$‘\n’&lt;/p&gt;
 &lt;p&gt;[a-z]star替换原先的star，目的是去除点号。
 使用echo和管道命令传递信息给sed或者awk等
@@ -59,7 +59,7 @@ generateChapter&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span 
 &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
 
 generateChapter
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;heading&#34;&gt;删除不必要的名字特殊字符，重命名&lt;/h1&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;删除不必要的名字特殊字符重命名&#34;&gt;删除不必要的名字特殊字符，重命名&lt;/h1&gt;
 &lt;ol&gt;
 &lt;li&gt;删除文件pdf名字不必要的（pages 110—30）等信息。&lt;/li&gt;
 &lt;li&gt;使用awk printf产生逗号分隔字符串，使用xargs -d, mv提取以逗号分隔的字段， 并且对文件名进行重命名（在我找的多种方法中，就他有效）&lt;/li&gt;
@@ -110,7 +110,7 @@ generateChapter
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;注意可以使用 ，学到技巧1中的检测工具，查看你的修改是否完全正确，如果出现文件名中有逗号的情况，通常pages没有删掉，原因是xargs也是按照，号进行分割，所以改进方法是使用分号输出&lt;/p&gt;
 &lt;p&gt;改进代码&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; var in &lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;find . -name &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;*&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;;&lt;span style=&#34;color:#66d9ef&#34;&gt;do&lt;/span&gt; echo $var|awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;/pages/{printf(&amp;#34;%s;%s&amp;#34;,$0,substr($0,0,length($0)-22)&amp;#34;.pdf&amp;#34;)|&amp;#34;xargs -d; mv &amp;#34;;}&amp;#39;&lt;/span&gt;;&lt;span style=&#34;color:#66d9ef&#34;&gt;done&lt;/span&gt; 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;heading-1&#34;&gt;最终结果&lt;/h1&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;最终结果&#34;&gt;最终结果&lt;/h1&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-org&#34; data-lang=&#34;org&#34;&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;= 1. [ ] [[local:F:/ScienceBase.Attachments/WindEnergy/harmonic power system]] =&lt;/span&gt;
   &lt;span style=&#34;color:#66d9ef&#34;&gt;1.&lt;/span&gt; [ ] [[&lt;span style=&#34;color:#a6e22e&#34;&gt;local:F:/ScienceBase.Attachments/WindEnergy/harmonic power system/ch1.pdf&lt;/span&gt;]]
   &lt;span style=&#34;color:#66d9ef&#34;&gt;2.&lt;/span&gt; [ ] [[&lt;span style=&#34;color:#a6e22e&#34;&gt;local:F:/ScienceBase.Attachments/WindEnergy/harmonic power system/ch10.pdf&lt;/span&gt;]]
@@ -224,7 +224,7 @@ END{
 &lt;span style=&#34;color:#a6e22e&#34;&gt;v&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;v&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;y&lt;/span&gt;;
 &lt;span style=&#34;color:#a6e22e&#34;&gt;y&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;300&lt;/span&gt;;
 }
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;6bash&#34;&gt;6.bash四种变量截取&lt;/h1&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;6bash四种变量截取&#34;&gt;6.bash四种变量截取&lt;/h1&gt;
 &lt;pre&gt;&lt;code&gt;${var#.*} 从左到右，满足#之后条件的最小长度
 ${var##.*} 从左到右，满足##之后条件的最大长度
 ${var%.*} 从右到左，满足%之后条件的最小长度
@@ -281,7 +281,7 @@ touch d.txt&lt;/p&gt;
 d.txt&lt;/p&gt;
 &lt;p&gt;III. code:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-awk&#34; data-lang=&#34;awk&#34;&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;awk&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{cmd=&amp;#34;rm &amp;#34;$0;system(cmd)}&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;a&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;txt&lt;/span&gt;   
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;10awk&#34;&gt;10.awk重定向和管道&lt;/h1&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;10awk重定向和管道&#34;&gt;10.awk重定向和管道&lt;/h1&gt;
 &lt;p&gt;有时候直接可以在awk使用管道，提供给shell,比如print|Sort,&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-awk&#34; data-lang=&#34;awk&#34;&gt;
 &lt;span style=&#34;color:#a6e22e&#34;&gt;awk&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $1, $2 | &amp;#34;sort&amp;#34; }&amp;#39;&lt;/span&gt;
@@ -293,7 +293,7 @@ dos2unix.exe func.awk
 
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这样执行shell才有效。&lt;/p&gt;
-&lt;h1 id=&#34;12awkshell&#34;&gt;12.awk性能比shell更高&lt;/h1&gt;
+&lt;h1 id=&#34;12awk性能比shell更高&#34;&gt;12.awk性能比shell更高&lt;/h1&gt;
 &lt;p&gt;参考&lt;a href=&#34;http://www.cnblogs.com/chengmo/archive/2010/10/04/1842073.html&#34;&gt; 链接 &lt;/a&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;
 性能比较
@@ -320,12 +320,12 @@ sys     0m0.008s
       <guid>https://jueqingsizhe66.github.io/blog/2016/09/25/bash-special-annotation/</guid>
       <description>&lt;p&gt;关于shell的summary参看&lt;a href=&#34;http://jueqingsizhe66.github.io/blog/2016/08/06/linux-shell-summary/#kernel&#34;&gt;Linux Shell Summary&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;以下是关于bash的一些比较特殊的地方。&lt;/p&gt;
-&lt;h2 id=&#34;1-bash&#34;&gt;1. bash数组再理解&lt;/h2&gt;
+&lt;h2 id=&#34;1-bash数组再理解&#34;&gt;1. bash数组再理解&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;declare -a&lt;/code&gt;表示声明一个数组，类似于 &lt;code&gt;declare -i&lt;/code&gt; 声明一个整数和&lt;code&gt;declare -x &lt;/code&gt;声明一个环境变量。&lt;/p&gt;
 &lt;p&gt;&lt;!-- raw HTML omitted --&gt;bash数组定义时候使用小括号来赋值，而在引用数组的时候反而使用中括号（不同于其他编程语言)&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;h3 id=&#34;heading&#34;&gt;定义数组&lt;/h3&gt;
+&lt;h3 id=&#34;定义数组&#34;&gt;定义数组&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;bash2&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;34&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;5&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;5&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;4&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;heading-1&#34;&gt;引用数组&lt;/h3&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;引用数组&#34;&gt;引用数组&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;echo &lt;span style=&#34;color:#e6db74&#34;&gt;${&lt;/span&gt;array[n]&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;
 遍历数组：
 filename&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;ls&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
@@ -333,9 +333,9 @@ filename&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&
 echo $var
 &lt;span style=&#34;color:#66d9ef&#34;&gt;done&lt;/span&gt;
 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;heading-2&#34;&gt;添加数组&lt;/h3&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;添加数组&#34;&gt;添加数组&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;bash1&lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;45&amp;#34;&lt;/span&gt;; &lt;span style=&#34;color:#75715e&#34;&gt;#赋值两边不能有空格&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;2-bash&#34;&gt;2. bash变量截取和变量替换&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;2-bash变量截取和变量替换&#34;&gt;2. bash变量截取和变量替换&lt;/h2&gt;
 &lt;p&gt;&lt;!-- raw HTML omitted --&gt;bash使用井号代表开头(这和正则表达式有点不同，使用caret)
 而结尾则使用百分号(不同于正则表达式的dollar符号$)。并且在当使用两个重叠的井号，表示最大长度（从头开始的最大删除都删掉）
 而使用两个百分号则表达反方向的最大长度删除（从尾到头删除匹配字符串）&lt;/p&gt;
@@ -371,7 +371,7 @@ ${string:position:length}
 &lt;li&gt;匹配项第一个位置出现#井号表示开头部分&lt;/li&gt;
 &lt;li&gt;匹配项最后一个位置出现%百分号表示结尾部分&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2 id=&#34;3-bash&#34;&gt;3. bash接受键盘操作&lt;/h2&gt;
+&lt;h2 id=&#34;3-bash接受键盘操作&#34;&gt;3. bash接受键盘操作&lt;/h2&gt;
 &lt;p&gt;用一个read命令即可(类似于matlab的input命令)
 通常的风格是 &lt;code&gt;read -p &amp;quot;prompt for reminding&amp;quot; variable-name&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;接收键盘输入：
@@ -396,7 +396,7 @@ read -p &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;please input your sex
 echo -e &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;\n&amp;#34;&lt;/span&gt;
 echo $sex
 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;4-tac&#34;&gt;4. tac反向&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;4-tac反向&#34;&gt;4. tac反向&lt;/h2&gt;
 &lt;p&gt;cat在bash中是打印文本信息的作用，而&lt;a href=&#34;http://bbs.chinaunix.net/thread-250407-1-1.html&#34;&gt;tac&lt;/a&gt;则是反向输出文件流&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;cat old_file|awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print NR,$0}&amp;#39;&lt;/span&gt;|sort -r -n|awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $2}&amp;#39;&lt;/span&gt;
 
@@ -405,7 +405,7 @@ echo $sex
 &lt;li&gt;逆向排列&lt;/li&gt;
 &lt;li&gt;输出每行&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2 id=&#34;5-if&#34;&gt;5. if当中也可以使用双括号进行算术判断&lt;/h2&gt;
+&lt;h2 id=&#34;5-if当中也可以使用双括号进行算术判断&#34;&gt;5. if当中也可以使用双括号进行算术判断&lt;/h2&gt;
 &lt;p&gt;if并不是支持正则表达式？还是只有变量支持？&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;root at javazhao-N53SM &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;13:26:46ä��午&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; in /MyBashWork/clean on git:develop?
 $ &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt; -f &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;All.sh&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; ;&lt;span style=&#34;color:#66d9ef&#34;&gt;then&lt;/span&gt; echo &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;hei&amp;#34;&lt;/span&gt;; &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; echo &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;no&amp;#34;&lt;/span&gt; ;&lt;span style=&#34;color:#66d9ef&#34;&gt;fi&lt;/span&gt;;
@@ -490,9 +490,9 @@ mkdir final-result
 &lt;/ol&gt;
 &lt;p&gt;编译的时候仅仅在项目下载之后，make一下即可生成对应的diff-cpp,diff-js,diff-lisp分析工具.
 文件分为单文件和文件夹两种。&lt;/p&gt;
-&lt;h2 id=&#34;heading&#34;&gt;单文件使用说明&lt;/h2&gt;
+&lt;h2 id=&#34;单文件使用说明&#34;&gt;单文件使用说明&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt; diff-lisp *.scm *1.scm 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;heading-1&#34;&gt;文件夹使用方式&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;文件夹使用方式&#34;&gt;文件夹使用方式&lt;/h2&gt;
 &lt;p&gt;保存下面源代码为process-lisp.sh&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;
 dir1&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;let-lang
@@ -517,7 +517,7 @@ dir2&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;letrec-lang
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;只要修改对应的文件夹dir1,dir2,就可以分析对应文件夹的scm所有文件,然后运用下面命令行，即可生成
 对应的html文件,方便阅读&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;bash process-lisp.sh
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;heading-2&#34;&gt;数组引入进一步修改处理程序&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;数组引入进一步修改处理程序&#34;&gt;数组引入进一步修改处理程序&lt;/h2&gt;
 &lt;p&gt;数组的shell操作参考&lt;a href=&#34;http://blog.csdn.net/liufei_learning/article/details/8000570&#34;&gt;如下&lt;/a&gt;,&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;定义的时候通过小括号包裹&lt;/li&gt;
@@ -560,7 +560,7 @@ done;
 2,proc-lang
 3,proc-lang
 
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;scm&#34;&gt;批处理解析scm文件&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;批处理解析scm文件&#34;&gt;批处理解析scm文件&lt;/h2&gt;
 &lt;p&gt;当文件夹下存在如下文件下，则可以进一步利用&lt;a href=&#34;#pi&#34;&gt;程序&lt;/a&gt;进行分析，注意拷贝nav.js和diff.css进行渲染&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;ls┌─[root][canbetter-N53SM][±][master ?:10 ✗][2.2.1][/home/happycamp-of-lisp/EOPL2014/DF-eopl/chapter3/proc-lang/ds-rep]
 └─➞ ls
@@ -618,7 +618,7 @@ for i in `seq 0 $((${#array1[@]}-1))`; do
 done;
 
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这样就完成了文件夹下所有的文件对比操作，当然得确保该文件夹下存在scm文件。&lt;/p&gt;
-&lt;h2 id=&#34;ydiff&#34;&gt;进一步修改YDiff？&lt;/h2&gt;</description>
+&lt;h2 id=&#34;进一步修改ydiff&#34;&gt;进一步修改YDiff？&lt;/h2&gt;</description>
     </item>
     
     <item>
@@ -629,11 +629,11 @@ done;
       <description>&lt;p&gt;通过&lt;a href=&#34;http://jueqingsizhe66.github.io/blog/2015/10/23/bash-support-idede-xin-fa-xian/&#34;&gt;Bash_It&lt;/a&gt;的学习，第一次意识到Shell数组的不一样的写法。
 并且也看到Pattern Match的一些用途。&lt;/p&gt;
 &lt;h2 id=&#34;1-array&#34;&gt;1 Array&lt;/h2&gt;
-&lt;h3 id=&#34;11-bash&#34;&gt;1.1 Bash数组定义&lt;/h3&gt;
+&lt;h3 id=&#34;11-bash数组定义&#34;&gt;1.1 Bash数组定义&lt;/h3&gt;
 &lt;p&gt;通过(1,2,3)区分于fortran语言的(/1,2,3/).&lt;/p&gt;
 &lt;p&gt;bash1=(34,5,6,4)&lt;/p&gt;
 &lt;p&gt;bash2=(&amp;ldquo;34&amp;rdquo;,&amp;ldquo;5&amp;rdquo;,&amp;ldquo;5&amp;rdquo;,&amp;ldquo;4&amp;rdquo;)&lt;/p&gt;
-&lt;h3 id=&#34;12-bash&#34;&gt;1.2 Bash关联数组定义&lt;/h3&gt;
+&lt;h3 id=&#34;12-bash关联数组定义&#34;&gt;1.2 Bash关联数组定义&lt;/h3&gt;
 &lt;p&gt;通过 -A开关选项定义一个关联数组。&lt;/p&gt;
 &lt;p&gt;declare -A bash1&lt;/p&gt;
 &lt;p&gt;bash1[&amp;ldquo;34&amp;rdquo;]=&amp;quot;53&amp;rdquo;&lt;/p&gt;
@@ -649,9 +649,9 @@ for subscript in a b c d e
 
   #这样就可以使用
   ${a[1]}
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;13-bash&#34;&gt;1.3 Bash数组添加数据&lt;/h3&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;13-bash数组添加数据&#34;&gt;1.3 Bash数组添加数据&lt;/h3&gt;
 &lt;p&gt;bash1+=&amp;quot;54&amp;rdquo;&lt;/p&gt;
-&lt;h3 id=&#34;14-bash&#34;&gt;1.4 Bash数组显示数据和便利&lt;/h3&gt;
+&lt;h3 id=&#34;14-bash数组显示数据和便利&#34;&gt;1.4 Bash数组显示数据和便利&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;##单个显示
 printf &amp;quot;%s\n&amp;quot; &amp;quot;${array[&amp;quot;c&amp;quot;]}&amp;quot;
 
@@ -659,7 +659,7 @@ printf &amp;quot;%s\n&amp;quot; &amp;quot;${array[&amp;quot;c&amp;quot;]}&amp;qu
 printf &amp;quot;%s\n&amp;quot; &amp;quot;${array[@]}&amp;quot;
 printf &amp;quot;%s\n&amp;quot; &amp;quot;${array[*]}&amp;quot;
 
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;15-&#34;&gt;1.5 拓展的操作&lt;/h3&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;15-拓展的操作&#34;&gt;1.5 拓展的操作&lt;/h3&gt;
 &lt;p&gt;#表示长度的作用&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;${#array&lt;a href=&#34;http://www.gnu.org/&#34;&gt;2&lt;/a&gt;}  现实第二个数组元素的长度&lt;/li&gt;
@@ -686,7 +686,7 @@ printf &amp;quot;%s\n&amp;quot; &amp;quot;${array[*]}&amp;quot;
 &lt;p&gt;&lt;a href=&#34;http://linux.vbird.org/linux_basic/&#34;&gt;鸟哥论坛&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;http://linux.about.com/&#34;&gt;Linux_About&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;http://www.cnblogs.com/bluebbc/tag/linux&#34;&gt;CN_Blogs的一个收集&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;3-&#34;&gt;3 事情流程&lt;/h2&gt;
+&lt;h2 id=&#34;3-事情流程&#34;&gt;3 事情流程&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;认定你的事情&lt;/li&gt;
 &lt;li&gt;做&lt;/li&gt;
@@ -709,7 +709,7 @@ printf &amp;quot;%s\n&amp;quot; &amp;quot;${array[*]}&amp;quot;
       <guid>https://jueqingsizhe66.github.io/blog/2015/10/23/bash-support-idede-xin-fa-xian/</guid>
       <description>&lt;p&gt;[Bash Support][1]实现一个vim的bash IDE工具。好处式可以较快捷的
 输入命令和编程以及调试(bashdb)。&lt;/p&gt;
-&lt;h2 id=&#34;heading&#34;&gt;支持的几种后缀文件&lt;/h2&gt;
+&lt;h2 id=&#34;支持的几种后缀文件&#34;&gt;支持的几种后缀文件&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;c 的.c  c++ 的.cc  .cpp  cc&lt;/li&gt;
 &lt;li&gt;perl 的.pl&lt;/li&gt;
@@ -717,11 +717,11 @@ printf &amp;quot;%s\n&amp;quot; &amp;quot;${array[*]}&amp;quot;
 &lt;li&gt;shell的.sh&lt;/li&gt;
 &lt;li&gt;vim的.vim文件&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2 id=&#34;template&#34;&gt;查看系统的各种template&lt;/h2&gt;
+&lt;h2 id=&#34;查看系统的各种template&#34;&gt;查看系统的各种template&lt;/h2&gt;
 &lt;p&gt;&lt;!-- raw HTML omitted --&gt;当你新建一个*.sh文件&lt;!-- raw HTML omitted --&gt;
 一定要记住的一个命令 \ntl,通过它可以知道各个template系统文件
 都在干什么，以及如何使用那些快捷命令，比如\ckc \css \cfu \cc \cs  \se \sf 等。&lt;/p&gt;
-&lt;h2 id=&#34;macro&#34;&gt;几个常见的Macro&lt;/h2&gt;
+&lt;h2 id=&#34;几个常见的macro&#34;&gt;几个常见的Macro&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;|FILENAME|&lt;/li&gt;
 &lt;li&gt;|AUTHOR|&lt;/li&gt;
@@ -733,7 +733,7 @@ printf &amp;quot;%s\n&amp;quot; &amp;quot;${array[*]}&amp;quot;
 &lt;/ol&gt;
 &lt;p&gt;&lt;!-- raw HTML omitted --&gt;你可以在.vim/bundle/bash-support.vim/bash-support/templates/Template文件(
 这边使用的是相对路径，我是通过bundle进行管理vim插件).&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;h2 id=&#34;css-&#34;&gt;css 的程序几个大的部分的注释&lt;/h2&gt;
+&lt;h2 id=&#34;css-的程序几个大的部分的注释&#34;&gt;css 的程序几个大的部分的注释&lt;/h2&gt;
 &lt;p&gt;当你敲入\css会在vim的下端出现一个输入栏，有下面几个选项&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&amp;lsquo;GLOBAL DECLARATIONS&amp;rsquo;     : &amp;lsquo;GLOBAL DECLARATIONS&amp;rsquo;,&lt;/li&gt;
@@ -849,7 +849,7 @@ echo &lt;span style=&#34;color:#66d9ef&#34;&gt;$((&lt;/span&gt; $regex &lt;span 
 
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
-&lt;h2 id=&#34;ckc&#34;&gt;ckc的几种注释关键字&lt;/h2&gt;
+&lt;h2 id=&#34;ckc的几种注释关键字&#34;&gt;ckc的几种注释关键字&lt;/h2&gt;
 &lt;p&gt;当你敲入\ckc会在vim的下端出现一个输入栏，有下面几个选项&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&amp;lsquo;bug&amp;rsquo;         : &amp;lsquo;:BUG:|DATE| |TIME|:|AUTHORREF|: &lt;!-- raw HTML omitted --&gt;&amp;rsquo;,&lt;/li&gt;
@@ -1169,14 +1169,14 @@ shell文件：&lt;/p&gt;
     awk -v RS&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$lines&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;END{print RS,--NR}&amp;#39;&lt;/span&gt; qiu.org &lt;span style=&#34;color:#75715e&#34;&gt;#减减表示减1&lt;/span&gt;
 &lt;span style=&#34;color:#66d9ef&#34;&gt;done&lt;/span&gt; &amp;lt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;analysis.data&amp;#34;&lt;/span&gt;
 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;heading&#34;&gt;搜索内容&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;搜索内容&#34;&gt;搜索内容&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;grep -n &amp;ldquo;内容关键字&amp;rdquo; 文件名路径&lt;/li&gt;
 &lt;li&gt;awk &amp;lsquo;{if($0~关键字){}}&amp;rsquo;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;等。
 3. sed &amp;lsquo;/关键字/p&amp;rsquo;&lt;/p&gt;
-&lt;h2 id=&#34;heading-1&#34;&gt;结果&lt;/h2&gt;
+&lt;h2 id=&#34;结果&#34;&gt;结果&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;┌─&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;root&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;javazhao-N53SM&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;/paper&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
 └─➞ sh analysis.sh 
 风力机 &lt;span style=&#34;color:#ae81ff&#34;&gt;379&lt;/span&gt;
@@ -1212,7 +1212,7 @@ shell文件：&lt;/p&gt;
 &lt;/ul&gt;
 &lt;p&gt;我现在发现我们既可以处理文件中的信息，也同时可以处理硬件的东西，这些其实我就清楚，比如linux把很多的设备都虚拟为文件，只不过之前不知道怎么用。
 接触到shell之后，我才发现比如键盘的东西都可以被写进脚本的，也就是电脑上的外接设备也是可以被写进程序当中的，当作计算机里面的一种概念。&lt;/p&gt;
-&lt;h2 id=&#34;vim&#34;&gt;vim的脚本化操作&lt;/h2&gt;
+&lt;h2 id=&#34;vim的脚本化操作&#34;&gt;vim的脚本化操作&lt;/h2&gt;
 &lt;p&gt;把下段的代码保存为c.sh,主要功能是把双个除号改为井号，当作注释。
 这样就可以把vim的action行为录为脚本。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;
@@ -1241,26 +1241,26 @@ vim ./cData &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;lt;&amp;lt;VIM &amp;g
 cat &amp;gt;&amp;gt; /etc/profile.d/http.sh &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;lt;&amp;lt;EOF
 &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;export PATH=/srv/httpd/bin:$PATH
 &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;EOF&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;mysql&#34;&gt;mysql的脚本化操作&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;mysql的脚本化操作&#34;&gt;mysql的脚本化操作&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;mysql -u$user -p$password &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;lt;&amp;lt; EOF  
 &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;FLUSH TABLES WITH READ LOCK;  
 &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;system lvcreate --snapshot -n $snap -L$snapsize /dev/$vg/$lv;  
 &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;UNLOCK TABLES;  
 &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;quit  
 &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;EOF&lt;/span&gt; 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;gnuplot&#34;&gt;gnuplot的脚本化操作&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;gnuplot的脚本化操作&#34;&gt;gnuplot的脚本化操作&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;gnuplot&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;lt;&amp;lt;EOF   
 &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;set ter &amp;#39;png&amp;#39;   
 &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;set out &amp;#39;$i/cpUp.png&amp;#39;  
 &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;plot &amp;#34;$i/cpUp.txt&amp;#34; t &amp;#39;cp&amp;#39; w lp  
 &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;EOF&lt;/span&gt; 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;heading&#34;&gt;获得键盘输入的两种方式&lt;/h2&gt;
-&lt;h3 id=&#34;read&#34;&gt;使用read&lt;/h3&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;获得键盘输入的两种方式&#34;&gt;获得键盘输入的两种方式&lt;/h2&gt;
+&lt;h3 id=&#34;使用read&#34;&gt;使用read&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;
 read -p &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;input a val:&amp;#34;&lt;/span&gt;  val
 echo $val
 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;stty&#34;&gt;使用stty&lt;/h3&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;使用stty&#34;&gt;使用stty&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;
 get_char&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
    SAVEDSTTY&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;stty -g&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;
@@ -1275,7 +1275,7 @@ echo &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Press any key to continu
 char&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;get_char&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;
 read k
 echo $k
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;heading-1&#34;&gt;不错的一个菜单输入&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;不错的一个菜单输入&#34;&gt;不错的一个菜单输入&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#字颜色：30—–37&lt;/span&gt;  
 &lt;span style=&#34;color:#75715e&#34;&gt;#字背景颜色范围：40—–47&lt;/span&gt; 
@@ -1439,7 +1439,7 @@ currentDir&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style
 generateChapter
 
 &lt;span style=&#34;color:#75715e&#34;&gt;#sed -i &amp;#39;/C++/d&amp;#39; summary |sed &amp;#39;/=========/d&amp;#39;|sed &amp;#39;/OpenFOAM/d&amp;#39; | sed &amp;#39;/Version/d&amp;#39; | sed &amp;#39;/Web/d&amp;#39;|sed &amp;#39;/anipulation/d&amp;#39;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;heading&#34;&gt;结果显示&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;结果显示&#34;&gt;结果显示&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# -------------------&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;/openfoamF708/tutorials/incompressible/icoFoam/cavity/system/fvSolution started&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;-------------------#&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#                                                                                                                                        #&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#                                                                                                                                        #&lt;/span&gt;
@@ -1512,29 +1512,29 @@ PISO
 &lt;li&gt;5配置部分&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;一一写上我会执行的操作，当然这些程序组合成为我自己使用的linux系统。方便我和linux的内核进行交流。&lt;/p&gt;
-&lt;h2 id=&#34;1git&#34;&gt;1系统的Git管理&lt;/h2&gt;
+&lt;h2 id=&#34;1系统的git管理&#34;&gt;1系统的Git管理&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;apt-get install git,gitk,git-doc &lt;span style=&#34;color:#75715e&#34;&gt;#rememeber how to configure&lt;/span&gt;
 apt-get install git-flow &lt;span style=&#34;color:#75715e&#34;&gt;#升级版的管理&lt;/span&gt;
 
 git config --global user.name &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;ye zhaoliang&amp;#34;&lt;/span&gt;
 git config --global user.email &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;zhaoturkkey@163.com&amp;#34;&lt;/span&gt;
 ssh-keygen -t rsa -C &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;zhaoturkkey@163.com&amp;#34;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;2&#34;&gt;2图形部分&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;2图形部分&#34;&gt;2图形部分&lt;/h2&gt;
 &lt;p&gt;有时候你希望把你的相关数据打印成图片，这样方便交流&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;apt-get install gnuplot
 apt-get install graphviz
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;3&#34;&gt;3语言部分&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;3语言部分&#34;&gt;3语言部分&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;apt-get install gfortran 
 apt-get install gcc 
 apt-get install python
 &lt;span style=&#34;color:#75715e&#34;&gt;# drracket&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;# haskell&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;4&#34;&gt;4编辑部分&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;4编辑部分&#34;&gt;4编辑部分&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;apt-get install vim   &lt;span style=&#34;color:#75715e&#34;&gt;#rememeber how to configure&lt;/span&gt;
 apt-get install vim-gtk
 
 apt-get install emacs
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;5&#34;&gt;5配置部分&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;5配置部分&#34;&gt;5配置部分&lt;/h2&gt;
 &lt;p&gt;在ubuntu管理系统经常会需要配置用户目录下的dotfiles，
 比如登录相关文件.bashrc,.bash_logout,.bash_profile.
 我会尝试着把我相关需要的文件夹备份在一个tar包。&lt;/p&gt;
@@ -1552,7 +1552,7 @@ tar -xvf ./vim.tar.gz -C ~ &lt;span style=&#34;color:#75715e&#34;&gt;# remember 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;cfaj写的&lt;a href=&#34;shell-script:&#34;&gt;shell-script:&lt;/a&gt;和&lt;!-- raw HTML omitted --&gt;
 主要教会我们的是我使用下划线新建一个临时函数，并使用下划线函数的大写字母来表征函数的返回值。然后使用${}变量引用来实现
 版本号的截取并使用case进行分类选择，还有比如不同的系统的case选择。&lt;/p&gt;
-&lt;h3 id=&#34;heading&#34;&gt;补充一个操作&lt;/h3&gt;
+&lt;h3 id=&#34;补充一个操作&#34;&gt;补充一个操作&lt;/h3&gt;
 &lt;p&gt;如果你想要使得子程序可以掉哦你个函数，必须使用export命令导出，类似于变量&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;
 &lt;span style=&#34;color:#66d9ef&#34;&gt;function&lt;/span&gt; func&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
@@ -1565,7 +1565,7 @@ export -f func
 &lt;span style=&#34;color:#75715e&#34;&gt;# 使用export  DATE  等，导出系统变量&lt;/span&gt;
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;只有经过这样你的func才变成公有化。当然你也可以把脚本添加到path路径中。&lt;/p&gt;
-&lt;h3 id=&#34;heading-1&#34;&gt;谨记一个失误&lt;/h3&gt;
+&lt;h3 id=&#34;谨记一个失误&#34;&gt;谨记一个失误&lt;/h3&gt;
 &lt;p&gt;无论是使用tar -cvf 打包，还是生成某个程序等，一定要检查一遍，是否能够运行，
 当时就确认你的操作无误，否则后来会后悔(曾经打包了一个系统 发现都不能用了！
 而那个系统也被我删掉了，可见我有多懊恼)&lt;/p&gt;
@@ -1673,10 +1673,10 @@ You can first practice &lt;a href=&#34;http://blog.chinaunix.net/uid-25932176-id
 &lt;li&gt;
 &lt;p&gt;${} == {} means in the &lt;strong&gt;current shell&lt;/strong&gt; closure the commands;  ${{  }} == {{  }}&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;${#f}  calculate the variable f&#39;s length&lt;/li&gt;
+&lt;li&gt;${#f}  calculate the variable f&amp;rsquo;s length&lt;/li&gt;
 &lt;li&gt;${f:6}  get the string from 6 to end of the string&lt;/li&gt;
 &lt;li&gt;${f:6:4} get the string from 6 to (6+4) of the string. ${f:${pos}:${len}}&lt;/li&gt;
-&lt;li&gt;${f: -8} get the reverse from end to end+8&#39;s string.&lt;/li&gt;
+&lt;li&gt;${f: -8} get the reverse from end to end+8&amp;rsquo;s string.&lt;/li&gt;
 &lt;li&gt;${f/path?/x}  &amp;ndash;single replace&lt;/li&gt;
 &lt;li&gt;${f//path?/x} &amp;ndash;globle replace&lt;/li&gt;
 &lt;li&gt;${f#*/}  delete the characters until get across a  / from left to right(&lt;strong&gt;From means start point. To means end point&lt;/strong&gt;)
@@ -1765,7 +1765,7 @@ You can first practice &lt;a href=&#34;http://blog.chinaunix.net/uid-25932176-id
 &lt;li&gt;&amp;amp;   let the command execute backward&lt;/li&gt;
 &lt;li&gt;``  redirect an command output to the argument of another command&lt;/li&gt;
 &lt;li&gt;; command separator&lt;/li&gt;
-&lt;li&gt;| pipe symbol, put a command output redirect to another command&#39;s input&lt;/li&gt;
+&lt;li&gt;| pipe symbol, put a command output redirect to another command&amp;rsquo;s input&lt;/li&gt;
 &lt;li&gt;$# the numbers of the parameters while execute the shell scripts&lt;/li&gt;
 &lt;li&gt;$@ the parameters  while execute the shell scripts(know every parameters) .Note use &amp;ldquo;$@&amp;rdquo;&lt;/li&gt;
 &lt;li&gt;$* the parameters as a string while execute the shell scripts&lt;/li&gt;
@@ -1938,7 +1938,7 @@ _MIN3&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;$1
 &lt;/ul&gt;
 &lt;hr&gt;
 &lt;p&gt;bit &amp;ndash;&amp;gt; word &amp;ndash;&amp;gt; line &amp;ndash;&amp;gt; content &amp;ndash;&amp;gt; file &amp;ndash;&amp;gt; system.  ++Actually, you can use the function to abstraction several command.
-What&#39;s more ,you can use module or filefolder to do another bigger abstraction++.&lt;/p&gt;
+What&amp;rsquo;s more ,you can use module or filefolder to do another bigger abstraction++.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;you can find that from bit manipulation to file manipulation,there are many commands used in the Linux system&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
     
@@ -2096,9 +2096,9 @@ ls -lsh
 &lt;li&gt;apt-get install libpq-dev&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;现在安装完之后的感觉就是界面变得更好看些，其他没什么改变。&lt;/p&gt;
-&lt;h3 id=&#34;heading&#34;&gt;注意&lt;/h3&gt;
+&lt;h3 id=&#34;注意&#34;&gt;注意&lt;/h3&gt;
 &lt;p&gt;Bash_it的配置脚本和openfoam的配置脚本冲突，暂时未找到原因。&lt;/p&gt;
-&lt;h3 id=&#34;theme&#34;&gt;补充theme配置&lt;/h3&gt;
+&lt;h3 id=&#34;补充theme配置&#34;&gt;补充theme配置&lt;/h3&gt;
 &lt;p&gt;当你执行玩Bash-it的install脚本后，在~目录下会有~/.bashrc文件，修改其中的bash theme主题变量即可。
 我现在使用的是doubletime_multiline_pyonly感觉还不错&lt;/p&gt;</description>
     </item>
@@ -2446,18 +2446,18 @@ echo &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{userA,userB,userC}-{hom
 &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;}
 &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; 但是我发现加入function反而不行，于是使用 function_name(){}的风格
 &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;heading&#34;&gt;无用的分号命令&lt;/h1&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;无用的分号命令&#34;&gt;无用的分号命令&lt;/h1&gt;
 &lt;p&gt;： 该命令什么都不做，但执行后会返回一个正确的退出代码，即exit 0。比如在if语句中，then后面不想做任何操作，但是又不能空着，这时就可以使用“:”来解决，如下&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$i&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; -ne &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;;&lt;span style=&#34;color:#66d9ef&#34;&gt;then&lt;/span&gt;
     :
 &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;
     echo &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$i&lt;span style=&#34;color:#e6db74&#34;&gt; is not equal 1&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
 &lt;span style=&#34;color:#66d9ef&#34;&gt;fi&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;heading-1&#34;&gt;特殊的点号&lt;/h1&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;特殊的点号&#34;&gt;特殊的点号&lt;/h1&gt;
 &lt;p&gt;点号+ 文件名的作用 和 source+文件名的作用一样，都是在当前的shell执行命令
 而 ./filename.sh 则是在子shell执行命令。
 所以如果想要设置环境变量得用source+文件名或者. 文件名的方式。&lt;/p&gt;
-&lt;h1 id=&#34;heading-2&#34;&gt;关于大括号和小括号的区别&lt;/h1&gt;
+&lt;h1 id=&#34;关于大括号和小括号的区别&#34;&gt;关于大括号和小括号的区别&lt;/h1&gt;
 &lt;p&gt;大括号和小括号的作用都一样，都是把几个命令组合在一起，然而他们也有所区别。
 ()是在产生的子shell下执行，而{}是在当前的shell下执行
 与前面讲到是使用&amp;rdquo;.  filename.sh&amp;quot;和&amp;rdquo;./filename.sh&amp;quot;的区别一样&lt;/p&gt;
@@ -2472,7 +2472,7 @@ abc
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;由此可见，() 子shell设置完，不会影响到父shell，因为父不会继承子，影响的只是
 自身的shell。
 &lt;em&gt;注意：()里面两边可以不使用空格，{}里面两边必须使用空格，且最后一个命令也需要以“；”结尾，表示命令结束。&lt;/em&gt;&lt;/p&gt;
-&lt;h1 id=&#34;heading-3&#34;&gt;中括号用于判断&lt;/h1&gt;
+&lt;h1 id=&#34;中括号用于判断&#34;&gt;中括号用于判断&lt;/h1&gt;
 &lt;p&gt;[] 与test命令一样，用于比较值以及检查文件类型。如下&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;[ &amp;ldquo;$A&amp;rdquo; = 123 ]：是字符串的测试，以测试 $A 是否为 1、2、3 这三个连续的&amp;quot;文字&amp;rdquo;。&lt;/li&gt;
@@ -2481,12 +2481,12 @@ abc
 &lt;li&gt;[ -f &amp;ldquo;$A&amp;rdquo; ] : 判断是否存在文件&lt;/li&gt;
 &lt;li&gt;[ -d &amp;ldquo;$A&amp;rdquo; ] : 判断是否存在文件夹&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h1 id=&#34;-&#34;&gt;关于 单括号和双中括号的区别&lt;/h1&gt;
+&lt;h1 id=&#34;关于-单括号和双中括号的区别&#34;&gt;关于 单括号和双中括号的区别&lt;/h1&gt;
 &lt;p&gt;[[]]可以说是[]的“增强版”，它能够将多个test命令支持的测试组合起来.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;# [[ (-d &amp;#34;$HOME&amp;#34;) &amp;amp;&amp;amp; (-w &amp;#34;$HOME&amp;#34;) ]] &amp;amp;&amp;amp; echo echo &amp;#34;home is a writable directory&amp;#34;&lt;/span&gt;  
 home is a writable directory
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;heading-4&#34;&gt;两者的主要区别如下：&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;两者的主要区别如下&#34;&gt;两者的主要区别如下：&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;数字测试： -eq -ne -lt -le -gt -ge，[&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt;]同 &lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt;一致
 &lt;ul&gt;
@@ -2527,7 +2527,7 @@ home is a writable directory
 ture
 &lt;span style=&#34;color:#75715e&#34;&gt;# [[ a &amp;gt; 1 ]] &amp;amp;&amp;amp; echo ture || echo false&lt;/span&gt;
 ture
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;heading-5&#34;&gt;双中括号和双小括号&lt;/h1&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;双中括号和双小括号&#34;&gt;双中括号和双小括号&lt;/h1&gt;
 &lt;p&gt;(())专门来做数值运算，如果表达式求值为 0，则设置退出状态为 1；如果求值为非 0 值，则设置为 0。不需要对 (( 和 )) 之间的操作符转义。算术只对整数进行。除 0 会产生错误，但不会产生溢出。可以执行 C 语言中常见的算术、逻辑和位操作。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;i&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;1+99&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;;echo $i
 &lt;span style=&#34;color:#ae81ff&#34;&gt;100&lt;/span&gt;
@@ -2539,11 +2539,11 @@ echo &lt;span style=&#34;color:#66d9ef&#34;&gt;$((&lt;/span&gt;&lt;span style=&#
 &lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;em&gt;注意：使用 (( )) 时，不需要空格分隔各值和运算符，使用[]和[[ ]] 时需要用空格分隔各值和运算符&lt;/em&gt;&lt;/p&gt;
-&lt;h1 id=&#34;find&#34;&gt;find跳过指定目录&lt;/h1&gt;
+&lt;h1 id=&#34;find跳过指定目录&#34;&gt;find跳过指定目录&lt;/h1&gt;
 &lt;p&gt;如果在查找文件时希望忽略某个目录，因为你知道那个目录中没有你所要查找的文件，那么可以使用-prune选项来指出需要忽略的目录。
 在使用 -prune选项时要当心，因为如果你同时使用了-depth选项，那么-prune选项就会被find命令忽略。&lt;/p&gt;
 &lt;h1 id=&#34;unix-tutorial-for-beginnerwwweesurreyacukteachingunix&#34;&gt;&lt;a href=&#34;www.ee.surrey.ac.uk/Teaching/Unix&#34;&gt;Unix Tutorial for Beginner&lt;/a&gt;&lt;/h1&gt;
-&lt;h1 id=&#34;bashhttpvbirddicksuedutwlinux-basic0320bashphp-&#34;&gt;&lt;a href=&#34;http://vbird.dic.ksu.edu.tw/linux_basic/0320bash.php&#34;&gt;常用的bash命令学习&lt;/a&gt;&lt;/h1&gt;
+&lt;h1 id=&#34;常用的bash命令学习httpvbirddicksuedutwlinux_basic0320bashphp-&#34;&gt;&lt;a href=&#34;http://vbird.dic.ksu.edu.tw/linux_basic/0320bash.php&#34;&gt;常用的bash命令学习&lt;/a&gt;&lt;/h1&gt;
 &lt;ol&gt;
 &lt;li&gt;wc -l&lt;/li&gt;
 &lt;li&gt;sort -rn -t 2 -k :&lt;/li&gt;
@@ -2574,7 +2574,7 @@ grep -oP &amp;lsquo;(?&amp;lt;=+)fx(?=()&amp;rsquo; *
 grep -onP &amp;lsquo;(?&amp;lt;=+)fx(?=()&amp;rsquo; *
 11. cut -d &amp;ldquo;:&amp;rdquo; -f 1,3 /etc/passwd   类似于awk的字域
 cut -d &amp;ldquo;:&amp;rdquo; -f 1,3,7 /etc/passwd&lt;/p&gt;
-&lt;h1 id=&#34;heading-6&#34;&gt;一个综合性的案例&lt;/h1&gt;
+&lt;h1 id=&#34;一个综合性的案例&#34;&gt;一个综合性的案例&lt;/h1&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#---  FUNCTION  ----------------------------------------------------------------&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#          NAME:  deleteDensity&lt;/span&gt;

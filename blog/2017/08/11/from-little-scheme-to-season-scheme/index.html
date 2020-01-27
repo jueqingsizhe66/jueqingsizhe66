@@ -114,16 +114,16 @@
   <meta property="twitter:site" content="@jueqingsizhe66">
   <meta property="twitter:creator" content="@jueqingsizhe66">
   
-  <meta property="og:site_name" content="Macro Life">
+  <meta property="og:site_name" content="简约派">
   <meta property="og:url" content="https://jueqingsizhe66.github.io/blog/2017/08/11/from-little-scheme-to-season-scheme/">
-  <meta property="og:title" content="From Little Scheme to Season Scheme | Macro Life">
+  <meta property="og:title" content="From Little Scheme to Season Scheme | 简约派">
   <meta property="og:description" content="The Little Scheme(TLS) 提出了rember,multirember,multirember*以及multirember&amp;Col collector等系列"><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
   <meta property="twitter:image" content="https://jueqingsizhe66.github.io/img/icon-192.png"><meta property="og:locale" content="en-us">
   
     
       <meta property="article:published_time" content="2017-08-11T20:13:42&#43;08:00">
     
-    <meta property="article:modified_time" content="2019-10-27T20:50:56&#43;08:00">
+    <meta property="article:modified_time" content="2017-08-11T20:13:42&#43;08:00">
   
 
   
@@ -142,7 +142,7 @@
 
 
 
-  <title>From Little Scheme to Season Scheme | Macro Life</title>
+  <title>From Little Scheme to Season Scheme | 简约派</title>
 
 </head>
 
@@ -185,7 +185,7 @@
   <div class="container">
 
     
-      <a class="navbar-brand" href="/">Macro Life</a>
+      <a class="navbar-brand" href="/">简约派</a>
       
       <button type="button" class="navbar-toggler" data-toggle="collapse"
               data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -516,10 +516,8 @@
     
     
       
-          Last updated on
-      
     
-    Oct 27, 2019
+    Aug 11, 2017
   </span>
 
   
@@ -596,7 +594,7 @@ rember-letrec
 rember-letcc
 rember star
 depthStar improvement</p>
-<h1 id="the-little-scheme">一、The Little Scheme</h1>
+<h1 id="一the-little-scheme">一、The Little Scheme</h1>
 <p>scheme的核心数据结构是List，通过list进行算法的演算，而rember是其中的一种算法，用于去除其中的一个元素。 并在rember的同级函数中，也定义了subst，member，insert left, insert right等。在TLS书中也提出了这些函数的相同之处并最终使用insert-g来统一各个函数，这是不错的思想。</p>
 <h2 id="11-rember">1.1 rember</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-racket" data-lang="racket">(<span style="color:#66d9ef">define</span> rember-f
@@ -939,7 +937,7 @@ depthStar improvement</p>
                                                   (+ ale dle)
                                                   (+ ari dri))))))))))
 
-</code></pre></div><h1 id="the-season-scheme">二、The Season Scheme</h1>
+</code></pre></div><h1 id="二the-season-scheme">二、The Season Scheme</h1>
 <p>由<code>member</code>和<code>rember</code>又可以深入进行剖析，于是引进了<code>member</code>的升级版本<code>two-in-a-lat</code>,未包含TSS的最后一个two-in-a-lat的实现，并通过let,letrec,letcc改写TLS中的rember系列函数，在结合leftmost和deep(Later on,deep有两外一层意思就是产生n层的pizza)函数，升级rember到删除最左边的一个元素。</p>
 <p>Member实际上在所有的函数的实现中都有对应的组成，他是一个十分重要的组成部分，包括基于member的union,intersect,intersectall函数的，一个相对基础的函数。
 the definition of member</p>

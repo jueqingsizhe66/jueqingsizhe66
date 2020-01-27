@@ -114,16 +114,16 @@
   <meta property="twitter:site" content="@jueqingsizhe66">
   <meta property="twitter:creator" content="@jueqingsizhe66">
   
-  <meta property="og:site_name" content="Macro Life">
+  <meta property="og:site_name" content="简约派">
   <meta property="og:url" content="https://jueqingsizhe66.github.io/blog/2016/03/03/schemehuan-jing-de-ji-chong-biao-xian-xing-shi-represtations/">
-  <meta property="og:title" content="scheme环境的几种表现形式-represtations | Macro Life">
+  <meta property="og:title" content="scheme环境的几种表现形式-represtations | 简约派">
   <meta property="og:description" content="scheme的解释器的构造，都需要enviroment类型的参与，environment类型的抽象确是影响到语言的具体性能。"><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
   <meta property="twitter:image" content="https://jueqingsizhe66.github.io/img/icon-192.png"><meta property="og:locale" content="en-us">
   
     
       <meta property="article:published_time" content="2016-03-03T02:05:32&#43;08:00">
     
-    <meta property="article:modified_time" content="2019-10-27T20:50:56&#43;08:00">
+    <meta property="article:modified_time" content="2016-03-03T02:05:32&#43;08:00">
   
 
   
@@ -142,7 +142,7 @@
 
 
 
-  <title>scheme环境的几种表现形式-represtations | Macro Life</title>
+  <title>scheme环境的几种表现形式-represtations | 简约派</title>
 
 </head>
 
@@ -185,7 +185,7 @@
   <div class="container">
 
     
-      <a class="navbar-brand" href="/">Macro Life</a>
+      <a class="navbar-brand" href="/">简约派</a>
       
       <button type="button" class="navbar-toggler" data-toggle="collapse"
               data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -516,10 +516,8 @@
     
     
       
-          Last updated on
-      
     
-    Oct 27, 2019
+    Mar 3, 2016
   </span>
 
   
@@ -569,11 +567,11 @@
   <ul>
     <li>
       <ul>
-        <li><a href="#has-binding-">增加一个has-binding 实现</a></li>
-        <li><a href="#extend-env">拓展一个列表输入的功能extend-env*</a></li>
+        <li><a href="#增加一个has-binding-实现">增加一个has-binding 实现</a></li>
+        <li><a href="#拓展一个列表输入的功能extend-env">拓展一个列表输入的功能extend-env*</a></li>
       </ul>
     </li>
-    <li><a href="#heading">结论</a></li>
+    <li><a href="#结论">结论</a></li>
   </ul>
 </nav>
     </aside>
@@ -637,7 +635,7 @@ empty-env  is <span style="color:#f92672">&#39;</span>()
 
  empty-env is <span style="color:#f92672">&#39;</span>()
 </code></pre></div><p>针对当前的关联表的一个很小的拓展</p>
-<h3 id="has-binding-">增加一个<code>has-binding</code> 实现</h3>
+<h3 id="增加一个has-binding-实现">增加一个<code>has-binding</code> 实现</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">
 (<span style="color:#66d9ef">define </span>has-binding?
   (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">env</span> var)
@@ -660,7 +658,7 @@ empty-env  is <span style="color:#f92672">&#39;</span>()
 (<span style="color:#a6e22e">equal??</span> (<span style="color:#a6e22e">has-binding?</span> e <span style="color:#e6db74">&#39;x</span>) <span style="color:#66d9ef">#t</span>)
 (<span style="color:#a6e22e">equal??</span> (<span style="color:#a6e22e">has-binding?</span> e <span style="color:#e6db74">&#39;z</span>) <span style="color:#66d9ef">#f</span>)
 
-</code></pre></div><h3 id="extend-env">拓展一个列表输入的功能<code>extend-env*</code></h3>
+</code></pre></div><h3 id="拓展一个列表输入的功能extend-env">拓展一个列表输入的功能<code>extend-env*</code></h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">define </span>extend-env*
   (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">var-list</span> val-list env)
     (<span style="color:#66d9ef">if </span>(null? var-list)
@@ -880,7 +878,7 @@ empty-env  is <span style="color:#f92672">&#39;</span>()
 (<span style="color:#a6e22e">equal??</span> (<span style="color:#a6e22e">has-binding?</span> e <span style="color:#e6db74">&#39;d</span>) <span style="color:#66d9ef">#t</span>)
 (<span style="color:#a6e22e">equal??</span> (<span style="color:#a6e22e">has-binding?</span> e <span style="color:#e6db74">&#39;m</span>) <span style="color:#66d9ef">#f</span>)
 
-</code></pre></div><h2 id="heading">结论</h2>
+</code></pre></div><h2 id="结论">结论</h2>
 <p>上述所谈的4种环境的实现，其实也就对应着四种不同的解释器的实现。环境实现的不同，对应者整个解释器的提取过程也就不一样。
 整个解释器独立的解释每一个表达式的时候，所采用的方法也就会有所不一样。所以设计一个好的environment，对应的就是设计一个好的
 数据结构，用于程序program解析的时候需要使用到的变量或者表达式数据，至关重要！</p>

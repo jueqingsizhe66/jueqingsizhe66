@@ -116,9 +116,9 @@
   <meta property="twitter:site" content="@jueqingsizhe66">
   <meta property="twitter:creator" content="@jueqingsizhe66">
   
-  <meta property="og:site_name" content="Macro Life">
+  <meta property="og:site_name" content="简约派">
   <meta property="og:url" content="https://jueqingsizhe66.github.io/blog/2015/05/13/qiu-ding-ji-fen/">
-  <meta property="og:title" content="求定积分 | Macro Life">
+  <meta property="og:title" content="求定积分 | 简约派">
   <meta property="og:description" content="
 
 "><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
@@ -127,7 +127,7 @@
     
       <meta property="article:published_time" content="2015-05-13T19:27:40&#43;08:00">
     
-    <meta property="article:modified_time" content="2019-10-27T20:50:56&#43;08:00">
+    <meta property="article:modified_time" content="2015-05-13T19:27:40&#43;08:00">
   
 
   
@@ -146,7 +146,7 @@
 
 
 
-  <title>求定积分 | Macro Life</title>
+  <title>求定积分 | 简约派</title>
 
 </head>
 
@@ -189,7 +189,7 @@
   <div class="container">
 
     
-      <a class="navbar-brand" href="/">Macro Life</a>
+      <a class="navbar-brand" href="/">简约派</a>
       
       <button type="button" class="navbar-toggler" data-toggle="collapse"
               data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -520,10 +520,8 @@
     
     
       
-          Last updated on
-      
     
-    Oct 27, 2019
+    May 13, 2015
   </span>
 
   
@@ -571,7 +569,7 @@
     <aside>
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#heading">于是我们可以得到</a></li>
+    <li><a href="#于是我们可以得到">于是我们可以得到</a></li>
     <li><a href="#and-apply-the-sum--to-get-the-sum-integer2-sum-cube2-sum-pi2">And Apply the sum  to get the sum-integer2 sum-cube2 sum-pi2</a></li>
   </ul>
 </nav>
@@ -612,7 +610,7 @@
 <span style="color:#75715e">;;  0</span>
 <span style="color:#75715e">;;  (+ (&lt;term&gt; a) (&lt;name&gt; (&lt;next&gt;a) b))))</span>
 
-</code></pre></div><h2 id="heading">于是我们可以得到</h2>
+</code></pre></div><h2 id="于是我们可以得到">于是我们可以得到</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">
 (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">sum</span> term a next b)
   (<span style="color:#66d9ef">if </span>(&gt;  a b)
@@ -732,7 +730,7 @@ term其实就是涉及到你需要思考的三种情况
                    (* <span style="color:#ae81ff">4.0</span> (<span style="color:#a6e22e">sum</span> f (+ a h) add-2h (- b h)))  
                    (* <span style="color:#ae81ff">2.0</span> (<span style="color:#a6e22e">sum</span> f (<span style="color:#a6e22e">add-2h</span> a) add-2h (- b h)))  
                    (<span style="color:#a6e22e">f</span> (+ a (* h n)))))) 
-</code></pre></div><p>a2:Here's a version that sums over pairs of terms (2 y_k + 4 y_k+1). No conditionals or special cases are needed anywhere, but there's an extra term [f(b) - f(a)] to be added to the final count.</p>
+</code></pre></div><p>a2:Here&rsquo;s a version that sums over pairs of terms (2 y_k + 4 y_k+1). No conditionals or special cases are needed anywhere, but there&rsquo;s an extra term [f(b) - f(a)] to be added to the final count.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"> (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">simpson</span> f a b n) 
    (<span style="color:#66d9ef">define </span>h (/ (- b a) n)) 
     

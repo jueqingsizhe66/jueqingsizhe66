@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>git | Macro Life</title>
+    <title>git | 简约派</title>
     <link>https://jueqingsizhe66.github.io/tags/git/</link>
       <atom:link href="https://jueqingsizhe66.github.io/tags/git/index.xml" rel="self" type="application/rss+xml" />
     <description>git</description>
@@ -27,14 +27,14 @@ Haskell开发的&lt;a href=&#34;http://darcs.net/Binaries&#34;&gt;Darcs&lt;/a&gt
 &lt;/ul&gt;
 &lt;p&gt;然而，很多时候我们并不想把所有的东西都公开，于是想有一个私有的云平台，这样
 我们就可以让很多内部的人员(局域网)使用了，gitlab正是为一堆比较懒的人设计的基于git的平台搭建。&lt;/p&gt;
-&lt;h2 id=&#34;heading&#34;&gt;参考链接&lt;/h2&gt;
+&lt;h2 id=&#34;参考链接&#34;&gt;参考链接&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://blog.csdn.net/yanjiangbo/article/details/39154573&#34;&gt;CentOS下一键安装GitLab&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;http://www.2cto.com/os/201411/353292.html&#34;&gt;gitlab一键安装笔记&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;http://segmentfault.com/a/1190000002439923&#34;&gt;使用Gitlab一键安装包后的日常备份恢复与迁移&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;http://www.2cto.com/os/201408/323795.html&#34;&gt;一键安装 gitlab7 on rhel6.4 并设置邮件发送&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;heading-1&#34;&gt;开始安装&lt;/h3&gt;
+&lt;h3 id=&#34;开始安装&#34;&gt;开始安装&lt;/h3&gt;
 &lt;p&gt;官网下载(我现在下载的版本是7.11.4.0  之前用的是7.1.1.0)
 &lt;a href=&#34;https://bitnami.com/stack/gitlab/installer&#34;&gt;https://bitnami.com/stack/gitlab/installer&lt;/a&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;gitlab(更新版本的采用的是图形界面，之前的版本采用的是命令流,全面的图形化更方便些。现在是连启动都是图形界面了,比如gitlabci 也直接不需要用./ctlscript.sh start)
@@ -45,8 +45,8 @@ passowrd:+++++++
 配置gmail（省的自己配置)
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;使用的过程既可以是在网页中直接使用，也可以直接使用类似github的命令流操作，
 但是前提是必须配置好服务器，类似于&lt;a href=&#34;https://help.github.com/articles/set-up-git/&#34;&gt;github的配置过程&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;ssh&#34;&gt;安装完毕，进行ssh配置的注意点&lt;/h2&gt;
-&lt;h3 id=&#34;rakegemesrbblock-rake-is-not-the-part-of-the-gem&#34;&gt;问题是rakegemes.rb里的一个block 有问题，提醒rake is not the part of the gem&lt;/h3&gt;
+&lt;h2 id=&#34;安装完毕进行ssh配置的注意点&#34;&gt;安装完毕，进行ssh配置的注意点&lt;/h2&gt;
+&lt;h3 id=&#34;问题是rakegemesrb里的一个block-有问题提醒rake-is-not-the-part-of-the-gem&#34;&gt;问题是rakegemes.rb里的一个block 有问题，提醒rake is not the part of the gem&lt;/h3&gt;
 &lt;p&gt;我分享一下解决方法，我的登录用户假如是fluid,那么我们现在使用&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;ssh-keygen -t rsa -C &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;你的登录邮箱gitlab账户&amp;#34;&lt;/span&gt;
 
@@ -55,8 +55,8 @@ passowrd:+++++++
 你得是在登录用户fluid才是可以git push等基本操作，而在root用户则是有权限限制，但是紧接着我在root用户下再次ssh-keygen…
 这样在/root/.ssh/id_rsa.pub又有一个新的key，你只要也把他添加到gitlab管理界面的profile setting里的ssh keys 添加一下就可以了.
 所以变成和github一样可以用root用户，其实罗嗦那么久还是ssh-keygen问题，还有记得对应用户的key问题&lt;/p&gt;
-&lt;h2 id=&#34;heading-2&#34;&gt;开始使用&lt;/h2&gt;
-&lt;h3 id=&#34;heading-3&#34;&gt;我在网页上创建了一个项目&lt;/h3&gt;
+&lt;h2 id=&#34;开始使用&#34;&gt;开始使用&lt;/h2&gt;
+&lt;h3 id=&#34;我在网页上创建了一个项目&#34;&gt;我在网页上创建了一个项目&lt;/h3&gt;
 &lt;p&gt;得到了如下信息:&lt;/p&gt;
 &lt;p&gt;Global Setting&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;git config --global user.name &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Administrator&amp;#34;&lt;/span&gt;
@@ -75,7 +75,7 @@ git remote add origin git@127.0.1.1:xinran/f708OpenFoam.git git push -u origin m
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后我cd /root/.ssh/
 因为我之前已经设置好了git配置，不懂的人可以参考&lt;a href=&#34;http://jueqingsizhe66.github.io/blog/2015/05/29/githe-githubpei-zhi&#34;&gt;git和github的配置&lt;/a&gt;
 然后拷贝id.pub的内容&lt;/p&gt;
-&lt;h3 id=&#34;heading-4&#34;&gt;测试是否走通了&lt;/h3&gt;
+&lt;h3 id=&#34;测试是否走通了&#34;&gt;测试是否走通了&lt;/h3&gt;
 &lt;p&gt;我们很想知道到底我们已经配置好了服务器?也很想知道局域网内的客户端是否可以访问服务器？&lt;/p&gt;
 &lt;p&gt;测试方法：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;root at fluidman-OptiPlex-990 in /opt/gitlab-7.1.1-0&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;21:17:36下午&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; 
@@ -83,7 +83,7 @@ $ ssh -T git@127.0.1.1
 Welcome to GitLab, Anonymous!
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;局域网人员测试:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;比如我的127.195.172.64别人只要在浏览器输入 127.195.172.64:80然后就可以了！！
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;reate-repository&#34;&gt;reate Repository（创建仓库）&lt;/h3&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;reate-repository创建仓库&#34;&gt;reate Repository（创建仓库）&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;mkdir common-util
 cd common-util
 git init
@@ -92,7 +92,7 @@ git add README
 git commit -m &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;first commit&amp;#39;&lt;/span&gt;
 git remote add origin git@127.0.0.1:devteam/common-util.git
 git push -u origin master
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;git&#34;&gt;对于已存在Git项目：&lt;/h3&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;对于已存在git项目&#34;&gt;对于已存在Git项目：&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;cd existing_git_repo 
 git remote add origin git@127.0.0.1:devteam/common-util.git 
 git push -u origin master
@@ -104,8 +104,8 @@ git push -u origin master
 &lt;li&gt;再测试等过程&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;还需要进行提交.&lt;/p&gt;
-&lt;h2 id=&#34;heading-5&#34;&gt;多用户问题&lt;/h2&gt;
-&lt;h3 id=&#34;heading-6&#34;&gt;注意验证用户&lt;/h3&gt;
+&lt;h2 id=&#34;多用户问题&#34;&gt;多用户问题&lt;/h2&gt;
+&lt;h3 id=&#34;注意验证用户&#34;&gt;注意验证用户&lt;/h3&gt;
 &lt;p&gt;会被弄到垃圾邮件当中，
 并且验证链接需要注意的是一定得改一下IP，
 比如：&lt;/p&gt;
@@ -115,7 +115,7 @@ git push -u origin master
 那么就变为&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;http://121.195.172.217/users/confirmation?confirmation_token&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;AEHLjx2WR21sb3zULW5h
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;这步的一个完美解决方案是在装gitlab的时候domain不要填127.0.1.1而应该填你的固有IP（动态获取的IP的话，最好保持不断网，基本上也能够维持IP不变）这样以后就不许要修改了&lt;/strong&gt;&lt;/p&gt;
-&lt;h3 id=&#34;heading-7&#34;&gt;我的目录分门别类(目的是一个项目一个文件夹)&lt;/h3&gt;
+&lt;h3 id=&#34;我的目录分门别类目的是一个项目一个文件夹&#34;&gt;我的目录分门别类(目的是一个项目一个文件夹)&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;/
 ├── dns-of-incompact3d
 ├── dns-of-semtex
@@ -123,7 +123,7 @@ git push -u origin master
 ├── lisper
 ├── nreal-fast
 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;heading-8&#34;&gt;我的一次使用提交&lt;/h3&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;我的一次使用提交&#34;&gt;我的一次使用提交&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;root at fluidman-OptiPlex-990 in /latex-chines-english&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;10:05:08上午&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;  on git:develop running make, make, make, and make
 $ git push -u origin develop
 Counting objects: 208, &lt;span style=&#34;color:#66d9ef&#34;&gt;done&lt;/span&gt;.
@@ -145,18 +145,18 @@ To git@127.0.1.1:xinran/latex-chines-english.git
       <description>&lt;p&gt;git是一个Linus开发的一个版本控制系统，其实就是一个文件系统而已。
 下面是我总结的一些操作步骤，最终的目的是你可以提交信息到github，
 并了解git和github之间的关系。&lt;/p&gt;
-&lt;h2 id=&#34;1-git&#34;&gt;1. 打开git&lt;/h2&gt;
+&lt;h2 id=&#34;1-打开git&#34;&gt;1. 打开git&lt;/h2&gt;
 &lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/git/1.png&#34; alt=&#34;打开&#34;&gt;&lt;/p&gt;
-&lt;h2 id=&#34;2-git&#34;&gt;2. 配置本地git环境&lt;/h2&gt;
+&lt;h2 id=&#34;2-配置本地git环境&#34;&gt;2. 配置本地git环境&lt;/h2&gt;
 &lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/git/config.png&#34; alt=&#34;配置&#34;&gt;&lt;/p&gt;
-&lt;h2 id=&#34;3-github-&#34;&gt;3. Github 注册用户&lt;/h2&gt;
+&lt;h2 id=&#34;3-github-注册用户&#34;&gt;3. Github 注册用户&lt;/h2&gt;
 &lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/git/register.png&#34; alt=&#34;注册&#34;&gt;&lt;/p&gt;
 &lt;p&gt;账号邮箱最好是你刚才git本地配置！ 密码自己选&lt;/p&gt;
-&lt;h2 id=&#34;4-ssh--&#34;&gt;4. ssh 公匙生成（一路回车 就好，由于我已经配置好了公匙所以显示是否覆盖。。。。。）&lt;/h2&gt;
+&lt;h2 id=&#34;4-ssh-公匙生成一路回车-就好由于我已经配置好了公匙所以显示是否覆盖&#34;&gt;4. ssh 公匙生成（一路回车 就好，由于我已经配置好了公匙所以显示是否覆盖。。。。。）&lt;/h2&gt;
 &lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/git/ssh.png&#34; alt=&#34;ssh&#34;&gt;&lt;/p&gt;
-&lt;h2 id=&#34;5-ubuntu-clip-apt-get-install-clip&#34;&gt;5. 拷贝公匙到黏贴板（ubuntu 得安装clip命令： apt-get install clip&lt;/h2&gt;
+&lt;h2 id=&#34;5-拷贝公匙到黏贴板ubuntu-得安装clip命令-apt-get-install-clip&#34;&gt;5. 拷贝公匙到黏贴板（ubuntu 得安装clip命令： apt-get install clip&lt;/h2&gt;
 &lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/git/copy.png&#34; alt=&#34;拷贝&#34;&gt;&lt;/p&gt;
-&lt;h2 id=&#34;6-github&#34;&gt;6. 登陆你的github用户&lt;/h2&gt;
+&lt;h2 id=&#34;6-登陆你的github用户&#34;&gt;6. 登陆你的github用户&lt;/h2&gt;
 &lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/git/enter.png&#34; alt=&#34;登录&#34;&gt;
 自动切换到登陆后的界面
 &lt;img src=&#34;https://jueqingsizhe66.github.io/images/git/interface.png&#34; alt=&#34;界面1&#34;&gt;
@@ -167,7 +167,7 @@ To git@127.0.1.1:xinran/latex-chines-english.git
 &lt;img src=&#34;https://jueqingsizhe66.github.io/images/git/name.png&#34; alt=&#34;取名字&#34;&gt;&lt;/p&gt;
 &lt;p&gt;网上说要测试，但是大部分情况，这样就算通过了，你也可以按照https://help.github.com/articles/generating-ssh-keys/
 这个连接的说法进行测试，。。。。。。我现在一般不测试。。。。&lt;/p&gt;
-&lt;h2 id=&#34;7-rupengfanyifanyi-&#34;&gt;7. 现在开始下载RupengFanYi/fanyi 的原始版本内容&lt;/h2&gt;
+&lt;h2 id=&#34;7-现在开始下载rupengfanyifanyi-的原始版本内容&#34;&gt;7. 现在开始下载RupengFanYi/fanyi 的原始版本内容&lt;/h2&gt;
 &lt;p&gt;我是想把已经翻译的放在Finished文件夹下
 &lt;img src=&#34;https://jueqingsizhe66.github.io/images/git/folder.png&#34; alt=&#34;文件夹&#34;&gt;&lt;/p&gt;
 &lt;p&gt;我们现在开始克隆这个项目《&amp;mdash;&amp;ndash;做正事了！！&lt;/p&gt;
@@ -177,7 +177,7 @@ To git@127.0.1.1:xinran/latex-chines-english.git
 Cd f:/  就表示切换到f盘
 &lt;img src=&#34;https://jueqingsizhe66.github.io/images/git/changedirectory.png&#34; alt=&#34;切换目录&#34;&gt;&lt;/p&gt;
 &lt;p&gt;既然已经git clone 了之后，我们现在开始进行第八步&lt;/p&gt;
-&lt;h2 id=&#34;8---html-finished-&#34;&gt;8.  把你已经翻译的文件 比如*.html 复制到Finished 文件夹表示已经翻译的&lt;/h2&gt;
+&lt;h2 id=&#34;8--把你已经翻译的文件-比如html-复制到finished-文件夹表示已经翻译的&#34;&gt;8.  把你已经翻译的文件 比如*.html 复制到Finished 文件夹表示已经翻译的&lt;/h2&gt;
 &lt;p&gt;一般不动fanyi文件夹里面的内容！我们只是把翻译好的文件拷贝到Finished然后上传&lt;/p&gt;
 &lt;p&gt;然后再切回到主工作区（表示 fanyi文件夹下）
 &lt;img src=&#34;https://jueqingsizhe66.github.io/images/git/finished.png&#34; alt=&#34;完成&#34;&gt;&lt;/p&gt;
@@ -192,7 +192,7 @@ Cd f:/  就表示切换到f盘
 &lt;img src=&#34;https://jueqingsizhe66.github.io/images/git/solve.png&#34; alt=&#34;解决&#34;&gt;
 然后就ok了
 &lt;img src=&#34;https://jueqingsizhe66.github.io/images/git/ok.png&#34; alt=&#34;可以&#34;&gt;&lt;/p&gt;
-&lt;h2 id=&#34;heading&#34;&gt;总结&lt;/h2&gt;
+&lt;h2 id=&#34;总结&#34;&gt;总结&lt;/h2&gt;
 &lt;p&gt;以后我们可以这样做
 &lt;img src=&#34;https://jueqingsizhe66.github.io/images/git/future.png&#34; alt=&#34;步骤1&#34;&gt;
 &lt;img src=&#34;https://jueqingsizhe66.github.io/images/git/future2.png&#34; alt=&#34;步骤2&#34;&gt;&lt;/p&gt;

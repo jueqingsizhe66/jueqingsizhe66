@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Turbsim | Macro Life</title>
+    <title>Turbsim | 简约派</title>
     <link>https://jueqingsizhe66.github.io/tags/turbsim/</link>
       <atom:link href="https://jueqingsizhe66.github.io/tags/turbsim/index.xml" rel="self" type="application/rss+xml" />
     <description>Turbsim</description>
@@ -22,7 +22,7 @@
 于是就有了下面的shell分析脚本。&lt;/p&gt;
 &lt;p&gt;TurbSim产生的风力机一圈的入流截面模型（仅仅一个截面，全场是因为捕捉了很多个截面）&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/fast/turbsim.png&#34; alt=&#34;Turbsim&#34;&gt;&lt;/p&gt;
-&lt;h2 id=&#34;shell&#34;&gt;Shell解析脚本&lt;/h2&gt;
+&lt;h2 id=&#34;shell解析脚本&#34;&gt;Shell解析脚本&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/bin/bash - 
 &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#===============================================================================&lt;/span&gt;
 #
@@ -158,7 +158,7 @@ alert  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;CTStartTime&amp;#34;&l
 grep -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;CTStartTime&amp;#34;&lt;/span&gt; *.inp|awk -F: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print $1,$3}&amp;#39;&lt;/span&gt;|awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{print substr($1,0,length($1)-4),&amp;#34;\t\t&amp;#34;,$2}&amp;#39;&lt;/span&gt;|column -t
 &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt; &amp;gt; summary.out
 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;heading&#34;&gt;改进&lt;/h3&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;改进&#34;&gt;改进&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;去除无用的Turbulence and Boundary&lt;/li&gt;
 &lt;li&gt;增加了对GridWidth and GridHeight的处理&lt;/li&gt;
@@ -169,7 +169,7 @@ grep -n &amp;quot;GridWidth&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|sed 
 &lt;/code&gt;&lt;/pre&gt;&lt;ol start=&#34;3&#34;&gt;
 &lt;li&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2 id=&#34;shell-1&#34;&gt;shell产生的结果如下：&lt;/h2&gt;
+&lt;h2 id=&#34;shell产生的结果如下&#34;&gt;shell产生的结果如下：&lt;/h2&gt;
 &lt;pre&gt;&lt;code&gt;#################
 ## RandSeed1 ##
 #################

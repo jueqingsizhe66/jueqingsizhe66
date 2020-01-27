@@ -123,9 +123,9 @@ let-exp
   <meta property="twitter:site" content="@jueqingsizhe66">
   <meta property="twitter:creator" content="@jueqingsizhe66">
   
-  <meta property="og:site_name" content="Macro Life">
+  <meta property="og:site_name" content="简约派">
   <meta property="og:url" content="https://jueqingsizhe66.github.io/blog/2016/02/27/the-second-interpreter-from-one/">
-  <meta property="og:title" content="The Second Interpreter from One | Macro Life">
+  <meta property="og:title" content="The Second Interpreter from One | 简约派">
   <meta property="og:description" content="在[First Interpreter From EOPL][1]中我们定义了一个最为基本的解释器，包含解释以下解释部分
 
 const-exp
@@ -141,7 +141,7 @@ let-exp
     
       <meta property="article:published_time" content="2016-02-27T01:04:52&#43;08:00">
     
-    <meta property="article:modified_time" content="2019-10-27T20:50:56&#43;08:00">
+    <meta property="article:modified_time" content="2016-02-27T01:04:52&#43;08:00">
   
 
   
@@ -160,7 +160,7 @@ let-exp
 
 
 
-  <title>The Second Interpreter from One | Macro Life</title>
+  <title>The Second Interpreter from One | 简约派</title>
 
 </head>
 
@@ -203,7 +203,7 @@ let-exp
   <div class="container">
 
     
-      <a class="navbar-brand" href="/">Macro Life</a>
+      <a class="navbar-brand" href="/">简约派</a>
       
       <button type="button" class="navbar-toggler" data-toggle="collapse"
               data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -534,10 +534,8 @@ let-exp
     
     
       
-          Last updated on
-      
     
-    Oct 27, 2019
+    Feb 27, 2016
   </span>
 
   
@@ -587,11 +585,11 @@ let-exp
   <ul>
     <li>
       <ul>
-        <li><a href="#-">注意操作符后面不是必须直接跟上括号(空格会被直接忽略) 而是应该保证括号的对称性。</a></li>
-        <li><a href="#heading">一个问题</a></li>
+        <li><a href="#注意操作符后面不是必须直接跟上括号空格会被直接忽略-而是应该保证括号的对称性">注意操作符后面不是必须直接跟上括号(空格会被直接忽略) 而是应该保证括号的对称性。</a></li>
+        <li><a href="#一个问题">一个问题</a></li>
       </ul>
     </li>
-    <li><a href="#heading-1">结论</a></li>
+    <li><a href="#结论">结论</a></li>
   </ul>
 </nav>
     </aside>
@@ -878,7 +876,7 @@ let-exp
              (<span style="color:#66d9ef">let </span>((<span style="color:#a6e22e">val1</span> (<span style="color:#a6e22e">value-of</span> exp1 env))
                    (<span style="color:#a6e22e">val2</span> (<span style="color:#a6e22e">value-of</span> exp2 env)))
                (<span style="color:#a6e22e">pair-val</span> val1 val2)))
-</code></pre></div><h3 id="-">注意操作符后面不是必须直接跟上括号(空格会被直接忽略) 而是应该保证括号的对称性。</h3>
+</code></pre></div><h3 id="注意操作符后面不是必须直接跟上括号空格会被直接忽略-而是应该保证括号的对称性">注意操作符后面不是必须直接跟上括号(空格会被直接忽略) 而是应该保证括号的对称性。</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">&gt; (<span style="color:#a6e22e">run</span> <span style="color:#e6db74">&#34;* (3,4&#34;</span>)
 <span style="color:#f92672">.</span> <span style="color:#f92672">.</span> parsing: at line <span style="color:#ae81ff">1</span>: looking for <span style="color:#e6db74">&#34;)&#34;</span><span style="color:#f92672">,</span> found end-marker <span style="color:#66d9ef">#f</span> in production
 ((string <span style="color:#e6db74">&#34;*&#34;</span>) (string <span style="color:#e6db74">&#34;(&#34;</span>) (<span style="color:#a6e22e">non-term</span> expression) (string <span style="color:#e6db74">&#34;,&#34;</span>) (<span style="color:#a6e22e">non-term</span> expression) (string <span style="color:#e6db74">&#34;)&#34;</span>) (<span style="color:#a6e22e">reduce</span> <span style="color:#f92672">#</span>&lt;procedure:mult-exp&gt;))
@@ -976,7 +974,7 @@ let-exp
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#a6e22e">run</span> <span style="color:#e6db74">&#34;print( less? (1, 2))&#34;</span>)
     <span style="color:#f92672">#</span>(struct:bool-val <span style="color:#66d9ef">#t</span>)(<span style="color:#a6e22e">num-val</span> <span style="color:#ae81ff">1</span>)
 </code></pre></div><!-- raw HTML omitted -->
-<h3 id="heading">一个问题</h3>
+<h3 id="一个问题">一个问题</h3>
 <p>怎么会有问题？</p>
 <pre><code> (run &quot;let x = 30
       in let x = -(x,1)
@@ -1115,7 +1113,7 @@ let-exp
 
 
 (<span style="color:#a6e22e">num-val</span> <span style="color:#ae81ff">4</span>)  <span style="color:#75715e">;;;(x y)= (7 3)  -(7,3)=4</span>
-</code></pre></div><h2 id="heading-1">结论</h2>
+</code></pre></div><h2 id="结论">结论</h2>
 <p>这是这对[First Interpreter From EOPL][1] 的8个方面的拓展，对于认识语言的设计有很大的帮助。</p>
 <p>1[]:http://jueqingsizhe66.github.io/blog/2016/02/25/first-interpreter-from-eopl/</p>
     </div>

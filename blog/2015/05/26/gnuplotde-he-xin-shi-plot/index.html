@@ -115,9 +115,9 @@
   <meta property="twitter:site" content="@jueqingsizhe66">
   <meta property="twitter:creator" content="@jueqingsizhe66">
   
-  <meta property="og:site_name" content="Macro Life">
+  <meta property="og:site_name" content="简约派">
   <meta property="og:url" content="https://jueqingsizhe66.github.io/blog/2015/05/26/gnuplotde-he-xin-shi-plot/">
-  <meta property="og:title" content="gnuplot的核心是plot | Macro Life">
+  <meta property="og:title" content="gnuplot的核心是plot | 简约派">
   <meta property="og:description" content="gnuplot是一种科学绘图的开源软件，比origin强上不少。
 而gnuplot的核心就是这个plot。"><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
   <meta property="twitter:image" content="https://jueqingsizhe66.github.io/img/icon-192.png"><meta property="og:locale" content="en-us">
@@ -125,7 +125,7 @@
     
       <meta property="article:published_time" content="2015-05-26T23:48:15&#43;08:00">
     
-    <meta property="article:modified_time" content="2019-10-27T20:50:56&#43;08:00">
+    <meta property="article:modified_time" content="2015-05-26T23:48:15&#43;08:00">
   
 
   
@@ -144,7 +144,7 @@
 
 
 
-  <title>gnuplot的核心是plot | Macro Life</title>
+  <title>gnuplot的核心是plot | 简约派</title>
 
 </head>
 
@@ -187,7 +187,7 @@
   <div class="container">
 
     
-      <a class="navbar-brand" href="/">Macro Life</a>
+      <a class="navbar-brand" href="/">简约派</a>
       
       <button type="button" class="navbar-toggler" data-toggle="collapse"
               data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -518,10 +518,8 @@
     
     
       
-          Last updated on
-      
     
-    Oct 27, 2019
+    May 26, 2015
   </span>
 
   
@@ -573,23 +571,23 @@
     <li><a href="#plot-how">plot how?</a></li>
     <li><a href="#call-it-what">call it what?</a>
       <ul>
-        <li><a href="#plotkeynotitle">你也可以忽略一个plot的key，使用notitle</a></li>
+        <li><a href="#你也可以忽略一个plot的key使用notitle">你也可以忽略一个plot的key，使用notitle</a></li>
       </ul>
     </li>
     <li><a href="#any-more">any more?</a></li>
   </ul>
 
   <ul>
-    <li><a href="#heading-1">第一个函数打印</a></li>
-    <li><a href="#basic-plot">basic-plot的数据表</a></li>
-    <li><a href="#gnuplotbasic-plot">gnuplot中的打印basic-plot</a></li>
-    <li><a href="#gnuplotgnuplot">gnuplot的gnuplot打印</a></li>
-    <li><a href="#heading-2">表格加上标题</a></li>
-    <li><a href="#--">表格的特殊使用  用于统计</a></li>
-    <li><a href="#named-xtics-">named-xtics 数据表</a></li>
-    <li><a href="#multi-axes">multi-axes数据表</a></li>
-    <li><a href="#diff-scales">diff-scales数据表</a></li>
-    <li><a href="#broken-axis-">broken-axis 数据表</a></li>
+    <li><a href="#第一个函数打印">第一个函数打印</a></li>
+    <li><a href="#basic-plot的数据表">basic-plot的数据表</a></li>
+    <li><a href="#gnuplot中的打印basic-plot">gnuplot中的打印basic-plot</a></li>
+    <li><a href="#gnuplot的gnuplot打印">gnuplot的gnuplot打印</a></li>
+    <li><a href="#表格加上标题">表格加上标题</a></li>
+    <li><a href="#表格的特殊使用--用于统计">表格的特殊使用  用于统计</a></li>
+    <li><a href="#named-xtics-数据表">named-xtics 数据表</a></li>
+    <li><a href="#multi-axes数据表">multi-axes数据表</a></li>
+    <li><a href="#diff-scales数据表">diff-scales数据表</a></li>
+    <li><a href="#broken-axis-数据表">broken-axis 数据表</a></li>
   </ul>
 </nav>
     </aside>
@@ -633,7 +631,7 @@ This option specifies where the resulting output should be put. If no option is 
 
 set xtics nomirror
 set ytics nomirror
-</code></pre></div><h1 id="--plot----the-core-of-the-gnuplot">步入正题  Plot &ndash; the core of the gnuplot</h1>
+</code></pre></div><h1 id="步入正题--plot----the-core-of-the-gnuplot">步入正题  Plot &ndash; the core of the gnuplot</h1>
 <h2 id="plot-what">plot what?</h2>
 <p>function.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-gnuplot" data-lang="gnuplot"><span style="color:#66d9ef">f</span>(x) <span style="color:#f92672">=</span> x<span style="color:#f92672">*</span><span style="color:#f92672">*</span><span style="color:#ae81ff">2</span>
@@ -660,7 +658,7 @@ set ytics nomirror
 <h2 id="call-it-what">call it what?</h2>
 <p>###你也可以给一张图加上title标题</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-gnuplot" data-lang="gnuplot"><span style="color:#66d9ef">plot</span> data u <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span> w lines lw <span style="color:#ae81ff">2</span> title <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Data Set 1</span><span style="color:#e6db74">&#39;</span>
-</code></pre></div><h3 id="plotkeynotitle">你也可以忽略一个plot的key，使用notitle</h3>
+</code></pre></div><h3 id="你也可以忽略一个plot的key使用notitle">你也可以忽略一个plot的key，使用notitle</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-gnuplot" data-lang="gnuplot"><span style="color:#66d9ef">plot</span> data u <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span> w lines notitle<span style="color:#f92672">,</span> \
      data u <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span> w points title <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Data Set 2</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">,</span> \
      data u <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span> w lp title <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Data Set 3</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">,</span> \
@@ -677,9 +675,9 @@ set ytics nomirror
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-gnuplot" data-lang="gnuplot"><span style="color:#66d9ef">plot</span> data u <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span> w lines<span style="color:#f92672">,</span> data u <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span> w points<span style="color:#f92672">,</span> \
 data u <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span> w lp
 <span style="color:#960050;background-color:#1e0010">
-</span></code></pre></div><h1 id="heading">很多例子</h1>
+</span></code></pre></div><h1 id="很多例子">很多例子</h1>
 <p>注意这边的 #+begin_src  #+end_src 是我在gnuplot的orgmode开启bable模式时候使用，具体你可以看一下<a href="http://www.cnblogs.com/qlwy/archive/2012/06/15/2551034.html">如何在gnuplot使用org-mode</a></p>
-<h2 id="heading-1">第一个函数打印</h2>
+<h2 id="第一个函数打印">第一个函数打印</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-gnuplot" data-lang="gnuplot"><span style="color:#75715e">#</span><span style="color:#75715e">+</span><span style="color:#75715e">b</span><span style="color:#75715e">e</span><span style="color:#75715e">g</span><span style="color:#75715e">i</span><span style="color:#75715e">n</span><span style="color:#75715e">_</span><span style="color:#75715e">s</span><span style="color:#75715e">r</span><span style="color:#75715e">c</span><span style="color:#75715e"> </span><span style="color:#75715e">g</span><span style="color:#75715e">n</span><span style="color:#75715e">u</span><span style="color:#75715e">p</span><span style="color:#75715e">l</span><span style="color:#75715e">o</span><span style="color:#75715e">t</span><span style="color:#75715e"> </span><span style="color:#75715e">:</span><span style="color:#75715e">e</span><span style="color:#75715e">x</span><span style="color:#75715e">p</span><span style="color:#75715e">o</span><span style="color:#75715e">r</span><span style="color:#75715e">t</span><span style="color:#75715e">s</span><span style="color:#75715e"> </span><span style="color:#75715e">c</span><span style="color:#75715e">o</span><span style="color:#75715e">d</span><span style="color:#75715e">e</span><span style="color:#75715e"> </span><span style="color:#75715e">:</span><span style="color:#75715e">f</span><span style="color:#75715e">i</span><span style="color:#75715e">l</span><span style="color:#75715e">e</span><span style="color:#75715e"> </span><span style="color:#75715e">g</span><span style="color:#75715e">n</span><span style="color:#75715e">u</span><span style="color:#75715e">p</span><span style="color:#75715e">l</span><span style="color:#75715e">o</span><span style="color:#75715e">t</span><span style="color:#75715e">.</span><span style="color:#75715e">p</span><span style="color:#75715e">n</span><span style="color:#75715e">g</span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">reset</span>
 <span style="color:#960050;background-color:#1e0010">
@@ -703,7 +701,7 @@ data u <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><
 </span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
 </span></code></pre></div><p>#+results:
 <img src="/images/gnuplot.png" alt="gnuplot"></p>
-<h2 id="basic-plot">basic-plot的数据表</h2>
+<h2 id="basic-plot的数据表">basic-plot的数据表</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e">#+tblname:basic-plot</span>
 |   x |         y1 |         y2 |
 |-----+------------+------------|
@@ -718,7 +716,7 @@ data u <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><
 | 0.9 | 0.23333323 |  0.2333332 |
 |   <span style="color:#ae81ff">1</span> |     0.2225 |       0.22 |
 
-</code></pre></div><h2 id="gnuplotbasic-plot">gnuplot中的打印basic-plot</h2>
+</code></pre></div><h2 id="gnuplot中的打印basic-plot">gnuplot中的打印basic-plot</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-gnuplot" data-lang="gnuplot"><span style="color:#75715e">#</span><span style="color:#75715e">+</span><span style="color:#75715e">b</span><span style="color:#75715e">e</span><span style="color:#75715e">g</span><span style="color:#75715e">i</span><span style="color:#75715e">n</span><span style="color:#75715e">_</span><span style="color:#75715e">s</span><span style="color:#75715e">r</span><span style="color:#75715e">c</span><span style="color:#75715e"> </span><span style="color:#75715e">g</span><span style="color:#75715e">n</span><span style="color:#75715e">u</span><span style="color:#75715e">p</span><span style="color:#75715e">l</span><span style="color:#75715e">o</span><span style="color:#75715e">t</span><span style="color:#75715e"> </span><span style="color:#75715e">:</span><span style="color:#75715e">v</span><span style="color:#75715e">a</span><span style="color:#75715e">r</span><span style="color:#75715e"> </span><span style="color:#75715e">d</span><span style="color:#75715e">a</span><span style="color:#75715e">t</span><span style="color:#75715e">a</span><span style="color:#75715e">=</span><span style="color:#75715e">b</span><span style="color:#75715e">a</span><span style="color:#75715e">s</span><span style="color:#75715e">i</span><span style="color:#75715e">c</span><span style="color:#75715e">-</span><span style="color:#75715e">p</span><span style="color:#75715e">l</span><span style="color:#75715e">o</span><span style="color:#75715e">t</span><span style="color:#75715e"> </span><span style="color:#75715e">:</span><span style="color:#75715e">e</span><span style="color:#75715e">x</span><span style="color:#75715e">p</span><span style="color:#75715e">o</span><span style="color:#75715e">r</span><span style="color:#75715e">t</span><span style="color:#75715e">s</span><span style="color:#75715e"> </span><span style="color:#75715e">c</span><span style="color:#75715e">o</span><span style="color:#75715e">d</span><span style="color:#75715e">e</span><span style="color:#75715e"> </span><span style="color:#75715e">:</span><span style="color:#75715e">f</span><span style="color:#75715e">i</span><span style="color:#75715e">l</span><span style="color:#75715e">e</span><span style="color:#75715e"> </span><span style="color:#75715e">t</span><span style="color:#75715e">a</span><span style="color:#75715e">b</span><span style="color:#75715e">l</span><span style="color:#75715e">e</span><span style="color:#75715e">.</span><span style="color:#75715e">p</span><span style="color:#75715e">n</span><span style="color:#75715e">g</span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">set</span> title <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Putting it All Together</span><span style="color:#e6db74">&#34;</span>
 <span style="color:#960050;background-color:#1e0010">
@@ -743,7 +741,7 @@ data u <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><
 | 9/5/2010  |      2.3 |
 | 9//2010   |      2.0 |
 
-</code></pre></div><h2 id="gnuplotgnuplot">gnuplot的gnuplot打印</h2>
+</code></pre></div><h2 id="gnuplot的gnuplot打印">gnuplot的gnuplot打印</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-gnuplot" data-lang="gnuplot"><span style="color:#75715e">#</span><span style="color:#75715e">+</span><span style="color:#75715e">b</span><span style="color:#75715e">e</span><span style="color:#75715e">g</span><span style="color:#75715e">i</span><span style="color:#75715e">n</span><span style="color:#75715e">_</span><span style="color:#75715e">s</span><span style="color:#75715e">r</span><span style="color:#75715e">c</span><span style="color:#75715e"> </span><span style="color:#75715e">g</span><span style="color:#75715e">n</span><span style="color:#75715e">u</span><span style="color:#75715e">p</span><span style="color:#75715e">l</span><span style="color:#75715e">o</span><span style="color:#75715e">t</span><span style="color:#75715e"> </span><span style="color:#75715e">:</span><span style="color:#75715e">v</span><span style="color:#75715e">a</span><span style="color:#75715e">r</span><span style="color:#75715e"> </span><span style="color:#75715e">d</span><span style="color:#75715e">a</span><span style="color:#75715e">t</span><span style="color:#75715e">a</span><span style="color:#75715e">=</span><span style="color:#75715e">x</span><span style="color:#75715e">t</span><span style="color:#75715e">i</span><span style="color:#75715e">c</span><span style="color:#75715e">s</span><span style="color:#75715e"> </span><span style="color:#75715e">:</span><span style="color:#75715e">e</span><span style="color:#75715e">x</span><span style="color:#75715e">p</span><span style="color:#75715e">o</span><span style="color:#75715e">r</span><span style="color:#75715e">t</span><span style="color:#75715e">s</span><span style="color:#75715e"> </span><span style="color:#75715e">c</span><span style="color:#75715e">o</span><span style="color:#75715e">d</span><span style="color:#75715e">e</span><span style="color:#75715e"> </span><span style="color:#75715e">:</span><span style="color:#75715e">f</span><span style="color:#75715e">i</span><span style="color:#75715e">l</span><span style="color:#75715e">e</span><span style="color:#75715e"> </span><span style="color:#75715e">t</span><span style="color:#75715e">i</span><span style="color:#75715e">m</span><span style="color:#75715e">e</span><span style="color:#75715e">.</span><span style="color:#75715e">p</span><span style="color:#75715e">n</span><span style="color:#75715e">g</span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">reset</span>
 <span style="color:#960050;background-color:#1e0010">
@@ -757,7 +755,7 @@ data u <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><
 </span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
 </span></code></pre></div><p>#+results:
 <img src="/images/time.png" alt="time"></p>
-<h2 id="heading-2">表格加上标题</h2>
+<h2 id="表格加上标题">表格加上标题</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e">#+CAPTION: 表格的标题</span>
 | <span style="color:#ae81ff">1</span> | one                          |
 | <span style="color:#ae81ff">2</span> | two                          |
@@ -769,7 +767,7 @@ data u <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><
 | <span style="color:#ae81ff">2</span> | two    |
 | <span style="color:#ae81ff">3</span> | This<span style="color:#f92672">=</span>&gt; |
 | <span style="color:#ae81ff">4</span> | four   |
-</code></pre></div><h2 id="--">表格的特殊使用  用于统计</h2>
+</code></pre></div><h2 id="表格的特殊使用--用于统计">表格的特殊使用  用于统计</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">| 数量 | 单价 |  总额 |
 |------+------+-------|
 |    <span style="color:#ae81ff">2</span> | 3.55 |   6.9 |
@@ -778,7 +776,7 @@ data u <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><
 |    <span style="color:#ae81ff">5</span> |  5.6 |   28. |
 <span style="color:#75715e">#+TBLFM: $3=$1*$2</span>
 
-</code></pre></div><h2 id="named-xtics-">named-xtics 数据表</h2>
+</code></pre></div><h2 id="named-xtics-数据表">named-xtics 数据表</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e">#+caption: time-history</span>
 <span style="color:#75715e">#+tblname: named-xtics</span>
 | tic name | x-value | Dead <span style="color:#f92672">(</span>y<span style="color:#f92672">)</span> | Live<span style="color:#f92672">(</span>l<span style="color:#f92672">)</span> |
@@ -805,7 +803,7 @@ data u <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><
 <span style="color:#75715e">#</span><span style="color:#75715e">+</span><span style="color:#75715e">e</span><span style="color:#75715e">n</span><span style="color:#75715e">d</span><span style="color:#75715e">_</span><span style="color:#75715e">s</span><span style="color:#75715e">r</span><span style="color:#75715e">c</span><span style="color:#960050;background-color:#1e0010">
 </span></code></pre></div><p>#+results:
 <img src="/images/named.png" alt="named-xtics"></p>
-<h2 id="multi-axes">multi-axes数据表</h2>
+<h2 id="multi-axes数据表">multi-axes数据表</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e">#+tblname:multi-axes</span>
 | Date      |  Time | Distance |
 |-----------+-------+----------|
@@ -840,7 +838,7 @@ data u <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><
 <span style="color:#75715e">#</span><span style="color:#75715e">+</span><span style="color:#75715e">e</span><span style="color:#75715e">n</span><span style="color:#75715e">d</span><span style="color:#75715e">_</span><span style="color:#75715e">s</span><span style="color:#75715e">r</span><span style="color:#75715e">c</span><span style="color:#960050;background-color:#1e0010">
 </span></code></pre></div><p>#+results:
 <img src="/images/multi.png" alt="multi-axes"></p>
-<h2 id="diff-scales">diff-scales数据表</h2>
+<h2 id="diff-scales数据表">diff-scales数据表</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e">#+tblname:diff-scales</span>
 | tic name |    x-loc |  Pop |
 |   10k BC | -10000 <span style="color:#ae81ff">1</span> |      |
@@ -913,7 +911,7 @@ data u <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><
 <span style="color:#75715e">#</span><span style="color:#75715e">+</span><span style="color:#75715e">e</span><span style="color:#75715e">n</span><span style="color:#75715e">d</span><span style="color:#75715e">_</span><span style="color:#75715e">s</span><span style="color:#75715e">r</span><span style="color:#75715e">c</span><span style="color:#960050;background-color:#1e0010">
 </span></code></pre></div><p>#+results:
 <img src="/images/scales.png" alt="scales"></p>
-<h2 id="broken-axis-">broken-axis 数据表</h2>
+<h2 id="broken-axis-数据表">broken-axis 数据表</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e">#+tblname: broken-axis</span>
 |  tic name | x-loc | Pre | Post |
 | 10,000 BC |  <span style="color:#ae81ff">1600</span> |   <span style="color:#ae81ff">1</span> |      |

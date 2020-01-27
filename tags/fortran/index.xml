@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>fortran | Macro Life</title>
+    <title>fortran | 简约派</title>
     <link>https://jueqingsizhe66.github.io/tags/fortran/</link>
       <atom:link href="https://jueqingsizhe66.github.io/tags/fortran/index.xml" rel="self" type="application/rss+xml" />
     <description>fortran</description>
@@ -265,7 +265,7 @@
 诞生于1951年左右的第一个面向对象的高级语言Fortran 语言，也已经65岁左右了，它以其
 快速有效的科学数值计算，一直运用于科学研究领域中。
 浅显针对fortran的理解&amp;mdash;-宫殿式的介绍.&lt;/p&gt;
-&lt;h2 id=&#34;heading&#34;&gt;宫殿&lt;/h2&gt;
+&lt;h2 id=&#34;宫殿&#34;&gt;宫殿&lt;/h2&gt;
 &lt;p&gt;宫殿蕴含着纵横交错，阡陌交通，但是确实零落有序，复合规律。通过宫殿群来认识这门科学语言。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/fortran/palace.jpg&#34; alt=&#34;宫殿&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;fortran&#34;&gt;fortran&lt;/h2&gt;
@@ -299,7 +299,7 @@ subroutine或者function当中。&lt;/p&gt;
 &lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;有时候我们进一步组装多个输入文件，而为了方便，我们把他们组装成一个更大的进口装置，放置在最前面。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/fortran/square.jpg&#34; alt=&#34;square&#34;&gt;&lt;/p&gt;
-&lt;h2 id=&#34;heading-1&#34;&gt;后续&lt;/h2&gt;
+&lt;h2 id=&#34;后续&#34;&gt;后续&lt;/h2&gt;
 &lt;p&gt;无论模块化，还是函数化，亦或者模式化，都是基于原先大的过程式变成的改成，
 只不过是为了减少冗余、重复，同时简化和方便阅读，另外还有就是方便拓展。
 &lt;em&gt;从现在开始可以建立你自己的fortranlibrary modal&lt;/em&gt; (&lt;!-- raw HTML omitted --&gt;一个不错的建议&lt;!-- raw HTML omitted --&gt;)&lt;/p&gt;
@@ -624,8 +624,8 @@ ENDDO
       <description>&lt;p&gt;Fortran：一门古老的&lt;a href=&#34;http://micro.ustc.edu.cn/Fortran/ZJDing/&#34;&gt;计算机数值科学计算语言&lt;/a&gt;,1950.&lt;/p&gt;
 &lt;p&gt;Fortran的强项就是数值计算，图形编程是一个鸡肋所在，但是有时候又需要做一些图形的展示，借助于&lt;a href=&#34;http://www.gtk.org/&#34;&gt;GTK+ project&lt;/a&gt;可以方便我们达到目的.&lt;/p&gt;
 &lt;p&gt;GTK是c语言编写的源程序，运用到fortran需要相应的库转换,在github上找到一个&lt;a href=&#34;https://github.com/jueqingsizhe66/gtk-fortran&#34;&gt;gtk-fortran库&lt;/a&gt;.下面是ubuntu上面的搭建过程(windows 未实现,可以参考 gtk+makefile)&lt;/p&gt;
-&lt;h2 id=&#34;ubuntu-&#34;&gt;Ubuntu 搭建&lt;/h2&gt;
-&lt;h3 id=&#34;heading&#34;&gt;环境搭建&lt;/h3&gt;
+&lt;h2 id=&#34;ubuntu-搭建&#34;&gt;Ubuntu 搭建&lt;/h2&gt;
+&lt;h3 id=&#34;环境搭建&#34;&gt;环境搭建&lt;/h3&gt;
 &lt;p&gt;GTK3+是跨平台的，既可以在windows上使用，也可以在linux上使用
 下面的代码可以直接打包进一个gtk.sh文件，直接运行sh gtk.sh进行安装&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#1 刚装好的Ubuntu系统中已经有GCC了，但是这个GCC几乎什么文件都不能编译，因为缺少一些必须的头文件，所以要安装build-essential这个软件包&lt;/span&gt;
@@ -652,7 +652,7 @@ sudo apt-get install libgtk3*
 &lt;span style=&#34;color:#75715e&#34;&gt;#查看是否安装了gtk&lt;/span&gt; 
 &lt;span style=&#34;color:#75715e&#34;&gt;#pkg-config --list-all | grep gtk&lt;/span&gt; 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这个流程做完了，就可以进行gtk测试,当然仅仅是c语言的测试&lt;/p&gt;
-&lt;h3 id=&#34;heading-1&#34;&gt;测试文件&lt;/h3&gt;
+&lt;h3 id=&#34;测试文件&#34;&gt;测试文件&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;//Helloworld.c
 &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;gtk/gtk.h&amp;gt;  &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
@@ -691,9 +691,9 @@ sudo apt-get install libgtk3*
     &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;;  
 }
 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;heading-2&#34;&gt;编译&lt;/h3&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;编译&#34;&gt;编译&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;gcc -o Helloworld Helloworld.c &lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;pkg-config --cflags --libs gtk+-3.0&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;heading-3&#34;&gt;运行&lt;/h3&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;运行&#34;&gt;运行&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;./Helloworld
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果你得到一个小窗口&amp;quot;GTK可以运行了&amp;rdquo; 证明你的gtk环境是正确的。&lt;/p&gt;

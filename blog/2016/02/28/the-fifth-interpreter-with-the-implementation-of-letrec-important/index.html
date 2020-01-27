@@ -114,16 +114,16 @@
   <meta property="twitter:site" content="@jueqingsizhe66">
   <meta property="twitter:creator" content="@jueqingsizhe66">
   
-  <meta property="og:site_name" content="Macro Life">
+  <meta property="og:site_name" content="简约派">
   <meta property="og:url" content="https://jueqingsizhe66.github.io/blog/2016/02/28/the-fifth-interpreter-with-the-implementation-of-letrec-important/">
-  <meta property="og:title" content="The Fifth interpreter with the implementation of letrec(Important) | Macro Life">
+  <meta property="og:title" content="The Fifth interpreter with the implementation of letrec(Important) | 简约派">
   <meta property="og:description" content="letrec的作用是可以定义内部函数。它的实现类似于let，只不过let实现的主要是局部变量，而他是局部的过程（持保留意见)"><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
   <meta property="twitter:image" content="https://jueqingsizhe66.github.io/img/icon-192.png"><meta property="og:locale" content="en-us">
   
     
       <meta property="article:published_time" content="2016-02-28T06:02:57&#43;08:00">
     
-    <meta property="article:modified_time" content="2019-10-27T20:50:56&#43;08:00">
+    <meta property="article:modified_time" content="2016-02-28T06:02:57&#43;08:00">
   
 
   
@@ -142,7 +142,7 @@
 
 
 
-  <title>The Fifth interpreter with the implementation of letrec(Important) | Macro Life</title>
+  <title>The Fifth interpreter with the implementation of letrec(Important) | 简约派</title>
 
 </head>
 
@@ -185,7 +185,7 @@
   <div class="container">
 
     
-      <a class="navbar-brand" href="/">Macro Life</a>
+      <a class="navbar-brand" href="/">简约派</a>
       
       <button type="button" class="navbar-toggler" data-toggle="collapse"
               data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -516,10 +516,8 @@
     
     
       
-          Last updated on
-      
     
-    Oct 27, 2019
+    Feb 28, 2016
   </span>
 
   
@@ -567,11 +565,11 @@
     <aside>
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#1">错误1.</a></li>
-    <li><a href="#2">错误2.</a></li>
-    <li><a href="#heading">额外错误</a>
+    <li><a href="#错误1">错误1.</a></li>
+    <li><a href="#错误2">错误2.</a></li>
+    <li><a href="#额外错误">额外错误</a>
       <ul>
-        <li><a href="#heading-1">为什么还是会出现如下的错误</a></li>
+        <li><a href="#为什么还是会出现如下的错误">为什么还是会出现如下的错误</a></li>
       </ul>
     </li>
   </ul>
@@ -582,7 +580,7 @@
 
     <div class="article-style">
       <p>letrec的作用是可以定义内部函数。它的实现类似于let，只不过let实现的主要是局部变量，而他是局部的过程（持保留意见)</p>
-<h2 id="1">错误1.</h2>
+<h2 id="错误1">错误1.</h2>
 <pre><code>  (define-datatype environment environment?
     (empty-env)
     (extend-env
@@ -620,7 +618,7 @@
      (body expression?)
      (env environment?)
      (trace boolean?))) ;;;需要考虑#t #f
-</code></pre><h2 id="2">错误2.</h2>
+</code></pre><h2 id="错误2">错误2.</h2>
 <pre><code>&gt; (run &quot;letrec double(x)=+(x,6) in (double 10)&quot;)
 enter: (x) = #(struct:num-val 10)
 . . cdr: contract violation
@@ -636,10 +634,10 @@ enter: (x) = #(struct:num-val 10)
                  (let ((proc (expval-&gt;proc (value-of rator env)))
                        (args (map (lambda (x) (value-of x env)) rands)))
                    (apply-procedure proc args)))
-</code></pre><h2 id="heading">额外错误</h2>
+</code></pre><h2 id="额外错误">额外错误</h2>
 <pre><code> data-structures.scm:7:11: all-defined: not a provide sub-form in: (all-defined)
 </code></pre><p>这个错误是因为现在都是在使用<code>(all-defined-out)</code></p>
-<h3 id="heading-1">为什么还是会出现如下的错误</h3>
+<h3 id="为什么还是会出现如下的错误">为什么还是会出现如下的错误</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">&gt; (<span style="color:#a6e22e">run</span> <span style="color:#e6db74">&#34;letrec double(x)
 </span><span style="color:#e6db74">            = if zero?(x) then 0 else -((double -(x,1)), 2)
 </span><span style="color:#e6db74">       in (double 6)&#34;</span>)

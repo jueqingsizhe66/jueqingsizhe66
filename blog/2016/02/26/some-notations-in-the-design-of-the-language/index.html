@@ -116,9 +116,9 @@ of the language.目的就是如何更简洁地定义语法。">
   <meta property="twitter:site" content="@jueqingsizhe66">
   <meta property="twitter:creator" content="@jueqingsizhe66">
   
-  <meta property="og:site_name" content="Macro Life">
+  <meta property="og:site_name" content="简约派">
   <meta property="og:url" content="https://jueqingsizhe66.github.io/blog/2016/02/26/some-notations-in-the-design-of-the-language/">
-  <meta property="og:title" content="Some notations in the design of the language | Macro Life">
+  <meta property="og:title" content="Some notations in the design of the language | 简约派">
   <meta property="og:description" content="What does it mean by Kleene star? What can it be used for?
 It is not so important,but a good tools to record the grammer
 of the language.目的就是如何更简洁地定义语法。"><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
@@ -127,7 +127,7 @@ of the language.目的就是如何更简洁地定义语法。"><meta property="o
     
       <meta property="article:published_time" content="2016-02-26T15:35:17&#43;08:00">
     
-    <meta property="article:modified_time" content="2019-10-27T20:50:56&#43;08:00">
+    <meta property="article:modified_time" content="2016-02-26T15:35:17&#43;08:00">
   
 
   
@@ -146,7 +146,7 @@ of the language.目的就是如何更简洁地定义语法。"><meta property="o
 
 
 
-  <title>Some notations in the design of the language | Macro Life</title>
+  <title>Some notations in the design of the language | 简约派</title>
 
 </head>
 
@@ -189,7 +189,7 @@ of the language.目的就是如何更简洁地定义语法。"><meta property="o
   <div class="container">
 
     
-      <a class="navbar-brand" href="/">Macro Life</a>
+      <a class="navbar-brand" href="/">简约派</a>
       
       <button type="button" class="navbar-toggler" data-toggle="collapse"
               data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -520,10 +520,8 @@ of the language.目的就是如何更简洁地定义语法。"><meta property="o
     
     
       
-          Last updated on
-      
     
-    Oct 27, 2019
+    Feb 26, 2016
   </span>
 
   
@@ -571,20 +569,20 @@ of the language.目的就是如何更简洁地定义语法。"><meta property="o
     <aside>
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#heading">几个基本字符</a>
+    <li><a href="#几个基本字符">几个基本字符</a>
       <ul>
         <li><a href="#nonterminal-symbols">Nonterminal Symbols</a></li>
         <li><a href="#terminal-symbols">Terminal Symbols:</a></li>
         <li><a href="#productionthe-rules">Production(The rules)</a></li>
       </ul>
     </li>
-    <li><a href="#syntactic-derivation">语义推导(Syntactic derivation)练习</a></li>
-    <li><a href="#heading-1">结论</a></li>
-    <li><a href="#substkleene-star">subst采用kleene star进行书写</a></li>
-    <li><a href="#define-datatype">define-datatype的运用</a>
+    <li><a href="#语义推导syntactic-derivation练习">语义推导(Syntactic derivation)练习</a></li>
+    <li><a href="#结论">结论</a></li>
+    <li><a href="#subst采用kleene-star进行书写">subst采用kleene star进行书写</a></li>
+    <li><a href="#define-datatype的运用">define-datatype的运用</a>
       <ul>
-        <li><a href="#lc-exp-s-list">Lc-Exp 和S-list的具体实现</a></li>
-        <li><a href="#expression--expval">expression 和 expval的具体定义和实现</a></li>
+        <li><a href="#lc-exp-和s-list的具体实现">Lc-Exp 和S-list的具体实现</a></li>
+        <li><a href="#expression-和-expval的具体定义和实现">expression 和 expval的具体定义和实现</a></li>
       </ul>
     </li>
   </ul>
@@ -597,7 +595,7 @@ of the language.目的就是如何更简洁地定义语法。"><meta property="o
       <p>What does it mean by Kleene star? What can it be used for?
 It is not so important,but a good tools to record the grammer
 of the language.目的就是如何更简洁地定义语法。</p>
-<h2 id="heading">几个基本字符</h2>
+<h2 id="几个基本字符">几个基本字符</h2>
 <h3 id="nonterminal-symbols">Nonterminal Symbols</h3>
 <p>指代被定义的集合名字(These are the names of the sets being defined)，比如List-of-Int,List-of-Char&hellip;,
 这些集合有时候也被叫做语义分类(syntactic categories)</p>
@@ -675,7 +673,7 @@ lhs和rhs，<code>::=</code>也被读作<em>is or can be</em></p>
 1;2
 3;4;6
 </code></pre><hr>
-<h2 id="syntactic-derivation">语义推导(Syntactic derivation)练习</h2>
+<h2 id="语义推导syntactic-derivation练习">语义推导(Syntactic derivation)练习</h2>
 <ul>
 <li>(14 . ()) is a List-of-Int?</li>
 </ul>
@@ -757,7 +755,7 @@ So,it is true
 So, it is true.
 
 
-</code></pre><h2 id="heading-1">结论</h2>
+</code></pre><h2 id="结论">结论</h2>
 <p>上米那说的List-of-Int,Bintree，Lambda calculus等都可以叫做一种语义类，是一门语言
 包含的原始类型。上面的syntatic derivation也可以被用来当作理论证明的一种入门，本质是递归理论。</p>
 <p>而其实他们都可以当作最为基本的解释器，因为他们在不断的解析他们所识别的expressions，上面的LcExp,
@@ -765,7 +763,7 @@ List-exp等都叫做expressions，也是解释器的元素。</p>
 <p>而假如我们有一个函数</p>
 <pre><code>nth-element : List * Int -&gt; SchemeVal
 </code></pre><p>他说明的是nth-element是一个接受List和Int作为形参并返回SchemeVal的过程，也就是它属于LcExp范畴。</p>
-<h2 id="substkleene-star">subst采用kleene star进行书写</h2>
+<h2 id="subst采用kleene-star进行书写">subst采用kleene star进行书写</h2>
 <p>subst的定义是</p>
 <pre><code>subst : Sym * Sym * S-list -&gt; S-list
 </code></pre><p>下面的实现过程从最为原始的只能处理lat的形式变为能够处理任意嵌套的expressions形式。</p>
@@ -825,9 +823,9 @@ List-exp等都叫做expressions，也是解释器的元素。</p>
 <li>递归出口(null? slt)  (zero? (car lst)) &hellip;</li>
 <li>逐渐朝向递归出口的算子 (cdr lst) (- n 1) &hellip;</li>
 </ol>
-<h2 id="define-datatype">define-datatype的运用</h2>
+<h2 id="define-datatype的运用">define-datatype的运用</h2>
 <p>具体实现可以查看<a href="http://jueqingsizhe66.github.io/blog/2016/02/19/the-implementation-of-define-datetype/">The Implementation of Define-datatype</a>.</p>
-<h3 id="lc-exp-s-list">Lc-Exp 和S-list的具体实现</h3>
+<h3 id="lc-exp-和s-list的具体实现">Lc-Exp 和S-list的具体实现</h3>
 <p>上文所提记得Lc-Exp的定义为：</p>
 <pre><code>    lc-exp  ::=identifier
             ::=(lambda (identifier) Lc-exp
@@ -857,7 +855,7 @@ List-exp等都叫做expressions，也是解释器的元素。</p>
     (s-list-s-exp (slst s-list?))
 )
 
-</code></pre><h3 id="expression--expval">expression 和 expval的具体定义和实现</h3>
+</code></pre><h3 id="expression-和-expval的具体定义和实现">expression 和 expval的具体定义和实现</h3>
 <p>在Interpreter的过程中肯定涉及到expression的设计和value值的表现（<strong>把exp和val的键值对叫做解释器的字典</strong>）
 expression的具体定义是</p>
 <pre><code>expression ::= (var-exp ())

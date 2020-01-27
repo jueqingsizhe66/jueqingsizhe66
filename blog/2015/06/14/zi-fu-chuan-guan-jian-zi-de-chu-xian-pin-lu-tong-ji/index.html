@@ -116,9 +116,9 @@
   <meta property="twitter:site" content="@jueqingsizhe66">
   <meta property="twitter:creator" content="@jueqingsizhe66">
   
-  <meta property="og:site_name" content="Macro Life">
+  <meta property="og:site_name" content="简约派">
   <meta property="og:url" content="https://jueqingsizhe66.github.io/blog/2015/06/14/zi-fu-chuan-guan-jian-zi-de-chu-xian-pin-lu-tong-ji/">
-  <meta property="og:title" content="字符串关键字的出现频率统计 | Macro Life">
+  <meta property="og:title" content="字符串关键字的出现频率统计 | 简约派">
   <meta property="og:description" content="有时候我们需要统计一篇论文当中某个字符串的出现频率。
 试验了，grep，awk，sed，wc -l等，最终发现awk的RS
 完美的解决了问题。"><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
@@ -127,7 +127,7 @@
     
       <meta property="article:published_time" content="2015-06-14T01:50:24&#43;08:00">
     
-    <meta property="article:modified_time" content="2019-10-27T20:50:56&#43;08:00">
+    <meta property="article:modified_time" content="2015-06-14T01:50:24&#43;08:00">
   
 
   
@@ -146,7 +146,7 @@
 
 
 
-  <title>字符串关键字的出现频率统计 | Macro Life</title>
+  <title>字符串关键字的出现频率统计 | 简约派</title>
 
 </head>
 
@@ -189,7 +189,7 @@
   <div class="container">
 
     
-      <a class="navbar-brand" href="/">Macro Life</a>
+      <a class="navbar-brand" href="/">简约派</a>
       
       <button type="button" class="navbar-toggler" data-toggle="collapse"
               data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -520,10 +520,8 @@
     
     
       
-          Last updated on
-      
     
-    Oct 27, 2019
+    Jun 14, 2015
   </span>
 
   
@@ -571,8 +569,8 @@
     <aside>
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#heading">搜索内容</a></li>
-    <li><a href="#heading-1">结果</a></li>
+    <li><a href="#搜索内容">搜索内容</a></li>
+    <li><a href="#结果">结果</a></li>
   </ul>
 </nav>
     </aside>
@@ -628,14 +626,14 @@ shell文件：</p>
     awk -v RS<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$lines<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#39;END{print RS,--NR}&#39;</span> qiu.org <span style="color:#75715e">#减减表示减1</span>
 <span style="color:#66d9ef">done</span> &lt; <span style="color:#e6db74">&#34;analysis.data&#34;</span>
 
-</code></pre></div><h2 id="heading">搜索内容</h2>
+</code></pre></div><h2 id="搜索内容">搜索内容</h2>
 <ol>
 <li>grep -n &ldquo;内容关键字&rdquo; 文件名路径</li>
 <li>awk &lsquo;{if($0~关键字){}}&rsquo;</li>
 </ol>
 <p>等。
 3. sed &lsquo;/关键字/p&rsquo;</p>
-<h2 id="heading-1">结果</h2>
+<h2 id="结果">结果</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">┌─<span style="color:#f92672">[</span>root<span style="color:#f92672">]</span><span style="color:#f92672">[</span>javazhao-N53SM<span style="color:#f92672">]</span><span style="color:#f92672">[</span>/paper<span style="color:#f92672">]</span>
 └─➞ sh analysis.sh 
 风力机 <span style="color:#ae81ff">379</span>

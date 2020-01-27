@@ -118,9 +118,9 @@
   <meta property="twitter:site" content="@jueqingsizhe66">
   <meta property="twitter:creator" content="@jueqingsizhe66">
   
-  <meta property="og:site_name" content="Macro Life">
+  <meta property="og:site_name" content="简约派">
   <meta property="og:url" content="https://jueqingsizhe66.github.io/blog/2016/02/27/the-fourth-interpreter-about-the-traceproc/">
-  <meta property="og:title" content="The Fourth Interpreter about the traceproc | Macro Life">
+  <meta property="og:title" content="The Fourth Interpreter about the traceproc | 简约派">
   <meta property="og:description" content="程序的过程追踪能力体现着一个独特的优势，本文在First Interpreter,Second Interpreter,Third Interpreter基础上实现新的解释器功能。
 实现效果:
     enter: x = #(struct:num-val 30)
@@ -131,7 +131,7 @@
     
       <meta property="article:published_time" content="2016-02-27T21:49:18&#43;08:00">
     
-    <meta property="article:modified_time" content="2019-10-27T20:50:56&#43;08:00">
+    <meta property="article:modified_time" content="2016-02-27T21:49:18&#43;08:00">
   
 
   
@@ -150,7 +150,7 @@
 
 
 
-  <title>The Fourth Interpreter about the traceproc | Macro Life</title>
+  <title>The Fourth Interpreter about the traceproc | 简约派</title>
 
 </head>
 
@@ -193,7 +193,7 @@
   <div class="container">
 
     
-      <a class="navbar-brand" href="/">Macro Life</a>
+      <a class="navbar-brand" href="/">简约派</a>
       
       <button type="button" class="navbar-toggler" data-toggle="collapse"
               data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -524,10 +524,8 @@
     
     
       
-          Last updated on
-      
     
-    Oct 27, 2019
+    Feb 27, 2016
   </span>
 
   
@@ -575,15 +573,15 @@
     <aside>
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#langscm">lang.scm修改程序追踪部分</a></li>
-    <li><a href="#data-structuresscm-">data-structures.scm 进行部分修改</a></li>
-    <li><a href="#interpscm-">interp.scm 修改程序追踪部分</a>
+    <li><a href="#langscm修改程序追踪部分">lang.scm修改程序追踪部分</a></li>
+    <li><a href="#data-structuresscm-进行部分修改">data-structures.scm 进行部分修改</a></li>
+    <li><a href="#interpscm-修改程序追踪部分">interp.scm 修改程序追踪部分</a>
       <ul>
-        <li><a href="#apply-procedure">apply-procedure的修改</a></li>
-        <li><a href="#value-of-">value-of 的修改</a></li>
+        <li><a href="#apply-procedure的修改">apply-procedure的修改</a></li>
+        <li><a href="#value-of-的修改">value-of 的修改</a></li>
       </ul>
     </li>
-    <li><a href="#heading">测试追踪修改的结果</a></li>
+    <li><a href="#测试追踪修改的结果">测试追踪修改的结果</a></li>
   </ul>
 </nav>
     </aside>
@@ -596,11 +594,11 @@
 <pre><code>    enter: x = #(struct:num-val 30)
     exting: result = #(struct:num-val 29)
 </code></pre><p><!-- raw HTML omitted -->老阮不狂谁会得？出门一笑大江横！<!-- raw HTML omitted --></p>
-<h2 id="langscm">lang.scm修改程序追踪部分</h2>
+<h2 id="langscm修改程序追踪部分">lang.scm修改程序追踪部分</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">      <span style="color:#75715e">;;增加了trace-proc</span>
           (<span style="color:#a6e22e">expression</span> (<span style="color:#e6db74">&#34;traceproc&#34;</span> <span style="color:#e6db74">&#34;(&#34;</span> identifier <span style="color:#e6db74">&#34;)&#34;</span> expression) traceproc-exp)
 </code></pre></div><p>至于proc的语法并不需要做任何的修改。</p>
-<h2 id="data-structuresscm-">data-structures.scm 进行部分修改</h2>
+<h2 id="data-structuresscm-进行部分修改">data-structures.scm 进行部分修改</h2>
 <ol>
 <li>在修改trace-proc实现的情况下还得修改proc?</li>
 </ol>
@@ -621,9 +619,9 @@
      (<span style="color:#a6e22e">body</span> expression?)
      (<span style="color:#a6e22e">env</span> environment?)
      (<span style="color:#a6e22e">trace</span> boolean?)))
-</code></pre></div><h2 id="interpscm-">interp.scm 修改程序追踪部分</h2>
+</code></pre></div><h2 id="interpscm-修改程序追踪部分">interp.scm 修改程序追踪部分</h2>
 <p>由于proc?的类型实现发生了变化，所以需要进行对应的修改apply-procedure和value-of。</p>
-<h3 id="apply-procedure">apply-procedure的修改</h3>
+<h3 id="apply-procedure的修改">apply-procedure的修改</h3>
 <p>原先的apply-procedure实现：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">
 (<span style="color:#66d9ef">define </span>apply-procedure
@@ -642,7 +640,7 @@
                   (<span style="color:#66d9ef">let </span>((<span style="color:#a6e22e">value</span> (<span style="color:#a6e22e">value-of</span> body (<span style="color:#a6e22e">extend-env</span> var val saved-env))))
                     (<span style="color:#66d9ef">if </span>trace? (<span style="color:#a6e22e">printf</span> <span style="color:#e6db74">&#34;exting: result = ~a\n&#34;</span> value) <span style="color:#e6db74">&#39;**proc**</span>)
                     value)))))
-</code></pre></div><h3 id="value-of-">value-of 的修改</h3>
+</code></pre></div><h3 id="value-of-的修改">value-of 的修改</h3>
 <p>原先的value-of实现：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">  (<span style="color:#a6e22e">proc-exp</span> (<span style="color:#a6e22e">var</span> body)
                  (<span style="color:#a6e22e">proc-val</span> (<span style="color:#a6e22e">procedure</span> var body env)))
@@ -651,7 +649,7 @@
                  (<span style="color:#a6e22e">proc-val</span> (<span style="color:#a6e22e">procedure</span> var body env <span style="color:#66d9ef">#f</span>)))
     (<span style="color:#a6e22e">traceproc-exp</span> (<span style="color:#a6e22e">var</span> body)
                   (<span style="color:#a6e22e">proc-val</span> (<span style="color:#a6e22e">procedure</span> var body env <span style="color:#66d9ef">#t</span>)))
-</code></pre></div><h2 id="heading">测试追踪修改的结果</h2>
+</code></pre></div><h2 id="测试追踪修改的结果">测试追踪修改的结果</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#a6e22e">run</span> <span style="color:#e6db74">&#34;proc(x) -(x, 1)&#34;</span>)
 (<span style="color:#a6e22e">run</span> <span style="color:#e6db74">&#34;(proc(x) -(x,1)  30)&#34;</span>)
 (<span style="color:#a6e22e">run</span> <span style="color:#e6db74">&#34;let f = traceproc (x) -(x,1) in (f 30)&#34;</span>)
