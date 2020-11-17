@@ -1,0 +1,1031 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>技术 | 30年磨一剑</title>
+    <link>https://jueqingsizhe66.github.io/category/%E6%8A%80%E6%9C%AF/</link>
+      <atom:link href="https://jueqingsizhe66.github.io/category/%E6%8A%80%E6%9C%AF/index.xml" rel="self" type="application/rss+xml" />
+    <description>技术</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>©2020</copyright><lastBuildDate>Thu, 31 Oct 2019 13:03:00 +0800</lastBuildDate>
+    <image>
+      <url>https://jueqingsizhe66.github.io/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_2.png</url>
+      <title>技术</title>
+      <link>https://jueqingsizhe66.github.io/category/%E6%8A%80%E6%9C%AF/</link>
+    </image>
+    
+    <item>
+      <title>python众多文件中提取轮毂高度处风速</title>
+      <link>https://jueqingsizhe66.github.io/post/python%E4%BC%97%E5%A4%9A%E6%96%87%E4%BB%B6%E4%B8%AD%E6%8F%90%E5%8F%96%E8%BD%AE%E6%AF%82%E9%AB%98%E5%BA%A6%E5%A4%84%E9%A3%8E%E9%80%9F/</link>
+      <pubDate>Thu, 31 Oct 2019 13:03:00 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/post/python%E4%BC%97%E5%A4%9A%E6%96%87%E4%BB%B6%E4%B8%AD%E6%8F%90%E5%8F%96%E8%BD%AE%E6%AF%82%E9%AB%98%E5%BA%A6%E5%A4%84%E9%A3%8E%E9%80%9F/</guid>
+      <description>&lt;h2 id=&#34;背景分析&#34;&gt;背景分析&lt;/h2&gt;
+&lt;p&gt;在前面的 &lt;a href=&#34;https://jueqingsizhe66.github.io/post/python%e6%8f%90%e5%8f%96%e5%a4%9a%e4%b8%aa%e6%96%87%e4%bb%b6%e6%b1%87%e6%80%bb%e5%88%b0%e4%b8%80%e4%b8%aaexcel%e8%a1%a8/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;python提取多个文件汇总到一个excel表&lt;/a&gt;一文中，我们使用ExcelWriter把提取的速度信息汇总在一个xls文件，各个sheet存放真实数据&lt;/p&gt;
+&lt;p&gt;而在AIWIND计算中，有可能插值错误，会出现Null值，于是a &lt;a href=&#34;https://jueqingsizhe66.github.io/post/python%e6%8f%90%e5%8f%96%e5%a4%9a%e4%b8%aa%e6%96%87%e4%bb%b6%e7%9a%84%e5%ad%98%e5%9c%a8nan%e9%80%9f%e5%ba%a6%e5%bb%93%e7%ba%bf/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;python提取多个文件的存在null速度廓线&lt;/a&gt;提出了过滤NULL值得方案&lt;/p&gt;
+&lt;p&gt;以上工作针对的是风廓线，我们现在想要从这个汇总表提取出来各个机位点在一定扇区下，比如0°得的轮毂高度处速度曲线, 也就是每计算一个扇区，我们都希望立马处理得到对应的对比结果，观察是否有所改进！于是做了下面工作&lt;/p&gt;
+&lt;p&gt;在&lt;a href=&#34;https://jueqingsizhe66.github.io/post/python%e5%af%b9%e6%af%94%e4%bd%9c%e5%9b%be%e4%b8%a4%e4%b8%aa%e9%a3%8e%e9%80%9f%e9%a3%8e%e5%90%91%e8%a1%a8/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;python对比作图&lt;/a&gt;一文中加入了数据的导出功能，可在此基础上进行改写&lt;/p&gt;
+&lt;p&gt;下图中左边为瞬态扇区的AIWIND即时结果，右边为改进前的WINDSIM和AIWIND在各个扇区的对比图,我们希望AIWIND即时结果能够较好地吻合规律，与之前的WINDSIM结果做对比，即提取即时扇区下的各个机位点的速度廓线，汇总表格，遍历所有sheetnames,提取轮毂点位的速度信息,作图，也可以导出，当前未进行。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/aiwind/hubVelocity.png&#34; alt=&#34;轮毂风速&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;技术分解&#34;&gt;技术分解&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;依然利用脚本提取风廓线文件，一个扇区生成一个汇总表&lt;/li&gt;
+&lt;li&gt;遍历汇总表的所有sheetnames, 利用Excel_File()和parse的功能&lt;/li&gt;
+&lt;li&gt;利用列表数据结构+条件提取对应高度处的风速&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;技术实现&#34;&gt;技术实现&lt;/h2&gt;
+&lt;p&gt;设计了一个plotSector，可针对对应扇区处理;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;注意观察fileReadyAnalysis的及时结果存放位置？&lt;/li&gt;
+&lt;li&gt;注意观察&lt;a href=&#34;https://jueqingsizhe66.github.io/post/python%e5%af%b9%e6%af%94%e4%bd%9c%e5%9b%be%e4%b8%a4%e4%b8%aa%e9%a3%8e%e9%80%9f%e9%a3%8e%e5%90%91%e8%a1%a8/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;对比作图&lt;/a&gt;导出的数据表格`0-Velocity.xlsx..`存放位置?&lt;/li&gt;
+&lt;/ol&gt;
+&lt;!--listend--&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; os
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; pandas &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; pd
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; numpy &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; np
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; matplotlib.pyplot &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; plt
+
+&lt;span style=&#34;color:#75715e&#34;&gt;## 注意需要有windsim各个扇区的数据 , 当前有一个问题必须配合AIIWND&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#fileReadyAnalysis=r&amp;#34;C:\Users\yezhaoliang\Desktop\NewSimulation\Results-newSimulation45.xlsx&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#fileReadyAnalysis=r&amp;#34;C:\Users\yezhaoliang\Desktop\NewSimulation\Results-newSimulation0.xlsx&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;## Sector: 0 22 45 67 90 112 135 157 180 202 247 270 292 315 337&lt;/span&gt;
+plotSector&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;0&amp;#39;&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;## AIWIND导出的数据需要汇总&lt;/span&gt;
+fileReadyAnalysis&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C:\Users\yezhaoliang\Desktop\NewSimulation\Results-newSimulation&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;plotSector&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;.xlsx&amp;#34;&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; __name__ &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;__main__&amp;#34;&lt;/span&gt;:
+    x_axix &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T11&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T12&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T13&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T21&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T22&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T23&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T1&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T10&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T14&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T15&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T16&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T17&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T18&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T19&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T2&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T20&amp;#34;&lt;/span&gt;,
+              &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T3&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T4&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T5&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T6&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T7&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T8&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T9&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;366&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;387&amp;#34;&lt;/span&gt;];
+    accordingTable &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T1&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T2&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T3&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T4&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T5&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T6&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T7&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T8&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T9&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T10&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T11&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T12&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T13&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T14&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T15&amp;#34;&lt;/span&gt;,
+                      &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T16&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T17&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T18&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T19&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T20&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T21&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T22&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T23&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;366&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;387&amp;#34;&lt;/span&gt;];
+    x_axisChange &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;1&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;2&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;3&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;4&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;5&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;6&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;7&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;8&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;9&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;10&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;11&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;12&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;13&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;14&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;15&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;16&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;17&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;18&amp;#34;&lt;/span&gt;,
+                    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;19&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;20&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;21&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;22&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;23&amp;#34;&lt;/span&gt; ];
+
+    speedTableDir&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;C:\Users\yezhaoliang\Desktop\work\AIWind\processWindSim\速度表速度分析&amp;#39;&lt;/span&gt;
+    speedTable&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;speedTableDir&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\\&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;plotSector&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;-velocity.xlsx&amp;#39;&lt;/span&gt;
+    speedTableData&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read_excel(speedTable,usecols&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;])
+    &lt;span style=&#34;color:#75715e&#34;&gt;# b = pd.read_excel(fileReadyAnalysis,None)&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# sheetnames=b.keys()&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# sheetvalues=b.values()&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;#hubVelocities=np.zeros(sheetvalues.__len__())&lt;/span&gt;
+
+    xlsx &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ExcelFile(fileReadyAnalysis)
+    turbines&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Series([&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;25&lt;/span&gt;)
+    turbineVelocity&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Series([&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;25&lt;/span&gt;,dtype&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;float&amp;#39;&lt;/span&gt;)
+    count&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;## 读取通过程序汇总的各个扇区的数据(各个机位点存储在相应sheet表中&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; sheetname &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; xlsx&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sheet_names:
+        pdtemp&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;xlsx&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;parse(sheetname)
+        &lt;span style=&#34;color:#75715e&#34;&gt;#print(pdtemp.iloc[5:20,2])&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;#linreg = LinearRegression()&lt;/span&gt;
+        newCount&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;accordingTable&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;index(x_axix[count])
+        &lt;span style=&#34;color:#75715e&#34;&gt;## 机位点名字&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(sheetname[&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt;:&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;])
+        turbines[newCount]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;sheetname[&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt;:&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;]
+        &lt;span style=&#34;color:#75715e&#34;&gt;## 数据提取&lt;/span&gt;
+        text1&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pdtemp&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;100&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;]
+        text2&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pdtemp&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;100&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+        iMax&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[i &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(text1)) &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; text1[i]&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;90&lt;/span&gt;]
+
+        neededIndex&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;iMax[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]
+        neededIndexSmaller&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;iMax[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        smallZ&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;text1[neededIndexSmaller]
+        smallV&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;text2[neededIndexSmaller]
+
+        bigZ &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; text1[neededIndex]
+        bigV &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; text2[neededIndex]
+       &lt;span style=&#34;color:#75715e&#34;&gt;# yi=[y for y in pdtemp.iloc[0:100,1]]&lt;/span&gt;
+       &lt;span style=&#34;color:#75715e&#34;&gt;# linreg.fit(pdtemp.iloc[5:20,2], pdtemp.iloc[5:20,1])&lt;/span&gt;
+        hub_height&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;90&lt;/span&gt;
+        velocityPredict&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;(bigV&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;smallV)&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;(bigZ&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;smallZ)&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;(hub_height&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;smallZ)&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;smallV
+&lt;span style=&#34;color:#75715e&#34;&gt;#        velocityPredict= linreg.predict(hub_height)&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(velocityPredict)
+        turbineVelocity[newCount]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;velocityPredict
+        count&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;count&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    df&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;concat([turbines,turbineVelocity],axis&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+    &lt;span style=&#34;color:#75715e&#34;&gt;#df.to_excel(&amp;#39;hello45.xlsx&amp;#39;)&lt;/span&gt;
+    df&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_excel(&lt;span style=&#34;color:#e6db74&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;C:\Users\yezhaoliang\Desktop\NewSimulation\hello&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;plotSector&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;.xlsx&amp;#39;&lt;/span&gt;)
+    &lt;span style=&#34;color:#75715e&#34;&gt;# speeTableSeries=pd.Series(speedTableData.values())&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# tempArray=pd.concat(turbineVelocity[0:23],speeTableSeries)&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;#temp1=[x for x in speedTableData]&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;#temp2=[y for y in turbineVelocity]&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;#tempArray=[temp1,temp2]&lt;/span&gt;
+    aiwindYaxis&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;turbineVelocity[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;23&lt;/span&gt;]
+    windsimYaxis&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;speedTableData[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;23&lt;/span&gt;]
+    &lt;span style=&#34;color:#75715e&#34;&gt;#ylimMax=max(tempArray[1])&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;#ylimMin=min(tempArray[1])&lt;/span&gt;
+
+    ylimMax&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;
+    ylimMin&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# 开始画图&lt;/span&gt;
+
+    plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;figure(figsize &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;15&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;))
+    plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;title(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Sector-&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;plotSector&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39; Analysis&amp;#39;&lt;/span&gt;,fontsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;32&lt;/span&gt; )
+    &lt;span style=&#34;color:#75715e&#34;&gt;#plt.plot(x_axix, aiwindYaxis, marker=&amp;#39;o&amp;#39;, color=&amp;#39;black&amp;#39;, label=&amp;#39;AIWIND&amp;#39;)&lt;/span&gt;
+    plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;plot(x_axisChange, aiwindYaxis, marker&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;o&amp;#39;&lt;/span&gt;,markersize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;9&amp;#39;&lt;/span&gt;, color&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;red&amp;#39;&lt;/span&gt;,markerfacecolor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;grey&amp;#39;&lt;/span&gt;,markeredgecolor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;black&amp;#39;&lt;/span&gt;,linestyle&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;solid&amp;#39;&lt;/span&gt;, label&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;AIWIND&amp;#39;&lt;/span&gt;,linewidth&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;)
+    &lt;span style=&#34;color:#75715e&#34;&gt;#plt.plot(sub_axix, test_acys,marker=&amp;#39;*&amp;#39;, color=&amp;#39;red&amp;#39;, label=&amp;#39;testing accuracy&amp;#39;)&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;#plt.plot(x_axix, windsimYaxis,marker=&amp;#39;*&amp;#39;, color=&amp;#39;blue&amp;#39;, label=&amp;#39;WindSiM&amp;#39;)&lt;/span&gt;
+    plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;plot(x_axisChange, windsimYaxis,marker&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;*&amp;#39;&lt;/span&gt;,markersize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;9&amp;#39;&lt;/span&gt;, color&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;black&amp;#39;&lt;/span&gt;,markerfacecolor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;grey&amp;#39;&lt;/span&gt;,markeredgecolor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;black&amp;#39;&lt;/span&gt;,label&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;WindSiM&amp;#39;&lt;/span&gt;,linewidth&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;)
+    &lt;span style=&#34;color:#75715e&#34;&gt;#plt.plot(x_axix, thresholds, color=&amp;#39;blue&amp;#39;, label=&amp;#39;threshold&amp;#39;)&lt;/span&gt;
+    plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;legend()  &lt;span style=&#34;color:#75715e&#34;&gt;# 显示图例&lt;/span&gt;
+    plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;margins(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;)
+    plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;grid()
+    plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ylim(ylimMin&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,ylimMax&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+    plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;xlabel(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Turbine Names&amp;#39;&lt;/span&gt;,fontsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;24&lt;/span&gt; )
+    plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ylabel(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Velocity&amp;#39;&lt;/span&gt;,fontsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;24&lt;/span&gt; )
+    plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;tick_params(axis&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;both&amp;#39;&lt;/span&gt;,which&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;major&amp;#39;&lt;/span&gt;,labelsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;24&lt;/span&gt;)
+    plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;savefig(&lt;span style=&#34;color:#e6db74&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C:\Users\yezhaoliang\Desktop\NewSimulation&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\\&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;plotSector&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;_&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Velocity-test&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;.jpg&amp;#34;&lt;/span&gt;,dpi &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;900&lt;/span&gt;)
+    &lt;span style=&#34;color:#75715e&#34;&gt;#plt.show()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>python对比作图两个风速风向表</title>
+      <link>https://jueqingsizhe66.github.io/post/python%E5%AF%B9%E6%AF%94%E4%BD%9C%E5%9B%BE%E4%B8%A4%E4%B8%AA%E9%A3%8E%E9%80%9F%E9%A3%8E%E5%90%91%E8%A1%A8/</link>
+      <pubDate>Tue, 29 Oct 2019 13:51:00 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/post/python%E5%AF%B9%E6%AF%94%E4%BD%9C%E5%9B%BE%E4%B8%A4%E4%B8%AA%E9%A3%8E%E9%80%9F%E9%A3%8E%E5%90%91%E8%A1%A8/</guid>
+      <description>&lt;h2 id=&#34;背景介绍&#34;&gt;背景介绍&lt;/h2&gt;
+&lt;p&gt;在前面&lt;a href=&#34;https://jueqingsizhe66.github.io/post/python%e6%8f%90%e5%8f%96%e5%90%84%e4%b8%aa%e6%89%87%e5%8c%ba%e4%b8%8d%e5%90%8c%e6%9c%ba%e4%bd%8d%e7%82%b9%e9%a3%8e%e9%80%9f%e9%a3%8e%e5%90%91%e8%a1%a8/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;python得到风速风向图&lt;/a&gt;一文中，我们得到风速风向表后，&lt;/p&gt;
+&lt;p&gt;有时候我们需要快速比较一个扇区或者多个扇区的不同机位点风速图或者风向图&lt;/p&gt;
+&lt;p&gt;方便进行对比分析，为此需要提取对应列信息，并进行重排以及绘图工作&lt;/p&gt;
+&lt;h2 id=&#34;技术分解&#34;&gt;技术分解&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;遍历&lt;/li&gt;
+&lt;li&gt;提取信息&lt;/li&gt;
+&lt;li&gt;绘图 matplotlib.pyplot模块用于作图&lt;/li&gt;
+&lt;li&gt;根据数据表提取信息，并根据表间转换提取数组中的index，设置count和newcount【妙用】参照表(according_table)是实际需要的X轴信息， x_axix是当前风速风向表的信息, 该值需要根据参照表进行调整&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;技术实现&#34;&gt;技术实现&lt;/h2&gt;
+&lt;p&gt;原先的x轴&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;x_axix&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T12&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T11&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T10&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T1&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T3&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T2&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T4&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T5&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T9&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T8&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T7&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T6&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T13&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T14&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T15&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T16&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T17&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T23&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T22&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T21&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T20&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T19&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T18&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;table_387&amp;#34;&lt;/span&gt;];&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;新的x轴&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;accordingTable&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[ &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T1&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T2&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T3&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T4&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T5&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T6&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T7&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T8&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T9&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T10&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T11&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T12&amp;#34;&lt;/span&gt;,  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T13&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T14&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T15&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T16&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T17&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T18&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T19&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T20&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T21&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T22&amp;#34;&lt;/span&gt;,  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T23&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;table_387&amp;#34;&lt;/span&gt;];&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;x轴显示信息&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;x_axisChange&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[ &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;1&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;2&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;3&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;4&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;5&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;6&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;7&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;8&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;9&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;10&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;11&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;12&amp;#34;&lt;/span&gt;,  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;13&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;14&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;15&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;16&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;17&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;18&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;19&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;20&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;21&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;22&amp;#34;&lt;/span&gt;,  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;23&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Clim&amp;#34;&lt;/span&gt;];&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;需要提取的扇区和物理量&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;plotSector&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;22&amp;#39;&lt;/span&gt;
+plotPhysics&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Velocity&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;并通过数组的index函数得到对应你的sectorID或者类似的TurbineID等。&lt;/p&gt;
+&lt;p&gt;通过numpy创建两个空数组&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;windsimYaxis&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;zeros(x_axix&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;__len__())
+aiwindYaxis&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;zeros(x_axix&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;__len__())&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;最终实现&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; matplotlib.pyplot &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; plt
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; pandas &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; pd
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; numpy &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; np
+
+columnMe &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;0&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;22&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;45&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;67&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;90&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;112&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;135&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;157&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;180&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;202&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;225&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;247&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;270&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;292&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;315&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;337&amp;#39;&lt;/span&gt;];
+indexMe &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T12_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T12_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T11_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T11_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T10_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T10_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T1_Velocity&amp;#34;&lt;/span&gt;,
+           &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T1_Angle&amp;#34;&lt;/span&gt;,
+           &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T3_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T3_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T2_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T2_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T4_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T4_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T5_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T5_Angle&amp;#34;&lt;/span&gt;,
+           &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T9_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T9_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T8_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T8_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T7_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T7_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T6_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T6_Angle&amp;#34;&lt;/span&gt;,
+           &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T13_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T13_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T14_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T14_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T15_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T15_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T16_Velocity&amp;#34;&lt;/span&gt;,
+           &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T16_Angle&amp;#34;&lt;/span&gt;,
+           &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T17_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T17_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T23_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T23_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T22_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T22_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T21_Velocity&amp;#34;&lt;/span&gt;,
+           &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T21_Angle&amp;#34;&lt;/span&gt;,
+           &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T20_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T20_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T19_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T19_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T18_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T18_Angle&amp;#34;&lt;/span&gt;,
+           &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;HL387_24035001_Velocity&amp;#34;&lt;/span&gt;,
+           &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;HL387_24035001_Angle&amp;#34;&lt;/span&gt;]
+
+
+asd &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read_csv(&lt;span style=&#34;color:#e6db74&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;C:\Users\yezhaoliang\PythonAIWind\AIWINDspeedTable.csv&amp;#39;&lt;/span&gt;, skiprows&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+wsd &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read_csv(&lt;span style=&#34;color:#e6db74&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;C:\Users\yezhaoliang\PythonAIWind\Results-WindSimSpeedTableZhuFengxiagn.csv&amp;#39;&lt;/span&gt;, skiprows&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;)
+
+x_axix&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T12&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T11&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T10&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T1&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T3&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T2&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T4&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T5&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T9&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T8&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T7&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T6&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T13&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T14&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T15&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T16&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T17&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T23&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T22&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T21&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T20&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T19&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T18&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;table_387&amp;#34;&lt;/span&gt;];
+windsimYaxis&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;zeros(x_axix&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;__len__())
+aiwindYaxis&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;zeros(x_axix&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;__len__())
+accordingTable&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[ &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T1&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T2&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T3&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T4&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T5&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T6&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T7&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T8&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T9&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T10&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T11&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T12&amp;#34;&lt;/span&gt;,  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T13&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T14&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T15&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T16&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T17&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T18&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T19&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T20&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T21&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T22&amp;#34;&lt;/span&gt;,  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T23&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;table_387&amp;#34;&lt;/span&gt;];
+
+x_axisChange&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[ &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;1&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;2&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;3&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;4&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;5&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;6&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;7&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;8&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;9&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;10&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;11&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;12&amp;#34;&lt;/span&gt;,  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;13&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;14&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;15&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;16&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;17&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;18&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;19&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;20&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;21&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;22&amp;#34;&lt;/span&gt;,  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;23&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Clim&amp;#34;&lt;/span&gt;];
+
+
+plotSector&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;22&amp;#39;&lt;/span&gt;
+plotPhysics&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Velocity&amp;#39;&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#plotPhysics=&amp;#39;Angle&amp;#39;&lt;/span&gt;
+sectorId&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;columnMe&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;index(plotSector)&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+count&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+plotId&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+newCount&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# for turbine in x_axix:&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; turbine &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; accordingTable:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(plotPhysics&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Velocity&amp;#39;&lt;/span&gt;):
+        plotId&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+        plotId&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# windsimYaxis[count]=wsd.iloc[2*count+plotId,sectorId]&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# aiwindYaxis[count]=asd.iloc[2*count+plotId,sectorId]&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# count = count+1&lt;/span&gt;
+    newCount&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;x_axix&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;index(turbine)
+    windsimYaxis[count]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;wsd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;newCount&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;plotId,sectorId]
+    aiwindYaxis[count]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;asd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;newCount&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;plotId,sectorId]
+    count &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; count&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+tempArray&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;array([windsimYaxis,aiwindYaxis])
+ylimMax&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;tempArray&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;max()
+ylimMin&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;tempArray&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;min()
+&lt;span style=&#34;color:#75715e&#34;&gt;# 开始画图&lt;/span&gt;
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;figure(figsize &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;15&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;))
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;title(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Sector-&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;plotSector&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39; Analysis&amp;#39;&lt;/span&gt;,fontsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;32&lt;/span&gt; )
+&lt;span style=&#34;color:#75715e&#34;&gt;#plt.plot(x_axix, aiwindYaxis, marker=&amp;#39;o&amp;#39;, color=&amp;#39;black&amp;#39;, label=&amp;#39;AIWIND&amp;#39;)&lt;/span&gt;
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;plot(x_axisChange, aiwindYaxis, marker&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;o&amp;#39;&lt;/span&gt;,markersize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;9&amp;#39;&lt;/span&gt;, color&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;red&amp;#39;&lt;/span&gt;,markerfacecolor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;grey&amp;#39;&lt;/span&gt;,markeredgecolor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;black&amp;#39;&lt;/span&gt;,linestyle&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;solid&amp;#39;&lt;/span&gt;, label&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;AIWIND&amp;#39;&lt;/span&gt;,linewidth&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;)
+&lt;span style=&#34;color:#75715e&#34;&gt;#plt.plot(sub_axix, test_acys,marker=&amp;#39;*&amp;#39;, color=&amp;#39;red&amp;#39;, label=&amp;#39;testing accuracy&amp;#39;)&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#plt.plot(x_axix, windsimYaxis,marker=&amp;#39;*&amp;#39;, color=&amp;#39;blue&amp;#39;, label=&amp;#39;WindSiM&amp;#39;)&lt;/span&gt;
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;plot(x_axisChange, windsimYaxis,marker&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;*&amp;#39;&lt;/span&gt;,markersize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;9&amp;#39;&lt;/span&gt;, color&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;black&amp;#39;&lt;/span&gt;,markerfacecolor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;grey&amp;#39;&lt;/span&gt;,markeredgecolor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;black&amp;#39;&lt;/span&gt;,label&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;WindSiM&amp;#39;&lt;/span&gt;,linewidth&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;)
+&lt;span style=&#34;color:#75715e&#34;&gt;#plt.plot(x_axix, thresholds, color=&amp;#39;blue&amp;#39;, label=&amp;#39;threshold&amp;#39;)&lt;/span&gt;
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;legend()  &lt;span style=&#34;color:#75715e&#34;&gt;# 显示图例&lt;/span&gt;
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;margins(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;)
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;grid()
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ylim(ylimMin&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,ylimMax&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;xlabel(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Turbine Names&amp;#39;&lt;/span&gt;,fontsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;24&lt;/span&gt; )
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ylabel(plotPhysics,fontsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;24&lt;/span&gt; )
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;tick_params(axis&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;both&amp;#39;&lt;/span&gt;,which&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;major&amp;#39;&lt;/span&gt;,labelsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;24&lt;/span&gt;)
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;savefig(plotSector&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;_&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;plotPhysics&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;.jpg&amp;#34;&lt;/span&gt;,dpi &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;900&lt;/span&gt;)
+plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;show()
+
+&lt;span style=&#34;color:#75715e&#34;&gt;# python 一个折线图绘制多个曲线&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# color：曲线颜色，blue，green，red等等&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# label：图例，这个参数内容就自定义啦，注意如果写这个参数一定要加上plt.legend()，之后再plt.show()才有有用！&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# linestyle：曲线风格，’–’，’-.’，’:’等等&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# linewidth：曲线宽度，自定义就可以&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# marker：标记点样式，’o’,’x’，也就是说这些符号会标示出曲线上具体的“点”，这样一来就易于观察曲线上那些地方是支撑点&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# markersize：标记点的大小，自定义就可以&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;改为批处理版本&#34;&gt;改为批处理版本&lt;/h2&gt;
+&lt;p&gt;增加一下for循环，通过ColumnMe,用于提取section&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; plotSector &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; columnMe:
+    &lt;span style=&#34;color:#75715e&#34;&gt;#plotPhysics=&amp;#39;Angle&amp;#39;&lt;/span&gt;
+    sectorId&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;columnMe&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;index(plotSector)&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    count&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    plotId&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    newCount&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# for turbine in x_axix:&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; turbine &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; accordingTable:
+        &lt;span style=&#34;color:#75715e&#34;&gt;#if(plotPhysics==&amp;#39;Velocity&amp;#39;):&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (plotPhysics &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Velocity&amp;#39;&lt;/span&gt;):
+                plotId&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+            plotId&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;# windsimYaxis[count]=wsd.iloc[2*count+plotId,sectorId]&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;# aiwindYaxis[count]=asd.iloc[2*count+plotId,sectorId]&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;# count = count+1&lt;/span&gt;
+        newCount&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;x_axix&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;index(turbine)
+        windsimYaxis[count]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;wsd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;newCount&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;plotId,sectorId]
+        aiwindYaxis[count]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;asd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;newCount&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;plotId,sectorId]
+        count &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; count&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    tempArray&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;array([windsimYaxis,aiwindYaxis])
+    ylimMax&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;tempArray&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;max()
+&lt;span style=&#34;color:#f92672&#34;&gt;....&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/aiwind/sectorAngleTurbines.png&#34; alt=&#34;最终结果&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;曲线数据导出&#34;&gt;曲线数据导出&lt;/h2&gt;
+&lt;p&gt;数据导出方便进行比较。
+使用了pandas的concat的功能，注意axis的用法，默认是行记录导入，axis=1相当于列记录导入.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;    sdf=pd.concat([pd.Series(x_axisChange),pd.Series(windsimYaxis),pd.Series(aiwindYaxis)],axis=1)
+    exportFilename=plotSector+&amp;quot;-&amp;quot;+plotPhysics+&amp;quot;.xlsx&amp;quot;
+    sdf.to_excel(exportFilename)
+
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>python提取各个扇区不同机位点风速风向表</title>
+      <link>https://jueqingsizhe66.github.io/post/python%E6%8F%90%E5%8F%96%E5%90%84%E4%B8%AA%E6%89%87%E5%8C%BA%E4%B8%8D%E5%90%8C%E6%9C%BA%E4%BD%8D%E7%82%B9%E9%A3%8E%E9%80%9F%E9%A3%8E%E5%90%91%E8%A1%A8/</link>
+      <pubDate>Tue, 29 Oct 2019 11:14:00 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/post/python%E6%8F%90%E5%8F%96%E5%90%84%E4%B8%AA%E6%89%87%E5%8C%BA%E4%B8%8D%E5%90%8C%E6%9C%BA%E4%BD%8D%E7%82%B9%E9%A3%8E%E9%80%9F%E9%A3%8E%E5%90%91%E8%A1%A8/</guid>
+      <description>&lt;h2 id=&#34;背景介绍&#34;&gt;背景介绍&lt;/h2&gt;
+&lt;p&gt;我们依然来处理windsim导出的风廓线信息(Tools-&amp;gt;Export vertical profile)在前面&lt;a href=&#34;https://jueqingsizhe66.github.io/post/perl%e6%8b%86%e5%88%86%e5%a4%a7%e6%96%87%e4%bb%b6%e5%88%b0excel%e8%a1%a8/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;perl拆分大文件&lt;/a&gt;一文中我们得到各个机位点在不同扇区下的物理量信息，并存放在一个excel表里头&lt;/p&gt;
+&lt;p&gt;而其实我们更关心的是轮毂高度处的风速风向信息，即形成下面的轮毂高度处不同扇区和机位点的风速风向&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/windsim/windspeedAngle.png&#34; alt=&#34;windSpeedAngle&#34;&gt;&lt;/p&gt;
+&lt;p&gt;每个风场均需要修改对应风机信息!&lt;/p&gt;
+&lt;h2 id=&#34;技术分解&#34;&gt;技术分解&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;遍历&lt;/li&gt;
+&lt;li&gt;建立一个扇区表和特征物理量【标识信息即可】， 该特征物理量为velocity表示提取偶数行，物理量为Angle表示提取奇数行&lt;/li&gt;
+&lt;li&gt;对特定的物理量进行atan2计算，atan2(vx,vy)得到[-pi,+pi]范围值，加上180°就变成了[0,2pi]&lt;/li&gt;
+&lt;li&gt;导出数据&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;技术实现&#34;&gt;技术实现&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;建立扇区表, 即excel表列信息&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;columnMe&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;0&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;22&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;45&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;67&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;90&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;112&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;135&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;157&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;180&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;202&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;225&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;247&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;270&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;292&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;315&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;337&amp;#39;&lt;/span&gt;];&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;建立机位风速、风向信息,即excel表行信息&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;    indexMe&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T12_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T12_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T11_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T11_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T10_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T10_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T1_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T1_Angle&amp;#34;&lt;/span&gt;,
+     &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T3_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T3_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T2_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T2_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T4_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T4_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T5_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T5_Angle&amp;#34;&lt;/span&gt;,
+     &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T9_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T9_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T8_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T8_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T7_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T7_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T6_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T6_Angle&amp;#34;&lt;/span&gt;,
+     &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T13_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T13_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T14_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T14_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T15_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T15_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T16_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T16_Angle&amp;#34;&lt;/span&gt;,
+     &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T17_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T17_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T23_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T23_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T22_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T22_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T21_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T21_Angle&amp;#34;&lt;/span&gt;,
+     &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T20_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T20_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T19_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T19_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T18_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T18_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;HL387_24035001_Velocity&amp;#34;&lt;/span&gt;,
+     &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;HL387_24035001_Angle&amp;#34;&lt;/span&gt;]
+    &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;如果换了个风电场该信息得重新编排，按照实际风电场需求&lt;/p&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;使用pandas创建数组、存储文件&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;根据扇区和机位信息建立pandas空数组&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;results&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;DataFrame([],index&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;indexMe,columns&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;columnMe)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;并通过iloc进行精确定位，同时赋值&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;results&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[turbineVId,sectorId]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;speed2d
+results&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[turbineAId,sectorId]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;actualAngle&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;最终的全部实现如下:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; numpy &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; np
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; pandas &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; pd
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; os
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; re
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; math &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; ma
+
+
+&lt;span style=&#34;color:#75715e&#34;&gt;#headDir=r&amp;#34;C:\Users\yezhaoliang\Desktop\work\AIWind\processWindSim\HuaiLaiTurbine&amp;#34;&lt;/span&gt;
+headDir&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C:\Users\yezhaoliang\Desktop\work\AIWind\processWindSim\HuaiLaiTurbineZhuFengxiang&amp;#34;&lt;/span&gt;
+
+&lt;span style=&#34;color:#75715e&#34;&gt;## 遍历所有csv文件&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;get_files&lt;/span&gt;(path&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;headDir, rule&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;.csv&amp;#34;&lt;/span&gt;):
+    all &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; fpathe,dirs,fs &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;walk(path):   &lt;span style=&#34;color:#75715e&#34;&gt;# os.walk是获取所有的目录&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; f &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; fs:
+            filename &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;join(fpathe,f)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; filename&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;endswith(rule):  &lt;span style=&#34;color:#75715e&#34;&gt;# 判断是否是&amp;#34;xxx&amp;#34;结尾&lt;/span&gt;
+                all&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(filename)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; all
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; __name__ &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;__main__&amp;#34;&lt;/span&gt;:
+&lt;span style=&#34;color:#75715e&#34;&gt;## 定义计算的扇区表&lt;/span&gt;
+    columnMe&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;0&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;22&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;45&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;67&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;90&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;112&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;135&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;157&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;180&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;202&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;225&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;247&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;270&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;292&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;315&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;337&amp;#39;&lt;/span&gt;];
+&lt;span style=&#34;color:#75715e&#34;&gt;## 定义风向风速表的行信息&lt;/span&gt;
+    indexMe&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T12_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T12_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T11_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T11_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T10_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T10_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T1_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T1_Angle&amp;#34;&lt;/span&gt;,
+     &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T3_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T3_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T2_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T2_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T4_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T4_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T5_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T5_Angle&amp;#34;&lt;/span&gt;,
+     &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T9_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T9_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T8_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T8_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T7_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T7_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T6_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T6_Angle&amp;#34;&lt;/span&gt;,
+     &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T13_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T13_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T14_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T14_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T15_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T15_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T16_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T16_Angle&amp;#34;&lt;/span&gt;,
+     &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T17_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T17_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T23_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T23_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T22_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T22_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T21_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T21_Angle&amp;#34;&lt;/span&gt;,
+     &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T20_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T20_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T19_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T19_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T18_Velocity&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;T18_Angle&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;HL387_24035001_Velocity&amp;#34;&lt;/span&gt;,
+     &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;HL387_24035001_Angle&amp;#34;&lt;/span&gt;]
+&lt;span style=&#34;color:#75715e&#34;&gt;## 创建一个空的DataFrame空结构,结构index由indexMe组成，结构的columns信息由columnMe组成&lt;/span&gt;
+    results&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;DataFrame([],index&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;indexMe,columns&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;columnMe)
+    b &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; get_files()
+    altitudesName&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[]
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; b:
+        them&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;i&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\\&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+        currentFilename&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;them[them&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;__len__()&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+        turbinesAndSectors&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;re&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split(&lt;span style=&#34;color:#e6db74&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;[.|-]&amp;#39;&lt;/span&gt;,currentFilename)
+&lt;span style=&#34;color:#75715e&#34;&gt;## 文件名第一项为风机信息&lt;/span&gt;
+        currentTurbine&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;turbinesAndSectors[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]
+&lt;span style=&#34;color:#75715e&#34;&gt;## 文件名倒数第二项为扇区信息---拆分的时候识别sector信息&lt;/span&gt;
+        currentSector&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;turbinesAndSectors[turbinesAndSectors&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;__len__()&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;]
+        &lt;span style=&#34;color:#75715e&#34;&gt;# sheetName=them[them.__len__()-3]+them[them.__len__()-2]+them[them.__len__()-1]&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;## 得到SectorID index用于存储数据&lt;/span&gt;
+        sectorId&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;columnMe&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;index(currentSector);
+        turbineVId&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;indexMe&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;index(currentTurbine&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;_Velocity&amp;#34;&lt;/span&gt;)
+        turbineAId&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;indexMe&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;index(currentTurbine&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;_Angle&amp;#34;&lt;/span&gt;)
+        sd&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read_csv(i,skiprows&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;)
+        &lt;span style=&#34;color:#75715e&#34;&gt;## 去除Null行（注意空格，数字也一样处理)&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;## 确认了第九行信息为所需要的信息 ，也可以做个线性化操作&lt;/span&gt;
+        UCRT&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;sd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[&lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;]
+        VCRT&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;sd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[&lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;]
+        speed2d&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;sd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[&lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;]
+&lt;span style=&#34;color:#75715e&#34;&gt;## 有趣的是： python atan2(y,x) 而在excel对应的为 atan2(x,y) --&amp;gt;只是针对和x轴夹角&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;##   如果需要针对y轴夹角必须采用python的atan2(x,y), 或者 excel的atan2(y,x)才是扇区角度的意思&lt;/span&gt;
+        actualAngle&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;ma&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;atan2(UCRT,VCRT)&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;180&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3.1415926&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;180&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;## 赋值&lt;/span&gt;
+        results&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[turbineVId,sectorId]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;speed2d
+        results&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[turbineAId,sectorId]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;actualAngle
+
+    results&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_csv(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Results-WindSimSpeedTableZhuFengxiagn.csv&amp;#34;&lt;/span&gt;,index&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;indexMe,columns&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;columnMe)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>python提取多个文件的存在null速度廓线</title>
+      <link>https://jueqingsizhe66.github.io/post/python%E6%8F%90%E5%8F%96%E5%A4%9A%E4%B8%AA%E6%96%87%E4%BB%B6%E7%9A%84%E5%AD%98%E5%9C%A8nan%E9%80%9F%E5%BA%A6%E5%BB%93%E7%BA%BF/</link>
+      <pubDate>Tue, 29 Oct 2019 10:56:00 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/post/python%E6%8F%90%E5%8F%96%E5%A4%9A%E4%B8%AA%E6%96%87%E4%BB%B6%E7%9A%84%E5%AD%98%E5%9C%A8nan%E9%80%9F%E5%BA%A6%E5%BB%93%E7%BA%BF/</guid>
+      <description>&lt;h2 id=&#34;背景介绍&#34;&gt;背景介绍&lt;/h2&gt;
+&lt;p&gt;在前面 &lt;a href=&#34;https://jueqingsizhe66.github.io/post/python%e6%8f%90%e5%8f%96%e5%a4%9a%e4%b8%aa%e6%96%87%e4%bb%b6%e6%b1%87%e6%80%bb%e5%88%b0%e4%b8%80%e4%b8%aaexcel%e8%a1%a8/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;python提取多个文件&lt;/a&gt;的案例中，只是遍历了全部有效数据，并提取其中两列数据，而如果数据存在NULL? pandas该如何处理?&lt;/p&gt;
+&lt;p&gt;在CFDpost处理怀来风电场数据的廓线时候遇到如下问题，速度廓线存在Null值，如下图所示&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://jueqingsizhe66.github.io/images/aiwind/AIWINDVelocity.png&#34;&gt;AIWINDVelocity&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;适合AIWIND计算出来的风电场机位点风廓线处理，存在空值&lt;/p&gt;
+&lt;h2 id=&#34;技术分解&#34;&gt;技术分解&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;遍历&lt;/li&gt;
+&lt;li&gt;提取所有非Null行 满足条件sd[sd.iloc[:, 3] != &#39; null&#39;] 即可。&lt;/li&gt;
+&lt;li&gt;减去对应海拔值&lt;/li&gt;
+&lt;li&gt;存储结果到对应的sheet表中&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;技术实现&#34;&gt;技术实现&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; numpy &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; np
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; pandas &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; pd
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; os
+
+
+headDir&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C:\Users\yezhaoliang\PythonAIWind\pandasHuaiLaiProfile&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;get_files&lt;/span&gt;(path&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;headDir, rule&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;.csv&amp;#34;&lt;/span&gt;):
+    all &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; fpathe,dirs,fs &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;walk(path):   &lt;span style=&#34;color:#75715e&#34;&gt;# os.walk是获取所有的目录&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; f &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; fs:
+            filename &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;join(fpathe,f)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; filename&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;endswith(rule):  &lt;span style=&#34;color:#75715e&#34;&gt;# 判断是否是&amp;#34;xxx&amp;#34;结尾&lt;/span&gt;
+                all&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(filename)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; all
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; __name__ &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;__main__&amp;#34;&lt;/span&gt;:
+    b &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; get_files()
+    writer&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ExcelWriter(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Results.xlsx&amp;#34;&lt;/span&gt;)
+    altitudesName&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[]
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; b:
+        them&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;i&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\\&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+        sheetName&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;them[them&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;__len__()&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;them[them&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;__len__()&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;them[them&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;__len__()&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+        altitudesName&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(sheetName)
+        sd&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read_csv(i,skiprows&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;)
+        &lt;span style=&#34;color:#75715e&#34;&gt;## 去除Null行（注意空格，数字也一样处理)&lt;/span&gt;
+        sdNotNull &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; sd[sd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[:, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39; null&amp;#39;&lt;/span&gt;]
+        startZ &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; sdNotNull&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iat[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;]  &lt;span style=&#34;color:#75715e&#34;&gt;## the third column at begin sequence you selected&lt;/span&gt;
+        squeezeZseries &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; sdNotNull&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;300&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; sdNotNull&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iat[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;]  &lt;span style=&#34;color:#75715e&#34;&gt;## 减去海拔值&lt;/span&gt;
+        temp1 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; sdNotNull&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;300&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;]
+        temp2 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; temp1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;astype(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;str&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;str&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;strip()  &lt;span style=&#34;color:#75715e&#34;&gt;##转换成字符串 然后去除左右空格&lt;/span&gt;
+        squeezeVelocityseries &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; temp2&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;astype(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;float64&amp;#39;&lt;/span&gt;);
+        result &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;concat([squeezeVelocityseries, squeezeZseries], axis&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+        result&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_excel(writer,sheet_name&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;sheetName,index_label&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;startZ)
+    writer&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;save()
+    writer&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;close()
+     &lt;span style=&#34;color:#75715e&#34;&gt;#tags=os.path.split(i)&lt;/span&gt;
+     &lt;span style=&#34;color:#75715e&#34;&gt;#print(os.path.join(tags[0],&amp;#39;done&amp;#39;,tags[1]))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;问题发现&#34;&gt;问题发现&lt;/h2&gt;
+&lt;p&gt;300个点得到的结果不依，高程不统一，为此专门提取500个点，可以帅选&lt;/p&gt;
+&lt;p&gt;改进main部分&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; __name__ &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;__main__&amp;#34;&lt;/span&gt;:
+    b &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; get_files()
+    writer&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ExcelWriter(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Results-compare-600.xlsx&amp;#34;&lt;/span&gt;)
+    altitudesName&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[]
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; b:
+        them&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;i&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\\&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+        secondPart&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;them[them&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;__len__()&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;]
+        &lt;span style=&#34;color:#75715e&#34;&gt;# sheetName=them[them.__len__()-3]+them[them.__len__()-2]+them[them.__len__()-1]&lt;/span&gt;
+        sheetName&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;them[them&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;__len__()&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;secondPart[&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;:]&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;them[them&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;__len__()&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+        altitudesName&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(sheetName)
+        sd&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read_csv(i,skiprows&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;)
+        &lt;span style=&#34;color:#75715e&#34;&gt;## 去除Null行（注意空格，数字也一样处理)&lt;/span&gt;
+        sdNotNull &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; sd[sd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[:, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39; null&amp;#39;&lt;/span&gt;]
+        &lt;span style=&#34;color:#75715e&#34;&gt;#squeezeZseries = sdNotNull.iloc[0:300, 2] - sdNotNull.iat[0, 2]  ## 减去海拔值&lt;/span&gt;
+        temp1 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; sdNotNull&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;1000&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;]
+        temp2 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; temp1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;astype(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;str&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;str&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;strip()  &lt;span style=&#34;color:#75715e&#34;&gt;##转换成字符串 然后去除左右空格&lt;/span&gt;
+        squeezeVelocityseriesPre &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; temp2&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;astype(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;float64&amp;#39;&lt;/span&gt;);
+        squeezeVelocityseriesPreNumpy &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; squeezeVelocityseriesPre&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_numpy();
+        temp3 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; sdNotNull&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;1000&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;]
+        temp4 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; temp3&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;astype(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;str&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;str&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;strip()
+        squeezeZseriesPre &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; temp4&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;astype(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;float64&amp;#39;&lt;/span&gt;);
+        squeezeZseriesPreNumpy &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; squeezeZseriesPre&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_numpy();
+        initialArray&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;squeezeVelocityseriesPre[squeezeVelocityseriesPre&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0.0&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;size
+        initialZ&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;squeezeZseriesPreNumpy[initialArray]
+        squeezeVelocityseriese &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; squeezeVelocityseriesPreNumpy[initialArray:initialArray&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;501&lt;/span&gt;]
+        squeezeZOriginial &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; squeezeZseriesPreNumpy[initialArray:initialArray&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;501&lt;/span&gt;]
+        squeezeZSeries &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; squeezeZseriesPreNumpy[initialArray:initialArray&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;501&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;initialZ
+
+        result &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;DataFrame({
+            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Velocity/(m/s)&amp;#39;&lt;/span&gt;:pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Series(squeezeVelocityseriese),
+            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Z-Z0/(m)&amp;#39;&lt;/span&gt;:pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Series(squeezeZSeries),
+            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Z/(m)&amp;#39;&lt;/span&gt;:pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Series(squeezeZOriginial)})
+        result&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_excel(writer,sheet_name&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;sheetName)
+    writer&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;save()
+    writer&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;close()&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>python提取多个文件汇总到一个excel表</title>
+      <link>https://jueqingsizhe66.github.io/post/python%E6%8F%90%E5%8F%96%E5%A4%9A%E4%B8%AA%E6%96%87%E4%BB%B6%E6%B1%87%E6%80%BB%E5%88%B0%E4%B8%80%E4%B8%AAexcel%E8%A1%A8/</link>
+      <pubDate>Tue, 29 Oct 2019 10:33:00 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/post/python%E6%8F%90%E5%8F%96%E5%A4%9A%E4%B8%AA%E6%96%87%E4%BB%B6%E6%B1%87%E6%80%BB%E5%88%B0%E4%B8%80%E4%B8%AAexcel%E8%A1%A8/</guid>
+      <description>&lt;h2 id=&#34;背景介绍&#34;&gt;背景介绍&lt;/h2&gt;
+&lt;p&gt;在&lt;a href=&#34;https://jueqingsizhe66.github.io/post/perl%e6%8b%86%e5%88%86%e5%a4%a7%e6%96%87%e4%bb%b6%e5%88%b0excel%e8%a1%a8/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;perl拆分大文件&lt;/a&gt;后我们得到下图信息&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/windsim/windsimResults.png&#34; alt=&#34;windsim处理结果&#34;&gt;&lt;/p&gt;
+&lt;p&gt;我们希望单独提取三列信息到一个excel表大文件夹内，方便比较数据&lt;/p&gt;
+&lt;p&gt;适合任何风电场！&lt;/p&gt;
+&lt;h2 id=&#34;技术分解&#34;&gt;技术分解&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;遍历&lt;/li&gt;
+&lt;li&gt;提却对应文件标识信息，并保存计算结果到xlsx文件&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;技术实现&#34;&gt;技术实现&lt;/h2&gt;
+&lt;p&gt;主要用到pandas的ExcelWriter函数&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; numpy &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; np
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; pandas &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; pd
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; os
+
+
+&lt;span style=&#34;color:#75715e&#34;&gt;#headDir=r&amp;#34;C:\Users\yezhaoliang\Desktop\work\AIWind\CompareCloseTOSingle\8.00&amp;#34;&lt;/span&gt;
+headDir&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C:\Users\yezhaoliang\Desktop\work\AIWind\processWindSim\HuaiLaiTurbine&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#headDir=r&amp;#34;D:\BoundaryLines&amp;#34;&lt;/span&gt;
+
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;get_files&lt;/span&gt;(path&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;headDir, rule&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;.csv&amp;#34;&lt;/span&gt;):
+    all &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; fpathe,dirs,fs &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;walk(path):   &lt;span style=&#34;color:#75715e&#34;&gt;# os.walk是获取所有的目录&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; f &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; fs:
+            filename &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;join(fpathe,f)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; filename&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;endswith(rule):  &lt;span style=&#34;color:#75715e&#34;&gt;# 判断是否是&amp;#34;xxx&amp;#34;结尾&lt;/span&gt;
+                all&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(filename)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; all
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; __name__ &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;__main__&amp;#34;&lt;/span&gt;:
+    b &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; get_files()
+    writer&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ExcelWriter(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Results-WindSimHuaiLaiTurbine.xlsx&amp;#34;&lt;/span&gt;)
+    altitudesName&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[]
+    &lt;span style=&#34;color:#75715e&#34;&gt;# googleEarthAltitude=[]&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# computedAltitude=[]&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# deltaAltitude=[]&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; b:
+        them&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;i&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\\&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+        &lt;span style=&#34;color:#75715e&#34;&gt;#secondPart=them[them.__len__()-2]&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;# sheetName=them[them.__len__()-3]+them[them.__len__()-2]+them[them.__len__()-1]&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;#sheetName=them[them.__len__()-3]+them[them.__len__()-2]+them[them.__len__()-1]&lt;/span&gt;
+        sheetName&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;them[them&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;__len__()&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+        altitudesName&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(sheetName)
+        sd&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read_csv(i,skiprows&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;)
+        &lt;span style=&#34;color:#75715e&#34;&gt;## 去除Null行（注意空格，数字也一样处理)&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;#squeezeZseries = sdNotNull.iloc[0:300, 2] - sdNotNull.iat[0, 2]  ## 减去海拔值&lt;/span&gt;
+
+        result &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;DataFrame({
+            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Velocity v/(m/s)&amp;#39;&lt;/span&gt;:sd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[:,&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;],
+            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;KE /(m*2/s*2)&amp;#39;&lt;/span&gt;:sd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[:,&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;],
+            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Z/(m)&amp;#39;&lt;/span&gt;:sd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[:,&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]})
+        result&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_excel(writer,sheet_name&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;sheetName)
+    writer&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;save()
+    writer&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;close()&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>perl拆分大文件到excel表</title>
+      <link>https://jueqingsizhe66.github.io/post/perl%E6%8B%86%E5%88%86%E5%A4%A7%E6%96%87%E4%BB%B6%E5%88%B0excel%E8%A1%A8/</link>
+      <pubDate>Tue, 29 Oct 2019 10:00:00 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/post/perl%E6%8B%86%E5%88%86%E5%A4%A7%E6%96%87%E4%BB%B6%E5%88%B0excel%E8%A1%A8/</guid>
+      <description>&lt;h2 id=&#34;背景介绍&#34;&gt;背景介绍&lt;/h2&gt;
+&lt;p&gt;在风资源分析中，经常需要导出测风塔和风机点位不同扇区下的风速风向、湍流度等风资源信息，而这些信息导出后糅合在同一个大的文件下不好分析，为此需要进行拆分.&lt;/p&gt;
+&lt;p&gt;数据文件也有一些规律和关键信息，看下面的原始数据片段(通过windsim计算导出的wind vertical profile,)&lt;/p&gt;
+&lt;p&gt;适合任意风场！&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;
+WECS number        :          1
+WECS name          : T12
+Manufacturer       : GW121.1
+Type               : gw
+Nominal effect     :       2500
+Hub height         :       90.0
+x (local)          :     5452.0
+y (local)          :     4103.5
+x (global)         : 20380130.0
+y (global)         :  4475007.5
+
+
+
+sector:     0
+
+  k       z-coord        UCRT         VCRT         WCRT      Speed_2D       Inflow        Shear    Shear_low   Shear_high           KE           TI        alpha           EP
+ (-)        (m)          (m/s)        (m/s)        (m/s)        (m/s)        (deg)        (1/s)        (1/s)        (1/s)    (m*2/s*2)          (%)          (-)    (m*2/s*3)
+   1        4.546        0.076       -3.410       -0.093        3.411       -1.557        0.316        0.750        0.099        0.325       19.289        0.212       0.0165
+   2       13.636        0.095       -4.306       -0.158        4.307       -2.107        0.072        0.099        0.045        0.364       16.171        0.195       0.0069
+
+   ....
+
+WECS number        :         23
+WECS name          : T18
+Manufacturer       : GW121.1
+Type               : gw
+Nominal effect     :       2500
+Hub height         :       90.0
+x (local)          :     4920.0
+y (local)          :     5961.5
+x (global)         : 20379598.0
+y (global)         :  4476865.5
+
+
+
+sector:     0
+
+  k       z-coord        UCRT         VCRT         WCRT      Speed_2D       Inflow        Shear    Shear_low   Shear_high           KE           TI        alpha           EP
+ (-)        (m)          (m/s)        (m/s)        (m/s)        (m/s)        (deg)        (1/s)        (1/s)        (1/s)    (m*2/s*2)          (%)          (-)    (m*2/s*3)
+   1        4.545       -0.043       -3.503       -0.156        3.503       -2.558        0.304        0.771        0.071        0.343       19.305        0.154       0.0180
+
+
+sector:   337
+
+  k       z-coord        UCRT         VCRT         WCRT      Speed_2D       Inflow        Shear    Shear_low   Shear_high           KE           TI        alpha           EP
+ (-)        (m)          (m/s)        (m/s)        (m/s)        (m/s)        (deg)        (1/s)        (1/s)        (1/s)    (m*2/s*2)          (%)          (-)    (m*2/s*3)
+   1        4.545        1.902       -3.359       -0.050        3.860       -0.744        0.325        0.849        0.064        0.412       19.205        0.127       0.0235
+   2       13.636        1.984       -3.970       -0.124        4.438       -1.595        0.045        0.064        0.025        0.418       16.813        0.113       0.0076
+   3       22.727        1.986       -4.226       -0.166        4.670       -2.035        0.022        0.025        0.018        0.450       16.586        0.101       0.0046
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;原始数据分析&#34;&gt;原始数据分析&lt;/h2&gt;
+&lt;p&gt;通过分析发现，数据具有以下特点&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;存在WECS name ，代表新的机位点&lt;/li&gt;
+&lt;li&gt;每个机位点 有很多的扇区，sector开头，并用冒号划分&lt;/li&gt;
+&lt;li&gt;为了提取坐标信息，增加了global字段，分别提取x， y信息,可用于保存文件名&lt;/li&gt;
+&lt;li&gt;存在WECS name 表示停止打印标记&lt;/li&gt;
+&lt;li&gt;Sector之下的一行到数据信息截止【下一个扇区前或者WECS name前】需要保存到一个文件内&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;技术需求梳理&#34;&gt;技术需求梳理&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;每个文件起名标准，&amp;ldquo;风机名-扇区名.csv&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;什么时候修改风机名？ 遇到WECS name的时候； 但因为还需要提取x,y信息放入headname所以增加一个skip的标记号
+&lt;ol&gt;
+&lt;li&gt;skip==1 表示在sector数据范围内,开始打印到文件名内【此时用于提取核心数据】&lt;/li&gt;
+&lt;li&gt;skip==2 表示在新风机位置处[此时用于提取x, y坐标信息]&lt;/li&gt;
+&lt;li&gt;skip==3 表示停止打印，遇到WECS number【此时用于截断数据打印】&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;得到扇区名字后，开始进行文件读取命令&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;技术实现&#34;&gt;技术实现&lt;/h2&gt;
+&lt;p&gt;为此设计了需求字段&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-perl&#34; data-lang=&#34;perl&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt;  $specialSectorTag&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;sector&amp;#34;&lt;/span&gt;;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt;  $specialHeadTag&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;WECS name&amp;#34;&lt;/span&gt;;
+&lt;span style=&#34;color:#75715e&#34;&gt;#my  $specialHeadTag=&amp;#34;Clim name&amp;#34;;&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;## Sometimes, there are chinese （）&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt;  $specialHeadTag1&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;global&amp;#34;&lt;/span&gt;;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt;  $specialPrintTag&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;z-coord&amp;#34;&lt;/span&gt;;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt;  $specialStopPrintTag&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;WECS number&amp;#34;&lt;/span&gt;;
+&lt;span style=&#34;color:#75715e&#34;&gt;#my  $specialStopPrintTag=&amp;#34;Climatology number&amp;#34;;&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt;  $skip&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;其中SectorTag表示得到扇区信息,开始生成文件名，创建文件指针，
+SpecialHeadTag可设置多个，当前只需要提取头部两个信息，分别为WECS name风机名字和全局坐标点，所以设置了HeadTag 和HeadTag1，理论上无数多个&lt;/p&gt;
+&lt;p&gt;PrintTag用于打印核心数据； StopPrintTag用于停止打印核心数据&lt;/p&gt;
+&lt;p&gt;所有源代码&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-perl&#34; data-lang=&#34;perl&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/usr/bin/env perl&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#===============================================================================&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         FILE: forSplitWindSim.pl&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#        USAGE: ./forSplitWindSim.pl&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#  DESCRIPTION:&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#      OPTIONS: ---&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# REQUIREMENTS: ---&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         BUGS: ---&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#        NOTES: ---&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#       AUTHOR: Ye Zhaoliang (Ye Zhaoliang), yezhaoliang@ncepu.edu.cn&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# ORGANIZATION:&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#      VERSION: 1.0&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#      CREATED: 2019-10-15 14:31:13&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#     REVISION: ---&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#===============================================================================&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; strict;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; warnings;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; utf8;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt;  $specialSectorTag&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;sector&amp;#34;&lt;/span&gt;;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt;  $specialHeadTag&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;WECS name&amp;#34;&lt;/span&gt;;
+&lt;span style=&#34;color:#75715e&#34;&gt;#my  $specialHeadTag=&amp;#34;Clim name&amp;#34;;&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;## Sometimes, there are chinese （）&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt;  $specialHeadTag1&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;global&amp;#34;&lt;/span&gt;;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt;  $specialPrintTag&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;z-coord&amp;#34;&lt;/span&gt;;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt;  $specialStopPrintTag&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;WECS number&amp;#34;&lt;/span&gt;;
+&lt;span style=&#34;color:#75715e&#34;&gt;#my  $specialStopPrintTag=&amp;#34;Climatology number&amp;#34;;&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt;  $skip&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;;
+
+&lt;span style=&#34;color:#75715e&#34;&gt;#my	$INPUTDATA_file_name = &amp;#39;D:/vertical_profile_wecs_cosMount.dat&amp;#39;;		# input file name&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt;	$INPUTDATA_file_name &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;C:\Users\yezhaoliang\Desktop\work\AIWind\processWindSim\HuaiLaiTurbineZhuFengxiang\vertical_profile_wecs.dat&amp;#39;&lt;/span&gt;;		&lt;span style=&#34;color:#75715e&#34;&gt;# in&lt;/span&gt;
+
+open  &lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt; $INPUTDATA, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;lt;&amp;#39;&lt;/span&gt;, $INPUTDATA_file_name
+    &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; die  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;$0 : failed to open  input file &amp;#39;$INPUTDATA_file_name&amp;#39; : $!\n&amp;#34;&lt;/span&gt;;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt;  $filename&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt;  $headName&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt;  $sectorName&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt; $INPUTDATAsector;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt;	$INPUTDATAsector_file_name &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;;		&lt;span style=&#34;color:#75715e&#34;&gt;# input file name&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; ( &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;lt;$INPUTDATA&amp;gt;&lt;/span&gt; ) {
+
+    &lt;span style=&#34;color:#75715e&#34;&gt;## Jump out empty line&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;next&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ($_&lt;span style=&#34;color:#f92672&#34;&gt;=~&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;/^\s*$/&lt;/span&gt;);
+    chomp();
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt;  $line&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;trim($_);
+    &lt;span style=&#34;color:#75715e&#34;&gt;#my  @columns=split(/\s+|:/,$line);&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# Every files have different patterns, you need to feel it! Modify it!&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt;  @columns&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;split(&lt;span style=&#34;color:#e6db74&#34;&gt;/:/&lt;/span&gt;,$line);
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt; $#columns,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;\n&amp;#34;&lt;/span&gt;;
+    &lt;span style=&#34;color:#75715e&#34;&gt;#print &amp;#34;$.: $_\n&amp;#34; if($_=~/kpoint/);&lt;/span&gt;
+
+    &lt;span style=&#34;color:#75715e&#34;&gt;##  Test commands for specialTag1  when you are using newest word&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;##   You need to find out the most comfortable pattern  for you&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;#print &amp;#34;$.: Sector $columns[0]  $columns[1] \n&amp;#34; if($line=~/$specialSectorTag/);&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;#print &amp;#34;$.: Name     $columns[0]  $columns[1] \n&amp;#34; if($line=~/$specialHeadTag/);&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;#print &amp;#34;$.: X     $columns[0]  $columns[1] \n&amp;#34; if($line=~/$specialHeadTag1/);&lt;/span&gt;
+
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt;	$INPUTDATAsector_file_name &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;;		&lt;span style=&#34;color:#75715e&#34;&gt;# input file name&lt;/span&gt;
+
+
+    &lt;span style=&#34;color:#75715e&#34;&gt;## 根据skip标记号控制打印,逐行执行,&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;## tag the start print position with $specialPrintTag&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;## tag the end print position with $specialStopPrintTag&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ( $line &lt;span style=&#34;color:#f92672&#34;&gt;=~&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;/$specialHeadTag|$specialHeadTag1/&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; $skip&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;) {
+
+        $headName &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; trim($columns[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]);  &lt;span style=&#34;color:#75715e&#34;&gt;## update the headName&lt;/span&gt;
+        $skip &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;;
+    }&lt;span style=&#34;color:#66d9ef&#34;&gt;elsif&lt;/span&gt;(( $line &lt;span style=&#34;color:#f92672&#34;&gt;=~&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;/$specialHeadTag|$specialHeadTag1/&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; $skip&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;)){
+
+        $headName &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; join(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;-&amp;#34;&lt;/span&gt;,trim($headName),trim($columns[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;])); &lt;span style=&#34;color:#75715e&#34;&gt;## Apeend the headName&lt;/span&gt;
+    }
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ( $line &lt;span style=&#34;color:#f92672&#34;&gt;=~&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;/$specialSectorTag/&lt;/span&gt; ) {
+
+        $sectorName &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; trim($columns[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]);
+        $INPUTDATAsector_file_name &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;D://$headName-$sectorName.csv&amp;#34;&lt;/span&gt;;		&lt;span style=&#34;color:#75715e&#34;&gt;# input file name&lt;/span&gt;
+        open  $INPUTDATAsector, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;gt;&amp;#39;&lt;/span&gt;, $INPUTDATAsector_file_name
+            &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; die  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;$0 : failed to open  input file &amp;#39;$INPUTDATAsector_file_name&amp;#39; : $!\n&amp;#34;&lt;/span&gt;;
+
+        &lt;span style=&#34;color:#75715e&#34;&gt;#        $skip=1;&lt;/span&gt;
+    }
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ( $line &lt;span style=&#34;color:#f92672&#34;&gt;=~&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; /$specialPrintTag/&lt;/span&gt;) {
+        $skip&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;;
+    }
+
+    &lt;span style=&#34;color:#75715e&#34;&gt;### New Position for different sectors&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ( $line &lt;span style=&#34;color:#f92672&#34;&gt;=~&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; /$specialStopPrintTag/&lt;/span&gt;) {
+        $skip&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;;
+
+    }
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ( $skip &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; ) {
+        $line &lt;span style=&#34;color:#f92672&#34;&gt;=~&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;s/\s+/,/g&lt;/span&gt;;  &lt;span style=&#34;color:#75715e&#34;&gt;### colon separate delimiter&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt; $INPUTDATAsector $line,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;\n&amp;#34;&lt;/span&gt;;
+
+    }
+
+
+}
+close  $INPUTDATA
+    &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; warn &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;$0 : failed to close input file &amp;#39;$INPUTDATA_file_name&amp;#39; : $!\n&amp;#34;&lt;/span&gt;;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;sub&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;ltrim&lt;/span&gt; { &lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt; $s &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; shift; $s &lt;span style=&#34;color:#f92672&#34;&gt;=~&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;s/^\s+//&lt;/span&gt;;       &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; $s };
+&lt;span style=&#34;color:#66d9ef&#34;&gt;sub&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;rtrim&lt;/span&gt; { &lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt; $s &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; shift; $s &lt;span style=&#34;color:#f92672&#34;&gt;=~&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;s/\s+$//&lt;/span&gt;;       &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; $s };
+&lt;span style=&#34;color:#66d9ef&#34;&gt;sub&lt;/span&gt;  &lt;span style=&#34;color:#a6e22e&#34;&gt;trim&lt;/span&gt; { &lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt; $s &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; shift; $s &lt;span style=&#34;color:#f92672&#34;&gt;=~&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;s/^\s+|\s+$//g&lt;/span&gt;; &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; $s };&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Hugo academic 设计理念</title>
+      <link>https://jueqingsizhe66.github.io/post/hugo-academic-design/</link>
+      <pubDate>Mon, 21 Oct 2019 21:47:25 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/post/hugo-academic-design/</guid>
+      <description>&lt;p&gt;下面请看hugo academic的开始页面采用多个md文件组合在一起的设计，遵循widgets的设计理念，可单独
+修改并去除。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/hugo/home.png&#34; alt=&#34;hugo home design&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;主题安装方法&#34;&gt;主题安装方法&lt;/h1&gt;
+&lt;p&gt;hugo的每个theme都有exampleSite的文件夹，只要拷贝到blog的根目录，再把academic主题拷贝到根目录的theme文件夹。&lt;/p&gt;
+&lt;p&gt;20201117 windows版本需要使用hugo-extend可执行程序。&lt;/p&gt;
+&lt;h1 id=&#34;不修改原则&#34;&gt;不修改原则&lt;/h1&gt;
+&lt;p&gt;不要在themes/主题/layout直接修改其中的layout布局，而应该拷贝该主题文件
+到你的blog目录下的layout，并建立相似的文件架构，拷贝对应的文件，然后在
+该拷贝文件中进行修改，请参考&lt;code&gt;./layout/partials&lt;/code&gt;和&lt;code&gt;./layout/_default&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;他是和themes/academic/layout是相同的，但又增加了一些部分&lt;/p&gt;
+&lt;p&gt;方便后期升级主题 &lt;code&gt;git submodule update --remote --merge&lt;/code&gt;&lt;/p&gt;
+&lt;h1 id=&#34;widget的概念&#34;&gt;widget的概念&lt;/h1&gt;
+&lt;p&gt;hugo有很多widget的概念，一个markdown文件是不是就是一个widget?&lt;/p&gt;
+&lt;h1 id=&#34;常见设置&#34;&gt;常见设置&lt;/h1&gt;
+&lt;p&gt;在config文件夹下包含四个主要文件夹&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;config/_default/config.toml&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;config/_default/language.toml&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;config/_default/params.toml&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;config/_default/menus.toml&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;1-config配置&#34;&gt;1. config配置&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;网站title设置&lt;/li&gt;
+&lt;li&gt;不蒜子设置&lt;/li&gt;
+&lt;li&gt;邮箱电话设置&lt;/li&gt;
+&lt;li&gt;常规设置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;2-language配置&#34;&gt;2. language配置&lt;/h2&gt;
+&lt;p&gt;语言配置略。&lt;/p&gt;
+&lt;h2 id=&#34;3-params配置&#34;&gt;3. params配置&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;网站字体设置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;4-menus配置&#34;&gt;4. menus配置&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;中文导航条设置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;5-galary设置&#34;&gt;5. galary设置&lt;/h2&gt;
+&lt;p&gt;在&lt;code&gt;content\home\gallery\gallery\&lt;/code&gt;目录下添加需要展示的照片即可&lt;/p&gt;
+&lt;h1 id=&#34;按照博文的tag和categories进行相关文章推荐&#34;&gt;按照博文的tag和categories进行相关文章推荐&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://discourse.gohugo.io/t/related-finds-no-pages/13622/5&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;gohugo论坛&lt;/a&gt;提到相关内容的配置信息：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;threshold = 1
+[[related.indices]]
+name = &amp;quot;keywords&amp;quot;
+weight = 200
+[[related.indices]]
+name  = &amp;quot;tags&amp;quot;
+weight = 100
+[[related.indices]]
+name  = &amp;quot;categories&amp;quot;
+weight = 100
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;因为page_footer.html有这样的设置&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;{{ if ne .Type &amp;quot;page&amp;quot; }}
+  {{ $related := site.RegularPages.Related . | first 5 }}
+  {{ with $related }}
+  &amp;lt;div class=&amp;quot;article-widget content-widget-hr&amp;quot;&amp;gt;
+    &amp;lt;h3&amp;gt;{{ i18n &amp;quot;related&amp;quot; }}&amp;lt;/h3&amp;gt;
+    &amp;lt;ul&amp;gt;
+      {{ range . }}
+      &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;{{ .RelPermalink }}&amp;quot;&amp;gt;{{ .Title }}&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+      {{ end }}
+    &amp;lt;/ul&amp;gt;
+{{ end }}
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;gulp压缩&#34;&gt;gulp压缩&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.gulpjs.com.cn/docs/getting-started/quick-start/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;gulp中文官网&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://gulpjs.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;gulpjs官网&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;安装node&#34;&gt;安装node&lt;/h2&gt;
+&lt;p&gt;自己前往&lt;a href=&#34;http://nodejs.cn/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt; node官网 &lt;/a&gt;安装&lt;/p&gt;
+&lt;h2 id=&#34;安装gulp&#34;&gt;安装gulp&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;npm install --save-dev gulp gulp-cli gulp-htmlclean gulp-htmlmin gulp-clean-css gulp-uglify gulp-imagemin --registry=https://registry.npm.taobao.org
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;增加淘宝镜像源&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1. 命令
+npm config set registry https://registry.npm.taobao.org
+2. 验证命令
+npm config get registry
+如果返回https://registry.npm.taobao.org，说明镜像配置成功。
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;一个&lt;a href=&#34;https://gulpjs.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt; gulp &lt;/a&gt;项目对应一个package.json,该文件可以通过&lt;code&gt;npm init&lt;/code&gt;生成，或者自己新建也可以；
+然后通过&lt;code&gt;npm install&lt;/code&gt;即可更新,之所以放在devDependencies,因为npm install 会编译&lt;code&gt;lib/install.js&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
+  &amp;quot;name&amp;quot;: &amp;quot;Hugo&amp;quot;,
+  &amp;quot;version&amp;quot;: &amp;quot;1.0.0&amp;quot;,
+  &amp;quot;descrption&amp;quot;: &amp;quot;website common usage&amp;quot;,
+  &amp;quot;dependencies&amp;quot;: {
+    &amp;quot;gulp-clean-css&amp;quot;: &amp;quot;^4.2.0&amp;quot;,
+    &amp;quot;gulp-cli&amp;quot;: &amp;quot;^2.2.0&amp;quot;,
+    &amp;quot;gulp-htmlclean&amp;quot;: &amp;quot;^2.7.22&amp;quot;,
+    &amp;quot;gulp-htmlmin&amp;quot;: &amp;quot;^5.0.1&amp;quot;,
+    &amp;quot;gulp-minify-css&amp;quot;: &amp;quot;^1.2.4&amp;quot;,
+    &amp;quot;plugin-error&amp;quot;: &amp;quot;^1.0.1&amp;quot;
+  },
+  &amp;quot;devDependencies&amp;quot;: {
+    &amp;quot;gulp&amp;quot;: &amp;quot;^4.0.2&amp;quot;,
+    &amp;quot;gulp-imagemin&amp;quot;: &amp;quot;^6.1.1&amp;quot;,
+    &amp;quot;gulp-htmlmin&amp;quot;: &amp;quot;^5.0.1&amp;quot;,
+    &amp;quot;gifsicle&amp;quot;: &amp;quot;^4.0.1&amp;quot;,
+    &amp;quot;jpegtran-bin&amp;quot;: &amp;quot;^4.0.0&amp;quot;,
+    &amp;quot;optipng-bin&amp;quot;: &amp;quot;^6.0.0&amp;quot;,
+    &amp;quot;svgo&amp;quot;: &amp;quot;^0.7.2&amp;quot;,
+    &amp;quot;gulp-terser&amp;quot;: &amp;quot;^1.2.0&amp;quot;
+  }
+}
+
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/sindresorhus/gulp-imagemin/issues/236&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt; 因为，有时候gulp 下载下来得再node install一下 &lt;/a&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;
+node node_modules/jpegoptim-bin/lib/install.js
+node node_modules/optipng-bin/lib/install.js
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;一个gulp项目可以通过gulpfile.js中定义任务，如下为一个minify-images压缩图片命令，
+可以通过&lt;code&gt;gulp minify-images&lt;/code&gt;来执行图片压缩过程。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;gulp minify-images&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;// 压缩图片
+gulp.task(&#39;minify-images&#39;, function() {
+    return gulp.src(&#39;./static/images/**/*.*&#39;)
+        .pipe(imagemin(
+        [imagemin.gifsicle({interlaced: true}), 
+        imagemin.jpegtran({&#39;progressive&#39;: true}), 
+        imagemin.optipng({&#39;optimizationLevel&#39;: 7}), 
+        imagemin.svgo()],
+        {&#39;verbose&#39;: true}))
+        .pipe(gulp.dest(&#39;./static/images&#39;))
+});
+
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;gulp压缩工具2hugulp&#34;&gt;gulp压缩工具2：hugulp&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;安装  &lt;code&gt;npm install hugulp&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;配置 &lt;code&gt;hugulp init&lt;/code&gt; 生成.hugulp文件&lt;/li&gt;
+&lt;li&gt;运行 &lt;code&gt;hugulp&lt;/code&gt;
+暂时不用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;不蒜子计数器&#34;&gt;不蒜子计数器&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;在&lt;code&gt;layouts/partials/page_header&lt;/code&gt;添加js&lt;/li&gt;
+&lt;li&gt;在&lt;code&gt;layouts/_defaults/single.html&lt;/code&gt;添加阅读量信息(也包含了utteranc评论的设置)&lt;/li&gt;
+&lt;li&gt;在&lt;code&gt;layouts/_defaults/list.html&lt;/code&gt;添加阅读量信息&lt;/li&gt;
+&lt;li&gt;在&lt;code&gt;layouts/partials/page_footer.html&lt;/code&gt;添加站内统计&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;但是这里面没有关于hero相关的设置, 如何设置个人相关信息呐？ 除了about.md&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;可以在&lt;code&gt;content/home/hero.md&lt;/code&gt;进行设置(不经常修改)&lt;/li&gt;
+&lt;li&gt;另外, &lt;code&gt;content/home/about.md&lt;/code&gt;包含着个人widget的设置信息，并且关联到``content\authors\admin_index.md` 可进一步写入个人信息(经常修改)。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;规律： 所有首页显示都按照是否active进行显示，如果显示那么按照weight权重进行顺序编排.&lt;/p&gt;
+&lt;h1 id=&#34;org-hugo&#34;&gt;org-hugo&lt;/h1&gt;
+&lt;p&gt;add &lt;code&gt;C-c c A&lt;/code&gt; in your org-capture-templates, so you can create an entry with blog ideas&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-elisp&#34;&gt;
+    (&amp;quot;A&amp;quot; &amp;quot;Blog Ideas&amp;quot; entry (file+headline &amp;quot;~/.emacs.d/Dropbox/GTD/orgBoss/blog.org&amp;quot; &amp;quot;Blog Ideas&amp;quot;)
+    &amp;quot;* TODO [#B] %?\n  %i\n %U&amp;quot;
+    :empty-lines 1)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;add below lisp with &lt;code&gt;C-c c h&lt;/code&gt; in order to create an subtree in &amp;ldquo;Blog Ideas&amp;rdquo; with an blog title!&lt;/p&gt;
+&lt;p&gt;设置文章的tag和category。tag直接使用org的tag就行，而category则是前面加@符号的tag&lt;/p&gt;
+&lt;p&gt;当该子标题设置为Done的时候，ox-hugo自动帮你导出到对应的blog位置！很方便。&lt;/p&gt;
+&lt;p&gt;参考&lt;a href=&#34;https://ox-hugo.scripter.co/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;ox-hugo&lt;/a&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-elisp&#34;&gt;(with-eval-after-load &#39;org-capture
+  (defun org-hugo-new-subtree-post-capture-template ()
+    &amp;quot;Returns `org-capture&#39; template string for new Hugo post.
+See `org-capture-templates&#39; for more information.&amp;quot;
+    (let* ((title (read-from-minibuffer &amp;quot;Post Title: &amp;quot;)) ;Prompt to enter the post title
+           (fname (org-hugo-slug title)))
+      (mapconcat #&#39;identity
+                 `(
+                   ,(concat &amp;quot;* TODO &amp;quot; title)
+                   &amp;quot;:PROPERTIES:&amp;quot;
+                   ,(concat &amp;quot;:EXPORT_FILE_NAME: &amp;quot; fname)
+                   &amp;quot;:END:&amp;quot;
+                   &amp;quot;\n\n&amp;quot;)        ;Place the cursor here finally
+                 &amp;quot;\n&amp;quot;)))
+
+  (add-to-list &#39;org-capture-templates
+               &#39;(&amp;quot;x&amp;quot;              ;`org-capture&#39; binding + h
+                 &amp;quot;Hugo post&amp;quot;
+                 entry
+                 ;; It is assumed that below file is present in `org-directory&#39;
+                 ;; and that it has a &amp;quot;Blog Ideas&amp;quot; heading. It can even be a
+                 ;; symlink pointing to the actual location of all-posts.org!
+                 (file+headline &amp;quot;~/.emacs.d/Dropbox/GTD/orgBoss/blog.org&amp;quot; &amp;quot;Blog Ideas&amp;quot;)
+                 (function org-hugo-new-subtree-post-capture-template))))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;C-c c x&lt;/code&gt;的templates可以进一步改造&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>markdown个人偏见</title>
+      <link>https://jueqingsizhe66.github.io/blog/2014/05/15/mdge-ren-pian-jian/</link>
+      <pubDate>Thu, 15 May 2014 22:57:56 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/blog/2014/05/15/mdge-ren-pian-jian/</guid>
+      <description>&lt;p&gt;###嵌套的列表###&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;有序   数字&lt;/li&gt;
+&lt;li&gt;无序   * + 注意在写法上的增加缩进&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;###四个部分：###&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;重点&lt;/li&gt;
+&lt;li&gt;分类&lt;/li&gt;
+&lt;li&gt;链接&lt;/li&gt;
+&lt;li&gt;图片&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;markdown基本上没有下划线，也没有颜色，因为hacker不需要？ 其实也需要！只不过更关注的是重点（着重  真正的问题 大小和重量）和分类（列表） 链接（源自哪边）  需要一些图片（也许颜色和下划线 可以这样引入） 还有更重要的是真实的代码快（这个地方特别讲究，所以每种语言有不同的标记，也许代码的颜色才是黑客真正的颜色），一般他们还特别注意版权（也就是引用快，所以还有&amp;gt; , &amp;raquo; etc的选项）其他的工作就由html标记，但是特别区域快的摆放，特别注意前后的空行.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;如果加入空行就会显示空行，如果不加入空行会把前后的数据叠加在一起，除非是加入标题。空行和加标题的一个效果类似，会使前后的数据用空行分开，另起一行！&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;在&amp;gt; 缩进的前方加入多余空格会造成&lt;em&gt;代码块&lt;/em&gt;的效果&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;如果&lt;code&gt;&amp;lt;table&amp;gt;&lt;/code&gt;标签没有&lt;code&gt;&amp;lt;td&amp;gt;&lt;/code&gt;的加入没有表格的效果，还是一堆数据&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;http://daringfireball.net/projects/markdown/syntax&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;For any markup that is not covered by Markdown’s syntax, you simply use HTML itself&lt;/a&gt;. There’s no need to preface it or delimit it to indicate that you’re switching from Markdown to HTML; you just use the tags.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The only restrictions are that block-level HTML elements — e.g.&lt;code&gt;&amp;lt;div&amp;gt;&lt;/code&gt;, &lt;code&gt;&amp;lt;table&amp;gt;&lt;/code&gt;, &lt;code&gt;&amp;lt;pre&amp;gt;&lt;/code&gt;, &lt;code&gt;&amp;lt;p&amp;gt;&lt;/code&gt;,etc. — must be separated from surrounding content by blank lines, and the start and end tags of the block should not be indented** with tabs or spaces**. Markdown is smart enough not to add extra (unwanted) &lt;code&gt;&amp;lt;p&amp;gt;&lt;/code&gt; tags around HTML block-level tags.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;p&gt;##&lt;a href=&#34;http://hi.baidu.com/zolyfxughcbdkpq/item/85ea887c03081c2bd7a89cc1&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;u&gt;一些常用的markdown没有的编辑操作：&lt;/u&gt;&lt;/a&gt;###&lt;/p&gt;
+&lt;p&gt;###下划线###&lt;/p&gt;
+&lt;p&gt;&lt;u&gt;代码:《u》下划线《/u》 &lt;/u&gt;&lt;/p&gt;
+&lt;p&gt;中间标明:要加下划线的文字.&lt;/p&gt;
+&lt;p&gt;###删除线###
+代码:《s》删除线《/s》&lt;/p&gt;
+&lt;p&gt;&lt;s&gt;中间标明:要加删除线的文字.&lt;/s&gt;&lt;/p&gt;
+&lt;p&gt;###更改字体颜色：###&lt;/p&gt;
+&lt;p&gt;《font color=&amp;quot;#value&amp;quot;》写上你想写的字《/font》
+(其中value值在000000与FFFFFF(16位进制)之间修改#后面的数值，就可以改变字体的颜色。&lt;/p&gt;
+&lt;p&gt;###部分常用颜色代码：###&lt;/p&gt;
+&lt;table&gt;
+&lt;tr&gt;&lt;td&gt;&lt;font color=&#34;#ff0000&#34;&gt;#ff0000 红色的字喔！&lt;/td&gt;&lt;/font&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;font color=&#34;#ff8000&#34;&gt;#ff8000 橙色的字喔！&lt;/td&gt;&lt;/font&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;font color=&#34;#ffff00&#34;&gt;#ffff00 黄色的字喔！&lt;/td&gt; &lt;/font&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;font color=&#34;#00ff00&#34;&gt;#00ff00 绿色的字喔！&lt;/td&gt;&lt;/font&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;font color=&#34;#0080ff&#34;&gt;#0080ff 蓝色的字喔！&lt;/td&gt; &lt;/font&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;font color=&#34;#0000a0&#34;&gt;#0000a0 靛色的字喔！&lt;/td&gt;&lt;/font&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;font color=&#34;#8000ff&#34;&gt;#8000ff 紫色的字喔！&lt;/td&gt; &lt;/font&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;font color=&#34;#000000&#34;&gt;#000000 黑色的字喔！&lt;/td&gt;&lt;/font&gt; &lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;font color=&#34;#c0c0c0&#34;&gt;#c0c0c0 灰色的字喔！&lt;/td&gt;&lt;/font&gt;&lt;/tr&gt;
+&lt;/table&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

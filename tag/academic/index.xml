@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Academic | 30年磨一剑</title>
+    <link>https://jueqingsizhe66.github.io/tag/academic/</link>
+      <atom:link href="https://jueqingsizhe66.github.io/tag/academic/index.xml" rel="self" type="application/rss+xml" />
+    <description>Academic</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>©2020</copyright><lastBuildDate>Mon, 21 Oct 2019 21:47:25 +0800</lastBuildDate>
+    <image>
+      <url>https://jueqingsizhe66.github.io/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_2.png</url>
+      <title>Academic</title>
+      <link>https://jueqingsizhe66.github.io/tag/academic/</link>
+    </image>
+    
+    <item>
+      <title>Hugo academic 设计理念</title>
+      <link>https://jueqingsizhe66.github.io/post/hugo-academic-design/</link>
+      <pubDate>Mon, 21 Oct 2019 21:47:25 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/post/hugo-academic-design/</guid>
+      <description>&lt;p&gt;下面请看hugo academic的开始页面采用多个md文件组合在一起的设计，遵循widgets的设计理念，可单独
+修改并去除。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/hugo/home.png&#34; alt=&#34;hugo home design&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;主题安装方法&#34;&gt;主题安装方法&lt;/h1&gt;
+&lt;p&gt;hugo的每个theme都有exampleSite的文件夹，只要拷贝到blog的根目录，再把academic主题拷贝到根目录的theme文件夹。&lt;/p&gt;
+&lt;p&gt;20201117 windows版本需要使用hugo-extend可执行程序。&lt;/p&gt;
+&lt;h1 id=&#34;不修改原则&#34;&gt;不修改原则&lt;/h1&gt;
+&lt;p&gt;不要在themes/主题/layout直接修改其中的layout布局，而应该拷贝该主题文件
+到你的blog目录下的layout，并建立相似的文件架构，拷贝对应的文件，然后在
+该拷贝文件中进行修改，请参考&lt;code&gt;./layout/partials&lt;/code&gt;和&lt;code&gt;./layout/_default&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;他是和themes/academic/layout是相同的，但又增加了一些部分&lt;/p&gt;
+&lt;p&gt;方便后期升级主题 &lt;code&gt;git submodule update --remote --merge&lt;/code&gt;&lt;/p&gt;
+&lt;h1 id=&#34;widget的概念&#34;&gt;widget的概念&lt;/h1&gt;
+&lt;p&gt;hugo有很多widget的概念，一个markdown文件是不是就是一个widget?&lt;/p&gt;
+&lt;h1 id=&#34;常见设置&#34;&gt;常见设置&lt;/h1&gt;
+&lt;p&gt;在config文件夹下包含四个主要文件夹&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;config/_default/config.toml&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;config/_default/language.toml&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;config/_default/params.toml&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;config/_default/menus.toml&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;1-config配置&#34;&gt;1. config配置&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;网站title设置&lt;/li&gt;
+&lt;li&gt;不蒜子设置&lt;/li&gt;
+&lt;li&gt;邮箱电话设置&lt;/li&gt;
+&lt;li&gt;常规设置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;2-language配置&#34;&gt;2. language配置&lt;/h2&gt;
+&lt;p&gt;语言配置略。&lt;/p&gt;
+&lt;h2 id=&#34;3-params配置&#34;&gt;3. params配置&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;网站字体设置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;4-menus配置&#34;&gt;4. menus配置&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;中文导航条设置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;5-galary设置&#34;&gt;5. galary设置&lt;/h2&gt;
+&lt;p&gt;在&lt;code&gt;content\home\gallery\gallery\&lt;/code&gt;目录下添加需要展示的照片即可&lt;/p&gt;
+&lt;h1 id=&#34;按照博文的tag和categories进行相关文章推荐&#34;&gt;按照博文的tag和categories进行相关文章推荐&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://discourse.gohugo.io/t/related-finds-no-pages/13622/5&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;gohugo论坛&lt;/a&gt;提到相关内容的配置信息：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;threshold = 1
+[[related.indices]]
+name = &amp;quot;keywords&amp;quot;
+weight = 200
+[[related.indices]]
+name  = &amp;quot;tags&amp;quot;
+weight = 100
+[[related.indices]]
+name  = &amp;quot;categories&amp;quot;
+weight = 100
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;因为page_footer.html有这样的设置&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;{{ if ne .Type &amp;quot;page&amp;quot; }}
+  {{ $related := site.RegularPages.Related . | first 5 }}
+  {{ with $related }}
+  &amp;lt;div class=&amp;quot;article-widget content-widget-hr&amp;quot;&amp;gt;
+    &amp;lt;h3&amp;gt;{{ i18n &amp;quot;related&amp;quot; }}&amp;lt;/h3&amp;gt;
+    &amp;lt;ul&amp;gt;
+      {{ range . }}
+      &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;{{ .RelPermalink }}&amp;quot;&amp;gt;{{ .Title }}&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+      {{ end }}
+    &amp;lt;/ul&amp;gt;
+{{ end }}
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;gulp压缩&#34;&gt;gulp压缩&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.gulpjs.com.cn/docs/getting-started/quick-start/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;gulp中文官网&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://gulpjs.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;gulpjs官网&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;安装node&#34;&gt;安装node&lt;/h2&gt;
+&lt;p&gt;自己前往&lt;a href=&#34;http://nodejs.cn/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt; node官网 &lt;/a&gt;安装&lt;/p&gt;
+&lt;h2 id=&#34;安装gulp&#34;&gt;安装gulp&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;npm install --save-dev gulp gulp-cli gulp-htmlclean gulp-htmlmin gulp-clean-css gulp-uglify gulp-imagemin --registry=https://registry.npm.taobao.org
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;增加淘宝镜像源&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1. 命令
+npm config set registry https://registry.npm.taobao.org
+2. 验证命令
+npm config get registry
+如果返回https://registry.npm.taobao.org，说明镜像配置成功。
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;一个&lt;a href=&#34;https://gulpjs.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt; gulp &lt;/a&gt;项目对应一个package.json,该文件可以通过&lt;code&gt;npm init&lt;/code&gt;生成，或者自己新建也可以；
+然后通过&lt;code&gt;npm install&lt;/code&gt;即可更新,之所以放在devDependencies,因为npm install 会编译&lt;code&gt;lib/install.js&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
+  &amp;quot;name&amp;quot;: &amp;quot;Hugo&amp;quot;,
+  &amp;quot;version&amp;quot;: &amp;quot;1.0.0&amp;quot;,
+  &amp;quot;descrption&amp;quot;: &amp;quot;website common usage&amp;quot;,
+  &amp;quot;dependencies&amp;quot;: {
+    &amp;quot;gulp-clean-css&amp;quot;: &amp;quot;^4.2.0&amp;quot;,
+    &amp;quot;gulp-cli&amp;quot;: &amp;quot;^2.2.0&amp;quot;,
+    &amp;quot;gulp-htmlclean&amp;quot;: &amp;quot;^2.7.22&amp;quot;,
+    &amp;quot;gulp-htmlmin&amp;quot;: &amp;quot;^5.0.1&amp;quot;,
+    &amp;quot;gulp-minify-css&amp;quot;: &amp;quot;^1.2.4&amp;quot;,
+    &amp;quot;plugin-error&amp;quot;: &amp;quot;^1.0.1&amp;quot;
+  },
+  &amp;quot;devDependencies&amp;quot;: {
+    &amp;quot;gulp&amp;quot;: &amp;quot;^4.0.2&amp;quot;,
+    &amp;quot;gulp-imagemin&amp;quot;: &amp;quot;^6.1.1&amp;quot;,
+    &amp;quot;gulp-htmlmin&amp;quot;: &amp;quot;^5.0.1&amp;quot;,
+    &amp;quot;gifsicle&amp;quot;: &amp;quot;^4.0.1&amp;quot;,
+    &amp;quot;jpegtran-bin&amp;quot;: &amp;quot;^4.0.0&amp;quot;,
+    &amp;quot;optipng-bin&amp;quot;: &amp;quot;^6.0.0&amp;quot;,
+    &amp;quot;svgo&amp;quot;: &amp;quot;^0.7.2&amp;quot;,
+    &amp;quot;gulp-terser&amp;quot;: &amp;quot;^1.2.0&amp;quot;
+  }
+}
+
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/sindresorhus/gulp-imagemin/issues/236&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt; 因为，有时候gulp 下载下来得再node install一下 &lt;/a&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;
+node node_modules/jpegoptim-bin/lib/install.js
+node node_modules/optipng-bin/lib/install.js
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;一个gulp项目可以通过gulpfile.js中定义任务，如下为一个minify-images压缩图片命令，
+可以通过&lt;code&gt;gulp minify-images&lt;/code&gt;来执行图片压缩过程。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;gulp minify-images&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;// 压缩图片
+gulp.task(&#39;minify-images&#39;, function() {
+    return gulp.src(&#39;./static/images/**/*.*&#39;)
+        .pipe(imagemin(
+        [imagemin.gifsicle({interlaced: true}), 
+        imagemin.jpegtran({&#39;progressive&#39;: true}), 
+        imagemin.optipng({&#39;optimizationLevel&#39;: 7}), 
+        imagemin.svgo()],
+        {&#39;verbose&#39;: true}))
+        .pipe(gulp.dest(&#39;./static/images&#39;))
+});
+
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;gulp压缩工具2hugulp&#34;&gt;gulp压缩工具2：hugulp&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;安装  &lt;code&gt;npm install hugulp&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;配置 &lt;code&gt;hugulp init&lt;/code&gt; 生成.hugulp文件&lt;/li&gt;
+&lt;li&gt;运行 &lt;code&gt;hugulp&lt;/code&gt;
+暂时不用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;不蒜子计数器&#34;&gt;不蒜子计数器&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;在&lt;code&gt;layouts/partials/page_header&lt;/code&gt;添加js&lt;/li&gt;
+&lt;li&gt;在&lt;code&gt;layouts/_defaults/single.html&lt;/code&gt;添加阅读量信息(也包含了utteranc评论的设置)&lt;/li&gt;
+&lt;li&gt;在&lt;code&gt;layouts/_defaults/list.html&lt;/code&gt;添加阅读量信息&lt;/li&gt;
+&lt;li&gt;在&lt;code&gt;layouts/partials/page_footer.html&lt;/code&gt;添加站内统计&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;但是这里面没有关于hero相关的设置, 如何设置个人相关信息呐？ 除了about.md&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;可以在&lt;code&gt;content/home/hero.md&lt;/code&gt;进行设置(不经常修改)&lt;/li&gt;
+&lt;li&gt;另外, &lt;code&gt;content/home/about.md&lt;/code&gt;包含着个人widget的设置信息，并且关联到``content\authors\admin_index.md` 可进一步写入个人信息(经常修改)。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;规律： 所有首页显示都按照是否active进行显示，如果显示那么按照weight权重进行顺序编排.&lt;/p&gt;
+&lt;h1 id=&#34;org-hugo&#34;&gt;org-hugo&lt;/h1&gt;
+&lt;p&gt;add &lt;code&gt;C-c c A&lt;/code&gt; in your org-capture-templates, so you can create an entry with blog ideas&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-elisp&#34;&gt;
+    (&amp;quot;A&amp;quot; &amp;quot;Blog Ideas&amp;quot; entry (file+headline &amp;quot;~/.emacs.d/Dropbox/GTD/orgBoss/blog.org&amp;quot; &amp;quot;Blog Ideas&amp;quot;)
+    &amp;quot;* TODO [#B] %?\n  %i\n %U&amp;quot;
+    :empty-lines 1)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;add below lisp with &lt;code&gt;C-c c h&lt;/code&gt; in order to create an subtree in &amp;ldquo;Blog Ideas&amp;rdquo; with an blog title!&lt;/p&gt;
+&lt;p&gt;设置文章的tag和category。tag直接使用org的tag就行，而category则是前面加@符号的tag&lt;/p&gt;
+&lt;p&gt;当该子标题设置为Done的时候，ox-hugo自动帮你导出到对应的blog位置！很方便。&lt;/p&gt;
+&lt;p&gt;参考&lt;a href=&#34;https://ox-hugo.scripter.co/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;ox-hugo&lt;/a&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-elisp&#34;&gt;(with-eval-after-load &#39;org-capture
+  (defun org-hugo-new-subtree-post-capture-template ()
+    &amp;quot;Returns `org-capture&#39; template string for new Hugo post.
+See `org-capture-templates&#39; for more information.&amp;quot;
+    (let* ((title (read-from-minibuffer &amp;quot;Post Title: &amp;quot;)) ;Prompt to enter the post title
+           (fname (org-hugo-slug title)))
+      (mapconcat #&#39;identity
+                 `(
+                   ,(concat &amp;quot;* TODO &amp;quot; title)
+                   &amp;quot;:PROPERTIES:&amp;quot;
+                   ,(concat &amp;quot;:EXPORT_FILE_NAME: &amp;quot; fname)
+                   &amp;quot;:END:&amp;quot;
+                   &amp;quot;\n\n&amp;quot;)        ;Place the cursor here finally
+                 &amp;quot;\n&amp;quot;)))
+
+  (add-to-list &#39;org-capture-templates
+               &#39;(&amp;quot;x&amp;quot;              ;`org-capture&#39; binding + h
+                 &amp;quot;Hugo post&amp;quot;
+                 entry
+                 ;; It is assumed that below file is present in `org-directory&#39;
+                 ;; and that it has a &amp;quot;Blog Ideas&amp;quot; heading. It can even be a
+                 ;; symlink pointing to the actual location of all-posts.org!
+                 (file+headline &amp;quot;~/.emacs.d/Dropbox/GTD/orgBoss/blog.org&amp;quot; &amp;quot;Blog Ideas&amp;quot;)
+                 (function org-hugo-new-subtree-post-capture-template))))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;C-c c x&lt;/code&gt;的templates可以进一步改造&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Academic: the website builder for Hugo</title>
+      <link>https://jueqingsizhe66.github.io/post/getting-started/</link>
+      <pubDate>Wed, 20 Apr 2016 00:00:00 +0000</pubDate>
+      <guid>https://jueqingsizhe66.github.io/post/getting-started/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Create a free website with Academic using Markdown, Jupyter, or RStudio. Choose a beautiful color theme and build anything with the Page Builder - over 40 &lt;em&gt;widgets&lt;/em&gt;, &lt;em&gt;themes&lt;/em&gt;, and &lt;em&gt;language packs&lt;/em&gt; included!&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://academic-demo.netlify.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Check out the latest &lt;strong&gt;demo&lt;/strong&gt;&lt;/a&gt; of what you&amp;rsquo;ll get in less than 10 minutes, or &lt;a href=&#34;https://sourcethemes.com/academic/#expo&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;view the &lt;strong&gt;showcase&lt;/strong&gt;&lt;/a&gt; of personal, project, and business sites.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;👉 &lt;a href=&#34;#install&#34;&gt;&lt;strong&gt;Get Started&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;📚 &lt;a href=&#34;https://sourcethemes.com/academic/docs/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;View the &lt;strong&gt;documentation&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;💬 &lt;a href=&#34;https://discourse.gohugo.io&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;Ask a question&lt;/strong&gt; on the forum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;👥 &lt;a href=&#34;https://spectrum.chat/academic&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Chat with the &lt;strong&gt;community&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;🐦 Twitter: &lt;a href=&#34;https://twitter.com/source_themes&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;@source_themes&lt;/a&gt; &lt;a href=&#34;https://twitter.com/GeorgeCushen&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;@GeorgeCushen&lt;/a&gt; &lt;a href=&#34;https://twitter.com/search?q=%23MadeWithAcademic&amp;amp;src=typd&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;#MadeWithAcademic&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;💡 &lt;a href=&#34;https://github.com/gcushen/hugo-academic/issues&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Request a &lt;strong&gt;feature&lt;/strong&gt; or report a &lt;strong&gt;bug&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;⬆️ &lt;strong&gt;Updating?&lt;/strong&gt; View the &lt;a href=&#34;https://sourcethemes.com/academic/docs/update/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Update Guide&lt;/a&gt; and &lt;a href=&#34;https://sourcethemes.com/academic/updates/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Release Notes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;❤️ &lt;strong&gt;Support development&lt;/strong&gt; of Academic:
+&lt;ul&gt;
+&lt;li&gt;☕️ &lt;a href=&#34;https://paypal.me/cushen&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;Donate a coffee&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;💵 &lt;a href=&#34;https://www.patreon.com/cushen&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Become a backer on &lt;strong&gt;Patreon&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;🖼️ &lt;a href=&#34;https://www.redbubble.com/people/neutreno/works/34387919-academic&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Decorate your laptop or journal with an Academic &lt;strong&gt;sticker&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;👕 &lt;a href=&#34;https://academic.threadless.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Wear the &lt;strong&gt;T-shirt&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;👩‍💻 &lt;a href=&#34;https://sourcethemes.com/academic/docs/contribute/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;Contribute&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-academic-is-mobile-first-with-a-responsive-design-to-ensure-that-your-site-looks-stunning-on-every-device&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://raw.githubusercontent.com/gcushen/hugo-academic/master/academic.png&#34; data-caption=&#34;Academic is mobile first with a responsive design to ensure that your site looks stunning on every device.&#34;&gt;
+
+
+  &lt;img src=&#34;https://raw.githubusercontent.com/gcushen/hugo-academic/master/academic.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Academic is mobile first with a responsive design to ensure that your site looks stunning on every device.
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+&lt;p&gt;&lt;strong&gt;Key features:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Page builder&lt;/strong&gt; - Create &lt;em&gt;anything&lt;/em&gt; with &lt;a href=&#34;https://sourcethemes.com/academic/docs/page-builder/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;widgets&lt;/strong&gt;&lt;/a&gt; and &lt;a href=&#34;https://sourcethemes.com/academic/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;elements&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Edit any type of content&lt;/strong&gt; - Blog posts, publications, talks, slides, projects, and more!&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Create content&lt;/strong&gt; in &lt;a href=&#34;https://sourcethemes.com/academic/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;Markdown&lt;/strong&gt;&lt;/a&gt;, &lt;a href=&#34;https://sourcethemes.com/academic/docs/jupyter/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;Jupyter&lt;/strong&gt;&lt;/a&gt;, or &lt;a href=&#34;https://sourcethemes.com/academic/docs/install/#install-with-rstudio&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;RStudio&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Plugin System&lt;/strong&gt; - Fully customizable &lt;a href=&#34;https://sourcethemes.com/academic/themes/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;color&lt;/strong&gt; and &lt;strong&gt;font themes&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Display Code and Math&lt;/strong&gt; - Code highlighting and &lt;a href=&#34;https://en.wikibooks.org/wiki/LaTeX/Mathematics&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;LaTeX math&lt;/a&gt; supported&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Integrations&lt;/strong&gt; - &lt;a href=&#34;https://analytics.google.com&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Google Analytics&lt;/a&gt;, &lt;a href=&#34;https://disqus.com&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Disqus commenting&lt;/a&gt;, Maps, Contact Forms, and more!&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Beautiful Site&lt;/strong&gt; - Simple and refreshing one page design&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Industry-Leading SEO&lt;/strong&gt; - Help get your website found on search engines and social media&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Media Galleries&lt;/strong&gt; - Display your images and videos with captions in a customizable gallery&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Mobile Friendly&lt;/strong&gt; - Look amazing on every screen with a mobile friendly version of your site&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Multi-language&lt;/strong&gt; - 15+ language packs including English, 中文, and Português&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Multi-user&lt;/strong&gt; - Each author gets their own profile page&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Privacy Pack&lt;/strong&gt; - Assists with GDPR&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Stand Out&lt;/strong&gt; - Bring your site to life with animation, parallax backgrounds, and scroll effects&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;One-Click Deployment&lt;/strong&gt; - No servers. No databases. Only files.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;themes&#34;&gt;Themes&lt;/h2&gt;
+&lt;p&gt;Academic comes with &lt;strong&gt;automatic day (light) and night (dark) mode&lt;/strong&gt; built-in. Alternatively, visitors can  choose their preferred mode - click the sun/moon icon in the top right of the &lt;a href=&#34;https://academic-demo.netlify.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Demo&lt;/a&gt; to see it in action! Day/night mode can also be disabled by the site admin in &lt;code&gt;params.toml&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://sourcethemes.com/academic/themes/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Choose a stunning &lt;strong&gt;theme&lt;/strong&gt; and &lt;strong&gt;font&lt;/strong&gt;&lt;/a&gt; for your site. Themes are fully &lt;a href=&#34;https://sourcethemes.com/academic/docs/customization/#custom-theme&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;customizable&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;ecosystem&#34;&gt;Ecosystem&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&#34;https://github.com/sourcethemes/academic-admin&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Academic Admin&lt;/a&gt;:&lt;/strong&gt; An admin tool to import publications from BibTeX or import assets for an offline site&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&#34;https://github.com/sourcethemes/academic-scripts&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Academic Scripts&lt;/a&gt;:&lt;/strong&gt; Scripts to help migrate content to new versions of Academic&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;install&#34;&gt;Install&lt;/h2&gt;
+&lt;p&gt;You can choose from one of the following four methods to install:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://sourcethemes.com/academic/docs/install/#install-with-web-browser&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;one-click install using your web browser (recommended)&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://sourcethemes.com/academic/docs/install/#install-with-git&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;install on your computer using &lt;strong&gt;Git&lt;/strong&gt; with the Command Prompt/Terminal app&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://sourcethemes.com/academic/docs/install/#install-with-zip&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;install on your computer by downloading the &lt;strong&gt;ZIP files&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://sourcethemes.com/academic/docs/install/#install-with-rstudio&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;install on your computer with &lt;strong&gt;RStudio&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Then &lt;a href=&#34;https://sourcethemes.com/academic/docs/get-started/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;personalize and deploy your new site&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;updating&#34;&gt;Updating&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://sourcethemes.com/academic/docs/update/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;View the Update Guide&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Feel free to &lt;em&gt;star&lt;/em&gt; the project on &lt;a href=&#34;https://github.com/gcushen/hugo-academic/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Github&lt;/a&gt; to help keep track of &lt;a href=&#34;https://sourcethemes.com/academic/updates&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;updates&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;license&#34;&gt;License&lt;/h2&gt;
+&lt;p&gt;Copyright 2016-present &lt;a href=&#34;https://georgecushen.com&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;George Cushen&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Released under the &lt;a href=&#34;https://github.com/gcushen/hugo-academic/blob/master/LICENSE.md&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;MIT&lt;/a&gt; license.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

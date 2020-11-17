@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ubuntu | 30年磨一剑</title>
+    <link>https://jueqingsizhe66.github.io/tag/ubuntu/</link>
+      <atom:link href="https://jueqingsizhe66.github.io/tag/ubuntu/index.xml" rel="self" type="application/rss+xml" />
+    <description>ubuntu</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>©2020</copyright><lastBuildDate>Fri, 19 May 2017 19:31:22 +0800</lastBuildDate>
+    <image>
+      <url>https://jueqingsizhe66.github.io/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_2.png</url>
+      <title>ubuntu</title>
+      <link>https://jueqingsizhe66.github.io/tag/ubuntu/</link>
+    </image>
+    
+    <item>
+      <title>Ubuntu17.04 Install FAST8.16</title>
+      <link>https://jueqingsizhe66.github.io/blog/2017/05/19/ubuntu17-dot-04-install-fast8-dot-16/</link>
+      <pubDate>Fri, 19 May 2017 19:31:22 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/blog/2017/05/19/ubuntu17-dot-04-install-fast8-dot-16/</guid>
+      <description>&lt;p&gt;Something Noted in the process of installation FAST8.16 in the 32bit ubuntu17.04 system.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Download  &lt;a href=&#34;https://nwtc.nrel.gov/FAST8&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt; Fast8.16 &lt;/a&gt; and decompress&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;
+mkdir FAST-816
+cd FAST-816
+mv FAST*.tar.gz FAST-816
+tar -xvf FAST*.tar.gz
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;Download  &lt;a href=&#34;https://nwtc.nrel.gov/system/files/MAP_v1.20.10.tar.gz&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt; Map &lt;/a&gt; for generating map.so and decompress&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;FAST_DIR 告诉MAP FAST项目存在哪里&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;
+cd FAST-816
+mkdir LIBMAP
+cd LIBMAP
+mv ../../*.MAP*.tar.gz .
+tar -xvf *MAP*.tar.gz
+
+cd compiling
+vim driver_makefile&amp;lt;&amp;lt;EOF
+
+----- FAST_DIR     = ../Source
++++++ FAST_DIR     = /paper/FAST-816/
+
+EOF
+
+cd ../src/
+
+vim makefile&amp;lt;&amp;lt;EOF
+
+----- BITS = -m64
++++++ BITS = -m32  32bit系统
+
+EOF
+
+make#################something error here
+
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;make Libmap.so something error here&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;a.o mapinit.o maperror.o lineroutines.o numeric.o outputstream.o mapapi.o lmroutines.o jacobian.o residual.o  -lm -llapacke 
+/usr/bin/ld: 找不到 -llapacke
+/usr/bin/ld: 找不到 -llapacke
+collect2: error: ld returned 1 exit status
+makefile:81: recipe for target &#39;all&#39; failed
+make: *** [all] Error 1
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;a href=&#34;http://jueqingsizhe66.github.io/blog/2016/04/15/ubuntu15-dot-10-32bit-an-zhuang-fastv8-dot-15/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt; fixed it &lt;/a&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;
+apt-get install lapacke-dev*
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;make again&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;make ### OK generate libmap-1.2.so
+
+mkdir /paper/FAST-816/bin
+cp libmap-1.20.10.so /paper/FAST-816/bin
+
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;Now Install FAST&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;
+cd /paper/FAST-816/compiling/
+make 
+make -f makefile_DISCON_DLL ## for Test18-26.fst case
+
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;gcc -fbacktrack FAST_Subs&lt;/code&gt; 可能再gcc-6会有点问题，部分f90文件得删除该选项 删掉-fbacktrace测试通过&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;
+ 2 &amp;gt; make
+gfortran -I Obj_lin32 -O2 -m32 -fbacktrace -ffree-line-length-none -x f95-cpp-input -DNO_LibLoad -DUSE_DLL_INTERFACE -c ../Source/FAST_Subs.f90 -o Obj_lin32/FAST_Subs.o -J Obj_lin32 -B Obj_lin32
+gfortran: internal compiler error: 已杀死 (program f951)
+Please submit a full bug report,
+with preprocessed source if appropriate.
+See &amp;lt;file:///usr/share/doc/gcc-6/README.Bugs&amp;gt; for instructions.
+makefile:416: recipe for target &#39;FAST_Subs.o&#39; failed
+make: *** [FAST_Subs.o] Error 4
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;Run Test1-18.fst&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;You can go to /paper/FAST-816/bin to check whether FAST_Glin32 and libmap.so have been generated or not&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;cd /paper/FAST-816/bin
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;
+❯ ./FAST_glin32 ../CertTest/Test02.fst
+
+ **************************************************************************************************
+ FAST (v8.16.00a-bjj, 27-Jul-2016)
+
+ Copyright (C) 2016 National Renewable Energy Laboratory
+
+ This program comes with ABSOLUTELY NO WARRANTY. See the &amp;quot;license.txt&amp;quot; file distributed with this
+ software for details.
+ **************************************************************************************************
+
+  Running FAST (v8.16.00a-bjj, 27-Jul-2016), compiled as a 32-bit application using single
+  precision
+  linked with NWTC Subroutine Library (v2.09.00, 23-Jul-2016)
+
+  Heading of the FAST input file:
+    FAST Certification Test #02: AWT-27CR2 with many DOFs with startup and shutdown and steady wind
+
+  Running ElastoDyn (v1.04.00a-bjj, 26-Jul-2016).
+
+  Running AeroDyn (v15.03.00, 27-Jul-2016).
+
+  Running AirfoilInfo (v1.01.00a-bjj, 5-Apr-2016).
+
+  Running BEM (v1.02.00, 29-Jun-2016).
+
+  Running InflowWind (v3.03.00, 26-Jul-2016).
+  Opening InflowWind input file:  ../CertTest/AWT27/Test02_InflowWind.dat
+
+  Running ServoDyn (v1.06.00a-bjj, 26-Jul-2016).
+  Timestep: 0 of 20 seconds.
+
+ Timestep: 2 of 20 seconds. Estimated final completion at 16:05:13.                               
+ Timestep: 4 of 20 seconds. Estimated final completion at 16:05:12.    
+
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;Modify the ServoData for servo module
+&lt;a href=&#34;http://jueqingsizhe66.github.io/blog/2015/10/22/fast-in-ubuntu64bit-bian-yi-zhu-yi-shi-xiang/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt; DISON_DLL running &lt;/a&gt; 因为FAST在运行Test18-26.fst的case时候会去读取5MW_BASELINE[只针对的是5MW]底下的ServoData的文件, 所以对应dll-filename得修改一下。&lt;/p&gt;
+&lt;p&gt;make DISCON SO file&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;❯ make -f makefile_DISCON_DLL
+gfortran  -O2 -m32 -fbacktrace -ffree-line-length-none -x f95-cpp-input -C -DIMPLICIT_DLLEXPORT -fPIC -c ../CertTest/5MW_Baseline/ServoData/Source/DISCON.f90 -o Obj_lin32/DISCON.obj -J Obj_lin32 -B Obj_lin32
+gfortran -shared -O2 -m32 -fbacktrace -fPIC -I Obj_lin32 -o ../CertTest/5MW_Baseline/ServoData/DISCON_glin32.so \
+ Obj_lin32/DISCON.obj
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;Change DLL_FileName in the configure data file
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;cd /paper/FAST-816/CertTest/5MW_Baseline
+vim NRELOffshrBsline5MW_Onshore_ServoDyn.dat 
+
+修改DLL_FileName为 ServoData/DISCON_glin32.so
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Test RESULT:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;
+  Running BeamDyn (v1.01.04, 26-Jul-2016).
+
+  Running AeroDyn (v15.03.00, 27-Jul-2016).
+
+  Running AirfoilInfo (v1.01.00a-bjj, 5-Apr-2016).
+
+  Running BEM (v1.02.00, 29-Jun-2016).
+ Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode = 1, Blade = 1
+ Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode = 2, Blade = 1
+ Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode = 3, Blade = 1
+ Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode = 4, Blade = 1
+ Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode = 1, Blade = 2
+ Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode = 2, Blade = 2
+ Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode = 3, Blade = 2
+ Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode = 4, Blade = 2
+ Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode = 1, Blade = 3
+ Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode = 2, Blade = 3
+ Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode = 3, Blade = 3
+ Warning: Turning off Unsteady Aerodynamics because C_nalpha is 0.  BladeNode = 4, Blade = 3
+
+  Running InflowWind (v3.03.00, 26-Jul-2016).
+  Opening InflowWind input file:  ../CertTest/5MW_Baseline/NRELOffshrBsline5MW_InflowWind_12mps.dat
+
+    Reading a 31x31 grid (145 m wide, 17.5 m to 162.5 m above ground) with a characteristic wind
+    speed of 12 m/s. This full-field file was generated by TurbSim (v1.06.00, 21-Sep-2012) on
+    07-Jan-2014 at 12:50:45.
+
+    Processed 1442 time steps of 20-Hz full-field data (72.05 seconds).
+
+  Running ServoDyn (v1.06.00a-bjj, 26-Jul-2016).
+
+  Running ServoDyn Interface for Bladed Controllers (using GNU Fortran for Linux, 14-Oct-2015).
+  Timestep: 0 of 20 seconds.
+
+ FAST_Solution0:CalcOutputs_And_SolveForInputs:SolveOption2:SrvD_CalcOutput:Running with torque
+ and pitch control of the NREL offshore 5MW baseline wind turbine from DISCON.dll as written by J.
+ Jonkman of NREL/NWTC for use in the IEA Annex XXIII OC3 studies.
+
+
+ Timestep: 1 of 20 seconds. Estimated final completion at 16:20:36.                               
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Okay, All things have been done.&lt;/p&gt;
+&lt;p&gt;Happy FAST programming.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

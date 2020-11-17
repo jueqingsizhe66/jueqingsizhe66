@@ -1,13 +1,19 @@
-<!DOCTYPE html>
-<html lang="en-us">
+<!DOCTYPE html><html lang="en-us" >
 
 <head>
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="generator" content="Source Themes Academic 4.5.0">
+  
+  
+  
+  <meta name="generator" content="Wowchemy 5.0.0-beta.0 for Hugo">
+  
 
+  
+
+  
   
 
   
@@ -21,20 +27,35 @@
   
   
 
-  <meta name="author" content="Ye Zhaoliang">
+  <meta name="author" content="叶昭良">
 
   
   
   
     
   
-  <meta name="description" content="背景分析 很多时候，我们需要执行一条命令比如`batchFluent.bat`, `cfdpost -batch \*.cse`, `fluent 3d -i batchFluent2000`等， 在执行该命令时">
+  <meta name="description" content="背景分析 很多时候，我们需要执行一条命令比如`batchFlu">
 
   
   <link rel="alternate" hreflang="en-us" href="https://jueqingsizhe66.github.io/post/perl%E6%89%B9%E9%87%8F%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%99%A8%E7%A8%8B%E5%BA%8F/">
 
   
 
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
 
   
   
@@ -45,11 +66,17 @@
   
   
   
+  <script src="/js/mathjax-config.js"></script>
+  
+
+  
+  
+  
   
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
 
     
     
@@ -59,48 +86,193 @@
     
       
       
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css" crossorigin="anonymous" title="hl-light">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/solarized-dark.min.css" crossorigin="anonymous" title="hl-light">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/solarized-dark.min.css" crossorigin="anonymous" title="hl-dark" disabled>
       
     
 
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css" integrity="sha512-1xoFisiGdy9nvho8EgXuXvnpR5GAMSjFwp40gSRE3NwdUdIMIKuPa7bqoUhLD0O/5tPNhteAsE5XyyMi5reQVA==" crossorigin="anonymous">
     
 
     
 
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.2.2/lazysizes.min.js" integrity="sha512-TmDwFLhg3UA4ZG0Eb4MIyT1O1Mb+Oww5kFG0uHqXsdbyZz9DcvYQhKpGgNkamAI6h2lGGZq2X8ftOJvF/XjTUg==" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+
   
 
   
   
   
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+    
+      
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+    
   
 
   
   
   
-  <link rel="stylesheet" href="/css/academic.min.e8d4d5fd376e67b34452ebe1cae16341.css">
+  
+  <link rel="stylesheet" href="/css/wowchemy.css">
 
   
 
-  
-
 
 
 
   
+<script>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','4703127160');
+</script>
 
+
+  
+
+
+  
+  
 
   
 
   <link rel="manifest" href="/index.webmanifest">
-  <link rel="icon" type="image/png" href="/img/icon-32.png">
-  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+  <link rel="icon" type="image/png" href="/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_192x192_fill_lanczos_center_2.png">
 
   <link rel="canonical" href="https://jueqingsizhe66.github.io/post/perl%E6%89%B9%E9%87%8F%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%99%A8%E7%A8%8B%E5%BA%8F/">
 
+  
+  
+  
   
   
   
@@ -114,11 +286,11 @@
   <meta property="twitter:site" content="@jueqingsizhe66">
   <meta property="twitter:creator" content="@jueqingsizhe66">
   
-  <meta property="og:site_name" content="简约派">
+  <meta property="og:site_name" content="30年磨一剑">
   <meta property="og:url" content="https://jueqingsizhe66.github.io/post/perl%E6%89%B9%E9%87%8F%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%99%A8%E7%A8%8B%E5%BA%8F/">
-  <meta property="og:title" content="perl批量工作机器程序 | 简约派">
-  <meta property="og:description" content="背景分析 很多时候，我们需要执行一条命令比如`batchFluent.bat`, `cfdpost -batch \*.cse`, `fluent 3d -i batchFluent2000`等， 在执行该命令时"><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
-  <meta property="twitter:image" content="https://jueqingsizhe66.github.io/img/icon-192.png"><meta property="og:locale" content="en-us">
+  <meta property="og:title" content="perl批量工作机器程序 | 30年磨一剑">
+  <meta property="og:description" content="背景分析 很多时候，我们需要执行一条命令比如`batchFlu"><meta property="og:image" content="https://jueqingsizhe66.github.io/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_2.png">
+  <meta property="twitter:image" content="https://jueqingsizhe66.github.io/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
   
     
       <meta property="article:published_time" content="2019-11-10T00:20:00&#43;08:00">
@@ -141,8 +313,6 @@
 
 
 
-
-
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -158,18 +328,18 @@
   
   "author": {
     "@type": "Person",
-    "name": "Ye Zhaoliang"
+    "name": "叶昭良"
   },
   
   "publisher": {
     "@type": "Organization",
-    "name": "简约派",
+    "name": "30年磨一剑",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://jueqingsizhe66.github.io/img/icon-512.png"
+      "url": "https://jueqingsizhe66.github.io/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_192x192_fill_lanczos_center_2.png"
     }
   },
-  "description": "背景分析 很多时候，我们需要执行一条命令比如`batchFluent.bat`, `cfdpost -batch \\*.cse`, `fluent 3d -i batchFluent2000`等， 在执行该命令时"
+  "description": "背景分析 很多时候，我们需要执行一条命令比如`batchFlu"
 }
 </script>
 
@@ -187,11 +357,19 @@
 
 
 
-  <title>perl批量工作机器程序 | 简约派</title>
+  <title>perl批量工作机器程序 | 30年磨一剑</title>
 
 </head>
 
-<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper  ">
+
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.js"></script>
 
   <aside class="search-results" id="search">
   <div class="container">
@@ -209,7 +387,7 @@
       <div id="search-box">
         
         <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
-        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control">
         
       </div>
 
@@ -225,25 +403,48 @@
 </aside>
 
 
-  
-<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0 compensate-for-scrollbar" id="navbar-main">
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
   <div class="container">
 
     
-      <a class="navbar-brand" href="/">简约派</a>
-      
-      <button type="button" class="navbar-toggler" data-toggle="collapse"
-              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
-        <span><i class="fas fa-bars"></i></span>
-      </button>
-      
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/">30年磨一剑</a>
+    </div>
+    
 
     
-    <div class="collapse navbar-collapse" id="navbar">
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/">30年磨一剑</a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-end" id="navbar-content">
 
       
-      
-      <ul class="navbar-nav ml-auto">
+      <ul class="navbar-nav d-md-inline-flex">
         
 
         
@@ -255,16 +456,24 @@
         
 
         
+
         
         
         
         
+
         
           
+            
+            
           
           
             
-          
+            
+            
+              
+            
+            
           
         
 
@@ -284,16 +493,24 @@
         
 
         
+
         
         
         
         
+
         
           
+            
+            
           
           
             
-          
+            
+            
+              
+            
+            
           
         
 
@@ -313,68 +530,18 @@
         
 
         
+
         
         
         
         
+
         
           
-          
-          
+            
             
           
           
-        
-
-        <li class="nav-item">
-          <a class="nav-link " href="/#projects"><span>项目</span></a>
-        </li>
-
-        
-        
-
-        
-
-        
-        
-        
-          
-        
-
-        
-        
-        
-        
-        
-        
-          
-          
-          
-            
-          
-          
-        
-
-        <li class="nav-item">
-          <a class="nav-link " href="/#featured"><span>Publications</span></a>
-        </li>
-
-        
-        
-
-        
-
-        
-        
-        
-          
-        
-
-        
-        
-        
-        
-        
         
 
         <li class="nav-item">
@@ -393,10 +560,18 @@
         
 
         
+
         
         
         
         
+
+        
+          
+            
+            
+          
+          
         
 
         <li class="nav-item">
@@ -415,10 +590,18 @@
         
 
         
+
         
         
         
         
+
+        
+          
+            
+            
+          
+          
         
 
         <li class="nav-item">
@@ -437,10 +620,18 @@
         
 
         
+
         
         
         
         
+
+        
+          
+            
+            
+          
+          
         
 
         <li class="nav-item">
@@ -459,16 +650,24 @@
         
 
         
+
         
         
         
         
+
         
           
+            
+            
           
           
             
-          
+            
+            
+              
+            
+            
           
         
 
@@ -482,29 +681,49 @@
       
 
         
-
-        
-        <li class="nav-item">
-          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
-        </li>
-        
-
-        
-
-        
-        <li class="nav-item">
-          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
-        </li>
-        
-
       </ul>
-
     </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+
+    </ul>
+
   </div>
 </nav>
 
 
-  <article class="article">
+  </div>
+
+  <div class="page-body">
+    <article class="article">
 
   
 
@@ -566,7 +785,6 @@
     
     Nov 10, 2019
   </span>
-
   
 
   
@@ -575,10 +793,11 @@
   <span class="middot-divider"></span>
   <span class="article-reading-time">
     7 min read
-
   </span>
   
 
+  
+  
   
   
   
@@ -587,9 +806,9 @@
   
   <span class="middot-divider"></span>
   <span class="article-categories">
-    <i class="fas fa-folder mr-1"></i><a href="">设计</a>, <a href="/categories/programme/">programme</a></span>
-
+    <i class="fas fa-folder mr-1"></i><a href="/category/%E8%AE%BE%E8%AE%A1/">设计</a>, <a href="/category/programme/">programme</a></span>
   
+
 </div>
 
     
@@ -614,7 +833,7 @@
 
 
 
-<span class="article-metadata" >Reading time: 15 minutes and    25 seconds with 3394 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+<span class="article-metadata" >Reading time: 15 minutes and    25 seconds with 3395 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
   <ul>
@@ -661,14 +880,14 @@
 cmd或者terminal，然后切换到对应脚本目录，拷贝相应脚本需要的程序，甚是麻烦，可否把这个过程程序化？</p>
 <h2 id="单个文件处理">单个文件处理</h2>
 <h3 id="管道1-转换openfoam结果为msh和dat">管道1: 转换Openfoam结果为msh和dat</h3>
-<p>通过下面的程序得到一个项目文件相关的msh, 比如YangJiang ,就会得到YangJiang.msh以及YangJiang.dat等， 也就是升华技术，可提取一个技术变量，projectName=&quot;YangJiang&rdquo;</p>
+<p>通过下面的程序得到一个项目文件相关的msh, 比如YangJiang ,就会得到YangJiang.msh以及YangJiang.dat等， 也就是升华技术，可提取一个技术变量，projectName=&ldquo;YangJiang&rdquo;</p>
 <p>batchFluent.bat(不需要修改!)</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">rem 路径相应修改为电脑上的安装文件夹路径
 set OPENFOAM_WIN_DIR<span style="color:#f92672">=</span>D:/Program Files <span style="color:#f92672">(</span>x86<span style="color:#f92672">)</span>/AIWind/solver/OpenFOAMv18.06
 set WM_PROJECT_DIR<span style="color:#f92672">=</span>%OPENFOAM_WIN_DIR%
 set PATH<span style="color:#f92672">=</span>%OPENFOAM_WIN_DIR%<span style="color:#ae81ff">\b</span>in;%OPENFOAM_WIN_DIR%<span style="color:#ae81ff">\b</span>in/mpi;%OPENFOAM_WIN_DIR%<span style="color:#ae81ff">\l</span>ib;
-set MPI_BUFFER_SIZE<span style="color:#f92672">=</span>20000000
-rem 将foamDataToFluentDict放入算例<span style="color:#ae81ff">\n</span>oTurbine<span style="color:#ae81ff">\1</span>0.00<span style="color:#ae81ff">\0</span><span style="color:#ae81ff">\k</span>h<span style="color:#ae81ff">\s</span>ystem
+set MPI_BUFFER_SIZE<span style="color:#f92672">=</span><span style="color:#ae81ff">20000000</span>
+rem 将foamDataToFluentDict放入算例<span style="color:#ae81ff">\n</span>oTurbine<span style="color:#ae81ff">\1</span>0.00<span style="color:#ae81ff">\0\k</span>h<span style="color:#ae81ff">\s</span>ystem
 rem 转换网格
 foamMeshToFluent
 rem 转换数据
@@ -704,7 +923,7 @@ epsilon         6;
 <p>由此可得到YangJiang20001.cas和YangJiang20001.dat</p>
 <h3 id="管道3-提取post结果--需要修改-修改一次-然后进行循环即可">管道3: 提取post结果(需要修改, 修改一次，然后进行循环即可)</h3>
 <p>然后针对cas和dat进行线信息提取即可</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">!@processDir<span style="color:#f92672">=</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;D:\\AIwind\\AIWindCases\\Dongping20191105\\noTurbine\\10.00\\0\\YangJiang\\fluentInterface&#34;</span><span style="color:#f92672">)</span>;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">!@processDir<span style="color:#f92672">=(</span><span style="color:#e6db74">&#34;D:\\AIwind\\AIWindCases\\Dongping20191105\\noTurbine\\10.00\\0\\YangJiang\\fluentInterface&#34;</span><span style="color:#f92672">)</span>;
 
 <span style="color:#75715e">################################################</span>
 <span style="color:#75715e">## 文件过滤设置</span>
@@ -712,7 +931,7 @@ epsilon         6;
 
 
 !$length<span style="color:#f92672">=</span>@processDir; <span style="color:#75715e">#get the length of the processDir array</span>
-!for<span style="color:#f92672">(</span>$count<span style="color:#f92672">=</span>0;$count&lt;$length;$count++<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+!for<span style="color:#f92672">(</span>$count<span style="color:#f92672">=</span>0;$count&lt;$length;$count++<span style="color:#f92672">){</span>
 
   !$pathDir <span style="color:#f92672">=</span> $processDir<span style="color:#f92672">[</span>$count<span style="color:#f92672">]</span>;
   <span style="color:#75715e">#!$file = &#34;huailai20m220001.dat&#34;; ## for 814w and 1425w</span>
@@ -722,9 +941,9 @@ epsilon         6;
   <span style="color:#75715e">###   Create output directory</span>
   !$outputLine<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;forLinesOutput0&#34;</span>;
   !$outputLineDir<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>pathDir<span style="color:#e6db74">}</span><span style="color:#e6db74">//</span>$outputLine<span style="color:#e6db74">&#34;</span>;
-  !if<span style="color:#f92672">(</span>! -e $outputLineDir<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+  !if<span style="color:#f92672">(</span>! -e $outputLineDir<span style="color:#f92672">){</span>
     !mkdir $outputLineDir;
-    !print <span style="color:#e6db74">&#34;</span>$outputLineDir<span style="color:#e6db74"> create successfully!</span><span style="color:#e6db74">&#34;</span>;
+    !print <span style="color:#e6db74">&#34;</span>$outputLineDir<span style="color:#e6db74"> create successfully!&#34;</span>;
     !<span style="color:#f92672">}</span></code></pre></div>
 <h2 id="技术分解1-批量后处理openfoam结果到dat格式">技术分解1&mdash;- 批量后处理Openfoam结果到dat格式</h2>
 <ol>
@@ -734,25 +953,25 @@ epsilon         6;
 <h2 id="技术实现1">技术实现1</h2>
 <h3 id="基础版本--初始版本">基础版本(初始版本)</h3>
 <p>事先拷贝好需要的文件放在指定位置处,使用system运行系统命令即可</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#75715e">#!/usr/bin/env perl</span>
-<span style="color:#75715e">#===============================================================================</span>
-<span style="color:#75715e">#</span>
-<span style="color:#75715e">#         FILE: batchProcess814w.pl</span>
-<span style="color:#75715e">#</span>
-<span style="color:#75715e">#        USAGE: ./batchProcess814w.pl</span>
-<span style="color:#75715e">#</span>
-<span style="color:#75715e">#  DESCRIPTION:</span>
-<span style="color:#75715e">#</span>
-<span style="color:#75715e">#      OPTIONS: ---</span>
-<span style="color:#75715e"># REQUIREMENTS: ---</span>
-<span style="color:#75715e">#         BUGS: ---</span>
-<span style="color:#75715e">#        NOTES: ---</span>
-<span style="color:#75715e">#       AUTHOR: YOUR NAME (),</span>
-<span style="color:#75715e"># ORGANIZATION:</span>
-<span style="color:#75715e">#      VERSION: 1.0</span>
-<span style="color:#75715e">#      CREATED: 2019/9/24 11:11:49</span>
-<span style="color:#75715e">#     REVISION: ---</span>
-<span style="color:#75715e">#===============================================================================</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#75715e">#!/usr/bin/env perl</span>
+<span style="color:#75715e">#===============================================================================</span>
+<span style="color:#75715e">#</span>
+<span style="color:#75715e">#         FILE: batchProcess814w.pl</span>
+<span style="color:#75715e">#</span>
+<span style="color:#75715e">#        USAGE: ./batchProcess814w.pl</span>
+<span style="color:#75715e">#</span>
+<span style="color:#75715e">#  DESCRIPTION:</span>
+<span style="color:#75715e">#</span>
+<span style="color:#75715e">#      OPTIONS: ---</span>
+<span style="color:#75715e"># REQUIREMENTS: ---</span>
+<span style="color:#75715e">#         BUGS: ---</span>
+<span style="color:#75715e">#        NOTES: ---</span>
+<span style="color:#75715e">#       AUTHOR: YOUR NAME (),</span>
+<span style="color:#75715e"># ORGANIZATION:</span>
+<span style="color:#75715e">#      VERSION: 1.0</span>
+<span style="color:#75715e">#      CREATED: 2019/9/24 11:11:49</span>
+<span style="color:#75715e">#     REVISION: ---</span>
+<span style="color:#75715e">#===============================================================================</span>
 
 <span style="color:#66d9ef">use</span> strict;
 <span style="color:#66d9ef">use</span> warnings;
@@ -765,12 +984,12 @@ epsilon         6;
 
 <span style="color:#66d9ef">foreach</span> <span style="color:#66d9ef">my</span> $name ( @$specialDirSign ) {
     <span style="color:#66d9ef">my</span>  $tempdirectory<span style="color:#f92672">=</span>sprintf(<span style="color:#e6db74">&#34;$directory\\$name\\huailai20m2\\&#34;</span>);
-    <span style="color:#75715e">#my  $tempBatchFile=sprintf(&#34;$directory\\$name\\huailai20m2\\batchFluent.bat&#34;);</span>
+    <span style="color:#75715e">#my  $tempBatchFile=sprintf(&#34;$directory\\$name\\huailai20m2\\batchFluent.bat&#34;);</span>
     <span style="color:#66d9ef">print</span> <span style="color:#e6db74">&#34;$tempdirectory\n&#34;</span>;
     chdir($tempdirectory);
     <span style="color:#66d9ef">my</span>  $mypath<span style="color:#f92672">=</span>getcwd();
     <span style="color:#66d9ef">print</span> <span style="color:#e6db74">&#34; Temp Director: -----------&gt; $mypath\n&#34;</span>;
-    <span style="color:#75715e">#system($tempBatchFile)</span>
+    <span style="color:#75715e">#system($tempBatchFile)</span>
     system(<span style="color:#e6db74">&#34;batchFluent.bat&#34;</span>)
 }</code></pre></div>
 <h3 id="高级版本">高级版本</h3>
@@ -781,26 +1000,26 @@ epsilon         6;
 <li>规律：找到noturbine文件夹</li>
 <li>规律：找到项目文件名kh, yandun,YangJiang等</li>
 </ol>
-<!-- raw HTML omitted -->
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#75715e">#!/usr/bin/env perl</span>
-<span style="color:#75715e">#===============================================================================</span>
-<span style="color:#75715e">#</span>
-<span style="color:#75715e">#         FILE: batchProcess814w.pl</span>
-<span style="color:#75715e">#</span>
-<span style="color:#75715e">#        USAGE: ./batchProcess814w.pl</span>
-<span style="color:#75715e">#</span>
-<span style="color:#75715e">#  DESCRIPTION:</span>
-<span style="color:#75715e">#</span>
-<span style="color:#75715e">#      OPTIONS: ---</span>
-<span style="color:#75715e"># REQUIREMENTS: ---</span>
-<span style="color:#75715e">#         BUGS: ---</span>
-<span style="color:#75715e">#        NOTES: ---</span>
-<span style="color:#75715e">#       AUTHOR: YOUR NAME (),</span>
-<span style="color:#75715e"># ORGANIZATION:</span>
-<span style="color:#75715e">#      VERSION: 1.0</span>
-<span style="color:#75715e">#      CREATED: 2019/9/24 11:11:49</span>
-<span style="color:#75715e">#     REVISION: ---</span>
-<span style="color:#75715e">#===============================================================================</span>
+<!--listend-->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#75715e">#!/usr/bin/env perl</span>
+<span style="color:#75715e">#===============================================================================</span>
+<span style="color:#75715e">#</span>
+<span style="color:#75715e">#         FILE: batchProcess814w.pl</span>
+<span style="color:#75715e">#</span>
+<span style="color:#75715e">#        USAGE: ./batchProcess814w.pl</span>
+<span style="color:#75715e">#</span>
+<span style="color:#75715e">#  DESCRIPTION:</span>
+<span style="color:#75715e">#</span>
+<span style="color:#75715e">#      OPTIONS: ---</span>
+<span style="color:#75715e"># REQUIREMENTS: ---</span>
+<span style="color:#75715e">#         BUGS: ---</span>
+<span style="color:#75715e">#        NOTES: ---</span>
+<span style="color:#75715e">#       AUTHOR: YOUR NAME (),</span>
+<span style="color:#75715e"># ORGANIZATION:</span>
+<span style="color:#75715e">#      VERSION: 1.0</span>
+<span style="color:#75715e">#      CREATED: 2019/9/24 11:11:49</span>
+<span style="color:#75715e">#     REVISION: ---</span>
+<span style="color:#75715e">#===============================================================================</span>
 
 <span style="color:#66d9ef">use</span> strict;
 <span style="color:#66d9ef">use</span> warnings;
@@ -827,33 +1046,33 @@ epsilon         6;
 
     copy(<span style="color:#e6db74">&#34;$sourceFileDirs\\$targetFileSign2&#34;</span>,<span style="color:#e6db74">&#34;$batchFile&#34;</span>);
     <span style="color:#66d9ef">print</span> <span style="color:#e6db74">&#34; Temp Director: -----------&gt; $mypath\n&#34;</span>;
-    <span style="color:#75715e">#system($tempBatchFile)</span>
+    <span style="color:#75715e">#system($tempBatchFile)</span>
     system(<span style="color:#e6db74">&#34;batchFluent.bat&#34;</span>)
 }</code></pre></div>
 <h4 id="相同风速-不同扇区的结果">相同风速，不同扇区的结果</h4>
 <ol>
 <li>找到noTurbine文件夹</li>
 </ol>
-<!-- raw HTML omitted -->
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl">  <span style="color:#75715e">#!/usr/bin/env perl</span>
-  <span style="color:#75715e">#===============================================================================</span>
-  <span style="color:#75715e">#</span>
-  <span style="color:#75715e">#         FILE: batchProcessHuailai814w.pl</span>
-  <span style="color:#75715e">#</span>
-  <span style="color:#75715e">#        USAGE: ./batchProcessHuailai814w.pl</span>
-  <span style="color:#75715e">#</span>
-  <span style="color:#75715e">#  DESCRIPTION:</span>
-  <span style="color:#75715e">#</span>
-  <span style="color:#75715e">#      OPTIONS: ---</span>
-  <span style="color:#75715e"># REQUIREMENTS: ---</span>
-  <span style="color:#75715e">#         BUGS: ---</span>
-  <span style="color:#75715e">#        NOTES: ---</span>
-  <span style="color:#75715e">#       AUTHOR: YOUR NAME (),</span>
-  <span style="color:#75715e"># ORGANIZATION:</span>
-  <span style="color:#75715e">#      VERSION: 1.0</span>
-  <span style="color:#75715e">#      CREATED: 2019/11/7 18:47:43</span>
-  <span style="color:#75715e">#     REVISION: ---</span>
-  <span style="color:#75715e">#===============================================================================</span>
+<!--listend-->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl">  <span style="color:#75715e">#!/usr/bin/env perl</span>
+  <span style="color:#75715e">#===============================================================================</span>
+  <span style="color:#75715e">#</span>
+  <span style="color:#75715e">#         FILE: batchProcessHuailai814w.pl</span>
+  <span style="color:#75715e">#</span>
+  <span style="color:#75715e">#        USAGE: ./batchProcessHuailai814w.pl</span>
+  <span style="color:#75715e">#</span>
+  <span style="color:#75715e">#  DESCRIPTION:</span>
+  <span style="color:#75715e">#</span>
+  <span style="color:#75715e">#      OPTIONS: ---</span>
+  <span style="color:#75715e"># REQUIREMENTS: ---</span>
+  <span style="color:#75715e">#         BUGS: ---</span>
+  <span style="color:#75715e">#        NOTES: ---</span>
+  <span style="color:#75715e">#       AUTHOR: YOUR NAME (),</span>
+  <span style="color:#75715e"># ORGANIZATION:</span>
+  <span style="color:#75715e">#      VERSION: 1.0</span>
+  <span style="color:#75715e">#      CREATED: 2019/11/7 18:47:43</span>
+  <span style="color:#75715e">#     REVISION: ---</span>
+  <span style="color:#75715e">#===============================================================================</span>
 
   <span style="color:#66d9ef">use</span> strict;
   <span style="color:#66d9ef">use</span> warnings;
@@ -861,7 +1080,7 @@ epsilon         6;
   <span style="color:#66d9ef">use</span> Cwd;
   <span style="color:#66d9ef">use</span> File::Copy;
 
-  <span style="color:#75715e">#my  $directory   = &#34;&#34;;</span>
+  <span style="color:#75715e">#my  $directory   = &#34;&#34;;</span>
   <span style="color:#66d9ef">my</span>  $directory   <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;D:\\YanDun20191106\\yuandun\\noTurbine\\&#34;</span>;
   <span style="color:#66d9ef">my</span>  $specialDirSign<span style="color:#f92672">=</span>[<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">22.5</span>,<span style="color:#ae81ff">45</span>,<span style="color:#ae81ff">67.5</span>,<span style="color:#ae81ff">90</span>,<span style="color:#ae81ff">112.5</span>,<span style="color:#ae81ff">135</span>,<span style="color:#ae81ff">157.5</span>,<span style="color:#ae81ff">180</span>,<span style="color:#ae81ff">202.5</span>,<span style="color:#ae81ff">225</span>,<span style="color:#ae81ff">247.5</span>,<span style="color:#ae81ff">270</span>,<span style="color:#ae81ff">292.5</span>,<span style="color:#ae81ff">315</span>];
 
@@ -880,11 +1099,11 @@ epsilon         6;
       <span style="color:#66d9ef">print</span> <span style="color:#e6db74">&#34; Temp Director: -----------&gt; $mypath\n&#34;</span>;
       <span style="color:#66d9ef">my</span> $dictFile<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;$tempdirectory//system//$targetFileSign1&#34;</span>;
       <span style="color:#66d9ef">my</span> $batchFile<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;$tempdirectory//$targetFileSign2&#34;</span>;
-<span style="color:#75715e">## bug 修复！</span>
+<span style="color:#75715e">## bug 修复！</span>
       copy(<span style="color:#e6db74">&#34;$sourceFileDirs\\system\\$targetFileSign1&#34;</span>,<span style="color:#e6db74">&#34;$dictFile&#34;</span>);
 
       copy(<span style="color:#e6db74">&#34;$sourceFileDirs\\$targetFileSign2&#34;</span>,<span style="color:#e6db74">&#34;$batchFile&#34;</span>);
-      <span style="color:#75715e">#system($tempBatchFile)</span>
+      <span style="color:#75715e">#system($tempBatchFile)</span>
       system(<span style="color:#e6db74">&#34;batchFluent.bat&#34;</span>);
   }</code></pre></div>
 <h2 id="技术分解2-批量处理dat文件到post格式">技术分解2&mdash;-批量处理dat文件到post格式</h2>
@@ -895,37 +1114,37 @@ epsilon         6;
 <li>保存cas &amp; dat
 具体文件需要修改msh和dat前缀</li>
 </ol>
-<!-- raw HTML omitted -->
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C">(cx<span style="color:#f92672">-</span>gui<span style="color:#f92672">-</span><span style="color:#66d9ef">do</span> cx<span style="color:#f92672">-</span>activate<span style="color:#f92672">-</span>item <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">MenuBar*ReadSubMenu*Mesh...</span><span style="color:#e6db74">&#34;</span>)
-(cx<span style="color:#f92672">-</span>gui<span style="color:#f92672">-</span><span style="color:#66d9ef">do</span> cx<span style="color:#f92672">-</span>set<span style="color:#f92672">-</span>file<span style="color:#f92672">-</span>dialog<span style="color:#f92672">-</span>entries <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Select File</span><span style="color:#e6db74">&#34;</span> <span style="color:#960050;background-color:#1e0010">&#39;</span>( <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">huailai20m2.msh</span><span style="color:#e6db74">&#34;</span>) <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Mesh Files (*.msh* *.MSH* )</span><span style="color:#e6db74">&#34;</span>)
-  (cx<span style="color:#f92672">-</span>gui<span style="color:#f92672">-</span><span style="color:#66d9ef">do</span> cx<span style="color:#f92672">-</span>activate<span style="color:#f92672">-</span>item <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">MenuBar*ReadSubMenu*Data...</span><span style="color:#e6db74">&#34;</span>)
-  (cx<span style="color:#f92672">-</span>gui<span style="color:#f92672">-</span><span style="color:#66d9ef">do</span> cx<span style="color:#f92672">-</span>set<span style="color:#f92672">-</span>file<span style="color:#f92672">-</span>dialog<span style="color:#f92672">-</span>entries <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Select File</span><span style="color:#e6db74">&#34;</span> <span style="color:#960050;background-color:#1e0010">&#39;</span>( <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">huailai20m22000.dat</span><span style="color:#e6db74">&#34;</span>) <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Data Files (*.dat* *.pdat* )</span><span style="color:#e6db74">&#34;</span>)
-  (cx<span style="color:#f92672">-</span>gui<span style="color:#f92672">-</span><span style="color:#66d9ef">do</span> cx<span style="color:#f92672">-</span>activate<span style="color:#f92672">-</span>item <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">MenuBar*WriteSubMenu*Case &amp; Data...</span><span style="color:#e6db74">&#34;</span>)
-  (cx<span style="color:#f92672">-</span>gui<span style="color:#f92672">-</span><span style="color:#66d9ef">do</span> cx<span style="color:#f92672">-</span>set<span style="color:#f92672">-</span>file<span style="color:#f92672">-</span>dialog<span style="color:#f92672">-</span>entries <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Select File</span><span style="color:#e6db74">&#34;</span> <span style="color:#960050;background-color:#1e0010">&#39;</span>( <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">huailai20m220001.cas</span><span style="color:#e6db74">&#34;</span>) <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Case/Data Files (*.cas* *.pdat* )</span><span style="color:#e6db74">&#34;</span>)
-  (cx<span style="color:#f92672">-</span>gui<span style="color:#f92672">-</span><span style="color:#66d9ef">do</span> cx<span style="color:#f92672">-</span>activate<span style="color:#f92672">-</span>item <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">MenuBar*WriteSubMenu*Stop Journal</span><span style="color:#e6db74">&#34;</span>)
-  (cx<span style="color:#f92672">-</span>gui<span style="color:#f92672">-</span><span style="color:#66d9ef">do</span> cx<span style="color:#f92672">-</span>activate<span style="color:#f92672">-</span>item <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">MenuBar*FileMenu*Exit</span><span style="color:#e6db74">&#34;</span>)</code></pre></div>
+<!--listend-->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C">(cx<span style="color:#f92672">-</span>gui<span style="color:#f92672">-</span><span style="color:#66d9ef">do</span> cx<span style="color:#f92672">-</span>activate<span style="color:#f92672">-</span>item <span style="color:#e6db74">&#34;MenuBar*ReadSubMenu*Mesh...&#34;</span>)
+(cx<span style="color:#f92672">-</span>gui<span style="color:#f92672">-</span><span style="color:#66d9ef">do</span> cx<span style="color:#f92672">-</span>set<span style="color:#f92672">-</span>file<span style="color:#f92672">-</span>dialog<span style="color:#f92672">-</span>entries <span style="color:#e6db74">&#34;Select File&#34;</span> <span style="color:#960050;background-color:#1e0010">&#39;</span>( <span style="color:#e6db74">&#34;huailai20m2.msh&#34;</span>) <span style="color:#e6db74">&#34;Mesh Files (*.msh* *.MSH* )&#34;</span>)
+  (cx<span style="color:#f92672">-</span>gui<span style="color:#f92672">-</span><span style="color:#66d9ef">do</span> cx<span style="color:#f92672">-</span>activate<span style="color:#f92672">-</span>item <span style="color:#e6db74">&#34;MenuBar*ReadSubMenu*Data...&#34;</span>)
+  (cx<span style="color:#f92672">-</span>gui<span style="color:#f92672">-</span><span style="color:#66d9ef">do</span> cx<span style="color:#f92672">-</span>set<span style="color:#f92672">-</span>file<span style="color:#f92672">-</span>dialog<span style="color:#f92672">-</span>entries <span style="color:#e6db74">&#34;Select File&#34;</span> <span style="color:#960050;background-color:#1e0010">&#39;</span>( <span style="color:#e6db74">&#34;huailai20m22000.dat&#34;</span>) <span style="color:#e6db74">&#34;Data Files (*.dat* *.pdat* )&#34;</span>)
+  (cx<span style="color:#f92672">-</span>gui<span style="color:#f92672">-</span><span style="color:#66d9ef">do</span> cx<span style="color:#f92672">-</span>activate<span style="color:#f92672">-</span>item <span style="color:#e6db74">&#34;MenuBar*WriteSubMenu*Case &amp; Data...&#34;</span>)
+  (cx<span style="color:#f92672">-</span>gui<span style="color:#f92672">-</span><span style="color:#66d9ef">do</span> cx<span style="color:#f92672">-</span>set<span style="color:#f92672">-</span>file<span style="color:#f92672">-</span>dialog<span style="color:#f92672">-</span>entries <span style="color:#e6db74">&#34;Select File&#34;</span> <span style="color:#960050;background-color:#1e0010">&#39;</span>( <span style="color:#e6db74">&#34;huailai20m220001.cas&#34;</span>) <span style="color:#e6db74">&#34;Case/Data Files (*.cas* *.pdat* )&#34;</span>)
+  (cx<span style="color:#f92672">-</span>gui<span style="color:#f92672">-</span><span style="color:#66d9ef">do</span> cx<span style="color:#f92672">-</span>activate<span style="color:#f92672">-</span>item <span style="color:#e6db74">&#34;MenuBar*WriteSubMenu*Stop Journal&#34;</span>)
+  (cx<span style="color:#f92672">-</span>gui<span style="color:#f92672">-</span><span style="color:#66d9ef">do</span> cx<span style="color:#f92672">-</span>activate<span style="color:#f92672">-</span>item <span style="color:#e6db74">&#34;MenuBar*FileMenu*Exit&#34;</span>)</code></pre></div>
 <p>核心命令： `fluent 3d -i batchFluent2000`</p>
 <h2 id="技术实现2">技术实现2</h2>
 <h3 id="相同风速下-不同扇区处理">相同风速下，不同扇区处理</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#75715e">#!/usr/bin/env perl</span>
-<span style="color:#75715e">#===============================================================================</span>
-<span style="color:#75715e">#</span>
-<span style="color:#75715e">#         FILE: journalTransferAIWINDTOFluentCasDat814w.pl</span>
-<span style="color:#75715e">#</span>
-<span style="color:#75715e">#        USAGE: ./journalTransferAIWINDTOFluentCasDat814w.pl</span>
-<span style="color:#75715e">#</span>
-<span style="color:#75715e">#  DESCRIPTION:</span>
-<span style="color:#75715e">#</span>
-<span style="color:#75715e">#      OPTIONS: ---</span>
-<span style="color:#75715e"># REQUIREMENTS: ---</span>
-<span style="color:#75715e">#         BUGS: ---</span>
-<span style="color:#75715e">#        NOTES: ---</span>
-<span style="color:#75715e">#       AUTHOR: YOUR NAME (),</span>
-<span style="color:#75715e"># ORGANIZATION:</span>
-<span style="color:#75715e">#      VERSION: 1.0</span>
-<span style="color:#75715e">#      CREATED: 2019/9/27 15:43:35</span>
-<span style="color:#75715e">#     REVISION: ---</span>
-<span style="color:#75715e">#===============================================================================</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#75715e">#!/usr/bin/env perl</span>
+<span style="color:#75715e">#===============================================================================</span>
+<span style="color:#75715e">#</span>
+<span style="color:#75715e">#         FILE: journalTransferAIWINDTOFluentCasDat814w.pl</span>
+<span style="color:#75715e">#</span>
+<span style="color:#75715e">#        USAGE: ./journalTransferAIWINDTOFluentCasDat814w.pl</span>
+<span style="color:#75715e">#</span>
+<span style="color:#75715e">#  DESCRIPTION:</span>
+<span style="color:#75715e">#</span>
+<span style="color:#75715e">#      OPTIONS: ---</span>
+<span style="color:#75715e"># REQUIREMENTS: ---</span>
+<span style="color:#75715e">#         BUGS: ---</span>
+<span style="color:#75715e">#        NOTES: ---</span>
+<span style="color:#75715e">#       AUTHOR: YOUR NAME (),</span>
+<span style="color:#75715e"># ORGANIZATION:</span>
+<span style="color:#75715e">#      VERSION: 1.0</span>
+<span style="color:#75715e">#      CREATED: 2019/9/27 15:43:35</span>
+<span style="color:#75715e">#     REVISION: ---</span>
+<span style="color:#75715e">#===============================================================================</span>
 
 <span style="color:#66d9ef">use</span> strict;
 <span style="color:#66d9ef">use</span> warnings;
@@ -933,10 +1152,10 @@ epsilon         6;
 <span style="color:#66d9ef">use</span> Cwd;
 <span style="color:#66d9ef">use</span> File::Copy;
 
-<span style="color:#75715e">#my  $directory   = &#34;D:\\huaiLaiUnder\\huaiLaiNew20190722\\huaiLaiNew20190722\\noTurbine\\10.00\\&#34;;</span>
+<span style="color:#75715e">#my  $directory   = &#34;D:\\huaiLaiUnder\\huaiLaiNew20190722\\huaiLaiNew20190722\\noTurbine\\10.00\\&#34;;</span>
 <span style="color:#66d9ef">my</span>  $directory <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;D:\\huaiiLaiPP\\AIWindProject1\\noTurbine\\10.00\\&#34;</span>;
-<span style="color:#75715e">#my  $specialDirSign=[0,22.5,45,67.5,90,112.5,135,157.5,180,202.5,225,247.5,270,292.5,315,337.5];</span>
-<span style="color:#75715e">#my  $specialDirSign=[0,45,135,270,292.5];</span>
+<span style="color:#75715e">#my  $specialDirSign=[0,22.5,45,67.5,90,112.5,135,157.5,180,202.5,225,247.5,270,292.5,315,337.5];</span>
+<span style="color:#75715e">#my  $specialDirSign=[0,45,135,270,292.5];</span>
 
 <span style="color:#66d9ef">my</span>  $sourceFluentBatchFile<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;D:\\huaiLaiUnder\\huaiLaiNew20190722\\huaiLaiNew20190722\\noTurbine\\10.00\\90\\huailai20m2\\fluentInterface\\batchFluent2000&#34;</span>;
 
@@ -945,34 +1164,34 @@ epsilon         6;
     <span style="color:#66d9ef">my</span>  $destinationFile<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;$tempdirectory\\batchFluent2000&#34;</span>;
 
     copy($sourceFluentBatchFile,$destinationFile) <span style="color:#f92672">or</span> die <span style="color:#e6db74">&#34;Copy failed: $!&#34;</span>;
-    <span style="color:#75715e">#my  $tempBatchFile=sprintf(&#34;$directory\\$name\\huailai20m2\\batchFluent.bat&#34;);</span>
+    <span style="color:#75715e">#my  $tempBatchFile=sprintf(&#34;$directory\\$name\\huailai20m2\\batchFluent.bat&#34;);</span>
     <span style="color:#66d9ef">print</span> <span style="color:#e6db74">&#34;$tempdirectory\n&#34;</span>;
     chdir($tempdirectory);
     <span style="color:#66d9ef">my</span>  $mypath<span style="color:#f92672">=</span>getcwd();
     <span style="color:#66d9ef">print</span> <span style="color:#e6db74">&#34; Temp Director: -----------&gt; $mypath\n&#34;</span>;
-    <span style="color:#75715e">#system($tempBatchFile)</span>
+    <span style="color:#75715e">#system($tempBatchFile)</span>
     system(<span style="color:#e6db74">&#34;fluent 3d -i batchFluent2000&#34;</span>);
 }</code></pre></div>
 <h3 id="快速格式化项目的batchfluent2000">快速格式化项目的batchFluent2000</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#66d9ef">use</span> strict;
 <span style="color:#66d9ef">use</span> warnings;
 
-<span style="color:#66d9ef">use</span> File::Slurp <span style="color:#e6db74">qw(</span><span style="color:#e6db74">read_file write_file</span><span style="color:#e6db74">)</span>;
-<span style="color:#75715e">#open(FEIJI,&#34;C:\\Users\\yezhaoliang\\Desktop\\probe.cse&#34;) or die &#34;can&#39;t open the file \n&#34;;</span>
-<span style="color:#75715e">#my $car =&#34;@lidarX1&#34;;</span>
+<span style="color:#66d9ef">use</span> File::Slurp <span style="color:#e6db74">qw(read_file write_file)</span>;
+<span style="color:#75715e">#open(FEIJI,&#34;C:\\Users\\yezhaoliang\\Desktop\\probe.cse&#34;) or die &#34;can&#39;t open the file \n&#34;;</span>
+<span style="color:#75715e">#my $car =&#34;@lidarX1&#34;;</span>
 
 
 <span style="color:#66d9ef">my</span> $filename <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;C:\\Users\\yezhaoliang\\Desktop\\batchFluent2000&#34;</span>;
 
 <span style="color:#66d9ef">my</span>  $projectOld<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;huailai20m2&#34;</span>;
 <span style="color:#66d9ef">my</span>  $projectNew<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;YangJiang&#34;</span>;
-<span style="color:#66d9ef">my</span> $data <span style="color:#f92672">=</span> read_file $filename, {binmode <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> <span style="color:#e6db74">&#39;utf8&#39;</span>};
-<span style="color:#75715e">## 文件内容替换---- 也可以用IO:All-&gt;slurp函数</span>
+<span style="color:#66d9ef">my</span> $data <span style="color:#f92672">=</span> read_file $filename, {binmode <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;utf8&#39;</span>};
+<span style="color:#75715e">## 文件内容替换---- 也可以用IO:All-&gt;slurp函数</span>
 
 $data <span style="color:#f92672">=~</span> <span style="color:#e6db74">s/$projectOld/$projectNew/g</span>;
-<span style="color:#75715e">## 删除掉^M</span>
+<span style="color:#75715e">## 删除掉^M</span>
 $data <span style="color:#f92672">=~</span> <span style="color:#e6db74">s/\r//g</span>;
-write_file $filename, {binmode <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> <span style="color:#e6db74">&#39;:utf8&#39;</span>},$data;</code></pre></div>
+write_file $filename, {binmode <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;:utf8&#39;</span>},$data;</code></pre></div>
 <h2 id="技术升维">技术升维</h2>
 <ol>
 <li>思考目录结构</li>
@@ -983,61 +1202,61 @@ write_file $filename, {binmode <span style="color:#f92672">=</span><span style="
 <h2 id="附录">附录</h2>
 <ol>
 <li>
-<p><a href="https://blog.csdn.net/lxp90/article/details/76228104">perl单行替换文件内容</a>(先temp，然后rename到原始文件名，删除temp备份)</p>
+<p><a href="https://blog.csdn.net/lxp90/article/details/76228104" target="_blank" rel="noopener">perl单行替换文件内容</a>(先temp，然后rename到原始文件名，删除temp备份)</p>
 </li>
 <li>
-<p><a href="https://blog.csdn.net/blog%5Fabel/article/details/40589227">perl s替换</a></p>
+<p><a href="https://blog.csdn.net/blog%5Fabel/article/details/40589227" target="_blank" rel="noopener">perl s替换</a></p>
 </li>
 <li>
-<p><a href="https://cn.perlmaven.com/how-to-replace-a-string-in-a-file-with-perl">perl slurp</a>(输入s命令到slurp中，执行！ `cpanm &lt;:Slurp&gt;`)</p>
+<p><a href="https://cn.perlmaven.com/how-to-replace-a-string-in-a-file-with-perl" target="_blank" rel="noopener">perl slurp</a>(输入s命令到slurp中，执行！ `cpanm &lt;:Slurp&gt;`)</p>
 </li>
 <li>
 <p><a href=":Slurphttps://metacpan.org/pod/File">File::Slurp</a> edit_file command file</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl">    <span style="color:#66d9ef">use</span> File::Slurp <span style="color:#e6db74">qw(</span><span style="color:#e6db74">edit_file</span><span style="color:#e6db74">)</span>;
-    <span style="color:#75715e"># perl -0777 -pi -e &#39;s/foo/bar/g&#39; /path/file</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl">    <span style="color:#66d9ef">use</span> File::Slurp <span style="color:#e6db74">qw(edit_file)</span>;
+    <span style="color:#75715e"># perl -0777 -pi -e &#39;s/foo/bar/g&#39; /path/file</span>
     edit_file { <span style="color:#e6db74">s/foo/bar/g</span> } <span style="color:#e6db74">&#39;/path/file&#39;</span>;
     edit_file <span style="color:#66d9ef">sub</span> { <span style="color:#e6db74">s/foo/bar/g</span> }, <span style="color:#e6db74">&#39;/path/file&#39;</span>;
     <span style="color:#66d9ef">sub</span> <span style="color:#a6e22e">replace_foo</span> { <span style="color:#e6db74">s/foo/bar/g</span> }
-    edit_file <span style="color:#f92672">\</span><span style="color:#f92672">&amp;</span>replace_foo, <span style="color:#e6db74">&#39;/path/file&#39;</span>;
+    edit_file <span style="color:#f92672">\&amp;</span>replace_foo, <span style="color:#e6db74">&#39;/path/file&#39;</span>;
     </code></pre></div>
 </li>
 <li>
-<p><a href="http://blogs.perl.org/users/leon%5Ftimmermans/2015/08/fileslurp-is-broken-and-wrong.html">perl slurp bugs and unmaintained</a>  可以选用Slurper, <a href="https://metacpan.org/pod/Path::Tiny">Path:Tiny</a>  or <a href="https://metacpan.org/pod/IO::All">Io:ALL</a></p>
+<p><a href="http://blogs.perl.org/users/leon%5Ftimmermans/2015/08/fileslurp-is-broken-and-wrong.html" target="_blank" rel="noopener">perl slurp bugs and unmaintained</a>  可以选用Slurper, <a href="https://metacpan.org/pod/Path::Tiny" target="_blank" rel="noopener">Path:Tiny</a>  or <a href="https://metacpan.org/pod/IO::All" target="_blank" rel="noopener">Io:ALL</a></p>
 </li>
 <li>
 <p>path::Tiny   `path(&ldquo;foo.txt&rdquo;)-&gt;move(&ldquo;bar.txt&rdquo;);`</p>
 </li>
 <li>
-<p>简单处理<a href="https://www.perl.com/pub/2004/03/12/ioall.html/">IO::All</a></p>
+<p>简单处理<a href="https://www.perl.com/pub/2004/03/12/ioall.html/" target="_blank" rel="noopener">IO::All</a></p>
 </li>
 <li>
 <p>虽然slurp废弃了，但发现依然不错文件内容单行处理，所以无法循环，没有if判断等。但可以执行批处理，而IO:All使用
 `my $line = $io-&gt;getline` ,其实使用内置的函数即可`while(&lt;$fh&gt;)`即可</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl">         <span style="color:#66d9ef">use</span> strict;
          <span style="color:#66d9ef">use</span> warnings;
-         <span style="color:#66d9ef">use</span> File::Slurp <span style="color:#e6db74">qw(</span><span style="color:#e6db74">read_file write_file</span><span style="color:#e6db74">)</span>;
+         <span style="color:#66d9ef">use</span> File::Slurp <span style="color:#e6db74">qw(read_file write_file)</span>;
          <span style="color:#66d9ef">my</span> $filename <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;C:\\Users\\yezhaoliang\\Desktop\\probe.cse&#34;</span>;
 
-    <span style="color:#75715e">##gbk or gb2312</span>
-         <span style="color:#66d9ef">my</span> $data <span style="color:#f92672">=</span> read_file $filename, {binmode <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> <span style="color:#e6db74">&#39;gbk&#39;</span>};
-         <span style="color:#75715e">## 文件内容替换---- 也可以用IO:All-&gt;slurp函数</span>
+    <span style="color:#75715e">##gbk or gb2312</span>
+         <span style="color:#66d9ef">my</span> $data <span style="color:#f92672">=</span> read_file $filename, {binmode <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;gbk&#39;</span>};
+         <span style="color:#75715e">## 文件内容替换---- 也可以用IO:All-&gt;slurp函数</span>
          $data <span style="color:#f92672">=~</span> <span style="color:#e6db74">s/风廓线/小心了/g</span>;
-         <span style="color:#75715e">## 删除掉^M</span>
+         <span style="color:#75715e">## 删除掉^M</span>
          $data <span style="color:#f92672">=~</span> <span style="color:#e6db74">s/\r//g</span>;
-         write_file $filename, {binmode <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> <span style="color:#e6db74">&#39;:gbk&#39;</span>},$data;
+         write_file $filename, {binmode <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;:gbk&#39;</span>},$data;
     </code></pre></div>
 <p>英文替换</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl">    <span style="color:#66d9ef">use</span> strict;
     <span style="color:#66d9ef">use</span> warnings;
-    <span style="color:#66d9ef">use</span> File::Slurp <span style="color:#e6db74">qw(</span><span style="color:#e6db74">read_file write_file</span><span style="color:#e6db74">)</span>;
+    <span style="color:#66d9ef">use</span> File::Slurp <span style="color:#e6db74">qw(read_file write_file)</span>;
     <span style="color:#66d9ef">my</span> $filename <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;C:\\Users\\yezhaoliang\\Desktop\\probe.cse&#34;</span>;
 
-    <span style="color:#66d9ef">my</span> $data <span style="color:#f92672">=</span> read_file $filename, {binmode <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> <span style="color:#e6db74">&#39;utf8&#39;</span>};
-    <span style="color:#75715e">## 文件内容替换---- 也可以用IO:All-&gt;slurp函数</span>
+    <span style="color:#66d9ef">my</span> $data <span style="color:#f92672">=</span> read_file $filename, {binmode <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;utf8&#39;</span>};
+    <span style="color:#75715e">## 文件内容替换---- 也可以用IO:All-&gt;slurp函数</span>
     $data <span style="color:#f92672">=~</span> <span style="color:#e6db74">s/lidar/Leida/g</span>;
-    <span style="color:#75715e">## 删除掉^M</span>
+    <span style="color:#75715e">## 删除掉^M</span>
     $data <span style="color:#f92672">=~</span> <span style="color:#e6db74">s/\r//g</span>;
-    write_file $filename, {binmode <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> <span style="color:#e6db74">&#39;:utf8&#39;</span>},$data;
+    write_file $filename, {binmode <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;:utf8&#39;</span>},$data;
     </code></pre></div>
 </li>
 <li>
@@ -1057,21 +1276,22 @@ write_file $filename, {binmode <span style="color:#f92672">=</span><span style="
 <p>其实外置、内置的思路都是open、循环、删除、重命名的过程这样还可以不断拓展，增加判断等。</p>
 </li>
 <li>
-<p>elisp通过defmacro生成一个<a href="https://emacs-china.org/t/elisp/11023/3"> 临时的defvar、defun </a>等,即生成一个新的状态或者worker</p>
+<p>elisp通过defmacro生成一个<a href="https://emacs-china.org/t/elisp/11023/3" target="_blank" rel="noopener"> 临时的defvar、defun </a>等,即生成一个新的状态或者worker</p>
 </li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elisp" data-lang="elisp">(defmacro defvar/os (name <span style="color:#66d9ef">&amp;rest</span> args)
-  <span style="color:#f92672">`</span>(defvar <span style="color:#f92672">,</span>name
+<pre><code class="language-elisp">(defmacro defvar/os (name &amp;rest args)
+  `(defvar ,name
      (pcase system-type
-       <span style="color:#f92672">,@</span>(<span style="color:#a6e22e">mapcar</span> (lambda (x)
-                   (let ((a (<span style="color:#a6e22e">car</span> x))
+       ,@(mapcar (lambda (x)
+                   (let ((a (car x))
                          (b (cadr x)))
-                     <span style="color:#f92672">`</span>(<span style="color:#f92672">,</span>(ecase a
-                          (:windows <span style="color:#f92672">&#39;</span><span style="color:#e6db74">&#39;windows-nt</span>)
-                          (:macos <span style="color:#f92672">&#39;</span><span style="color:#e6db74">&#39;darwin</span>))
-                       <span style="color:#f92672">,</span>b)))
-                   (-partition-all <span style="color:#ae81ff">2</span> args)))))
-</code></pre></div><h3 id="增强版的自定义功能">增强版的自定义功能</h3>
+                     `(,(ecase a
+                          (:windows ''windows-nt)
+                          (:macos ''darwin))
+                       ,b)))
+                   (-partition-all 2 args)))))
+</code></pre>
+<h3 id="增强版的自定义功能">增强版的自定义功能</h3>
 <p>如果遇到某种条件下的文件则执行对应的修正</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#66d9ef">use</span> strict;
 <span style="color:#66d9ef">use</span> warnings;
@@ -1083,7 +1303,7 @@ open  <span style="color:#66d9ef">my</span> $input, <span style="color:#e6db74">
     <span style="color:#f92672">or</span> die  <span style="color:#e6db74">&#34;$0 : failed to open  input file &#39;$input_file_name&#39; : $!\n&#34;</span>;
 
 
-<span style="color:#66d9ef">my</span>	$output_file_name <span style="color:#f92672">=</span> <span style="color:#e6db74">qw&#34;c:\users\yezhaoliang\desktop\probe2.cse&#34;</span>; <span style="color:#75715e"># output file name</span>
+<span style="color:#66d9ef">my</span>	$output_file_name <span style="color:#f92672">=</span> <span style="color:#e6db74">qw&#34;c:\users\yezhaoliang\desktop\probe2.cse&#34;</span>; <span style="color:#75715e"># output file name</span>
 
 open  <span style="color:#66d9ef">my</span> $output, <span style="color:#e6db74">&#39;&gt;&#39;</span>, $output_file_name
     <span style="color:#f92672">or</span> die  <span style="color:#e6db74">&#34;$0 : failed to open  output file &#39;$output_file_name&#39; : $!\n&#34;</span>;
@@ -1110,17 +1330,17 @@ close  $input
 <li>修改</li>
 <li>执行</li>
 </ol>
-<!-- raw HTML omitted -->
+<!--listend-->
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#66d9ef">use</span> strict;
 <span style="color:#66d9ef">use</span> warnings;
 <span style="color:#66d9ef">use</span> utf8;
 <span style="color:#66d9ef">use</span> Cwd;
 
-<span style="color:#75715e">#my  $directory   = &#34;D:\\huaiLaiUnder\\huaiLaiNew20190722\\huaiLaiNew20190722\\noTurbine\\10.00\\&#34;;</span>
+<span style="color:#75715e">#my  $directory   = &#34;D:\\huaiLaiUnder\\huaiLaiNew20190722\\huaiLaiNew20190722\\noTurbine\\10.00\\&#34;;</span>
 <span style="color:#66d9ef">my</span>  $directory <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;D:\\AIwind\\AIWindCases\\Dongping20191105\\noTurbine\\10.00&#34;</span>;
-<span style="color:#75715e">#my  $specialDirSign=[0,22.5,45,67.5,90,112.5,135,157.5,180,202.5,225,247.5,270,292.5,315,337.5];</span>
+<span style="color:#75715e">#my  $specialDirSign=[0,22.5,45,67.5,90,112.5,135,157.5,180,202.5,225,247.5,270,292.5,315,337.5];</span>
 <span style="color:#66d9ef">my</span>  $specialDirSign<span style="color:#f92672">=</span>[<span style="color:#ae81ff">22.5</span>,<span style="color:#ae81ff">45</span>,<span style="color:#ae81ff">67.5</span>,<span style="color:#ae81ff">90</span>,<span style="color:#ae81ff">112.5</span>,<span style="color:#ae81ff">135</span>,<span style="color:#ae81ff">157.5</span>];
-<span style="color:#75715e">#my  $specialDirSign=[0,45,135,270,292.5];</span>
+<span style="color:#75715e">#my  $specialDirSign=[0,45,135,270,292.5];</span>
 
 <span style="color:#66d9ef">my</span>  $sourceFluentBatchFile<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;D:\\AIwind\\AIWindCases\\Dongping20191105\\noTurbine\\10.00\\0\\YangJiang\\fluentInterface\\batchFluent2000&#34;</span>;
 
@@ -1134,14 +1354,14 @@ close  $input
     <span style="color:#66d9ef">my</span>	$input_file_name <span style="color:#f92672">=</span> $sourceFluentBatchFile;
     open  <span style="color:#66d9ef">my</span> $input, <span style="color:#e6db74">&#39;&lt;&#39;</span>, $input_file_name
         <span style="color:#f92672">or</span> die  <span style="color:#e6db74">&#34;$0 : failed to open  input file &#39;$input_file_name&#39; : $!\n&#34;</span>;
-    <span style="color:#66d9ef">my</span>	$output_file_name <span style="color:#f92672">=</span> sprintf(<span style="color:#e6db74">&#34;$tempdirectory\\batchFluent2000&#34;</span>); <span style="color:#75715e"># output file name</span>
+    <span style="color:#66d9ef">my</span>	$output_file_name <span style="color:#f92672">=</span> sprintf(<span style="color:#e6db74">&#34;$tempdirectory\\batchFluent2000&#34;</span>); <span style="color:#75715e"># output file name</span>
     open  <span style="color:#66d9ef">my</span> $output, <span style="color:#e6db74">&#39;&gt;&#39;</span>, $output_file_name
         <span style="color:#f92672">or</span> die  <span style="color:#e6db74">&#34;$0 : failed to open  output file &#39;$output_file_name&#39; : $!\n&#34;</span>;
 
     <span style="color:#66d9ef">while</span> (<span style="color:#66d9ef">my</span> $line<span style="color:#f92672">=</span><span style="color:#e6db74">&lt;$input&gt;</span>){
 
         <span style="color:#66d9ef">if</span> ( $line <span style="color:#f92672">=~</span> <span style="color:#e6db74">m/$oldProjectName/xm</span>) {
-            <span style="color:#75715e">## 要求1</span>
+            <span style="color:#75715e">## 要求1</span>
             $line <span style="color:#f92672">=~</span> <span style="color:#e6db74">s/$oldProjectName/$projectName/gm</span>
         }
         <span style="color:#66d9ef">print</span> $output $line;
@@ -1153,13 +1373,13 @@ close  $input
         <span style="color:#f92672">or</span> warn <span style="color:#e6db74">&#34;$0 : failed to close input file &#39;$input_file_name&#39; : $!\n&#34;</span>;
 
 
-    <span style="color:#75715e">#copy($sourceFluentBatchFile,$destinationFile) or die &#34;Copy failed: $!&#34;;</span>
-    <span style="color:#75715e">#my  $tempBatchFile=sprintf(&#34;$directory\\$name\\huailai20m2\\batchFluent.bat&#34;);</span>
+    <span style="color:#75715e">#copy($sourceFluentBatchFile,$destinationFile) or die &#34;Copy failed: $!&#34;;</span>
+    <span style="color:#75715e">#my  $tempBatchFile=sprintf(&#34;$directory\\$name\\huailai20m2\\batchFluent.bat&#34;);</span>
     <span style="color:#66d9ef">print</span> <span style="color:#e6db74">&#34;$tempdirectory\n&#34;</span>;
     chdir($tempdirectory);
     <span style="color:#66d9ef">my</span>  $mypath<span style="color:#f92672">=</span>getcwd();
     <span style="color:#66d9ef">print</span> <span style="color:#e6db74">&#34; Temp Director: -----------&gt; $mypath\n&#34;</span>;
-    <span style="color:#75715e">#system($tempBatchFile)</span>
+    <span style="color:#75715e">#system($tempBatchFile)</span>
     system(<span style="color:#e6db74">&#34;fluent 3d -i batchFluent2000&#34;</span>);
 }</code></pre></div>
 <h3 id="案例2-批量修改probelinesandexport-dot-cse-替换-然后执行-完美版">案例2：批量修改probelinesAndexport.cse、替换 然后执行【完美版】</h3>
@@ -1168,16 +1388,16 @@ close  $input
 <li>修改</li>
 <li>执行</li>
 </ol>
-<!-- raw HTML omitted -->
+<!--listend-->
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#66d9ef">use</span> strict;
 <span style="color:#66d9ef">use</span> warnings;
 <span style="color:#66d9ef">use</span> Cwd;
 
-<span style="color:#75715e">#my  $directory   = &#34;D:\\huaiLaiUnder\\huaiLaiNew20190722\\huaiLaiNew20190722\\noTurbine\\10.00\\&#34;;</span>
+<span style="color:#75715e">#my  $directory   = &#34;D:\\huaiLaiUnder\\huaiLaiNew20190722\\huaiLaiNew20190722\\noTurbine\\10.00\\&#34;;</span>
 <span style="color:#66d9ef">my</span>  $directory <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;D:\\AIwind\\AIWindCases\\Dongping20191105\\noTurbine\\10.00&#34;</span>;
-<span style="color:#75715e">#my  $specialDirSign=[0,22.5,45,67.5,90,112.5,135,157.5,180,202.5,225,247.5,270,292.5,315,337.5];</span>
+<span style="color:#75715e">#my  $specialDirSign=[0,22.5,45,67.5,90,112.5,135,157.5,180,202.5,225,247.5,270,292.5,315,337.5];</span>
 <span style="color:#66d9ef">my</span>  $specialDirSign<span style="color:#f92672">=</span>[<span style="color:#ae81ff">22.5</span>,<span style="color:#ae81ff">45</span>,<span style="color:#ae81ff">67.5</span>,<span style="color:#ae81ff">90</span>,<span style="color:#ae81ff">112.5</span>,<span style="color:#ae81ff">135</span>,<span style="color:#ae81ff">157.5</span>];
-<span style="color:#75715e">#my  $specialDirSign=[0,45,135,270,292.5];</span>
+<span style="color:#75715e">#my  $specialDirSign=[0,45,135,270,292.5];</span>
 <span style="color:#66d9ef">my</span>  $projectName<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;YangJiang&#34;</span>;
 
 <span style="color:#66d9ef">my</span>  $sourceFluentBatchFile<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;D:\\AIwind\\AIWindCases\\Dongping20191105\\noTurbine\\10.00\\0\\YangJiang\\fluentInterface\\probeLinesAndExportYangJiang.cse&#34;</span>;
@@ -1188,7 +1408,7 @@ close  $input
     <span style="color:#66d9ef">my</span>	$input_file_name <span style="color:#f92672">=</span> $sourceFluentBatchFile;
     open  <span style="color:#66d9ef">my</span> $input, <span style="color:#e6db74">&#39;&lt;&#39;</span>, $input_file_name
         <span style="color:#f92672">or</span> die  <span style="color:#e6db74">&#34;$0 : failed to open  input file &#39;$input_file_name&#39; : $!\n&#34;</span>;
-    <span style="color:#66d9ef">my</span>	$output_file_name <span style="color:#f92672">=</span> sprintf(<span style="color:#e6db74">&#34;$tempdirectory\\probelinesAndExport.cse&#34;</span>); <span style="color:#75715e"># output file name</span>
+    <span style="color:#66d9ef">my</span>	$output_file_name <span style="color:#f92672">=</span> sprintf(<span style="color:#e6db74">&#34;$tempdirectory\\probelinesAndExport.cse&#34;</span>); <span style="color:#75715e"># output file name</span>
     open  <span style="color:#66d9ef">my</span> $output, <span style="color:#e6db74">&#39;&gt;&#39;</span>, $output_file_name
         <span style="color:#f92672">or</span> die  <span style="color:#e6db74">&#34;$0 : failed to open  output file &#39;$output_file_name&#39; : $!\n&#34;</span>;
 
@@ -1196,11 +1416,11 @@ close  $input
 
         <span style="color:#66d9ef">if</span> ( $line <span style="color:#f92672">=~</span> <span style="color:#e6db74">m/(^!\@processDir=\(&#34;(.*)&#34;\))/xm</span>) {
             $line <span style="color:#f92672">=</span> sprintf(<span style="color:#e6db74">&#34;!\@processDir=\&#34;$tempdirectory\&#34;;&#34;</span>);
-            <span style="color:#75715e">## 要求1</span>
+            <span style="color:#75715e">## 要求1</span>
             $line <span style="color:#f92672">=~</span> <span style="color:#e6db74">s/\\/\\\\/gxm</span>
         }
         <span style="color:#66d9ef">elsif</span> (  $line <span style="color:#f92672">=~</span> <span style="color:#e6db74">m/(^!\$file\s=\s&#34;(.*)&#34;)/xm</span> ) {
-            <span style="color:#75715e">## 规律</span>
+            <span style="color:#75715e">## 规律</span>
             $line <span style="color:#f92672">=~</span> <span style="color:#e6db74">s/$2/${projectName}20001.dat/xg</span>;
         }
         <span style="color:#66d9ef">print</span> $output $line;
@@ -1211,14 +1431,14 @@ close  $input
     close  $input
         <span style="color:#f92672">or</span> warn <span style="color:#e6db74">&#34;$0 : failed to close input file &#39;$input_file_name&#39; : $!\n&#34;</span>;
 
-    <span style="color:#75715e">#copy($sourceFluentBatchFile,$destinationFile) or die &#34;Copy failed: $!&#34;;</span>
-    <span style="color:#75715e">#my  $tempBatchFile=sprintf(&#34;$directory\\$name\\huailai20m2\\batchFluent.bat&#34;);</span>
+    <span style="color:#75715e">#copy($sourceFluentBatchFile,$destinationFile) or die &#34;Copy failed: $!&#34;;</span>
+    <span style="color:#75715e">#my  $tempBatchFile=sprintf(&#34;$directory\\$name\\huailai20m2\\batchFluent.bat&#34;);</span>
     <span style="color:#66d9ef">print</span> <span style="color:#e6db74">&#34;$tempdirectory\n&#34;</span>;
     chdir($tempdirectory);
     <span style="color:#66d9ef">my</span>  $mypath<span style="color:#f92672">=</span>getcwd();
     <span style="color:#66d9ef">print</span> <span style="color:#e6db74">&#34; Temp Director: -----------&gt; $mypath\n&#34;</span>;
-    <span style="color:#75715e">#system($tempBatchFile)</span>
-    <span style="color:#75715e">#system(&#34;fluent 3d -i batchFluent2000&#34;);</span>
+    <span style="color:#75715e">#system($tempBatchFile)</span>
+    <span style="color:#75715e">#system(&#34;fluent 3d -i batchFluent2000&#34;);</span>
     system(<span style="color:#e6db74">&#34;cfdpost -batch probeLinesAndExport.cse&#34;</span>);
 }</code></pre></div>
 <h3 id="上述两个过程案例1-2可以合并">上述两个过程案例1、2可以合并</h3>
@@ -1226,26 +1446,26 @@ close  $input
 <li>确定处理哪个case, 烟墩? 怀来? 东平?</li>
 <li>确定源文件是否存在! 原先的BatchFluent2000和cse文件在？</li>
 </ol>
-<!-- raw HTML omitted -->
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#75715e">#!/usr/bin/env perl</span>
-<span style="color:#75715e">#===============================================================================</span>
-<span style="color:#75715e">#</span>
-<span style="color:#75715e">#         FILE: journalTransferAIWINDTOFluentCasDat814w.pl</span>
-<span style="color:#75715e">#</span>
-<span style="color:#75715e">#        USAGE: ./journalTransferAIWINDTOFluentCasDat814w.pl</span>
-<span style="color:#75715e">#</span>
-<span style="color:#75715e">#  DESCRIPTION:</span>
-<span style="color:#75715e">#</span>
-<span style="color:#75715e">#      OPTIONS: ---</span>
-<span style="color:#75715e"># REQUIREMENTS: ---</span>
-<span style="color:#75715e">#         BUGS: ---</span>
-<span style="color:#75715e">#        NOTES: ---</span>
-<span style="color:#75715e">#       AUTHOR: YOUR NAME (),</span>
-<span style="color:#75715e"># ORGANIZATION:</span>
-<span style="color:#75715e">#      VERSION: 1.0</span>
-<span style="color:#75715e">#      CREATED: 2019/9/27 15:43:35</span>
-<span style="color:#75715e">#     REVISION: ---</span>
-<span style="color:#75715e">#===============================================================================</span>
+<!--listend-->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#75715e">#!/usr/bin/env perl</span>
+<span style="color:#75715e">#===============================================================================</span>
+<span style="color:#75715e">#</span>
+<span style="color:#75715e">#         FILE: journalTransferAIWINDTOFluentCasDat814w.pl</span>
+<span style="color:#75715e">#</span>
+<span style="color:#75715e">#        USAGE: ./journalTransferAIWINDTOFluentCasDat814w.pl</span>
+<span style="color:#75715e">#</span>
+<span style="color:#75715e">#  DESCRIPTION:</span>
+<span style="color:#75715e">#</span>
+<span style="color:#75715e">#      OPTIONS: ---</span>
+<span style="color:#75715e"># REQUIREMENTS: ---</span>
+<span style="color:#75715e">#         BUGS: ---</span>
+<span style="color:#75715e">#        NOTES: ---</span>
+<span style="color:#75715e">#       AUTHOR: YOUR NAME (),</span>
+<span style="color:#75715e"># ORGANIZATION:</span>
+<span style="color:#75715e">#      VERSION: 1.0</span>
+<span style="color:#75715e">#      CREATED: 2019/9/27 15:43:35</span>
+<span style="color:#75715e">#     REVISION: ---</span>
+<span style="color:#75715e">#===============================================================================</span>
 
 <span style="color:#66d9ef">use</span> strict;
 <span style="color:#66d9ef">use</span> warnings;
@@ -1253,47 +1473,47 @@ close  $input
 <span style="color:#66d9ef">use</span> Cwd;
 <span style="color:#66d9ef">use</span> File::Copy;
 
-<span style="color:#75715e">#my  $directory   = &#34;D:\\huaiLaiUnder\\huaiLaiNew20190722\\huaiLaiNew20190722\\noTurbine\\10.00\\&#34;;</span>
+<span style="color:#75715e">#my  $directory   = &#34;D:\\huaiLaiUnder\\huaiLaiNew20190722\\huaiLaiNew20190722\\noTurbine\\10.00\\&#34;;</span>
 <span style="color:#66d9ef">my</span>  $directory <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;D:\\AIwind\\AIWindCases\\Dongping20191105\\noTurbine\\10.00&#34;</span>;
-<span style="color:#75715e">#my  $specialDirSign=[0,22.5,45,67.5,90,112.5,135,157.5,180,202.5,225,247.5,270,292.5,315,337.5];</span>
+<span style="color:#75715e">#my  $specialDirSign=[0,22.5,45,67.5,90,112.5,135,157.5,180,202.5,225,247.5,270,292.5,315,337.5];</span>
 <span style="color:#66d9ef">my</span>  $specialDirSign<span style="color:#f92672">=</span>[<span style="color:#ae81ff">22.5</span>];
-<span style="color:#75715e">#my  $specialDirSign=[0,45,135,270,292.5];</span>
+<span style="color:#75715e">#my  $specialDirSign=[0,45,135,270,292.5];</span>
 
-<span style="color:#75715e">## 确认文件是否存在</span>
+<span style="color:#75715e">## 确认文件是否存在</span>
 <span style="color:#66d9ef">my</span>  $sourceFluentBatchFileStep2<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;D:\\AIwind\\AIWindCases\\Dongping20191105\\noTurbine\\10.00\\0\\YangJiang\\fluentInterface\\batchFluent2000&#34;</span>;
 
-<span style="color:#75715e">## 确认文件是否存在</span>
+<span style="color:#75715e">## 确认文件是否存在</span>
 <span style="color:#66d9ef">my</span>  $sourceFluentBatchFileStep3<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;D:\\AIwind\\AIWindCases\\Dongping20191105\\noTurbine\\10.00\\0\\YangJiang\\fluentInterface\\probeLinesAndExportYangJiang.cse&#34;</span>;
 
-<span style="color:#75715e">## step1</span>
+<span style="color:#75715e">## step1</span>
 <span style="color:#66d9ef">my</span> $sourceFileDirs<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;D:\\AIwind\\AIWindCases\\Dongping20191105\\noTurbine\\10.00\\0\\YangJiang\\&#34;</span>;
 <span style="color:#66d9ef">my</span>  $targetFileSign1<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;foamDataToFluentDict&#34;</span>;
 <span style="color:#66d9ef">my</span>  $targetFileSign2<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;batchFluent.bat&#34;</span>;
 <span style="color:#66d9ef">my</span>  $projectVelocity<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;10.00&#39;</span>;
 <span style="color:#66d9ef">my</span> $projectName<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;YangJiang&#34;</span>;
 
-<span style="color:#75715e">## step2</span>
+<span style="color:#75715e">## step2</span>
 <span style="color:#66d9ef">my</span>  $oldProjectName<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Huailai20m2&#34;</span>;
-<span style="color:#75715e">#my  $projectName=&#34;YangJiang&#34;;</span>
+<span style="color:#75715e">#my  $projectName=&#34;YangJiang&#34;;</span>
 
 <span style="color:#66d9ef">foreach</span> <span style="color:#66d9ef">my</span> $name ( @$specialDirSign ) {
 
 
-    <span style="color:#75715e">###########################STEP 2 ###########################</span>
+    <span style="color:#75715e">###########################STEP 2 ###########################</span>
     <span style="color:#66d9ef">my</span>  $tempdirectory<span style="color:#f92672">=</span>sprintf(<span style="color:#e6db74">&#34;$directory\\$name\\$projectName\\fluentInterface\\&#34;</span>);
     <span style="color:#66d9ef">my</span>  $destinationFile<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;$tempdirectory\\batchFluent2000&#34;</span>;
 
     <span style="color:#66d9ef">my</span>	$input_file_name <span style="color:#f92672">=</span> $sourceFluentBatchFileStep2;
     open  <span style="color:#66d9ef">my</span> $input, <span style="color:#e6db74">&#39;&lt;&#39;</span>, $input_file_name
         <span style="color:#f92672">or</span> die  <span style="color:#e6db74">&#34;$0 : failed to open  input file &#39;$input_file_name&#39; : $!\n&#34;</span>;
-    <span style="color:#66d9ef">my</span>	$output_file_name <span style="color:#f92672">=</span> sprintf(<span style="color:#e6db74">&#34;$tempdirectory\\batchFluent2000&#34;</span>); <span style="color:#75715e"># output file name</span>
+    <span style="color:#66d9ef">my</span>	$output_file_name <span style="color:#f92672">=</span> sprintf(<span style="color:#e6db74">&#34;$tempdirectory\\batchFluent2000&#34;</span>); <span style="color:#75715e"># output file name</span>
     open  <span style="color:#66d9ef">my</span> $output, <span style="color:#e6db74">&#39;&gt;&#39;</span>, $output_file_name
         <span style="color:#f92672">or</span> die  <span style="color:#e6db74">&#34;$0 : failed to open  output file &#39;$output_file_name&#39; : $!\n&#34;</span>;
 
     <span style="color:#66d9ef">while</span> (<span style="color:#66d9ef">my</span> $line<span style="color:#f92672">=</span><span style="color:#e6db74">&lt;$input&gt;</span>){
 
         <span style="color:#66d9ef">if</span> ( $line <span style="color:#f92672">=~</span> <span style="color:#e6db74">m/$oldProjectName/xm</span>) {
-            <span style="color:#75715e">## 要求1</span>
+            <span style="color:#75715e">## 要求1</span>
             $line <span style="color:#f92672">=~</span> <span style="color:#e6db74">s/$oldProjectName/$projectName/gm</span>
         }
         <span style="color:#66d9ef">print</span> $output $line;
@@ -1305,22 +1525,22 @@ close  $input
         <span style="color:#f92672">or</span> warn <span style="color:#e6db74">&#34;$0 : failed to close input file &#39;$input_file_name&#39; : $!\n&#34;</span>;
 
 
-    <span style="color:#75715e">#copy($sourceFluentBatchFile,$destinationFile) or die &#34;Copy failed: $!&#34;;</span>
-    <span style="color:#75715e">#my  $tempBatchFile=sprintf(&#34;$directory\\$name\\huailai20m2\\batchFluent.bat&#34;);</span>
+    <span style="color:#75715e">#copy($sourceFluentBatchFile,$destinationFile) or die &#34;Copy failed: $!&#34;;</span>
+    <span style="color:#75715e">#my  $tempBatchFile=sprintf(&#34;$directory\\$name\\huailai20m2\\batchFluent.bat&#34;);</span>
     <span style="color:#66d9ef">print</span> <span style="color:#e6db74">&#34;$tempdirectory\n&#34;</span>;
     chdir($tempdirectory);
     <span style="color:#66d9ef">my</span>  $mypath<span style="color:#f92672">=</span>getcwd();
     <span style="color:#66d9ef">print</span> <span style="color:#e6db74">&#34; Temp Director: -----------&gt; $mypath\n&#34;</span>;
-    <span style="color:#75715e">#system($tempBatchFile)</span>
+    <span style="color:#75715e">#system($tempBatchFile)</span>
     system(<span style="color:#e6db74">&#34;fluent 3d -i batchFluent2000&#34;</span>);
 
-    <span style="color:#75715e">###########################STEP 2 ###########################</span>
+    <span style="color:#75715e">###########################STEP 2 ###########################</span>
 
-    <span style="color:#75715e">###########################STEP 3 ###########################</span>
+    <span style="color:#75715e">###########################STEP 3 ###########################</span>
     <span style="color:#66d9ef">my</span>	$input_file_name <span style="color:#f92672">=</span> $sourceFluentBatchFileStep3;
     open  <span style="color:#66d9ef">my</span> $input, <span style="color:#e6db74">&#39;&lt;&#39;</span>, $input_file_name
         <span style="color:#f92672">or</span> die  <span style="color:#e6db74">&#34;$0 : failed to open  input file &#39;$input_file_name&#39; : $!\n&#34;</span>;
-    <span style="color:#66d9ef">my</span>	$output_file_name <span style="color:#f92672">=</span> sprintf(<span style="color:#e6db74">&#34;$tempdirectory\\probelinesAndExport.cse&#34;</span>); <span style="color:#75715e"># output file name</span>
+    <span style="color:#66d9ef">my</span>	$output_file_name <span style="color:#f92672">=</span> sprintf(<span style="color:#e6db74">&#34;$tempdirectory\\probelinesAndExport.cse&#34;</span>); <span style="color:#75715e"># output file name</span>
     open  <span style="color:#66d9ef">my</span> $output, <span style="color:#e6db74">&#39;&gt;&#39;</span>, $output_file_name
         <span style="color:#f92672">or</span> die  <span style="color:#e6db74">&#34;$0 : failed to open  output file &#39;$output_file_name&#39; : $!\n&#34;</span>;
 
@@ -1328,11 +1548,11 @@ close  $input
 
         <span style="color:#66d9ef">if</span> ( $line <span style="color:#f92672">=~</span> <span style="color:#e6db74">m/(^!\@processDir=\(&#34;(.*)&#34;\))/xm</span>) {
             $line <span style="color:#f92672">=</span> sprintf(<span style="color:#e6db74">&#34;!\@processDir=\&#34;$tempdirectory\&#34;;&#34;</span>);
-            <span style="color:#75715e">## 要求1</span>
+            <span style="color:#75715e">## 要求1</span>
             $line <span style="color:#f92672">=~</span> <span style="color:#e6db74">s/\\/\\\\/gxm</span>
         }
         <span style="color:#66d9ef">elsif</span> (  $line <span style="color:#f92672">=~</span> <span style="color:#e6db74">m/(^!\$file\s=\s&#34;(.*)&#34;)/xm</span> ) {
-            <span style="color:#75715e">## 规律</span>
+            <span style="color:#75715e">## 规律</span>
             $line <span style="color:#f92672">=~</span> <span style="color:#e6db74">s/$2/${projectName}20001.dat/xg</span>;
         }
         <span style="color:#66d9ef">print</span> $output $line;
@@ -1343,17 +1563,17 @@ close  $input
     close  $input
         <span style="color:#f92672">or</span> warn <span style="color:#e6db74">&#34;$0 : failed to close input file &#39;$input_file_name&#39; : $!\n&#34;</span>;
 
-    <span style="color:#75715e">#copy($sourceFluentBatchFile,$destinationFile) or die &#34;Copy failed: $!&#34;;</span>
-    <span style="color:#75715e">#my  $tempBatchFile=sprintf(&#34;$directory\\$name\\huailai20m2\\batchFluent.bat&#34;);</span>
+    <span style="color:#75715e">#copy($sourceFluentBatchFile,$destinationFile) or die &#34;Copy failed: $!&#34;;</span>
+    <span style="color:#75715e">#my  $tempBatchFile=sprintf(&#34;$directory\\$name\\huailai20m2\\batchFluent.bat&#34;);</span>
     <span style="color:#66d9ef">print</span> <span style="color:#e6db74">&#34;$tempdirectory\n&#34;</span>;
     chdir($tempdirectory);
     <span style="color:#66d9ef">my</span>  $mypath<span style="color:#f92672">=</span>getcwd();
     <span style="color:#66d9ef">print</span> <span style="color:#e6db74">&#34; Temp Director: -----------&gt; $mypath\n&#34;</span>;
-    <span style="color:#75715e">#system($tempBatchFile)</span>
-    <span style="color:#75715e">#system(&#34;fluent 3d -i batchFluent2000&#34;);</span>
+    <span style="color:#75715e">#system($tempBatchFile)</span>
+    <span style="color:#75715e">#system(&#34;fluent 3d -i batchFluent2000&#34;);</span>
     system(<span style="color:#e6db74">&#34;cfdpost -batch probeLinesAndExport.cse&#34;</span>);
 
-    <span style="color:#75715e">###########################STEP 3 ###########################</span>
+    <span style="color:#75715e">###########################STEP 3 ###########################</span>
 
 }</code></pre></div>
 
@@ -1376,9 +1596,10 @@ close  $input
 
 
 
+
 <div class="article-tags">
   
-  <a class="badge badge-light" href="/tags/perl/">perl</a>
+  <a class="badge badge-light" href="/tag/perl/">perl</a>
   
 </div>
 
@@ -1447,7 +1668,7 @@ close  $input
       
       
       <li>
-        <a href="https://web.whatsapp.com/send?text=perl%e6%89%b9%e9%87%8f%e5%b7%a5%e4%bd%9c%e6%9c%ba%e5%99%a8%e7%a8%8b%e5%ba%8f%20https://jueqingsizhe66.github.io/post/perl%E6%89%B9%E9%87%8F%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%99%A8%E7%A8%8B%E5%BA%8F/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+        <a href="whatsapp://send?text=perl%e6%89%b9%e9%87%8f%e5%b7%a5%e4%bd%9c%e6%9c%ba%e5%99%a8%e7%a8%8b%e5%ba%8f%20https://jueqingsizhe66.github.io/post/perl%E6%89%B9%E9%87%8F%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%99%A8%E7%A8%8B%E5%BA%8F/" target="_blank" rel="noopener" class="share-btn-whatsapp">
           <i class="fab fa-whatsapp"></i>
         </a>
       </li>
@@ -1478,11 +1699,8 @@ close  $input
 
 
 
-
   
-
-
-
+  
 
 
 
@@ -1490,16 +1708,17 @@ close  $input
   
   
     
+  
   
   
   <div class="media author-card content-widget-hr">
     
       
-      <img class="portrait mr-3" src="/authors/admin/avatar_hub2bcfcfc92fc067668c68513c0d68b69_23221_250x250_fill_q90_lanczos_center.jpg" alt="Avatar">
+      <a href="https://jueqingsizhe66.github.io/"><img class="avatar mr-3 avatar-circle" src="/author/%E5%8F%B6%E6%98%AD%E8%89%AF/avatar_huc99f1f2e739130747140db298bdd1890_46492_270x270_fill_q90_lanczos_center.jpg" alt="叶昭良"></a>
     
 
     <div class="media-body">
-      <h5 class="card-title"><a href="https://jueqingsizhe66.github.io/">Ye Zhaoliang</a></h5>
+      <h5 class="card-title"><a href="https://jueqingsizhe66.github.io/">叶昭良</a></h5>
       <h6 class="card-subtitle">Engineer of offshore wind turbine technique research</h6>
       <p class="card-text">My research interests include distributed energy, wind turbine power generation technique , Computational fluid dynamic and programmable matter.</p>
       <ul class="network-icon" aria-hidden="true">
@@ -1583,13 +1802,16 @@ close  $input
 
 
 
+
+
+
+
+
   
   
   <div class="article-widget content-widget-hr">
     <h3>Related</h3>
     <ul>
-      
-      <li><a href="/blog/2016/02/22/shi-yong-ydiffgong-ju-sheng-cheng-wen-jian-chai-yi-bi-jiao-wen-jian/">使用Ydiff工具生成文件差异比较文件</a></li>
       
       <li><a href="/blog/2017/02/08/perldu-qu-mysqlshu-ju-ku/">perl读取mysql数据库</a></li>
       
@@ -1597,7 +1819,9 @@ close  $input
       
       <li><a href="/blog/2017/01/22/perl-summary/">Perl_Summary</a></li>
       
-      <li><a href="/post/%E7%8E%A9%E8%BD%ACpython-datetime/">玩转python datetime</a></li>
+      <li><a href="/post/perl%E6%8B%86%E5%88%86%E5%A4%A7%E6%96%87%E4%BB%B6%E5%88%B0excel%E8%A1%A8/">perl拆分大文件到excel表</a></li>
+      
+      <li><a href="/post/python%E6%8F%90%E5%8F%96%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E7%99%BD%E5%A4%A9%E5%92%8C%E9%BB%91%E5%A4%9C%E7%9A%84%E6%97%B6%E9%97%B4%E6%AE%B5/">python提取时间序列白天和黑夜的时间段</a></li>
       
     </ul>
 
@@ -1619,67 +1843,120 @@ close  $input
         crossorigin="anonymous"
         async>
 </script>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    ©2020 &middot; 
+
+    ^-^ YZL ^-^ Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
 
       
 
     
     
     
-    <script src="/js/mathjax-config.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+      
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/go.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/vim.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/matlab.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/sql.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/python.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/c.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/scheme.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/racket.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/perl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/awk.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/clojure.min.js"></script>
+        
+      
+
     
 
     
     
-    
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
-
-      
-
-      
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js" integrity="sha256-aYTdUrn6Ow1DDgh5JTc3aDGnnju48y/1c8s1dgkYPQ8=" crossorigin="anonymous"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/go.min.js"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/vim.min.js"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/matlab.min.js"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/sql.min.js"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/python.min.js"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/c.min.js"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/scheme.min.js"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/racket.min.js"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/perl.min.js"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/awk.min.js"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/clojure.min.js"></script>
-        
-      
-
-      
-      
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
-      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js" integrity="sha512-SeiQaaDh73yrb56sTW/RgVdi/mMqNeM2oBwubFHagc5BkixSpP1fvqF47mKzPGWYSSy4RwbBunrJBQ4Co8fRWA==" crossorigin="anonymous"></script>
     
 
     
     
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin="anonymous"></script>
-    
-
-    
-    
-    <script>hljs.initHighlightingOnLoad();</script>
+    <script>const code_highlighting = true;</script>
     
 
     
@@ -1695,7 +1972,8 @@ close  $input
         'post': "Posts",
         'project': "Projects",
         'publication' : "Publications",
-        'talk' : "Talks"
+        'talk' : "Talks",
+        'slides' : "Slides"
         };
     </script>
     
@@ -1729,6 +2007,13 @@ close  $input
 
     
     
+    
+
+    
+    
+
+    
+    
 
     
     
@@ -1744,7 +2029,7 @@ close  $input
     
     
     
-    <script src="/js/academic.min.d6bd04fdad2ad213aa8111c5a3b72fc5.js"></script>
+    <script src="/js/wowchemy.min.59419d2c9809de125013c581da371866.js"></script>
 
     
 
@@ -1752,60 +2037,6 @@ close  $input
 
 
 
-
-  
-  
-  <div class="container">
-    <footer class="site-footer">
-  
-
-  <p class="powered-by">
-    ©2020 &middot; 
-
-    Powered by the
-    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
-    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
-
-    
-    <span class="float-right" aria-hidden="true">
-      <a href="#" class="back-to-top">
-        <span class="button_icon">
-          <i class="fas fa-chevron-up fa-2x"></i>
-        </span>
-      </a>
-    </span>
-    
-  </p>
-</footer>
-
-  </div>
-  
-
-  
-<div id="modal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Cite</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <pre><code class="tex hljs"></code></pre>
-      </div>
-      <div class="modal-footer">
-        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
-          <i class="fas fa-copy"></i> Copy
-        </a>
-        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
-          <i class="fas fa-download"></i> Download
-        </a>
-        <div id="modal-error"></div>
-      </div>
-    </div>
-  </div>
-</div>
 
 </body>
 </html>

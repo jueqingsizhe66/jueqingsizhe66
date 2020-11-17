@@ -1,13 +1,19 @@
-<!DOCTYPE html>
-<html lang="en-us">
+<!DOCTYPE html><html lang="en-us" >
 
 <head>
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="generator" content="Source Themes Academic 4.5.0">
+  
+  
+  
+  <meta name="generator" content="Wowchemy 5.0.0-beta.0 for Hugo">
+  
 
+  
+
+  
   
 
   
@@ -21,7 +27,7 @@
   
   
 
-  <meta name="author" content="Ye Zhaoliang">
+  <meta name="author" content="叶昭良">
 
   
   
@@ -41,6 +47,21 @@ The Second Interpreter from on第一次扩展了基础的let-language，实现�
   
 
 
+
+
+
+
+
+  
+
+
+
+
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+
   
   
   
@@ -50,11 +71,17 @@ The Second Interpreter from on第一次扩展了基础的let-language，实现�
   
   
   
+  <script src="/js/mathjax-config.js"></script>
+  
+
+  
+  
+  
   
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
 
     
     
@@ -64,48 +91,193 @@ The Second Interpreter from on第一次扩展了基础的let-language，实现�
     
       
       
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css" crossorigin="anonymous" title="hl-light">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/solarized-dark.min.css" crossorigin="anonymous" title="hl-light">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/solarized-dark.min.css" crossorigin="anonymous" title="hl-dark" disabled>
       
     
 
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css" integrity="sha512-1xoFisiGdy9nvho8EgXuXvnpR5GAMSjFwp40gSRE3NwdUdIMIKuPa7bqoUhLD0O/5tPNhteAsE5XyyMi5reQVA==" crossorigin="anonymous">
     
 
     
 
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.2.2/lazysizes.min.js" integrity="sha512-TmDwFLhg3UA4ZG0Eb4MIyT1O1Mb+Oww5kFG0uHqXsdbyZz9DcvYQhKpGgNkamAI6h2lGGZq2X8ftOJvF/XjTUg==" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+
   
 
   
   
   
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+    
+      
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+    
   
 
   
   
   
-  <link rel="stylesheet" href="/css/academic.min.e8d4d5fd376e67b34452ebe1cae16341.css">
+  
+  <link rel="stylesheet" href="/css/wowchemy.css">
 
   
 
-  
-
 
 
 
   
+<script>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','4703127160');
+</script>
 
+
+  
+
+
+  
+  
 
   
 
   <link rel="manifest" href="/index.webmanifest">
-  <link rel="icon" type="image/png" href="/img/icon-32.png">
-  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+  <link rel="icon" type="image/png" href="/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_192x192_fill_lanczos_center_2.png">
 
   <link rel="canonical" href="https://jueqingsizhe66.github.io/blog/2016/02/27/the-third-interpreter-implementing-proc/">
 
+  
+  
+  
   
   
   
@@ -119,16 +291,16 @@ The Second Interpreter from on第一次扩展了基础的let-language，实现�
   <meta property="twitter:site" content="@jueqingsizhe66">
   <meta property="twitter:creator" content="@jueqingsizhe66">
   
-  <meta property="og:site_name" content="简约派">
+  <meta property="og:site_name" content="30年磨一剑">
   <meta property="og:url" content="https://jueqingsizhe66.github.io/blog/2016/02/27/the-third-interpreter-implementing-proc/">
-  <meta property="og:title" content="The third Interpreter implementing Proc | 简约派">
+  <meta property="og:title" content="The third Interpreter implementing Proc | 30年磨一剑">
   <meta property="og:description" content="Scheme解释器的好处是可以不断的拓展自己语言的能力，
 
 通过The First-interpreter-from-eopl创建了一个较为简单let-language，实现了较为简单的减法运算和let局部变量赋值等功能。
 The Second Interpreter from on第一次扩展了基础的let-language，实现了四则运算，逻辑判断，列表操作,列表赋值等。
 这个版本的解释器进一步拓展了过程定义和过程调用的功能。
-"><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
-  <meta property="twitter:image" content="https://jueqingsizhe66.github.io/img/icon-192.png"><meta property="og:locale" content="en-us">
+"><meta property="og:image" content="https://jueqingsizhe66.github.io/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_2.png">
+  <meta property="twitter:image" content="https://jueqingsizhe66.github.io/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
   
     
       <meta property="article:published_time" content="2016-02-27T14:35:50&#43;08:00">
@@ -152,11 +324,19 @@ The Second Interpreter from on第一次扩展了基础的let-language，实现�
 
 
 
-  <title>The third Interpreter implementing Proc | 简约派</title>
+  <title>The third Interpreter implementing Proc | 30年磨一剑</title>
 
 </head>
 
-<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper  ">
+
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.js"></script>
 
   <aside class="search-results" id="search">
   <div class="container">
@@ -174,7 +354,7 @@ The Second Interpreter from on第一次扩展了基础的let-language，实现�
       <div id="search-box">
         
         <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
-        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control">
         
       </div>
 
@@ -190,25 +370,48 @@ The Second Interpreter from on第一次扩展了基础的let-language，实现�
 </aside>
 
 
-  
-<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0 compensate-for-scrollbar" id="navbar-main">
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
   <div class="container">
 
     
-      <a class="navbar-brand" href="/">简约派</a>
-      
-      <button type="button" class="navbar-toggler" data-toggle="collapse"
-              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
-        <span><i class="fas fa-bars"></i></span>
-      </button>
-      
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/">30年磨一剑</a>
+    </div>
+    
 
     
-    <div class="collapse navbar-collapse" id="navbar">
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/">30年磨一剑</a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-end" id="navbar-content">
 
       
-      
-      <ul class="navbar-nav ml-auto">
+      <ul class="navbar-nav d-md-inline-flex">
         
 
         
@@ -220,16 +423,24 @@ The Second Interpreter from on第一次扩展了基础的let-language，实现�
         
 
         
+
         
         
         
         
+
         
           
+            
+            
           
           
             
-          
+            
+            
+              
+            
+            
           
         
 
@@ -249,16 +460,24 @@ The Second Interpreter from on第一次扩展了基础的let-language，实现�
         
 
         
+
         
         
         
         
+
         
           
+            
+            
           
           
             
-          
+            
+            
+              
+            
+            
           
         
 
@@ -278,68 +497,18 @@ The Second Interpreter from on第一次扩展了基础的let-language，实现�
         
 
         
+
         
         
         
         
+
         
           
-          
-          
+            
             
           
           
-        
-
-        <li class="nav-item">
-          <a class="nav-link " href="/#projects"><span>项目</span></a>
-        </li>
-
-        
-        
-
-        
-
-        
-        
-        
-          
-        
-
-        
-        
-        
-        
-        
-        
-          
-          
-          
-            
-          
-          
-        
-
-        <li class="nav-item">
-          <a class="nav-link " href="/#featured"><span>Publications</span></a>
-        </li>
-
-        
-        
-
-        
-
-        
-        
-        
-          
-        
-
-        
-        
-        
-        
-        
         
 
         <li class="nav-item">
@@ -358,10 +527,18 @@ The Second Interpreter from on第一次扩展了基础的let-language，实现�
         
 
         
+
         
         
         
         
+
+        
+          
+            
+            
+          
+          
         
 
         <li class="nav-item">
@@ -380,10 +557,18 @@ The Second Interpreter from on第一次扩展了基础的let-language，实现�
         
 
         
+
         
         
         
         
+
+        
+          
+            
+            
+          
+          
         
 
         <li class="nav-item">
@@ -402,10 +587,18 @@ The Second Interpreter from on第一次扩展了基础的let-language，实现�
         
 
         
+
         
         
         
         
+
+        
+          
+            
+            
+          
+          
         
 
         <li class="nav-item">
@@ -424,16 +617,24 @@ The Second Interpreter from on第一次扩展了基础的let-language，实现�
         
 
         
+
         
         
         
         
+
         
           
+            
+            
           
           
             
-          
+            
+            
+              
+            
+            
           
         
 
@@ -447,29 +648,49 @@ The Second Interpreter from on第一次扩展了基础的let-language，实现�
       
 
         
-
-        
-        <li class="nav-item">
-          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
-        </li>
-        
-
-        
-
-        
-        <li class="nav-item">
-          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
-        </li>
-        
-
       </ul>
-
     </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+
+    </ul>
+
   </div>
 </nav>
 
 
-  <article class="article">
+  </div>
+
+  <div class="page-body">
+    <article class="article">
 
   
 
@@ -529,13 +750,14 @@ The Second Interpreter from on第一次扩展了基础的let-language，实现�
     
     Feb 27, 2016
   </span>
-
   
 
   
 
   
 
+  
+  
   
   
   
@@ -544,9 +766,9 @@ The Second Interpreter from on第一次扩展了基础的let-language，实现�
   
   <span class="middot-divider"></span>
   <span class="article-categories">
-    <i class="fas fa-folder mr-1"></i><a href="/categories/programme/">programme</a></span>
-
+    <i class="fas fa-folder mr-1"></i><a href="/category/programme/">programme</a></span>
   
+
 </div>
 
     
@@ -571,7 +793,7 @@ The Second Interpreter from on第一次扩展了基础的let-language，实现�
 
 
 
-<span class="article-metadata" >Reading time: 11 minutes and    1 second with 2426 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+<span class="article-metadata" >Reading time: 11 minutes and    11 seconds with 2461 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
   <ul>
@@ -599,8 +821,8 @@ The Second Interpreter from on第一次扩展了基础的let-language，实现�
     <div class="article-style">
       <p>Scheme解释器的好处是可以不断的拓展自己语言的能力，</p>
 <ol>
-<li>通过<a href="http://jueqingsizhe66.github.io/blog/2016/02/25/first-interpreter-from-eopl/">The First-interpreter-from-eopl</a>创建了一个较为简单let-language，实现了较为简单的减法运算和let局部变量赋值等功能。</li>
-<li><a href="http://jueqingsizhe66.github.io/blog/2016/02/27/the-second-interpreter-from-one/">The Second Interpreter from on</a>第一次扩展了基础的let-language，实现了四则运算，逻辑判断，列表操作,列表赋值等。</li>
+<li>通过<a href="http://jueqingsizhe66.github.io/blog/2016/02/25/first-interpreter-from-eopl/" target="_blank" rel="noopener">The First-interpreter-from-eopl</a>创建了一个较为简单let-language，实现了较为简单的减法运算和let局部变量赋值等功能。</li>
+<li><a href="http://jueqingsizhe66.github.io/blog/2016/02/27/the-second-interpreter-from-one/" target="_blank" rel="noopener">The Second Interpreter from on</a>第一次扩展了基础的let-language，实现了四则运算，逻辑判断，列表操作,列表赋值等。</li>
 <li>这个版本的解释器进一步拓展了过程定义和过程调用的功能。</li>
 </ol>
 <ul>
@@ -608,82 +830,88 @@ The Second Interpreter from on第一次扩展了基础的let-language，实现�
 <li><a href="#2">2. Y-comb 的实现过程</a></li>
 <li><a href="#3">3. 新语言的Y+实现</a></li>
 </ul>
-<!-- raw HTML omitted -->
+<h2 id = "1"> 1. proc-language 的实现 </h2>
 <h3 id="langscm增加了过程定义和调用">lang.scm增加了过程定义和调用</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">    <span style="color:#75715e">;;;new stuff</span>
-      (<span style="color:#a6e22e">expression</span>
-       (<span style="color:#e6db74">&#34;proc&#34;</span> <span style="color:#e6db74">&#34;(&#34;</span> identifier <span style="color:#e6db74">&#34;)&#34;</span> expression)
+<pre><code class="language-scheme">    ;;;new stuff
+      (expression
+       (&quot;proc&quot; &quot;(&quot; identifier &quot;)&quot; expression)
        proc-exp)
       
-      (<span style="color:#a6e22e">expression</span>
-       (<span style="color:#e6db74">&#34;(&#34;</span> expression expression <span style="color:#e6db74">&#34;)&#34;</span>)
+      (expression
+       (&quot;(&quot; expression expression &quot;)&quot;)
        call-exp)
-</code></pre></div><h3 id="interpscm增加了过程定义和调用">interp.scm增加了过程定义和调用</h3>
+</code></pre>
+<h3 id="interpscm增加了过程定义和调用">interp.scm增加了过程定义和调用</h3>
 <ul>
 <li>value-of 增加了proc-exp和call-exp的内部语言形式</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">      <span style="color:#75715e">;;;新增的proc-exp 和call-exp</span>
-        (<span style="color:#a6e22e">proc-exp</span> (<span style="color:#a6e22e">var</span> body)
-                 (<span style="color:#a6e22e">proc-val</span> (<span style="color:#a6e22e">procedure</span> var body env)))
+<pre><code class="language-scheme">      ;;;新增的proc-exp 和call-exp
+        (proc-exp (var body)
+                 (proc-val (procedure var body env)))
         
-        (<span style="color:#a6e22e">call-exp</span> (<span style="color:#a6e22e">rator</span> rand)
-                 (<span style="color:#66d9ef">let </span>((<span style="color:#a6e22e">proc</span> (<span style="color:#a6e22e">expval-&gt;proc</span> (<span style="color:#a6e22e">value-of</span> rator env)))
-                       (<span style="color:#a6e22e">arg</span> (<span style="color:#a6e22e">value-of</span> rand env)))
-                   (<span style="color:#a6e22e">apply-procedure</span> proc arg)))
-</code></pre></div><ul>
+        (call-exp (rator rand)
+                 (let ((proc (expval-&gt;proc (value-of rator env)))
+                       (arg (value-of rand env)))
+                   (apply-procedure proc arg)))
+</code></pre>
+<ul>
 <li>apply-procedure 用于proc的实现</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"> <span style="color:#75715e">;; proc-exp</span>
- <span style="color:#75715e">;; apply-procedure : Proc * ExpVal -&gt; ExpVal</span>
-  <span style="color:#75715e">;; Page: 79</span>
-  (<span style="color:#66d9ef">define </span>apply-procedure
-    (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">proc1</span> val)
-      (<span style="color:#a6e22e">cases</span> proc proc1
-        (<span style="color:#a6e22e">procedure</span> (<span style="color:#a6e22e">var</span> body saved-env)
-          (<span style="color:#a6e22e">value-of</span> body (<span style="color:#a6e22e">extend-env</span> var val saved-env))))))
-</code></pre></div><h2 id="data-structuresscm增加了过程定义和调用">data-structures.scm增加了过程定义和调用</h2>
+<pre><code class="language-scheme"> ;; proc-exp
+ ;; apply-procedure : Proc * ExpVal -&gt; ExpVal
+  ;; Page: 79
+  (define apply-procedure
+    (lambda (proc1 val)
+      (cases proc proc1
+        (procedure (var body saved-env)
+          (value-of body (extend-env var val saved-env))))))
+</code></pre>
+<h2 id="data-structuresscm增加了过程定义和调用">data-structures.scm增加了过程定义和调用</h2>
 <ul>
 <li>在expval中拓展了proc?的判断</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">  (<span style="color:#a6e22e">define-datatype</span> expval expval?
-    (<span style="color:#a6e22e">num-val</span>
-     (<span style="color:#a6e22e">value</span> number?))
-    (<span style="color:#a6e22e">bool-val</span>
-     (<span style="color:#a6e22e">boolean</span> boolean?))
-    (<span style="color:#a6e22e">pair-val</span>
+<pre><code class="language-scheme">  (define-datatype expval expval?
+    (num-val
+     (value number?))
+    (bool-val
+     (boolean boolean?))
+    (pair-val
      (car expval?)
      (cdr expval?))
-    (<span style="color:#a6e22e">emptylist-val</span>)
-    <span style="color:#75715e">;;新增的proc-exp</span>
-    (<span style="color:#a6e22e">proc-val</span> 
-     (<span style="color:#a6e22e">proc</span> proc?))
+    (emptylist-val)
+    ;;新增的proc-exp
+    (proc-val 
+     (proc proc?))
     )
   
-</code></pre></div><ul>
+</code></pre>
+<ul>
 <li>增加expval-&gt;proc类型转换的过程</li>
 </ul>
 <p>proc其实就是一个closure的具体实现。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">  <span style="color:#75715e">;;;新增的expval-&gt;proc 和proc类</span>
-  <span style="color:#75715e">;; expval-&gt;proc : ExpVal -&gt; Proc</span>
-  (<span style="color:#66d9ef">define </span>expval-&gt;proc
-    (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">v</span>)
-      (<span style="color:#a6e22e">cases</span> expval v
-        (<span style="color:#a6e22e">proc-val</span> (<span style="color:#a6e22e">proc</span>) proc)
-        (<span style="color:#66d9ef">else </span>(<span style="color:#a6e22e">expval-extractor-error</span> <span style="color:#e6db74">&#39;proc</span> v)))))
+<pre><code class="language-scheme">  ;;;新增的expval-&gt;proc 和proc类
+  ;; expval-&gt;proc : ExpVal -&gt; Proc
+  (define expval-&gt;proc
+    (lambda (v)
+      (cases expval v
+        (proc-val (proc) proc)
+        (else (expval-extractor-error 'proc v)))))
   
-  <span style="color:#75715e">;; proc? : SchemeVal -&gt; Bool</span>
-  <span style="color:#75715e">;; procedure : Var * Exp * Env -&gt; Proc</span>
-  (<span style="color:#a6e22e">define-datatype</span> proc proc?
-    (<span style="color:#a6e22e">procedure</span>
-     (<span style="color:#a6e22e">var</span> symbol?)
-     (<span style="color:#a6e22e">body</span> expression?)
-     (<span style="color:#a6e22e">env</span> environment?)))
-</code></pre></div><h2 id="增加过程定义和调用的测试结果">增加过程定义和调用的测试结果</h2>
-<!-- raw HTML omitted -->
+  ;; proc? : SchemeVal -&gt; Bool
+  ;; procedure : Var * Exp * Env -&gt; Proc
+  (define-datatype proc proc?
+    (procedure
+     (var symbol?)
+     (body expression?)
+     (env environment?)))
+</code></pre>
+<h2 id="增加过程定义和调用的测试结果">增加过程定义和调用的测试结果</h2>
+<h3 id="error1"> 错误1 </h3>
 <pre><code>. data-structures.scm:102:11: expression?: unbound identifier in module in: expression?
-</code></pre><h3 id="错误2">错误2</h3>
+</code></pre>
+<h3 id="错误2">错误2</h3>
 <p>如果按照错误1,把具体的expression?实现放入<code>data-structures.scm</code>中，则会出现<a href="#error1">错误1</a>的问题。</p>
-<p>expression?现在定义如下,具体参考<a href="http://jueqingsizhe66.github.io/blog/2016/02/26/some-notations-in-the-design-of-the-language/">Some notations</a>:</p>
+<p>expression?现在定义如下,具体参考<a href="http://jueqingsizhe66.github.io/blog/2016/02/26/some-notations-in-the-design-of-the-language/" target="_blank" rel="noopener">Some notations</a>:</p>
 <pre><code>expression ::= (var-exp ())
            ::= (const-exp ())
            ::= (zero?-exp ())
@@ -714,7 +942,8 @@ The Second Interpreter from on第一次扩展了基础的let-language，实现�
 
            ::= (let*-exp ())
 
-</code></pre><p>expression?实现如下:</p>
+</code></pre>
+<p>expression?实现如下:</p>
 <pre><code>  ;; datatype ;;;
   (define-datatype expression expression?
     (var-exp
@@ -804,7 +1033,8 @@ The Second Interpreter from on第一次扩展了基础的let-language，实现�
     
     )
   
-</code></pre><p>为什么添加上expression？反而出现如下的错误？</p>
+</code></pre>
+<p>为什么添加上expression？反而出现如下的错误？</p>
 <pre><code>(require &quot;data-structures.scm&quot;)
 (require &quot;lang.scm&quot;)  =》 There are some problems here.
 top.scm:8:11: module: identifier already imported from: &quot;data-structures.scm&quot; at: expression in: &quot;lang.scm&quot;
@@ -814,32 +1044,34 @@ module: identifier already imported from a different source in:
   expression
   &quot;lang.scm&quot;
   &quot;data-structures.scm&quot;
-</code></pre><p>分析发现是因为lang.scm其实已经定义了expression?, <code>sllgen:make-define-datatypes</code>中通过the grammer定义了所有的expression?的实现。
+</code></pre>
+<p>分析发现是因为lang.scm其实已经定义了expression?, <code>sllgen:make-define-datatypes</code>中通过the grammer定义了所有的expression?的实现。
 所以如果在<code>top.scm</code>中同时导入<code>lang.scm</code> 和<code>data-structures.scm</code>则会报错，重复定义。
 <strong><code>于是仅仅在data-structures.scm中增加require &quot;lang.scm&quot;即可</code></strong>,
-<!-- raw HTML omitted -->结果通过！<!-- raw HTML omitted --></p>
+<font size="10" color="red">结果通过！</font></p>
 <h3 id="正确的测试结果">正确的测试结果</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#a6e22e">run</span> <span style="color:#e6db74">&#34;proc(x) -(x, 1)&#34;</span>)
-(<span style="color:#a6e22e">run</span> <span style="color:#e6db74">&#34;(proc(x) -(x,1)  30)&#34;</span>)
-(<span style="color:#a6e22e">run</span> <span style="color:#e6db74">&#34;(proc(f)(f 30)  proc(x)-(x,1))&#34;</span>)
-(<span style="color:#a6e22e">run</span> <span style="color:#e6db74">&#34;let x = 3 in -(x,1)&#34;</span>)
-<span style="color:#75715e">;;new stuff, the Currying</span>
-(<span style="color:#a6e22e">run</span> <span style="color:#e6db74">&#34;let f = proc (x) proc (y) -(x, -(0, y)) in ((f 10) 20)&#34;</span>)
+<pre><code class="language-scheme">(run &quot;proc(x) -(x, 1)&quot;)
+(run &quot;(proc(x) -(x,1)  30)&quot;)
+(run &quot;(proc(f)(f 30)  proc(x)-(x,1))&quot;)
+(run &quot;let x = 3 in -(x,1)&quot;)
+;;new stuff, the Currying
+(run &quot;let f = proc (x) proc (y) -(x, -(0, y)) in ((f 10) 20)&quot;)
 
-    (<span style="color:#a6e22e">proc-val</span> (<span style="color:#a6e22e">procedure</span> <span style="color:#e6db74">&#39;x</span> (<span style="color:#a6e22e">diff-exp</span> (<span style="color:#a6e22e">var-exp</span> <span style="color:#e6db74">&#39;x</span>) (<span style="color:#a6e22e">const-exp</span> <span style="color:#ae81ff">1</span>)) (list (list <span style="color:#e6db74">&#39;i</span> (<span style="color:#a6e22e">num-val</span> <span style="color:#ae81ff">1</span>)) (list <span style="color:#e6db74">&#39;v</span> (<span style="color:#a6e22e">num-val</span> <span style="color:#ae81ff">5</span>)) (list <span style="color:#e6db74">&#39;x</span> (<span style="color:#a6e22e">num-val</span> <span style="color:#ae81ff">10</span>)))))
-    (<span style="color:#a6e22e">num-val</span> <span style="color:#ae81ff">29</span>)
-    (<span style="color:#a6e22e">num-val</span> <span style="color:#ae81ff">29</span>)
-    (<span style="color:#a6e22e">num-val</span> <span style="color:#ae81ff">2</span>)
-    (<span style="color:#a6e22e">num-val</span> <span style="color:#ae81ff">30</span>)
-</code></pre></div><!-- raw HTML omitted -->
-<p>关于y-combination可以参考<a href="http://jueqingsizhe66.github.io/blog/2015/05/17/cong-lambdadao-simple-plus-complexjie-shi-qi-zai-dao-shu-xing-chou-xiang/">从lambda到simple+complex解释器再到树形抽象</a>疑问关于y-comb的实现。
+    (proc-val (procedure 'x (diff-exp (var-exp 'x) (const-exp 1)) (list (list 'i (num-val 1)) (list 'v (num-val 5)) (list 'x (num-val 10)))))
+    (num-val 29)
+    (num-val 29)
+    (num-val 2)
+    (num-val 30)
+</code></pre>
+<h2 id="2"> 2. 一个y-combination的实现 </h2>
+<p>关于y-combination可以参考<a href="http://jueqingsizhe66.github.io/blog/2015/05/17/cong-lambdadao-simple-plus-complexjie-shi-qi-zai-dao-shu-xing-chou-xiang/" target="_blank" rel="noopener">从lambda到simple+complex解释器再到树形抽象</a>疑问关于y-comb的实现。
 进一步可以参考:</p>
 <ul>
-<li>[Fixed-point combinator] <a href="https://en.wikipedia.org/wiki/Fixed-point_combinator#Fixed_point_combinators_in_lambda_calculus">5</a></li>
-<li>[Church and Turing] <a href="http://www.yinwang.org/blog-cn/2013/07/13/church-turing/">6</a></li>
-<li>[Neil Jones的computation and complexity,使用一种while语言] <a href="http://www.diku.dk/~neil/comp2book2007/book-whole.pdf">7</a></li>
-<li>Matthias Felleisen 和 Matthew Flatt 的[《Programming Languages and Lambda Calculi》] <a href="http://www.cs.utah.edu/~mflatt/past-courses/cs7520/public_html/s06/notes.pdf">8</a> 教你认识lambda</li>
-<li>[最经典的Y combinator] <a href="http://www.ece.uc.edu/~franco/C511/html/Scheme/ycomb.html">9</a> 看了10遍以上</li>
+<li>[Fixed-point combinator] <a href="https://en.wikipedia.org/wiki/Fixed-point_combinator#Fixed_point_combinators_in_lambda_calculus" target="_blank" rel="noopener">5</a></li>
+<li>[Church and Turing] <a href="http://www.yinwang.org/blog-cn/2013/07/13/church-turing/" target="_blank" rel="noopener">6</a></li>
+<li>[Neil Jones的computation and complexity,使用一种while语言] <a href="http://www.diku.dk/~neil/comp2book2007/book-whole.pdf" target="_blank" rel="noopener">7</a></li>
+<li>Matthias Felleisen 和 Matthew Flatt 的[《Programming Languages and Lambda Calculi》] <a href="http://www.cs.utah.edu/~mflatt/past-courses/cs7520/public_html/s06/notes.pdf" target="_blank" rel="noopener">8</a> 教你认识lambda</li>
+<li>[最经典的Y combinator] <a href="http://www.ece.uc.edu/~franco/C511/html/Scheme/ycomb.html" target="_blank" rel="noopener">9</a> 看了10遍以上</li>
 </ul>
 <h3 id="y-comb基本思想">Y-comb基本思想</h3>
 <ol>
@@ -847,177 +1079,184 @@ module: identifier already imported from a different source in:
 <li>beta规约原则</li>
 </ol>
 <p>比如</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">define </span>fact 
- (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">op</span>)
-   (<span style="color:#66d9ef">lambda </span>( x y) (<span style="color:#a6e22e">op</span>  x y))))
+<pre><code class="language-scheme">(define fact 
+ (lambda (op)
+   (lambda ( x y) (op  x y))))
 
-</code></pre></div><p>比如</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#a6e22e">f</span> arg) ==  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">arg</span>) (<span style="color:#a6e22e">f</span> arg))
+</code></pre>
+<p>比如</p>
+<pre><code class="language-scheme">(f arg) ==  (lambda (arg) (f arg))
 
-</code></pre></div><p>最为基本的fact实现是(构建与已经存在的fact)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">define </span>fact
- (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">x</span>)
-   (<span style="color:#66d9ef">if </span>(zero? x)
-      <span style="color:#ae81ff">0</span>
-      (<span style="color:#a6e22e">fact</span> (- x <span style="color:#ae81ff">1</span>)))))
+</code></pre>
+<p>最为基本的fact实现是(构建与已经存在的fact)</p>
+<pre><code class="language-scheme">(define fact
+ (lambda (x)
+   (if (zero? x)
+      0
+      (fact (- x 1)))))
 
-(<span style="color:#a6e22e">fact</span> <span style="color:#ae81ff">5</span>)
+(fact 5)
 
-<span style="color:#ae81ff">120</span>
-</code></pre></div><p>而如果运用思想1(也就是隐藏fact的调用，而使用局部过程变量procedure),则变换为</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">
-(<span style="color:#66d9ef">define </span>fact
-   (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">procedure</span>)
-     (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">x</span>)
-        (<span style="color:#66d9ef">if </span>(zero? x)
-           <span style="color:#ae81ff">0</span>
-           (<span style="color:#a6e22e">procedure</span> (- x <span style="color:#ae81ff">1</span>))))))
-
-
-((<span style="color:#a6e22e">fact</span> fact) <span style="color:#ae81ff">5</span>)
-
-<span style="color:#ae81ff">120</span>
-</code></pre></div><p>于是有了下面的推导过程(把fact的表达式多给他还原 ，可以参考<a href="http://jueqingsizhe66.github.io/blog/2016/02/26/some-notations-in-the-design-of-the-language/">还原方法Some-notations</a>)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"> (<span style="color:#66d9ef">define </span>fact
-    ((<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">procedure</span>)
-       ((<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">func-arg</span>)  <span style="color:#75715e">;;吸收5</span>
-          (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">n</span>)
-            (<span style="color:#66d9ef">if </span>(zero? n)
-                <span style="color:#ae81ff">1</span>
-                (* n (<span style="color:#a6e22e">func-arg</span> (- n <span style="color:#ae81ff">1</span>))))))
-        (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">arg</span>) ((<span style="color:#a6e22e">procedure</span> procedure) arg))))
-     (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">procedure</span>)
-       ((<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">func-arg</span>) <span style="color:#75715e">;;吸收5</span>
-          (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">n</span>)
-            (<span style="color:#66d9ef">if </span>(zero? n)
-                <span style="color:#ae81ff">1</span>
-                (* n (<span style="color:#a6e22e">func-arg</span> (- n <span style="color:#ae81ff">1</span>))))))
-        (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">arg</span>) ((<span style="color:#a6e22e">procedure</span> procedure) arg))))))
+120
+</code></pre>
+<p>而如果运用思想1(也就是隐藏fact的调用，而使用局部过程变量procedure),则变换为</p>
+<pre><code class="language-scheme">
+(define fact
+   (lambda (procedure)
+     (lambda (x)
+        (if (zero? x)
+           0
+           (procedure (- x 1))))))
 
 
-  (((<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">procedure</span>)
-      (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">n</span>)
-        (<span style="color:#66d9ef">if </span>(zero? n)
-            <span style="color:#ae81ff">1</span>
-            (* n ((<span style="color:#a6e22e">procedure</span> procedure) (- n <span style="color:#ae81ff">1</span>))))))
-    (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">procedure</span>)
-      (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">n</span>)
-        (<span style="color:#66d9ef">if </span>(zero? n)
-            <span style="color:#ae81ff">1</span>
-            (* n ((<span style="color:#a6e22e">procedure</span> procedure) (- n <span style="color:#ae81ff">1</span>)))))))
-   <span style="color:#ae81ff">5</span>)
+((fact fact) 5)
 
- (<span style="color:#66d9ef">define </span>fact1
-   (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">x</span>)
-   (<span style="color:#66d9ef">letrec </span>((<span style="color:#a6e22e">F</span> (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">procedure</span>)
-       ((<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">func-arg</span>)  <span style="color:#75715e">;;吸收5</span>
-          (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">n</span>)
-            (<span style="color:#66d9ef">if </span>(zero? n)
-                <span style="color:#ae81ff">1</span>
-                (* n (<span style="color:#a6e22e">func-arg</span> (- n <span style="color:#ae81ff">1</span>))))))
-        (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">arg</span>) ((<span style="color:#a6e22e">procedure</span> procedure) arg))))))
-     ((<span style="color:#a6e22e">F</span> F) x))))
+120
+</code></pre>
+<p>于是有了下面的推导过程(把fact的表达式多给他还原 ，可以参考<a href="http://jueqingsizhe66.github.io/blog/2016/02/26/some-notations-in-the-design-of-the-language/" target="_blank" rel="noopener">还原方法Some-notations</a>)</p>
+<pre><code class="language-scheme"> (define fact
+    ((lambda (procedure)
+       ((lambda (func-arg)  ;;吸收5
+          (lambda (n)
+            (if (zero? n)
+                1
+                (* n (func-arg (- n 1))))))
+        (lambda (arg) ((procedure procedure) arg))))
+     (lambda (procedure)
+       ((lambda (func-arg) ;;吸收5
+          (lambda (n)
+            (if (zero? n)
+                1
+                (* n (func-arg (- n 1))))))
+        (lambda (arg) ((procedure procedure) arg))))))
 
 
-  (<span style="color:#66d9ef">define </span>Y
-    (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">X</span>)
-      ((<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">procedure</span>)
-         (<span style="color:#a6e22e">X</span> (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">arg</span>) ((<span style="color:#a6e22e">procedure</span> procedure) arg))))
-       (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">procedure</span>)
-         (<span style="color:#a6e22e">X</span> (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">arg</span>) ((<span style="color:#a6e22e">procedure</span> procedure) arg)))))))
+  (((lambda (procedure)
+      (lambda (n)
+        (if (zero? n)
+            1
+            (* n ((procedure procedure) (- n 1))))))
+    (lambda (procedure)
+      (lambda (n)
+        (if (zero? n)
+            1
+            (* n ((procedure procedure) (- n 1)))))))
+   5)
 
-  (((<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">X</span>)
-      ((<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">procedure</span>)
-         (<span style="color:#a6e22e">X</span> (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">arg</span>) ((<span style="color:#a6e22e">procedure</span> procedure) arg))))
-       (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">procedure</span>)
-         (<span style="color:#a6e22e">X</span> (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">arg</span>) ((<span style="color:#a6e22e">procedure</span> procedure) arg))))))
-    (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">func-arg</span>)
-      (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">n</span>)
-        (<span style="color:#66d9ef">if </span>(zero? n)
-            <span style="color:#ae81ff">1</span>
-            (* n (<span style="color:#a6e22e">func-arg</span> (- n <span style="color:#ae81ff">1</span>)))))))
-   <span style="color:#ae81ff">5</span>)
+ (define fact1
+   (lambda (x)
+   (letrec ((F (lambda (procedure)
+       ((lambda (func-arg)  ;;吸收5
+          (lambda (n)
+            (if (zero? n)
+                1
+                (* n (func-arg (- n 1))))))
+        (lambda (arg) ((procedure procedure) arg))))))
+     ((F F) x))))
 
-<span style="color:#75715e">;;如何吸收F 形成(F F)的形式 产生循环的调用过程</span>
-<span style="color:#75715e">;; 只能是通过lambda 算子 构造proc 从而获得完整的表达式</span>
-  (((<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">X</span>)
-      ((<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">F</span>)
-         (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">arg</span>) ((<span style="color:#a6e22e">F</span> F) arg)))  <span style="color:#75715e">;;一定要保证lambda封闭  </span>
-       (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">procedure</span>)
-         (<span style="color:#a6e22e">X</span> (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">arg</span>) ((<span style="color:#a6e22e">procedure</span> procedure) arg))))))
-    (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">func-arg</span>)
-      (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">n</span>)
-        (<span style="color:#66d9ef">if </span>(zero? n)
-            <span style="color:#ae81ff">1</span>
-            (* n (<span style="color:#a6e22e">func-arg</span> (- n <span style="color:#ae81ff">1</span>)))))))
-   <span style="color:#ae81ff">5</span>)
 
-(<span style="color:#66d9ef">define </span>Y 
-  (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">X</span>)
-      ((<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">F</span>)
-         (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">arg</span>) ((<span style="color:#a6e22e">F</span> F) arg)))  <span style="color:#75715e">;;一定要保证lambda封闭</span>
-       (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">procedure</span>)
-         (<span style="color:#a6e22e">X</span> (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">arg</span>) ((<span style="color:#a6e22e">procedure</span> procedure) arg)))))))
+  (define Y
+    (lambda (X)
+      ((lambda (procedure)
+         (X (lambda (arg) ((procedure procedure) arg))))
+       (lambda (procedure)
+         (X (lambda (arg) ((procedure procedure) arg)))))))
 
-((<span style="color:#a6e22e">Y</span>   (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">func-arg</span>)
-      (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">n</span>)
-        (<span style="color:#66d9ef">if </span>(zero? n)
-            <span style="color:#ae81ff">1</span>
-            (* n (<span style="color:#a6e22e">func-arg</span> (- n <span style="color:#ae81ff">1</span>))))))) <span style="color:#ae81ff">5</span>)
-</code></pre></div><p>可以看到每增加一层(lambada (arg) &hellip;) ，也就是(lambda (arg) (lambda (arg2)  (lambda (arg) &hellip; )))，
+  (((lambda (X)
+      ((lambda (procedure)
+         (X (lambda (arg) ((procedure procedure) arg))))
+       (lambda (procedure)
+         (X (lambda (arg) ((procedure procedure) arg))))))
+    (lambda (func-arg)
+      (lambda (n)
+        (if (zero? n)
+            1
+            (* n (func-arg (- n 1)))))))
+   5)
+
+;;如何吸收F 形成(F F)的形式 产生循环的调用过程
+;; 只能是通过lambda 算子 构造proc 从而获得完整的表达式
+  (((lambda (X)
+      ((lambda (F)
+         (lambda (arg) ((F F) arg)))  ;;一定要保证lambda封闭  
+       (lambda (procedure)
+         (X (lambda (arg) ((procedure procedure) arg))))))
+    (lambda (func-arg)
+      (lambda (n)
+        (if (zero? n)
+            1
+            (* n (func-arg (- n 1)))))))
+   5)
+
+(define Y 
+  (lambda (X)
+      ((lambda (F)
+         (lambda (arg) ((F F) arg)))  ;;一定要保证lambda封闭
+       (lambda (procedure)
+         (X (lambda (arg) ((procedure procedure) arg)))))))
+
+((Y   (lambda (func-arg)
+      (lambda (n)
+        (if (zero? n)
+            1
+            (* n (func-arg (- n 1))))))) 5)
+</code></pre>
+<p>可以看到每增加一层(lambada (arg) &hellip;) ，也就是(lambda (arg) (lambda (arg2)  (lambda (arg) &hellip; )))，
 也就是  <code>&lt;procedure&gt;::= (lambda (arg) (&lt;expression&gt; |&lt;procedure&gt;)) | &lt;procedure&gt;</code>。</p>
-<!-- raw HTML omitted -->
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#a6e22e">run</span> <span style="color:#e6db74">&#34;let makemult = proc (maker) proc (x)
-</span><span style="color:#e6db74">      if zero?(x)
-</span><span style="color:#e6db74">            then 0
-</span><span style="color:#e6db74">      else
-</span><span style="color:#e6db74">            -(((maker maker) -(x,1)), -4)
-</span><span style="color:#e6db74">      in let times4 = proc (x) ((makemult makemult) x) in (times4 3)&#34;</span>)
+<h2 id="3">新语言的Y+实现</h2>
+<pre><code class="language-scheme">(run &quot;let makemult = proc (maker) proc (x)
+      if zero?(x)
+            then 0
+      else
+            -(((maker maker) -(x,1)), -4)
+      in let times4 = proc (x) ((makemult makemult) x) in (times4 3)&quot;)
 
-<span style="color:#75715e">;; ==&gt; (num-val 12)</span>
+;; ==&gt; (num-val 12)
 
-<span style="color:#75715e">;;times</span>
-(<span style="color:#a6e22e">run</span> <span style="color:#e6db74">&#34;let makemult = proc (maker) proc (x) proc(y)
-</span><span style="color:#e6db74">      if zero?(x) then 0
-</span><span style="color:#e6db74">      else -((((maker maker) -(x, 1)) y), -(0, y))
-</span><span style="color:#e6db74">      in let times = proc(x) proc(y)
-</span><span style="color:#e6db74">                    (((makemult makemult) x) y)
-</span><span style="color:#e6db74">      in ((times 3) 8)&#34;</span>)
+;;times
+(run &quot;let makemult = proc (maker) proc (x) proc(y)
+      if zero?(x) then 0
+      else -((((maker maker) -(x, 1)) y), -(0, y))
+      in let times = proc(x) proc(y)
+                    (((makemult makemult) x) y)
+      in ((times 3) 8)&quot;)
 
-<span style="color:#75715e">;; -&gt; (num-val 24)</span>
+;; -&gt; (num-val 24)
 
-(<span style="color:#a6e22e">run</span> <span style="color:#e6db74">&#34;let makemult = proc (maker) proc (x) proc(y)
-</span><span style="color:#e6db74">      if zero?(x) then 0
-</span><span style="color:#e6db74">      else -((((maker maker) -(x, 1)) y), -(0, y))
-</span><span style="color:#e6db74">      in let times = proc(x) proc(y)
-</span><span style="color:#e6db74">                    (((makemult makemult) x) y)
-</span><span style="color:#e6db74">      in let f = proc(func) proc(num)
-</span><span style="color:#e6db74">        if zero?(num)
-</span><span style="color:#e6db74">           then 1
-</span><span style="color:#e6db74">        else
-</span><span style="color:#e6db74">           ((times ((func func) -(num, 1))) num)
-</span><span style="color:#e6db74">      in let fact = proc (x) ((f f) x)
-</span><span style="color:#e6db74">      in (fact 5)&#34;</span>)
+(run &quot;let makemult = proc (maker) proc (x) proc(y)
+      if zero?(x) then 0
+      else -((((maker maker) -(x, 1)) y), -(0, y))
+      in let times = proc(x) proc(y)
+                    (((makemult makemult) x) y)
+      in let f = proc(func) proc(num)
+        if zero?(num)
+           then 1
+        else
+           ((times ((func func) -(num, 1))) num)
+      in let fact = proc (x) ((f f) x)
+      in (fact 5)&quot;)
 
 
-(<span style="color:#a6e22e">num-val</span> <span style="color:#ae81ff">12</span>)
-(<span style="color:#a6e22e">num-val</span> <span style="color:#ae81ff">24</span>)
-(<span style="color:#a6e22e">num-val</span> <span style="color:#ae81ff">120</span>)
-</code></pre></div><p>最终提取一个更为精简的y-comb</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">
+(num-val 12)
+(num-val 24)
+(num-val 120)
+</code></pre>
+<p>最终提取一个更为精简的y-comb</p>
+<pre><code class="language-scheme">
 
-(<span style="color:#a6e22e">run</span> <span style="color:#e6db74">&#34;let makerec = proc (f)
-</span><span style="color:#e6db74">        let d = proc (x)
-</span><span style="color:#e6db74">          proc (z) ((f (x x)) z)
-</span><span style="color:#e6db74">        in proc (n) ((f (d d)) n)
-</span><span style="color:#e6db74">     in let maketimes4 = proc (f) proc (x)
-</span><span style="color:#e6db74">          if zero?(x)
-</span><span style="color:#e6db74">             then 0
-</span><span style="color:#e6db74">          else -((f -(x,1)), -4)
-</span><span style="color:#e6db74">      in let times4 = (makerec maketimes4) in (times4 3)&#34;</span>)
+(run &quot;let makerec = proc (f)
+        let d = proc (x)
+          proc (z) ((f (x x)) z)
+        in proc (n) ((f (d d)) n)
+     in let maketimes4 = proc (f) proc (x)
+          if zero?(x)
+             then 0
+          else -((f -(x,1)), -4)
+      in let times4 = (makerec maketimes4) in (times4 3)&quot;)
 
-    (<span style="color:#a6e22e">num-val</span> <span style="color:#ae81ff">12</span>)
-</code></pre></div><h2 id="结论">结论</h2>
+    (num-val 12)
+</code></pre>
+<h2 id="结论">结论</h2>
 <p>Y-comb是一个痛苦和希望的承载者(持保留意见)，韵味十足.又像一个走过岁月年轮，在家等待着归家儿女的思妇，祈祷，承担。
 Y-Comb需要丝丝宁静,雨夜飘过。</p>
     </div>
@@ -1039,9 +1278,10 @@ Y-Comb需要丝丝宁静,雨夜飘过。</p>
 
 
 
+
 <div class="article-tags">
   
-  <a class="badge badge-light" href="/tags/scheme/">scheme</a>
+  <a class="badge badge-light" href="/tag/scheme/">scheme</a>
   
 </div>
 
@@ -1110,7 +1350,7 @@ Y-Comb需要丝丝宁静,雨夜飘过。</p>
       
       
       <li>
-        <a href="https://web.whatsapp.com/send?text=The%20third%20Interpreter%20implementing%20Proc%20https://jueqingsizhe66.github.io/blog/2016/02/27/the-third-interpreter-implementing-proc/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+        <a href="whatsapp://send?text=The%20third%20Interpreter%20implementing%20Proc%20https://jueqingsizhe66.github.io/blog/2016/02/27/the-third-interpreter-implementing-proc/" target="_blank" rel="noopener" class="share-btn-whatsapp">
           <i class="fab fa-whatsapp"></i>
         </a>
       </li>
@@ -1141,11 +1381,8 @@ Y-Comb需要丝丝宁静,雨夜飘过。</p>
 
 
 
-
   
-
-
-
+  
 
 
 
@@ -1153,16 +1390,17 @@ Y-Comb需要丝丝宁静,雨夜飘过。</p>
   
   
     
+  
   
   
   <div class="media author-card content-widget-hr">
     
       
-      <img class="portrait mr-3" src="/authors/admin/avatar_hub2bcfcfc92fc067668c68513c0d68b69_23221_250x250_fill_q90_lanczos_center.jpg" alt="Avatar">
+      <a href="https://jueqingsizhe66.github.io/"><img class="avatar mr-3 avatar-circle" src="/author/%E5%8F%B6%E6%98%AD%E8%89%AF/avatar_huc99f1f2e739130747140db298bdd1890_46492_270x270_fill_q90_lanczos_center.jpg" alt="叶昭良"></a>
     
 
     <div class="media-body">
-      <h5 class="card-title"><a href="https://jueqingsizhe66.github.io/">Ye Zhaoliang</a></h5>
+      <h5 class="card-title"><a href="https://jueqingsizhe66.github.io/">叶昭良</a></h5>
       <h6 class="card-subtitle">Engineer of offshore wind turbine technique research</h6>
       <p class="card-text">My research interests include distributed energy, wind turbine power generation technique , Computational fluid dynamic and programmable matter.</p>
       <ul class="network-icon" aria-hidden="true">
@@ -1246,21 +1484,26 @@ Y-Comb需要丝丝宁静,雨夜飘过。</p>
 
 
 
+
+
+
+
+
   
   
   <div class="article-widget content-widget-hr">
     <h3>Related</h3>
     <ul>
       
-      <li><a href="/blog/2016/02/27/the-second-interpreter-from-one/">The Second Interpreter from One</a></li>
+      <li><a href="/blog/2017/08/11/from-little-scheme-to-season-scheme/">From Little Scheme to Season Scheme</a></li>
       
-      <li><a href="/blog/2016/02/26/some-notations-in-the-design-of-the-language/">Some notations in the design of the language</a></li>
+      <li><a href="/blog/2016/03/30/program-as-data/">program-as-data</a></li>
       
-      <li><a href="/blog/2016/02/25/first-interpreter-from-eopl/">First Interpreter from EOPL</a></li>
+      <li><a href="/blog/2016/03/03/schemehuan-jing-de-ji-chong-biao-xian-xing-shi-represtations/">scheme环境的几种表现形式-represtations</a></li>
       
-      <li><a href="/blog/2016/02/24/chicago-really-only-has-7-characters/">Chicago really only has 7 characters?</a></li>
+      <li><a href="/blog/2016/02/28/cha-ru-pai-xu/">插入排序</a></li>
       
-      <li><a href="/blog/2016/02/23/casesde-zuo-yong/">cases的作用</a></li>
+      <li><a href="/blog/2016/02/28/the-fifth-interpreter-with-the-implementation-of-letrec-important/">The Fifth interpreter with the implementation of letrec(Important)</a></li>
       
     </ul>
 
@@ -1282,67 +1525,120 @@ Y-Comb需要丝丝宁静,雨夜飘过。</p>
         crossorigin="anonymous"
         async>
 </script>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    ©2020 &middot; 
+
+    ^-^ YZL ^-^ Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
 
       
 
     
     
     
-    <script src="/js/mathjax-config.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+      
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/go.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/vim.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/matlab.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/sql.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/python.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/c.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/scheme.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/racket.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/perl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/awk.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/clojure.min.js"></script>
+        
+      
+
     
 
     
     
-    
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
-
-      
-
-      
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js" integrity="sha256-aYTdUrn6Ow1DDgh5JTc3aDGnnju48y/1c8s1dgkYPQ8=" crossorigin="anonymous"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/go.min.js"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/vim.min.js"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/matlab.min.js"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/sql.min.js"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/python.min.js"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/c.min.js"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/scheme.min.js"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/racket.min.js"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/perl.min.js"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/awk.min.js"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/clojure.min.js"></script>
-        
-      
-
-      
-      
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
-      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js" integrity="sha512-SeiQaaDh73yrb56sTW/RgVdi/mMqNeM2oBwubFHagc5BkixSpP1fvqF47mKzPGWYSSy4RwbBunrJBQ4Co8fRWA==" crossorigin="anonymous"></script>
     
 
     
     
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin="anonymous"></script>
-    
-
-    
-    
-    <script>hljs.initHighlightingOnLoad();</script>
+    <script>const code_highlighting = true;</script>
     
 
     
@@ -1358,7 +1654,8 @@ Y-Comb需要丝丝宁静,雨夜飘过。</p>
         'post': "Posts",
         'project': "Projects",
         'publication' : "Publications",
-        'talk' : "Talks"
+        'talk' : "Talks",
+        'slides' : "Slides"
         };
     </script>
     
@@ -1392,6 +1689,13 @@ Y-Comb需要丝丝宁静,雨夜飘过。</p>
 
     
     
+    
+
+    
+    
+
+    
+    
 
     
     
@@ -1407,7 +1711,7 @@ Y-Comb需要丝丝宁静,雨夜飘过。</p>
     
     
     
-    <script src="/js/academic.min.d6bd04fdad2ad213aa8111c5a3b72fc5.js"></script>
+    <script src="/js/wowchemy.min.59419d2c9809de125013c581da371866.js"></script>
 
     
 
@@ -1415,60 +1719,6 @@ Y-Comb需要丝丝宁静,雨夜飘过。</p>
 
 
 
-
-  
-  
-  <div class="container">
-    <footer class="site-footer">
-  
-
-  <p class="powered-by">
-    ©2020 &middot; 
-
-    Powered by the
-    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
-    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
-
-    
-    <span class="float-right" aria-hidden="true">
-      <a href="#" class="back-to-top">
-        <span class="button_icon">
-          <i class="fas fa-chevron-up fa-2x"></i>
-        </span>
-      </a>
-    </span>
-    
-  </p>
-</footer>
-
-  </div>
-  
-
-  
-<div id="modal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Cite</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <pre><code class="tex hljs"></code></pre>
-      </div>
-      <div class="modal-footer">
-        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
-          <i class="fas fa-copy"></i> Copy
-        </a>
-        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
-          <i class="fas fa-download"></i> Download
-        </a>
-        <div id="modal-error"></div>
-      </div>
-    </div>
-  </div>
-</div>
 
 </body>
 </html>

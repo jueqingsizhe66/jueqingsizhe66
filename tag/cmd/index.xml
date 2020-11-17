@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>cmd | 30年磨一剑</title>
+    <link>https://jueqingsizhe66.github.io/tag/cmd/</link>
+      <atom:link href="https://jueqingsizhe66.github.io/tag/cmd/index.xml" rel="self" type="application/rss+xml" />
+    <description>cmd</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>©2020</copyright><lastBuildDate>Thu, 15 May 2014 22:27:07 +0800</lastBuildDate>
+    <image>
+      <url>https://jueqingsizhe66.github.io/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_2.png</url>
+      <title>cmd</title>
+      <link>https://jueqingsizhe66.github.io/tag/cmd/</link>
+    </image>
+    
+    <item>
+      <title>模块分割--工厂机制</title>
+      <link>https://jueqingsizhe66.github.io/blog/2014/05/15/mo-kuai-fen-ge-gong-han-ji-zhi/</link>
+      <pubDate>Thu, 15 May 2014 22:27:07 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/blog/2014/05/15/mo-kuai-fen-ge-gong-han-ji-zhi/</guid>
+      <description>&lt;ol&gt;
+&lt;li&gt;map&lt;/li&gt;
+&lt;li&gt;reduce&lt;/li&gt;
+&lt;li&gt;deploy(by makefile)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;#map&amp;mdash;do   or map&amp;ndash;action#&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-makefile&#34;&gt;FC=gfortran
+FFLAGS=-O3
+split : ./f90split.f90 ./output/cmd.sh
+    $(FC) $(FFLAGS) $^ -o $@
+    mv $@ ./output/
+    /bin/sh ./output/cmd.sh
+
+.PHONY: clean
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;不是不适合是超级适合只不过你不会而已&#34;&gt;不是不适合，是超级适合，只不过你不会而已&lt;/h2&gt;
+&lt;p&gt;#makefile:(负责让对应的文件夹去做对应的事情)#&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-makefile&#34;&gt;FC=gfortran
+FFLAGS=-O3
+split : ./f90split.f90 ./output/cmd.sh
+    $(FC) $(FFLAGS) $&amp;lt; -o $@                # 造出一个工人出来！
+    cp $@ ./output/          # 把一个高级技术工人调到现场 去干活去！  最好用cp 这样就可以派到其他工厂去了
+    cd ./output/ &amp;amp;&amp;amp;sh cmd.sh#切换到对应目录下 去做他该做的事情就可以了（而不是原先你想的
+
+    # sh .output/cmd.sh 这样是在当前的目录下产生所有的东西 而不是对应的目录）
+.PHONY: clean
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;#在我的output目录下新建了一个#
+##cmd.sh:(他只做本目录下的内容)##&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#!/bin/sh
+# sh cmd.sh
+
+for i in `ls -l /home/incompact3dNew/channel|grep f90|awk &#39;{print $NF}&#39;`;
+do
+    file=/home/incompact3dNew/channel/$i;
+#    echo $file;
+     ./split $file
+done;
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

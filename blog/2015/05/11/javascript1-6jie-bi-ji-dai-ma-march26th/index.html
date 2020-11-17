@@ -1,13 +1,19 @@
-<!DOCTYPE html>
-<html lang="en-us">
+<!DOCTYPE html><html lang="en-us" >
 
 <head>
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="generator" content="Source Themes Academic 4.5.0">
+  
+  
+  
+  <meta name="generator" content="Wowchemy 5.0.0-beta.0 for Hugo">
+  
 
+  
+
+  
   
 
   
@@ -21,20 +27,35 @@
   
   
 
-  <meta name="author" content="Ye Zhaoliang">
+  <meta name="author" content="叶昭良">
 
   
   
   
     
   
-  <meta name="description" content="js 常见 Events 属性 当以下情况发生时，出现此事件 onabort 图像加载被中断 元素失去焦点 onchange 用户改变域的内容 onclick 鼠标点击某个对象 ondblclick 鼠标双击某个对象 onerror 当加载文档或图像">
+  <meta name="description" content="js 常见 Events 属性 当以下情况发生时，出现此事件 onabort 图像加载被中断 元素">
 
   
   <link rel="alternate" hreflang="en-us" href="https://jueqingsizhe66.github.io/blog/2015/05/11/javascript1-6jie-bi-ji-dai-ma-march26th/">
 
   
 
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
 
   
   
@@ -45,11 +66,17 @@
   
   
   
+  <script src="/js/mathjax-config.js"></script>
+  
+
+  
+  
+  
   
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
 
     
     
@@ -59,48 +86,193 @@
     
       
       
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css" crossorigin="anonymous" title="hl-light">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/solarized-dark.min.css" crossorigin="anonymous" title="hl-light">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/solarized-dark.min.css" crossorigin="anonymous" title="hl-dark" disabled>
       
     
 
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css" integrity="sha512-1xoFisiGdy9nvho8EgXuXvnpR5GAMSjFwp40gSRE3NwdUdIMIKuPa7bqoUhLD0O/5tPNhteAsE5XyyMi5reQVA==" crossorigin="anonymous">
     
 
     
 
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.2.2/lazysizes.min.js" integrity="sha512-TmDwFLhg3UA4ZG0Eb4MIyT1O1Mb+Oww5kFG0uHqXsdbyZz9DcvYQhKpGgNkamAI6h2lGGZq2X8ftOJvF/XjTUg==" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+
   
 
   
   
   
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+    
+      
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+    
   
 
   
   
   
-  <link rel="stylesheet" href="/css/academic.min.e8d4d5fd376e67b34452ebe1cae16341.css">
+  
+  <link rel="stylesheet" href="/css/wowchemy.css">
 
   
 
-  
-
 
 
 
   
+<script>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','4703127160');
+</script>
 
+
+  
+
+
+  
+  
 
   
 
   <link rel="manifest" href="/index.webmanifest">
-  <link rel="icon" type="image/png" href="/img/icon-32.png">
-  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+  <link rel="icon" type="image/png" href="/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_192x192_fill_lanczos_center_2.png">
 
   <link rel="canonical" href="https://jueqingsizhe66.github.io/blog/2015/05/11/javascript1-6jie-bi-ji-dai-ma-march26th/">
 
+  
+  
+  
   
   
   
@@ -114,11 +286,11 @@
   <meta property="twitter:site" content="@jueqingsizhe66">
   <meta property="twitter:creator" content="@jueqingsizhe66">
   
-  <meta property="og:site_name" content="简约派">
+  <meta property="og:site_name" content="30年磨一剑">
   <meta property="og:url" content="https://jueqingsizhe66.github.io/blog/2015/05/11/javascript1-6jie-bi-ji-dai-ma-march26th/">
-  <meta property="og:title" content="JavaScript1-6节笔记代码March26th | 简约派">
-  <meta property="og:description" content="js 常见 Events 属性 当以下情况发生时，出现此事件 onabort 图像加载被中断 元素失去焦点 onchange 用户改变域的内容 onclick 鼠标点击某个对象 ondblclick 鼠标双击某个对象 onerror 当加载文档或图像"><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
-  <meta property="twitter:image" content="https://jueqingsizhe66.github.io/img/icon-192.png"><meta property="og:locale" content="en-us">
+  <meta property="og:title" content="JavaScript1-6节笔记代码March26th | 30年磨一剑">
+  <meta property="og:description" content="js 常见 Events 属性 当以下情况发生时，出现此事件 onabort 图像加载被中断 元素"><meta property="og:image" content="https://jueqingsizhe66.github.io/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_2.png">
+  <meta property="twitter:image" content="https://jueqingsizhe66.github.io/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
   
     
       <meta property="article:published_time" content="2015-05-11T14:58:43&#43;08:00">
@@ -142,11 +314,19 @@
 
 
 
-  <title>JavaScript1-6节笔记代码March26th | 简约派</title>
+  <title>JavaScript1-6节笔记代码March26th | 30年磨一剑</title>
 
 </head>
 
-<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper  ">
+
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.js"></script>
 
   <aside class="search-results" id="search">
   <div class="container">
@@ -164,7 +344,7 @@
       <div id="search-box">
         
         <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
-        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control">
         
       </div>
 
@@ -180,25 +360,48 @@
 </aside>
 
 
-  
-<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0 compensate-for-scrollbar" id="navbar-main">
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
   <div class="container">
 
     
-      <a class="navbar-brand" href="/">简约派</a>
-      
-      <button type="button" class="navbar-toggler" data-toggle="collapse"
-              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
-        <span><i class="fas fa-bars"></i></span>
-      </button>
-      
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/">30年磨一剑</a>
+    </div>
+    
 
     
-    <div class="collapse navbar-collapse" id="navbar">
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/">30年磨一剑</a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-end" id="navbar-content">
 
       
-      
-      <ul class="navbar-nav ml-auto">
+      <ul class="navbar-nav d-md-inline-flex">
         
 
         
@@ -210,16 +413,24 @@
         
 
         
+
         
         
         
         
+
         
           
+            
+            
           
           
             
-          
+            
+            
+              
+            
+            
           
         
 
@@ -239,16 +450,24 @@
         
 
         
+
         
         
         
         
+
         
           
+            
+            
           
           
             
-          
+            
+            
+              
+            
+            
           
         
 
@@ -268,68 +487,18 @@
         
 
         
+
         
         
         
         
+
         
           
-          
-          
+            
             
           
           
-        
-
-        <li class="nav-item">
-          <a class="nav-link " href="/#projects"><span>项目</span></a>
-        </li>
-
-        
-        
-
-        
-
-        
-        
-        
-          
-        
-
-        
-        
-        
-        
-        
-        
-          
-          
-          
-            
-          
-          
-        
-
-        <li class="nav-item">
-          <a class="nav-link " href="/#featured"><span>Publications</span></a>
-        </li>
-
-        
-        
-
-        
-
-        
-        
-        
-          
-        
-
-        
-        
-        
-        
-        
         
 
         <li class="nav-item">
@@ -348,10 +517,18 @@
         
 
         
+
         
         
         
         
+
+        
+          
+            
+            
+          
+          
         
 
         <li class="nav-item">
@@ -370,10 +547,18 @@
         
 
         
+
         
         
         
         
+
+        
+          
+            
+            
+          
+          
         
 
         <li class="nav-item">
@@ -392,10 +577,18 @@
         
 
         
+
         
         
         
         
+
+        
+          
+            
+            
+          
+          
         
 
         <li class="nav-item">
@@ -414,16 +607,24 @@
         
 
         
+
         
         
         
         
+
         
           
+            
+            
           
           
             
-          
+            
+            
+              
+            
+            
           
         
 
@@ -437,29 +638,49 @@
       
 
         
-
-        
-        <li class="nav-item">
-          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
-        </li>
-        
-
-        
-
-        
-        <li class="nav-item">
-          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
-        </li>
-        
-
       </ul>
-
     </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+
+    </ul>
+
   </div>
 </nav>
 
 
-  <article class="article">
+  </div>
+
+  <div class="page-body">
+    <article class="article">
 
   
 
@@ -519,13 +740,14 @@
     
     May 11, 2015
   </span>
-
   
 
   
 
   
 
+  
+  
   
   
   
@@ -534,9 +756,9 @@
   
   <span class="middot-divider"></span>
   <span class="article-categories">
-    <i class="fas fa-folder mr-1"></i><a href="/categories/programme/">programme</a></span>
-
+    <i class="fas fa-folder mr-1"></i><a href="/category/programme/">programme</a></span>
   
+
 </div>
 
     
@@ -561,7 +783,7 @@
 
 
 
-<span class="article-metadata" >Reading time: 37 minutes and    46 seconds with 8311 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+<span class="article-metadata" >Reading time: 37 minutes and    40 seconds with 8287 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents"></nav>
     </aside>
@@ -636,7 +858,7 @@ parentNode：返回的是指定节点的父节点。
 二、JavaScript练习总结
 1.window.onload=function(){&hellip;}表示的是在页面加载完成后便开始运行。
 2.node.insertBefor(new node,null)。这样调用就可以在指定的前面添加了!
-3.如果网页乱码，可以在<!-- raw HTML omitted --><!-- raw HTML omitted -->之间加上：  <!-- raw HTML omitted -->
+3.如果网页乱码，可以在<head></head>之间加上：  <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
 4.特别说明：insertBefor这个方法。3个参数：  paraentNode.insertBefor(newNode,childNodeInParaNode);
 就是说哪个Node来调用insertBefore方法就是在那个Node的子节点中插入，其中第一个参数是要插入的节点，第二个参数是自己点中要在哪个指定的子元素前面。
 注：第二个节点可是是null，就表示在最后添加，同AppendChild。特别注意了。
@@ -663,251 +885,252 @@ window.onload=function myFunc(){&hellip;}
 这个是&quot;重量级&quot;的加载完成事件 , 只能注册一次,jQuery的ready()就很方便</p>
 <p>4.关于parenNode和parentElement区别？
 parentNode 是Node类的属性 , 而parentElement是Element类的属性 , 很多情况下可以通用,只是属于两个不同的体系,使用时尝试着看看效果就好</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">
-&lt;<span style="color:#f92672">Html</span>&gt;
-&lt;<span style="color:#f92672">Head</span>&gt;
+<pre><code class="language-html">
+&lt;Html&gt;
+&lt;Head&gt;
 
-<span style="color:#75715e">&lt;!--</span><span style="color:#75715e">script 一定要小写</span><span style="color:#75715e">--&gt;</span>
-&lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/javascript&#34;</span>&gt;
-<span style="color:#75715e">//javascript内部注释使用//表示单行注释  /**/表示快注释
-</span><span style="color:#75715e"></span><span style="color:#75715e">//javascript大小写敏感
-</span><span style="color:#75715e"></span><span style="color:#75715e">//javascript可以用var表示所有数值类型，代替int,String,boolean等
-</span><span style="color:#75715e"></span><span style="color:#75715e">//按F5刷新，进行调试
-</span><span style="color:#75715e"></span><span style="color:#75715e">//变量和数组的定义
-</span><span style="color:#75715e"></span><span style="color:#75715e">//变量定义
-</span><span style="color:#75715e"></span>
+&lt;!--script 一定要小写--&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+//javascript内部注释使用//表示单行注释  /**/表示快注释
+//javascript大小写敏感
+//javascript可以用var表示所有数值类型，代替int,String,boolean等
+//按F5刷新，进行调试
+//变量和数组的定义
+//变量定义
 
-<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;字符串&#39;</span>;
-<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">age</span><span style="color:#f92672">=</span><span style="color:#ae81ff">39</span>;
 
-<span style="color:#75715e">//数组定义
-</span><span style="color:#75715e"></span><span style="color:#75715e">//一定要数组用  [] 进行定义，元素之间用逗号隔开   []吃过亏
-</span><span style="color:#75715e"></span><span style="color:#75715e">//map数组用{} 定义 键值对之间用逗号隔开
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">apples</span><span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;ap1&#39;</span>,<span style="color:#e6db74">&#39;ap2&#39;</span>];
-<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">arr</span><span style="color:#f92672">=</span>{<span style="color:#e6db74">&#34;name&#34;</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#39;张三&#39;</span>,<span style="color:#e6db74">&#39;age&#39;</span><span style="color:#f92672">:</span><span style="color:#ae81ff">45</span>};
+var name='字符串';
+var age=39;
 
-<span style="color:#75715e">//打印alert
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">alert</span>(<span style="color:#a6e22e">name</span>);
-<span style="color:#a6e22e">alert</span>(<span style="color:#a6e22e">age</span>);
-<span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">i</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;<span style="color:#a6e22e">i</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">apples</span>.<span style="color:#a6e22e">length</span>;<span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>)
+//数组定义
+//一定要数组用  [] 进行定义，元素之间用逗号隔开   []吃过亏
+//map数组用{} 定义 键值对之间用逗号隔开
+var apples=['ap1','ap2'];
+var arr={&quot;name&quot;:'张三','age':45};
+
+//打印alert
+alert(name);
+alert(age);
+for(var i=0;i&lt;apples.length;i++)
 {
-    <span style="color:#a6e22e">alert</span>(<span style="color:#a6e22e">apples</span>[<span style="color:#a6e22e">i</span>]);
+    alert(apples[i]);
 }
 
-<span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">key</span> <span style="color:#66d9ef">in</span> <span style="color:#a6e22e">arr</span>)
+for(var key in arr)
 {
-    <span style="color:#a6e22e">alert</span>(<span style="color:#a6e22e">key</span><span style="color:#f92672">+</span><span style="color:#e6db74">&#39;===&#39;</span><span style="color:#f92672">+</span><span style="color:#a6e22e">arr</span>[<span style="color:#a6e22e">key</span>]);
+    alert(key+'==='+arr[key]);
 }
 
-<span style="color:#75715e">//数值类型的转换
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">n</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;fsf&#39;</span>;
-<span style="color:#66d9ef">if</span>(isNaN(<span style="color:#a6e22e">n</span>))
+//数值类型的转换
+var n = 'fsf';
+if(isNaN(n))
   {
-    <span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;不能使用&#39;</span>);
-  }<span style="color:#66d9ef">else</span>
+    alert('不能使用');
+  }else
     {
-      <span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;可以使用&#39;</span>);
+      alert('可以使用');
     }
-<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">num</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;100&#39;</span>
-<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">n</span> <span style="color:#f92672">=</span> Number(<span style="color:#a6e22e">num</span>);
-<span style="color:#a6e22e">alert</span>(<span style="color:#a6e22e">n</span>);
+var num='100'
+var n = Number(num);
+alert(n);
 
-<span style="color:#a6e22e">alert</span>(parseFloat(<span style="color:#e6db74">&#39;100.3&#39;</span>));<span style="color:#75715e">//转小数
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">alert</span>(parseInt(<span style="color:#e6db74">&#39;100&#39;</span>))<span style="color:#75715e">//转整数
-</span><span style="color:#75715e"></span>
-<span style="color:#75715e">//函数定义  及参数获取
-</span><span style="color:#75715e"></span><span style="color:#75715e">// 在浏览器的源码窗口中 ，加入 断点，进行断点调试,单步调试(F8 快捷键 在Opera中）
-</span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">sum</span>()
+alert(parseFloat('100.3'));//转小数
+alert(parseInt('100'))//转整数
+
+//函数定义  及参数获取
+// 在浏览器的源码窗口中 ，加入 断点，进行断点调试,单步调试(F8 快捷键 在Opera中）
+
+function sum()
 {
-  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">apple</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
-  <span style="color:#75715e">//循环语句的使用
-</span><span style="color:#75715e"></span>  <span style="color:#75715e">//内置变量arguments的调用
-</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">i</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;<span style="color:#a6e22e">i</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">arguments</span>.<span style="color:#a6e22e">length</span>;<span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>)
+  var apple=0;
+  //循环语句的使用
+  //内置变量arguments的调用
+  for(var i=0;i&lt;arguments.length;i++)
   {
-    <span style="color:#a6e22e">apple</span><span style="color:#f92672">+=</span><span style="color:#a6e22e">arguments</span>[<span style="color:#a6e22e">i</span>];
+    apple+=arguments[i];
   }
-  <span style="color:#75715e">//不加入return 没有返回值 则sumofmoney=undefined
-</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">apple</span>;
+  //不加入return 没有返回值 则sumofmoney=undefined
+  return apple;
 }
 
-<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">sumOfMoney</span><span style="color:#f92672">=</span><span style="color:#a6e22e">sum</span>(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">6</span>,<span style="color:#ae81ff">2</span>);
-<span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;1+2+3+4+5+6+2==&#39;</span><span style="color:#f92672">+</span><span style="color:#a6e22e">sumOfMoney</span>);
+var sumOfMoney=sum(1,3,4,5,6,2);
+alert('1+2+3+4+5+6+2=='+sumOfMoney);
 
 
-<span style="color:#75715e">//注意转义字符
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#34;D:\\Program Files \\ok\\fd&#34;</span>);
-<span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;D:\\Program Files \\ok\\fd&#39;</span>);
+//注意转义字符
+alert(&quot;D:\\Program Files \\ok\\fd&quot;);
+alert('D:\\Program Files \\ok\\fd');
 
 
-<span style="color:#75715e">//匿名方法是需要着重学习的
-</span><span style="color:#75715e"></span><span style="color:#75715e">//1
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">ff</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>()
+//匿名方法是需要着重学习的
+//1
+var ff = function()
 {
-  <span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;go home!&#39;</span>);
+  alert('go home!');
 }
-<span style="color:#a6e22e">ff</span>();
+ff();
 
-<span style="color:#75715e">//一个易错点
-</span><span style="color:#75715e"></span><span style="color:#75715e">//btn.onclick=function(){} onclick后面不能家少年宫()
-</span><span style="color:#75715e"></span><span style="color:#75715e">//2
-</span><span style="color:#75715e"></span>(<span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">n1</span>,<span style="color:#a6e22e">n2</span>)
+//一个易错点
+//btn.onclick=function(){} onclick后面不能家少年宫()
+//2
+(function(n1,n2)
 {
-   <span style="color:#a6e22e">alert</span>(<span style="color:#a6e22e">n1</span><span style="color:#f92672">+</span><span style="color:#a6e22e">n2</span>);
+   alert(n1+n2);
 }
-)(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>);
-<span style="color:#75715e">//3
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">onload</span><span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>()
+)(1,2);
+//3
+onload=function()
 {
-  document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;btn&#39;</span>).<span style="color:#a6e22e">onClick</span><span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>()
+  document.getElementById('btn').onClick=function()
   {
-    <span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#34;You are clicking  the button&#34;</span>)
+    alert(&quot;You are clicking  the button&quot;)
   }
 };
 
 
 
-<span style="color:#75715e">//字符串的常用方法
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;I am from the God&#39;</span>.<span style="color:#a6e22e">length</span>);
-<span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;I am from the God&#39;</span>.<span style="color:#a6e22e">charAt</span>(<span style="color:#ae81ff">3</span>));
-<span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;I am from the God&#39;</span>.<span style="color:#a6e22e">charAt</span>(<span style="color:#ae81ff">9</span>));
-<span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;I am from the God&#39;</span>.<span style="color:#a6e22e">substring</span>(<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">9</span>));
-<span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;I am from the God&#39;</span>.<span style="color:#a6e22e">indexOf</span>(<span style="color:#e6db74">&#39;t&#39;</span>));
-<span style="color:#66d9ef">var</span>  <span style="color:#a6e22e">names</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;I am from the God&#39;</span>.<span style="color:#a6e22e">split</span>(<span style="color:#e6db74">&#39; &#39;</span>);
-<span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">name</span> <span style="color:#66d9ef">in</span> <span style="color:#a6e22e">names</span>)
+//字符串的常用方法
+alert('I am from the God'.length);
+alert('I am from the God'.charAt(3));
+alert('I am from the God'.charAt(9));
+alert('I am from the God'.substring(3,9));
+alert('I am from the God'.indexOf('t'));
+var  names = 'I am from the God'.split(' ');
+for(var name in names)
   {
-    <span style="color:#a6e22e">alert</span>(<span style="color:#a6e22e">name</span><span style="color:#f92672">+</span><span style="color:#e6db74">&#39;=&#39;</span><span style="color:#f92672">+</span><span style="color:#a6e22e">names</span>[<span style="color:#a6e22e">name</span>]);
+    alert(name+'='+names[name]);
   }
-<span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">i</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;<span style="color:#a6e22e">i</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">names</span>.<span style="color:#a6e22e">length</span>;<span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>)
+for(var i=0;i&lt;names.length;i++)
 {
-  <span style="color:#a6e22e">alert</span>(<span style="color:#a6e22e">names</span>[<span style="color:#a6e22e">i</span>]);
+  alert(names[i]);
 }
 
-<span style="color:#75715e">//杨老师练习1
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;杨1&#39;</span>);
-window.<span style="color:#a6e22e">onload</span><span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>()
+//杨老师练习1
+alert('杨1');
+window.onload=function()
 {
-  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">buttons</span><span style="color:#f92672">=</span>document.<span style="color:#a6e22e">getElementsByName</span>(<span style="color:#e6db74">&#39;button1&#39;</span>);
-  <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">i</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;  <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">buttons</span>.<span style="color:#a6e22e">length</span>;<span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>)
+  var buttons=document.getElementsByName('button1');
+  for(var i=0;  i &lt; buttons.length;i++)
   {
-    <span style="color:#75715e">//alert(buttons[i]   onclick不能写成onClick  大小写敏感
-</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">buttons</span>[<span style="color:#a6e22e">i</span>].<span style="color:#a6e22e">onclick</span><span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>()
+    //alert(buttons[i]   onclick不能写成onClick  大小写敏感
+    buttons[i].onclick=function()
     {
-        <span style="color:#a6e22e">alert</span>(<span style="color:#a6e22e">i</span>);
+        alert(i);
     };
   }
 }
-<span style="color:#75715e">//杨老师练习2
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;杨2&#39;</span>);
-<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">aa</span>()
+//杨老师练习2
+alert('杨2');
+function aa()
 {
-  <span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;aaa&#39;</span>);
-  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">function</span>(){<span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;bbb&#39;</span>);};
+  alert('aaa');
+  return function(){alert('bbb');};
 }
-<span style="color:#a6e22e">alert</span>(<span style="color:#a6e22e">aa</span>);
-<span style="color:#a6e22e">alert</span>(<span style="color:#a6e22e">aa</span>());
-<span style="color:#75715e">// alert(aa());打印是aaa,和function(){alert(&#34;bbb&#34;);}以为执行函数方法题内容,返回的是一个匿名函数,返回的是函数体字符串. 
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">alert</span>(<span style="color:#a6e22e">aa</span>()());
-<span style="color:#75715e">//alert(aa()());打印的是aaa,bbb,undefined ,先执行aa()，函数体内容aaa，返回字符串function(){alert(&#34;bbb&#34;);}，再执行function(){alert(&#34;bbb&#34;);}()，
-</span><span style="color:#75715e"></span><span style="color:#75715e">//这时该方法名是：function(){alert(&#34;bbb&#34;);}，先打印bbb，在打印undefined，因为该方法名未定义， 
-</span><span style="color:#75715e"></span><span style="color:#75715e">//杨老师练习3
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;杨3&#39;</span>);
-<span style="color:#75715e">//每隔1s重复的执行  烦人，注释掉
-</span><span style="color:#75715e"></span><span style="color:#75715e">//setInterval(aa,1000);
-</span><span style="color:#75715e"></span><span style="color:#75715e">//setInterval(aa(),1000);
-</span><span style="color:#75715e"></span><span style="color:#75715e">//杨老师练习4
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;杨4&#39;</span>);
-<span style="color:#75715e">//setInterval(alert(&#39;a&#39;),1000); //每隔1s显示a
-</span><span style="color:#75715e"></span><span style="color:#75715e">//setInterval(function(){alert(&#34;a&#34;);},1000);  //返回一个函数 因为未被执行，这个函数没有任何东西
-</span><span style="color:#75715e"></span><span style="color:#75715e">//杨老师练习5
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;杨5&#39;</span>);
-<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">s1</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;aaa&#34;</span>;
-<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">s2</span><span style="color:#f92672">=</span><span style="color:#66d9ef">new</span> String(<span style="color:#e6db74">&#34;aaa&#34;</span>);
-<span style="color:#a6e22e">alert</span>(<span style="color:#a6e22e">s1</span> <span style="color:#66d9ef">instanceof</span> Object); <span style="color:#75715e">//false
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">alert</span>(<span style="color:#a6e22e">s2</span> <span style="color:#66d9ef">instanceof</span> Object);<span style="color:#75715e">//true
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">alert</span>(<span style="color:#a6e22e">s1</span> <span style="color:#66d9ef">instanceof</span> String);<span style="color:#75715e">//false
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">alert</span>(<span style="color:#a6e22e">s2</span> <span style="color:#66d9ef">instanceof</span> String);<span style="color:#75715e">// true
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">alert</span>(<span style="color:#66d9ef">typeof</span>(<span style="color:#a6e22e">s1</span>));  <span style="color:#75715e">//string
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">alert</span>(<span style="color:#66d9ef">typeof</span>(<span style="color:#a6e22e">s2</span>)); <span style="color:#75715e">//object
-</span><span style="color:#75715e"></span><span style="color:#75715e">//杨老师练习6
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;杨6&#39;</span>);
-<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">x</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>;
-<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">y</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
-<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">z</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
-<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">add</span>(<span style="color:#a6e22e">n</span>)
+alert(aa);
+alert(aa());
+// alert(aa());打印是aaa,和function(){alert(&quot;bbb&quot;);}以为执行函数方法题内容,返回的是一个匿名函数,返回的是函数体字符串. 
+alert(aa()());
+//alert(aa()());打印的是aaa,bbb,undefined ,先执行aa()，函数体内容aaa，返回字符串function(){alert(&quot;bbb&quot;);}，再执行function(){alert(&quot;bbb&quot;);}()，
+//这时该方法名是：function(){alert(&quot;bbb&quot;);}，先打印bbb，在打印undefined，因为该方法名未定义， 
+//杨老师练习3
+alert('杨3');
+//每隔1s重复的执行  烦人，注释掉
+//setInterval(aa,1000);
+//setInterval(aa(),1000);
+//杨老师练习4
+alert('杨4');
+//setInterval(alert('a'),1000); //每隔1s显示a
+//setInterval(function(){alert(&quot;a&quot;);},1000);  //返回一个函数 因为未被执行，这个函数没有任何东西
+//杨老师练习5
+alert('杨5');
+var s1=&quot;aaa&quot;;
+var s2=new String(&quot;aaa&quot;);
+alert(s1 instanceof Object); //false
+alert(s2 instanceof Object);//true
+alert(s1 instanceof String);//false
+alert(s2 instanceof String);// true
+alert(typeof(s1));  //string
+alert(typeof(s2)); //object
+//杨老师练习6
+alert('杨6');
+var x=1;
+var y=0;
+var z=0;
+function add(n)
 {
-  <span style="color:#a6e22e">n</span><span style="color:#f92672">=</span><span style="color:#a6e22e">n</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>;
-  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">n</span>;
+  n=n+1;
+  return n;
 }
-<span style="color:#a6e22e">y</span><span style="color:#f92672">=</span><span style="color:#a6e22e">add</span>(<span style="color:#a6e22e">x</span>);
-<span style="color:#75715e">//js只会用最新的函数定义
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">add</span>(<span style="color:#a6e22e">n</span>)
+y=add(x);
+//js只会用最新的函数定义
+function add(n)
 {
-  <span style="color:#a6e22e">n</span><span style="color:#f92672">=</span><span style="color:#a6e22e">n</span><span style="color:#f92672">+</span><span style="color:#ae81ff">3</span>;
-  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">n</span>;
+  n=n+3;
+  return n;
 }
 
-<span style="color:#a6e22e">z</span><span style="color:#f92672">=</span><span style="color:#a6e22e">add</span>(<span style="color:#a6e22e">x</span>);
-<span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;y=&#39;</span><span style="color:#f92672">+</span><span style="color:#a6e22e">y</span><span style="color:#f92672">+</span><span style="color:#e6db74">&#39;z=&#39;</span><span style="color:#f92672">+</span><span style="color:#a6e22e">z</span>);<span style="color:#75715e">//y-4  z=4  只用最新的
-</span><span style="color:#75715e"></span><span style="color:#75715e">//杨老师练习7
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;杨7&#39;</span>);
-<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">add1</span><span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">n</span>)
+z=add(x);
+alert('y='+y+'z='+z);//y-4  z=4  只用最新的
+//杨老师练习7
+alert('杨7');
+var add1=function(n)
 {
-   <span style="color:#a6e22e">n</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">n</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>;
-   <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">n</span>;
+   n = n+1;
+   return n;
 }
-<span style="color:#a6e22e">y</span><span style="color:#f92672">=</span><span style="color:#a6e22e">add1</span>(<span style="color:#a6e22e">x</span>);
-<span style="color:#a6e22e">add1</span> <span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">n</span>)
+y=add1(x);
+add1 =function(n)
 {
-  <span style="color:#a6e22e">n</span><span style="color:#f92672">=</span> <span style="color:#a6e22e">n</span> <span style="color:#f92672">+</span><span style="color:#ae81ff">3</span>;
-  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">n</span>;
+  n= n +3;
+  return n;
 }
-<span style="color:#a6e22e">z</span><span style="color:#f92672">=</span> <span style="color:#a6e22e">add1</span>(<span style="color:#a6e22e">x</span>);
-<span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;y=&#39;</span><span style="color:#f92672">+</span><span style="color:#a6e22e">y</span><span style="color:#f92672">+</span><span style="color:#e6db74">&#39; z=&#39;</span><span style="color:#f92672">+</span><span style="color:#a6e22e">z</span>);
-<span style="color:#75715e">//杨老师练习8
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;杨8&#39;</span>);
-<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">s1</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;aaa&#34;</span>; <span style="color:#75715e">// --------------------&gt;是String类型 非对象
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">s2</span><span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> String(<span style="color:#e6db74">&#39;aaa&#39;</span>);
-<span style="color:#a6e22e">alert</span>(<span style="color:#a6e22e">s1</span> <span style="color:#66d9ef">instanceof</span> Object);
-<span style="color:#a6e22e">alert</span>(<span style="color:#a6e22e">s2</span> <span style="color:#66d9ef">instanceof</span> Object);
-<span style="color:#a6e22e">alert</span>(<span style="color:#a6e22e">s1</span> <span style="color:#66d9ef">instanceof</span> String);
-<span style="color:#a6e22e">alert</span>(<span style="color:#a6e22e">s2</span> <span style="color:#66d9ef">instanceof</span> String);
-<span style="color:#a6e22e">alert</span>(<span style="color:#66d9ef">typeof</span>(<span style="color:#a6e22e">s1</span>));
-<span style="color:#a6e22e">alert</span>(<span style="color:#66d9ef">typeof</span>(<span style="color:#a6e22e">s2</span>));
+z= add1(x);
+alert('y='+y+' z='+z);
+//杨老师练习8
+alert('杨8');
+var s1=&quot;aaa&quot;; // --------------------&gt;是String类型 非对象
+var s2= new String('aaa');
+alert(s1 instanceof Object);
+alert(s2 instanceof Object);
+alert(s1 instanceof String);
+alert(s2 instanceof String);
+alert(typeof(s1));
+alert(typeof(s2));
 
 
-<span style="color:#75715e">//杨老师练习9
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;杨9&#39;</span>);
-<span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;易错点： btn.onclick=function(){}  onclick后面别跟()&#39;</span>)
+//杨老师练习9
+alert('杨9');
+alert('易错点： btn.onclick=function(){}  onclick后面别跟()')
 
-&lt;/<span style="color:#f92672">script</span>&gt;
+&lt;/script&gt;
 
-&lt;/<span style="color:#f92672">Head</span>&gt;
+&lt;/Head&gt;
 
-&lt;<span style="color:#f92672">Body</span>&gt;
-  &lt;<span style="color:#f92672">Div</span>&gt;
-    &lt;<span style="color:#f92672">Input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;button&#34;</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;button1&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;按钮1&#34;</span>/&gt;
-    &lt;<span style="color:#f92672">Input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;button&#34;</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;button1&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;按钮2&#34;</span>/&gt;
-    &lt;<span style="color:#f92672">Input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;button&#34;</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;button1&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;按钮3&#34;</span>/&gt;
-    &lt;<span style="color:#f92672">Input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;button&#34;</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;button1&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;按钮4&#34;</span>/&gt;
-    &lt;<span style="color:#f92672">Input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;button&#34;</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;button1&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;按钮5&#34;</span>/&gt;
-  &lt;/<span style="color:#f92672">Div</span>&gt;
-  &lt;<span style="color:#f92672">Div</span>&gt;
-    &lt;<span style="color:#f92672">Input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;button&#34;</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;name&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;click&#34;</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;btn&#34;</span>/&gt;
-  &lt;/<span style="color:#f92672">Div</span>&gt;
-  &lt;<span style="color:#f92672">Div</span>&gt;
-    &lt;<span style="color:#f92672">Br</span>/&gt;
-    &lt;<span style="color:#f92672">Br</span>/&gt;
-    &lt;<span style="color:#f92672">Br</span>/&gt;
-    &lt;<span style="color:#f92672">A</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;javascript:alert(new Date().toLocaleTimeString());&#34;</span>&gt;显示时间&lt;/<span style="color:#f92672">A</span>&gt;
-    &lt;/<span style="color:#f92672">Br</span>&gt;
-    &lt;<span style="color:#f92672">A</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;javascript:void(0);&#34;</span>&gt;显示时间&lt;/<span style="color:#f92672">A</span>&gt;
-    &lt;/<span style="color:#f92672">Br</span>&gt;
-    &lt;<span style="color:#f92672">Input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;button&#34;</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;name&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;显示时间&#34;</span><span style="color:#960050;background-color:#1e0010">,</span><span style="color:#a6e22e">onclick</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;alert(new Date().toLocaleTimeString());&#34;</span>/&gt;
-  &lt;<span style="color:#f92672">Div</span>&gt;
-&lt;/<span style="color:#f92672">Body</span>&gt;
-&lt;/<span style="color:#f92672">Html</span>&gt;
-</code></pre></div><p>为什么jquery.js有那么多的<br>
+&lt;Body&gt;
+  &lt;Div&gt;
+    &lt;Input type=&quot;button&quot; name=&quot;button1&quot; value=&quot;按钮1&quot;/&gt;
+    &lt;Input type=&quot;button&quot; name=&quot;button1&quot; value=&quot;按钮2&quot;/&gt;
+    &lt;Input type=&quot;button&quot; name=&quot;button1&quot; value=&quot;按钮3&quot;/&gt;
+    &lt;Input type=&quot;button&quot; name=&quot;button1&quot; value=&quot;按钮4&quot;/&gt;
+    &lt;Input type=&quot;button&quot; name=&quot;button1&quot; value=&quot;按钮5&quot;/&gt;
+  &lt;/Div&gt;
+  &lt;Div&gt;
+    &lt;Input type=&quot;button&quot; name=&quot;name&quot; value=&quot;click&quot; id=&quot;btn&quot;/&gt;
+  &lt;/Div&gt;
+  &lt;Div&gt;
+    &lt;Br/&gt;
+    &lt;Br/&gt;
+    &lt;Br/&gt;
+    &lt;A href=&quot;javascript:alert(new Date().toLocaleTimeString());&quot;&gt;显示时间&lt;/A&gt;
+    &lt;/Br&gt;
+    &lt;A href=&quot;javascript:void(0);&quot;&gt;显示时间&lt;/A&gt;
+    &lt;/Br&gt;
+    &lt;Input type=&quot;button&quot; name=&quot;name&quot; value=&quot;显示时间&quot;,onclick=&quot;alert(new Date().toLocaleTimeString());&quot;/&gt;
+  &lt;Div&gt;
+&lt;/Body&gt;
+&lt;/Html&gt;
+</code></pre>
+<p>为什么jquery.js有那么多的<br>
 name : function(){}, 的写法？ 他们是什么意思？</p>
 <p>JQuery.js中出现如下的书写方式：</p>
 <p>success：function(data){}
@@ -926,31 +1149,32 @@ JSON以一种特定的字符串形式来表示 JavaScript 对象。如果将具�
 您可以使用以下JSON形式来表示User对象：
 {&ldquo;UserID&rdquo;:11, &ldquo;Name&rdquo;:&ldquo;tht&rdquo;, &ldquo;Email&rdquo;:&ldquo;18039010◎qq.com&rdquo;};
 然后如果把这一字符串赋予一个JavaScript变量，那么就可以直接使用对象的任一属性了。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">Html</span>&gt;
-  &lt;<span style="color:#f92672">Head</span>&gt;
-    &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/javascript&#34;</span>&gt;
-        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">User</span><span style="color:#f92672">=</span>{<span style="color:#e6db74">&#34;UserId&#34;</span><span style="color:#f92672">:</span><span style="color:#ae81ff">11</span>,<span style="color:#e6db74">&#34;Name&#34;</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;Ye Zhaoliang&#34;</span>,<span style="color:#e6db74">&#34;Email&#34;</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;977962857@qq.com&#34;</span>};
-        <span style="color:#a6e22e">alert</span>(<span style="color:#a6e22e">User</span>.<span style="color:#a6e22e">Name</span>);
+<pre><code class="language-html">&lt;Html&gt;
+  &lt;Head&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+        var User={&quot;UserId&quot;:11,&quot;Name&quot;:&quot;Ye Zhaoliang&quot;,&quot;Email&quot;:&quot;977962857@qq.com&quot;};
+        alert(User.Name);
 
-        <span style="color:#75715e">//利用JSon对象方式  定义两个User对象
-</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">User1</span><span style="color:#f92672">=</span>{<span style="color:#e6db74">&#34;UserId&#34;</span><span style="color:#f92672">:</span><span style="color:#ae81ff">12</span>,<span style="color:#e6db74">&#34;Name&#34;</span><span style="color:#f92672">:</span>{<span style="color:#e6db74">&#34;FirstName&#34;</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;Ye&#34;</span>,<span style="color:#e6db74">&#34;LastName&#34;</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;Zhaoliang&#34;</span>},<span style="color:#e6db74">&#34;Email&#34;</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;977962857@qq.com&#34;</span>};
-        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">User2</span><span style="color:#f92672">=</span>{<span style="color:#e6db74">&#34;UserId&#34;</span><span style="color:#f92672">:</span><span style="color:#ae81ff">13</span>,<span style="color:#e6db74">&#34;Name&#34;</span><span style="color:#f92672">:</span>{<span style="color:#e6db74">&#34;FirstName&#34;</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;Ye&#34;</span>,<span style="color:#e6db74">&#34;LastName&#34;</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;Wangliang&#34;</span>},<span style="color:#e6db74">&#34;Email&#34;</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;977962859@qq.com&#34;</span>};
-        <span style="color:#a6e22e">alert</span>(<span style="color:#a6e22e">User1</span>.<span style="color:#a6e22e">Name</span>.<span style="color:#a6e22e">LastName</span><span style="color:#f92672">+</span><span style="color:#e6db74">&#34; love you!&#34;</span>);
+        //利用JSon对象方式  定义两个User对象
+        var User1={&quot;UserId&quot;:12,&quot;Name&quot;:{&quot;FirstName&quot;:&quot;Ye&quot;,&quot;LastName&quot;:&quot;Zhaoliang&quot;},&quot;Email&quot;:&quot;977962857@qq.com&quot;};
+        var User2={&quot;UserId&quot;:13,&quot;Name&quot;:{&quot;FirstName&quot;:&quot;Ye&quot;,&quot;LastName&quot;:&quot;Wangliang&quot;},&quot;Email&quot;:&quot;977962859@qq.com&quot;};
+        alert(User1.Name.LastName+&quot; love you!&quot;);
 
-        <span style="color:#75715e">//用数组存储一个用户列表
-</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">Users</span><span style="color:#f92672">=</span>[<span style="color:#a6e22e">User1</span>,<span style="color:#a6e22e">User2</span>];
-        <span style="color:#a6e22e">alert</span>(<span style="color:#a6e22e">Users</span>.<span style="color:#a6e22e">length</span>);
-        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">i</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;<span style="color:#a6e22e">i</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">Users</span>.<span style="color:#a6e22e">length</span>;<span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>)
+        //用数组存储一个用户列表
+        var Users=[User1,User2];
+        alert(Users.length);
+        for(var i=0;i&lt;Users.length;i++)
         {
-          <span style="color:#a6e22e">alert</span>(<span style="color:#a6e22e">Users</span>[<span style="color:#a6e22e">i</span>].<span style="color:#a6e22e">UserId</span><span style="color:#f92672">+</span><span style="color:#e6db74">&#34; &#34;</span><span style="color:#f92672">+</span><span style="color:#a6e22e">Users</span>[<span style="color:#a6e22e">i</span>].<span style="color:#a6e22e">Name</span>.<span style="color:#a6e22e">LastName</span>);
+          alert(Users[i].UserId+&quot; &quot;+Users[i].Name.LastName);
         }
-    &lt;/<span style="color:#f92672">script</span>&gt;
-  &lt;/<span style="color:#f92672">Head</span>&gt;
-  &lt;<span style="color:#f92672">Body</span>&gt;
+    &lt;/script&gt;
+  &lt;/Head&gt;
+  &lt;Body&gt;
 
-  &lt;/<span style="color:#f92672">Body</span>&gt;
-&lt;/<span style="color:#f92672">Html</span>&gt;
-</code></pre></div><p>由此引出面向对象的JavaScript编程。</p>
+  &lt;/Body&gt;
+&lt;/Html&gt;
+</code></pre>
+<p>由此引出面向对象的JavaScript编程。</p>
 <p>![./image/java/object.gif][JSON对象的格式描述，用逗号分隔开多个对象，一个对象用{}组合，每个对象的属性用:分隔，冒号前面表示属性 &hellip;]</p>
 <p>![./image/java/array.gif][用[]表达多个数组元素，元素之间不分类型，用逗号分隔元素]</p>
 <p>1: JS中单引号和双引号有什么区别？为什么在字符串中用单引号括起来，而不是双引号？
@@ -960,13 +1184,17 @@ JSON的数据格式一般是使用双引号的。</p>
 </code></pre>
 <p>所以字符串如果用单引号修饰就可以内部引用Html的属性。
 比如</p>
-<!-- raw HTML omitted -->
+<Div class="global-notify" id="global-message">
+var str='<Div class="global-notify" id="global-message">'
+复制代码
+更多的是考虑到前端，会使用HTML的属性值，而Html的属性值都是用双引号包裹，所以如果再用单引号括起来不需要进行转义。
+另外可能就是大家习惯。
 <p>2：Javascript也有事件编程</p>
-<p>button中的onclick=&quot;js代码&rdquo;</p>
+<p>button中的onclick=&ldquo;js代码&rdquo;</p>
 <p>&lt;input type=“button” onclick=“ js代码&rdquo; /&gt;
 复制代码</p>
 <p>href超链接的特殊的调用事件的方法：</p>
-<p><!-- raw HTML omitted -->热点文字<!-- raw HTML omitted -->
+<p><a href=“javascript:js代码”>热点文字</a>
 复制代码</p>
 <pre><code>      只有超链接的href中的JavaScript中才需要加“javascript:”，因为它不是事件，而是把”javascript:”看成像“http:”、“ftp:”、“thunder://”、“ed2k://”、“mailto:”一样的网络协议，交             由js解析引擎处理。只有href中，这是一个特例。
 </code></pre>
@@ -1018,7 +1246,7 @@ String.prototype.IseMaile = function ()
 复制代码</p>
 <p>6：js文件引入javascript的好处是?      1:多文档共享  js
 2:减少网络流量</p>
-<p>使用方法 ： &lt;Link src=&rdquo;*.js&rdquo; type=&quot;text/javascript&rdquo;</p>
+<p>使用方法 ： &lt;Link src=&quot;*.js&quot; type=&ldquo;text/javascript&rdquo;</p>
 <p>存在疑问：Dom  and Bom的区别？</p>
 <p>Broser object model (BOM)
 Document object model(Dom)
@@ -1044,9 +1272,10 @@ window对象是Bom模型的核心，包含6个对象，document,frames,history,l
 &mdash;&mdash;-location&hellip;</p>
 <p>根节点是:document</p>
 <p>联系：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">document.write(&#39;test&#39;);
-window.document.write(&#39;test&#39;);
-</code></pre></div><p>![./images/java/dom.png][某个dom的树状节点层次图（可以进行实例化]</p>
+<pre><code class="language-html">document.write('test');
+window.document.write('test');
+</code></pre>
+<p>![./images/java/dom.png][某个dom的树状节点层次图（可以进行实例化]</p>
 <p>14.this事件
 事件中的this。除了可以使用event.srcElement</p>
 <p>在事件响应函数中，this表示发生事件的控件。</p>
@@ -1095,12 +1324,12 @@ document.onmousedown=function(){}
 <p>对象上时触发事件发生
 element.setAttribute()        把指定属性设置或更</p>
 <p>改为指定值。
-18. dvObj.style.width='300px&rsquo;;
-dvObj.style.height='200px&rsquo;;
-dvObj.style.border='1px solid red&rsquo;;
+18. dvObj.style.width=&lsquo;300px&rsquo;;
+dvObj.style.height=&lsquo;200px&rsquo;;
+dvObj.style.border=&lsquo;1px solid red&rsquo;;
 加'&lsquo;的是因为给变量赋值必须是一个正确的类型</p>
 <p>。数字就是数字字符串就是字符串
-19.<!-- raw HTML omitted --> 标签定义段落。
+19.<p> 标签定义段落。
 border:1px solid green; 边框：1像素，实心</p>
 <p>，绿色
 20.form对象
@@ -1121,7 +1350,7 @@ form对象是表单的Dom对象。
 <p>onsubmit中可以进行数据校验，如果数据有问题</p>
 <p>，返回false即可取消提交</p>
 <p>21.不同浏览器的差异</p>
-<!-- raw HTML omitted -->
+<form> 标签用于为用户输入创建 HTML 表单。
 <p>表单能够包含 input 元素，比如文本字段、复选</p>
 <p>框、单选框、提交按钮等等。表单还可以包含</p>
 <p>menus、textarea、fieldset、legend 和</p>
@@ -1131,44 +1360,48 @@ submit() 提交表单。 是form中的一个方法
 onsubmit 在提交表单之前调用。是一个事件</p>
 <p>1: js的for循环的var i = 0的再认识
 经过var定义的是一个全局变量</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">        //一个重要错误   var i =0 其实就是定义了一个全局变量i = 0
+<pre><code class="language-html">        //一个重要错误   var i =0 其实就是定义了一个全局变量i = 0
         //所有的js都可以调用
-        for(var i=0;i&lt;<span style="color:#f92672">Users.length</span><span style="color:#960050;background-color:#1e0010">;</span><span style="color:#a6e22e">i</span><span style="color:#960050;background-color:#1e0010">+</span><span style="color:#960050;background-color:#1e0010">+</span><span style="color:#960050;background-color:#1e0010">)</span>
-        <span style="color:#960050;background-color:#1e0010">{</span>
-          <span style="color:#a6e22e">alert</span><span style="color:#960050;background-color:#1e0010">(</span><span style="color:#a6e22e">Users</span><span style="color:#960050;background-color:#1e0010">[</span><span style="color:#a6e22e">i</span><span style="color:#960050;background-color:#1e0010">]</span><span style="color:#960050;background-color:#1e0010">.</span><span style="color:#a6e22e">UserId</span><span style="color:#960050;background-color:#1e0010">+</span><span style="color:#960050;background-color:#1e0010">&#34;</span> <span style="color:#960050;background-color:#1e0010">&#34;</span><span style="color:#960050;background-color:#1e0010">+</span><span style="color:#a6e22e">Users</span><span style="color:#960050;background-color:#1e0010">[</span><span style="color:#a6e22e">i</span><span style="color:#960050;background-color:#1e0010">]</span><span style="color:#960050;background-color:#1e0010">.</span><span style="color:#a6e22e">Name</span><span style="color:#960050;background-color:#1e0010">.</span><span style="color:#a6e22e">LastName</span><span style="color:#960050;background-color:#1e0010">)</span><span style="color:#960050;background-color:#1e0010">;</span>
-        <span style="color:#960050;background-color:#1e0010">}</span>
-</code></pre></div><p>也就是for之后alert(i)的值是 Users.length</p>
+        for(var i=0;i&lt;Users.length;i++)
+        {
+          alert(Users[i].UserId+&quot; &quot;+Users[i].Name.LastName);
+        }
+</code></pre>
+<p>也就是for之后alert(i)的值是 Users.length</p>
 <p>所以可以在for之前直接定义 var i = 0;即可</p>
 <p>2：以二进制读取，10进制输出</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">        alert(parseInt(&#39;100&#39;,8));//以8进制
-        alert(parseInt(&#39;100&#39;,2));// 以2进制读取，并10进制显示
-        alert(parseInt(&#39;100&#39;,10));// 以10进制 默认方式
-        alert(parseInt(&#39;100&#39;,16));// 以16进制
+<pre><code class="language-html">        alert(parseInt('100',8));//以8进制
+        alert(parseInt('100',2));// 以2进制读取，并10进制显示
+        alert(parseInt('100',10));// 以10进制 默认方式
+        alert(parseInt('100',16));// 以16进制
 
-</code></pre></div><p>3： onload在页面加载完后在加载的部分js</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">        //很重要  onload  只在页面加载完控件才执行，所以确保id有效！！
+</code></pre>
+<p>3： onload在页面加载完后在加载的部分js</p>
+<pre><code class="language-html">        //很重要  onload  只在页面加载完控件才执行，所以确保id有效！！
         //否则可能报错
         onload=function()
         {
-          document.getElementById(&#39;btn&#39;).onclick=function()
+          document.getElementById('btn').onclick=function()
           {
-            alert(&#39;hello&#39;);
+            alert('hello');
           };
         }
-</code></pre></div><p>4：Html的事件在学习</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">      &lt;<span style="color:#f92672">Input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;button&#34;</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;time&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;show current time&#34;</span> <span style="color:#a6e22e">onclick</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;alert(new Date().toLocaleTimeString());&#34;</span>/&gt;
-      <span style="color:#75715e">&lt;!--</span><span style="color:#75715e">会跳转到最前面   #z只是一个页面最前面的一个锚</span><span style="color:#75715e">--&gt;</span>
-      &lt;<span style="color:#f92672">A</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#&#34;</span> <span style="color:#a6e22e">onclick</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;alert(new Date().toLocaleTimeString());&#34;</span>&gt;百度&lt;/<span style="color:#f92672">A</span>&gt;
-      &lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;
-&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;
-&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;
-<span style="color:#75715e">&lt;!--</span><span style="color:#75715e">直接在当前位置打印出时间： javascript: 类似于http://  ftp://</span><span style="color:#75715e">--&gt;</span>
-&lt;<span style="color:#f92672">A</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;javascript:alert(new Date().toLocaleTimeString());&#34;</span>&gt;网易&lt;/<span style="color:#f92672">A</span>&gt;
-&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;
-&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;&lt;<span style="color:#f92672">br</span>/&gt;
-&lt;<span style="color:#f92672">A</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;javascript:void(0);&#34;</span> <span style="color:#a6e22e">onclick</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;alert(new Date().toLocaleTimeString());&#34;</span>&gt;新浪&lt;/<span style="color:#f92672">A</span>&gt;
-&lt;<span style="color:#f92672">A</span> <span style="color:#a6e22e">href</span>&gt;
-</code></pre></div>
+</code></pre>
+<p>4：Html的事件在学习</p>
+<pre><code class="language-html">      &lt;Input type=&quot;button&quot; name=&quot;time&quot; value=&quot;show current time&quot; onclick=&quot;alert(new Date().toLocaleTimeString());&quot;/&gt;
+      &lt;!--会跳转到最前面   #z只是一个页面最前面的一个锚--&gt;
+      &lt;A href=&quot;#&quot; onclick=&quot;alert(new Date().toLocaleTimeString());&quot;&gt;百度&lt;/A&gt;
+      &lt;br/&gt;&lt;br/&gt;
+&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;
+&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;
+&lt;!--直接在当前位置打印出时间： javascript: 类似于http://  ftp://--&gt;
+&lt;A href=&quot;javascript:alert(new Date().toLocaleTimeString());&quot;&gt;网易&lt;/A&gt;
+&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;
+&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;
+&lt;A href=&quot;javascript:void(0);&quot; onclick=&quot;alert(new Date().toLocaleTimeString());&quot;&gt;新浪&lt;/A&gt;
+&lt;A href&gt;
+</code></pre>
+
     </div>
  <div class="nav-links" style="padding:10;">
         
@@ -1188,9 +1421,10 @@ onsubmit 在提交表单之前调用。是一个事件</p>
 
 
 
+
 <div class="article-tags">
   
-  <a class="badge badge-light" href="/tags/javascript/">JavaScript</a>
+  <a class="badge badge-light" href="/tag/javascript/">JavaScript</a>
   
 </div>
 
@@ -1259,7 +1493,7 @@ onsubmit 在提交表单之前调用。是一个事件</p>
       
       
       <li>
-        <a href="https://web.whatsapp.com/send?text=JavaScript1-6%e8%8a%82%e7%ac%94%e8%ae%b0%e4%bb%a3%e7%a0%81March26th%20https://jueqingsizhe66.github.io/blog/2015/05/11/javascript1-6jie-bi-ji-dai-ma-march26th/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+        <a href="whatsapp://send?text=JavaScript1-6%e8%8a%82%e7%ac%94%e8%ae%b0%e4%bb%a3%e7%a0%81March26th%20https://jueqingsizhe66.github.io/blog/2015/05/11/javascript1-6jie-bi-ji-dai-ma-march26th/" target="_blank" rel="noopener" class="share-btn-whatsapp">
           <i class="fab fa-whatsapp"></i>
         </a>
       </li>
@@ -1290,11 +1524,8 @@ onsubmit 在提交表单之前调用。是一个事件</p>
 
 
 
-
   
-
-
-
+  
 
 
 
@@ -1302,16 +1533,17 @@ onsubmit 在提交表单之前调用。是一个事件</p>
   
   
     
+  
   
   
   <div class="media author-card content-widget-hr">
     
       
-      <img class="portrait mr-3" src="/authors/admin/avatar_hub2bcfcfc92fc067668c68513c0d68b69_23221_250x250_fill_q90_lanczos_center.jpg" alt="Avatar">
+      <a href="https://jueqingsizhe66.github.io/"><img class="avatar mr-3 avatar-circle" src="/author/%E5%8F%B6%E6%98%AD%E8%89%AF/avatar_huc99f1f2e739130747140db298bdd1890_46492_270x270_fill_q90_lanczos_center.jpg" alt="叶昭良"></a>
     
 
     <div class="media-body">
-      <h5 class="card-title"><a href="https://jueqingsizhe66.github.io/">Ye Zhaoliang</a></h5>
+      <h5 class="card-title"><a href="https://jueqingsizhe66.github.io/">叶昭良</a></h5>
       <h6 class="card-subtitle">Engineer of offshore wind turbine technique research</h6>
       <p class="card-text">My research interests include distributed energy, wind turbine power generation technique , Computational fluid dynamic and programmable matter.</p>
       <ul class="network-icon" aria-hidden="true">
@@ -1395,21 +1627,26 @@ onsubmit 在提交表单之前调用。是一个事件</p>
 
 
 
+
+
+
+
+
   
   
   <div class="article-widget content-widget-hr">
     <h3>Related</h3>
     <ul>
       
-      <li><a href="/blog/2015/05/11/javascript-7-11jie-bi-ji-dai-ma-march28th/">JavaScript 7-11节笔记代码March28th</a></li>
+      <li><a href="/blog/2015/05/11/jquery1-9april4th/">JQuery1-9April4th</a></li>
       
-      <li><a href="/blog/2015/05/11/jarbao-da-bao-cheng-ke-an-zhuang-de-exewen-jian/">Jar包打包成可安装的EXE文件</a></li>
+      <li><a href="/blog/2015/05/11/jsdom14-19jie-bi-ji-dai-ma-april1th/">JSDOM14-19节笔记代码April1th</a></li>
       
-      <li><a href="/blog/2015/05/11/javaban-1yue-24ri/">Java班 1月24日</a></li>
+      <li><a href="/blog/2015/05/11/jsdom7-13jie-bi-ji-dai-ma-march31th/">JSDOM7-13节笔记代码March31th</a></li>
       
-      <li><a href="/blog/2015/05/11/javascriptbi-bao-xun-lian/">javascript闭包训练</a></li>
+      <li><a href="/blog/2015/05/11/march15th/">March15th</a></li>
       
-      <li><a href="/blog/2015/05/11/html1-17jie-bi-ji-dai-ma-march22nd/">HTML1-17节笔记代码March22nd</a></li>
+      <li><a href="/blog/2015/05/11/jquery10-18jie-bi-ji-dai-ma-april5th/">jQuery10-18节笔记代码April5th</a></li>
       
     </ul>
 
@@ -1431,67 +1668,120 @@ onsubmit 在提交表单之前调用。是一个事件</p>
         crossorigin="anonymous"
         async>
 </script>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    ©2020 &middot; 
+
+    ^-^ YZL ^-^ Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
 
       
 
     
     
     
-    <script src="/js/mathjax-config.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+      
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/go.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/vim.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/matlab.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/sql.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/python.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/c.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/scheme.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/racket.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/perl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/awk.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/clojure.min.js"></script>
+        
+      
+
     
 
     
     
-    
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
-
-      
-
-      
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js" integrity="sha256-aYTdUrn6Ow1DDgh5JTc3aDGnnju48y/1c8s1dgkYPQ8=" crossorigin="anonymous"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/go.min.js"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/vim.min.js"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/matlab.min.js"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/sql.min.js"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/python.min.js"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/c.min.js"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/scheme.min.js"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/racket.min.js"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/perl.min.js"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/awk.min.js"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/clojure.min.js"></script>
-        
-      
-
-      
-      
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
-      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js" integrity="sha512-SeiQaaDh73yrb56sTW/RgVdi/mMqNeM2oBwubFHagc5BkixSpP1fvqF47mKzPGWYSSy4RwbBunrJBQ4Co8fRWA==" crossorigin="anonymous"></script>
     
 
     
     
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin="anonymous"></script>
-    
-
-    
-    
-    <script>hljs.initHighlightingOnLoad();</script>
+    <script>const code_highlighting = true;</script>
     
 
     
@@ -1507,7 +1797,8 @@ onsubmit 在提交表单之前调用。是一个事件</p>
         'post': "Posts",
         'project': "Projects",
         'publication' : "Publications",
-        'talk' : "Talks"
+        'talk' : "Talks",
+        'slides' : "Slides"
         };
     </script>
     
@@ -1541,6 +1832,13 @@ onsubmit 在提交表单之前调用。是一个事件</p>
 
     
     
+    
+
+    
+    
+
+    
+    
 
     
     
@@ -1556,7 +1854,7 @@ onsubmit 在提交表单之前调用。是一个事件</p>
     
     
     
-    <script src="/js/academic.min.d6bd04fdad2ad213aa8111c5a3b72fc5.js"></script>
+    <script src="/js/wowchemy.min.59419d2c9809de125013c581da371866.js"></script>
 
     
 
@@ -1564,60 +1862,6 @@ onsubmit 在提交表单之前调用。是一个事件</p>
 
 
 
-
-  
-  
-  <div class="container">
-    <footer class="site-footer">
-  
-
-  <p class="powered-by">
-    ©2020 &middot; 
-
-    Powered by the
-    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
-    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
-
-    
-    <span class="float-right" aria-hidden="true">
-      <a href="#" class="back-to-top">
-        <span class="button_icon">
-          <i class="fas fa-chevron-up fa-2x"></i>
-        </span>
-      </a>
-    </span>
-    
-  </p>
-</footer>
-
-  </div>
-  
-
-  
-<div id="modal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Cite</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <pre><code class="tex hljs"></code></pre>
-      </div>
-      <div class="modal-footer">
-        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
-          <i class="fas fa-copy"></i> Copy
-        </a>
-        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
-          <i class="fas fa-download"></i> Download
-        </a>
-        <div id="modal-error"></div>
-      </div>
-    </div>
-  </div>
-</div>
 
 </body>
 </html>

@@ -1,13 +1,19 @@
-<!DOCTYPE html>
-<html lang="en-us">
+<!DOCTYPE html><html lang="en-us" >
 
 <head>
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="generator" content="Source Themes Academic 4.5.0">
+  
+  
+  
+  <meta name="generator" content="Wowchemy 5.0.0-beta.0 for Hugo">
+  
 
+  
+
+  
   
 
   
@@ -21,14 +27,14 @@
   
   
 
-  <meta name="author" content="Ye Zhaoliang">
+  <meta name="author" content="叶昭良">
 
   
   
   
     
   
-  <meta name="description" content="
+  <meta name="description" content="目录
 
 1. 基础部分
 2. 通过构造函数，构造出Natural recursion
@@ -55,6 +61,21 @@
   
 
 
+
+
+
+
+
+  
+
+
+
+
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+
   
   
   
@@ -64,11 +85,17 @@
   
   
   
+  <script src="/js/mathjax-config.js"></script>
+  
+
+  
+  
+  
   
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
 
     
     
@@ -78,48 +105,193 @@
     
       
       
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css" crossorigin="anonymous" title="hl-light">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/solarized-dark.min.css" crossorigin="anonymous" title="hl-light">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/solarized-dark.min.css" crossorigin="anonymous" title="hl-dark" disabled>
       
     
 
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css" integrity="sha512-1xoFisiGdy9nvho8EgXuXvnpR5GAMSjFwp40gSRE3NwdUdIMIKuPa7bqoUhLD0O/5tPNhteAsE5XyyMi5reQVA==" crossorigin="anonymous">
     
 
     
 
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.2.2/lazysizes.min.js" integrity="sha512-TmDwFLhg3UA4ZG0Eb4MIyT1O1Mb+Oww5kFG0uHqXsdbyZz9DcvYQhKpGgNkamAI6h2lGGZq2X8ftOJvF/XjTUg==" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+
   
 
   
   
   
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+    
+      
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+    
   
 
   
   
   
-  <link rel="stylesheet" href="/css/academic.min.e8d4d5fd376e67b34452ebe1cae16341.css">
+  
+  <link rel="stylesheet" href="/css/wowchemy.css">
 
   
 
-  
-
 
 
 
   
+<script>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','4703127160');
+</script>
 
+
+  
+
+
+  
+  
 
   
 
   <link rel="manifest" href="/index.webmanifest">
-  <link rel="icon" type="image/png" href="/img/icon-32.png">
-  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+  <link rel="icon" type="image/png" href="/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_192x192_fill_lanczos_center_2.png">
 
   <link rel="canonical" href="https://jueqingsizhe66.github.io/blog/2016/10/09/a-little-java-note/">
 
+  
+  
+  
   
   
   
@@ -133,10 +305,10 @@
   <meta property="twitter:site" content="@jueqingsizhe66">
   <meta property="twitter:creator" content="@jueqingsizhe66">
   
-  <meta property="og:site_name" content="简约派">
+  <meta property="og:site_name" content="30年磨一剑">
   <meta property="og:url" content="https://jueqingsizhe66.github.io/blog/2016/10/09/a-little-java-note/">
-  <meta property="og:title" content="a little java note | 简约派">
-  <meta property="og:description" content="
+  <meta property="og:title" content="a little java note | 30年磨一剑">
+  <meta property="og:description" content="目录
 
 1. 基础部分
 2. 通过构造函数，构造出Natural recursion
@@ -155,8 +327,8 @@
 15. IntEvalD 和SetEvalD很多相似之处	
 16. 根据extends使用Override增加函数的丰富性	
 
-视角没想到可以分成不同的classes，并在此基础上进行extends和implement，最终new通过constructors创造不同的value。两级在于基础元件和功能元件两部分。两级也可以分为extends和implements。集于一个class。"><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
-  <meta property="twitter:image" content="https://jueqingsizhe66.github.io/img/icon-192.png"><meta property="og:locale" content="en-us">
+视角没想到可以分成不同的classes，并在此基础上进行extends和implement，最终new通过constructors创造不同的value。两级在于基础元件和功能元件两部分。两级也可以分为extends和implements。集于一个class。"><meta property="og:image" content="https://jueqingsizhe66.github.io/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_2.png">
+  <meta property="twitter:image" content="https://jueqingsizhe66.github.io/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
   
     
       <meta property="article:published_time" content="2016-10-09T01:58:39&#43;08:00">
@@ -180,11 +352,19 @@
 
 
 
-  <title>a little java note | 简约派</title>
+  <title>a little java note | 30年磨一剑</title>
 
 </head>
 
-<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper  ">
+
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.js"></script>
 
   <aside class="search-results" id="search">
   <div class="container">
@@ -202,7 +382,7 @@
       <div id="search-box">
         
         <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
-        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control">
         
       </div>
 
@@ -218,25 +398,48 @@
 </aside>
 
 
-  
-<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0 compensate-for-scrollbar" id="navbar-main">
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
   <div class="container">
 
     
-      <a class="navbar-brand" href="/">简约派</a>
-      
-      <button type="button" class="navbar-toggler" data-toggle="collapse"
-              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
-        <span><i class="fas fa-bars"></i></span>
-      </button>
-      
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/">30年磨一剑</a>
+    </div>
+    
 
     
-    <div class="collapse navbar-collapse" id="navbar">
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/">30年磨一剑</a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-end" id="navbar-content">
 
       
-      
-      <ul class="navbar-nav ml-auto">
+      <ul class="navbar-nav d-md-inline-flex">
         
 
         
@@ -248,16 +451,24 @@
         
 
         
+
         
         
         
         
+
         
           
+            
+            
           
           
             
-          
+            
+            
+              
+            
+            
           
         
 
@@ -277,16 +488,24 @@
         
 
         
+
         
         
         
         
+
         
           
+            
+            
           
           
             
-          
+            
+            
+              
+            
+            
           
         
 
@@ -306,68 +525,18 @@
         
 
         
+
         
         
         
         
+
         
           
-          
-          
+            
             
           
           
-        
-
-        <li class="nav-item">
-          <a class="nav-link " href="/#projects"><span>项目</span></a>
-        </li>
-
-        
-        
-
-        
-
-        
-        
-        
-          
-        
-
-        
-        
-        
-        
-        
-        
-          
-          
-          
-            
-          
-          
-        
-
-        <li class="nav-item">
-          <a class="nav-link " href="/#featured"><span>Publications</span></a>
-        </li>
-
-        
-        
-
-        
-
-        
-        
-        
-          
-        
-
-        
-        
-        
-        
-        
         
 
         <li class="nav-item">
@@ -386,10 +555,18 @@
         
 
         
+
         
         
         
         
+
+        
+          
+            
+            
+          
+          
         
 
         <li class="nav-item">
@@ -408,10 +585,18 @@
         
 
         
+
         
         
         
         
+
+        
+          
+            
+            
+          
+          
         
 
         <li class="nav-item">
@@ -430,10 +615,18 @@
         
 
         
+
         
         
         
         
+
+        
+          
+            
+            
+          
+          
         
 
         <li class="nav-item">
@@ -452,16 +645,24 @@
         
 
         
+
         
         
         
         
+
         
           
+            
+            
           
           
             
-          
+            
+            
+              
+            
+            
           
         
 
@@ -475,29 +676,49 @@
       
 
         
-
-        
-        <li class="nav-item">
-          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
-        </li>
-        
-
-        
-
-        
-        <li class="nav-item">
-          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
-        </li>
-        
-
       </ul>
-
     </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+
+    </ul>
+
   </div>
 </nav>
 
 
-  <article class="article">
+  </div>
+
+  <div class="page-body">
+    <article class="article">
 
   
 
@@ -557,13 +778,14 @@
     
     Oct 9, 2016
   </span>
-
   
 
   
 
   
 
+  
+  
   
   
   
@@ -572,9 +794,9 @@
   
   <span class="middot-divider"></span>
   <span class="article-categories">
-    <i class="fas fa-folder mr-1"></i><a href="/categories/programme/">programme</a></span>
-
+    <i class="fas fa-folder mr-1"></i><a href="/category/programme/">programme</a></span>
   
+
 </div>
 
     
@@ -599,7 +821,7 @@
 
 
 
-<span class="article-metadata" >Reading time: 19 minutes and    56 seconds with 4388 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+<span class="article-metadata" >Reading time: 21 minutes and    55 seconds with 4823 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents"></nav>
     </aside>
@@ -607,7 +829,7 @@
 
 
     <div class="article-style">
-      <!-- raw HTML omitted -->
+      <div align="center">目录</div>
 <ul>
 <li><a href="#1">1. 基础部分</a></li>
 <li><a href="#2">2. 通过构造函数，构造出Natural recursion</a></li>
@@ -627,7 +849,7 @@
 <li><a href="#16">16. 根据extends使用Override增加函数的丰富性	</a></li>
 </ul>
 <p>视角没想到可以分成不同的classes，并在此基础上进行extends和implement，最终new通过constructors创造不同的value。两级在于基础元件和功能元件两部分。两级也可以分为extends和implements。集于一个class。</p>
-<p>学完<a href="http://www.ccs.neu.edu/home/matthias/BALJ/">《a little java》</a>的心得,</p>
+<p>学完<a href="http://www.ccs.neu.edu/home/matthias/BALJ/" target="_blank" rel="noopener">《a little java》</a>的心得,</p>
 <ol>
 <li>构造函数：new通过构造函数，产生了datatype的值；构造函数由此进行了natural recursion， 并通过一个基类退出循环（详见PieD).new create values.</li>
 <li>This,一般指向当前对象，但是在函数式编程中，this可能指代的是当前对象之后的所有剩余对象
@@ -664,74 +886,74 @@ This and that在对象间传递，而consume在函数间传递（Hangs over back
 <li>方向 ——我们这里所说的思考有别于妄想和幻想，而是一种有目的性和有计划性的思维活动，因此，这种思考需要有一定的价值导向，也就是思路——体现为目的性、方向性和一致性。漫无目的地思考难以发挥强有力的思考力，常常会把思考引进死胡同，导致思路夭折和无果而终。目的性、方向性、一致性和价值导向，决定着思考的角度和向度。</li>
 <li>作用点 ——必须把思考集中在特定的对象上，并把握其中的关键点，这样的思考就会势如破竹。如果找不准思考的着力点，就会精力分散、思维紊乱、胡思乱想，出现东一榔头西一棒的现象。思考就会停留在事物的表面上浮光掠影，无法深刻认识事物的本质。思考在作用点上的集中性程度，决定着思考的强度和力度(广度和深度）。</li>
 </ol>
-<!-- raw HTML omitted -->
+<h3 id="1">基础部分</h3>
 <p>理解分层。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">KebabD<span style="color:#f92672">(</span>chapter2<span style="color:#f92672">)</span> 烤肉
-    <span style="color:#a6e22e">isVeggie</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    whatHolder<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+<pre><code class="language-java">KebabD(chapter2) 烤肉
+    isVeggie();
+    whatHolder();
         Holder 烤肉摆放工具
-            Object<span style="color:#f92672">;</span>
-            Holder<span style="color:#f92672">(</span>Object<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            isVeggie<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            whatHolder<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            Object;
+            Holder(Object);
+            isVeggie();
+            whatHolder();
         Shallot  葱
-            KebabD<span style="color:#f92672">;</span>
-            Shallot<span style="color:#f92672">(</span>KebabD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            isVeggie<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            whatHolder<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            KebabD;
+            Shallot(KebabD);
+            isVeggie();
+            whatHolder();
          
         Shrimp 虾
-            KebabD<span style="color:#f92672">;</span>
-            Shrimp <span style="color:#f92672">(</span>KebabD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            isVeggie<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            whatHolder<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            KebabD;
+            Shrimp (KebabD);
+            isVeggie();
+            whatHolder();
              
         Radish 萝卜
-            KebabD<span style="color:#f92672">;</span>
-            Radish <span style="color:#f92672">(</span>KebabD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            isVeggie<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            whatHolder<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            KebabD;
+            Radish (KebabD);
+            isVeggie();
+            whatHolder();
          
         Pepper 胡椒粉
-            KebabD<span style="color:#f92672">;</span>
-            Pepper <span style="color:#f92672">(</span>KebabD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            isVeggie<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            whatHolder<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            KebabD;
+            Pepper (KebabD);
+            isVeggie();
+            whatHolder();
              
         Zucchini 西葫芦
-            KebabD<span style="color:#f92672">;</span>
-            Zucchini <span style="color:#f92672">(</span>KebabD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            isVeggie<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            whatHolder<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            KebabD;
+            Zucchini (KebabD);
+            isVeggie();
+            whatHolder();
          
  
-RodD<span style="color:#f92672">(</span>chapter2<span style="color:#f92672">)</span> 杆  <span style="color:#a6e22e">将烤肉串起来工具</span><span style="color:#f92672">(</span>烤肉摆放方式1<span style="color:#960050;background-color:#1e0010">）</span>
+RodD(chapter2) 杆  将烤肉串起来工具(烤肉摆放方式1）
     Dagger 匕首
     Sabre 军刀
     Sword 剑
      
-<span style="color:#a6e22e">PlateD</span><span style="color:#f92672">(</span>chapter2<span style="color:#f92672">)</span> 盘子  <span style="color:#960050;background-color:#1e0010">（</span>烤肉摆放方式2<span style="color:#f92672">)</span>
+PlateD(chapter2) 盘子  （烤肉摆放方式2)
     Gold 金盘子
     Silver
     Brass 黄铜盘子
     Copper 镀铜盘子
     Wood   木盘子
  
-<span style="color:#a6e22e">PointD</span><span style="color:#f92672">(</span>chapter1<span style="color:#f92672">,</span>2<span style="color:#f92672">)</span> 点
-    <span style="color:#a6e22e">distanceTo0</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">,</span><span style="color:#66d9ef">int</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">//可以把它们移入到构造函数中
-</span><span style="color:#75715e"></span>    closerTo0<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+PointD(chapter1,2) 点
+    distanceTo0(int,int); //可以把它们移入到构造函数中
+    closerTo0();
         CartesianPt 笛卡尔坐标
             Int
             Int
-            <span style="color:#a6e22e">CartesianPt</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">,</span><span style="color:#66d9ef">int</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            distanceTo0<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            Closeto0<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            CartesianPt(int,int);
+            distanceTo0();
+            Closeto0();
         ManhattenPt 曼哈顿坐标
             Int
             Int
-            <span style="color:#a6e22e">ManhattenPt</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">,</span><span style="color:#66d9ef">int</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            distanceTo0<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            Closeto0<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            ManhattenPt(int,int);
+            distanceTo0();
+            Closeto0();
          
         圆柱坐标系
         球坐标系
@@ -739,56 +961,56 @@ RodD<span style="color:#f92672">(</span>chapter2<span style="color:#f92672">)</s
 PieD
  
  
-PizzaD<span style="color:#960050;background-color:#1e0010">（</span>chapter3<span style="color:#f92672">,</span>4<span style="color:#960050;background-color:#1e0010">）</span>
-    remA 去除比萨饼的凤尾鱼订料<span style="color:#960050;background-color:#1e0010">（</span>防止过咸<span style="color:#960050;background-color:#1e0010">）</span>
-    topAwC<span style="color:#f92672">(</span><span style="color:#f92672">)</span> 在凤尾鱼顶料加上奶酪顶料<span style="color:#960050;background-color:#1e0010">（</span>盖住咸味<span style="color:#960050;background-color:#1e0010">）</span>
-    subAbC<span style="color:#f92672">(</span><span style="color:#f92672">)</span> 将所有的凤尾鱼顶料换成奶酪顶料
+PizzaD（chapter3,4）
+    remA 去除比萨饼的凤尾鱼订料（防止过咸）
+    topAwC() 在凤尾鱼顶料加上奶酪顶料（盖住咸味）
+    subAbC() 将所有的凤尾鱼顶料换成奶酪顶料
         Crust 面包皮
-            <span style="color:#a6e22e">remA</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            topAwC<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            subAbC<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            remA();
+            topAwC();
+            subAbC();
         Cheese  奶酪
             pizzaD
-            <span style="color:#a6e22e">Cheese</span><span style="color:#f92672">(</span>PizzaD<span style="color:#f92672">)</span>
-            remA<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            topAwC<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            subAbC<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            Cheese(PizzaD)
+            remA();
+            topAwC();
+            subAbC();
          
         Olive   橄榄
             pizzaD
-            <span style="color:#a6e22e">Olive</span><span style="color:#f92672">(</span>PizzaD<span style="color:#f92672">)</span>
-            remA<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            topAwC<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            subAbC<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            Olive(PizzaD)
+            remA();
+            topAwC();
+            subAbC();
              
         Anchovy 凤尾鱼
             pizzaD
-            <span style="color:#a6e22e">Anchovy</span><span style="color:#f92672">(</span>PizzaD<span style="color:#f92672">)</span>
-            remA<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            topAwC<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            subAbC<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            Anchovy(PizzaD)
+            remA();
+            topAwC();
+            subAbC();
              
         Sausage 香肠
             pizzaD
-            <span style="color:#a6e22e">Sausage</span><span style="color:#f92672">(</span>PizzaD<span style="color:#f92672">)</span>
-            remA<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            topAwC<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            subAbC<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            Sausage(PizzaD)
+            remA();
+            topAwC();
+            subAbC();
         Spinach 菠菜
             pizzaD
-            <span style="color:#a6e22e">Spinach</span><span style="color:#f92672">(</span>PizzaD<span style="color:#f92672">)</span>
-            remA<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            topAwC<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            subAbC<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            Spinach(PizzaD)
+            remA();
+            topAwC();
+            subAbC();
          
  
  
  
 Shape
  
-<span style="color:#a6e22e">Shish</span><span style="color:#f92672">(</span>chapter2<span style="color:#960050;background-color:#1e0010">，</span>4<span style="color:#f92672">)</span> 羊肉串
-    <span style="color:#a6e22e">onlyOnions</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span> 
-    isVegetarian<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+Shish(chapter2，4) 羊肉串
+    onlyOnions(); 
+    isVegetarian();
         Skew 架子 烤肉叉子
         Onion 洋葱
         Lamb  羔羊肉
@@ -798,13 +1020,13 @@ Shape
 Tree
 
 
-<span style="color:#a6e22e">SeasoningD</span> <span style="color:#f92672">(</span>chapter1<span style="color:#f92672">)</span> 调味品
-    <span style="color:#a6e22e">Sage</span><span style="color:#f92672">(</span>鼠尾草<span style="color:#f92672">)</span>
+SeasoningD (chapter1) 调味品
+    Sage(鼠尾草)
     Pepper
     Salt
-    <span style="color:#a6e22e">Thyme</span><span style="color:#f92672">(</span>百里香<span style="color:#f92672">)</span>
+    Thyme(百里香)
  
-NumD <span style="color:#f92672">(</span>chapter1<span style="color:#f92672">)</span>
+NumD (chapter1)
     Zero
     OneMoreThan
  
@@ -814,7 +1036,8 @@ LayerD
  
 FruitD
 
-</code></pre></div><p><strong>第二条建议</strong>
+</code></pre>
+<p><strong>第二条建议</strong>
 When writing a function over a datatype,
 place a method in each of the variants that make up the datatype.
 If a field of a variant belongs to the same datatype,
@@ -824,186 +1047,190 @@ computing the function.（疑问子类 每继承一次父类 都得重写三个�
 When extending a class, use overriding
 to enrich its functionality.</p>
 <p>根据以上建议， LtdSubstV 可以直接在 SubstV 类上进行继承和扩展。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Shish<span style="color:#f92672">(</span>chapter2<span style="color:#960050;background-color:#1e0010">，</span>4<span style="color:#f92672">)</span> 羊肉串
+<pre><code class="language-java">Shish(chapter2，4) 羊肉串
    OnlyOnionsV
    IsVegetarianV
-   <span style="color:#a6e22e">onlyOnions</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span> 
-   isVegetarian<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+   onlyOnions(); 
+   isVegetarian();
         Skew 架子 烤肉叉子
-            <span style="color:#a6e22e">onlyOnions</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            isVegetarian<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            onlyOnions();
+            isVegetarian();
         Onion 洋葱
             ShishD
-            <span style="color:#a6e22e">Onion</span><span style="color:#f92672">(</span>ShishD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            onlyOnions<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            isVegetarian<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            Onion(ShishD);
+            onlyOnions();
+            isVegetarian();
         Lamb  羔羊肉
             ShishD
-            <span style="color:#a6e22e">Lamb</span><span style="color:#f92672">(</span>ShishD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            onlyOnions<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            isVegetarian<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            Lamb(ShishD);
+            onlyOnions();
+            isVegetarian();
              
         Tomato 西红柿
             ShishD
-            <span style="color:#a6e22e">Tomato</span><span style="color:#f92672">(</span>ShishD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            onlyOnions<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            isVegetarian<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            Tomato(ShishD);
+            onlyOnions();
+            isVegetarian();
 
 
 OnlyOnionsV 
-    <span style="color:#a6e22e">forSkew</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    forOnion<span style="color:#f92672">(</span>ShishD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    forLamb<span style="color:#f92672">(</span>ShishD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    forTomato<span style="color:#f92672">(</span>ShishD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    forSkew();
+    forOnion(ShishD);
+    forLamb(ShishD);
+    forTomato(ShishD);
  
 isVegetatianV
-    <span style="color:#a6e22e">forSkew</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    forOnion<span style="color:#f92672">(</span>ShishD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    forLamb<span style="color:#f92672">(</span>ShishD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    forTomato<span style="color:#f92672">(</span>ShishD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    forSkew();
+    forOnion(ShishD);
+    forLamb(ShishD);
+    forTomato(ShishD);
      
  
 ShishD
    OnlyOionsV ooFn
    IsVegeterian ivFn
-   <span style="color:#a6e22e">onlyOnions</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span>a<span style="color:#f92672">;</span>
-   isVegetarian<span style="color:#f92672">(</span><span style="color:#f92672">)</span>a<span style="color:#f92672">;</span>
+   onlyOnions()a;
+   isVegetarian()a;
         Skew
-            <span style="color:#a6e22e">onlyOnions</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            isVegetarian<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            onlyOnions();
+            isVegetarian();
         Onion
-            <span style="color:#a6e22e">onlyOnions</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            isVegetarian<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            onlyOnions();
+            isVegetarian();
         Lamb
-            <span style="color:#a6e22e">onlyOnions</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            isVegetarian<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            onlyOnions();
+            isVegetarian();
         Tomato
-            <span style="color:#a6e22e">onlyOnions</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            isVegetarian<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            onlyOnions();
+            isVegetarian();
          
  
-</code></pre></div><!-- raw HTML omitted -->
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">RemAV
-    <span style="color:#a6e22e">forCurst</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    forCheese<span style="color:#f92672">(</span>PizzaD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    forOlive<span style="color:#f92672">(</span>PizzaD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    forAnchovy<span style="color:#f92672">(</span>PizzaD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    forSausage<span style="color:#f92672">(</span>PizzaD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+</code></pre>
+<h3 id="2">通过构造函数，构造出Natural recursion部分，形成递归，递归出口为skew</h3>
+<pre><code class="language-java">RemAV
+    forCurst();
+    forCheese(PizzaD);
+    forOlive(PizzaD);
+    forAnchovy(PizzaD);
+    forSausage(PizzaD);
 
 TopAwCV
-    <span style="color:#a6e22e">forCurst</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    forCheese<span style="color:#f92672">(</span>PizzaD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    forOlive<span style="color:#f92672">(</span>PizzaD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    forAnchovy<span style="color:#f92672">(</span>PizzaD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    forSausage<span style="color:#f92672">(</span>PizzaD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    forCurst();
+    forCheese(PizzaD);
+    forOlive(PizzaD);
+    forAnchovy(PizzaD);
+    forSausage(PizzaD);
 
 SubAbCV
-    <span style="color:#a6e22e">forCurst</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    forCheese<span style="color:#f92672">(</span>PizzaD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    forOlive<span style="color:#f92672">(</span>PizzaD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    forAnchovy<span style="color:#f92672">(</span>PizzaD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    forSausage<span style="color:#f92672">(</span>PizzaD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    forCurst();
+    forCheese(PizzaD);
+    forOlive(PizzaD);
+    forAnchovy(PizzaD);
+    forSausage(PizzaD);
  
  
 PizzaD 
    RemAV remFn
    TopAwCV topFn
    SubAbCV  subFn
-   <span style="color:#a6e22e">remA</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span>a<span style="color:#f92672">;</span>
-   topAwC<span style="color:#f92672">(</span><span style="color:#f92672">)</span>a<span style="color:#f92672">;</span>
-   subAbC<span style="color:#f92672">(</span><span style="color:#f92672">)</span>a<span style="color:#f92672">;</span>
+   remA()a;
+   topAwC()a;
+   subAbC()a;
         Crust
-            <span style="color:#a6e22e">remA</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            topAwC<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            subAwC<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            remA();
+            topAwC();
+            subAwC();
         Cheese
             PizzaD
-            <span style="color:#a6e22e">Cheese</span><span style="color:#f92672">(</span>PizzaD<span style="color:#f92672">)</span>
-            remA<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            topAwC<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            subAwC<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            Cheese(PizzaD)
+            remA();
+            topAwC();
+            subAwC();
         Olive
             PizzaD
-            <span style="color:#a6e22e">Olive</span><span style="color:#f92672">(</span>PizzaD<span style="color:#f92672">)</span>
-            remA<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            topAwC<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            subAwC<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            Olive(PizzaD)
+            remA();
+            topAwC();
+            subAwC();
         Anchovy
             PizzaD
-            <span style="color:#a6e22e">Anchovy</span><span style="color:#f92672">(</span>PizzaD<span style="color:#f92672">)</span>
-            remA<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            topAwC<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            subAwC<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            Anchovy(PizzaD)
+            remA();
+            topAwC();
+            subAwC();
         Sausage
             PizzaD
-            <span style="color:#a6e22e">Sausage</span><span style="color:#f92672">(</span>PizzaD
-            <span style="color:#a6e22e">remA</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            topAwC<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            subAwC<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            Sausage(PizzaD
+            remA();
+            topAwC();
+            subAwC();
 
 
 PieD
     RemAV raFn
     RemFish rfFn
-    <span style="color:#a6e22e">remA</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span>a<span style="color:#f92672">;</span>
-    remFish<span style="color:#f92672">(</span>FishD<span style="color:#f92672">)</span>a<span style="color:#f92672">;</span>
+    remA()a;
+    remFish(FishD)a;
         Bot
-            <span style="color:#a6e22e">remA</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            remFish<span style="color:#f92672">(</span>FishD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            remA();
+            remFish(FishD);
         Top
             Object
             PieD
-            <span style="color:#a6e22e">Top</span><span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span> PieD<span style="color:#f92672">)</span>
-            remA<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            remFish<span style="color:#f92672">(</span>FishD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            Top(Object, PieD)
+            remA();
+            remFish(FishD);
              
 FishD
     Salmon 鲑鱼
-    <span style="color:#a6e22e">Equals</span><span style="color:#f92672">(</span>Object<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    Equals(Object);
     Anchovy 凤尾鱼
-    <span style="color:#a6e22e">Equals</span><span style="color:#f92672">(</span>Object<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    Equals(Object);
     Tuna  金枪鱼
-    <span style="color:#a6e22e">Equals</span><span style="color:#f92672">(</span>Object<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    Equals(Object);
  
 RemAV
     forBot
-    <span style="color:#a6e22e">fotTop</span><span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span> PieD<span style="color:#f92672">)</span>
+    fotTop(Object, PieD)
 RemFishV
-    <span style="color:#a6e22e">forBot</span><span style="color:#f92672">(</span>FishD<span style="color:#f92672">)</span>
-    forTop<span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span> PieD<span style="color:#f92672">,</span>  FishD<span style="color:#f92672">)</span>
+    forBot(FishD)
+    forTop(Object, PieD,  FishD)
  
 RemIntV
-    <span style="color:#a6e22e">forBot</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">)</span>
-    forTop<span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span> pieD<span style="color:#f92672">,</span> Integer<span style="color:#f92672">)</span>
+    forBot(int)
+    forTop(Object, pieD, Integer)
      
-</code></pre></div><!-- raw HTML omitted -->
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">RemV
-    <span style="color:#a6e22e">forBot</span><span style="color:#f92672">(</span>Object<span style="color:#f92672">)</span>
-    forTop<span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span> pieD<span style="color:#f92672">,</span> Object<span style="color:#f92672">)</span>
+</code></pre>
+<h3 id="3">重新设计RemAV RemFishV  RemIntV 为RemV(用Object替换）</h3>
+<pre><code class="language-java">RemV
+    forBot(Object)
+    forTop(Object, pieD, Object)
 
-</code></pre></div><!-- raw HTML omitted -->
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">
-<span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PieD</span> <span style="color:#f92672">{</span>
-    <span style="color:#66d9ef">abstract</span> PieD <span style="color:#a6e22e">rem</span><span style="color:#f92672">(</span>RemV remFn<span style="color:#f92672">,</span> Object o<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    <span style="color:#66d9ef">abstract</span> PieD <span style="color:#a6e22e">subst</span><span style="color:#f92672">(</span>SubstV substFn<span style="color:#f92672">,</span> Object n<span style="color:#f92672">,</span> Object o<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-<span style="color:#f92672">}</span>
+</code></pre>
+<h3 id="4">下一步把PieD的字段放入到对应的参数当中</h3>
+<pre><code class="language-java">
+abstract class PieD {
+    abstract PieD rem(RemV remFn, Object o);
+    abstract PieD subst(SubstV substFn, Object n, Object o);
+}
  
 PieD 
-    <span style="color:#a6e22e">Rem</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span>a<span style="color:#f92672">;</span>
-    Subst<span style="color:#f92672">(</span><span style="color:#f92672">)</span>a<span style="color:#f92672">;</span>
+    Rem()a;
+    Subst()a;
         Top
-            <span style="color:#a6e22e">Top</span><span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span>Object<span style="color:#f92672">)</span>
-            Rem<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            Subst<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            Top(Object,Object)
+            Rem();
+            Subst();
         Bot
-            <span style="color:#a6e22e">Bot</span><span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span>Object<span style="color:#f92672">)</span>
-            Rem<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            Subst<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            Bot(Object,Object)
+            Rem();
+            Subst();
 
-</code></pre></div><!-- raw HTML omitted -->
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">PieD 
-    <span style="color:#a6e22e">Rem</span><span style="color:#f92672">(</span>Remv<span style="color:#f92672">)</span>a<span style="color:#f92672">;</span>
-    Subst<span style="color:#f92672">(</span>Subst<span style="color:#f92672">)</span>a<span style="color:#f92672">;</span>
+</code></pre>
+<h3 id="5">引入 this 关键字，指代访问者本身，同步修改对应的访问者类。</h3>
+<pre><code class="language-java">PieD 
+    Rem(Remv)a;
+    Subst(Subst)a;
         Top
             Top
             Rem
@@ -1013,24 +1240,25 @@ PieD
             Rem
             Subst
 
-</code></pre></div><!-- raw HTML omitted -->
+</code></pre>
+<h3 id="6">需要进一步提取出visitor部分的函数</h3>
 <p>这样就可以把所有</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">PieVisitorI 
-    <span style="color:#a6e22e">forBot</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    forTop<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+<pre><code class="language-java">PieVisitorI 
+    forBot();
+    forTop();
         Remv
-            <span style="color:#a6e22e">forBot</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            forTop<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            forBot();
+            forTop();
         SubstV
-            <span style="color:#a6e22e">forBot</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            forTop<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            forBot();
+            forTop();
      
 pieD
-    <span style="color:#a6e22e">Accept</span><span style="color:#f92672">(</span>PieVisitorI<span style="color:#f92672">)</span>
+    Accept(PieVisitorI)
         Bot
-            <span style="color:#a6e22e">Accept</span><span style="color:#f92672">(</span>pieVisitorI<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            Accept(pieVisitorI);
         Top
-            <span style="color:#a6e22e">Accept</span><span style="color:#f92672">(</span>pieVisitorI<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            Accept(pieVisitorI);
  
  
  
@@ -1043,492 +1271,506 @@ FruitD
     Fig 无花果
  
 TreeD
-    <span style="color:#a6e22e">Accept</span><span style="color:#f92672">(</span>bTreeVisitorI<span style="color:#f92672">)</span>
-    Accept<span style="color:#f92672">(</span>iTreeVisitorI<span style="color:#f92672">)</span>
-    Accept<span style="color:#f92672">(</span>tTreeVisitorI<span style="color:#f92672">)</span>
+    Accept(bTreeVisitorI)
+    Accept(iTreeVisitorI)
+    Accept(tTreeVisitorI)
         Bub 芽
-            <span style="color:#a6e22e">Accept</span><span style="color:#f92672">(</span>bTreeVisitorI<span style="color:#f92672">)</span>
-            Accept<span style="color:#f92672">(</span>iTreeVisitorI<span style="color:#f92672">)</span>
-            Accept<span style="color:#f92672">(</span>tTreeVisitorI<span style="color:#f92672">)</span>
+            Accept(bTreeVisitorI)
+            Accept(iTreeVisitorI)
+            Accept(tTreeVisitorI)
         Flat 平顶
             FruitD
             TreeD
-            <span style="color:#a6e22e">Flat</span><span style="color:#f92672">(</span>FruitD<span style="color:#f92672">,</span> TreeD<span style="color:#f92672">)</span>
-            Accept<span style="color:#f92672">(</span>bTreeVisitorI<span style="color:#f92672">)</span>
-            Accept<span style="color:#f92672">(</span>iTreeVisitorI<span style="color:#f92672">)</span>
-            Accept<span style="color:#f92672">(</span>tTreeVisitorI<span style="color:#f92672">)</span>
+            Flat(FruitD, TreeD)
+            Accept(bTreeVisitorI)
+            Accept(iTreeVisitorI)
+            Accept(tTreeVisitorI)
         Split 分枝
             TreeD
             TreeD
-            <span style="color:#a6e22e">Split</span><span style="color:#f92672">(</span>TreeD<span style="color:#f92672">,</span> TreeD<span style="color:#f92672">)</span>
-            Accept<span style="color:#f92672">(</span>bTreeVisitorI<span style="color:#f92672">)</span>
-            Accept<span style="color:#f92672">(</span>iTreeVisitorI<span style="color:#f92672">)</span>
-            Accept<span style="color:#f92672">(</span>tTreeVisitorI<span style="color:#f92672">)</span>
+            Split(TreeD, TreeD)
+            Accept(bTreeVisitorI)
+            Accept(iTreeVisitorI)
+            Accept(tTreeVisitorI)
  
 bTreeVisitorI
-    <span style="color:#a6e22e">forBud</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    forFlat<span style="color:#f92672">(</span>FruitD<span style="color:#f92672">,</span> TreeD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    forSplit<span style="color:#f92672">(</span>TreeD<span style="color:#f92672">,</span> TreeD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        bIsFlatV <span style="color:#66d9ef">implements</span> bTreeVisitorI
-            <span style="color:#a6e22e">forBud</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            forFlat<span style="color:#f92672">(</span>FruitD<span style="color:#f92672">,</span> TreeD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            forSplit<span style="color:#f92672">(</span>TreeD<span style="color:#f92672">,</span> TreeD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        bIsSplitV <span style="color:#66d9ef">implements</span> bTreeVisitorI
-            <span style="color:#a6e22e">forBud</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            forFlat<span style="color:#f92672">(</span>FruitD<span style="color:#f92672">,</span> TreeD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            forSplit<span style="color:#f92672">(</span>TreeD<span style="color:#f92672">,</span> TreeD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        bHasFruitV <span style="color:#66d9ef">implements</span> bTreeVisitorI
-            <span style="color:#a6e22e">forBud</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            forFlat<span style="color:#f92672">(</span>FruitD<span style="color:#f92672">,</span> TreeD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            forSplit<span style="color:#f92672">(</span>TreeD<span style="color:#f92672">,</span> TreeD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    forBud();
+    forFlat(FruitD, TreeD);
+    forSplit(TreeD, TreeD);
+        bIsFlatV implements bTreeVisitorI
+            forBud();
+            forFlat(FruitD, TreeD);
+            forSplit(TreeD, TreeD);
+        bIsSplitV implements bTreeVisitorI
+            forBud();
+            forFlat(FruitD, TreeD);
+            forSplit(TreeD, TreeD);
+        bHasFruitV implements bTreeVisitorI
+            forBud();
+            forFlat(FruitD, TreeD);
+            forSplit(TreeD, TreeD);
 
  
 iTreeVisitorI
-    <span style="color:#a6e22e">forBud</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    forFlat<span style="color:#f92672">(</span>FruitD<span style="color:#f92672">,</span> TreeD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    forSplit<span style="color:#f92672">(</span>TreeD<span style="color:#f92672">,</span> TreeD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        iHeightV <span style="color:#66d9ef">implements</span> iTreeVisitorI
-            <span style="color:#a6e22e">forBud</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            forFlat<span style="color:#f92672">(</span>FruitD<span style="color:#f92672">,</span> TreeD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            forSplit<span style="color:#f92672">(</span>TreeD<span style="color:#f92672">,</span> TreeD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        iOccursV <span style="color:#66d9ef">implements</span> iTreeVisitorI
+    forBud();
+    forFlat(FruitD, TreeD);
+    forSplit(TreeD, TreeD);
+        iHeightV implements iTreeVisitorI
+            forBud();
+            forFlat(FruitD, TreeD);
+            forSplit(TreeD, TreeD);
+        iOccursV implements iTreeVisitorI
             FruitD
-            <span style="color:#a6e22e">iOccursV</span><span style="color:#f92672">(</span>FruitD<span style="color:#f92672">)</span>
-            forBud<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            forFlat<span style="color:#f92672">(</span>FruitD<span style="color:#f92672">,</span> TreeD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            forSplit<span style="color:#f92672">(</span>TreeD<span style="color:#f92672">,</span> TreeD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            iOccursV(FruitD)
+            forBud();
+            forFlat(FruitD, TreeD);
+            forSplit(TreeD, TreeD);
 
        
  
 tTreeVisitorI
-    <span style="color:#a6e22e">forBud</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    forFlat<span style="color:#f92672">(</span>FruitD<span style="color:#f92672">,</span> TreeD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    forSplit<span style="color:#f92672">(</span>TreeD<span style="color:#f92672">,</span> TreeD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        tSubstV <span style="color:#66d9ef">implements</span> tTreeVisitorI
+    forBud();
+    forFlat(FruitD, TreeD);
+    forSplit(TreeD, TreeD);
+        tSubstV implements tTreeVisitorI
             FruitD
             FruitD
-            <span style="color:#a6e22e">tSubstV</span><span style="color:#f92672">(</span>FruitD<span style="color:#f92672">,</span> FruitD<span style="color:#f92672">)</span>
-            forBud<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            forFlat<span style="color:#f92672">(</span>FruitD<span style="color:#f92672">,</span> TreeD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            forSplit<span style="color:#f92672">(</span>TreeD<span style="color:#f92672">,</span> TreeD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-         iOccursV <span style="color:#66d9ef">implements</span> tTreeVisitorI
-            <span style="color:#a6e22e">forBud</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            forFlat<span style="color:#f92672">(</span>FruitD<span style="color:#f92672">,</span> TreeD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            forSplit<span style="color:#f92672">(</span>TreeD<span style="color:#f92672">,</span> TreeD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            tSubstV(FruitD, FruitD)
+            forBud();
+            forFlat(FruitD, TreeD);
+            forSplit(TreeD, TreeD);
+         iOccursV implements tTreeVisitorI
+            forBud();
+            forFlat(FruitD, TreeD);
+            forSplit(TreeD, TreeD);
   
  
-</code></pre></div><!-- raw HTML omitted -->
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">TreeVisitorI
-    <span style="color:#a6e22e">forBud</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    forFlat<span style="color:#f92672">(</span>FruitD<span style="color:#f92672">,</span> TreeD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    forSplit<span style="color:#f92672">(</span>TreeD<span style="color:#f92672">,</span> TreeD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-         IsFlatV <span style="color:#66d9ef">implements</span> TreeVisitorI
-            <span style="color:#a6e22e">forBud</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            forFlat<span style="color:#f92672">(</span>FruitD<span style="color:#f92672">,</span> TreeD<span style="color:#f92672">)</span>
-            forSplit<span style="color:#f92672">(</span>TreeD<span style="color:#f92672">,</span> TreeD<span style="color:#f92672">)</span>
+</code></pre>
+<h3 id="7">为了统一bTreeVisitorI 和 iTreeVisitorI   tTreeVisitorI</h3>
+（三个的不同就在于返回值分别为 boolean   int   treeD)
+<pre><code class="language-java">TreeVisitorI
+    forBud();
+    forFlat(FruitD, TreeD);
+    forSplit(TreeD, TreeD);
+         IsFlatV implements TreeVisitorI
+            forBud();
+            forFlat(FruitD, TreeD)
+            forSplit(TreeD, TreeD)
          
          
-        OccursV <span style="color:#66d9ef">implements</span> TreeVisitorI
+        OccursV implements TreeVisitorI
             FruitD
-            <span style="color:#a6e22e">OccursV</span><span style="color:#f92672">(</span>FruitD<span style="color:#f92672">)</span>
-            forBud<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            forFlat<span style="color:#f92672">(</span>FruitD<span style="color:#f92672">,</span> TreeD<span style="color:#f92672">)</span>
-            forSplit<span style="color:#f92672">(</span>TreeD<span style="color:#f92672">,</span> TreeD<span style="color:#f92672">)</span>
+            OccursV(FruitD)
+            forBud();
+            forFlat(FruitD, TreeD)
+            forSplit(TreeD, TreeD)
          
          
-        <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">OccursV</span> <span style="color:#66d9ef">implements</span> TreeVisitorI <span style="color:#f92672">{</span>
-            FruitD a<span style="color:#f92672">;</span>
-            OccursV<span style="color:#f92672">(</span>FruitD _a<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-                a <span style="color:#f92672">=</span> _a<span style="color:#f92672">;</span>
-            <span style="color:#f92672">}</span>
-            <span style="color:#66d9ef">public</span> Object <span style="color:#a6e22e">forBud</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-                <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> Integer<span style="color:#f92672">(</span>0<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            <span style="color:#f92672">}</span>
-            <span style="color:#66d9ef">public</span> Object <span style="color:#a6e22e">forFlat</span><span style="color:#f92672">(</span>FruitD f<span style="color:#f92672">,</span> TreeD t<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-                <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>f<span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span>a<span style="color:#f92672">)</span><span style="color:#f92672">)</span>
-                    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> Integer<span style="color:#f92672">(</span><span style="color:#f92672">(</span><span style="color:#f92672">(</span>Integer<span style="color:#f92672">)</span><span style="color:#f92672">(</span>t<span style="color:#f92672">.</span><span style="color:#a6e22e">accept</span><span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">.</span><span style="color:#a6e22e">intValue</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">+</span> 1<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-                <span style="color:#66d9ef">else</span>
-                    <span style="color:#66d9ef">return</span> t<span style="color:#f92672">.</span><span style="color:#a6e22e">accept</span><span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            <span style="color:#f92672">}</span>
-            <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">forSplit</span><span style="color:#f92672">(</span>TreeD l<span style="color:#f92672">,</span> TreeD r<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-                <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> Integer<span style="color:#f92672">(</span><span style="color:#f92672">(</span><span style="color:#f92672">(</span>Integer<span style="color:#f92672">)</span><span style="color:#f92672">(</span>l<span style="color:#f92672">.</span><span style="color:#a6e22e">accept</span><span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">.</span><span style="color:#a6e22e">intValue</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span>
-                                   <span style="color:#f92672">+</span>
-                                   <span style="color:#f92672">(</span><span style="color:#f92672">(</span>Integer<span style="color:#f92672">)</span><span style="color:#f92672">(</span>r<span style="color:#f92672">.</span><span style="color:#a6e22e">accept</span><span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">.</span><span style="color:#a6e22e">intValue</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            <span style="color:#f92672">}</span>
-        <span style="color:#f92672">}</span>
+        class OccursV implements TreeVisitorI {
+            FruitD a;
+            OccursV(FruitD _a) {
+                a = _a;
+            }
+            public Object forBud() {
+                return new Integer(0);
+            }
+            public Object forFlat(FruitD f, TreeD t) {
+                if (f.equals(a))
+                    return new Integer(((Integer)(t.accept(this))).intValue() + 1);
+                else
+                    return t.accept(this);
+            }
+            public int forSplit(TreeD l, TreeD r) {
+                return new Integer(((Integer)(l.accept(this))).intValue()
+                                   +
+                                   ((Integer)(r.accept(this))).intValue());
+            }
+        }
 
 
 TreeD
-    <span style="color:#a6e22e">Accept</span><span style="color:#f92672">(</span>TreeVisitorI<span style="color:#f92672">)</span>
+    Accept(TreeVisitorI)
         Bub 芽
-            <span style="color:#a6e22e">Accept</span><span style="color:#f92672">(</span>TreeVisitorI<span style="color:#f92672">)</span>
+            Accept(TreeVisitorI)
         Flat 平顶
             FruitD
             TreeD
-            <span style="color:#a6e22e">Flat</span><span style="color:#f92672">(</span>FruitD<span style="color:#f92672">,</span> TreeD<span style="color:#f92672">)</span>
-            Accept<span style="color:#f92672">(</span>TreeVisitorI<span style="color:#f92672">)</span>
+            Flat(FruitD, TreeD)
+            Accept(TreeVisitorI)
         Split 分枝
             TreeD
             TreeD
-            <span style="color:#a6e22e">Split</span><span style="color:#f92672">(</span>TreeD<span style="color:#f92672">,</span> TreeD<span style="color:#f92672">)</span>
-            Accept<span style="color:#f92672">(</span>tTreeVisitorI<span style="color:#f92672">)</span>
+            Split(TreeD, TreeD)
+            Accept(tTreeVisitorI)
          
 
 
 PieD
     RemAV raFn
     RemFish rfFn
-    <span style="color:#a6e22e">remA</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span>a<span style="color:#f92672">;</span>
-    remFish<span style="color:#f92672">(</span>FishD<span style="color:#f92672">)</span>a<span style="color:#f92672">;</span>
+    remA()a;
+    remFish(FishD)a;
         Bot
-            <span style="color:#a6e22e">remA</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            remFish<span style="color:#f92672">(</span>FishD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            remA();
+            remFish(FishD);
         Top
             Object
             PieD
-            <span style="color:#a6e22e">Top</span><span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span> PieD<span style="color:#f92672">)</span>
-            remA<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            remFish<span style="color:#f92672">(</span>FishD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            Top(Object, PieD)
+            remA();
+            remFish(FishD);
  
 FishD
     Salmon 鲑鱼
-    <span style="color:#a6e22e">Equals</span><span style="color:#f92672">(</span>Object<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    Equals(Object);
     Anchovy 凤尾鱼
-    <span style="color:#a6e22e">Equals</span><span style="color:#f92672">(</span>Object<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    Equals(Object);
     Tuna  金枪鱼
-    <span style="color:#a6e22e">Equals</span><span style="color:#f92672">(</span>Object<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    Equals(Object);
  
 RemAV
     forBot
-    <span style="color:#a6e22e">fotTop</span><span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span> PieD<span style="color:#f92672">)</span>
+    fotTop(Object, PieD)
 RemFishV
-    <span style="color:#a6e22e">forBot</span><span style="color:#f92672">(</span>FishD<span style="color:#f92672">)</span>
-    forTop<span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span> PieD<span style="color:#f92672">,</span>  FishD<span style="color:#f92672">)</span>
+    forBot(FishD)
+    forTop(Object, PieD,  FishD)
      
 RemIntV
-    <span style="color:#a6e22e">forBot</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">)</span>
-    forTop<span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span> pieD<span style="color:#f92672">,</span> Integer<span style="color:#f92672">)</span>
+    forBot(int)
+    forTop(Object, pieD, Integer)
      
-</code></pre></div><!-- raw HTML omitted -->
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">RemV
-    <span style="color:#a6e22e">forBot</span><span style="color:#f92672">(</span>Object<span style="color:#f92672">)</span>
-    forTop<span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span> pieD<span style="color:#f92672">,</span> Object<span style="color:#f92672">)</span>
+</code></pre>
+<h3 id="8">重新设计RemAV RemFishV  RemIntV 为RemV(用Object替换）</h3>
+<pre><code class="language-java">RemV
+    forBot(Object)
+    forTop(Object, pieD, Object)
 PieD
     RemV
-    <span style="color:#a6e22e">Rem</span><span style="color:#f92672">(</span>Object<span style="color:#f92672">)</span>
+    Rem(Object)
         Bot
-            <span style="color:#a6e22e">Rem</span><span style="color:#f92672">(</span>Object<span style="color:#f92672">)</span>
+            Rem(Object)
         Top
             Object
             PieD
-            <span style="color:#a6e22e">Top</span><span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span> PieD<span style="color:#f92672">)</span>
-            Rem<span style="color:#f92672">(</span>Object<span style="color:#f92672">)</span>
+            Top(Object, PieD)
+            Rem(Object)
  
 SubstFishV
-    <span style="color:#a6e22e">forBot</span><span style="color:#f92672">(</span>FishD<span style="color:#f92672">,</span> FishD<span style="color:#f92672">)</span>
-    forTop<span style="color:#f92672">(</span>Object <span style="color:#f92672">,</span> PieD<span style="color:#f92672">,</span> FishD<span style="color:#f92672">,</span> FishO<span style="color:#f92672">)</span>
+    forBot(FishD, FishD)
+    forTop(Object , PieD, FishD, FishO)
  
 SubstIntV
-    <span style="color:#a6e22e">forBot</span><span style="color:#f92672">(</span>Int<span style="color:#f92672">,</span> Int<span style="color:#f92672">)</span>
-    forTop<span style="color:#f92672">(</span>Object <span style="color:#f92672">,</span> PieD<span style="color:#f92672">,</span> Int<span style="color:#f92672">,</span> Int<span style="color:#f92672">)</span>
+    forBot(Int, Int)
+    forTop(Object , PieD, Int, Int)
  
 SubstV
-    <span style="color:#a6e22e">forBot</span><span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span> Object<span style="color:#f92672">)</span>
-    forTop<span style="color:#f92672">(</span>Object <span style="color:#f92672">,</span> PieD<span style="color:#f92672">,</span> Object<span style="color:#f92672">,</span> Object<span style="color:#f92672">)</span>
+    forBot(Object, Object)
+    forTop(Object , PieD, Object, Object)
      
  
-</code></pre></div><!-- raw HTML omitted -->
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">PieD
+</code></pre>
+<h3 id="9">然后现在把Remv 和Subst重新放入PieD</h3>
+<pre><code class="language-java">PieD
     Remv
     SubstV
-    <span style="color:#a6e22e">Rem</span><span style="color:#f92672">(</span>Object<span style="color:#f92672">)</span>
-    Subst<span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span> Object<span style="color:#f92672">)</span>
+    Rem(Object)
+    Subst(Object, Object)
         Bot
-            <span style="color:#a6e22e">Rem</span><span style="color:#f92672">(</span>Object<span style="color:#f92672">)</span>
-            Subst<span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span>Object<span style="color:#f92672">)</span>
+            Rem(Object)
+            Subst(Object,Object)
         Top
             Object
             PieD
-            <span style="color:#a6e22e">Top</span><span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span>PieD<span style="color:#f92672">)</span>
-            Rem<span style="color:#f92672">(</span>Object<span style="color:#f92672">)</span>
-            Subst<span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span>Object<span style="color:#f92672">)</span>
+            Top(Object,PieD)
+            Rem(Object)
+            Subst(Object,Object)
  
 
-</code></pre></div><!-- raw HTML omitted -->
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">PieD
-    <span style="color:#a6e22e">Rem</span><span style="color:#f92672">(</span>Remv<span style="color:#f92672">,</span>Object<span style="color:#f92672">)</span>
-    Subst<span style="color:#f92672">(</span>SubstV<span style="color:#f92672">,</span>Object<span style="color:#f92672">,</span> Object<span style="color:#f92672">)</span>
+</code></pre>
+<h3 id="9">紧接着 我们还想着把Remv  SubstV放入参数的位置</h3>
+<pre><code class="language-java">PieD
+    Rem(Remv,Object)
+    Subst(SubstV,Object, Object)
         Bot
-            <span style="color:#a6e22e">Rem</span><span style="color:#f92672">(</span>Renv<span style="color:#f92672">,</span>Object<span style="color:#f92672">)</span>
-            Subst<span style="color:#f92672">(</span>Substv<span style="color:#f92672">,</span>Object<span style="color:#f92672">,</span>Object<span style="color:#f92672">)</span>
+            Rem(Renv,Object)
+            Subst(Substv,Object,Object)
         Top
             Object
             PieD
-            <span style="color:#a6e22e">Top</span><span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span>PieD<span style="color:#f92672">)</span>
-            Rem<span style="color:#f92672">(</span>RemV<span style="color:#f92672">,</span>Object<span style="color:#f92672">)</span>
-            Subst<span style="color:#f92672">(</span>Substv<span style="color:#f92672">,</span>Object<span style="color:#f92672">,</span>Object<span style="color:#f92672">)</span>
-</code></pre></div><!-- raw HTML omitted -->
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">RemV</span> <span style="color:#f92672">{</span>
-    Object o<span style="color:#f92672">;</span>
-    RemV<span style="color:#f92672">(</span>Object _o<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        o <span style="color:#f92672">=</span> _o<span style="color:#f92672">;</span>
-    <span style="color:#f92672">}</span>
-    PieD <span style="color:#a6e22e">forBot</span><span style="color:#f92672">(</span>Object o<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> Bot<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    <span style="color:#f92672">}</span>
-    PieD <span style="color:#a6e22e">forTop</span><span style="color:#f92672">(</span>Object t<span style="color:#f92672">,</span> PieD r<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>o<span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span>t<span style="color:#f92672">)</span><span style="color:#f92672">)</span>
-            <span style="color:#66d9ef">return</span> r<span style="color:#f92672">.</span><span style="color:#a6e22e">rem</span><span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        <span style="color:#66d9ef">else</span>
-            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> Top<span style="color:#f92672">(</span>t<span style="color:#f92672">,</span> r<span style="color:#f92672">.</span><span style="color:#a6e22e">rem</span><span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    <span style="color:#f92672">}</span>
+            Top(Object,PieD)
+            Rem(RemV,Object)
+            Subst(Substv,Object,Object)
+</code></pre>
+<h3 id="10">紧接着我们进一步比较RemV SubstV的实现(我们就得重新修改rem和subst了)</h3>
+<pre><code class="language-java">
+class RemV {
+    Object o;
+    RemV(Object _o) {
+        o = _o;
+    }
+    PieD forBot(Object o){
+        return new Bot();
+    }
+    PieD forTop(Object t, PieD r){
+        if (o.equals(t))
+            return r.rem(this);
+        else
+            return new Top(t, r.rem(this));
+    }
 
 
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">RemV</span> <span style="color:#f92672">{</span>
-    PieD <span style="color:#a6e22e">forBot</span><span style="color:#f92672">(</span>Object o<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> Bot<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    <span style="color:#f92672">}</span>
-    PieD <span style="color:#a6e22e">forTop</span><span style="color:#f92672">(</span>Object t<span style="color:#f92672">,</span> PieD r<span style="color:#f92672">,</span> Object o<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>o<span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span>t<span style="color:#f92672">)</span><span style="color:#f92672">)</span>
-            <span style="color:#66d9ef">return</span> r<span style="color:#f92672">.</span><span style="color:#a6e22e">rem</span><span style="color:#f92672">(</span>o<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        <span style="color:#66d9ef">else</span>
-            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> Top<span style="color:#f92672">(</span>t<span style="color:#f92672">,</span> r<span style="color:#f92672">.</span><span style="color:#a6e22e">rem</span><span style="color:#f92672">(</span>o<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
+class RemV {
+    PieD forBot(Object o) {
+        return new Bot();
+    }
+    PieD forTop(Object t, PieD r, Object o) {
+        if (o.equals(t))
+            return r.rem(o);
+        else
+            return new Top(t, r.rem(o));
+    }
+}
 
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SubstV</span> <span style="color:#f92672">{</span>
-    PieD <span style="color:#a6e22e">forBot</span><span style="color:#f92672">(</span>Object n<span style="color:#f92672">,</span> Object o<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> Bot<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    <span style="color:#f92672">}</span>
-    PieD <span style="color:#a6e22e">forTop</span> <span style="color:#f92672">(</span>Object t<span style="color:#f92672">,</span> PieD r<span style="color:#f92672">,</span> Object n<span style="color:#f92672">,</span> Object o<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>o<span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span>t<span style="color:#f92672">)</span><span style="color:#f92672">)</span>
-            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> Top<span style="color:#f92672">(</span>n<span style="color:#f92672">,</span> r<span style="color:#f92672">.</span><span style="color:#a6e22e">subst</span><span style="color:#f92672">(</span>n<span style="color:#f92672">,</span> o<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        <span style="color:#66d9ef">else</span>
-            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> Top<span style="color:#f92672">(</span>t<span style="color:#f92672">,</span> r<span style="color:#f92672">.</span><span style="color:#a6e22e">subst</span><span style="color:#f92672">(</span>n<span style="color:#f92672">,</span> 0<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SubstV</span> <span style="color:#f92672">{</span>
-    Object n<span style="color:#f92672">;</span>
-    Object o<span style="color:#f92672">;</span>
-    SubstV<span style="color:#f92672">(</span>Object _n<span style="color:#f92672">,</span> Object _o<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
-        n <span style="color:#f92672">=</span> _n<span style="color:#f92672">;</span>
-        o <span style="color:#f92672">=</span> _o<span style="color:#f92672">;</span>
-    <span style="color:#f92672">}</span>
-    PieD <span style="color:#a6e22e">forBot</span><span style="color:#f92672">(</span>Object n<span style="color:#f92672">,</span> Object o<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
-            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> Bot<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        <span style="color:#f92672">}</span>
-    PieD <span style="color:#a6e22e">forTop</span><span style="color:#f92672">(</span>Object t<span style="color:#f92672">,</span> PieD r<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>o<span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span>t<span style="color:#f92672">)</span><span style="color:#f92672">)</span>
-            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> Top<span style="color:#f92672">(</span>n<span style="color:#f92672">,</span> r<span style="color:#f92672">.</span><span style="color:#a6e22e">subst</span><span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        <span style="color:#66d9ef">else</span>
-            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> Top<span style="color:#f92672">(</span>t<span style="color:#f92672">,</span> r<span style="color:#f92672">.</span><span style="color:#a6e22e">subst</span><span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
+class SubstV {
+    PieD forBot(Object n, Object o) {
+        return new Bot();
+    }
+    PieD forTop (Object t, PieD r, Object n, Object o) {
+        if (o.equals(t))
+            return new Top(n, r.subst(n, o));
+        else
+            return new Top(t, r.subst(n, 0));
+    }
+}
+class SubstV {
+    Object n;
+    Object o;
+    SubstV(Object _n, Object _o){
+        n = _n;
+        o = _o;
+    }
+    PieD forBot(Object n, Object o){
+            return new Bot();
+        }
+    PieD forTop(Object t, PieD r){
+        if (o.equals(t))
+            return new Top(n, r.subst(this));
+        else
+            return new Top(t, r.subst(this));
+    }
+}
 
  
-</code></pre></div><!-- raw HTML omitted -->
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">PieD
-    <span style="color:#a6e22e">Rem</span><span style="color:#f92672">(</span>RemV<span style="color:#f92672">)</span>
-    Subst<span style="color:#f92672">(</span>SubstV<span style="color:#f92672">)</span>
+</code></pre>
+<h3 id="11">紧接着我们可以进行下一步抽象</h3>
+<pre><code class="language-java">PieD
+    Rem(RemV)
+    Subst(SubstV)
         Top
             Object
             PieD
-            <span style="color:#a6e22e">Top</span><span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span> PieD<span style="color:#f92672">)</span>
-            Rem<span style="color:#f92672">(</span>RemV<span style="color:#f92672">)</span>
-            Subst<span style="color:#f92672">(</span>SubstV<span style="color:#f92672">)</span>
+            Top(Object, PieD)
+            Rem(RemV)
+            Subst(SubstV)
         Bot
             Object
             PieD
-            <span style="color:#a6e22e">Bot</span><span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span> PieD<span style="color:#f92672">)</span>
-            Rem<span style="color:#f92672">(</span>RemV<span style="color:#f92672">)</span>
-            Subst<span style="color:#f92672">(</span>SubstV<span style="color:#f92672">)</span>
+            Bot(Object, PieD)
+            Rem(RemV)
+            Subst(SubstV)
  
  
-</code></pre></div><!-- raw HTML omitted -->
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">PieVisitorI
+</code></pre>
+<h3 id="12">紧接着我们发现rem和subst代码类似</h3>
+<pre><code class="language-java">PieVisitorI
     forBot
     forTop
         RemV implement PieVisitorI
             Object
-            <span style="color:#a6e22e">RemV</span><span style="color:#f92672">(</span>Object<span style="color:#f92672">)</span>
-            forBot<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            forTop<span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span>PieD<span style="color:#960050;background-color:#1e0010">）</span>
+            RemV(Object)
+            forBot();
+            forTop(Object,PieD）
         SubstV implement PieVisitorI
             Object
             Object
-            <span style="color:#a6e22e">SubstV</span><span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span> Object<span style="color:#f92672">)</span>
-            forBot<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            forTop<span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span>PieD<span style="color:#960050;background-color:#1e0010">）</span>
+            SubstV(Object, Object)
+            forBot();
+            forTop(Object,PieD）
         LtdSubstV implement PieVisitorI
-            <span style="color:#66d9ef">int</span>
+            int
             Object
             Object
-            <span style="color:#a6e22e">LtdSubstV</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">,</span> Object<span style="color:#f92672">,</span> Object<span style="color:#f92672">)</span>
-            forBot<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            forTop<span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span>PieD<span style="color:#960050;background-color:#1e0010">）</span>
+            LtdSubstV(int, Object, Object)
+            forBot();
+            forTop(Object,PieD）
          
 PieD
-    <span style="color:#a6e22e">Accept</span><span style="color:#f92672">(</span>PieVisitorI<span style="color:#f92672">)</span>
+    Accept(PieVisitorI)
         Bob
-            <span style="color:#a6e22e">Accept</span><span style="color:#f92672">(</span>pieVisitorI<span style="color:#f92672">)</span>
+            Accept(pieVisitorI)
         Top
             Object
             PieD
-            <span style="color:#a6e22e">Top</span><span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span>PieD<span style="color:#f92672">)</span>
-            Accept<span style="color:#f92672">(</span>PieVisitorI<span style="color:#f92672">)</span>
+            Top(Object,PieD)
+            Accept(PieVisitorI)
  
 
 
 ExprVisitorI
 
 ExprVisitorI
-    <span style="color:#a6e22e">forPlus</span><span style="color:#f92672">(</span>ExprD<span style="color:#f92672">,</span> ExprD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    forDiff<span style="color:#f92672">(</span>ExprD<span style="color:#f92672">,</span> ExprD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    forProd<span style="color:#f92672">(</span>ExprD<span style="color:#f92672">,</span> ExprD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    forConst<span style="color:#f92672">(</span>ExprD<span style="color:#f92672">,</span> ExprD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        IntEvalV <span style="color:#66d9ef">implements</span>  ExprVisitorI
-            <span style="color:#a6e22e">forPlus</span><span style="color:#f92672">(</span>ExprD<span style="color:#f92672">,</span> ExprD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            forDiff<span style="color:#f92672">(</span>ExprD<span style="color:#f92672">,</span> ExprD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            forProd<span style="color:#f92672">(</span>ExprD<span style="color:#f92672">,</span> ExprD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            forConst<span style="color:#f92672">(</span>Object<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            Plus<span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span> Object<span style="color:#f92672">)</span>
-            Diff<span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span> Object<span style="color:#f92672">)</span>
-            Prod<span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span> Object<span style="color:#f92672">)</span>
+    forPlus(ExprD, ExprD);
+    forDiff(ExprD, ExprD);
+    forProd(ExprD, ExprD);
+    forConst(ExprD, ExprD);
+        IntEvalV implements  ExprVisitorI
+            forPlus(ExprD, ExprD);
+            forDiff(ExprD, ExprD);
+            forProd(ExprD, ExprD);
+            forConst(Object);
+            Plus(Object, Object)
+            Diff(Object, Object)
+            Prod(Object, Object)
  
 
 ExprD
-    <span style="color:#a6e22e">Accept</span><span style="color:#f92672">(</span>ExprVisitorI<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    Accept(ExprVisitorI);
         Plus
             ExprD
             ExprD
-            <span style="color:#a6e22e">Plus</span><span style="color:#f92672">(</span>ExprD<span style="color:#f92672">,</span> ExprD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            Accept<span style="color:#f92672">(</span>ExprVisitorI<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            Plus(ExprD, ExprD);
+            Accept(ExprVisitorI);
         Diff
             ExprD
             ExprD
-            <span style="color:#a6e22e">Diff</span><span style="color:#f92672">(</span>ExprD<span style="color:#f92672">,</span> ExprD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            Accept<span style="color:#f92672">(</span>ExprVisitorI<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            Diff(ExprD, ExprD);
+            Accept(ExprVisitorI);
         Prod
             ExprD
             ExprD
-            <span style="color:#a6e22e">Prod</span><span style="color:#f92672">(</span>ExprD<span style="color:#f92672">,</span> ExprD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            Accept<span style="color:#f92672">(</span>ExprVisitorI<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            Prod(ExprD, ExprD);
+            Accept(ExprVisitorI);
         ConstD
             Object
-            <span style="color:#a6e22e">ConstD</span><span style="color:#f92672">(</span>Object<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            Accept<span style="color:#f92672">(</span>ExprVisitorI<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            ConstD(Object);
+            Accept(ExprVisitorI);
  
-</code></pre></div><!-- raw HTML omitted -->
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">SetD 
-    <span style="color:#a6e22e">Add</span><span style="color:#f92672">(</span>integer i<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    Mem<span style="color:#f92672">(</span>integer i<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    Plus<span style="color:#f92672">(</span>SetD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    Diff<span style="color:#f92672">(</span>SetD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    Prod<span style="color:#f92672">(</span>SetD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+</code></pre>
+<h3 id="13">然后再实现Set集合的类型</h3>
+<pre><code class="language-java">SetD 
+    Add(integer i);
+    Mem(integer i);
+    Plus(SetD);
+    Diff(SetD);
+    Prod(SetD);
         Empty
-            <span style="color:#a6e22e">Mem</span><span style="color:#f92672">(</span>integer i<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            Plus<span style="color:#f92672">(</span>SetD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            Diff<span style="color:#f92672">(</span>SetD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            Prod<span style="color:#f92672">(</span>SetD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            Mem(integer i);
+            Plus(SetD);
+            Diff(SetD);
+            Prod(SetD);
          
         Add
-            Integer<span style="color:#f92672">;</span>
-            SetD<span style="color:#f92672">;</span>
-            Add<span style="color:#f92672">(</span>Integer<span style="color:#f92672">,</span> Integer<span style="color:#f92672">)</span>
-            Mem<span style="color:#f92672">(</span>integer i<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            Plus<span style="color:#f92672">(</span>SetD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            Diff<span style="color:#f92672">(</span>SetD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            Prod<span style="color:#f92672">(</span>SetD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            Integer;
+            SetD;
+            Add(Integer, Integer)
+            Mem(integer i);
+            Plus(SetD);
+            Diff(SetD);
+            Prod(SetD);
  
 ExprVisitorI
-    <span style="color:#a6e22e">forPlus</span><span style="color:#f92672">(</span>ExprD<span style="color:#f92672">,</span> ExprD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    forDiff<span style="color:#f92672">(</span>ExprD<span style="color:#f92672">,</span> ExprD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    forProd<span style="color:#f92672">(</span>ExprD<span style="color:#f92672">,</span> ExprD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    forConst<span style="color:#f92672">(</span>ExprD<span style="color:#f92672">,</span> ExprD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        IntEvalV <span style="color:#66d9ef">implements</span>  ExprVisitorI
-            <span style="color:#a6e22e">forPlus</span><span style="color:#f92672">(</span>ExprD<span style="color:#f92672">,</span> ExprD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            forDiff<span style="color:#f92672">(</span>ExprD<span style="color:#f92672">,</span> ExprD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            forProd<span style="color:#f92672">(</span>ExprD<span style="color:#f92672">,</span> ExprD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            forConst<span style="color:#f92672">(</span>Object<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            Plus<span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span> Object<span style="color:#f92672">)</span>
-            Diff<span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span> Object<span style="color:#f92672">)</span>
-            Prod<span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span> Object<span style="color:#f92672">)</span>
-                SetEvalV <span style="color:#66d9ef">implements</span> IntEvalV
-                    <span style="color:#a6e22e">Plus</span><span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span> Object<span style="color:#f92672">)</span>
-                    Diff<span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span> Object<span style="color:#f92672">)</span>
-                    Prod<span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span> Object<span style="color:#f92672">)</span>
+    forPlus(ExprD, ExprD);
+    forDiff(ExprD, ExprD);
+    forProd(ExprD, ExprD);
+    forConst(ExprD, ExprD);
+        IntEvalV implements  ExprVisitorI
+            forPlus(ExprD, ExprD);
+            forDiff(ExprD, ExprD);
+            forProd(ExprD, ExprD);
+            forConst(Object);
+            Plus(Object, Object)
+            Diff(Object, Object)
+            Prod(Object, Object)
+                SetEvalV implements IntEvalV
+                    Plus(Object, Object)
+                    Diff(Object, Object)
+                    Prod(Object, Object)
                  
-</code></pre></div><!-- raw HTML omitted -->
+</code></pre>
+<h3 id="14">SetEvalV 直接集成IntEvalV不合理？</h3>
 <p>从SetEvalV 和IntEvalV抽取出一个基类</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">EvalD <span style="color:#66d9ef">implements</span> ExprVisitorI
-    <span style="color:#a6e22e">forPlus</span><span style="color:#f92672">(</span>ExprD<span style="color:#f92672">,</span> ExprD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    forDiff<span style="color:#f92672">(</span>ExprD<span style="color:#f92672">,</span> ExprD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    forProd<span style="color:#f92672">(</span>ExprD<span style="color:#f92672">,</span> ExprD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    forConst<span style="color:#f92672">(</span>ExprD<span style="color:#f92672">,</span> ExprD<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    Plus<span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span> Object<span style="color:#f92672">)</span>
-    Diff<span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span> Object<span style="color:#f92672">)</span>
-    Prod<span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span> Object<span style="color:#f92672">)</span>
+<pre><code class="language-java">EvalD implements ExprVisitorI
+    forPlus(ExprD, ExprD);
+    forDiff(ExprD, ExprD);
+    forProd(ExprD, ExprD);
+    forConst(ExprD, ExprD);
+    Plus(Object, Object)
+    Diff(Object, Object)
+    Prod(Object, Object)
         IntEvalD
-            <span style="color:#a6e22e">Plus</span><span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span> 	Object<span style="color:#f92672">)</span>
-            Diff<span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span> Object<span style="color:#f92672">)</span>
-            Prod<span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span> Object<span style="color:#f92672">)</span>
+            Plus(Object, 	Object)
+            Diff(Object, Object)
+            Prod(Object, Object)
             SetEvalD
-            <span style="color:#a6e22e">Plus</span><span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span> Object<span style="color:#f92672">)</span>
-            Diff<span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span> Object<span style="color:#f92672">)</span>
-            Prod<span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span> Object<span style="color:#f92672">)</span>
+            Plus(Object, Object)
+            Diff(Object, Object)
+            Prod(Object, Object)
          
-</code></pre></div><!-- raw HTML omitted -->
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">SubstD <span style="color:#66d9ef">implements</span> pieVisitorI
+</code></pre>
+<h3 id="15">IntEvalD 和SetEvalD很多相似之处</h3>
+于是我们进一步提取
+<pre><code class="language-java">SubstD implements pieVisitorI
     Object
     Object
-    <span style="color:#a6e22e">SubstD</span><span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span> Object<span style="color:#f92672">)</span>
-    forBot<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    forTop<span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span>PieD<span style="color:#f92672">)</span>
+    SubstD(Object, Object)
+    forBot();
+    forTop(Object,PieD)
 SubstV
-    <span style="color:#a6e22e">SubstV</span><span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span> Object<span style="color:#f92672">)</span>
-    forTop<span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span> Object<span style="color:#f92672">)</span>
+    SubstV(Object, Object)
+    forTop(Object, Object)
 LtdSubstV
-    <span style="color:#66d9ef">int</span>
-    <span style="color:#a6e22e">LtdSubstV</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">,</span>Object<span style="color:#f92672">,</span> Object<span style="color:#f92672">)</span>
-    forTop<span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span> Object<span style="color:#f92672">)</span>
-</code></pre></div><!-- raw HTML omitted -->
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">SubstV <span style="color:#66d9ef">implements</span> PieVisitorI
+    int
+    LtdSubstV(int,Object, Object)
+    forTop(Object, Object)
+</code></pre>
+<h3 id="16">根据extends使用override增加函数的丰富性</h3>
+<pre><code class="language-java">SubstV implements PieVisitorI
     Object
     Object
-    <span style="color:#a6e22e">SubstV</span><span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span> Object<span style="color:#f92672">)</span>
-    forBot<span style="color:#f92672">(</span><span style="color:#f92672">)</span>
-    forTop<span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span> PieD<span style="color:#f92672">)</span>
+    SubstV(Object, Object)
+    forBot()
+    forTop(Object, PieD)
  
 LtdSubstV
     Int
     Object
     Object
-    <span style="color:#a6e22e">LtdSubstV</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">,</span> Object<span style="color:#f92672">,</span> Object<span style="color:#f92672">)</span>
-    forTop<span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span> PieD<span style="color:#f92672">)</span>
+    LtdSubstV(int, Object, Object)
+    forTop(Object, PieD)
 
-</code></pre></div><p>原来，抽象类可以有构造方法.抽象类只要有一个abstract函数就可以叫做抽象类
+</code></pre>
+<p>原来，抽象类可以有构造方法.抽象类只要有一个abstract函数就可以叫做抽象类
 抽象类可以有构造方法，构造方法不可继承，但是可以供子类用super（）或者super（参数，参数。。。。）调用。
 构造函数是对象的基本，没有构造函数就没有对象。
 若果在父类中（这里就是你的抽象类）中显示的写了又参数的构造函数，在子类继承是就必须写一个构造函数来调用父类的构造函数。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">PointD
-<span style="color:#a6e22e">PointD</span><span style="color:#f92672">(</span>chapter1<span style="color:#f92672">,</span>2<span style="color:#f92672">)</span> 点
-    <span style="color:#a6e22e">distanceTo0</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">,</span><span style="color:#66d9ef">int</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">//可以把它们移入到构造函数中
-</span><span style="color:#75715e"></span>    closerTo0<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    PointD <span style="color:#a6e22e">minus</span><span style="color:#f92672">(</span>PointD<span style="color:#f92672">)</span>
-    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">moveBy</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> <span style="color:#f92672">,</span><span style="color:#66d9ef">int</span><span style="color:#f92672">)</span>
+<pre><code class="language-java">PointD
+PointD(chapter1,2) 点
+    distanceTo0(int,int); //可以把它们移入到构造函数中
+    closerTo0();
+    PointD minus(PointD)
+    int moveBy(int ,int)
         CartesianPt 笛卡尔坐标
             Int
             Int
-            <span style="color:#a6e22e">CartesianPt</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">,</span><span style="color:#66d9ef">int</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            distanceTo0<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            Closeto0<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            CartesianPt(int,int);
+            distanceTo0();
+            Closeto0();
         ManhattenPt 曼哈顿坐标
             Int
             Int
-            <span style="color:#a6e22e">ManhattenPt</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">,</span><span style="color:#66d9ef">int</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            distanceTo0<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            Closeto0<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            ManhattenPt(int,int);
+            distanceTo0();
+            Closeto0();
         圆柱坐标系
         球坐标系
 
@@ -1537,137 +1779,139 @@ LtdSubstV
 ShadowedCartesia 
     Int
     Int
-    <span style="color:#a6e22e">ShadowedCartesia</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">)</span>
-    distanceTo0<span style="color:#f92672">(</span><span style="color:#f92672">)</span>
+    ShadowedCartesia(int, int, int, int)
+    distanceTo0()
  
 shapeVisitorI
-    <span style="color:#a6e22e">forCircle</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">)</span>
-    forSquare<span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">)</span>
-    forTrans<span style="color:#f92672">(</span>pointD<span style="color:#f92672">,</span> ShapeD<span style="color:#f92672">)</span>
+    forCircle(int)
+    forSquare(int)
+    forTrans(pointD, ShapeD)
     UnionVisitorI
-    <span style="color:#a6e22e">forUnion</span><span style="color:#f92672">(</span>ShapeD<span style="color:#f92672">,</span> ShapeD<span style="color:#f92672">)</span>
-        HasPtV <span style="color:#66d9ef">implements</span> ShapeVisitorI
+    forUnion(ShapeD, ShapeD)
+        HasPtV implements ShapeVisitorI
             PointD
-            <span style="color:#a6e22e">HasPt</span><span style="color:#f92672">(</span>PointD<span style="color:#f92672">)</span>
-            forCircle<span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">)</span>
-            forSquare<span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">)</span>
-            forTrans<span style="color:#f92672">(</span>PointD<span style="color:#f92672">,</span> ShapeD<span style="color:#f92672">)</span>
-        UnionHasPtV <span style="color:#66d9ef">implements</span> ShapeVisitorI
-            <span style="color:#a6e22e">UnionHasPtV</span><span style="color:#f92672">(</span>PointD<span style="color:#f92672">)</span>
-            forUnion<span style="color:#f92672">(</span>ShapeD<span style="color:#f92672">,</span> ShapeD<span style="color:#f92672">)</span>
-            <span style="color:#66d9ef">return</span> s<span style="color:#f92672">.</span><span style="color:#a6e22e">accept</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> HasPtV<span style="color:#f92672">(</span>p<span style="color:#f92672">.</span><span style="color:#a6e22e">minus</span><span style="color:#f92672">(</span>q<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        HasPtV <span style="color:#66d9ef">implements</span> ShapeVisitorI
+            HasPt(PointD)
+            forCircle(int)
+            forSquare(int)
+            forTrans(PointD, ShapeD)
+        UnionHasPtV implements ShapeVisitorI
+            UnionHasPtV(PointD)
+            forUnion(ShapeD, ShapeD)
+            return s.accept(new HasPtV(p.minus(q)));
+        HasPtV implements ShapeVisitorI
             PointD
-            <span style="color:#a6e22e">HasPt</span><span style="color:#f92672">(</span>PointD<span style="color:#f92672">)</span>
-            ShapeVisitorI <span style="color:#a6e22e">newHasPt</span><span style="color:#f92672">(</span>PointD<span style="color:#f92672">)</span>
-            forCircle<span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">)</span>
-            forSquare<span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">)</span>
-            forTrans<span style="color:#f92672">(</span>PointD<span style="color:#f92672">,</span> ShapeD<span style="color:#f92672">)</span>
-        UnionHasPtV <span style="color:#66d9ef">implements</span> unionVisitorI
-            <span style="color:#a6e22e">UnionHasPtV</span><span style="color:#f92672">(</span>PointD<span style="color:#f92672">)</span>
-            ShapeVisitorI <span style="color:#a6e22e">newHasPt</span><span style="color:#f92672">(</span>PointD<span style="color:#f92672">)</span>_o
-            <span style="color:#a6e22e">forUnion</span><span style="color:#f92672">(</span>ShapeD<span style="color:#f92672">,</span> ShapeD<span style="color:#f92672">)</span>
-            <span style="color:#66d9ef">return</span> s<span style="color:#f92672">.</span><span style="color:#a6e22e">accept</span><span style="color:#f92672">(</span>newHasPtV<span style="color:#f92672">(</span>p<span style="color:#f92672">.</span><span style="color:#a6e22e">minus</span><span style="color:#f92672">(</span>q<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            HasPt(PointD)
+            ShapeVisitorI newHasPt(PointD)
+            forCircle(int)
+            forSquare(int)
+            forTrans(PointD, ShapeD)
+        UnionHasPtV implements unionVisitorI
+            UnionHasPtV(PointD)
+            ShapeVisitorI newHasPt(PointD)_o
+            forUnion(ShapeD, ShapeD)
+            return s.accept(newHasPtV(p.minus(q)));
  
  
 ShapeD
-    <span style="color:#a6e22e">Accept</span><span style="color:#f92672">(</span>ShapeVisitorI<span style="color:#f92672">)</span>
+    Accept(ShapeVisitorI)
         Circle
             Int
-            <span style="color:#a6e22e">Circle</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">)</span>
-            Accept<span style="color:#f92672">(</span>ShapeVisitorI<span style="color:#f92672">)</span>_o
+            Circle(int)
+            Accept(ShapeVisitorI)_o
         Square
             Int
-            <span style="color:#a6e22e">Square</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">)</span>
-            Accept<span style="color:#f92672">(</span>ShapeVisitorI<span style="color:#f92672">)</span>_o
+            Square(int)
+            Accept(ShapeVisitorI)_o
         Trans
             PointD
             ShapeD
-            <span style="color:#a6e22e">Trans</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">)</span>
-            Accept<span style="color:#f92672">(</span>ShapeVisitorI<span style="color:#f92672">)</span>_o
+            Trans(int)
+            Accept(ShapeVisitorI)_o
         Union
             ShapeD
             ShapeD
-            <span style="color:#a6e22e">Union</span><span style="color:#f92672">(</span>ShapeD<span style="color:#f92672">,</span> ShapeD<span style="color:#f92672">)</span>
-            Accetp<span style="color:#f92672">(</span>ShapeVisitorI<span style="color:#f92672">)</span>_o
+            Union(ShapeD, ShapeD)
+            Accetp(ShapeVisitorI)_o
          
-</code></pre></div><!-- raw HTML omitted -->
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">PieManI
-    Int <span style="color:#a6e22e">addTop</span><span style="color:#f92672">(</span>Object<span style="color:#f92672">)</span>
-    Int <span style="color:#a6e22e">remTop</span><span style="color:#f92672">(</span>Object<span style="color:#f92672">)</span>
-    Int <span style="color:#a6e22e">substTop</span><span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span>Object<span style="color:#f92672">)</span>
-    Int <span style="color:#a6e22e">occTop</span><span style="color:#f92672">(</span>Object<span style="color:#f92672">)</span>
+</code></pre>
+<h3 id="16">newHasPt和HasPtV are eta reduction</h3>
+<pre><code class="language-java">PieManI
+    Int addTop(Object)
+    Int remTop(Object)
+    Int substTop(Object,Object)
+    Int occTop(Object)
  
-PieManM <span style="color:#66d9ef">implements</span> PieManI
+PieManM implements PieManI
     PieD
-    <span style="color:#a6e22e">addTop</span><span style="color:#f92672">(</span>Object<span style="color:#f92672">)</span> _o
-    <span style="color:#a6e22e">remTop</span><span style="color:#f92672">(</span>Object<span style="color:#f92672">)</span>_o
-    <span style="color:#a6e22e">substTop</span><span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span>Object<span style="color:#f92672">)</span>_o
-    <span style="color:#a6e22e">occTop</span><span style="color:#f92672">(</span>Object<span style="color:#f92672">)</span>
+    addTop(Object) _o
+    remTop(Object)_o
+    substTop(Object,Object)_o
+    occTop(Object)
  
  
 PieVisitorI
-    <span style="color:#a6e22e">forBot</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-    forTop<span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span> Object<span style="color:#f92672">)</span>
+    forBot();
+    forTop(Object, Object)
         OccursV
             Object
-            <span style="color:#a6e22e">OccursV</span><span style="color:#f92672">(</span>Object<span style="color:#f92672">)</span>
-            forBot<span style="color:#f92672">(</span><span style="color:#f92672">)</span>_o
-            <span style="color:#a6e22e">forTop</span><span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span>PieD<span style="color:#f92672">)</span>_o
+            OccursV(Object)
+            forBot()_o
+            forTop(Object,PieD)_o
         SubstV
             Object
             Object
-            <span style="color:#a6e22e">SubstV</span><span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span> Object<span style="color:#f92672">)</span>
-            forBot<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-            forTop<span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span>PieD<span style="color:#f92672">)</span>_o
+            SubstV(Object, Object)
+            forBot();
+            forTop(Object,PieD)_o
         RemV
             Object
-            <span style="color:#a6e22e">RemV</span><span style="color:#f92672">(</span>Object<span style="color:#f92672">)</span>
-            forBot<span style="color:#f92672">(</span>Object<span style="color:#f92672">)</span>
-            forTop<span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span>PieD<span style="color:#f92672">)</span>
+            RemV(Object)
+            forBot(Object)
+            forTop(Object,PieD)
      
  
 PieD
-    <span style="color:#a6e22e">Accept</span><span style="color:#f92672">(</span>PieVisitorI<span style="color:#f92672">)</span>
+    Accept(PieVisitorI)
         Bot
-            <span style="color:#a6e22e">Accept</span><span style="color:#f92672">(</span>PieVisitorI<span style="color:#f92672">)</span>_o
+            Accept(PieVisitorI)_o
         Top
             Object
             PieD
-            <span style="color:#a6e22e">Top</span><span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span> PieD<span style="color:#f92672">)</span>
-            Accept<span style="color:#f92672">(</span>PieVisitorI<span style="color:#f92672">)</span>_o
+            Top(Object, PieD)
+            Accept(PieVisitorI)_o
  
 PieVisitorI
-    <span style="color:#a6e22e">forBot</span><span style="color:#f92672">(</span>Bot<span style="color:#f92672">)</span>
-    foTop<span style="color:#f92672">(</span>Top<span style="color:#f92672">)</span>
+    forBot(Bot)
+    foTop(Top)
         OccursV
             Object
-            <span style="color:#a6e22e">OccursV</span><span style="color:#f92672">(</span>Object<span style="color:#f92672">)</span>
-            forBot<span style="color:#f92672">(</span>Bot that<span style="color:#f92672">)</span>
-            forTop<span style="color:#f92672">(</span>Top that<span style="color:#f92672">)</span>
+            OccursV(Object)
+            forBot(Bot that)
+            forTop(Top that)
         SubstV
             Object
             Object
-            <span style="color:#a6e22e">SubstV</span><span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span>Object<span style="color:#f92672">)</span>
-            forBot<span style="color:#f92672">(</span>Bot that<span style="color:#f92672">)</span>
-            forTop<span style="color:#f92672">(</span>Top That<span style="color:#f92672">)</span>
+            SubstV(Object,Object)
+            forBot(Bot that)
+            forTop(Top That)
         RemV
             Object
-            <span style="color:#a6e22e">RemV</span><span style="color:#f92672">(</span>Object<span style="color:#f92672">)</span>
-            forBot<span style="color:#f92672">(</span>Bot that<span style="color:#f92672">)</span>
-            fotTop<span style="color:#f92672">(</span>Top that<span style="color:#f92672">)</span>
+            RemV(Object)
+            forBot(Bot that)
+            fotTop(Top that)
  
 PieD
-    <span style="color:#a6e22e">Accept</span><span style="color:#f92672">(</span>PieVisitorI<span style="color:#f92672">)</span>
+    Accept(PieVisitorI)
         Bot
-            <span style="color:#a6e22e">Accept</span><span style="color:#f92672">(</span>PieVisitorI<span style="color:#f92672">)</span>_o
+            Accept(PieVisitorI)_o
         Top
             Object
             Object
-            <span style="color:#a6e22e">Top</span><span style="color:#f92672">(</span>Object<span style="color:#f92672">,</span> Objct<span style="color:#f92672">)</span>
-            Accept<span style="color:#f92672">(</span>PieVisitor<span style="color:#f92672">)</span>_o
+            Top(Object, Objct)
+            Accept(PieVisitor)_o
  
-</code></pre></div><p><strong>每天你只能不断去思考 事情的要点和第一步和第二步 才能取得进步.</strong></p>
+</code></pre>
+<p><strong>每天你只能不断去思考 事情的要点和第一步和第二步 才能取得进步.</strong></p>
 <p>What’s the point of the visitor pattern? What’s the point of the software design?</p>
 <ul>
 <li>亮点</li>
@@ -1676,7 +1920,7 @@ PieD
 </ul>
 <p><img src="/images/alittlejava/closure.png" alt="closure"></p>
 <p><strong>Closure(Closure(this))</strong></p>
-<p>具体java源代码参考<a href="https://github.com/jueqingsizhe66/ALittleJava">the little java</a></p>
+<p>具体java源代码参考<a href="https://github.com/jueqingsizhe66/ALittleJava" target="_blank" rel="noopener">the little java</a></p>
     </div>
  <div class="nav-links" style="padding:10;">
         
@@ -1696,9 +1940,10 @@ PieD
 
 
 
+
 <div class="article-tags">
   
-  <a class="badge badge-light" href="/tags/javabasic/">JavaBasic</a>
+  <a class="badge badge-light" href="/tag/javabasic/">JavaBasic</a>
   
 </div>
 
@@ -1767,7 +2012,7 @@ PieD
       
       
       <li>
-        <a href="https://web.whatsapp.com/send?text=a%20little%20java%20note%20https://jueqingsizhe66.github.io/blog/2016/10/09/a-little-java-note/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+        <a href="whatsapp://send?text=a%20little%20java%20note%20https://jueqingsizhe66.github.io/blog/2016/10/09/a-little-java-note/" target="_blank" rel="noopener" class="share-btn-whatsapp">
           <i class="fab fa-whatsapp"></i>
         </a>
       </li>
@@ -1798,11 +2043,8 @@ PieD
 
 
 
-
   
-
-
-
+  
 
 
 
@@ -1810,16 +2052,17 @@ PieD
   
   
     
+  
   
   
   <div class="media author-card content-widget-hr">
     
       
-      <img class="portrait mr-3" src="/authors/admin/avatar_hub2bcfcfc92fc067668c68513c0d68b69_23221_250x250_fill_q90_lanczos_center.jpg" alt="Avatar">
+      <a href="https://jueqingsizhe66.github.io/"><img class="avatar mr-3 avatar-circle" src="/author/%E5%8F%B6%E6%98%AD%E8%89%AF/avatar_huc99f1f2e739130747140db298bdd1890_46492_270x270_fill_q90_lanczos_center.jpg" alt="叶昭良"></a>
     
 
     <div class="media-body">
-      <h5 class="card-title"><a href="https://jueqingsizhe66.github.io/">Ye Zhaoliang</a></h5>
+      <h5 class="card-title"><a href="https://jueqingsizhe66.github.io/">叶昭良</a></h5>
       <h6 class="card-subtitle">Engineer of offshore wind turbine technique research</h6>
       <p class="card-text">My research interests include distributed energy, wind turbine power generation technique , Computational fluid dynamic and programmable matter.</p>
       <ul class="network-icon" aria-hidden="true">
@@ -1903,21 +2146,26 @@ PieD
 
 
 
+
+
+
+
+
   
   
   <div class="article-widget content-widget-hr">
     <h3>Related</h3>
     <ul>
       
-      <li><a href="/blog/2016/04/15/neng-zhen-zheng-jiao-hui-ni-bian-cheng-neng-li-de-shi-zhong-xie/">能真正教会你编程能力的是重写</a></li>
+      <li><a href="/blog/2017/02/10/javakai-fa-nexussi-fu-da-jian/">java开发nexus私服搭建</a></li>
       
-      <li><a href="/blog/2016/03/03/schemehuan-jing-de-ji-chong-biao-xian-xing-shi-represtations/">scheme环境的几种表现形式-represtations</a></li>
+      <li><a href="/blog/2016/07/19/javaxiao-jie/">java小结</a></li>
       
-      <li><a href="/blog/2016/02/27/the-fourth-interpreter-about-the-traceproc/">The Fourth Interpreter about the traceproc</a></li>
+      <li><a href="/blog/2015/05/11/ya-suo-wen-jian-ioliu-de-shi-yong-he-jian-dan-feng-zhuang-0213/">压缩文件IO流的使用和简单封装（0213）</a></li>
       
-      <li><a href="/blog/2016/02/27/the-third-interpreter-implementing-proc/">The third Interpreter implementing Proc</a></li>
+      <li><a href="/blog/2015/05/11/fan-she-ji-zhi-nei-sheng-zheng-ze/">反射机制内省正则</a></li>
       
-      <li><a href="/blog/2016/02/27/the-second-interpreter-from-one/">The Second Interpreter from One</a></li>
+      <li><a href="/blog/2015/05/11/jian-yi-de-dai-ma-yun-xing-mo-ni-chuang-kou/">简易的代码运行模拟窗口</a></li>
       
     </ul>
 
@@ -1939,67 +2187,120 @@ PieD
         crossorigin="anonymous"
         async>
 </script>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    ©2020 &middot; 
+
+    ^-^ YZL ^-^ Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
 
       
 
     
     
     
-    <script src="/js/mathjax-config.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+      
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/go.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/vim.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/matlab.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/sql.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/python.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/c.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/scheme.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/racket.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/perl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/awk.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/clojure.min.js"></script>
+        
+      
+
     
 
     
     
-    
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
-
-      
-
-      
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js" integrity="sha256-aYTdUrn6Ow1DDgh5JTc3aDGnnju48y/1c8s1dgkYPQ8=" crossorigin="anonymous"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/go.min.js"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/vim.min.js"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/matlab.min.js"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/sql.min.js"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/python.min.js"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/c.min.js"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/scheme.min.js"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/racket.min.js"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/perl.min.js"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/awk.min.js"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/clojure.min.js"></script>
-        
-      
-
-      
-      
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
-      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js" integrity="sha512-SeiQaaDh73yrb56sTW/RgVdi/mMqNeM2oBwubFHagc5BkixSpP1fvqF47mKzPGWYSSy4RwbBunrJBQ4Co8fRWA==" crossorigin="anonymous"></script>
     
 
     
     
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin="anonymous"></script>
-    
-
-    
-    
-    <script>hljs.initHighlightingOnLoad();</script>
+    <script>const code_highlighting = true;</script>
     
 
     
@@ -2015,7 +2316,8 @@ PieD
         'post': "Posts",
         'project': "Projects",
         'publication' : "Publications",
-        'talk' : "Talks"
+        'talk' : "Talks",
+        'slides' : "Slides"
         };
     </script>
     
@@ -2049,6 +2351,13 @@ PieD
 
     
     
+    
+
+    
+    
+
+    
+    
 
     
     
@@ -2064,7 +2373,7 @@ PieD
     
     
     
-    <script src="/js/academic.min.d6bd04fdad2ad213aa8111c5a3b72fc5.js"></script>
+    <script src="/js/wowchemy.min.59419d2c9809de125013c581da371866.js"></script>
 
     
 
@@ -2072,60 +2381,6 @@ PieD
 
 
 
-
-  
-  
-  <div class="container">
-    <footer class="site-footer">
-  
-
-  <p class="powered-by">
-    ©2020 &middot; 
-
-    Powered by the
-    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
-    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
-
-    
-    <span class="float-right" aria-hidden="true">
-      <a href="#" class="back-to-top">
-        <span class="button_icon">
-          <i class="fas fa-chevron-up fa-2x"></i>
-        </span>
-      </a>
-    </span>
-    
-  </p>
-</footer>
-
-  </div>
-  
-
-  
-<div id="modal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Cite</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <pre><code class="tex hljs"></code></pre>
-      </div>
-      <div class="modal-footer">
-        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
-          <i class="fas fa-copy"></i> Copy
-        </a>
-        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
-          <i class="fas fa-download"></i> Download
-        </a>
-        <div id="modal-error"></div>
-      </div>
-    </div>
-  </div>
-</div>
 
 </body>
 </html>

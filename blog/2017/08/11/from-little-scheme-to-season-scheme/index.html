@@ -1,13 +1,19 @@
-<!DOCTYPE html>
-<html lang="en-us">
+<!DOCTYPE html><html lang="en-us" >
 
 <head>
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="generator" content="Source Themes Academic 4.5.0">
+  
+  
+  
+  <meta name="generator" content="Wowchemy 5.0.0-beta.0 for Hugo">
+  
 
+  
+
+  
   
 
   
@@ -21,20 +27,35 @@
   
   
 
-  <meta name="author" content="Ye Zhaoliang">
+  <meta name="author" content="叶昭良">
 
   
   
   
     
   
-  <meta name="description" content="The Little Scheme(TLS) 提出了rember,multirember,multirember*以及multirember&amp;Col collector等系列">
+  <meta name="description" content="The Little Scheme(TLS) 提出了rember,multirember,multi">
 
   
   <link rel="alternate" hreflang="en-us" href="https://jueqingsizhe66.github.io/blog/2017/08/11/from-little-scheme-to-season-scheme/">
 
   
 
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
 
   
   
@@ -45,11 +66,17 @@
   
   
   
+  <script src="/js/mathjax-config.js"></script>
+  
+
+  
+  
+  
   
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
 
     
     
@@ -59,48 +86,193 @@
     
       
       
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css" crossorigin="anonymous" title="hl-light">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/solarized-dark.min.css" crossorigin="anonymous" title="hl-light">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/solarized-dark.min.css" crossorigin="anonymous" title="hl-dark" disabled>
       
     
 
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css" integrity="sha512-1xoFisiGdy9nvho8EgXuXvnpR5GAMSjFwp40gSRE3NwdUdIMIKuPa7bqoUhLD0O/5tPNhteAsE5XyyMi5reQVA==" crossorigin="anonymous">
     
 
     
 
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.2.2/lazysizes.min.js" integrity="sha512-TmDwFLhg3UA4ZG0Eb4MIyT1O1Mb+Oww5kFG0uHqXsdbyZz9DcvYQhKpGgNkamAI6h2lGGZq2X8ftOJvF/XjTUg==" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+
   
 
   
   
   
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+    
+      
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+    
   
 
   
   
   
-  <link rel="stylesheet" href="/css/academic.min.e8d4d5fd376e67b34452ebe1cae16341.css">
+  
+  <link rel="stylesheet" href="/css/wowchemy.css">
 
   
 
-  
-
 
 
 
   
+<script>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','4703127160');
+</script>
 
+
+  
+
+
+  
+  
 
   
 
   <link rel="manifest" href="/index.webmanifest">
-  <link rel="icon" type="image/png" href="/img/icon-32.png">
-  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+  <link rel="icon" type="image/png" href="/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_192x192_fill_lanczos_center_2.png">
 
   <link rel="canonical" href="https://jueqingsizhe66.github.io/blog/2017/08/11/from-little-scheme-to-season-scheme/">
 
+  
+  
+  
   
   
   
@@ -114,11 +286,11 @@
   <meta property="twitter:site" content="@jueqingsizhe66">
   <meta property="twitter:creator" content="@jueqingsizhe66">
   
-  <meta property="og:site_name" content="简约派">
+  <meta property="og:site_name" content="30年磨一剑">
   <meta property="og:url" content="https://jueqingsizhe66.github.io/blog/2017/08/11/from-little-scheme-to-season-scheme/">
-  <meta property="og:title" content="From Little Scheme to Season Scheme | 简约派">
-  <meta property="og:description" content="The Little Scheme(TLS) 提出了rember,multirember,multirember*以及multirember&amp;Col collector等系列"><meta property="og:image" content="https://jueqingsizhe66.github.io/img/icon-192.png">
-  <meta property="twitter:image" content="https://jueqingsizhe66.github.io/img/icon-192.png"><meta property="og:locale" content="en-us">
+  <meta property="og:title" content="From Little Scheme to Season Scheme | 30年磨一剑">
+  <meta property="og:description" content="The Little Scheme(TLS) 提出了rember,multirember,multi"><meta property="og:image" content="https://jueqingsizhe66.github.io/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_2.png">
+  <meta property="twitter:image" content="https://jueqingsizhe66.github.io/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
   
     
       <meta property="article:published_time" content="2017-08-11T20:13:42&#43;08:00">
@@ -142,11 +314,19 @@
 
 
 
-  <title>From Little Scheme to Season Scheme | 简约派</title>
+  <title>From Little Scheme to Season Scheme | 30年磨一剑</title>
 
 </head>
 
-<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper  ">
+
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.js"></script>
 
   <aside class="search-results" id="search">
   <div class="container">
@@ -164,7 +344,7 @@
       <div id="search-box">
         
         <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
-        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control">
         
       </div>
 
@@ -180,25 +360,48 @@
 </aside>
 
 
-  
-<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0 compensate-for-scrollbar" id="navbar-main">
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
   <div class="container">
 
     
-      <a class="navbar-brand" href="/">简约派</a>
-      
-      <button type="button" class="navbar-toggler" data-toggle="collapse"
-              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
-        <span><i class="fas fa-bars"></i></span>
-      </button>
-      
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/">30年磨一剑</a>
+    </div>
+    
 
     
-    <div class="collapse navbar-collapse" id="navbar">
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/">30年磨一剑</a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-end" id="navbar-content">
 
       
-      
-      <ul class="navbar-nav ml-auto">
+      <ul class="navbar-nav d-md-inline-flex">
         
 
         
@@ -210,16 +413,24 @@
         
 
         
+
         
         
         
         
+
         
           
+            
+            
           
           
             
-          
+            
+            
+              
+            
+            
           
         
 
@@ -239,16 +450,24 @@
         
 
         
+
         
         
         
         
+
         
           
+            
+            
           
           
             
-          
+            
+            
+              
+            
+            
           
         
 
@@ -268,68 +487,18 @@
         
 
         
+
         
         
         
         
+
         
           
-          
-          
+            
             
           
           
-        
-
-        <li class="nav-item">
-          <a class="nav-link " href="/#projects"><span>项目</span></a>
-        </li>
-
-        
-        
-
-        
-
-        
-        
-        
-          
-        
-
-        
-        
-        
-        
-        
-        
-          
-          
-          
-            
-          
-          
-        
-
-        <li class="nav-item">
-          <a class="nav-link " href="/#featured"><span>Publications</span></a>
-        </li>
-
-        
-        
-
-        
-
-        
-        
-        
-          
-        
-
-        
-        
-        
-        
-        
         
 
         <li class="nav-item">
@@ -348,10 +517,18 @@
         
 
         
+
         
         
         
         
+
+        
+          
+            
+            
+          
+          
         
 
         <li class="nav-item">
@@ -370,10 +547,18 @@
         
 
         
+
         
         
         
         
+
+        
+          
+            
+            
+          
+          
         
 
         <li class="nav-item">
@@ -392,10 +577,18 @@
         
 
         
+
         
         
         
         
+
+        
+          
+            
+            
+          
+          
         
 
         <li class="nav-item">
@@ -414,16 +607,24 @@
         
 
         
+
         
         
         
         
+
         
           
+            
+            
           
           
             
-          
+            
+            
+              
+            
+            
           
         
 
@@ -437,29 +638,49 @@
       
 
         
-
-        
-        <li class="nav-item">
-          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
-        </li>
-        
-
-        
-
-        
-        <li class="nav-item">
-          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
-        </li>
-        
-
       </ul>
-
     </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+
+    </ul>
+
   </div>
 </nav>
 
 
-  <article class="article">
+  </div>
+
+  <div class="page-body">
+    <article class="article">
 
   
 
@@ -519,13 +740,14 @@
     
     Aug 11, 2017
   </span>
-
   
 
   
 
   
 
+  
+  
   
   
   
@@ -534,9 +756,9 @@
   
   <span class="middot-divider"></span>
   <span class="article-categories">
-    <i class="fas fa-folder mr-1"></i><a href="/categories/programme/">programme</a></span>
-
+    <i class="fas fa-folder mr-1"></i><a href="/category/programme/">programme</a></span>
   
+
 </div>
 
     
@@ -561,7 +783,7 @@
 
 
 
-<span class="article-metadata" >Reading time: 20 minutes and    40 seconds with 4549 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+<span class="article-metadata" >Reading time: 20 minutes and    39 seconds with 4543 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
   <ul>
@@ -582,7 +804,7 @@
 
 
     <div class="article-style">
-      <p>The Little Scheme(TLS) 提出了<code>rember</code>,<code>multirember</code>,<code>multirember*</code>以及<code>multirember&amp;Col collector</code>等系列函数的定义，而在The Season Scheme(TSS) 进一步改进了<code>rember</code>系列函数， 使用<code>let</code>、<code>letrec</code>、<code>letcc</code>进行改写，并结合<code>leftmost</code>和<code>deep</code>函数的想法，又提出了<code>rember</code>的函数，该函数表示删除最左边的函数。在此过程中，剖析每一个简单的函数(并由此带来智趣)， 并进行改进，升级，提炼，从中可以体味到<a href="http://blog.sina.com.cn/s/blog_bffd70da0101f4sl.html"> 华罗庚老先生 </a>说的”书越读越薄，并积厚薄书”的感觉,从繁杂中感受直观的本质， 借以理解事物，从另外一个角度看待事物。</p>
+      <p>The Little Scheme(TLS) 提出了<code>rember</code>,<code>multirember</code>,<code>multirember*</code>以及<code>multirember&amp;Col collector</code>等系列函数的定义，而在The Season Scheme(TSS) 进一步改进了<code>rember</code>系列函数， 使用<code>let</code>、<code>letrec</code>、<code>letcc</code>进行改写，并结合<code>leftmost</code>和<code>deep</code>函数的想法，又提出了<code>rember</code>的函数，该函数表示删除最左边的函数。在此过程中，剖析每一个简单的函数(并由此带来智趣)， 并进行改进，升级，提炼，从中可以体味到<a href="http://blog.sina.com.cn/s/blog_bffd70da0101f4sl.html" target="_blank" rel="noopener"> 华罗庚老先生 </a>说的”书越读越薄，并积厚薄书”的感觉,从繁杂中感受直观的本质， 借以理解事物，从另外一个角度看待事物。</p>
 <p>一、The Little Scheme
 rember
 multirember
@@ -597,81 +819,85 @@ depthStar improvement</p>
 <h1 id="一the-little-scheme">一、The Little Scheme</h1>
 <p>scheme的核心数据结构是List，通过list进行算法的演算，而rember是其中的一种算法，用于去除其中的一个元素。 并在rember的同级函数中，也定义了subst，member，insert left, insert right等。在TLS书中也提出了这些函数的相同之处并最终使用insert-g来统一各个函数，这是不错的思想。</p>
 <h2 id="11-rember">1.1 rember</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-racket" data-lang="racket">(<span style="color:#66d9ef">define</span> rember-f
-  (<span style="color:#66d9ef">lambda</span> (test?)
-          (<span style="color:#66d9ef">lambda</span> (a lat)
-            (<span style="color:#66d9ef">cond</span>
-              ((null? lat) <span style="color:#f92672">&#39;</span>())
+<pre><code class="language-racket">(define rember-f
+  (lambda (test?)
+          (lambda (a lat)
+            (cond
+              ((null? lat) '())
               ((test? a (car lat))
                (cdr lat))
-              (<span style="color:#66d9ef">else</span>
+              (else
                (cons (car lat)
                      ((multirember-f test?) a (cdr lat))))))))
 
-</code></pre></div><p>Another related procedures:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-racket" data-lang="racket">(<span style="color:#66d9ef">define</span> insertL
-  (<span style="color:#66d9ef">lambda</span> (<span style="color:#66d9ef">new</span> old lat)
-    (<span style="color:#66d9ef">cond</span>
+</code></pre>
+<p>Another related procedures:</p>
+<pre><code class="language-racket">(define insertL
+  (lambda (new old lat)
+    (cond
       ((null? lat)
-       <span style="color:#f92672">&#39;</span>())
+       '())
       ((eq? (car lat) old)
-       (cons <span style="color:#66d9ef">new</span> (cons old (cdr lat))))
-      (<span style="color:#66d9ef">else</span>
-       (cons <span style="color:#66d9ef">new</span> (insertL <span style="color:#66d9ef">new</span> old (cdr lat)))))))
+       (cons new (cons old (cdr lat))))
+      (else
+       (cons new (insertL new old (cdr lat)))))))
 
 
-(<span style="color:#66d9ef">define</span> insertLR
-  (<span style="color:#66d9ef">lambda</span> (<span style="color:#66d9ef">new</span> oldL oldR lat)
-    (<span style="color:#66d9ef">cond</span>
+(define insertLR
+  (lambda (new oldL oldR lat)
+    (cond
       ((null? lat)
-       <span style="color:#f92672">&#39;</span>())
+       '())
       ((eq? (car lat) oldL)
-       (cons <span style="color:#66d9ef">new</span> (cons oldL (cdr lat))))
+       (cons new (cons oldL (cdr lat))))
       ((eq? (car lat) oldR)
-       (cons oldR (cons <span style="color:#66d9ef">new</span> (cdr lat))))
-      (<span style="color:#66d9ef">else</span>
-       (cons (car lat) (insertLR <span style="color:#66d9ef">new</span> oldL oldR (cdr lat)))))))
+       (cons oldR (cons new (cdr lat))))
+      (else
+       (cons (car lat) (insertLR new oldL oldR (cdr lat)))))))
 
-</code></pre></div><p>进一步可以参考 <a href="http://jueqingsizhe66.github.io/blog/2015/05/18/the-little-scheme-and-part-of-tss/"> TLS and TSS Backup </a></p>
+</code></pre>
+<p>进一步可以参考 <a href="http://jueqingsizhe66.github.io/blog/2015/05/18/the-little-scheme-and-part-of-tss/" target="_blank" rel="noopener"> TLS and TSS Backup </a></p>
 <p>为了更进一步删除一个列表(未嵌套多个list)时候所有的元素(定义为lat version)</p>
 <h2 id="12-multirember">1.2 multirember</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-racket" data-lang="racket">(<span style="color:#66d9ef">define</span> multirember-f
-  (<span style="color:#66d9ef">lambda</span> (test?)
-          (<span style="color:#66d9ef">lambda</span> (a lat)
-            (<span style="color:#66d9ef">cond</span>
-              ((null? lat) <span style="color:#f92672">&#39;</span>())
+<pre><code class="language-racket">(define multirember-f
+  (lambda (test?)
+          (lambda (a lat)
+            (cond
+              ((null? lat) '())
               ((test? a (car lat))
                ((multirember-f test?) a (cdr lat)))
-              (<span style="color:#66d9ef">else</span>
+              (else
                (cons (car lat)
-                     ((multirember-f test?) a (cdr lat))))))))<span style="color:#960050;background-color:#1e0010">
-</span></code></pre></div><p>Another related procedures:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-racket" data-lang="racket">(<span style="color:#66d9ef">define</span> multiinsertLR
-  (<span style="color:#66d9ef">lambda</span> (<span style="color:#66d9ef">new</span> oldL oldR lat)
-    (<span style="color:#66d9ef">cond</span>
+                     ((multirember-f test?) a (cdr lat))))))))
+</code></pre>
+<p>Another related procedures:</p>
+<pre><code class="language-racket">(define multiinsertLR
+  (lambda (new oldL oldR lat)
+    (cond
       ((null? lat)
-       <span style="color:#f92672">&#39;</span>())
+       '())
       ((eq? (car lat) oldL)
-       (cons <span style="color:#66d9ef">new</span> (cons oldL (multiinsertLR <span style="color:#66d9ef">new</span> oldL oldR (cdr lat)))))
+       (cons new (cons oldL (multiinsertLR new oldL oldR (cdr lat)))))
       ((eq? (car lat) oldR)
-       (cons oldR (cons <span style="color:#66d9ef">new</span> (multiinsertLR <span style="color:#66d9ef">new</span> oldL oldR (cdr lat)))))
-      (<span style="color:#66d9ef">else</span>
-       (cons (car lat) (multiinsertLR <span style="color:#66d9ef">new</span> oldL oldR (cdr lat)))))))
+       (cons oldR (cons new (multiinsertLR new oldL oldR (cdr lat)))))
+      (else
+       (cons (car lat) (multiinsertLR new oldL oldR (cdr lat)))))))
 
 
-<span style="color:#75715e">;(insertL &#39;a &#39;b &#39;(a b c (a b c)))</span>
-<span style="color:#75715e">;&#39;(a a b c (a b c))</span>
+;(insertL 'a 'b '(a b c (a b c)))
+;'(a a b c (a b c))
 
-<span style="color:#75715e">;(insertLR &#39;water &#39;a &#39;b &#39;(a bc b c d (a c b)))</span>
-<span style="color:#75715e">;&#39;(water a bc b c d (a c b))</span>
+;(insertLR 'water 'a 'b '(a bc b c d (a c b)))
+;'(water a bc b c d (a c b))
 
- (multiinsertLR <span style="color:#f92672">&#39;</span><span style="color:#e6db74">water</span> <span style="color:#f92672">&#39;</span><span style="color:#e6db74">a</span> <span style="color:#f92672">&#39;</span><span style="color:#e6db74">b</span> <span style="color:#f92672">&#39;</span>(<span style="color:#e6db74">a</span> <span style="color:#e6db74">b</span> <span style="color:#e6db74">c</span> <span style="color:#e6db74">d</span> <span style="color:#e6db74">a</span> <span style="color:#e6db74">b</span> (<span style="color:#e6db74">a</span> <span style="color:#e6db74">b</span> <span style="color:#e6db74">c</span> <span style="color:#e6db74">d</span>)))
-<span style="color:#f92672">&#39;</span>(<span style="color:#e6db74">water</span> <span style="color:#e6db74">a</span> <span style="color:#e6db74">b</span> <span style="color:#e6db74">water</span> <span style="color:#e6db74">c</span> <span style="color:#e6db74">d</span> <span style="color:#e6db74">water</span> <span style="color:#e6db74">a</span> <span style="color:#e6db74">b</span> <span style="color:#e6db74">water</span> (<span style="color:#e6db74">a</span> <span style="color:#e6db74">b</span> <span style="color:#e6db74">c</span> <span style="color:#e6db74">d</span>))
-&gt; (insertLR <span style="color:#f92672">&#39;</span><span style="color:#e6db74">water</span> <span style="color:#f92672">&#39;</span><span style="color:#e6db74">a</span> <span style="color:#f92672">&#39;</span><span style="color:#e6db74">b</span> <span style="color:#f92672">&#39;</span>(<span style="color:#e6db74">a</span> <span style="color:#e6db74">b</span> <span style="color:#e6db74">c</span> <span style="color:#e6db74">d</span> <span style="color:#e6db74">a</span> <span style="color:#e6db74">b</span> (<span style="color:#e6db74">a</span> <span style="color:#e6db74">b</span> <span style="color:#e6db74">c</span> <span style="color:#e6db74">d</span>)))
-<span style="color:#f92672">&#39;</span>(<span style="color:#e6db74">water</span> <span style="color:#e6db74">a</span> <span style="color:#e6db74">b</span> <span style="color:#e6db74">c</span> <span style="color:#e6db74">d</span> <span style="color:#e6db74">a</span> <span style="color:#e6db74">b</span> (<span style="color:#e6db74">a</span> <span style="color:#e6db74">b</span> <span style="color:#e6db74">c</span> <span style="color:#e6db74">d</span>))
+ (multiinsertLR 'water 'a 'b '(a b c d a b (a b c d)))
+'(water a b water c d water a b water (a b c d))
+&gt; (insertLR 'water 'a 'b '(a b c d a b (a b c d)))
+'(water a b c d a b (a b c d))
 
-</code></pre></div><h2 id="13-multirember">1.3 multirember*</h2>
-<pre><code class="language-rakcet" data-lang="rakcet">(define multiinsertLR*
+</code></pre>
+<h2 id="13-multirember">1.3 multirember*</h2>
+<pre><code class="language-rakcet">(define multiinsertLR*
   (lambda (new oldL oldR lat)
     (define atom?
       (lambda (x)
@@ -714,8 +940,9 @@ depthStar improvement</p>
 '(water a b water c d water a b water (water a b water c d))
 &gt; (multiinsertLR 'water 'a 'b '(a b c d a b (a b c d)))
 '(water a b water c d water a b water (a b c d))
-</code></pre><p>Another related procedures:</p>
-<pre><code class="language-rakect" data-lang="rakect">(define multiinsertLR*let
+</code></pre>
+<p>Another related procedures:</p>
+<pre><code class="language-rakect">(define multiinsertLR*let
   (lambda (new oldL oldR lat)
     (define atom?
       (lambda (x)
@@ -801,101 +1028,103 @@ depthStar improvement</p>
 
 (multiinsertLR*letreclet 'water 'a 'b '(a b c d a b (a b c d)))
 '(water a b water c d water a b water (water a b water c d))
-</code></pre><h2 id="14-multiremberstar-and-collector">1.4 multiremberstar and collector</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-racket" data-lang="racket">(<span style="color:#66d9ef">define</span> multirember*co
-  (<span style="color:#66d9ef">lambda</span> (a lat col)
-    (<span style="color:#66d9ef">define</span> atom?
-      (<span style="color:#66d9ef">lambda</span> (x)
-        (<span style="color:#66d9ef">and</span> (not (pair? x)) (not (null? x)))))
-    (<span style="color:#66d9ef">cond</span>
+</code></pre>
+<h2 id="14-multiremberstar-and-collector">1.4 multiremberstar and collector</h2>
+<pre><code class="language-racket">(define multirember*co
+  (lambda (a lat col)
+    (define atom?
+      (lambda (x)
+        (and (not (pair? x)) (not (null? x)))))
+    (cond
       (( null? lat)
-       (col (<span style="color:#66d9ef">quote</span> ()) (<span style="color:#66d9ef">quote</span> ())))
+       (col (quote ()) (quote ())))
       ((atom? (car lat))
-       (<span style="color:#66d9ef">cond</span>
+       (cond
          ((eq? ( car lat) a)
          (multirember*co a (cdr lat)
-                        (<span style="color:#66d9ef">lambda</span> ( newlat seen)
+                        (lambda ( newlat seen)
                           (col newlat (cons (car lat)
                                             seen)))))
-       (<span style="color:#66d9ef">else</span>
+       (else
         (multirember*co a (cdr lat)
-                       (<span style="color:#66d9ef">lambda</span> (newlat seen)
+                       (lambda (newlat seen)
                          (col (cons (car lat) newlat) seen))))))
-      (<span style="color:#66d9ef">else</span>
+      (else
        (multirember*co a (car lat)
-                       (<span style="color:#66d9ef">lambda</span> (al as)
+                       (lambda (al as)
                          (multirember*co a (cdr lat)
-                                         (<span style="color:#66d9ef">lambda</span> (dl ds)
+                                         (lambda (dl ds)
                                            (col (cons al dl)
                                                 (cons as ds))))))))))
 
-</code></pre></div><p>Another related procedures:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-racket" data-lang="racket">(<span style="color:#66d9ef">define</span> col
-   (<span style="color:#66d9ef">lambda</span> (x y)
+</code></pre>
+<p>Another related procedures:</p>
+<pre><code class="language-racket">(define col
+   (lambda (x y)
       (null? y)))
 
 
-(<span style="color:#66d9ef">define</span> a-friend
-   (<span style="color:#66d9ef">lambda</span> (x y)
+(define a-friend
+   (lambda (x y)
       (length x)))
 
-(<span style="color:#66d9ef">define</span> a-friend-y
-   (<span style="color:#66d9ef">lambda</span> (x y)
+(define a-friend-y
+   (lambda (x y)
       (length y)))
 
 
-(<span style="color:#66d9ef">define</span> a-friend-z
-   (<span style="color:#66d9ef">lambda</span> (x y)
-      (cons x (cons y <span style="color:#f92672">&#39;</span>()))))
+(define a-friend-z
+   (lambda (x y)
+      (cons x (cons y '()))))
 
-(<span style="color:#66d9ef">define</span> a-friend-zp
-   (<span style="color:#66d9ef">lambda</span> (x y z)
-      (cons x (cons y (cons z <span style="color:#f92672">&#39;</span>())))))
+(define a-friend-zp
+   (lambda (x y z)
+      (cons x (cons y (cons z '())))))
 
-(<span style="color:#66d9ef">define</span> evens-only*col
-  (<span style="color:#66d9ef">lambda</span> (l col)
+(define evens-only*col
+  (lambda (l col)
 
-    (<span style="color:#66d9ef">define</span> atom?
-      (<span style="color:#66d9ef">lambda</span> (x)
-        (<span style="color:#66d9ef">and</span> (not (pair? x)) (not (null? x)))))
-    (<span style="color:#66d9ef">cond</span>
-      ((null? l) (col <span style="color:#f92672">&#39;</span>() <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">0</span>))
+    (define atom?
+      (lambda (x)
+        (and (not (pair? x)) (not (null? x)))))
+    (cond
+      ((null? l) (col '() 1 0))
       ((atom? (car l))
-       (<span style="color:#66d9ef">cond</span>
+       (cond
          ((even? (car l))
           (evens-only*col (cdr l)
-                          (<span style="color:#66d9ef">lambda</span> (newlat L R)
+                          (lambda (newlat L R)
                             (col (cons (car l) newlat) (* (car l) L) R))))
-         (<span style="color:#66d9ef">else</span> (evens-only*col (cdr l) (<span style="color:#66d9ef">lambda</span> (newlat L R)
+         (else (evens-only*col (cdr l) (lambda (newlat L R)
                                       (col newlat L
                                            (+ (car l) R)))))))
-      (<span style="color:#66d9ef">else</span>
+      (else
        (evens-only*col (car l)
-                       (<span style="color:#66d9ef">lambda</span> (al ale ari)
+                       (lambda (al ale ari)
                          (evens-only*col (cdr l)
-                                         (<span style="color:#66d9ef">lambda</span> (dl dle dri)
+                                         (lambda (dl dle dri)
                                            (col (cons al dl)
                                                 (* ale dle)
                                                 (+ ari dri))))))))))
 
 
-(<span style="color:#66d9ef">define</span> multiinsertLRo
-  (<span style="color:#66d9ef">lambda</span> (<span style="color:#66d9ef">new</span> oldL oldR lat col)
-    (<span style="color:#66d9ef">cond</span>
-      ((null? lat) (col <span style="color:#f92672">&#39;</span>() <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span>))
+(define multiinsertLRo
+  (lambda (new oldL oldR lat col)
+    (cond
+      ((null? lat) (col '() 0 0))
       ((eq? (car lat) oldL)
-       (multiinsertLRo <span style="color:#66d9ef">new</span> oldL oldR (cdr lat)
-                       (<span style="color:#66d9ef">lambda</span> (newlat L R)
-                         (col (cons <span style="color:#66d9ef">new</span> (cons oldL newlat))
-                              (+ L <span style="color:#ae81ff">1</span>) R))))
+       (multiinsertLRo new oldL oldR (cdr lat)
+                       (lambda (newlat L R)
+                         (col (cons new (cons oldL newlat))
+                              (+ L 1) R))))
       ((eq? (car lat) oldR)
-       (multiinsertLRo <span style="color:#66d9ef">new</span> oldL oldR (cdr lat)
-                       (<span style="color:#66d9ef">lambda</span> (newlat L R)
-                         (col (cons oldR (cons <span style="color:#66d9ef">new</span> newlat))
-                              L (+ R <span style="color:#ae81ff">1</span>)))))
-      (<span style="color:#66d9ef">else</span>
-       (multiinsertLRo <span style="color:#66d9ef">new</span> oldL oldR (cdr lat)
-                       (<span style="color:#66d9ef">lambda</span> (newlat L R)
+       (multiinsertLRo new oldL oldR (cdr lat)
+                       (lambda (newlat L R)
+                         (col (cons oldR (cons new newlat))
+                              L (+ R 1)))))
+      (else
+       (multiinsertLRo new oldL oldR (cdr lat)
+                       (lambda (newlat L R)
                          (col (cons (car lat) newlat)
                               L
                               R)))))))
@@ -903,741 +1132,759 @@ depthStar improvement</p>
 
 
 
-(<span style="color:#66d9ef">define</span> multiinsertLR*o
-  (<span style="color:#66d9ef">lambda</span> (<span style="color:#66d9ef">new</span> oldL oldR lat col)
-    (<span style="color:#66d9ef">define</span> atom?
-      (<span style="color:#66d9ef">lambda</span> (x)
-        (<span style="color:#66d9ef">and</span> (not (pair? x)) (not (null? x)))))
-    (<span style="color:#66d9ef">cond</span>
-      ((null? lat) (col <span style="color:#f92672">&#39;</span>() <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span>))
+(define multiinsertLR*o
+  (lambda (new oldL oldR lat col)
+    (define atom?
+      (lambda (x)
+        (and (not (pair? x)) (not (null? x)))))
+    (cond
+      ((null? lat) (col '() 0 0))
       ((atom? (car lat))
-       (<span style="color:#66d9ef">cond</span>
+       (cond
          ((eq? (car lat) oldL)
-          (multiinsertLR*o <span style="color:#66d9ef">new</span> oldL oldR (cdr lat)
-                          (<span style="color:#66d9ef">lambda</span> (newlat L R)
-                            (col (cons <span style="color:#66d9ef">new</span> (cons oldL newlat))
-                                 (+ L <span style="color:#ae81ff">1</span>) R))))
+          (multiinsertLR*o new oldL oldR (cdr lat)
+                          (lambda (newlat L R)
+                            (col (cons new (cons oldL newlat))
+                                 (+ L 1) R))))
          ((eq? (car lat) oldR)
-          (multiinsertLR*o <span style="color:#66d9ef">new</span> oldL oldR (cdr lat)
-                          (<span style="color:#66d9ef">lambda</span> (newlat L R)
-                            (col (cons oldR (cons <span style="color:#66d9ef">new</span> newlat))
-                                 L (+ R <span style="color:#ae81ff">1</span>)))))
-         (<span style="color:#66d9ef">else</span>
-          (multiinsertLR*o <span style="color:#66d9ef">new</span> oldL oldR (cdr lat)
-                          (<span style="color:#66d9ef">lambda</span> (newlat L R)
+          (multiinsertLR*o new oldL oldR (cdr lat)
+                          (lambda (newlat L R)
+                            (col (cons oldR (cons new newlat))
+                                 L (+ R 1)))))
+         (else
+          (multiinsertLR*o new oldL oldR (cdr lat)
+                          (lambda (newlat L R)
                             (col (cons (car lat) newlat)
                                  L
                                  R))))))
-      (<span style="color:#66d9ef">else</span>
-       (multiinsertLR*o <span style="color:#66d9ef">new</span> oldL oldR (car lat)
-                        (<span style="color:#66d9ef">lambda</span> (al ale ari)
-                          (multiinsertLR*o <span style="color:#66d9ef">new</span> oldL oldR (cdr lat)
-                                           (<span style="color:#66d9ef">lambda</span> (dl dle dri)
+      (else
+       (multiinsertLR*o new oldL oldR (car lat)
+                        (lambda (al ale ari)
+                          (multiinsertLR*o new oldL oldR (cdr lat)
+                                           (lambda (dl dle dri)
                                              (col (cons al dl)
                                                   (+ ale dle)
                                                   (+ ari dri))))))))))
 
-</code></pre></div><h1 id="二the-season-scheme">二、The Season Scheme</h1>
+</code></pre>
+<h1 id="二the-season-scheme">二、The Season Scheme</h1>
 <p>由<code>member</code>和<code>rember</code>又可以深入进行剖析，于是引进了<code>member</code>的升级版本<code>two-in-a-lat</code>,未包含TSS的最后一个two-in-a-lat的实现，并通过let,letrec,letcc改写TLS中的rember系列函数，在结合leftmost和deep(Later on,deep有两外一层意思就是产生n层的pizza)函数，升级rember到删除最左边的一个元素。</p>
 <p>Member实际上在所有的函数的实现中都有对应的组成，他是一个十分重要的组成部分，包括基于member的union,intersect,intersectall函数的，一个相对基础的函数。
 the definition of member</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-racket" data-lang="racket">(<span style="color:#66d9ef">define</span> member?
-  (<span style="color:#66d9ef">lambda</span> (a lat)
-    (<span style="color:#66d9ef">cond</span>
-      ((null? lat) <span style="color:#66d9ef">#f</span>)
-      (<span style="color:#66d9ef">else</span>
-       (<span style="color:#66d9ef">or</span> (eq? a (car lat))
+<pre><code class="language-racket">(define member?
+  (lambda (a lat)
+    (cond
+      ((null? lat) #f)
+      (else
+       (or (eq? a (car lat))
            (member a (cdr lat)))))))
 
-<span style="color:#75715e">; member-letrec version</span>
-(<span style="color:#66d9ef">define</span> member?
-  (<span style="color:#66d9ef">lambda</span> (a l)
-    (<span style="color:#66d9ef">letrec</span>
-      ((yes? (<span style="color:#66d9ef">lambda</span> (l)
-               (<span style="color:#66d9ef">cond</span>
-                 ((null? l) <span style="color:#66d9ef">#f</span>)
-                 ((eq? (car l) a) <span style="color:#66d9ef">#t</span>)
-                 (<span style="color:#66d9ef">else</span> (yes? (cdr l)))))))
-      (yes? l))))<span style="color:#960050;background-color:#1e0010">
-</span></code></pre></div><p>现在让我们看看two-in-a-lat的引申(通过member)
+; member-letrec version
+(define member?
+  (lambda (a l)
+    (letrec
+      ((yes? (lambda (l)
+               (cond
+                 ((null? l) #f)
+                 ((eq? (car l) a) #t)
+                 (else (yes? (cdr l)))))))
+      (yes? l))))
+</code></pre>
+<p>现在让我们看看two-in-a-lat的引申(通过member)
 Two -in -a -lat</p>
 <p>包含two-in-a-lat(用member2代替),并附加sum-of-prefix和scramble函数的实现，目的是说如果你想让函数知道额外的信息，可以通过增加参数的方法。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-racket" data-lang="racket">(<span style="color:#66d9ef">define</span> member-letrec-ju?
-  (<span style="color:#66d9ef">lambda</span> (a lat)
-    (<span style="color:#66d9ef">letrec</span> ((yes? (<span style="color:#66d9ef">lambda</span> (l)
-                    (<span style="color:#66d9ef">cond</span>
-                      ((null? l) <span style="color:#66d9ef">#f</span>)
-                      (<span style="color:#66d9ef">else</span>
-                       (<span style="color:#66d9ef">or</span> (eq? a (car l))
+<pre><code class="language-racket">(define member-letrec-ju?
+  (lambda (a lat)
+    (letrec ((yes? (lambda (l)
+                    (cond
+                      ((null? l) #f)
+                      (else
+                       (or (eq? a (car l))
                            (yes? a (cdr l))))))))
       (yes? lat))))
 
-(<span style="color:#66d9ef">define</span> member2?
-  (<span style="color:#66d9ef">lambda</span> (preceding lat)
-    (<span style="color:#66d9ef">cond</span>
-      ((null? lat) <span style="color:#66d9ef">#f</span>)
-      (<span style="color:#66d9ef">else</span> (<span style="color:#66d9ef">or</span> (eq? preceding (car lat))
+(define member2?
+  (lambda (preceding lat)
+    (cond
+      ((null? lat) #f)
+      (else (or (eq? preceding (car lat))
                 (member2? (car lat) (cdr lat)))))))
 
-<span style="color:#75715e">;;; (member2? &#39;a &#39;(a b c))  bugs!</span>
+;;; (member2? 'a '(a b c))  bugs!
 
-(<span style="color:#66d9ef">define</span> memberContinue?
-  (<span style="color:#66d9ef">lambda</span> (lat)
-    (<span style="color:#66d9ef">define</span> M2?
-      (<span style="color:#66d9ef">lambda</span> (preceding lat)
-        (<span style="color:#66d9ef">cond</span>
-          ((null? lat) <span style="color:#66d9ef">#f</span>)
-          (<span style="color:#66d9ef">else</span> (<span style="color:#66d9ef">or</span> (eq? preceding (car lat))
+(define memberContinue?
+  (lambda (lat)
+    (define M2?
+      (lambda (preceding lat)
+        (cond
+          ((null? lat) #f)
+          (else (or (eq? preceding (car lat))
                     (M2? (car lat) (cdr lat)))))))
-    (M2? <span style="color:#f92672">&#39;</span>() lat)))
+    (M2? '() lat)))
 
 
-(<span style="color:#66d9ef">define</span> memberContinueAlter?
-  (<span style="color:#66d9ef">lambda</span> (lat)
-    (<span style="color:#66d9ef">letrec</span> ((M2? (<span style="color:#66d9ef">lambda</span> (preceding lat)
-                    (<span style="color:#66d9ef">cond</span>
-                      ((null? lat) <span style="color:#66d9ef">#f</span>)
-                      (<span style="color:#66d9ef">else</span>
-                       (<span style="color:#66d9ef">let</span> ((pre (car lat)))
-                         (<span style="color:#66d9ef">or</span> (eq? preceding pre)
+(define memberContinueAlter?
+  (lambda (lat)
+    (letrec ((M2? (lambda (preceding lat)
+                    (cond
+                      ((null? lat) #f)
+                      (else
+                       (let ((pre (car lat)))
+                         (or (eq? preceding pre)
                                 (M2? pre (cdr lat)))))))))
-             (M2? <span style="color:#f92672">&#39;</span>() lat))))
+             (M2? '() lat))))
 
 
-(<span style="color:#66d9ef">define</span> sum-of-prefixes
-  (<span style="color:#66d9ef">lambda</span> (tup)
-    (<span style="color:#66d9ef">define</span> sum-of-prefixes-b
-      (<span style="color:#66d9ef">lambda</span> (sonssf tup)     <span style="color:#75715e">; sonssf stands for &#39;sum of numbers seen so far&#39;</span>
-        (<span style="color:#66d9ef">cond</span>
-          ((null? tup) <span style="color:#f92672">&#39;</span>())
-          (<span style="color:#66d9ef">else</span> (cons (+ sonssf (car tup))
+(define sum-of-prefixes
+  (lambda (tup)
+    (define sum-of-prefixes-b
+      (lambda (sonssf tup)     ; sonssf stands for 'sum of numbers seen so far'
+        (cond
+          ((null? tup) '())
+          (else (cons (+ sonssf (car tup))
                       (sum-of-prefixes-b
                        (+ sonssf (car tup))
                        (cdr tup)))))))
-    (sum-of-prefixes-b <span style="color:#ae81ff">0</span> tup)))
+    (sum-of-prefixes-b 0 tup)))
 
-<span style="color:#75715e">;  (sum-of-prefixes &#39;(1 2 3 4))</span>
-<span style="color:#75715e">; &#39;(1 3 6 10)</span>
+;  (sum-of-prefixes '(1 2 3 4))
+; '(1 3 6 10)
 
 
-(<span style="color:#66d9ef">define</span> sum-of-prefixes1
-  (<span style="color:#66d9ef">lambda</span> (tup)
-    (<span style="color:#66d9ef">letrec</span>
-      ((S (<span style="color:#66d9ef">lambda</span> (sss tup)
-            (<span style="color:#66d9ef">cond</span>
-              ((null? tup) <span style="color:#f92672">&#39;</span>())
-              (<span style="color:#66d9ef">else</span>
-               (<span style="color:#66d9ef">let</span> ((first (car tup)))
+(define sum-of-prefixes1
+  (lambda (tup)
+    (letrec
+      ((S (lambda (sss tup)
+            (cond
+              ((null? tup) '())
+              (else
+               (let ((first (car tup)))
                 (cons (+ sss first)
                       (S (+ sss first) (cdr tup)))))))))
-(S <span style="color:#ae81ff">0</span> tup))))
+(S 0 tup))))
 
-(<span style="color:#66d9ef">define</span> scramble-b
-  (<span style="color:#66d9ef">lambda</span> (tup rev-pre)
-    (<span style="color:#66d9ef">define</span> one?
-      (<span style="color:#66d9ef">lambda</span> (n)
-        (= n  <span style="color:#ae81ff">1</span>)))
-    (<span style="color:#66d9ef">define</span> sub1
-      (<span style="color:#66d9ef">lambda</span> (n)
-        (- n <span style="color:#ae81ff">1</span>)))
-    (<span style="color:#66d9ef">define</span> pick
-      (<span style="color:#66d9ef">lambda</span> (n lat)
-        (<span style="color:#66d9ef">cond</span>
+(define scramble-b
+  (lambda (tup rev-pre)
+    (define one?
+      (lambda (n)
+        (= n  1)))
+    (define sub1
+      (lambda (n)
+        (- n 1)))
+    (define pick
+      (lambda (n lat)
+        (cond
           ((one? n) (car lat))
-          (<span style="color:#66d9ef">else</span> (pick (sub1 n) (cdr lat))))))
-    (<span style="color:#66d9ef">cond</span>
-      ((null? tup) <span style="color:#f92672">&#39;</span>())
-      (<span style="color:#66d9ef">else</span>
+          (else (pick (sub1 n) (cdr lat))))))
+    (cond
+      ((null? tup) '())
+      (else
        (cons (pick (car tup) (cons (car tup) rev-pre))
              (scramble-b (cdr tup)
                          (cons (car tup) rev-pre)))))))
 
 
-(<span style="color:#66d9ef">define</span> scramble
-  (<span style="color:#66d9ef">lambda</span> (tup)
-    (<span style="color:#66d9ef">letrec</span> ((scramble-b
-              (<span style="color:#66d9ef">lambda</span> (tup rev-pre)
-                (<span style="color:#66d9ef">define</span> one?
-                  (<span style="color:#66d9ef">lambda</span> (n)
-                    (= n  <span style="color:#ae81ff">1</span>)))
-                (<span style="color:#66d9ef">define</span> sub1
-                  (<span style="color:#66d9ef">lambda</span> (n)
-                    (- n <span style="color:#ae81ff">1</span>)))
-                (<span style="color:#66d9ef">define</span> pick
-                  (<span style="color:#66d9ef">lambda</span> (n lat)
-                    (<span style="color:#66d9ef">cond</span>
+(define scramble
+  (lambda (tup)
+    (letrec ((scramble-b
+              (lambda (tup rev-pre)
+                (define one?
+                  (lambda (n)
+                    (= n  1)))
+                (define sub1
+                  (lambda (n)
+                    (- n 1)))
+                (define pick
+                  (lambda (n lat)
+                    (cond
                       ((one? n) (car lat))
-                      (<span style="color:#66d9ef">else</span> (pick (sub1 n) (cdr lat))))))
-                (<span style="color:#66d9ef">cond</span>
-                  ((null? tup) <span style="color:#f92672">&#39;</span>())
-                  (<span style="color:#66d9ef">else</span>
-                   (<span style="color:#66d9ef">let</span> ((first (car tup)))
+                      (else (pick (sub1 n) (cdr lat))))))
+                (cond
+                  ((null? tup) '())
+                  (else
+                   (let ((first (car tup)))
                      (cons (pick first (cons first rev-pre))
                      (scramble-b (cdr tup)
                                  (cons first rev-pre)))))))))
-      (scramble-b tup <span style="color:#f92672">&#39;</span>()))))
+      (scramble-b tup '()))))
 
 
 
 
-(<span style="color:#66d9ef">define</span> scramble2
-  (<span style="color:#66d9ef">lambda</span> (tup)
-    (<span style="color:#66d9ef">letrec</span> ((one?
-              (<span style="color:#66d9ef">lambda</span> (n)
-                (= n  <span style="color:#ae81ff">1</span>)))
+(define scramble2
+  (lambda (tup)
+    (letrec ((one?
+              (lambda (n)
+                (= n  1)))
              (sub1
-              (<span style="color:#66d9ef">lambda</span> (n)
-                (- n <span style="color:#ae81ff">1</span>)))
+              (lambda (n)
+                (- n 1)))
              (pick
-              (<span style="color:#66d9ef">lambda</span> (n lat)
-                (<span style="color:#66d9ef">cond</span>
+              (lambda (n lat)
+                (cond
                   ((one? n) (car lat))
-                  (<span style="color:#66d9ef">else</span> (pick (sub1 n) (cdr lat))))))
+                  (else (pick (sub1 n) (cdr lat))))))
              (scramble-b
-              (<span style="color:#66d9ef">lambda</span> (tup rev-pre)
-                (<span style="color:#66d9ef">cond</span>
-                  ((null? tup) <span style="color:#f92672">&#39;</span>())
-                  (<span style="color:#66d9ef">else</span>
-                   (<span style="color:#66d9ef">let</span> ((first (car tup)))
+              (lambda (tup rev-pre)
+                (cond
+                  ((null? tup) '())
+                  (else
+                   (let ((first (car tup)))
                      (cons (pick first (cons first rev-pre))
                            (scramble-b (cdr tup)
                                        (cons first rev-pre)))))))))
-      (scramble-b tup <span style="color:#f92672">&#39;</span>()))))<span style="color:#960050;background-color:#1e0010">
-</span></code></pre></div><p>##2.1 rember-let</p>
+      (scramble-b tup '()))))
+</code></pre>
+<p>##2.1 rember-let</p>
 <p>Note: use let to define the repeated expression, so simplify the definition of the procedure.</p>
 <h2 id="22-rember-letrec">2.2 rember-letrec</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-racket" data-lang="racket"><span style="color:#75715e">;;; see at the TSS</span>
-(<span style="color:#66d9ef">define</span> rember
-  (<span style="color:#66d9ef">lambda</span> (a lat)
-    (<span style="color:#66d9ef">letrec</span>
-        ((R (<span style="color:#66d9ef">lambda</span> (lat)
-              (<span style="color:#66d9ef">cond</span>
-                ((null? lat) <span style="color:#f92672">&#39;</span>())
+<pre><code class="language-racket">;;; see at the TSS
+(define rember
+  (lambda (a lat)
+    (letrec
+        ((R (lambda (lat)
+              (cond
+                ((null? lat) '())
                 ((eq? (car lat) a) (cdr lat))
-                (<span style="color:#66d9ef">else</span>
+                (else
                  (cons (car lat) (R (cdr lat))))))))
-      (R lat))))<span style="color:#960050;background-color:#1e0010">
-</span></code></pre></div><p>如果我们想要进一步实现rember-beyond-first(保留删除元素之前的所有元素)和rember-upto-last(只保留删除元素之后的元素)</p>
+      (R lat))))
+</code></pre>
+<p>如果我们想要进一步实现rember-beyond-first(保留删除元素之前的所有元素)和rember-upto-last(只保留删除元素之后的元素)</p>
 <h2 id="23-rember-letcc">2.3 rember-letcc</h2>
 <p>Rember-Beyond-first</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-racket" data-lang="racket"><span style="color:#75715e">; The rember-beyond-first function rembers everything beyond first match</span>
-<span style="color:#75715e">;</span>
-(<span style="color:#66d9ef">define</span> rember-beyond-first
-  (<span style="color:#66d9ef">lambda</span> (a lat)
-    (<span style="color:#66d9ef">letrec</span>
-      ((R (<span style="color:#66d9ef">lambda</span> (lat)
-            (<span style="color:#66d9ef">cond</span>
-              ((null? lat) <span style="color:#f92672">&#39;</span>())
-              ((eq? (car lat) a) <span style="color:#f92672">&#39;</span>())
-              (<span style="color:#66d9ef">else</span>
+<pre><code class="language-racket">; The rember-beyond-first function rembers everything beyond first match
+;
+(define rember-beyond-first
+  (lambda (a lat)
+    (letrec
+      ((R (lambda (lat)
+            (cond
+              ((null? lat) '())
+              ((eq? (car lat) a) '())
+              (else
                 (cons (car lat) (R (cdr lat))))))))
       (R lat))))
 	
 
 (rember-beyond-first
-  <span style="color:#f92672">&#39;</span><span style="color:#e6db74">roots</span>
-  <span style="color:#f92672">&#39;</span>(<span style="color:#e6db74">noodles</span> <span style="color:#e6db74">spaghetti</span> <span style="color:#e6db74">spatzle</span> <span style="color:#e6db74">bean-thread</span> <span style="color:#e6db74">roots</span> <span style="color:#e6db74">potatoes</span> <span style="color:#e6db74">yam</span> <span style="color:#e6db74">others</span> <span style="color:#e6db74">rice</span>))
-<span style="color:#75715e">; ==&gt; &#39;(noodles spaghetti spaghetti bean-thread)</span>
+  'roots
+  '(noodles spaghetti spatzle bean-thread roots potatoes yam others rice))
+; ==&gt; '(noodles spaghetti spaghetti bean-thread)
 
 Rember-upto-last
 
 
-(<span style="color:#66d9ef">define-syntax</span> letcc
-  (<span style="color:#66d9ef">syntax-rules</span> ()
-    ((letcc ?k ?body <span style="color:#66d9ef">...</span>)
-     (call/cc (<span style="color:#66d9ef">lambda</span> (?k) ?body <span style="color:#66d9ef">...</span>)))))
-(<span style="color:#66d9ef">define</span> rember-upto-last
-  (<span style="color:#66d9ef">lambda</span> (a lat) <span style="color:#75715e">; Look Ma, no cons   </span>
+(define-syntax letcc
+  (syntax-rules ()
+    ((letcc ?k ?body ...)
+     (call/cc (lambda (?k) ?body ...)))))
+(define rember-upto-last
+  (lambda (a lat) ; Look Ma, no cons   
     (letcc skip
-      (<span style="color:#66d9ef">letrec</span> 
+      (letrec 
           ((R
-            (<span style="color:#66d9ef">lambda</span> (l)
-              (<span style="color:#66d9ef">cond</span>
+            (lambda (l)
+              (cond
                 ((null? l) (void))
-                (<span style="color:#66d9ef">else</span> (<span style="color:#66d9ef">let</span> ()
+                (else (let ()
                         (R (cdr l))
-                        (<span style="color:#66d9ef">cond</span>
+                        (cond
                           ((eq? a (car l))
                            (skip (cdr l)))
-                          (<span style="color:#66d9ef">else</span> (void)))))))))
+                          (else (void)))))))))
         (R lat)
         lat))))
 
 	
 
 (rember-upto-last
-  <span style="color:#f92672">&#39;</span><span style="color:#e6db74">roots</span>
-  <span style="color:#f92672">&#39;</span>(<span style="color:#e6db74">noodles</span> <span style="color:#e6db74">spaghetti</span> <span style="color:#e6db74">spatzle</span> <span style="color:#e6db74">bean-thread</span> <span style="color:#e6db74">roots</span> <span style="color:#e6db74">potatoes</span> <span style="color:#e6db74">yam</span> <span style="color:#e6db74">others</span> <span style="color:#e6db74">rice</span>))
-<span style="color:#75715e">; ==&gt; &#39;(potatoes yam others rice)</span>
+  'roots
+  '(noodles spaghetti spatzle bean-thread roots potatoes yam others rice))
+; ==&gt; '(potatoes yam others rice)
 
-</code></pre></div><h2 id="24-remberstar">2.4 remberstar</h2>
+</code></pre>
+<h2 id="24-remberstar">2.4 remberstar</h2>
 <p>the definition of leftmost</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-racket" data-lang="racket">(<span style="color:#66d9ef">define</span> leftmost-fixed-let
-  (<span style="color:#66d9ef">lambda</span> (l)
-    (<span style="color:#66d9ef">cond</span>
-      ((null? l) <span style="color:#f92672">&#39;</span>())
+<pre><code class="language-racket">(define leftmost-fixed-let
+  (lambda (l)
+    (cond
+      ((null? l) '())
       ((atom? (car l)) (car l))
-      (<span style="color:#66d9ef">else</span>
-       (<span style="color:#66d9ef">let</span> ((a (leftmost-fixed (car l))))
-         (<span style="color:#66d9ef">cond</span>
+      (else
+       (let ((a (leftmost-fixed (car l))))
+         (cond
            ((atom? a) a)
-           (<span style="color:#66d9ef">else</span> (leftmost-fixed (cdr l)))))))))
+           (else (leftmost-fixed (cdr l)))))))))
 
-<span style="color:#75715e">;(leftmost-fixed-let &#39;((() a b) (c d))) ;; bug fixed</span>
-<span style="color:#75715e">;</span>
-<span style="color:#75715e">;(leftmost-fixed-let &#39;(((y) b) (c d)))   ; &#39;y</span>
-<span style="color:#75715e">;(leftmost-fixed-let &#39;(((y) ()) () (e))) ; &#39;y</span>
-<span style="color:#75715e">;(leftmost-fixed-let &#39;(((() y) ())))     ; &#39;y</span>
-<span style="color:#75715e">;(leftmost-fixed-let &#39;(((()) ()))) ; &#39;()</span>
+;(leftmost-fixed-let '((() a b) (c d))) ;; bug fixed
+;
+;(leftmost-fixed-let '(((y) b) (c d)))   ; 'y
+;(leftmost-fixed-let '(((y) ()) () (e))) ; 'y
+;(leftmost-fixed-let '(((() y) ())))     ; 'y
+;(leftmost-fixed-let '(((()) ()))) ; '()
 
 
 
-<span style="color:#75715e">;;letcc version</span>
+;;letcc version
 
-(<span style="color:#66d9ef">define</span> leftmost-letcc
-  (<span style="color:#66d9ef">letrec</span>
-      ((lm (<span style="color:#66d9ef">lambda</span> (l out)
-             (<span style="color:#66d9ef">cond</span>
-               ((null? l) <span style="color:#f92672">&#39;</span>())
+(define leftmost-letcc
+  (letrec
+      ((lm (lambda (l out)
+             (cond
+               ((null? l) '())
                ((atom? (car l)) (out (car l)))
-               (<span style="color:#66d9ef">else</span>
-                (<span style="color:#66d9ef">begin</span>
+               (else
+                (begin
                   (lm (car l) out)
                   (lm (cdr l) out)))))))
-    (<span style="color:#66d9ef">lambda</span> (l)
+    (lambda (l)
       (call-with-current-continuation
-       (<span style="color:#66d9ef">lambda</span> (skip)
-         (lm l skip))))))<span style="color:#960050;background-color:#1e0010">
-</span></code></pre></div><p>the definition of deep</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-racket" data-lang="racket">(<span style="color:#66d9ef">define</span> deep
-  (<span style="color:#66d9ef">lambda</span> (m)
-    (<span style="color:#66d9ef">cond</span>
-      ((zero? m) <span style="color:#f92672">&#39;</span><span style="color:#e6db74">pizza</span>)
-      (<span style="color:#66d9ef">else</span> (cons (deep (sub1 m)) <span style="color:#f92672">&#39;</span>())))))
+       (lambda (skip)
+         (lm l skip))))))
+</code></pre>
+<p>the definition of deep</p>
+<pre><code class="language-racket">(define deep
+  (lambda (m)
+    (cond
+      ((zero? m) 'pizza)
+      (else (cons (deep (sub1 m)) '())))))
 
 
-(<span style="color:#66d9ef">define</span> toppings <span style="color:#ae81ff">0</span>)
-(<span style="color:#66d9ef">define</span> deepB
-  (<span style="color:#66d9ef">lambda</span> (m)
-    (<span style="color:#66d9ef">cond</span>
+(define toppings 0)
+(define deepB
+  (lambda (m)
+    (cond
       ((zero? m)
        (call-with-current-continuation
-        (<span style="color:#66d9ef">lambda</span> (jump)
-          (<span style="color:#66d9ef">set!</span> toppings jump)
-          <span style="color:#f92672">&#39;</span><span style="color:#e6db74">pizza</span>)))
-      (<span style="color:#66d9ef">else</span>
-       (cons (deepB (sub1 m)) <span style="color:#f92672">&#39;</span>())))))
+        (lambda (jump)
+          (set! toppings jump)
+          'pizza)))
+      (else
+       (cons (deepB (sub1 m)) '())))))
 
-(<span style="color:#66d9ef">define</span> deep&amp;co
-  (<span style="color:#66d9ef">lambda</span> (m k)
-    (<span style="color:#66d9ef">cond</span>
-      ((zero? m) (k <span style="color:#f92672">&#39;</span><span style="color:#e6db74">pizza</span>))
-      (<span style="color:#66d9ef">else</span>
+(define deep&amp;co
+  (lambda (m k)
+    (cond
+      ((zero? m) (k 'pizza))
+      (else
        (deep&amp;co (sub1 m)
-                (<span style="color:#66d9ef">lambda</span> (x) (k (cons x <span style="color:#f92672">&#39;</span>()))))))))
+                (lambda (x) (k (cons x '()))))))))
 
-(deep&amp;co <span style="color:#ae81ff">0</span> (<span style="color:#66d9ef">lambda</span> (x) x))          <span style="color:#75715e">; &#39;pizza</span>
-(deep&amp;co <span style="color:#ae81ff">6</span> (<span style="color:#66d9ef">lambda</span> (x) x))          <span style="color:#75715e">; &#39;((((((pizza))))))</span>
-(deep&amp;co <span style="color:#ae81ff">2</span> (<span style="color:#66d9ef">lambda</span> (x) x)) <span style="color:#75715e">; &#39;((pizza))</span>
+(deep&amp;co 0 (lambda (x) x))          ; 'pizza
+(deep&amp;co 6 (lambda (x) x))          ; '((((((pizza))))))
+(deep&amp;co 2 (lambda (x) x)) ; '((pizza))
 
 
-(<span style="color:#66d9ef">define</span> deep&amp;coB
-  (<span style="color:#66d9ef">lambda</span> (m k)
-    (<span style="color:#66d9ef">cond</span>
+(define deep&amp;coB
+  (lambda (m k)
+    (cond
       ((zero? m)
-       (<span style="color:#66d9ef">let</span> ()
-         (<span style="color:#66d9ef">set!</span> toppings k)
-         (k <span style="color:#f92672">&#39;</span><span style="color:#e6db74">pizza</span>)))
-      (<span style="color:#66d9ef">else</span>
+       (let ()
+         (set! toppings k)
+         (k 'pizza)))
+      (else
        (deep&amp;coB (sub1 m)
-                 (<span style="color:#66d9ef">lambda</span> (x)
-                   (k (cons x <span style="color:#f92672">&#39;</span>()))))))))
+                 (lambda (x)
+                   (k (cons x '()))))))))
 
-(deep&amp;coB <span style="color:#ae81ff">6</span> (<span style="color:#66d9ef">lambda</span> (x) x))         <span style="color:#75715e">; &#39;((((((pizza))))))</span>
-(deep&amp;coB <span style="color:#ae81ff">4</span> (<span style="color:#66d9ef">lambda</span> (x) x)) <span style="color:#75715e">; &#39;((((pizza))))</span>
-</code></pre></div><p>接下来，再看看由leftmost结合rember得到rember star.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-racket" data-lang="racket">
-<span style="color:#75715e">; The rember1* function removes the leftmost occurrence of a in l</span>
-<span style="color:#75715e">;</span>
-(<span style="color:#66d9ef">define</span> rember1*
-  (<span style="color:#66d9ef">lambda</span> (a l)
-    (<span style="color:#66d9ef">cond</span>
-      ((null? l) <span style="color:#f92672">&#39;</span>())
+(deep&amp;coB 6 (lambda (x) x))         ; '((((((pizza))))))
+(deep&amp;coB 4 (lambda (x) x)) ; '((((pizza))))
+</code></pre>
+<p>接下来，再看看由leftmost结合rember得到rember star.</p>
+<pre><code class="language-racket">
+; The rember1* function removes the leftmost occurrence of a in l
+;
+(define rember1*
+  (lambda (a l)
+    (cond
+      ((null? l) '())
       ((atom? (car l))
-       (<span style="color:#66d9ef">cond</span>
+       (cond
          ((eq? (car l) a) (cdr l))
-         (<span style="color:#66d9ef">else</span>
+         (else
            (cons (car l) (rember1* a (cdr l))))))
-      (<span style="color:#66d9ef">else</span>
-        (<span style="color:#66d9ef">cond</span>
-          ((equal? (rember1* a (car l)) (car l)) <span style="color:#75715e">; if the list with &#39;a&#39; removed doesn&#39;t change</span>
-           (cons (car l) (rember1* a (cdr l))))  <span style="color:#75715e">; then recurse</span>
-          (<span style="color:#66d9ef">else</span>
-            (cons (rember1* a (car l)) (cdr l)))))))) <span style="color:#75715e">; otherwise remove &#39;a&#39;</span>
+      (else
+        (cond
+          ((equal? (rember1* a (car l)) (car l)) ; if the list with 'a' removed doesn't change
+           (cons (car l) (rember1* a (cdr l))))  ; then recurse
+          (else
+            (cons (rember1* a (car l)) (cdr l)))))))) ; otherwise remove 'a'
 
 	
 
 
-<span style="color:#75715e">; Examples of rember1*</span>
-<span style="color:#75715e">;</span>
+; Examples of rember1*
+;
 (rember1*
-  <span style="color:#f92672">&#39;</span><span style="color:#e6db74">salad</span>
-  <span style="color:#f92672">&#39;</span>((<span style="color:#e6db74">Swedish</span> <span style="color:#e6db74">rye</span>) (<span style="color:#e6db74">French</span> (<span style="color:#e6db74">mustard</span> <span style="color:#e6db74">salad</span> <span style="color:#e6db74">turkey</span>)) <span style="color:#e6db74">salad</span>))
-<span style="color:#75715e">; ==&gt; &#39;((Swedish rye) (French (mustard turkey)) salad)</span>
+  'salad
+  '((Swedish rye) (French (mustard salad turkey)) salad))
+; ==&gt; '((Swedish rye) (French (mustard turkey)) salad)
 
 (rember1*
-  <span style="color:#f92672">&#39;</span><span style="color:#e6db74">meat</span>
-  <span style="color:#f92672">&#39;</span>((<span style="color:#e6db74">pasta</span> <span style="color:#e6db74">meat</span>) <span style="color:#e6db74">pasta</span> (<span style="color:#e6db74">noodles</span> <span style="color:#e6db74">meat</span> <span style="color:#e6db74">sauce</span>) <span style="color:#e6db74">meat</span> <span style="color:#e6db74">tomatoes</span>))
-<span style="color:#75715e">; ==&gt; &#39;((pasta) pasta (noodles meat sauce) meat tomatoes)</span>
+  'meat
+  '((pasta meat) pasta (noodles meat sauce) meat tomatoes))
+; ==&gt; '((pasta) pasta (noodles meat sauce) meat tomatoes)
 
-</code></pre></div><p>下面是letrec version of rember1</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-racket" data-lang="racket">
-(<span style="color:#66d9ef">define</span> rember1*-letrec
-  (<span style="color:#66d9ef">lambda</span> (a l)
-    (<span style="color:#66d9ef">letrec</span>
-        ((R (<span style="color:#66d9ef">lambda</span> (l)
-              (<span style="color:#66d9ef">cond</span>
-                ((null? l) <span style="color:#f92672">&#39;</span>())
+</code></pre>
+<p>下面是letrec version of rember1</p>
+<pre><code class="language-racket">
+(define rember1*-letrec
+  (lambda (a l)
+    (letrec
+        ((R (lambda (l)
+              (cond
+                ((null? l) '())
                 ((atom? (car l))
-                 (<span style="color:#66d9ef">let</span> ((first (car l))
+                 (let ((first (car l))
                        (second (cdr l)))
-                   (<span style="color:#66d9ef">cond</span>
+                   (cond
                      ((eq? first a) second)
-                     (<span style="color:#66d9ef">else</span>
+                     (else
                       (cons first (R second))))))
-                 (<span style="color:#66d9ef">else</span>
-                  (<span style="color:#66d9ef">let</span> ((first (car l))
+                 (else
+                  (let ((first (car l))
                         (second (cdr l)))
-                    (<span style="color:#66d9ef">cond</span>
-                      ((equal? (R first) first) <span style="color:#75715e">; if the list with &#39;a&#39; removed doesn&#39;t change</span>
-                       (cons first (R second)))  <span style="color:#75715e">; then recurse</span>
-                      (<span style="color:#66d9ef">else</span>
-                       (cons (R first) second))))))))) <span style="color:#75715e">; otherwise remove &#39;a&#39;</span>
+                    (cond
+                      ((equal? (R first) first) ; if the list with 'a' removed doesn't change
+                       (cons first (R second)))  ; then recurse
+                      (else
+                       (cons (R first) second))))))))) ; otherwise remove 'a'
       (R l))))
 (rember1*-letrec
-  <span style="color:#f92672">&#39;</span><span style="color:#e6db74">salad</span>
-  <span style="color:#f92672">&#39;</span>((<span style="color:#e6db74">Swedish</span> <span style="color:#e6db74">rye</span>) (<span style="color:#e6db74">French</span> (<span style="color:#e6db74">mustard</span> <span style="color:#e6db74">salad</span> <span style="color:#e6db74">turkey</span>)) <span style="color:#e6db74">salad</span>))
+  'salad
+  '((Swedish rye) (French (mustard salad turkey)) salad))
 (rember1*-letrec
-  <span style="color:#f92672">&#39;</span><span style="color:#e6db74">meat</span>
-  <span style="color:#f92672">&#39;</span>((<span style="color:#e6db74">pasta</span> <span style="color:#e6db74">meat</span>) <span style="color:#e6db74">pasta</span> (<span style="color:#e6db74">noodles</span> <span style="color:#e6db74">meat</span> <span style="color:#e6db74">sauce</span>) <span style="color:#e6db74">meat</span> <span style="color:#e6db74">tomatoes</span>))
+  'meat
+  '((pasta meat) pasta (noodles meat sauce) meat tomatoes))
 
-</code></pre></div><p>the version of letcc (我暂时不太理解)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-racket" data-lang="racket"><span style="color:#75715e">; rember1* via letcc</span>
-<span style="color:#75715e">;</span>
-(<span style="color:#66d9ef">define</span> rember1*-letcc
-  (<span style="color:#66d9ef">lambda</span> (a l)
-    (<span style="color:#66d9ef">letrec</span>
-        ((rm (<span style="color:#66d9ef">lambda</span> (a l oh)
-               (<span style="color:#66d9ef">cond</span>
-                 ((null? l) (oh <span style="color:#f92672">&#39;</span><span style="color:#e6db74">no</span>))
+</code></pre>
+<p>the version of letcc (我暂时不太理解)</p>
+<pre><code class="language-racket">; rember1* via letcc
+;
+(define rember1*-letcc
+  (lambda (a l)
+    (letrec
+        ((rm (lambda (a l oh)
+               (cond
+                 ((null? l) (oh 'no))
                  ((atom? (car l))
-                  (<span style="color:#66d9ef">if</span> (eq? (car l) a)
+                  (if (eq? (car l) a)
                       (cdr l)
                       (cons (car l) (rm a (cdr l) oh))))
-                 (<span style="color:#66d9ef">else</span>
-                  (<span style="color:#66d9ef">let</span> ((new-car
+                 (else
+                  (let ((new-car
                          (call-with-current-continuation
-                          (<span style="color:#66d9ef">lambda</span> (oh)
+                          (lambda (oh)
                             (rm a (car l) oh)))))
-                    (<span style="color:#66d9ef">if</span> (atom? new-car)
+                    (if (atom? new-car)
                         (cons (car l) (rm a (cdr l) oh))
                         (cons new-car (cdr l)))))))))
-      (<span style="color:#66d9ef">let</span> ((new-l
+      (let ((new-l
              (call-with-current-continuation
-              (<span style="color:#66d9ef">lambda</span> (oh)
+              (lambda (oh)
                 (rm a l oh)))))
-        (<span style="color:#66d9ef">if</span> (atom? new-l)
+        (if (atom? new-l)
             l
             new-l)))))
 
-<span style="color:#75715e">; Tests of rember1*-letcc</span>
-<span style="color:#75715e">;</span>
+; Tests of rember1*-letcc
+;
 (rember1*-letcc
- <span style="color:#f92672">&#39;</span><span style="color:#e6db74">salad</span>
- <span style="color:#f92672">&#39;</span>((<span style="color:#e6db74">Swedish</span> <span style="color:#e6db74">rye</span>) (<span style="color:#e6db74">French</span> (<span style="color:#e6db74">mustard</span> <span style="color:#e6db74">salad</span> <span style="color:#e6db74">turkey</span>)) <span style="color:#e6db74">salad</span>))
-<span style="color:#75715e">; ==&gt; &#39;((Swedish rye) (French (mustard turkey)) salad)</span>
+ 'salad
+ '((Swedish rye) (French (mustard salad turkey)) salad))
+; ==&gt; '((Swedish rye) (French (mustard turkey)) salad)
 
 (rember1*-letcc
- <span style="color:#f92672">&#39;</span><span style="color:#e6db74">meat</span>
- <span style="color:#f92672">&#39;</span>((<span style="color:#e6db74">pasta</span> <span style="color:#e6db74">meat</span>) <span style="color:#e6db74">pasta</span> (<span style="color:#e6db74">noodles</span> <span style="color:#e6db74">meat</span> <span style="color:#e6db74">sauce</span>) <span style="color:#e6db74">meat</span> <span style="color:#e6db74">tomatoes</span>))
-<span style="color:#75715e">; ==&gt; &#39;((pasta) pasta (noodles meat sauce) meat tomatoes)</span>
+ 'meat
+ '((pasta meat) pasta (noodles meat sauce) meat tomatoes))
+; ==&gt; '((pasta) pasta (noodles meat sauce) meat tomatoes)
 
 (rember1*-letcc
- <span style="color:#f92672">&#39;</span><span style="color:#e6db74">a</span>
- <span style="color:#f92672">&#39;</span>((<span style="color:#e6db74">foo</span> <span style="color:#e6db74">bar</span>) <span style="color:#e6db74">baz</span>))
-<span style="color:#75715e">; ==&gt; &#39;((foo bar) baz)</span>
-</code></pre></div><p>the definition of union</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-racket" data-lang="racket">(<span style="color:#66d9ef">define</span> union2
-  (<span style="color:#66d9ef">lambda</span> (set1 set2)
-    (<span style="color:#66d9ef">letrec</span> ((member? (<span style="color:#66d9ef">lambda</span> (a lat)
-                (<span style="color:#66d9ef">cond</span> ((null? lat) <span style="color:#66d9ef">#f</span>)
-                              ((eq? a (car lat)) <span style="color:#66d9ef">#t</span>)
-                              (<span style="color:#66d9ef">else</span> (member? a (cdr lat))))))
-             (A (<span style="color:#66d9ef">lambda</span> (set1)
-                (<span style="color:#66d9ef">cond</span>
+ 'a
+ '((foo bar) baz))
+; ==&gt; '((foo bar) baz)
+</code></pre>
+<p>the definition of union</p>
+<pre><code class="language-racket">(define union2
+  (lambda (set1 set2)
+    (letrec ((member? (lambda (a lat)
+                (cond ((null? lat) #f)
+                              ((eq? a (car lat)) #t)
+                              (else (member? a (cdr lat))))))
+             (A (lambda (set1)
+                (cond
                   ((null? set1) set2)
-                  (<span style="color:#66d9ef">else</span>
-                   (<span style="color:#66d9ef">let</span> ((p1 (A (cdr set1))))
-                     (<span style="color:#66d9ef">if</span> (member? (car set1) set2)
+                  (else
+                   (let ((p1 (A (cdr set1))))
+                     (if (member? (car set1) set2)
                          p1
                          (cons (car set1) p1))))))))
       (A set1))))
-      (union2 <span style="color:#f92672">&#39;</span>(<span style="color:#e6db74">a</span> <span style="color:#e6db74">b</span> <span style="color:#e6db74">c</span>) <span style="color:#f92672">&#39;</span>(<span style="color:#e6db74">c</span> <span style="color:#e6db74">d</span> <span style="color:#e6db74">e</span> <span style="color:#e6db74">f</span>))
+      (union2 '(a b c) '(c d e f))
 
-</code></pre></div><p>the definition of intersect</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-racket" data-lang="racket">(<span style="color:#66d9ef">define</span> intersect
-  (<span style="color:#66d9ef">lambda</span> (set1 set2)
-    (<span style="color:#66d9ef">cond</span>
-      ((null? set1) <span style="color:#f92672">&#39;</span>())  <span style="color:#75715e">; don&#39;t forget the 1st commandment</span>
+</code></pre>
+<p>the definition of intersect</p>
+<pre><code class="language-racket">(define intersect
+  (lambda (set1 set2)
+    (cond
+      ((null? set1) '())  ; don't forget the 1st commandment
       ((member? (car set1) set2)
        (cons (car set1) (intersect (cdr set1) set2)))
-      (<span style="color:#66d9ef">else</span>
+      (else
         (intersect (cdr set1) set2)))))
-<span style="color:#75715e">; Examples of intersect</span>
-<span style="color:#75715e">;</span>
-<span style="color:#75715e">;(intersect &#39;(a b x c d) &#39;(q w e x r t y a))     ; &#39;(a x)</span>
-<span style="color:#75715e">;(intersect &#39;(a b x c d) &#39;())                    ; &#39;()</span>
-<span style="color:#75715e">;(intersect &#39;() &#39;())                             ; &#39;()</span>
-<span style="color:#75715e">;(intersect &#39;() &#39;(a b x c d))                    ; &#39;()</span>
-<span style="color:#75715e">;(intersect &#39;(a b x c d) &#39;(a b x c d))           ; &#39;(a b x c d)</span>
+; Examples of intersect
+;
+;(intersect '(a b x c d) '(q w e x r t y a))     ; '(a x)
+;(intersect '(a b x c d) '())                    ; '()
+;(intersect '() '())                             ; '()
+;(intersect '() '(a b x c d))                    ; '()
+;(intersect '(a b x c d) '(a b x c d))           ; '(a b x c d)
 
-</code></pre></div><p>intersect letrec version</p>
+</code></pre>
+<p>intersect letrec version</p>
 <p>use letrec to remove arguments that do not change for recursive applications</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-racket" data-lang="racket">(<span style="color:#66d9ef">define</span> intersect-letrec
-  (<span style="color:#66d9ef">lambda</span> (set1 set2)
-    (<span style="color:#66d9ef">letrec</span>
-      ((I (<span style="color:#66d9ef">lambda</span> (set)
-            (<span style="color:#66d9ef">cond</span>
-              ((null? set) <span style="color:#f92672">&#39;</span>())
+<pre><code class="language-racket">(define intersect-letrec
+  (lambda (set1 set2)
+    (letrec
+      ((I (lambda (set)
+            (cond
+              ((null? set) '())
               ((member? (car set) set2)
                (cons (car set) (I (cdr set))))
-              (<span style="color:#66d9ef">else</span>
+              (else
                 (I (cdr set)))))))
       (I set1))))
 
-<span style="color:#75715e">; Test of intersect-letrec</span>
-<span style="color:#75715e">;</span>
-<span style="color:#75715e">;(intersect-letrec &#39;(a b x c d) &#39;(q w e x r t y a))     ; &#39;(a x)</span>
-<span style="color:#75715e">;(intersect-letrec &#39;(a b x c d) &#39;())                    ; &#39;()</span>
-<span style="color:#75715e">;(intersect-letrec &#39;() &#39;())                             ; &#39;()</span>
-<span style="color:#75715e">;(intersect-letrec &#39;() &#39;(a b x c d))                    ; &#39;()</span>
-<span style="color:#75715e">;(intersect-letrec &#39;(a b x c d) &#39;(a b x c d))           ; &#39;(a b x c d)</span>
-</code></pre></div><p>the definition of intersectall</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-racket" data-lang="racket"><span style="color:#75715e">; The intersectall function finds intersect of a bunch of sets</span>
-<span style="color:#75715e">;</span>
-(<span style="color:#66d9ef">define</span> intersectall
-  (<span style="color:#66d9ef">lambda</span> (lset)
-    (<span style="color:#66d9ef">cond</span>
-      ((null? lset) <span style="color:#f92672">&#39;</span>())
+; Test of intersect-letrec
+;
+;(intersect-letrec '(a b x c d) '(q w e x r t y a))     ; '(a x)
+;(intersect-letrec '(a b x c d) '())                    ; '()
+;(intersect-letrec '() '())                             ; '()
+;(intersect-letrec '() '(a b x c d))                    ; '()
+;(intersect-letrec '(a b x c d) '(a b x c d))           ; '(a b x c d)
+</code></pre>
+<p>the definition of intersectall</p>
+<pre><code class="language-racket">; The intersectall function finds intersect of a bunch of sets
+;
+(define intersectall
+  (lambda (lset)
+    (cond
+      ((null? lset) '())
       ((null? (cdr lset)) (car lset))
-      (<span style="color:#66d9ef">else</span>
+      (else
         (intersect (car lset)
                    (intersectall (cdr lset)))))))
 
-<span style="color:#75715e">; Examples of intersectall</span>
-<span style="color:#75715e">;</span>
-<span style="color:#75715e">;(intersectall &#39;((a) (a) (a)))                   ; &#39;(a)</span>
-<span style="color:#75715e">;(intersectall &#39;((a) () (a)))                    ; &#39;()</span>
-<span style="color:#75715e">;(intersectall &#39;())                              ; &#39;()</span>
-<span style="color:#75715e">;(intersectall &#39;((a b c d) (b c d e) (c d e f))) ; &#39;(c d)</span>
+; Examples of intersectall
+;
+;(intersectall '((a) (a) (a)))                   ; '(a)
+;(intersectall '((a) () (a)))                    ; '()
+;(intersectall '())                              ; '()
+;(intersectall '((a b c d) (b c d e) (c d e f))) ; '(c d)
 
-<span style="color:#75715e">; Obeying the 12th commandment</span>
-<span style="color:#75715e">;</span>
-(<span style="color:#66d9ef">define</span> intersectall-letrec
-  (<span style="color:#66d9ef">lambda</span> (lset)
-    (<span style="color:#66d9ef">letrec</span>
-      ((A (<span style="color:#66d9ef">lambda</span> (lset)
-            (<span style="color:#66d9ef">cond</span>
+; Obeying the 12th commandment
+;
+(define intersectall-letrec
+  (lambda (lset)
+    (letrec
+      ((A (lambda (lset)
+            (cond
               ((null? (cdr lset)) (car lset))
-              (<span style="color:#66d9ef">else</span>
+              (else
                 (intersect (car lset)
                            (A (cdr lset))))))))
-      (<span style="color:#66d9ef">cond</span>
-        ((null? lset) <span style="color:#f92672">&#39;</span>())
-        (<span style="color:#66d9ef">else</span> (A lset))))))
+      (cond
+        ((null? lset) '())
+        (else (A lset))))))
 
-<span style="color:#75715e">; Tests of intersectall-letrec</span>
-<span style="color:#75715e">;;</span>
-<span style="color:#75715e">;(intersectall-letrec &#39;((a) (a) (a)))                   ; &#39;(a)</span>
-<span style="color:#75715e">;(intersectall-letrec &#39;((a) () (a)))                    ; &#39;()</span>
-<span style="color:#75715e">;(intersectall-letrec &#39;())                              ; &#39;()</span>
-<span style="color:#75715e">;(intersectall-letrec &#39;((a b c d) (b c d e) (c d e f))) ; &#39;(c d)</span>
+; Tests of intersectall-letrec
+;;
+;(intersectall-letrec '((a) (a) (a)))                   ; '(a)
+;(intersectall-letrec '((a) () (a)))                    ; '()
+;(intersectall-letrec '())                              ; '()
+;(intersectall-letrec '((a b c d) (b c d e) (c d e f))) ; '(c d)
 
 
-(<span style="color:#66d9ef">define</span> intersectall-ap
-  (<span style="color:#66d9ef">lambda</span> (lset)
+(define intersectall-ap
+  (lambda (lset)
     (call-with-current-continuation
-      (<span style="color:#66d9ef">lambda</span> (hop)
-        (<span style="color:#66d9ef">letrec</span>
-          ((A (<span style="color:#66d9ef">lambda</span> (lset)
-                (<span style="color:#66d9ef">cond</span>
-                  ((null? (car lset)) (hop <span style="color:#f92672">&#39;</span>()))
+      (lambda (hop)
+        (letrec
+          ((A (lambda (lset)
+                (cond
+                  ((null? (car lset)) (hop '()))
                   ((null? (cdr lset)) (car lset))
-                  (<span style="color:#66d9ef">else</span>
+                  (else
                     (I (car lset)
                        (A (cdr lset)))))))
-           (I (<span style="color:#66d9ef">lambda</span> (s1 s2)
-                (<span style="color:#66d9ef">letrec</span>
-                  ((J (<span style="color:#66d9ef">lambda</span> (s1)
-                        (<span style="color:#66d9ef">cond</span>
-                          ((null? s1) <span style="color:#f92672">&#39;</span>())
+           (I (lambda (s1 s2)
+                (letrec
+                  ((J (lambda (s1)
+                        (cond
+                          ((null? s1) '())
                           ((member? (car s1) s2)
                            (cons (car s1) (J (cdr s1))))
-                          (<span style="color:#66d9ef">else</span>
+                          (else
                             (J (cdr s1)))))))
-                  (<span style="color:#66d9ef">cond</span>
-                    ((null? s2) (hop <span style="color:#f92672">&#39;</span>()))
-                    (<span style="color:#66d9ef">else</span> (J s1)))))))
-          (<span style="color:#66d9ef">cond</span>
-            ((null? lset) <span style="color:#f92672">&#39;</span>())
-            (<span style="color:#66d9ef">else</span> (A lset))))))))
+                  (cond
+                    ((null? s2) (hop '()))
+                    (else (J s1)))))))
+          (cond
+            ((null? lset) '())
+            (else (A lset))))))))
 
-<span style="color:#75715e">; Tests of intersectall-ap</span>
-<span style="color:#75715e">;</span>
-<span style="color:#75715e">;(intersectall-ap &#39;((a) (a) (a)))                   ; &#39;(a)</span>
-<span style="color:#75715e">;(intersectall-ap &#39;((a) () (a)))                    ; &#39;()</span>
-<span style="color:#75715e">;(intersectall-ap &#39;())                              ; &#39;()</span>
-<span style="color:#75715e">;(intersectall-ap &#39;((a b c d) (b c d e) (c d e f))) ; &#39;(c d)</span>
-</code></pre></div><p>最后再透过deep star的写法优化过程来体会TSS的函数精髓。
+; Tests of intersectall-ap
+;
+;(intersectall-ap '((a) (a) (a)))                   ; '(a)
+;(intersectall-ap '((a) () (a)))                    ; '()
+;(intersectall-ap '())                              ; '()
+;(intersectall-ap '((a b c d) (b c d e) (c d e f))) ; '(c d)
+</code></pre>
+<p>最后再透过deep star的写法优化过程来体会TSS的函数精髓。
 depthStar improvement</p>
 <p>通过depth进一步阐释letrec的意义（从原始的depth到depth-let 然后depth-let-if，以及更为清晰版本的depth-let-max,然后最后浓缩到最后的6行代码depth-max。
 depth</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-racket" data-lang="racket"><span style="color:#75715e">; The depth* function finds the max depth of an s-expression</span>
+<pre><code class="language-racket">; The depth* function finds the max depth of an s-expression
 
-<span style="color:#75715e">;</span>
-(<span style="color:#66d9ef">define</span> depth*
-  (<span style="color:#66d9ef">lambda</span> (l)
-    (<span style="color:#66d9ef">cond</span>
-      ((null? l) <span style="color:#ae81ff">1</span>)
+;
+(define depth*
+  (lambda (l)
+    (cond
+      ((null? l) 1)
       ((atom? (car l)) (depth* (cdr l)))
-      (<span style="color:#66d9ef">else</span>
-        (<span style="color:#66d9ef">cond</span>
+      (else
+        (cond
           ((&gt; (depth* (cdr l))
               (add1 (depth* (car l))))
            (depth* (cdr l)))
-          (<span style="color:#66d9ef">else</span>
+          (else
 (add1 (depth* (car l)))))))))
 
 
-(depth* <span style="color:#f92672">&#39;</span>((<span style="color:#e6db74">pickled</span>) <span style="color:#e6db74">peppers</span> (<span style="color:#e6db74">peppers</span> <span style="color:#e6db74">pickled</span>)))                          <span style="color:#75715e">; 2</span>
-(depth* <span style="color:#f92672">&#39;</span>(<span style="color:#e6db74">margarine</span> ((<span style="color:#e6db74">bitter</span> <span style="color:#e6db74">butter</span>) (<span style="color:#e6db74">makes</span>) (<span style="color:#e6db74">batter</span> (<span style="color:#e6db74">bitter</span>))) <span style="color:#e6db74">butter</span>)) <span style="color:#75715e">; 4</span>
-(depth* <span style="color:#f92672">&#39;</span>(<span style="color:#e6db74">c</span> (<span style="color:#e6db74">b</span> (<span style="color:#e6db74">a</span> <span style="color:#e6db74">b</span>) <span style="color:#e6db74">a</span>) <span style="color:#e6db74">a</span>)) <span style="color:#75715e">; 3</span>
-</code></pre></div><p>let version:
+(depth* '((pickled) peppers (peppers pickled)))                          ; 2
+(depth* '(margarine ((bitter butter) (makes) (batter (bitter))) butter)) ; 4
+(depth* '(c (b (a b) a) a)) ; 3
+</code></pre>
+<p>let version:
 depth-let</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-racket" data-lang="racket">(<span style="color:#66d9ef">define</span> depth*-let
-  (<span style="color:#66d9ef">lambda</span> (l)
-    (<span style="color:#66d9ef">cond</span>
-      ((null? l) <span style="color:#ae81ff">1</span>)
+<pre><code class="language-racket">(define depth*-let
+  (lambda (l)
+    (cond
+      ((null? l) 1)
       ((atom? (car l)) (depth*-let (cdr l)))
-      (<span style="color:#66d9ef">else</span>
-       (<span style="color:#66d9ef">let</span> ((rightPart (depth*-let (cdr l)))
+      (else
+       (let ((rightPart (depth*-let (cdr l)))
              (leftPart (add1 (depth*-let (car l)))))
-         (<span style="color:#66d9ef">cond</span>
+         (cond
            ((&gt; rightPart
                leftPart)
             rightPart)
-           (<span style="color:#66d9ef">else</span>
+           (else
             leftPart)))))))
 
-(depth*-let <span style="color:#f92672">&#39;</span>((<span style="color:#e6db74">pickled</span>) <span style="color:#e6db74">peppers</span> (<span style="color:#e6db74">peppers</span> <span style="color:#e6db74">pickled</span>)))                          <span style="color:#75715e">; 2</span>
-(depth*-let <span style="color:#f92672">&#39;</span>(<span style="color:#e6db74">margarine</span> ((<span style="color:#e6db74">bitter</span> <span style="color:#e6db74">butter</span>) (<span style="color:#e6db74">makes</span>) (<span style="color:#e6db74">batter</span> (<span style="color:#e6db74">bitter</span>))) <span style="color:#e6db74">butter</span>)) <span style="color:#75715e">; 4</span>
-(depth*-let <span style="color:#f92672">&#39;</span>(<span style="color:#e6db74">c</span> (<span style="color:#e6db74">b</span> (<span style="color:#e6db74">a</span> <span style="color:#e6db74">b</span>) <span style="color:#e6db74">a</span>) <span style="color:#e6db74">a</span>)) <span style="color:#75715e">; 3</span>
+(depth*-let '((pickled) peppers (peppers pickled)))                          ; 2
+(depth*-let '(margarine ((bitter butter) (makes) (batter (bitter))) butter)) ; 4
+(depth*-let '(c (b (a b) a) a)) ; 3
 
-</code></pre></div><p>let-if version:
+</code></pre>
+<p>let-if version:
 depth-let-if</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-racket" data-lang="racket">(<span style="color:#66d9ef">define</span> depth*-let-if
-  (<span style="color:#66d9ef">lambda</span> (l)
-    (<span style="color:#66d9ef">cond</span>
-      ((null? l) <span style="color:#ae81ff">1</span>)
+<pre><code class="language-racket">(define depth*-let-if
+  (lambda (l)
+    (cond
+      ((null? l) 1)
       ((atom? (car l)) (depth*-let-if (cdr l)))
-      (<span style="color:#66d9ef">else</span>
-       (<span style="color:#66d9ef">let</span> ((rightPart (depth*-let-if (cdr l)))
+      (else
+       (let ((rightPart (depth*-let-if (cdr l)))
              (leftPart (add1 (depth*-let-if (car l)))))
-         (<span style="color:#66d9ef">if</span> (&gt; rightPart leftPart)
+         (if (&gt; rightPart leftPart)
             rightPart
             leftPart))))))
 
-(depth*-let-if <span style="color:#f92672">&#39;</span>((<span style="color:#e6db74">pickled</span>) <span style="color:#e6db74">peppers</span> (<span style="color:#e6db74">peppers</span> <span style="color:#e6db74">pickled</span>)))                          <span style="color:#75715e">; 2</span>
-(depth*-let-if <span style="color:#f92672">&#39;</span>(<span style="color:#e6db74">margarine</span> ((<span style="color:#e6db74">bitter</span> <span style="color:#e6db74">butter</span>) (<span style="color:#e6db74">makes</span>) (<span style="color:#e6db74">batter</span> (<span style="color:#e6db74">bitter</span>))) <span style="color:#e6db74">butter</span>)) <span style="color:#75715e">; 4</span>
-(depth*-let-if <span style="color:#f92672">&#39;</span>(<span style="color:#e6db74">c</span> (<span style="color:#e6db74">b</span> (<span style="color:#e6db74">a</span> <span style="color:#e6db74">b</span>) <span style="color:#e6db74">a</span>) <span style="color:#e6db74">a</span>)) <span style="color:#75715e">; 3</span>
+(depth*-let-if '((pickled) peppers (peppers pickled)))                          ; 2
+(depth*-let-if '(margarine ((bitter butter) (makes) (batter (bitter))) butter)) ; 4
+(depth*-let-if '(c (b (a b) a) a)) ; 3
 
 depth-let-max version:
-depth-let-max<span style="color:#960050;background-color:#1e0010">
-</span></code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-racket" data-lang="racket"><span style="color:#66d9ef">define</span> depth*-let-max
-  (<span style="color:#66d9ef">lambda</span> (l)
-    (<span style="color:#66d9ef">cond</span>
-      ((null? l) <span style="color:#ae81ff">1</span>)
+depth-let-max
+</code></pre>
+<pre><code class="language-racket">define depth*-let-max
+  (lambda (l)
+    (cond
+      ((null? l) 1)
       ((atom? (car l)) (depth*-let-max (cdr l)))
-      (<span style="color:#66d9ef">else</span>
-       (<span style="color:#66d9ef">let</span> ((rightPart (depth*-let-max (cdr l)))
+      (else
+       (let ((rightPart (depth*-let-max (cdr l)))
              (leftPart (add1 (depth*-let-max (car l)))))
-         (max rightPart leftPart)))))<span style="color:#960050;background-color:#1e0010">)</span>
+         (max rightPart leftPart))))))
 
-(depth*-let-max <span style="color:#f92672">&#39;</span>((<span style="color:#e6db74">pickled</span>) <span style="color:#e6db74">peppers</span> (<span style="color:#e6db74">peppers</span> <span style="color:#e6db74">pickled</span>)))                          <span style="color:#75715e">; 2</span>
-(depth*-let-max <span style="color:#f92672">&#39;</span>(<span style="color:#e6db74">margarine</span> ((<span style="color:#e6db74">bitter</span> <span style="color:#e6db74">butter</span>) (<span style="color:#e6db74">makes</span>) (<span style="color:#e6db74">batter</span> (<span style="color:#e6db74">bitter</span>))) <span style="color:#e6db74">butter</span>)) <span style="color:#75715e">; 4</span>
-(depth*-let-max <span style="color:#f92672">&#39;</span>(<span style="color:#e6db74">c</span> (<span style="color:#e6db74">b</span> (<span style="color:#e6db74">a</span> <span style="color:#e6db74">b</span>) <span style="color:#e6db74">a</span>) <span style="color:#e6db74">a</span>)) <span style="color:#75715e">; 3</span>
+(depth*-let-max '((pickled) peppers (peppers pickled)))                          ; 2
+(depth*-let-max '(margarine ((bitter butter) (makes) (batter (bitter))) butter)) ; 4
+(depth*-let-max '(c (b (a b) a) a)) ; 3
 
 depth-max version:
 depth-max
 
-(<span style="color:#66d9ef">define</span> depth*-max
-  (<span style="color:#66d9ef">lambda</span> (l)
-    (<span style="color:#66d9ef">cond</span>
-      ((null? l) <span style="color:#ae81ff">1</span>)
+(define depth*-max
+  (lambda (l)
+    (cond
+      ((null? l) 1)
       ((atom? (car l)) (depth*-max (cdr l)))
-      (<span style="color:#66d9ef">else</span>
+      (else
          (max (depth*-max (cdr l)) (add1 (depth*-max (car l))))))))
 
-(depth*-max <span style="color:#f92672">&#39;</span>((<span style="color:#e6db74">pickled</span>) <span style="color:#e6db74">peppers</span> (<span style="color:#e6db74">peppers</span> <span style="color:#e6db74">pickled</span>)))                          <span style="color:#75715e">; 2</span>
-(depth*-max <span style="color:#f92672">&#39;</span>(<span style="color:#e6db74">margarine</span> ((<span style="color:#e6db74">bitter</span> <span style="color:#e6db74">butter</span>) (<span style="color:#e6db74">makes</span>) (<span style="color:#e6db74">batter</span> (<span style="color:#e6db74">bitter</span>))) <span style="color:#e6db74">butter</span>)) <span style="color:#75715e">; 4</span>
-(depth*-max <span style="color:#f92672">&#39;</span>(<span style="color:#e6db74">c</span> (<span style="color:#e6db74">b</span> (<span style="color:#e6db74">a</span> <span style="color:#e6db74">b</span>) <span style="color:#e6db74">a</span>) <span style="color:#e6db74">a</span>)) <span style="color:#75715e">; 3</span>
+(depth*-max '((pickled) peppers (peppers pickled)))                          ; 2
+(depth*-max '(margarine ((bitter butter) (makes) (batter (bitter))) butter)) ; 4
+(depth*-max '(c (b (a b) a) a)) ; 3
 
-</code></pre></div><p>常用链接，</p>
-<p><a href="http://jueqingsizhe66.github.io/blog/2016/02/14/si-ji-mo-si-de-le-yuan-schemers/"> Scheme清单 </a>
-<a href="https://groups.google.com/forum/#!forum/racket-users"> Google racket User group </a>
-<a href="https://groups.google.com/forum/#!topic/racket-users/cPuTr8lrXCs"> Gossip about the decision tree </a>
+</code></pre>
+<p>常用链接，</p>
+<p><a href="http://jueqingsizhe66.github.io/blog/2016/02/14/si-ji-mo-si-de-le-yuan-schemers/" target="_blank" rel="noopener"> Scheme清单 </a>
+<a href="https://groups.google.com/forum/#!forum/racket-users" target="_blank" rel="noopener"> Google racket User group </a>
+<a href="https://groups.google.com/forum/#!topic/racket-users/cPuTr8lrXCs" target="_blank" rel="noopener"> Gossip about the decision tree </a>
 GreghenderShoot 1970</p>
 <ol>
 <li>
-<p><a href="https://github.com/greghendershott"> Github Repo </a></p>
+<p><a href="https://github.com/greghendershott" target="_blank" rel="noopener"> Github Repo </a></p>
 </li>
 <li>
-<p><a href="https://github.com/greghendershott/fear-of-macros"> Fear of macro </a> Tell us the history of macro, overcome the fear of macro</p>
+<p><a href="https://github.com/greghendershott/fear-of-macros" target="_blank" rel="noopener"> Fear of macro </a> Tell us the history of macro, overcome the fear of macro</p>
 </li>
 <li>
-<p><a href="https://github.com/greghendershott/frog"> frog </a> one static website generator tool</p>
+<p><a href="https://github.com/greghendershott/frog" target="_blank" rel="noopener"> frog </a> one static website generator tool</p>
 </li>
 <li>
-<p><a href="http://www.greghendershott.com/"> His Website </a>
+<p><a href="http://www.greghendershott.com/" target="_blank" rel="noopener"> His Website </a>
 Tonyg</p>
 </li>
 <li>
-<p><a href="https://github.com/tonyg?tab=repositories"> Github Repo </a></p>
+<p><a href="https://github.com/tonyg?tab=repositories" target="_blank" rel="noopener"> Github Repo </a></p>
 </li>
 <li>
-<p><a href="http://tonyg.github.io/racket-bitsyntax/"> His opensource tools: Bitsyntax </a></p>
+<p><a href="http://tonyg.github.io/racket-bitsyntax/" target="_blank" rel="noopener"> His opensource tools: Bitsyntax </a></p>
 </li>
 </ol>
-<p><a href="https://botbot.me/freenode/racket/"> racket freenote robot, Gossip Platform </a>
+<p><a href="https://botbot.me/freenode/racket/" target="_blank" rel="noopener"> racket freenote robot, Gossip Platform </a>
 Husk scheme</p>
 <ol>
 <li>
-<p><a href="https://github.com/justinethier/husk-scheme"> husk repo </a></p>
+<p><a href="https://github.com/justinethier/husk-scheme" target="_blank" rel="noopener"> husk repo </a></p>
 </li>
 <li>
-<p><a href="http://justinethier.github.io/husk-scheme/manual/getting-started.html"> husk get started </a>
-<a href="https://github.com/alaricsp/chicken-scheme"> chicken scheme </a>
-<a href="http://www.schemers.org/Documents/Standards/R5RS/HTML/r5rs-Z-H-2.html#%25_toc_start"> R5RS html file </a>
+<p><a href="http://justinethier.github.io/husk-scheme/manual/getting-started.html" target="_blank" rel="noopener"> husk get started </a>
+<a href="https://github.com/alaricsp/chicken-scheme" target="_blank" rel="noopener"> chicken scheme </a>
+<a href="http://www.schemers.org/Documents/Standards/R5RS/HTML/r5rs-Z-H-2.html#%25_toc_start" target="_blank" rel="noopener"> R5RS html file </a>
 root of lisp</p>
 </li>
 <li>
-<p><a href="http://www.paulgraham.com/rootsoflisp.html"> original site </a></p>
+<p><a href="http://www.paulgraham.com/rootsoflisp.html" target="_blank" rel="noopener"> original site </a></p>
 </li>
 <li>
-<p><a href="https://github.com/hlpp/scheme/tree/master/tests"> define implement </a></p>
+<p><a href="https://github.com/hlpp/scheme/tree/master/tests" target="_blank" rel="noopener"> define implement </a></p>
 </li>
 </ol>
-<p>BTW, one very good vim tips, you can use <a href="https://github.com/Shougo/vimfiler.vim"> Vimfiler </a>, with shortkey <code>m</code> and then <code>r</code> to rename the file in the editor page.</p>
+<p>BTW, one very good vim tips, you can use <a href="https://github.com/Shougo/vimfiler.vim" target="_blank" rel="noopener"> Vimfiler </a>, with shortkey <code>m</code> and then <code>r</code> to rename the file in the editor page.</p>
 
     </div>
  <div class="nav-links" style="padding:10;">
@@ -1658,9 +1905,10 @@ root of lisp</p>
 
 
 
+
 <div class="article-tags">
   
-  <a class="badge badge-light" href="/tags/scheme/">scheme</a>
+  <a class="badge badge-light" href="/tag/scheme/">scheme</a>
   
 </div>
 
@@ -1729,7 +1977,7 @@ root of lisp</p>
       
       
       <li>
-        <a href="https://web.whatsapp.com/send?text=From%20Little%20Scheme%20to%20Season%20Scheme%20https://jueqingsizhe66.github.io/blog/2017/08/11/from-little-scheme-to-season-scheme/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+        <a href="whatsapp://send?text=From%20Little%20Scheme%20to%20Season%20Scheme%20https://jueqingsizhe66.github.io/blog/2017/08/11/from-little-scheme-to-season-scheme/" target="_blank" rel="noopener" class="share-btn-whatsapp">
           <i class="fab fa-whatsapp"></i>
         </a>
       </li>
@@ -1760,11 +2008,8 @@ root of lisp</p>
 
 
 
-
   
-
-
-
+  
 
 
 
@@ -1772,16 +2017,17 @@ root of lisp</p>
   
   
     
+  
   
   
   <div class="media author-card content-widget-hr">
     
       
-      <img class="portrait mr-3" src="/authors/admin/avatar_hub2bcfcfc92fc067668c68513c0d68b69_23221_250x250_fill_q90_lanczos_center.jpg" alt="Avatar">
+      <a href="https://jueqingsizhe66.github.io/"><img class="avatar mr-3 avatar-circle" src="/author/%E5%8F%B6%E6%98%AD%E8%89%AF/avatar_huc99f1f2e739130747140db298bdd1890_46492_270x270_fill_q90_lanczos_center.jpg" alt="叶昭良"></a>
     
 
     <div class="media-body">
-      <h5 class="card-title"><a href="https://jueqingsizhe66.github.io/">Ye Zhaoliang</a></h5>
+      <h5 class="card-title"><a href="https://jueqingsizhe66.github.io/">叶昭良</a></h5>
       <h6 class="card-subtitle">Engineer of offshore wind turbine technique research</h6>
       <p class="card-text">My research interests include distributed energy, wind turbine power generation technique , Computational fluid dynamic and programmable matter.</p>
       <ul class="network-icon" aria-hidden="true">
@@ -1865,21 +2111,26 @@ root of lisp</p>
 
 
 
+
+
+
+
+
   
   
   <div class="article-widget content-widget-hr">
     <h3>Related</h3>
     <ul>
       
-      <li><a href="/blog/2015/05/18/the-little-scheme-and-part-of-tss/">The-Little-Scheme-And-Part-Of-TSS</a></li>
-      
-      <li><a href="/blog/2017/08/11/cps-intutive/">CPS Intutive</a></li>
-      
       <li><a href="/blog/2016/03/30/program-as-data/">program-as-data</a></li>
       
       <li><a href="/blog/2016/03/03/schemehuan-jing-de-ji-chong-biao-xian-xing-shi-represtations/">scheme环境的几种表现形式-represtations</a></li>
       
       <li><a href="/blog/2016/02/28/cha-ru-pai-xu/">插入排序</a></li>
+      
+      <li><a href="/blog/2016/02/28/the-fifth-interpreter-with-the-implementation-of-letrec-important/">The Fifth interpreter with the implementation of letrec(Important)</a></li>
+      
+      <li><a href="/blog/2016/02/27/the-fourth-interpreter-about-the-traceproc/">The Fourth Interpreter about the traceproc</a></li>
       
     </ul>
 
@@ -1901,67 +2152,120 @@ root of lisp</p>
         crossorigin="anonymous"
         async>
 </script>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    ©2020 &middot; 
+
+    ^-^ YZL ^-^ Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
 
       
 
     
     
     
-    <script src="/js/mathjax-config.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+      
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/go.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/vim.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/matlab.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/sql.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/python.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/c.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/scheme.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/racket.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/perl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/awk.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/clojure.min.js"></script>
+        
+      
+
     
 
     
     
-    
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
-
-      
-
-      
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js" integrity="sha256-aYTdUrn6Ow1DDgh5JTc3aDGnnju48y/1c8s1dgkYPQ8=" crossorigin="anonymous"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/go.min.js"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/vim.min.js"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/matlab.min.js"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/sql.min.js"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/python.min.js"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/c.min.js"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/scheme.min.js"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/racket.min.js"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/perl.min.js"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/awk.min.js"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/clojure.min.js"></script>
-        
-      
-
-      
-      
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
-      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js" integrity="sha512-SeiQaaDh73yrb56sTW/RgVdi/mMqNeM2oBwubFHagc5BkixSpP1fvqF47mKzPGWYSSy4RwbBunrJBQ4Co8fRWA==" crossorigin="anonymous"></script>
     
 
     
     
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin="anonymous"></script>
-    
-
-    
-    
-    <script>hljs.initHighlightingOnLoad();</script>
+    <script>const code_highlighting = true;</script>
     
 
     
@@ -1977,7 +2281,8 @@ root of lisp</p>
         'post': "Posts",
         'project': "Projects",
         'publication' : "Publications",
-        'talk' : "Talks"
+        'talk' : "Talks",
+        'slides' : "Slides"
         };
     </script>
     
@@ -2011,6 +2316,13 @@ root of lisp</p>
 
     
     
+    
+
+    
+    
+
+    
+    
 
     
     
@@ -2026,7 +2338,7 @@ root of lisp</p>
     
     
     
-    <script src="/js/academic.min.d6bd04fdad2ad213aa8111c5a3b72fc5.js"></script>
+    <script src="/js/wowchemy.min.59419d2c9809de125013c581da371866.js"></script>
 
     
 
@@ -2034,60 +2346,6 @@ root of lisp</p>
 
 
 
-
-  
-  
-  <div class="container">
-    <footer class="site-footer">
-  
-
-  <p class="powered-by">
-    ©2020 &middot; 
-
-    Powered by the
-    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
-    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
-
-    
-    <span class="float-right" aria-hidden="true">
-      <a href="#" class="back-to-top">
-        <span class="button_icon">
-          <i class="fas fa-chevron-up fa-2x"></i>
-        </span>
-      </a>
-    </span>
-    
-  </p>
-</footer>
-
-  </div>
-  
-
-  
-<div id="modal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Cite</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <pre><code class="tex hljs"></code></pre>
-      </div>
-      <div class="modal-footer">
-        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
-          <i class="fas fa-copy"></i> Copy
-        </a>
-        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
-          <i class="fas fa-download"></i> Download
-        </a>
-        <div id="modal-error"></div>
-      </div>
-    </div>
-  </div>
-</div>
 
 </body>
 </html>
