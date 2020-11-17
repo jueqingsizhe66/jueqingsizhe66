@@ -2529,6 +2529,19 @@ See `org-capture-templates&#39; for more information.&amp;quot;
                  (function org-hugo-new-subtree-post-capture-template))))
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;code&gt;C-c c x&lt;/code&gt;的templates可以进一步改造&lt;/p&gt;
+&lt;h2 id=&#34;文章写作的要点&#34;&gt;文章写作的要点&lt;/h2&gt;
+&lt;p&gt;在&lt;code&gt;---  和 ---&lt;/code&gt;之间代表头部信息，可以参考contend/post目录下的文件，
+每篇文章可以有一张缩列图，图的文件名都是featured后缀是jpg或者png，
+文件夹名字就是文章名字，文件夹放着index.md和featured.jpg等&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;
+# Featured image
+# To use, add an image named `featured.jpg/png` to your page&#39;s folder.
+# Focal points: Smart, Center, TopLeft, Top, TopRight, Left, Right, BottomLeft, Bottom, BottomRight.
+image:
+  caption: &amp;quot;&amp;quot;
+  focal_point: &amp;quot;&amp;quot;
+  preview_only: false
+&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     
@@ -2560,7 +2573,7 @@ data.head()
 &lt;p&gt;Demo:&lt;/p&gt;
 
 
-&lt;div id=&#34;chart-694783215&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;div id=&#34;chart-947652813&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
 &lt;script&gt;
   (function() {
     let a = setInterval( function() {
@@ -2570,7 +2583,7 @@ data.head()
       clearInterval( a );
 
       Plotly.d3.json(&#34;./line-chart.json&#34;, function(chart) {
-        Plotly.plot(&#39;chart-694783215&#39;, chart.data, chart.layout, {responsive: true});
+        Plotly.plot(&#39;chart-947652813&#39;, chart.data, chart.layout, {responsive: true});
       });
     }, 500 );
   })();
