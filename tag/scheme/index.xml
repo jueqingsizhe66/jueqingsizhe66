@@ -5,7 +5,7 @@
     <link>https://jueqingsizhe66.github.io/tag/scheme/</link>
       <atom:link href="https://jueqingsizhe66.github.io/tag/scheme/index.xml" rel="self" type="application/rss+xml" />
     <description>scheme</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>©2020</copyright><lastBuildDate>Fri, 11 Aug 2017 20:13:42 +0800</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>©2021</copyright><lastBuildDate>Fri, 11 Aug 2017 20:13:42 +0800</lastBuildDate>
     <image>
       <url>https://jueqingsizhe66.github.io/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_2.png</url>
       <title>scheme</title>
@@ -6504,7 +6504,6 @@ And we&#39;re done.
       (else
        (and (eqlist? (car l1) (car l2))
             (eqlist? (cdr l1) (cdr l2)))))))
-
 (define eqlist1?
   (lambda (l1 l2)
     (cond 
@@ -7054,7 +7053,7 @@ And we&#39;re done.
 ;;;                                                                or it contains at least one non-empty list.
 ;;;                                                 And Because the last question is always else
 ;;;         Why (cons 
-;;;                                           Because we are building  a lsit  -----The second commandments
+;;;                                           Because we are building  a list  -----The second commandments
 ;;;
 ;;;         Why (firsts (cdr l)) 
 ;;;                                           Because we can only  look at one S-expression at at time .
@@ -7402,9 +7401,9 @@ And we&#39;re done.
          (else (cons (car l)
                      (insertR* new old
                                (cdr l)))))
-       (else cons (insertR* new old
+       (else (cons (insertR* new old
                             (car l))
-             (insertR* new old (cdr l))))))
+             (insertR* new old (cdr l))))))))
 
 ;;; 
 (define insertL*
@@ -7419,9 +7418,9 @@ And we&#39;re done.
          (else (cons (car l)
                      (insertL* new old
                                (cdr l)))))
-       (else cons (insertL* new old
+       (else (cons (insertL* new old
                             (car l))
-             (insertL* new old (cdr l))))))
+             (insertL* new old (cdr l)))))))
 
 
 (define occur*
@@ -7470,6 +7469,7 @@ And we&#39;re done.
 (define first
   (lambda (p)
     (cond (else (car p)))))
+
 (define second
   (lambda (p)
     (cond
@@ -7495,6 +7495,7 @@ And we&#39;re done.
       (else 
             (intersect1? 
               (cdr set1) set2)))))
+
 (define intersect2?
   (lambda (set1 set2)
     (cond
@@ -7511,6 +7512,7 @@ And we&#39;re done.
              (intersect (cdr set1) set2)))
       (else
        (intersect (cdr set1) set2)))))
+
 (define intersect
   (lambda (set1 set2)
     (cond
@@ -7551,6 +7553,7 @@ And we&#39;re done.
        (else
         (cons (car set1)
               (union (cdr set1) (set2)))))))
+
 (define build 
   (lambda (s1 s2)
     (cond 
@@ -7847,6 +7850,7 @@ And we&#39;re done.
       ((subset? set1 set2)
        (subset? set2 set1))
       (else #f))))
+
 (define eqset1?
   (lambda (set1 set2)
     (cond
@@ -8331,6 +8335,7 @@ And we&#39;re done.
                                                (col (cons al dl)
                                                     (* ap dp)
                                                     (+ as ds))))))))))
+
 ;the fourth collector :: the last-last-friend
 (define the-last-last-friend
   (lambda (newl product sum)
@@ -8366,14 +8371,12 @@ And we&#39;re done.
                   (rempick ((sub1 n)
                             (cdr lat))))))))
 
-
 (define keep-looking
   (lambda (a sorn lat)
     (cond
       ((number? sorn)
        (keep-looking a (pick sorn lat) lat))
       (else (eq? sorn a)))))
-
 
 (define looking
   (lambda (a lat)
@@ -8463,7 +8466,7 @@ And we&#39;re done.
 ;;;        Yes, there is .The first component of a  pair becomes simpler,though the second component becomes more complicated
 ;;;
 ;;; In what way is the first component simpler?
-;;;       IT is only a part (IT intelligent technique   is equal to it) of the original pair&#39;s first component.
+;;;       IT is only a part (IT intelligent technique is equal to it) of the original pair&#39;s first component.
 ;;;
 ;;; Doesn&#39;t this mean that lenght * is the wrong function for determining the length of the argument? Can you find a better function
 ;;;         A better function should pay more attention to the first component
@@ -8483,6 +8486,7 @@ And we&#39;re done.
       (else
        (+ (length* (first pora))
           (length* (second pora)))))))
+
 (define weight*
   (lambda (pora)
     (cond 
@@ -8490,6 +8494,7 @@ And we&#39;re done.
       (else
        (+ (* (weight* (first pora)) 2)
           (weight* (second pora)))))))
+
 ;;;  Here is shuffle which is like align but uses revpair from chapter7, instead of shift:(when the first component is a-pair?
 ;;;       THen do revpair.
 ;;; The function shuffle and revpair swap the components of pairs when the first component is a pair...
@@ -8557,7 +8562,6 @@ And we&#39;re done.
 ;;; Here is the beginning of this function:
 ;;;
 ;;; (define will-stop?  (lambda (f) ...)))
-;;;
 ;;;
 ;;;
 ;;; What does it do?  Do will-stop? return a value for all arguments?

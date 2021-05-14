@@ -755,7 +755,7 @@
 
 
 
-<span class="article-metadata" >Reading time: 109 minutes and    16 seconds with 24041 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+<span class="article-metadata" >Reading time: 109 minutes and    16 seconds with 24040 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents"></nav>
     </aside>
@@ -949,7 +949,6 @@
       (else
        (and (eqlist? (car l1) (car l2))
             (eqlist? (cdr l1) (cdr l2)))))))
-
 (define eqlist1?
   (lambda (l1 l2)
     (cond 
@@ -1499,7 +1498,7 @@
 ;;;                                                                or it contains at least one non-empty list.
 ;;;                                                 And Because the last question is always else
 ;;;         Why (cons 
-;;;                                           Because we are building  a lsit  -----The second commandments
+;;;                                           Because we are building  a list  -----The second commandments
 ;;;
 ;;;         Why (firsts (cdr l)) 
 ;;;                                           Because we can only  look at one S-expression at at time .
@@ -1847,9 +1846,9 @@
          (else (cons (car l)
                      (insertR* new old
                                (cdr l)))))
-       (else cons (insertR* new old
+       (else (cons (insertR* new old
                             (car l))
-             (insertR* new old (cdr l))))))
+             (insertR* new old (cdr l))))))))
 
 ;;; 
 (define insertL*
@@ -1864,9 +1863,9 @@
          (else (cons (car l)
                      (insertL* new old
                                (cdr l)))))
-       (else cons (insertL* new old
+       (else (cons (insertL* new old
                             (car l))
-             (insertL* new old (cdr l))))))
+             (insertL* new old (cdr l)))))))
 
 
 (define occur*
@@ -1915,6 +1914,7 @@
 (define first
   (lambda (p)
     (cond (else (car p)))))
+
 (define second
   (lambda (p)
     (cond
@@ -1940,6 +1940,7 @@
       (else 
             (intersect1? 
               (cdr set1) set2)))))
+
 (define intersect2?
   (lambda (set1 set2)
     (cond
@@ -1956,6 +1957,7 @@
              (intersect (cdr set1) set2)))
       (else
        (intersect (cdr set1) set2)))))
+
 (define intersect
   (lambda (set1 set2)
     (cond
@@ -1996,6 +1998,7 @@
        (else
         (cons (car set1)
               (union (cdr set1) (set2)))))))
+
 (define build 
   (lambda (s1 s2)
     (cond 
@@ -2292,6 +2295,7 @@
       ((subset? set1 set2)
        (subset? set2 set1))
       (else #f))))
+
 (define eqset1?
   (lambda (set1 set2)
     (cond
@@ -2776,6 +2780,7 @@
                                                (col (cons al dl)
                                                     (* ap dp)
                                                     (+ as ds))))))))))
+
 ;the fourth collector :: the last-last-friend
 (define the-last-last-friend
   (lambda (newl product sum)
@@ -2811,14 +2816,12 @@
                   (rempick ((sub1 n)
                             (cdr lat))))))))
 
-
 (define keep-looking
   (lambda (a sorn lat)
     (cond
       ((number? sorn)
        (keep-looking a (pick sorn lat) lat))
       (else (eq? sorn a)))))
-
 
 (define looking
   (lambda (a lat)
@@ -2908,7 +2911,7 @@
 ;;;        Yes, there is .The first component of a  pair becomes simpler,though the second component becomes more complicated
 ;;;
 ;;; In what way is the first component simpler?
-;;;       IT is only a part (IT intelligent technique   is equal to it) of the original pair's first component.
+;;;       IT is only a part (IT intelligent technique is equal to it) of the original pair's first component.
 ;;;
 ;;; Doesn't this mean that lenght * is the wrong function for determining the length of the argument? Can you find a better function
 ;;;         A better function should pay more attention to the first component
@@ -2928,6 +2931,7 @@
       (else
        (+ (length* (first pora))
           (length* (second pora)))))))
+
 (define weight*
   (lambda (pora)
     (cond 
@@ -2935,6 +2939,7 @@
       (else
        (+ (* (weight* (first pora)) 2)
           (weight* (second pora)))))))
+
 ;;;  Here is shuffle which is like align but uses revpair from chapter7, instead of shift:(when the first component is a-pair?
 ;;;       THen do revpair.
 ;;; The function shuffle and revpair swap the components of pairs when the first component is a pair...
@@ -3002,7 +3007,6 @@
 ;;; Here is the beginning of this function:
 ;;;
 ;;; (define will-stop?  (lambda (f) ...)))
-;;;
 ;;;
 ;;;
 ;;; What does it do?  Do will-stop? return a value for all arguments?
@@ -6909,7 +6913,7 @@ bakers-dozen-again  ; '(egg egg egg egg egg egg egg egg egg egg egg egg egg-end 
   
 
   <p class="powered-by">
-    ©2020 &middot; 
+    ©2021 &middot; 
 
     ^-^ LingHuChong ^-^ Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
@@ -7085,7 +7089,7 @@ bakers-dozen-again  ; '(egg egg egg egg egg egg egg egg egg egg egg egg egg-end 
     
     
     
-    <script src="/js/wowchemy.min.59419d2c9809de125013c581da371866.js"></script>
+    <script src="/js/wowchemy.min.516d1df876a80aa80a06ab72f875bdd4.js"></script>
 
     
 

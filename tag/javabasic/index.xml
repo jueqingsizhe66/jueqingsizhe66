@@ -5,7 +5,7 @@
     <link>https://jueqingsizhe66.github.io/tag/javabasic/</link>
       <atom:link href="https://jueqingsizhe66.github.io/tag/javabasic/index.xml" rel="self" type="application/rss+xml" />
     <description>JavaBasic</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>©2020</copyright><lastBuildDate>Fri, 10 Feb 2017 00:04:33 +0800</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>©2021</copyright><lastBuildDate>Fri, 10 Feb 2017 00:04:33 +0800</lastBuildDate>
     <image>
       <url>https://jueqingsizhe66.github.io/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_2.png</url>
       <title>JavaBasic</title>
@@ -19392,12 +19392,12 @@ GTK.gtk_widget_show(window);&lt;/p&gt;
                          GTK.gtk_main_quit();
                  }
          }, null);
-            
+
          //网格布局  盒子布局   固定布局。。。 当前选择网格布局
      int houseGrid = GTK.gtk_grid_new();
      //载入控件
      //省略 一万行代码。。。。
-        
+
      //载入到windows当中
          GTK.gtk_container_add(window, houseGrid);
          //启动循环
@@ -19447,25 +19447,25 @@ public class TestGtkWidgetFixedLayout
           GTK.gtk_init();
       int window = GTK.gtk_window_new(GTK.GTK_WINDOW_TOPLEVEL); // 原来还有个POPUP估计是右键菜单
       GTK.gtk_widget_show(window);
-        
+
       GTK.gtk_window_set_title(window, &amp;quot;霜雪&amp;quot;); // widget下没有 只有在window下有。
      // GTK.gtk_window_set_position(window, GTK.GTK_WIN_POS_CENTER);
-        
+
       GTK.gtk_window_set_position(window, GTK.GTK_WIN_POS_CENTER_ALWAYS);
       //GTK.gtk_window_set_resizable(window, true);  //默认可以拉伸
       // 默认的窗口可以最大化， GTK.gtk_widget_set_maximize(widget)
-       
+
       //新建了一个文本框
       int entry1  = GTK.gtk_entry_new();
       GTK.gtk_widget_show(entry1);
       //新建了一个button 
       int button1 = GTK.gtk_button_new_with_label(&amp;quot;click me&amp;quot;);
       GTK.gtk_widget_show(button1);
-        
+
       //新建了一个标签
       int label1 =  GTK.gtk_label_new(&amp;quot;请输入：&amp;quot;);
       GTK.gtk_widget_show(label1);
-        
+
       // 安静的关闭对话框
       GTK.g_signal_connect(window, &amp;quot;destroy&amp;quot;, new IGCallBack()
       {
@@ -19476,7 +19476,7 @@ public class TestGtkWidgetFixedLayout
                       GTK.gtk_main_quit();
               }
       }, null);
-        
+
       //int box1= GTK.gtk_box_new(GTK., spacing)
       //新加了一个house  用来整租给文本框 +button+label
       int house = GTK.gtk_fixed_new();
@@ -19484,9 +19484,9 @@ public class TestGtkWidgetFixedLayout
       GTK.gtk_fixed_put(house,button1,50,0);
       GTK.gtk_fixed_put(house,label1,0,100); //很难适应屏幕大小！！所以一般很少用
       GTK.gtk_widget_show(house);
-        
+
       GTK.gtk_container_add(window,house);
-        
+
       GTK.gtk_main();
   }
 &lt;/code&gt;&lt;/pre&gt;
@@ -19793,7 +19793,7 @@ public class TestGtkCheckBox
                           // TODO 自动生成的方法存根
                           GTK.gtk_main_quit();
                   }
-                    
+
           },null);
           box = GTK.gtk_box_new(GTK.GTK_ORIENTATION_VERTICAL, 0);
           int box2= GTK.gtk_box_new(GTK.GTK_ORIENTATION_VERTICAL,0);
@@ -19806,25 +19806,25 @@ public class TestGtkCheckBox
           GTK.gtk_container_add(window, box);
           GTK.gtk_widget_show(box);
           GTK.gtk_main();
-            
+
   }
 
-    
+
   public static void testGtkCheckBox(int window,int box2)
   {
-    
+
           int cbMan = GTK.gtk_check_button_new_with_label(&amp;quot;男&amp;quot;);
           int cbWoman = GTK.gtk_check_button_new_with_label(&amp;quot;女&amp;quot;);
-            
-            
+
+
           GTK.gtk_box_pack_start(box2, cbMan, false,false        , 0);
           GTK.gtk_box_pack_start(box2, cbWoman, false,false        , 0);
-            
-            
+
+
           GTK.gtk_widget_show(cbMan);
           GTK.gtk_widget_show(cbWoman);
           GTK.gtk_widget_show(box2);
-    
+
   }
   public static void testGtkCheckBoxInstall(int window,int box1)
   {
@@ -19838,14 +19838,14 @@ public class TestGtkCheckBox
           final int btnInstall = GTK.gtk_button_new_with_label(&amp;quot;install&amp;quot;);
           int btnClosed  = GTK.gtk_button_new_with_label(&amp;quot;close&amp;quot;);
           GTK.gtk_widget_set_sensitive(btnInstall, false);
-            
+
           //添加控件
           GTK.gtk_box_pack_start(box1, entryLicense, false,false        , 0);
           GTK.gtk_box_pack_start(box1, cbAgree, false,false, 0);
           GTK.gtk_box_pack_start(boxInner, btnInstall, false,false,0);
           GTK.gtk_box_pack_start(boxInner, btnClosed, false,false,0);
           GTK.gtk_box_pack_start(box1, boxInner, false,false        , 0);
-            
+
           //显示控件
           GTK.gtk_widget_show(entryLicense);
           GTK.gtk_widget_show(cbAgree);
@@ -19853,7 +19853,7 @@ public class TestGtkCheckBox
           GTK.gtk_widget_show(btnClosed);
           GTK.gtk_widget_show(boxInner);
           GTK.gtk_widget_show(box1);
-            
+
           //添加事件
           GTK.g_signal_connect(cbAgree, &amp;quot;clicked&amp;quot;, new IGCallBack() 
           {
@@ -19862,7 +19862,7 @@ public class TestGtkCheckBox
                   {
                           // TODO 自动生成的方法存根
                           boolean isChecked =  GTK.gtk_toggle_button_get_active(cbAgree);
-                            
+
                           //写了gtk_checkbox发现没有set命令 于是用了widget..
                           GTK.gtk_widget_set_sensitive(btnInstall, isChecked);
                   }
