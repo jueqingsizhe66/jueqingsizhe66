@@ -13,6 +13,6 @@ set /p declation=输入提交的commit信息:
 git commit -m "%declation%"
 echo;
 
-echo /p current_branch=将变更情况提交到远程自己分支：git push origin master? or develop?
+set /p current_branch=将变更情况提交到远程自己分支git push origin master? or develop?: 
 git push origin "%current_branch%"
 echo;
