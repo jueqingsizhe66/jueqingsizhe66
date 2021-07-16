@@ -1,18 +1,18 @@
 @echo off
 
-title GIT一键提交
+title GIT one key commit
 color 3
-echo 当前目录是：%cd%
+echo Current directory %cd%
 echo;
 
-echo 开始添加变更：git add .
+echo Operation: git add .
 git add .
 echo;
 
-set /p declation=输入提交的commit信息:
+set /p declation= please input commit msg:
 git commit -m "%declation%"
 echo;
 
-set /p current_branch=将变更情况提交到远程自己分支git push origin master? or develop?: 
+set /p current_branch= Which branch do you wanna push?: git push origin master? or develop?: 
 git push origin "%current_branch%"
 echo;
