@@ -13,6 +13,6 @@ set /p declation= please input commit msg:
 git commit -m "%declation%"
 echo;
 
-set /p current_branch= Which branch do you wanna push?: git push origin master? or develop?:
+rem set /p current_branch= Which branch do you wanna push?: git push origin master? or develop?:
 git push origin master
 echo;
