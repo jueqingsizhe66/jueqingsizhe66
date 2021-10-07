@@ -265,8 +265,8 @@
   
 
   <link rel="manifest" href="/index.webmanifest">
-  <link rel="icon" type="image/png" href="/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_32x32_fill_lanczos_center_2.png">
-  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_192x192_fill_lanczos_center_2.png">
+  <link rel="icon" type="image/png" href="/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_32x32_fill_lanczos_center_3.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_192x192_fill_lanczos_center_3.png">
 
   <link rel="canonical" href="https://jueqingsizhe66.github.io/post/python%E6%8F%90%E5%8F%96%E5%A4%9A%E4%B8%AA%E6%96%87%E4%BB%B6%E7%9A%84%E5%AD%98%E5%9C%A8nan%E9%80%9F%E5%BA%A6%E5%BB%93%E7%BA%BF/">
 
@@ -289,8 +289,8 @@
   <meta property="og:site_name" content="30年磨一剑">
   <meta property="og:url" content="https://jueqingsizhe66.github.io/post/python%E6%8F%90%E5%8F%96%E5%A4%9A%E4%B8%AA%E6%96%87%E4%BB%B6%E7%9A%84%E5%AD%98%E5%9C%A8nan%E9%80%9F%E5%BA%A6%E5%BB%93%E7%BA%BF/">
   <meta property="og:title" content="python提取多个文件的存在null速度廓线 | 30年磨一剑">
-  <meta property="og:description" content="背景介绍 在前面 python提取多个文件的案例中，只是遍历了全"><meta property="og:image" content="https://jueqingsizhe66.github.io/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_2.png">
-  <meta property="twitter:image" content="https://jueqingsizhe66.github.io/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
+  <meta property="og:description" content="背景介绍 在前面 python提取多个文件的案例中，只是遍历了全"><meta property="og:image" content="https://jueqingsizhe66.github.io/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png">
+  <meta property="twitter:image" content="https://jueqingsizhe66.github.io/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png"><meta property="og:locale" content="en-us">
   
     
       <meta property="article:published_time" content="2019-10-29T10:56:00&#43;08:00">
@@ -336,7 +336,7 @@
     "name": "30年磨一剑",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://jueqingsizhe66.github.io/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_192x192_fill_lanczos_center_2.png"
+      "url": "https://jueqingsizhe66.github.io/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_192x192_fill_lanczos_center_3.png"
     }
   },
   "description": "背景介绍 在前面 python提取多个文件的案例中，只是遍历了全"
@@ -831,8 +831,8 @@
 <li>存储结果到对应的sheet表中</li>
 </ol>
 <h2 id="技术实现">技术实现</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
-<span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+<span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
 <span style="color:#f92672">import</span> os
 
 
@@ -871,7 +871,7 @@ headDir<span style="color:#f92672">=</span><span style="color:#e6db74">r</span><
 <h2 id="问题发现">问题发现</h2>
 <p>300个点得到的结果不依，高程不统一，为此专门提取500个点，可以帅选</p>
 <p>改进main部分</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
     b <span style="color:#f92672">=</span> get_files()
     writer<span style="color:#f92672">=</span>pd<span style="color:#f92672">.</span>ExcelWriter(<span style="color:#e6db74">&#34;Results-compare-600.xlsx&#34;</span>)
     altitudesName<span style="color:#f92672">=</span>[]
@@ -1362,8 +1362,7 @@ headDir<span style="color:#f92672">=</span><span style="color:#e6db74">r</span><
     <script src="/js/wowchemy.min.516d1df876a80aa80a06ab72f875bdd4.js"></script>
 
     
-
-
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
 
 
 

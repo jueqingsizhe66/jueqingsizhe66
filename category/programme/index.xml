@@ -7,7 +7,7 @@
     <description>programme</description>
     <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>©2021</copyright><lastBuildDate>Wed, 04 Dec 2019 14:18:00 +0800</lastBuildDate>
     <image>
-      <url>https://jueqingsizhe66.github.io/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_2.png</url>
+      <url>https://jueqingsizhe66.github.io/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
       <title>programme</title>
       <link>https://jueqingsizhe66.github.io/category/programme/</link>
     </image>
@@ -22,8 +22,8 @@
 &lt;p&gt;&lt;a href=&#34;https://www.jianshu.com/p/3d1d648406f3&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Astral库计算日出日落时间&lt;/a&gt;一文解决获取当天日出日落时间，进一步可参考&lt;a href=&#34;https://astral.readthedocs.io/en/stable/index.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Astral手册&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;原始数据格式&#34;&gt;原始数据格式&lt;/h2&gt;
 &lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/aiwind/dataFormatDayNight.png&#34; alt=&#34;原始数据格式&#34;&gt;：第一列为时间序列，2,3列分别为雷达40m处的风向风速，依次类推&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; pandas &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; pd
-  &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; numpy &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; np
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; pandas &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; pd
+  &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; numpy &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; np
   &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; datetime
   &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; astral
 
@@ -34,17 +34,17 @@
   &lt;span style=&#34;color:#75715e&#34;&gt;#location_yangjiang = astral.Location((&amp;#39;YanDun&amp;#39;, &amp;#39;China&amp;#39;,42.3369 ,94.382 , &amp;#39;Asia/Shanghai&amp;#39;, 0))&lt;/span&gt;
   &lt;span style=&#34;color:#75715e&#34;&gt;#location_yangjiang = astral.Location((&amp;#39;huailai&amp;#39;, &amp;#39;China&amp;#39;,42.242 ,115.35 , &amp;#39;Asia/Shanghai&amp;#39;, 0))&lt;/span&gt;
   &lt;span style=&#34;color:#75715e&#34;&gt;#time_sunrise=location_yangjiang.sunrise(date=datetime.date.today(),local=True)&lt;/span&gt;
-  time_sunrise&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;location_yangjiang&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sunrise(date&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;date(&lt;span style=&#34;color:#ae81ff&#34;&gt;2019&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;15&lt;/span&gt;),local&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;True)
+  time_sunrise&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;location_yangjiang&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sunrise(date&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;date(&lt;span style=&#34;color:#ae81ff&#34;&gt;2019&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;15&lt;/span&gt;),local&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;)
   time_sunrise_update&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;time_sunrise &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;timedelta(hours&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;#提前/延后日出时间量&lt;/span&gt;
   time_sunrise_new&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;str(time_sunrise_update)
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(f&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;日出时间:{time_sunrise_new}&amp;#34;&lt;/span&gt;)
+  print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;日出时间:&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;time_sunrise_new&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
 
   &lt;span style=&#34;color:#75715e&#34;&gt;#time_sunset=location_yangjiang.sunset(date=datetime.date.today(),local=True)&lt;/span&gt;
-  time_sunset&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;location_yangjiang&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sunset(date&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;date(&lt;span style=&#34;color:#ae81ff&#34;&gt;2019&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;15&lt;/span&gt;),local&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;True)
+  time_sunset&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;location_yangjiang&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sunset(date&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;date(&lt;span style=&#34;color:#ae81ff&#34;&gt;2019&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;15&lt;/span&gt;),local&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;)
 
   time_sunset_update&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;time_sunset &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;timedelta(hours&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;#提前/延后日落时间量&lt;/span&gt;
   time_sunset_new&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;str(time_sunset_update)
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(f&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;日落时间:{time_sunset_new}&amp;#34;&lt;/span&gt;)
+  print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;日落时间:&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;time_sunset_new&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
 
 
   &lt;span style=&#34;color:#75715e&#34;&gt;#dongpingLidar=pd.read_excel(r&amp;#34;C:\Users\yezhaoliang\Desktop\dongpingLidar67.xlsx&amp;#34;)&lt;/span&gt;
@@ -59,7 +59,7 @@
       year&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;today[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;]
       month&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;today[&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;]
       day&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;today[&lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;]
-      time_sunrise &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; location_yangjiang&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sunrise(date&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;date(int(year), int(month), int(day)), local&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;True)
+      time_sunrise &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; location_yangjiang&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sunrise(date&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;date(int(year), int(month), int(day)), local&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;)
       time_sunrise_update &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; time_sunrise &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;timedelta(hours&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;)  &lt;span style=&#34;color:#75715e&#34;&gt;# 提前/延后日出时间量&lt;/span&gt;
       time_sunrise_new &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; str(time_sunrise_update)
       &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; time_sunrise_new[&lt;span style=&#34;color:#ae81ff&#34;&gt;11&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;19&lt;/span&gt;]
@@ -69,7 +69,7 @@
       month&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;today[&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;]
       day&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;today[&lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;]
       &lt;span style=&#34;color:#75715e&#34;&gt;## 日落&lt;/span&gt;
-      time_sunset &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; location_yangjiang&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sunset(date&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;date(int(year), int(month), int(day)), local&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;True)
+      time_sunset &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; location_yangjiang&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sunset(date&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;date(int(year), int(month), int(day)), local&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;)
       time_sunset_update &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; time_sunset &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;timedelta(hours&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;)  &lt;span style=&#34;color:#75715e&#34;&gt;# 提前/延后日落时间量&lt;/span&gt;
       time_sunset_new &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; str(time_sunset_update)
       &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; time_sunset_new[&lt;span style=&#34;color:#ae81ff&#34;&gt;11&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;19&lt;/span&gt;]
@@ -104,7 +104,7 @@
 &lt;span style=&#34;color:#75715e&#34;&gt;##2. 测试期中间日期跟踪日落日出&lt;/span&gt;
   &lt;span style=&#34;color:#75715e&#34;&gt;# dayIndex,nightIndex=getDayArrayCursor()&lt;/span&gt;
   &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(positions)):
-      &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(f&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{i}:&amp;#34;&lt;/span&gt;)
+      print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;i&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;:&amp;#34;&lt;/span&gt;)
       dir1 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; dongpingLidar&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[:, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;i&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
       vel &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; dongpingLidar&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[:, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;i&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;]
 
@@ -150,10 +150,9 @@
 &lt;li&gt;设计功率曲线&lt;/li&gt;
 &lt;li&gt;scada风速序列&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/aiwind/CFDAEP.PNG&#34; alt=&#34;CFD发电量计算&#34;&gt;&lt;/p&gt;
 &lt;!--listend--&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; pandas &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; pd
-&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; numpy &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; np
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; pandas &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; pd
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; numpy &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; np
 
 &lt;span style=&#34;color:#75715e&#34;&gt;## Yandun&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#powerlaw=pd.read_csv(r&amp;#39;C:\Users\yezhaoliang\Desktop\power12.csv&amp;#39;)&lt;/span&gt;
@@ -242,7 +241,7 @@ cpPs &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; powerlaw&lt;span s
     count&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
     [velocityZones,powerZones]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;powerLawIntoZones(zones)
     cps&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;DataFrame([velocityZones,powerZones])&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;T
-    cps&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_excel(f&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;powerVelocityBin{zones}.xlsx&amp;#34;&lt;/span&gt;)
+    cps&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_excel(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;powerVelocityBin&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;zones&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;.xlsx&amp;#34;&lt;/span&gt;)
     &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; vel &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; nac:
         &lt;span style=&#34;color:#75715e&#34;&gt;#calPower[count]=getMean(cpVs,cpPs,vel)&lt;/span&gt;
         calVel[count]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;vel
@@ -265,7 +264,7 @@ velocitySet&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span st
     nac8 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; velocitySet&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[:, i]
     power1 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; getPower(nac8,i)
     &lt;span style=&#34;color:#75715e&#34;&gt;#power1 = getPowerVelocityBin(nac8,i,50)&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(power1)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+    print(power1)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&#34;速度分仓&#34;&gt;速度分仓&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;设计功率曲线按照分仓个数bin,进行分仓&lt;/li&gt;
@@ -273,8 +272,9 @@ velocitySet&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span st
 &lt;li&gt;结果发现速度分仓超过25仓之后，对功率曲线计算结果基本上和线性插值类似。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&#34;悟空-条件&#34;&gt;悟空[条件]&lt;/h2&gt;
-&lt;p&gt;注意判断中大于号和小于号都不能写错，涉及到判断、抉择、条件、空的时候一定得注意思考对，曾经我就犯过错误!&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(vel&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt;(velocityZones[i]&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;velocityMagnitude&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2.0&lt;/span&gt;)  &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt;
+&lt;p&gt;注意判断中大于号和小于号都不能写错，涉及到判断、抉择、条件、空的时候一定得注意
+思考对，曾经我就犯过错误!&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(vel&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt;(velocityZones[i]&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;velocityMagnitude&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2.0&lt;/span&gt;)  &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt;
         vel&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;(velocityZones[i]&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;velocityMagnitude&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2.0&lt;/span&gt;) ):&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&#34;手算两条功率的k值&#34;&gt;手算两条功率的k值&lt;/h2&gt;
 &lt;p&gt;实际功率曲线[一般是scada的风速和功率的散点图]和设计功率曲线之比如果达到1，也就是k值，那么认为是最好的，如果大点也可以，但是最好不要少于，为了计算这个k值，简单编写了下面代码&lt;/p&gt;
@@ -284,7 +284,7 @@ velocitySet&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span st
 &lt;li&gt;设计功率曲线&lt;/li&gt;
 &lt;/ol&gt;
 &lt;!--listend--&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; vel &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(nac&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;__len__()):
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; vel &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(nac&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;__len__()):
     &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(zones):
         &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;j &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; nac[vel]&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; nac[vel] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;velocityMagnitude&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2.0&lt;/span&gt;):
             counts[j]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;counts[j]&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
@@ -298,8 +298,8 @@ velocitySet&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span st
             powerSum[j]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;powerSum[j]&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;power[vel]
             &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;全部代码如下：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; pandas &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; pd
-&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; numpy &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; np
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; pandas &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; pd
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; numpy &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; np
 
 &lt;span style=&#34;color:#75715e&#34;&gt;### 规定风速范围从0-25 不能少于25&lt;/span&gt;
 powerlaw&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read_csv(&lt;span style=&#34;color:#e6db74&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;C:\Users\yezhaoliang\Desktop\my89_12.csv&amp;#39;&lt;/span&gt;)
@@ -429,7 +429,7 @@ cpPs &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; powerlaw&lt;span s
     count&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
     [velocityZones,powerZones]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;powerLawIntoZones(zones)
     cps&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;DataFrame([velocityZones,powerZones])&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;T
-    cps&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_excel(f&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;powerVelocityBin{zones}.xlsx&amp;#34;&lt;/span&gt;)
+    cps&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_excel(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;powerVelocityBin&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;zones&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;.xlsx&amp;#34;&lt;/span&gt;)
     &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; vel &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; nac:
         &lt;span style=&#34;color:#75715e&#34;&gt;#calPower[count]=getMean(cpVs,cpPs,vel)&lt;/span&gt;
         calVel[count]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;vel
@@ -451,8 +451,8 @@ kvalues&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;np&lt;span style=
     power8 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; velocityPowerSeries&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[:, i&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;]
     [probability,velocitySet,PowerSet,k] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; velocitySeriesSplitIntoZones(nac8,power8,&lt;span style=&#34;color:#ae81ff&#34;&gt;50&lt;/span&gt;)
     kvalues[i] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; k
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sum(probability))
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(f&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;k value is {k}&amp;#34;&lt;/span&gt;)
+    print(np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sum(probability))
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;k value is &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;k&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
     &lt;span style=&#34;color:#75715e&#34;&gt;#power1 = getPower(nac8,i)&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#    power1 = getPowerVelocityBin(nac8,i,125)&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#    print(power1)&lt;/span&gt;
@@ -474,16 +474,16 @@ kset&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_csv(&lt;span styl
 &lt;h2 id=&#34;mp4格式导出&#34;&gt;mp4格式导出&lt;/h2&gt;
 &lt;p&gt;在Ubuntu或者mac系统可以试用image
 注意控制&lt;a href=&#34;https://blog.csdn.net/sailist/article/details/79502007&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;ffmpeg&lt;/a&gt;的路径&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## 设置ffmpeg路径&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## 设置ffmpeg路径&lt;/span&gt;
   ffmpegpath &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;abspath(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;./ffmpeg/bin/ffmpeg.exe&amp;#34;&lt;/span&gt;)
   plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;rcParams[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;animation.ffmpeg_path&amp;#34;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ffmpegpath
   writer &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; animation&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;FFMpegWriter()
 &lt;span style=&#34;color:#75715e&#34;&gt;## 在sava函数中设置执行者&lt;/span&gt;
   anim&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;save(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;test_animation.mp4&amp;#39;&lt;/span&gt;,writer&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;writer)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&#34;技术实现&#34;&gt;技术实现&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; numpy &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; np
-&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; matplotlib.pyplot &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; plt
-&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; matplotlib.animation &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; animation
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; numpy &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; np
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; matplotlib.pyplot &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; plt
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; matplotlib.animation &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; animation
 &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; os
 &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; math
 
@@ -491,7 +491,7 @@ kset&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_csv(&lt;span styl
 fig, ax &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;subplots(figsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;))
 &lt;span style=&#34;color:#75715e&#34;&gt;#https://blog.csdn.net/xiaosebi1111/article/details/50617433  控制子图&lt;/span&gt;
 xdata, ydata &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [], []
-ln, &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;plot([], [], &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;rs&amp;#39;&lt;/span&gt;,animated&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;True)
+ln, &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;plot([], [], &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;rs&amp;#39;&lt;/span&gt;,animated&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;)
 text_pt &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;text(&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;, fontsize&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;18&lt;/span&gt;)
 
 &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;init&lt;/span&gt;():
@@ -513,7 +513,7 @@ text_pt &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; plt&lt;span sty
     &lt;span style=&#34;color:#75715e&#34;&gt;#ydata.append(np.sin(frame))&lt;/span&gt;
     ydata&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(math&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;floor(frame&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;16&lt;/span&gt;) )
     ln&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;set_data(xdata, ydata)
-    text_pt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;set_text(f&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Sector={frame%16+1}, VelocityBin={math.floor(frame/16)+1}&amp;#34;&lt;/span&gt; )
+    text_pt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;set_text(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Sector=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;frame&lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;16&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;, VelocityBin=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;math&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;floor(frame&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;16&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; )
     &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ln,text_pt,
 &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;generateFrames&lt;/span&gt;(rows&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;16&lt;/span&gt;,cols&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;25&lt;/span&gt;):
    count&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;;
@@ -543,7 +543,7 @@ writer &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; animation&lt;spa
 frames&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;generateFrames(&lt;span style=&#34;color:#ae81ff&#34;&gt;16&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;25&lt;/span&gt;)
 &lt;span style=&#34;color:#75715e&#34;&gt;#frames=np.linspace(-np.pi,np.pi, 16)&lt;/span&gt;
 anim &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; animation&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;FuncAnimation(fig, update2, frames&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;frames,interval&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;25&lt;/span&gt;,
-                    init_func&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;init,blit&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;True)
+                    init_func&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;init,blit&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;)
 
 &lt;span style=&#34;color:#75715e&#34;&gt;# anim = animation.FuncAnimation(fig, update, frames=np.linspace(-np.pi,np.pi, 16),interval=10,&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#                                init_func=init,blit=True)&lt;/span&gt;
@@ -569,7 +569,7 @@ cmd或者terminal，然后切换到对应脚本目录，拷贝相应脚本需要
 &lt;h3 id=&#34;管道1-转换openfoam结果为msh和dat&#34;&gt;管道1: 转换Openfoam结果为msh和dat&lt;/h3&gt;
 &lt;p&gt;通过下面的程序得到一个项目文件相关的msh, 比如YangJiang ,就会得到YangJiang.msh以及YangJiang.dat等， 也就是升华技术，可提取一个技术变量，projectName=&amp;ldquo;YangJiang&amp;rdquo;&lt;/p&gt;
 &lt;p&gt;batchFluent.bat(不需要修改!)&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;rem 路径相应修改为电脑上的安装文件夹路径
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;rem 路径相应修改为电脑上的安装文件夹路径
 set OPENFOAM_WIN_DIR&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;D:/Program Files &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;x86&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;/AIWind/solver/OpenFOAMv18.06
 set WM_PROJECT_DIR&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;%OPENFOAM_WIN_DIR%
 set PATH&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;%OPENFOAM_WIN_DIR%&lt;span style=&#34;color:#ae81ff&#34;&gt;\b&lt;/span&gt;in;%OPENFOAM_WIN_DIR%&lt;span style=&#34;color:#ae81ff&#34;&gt;\b&lt;/span&gt;in/mpi;%OPENFOAM_WIN_DIR%&lt;span style=&#34;color:#ae81ff&#34;&gt;\l&lt;/span&gt;ib;
@@ -580,7 +580,7 @@ foamMeshToFluent
 rem 转换数据
 foamDataToFluent&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;system/foamdatatofluentdict(不需要修改)&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;FoamFile
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;FoamFile
 &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
   version     2.0;
   format      ascii;
@@ -598,7 +598,7 @@ epsilon         6;
 //alpha1          150;//&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3 id=&#34;管道2-转换msh和dat为fluent的cas-and-dat--需要修改&#34;&gt;管道2: 转换msh和dat为fluent的cas and dat(需要修改)&lt;/h3&gt;
 &lt;p&gt;YangJiang.msh 和 YangJiang2000.dat和 YangJiang20001.cas得适配，应需进行修正，把这个升级为&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;cx-gui-do cx-activate-item &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;MenuBar*ReadSubMenu*Mesh...&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;cx-gui-do cx-activate-item &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;MenuBar*ReadSubMenu*Mesh...&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;cx-gui-do cx-set-file-dialog-entries &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Select File&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;( &amp;#34;YangJiang.msh&amp;#34;) &amp;#34;Mesh Files (*.msh* *.MSH* )&amp;#34;)
 &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;(cx-gui-do cx-activate-item &amp;#34;MenuBar*ReadSubMenu*Data...&amp;#34;)
 &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;(cx-gui-do cx-set-file-dialog-entries &amp;#34;Select File&amp;#34; &amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;YangJiang2000.dat&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Data Files (*.dat* *.pdat* )&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
@@ -610,7 +610,7 @@ epsilon         6;
 &lt;p&gt;由此可得到YangJiang20001.cas和YangJiang20001.dat&lt;/p&gt;
 &lt;h3 id=&#34;管道3-提取post结果--需要修改-修改一次-然后进行循环即可&#34;&gt;管道3: 提取post结果(需要修改, 修改一次，然后进行循环即可)&lt;/h3&gt;
 &lt;p&gt;然后针对cas和dat进行线信息提取即可&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;!@processDir&lt;span style=&#34;color:#f92672&#34;&gt;=(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;D:\\AIwind\\AIWindCases\\Dongping20191105\\noTurbine\\10.00\\0\\YangJiang\\fluentInterface&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;!@processDir&lt;span style=&#34;color:#f92672&#34;&gt;=(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;D:\\AIwind\\AIWindCases\\Dongping20191105\\noTurbine\\10.00\\0\\YangJiang\\fluentInterface&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;;
 
 &lt;span style=&#34;color:#75715e&#34;&gt;################################################&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;## 文件过滤设置&lt;/span&gt;
@@ -640,7 +640,7 @@ epsilon         6;
 &lt;h2 id=&#34;技术实现1&#34;&gt;技术实现1&lt;/h2&gt;
 &lt;h3 id=&#34;基础版本--初始版本&#34;&gt;基础版本(初始版本)&lt;/h3&gt;
 &lt;p&gt;事先拷贝好需要的文件放在指定位置处,使用system运行系统命令即可&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-perl&#34; data-lang=&#34;perl&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/usr/bin/env perl&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-perl&#34; data-lang=&#34;perl&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/usr/bin/env perl&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#===============================================================================&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#         FILE: batchProcess814w.pl&lt;/span&gt;
@@ -688,7 +688,7 @@ epsilon         6;
 &lt;li&gt;规律：找到项目文件名kh, yandun,YangJiang等&lt;/li&gt;
 &lt;/ol&gt;
 &lt;!--listend--&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-perl&#34; data-lang=&#34;perl&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/usr/bin/env perl&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-perl&#34; data-lang=&#34;perl&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/usr/bin/env perl&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#===============================================================================&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#         FILE: batchProcess814w.pl&lt;/span&gt;
@@ -741,7 +741,7 @@ epsilon         6;
 &lt;li&gt;找到noTurbine文件夹&lt;/li&gt;
 &lt;/ol&gt;
 &lt;!--listend--&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-perl&#34; data-lang=&#34;perl&#34;&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;#!/usr/bin/env perl&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-perl&#34; data-lang=&#34;perl&#34;&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;#!/usr/bin/env perl&lt;/span&gt;
   &lt;span style=&#34;color:#75715e&#34;&gt;#===============================================================================&lt;/span&gt;
   &lt;span style=&#34;color:#75715e&#34;&gt;#&lt;/span&gt;
   &lt;span style=&#34;color:#75715e&#34;&gt;#         FILE: batchProcessHuailai814w.pl&lt;/span&gt;
@@ -802,7 +802,7 @@ epsilon         6;
 具体文件需要修改msh和dat前缀&lt;/li&gt;
 &lt;/ol&gt;
 &lt;!--listend--&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-C&#34; data-lang=&#34;C&#34;&gt;(cx&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;gui&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;do&lt;/span&gt; cx&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;activate&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;item &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;MenuBar*ReadSubMenu*Mesh...&amp;#34;&lt;/span&gt;)
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-C&#34; data-lang=&#34;C&#34;&gt;(cx&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;gui&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;do&lt;/span&gt; cx&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;activate&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;item &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;MenuBar*ReadSubMenu*Mesh...&amp;#34;&lt;/span&gt;)
 (cx&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;gui&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;do&lt;/span&gt; cx&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;set&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;file&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;dialog&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;entries &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Select File&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&amp;#39;&lt;/span&gt;( &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;huailai20m2.msh&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Mesh Files (*.msh* *.MSH* )&amp;#34;&lt;/span&gt;)
   (cx&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;gui&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;do&lt;/span&gt; cx&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;activate&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;item &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;MenuBar*ReadSubMenu*Data...&amp;#34;&lt;/span&gt;)
   (cx&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;gui&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;do&lt;/span&gt; cx&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;set&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;file&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;dialog&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;entries &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Select File&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&amp;#39;&lt;/span&gt;( &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;huailai20m22000.dat&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Data Files (*.dat* *.pdat* )&amp;#34;&lt;/span&gt;)
@@ -813,7 +813,7 @@ epsilon         6;
 &lt;p&gt;核心命令： `fluent 3d -i batchFluent2000`&lt;/p&gt;
 &lt;h2 id=&#34;技术实现2&#34;&gt;技术实现2&lt;/h2&gt;
 &lt;h3 id=&#34;相同风速下-不同扇区处理&#34;&gt;相同风速下，不同扇区处理&lt;/h3&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-perl&#34; data-lang=&#34;perl&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/usr/bin/env perl&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-perl&#34; data-lang=&#34;perl&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/usr/bin/env perl&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#===============================================================================&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#         FILE: journalTransferAIWINDTOFluentCasDat814w.pl&lt;/span&gt;
@@ -860,7 +860,7 @@ epsilon         6;
     system(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;fluent 3d -i batchFluent2000&amp;#34;&lt;/span&gt;);
 }&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3 id=&#34;快速格式化项目的batchfluent2000&#34;&gt;快速格式化项目的batchFluent2000&lt;/h3&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-perl&#34; data-lang=&#34;perl&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; strict;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-perl&#34; data-lang=&#34;perl&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; strict;
 &lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; warnings;
 
 &lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; File::Slurp &lt;span style=&#34;color:#e6db74&#34;&gt;qw(read_file write_file)&lt;/span&gt;;
@@ -899,7 +899,7 @@ write_file $filename, {binmode &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;g
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;a href=&#34;:Slurphttps://metacpan.org/pod/File&#34;&gt;File::Slurp&lt;/a&gt; edit_file command file&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-perl&#34; data-lang=&#34;perl&#34;&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; File::Slurp &lt;span style=&#34;color:#e6db74&#34;&gt;qw(edit_file)&lt;/span&gt;;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-perl&#34; data-lang=&#34;perl&#34;&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; File::Slurp &lt;span style=&#34;color:#e6db74&#34;&gt;qw(edit_file)&lt;/span&gt;;
     &lt;span style=&#34;color:#75715e&#34;&gt;# perl -0777 -pi -e &amp;#39;s/foo/bar/g&amp;#39; /path/file&lt;/span&gt;
     edit_file { &lt;span style=&#34;color:#e6db74&#34;&gt;s/foo/bar/g&lt;/span&gt; } &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;/path/file&amp;#39;&lt;/span&gt;;
     edit_file &lt;span style=&#34;color:#66d9ef&#34;&gt;sub&lt;/span&gt; { &lt;span style=&#34;color:#e6db74&#34;&gt;s/foo/bar/g&lt;/span&gt; }, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;/path/file&amp;#39;&lt;/span&gt;;
@@ -919,7 +919,7 @@ write_file $filename, {binmode &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;g
 &lt;li&gt;
 &lt;p&gt;虽然slurp废弃了，但发现依然不错文件内容单行处理，所以无法循环，没有if判断等。但可以执行批处理，而IO:All使用
 `my $line = $io-&amp;gt;getline` ,其实使用内置的函数即可`while(&amp;lt;$fh&amp;gt;)`即可&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-perl&#34; data-lang=&#34;perl&#34;&gt;         &lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; strict;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-perl&#34; data-lang=&#34;perl&#34;&gt;         &lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; strict;
          &lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; warnings;
          &lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; File::Slurp &lt;span style=&#34;color:#e6db74&#34;&gt;qw(read_file write_file)&lt;/span&gt;;
          &lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt; $filename &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C:\\Users\\yezhaoliang\\Desktop\\probe.cse&amp;#34;&lt;/span&gt;;
@@ -933,7 +933,7 @@ write_file $filename, {binmode &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;g
          write_file $filename, {binmode &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;:gbk&amp;#39;&lt;/span&gt;},$data;
     &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;英文替换&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-perl&#34; data-lang=&#34;perl&#34;&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; strict;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-perl&#34; data-lang=&#34;perl&#34;&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; strict;
     &lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; warnings;
     &lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; File::Slurp &lt;span style=&#34;color:#e6db74&#34;&gt;qw(read_file write_file)&lt;/span&gt;;
     &lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt; $filename &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C:\\Users\\yezhaoliang\\Desktop\\probe.cse&amp;#34;&lt;/span&gt;;
@@ -948,7 +948,7 @@ write_file $filename, {binmode &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;g
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;回归到原始程序，只用内置函数&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-perl&#34; data-lang=&#34;perl&#34;&gt;    open(F1,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;lt;test.txt&amp;#39;&lt;/span&gt;);
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-perl&#34; data-lang=&#34;perl&#34;&gt;    open(F1,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;lt;test.txt&amp;#39;&lt;/span&gt;);
     open(F2,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;gt;test.txt.tmp&amp;#39;&lt;/span&gt;);
     &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; ($s&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;lt;F1&amp;gt;&lt;/span&gt;){
         $s &lt;span style=&#34;color:#f92672&#34;&gt;=~&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;s/1234/ABCD/g&lt;/span&gt;;
@@ -980,7 +980,7 @@ write_file $filename, {binmode &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;g
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h3 id=&#34;增强版的自定义功能&#34;&gt;增强版的自定义功能&lt;/h3&gt;
 &lt;p&gt;如果遇到某种条件下的文件则执行对应的修正&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-perl&#34; data-lang=&#34;perl&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; strict;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-perl&#34; data-lang=&#34;perl&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; strict;
 &lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; warnings;
 
 
@@ -1018,7 +1018,7 @@ close  $input
 &lt;li&gt;执行&lt;/li&gt;
 &lt;/ol&gt;
 &lt;!--listend--&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-perl&#34; data-lang=&#34;perl&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; strict;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-perl&#34; data-lang=&#34;perl&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; strict;
 &lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; warnings;
 &lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; utf8;
 &lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; Cwd;
@@ -1076,7 +1076,7 @@ close  $input
 &lt;li&gt;执行&lt;/li&gt;
 &lt;/ol&gt;
 &lt;!--listend--&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-perl&#34; data-lang=&#34;perl&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; strict;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-perl&#34; data-lang=&#34;perl&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; strict;
 &lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; warnings;
 &lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; Cwd;
 
@@ -1134,7 +1134,7 @@ close  $input
 &lt;li&gt;确定源文件是否存在! 原先的BatchFluent2000和cse文件在？&lt;/li&gt;
 &lt;/ol&gt;
 &lt;!--listend--&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-perl&#34; data-lang=&#34;perl&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/usr/bin/env perl&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-perl&#34; data-lang=&#34;perl&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/usr/bin/env perl&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#===============================================================================&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#         FILE: journalTransferAIWINDTOFluentCasDat814w.pl&lt;/span&gt;
@@ -1281,7 +1281,7 @@ close  $input
 &lt;li&gt;datetime格式转变，运用&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&#34;技术实现&#34;&gt;技术实现&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; pandas &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; pd
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; pandas &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; pd
 
     &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; datetime&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt;time
     csvFile&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C:\Users\yezhaoliang\Desktop\ew.csv&amp;#34;&lt;/span&gt;
@@ -1313,22 +1313,22 @@ close  $input
     earlistDate &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;strptime(earlistDay, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;%Y%m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%d&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; %H:%M:%S&amp;#39;&lt;/span&gt;)
     latestDay&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;csvData&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[len(csvData)&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]
     latestDate &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;strptime(latestDay, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;%Y%m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%d&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; %H:%M:%S&amp;#39;&lt;/span&gt;)
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(f&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{versionName.ljust(NameListLength,&amp;#34; &amp;#34;)}: {versionNumber}&amp;#39;&lt;/span&gt;,file&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;bakFile)
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(f&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{sitename.ljust(NameListLength,&amp;#34; &amp;#34;)}: Tower_wind_{earlistDate.year:04}{earlistDate.month:02}{earlistDate.day:02}&amp;#39;&lt;/span&gt;
-          f&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;-{latestDate.year:04}{latestDate.month:02}{latestDate.day:02}.tim&amp;#39;&lt;/span&gt;,file&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;bakFile)
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(f&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{measureTimeName.ljust(NameListLength,&amp;#34; &amp;#34;)}: {earlistDate:%m/&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%d&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;/%Y %H:%M}-{latestDate:%m/&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%d&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;/%Y %H:%m}&amp;#39;&lt;/span&gt;,file&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;bakFile)
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(f&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{siteposName.ljust(NameListLength,&amp;#34; &amp;#34;)}: {sitePositionX} {sitePositionY}&amp;#39;&lt;/span&gt;,file&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;bakFile)
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(f&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{coorName.ljust(NameListLength,&amp;#34; &amp;#34;)}: 3&amp;#39;&lt;/span&gt;,file&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;bakFile)
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(f&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{measureHeightName.ljust(NameListLength,&amp;#34; &amp;#34;)}: 90.0&amp;#39;&lt;/span&gt;,file&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;bakFile)
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(f&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;,file&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;bakFile)
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(f&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;rec nr:&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\t&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;year:&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\t&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;mon:&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\t&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;date:&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\t&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;hour:&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\t&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;min:&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\t&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;dir:&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\t&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;speed:&amp;#39;&lt;/span&gt;,file&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;bakFile)
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;versionName&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ljust(NameListLength,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34; &amp;#34;&lt;/span&gt;)&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;: &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;versionNumber&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,file&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;bakFile)
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;sitename&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ljust(NameListLength,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34; &amp;#34;&lt;/span&gt;)&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;: Tower_wind_&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;earlistDate&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;year&lt;span style=&#34;color:#e6db74&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;04&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;}{&lt;/span&gt;earlistDate&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;month&lt;span style=&#34;color:#e6db74&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;02&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;}{&lt;/span&gt;earlistDate&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;day&lt;span style=&#34;color:#e6db74&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;02&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
+          &lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;latestDate&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;year&lt;span style=&#34;color:#e6db74&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;04&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;}{&lt;/span&gt;latestDate&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;month&lt;span style=&#34;color:#e6db74&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;02&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;}{&lt;/span&gt;latestDate&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;day&lt;span style=&#34;color:#e6db74&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;02&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;.tim&amp;#39;&lt;/span&gt;,file&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;bakFile)
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;measureTimeName&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ljust(NameListLength,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34; &amp;#34;&lt;/span&gt;)&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;: &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;earlistDate&lt;span style=&#34;color:#e6db74&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%m/%d/%Y %H:%M&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;latestDate&lt;span style=&#34;color:#e6db74&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%m/%d/%Y %H:%m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,file&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;bakFile)
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;siteposName&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ljust(NameListLength,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34; &amp;#34;&lt;/span&gt;)&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;: &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;sitePositionX&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;sitePositionY&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,file&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;bakFile)
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;coorName&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ljust(NameListLength,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34; &amp;#34;&lt;/span&gt;)&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;: 3&amp;#39;&lt;/span&gt;,file&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;bakFile)
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;measureHeightName&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ljust(NameListLength,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34; &amp;#34;&lt;/span&gt;)&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;: 90.0&amp;#39;&lt;/span&gt;,file&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;bakFile)
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;,file&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;bakFile)
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;rec nr:&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\t&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;year:&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\t&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;mon:&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\t&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;date:&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\t&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;hour:&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\t&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;min:&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\t&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;dir:&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\t&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;speed:&amp;#39;&lt;/span&gt;,file&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;bakFile)
 &lt;span style=&#34;color:#75715e&#34;&gt;###正式打入需要的数据&lt;/span&gt;
     &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(csvData)):
         a &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; csvData&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[i, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]
         direction &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; csvData&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[i, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
         velocity &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; csvData&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[i, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;]
         d1 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;strptime(a, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;%Y%m&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%d&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; %H:%M:%S&amp;#39;&lt;/span&gt;)
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(f&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{i}&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\t&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{d1.year:04}&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\t&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{d1.month:02}&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\t&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{d1.day:02}&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\t&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{d1.hour:02}&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\t&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{d1.minute:02}&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\t&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{direction}&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\t&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{velocity}&amp;#39;&lt;/span&gt;,file&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;bakFile)
+        print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;i&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\t&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;d1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;year&lt;span style=&#34;color:#e6db74&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;04&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\t&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;d1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;month&lt;span style=&#34;color:#e6db74&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;02&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\t&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;d1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;day&lt;span style=&#34;color:#e6db74&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;02&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\t&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;d1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;hour&lt;span style=&#34;color:#e6db74&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;02&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\t&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;d1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;minute&lt;span style=&#34;color:#e6db74&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;02&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\t&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;direction&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\t&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;velocity&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,file&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;bakFile)
     bakFile&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;close()&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&#34;附录&#34;&gt;附录&lt;/h2&gt;
 &lt;ol&gt;
@@ -1358,10 +1358,10 @@ close  $input
 &lt;li&gt;转化pandas的Series和list，方便实用index函数&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&#34;技术实现&#34;&gt;技术实现&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; os
-&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; pandas &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; pd
-&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; numpy &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; np
-&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; matplotlib.pyplot &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; plt
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; os
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; pandas &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; pd
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; numpy &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; np
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; matplotlib.pyplot &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; plt
 
 &lt;span style=&#34;color:#75715e&#34;&gt;## 注意需要有windsim各个扇区的数据&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#fileReadyAnalysis=r&amp;#34;C:\Users\yezhaoliang\Desktop\NewSimulation\Results-newSimulation45.xlsx&amp;#34;&lt;/span&gt;
@@ -1414,7 +1414,7 @@ aiwindfileReadyAnalysis&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&
         windSimVelocity[newCount]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; speedTableData&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[newCountST,&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
 
         &lt;span style=&#34;color:#75715e&#34;&gt;## 机位点名字&lt;/span&gt;
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(sheetname[&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt;:&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;])
+        print(sheetname[&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt;:&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;])
         &lt;span style=&#34;color:#75715e&#34;&gt;## 数据提取  AIWIND  单个扇区下的处理&lt;/span&gt;
         text1&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pdtemp&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;100&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;]
         text2&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pdtemp&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iloc[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;100&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
@@ -1432,7 +1432,7 @@ aiwindfileReadyAnalysis&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&
         hub_height&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;90&lt;/span&gt;
         velocityPredict&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;(bigV&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;smallV)&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;(bigZ&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;smallZ)&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;(hub_height&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;smallZ)&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;smallV
 &lt;span style=&#34;color:#75715e&#34;&gt;#        velocityPredict= linreg.predict(hub_height)&lt;/span&gt;
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(velocityPredict)
+        print(velocityPredict)
         turbineVelocity[newCount]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;velocityPredict
         count&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;count&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
     df&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;concat([turbines,turbineVelocity,windSimVelocity],axis&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
@@ -47041,7 +47041,7 @@ index 190b988..bcc7654 100644
 &lt;li&gt;call_to_stream(File, [In,Meta,Meta]&amp;raquo;gv_attrs_download(In)).&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;gv_attrs_download(Write):-
-@@ -79,7 +74,7 @@ gv_attrs_iri(&amp;lsquo;&lt;a href=&#34;http://www.graphviz.org/doc/info/attrs.html&#39;)&#34;&gt;http://www.graphviz.org/doc/info/attrs.html&#39;)&lt;/a&gt;.&lt;/p&gt;
+@@ -79,7 +74,7 @@ gv_attrs_iri(&amp;lsquo;&lt;a href=&#34;http://www.graphviz.org/doc/info/attrs.html%27%29&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;http://www.graphviz.org/doc/info/attrs.html&#39;)&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;% HELPERS %&lt;/p&gt;
 &lt;p&gt;-%! translate_default(+Default1:atom, -Default2:atom) is det.
 +%! translate_default(+Default1, -Default2) is det.&lt;/p&gt;
@@ -47109,7 +47109,7 @@ diff &amp;ndash;git a/pack.pl b/pack.pl
 index 203cbfc..989108a 100644
 &amp;mdash; a/pack.pl
 +++ b/pack.pl
-@@ -4,6 +4,6 @@ home(&amp;lsquo;&lt;a href=&#34;https://github.com/wouterbeek/plGraphViz&#39;)&#34;&gt;https://github.com/wouterbeek/plGraphViz&#39;)&lt;/a&gt;.
+@@ -4,6 +4,6 @@ home(&amp;lsquo;&lt;a href=&#34;https://github.com/wouterbeek/plGraphViz%27%29&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://github.com/wouterbeek/plGraphViz&#39;)&lt;/a&gt;.
 maintainer(&amp;lsquo;Wouter Beek&amp;rsquo;, &amp;lsquo;&lt;a href=&#34;mailto:me@wouterbeek.com&#34;&gt;me@wouterbeek.com&lt;/a&gt;&amp;rsquo;).
 name(plGraphViz).
 packager(&amp;lsquo;Wouter Beek&amp;rsquo;, &amp;lsquo;&lt;a href=&#34;mailto:me@wouterbeek.com&#34;&gt;me@wouterbeek.com&lt;/a&gt;&amp;rsquo;).
@@ -47820,7 +47820,7 @@ index aecbe07..30ea9c5 100644
 +++ b/prolog/gv/gv_graph_comp.pl
 @@ -24,12 +24,11 @@ a_list = ID &amp;ldquo;=&amp;rdquo; ID [&amp;rdquo;,&amp;quot;] [a_list]&lt;/p&gt;
 &lt;p&gt;@author Wouter Beek
-@see &lt;a href=&#34;http://www.graphviz.org/content/dot-language&#34;&gt;http://www.graphviz.org/content/dot-language&lt;/a&gt;
+@see &lt;a href=&#34;http://www.graphviz.org/content/dot-language&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;http://www.graphviz.org/content/dot-language&lt;/a&gt;
 -@version 2015/07-2015/08, 2015/10-2015/12
 +@version 2015/07-2015/08, 2015/10-2016/01
 */&lt;/p&gt;
@@ -48277,7 +48277,7 @@ index bcc7654..190b988 100644
 &lt;li&gt;).&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;gv_attrs_download(Write):-
-@@ -74,7 +79,7 @@ gv_attrs_iri(&amp;lsquo;&lt;a href=&#34;http://www.graphviz.org/doc/info/attrs.html&#39;)&#34;&gt;http://www.graphviz.org/doc/info/attrs.html&#39;)&lt;/a&gt;.&lt;/p&gt;
+@@ -74,7 +79,7 @@ gv_attrs_iri(&amp;lsquo;&lt;a href=&#34;http://www.graphviz.org/doc/info/attrs.html%27%29&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;http://www.graphviz.org/doc/info/attrs.html&#39;)&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;% HELPERS %&lt;/p&gt;
 &lt;p&gt;-%! translate_default(+Default1, -Default2) is det.
 +%! translate_default(+Default1:atom, -Default2:atom) is det.&lt;/p&gt;
@@ -48345,7 +48345,7 @@ diff &amp;ndash;git a/pack.pl b/pack.pl
 index 989108a..203cbfc 100644
 &amp;mdash; a/pack.pl
 +++ b/pack.pl
-@@ -4,6 +4,6 @@ home(&amp;lsquo;&lt;a href=&#34;https://github.com/wouterbeek/plGraphViz&#39;)&#34;&gt;https://github.com/wouterbeek/plGraphViz&#39;)&lt;/a&gt;.
+@@ -4,6 +4,6 @@ home(&amp;lsquo;&lt;a href=&#34;https://github.com/wouterbeek/plGraphViz%27%29&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://github.com/wouterbeek/plGraphViz&#39;)&lt;/a&gt;.
 maintainer(&amp;lsquo;Wouter Beek&amp;rsquo;, &amp;lsquo;&lt;a href=&#34;mailto:me@wouterbeek.com&#34;&gt;me@wouterbeek.com&lt;/a&gt;&amp;rsquo;).
 name(plGraphViz).
 packager(&amp;lsquo;Wouter Beek&amp;rsquo;, &amp;lsquo;&lt;a href=&#34;mailto:me@wouterbeek.com&#34;&gt;me@wouterbeek.com&lt;/a&gt;&amp;rsquo;).
@@ -48769,7 +48769,7 @@ index 30ea9c5..aecbe07 100644
 +++ b/prolog/gv/gv_graph_comp.pl
 @@ -24,11 +24,12 @@ a_list = ID &amp;ldquo;=&amp;rdquo; ID [&amp;rdquo;,&amp;quot;] [a_list]&lt;/p&gt;
 &lt;p&gt;@author Wouter Beek
-@see &lt;a href=&#34;http://www.graphviz.org/content/dot-language&#34;&gt;http://www.graphviz.org/content/dot-language&lt;/a&gt;
+@see &lt;a href=&#34;http://www.graphviz.org/content/dot-language&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;http://www.graphviz.org/content/dot-language&lt;/a&gt;
 -@version 2015/07-2015/08, 2015/10-2016/01
 +@version 2015/07-2015/08, 2015/10-2015/12
 */&lt;/p&gt;
@@ -50266,7 +50266,7 @@ index 8730e13..bcc7654 100644
 &lt;li&gt;call_to_stream(File, [In,Meta,Meta]&amp;raquo;gv_attrs_download(In)).&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;gv_attrs_download(Write):-
-@@ -78,7 +74,7 @@ gv_attrs_iri(&amp;lsquo;&lt;a href=&#34;http://www.graphviz.org/doc/info/attrs.html&#39;)&#34;&gt;http://www.graphviz.org/doc/info/attrs.html&#39;)&lt;/a&gt;.&lt;/p&gt;
+@@ -78,7 +74,7 @@ gv_attrs_iri(&amp;lsquo;&lt;a href=&#34;http://www.graphviz.org/doc/info/attrs.html%27%29&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;http://www.graphviz.org/doc/info/attrs.html&#39;)&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;% HELPERS %&lt;/p&gt;
 &lt;p&gt;-%! translate_default(+Default1:atom, -Default2:atom) is det.
 +%! translate_default(+Default1, -Default2) is det.&lt;/p&gt;
@@ -59274,10 +59274,10 @@ of that data representation.&lt;/p&gt;
 &lt;h2 id=&#34;jumpscps&#34;&gt;Jumps(CPS)&lt;/h2&gt;
 &lt;p&gt;Continuation is the special contribution of the book.&lt;/p&gt;
 &lt;p&gt;[很多其他的scheme解释器和编译器.][1] [Mit_scheme][2]
-[1]: &lt;a href=&#34;http://tunes.org/wiki/scheme.html&#34;&gt;http://tunes.org/wiki/scheme.html&lt;/a&gt;
-[2]: &lt;a href=&#34;http://groups.csail.mit.edu/mac/projects/scheme/index.html&#34;&gt;http://groups.csail.mit.edu/mac/projects/scheme/index.html&lt;/a&gt;
-[3]: &lt;a href=&#34;http://ds26gte.github.io/tyscheme/index.html&#34;&gt;http://ds26gte.github.io/tyscheme/index.html&lt;/a&gt;
-[4]: &lt;a href=&#34;http://v.fcode.cn/video-internal_file.html&#34;&gt;http://v.fcode.cn/video-internal_file.html&lt;/a&gt;&lt;/p&gt;</description>
+[1]: &lt;a href=&#34;http://tunes.org/wiki/scheme.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;http://tunes.org/wiki/scheme.html&lt;/a&gt;
+[2]: &lt;a href=&#34;http://groups.csail.mit.edu/mac/projects/scheme/index.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;http://groups.csail.mit.edu/mac/projects/scheme/index.html&lt;/a&gt;
+[3]: &lt;a href=&#34;http://ds26gte.github.io/tyscheme/index.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;http://ds26gte.github.io/tyscheme/index.html&lt;/a&gt;
+[4]: &lt;a href=&#34;http://v.fcode.cn/video-internal_file.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;http://v.fcode.cn/video-internal_file.html&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -62674,7 +62674,7 @@ ls -lsh
 &lt;p&gt;##安装步骤&lt;/p&gt;
 &lt;p&gt;很简单&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;git clone &amp;ndash;depth=1 &lt;a href=&#34;https://github.com/jueqingsizhe66/bash-it&#34;&gt;https://github.com/jueqingsizhe66/bash-it&lt;/a&gt; ~/.bash-it (&lt;strong&gt;如果不加入&amp;ndash;depth=1会少一些文件,没有Enable文件夹&lt;/strong&gt;)
+&lt;li&gt;git clone &amp;ndash;depth=1 &lt;a href=&#34;https://github.com/jueqingsizhe66/bash-it&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://github.com/jueqingsizhe66/bash-it&lt;/a&gt; ~/.bash-it (&lt;strong&gt;如果不加入&amp;ndash;depth=1会少一些文件,没有Enable文件夹&lt;/strong&gt;)
 (或者把install.sh里面的enable改成available即可(因为作者可能删掉了enable)
 )&lt;/li&gt;
 &lt;li&gt;cd ~/.bash-it&lt;/li&gt;
@@ -71953,7 +71953,7 @@ julia使用type来定义&lt;/p&gt;
 &lt;p&gt;其实这个是更加深层次的运用Haskell,在scheme也有. 比如IO monad,可以想象为一种抽象数据类型。&lt;/p&gt;
 &lt;h3 id=&#34;25-如果别人问你如何学习haskell&#34;&gt;25. 如果别人问你如何学习haskell？&lt;/h3&gt;
 &lt;p&gt;告诉他有一篇文章叫做 如此有趣的学习Haskell
-Haskell趣學指南   &lt;a href=&#34;http://learnyouahaskell-zh-tw.csie.org/zh-cn/chapters.html&#34;&gt;http://learnyouahaskell-zh-tw.csie.org/zh-cn/chapters.html&lt;/a&gt;
+Haskell趣學指南   &lt;a href=&#34;http://learnyouahaskell-zh-tw.csie.org/zh-cn/chapters.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;http://learnyouahaskell-zh-tw.csie.org/zh-cn/chapters.html&lt;/a&gt;
 还不错 ，这个教程&lt;/p&gt;
 &lt;p&gt;学习Haskell ，要是你能够对于空格特别敏感，会对你有所好处，因为很多地方都是用空格分开
 而不是（）  [] 之类的。空格有实际意义，分开不同的字段&lt;/p&gt;
@@ -82953,7 +82953,7 @@ class TCPClient5
 2：为什么 第一个进入聊天系统的杨中科，会打印出三次呢？ 当然后面的消息正常，当然三次的意思是聊天系统进入了三个人，都教授和Rocket. 所以肯定是那部分有问题待解决&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/%E6%9C%8D%E5%8A%A1%E5%99%A82.png&#34; alt=&#34;在这边有一个小问题，出现了三行打印&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/%E5%9F%BA%E6%9C%AC%E6%BB%A1%E8%B6%B3%E9%A2%98%E6%84%8F.png&#34; alt=&#34;群发效果OK,服务器也没问题了&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;http://www.cnblogs.com/linjiqin/archive/2013/05/30/3108188.html&#34;&gt;http://www.cnblogs.com/linjiqin/archive/2013/05/30/3108188.html&lt;/a&gt;  欣赏了这篇佳作&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.cnblogs.com/linjiqin/archive/2013/05/30/3108188.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;http://www.cnblogs.com/linjiqin/archive/2013/05/30/3108188.html&lt;/a&gt;  欣赏了这篇佳作&lt;/p&gt;
 &lt;p&gt;基于上次的问题，打开的时候经常会出现多个打印的情况，
 尝试如下修改：
 “登录用户集合”和“服务器已启用线程集合”的list，如果变化不频繁，读多写少，使用CopyOnWriteArrayList。
@@ -83578,12 +83578,12 @@ new File(文件名字符串) 又或者第三种。 未找到解决办法
 &lt;p&gt;补充2：  myeclipse并不会报警我在使用外部约束DTD的不存在的元素，自己又不知道xml解析器是否真的晓得dtd的文件的存在，于是就想着自己               测试一下
 3：于是求教 Professor Du   ，给了我两个读取项目文件的视频
 视频1： 用  当前类 ValidateDTD.class.getResource()方法
-&lt;a href=&#34;http://v.polyv.net/uc/video/iframeview?vid=e46d36780492b6d4ec8ed55f4fb04583_e&amp;amp;playerwidth=100&#34;&gt;http://v.polyv.net/uc/video/iframeview?vid=e46d36780492b6d4ec8ed55f4fb04583_e&amp;amp;playerwidth=100&lt;/a&gt;
+&lt;a href=&#34;http://v.polyv.net/uc/video/iframeview?vid=e46d36780492b6d4ec8ed55f4fb04583_e&amp;amp;playerwidth=100&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;http://v.polyv.net/uc/video/iframeview?vid=e46d36780492b6d4ec8ed55f4fb04583_e&amp;playerwidth=100&lt;/a&gt;
 注意： bin目录表示类加载根目录（要知道我在说什么，打开window-&amp;gt; show view&amp;ndash;&amp;gt;navigator&lt;br&gt;
 你会发现navigator现实的bin文件夹和  src文件夹基本上是对应的，只不过是把java文件，都变成了
 class文件，其他文件保持原样，这也就是bin根目录的所在地和他的文档结构）   在使用 此方法必须加上斜杠开头
 视频2 ： 用 当前类 ValidateDTD.class.classLoader().getResource()方法
-&lt;a href=&#34;http://v.polyv.net/uc/video/iframeview?vid=e46d367804795fd7b389ade7541a9db7_e&amp;amp;playerwidth=100&#34;&gt;http://v.polyv.net/uc/video/iframeview?vid=e46d367804795fd7b389ade7541a9db7_e&amp;amp;playerwidth=100&lt;/a&gt;
+&lt;a href=&#34;http://v.polyv.net/uc/video/iframeview?vid=e46d367804795fd7b389ade7541a9db7_e&amp;amp;playerwidth=100&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;http://v.polyv.net/uc/video/iframeview?vid=e46d367804795fd7b389ade7541a9db7_e&amp;playerwidth=100&lt;/a&gt;
 注意： 与上面方法不同的是，在加载bin目录的时候，不需要使用斜杠  直接写上包名或者文件名（按照文件结构，
 把bin目录当做根目录即可）&lt;/p&gt;
 &lt;p&gt;视频一的测试源文件：&lt;/p&gt;
@@ -85290,7 +85290,7 @@ trigger()
       <link>https://jueqingsizhe66.github.io/blog/2015/05/11/jquery10-18jie-bi-ji-dai-ma-april5th/</link>
       <pubDate>Mon, 11 May 2015 14:58:44 +0800</pubDate>
       <guid>https://jueqingsizhe66.github.io/blog/2015/05/11/jquery10-18jie-bi-ji-dai-ma-april5th/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;http://www.rupeng.com/forum/thread-45422-1-1.html&#34;&gt;http://www.rupeng.com/forum/thread-45422-1-1.html&lt;/a&gt; jquery1-9
+      <description>&lt;p&gt;&lt;a href=&#34;http://www.rupeng.com/forum/thread-45422-1-1.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;http://www.rupeng.com/forum/thread-45422-1-1.html&lt;/a&gt; jquery1-9
 1：移除元素
 $(&amp;lsquo;div&amp;rsquo;).empty()  清空层中的元素
 $(&amp;lsquo;div&amp;rsquo;).remove(&#39;.cls&#39;)   清空层中运用cls样式的元素
@@ -87324,7 +87324,7 @@ return false;
 &lt;p&gt;IE:innerText    FF:textContent
 IE:srcElement(事件源）   FF：target
 IE:attachEvent   FF:addEventListener   来绑定事件
-&lt;a href=&#34;http://www.360doc.com/content/09/0319/12/16915_2855107.shtml&#34;&gt;http://www.360doc.com/content/09/0319/12/16915_2855107.shtml&lt;/a&gt;&lt;/p&gt;
+&lt;a href=&#34;http://www.360doc.com/content/09/0319/12/16915_2855107.shtml&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;http://www.360doc.com/content/09/0319/12/16915_2855107.shtml&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;JQuery是一个好东西，主要目的是为了统一不同浏览器使用DOM的不同点，屏蔽了不友好的功能！ 这也是下阶段的学习目标。&lt;/p&gt;</description>
     </item>
     
@@ -92036,7 +92036,7 @@ public class TestMapMap
     &lt;/Select&gt;
 &lt;pre&gt;&lt;code&gt;&amp;lt;!-- 更好的办法是使用CSS的height &amp;amp; width替换掉rows cols--&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;Textarea rows=&#34;3&#34; cols=&#34;20&#34;&gt;&lt;/Textarea&gt;&lt;/p&gt;
+&lt;Textarea rows=&#34;3&#34; cols=&#34;20&#34;&gt;&lt;/Textarea&gt;
 &lt;pre&gt;&lt;code&gt;&amp;lt;!--Radio type 和 Label配合使用 --&amp;gt;
 &amp;lt;!--Label标签做了一个字段的包装，这样用户点击字段 也可以选择！！！新的知识点啊！--&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
@@ -95491,7 +95491,7 @@ re 分数 from grade g
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;第二题：
 费时：3个小时（重写5遍）
-&lt;a href=&#34;http://www.rupeng.com/forum/thread-44516-1-1.html&#34;&gt;http://www.rupeng.com/forum/thread-44516-1-1.html&lt;/a&gt;
+&lt;a href=&#34;http://www.rupeng.com/forum/thread-44516-1-1.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;http://www.rupeng.com/forum/thread-44516-1-1.html&lt;/a&gt;
 sql_properties：&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;mysqlDriver=com.mysql.jdbc.Driver
 connectDatabase=jdbc:mysql://localhost/study?seUnicode=true&amp;amp;characterEncoding=UTF8
@@ -96022,7 +96022,7 @@ Oe.setId(GTK.gtk_label_new())的换心操作。 不要让entry变成了label而�
 并发现我并未封装combobox,和radiobutton之类的，checkbox
 并最终还使得button在原先的两个构造函数的基础上增加了图片资源的加载，和加载图片的位置控制
 增加了8个工作量。&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;http://blog.csdn.net/uunubt/article/details/6089402&#34;&gt;http://blog.csdn.net/uunubt/article/details/6089402&lt;/a&gt;
+&lt;p&gt;&lt;a href=&#34;http://blog.csdn.net/uunubt/article/details/6089402&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;http://blog.csdn.net/uunubt/article/details/6089402&lt;/a&gt;
 参考此文，琢磨出来RadioButton的用法：
 int cbMan = GTK.gtk_radio_button_new_with_label(0, &amp;ldquo;男&amp;rdquo;);
 int cbWoman = GTK.gtk_radio_button_new_with_label_from_widget(cbMan, &amp;ldquo;女&amp;rdquo;);&lt;/p&gt;
