@@ -5,12 +5,522 @@
     <link>https://jueqingsizhe66.github.io/tag/python/</link>
       <atom:link href="https://jueqingsizhe66.github.io/tag/python/index.xml" rel="self" type="application/rss+xml" />
     <description>python</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>©2022</copyright><lastBuildDate>Wed, 04 Dec 2019 14:18:00 +0800</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>©2022</copyright><lastBuildDate>Sun, 16 Jan 2022 23:02:00 +0800</lastBuildDate>
     <image>
       <url>https://jueqingsizhe66.github.io/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
       <title>python</title>
       <link>https://jueqingsizhe66.github.io/tag/python/</link>
     </image>
+    
+    <item>
+      <title>python常用函数学习总结</title>
+      <link>https://jueqingsizhe66.github.io/post/python%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/</link>
+      <pubDate>Sun, 16 Jan 2022 23:02:00 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/post/python%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/</guid>
+      <description>&lt;h2 id=&#34;1-dot-如何使用递归&#34;&gt;1.如何使用递归？&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;怎么递归？ natural recursion&lt;/li&gt;
+&lt;li&gt;什么时候结束? 终止条件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;参考&lt;a href=&#34;https://jueqingsizhe66.github.io/blog/2015/05/18/the-little-scheme-and-part-of-tss/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;the little scheme&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;已有的结论是函数名字可以调用
+新的结论：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;函数名字可以赋值，&lt;/li&gt;
+&lt;li&gt;函数可以嵌套,于是出现了高阶函数！&lt;/li&gt;
+&lt;li&gt;也就是函数名字作为函数参数，可以作为返回值&lt;/li&gt;
+&lt;/ol&gt;
+&lt;!--listend--&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;fun&lt;/span&gt;():
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;init&lt;/span&gt;():
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; init;
+letlei&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;fun();
+print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;hello,&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;letlei()&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;fibo&lt;/span&gt;(n):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(n&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(n&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; fibo(n&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;fibo(n&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;)
+print(fibo(&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;))&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;2-dot-python-filter的使用&#34;&gt;2. python filter的使用&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;结论：filter可以过滤一个容器的元素，但不会改变元素内容&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;迭代器批次把内容从容器放出来(使用一个，则倒出一个到内存)，列表全部把内容从容器倒出来（都放入内存中)&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;fun2filter&lt;/span&gt;(str):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;( str &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;a&amp;#39;&lt;/span&gt;):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; str
+ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; filter(fun2filter, [&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;a&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;b&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;c&amp;#39;&lt;/span&gt;])
+print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34; filter Object is &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;ret&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34; force change to list Object is &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;list(ret)&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;3-dot-python-map的使用&#34;&gt;3. python map的使用&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;结论：map可以处理一个容器的数据,会改变元素内容&lt;/strong&gt;
+很关键，fitler只会过滤数据，而不会修改元素，map则可以逐个修改数据!&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;fun2map&lt;/span&gt;(str):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; str&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;added&amp;#34;&lt;/span&gt;
+
+ret1 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; map(fun2map,[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;a&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;b&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;c&amp;#39;&lt;/span&gt;])
+&lt;span style=&#34;color:#75715e&#34;&gt;#ret1 = filter(fun2map,[&amp;#39;a&amp;#39;,&amp;#39;b&amp;#39;,&amp;#39;c&amp;#39;]) 不会起作用的！！！！他只会过滤，不会修改！&lt;/span&gt;
+
+print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;map object is &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;ret1&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;span class=&#34;timestamp-wrapper&#34;&gt;&lt;span class=&#34;timestamp&#34;&gt;&amp;lt;2022-01-16 周日 22:38&amp;gt;&lt;/span&gt;&lt;/span&gt;测试通过&lt;/p&gt;
+&lt;h2 id=&#34;4-dot-python-reduce使用&#34;&gt;4. python reduce使用&lt;/h2&gt;
+&lt;p&gt;结论： reduce只返回序列（或者列表）的求和运算？ 把一个序列变为一个值，一个结论！
+reduce只会返回最终解！阶乘也很好用！&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;reduce本质就是斐波那契数列&lt;/strong&gt;
+计算阶乘也很方便&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; functools &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; reduce
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;fun2reduce&lt;/span&gt;(x,y):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; x&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;y
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;funM2reduce&lt;/span&gt;(x,y):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; x&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;y
+sum1&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;reduce(fun2reduce,[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;])
+sum2&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;reduce(&lt;span style=&#34;color:#66d9ef&#34;&gt;lambda&lt;/span&gt; x,y: x&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;y, [&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;])
+sum3&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;reduce(funM2reduce,[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;])
+sum3&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;reduce(funM2reduce,range(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;))
+print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;reduce function f is  &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;sum1&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;   pk  &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;sum2&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; pk &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;sum3&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;阶乘：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;print(reduce((&lt;span style=&#34;color:#66d9ef&#34;&gt;lambda&lt;/span&gt; x,y:x&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;y),range(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;)))
+&lt;span style=&#34;color:#ae81ff&#34;&gt;24&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;5-dot-什么是闭包&#34;&gt;5. 什么是闭包?&lt;/h2&gt;
+&lt;p&gt;结论： inner是一个闭包,符合两个条件，1. inner是一个内部函数，2. inner调用外部环境的一个变量
+&lt;strong&gt;即 闭包=内部函数+内部函数定义时的环境变量&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;outer&lt;/span&gt;():
+    x&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;inner&lt;/span&gt;(): &lt;span style=&#34;color:#75715e&#34;&gt;## 1. 内部函数&lt;/span&gt;
+        print(x) &lt;span style=&#34;color:#75715e&#34;&gt;## 2. 调用内部函数外部环境变量x&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; inner
+
+outer()()
+fout2inner &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; outer()
+print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;测试闭包的功能 &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;fout2inner()&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;结论：基于闭包思想 及装饰器思想解决代码重复问题&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;6-dot-python抽样&#34;&gt;6. python抽样&lt;/h2&gt;
+&lt;p&gt;结论：通过choice,sample,randrange,randint函数实现抽样功能&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; random
+
+print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;random.random() = &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;random()&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;随机生成1个值random.randint(1,8) = &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;randint(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;)&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;随机生成1个值random.randrange(1,8) = &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;randrange(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;)&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;随机选取序列1个值 choice(序列)=sampe(序列,1)：random.choice(&amp;#39;hello&amp;#39;) = &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;choice(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;hello&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;随机选取序列1个值：random.choice([&amp;#39;123&amp;#39;,4,[12,3,4]]) = &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;choice([&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;123&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;,[&lt;span style=&#34;color:#ae81ff&#34;&gt;12&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;]])&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+&lt;span style=&#34;color:#75715e&#34;&gt;##&lt;/span&gt;
+print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;随机选取序列多个值,sampe(序列，个数)：random.sample([&amp;#39;123&amp;#39;,4,[12,3,4]],2,&amp;#39;34&amp;#39;) = &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sample([&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;123&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;,[&lt;span style=&#34;color:#ae81ff&#34;&gt;12&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;]],&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;)&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;v_code&lt;/span&gt;():
+    code&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;):
+        &lt;span style=&#34;color:#75715e&#34;&gt;## choice形成序列&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;## choice很有用的&lt;/span&gt;
+       add&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;choice([random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;randrange(&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;),chr(random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;randrange(&lt;span style=&#34;color:#ae81ff&#34;&gt;65&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;90&lt;/span&gt;)),chr(random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;randrange(&lt;span style=&#34;color:#ae81ff&#34;&gt;97&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;122&lt;/span&gt;))])
+        &lt;span style=&#34;color:#75715e&#34;&gt;## 转换为string&lt;/span&gt;
+       code &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; str(add)
+    print(code)
+
+&lt;span style=&#34;color:#75715e&#34;&gt;# def v_codes(sampleNum):&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# bug因为random出来的是一个结果&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# print(random.sample([random.randrange(10),chr(random.randrange(65,90)),chr(random.randrange(97,122))],sampleNum))&lt;/span&gt;
+
+v_code()&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;7-dot-什么是生成器-什么是迭代器&#34;&gt;7. 什么是生成器？ 什么是迭代器？&lt;/h2&gt;
+&lt;p&gt;结论：生成器(列表 list, tuple, string, dict)都是迭代器(满足两个条件：1. 有iter方法，2. 有next方法)，迭代器不一定是生成器&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 列表生成器 方式&lt;/span&gt;
+a&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[x&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;)]
+&lt;span style=&#34;color:#75715e&#34;&gt;# 迭代器&lt;/span&gt;
+b&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;(x&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt;  x &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;10000&lt;/span&gt;))
+print(next(b))
+print(next(b))
+print(next(b))&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;8-dot-yield的作用&#34;&gt;8. yield的作用?&lt;/h2&gt;
+&lt;p&gt;结论： 只要有yield的都是迭代器函数对象 foo()(不加载到内存）,如果没有就是普通函数加载到内存了&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;foo&lt;/span&gt;():
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;ok&amp;#34;&lt;/span&gt;)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;yield&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;ok2&amp;#34;&lt;/span&gt;)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;yield&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+
+g&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; foo()  &lt;span style=&#34;color:#75715e&#34;&gt;## foo() 带括号是生成器对象&lt;/span&gt;
+print(g)
+
+&lt;span style=&#34;color:#75715e&#34;&gt;## 调用生成器函数对象&lt;/span&gt;
+print(next(g))
+&lt;span style=&#34;color:#75715e&#34;&gt;## 可以控制执行次数！&lt;/span&gt;
+print(next(g))&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;结论：迭代写法和同时写法有所不同, 要注意一句话写完和两句话写完是不一样的，以为before的值已经发生了修改！&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## 0 1 1 2 3 5 8 13&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;## 同时和并行什么区别？ 同时就是同一条语句(有点并行线程的感觉，并发执行）, 保证before不更新&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;## 不同时就是分成两部执行,分成先后，有迭代顺序, 先后写before会更新&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;fib&lt;/span&gt;(max):
+    n,before,after&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; n&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;max:
+        print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;n=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;n&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;, before=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;before&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; after=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;after&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+        &lt;span style=&#34;color:#75715e&#34;&gt;# before=after&lt;/span&gt;
+         &lt;span style=&#34;color:#66d9ef&#34;&gt;yield&lt;/span&gt;(before) &lt;span style=&#34;color:#75715e&#34;&gt;## 变成生成器对象函数&lt;/span&gt;
+       &lt;span style=&#34;color:#75715e&#34;&gt;# after=before+after  ## 实际上after ={before}+after before不能更新&lt;/span&gt;
+        before,after&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;after,before&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;after
+        n&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;n&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;fib(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;max&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;) = &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;after&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+
+fib(&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;结论：改造为生成器函数对象&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;fib&lt;/span&gt;(max):
+    n,before,after&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; n&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;max:
+        print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;n=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;n&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;, before=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;before&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; after=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;after&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+        &lt;span style=&#34;color:#75715e&#34;&gt;# before=after&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;# after=before+after  ## 实际上after ={before}+after before不能更新&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;yield&lt;/span&gt;(after) &lt;span style=&#34;color:#75715e&#34;&gt;## 变成生成器对象函数&lt;/span&gt;
+        before,after&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;after,before&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;after
+        n&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;n&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;fib(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;max&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;) = &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;after&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+
+g&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;fib(&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;)
+
+next(g)
+next(g)
+next(g)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;结论： yield可以通过send方法进行函数变量赋值控制，&lt;/strong&gt;
+第一次必须先进性赋值next(b) 或者通过b.send(None), b.send(None)等效于next(b)&lt;/p&gt;
+&lt;p&gt;一次send等效于一次next,即执行一次yield&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;far&lt;/span&gt;():
+      print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;ok1&amp;#39;&lt;/span&gt;)
+      count&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;yield&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+      print(count)
+      count2&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;yield&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;count
+      print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;ok3&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;count2)
+      &lt;span style=&#34;color:#66d9ef&#34;&gt;yield&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;
+
+  df&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;far()
+  df&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;send(&lt;span style=&#34;color:#66d9ef&#34;&gt;None&lt;/span&gt;)
+&lt;span style=&#34;color:#75715e&#34;&gt;#df.send(None) ## 第一次必须是df.send(None) 或者先执行一次next(df)&lt;/span&gt;
+
+  df&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;send(&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;)
+  print(df&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;send(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;2----&amp;#39;&lt;/span&gt;))
+  &lt;span style=&#34;color:#75715e&#34;&gt;# next(df)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;9-dot-如何使用os模块&#34;&gt;9.如何使用OS模块&lt;/h2&gt;
+&lt;p&gt;结论： 文件目录相关操作可以参考OS模块&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; os
+print(os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;getcwd())
+print(os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;listdir())
+
+print(os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;stat(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;./&amp;#39;&lt;/span&gt;))
+print(os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;pathsep)
+print(os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sep) &lt;span style=&#34;color:#75715e&#34;&gt;## 路径分割附&lt;/span&gt;
+print(os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;environ)
+print(os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;dirname(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;c:/testRandom.py&amp;#39;&lt;/span&gt;))
+print(os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;basename(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;c:/testRandom.py&amp;#39;&lt;/span&gt;))&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;10-dot-如何使用hashlib&#34;&gt;10. 如何使用hashlib&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;结论: 通过hashlib创建解密和加密&lt;/em&gt;
+1、什么叫hash:hash是一种算法（不同的hash算法只是复杂度不一样）（3.x里代替了md5模块和sha模块，主要提供 SHA1, SHA224, SHA256, SHA384, SHA512 ，MD5 算法），该算法接受传入的内容，经过运算得到一串hash值
+2、hash值的特点是(hash值/产品有三大特性：)&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;  md52&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;hashlib&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;md5()
+  print(md52)
+  md52&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;update(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;hell word&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;encode(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;utf-8&amp;#39;&lt;/span&gt;))
+  md52&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;update(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;hell word&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;encode(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;utf8&amp;#39;&lt;/span&gt;)) &lt;span style=&#34;color:#75715e&#34;&gt;## python3只有unicode和 ,默认不是utf-8&lt;/span&gt;
+  md52&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;digest()
+  md52&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;hexdigest()&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;11-dot-如何扩平台编码&#34;&gt;11. 如何扩平台编码&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;结论： 扩平台运行可以参考sys模块&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34; sys.argv= &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;sys&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;argv&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;sys.path = &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;sys&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;sys.platform = &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;sys&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;platform&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; )
+print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;sys.maxsize = &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;sys&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;maxsize&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; )
+print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;sys.stdout.write(&amp;#39;Please:&amp;#39;) = &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;sys&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;stdout&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Please:&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; )
+&lt;span style=&#34;color:#75715e&#34;&gt;#正常退出，不执行下面代码&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# print (sys.exit(0))&lt;/span&gt;
+
+&lt;span style=&#34;color:#75715e&#34;&gt;# if sys.platform==&amp;#39;win32&amp;#39;:&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#     os.system(&amp;#39;dir&amp;#39;) ## 执行系统命令&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# else:&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#     os.system(&amp;#39;ls&amp;#39;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;12-dot-如何使用re模块&#34;&gt;12. 如何使用RE模块&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;结论:通过re模块进行正则匹配&lt;/em&gt;
+&lt;a href=&#34;https://docs.python.org/zh-cn/3/library/re.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://docs.python.org/zh-cn/3/library/re.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;需要明确常用的正则元素、字母、数值、元数据( * + ? \d{3,} [abA-Z] ||| . \d \s \S \w \W )等！
+要注意正则零宽断言和捕获方面的使用&lt;/p&gt;
+&lt;p&gt;如果在python中使用正则，想要直接使用正则语法则注意在模式表达式前面加小写r，如果不加小写r，表示先试用python解析字符串，然后再把解析后的内容传给正则表达式进行解析。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; re
+
+  &lt;span style=&#34;color:#75715e&#34;&gt;## 返回所有匹配对象,并放在一个列表中&lt;/span&gt;
+  print(re&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;findall(&lt;span style=&#34;color:#e6db74&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\\&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;df&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\\&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;b&amp;#39;&lt;/span&gt;))
+  &lt;span style=&#34;color:#75715e&#34;&gt;## \元字符在python中有特殊用途&lt;/span&gt;
+  print(re&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;findall(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\\\\&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;df&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\\&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;b&amp;#39;&lt;/span&gt;))
+
+  &lt;span style=&#34;color:#75715e&#34;&gt;## search 返回第一个匹配对象，并且可以通过group进行调用&lt;/span&gt;
+  &lt;span style=&#34;color:#75715e&#34;&gt;#ret=re.search(r&amp;#39;(?P&amp;lt;id&amp;gt;\d{3})/(?P&amp;lt;name&amp;gt;\w{3})&amp;#39;,&amp;#39;weekdydtt123/ooo&amp;#39;)&lt;/span&gt;
+  ret&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;re&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;search(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;(?P&amp;lt;id&amp;gt;\d&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{3}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;)/(?P&amp;lt;name&amp;gt;\w&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{3}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;)&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;weekdydtt123/ooo&amp;#39;&lt;/span&gt;)
+  print(ret&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;group(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;id&amp;#39;&lt;/span&gt;))
+  print(ret&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;group(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;))
+  &lt;span style=&#34;color:#75715e&#34;&gt;## match 返回第一个匹配对象，并且可以通过group进行调用&lt;/span&gt;
+  &lt;span style=&#34;color:#75715e&#34;&gt;## 但是从第一个字符开始找, 如果第一个字符就不匹配就返回None, 不继续匹配. 用于判断字符串开头或整个字符串是否匹配,速度快。&lt;/span&gt;
+  &lt;span style=&#34;color:#75715e&#34;&gt;## match 自带^光环，所以速度很快&lt;/span&gt;
+  &lt;span style=&#34;color:#75715e&#34;&gt;# ret=re.match(r&amp;#39;(?P&amp;lt;id&amp;gt;\d{2})/(?P&amp;lt;name&amp;gt;\w{3})&amp;#39;,&amp;#39;weekdydtt123/ooo&amp;#39;)&lt;/span&gt;
+  &lt;span style=&#34;color:#75715e&#34;&gt;# print(ret.group(&amp;#39;id&amp;#39;))&lt;/span&gt;
+  &lt;span style=&#34;color:#75715e&#34;&gt;# print(ret.group(&amp;#39;name&amp;#39;))&lt;/span&gt;
+
+
+  &lt;span style=&#34;color:#75715e&#34;&gt;## re.compile 编译生成Pattern对象 可重复使用Pattern，pattern对象可调用findall, search and match&lt;/span&gt;
+  pat&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; re&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;compile(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;ab&amp;#39;&lt;/span&gt;)  &lt;span style=&#34;color:#75715e&#34;&gt;## 提出一般模式, 基于该模式可运用到不同的场景下！&lt;/span&gt;
+  ret1&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pat&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;findall(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;abcd abc gd&amp;#39;&lt;/span&gt;)
+  ret2&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pat&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;findall(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;acd abc gd&amp;#39;&lt;/span&gt;)
+  ret3&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pat&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;match(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;abc db ab&amp;#39;&lt;/span&gt;)
+  ret4&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pat&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;search(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;abc db ab&amp;#39;&lt;/span&gt;)
+  print(ret1)
+  print(ret2)
+  print(ret3&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;group())
+  print(ret4&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;group())
+  print(ret4&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;group())&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;13-dot-如果有配置文件&#34;&gt;13. 如果有配置文件？&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;结论：通过configparser模块生成和读取配置文件&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;写入文件：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt;  configparser
+
+config&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;configparser&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ConfigParser()
+config[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;DEFAULT&amp;#34;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;{
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;ServerAliveInterval&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;45&amp;#39;&lt;/span&gt;,
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Compression&amp;#39;&lt;/span&gt;:&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;yes&amp;#39;&lt;/span&gt;,
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;CompressionLevel&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;9&amp;#39;&lt;/span&gt;
+}
+
+config[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;bitbucket.org&amp;#39;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;{}
+config[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;bitbucket.org&amp;#39;&lt;/span&gt;][&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;user&amp;#39;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;hg&amp;#39;&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# config[&amp;#39;bitbucket.org&amp;#39;]={&amp;#39;user&amp;#39;:&amp;#39;hg&amp;#39;}&lt;/span&gt;
+config[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;topsecret.server.com&amp;#39;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;{}
+topsecret&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;config[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;topsecret.server.com&amp;#39;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;{}
+topsecret[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Host Port&amp;#39;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;50222&amp;#39;&lt;/span&gt;
+config[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;DEFAULT&amp;#39;&lt;/span&gt;][&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;ForwardX11&amp;#39;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;yes&amp;#39;&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;with&lt;/span&gt; open(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;example.ini&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;w&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; configfile:
+    config&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(configfile)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;读取文件：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt;  configparser
+config&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;configparser&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ConfigParser()
+
+config&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;example.ini&amp;#39;&lt;/span&gt;)
+
+print(config&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;defaults())
+print(config&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sections())
+print(config[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;bitbucket.org&amp;#39;&lt;/span&gt;])
+print(config[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;bitbucket.org&amp;#39;&lt;/span&gt;][&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;user&amp;#39;&lt;/span&gt;])
+print(config[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;DEFAULT&amp;#39;&lt;/span&gt;][&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Compression&amp;#39;&lt;/span&gt;])&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>数据设计程序-装饰者模式</title>
+      <link>https://jueqingsizhe66.github.io/post/%E6%95%B0%E6%8D%AE%E8%AE%BE%E8%AE%A1%E7%A8%8B%E5%BA%8F/</link>
+      <pubDate>Sun, 16 Jan 2022 22:19:00 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/post/%E6%95%B0%E6%8D%AE%E8%AE%BE%E8%AE%A1%E7%A8%8B%E5%BA%8F/</guid>
+      <description>&lt;p&gt;问题： 我们生活在海量的数据库中，如何高效梳理和归纳我们接触到的数据？&lt;/p&gt;
+&lt;p&gt;解决办法： 通过数据设计一个可靠的设计， 既有输入、又有过程的函数、最后获得响应目的的数据&lt;/p&gt;
+&lt;p&gt;案例： 装饰者模式的运用&lt;/p&gt;
+&lt;h1 id=&#34;1--思路及想法&#34;&gt;1.  思路及想法&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;执行某个函数f，插入某段代码g,不影响函数f，但是显示出代码g的结果
+函数f指的就是foo和bar等（在我们数据设计程序世界里面，函数是最小单元)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;foo&lt;/span&gt;():
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;foo.....&amp;#39;&lt;/span&gt;)
+    time&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sleep(&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;)
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;end-start: &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;end&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;start&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+foo()
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;bar&lt;/span&gt;():
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;bar .....&amp;#39;&lt;/span&gt;)
+    time&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sleep(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;end-start: &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;end&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;start&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+bar()&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;我们希望添加的插入代码块g如下，即增加计时器或者其他logger切面功能&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;start&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;time&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;time()
+print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;foo.....&amp;#39;&lt;/span&gt;)
+time&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sleep(&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;)
+end&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;time&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;time()
+print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;end-start: &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;end&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;start&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+
+start&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;time&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;time()
+print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;bar .....&amp;#39;&lt;/span&gt;)
+time&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sleep(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+end&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;time&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;time()
+print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;end-start: &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;end&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;start&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;!--listend--&gt;
+&lt;h1 id=&#34;2--初始解决方案&#34;&gt;2.  初始解决方案&lt;/h1&gt;
+&lt;pre&gt;&lt;code&gt;我们出发点认为所有函数是first class对象，这样就可以把函数当做变量来对象。
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;有了这个出发点，咱们就可以设计我们的解决方案&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;新建一个showTime函数，函数f作为变量&lt;/li&gt;
+&lt;li&gt;调用showTime函数，把函数f传入作为输入变量，得到我们想要的结果.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;!--listend--&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## &amp;lt;2022-01-16 22:13&amp;gt;测试通过&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;showTime&lt;/span&gt;(f):
+    start&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;time&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;time()
+    f()
+    end&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;time&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;time()
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;end-start: &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;end&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;start&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;fooUpdate&lt;/span&gt;():
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;fooUpdate.....&amp;#39;&lt;/span&gt;)
+    time&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sleep(&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;)
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;barUpdate&lt;/span&gt;():
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;barupdate.....&amp;#39;&lt;/span&gt;)
+    time&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sleep(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+showTime(fooUpdate)
+showTime(barUpdate)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;存在问题：你改变了之前很多业务员的代码习惯，必须调用showTime了(不满足我们初始的思路)&lt;/p&gt;
+&lt;h1 id=&#34;3--解决showtime的缺点&#34;&gt;3.  解决showTime的缺点&lt;/h1&gt;
+&lt;!--listend--&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## &amp;lt;2022-01-16 22:12&amp;gt; 测试通过&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;foo&lt;/span&gt;():
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;fooo ......&amp;#34;&lt;/span&gt;)
+    time&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sleep(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;showTime&lt;/span&gt;(f):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;inner&lt;/span&gt;():
+        start&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; time&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;time()
+        f()
+        end&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; time&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;time()
+        print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;end-start: &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;end&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;start&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; inner
+
+foo &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;showTime(foo)
+foo()&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;上面基本解决了我们的想法，但是写法不太友好，python引入了注解写法，更为简洁，如下所示：
+即_注解等效于调用了一次外部程序。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## &amp;lt;2022-01-16 22:12&amp;gt; 测试通过&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;showTime&lt;/span&gt;(f):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;inner&lt;/span&gt;():
+        start&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; time&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;time()
+        f()
+        end&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; time&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;time()
+        print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;end-start: &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;end&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;start&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; inner
+
+&lt;span style=&#34;color:#a6e22e&#34;&gt;@showTime&lt;/span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;## 等价于foo=showTime(foo)&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;foo&lt;/span&gt;():
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;fooo ......&amp;#34;&lt;/span&gt;)
+    time&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sleep(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+
+&lt;span style=&#34;color:#75715e&#34;&gt;# foo =showTime(foo) ## 等价于@showTime&lt;/span&gt;
+foo()&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;但是上面解决的仅仅是无参函数,如果我们的函数f有很多参数？
+即add1&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;add1&lt;/span&gt;(&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;a, &lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt;b):
+    sums&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; a:
+        sums&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;sums&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;i
+    print(sums)
+    time&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sleep(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;a= &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;a&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; ， b=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;b&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+add1(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;,hf&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;,hfd&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id=&#34;4--多参数解决方案改进&#34;&gt;4.  多参数解决方案改进&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;通过引入一个wrapper函数，考虑args和kwargs来解决多常数问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;!--listend--&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;showtime&lt;/span&gt;(func):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;wrapper&lt;/span&gt;(&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;args,&lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt;kwargs):
+        start&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;time&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;time()
+        func(&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;args,&lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt;kwargs)
+        end&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;time&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;time()
+        print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;end-start  is  &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;end&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;start&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; flag&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;:
+            print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;已将上述操作操作录入文件&amp;#34;&lt;/span&gt;)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; wrapper
+&lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; showtime&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## &amp;lt;2022-01-16 22:12&amp;gt; 测试通过&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;## 多参数解决方法&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;showtime1&lt;/span&gt;(func):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;wrapper&lt;/span&gt;(&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;args,&lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt;kwargs):
+        start&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;time&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;time()
+        func(&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;args,&lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt;kwargs)
+        end&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;time&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;time()
+        print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;end-start  is  &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;end&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;start&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; wrapper
+
+&lt;span style=&#34;color:#a6e22e&#34;&gt;@showtime1&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;add&lt;/span&gt;(&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;a,&lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt;b):
+    time&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sleep(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+    sum&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; a:
+        sum&lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt;i
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;sum of &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;a&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; is equal to &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;sum&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+
+add(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;上面还有个缺陷，如果我的showtime1有参数？ 即比如@showtime1(authtype=&amp;lsquo;local&amp;rsquo;)
+我的日志可能是网络记录、本地记录或者其他方式,该如何解决？&lt;/p&gt;
+&lt;h1 id=&#34;5--日志参数解决方法&#34;&gt;5.  日志参数解决方法&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;思路： 再增加一层函数，考虑参数authtype，并返回showtime函数&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;## &amp;lt;2022-01-16 22:15&amp;gt; 测试通过&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; time
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;logger&lt;/span&gt;(flag&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;showtime&lt;/span&gt;(func):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;wrapper&lt;/span&gt;(&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;args,&lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt;kwargs):
+                start&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;time&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;time()
+                func(&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;args,&lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt;kwargs)
+                end&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;time&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;time()
+                print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;end-start  is  &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;end&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;start&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; flag&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;:
+                    print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;已将上述操作操作录入文件&amp;#34;&lt;/span&gt;)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; wrapper
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; showtime
+
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;@logger&lt;/span&gt;(flag&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;add&lt;/span&gt;(&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;a,&lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt;b):
+        time&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sleep(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+        sum&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; a:
+            sum&lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt;i
+        print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;sum of &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;a&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; is equal to &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;sum&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+
+    add(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;)
+    &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;至此，我们完成了一种完美的添加时间的日志记录功能，支持初始函数的多参数功能，支持日志记录的参数类型指定,三层函数嵌套实现装饰者模式。&lt;/p&gt;
+&lt;h1 id=&#34;6--案例1-网站登录功能无多参数功能&#34;&gt;6.  案例1 网站登录功能(无多参数功能)&lt;/h1&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;user&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;yzl&amp;#34;&lt;/span&gt;
+passwd&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;123&amp;#39;&lt;/span&gt;
+
+loginStatus&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;False&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;login1&lt;/span&gt;(authtype):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; loginStatus &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;False&lt;/span&gt;:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;wrapper&lt;/span&gt;(f):
+            print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;authtype is &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;authtype&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; authtype&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;jingdong&amp;#34;&lt;/span&gt;:
+                username &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; input(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;input your Username:&amp;#34;&lt;/span&gt;)
+                password &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; input(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;input your Password:&amp;#34;&lt;/span&gt;)
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;( username &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; user &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; password &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; passwd):
+                    print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;welcome to Jd&amp;#34;&lt;/span&gt;)
+                    login_Status&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; authtype&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;weixin&amp;#34;&lt;/span&gt;:
+                username &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; input(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;input your Username:&amp;#34;&lt;/span&gt;)
+                password &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; input(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;input your Password:&amp;#34;&lt;/span&gt;)
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;( username &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; user &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; password &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; passwd):
+                    print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;welcome to Jd&amp;#34;&lt;/span&gt;)
+                    login_Status&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+                print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;无效&amp;#34;&lt;/span&gt;)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; wrapper
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;pass&lt;/span&gt;
+
+&lt;span style=&#34;color:#a6e22e&#34;&gt;@login1&lt;/span&gt;(authtype&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;jingdong&amp;#34;&lt;/span&gt;)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;home&lt;/span&gt;():
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;欢迎来到主界面&amp;#34;&lt;/span&gt;)
+
+&lt;span style=&#34;color:#a6e22e&#34;&gt;@login1&lt;/span&gt;(authtype&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;weixin&amp;#34;&lt;/span&gt;)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;finance&lt;/span&gt;():
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;欢迎来到经融界面&amp;#34;&lt;/span&gt;)  &lt;span style=&#34;color:#75715e&#34;&gt;## 登录完了 就应该具备记录登录状态功能，不需要重复输入，也就是单点登录功能&lt;/span&gt;
+
+&lt;span style=&#34;color:#a6e22e&#34;&gt;@login1&lt;/span&gt;(authtype&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;weixin&amp;#34;&lt;/span&gt;)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;manager&lt;/span&gt;():
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;欢迎来到管理界面&amp;#34;&lt;/span&gt;)  &lt;span style=&#34;color:#75715e&#34;&gt;## 登录完了 就应该具备记录登录状态功能，不需要重复输入，也就是单点登录功能&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>python提取时间序列白天和黑夜的时间段</title>

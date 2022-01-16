@@ -1,0 +1,1575 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  
+  
+  <meta name="generator" content="Wowchemy 5.0.0-beta.0 for Hugo">
+  
+
+  
+
+  
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="令狐冲">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="1.如何使用递归？ 怎么递归？ natural recursion 什么时候结束? 终止条件 参考t">
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://jueqingsizhe66.github.io/post/python%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">
+
+  
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+  
+  <script src="/js/mathjax-config.js"></script>
+  
+
+  
+  
+  
+  
+    
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/solarized-dark.min.css" crossorigin="anonymous" title="hl-light">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/solarized-dark.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css" integrity="sha512-1xoFisiGdy9nvho8EgXuXvnpR5GAMSjFwp40gSRE3NwdUdIMIKuPa7bqoUhLD0O/5tPNhteAsE5XyyMi5reQVA==" crossorigin="anonymous">
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.2.2/lazysizes.min.js" integrity="sha512-TmDwFLhg3UA4ZG0Eb4MIyT1O1Mb+Oww5kFG0uHqXsdbyZz9DcvYQhKpGgNkamAI6h2lGGZq2X8ftOJvF/XjTUg==" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+    
+      
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+    
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.css">
+
+  
+
+
+
+
+  
+<script>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','4703127160');
+</script>
+
+
+  
+
+
+  
+  
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_32x32_fill_lanczos_center_3.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_192x192_fill_lanczos_center_3.png">
+
+  <link rel="canonical" href="https://jueqingsizhe66.github.io/post/python%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">
+
+  
+  
+  
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="twitter:site" content="@jueqingsizhe66">
+  <meta property="twitter:creator" content="@jueqingsizhe66">
+  
+  <meta property="og:site_name" content="30年磨一剑">
+  <meta property="og:url" content="https://jueqingsizhe66.github.io/post/python%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">
+  <meta property="og:title" content="python常用函数学习总结 | 30年磨一剑">
+  <meta property="og:description" content="1.如何使用递归？ 怎么递归？ natural recursion 什么时候结束? 终止条件 参考t"><meta property="og:image" content="https://jueqingsizhe66.github.io/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png">
+  <meta property="twitter:image" content="https://jueqingsizhe66.github.io/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2022-01-16T23:02:00&#43;08:00">
+    
+    <meta property="article:modified_time" content="2022-01-16T23:02:50&#43;08:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://jueqingsizhe66.github.io/post/python%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/"
+  },
+  "headline": "python常用函数学习总结",
+  
+  "datePublished": "2022-01-16T23:02:00+08:00",
+  "dateModified": "2022-01-16T23:02:50+08:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "令狐冲"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "30年磨一剑",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://jueqingsizhe66.github.io/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_192x192_fill_lanczos_center_3.png"
+    }
+  },
+  "description": "1.如何使用递归？ 怎么递归？ natural recursion 什么时候结束? 终止条件 参考t"
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>python常用函数学习总结 | 30年磨一剑</title>
+
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper  ">
+
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.js"></script>
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/">30年磨一剑</a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/">30年磨一剑</a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-end" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#hero"><span>概要</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>博文</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/about/"><span>About</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/categories/"><span>分类</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/archives"><span>归档</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#tags"><span>标签</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  </div>
+
+  <div class="page-body">
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+  
+ <script async src="//cdn.busuanzi.ibruce.info/cdn/busuanzi/2.3/busuanzi.pure.mini.js"></script> 
+ <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script> 
+ <script> 
+     $(document).ready(function() { 
+         var int = setInterval(fixCount, 100); 
+         var busuanziSiteOffset =  100000  
+         function fixCount() { 
+             if ($("#busuanzi_container_site_pv").css("display") != "none") { 
+                 clearInterval(int); 
+                 $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + busuanziSiteOffset); 
+             } 
+         } 
+     }); 
+ </script> 
+  
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>python常用函数学习总结</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+          Last updated on
+      
+    
+    2022年1月16日
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    6 min read
+  </span>
+  
+
+  
+  
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/category/programme/">programme</a>, <a href="/category/%E6%8A%80%E6%9C%AF/">技术</a>, <a href="/category/%E6%96%B9%E6%B3%95/">方法</a></span>
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+
+
+<span class="article-metadata" >Reading time: 11 minutes and    37 seconds with 2556 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+    <aside>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-dot-如何使用递归">1.如何使用递归？</a></li>
+    <li><a href="#2-dot-python-filter的使用">2. python filter的使用</a></li>
+    <li><a href="#3-dot-python-map的使用">3. python map的使用</a></li>
+    <li><a href="#4-dot-python-reduce使用">4. python reduce使用</a></li>
+    <li><a href="#5-dot-什么是闭包">5. 什么是闭包?</a></li>
+    <li><a href="#6-dot-python抽样">6. python抽样</a></li>
+    <li><a href="#7-dot-什么是生成器-什么是迭代器">7. 什么是生成器？ 什么是迭代器？</a></li>
+    <li><a href="#8-dot-yield的作用">8. yield的作用?</a></li>
+    <li><a href="#9-dot-如何使用os模块">9.如何使用OS模块</a></li>
+    <li><a href="#10-dot-如何使用hashlib">10. 如何使用hashlib</a></li>
+    <li><a href="#11-dot-如何扩平台编码">11. 如何扩平台编码</a></li>
+    <li><a href="#12-dot-如何使用re模块">12. 如何使用RE模块</a></li>
+    <li><a href="#13-dot-如果有配置文件">13. 如果有配置文件？</a></li>
+  </ul>
+</nav>
+    </aside>
+  <div class="article-container">
+
+
+    <div class="article-style">
+      <h2 id="1-dot-如何使用递归">1.如何使用递归？</h2>
+<ul>
+<li>怎么递归？ natural recursion</li>
+<li>什么时候结束? 终止条件</li>
+</ul>
+<p>参考<a href="https://jueqingsizhe66.github.io/blog/2015/05/18/the-little-scheme-and-part-of-tss/" target="_blank" rel="noopener">the little scheme</a></p>
+<p>已有的结论是函数名字可以调用
+新的结论：</p>
+<ol>
+<li>函数名字可以赋值，</li>
+<li>函数可以嵌套,于是出现了高阶函数！</li>
+<li>也就是函数名字作为函数参数，可以作为返回值</li>
+</ol>
+<!--listend-->
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fun</span>():
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">init</span>():
+        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">8</span>;
+    <span style="color:#66d9ef">return</span> init;
+letlei<span style="color:#f92672">=</span>fun();
+print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;hello,</span><span style="color:#e6db74">{</span>letlei()<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fibo</span>(n):
+    <span style="color:#66d9ef">if</span>(n<span style="color:#f92672">==</span><span style="color:#ae81ff">0</span>):
+        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
+    <span style="color:#66d9ef">if</span>(n<span style="color:#f92672">==</span><span style="color:#ae81ff">1</span>):
+        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">return</span> fibo(n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">+</span>fibo(n<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>)
+print(fibo(<span style="color:#ae81ff">10</span>))</code></pre></div>
+<h2 id="2-dot-python-filter的使用">2. python filter的使用</h2>
+<p><strong>结论：filter可以过滤一个容器的元素，但不会改变元素内容</strong></p>
+<p>迭代器批次把内容从容器放出来(使用一个，则倒出一个到内存)，列表全部把内容从容器倒出来（都放入内存中)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fun2filter</span>(str):
+    <span style="color:#66d9ef">if</span>( str <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;a&#39;</span>):
+        <span style="color:#66d9ef">return</span> str
+ret <span style="color:#f92672">=</span> filter(fun2filter, [<span style="color:#e6db74">&#39;a&#39;</span>,<span style="color:#e6db74">&#39;b&#39;</span>,<span style="color:#e6db74">&#39;c&#39;</span>])
+print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34; filter Object is </span><span style="color:#e6db74">{</span>ret<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34; force change to list Object is </span><span style="color:#e6db74">{</span>list(ret)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)</code></pre></div>
+<h2 id="3-dot-python-map的使用">3. python map的使用</h2>
+<p><strong>结论：map可以处理一个容器的数据,会改变元素内容</strong>
+很关键，fitler只会过滤数据，而不会修改元素，map则可以逐个修改数据!</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fun2map</span>(str):
+    <span style="color:#66d9ef">return</span> str<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;added&#34;</span>
+
+ret1 <span style="color:#f92672">=</span> map(fun2map,[<span style="color:#e6db74">&#39;a&#39;</span>,<span style="color:#e6db74">&#39;b&#39;</span>,<span style="color:#e6db74">&#39;c&#39;</span>])
+<span style="color:#75715e">#ret1 = filter(fun2map,[&#39;a&#39;,&#39;b&#39;,&#39;c&#39;]) 不会起作用的！！！！他只会过滤，不会修改！</span>
+
+print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;map object is </span><span style="color:#e6db74">{</span>ret1<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)</code></pre></div>
+<p><span class="timestamp-wrapper"><span class="timestamp">&lt;2022-01-16 周日 22:38&gt;</span></span>测试通过</p>
+<h2 id="4-dot-python-reduce使用">4. python reduce使用</h2>
+<p>结论： reduce只返回序列（或者列表）的求和运算？ 把一个序列变为一个值，一个结论！
+reduce只会返回最终解！阶乘也很好用！</p>
+<p><strong>reduce本质就是斐波那契数列</strong>
+计算阶乘也很方便</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> functools <span style="color:#f92672">import</span> reduce
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fun2reduce</span>(x,y):
+    <span style="color:#66d9ef">return</span> x<span style="color:#f92672">+</span>y
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">funM2reduce</span>(x,y):
+    <span style="color:#66d9ef">return</span> x<span style="color:#f92672">*</span>y
+sum1<span style="color:#f92672">=</span>reduce(fun2reduce,[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>])
+sum2<span style="color:#f92672">=</span>reduce(<span style="color:#66d9ef">lambda</span> x,y: x<span style="color:#f92672">+</span>y, [<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>])
+sum3<span style="color:#f92672">=</span>reduce(funM2reduce,[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>])
+sum3<span style="color:#f92672">=</span>reduce(funM2reduce,range(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">10</span>))
+print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;reduce function f is  </span><span style="color:#e6db74">{</span>sum1<span style="color:#e6db74">}</span><span style="color:#e6db74">   pk  </span><span style="color:#e6db74">{</span>sum2<span style="color:#e6db74">}</span><span style="color:#e6db74"> pk </span><span style="color:#e6db74">{</span>sum3<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)</code></pre></div>
+<p>阶乘：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">print(reduce((<span style="color:#66d9ef">lambda</span> x,y:x<span style="color:#f92672">*</span>y),range(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">5</span>)))
+<span style="color:#ae81ff">24</span></code></pre></div>
+<h2 id="5-dot-什么是闭包">5. 什么是闭包?</h2>
+<p>结论： inner是一个闭包,符合两个条件，1. inner是一个内部函数，2. inner调用外部环境的一个变量
+<strong>即 闭包=内部函数+内部函数定义时的环境变量</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">outer</span>():
+    x<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">inner</span>(): <span style="color:#75715e">## 1. 内部函数</span>
+        print(x) <span style="color:#75715e">## 2. 调用内部函数外部环境变量x</span>
+    <span style="color:#66d9ef">return</span> inner
+
+outer()()
+fout2inner <span style="color:#f92672">=</span> outer()
+print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;测试闭包的功能 </span><span style="color:#e6db74">{</span>fout2inner()<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)</code></pre></div>
+<p><strong>结论：基于闭包思想 及装饰器思想解决代码重复问题</strong></p>
+<h2 id="6-dot-python抽样">6. python抽样</h2>
+<p>结论：通过choice,sample,randrange,randint函数实现抽样功能</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> random
+
+print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;random.random() = </span><span style="color:#e6db74">{</span>random<span style="color:#f92672">.</span>random()<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;随机生成1个值random.randint(1,8) = </span><span style="color:#e6db74">{</span>random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">8</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;随机生成1个值random.randrange(1,8) = </span><span style="color:#e6db74">{</span>random<span style="color:#f92672">.</span>randrange(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">8</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;随机选取序列1个值 choice(序列)=sampe(序列,1)：random.choice(&#39;hello&#39;) = </span><span style="color:#e6db74">{</span>random<span style="color:#f92672">.</span>choice(<span style="color:#e6db74">&#39;hello&#39;</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;随机选取序列1个值：random.choice([&#39;123&#39;,4,[12,3,4]]) = </span><span style="color:#e6db74">{</span>random<span style="color:#f92672">.</span>choice([<span style="color:#e6db74">&#39;123&#39;</span>,<span style="color:#ae81ff">4</span>,[<span style="color:#ae81ff">12</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>]])<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+<span style="color:#75715e">##</span>
+print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;随机选取序列多个值,sampe(序列，个数)：random.sample([&#39;123&#39;,4,[12,3,4]],2,&#39;34&#39;) = </span><span style="color:#e6db74">{</span>random<span style="color:#f92672">.</span>sample([<span style="color:#e6db74">&#39;123&#39;</span>,<span style="color:#ae81ff">4</span>,[<span style="color:#ae81ff">12</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>]],<span style="color:#ae81ff">2</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">v_code</span>():
+    code<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;&#39;</span>
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">6</span>):
+        <span style="color:#75715e">## choice形成序列</span>
+        <span style="color:#75715e">## choice很有用的</span>
+       add<span style="color:#f92672">=</span>random<span style="color:#f92672">.</span>choice([random<span style="color:#f92672">.</span>randrange(<span style="color:#ae81ff">10</span>),chr(random<span style="color:#f92672">.</span>randrange(<span style="color:#ae81ff">65</span>,<span style="color:#ae81ff">90</span>)),chr(random<span style="color:#f92672">.</span>randrange(<span style="color:#ae81ff">97</span>,<span style="color:#ae81ff">122</span>))])
+        <span style="color:#75715e">## 转换为string</span>
+       code <span style="color:#f92672">+=</span> str(add)
+    print(code)
+
+<span style="color:#75715e"># def v_codes(sampleNum):</span>
+<span style="color:#75715e"># bug因为random出来的是一个结果</span>
+    <span style="color:#75715e"># print(random.sample([random.randrange(10),chr(random.randrange(65,90)),chr(random.randrange(97,122))],sampleNum))</span>
+
+v_code()</code></pre></div>
+<h2 id="7-dot-什么是生成器-什么是迭代器">7. 什么是生成器？ 什么是迭代器？</h2>
+<p>结论：生成器(列表 list, tuple, string, dict)都是迭代器(满足两个条件：1. 有iter方法，2. 有next方法)，迭代器不一定是生成器</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 列表生成器 方式</span>
+a<span style="color:#f92672">=</span>[x<span style="color:#f92672">*</span><span style="color:#ae81ff">2</span> <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">10</span>)]
+<span style="color:#75715e"># 迭代器</span>
+b<span style="color:#f92672">=</span>(x<span style="color:#f92672">*</span><span style="color:#ae81ff">2</span> <span style="color:#66d9ef">for</span>  x <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">10000</span>))
+print(next(b))
+print(next(b))
+print(next(b))</code></pre></div>
+<h2 id="8-dot-yield的作用">8. yield的作用?</h2>
+<p>结论： 只要有yield的都是迭代器函数对象 foo()(不加载到内存）,如果没有就是普通函数加载到内存了</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">foo</span>():
+    print(<span style="color:#e6db74">&#34;ok&#34;</span>)
+    <span style="color:#66d9ef">yield</span> <span style="color:#ae81ff">1</span>
+    print(<span style="color:#e6db74">&#34;ok2&#34;</span>)
+    <span style="color:#66d9ef">yield</span> <span style="color:#ae81ff">2</span>
+
+g<span style="color:#f92672">=</span> foo()  <span style="color:#75715e">## foo() 带括号是生成器对象</span>
+print(g)
+
+<span style="color:#75715e">## 调用生成器函数对象</span>
+print(next(g))
+<span style="color:#75715e">## 可以控制执行次数！</span>
+print(next(g))</code></pre></div>
+<p>结论：迭代写法和同时写法有所不同, 要注意一句话写完和两句话写完是不一样的，以为before的值已经发生了修改！</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">## 0 1 1 2 3 5 8 13</span>
+<span style="color:#75715e">## 同时和并行什么区别？ 同时就是同一条语句(有点并行线程的感觉，并发执行）, 保证before不更新</span>
+<span style="color:#75715e">## 不同时就是分成两部执行,分成先后，有迭代顺序, 先后写before会更新</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fib</span>(max):
+    n,before,after<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">while</span> n<span style="color:#f92672">&lt;</span>max:
+        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;n=</span><span style="color:#e6db74">{</span>n<span style="color:#e6db74">}</span><span style="color:#e6db74">, before=</span><span style="color:#e6db74">{</span>before<span style="color:#e6db74">}</span><span style="color:#e6db74"> after=</span><span style="color:#e6db74">{</span>after<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+        <span style="color:#75715e"># before=after</span>
+         <span style="color:#66d9ef">yield</span>(before) <span style="color:#75715e">## 变成生成器对象函数</span>
+       <span style="color:#75715e"># after=before+after  ## 实际上after ={before}+after before不能更新</span>
+        before,after<span style="color:#f92672">=</span>after,before<span style="color:#f92672">+</span>after
+        n<span style="color:#f92672">=</span>n<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
+    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;fib(</span><span style="color:#e6db74">{</span>max<span style="color:#e6db74">}</span><span style="color:#e6db74">) = </span><span style="color:#e6db74">{</span>after<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+
+fib(<span style="color:#ae81ff">5</span>)</code></pre></div>
+<p>结论：改造为生成器函数对象</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fib</span>(max):
+    n,before,after<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">while</span> n<span style="color:#f92672">&lt;</span>max:
+        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;n=</span><span style="color:#e6db74">{</span>n<span style="color:#e6db74">}</span><span style="color:#e6db74">, before=</span><span style="color:#e6db74">{</span>before<span style="color:#e6db74">}</span><span style="color:#e6db74"> after=</span><span style="color:#e6db74">{</span>after<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+        <span style="color:#75715e"># before=after</span>
+        <span style="color:#75715e"># after=before+after  ## 实际上after ={before}+after before不能更新</span>
+        <span style="color:#66d9ef">yield</span>(after) <span style="color:#75715e">## 变成生成器对象函数</span>
+        before,after<span style="color:#f92672">=</span>after,before<span style="color:#f92672">+</span>after
+        n<span style="color:#f92672">=</span>n<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
+    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;fib(</span><span style="color:#e6db74">{</span>max<span style="color:#e6db74">}</span><span style="color:#e6db74">) = </span><span style="color:#e6db74">{</span>after<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+
+g<span style="color:#f92672">=</span>fib(<span style="color:#ae81ff">5</span>)
+
+next(g)
+next(g)
+next(g)</code></pre></div>
+<p><strong>结论： yield可以通过send方法进行函数变量赋值控制，</strong>
+第一次必须先进性赋值next(b) 或者通过b.send(None), b.send(None)等效于next(b)</p>
+<p>一次send等效于一次next,即执行一次yield</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">far</span>():
+      print(<span style="color:#e6db74">&#39;ok1&#39;</span>)
+      count<span style="color:#f92672">=</span><span style="color:#66d9ef">yield</span> <span style="color:#ae81ff">1</span>
+      print(count)
+      count2<span style="color:#f92672">=</span><span style="color:#66d9ef">yield</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">+</span>count
+      print(<span style="color:#e6db74">&#39;ok3&#39;</span><span style="color:#f92672">+</span>count2)
+      <span style="color:#66d9ef">yield</span> <span style="color:#ae81ff">3</span>
+
+  df<span style="color:#f92672">=</span>far()
+  df<span style="color:#f92672">.</span>send(<span style="color:#66d9ef">None</span>)
+<span style="color:#75715e">#df.send(None) ## 第一次必须是df.send(None) 或者先执行一次next(df)</span>
+
+  df<span style="color:#f92672">.</span>send(<span style="color:#ae81ff">3</span>)
+  print(df<span style="color:#f92672">.</span>send(<span style="color:#e6db74">&#39;2----&#39;</span>))
+  <span style="color:#75715e"># next(df)</span></code></pre></div>
+<h2 id="9-dot-如何使用os模块">9.如何使用OS模块</h2>
+<p>结论： 文件目录相关操作可以参考OS模块</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> os
+print(os<span style="color:#f92672">.</span>getcwd())
+print(os<span style="color:#f92672">.</span>listdir())
+
+print(os<span style="color:#f92672">.</span>stat(<span style="color:#e6db74">&#39;./&#39;</span>))
+print(os<span style="color:#f92672">.</span>pathsep)
+print(os<span style="color:#f92672">.</span>sep) <span style="color:#75715e">## 路径分割附</span>
+print(os<span style="color:#f92672">.</span>environ)
+print(os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>dirname(<span style="color:#e6db74">&#39;c:/testRandom.py&#39;</span>))
+print(os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>basename(<span style="color:#e6db74">&#39;c:/testRandom.py&#39;</span>))</code></pre></div>
+<h2 id="10-dot-如何使用hashlib">10. 如何使用hashlib</h2>
+<p><em>结论: 通过hashlib创建解密和加密</em>
+1、什么叫hash:hash是一种算法（不同的hash算法只是复杂度不一样）（3.x里代替了md5模块和sha模块，主要提供 SHA1, SHA224, SHA256, SHA384, SHA512 ，MD5 算法），该算法接受传入的内容，经过运算得到一串hash值
+2、hash值的特点是(hash值/产品有三大特性：)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">  md52<span style="color:#f92672">=</span>hashlib<span style="color:#f92672">.</span>md5()
+  print(md52)
+  md52<span style="color:#f92672">.</span>update(<span style="color:#e6db74">&#39;hell word&#39;</span><span style="color:#f92672">.</span>encode(<span style="color:#e6db74">&#39;utf-8&#39;</span>))
+  md52<span style="color:#f92672">.</span>update(<span style="color:#e6db74">&#39;hell word&#39;</span><span style="color:#f92672">.</span>encode(<span style="color:#e6db74">&#39;utf8&#39;</span>)) <span style="color:#75715e">## python3只有unicode和 ,默认不是utf-8</span>
+  md52<span style="color:#f92672">.</span>digest()
+  md52<span style="color:#f92672">.</span>hexdigest()</code></pre></div>
+<h2 id="11-dot-如何扩平台编码">11. 如何扩平台编码</h2>
+<p><strong>结论： 扩平台运行可以参考sys模块</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34; sys.argv= </span><span style="color:#e6db74">{</span>sys<span style="color:#f92672">.</span>argv<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;sys.path = </span><span style="color:#e6db74">{</span>sys<span style="color:#f92672">.</span>path<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;sys.platform = </span><span style="color:#e6db74">{</span>sys<span style="color:#f92672">.</span>platform<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> )
+print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;sys.maxsize = </span><span style="color:#e6db74">{</span>sys<span style="color:#f92672">.</span>maxsize<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> )
+print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;sys.stdout.write(&#39;Please:&#39;) = </span><span style="color:#e6db74">{</span>sys<span style="color:#f92672">.</span>stdout<span style="color:#f92672">.</span>write(<span style="color:#e6db74">&#39;Please:&#39;</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> )
+<span style="color:#75715e">#正常退出，不执行下面代码</span>
+<span style="color:#75715e"># print (sys.exit(0))</span>
+
+<span style="color:#75715e"># if sys.platform==&#39;win32&#39;:</span>
+<span style="color:#75715e">#     os.system(&#39;dir&#39;) ## 执行系统命令</span>
+<span style="color:#75715e"># else:</span>
+<span style="color:#75715e">#     os.system(&#39;ls&#39;)</span></code></pre></div>
+<h2 id="12-dot-如何使用re模块">12. 如何使用RE模块</h2>
+<p><em>结论:通过re模块进行正则匹配</em>
+<a href="https://docs.python.org/zh-cn/3/library/re.html" target="_blank" rel="noopener">https://docs.python.org/zh-cn/3/library/re.html</a></p>
+<p>需要明确常用的正则元素、字母、数值、元数据( * + ? \d{3,} [abA-Z] ||| . \d \s \S \w \W )等！
+要注意正则零宽断言和捕获方面的使用</p>
+<p>如果在python中使用正则，想要直接使用正则语法则注意在模式表达式前面加小写r，如果不加小写r，表示先试用python解析字符串，然后再把解析后的内容传给正则表达式进行解析。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">  <span style="color:#f92672">import</span> re
+
+  <span style="color:#75715e">## 返回所有匹配对象,并放在一个列表中</span>
+  print(re<span style="color:#f92672">.</span>findall(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74">&#39;df</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">b&#39;</span>))
+  <span style="color:#75715e">## \元字符在python中有特殊用途</span>
+  print(re<span style="color:#f92672">.</span>findall(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\\\\</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74">&#39;df</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">b&#39;</span>))
+
+  <span style="color:#75715e">## search 返回第一个匹配对象，并且可以通过group进行调用</span>
+  <span style="color:#75715e">#ret=re.search(r&#39;(?P&lt;id&gt;\d{3})/(?P&lt;name&gt;\w{3})&#39;,&#39;weekdydtt123/ooo&#39;)</span>
+  ret<span style="color:#f92672">=</span>re<span style="color:#f92672">.</span>search(<span style="color:#e6db74">&#39;(?P&lt;id&gt;\d</span><span style="color:#e6db74">{3}</span><span style="color:#e6db74">)/(?P&lt;name&gt;\w</span><span style="color:#e6db74">{3}</span><span style="color:#e6db74">)&#39;</span>,<span style="color:#e6db74">&#39;weekdydtt123/ooo&#39;</span>)
+  print(ret<span style="color:#f92672">.</span>group(<span style="color:#e6db74">&#39;id&#39;</span>))
+  print(ret<span style="color:#f92672">.</span>group(<span style="color:#e6db74">&#39;name&#39;</span>))
+  <span style="color:#75715e">## match 返回第一个匹配对象，并且可以通过group进行调用</span>
+  <span style="color:#75715e">## 但是从第一个字符开始找, 如果第一个字符就不匹配就返回None, 不继续匹配. 用于判断字符串开头或整个字符串是否匹配,速度快。</span>
+  <span style="color:#75715e">## match 自带^光环，所以速度很快</span>
+  <span style="color:#75715e"># ret=re.match(r&#39;(?P&lt;id&gt;\d{2})/(?P&lt;name&gt;\w{3})&#39;,&#39;weekdydtt123/ooo&#39;)</span>
+  <span style="color:#75715e"># print(ret.group(&#39;id&#39;))</span>
+  <span style="color:#75715e"># print(ret.group(&#39;name&#39;))</span>
+
+
+  <span style="color:#75715e">## re.compile 编译生成Pattern对象 可重复使用Pattern，pattern对象可调用findall, search and match</span>
+  pat<span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>compile(<span style="color:#e6db74">&#39;ab&#39;</span>)  <span style="color:#75715e">## 提出一般模式, 基于该模式可运用到不同的场景下！</span>
+  ret1<span style="color:#f92672">=</span>pat<span style="color:#f92672">.</span>findall(<span style="color:#e6db74">&#39;abcd abc gd&#39;</span>)
+  ret2<span style="color:#f92672">=</span>pat<span style="color:#f92672">.</span>findall(<span style="color:#e6db74">&#39;acd abc gd&#39;</span>)
+  ret3<span style="color:#f92672">=</span>pat<span style="color:#f92672">.</span>match(<span style="color:#e6db74">&#39;abc db ab&#39;</span>)
+  ret4<span style="color:#f92672">=</span>pat<span style="color:#f92672">.</span>search(<span style="color:#e6db74">&#39;abc db ab&#39;</span>)
+  print(ret1)
+  print(ret2)
+  print(ret3<span style="color:#f92672">.</span>group())
+  print(ret4<span style="color:#f92672">.</span>group())
+  print(ret4<span style="color:#f92672">.</span>group())</code></pre></div>
+<h2 id="13-dot-如果有配置文件">13. 如果有配置文件？</h2>
+<p><strong>结论：通过configparser模块生成和读取配置文件</strong></p>
+<p>写入文件：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span>  configparser
+
+config<span style="color:#f92672">=</span>configparser<span style="color:#f92672">.</span>ConfigParser()
+config[<span style="color:#e6db74">&#34;DEFAULT&#34;</span>]<span style="color:#f92672">=</span>{
+    <span style="color:#e6db74">&#39;ServerAliveInterval&#39;</span>: <span style="color:#e6db74">&#39;45&#39;</span>,
+    <span style="color:#e6db74">&#39;Compression&#39;</span>:<span style="color:#e6db74">&#39;yes&#39;</span>,
+    <span style="color:#e6db74">&#39;CompressionLevel&#39;</span>: <span style="color:#e6db74">&#39;9&#39;</span>
+}
+
+config[<span style="color:#e6db74">&#39;bitbucket.org&#39;</span>]<span style="color:#f92672">=</span>{}
+config[<span style="color:#e6db74">&#39;bitbucket.org&#39;</span>][<span style="color:#e6db74">&#39;user&#39;</span>]<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;hg&#39;</span>
+<span style="color:#75715e"># config[&#39;bitbucket.org&#39;]={&#39;user&#39;:&#39;hg&#39;}</span>
+config[<span style="color:#e6db74">&#39;topsecret.server.com&#39;</span>]<span style="color:#f92672">=</span>{}
+topsecret<span style="color:#f92672">=</span>config[<span style="color:#e6db74">&#39;topsecret.server.com&#39;</span>]<span style="color:#f92672">=</span>{}
+topsecret[<span style="color:#e6db74">&#39;Host Port&#39;</span>]<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;50222&#39;</span>
+config[<span style="color:#e6db74">&#39;DEFAULT&#39;</span>][<span style="color:#e6db74">&#39;ForwardX11&#39;</span>]<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;yes&#39;</span>
+
+<span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;example.ini&#39;</span>,<span style="color:#e6db74">&#39;w&#39;</span>) <span style="color:#66d9ef">as</span> configfile:
+    config<span style="color:#f92672">.</span>write(configfile)</code></pre></div>
+<p>读取文件：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span>  configparser
+config<span style="color:#f92672">=</span>configparser<span style="color:#f92672">.</span>ConfigParser()
+
+config<span style="color:#f92672">.</span>read(<span style="color:#e6db74">&#39;example.ini&#39;</span>)
+
+print(config<span style="color:#f92672">.</span>defaults())
+print(config<span style="color:#f92672">.</span>sections())
+print(config[<span style="color:#e6db74">&#39;bitbucket.org&#39;</span>])
+print(config[<span style="color:#e6db74">&#39;bitbucket.org&#39;</span>][<span style="color:#e6db74">&#39;user&#39;</span>])
+print(config[<span style="color:#e6db74">&#39;DEFAULT&#39;</span>][<span style="color:#e6db74">&#39;Compression&#39;</span>])</code></pre></div>
+
+    </div>
+ <div class="nav-links" style="padding:10;">
+        
+        <div align="left">
+        <a href="https://jueqingsizhe66.github.io/post/%E6%95%B0%E6%8D%AE%E8%AE%BE%E8%AE%A1%E7%A8%8B%E5%BA%8F/"><span class="arrow">←</span> <strong>上一篇:数据设计程序-装饰者模式</strong></a>
+        </div>
+        
+        
+      </div>
+    
+
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/python/">python</a>
+  
+</div>
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=https://jueqingsizhe66.github.io/post/python%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/&amp;text=python%e5%b8%b8%e7%94%a8%e5%87%bd%e6%95%b0%e5%ad%a6%e4%b9%a0%e6%80%bb%e7%bb%93" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=https://jueqingsizhe66.github.io/post/python%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/&amp;t=python%e5%b8%b8%e7%94%a8%e5%87%bd%e6%95%b0%e5%ad%a6%e4%b9%a0%e6%80%bb%e7%bb%93" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=python%e5%b8%b8%e7%94%a8%e5%87%bd%e6%95%b0%e5%ad%a6%e4%b9%a0%e6%80%bb%e7%bb%93&amp;body=https://jueqingsizhe66.github.io/post/python%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https://jueqingsizhe66.github.io/post/python%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/&amp;title=python%e5%b8%b8%e7%94%a8%e5%87%bd%e6%95%b0%e5%ad%a6%e4%b9%a0%e6%80%bb%e7%bb%93" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="whatsapp://send?text=python%e5%b8%b8%e7%94%a8%e5%87%bd%e6%95%b0%e5%ad%a6%e4%b9%a0%e6%80%bb%e7%bb%93%20https://jueqingsizhe66.github.io/post/python%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=https://jueqingsizhe66.github.io/post/python%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/&amp;title=python%e5%b8%b8%e7%94%a8%e5%87%bd%e6%95%b0%e5%ad%a6%e4%b9%a0%e6%80%bb%e7%bb%93" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="https://jueqingsizhe66.github.io/"><img class="avatar mr-3 avatar-circle" src="/author/%E4%BB%A4%E7%8B%90%E5%86%B2/avatar_huc99f1f2e739130747140db298bdd1890_46492_270x270_fill_q90_lanczos_center.jpg" alt="令狐冲"></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://jueqingsizhe66.github.io/">令狐冲</a></h5>
+      <h6 class="card-subtitle">Engineer of offshore wind turbine technique research</h6>
+      <p class="card-text">My research interests include distributed energy, wind turbine power generation technique , Computational fluid dynamic and programmable matter.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/jueqingsizhe66" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.co.uk/citations?user=7VyEMyQAAAAJ&amp;hl=zh-CN" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/jueqingsizhe66" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>Related</h3>
+    <ul>
+      
+      <li><a href="/post/%E6%95%B0%E6%8D%AE%E8%AE%BE%E8%AE%A1%E7%A8%8B%E5%BA%8F/">数据设计程序-装饰者模式</a></li>
+      
+      <li><a href="/post/python%E6%8F%90%E5%8F%96%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E7%99%BD%E5%A4%A9%E5%92%8C%E9%BB%91%E5%A4%9C%E7%9A%84%E6%97%B6%E9%97%B4%E6%AE%B5/">python提取时间序列白天和黑夜的时间段</a></li>
+      
+      <li><a href="/post/python%E7%BB%95%E7%82%B9%E6%97%8B%E8%BD%AC/">python绕点旋转</a></li>
+      
+      <li><a href="/post/python%E5%88%B6%E4%BD%9C%E6%9B%B2%E7%BA%BF%E5%8A%A8%E7%94%BB/">python制作曲线动画</a></li>
+      
+      <li><a href="/post/%E7%8E%A9%E8%BD%ACpython-datetime/">玩转python datetime</a></li>
+      
+    </ul>
+
+
+         <span id="busuanzi_container_site_pv"> 
+             本站访问量：<span id="busuanzi_value_site_pv"></span>次 
+         </span> 
+         &nbsp; 
+   </div> 
+
+
+  </div>
+
+</article>
+<script src="https://utteranc.es/client.js"
+        repo="jueqingsizhe66/jueqingsizhe66.github.io"
+        issue-term="pathname"
+        theme="github-dark"
+        crossorigin="anonymous"
+        async>
+</script>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    ©2022 &middot; 
+
+    ^-^ LingHuChong ^-^ Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+      
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/go.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/vim.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/matlab.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/sql.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/python.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/c.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/scheme.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/racket.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/perl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/awk.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/clojure.min.js"></script>
+        
+      
+
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js" integrity="sha512-SeiQaaDh73yrb56sTW/RgVdi/mMqNeM2oBwubFHagc5BkixSpP1fvqF47mKzPGWYSSy4RwbBunrJBQ4Co8fRWA==" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks",
+        'slides' : "Slides"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/wowchemy.min.516d1df876a80aa80a06ab72f875bdd4.js"></script>
+
+    
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+
+
+
+</body>
+</html>
