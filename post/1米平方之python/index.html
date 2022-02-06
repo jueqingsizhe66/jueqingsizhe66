@@ -1,0 +1,1917 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  
+  
+  <meta name="generator" content="Wowchemy 5.0.0-beta.0 for Hugo">
+  
+
+  
+
+  
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="令狐冲">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="从1月24号到2月7号的python学习汇总: pyleanrn git USER_ATM_Product 封装、继">
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://jueqingsizhe66.github.io/post/1%E7%B1%B3%E5%B9%B3%E6%96%B9%E4%B9%8Bpython/">
+
+  
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+  
+  <script src="/js/mathjax-config.js"></script>
+  
+
+  
+  
+  
+  
+    
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/solarized-dark.min.css" crossorigin="anonymous" title="hl-light">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/solarized-dark.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css" integrity="sha512-1xoFisiGdy9nvho8EgXuXvnpR5GAMSjFwp40gSRE3NwdUdIMIKuPa7bqoUhLD0O/5tPNhteAsE5XyyMi5reQVA==" crossorigin="anonymous">
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.2.2/lazysizes.min.js" integrity="sha512-TmDwFLhg3UA4ZG0Eb4MIyT1O1Mb+Oww5kFG0uHqXsdbyZz9DcvYQhKpGgNkamAI6h2lGGZq2X8ftOJvF/XjTUg==" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+    
+      
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+    
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.css">
+
+  
+
+
+
+
+  
+<script>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','4703127160');
+</script>
+
+
+  
+
+
+  
+  
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_32x32_fill_lanczos_center_3.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_192x192_fill_lanczos_center_3.png">
+
+  <link rel="canonical" href="https://jueqingsizhe66.github.io/post/1%E7%B1%B3%E5%B9%B3%E6%96%B9%E4%B9%8Bpython/">
+
+  
+  
+  
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="twitter:site" content="@jueqingsizhe66">
+  <meta property="twitter:creator" content="@jueqingsizhe66">
+  
+  <meta property="og:site_name" content="30年磨一剑">
+  <meta property="og:url" content="https://jueqingsizhe66.github.io/post/1%E7%B1%B3%E5%B9%B3%E6%96%B9%E4%B9%8Bpython/">
+  <meta property="og:title" content="1米平方之python | 30年磨一剑">
+  <meta property="og:description" content="从1月24号到2月7号的python学习汇总: pyleanrn git USER_ATM_Product 封装、继"><meta property="og:image" content="https://jueqingsizhe66.github.io/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png">
+  <meta property="twitter:image" content="https://jueqingsizhe66.github.io/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2022-02-07T00:15:00&#43;08:00">
+    
+    <meta property="article:modified_time" content="2022-02-07T00:15:26&#43;08:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://jueqingsizhe66.github.io/post/1%E7%B1%B3%E5%B9%B3%E6%96%B9%E4%B9%8Bpython/"
+  },
+  "headline": "1米平方之python",
+  
+  "datePublished": "2022-02-07T00:15:00+08:00",
+  "dateModified": "2022-02-07T00:15:26+08:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "令狐冲"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "30年磨一剑",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://jueqingsizhe66.github.io/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_192x192_fill_lanczos_center_3.png"
+    }
+  },
+  "description": "从1月24号到2月7号的python学习汇总: pyleanrn git USER_ATM_Product 封装、继"
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>1米平方之python | 30年磨一剑</title>
+
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper  ">
+
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.js"></script>
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/">30年磨一剑</a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/">30年磨一剑</a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-end" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#hero"><span>概要</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>博文</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/about/"><span>About</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/categories/"><span>分类</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/archives"><span>归档</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#tags"><span>标签</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  </div>
+
+  <div class="page-body">
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+  
+ <script async src="//cdn.busuanzi.ibruce.info/cdn/busuanzi/2.3/busuanzi.pure.mini.js"></script> 
+ <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script> 
+ <script> 
+     $(document).ready(function() { 
+         var int = setInterval(fixCount, 100); 
+         var busuanziSiteOffset =  100000  
+         function fixCount() { 
+             if ($("#busuanzi_container_site_pv").css("display") != "none") { 
+                 clearInterval(int); 
+                 $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + busuanziSiteOffset); 
+             } 
+         } 
+     }); 
+ </script> 
+  
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>1米平方之python</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+          Last updated on
+      
+    
+    2022年2月7日
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    18 min read
+  </span>
+  
+
+  
+  
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/category/programme/">programme</a>, <a href="/category/%E6%8A%80%E6%9C%AF/">技术</a></span>
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+
+
+<span class="article-metadata" >Reading time: 38 minutes and    45 seconds with 8528 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+    <aside>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-24-学习总结">1-24 学习总结<span class="timestamp-wrapper"><span class="timestamp">&lt;2022-01-24 周一 22:35&gt;</span></span></a></li>
+    <li><a href="#1-25号学习总结">1-25号学习总结</a></li>
+    <li><a href="#1-26号学习总结">1-26号学习总结</a></li>
+    <li><a href="#1-27号学习总结">1-27号学习总结</a></li>
+    <li><a href="#1月28号学习">1月28号学习</a></li>
+    <li><a href="#1月29号学习">1月29号学习</a></li>
+    <li><a href="#1月30号学习">1月30号学习</a></li>
+    <li><a href="#2月1号学习">2月1号学习</a></li>
+    <li><a href="#其实直接exec或者eval也是可以执行不需要compile">其实直接exec或者eval也是可以执行，不需要compile</a></li>
+    <li><a href="#2月2号学习">2月2号学习</a></li>
+    <li><a href="#2月3号学习">2月3号学习</a></li>
+    <li><a href="#2月4号学习">2月4号学习</a></li>
+    <li><a href="#2月5号学习">2月5号学习</a></li>
+    <li><a href="#2月6号学习">2月6号学习</a></li>
+  </ul>
+</nav>
+    </aside>
+  <div class="article-container">
+
+
+    <div class="article-style">
+      <p>从1月24号到2月7号的python学习汇总:</p>
+<ul>
+<li><a href="https://github.com/jueqingsizhe66/pyLearn" target="_blank" rel="noopener">pyleanrn git</a></li>
+<li><a href="https://github.com/jueqingsizhe66/USER_ATM_Product" target="_blank" rel="noopener">USER_ATM_Product</a></li>
+</ul>
+<p>封装、继承体现代码重复，多态体现接口重复
+万事万物结为对象，class Foo的Foo也是type语句生成出来的</p>
+<p>fibonacci的yield过渡到生产者、消费者模式(串行体味到并行的感觉)</p>
+<p>下一步可能接着学习多用户模式的socket通信以及mysql、django等学习</p>
+<h2 id="1-24-学习总结">1-24 学习总结<span class="timestamp-wrapper"><span class="timestamp">&lt;2022-01-24 周一 22:35&gt;</span></span></h2>
+<ul>
+<li>VIP14期之1：</li>
+</ul>
+<p>python的工程应用案例，youtube，dropbox,facebook等,NASA等也在用</p>
+<p>python的前景&mdash;薪资高的图</p>
+<p>语言基础：</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 数据类型</li>
+<li><input checked="" disabled="" type="checkbox"> 流程控制
+if-else if-elif-else  while break</li>
+<li><input checked="" disabled="" type="checkbox"> 常用模块</li>
+<li><input disabled="" type="checkbox"> 函数、迭代器、装饰器</li>
+<li><input disabled="" type="checkbox"> 递归、迭代、反射</li>
+<li><input disabled="" type="checkbox"> 面向对象编程</li>
+<li><input disabled="" type="checkbox"> 购物车</li>
+<li><input disabled="" type="checkbox"> ATM</li>
+<li><input disabled="" type="checkbox"> 计算器</li>
+<li><input disabled="" type="checkbox"> 模拟人生</li>
+</ul>
+<p>网络编程：</p>
+<ul>
+<li><input disabled="" type="checkbox"> socket</li>
+<li><input disabled="" type="checkbox"> 多线程 多进程</li>
+<li><input disabled="" type="checkbox"> 生产者消费者</li>
+<li><input disabled="" type="checkbox"> 堡垒机</li>
+<li><input disabled="" type="checkbox"> FTP</li>
+<li><input disabled="" type="checkbox"> 批量</li>
+<li><input disabled="" type="checkbox"> RAbibitMQ</li>
+<li><input disabled="" type="checkbox"> Redis、memcache、mongodb</li>
+</ul>
+<p>Web基础</p>
+<ul>
+<li><input disabled="" type="checkbox"> html/css</li>
+<li><input disabled="" type="checkbox"> Dom</li>
+<li><input disabled="" type="checkbox"> JS</li>
+<li><input disabled="" type="checkbox"> jquery  easyui  angulaJS</li>
+<li><input disabled="" type="checkbox"> Ajax</li>
+<li><input disabled="" type="checkbox"> highChart</li>
+<li>
+<table>
+<thead>
+<tr>
+<th>[ ] bootstrap</th>
+</tr>
+</thead>
+</table>
+</li>
+</ul>
+<p>算法：(算法，才是计算机的精髓)</p>
+<ul>
+<li><input disabled="" type="checkbox"> 冒泡</li>
+<li><input disabled="" type="checkbox"> 二叉树</li>
+<li><input disabled="" type="checkbox"> 哈希</li>
+<li><input disabled="" type="checkbox"> 折半</li>
+<li>
+<table>
+<thead>
+<tr>
+<th>[ ] 工厂模式、单例模式、享元模式、代理模式</th>
+</tr>
+</thead>
+</table>
+</li>
+</ul>
+<p>自动化开发: 哪个地方用了什么算法!</p>
+<p>PY WEB框架</p>
+<ul>
+<li><input disabled="" type="checkbox"> MVC</li>
+<li><input disabled="" type="checkbox"> 自行开发WEB框架</li>
+<li><input disabled="" type="checkbox"> Django Tornado  Flask  Bottle  WebPy</li>
+<li><input disabled="" type="checkbox"> 中间件 ORM  Cookie</li>
+<li><input disabled="" type="checkbox"> Restful API</li>
+<li><input disabled="" type="checkbox"> 权限管理</li>
+<li><input disabled="" type="checkbox"> BBS论坛(删掉)</li>
+<li>
+<table>
+<thead>
+<tr>
+<th>[ ] Chatroom(删掉)</th>
+</tr>
+</thead>
+</table>
+</li>
+</ul>
+<p>项目实战篇：</p>
+<ul>
+<li><input disabled="" type="checkbox"> 购物商城</li>
+<li><input disabled="" type="checkbox"> 主机管理+任务编排  + 运维审计堡垒机开发</li>
+<li><input disabled="" type="checkbox"> Nagios/Zabbix(已经开发了10几年了)监控产品(可能有用！)</li>
+<li><input disabled="" type="checkbox"> CMDB资产管理(自动化开发必须做的, 需要理解原理)</li>
+<li><input disabled="" type="checkbox"> 网站访问质量监测分析平台</li>
+<li><input disabled="" type="checkbox"> Docker</li>
+<li>
+<table>
+<thead>
+<tr>
+<th>[ ] openStack(够呛)</th>
+</tr>
+</thead>
+</table>
+</li>
+</ul>
+<p>为什么python?
+python的前景?
+Python的发展史？
+python2 or python3？
+<a href="https://www.cnblogs.com/alex3714/articles/5465198.html" target="_blank" rel="noopener">https://www.cnblogs.com/alex3714/articles/5465198.html</a>
+<a href="https://docs.python.org/3/" target="_blank" rel="noopener">https://docs.python.org/3/</a></p>
+<ul>
+<li>VIP第二期</li>
+</ul>
+<p>Python自动化开发之路 site:cnblogs.com
+<a href="https://www.cnblogs.com/flying1819/articles/8035554.html" target="_blank" rel="noopener">https://www.cnblogs.com/flying1819/articles/8035554.html</a>
+<a href="https://www.cnblogs.com/alex3714/category/770733.html" target="_blank" rel="noopener">https://www.cnblogs.com/alex3714/category/770733.html</a></p>
+<h2 id="1-25号学习总结">1-25号学习总结</h2>
+<p>no!</p>
+<h2 id="1-26号学习总结">1-26号学习总结</h2>
+<p>数组操作
+数组切片取出</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_array</span>():
+    names<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#34;yzl&#34;</span>,<span style="color:#e6db74">&#34;hh&#34;</span>,<span style="color:#e6db74">&#34;hr&#34;</span>,<span style="color:#e6db74">&#34;nb&#34;</span>,<span style="color:#e6db74">&#34;em&#34;</span>]
+    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;names = </span><span style="color:#e6db74">{</span>names<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;names[0] = </span><span style="color:#e6db74">{</span>names[<span style="color:#ae81ff">0</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;names[1] = </span><span style="color:#e6db74">{</span>names[<span style="color:#ae81ff">1</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+    names[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;New Times&#34;</span>
+    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;After names[1]=&#34;New Times&#34; , names = </span><span style="color:#e6db74">{</span>names<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+    names<span style="color:#f92672">.</span>append(<span style="color:#e6db74">&#34;ending&#34;</span>)
+    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;After names.append(&#34;ending&#34;) , names = </span><span style="color:#e6db74">{</span>names<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+    names<span style="color:#f92672">.</span>insert(<span style="color:#ae81ff">2</span>,<span style="color:#e6db74">&#34;second&#34;</span>)
+    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;After names.insert(2, &#34;second&#34;) , names = </span><span style="color:#e6db74">{</span>names<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39; Before pop(2) names= </span><span style="color:#e6db74">{</span>names<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39; names.pop(2) = </span><span style="color:#e6db74">{</span>names<span style="color:#f92672">.</span>pop(<span style="color:#ae81ff">2</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39; After pop(2) names= </span><span style="color:#e6db74">{</span>names<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39; names.pop(1) = </span><span style="color:#e6db74">{</span>names<span style="color:#f92672">.</span>pop(<span style="color:#ae81ff">1</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39; After pop(1) names= </span><span style="color:#e6db74">{</span>names<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39; namees.index(&#34;hr&#34;) = </span><span style="color:#e6db74">{</span>names<span style="color:#f92672">.</span>index(<span style="color:#e6db74">&#34;hr&#34;</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39; namees.index(&#34;nb&#34;) = </span><span style="color:#e6db74">{</span>names<span style="color:#f92672">.</span>index(<span style="color:#e6db74">&#34;nb&#34;</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39; names[namees.index(&#34;nb&#34;)] = </span><span style="color:#e6db74">{</span>names[names<span style="color:#f92672">.</span>index(<span style="color:#e6db74">&#34;nb&#34;</span>)]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;names[2]=</span><span style="color:#e6db74">{</span>names[<span style="color:#ae81ff">2</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;names[0]=</span><span style="color:#e6db74">{</span>names[<span style="color:#ae81ff">0</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;names[1]=</span><span style="color:#e6db74">{</span>names[<span style="color:#ae81ff">1</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;names[0:3]=</span><span style="color:#e6db74">{</span>names[<span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">3</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;names[1:-1]=</span><span style="color:#e6db74">{</span>names[<span style="color:#ae81ff">1</span>:<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)</code></pre></div>
+<p>深拷贝、浅拷贝、不拷贝</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_ArrayCopy</span>():
+    names<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#34;zym&#34;</span>,<span style="color:#e6db74">&#34;ys&#34;</span>,<span style="color:#e6db74">&#34;lkp&#34;</span>,[<span style="color:#e6db74">&#34;abc&#34;</span>,<span style="color:#e6db74">&#34;def&#34;</span>],<span style="color:#e6db74">&#34;qx&#34;</span>,<span style="color:#e6db74">&#34;zb&#34;</span>]
+    <span style="color:#75715e">## copy()是浅拷贝，只copy第一层，其它层走引用</span>
+    <span style="color:#75715e">## ***************第一种类型： 完全指针拷贝, 修改后完全相关***************</span>
+    namesCopy<span style="color:#f92672">=</span>names
+    <span style="color:#75715e">## ***************第二种类型： 浅拷贝  第一层值拷贝  第二层指针拷贝，修改后部分相关(第一层不相关)***************</span>
+    <span style="color:#75715e"># namesCopy=names.copy() ## 1. 数组copy等效于copy.copy(names)</span>
+    <span style="color:#75715e"># namesCopy=names[:] ## 2. 数组切片等效于copy.copy(names)</span>
+    <span style="color:#75715e"># namesCopy=list(names) ## 3. 工厂函数list(names)等效于copy.copy(names)</span>
+    <span style="color:#75715e"># namesCopy=copy.copy(names)</span>
+    <span style="color:#75715e">## ***************第三种类型： 深拷贝(完全不相关，各自一份内存)***************</span>
+    <span style="color:#75715e"># namesCopy=copy.deepcopy(names)</span>
+
+    <span style="color:#75715e">## 第一层是 值拷贝</span>
+    names[<span style="color:#ae81ff">2</span>]<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;lukunpeng&#34;</span>
+    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;names=</span><span style="color:#e6db74">{</span>names<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;namesCopy=</span><span style="color:#e6db74">{</span>namesCopy<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+    <span style="color:#75715e">## 第二层是 指针拷贝</span>
+    names[<span style="color:#ae81ff">3</span>][<span style="color:#ae81ff">1</span>]<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;123&#34;</span>
+    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;names=</span><span style="color:#e6db74">{</span>names<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;namesCopy=</span><span style="color:#e6db74">{</span>namesCopy<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+
+    <span style="color:#75715e">## 浅copy适用场景   夫妻共用一个财务账号  即夫妻姓名是不同，账号是共享 设计一个数据结构 [names,[saving,money]]</span>
+    <span style="color:#75715e">## 场景中考虑到内存部分共享，则考虑浅拷贝， 如果内存完全不共享，则为深拷贝</span>
+    <span style="color:#75715e"># 数据是否共享?</span>
+    man<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;Apple&#39;</span>,[<span style="color:#e6db74">&#39;Saving&#39;</span>,<span style="color:#ae81ff">1000</span>]]
+    woman<span style="color:#f92672">=</span>man[:]
+    woman[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Banana&#39;</span>
+    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;man= </span><span style="color:#e6db74">{</span>man<span style="color:#e6db74">}</span><span style="color:#e6db74">  </span><span style="color:#ae81ff">\t</span><span style="color:#e6db74"> women =</span><span style="color:#e6db74">{</span>woman<span style="color:#e6db74">}</span><span style="color:#e6db74"> &#39;</span>)
+    woman[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">1</span>]<span style="color:#f92672">=</span>woman[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">1</span>]<span style="color:#f92672">-</span><span style="color:#ae81ff">100</span>  <span style="color:#75715e">### 花了100块钱，总存款就少了</span>
+    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;Women spent 100 dollar </span><span style="color:#ae81ff">\n\t</span><span style="color:#e6db74"> man= </span><span style="color:#e6db74">{</span>man<span style="color:#e6db74">}</span><span style="color:#e6db74">  </span><span style="color:#ae81ff">\t</span><span style="color:#e6db74"> women =</span><span style="color:#e6db74">{</span>woman<span style="color:#e6db74">}</span><span style="color:#e6db74"> &#39;</span>)</code></pre></div>
+<p>元组(tuple)可以理解为列表，但是他不可修改，只能查，有count和index,没有增、改,仿照列表即可，原则是看到元组后就认为数据内容不可改变！(元组工具类为set，用小括号括起来数据，列表是中括号)&mdash;&ndash;&gt;数据是否可变？</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_tuple</span>():
+    <span style="color:#75715e">## 元组内容不可变</span>
+    product_list<span style="color:#f92672">=</span>[
+        (<span style="color:#e6db74">&#39;Ipod Watch&#39;</span>,<span style="color:#ae81ff">2000</span>),
+        (<span style="color:#e6db74">&#39;Ipad&#39;</span>, <span style="color:#ae81ff">7000</span>),
+        (<span style="color:#e6db74">&#39;Iphone&#39;</span>, <span style="color:#ae81ff">10000</span>),
+        (<span style="color:#e6db74">&#39;Huawei P40&#39;</span>, <span style="color:#ae81ff">8000</span>),
+        (<span style="color:#e6db74">&#39;RongYao Magic3 ZhiZhen&#39;</span>, <span style="color:#ae81ff">7400</span>)
+    ]
+    shoppign_cart<span style="color:#f92672">=</span>[]
+    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;product_list = </span><span style="color:#e6db74">{</span>product_list<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;product_list[0,1] = </span><span style="color:#e6db74">{</span>product_list[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">1</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+    salary<span style="color:#f92672">=</span>input(<span style="color:#e6db74">&#39;Input your salay: &#39;</span>)
+    <span style="color:#66d9ef">if</span> salary<span style="color:#f92672">.</span>isdigit():
+        salary<span style="color:#f92672">=</span>int(salary)
+        <span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
+            <span style="color:#75715e"># for item in product_list:</span>
+            <span style="color:#75715e">#     print(f&#39;{product_list.index(item)}  {item}&#39;)  ## 回忆之前的知识点</span>
+            <span style="color:#75715e">## 更简捷方式 使用enumerate</span>
+            <span style="color:#75715e">## 新知识点1</span>
+            <span style="color:#66d9ef">for</span> index,item <span style="color:#f92672">in</span> enumerate(product_list):
+                print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{</span>index<span style="color:#e6db74">}</span><span style="color:#e6db74"> </span><span style="color:#e6db74">{</span>item<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+            user_choice<span style="color:#f92672">=</span>input(<span style="color:#e6db74">&#39;Input series no what you wanna buy: &#39;</span>)
+            <span style="color:#66d9ef">if</span> user_choice<span style="color:#f92672">.</span>isdigit():
+                user_choice<span style="color:#f92672">=</span>int(user_choice) <span style="color:#75715e">## 新知识点2</span>
+                <span style="color:#66d9ef">if</span> user_choice <span style="color:#f92672">&lt;</span> len(product_list) <span style="color:#f92672">and</span> user_choice<span style="color:#f92672">&gt;=</span><span style="color:#ae81ff">0</span>:    <span style="color:#75715e"># product_list.count(&#34;ffff&#34;): count是用来获取某个元素出现的次数</span>
+                    <span style="color:#75715e">## 增加限制条件user_choice &gt;0</span>
+                    <span style="color:#66d9ef">if</span> salary<span style="color:#f92672">&lt;</span>product_list[user_choice][<span style="color:#ae81ff">1</span>]:
+                        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\033</span><span style="color:#e6db74">[1;34m  money is not enough, please try again! </span><span style="color:#ae81ff">\033</span><span style="color:#e6db74">[0m&#39;</span>)
+                    <span style="color:#66d9ef">else</span>:
+                        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;got it, give you your gift </span><span style="color:#e6db74">{</span>product_list[user_choice][<span style="color:#ae81ff">0</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+                        salary<span style="color:#f92672">=</span>salary<span style="color:#f92672">-</span>product_list[user_choice][<span style="color:#ae81ff">1</span>] <span style="color:#75715e">###更新你的工资</span>
+                        <span style="color:#75715e">#salary -= product_list[user_choice][1] ###也可以简写</span>
+                        shoppign_cart<span style="color:#f92672">.</span>append(product_list[user_choice])
+                        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{</span>product_list[user_choice][<span style="color:#ae81ff">0</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74"> has been added into the shoppign_cart; </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74"> </span><span style="color:#ae81ff">\033</span><span style="color:#e6db74">[1;32m how much you have now? </span><span style="color:#e6db74">{</span>salary<span style="color:#e6db74">}</span><span style="color:#e6db74">, you can go on shopping </span><span style="color:#ae81ff">\033</span><span style="color:#e6db74">[0m&#39;</span>)
+                <span style="color:#66d9ef">else</span>:
+                    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\033</span><span style="color:#e6db74">[1;31m Warning!  Please input the number less than </span><span style="color:#e6db74">{</span>len(product_list)<span style="color:#e6db74">}</span><span style="color:#e6db74"> </span><span style="color:#ae81ff">\033</span><span style="color:#e6db74">[0m&#39;</span>)
+                    <span style="color:#66d9ef">continue</span>
+            <span style="color:#66d9ef">elif</span> user_choice<span style="color:#f92672">==</span><span style="color:#e6db74">&#39;q&#39;</span>:
+                print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;buy buy, your shoppign_cart has </span><span style="color:#e6db74">{</span>shoppign_cart<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+                print(<span style="color:#e6db74">&#34;shopping cart&#34;</span><span style="color:#f92672">.</span>center(<span style="color:#ae81ff">50</span>,<span style="color:#e6db74">&#39;-&#39;</span>))
+                <span style="color:#66d9ef">for</span> index,item <span style="color:#f92672">in</span> shoppign_cart:
+                    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{</span>index<span style="color:#e6db74">}</span><span style="color:#e6db74"> -&gt; </span><span style="color:#e6db74">{</span>item<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+                print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;Your current balance is </span><span style="color:#e6db74">{</span>salary<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+                print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;welcome back&#39;</span>)
+                <span style="color:#75715e"># exit() # exit直接退出这个程序， 会避免影响另外一个程序运行 先用break即可,退出无限循环</span>
+                <span style="color:#66d9ef">break</span>
+            <span style="color:#66d9ef">else</span>:
+                print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\033</span><span style="color:#e6db74">[1;31m Invalid Option </span><span style="color:#ae81ff">\033</span><span style="color:#e6db74">[0m&#39;</span>)</code></pre></div>
+<p>列表是最常用的数据类型之一，另外还有一个就是字典！（列表和字典都支持数据结构嵌套)
+字典用大括号表示，工具类函数式dict</p>
+<h2 id="1-27号学习总结">1-27号学习总结</h2>
+<p>元组是不可修改的列表
+字符串具有不可修改特性</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure >
+
+
+  <a data-fancybox="" href="/ox-hugo/2022-01-27_09-16-38_utf-8.png" >
+
+
+  <img src="/ox-hugo/2022-01-27_09-16-38_utf-8.png" alt=""  >
+</a>
+
+
+
+</figure>
+
+<p><a href="https://www.cnblogs.com/alex3714/articles/5161349.html" target="_blank" rel="noopener">file常用模块学习</a></p>
+<p>大部分时间我们都是在写函数，而不是写类，当我们觉得一直写函数的方式来解决问题，但是效率不高，于是我们才写了类，我们写了模块。</p>
+<h2 id="1月28号学习">1月28号学习</h2>
+<p>以色列人均看书64本
+中国人均看书4本（没有看书的习惯）</p>
+<p><span class="underline">看书能够改变一个人的气质</span>,气质表现为谈吐,与挣多少钱无关。</p>
+<p>养成看书的习惯！《追风筝的人》:阿富汗 一个人 追风筝
+&mdash;-书中自有黄金屋 书中自有颜如玉&mdash;-</p>
+<h2 id="1月29号学习">1月29号学习</h2>
+<p>可以不用智能手机，可以每天多读书
+flush才有效果！</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">20</span>):
+    sys<span style="color:#f92672">.</span>stdout<span style="color:#f92672">.</span>write(<span style="color:#e6db74">&#39;#&#39;</span>)
+    sys<span style="color:#f92672">.</span>stdout<span style="color:#f92672">.</span>flush()
+    time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">0.1</span>)</code></pre></div>
+<p>寻找人生的价值,创造价值(create value)
+reset, python 无所谓，人生无所谓
+价值与否，在于个人，平常心即可！</p>
+<p>旅行者1号视角看到的地球只是淡蓝色的一点，而在淡蓝色的一点曾经出现过君王、孔子、武藤兰、马云等。平常心即可</p>
+<p>痛苦是因为对于无能的愤怒，有钱可能可以减轻一些痛苦。</p>
+<p>gb2312只支持几千个汉字
+gb18030 2万多个万字
+后来又出现了gbk！</p>
+<p>日本、韩语也都有！</p>
+<p>Unicode兼容世界语（中英文都占2个字节, Ascii占1个字节）
+也就是一个英文文档是2MW，如果存为unicode的话，则为4MW</p>
+<p>为此又出现了UTF-8，统一unicode和ascii码！ 凡是中韩系采用Unicode，而英系则用ascii码</p>
+<p>需要明白文件编码 和程序编码的区别</p>
+<p>我们每一个文件打开、显示都会有一个编码， 比如中文兄系统的大部分文件都是按照gbk编码的，但是如果程序默认解析通过utf-8显示该类文件，那么就需要事先decode(&lsquo;gbk&rsquo;)，转为unicode，然后再encode(&lsquo;utf-8&rsquo;)转成utf-8编码源程序，最后再由程序去解释</p>
+<ol>
+<li>要记住每一个文件都有编码，可以采用记事本查看， 如果是gbk编码文件，导入到pycharm需要追加 #-<strong>-coding:gbk-</strong>-</li>
+<li>要记住所有程序文件的中文都是Unicode(无论在文件编码指明了gbk或者韩语、日语等),也就是说无法使用decode(),但是可以使用encode(&lsquo;gbk&rsquo;), encode(&lsquo;utf-8&rsquo;)等。</li>
+</ol>
+<p>ubuntu中文件转换可以使用 iconv 命令，该命令的格式如下：
+iconv -f  文件编码格式  -t 想要转换的编码格式  要编码的文件名 -o 编码之后的文件名
+iconv -f &lsquo;gbk&rsquo; -t &lsquo;utf-8&rsquo; file.c -o filenew.c
+这样就可以把中文编码的源程序，变成utf-8编码的源程序，发送给c编译器也能编译通过。
+pycharm默认底部有一行显示utf-8（任何编辑器都会有默认的编码形式）</p>
+<p>VIP第四期
+python回顾与整理
+<a href="https://blog.51cto.com/xpleaf/1763071" target="_blank" rel="noopener">https://blog.51cto.com/xpleaf/1763071</a></p>
+<p>函数和过程的区别： 在python当中，过程就是没有定义return的函数。 但是python会给函数一个None返回值做为过程返回值（隐式执行)</p>
+<p>平常心是一种很好的学习心态，镂空心态。</p>
+<p>装饰器：本质是函数，每个函数都有目的，装饰器的目的就是为了装饰其他函数，附加其他功能。
+装饰器原则：不能修改装饰的函数， 不能被修改函数的调用方式
+装饰器对被装饰的函数完全透明，用了这个函数的人，并没有发现这个函数被装饰了</p>
+<h2 id="1月30号学习">1月30号学习</h2>
+<p>斐波那契数列是生成器串行算法
+生产者-消费者模式是生成器并行算法</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">## 生成器测试</span>
+<span style="color:#75715e">## 生成器串行</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fib_max</span>(max):
+    n,a,b<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">while</span> n<span style="color:#f92672">&lt;=</span>max:
+        <span style="color:#66d9ef">yield</span> b  <span style="color:#75715e">## 生成器生成  用于返回需要从算法里面中间计算得到的值  当前状态值！</span>
+        a,b<span style="color:#f92672">=</span>b,a<span style="color:#f92672">+</span>b
+        n<span style="color:#f92672">=</span>n<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;*--done--*&#39;</span>
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_generator</span>():
+  print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;a=[1,2,3,4,5,7,8] = </span><span style="color:#e6db74">{</span>[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">8</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+  print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;[i*2 for  i in range(1,10,1)]  = </span><span style="color:#e6db74">{</span>[i<span style="color:#f92672">*</span><span style="color:#ae81ff">2</span> <span style="color:#66d9ef">for</span>  i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">1</span>)]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+  print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;(i*2 for i in range(1,10,1)) = </span><span style="color:#e6db74">{</span>(i<span style="color:#f92672">*</span><span style="color:#ae81ff">2</span> <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">1</span>))<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+  <span style="color:#75715e">## 生成器小括号，一般是存储算法到内存，而不是像列表把所有数据导入内存中</span>
+  g<span style="color:#f92672">=</span>fib_max(<span style="color:#ae81ff">6</span>)
+  <span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
+      <span style="color:#66d9ef">try</span>:
+          x<span style="color:#f92672">=</span> next(g)
+          print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;g= </span><span style="color:#e6db74">{</span>x<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+      <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">StopIteration</span> <span style="color:#66d9ef">as</span> e:
+          print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;Generator exception return value </span><span style="color:#e6db74">{</span>e<span style="color:#f92672">.</span>value<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+          <span style="color:#66d9ef">break</span></code></pre></div>
+<h2 id="2月1号学习">2月1号学习</h2>
+<p>单线程下的并行(异步)程序（nginx底层逻辑过程）
+&mdash;&ndash;协程开发！
+注意下面程序必须先执行next，因为我们需要让程序执行到yield
+函数中</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">## 生成器并行: 生产者-消费者模式</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">consume</span>(name):
+    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\033</span><span style="color:#e6db74">[31;1m Inside consume:</span><span style="color:#ae81ff">\033</span><span style="color:#e6db74">[0m 准备吃包子了</span><span style="color:#e6db74">{</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+    <span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
+        baozi<span style="color:#f92672">=</span><span style="color:#66d9ef">yield</span>
+        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\033</span><span style="color:#e6db74">[31;1m Inside Consume:</span><span style="color:#ae81ff">\033</span><span style="color:#e6db74">[0m 包子</span><span style="color:#e6db74">{</span>baozi<span style="color:#e6db74">}</span><span style="color:#e6db74">来了，被</span><span style="color:#e6db74">{</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74">吃了&#39;</span>)
+
+<span style="color:#75715e">## 生成器并行: 生产者-消费者模式</span>
+<span style="color:#75715e">## 不要小瞧这段代码，它是异步IO的雏形，nginx的前身，nginx为什么效率那么高，因为它是异步</span>
+<span style="color:#75715e">## 虽然当前代码依然是串行，但由于切换不同角色，且执行速度快，所有有点看起来是并行程序。</span>
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">producer</span>(name):
+    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\033</span><span style="color:#e6db74">[1;32m 老子</span><span style="color:#e6db74">{</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74">准备做包子了 </span><span style="color:#ae81ff">\033</span><span style="color:#e6db74">[0m&#39;</span>)
+    c1<span style="color:#f92672">=</span>consume(<span style="color:#e6db74">&#39;Wen Zongli&#39;</span>)
+    c2<span style="color:#f92672">=</span>consume(<span style="color:#e6db74">&#39;Zhou Zongli&#39;</span>)
+    c1<span style="color:#f92672">.</span>__next__()
+    c2<span style="color:#f92672">.</span>__next__()
+
+    <span style="color:#66d9ef">for</span> i  <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">10</span>):
+        time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">1</span>)
+        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\033</span><span style="color:#e6db74">[1;33m  做了1个包子  分成凉拌</span><span style="color:#ae81ff">\033</span><span style="color:#e6db74">[0m&#39;</span>)
+        c1<span style="color:#f92672">.</span>send(i)
+        c2<span style="color:#f92672">.</span>send(i)</code></pre></div>
+<p>我们已经知道：
+可以直接作用于for循环的包括以下两类数据：</p>
+<ol>
+<li>集合类数据，比如list,dict,tuple,set,str,file等(for I in file是迭代器对象 iterator对象，这就是为什么他快得原因 for I in f)</li>
+<li>generator类数据，</li>
+</ol>
+<p>这些可以直接作用于for循环的对象，统称为可迭代的对象，或者叫做可循环对象，
+可以使用isinstance(),来判断对象是否可迭代。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> collections.abc <span style="color:#f92672">import</span> Iterable
+isinstance(<span style="color:#e6db74">&#39;[]&#39;</span>,Iterable)
+isinstance(<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#39;</span>,Iterable)
+isinstance(<span style="color:#e6db74">&#39;abc&#39;</span>,Iterable)
+isinstance(<span style="color:#e6db74">&#39;set(1,3,5)&#39;</span>,Iterable)
+isinstance(<span style="color:#e6db74">&#39;(abc)&#39;</span>,Iterable)</code></pre></div>
+<p>生成器除了被for循环调用外，即Iterable功能，他还可以被next()反复调用并不断返回下一个值。
+我们把可以被next()函数调用并不断返回下一个值的对象成为迭代器：Iterator</p>
+<p>可以使用isinstance()判断一个对象是否是Iterator对象</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> collections.abc <span style="color:#f92672">import</span> Iterator
+isinstance(<span style="color:#e6db74">&#39;abc&#39;</span>,Iterator) <span style="color:#75715e">## false</span>
+a<span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>]
+dir(a)<span style="color:#75715e">## 查看a可以调用的所有内部方法  dir是python中一个相当重要的命令</span>
+isinstance(<span style="color:#e6db74">&#39;(x*2 for x in range(10))&#39;</span>,Iterator) <span style="color:#75715e">## True</span></code></pre></div>
+<p>list,dict,str虽然是一个Iterable对象，但却不是Iterator对象
+但是可以通过iterator的一个内部函数进行变换</p>
+<p>之所以list,dict,str不是一个Iterator对象，是因为Iterator对象本身是一个数据流对象，可以被next函数反复调用，并不断返回下一个数据(值也是可以的),直到没有数据抛出Stopiteration错误，可以把这个数据流看做一个有序序列，但是我们却不能知道这个序列的长度，只能不断通过next函数按需计算，得到下一个数据。 所以Iterator的计算是惰性的，效率高！只有在需要的时候才会返回下一个值。 即Iterator甚至可以表现无限的自然数，但是list就不可以。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> collections.abc <span style="color:#f92672">import</span> Iterator
+isinstance(<span style="color:#e6db74">&#39;iter(abc)&#39;</span>,Iterator) <span style="color:#75715e">## false</span>
+a<span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>]
+isinstance(<span style="color:#e6db74">&#39;iter(a)&#39;</span>,Iterator)</code></pre></div>
+<p>Iterable很重要的知识点！类似于java的Collections的作用！
+内建函数
+<a href="https://docs.python.org/3/library/functions.html?highlight=built" target="_blank" rel="noopener">https://docs.python.org/3/library/functions.html?highlight=built</a></p>
+<p>compile相当不错，增加了动态执行python代码段的功能。</p>
+<h2 id="其实直接exec或者eval也是可以执行不需要compile">其实直接exec或者eval也是可以执行，不需要compile</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">## compile and exec</span>
+code<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;for i in range(10):print(i)&#34;</span>
+c<span style="color:#f92672">=</span>compile(code,<span style="color:#e6db74">&#34;&#34;</span>,<span style="color:#e6db74">&#39;exec&#39;</span>)
+exec(c)
+
+code2<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;1+2+3*4/29.2&#34;</span>
+c2<span style="color:#f92672">=</span>compile(code2,<span style="color:#e6db74">&#39;&#39;</span>,<span style="color:#e6db74">&#39;eval&#39;</span>) <span style="color:#75715e">## eval其实可以直接调用</span>
+eval(c2)
+<span style="color:#75715e">## compile甚至可以变到更大的代码段，类似动态导入的过程！ 动态import代码的过程！</span></code></pre></div>
+<pre><code>## python一切数据类型的根都是由type产生的
+## json序列化带来的好处是可以在不同语言的代码相互转化,逐步替换xml
+</code></pre>
+<p><a href="https://www.cnblogs.com/alex3714/articles/5143440.html" target="_blank" rel="noopener">https://www.cnblogs.com/alex3714/articles/5143440.html</a>
+软件目录结构：
+Foo/
+bin/
+foo   ##启动脚本
+foo/
+<span class="underline"><span class="underline">init</span></span>  ## 凡是有init的文件，叫做包，没有init叫做目录
+main.py
+conf/
+<span class="underline"><span class="underline">init</span></span>  ## 凡是有init的文件，叫做包，没有init叫做目录
+settings.py
+docs/
+setup.py   ## python setup.py ..
+requirement.py ## 依赖关系
+readme.md
+<a href="https://www.cnblogs.com/wupeiqi/articles/4963027.html" target="_blank" rel="noopener">https://www.cnblogs.com/wupeiqi/articles/4963027.html</a></p>
+<p><a href="https://www.cnblogs.com/alex3714/articles/5765046.html" target="_blank" rel="noopener">软件目录结果</a>
+<a href="https://github.com/pallets/flask/blob/main/setup.py" target="_blank" rel="noopener">https://github.com/pallets/flask/blob/main/setup.py</a></p>
+<p>foo会去调用foo目录下和conf目录下的模块</p>
+<h2 id="2月2号学习">2月2号学习</h2>
+<p>模块，用一砣代码实现了某个功能的代码集合。</p>
+<p>类似于函数式编程和面向过程编程，函数式编程则完成一个功能，其他代码用来调用即可，提供了代码的重用性和代码间的耦合。而对于一个复杂的功能来，可能需要多个函数才能完成（函数又可以在不同的.py文件中），<strong>n个 .py 文件组成的代码集合就称为模块</strong>。</p>
+<p>如：os 是系统相关的模块；file是文件操作相关的模块</p>
+<p>模块分为三种：</p>
+<ul>
+<li>自定义模块</li>
+<li>内置模块</li>
+<li>开源模块</li>
+</ul>
+<p>python标准库函数介绍： <a href="https://docs.python.org/3/library/index.html" target="_blank" rel="noopener">https://docs.python.org/3/library/index.html</a>
+操作系统模块：<a href="https://docs.python.org/3/library/os.html" target="_blank" rel="noopener">https://docs.python.org/3/library/os.html</a>
+解释器系统模块：<a href="https://docs.python.org/3/library/sys.html" target="_blank" rel="noopener">https://docs.python.org/3/library/sys.html</a>
+文件模块： <a href="https://docs.python.org/3/library/io.html" target="_blank" rel="noopener">https://docs.python.org/3/library/io.html</a>
+进程管理模块：<a href="https://docs.python.org/3/library/subprocess.html" target="_blank" rel="noopener">https://docs.python.org/3/library/subprocess.html</a>
+configparser:  <a href="https://docs.python.org/3/library/configparser.html" target="_blank" rel="noopener">https://docs.python.org/3/library/configparser.html</a>
+日志模块： <a href="https://docs.python.org/3/library/logging.html" target="_blank" rel="noopener">https://docs.python.org/3/library/logging.html</a>
+loguru:  <a href="https://loguru.readthedocs.io/en/stable/" target="_blank" rel="noopener">https://loguru.readthedocs.io/en/stable/</a>
+<a href="https://cuiqingcai.com/7776.html" target="_blank" rel="noopener">https://cuiqingcai.com/7776.html</a>
+<a href="https://segmentfault.com/a/1190000040911280" target="_blank" rel="noopener">https://segmentfault.com/a/1190000040911280</a>
+<a href="https://cloud.tencent.com/developer/article/1664382" target="_blank" rel="noopener">https://cloud.tencent.com/developer/article/1664382</a>
+json模块：<a href="https://docs.python.org/3/library/json.html" target="_blank" rel="noopener">https://docs.python.org/3/library/json.html</a>
+多线程模块：<a href="https://docs.python.org/3/library/multiprocessing.html" target="_blank" rel="noopener">https://docs.python.org/3/library/multiprocessing.html</a>
+内置函数： <a href="https://docs.python.org/3/library/functions.html" target="_blank" rel="noopener">https://docs.python.org/3/library/functions.html</a></p>
+<p>很特别的抽象语法树模块： <a href="https://docs.python.org/3/library/ast.html" target="_blank" rel="noopener">https://docs.python.org/3/library/ast.html</a>
+python关键字： <a href="https://docs.python.org/3/reference/lexical_analysis.html#keywords" target="_blank" rel="noopener">https://docs.python.org/3/reference/lexical_analysis.html#keywords</a></p>
+<p>idea快速查看一个文件有多少代码和功能（CTRL+H12),Alt+F7也相当好用</p>
+<p><a href="https://github.com/Delgan/loguru" target="_blank" rel="noopener">https://github.com/Delgan/loguru</a> 好用的日志框架</p>
+<p>加速python安装包安装速度</p>
+<p>放在`c:/users/{username}/pip/pip.ini`</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">[global]
+timeout <span style="color:#a6e22e">=</span> <span style="color:#ae81ff">60</span>
+index-url <span style="color:#a6e22e">=</span> http://pypi.douban.com/simple
+trusted-host <span style="color:#a6e22e">=</span> pypi.douban.com</code></pre></div>
+<p>在进行程序设计的时候，注意<strong>程序解耦</strong>、<strong>模块解耦</strong>、程序的可复用(相互独立、最小化原则)
+要不断思考、凝练！ 思考每段程序的作用。</p>
+<p>思考的小技巧：把相似的地方提取到一个函数中。 从最终使用角度去反推你的设计，你最后要怎么用这个程序，哪种方式最方便</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">transaction(tran_type,account,amount,logger)</code></pre></div>
+<p>或者从测试的角度出发，transaction(还款,谁,2000,logger)
+transaction(提款,谁，20000，logger)
+transaction(转账,谁，转账账户，10000，logger)
+从测试指导设计也是一个不错的思考方式！
+从使用者的角度去设计一个好用的程序！(要写下来才有用)</p>
+<p>可以把我梳理集团科技项目管理平台的业务经理经验给大家分享一下，干了多少张业务图，按照流程的先后顺序、涉及到多少相关人员、需要形成多少新数据、最终还得做业务蓝图评审。</p>
+<p>所以设计一个程序应该是从业务开始梳理，从蓝图获得编码的基准，然后才是编码，也就是前期会形成很多uml设计图、类图-时序图等，指导编码。</p>
+<p>而如果想要省调这堆设计图，那么也就是你的脑中得有这些流程图，图在这里很重要，他体现着你对代码的布局，体现着代码的运用场景，体现你对代码的谋篇布局。</p>
+<p>能不能把主要规律用_几条简单的公式写出来，就是懂不懂产品内在规律_。
+三个基本公式：(无论你的程序怎么设计，都得解决这些等价关系, 所以等价关系决定着程序的设计)
+取款：user1=user1-amount
+还钱: user1=user1-借钱*(1+利息)
+转账： user1 = user1 -amount; user2=user2+amount(转账手续费 金卡不需要等)</p>
+<ul>
+<li><code>想知道数，是想要知道产品的性能</code></li>
+<li><code>想知道图，是想知道产品的运用场景</code></li>
+<li><code>想知道报告，是想知道产品的可行性</code></li>
+</ul>
+<p>数*一定冗余裕度(1+20%)= 保守设计范围
+<span class="underline">交易就是买卖的意思！</span></p>
+<p>看源码速度快与慢取决于你脑海里生成业务场景的快与慢！</p>
+<h2 id="2月3号学习">2月3号学习</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> loguru <span style="color:#f92672">import</span>  logger  <span style="color:#75715e">## 好处是加快logger执行速度，同事logger 也可以起个别名，如果直接import loguru, 调用多次logger, 还得多次loguru.logger.info。</span>
+<span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">import 本质是路径搜索 类似DNS 路由
+</span><span style="color:#e6db74">会把对应文件模块解释一遍
+</span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+
+<span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">包的本质是存储多个模块，就多个py文件，一个包里里面必须有一个__init__.py文件
+</span><span style="color:#e6db74">专业表示：逻辑上组织模块是包
+</span><span style="color:#e6db74">逻辑上组织python代码（比如类、变量、函数、关系等）叫做模块
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">导入模块的本质是把模块文件解释一遍
+</span><span style="color:#e6db74">导入包的本质是把模块的__init__.py文件执行一遍(run __init__.py)（与模块有所区别）
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">run __init__.py 很关键， 也就是以后导入包的模块通过，包同级导入，即相对路径导入
+</span><span style="color:#e6db74">比如： core目录下，我在__init__.py执行  from . import testModule,test_pickle_loads 等，但是不能import testModule, 因为import
+</span><span style="color:#e6db74">此时是绝对导入，不具有以当前包围相对坐标系的功能。
+</span><span style="color:#e6db74">所以run __init__.py的理解很重要  .代表的是__init__.py所在路径
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">sayHelloInModule</span>(name):
+    logger<span style="color:#f92672">.</span>info(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;hello world Mr|MRs</span><span style="color:#e6db74">{</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+    <span style="color:#75715e">## sys.path就是一个列表 list  环境变量组合  想要import模块或者包必须保证模块或者包在我们的sys.path目录下能够找到，所以sys.path类似于操作系统的环境变量</span>
+    <span style="color:#75715e"># logger.info(f&#39;current sys.path = {sys.path}&#39;)</span></code></pre></div>
+<p>面向对象介绍
+特性
+class
+object
+世界万物都可分类，
+凡是对象都有种类，存在一定的范畴
+只要是对象，就有分类，就有属性
+多态表现为，有一份工作，A\B\C三个人来做，效果不一样，在于他们都能做这份工作，但是工作实现的效果不太一样，有好有坏！工作就是一个接口，ABC都实现了工作接口</p>
+<p>在历史长河中，有很多人都能做领袖，但是领袖执行的效果、统帅的效果各有不一，有的是暴政，有的是勤政，有的是昏政，领袖是一种接口，不同君王都实现了该接口，但是统帅的效果不一。</p>
+<p>第一次还不太习惯用python写面向对象程序，还得多写几遍。</p>
+<p>类变量共用内存，节省开销（放在类中的变量，而不是方法中）
+析构函数：def <strong>del</strong>(self) (del对象的时候 出现 f.close()出现)
+python有自动回收机制。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Man</span>(People,Relation):
+    super(Man,self)<span style="color:#f92672">.</span>__init__(self,name,age) <span style="color:#f92672">&lt;--</span>super解决多继承问题<span style="color:#960050;background-color:#1e0010">（</span>java只有单继承<span style="color:#960050;background-color:#1e0010">）</span></code></pre></div>
+<p>python3是广度优先(新式类和经典类都是广度优先)，python2是深度优先（多继承有用）(经典类),py2的新式类也是广度优先</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">## 经典类  多继承优先找的是临近类</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">A</span>:
+    <span style="color:#66d9ef">pass</span>
+
+<span style="color:#75715e">## 新式类  多继承优先找的是临近类</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">A</span>(Object):
+    <span style="color:#66d9ef">pass</span></code></pre></div>
+<h2 id="2月4号学习">2月4号学习</h2>
+<p>我觉得每个人都应该学习一门编程语言。学习编程教你如何思考，就像学法律一样。学法律并不一定要为了做律师，但法律教你一种思考方式。学习编程也是一样，我把计算机科学看成是基础教育，每个人都应该花一年时间学习编程。</p>
+<p>&ldquo;I think the greatest value of learning how to think&hellip;. I think everybody in this country should learn how to program a computer, should learn a computer language, because it teaches you how to think. I view computer science as a liberal art. It should be something everybody takes in a year in their life, one of the courses they take is, you know learning how to program.&rdquo;</p>
+<p>面向对象编程
+<a href="https://www.cnblogs.com/alex3714/articles/5188179.html" target="_blank" rel="noopener">https://www.cnblogs.com/alex3714/articles/5188179.html</a></p>
+<ul>
+<li>当py文件独立运行时候，该模块文件内的name字段即为main</li>
+<li>当py文件以import运行时，该模块文件内的name字段即为导入模块名字</li>
+</ul>
+<p><a href="https://www.cnblogs.com/rianley/p/9013905.html" target="_blank" rel="noopener">https://www.cnblogs.com/rianley/p/9013905.html</a></p>
+<h2 id="2月5号学习">2月5号学习</h2>
+<p>任务监控学习： <a href="https://github.com/giampaolo/psutil" target="_blank" rel="noopener">https://github.com/giampaolo/psutil</a>
+### 知识点： 模块名和类名不能一致，否则报错  import失败， 即 User模块文件，不能包含User class，否则导入User类失败</p>
+<h2 id="2月6号学习">2月6号学习</h2>
+<p>ATM+购物车&mdash;&gt; 人 &mdash; 钱 &mdash; 物
+&mdash;-&gt;管人 manager &mdash; 管钱  atm &mdash; 管物 购物车
+&mdash;-&gt;管权                       &mdash; 管物</p>
+<p>我们知道，封装通过模块设计方法(方法)，隐藏代码实现细节(效果)，从而使得代码模块化(最终效果)
+继承可以通过已实现的代码模块(类)
+封装和继承的目的都是为了代码重用
+(但是能用组合的形式尽量用组合，比如变形金刚有手、脚、头等多个部位组合而成)
+那么多态？
+多态是允许子类类型的指针赋值给父类（如果子类产生新的方法，那只能采用父类进行定义）
+一个接口，多种实现，
+多态的目的就是为了解决接口滥用问题，实现接口重用（区分代码重用）</p>
+<p>@property的作用是把动作实现细节隐藏，只返回一个状态，但其实property变量内部执行了一堆外部API、并做了呈现。</p>
+<p>print(f&rsquo;cat1“s类型是{type(cat1)}')
+##  知识点 java一切对象皆对象，对象都有类，类也是一种对象，类的归属是Type
+print(f&rsquo;Cat“s类型是{type(Cat)}')</p>
+<p>类的方法一般都有一个self字段。</p>
+<p>type又称类的类</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">hell</span>(self):
+    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;hho&#39;</span>)
+
+Foo<span style="color:#f92672">=</span>type(<span style="color:#e6db74">&#39;Foo&#39;</span>,(object),{<span style="color:#e6db74">&#39;talk&#39;</span>:hell}) <span style="color:#75715e">##object也可以省略，当前为新式类写法</span>
+f<span style="color:#f92672">=</span>Foo() <span style="color:#75715e">## Foo 其实是type的对象</span>
+f<span style="color:#f92672">.</span>talk() <span style="color:#75715e">##等价于调用hell()</span></code></pre></div>
+<p>增加<span class="underline"><span class="underline">init</span></span>函数</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">hellInit</span>(self):
+    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;hho </span><span style="color:#e6db74">{</span>self<span style="color:#f92672">.</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+
+<span style="color:#66d9ef">def</span> __init__(self,name,age):
+    self<span style="color:#f92672">.</span>name<span style="color:#f92672">=</span>name
+    self<span style="color:#f92672">.</span>age <span style="color:#f92672">=</span> age
+FooInit<span style="color:#f92672">=</span>type(<span style="color:#e6db74">&#39;FooInit&#39;</span>,(object,),{<span style="color:#e6db74">&#39;talk&#39;</span>:hellInit,
+                                  <span style="color:#e6db74">&#39;__init__&#39;</span>:__init__}) <span style="color:#75715e">##object也可以省略，当前为新式类写法</span>
+
+f2<span style="color:#f92672">=</span>FooInit(<span style="color:#e6db74">&#39;Ale&#39;</span>,<span style="color:#ae81ff">33</span>)
+f2<span style="color:#f92672">.</span>talk()</code></pre></div>
+<p>面向对象的起源是type(一切皆对象)
+class类由type实例化得到。
+<a href="https://www.cnblogs.com/alex3714/articles/5213184.html" target="_blank" rel="noopener">https://www.cnblogs.com/alex3714/articles/5213184.html</a></p>
+<p>类的生成 调用 顺序依次是 <span class="underline"><span class="underline">new</span></span> &ndash;&gt; <span class="underline"><span class="underline">init</span></span> &ndash;&gt; <span class="underline"><span class="underline">call</span></span>
+一般不写<span class="underline"><span class="underline">new</span></span>，只是调用父类的new方法</p>
+<p>通过字符串映射或修改程序运行时的状态、属性、方法, 有以下4个方法</p>
+<p>通过反射setattr实现内存动态装配</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">d<span style="color:#f92672">=</span>Dog(<span style="color:#e6db74">&#34;xiaowang&#34;</span>)
+choice<span style="color:#f92672">=</span>input(<span style="color:#e6db74">&#34;&gt;&gt;&#34;</span>)<span style="color:#f92672">.</span>strip()
+<span style="color:#75715e">## 简化很多代码</span>
+<span style="color:#66d9ef">if</span>(hasattr(d, choice)):
+    getattr(d,choice)
+<span style="color:#66d9ef">else</span>:
+    setattr(d,choice,bulk)
+    func<span style="color:#f92672">=</span>getattr(d,choice)
+    func(d)
+<span style="color:#75715e">#    setattr(d,&#34;newFunction&#34;,bulk)</span>
+<span style="color:#75715e">#    d.newFunction()</span></code></pre></div>
+<p>异常不处理，程序会崩溃，比如除数为0，key不存在，文件不存在等
+try except就会正常结束</p>
+<p>socket编程，其实是指传输层编程，它基于ip网络程，实现了TCP和UDP协议，
+在socket之上可以构建http、mqtt、weixin、qq等通信应用程协议
+<a href="https://www.cnblogs.com/alex3714/articles/5830365.html" target="_blank" rel="noopener">https://www.cnblogs.com/alex3714/articles/5830365.html</a></p>
+<p>socket其实就是tcp/ip 和udp协议的包装，包含收发过程
+各种网络协议都基于socket!</p>
+<p>最基本的业务流程<span class="timestamp-wrapper"><span class="timestamp">&lt;2022-02-06 周日 21:08&gt;</span></span>确认没问题：服务器端导入socket包，引入tcp或者udp协议，创建端口(bind)，建立监听(listen)，等待链接，接受(accept)和发送send和接收recv。</p>
+<p>客户端导入socket包，引入tcp或者udp协议，连接端口connect，发送send和接收recv。</p>
+<p>socket其实就是一个网络文件协议！bufferByte进行传递</p>
+<p>反射是支持编程语言从字符串获取内存地动作能力
+__import__是支持模块动态导入的能力，即<span class="underline"><span class="underline">import</span></span>是类似宏的功能，先会解析<span class="underline"><span class="underline">import</span></span> vars的vars的内容，然后再进行import (from .. import 不变量引入，</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">## 前提，我只知道模块名字的字符串形式，如何动态导入类，并通过反射获得模块内的类、方法等</span>
+mod<span style="color:#f92672">=</span>__import__(<span style="color:#e6db74">&#34;lib.aa&#34;</span>)
+print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;mod=</span><span style="color:#e6db74">{</span>mod<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+instance <span style="color:#f92672">=</span> getattr(mod<span style="color:#f92672">.</span>aa,<span style="color:#e6db74">&#34;C&#34;</span>)</code></pre></div>
+<p>官方建议使用importlib更方便些，不建议使用python解释器内部使用的<span class="underline"><span class="underline">import_</span></span></p>
+
+    </div>
+ <div class="nav-links" style="padding:10;">
+        
+        <div align="left">
+        <a href="https://jueqingsizhe66.github.io/post/python%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/"><span class="arrow">←</span> <strong>上一篇:python常用函数学习总结</strong></a>
+        </div>
+        
+        
+      </div>
+    
+
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/python/">python</a>
+  
+</div>
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=https://jueqingsizhe66.github.io/post/1%E7%B1%B3%E5%B9%B3%E6%96%B9%E4%B9%8Bpython/&amp;text=1%e7%b1%b3%e5%b9%b3%e6%96%b9%e4%b9%8bpython" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=https://jueqingsizhe66.github.io/post/1%E7%B1%B3%E5%B9%B3%E6%96%B9%E4%B9%8Bpython/&amp;t=1%e7%b1%b3%e5%b9%b3%e6%96%b9%e4%b9%8bpython" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=1%e7%b1%b3%e5%b9%b3%e6%96%b9%e4%b9%8bpython&amp;body=https://jueqingsizhe66.github.io/post/1%E7%B1%B3%E5%B9%B3%E6%96%B9%E4%B9%8Bpython/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https://jueqingsizhe66.github.io/post/1%E7%B1%B3%E5%B9%B3%E6%96%B9%E4%B9%8Bpython/&amp;title=1%e7%b1%b3%e5%b9%b3%e6%96%b9%e4%b9%8bpython" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="whatsapp://send?text=1%e7%b1%b3%e5%b9%b3%e6%96%b9%e4%b9%8bpython%20https://jueqingsizhe66.github.io/post/1%E7%B1%B3%E5%B9%B3%E6%96%B9%E4%B9%8Bpython/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=https://jueqingsizhe66.github.io/post/1%E7%B1%B3%E5%B9%B3%E6%96%B9%E4%B9%8Bpython/&amp;title=1%e7%b1%b3%e5%b9%b3%e6%96%b9%e4%b9%8bpython" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="https://jueqingsizhe66.github.io/"><img class="avatar mr-3 avatar-circle" src="/author/%E4%BB%A4%E7%8B%90%E5%86%B2/avatar_huc99f1f2e739130747140db298bdd1890_46492_270x270_fill_q90_lanczos_center.jpg" alt="令狐冲"></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://jueqingsizhe66.github.io/">令狐冲</a></h5>
+      <h6 class="card-subtitle">Engineer of offshore wind turbine technique research</h6>
+      <p class="card-text">My research interests include distributed energy, wind turbine power generation technique , Computational fluid dynamic and programmable matter.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/jueqingsizhe66" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.co.uk/citations?user=7VyEMyQAAAAJ&amp;hl=zh-CN" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/jueqingsizhe66" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>Related</h3>
+    <ul>
+      
+      <li><a href="/post/python%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">python常用函数学习总结</a></li>
+      
+      <li><a href="/post/%E6%95%B0%E6%8D%AE%E8%AE%BE%E8%AE%A1%E7%A8%8B%E5%BA%8F/">数据设计程序-装饰者模式</a></li>
+      
+      <li><a href="/post/python%E6%8F%90%E5%8F%96%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E7%99%BD%E5%A4%A9%E5%92%8C%E9%BB%91%E5%A4%9C%E7%9A%84%E6%97%B6%E9%97%B4%E6%AE%B5/">python提取时间序列白天和黑夜的时间段</a></li>
+      
+      <li><a href="/post/python%E7%BB%95%E7%82%B9%E6%97%8B%E8%BD%AC/">python绕点旋转</a></li>
+      
+      <li><a href="/post/python%E5%88%B6%E4%BD%9C%E6%9B%B2%E7%BA%BF%E5%8A%A8%E7%94%BB/">python制作曲线动画</a></li>
+      
+    </ul>
+
+
+         <span id="busuanzi_container_site_pv"> 
+             本站访问量：<span id="busuanzi_value_site_pv"></span>次 
+         </span> 
+         &nbsp; 
+   </div> 
+
+
+  </div>
+
+</article>
+<script src="https://utteranc.es/client.js"
+        repo="jueqingsizhe66/jueqingsizhe66.github.io"
+        issue-term="pathname"
+        theme="github-dark"
+        crossorigin="anonymous"
+        async>
+</script>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    ©2022 &middot; 
+
+    ^-^ LingHuChong ^-^ Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+      
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/go.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/vim.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/matlab.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/sql.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/python.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/c.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/scheme.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/racket.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/perl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/awk.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/clojure.min.js"></script>
+        
+      
+
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js" integrity="sha512-SeiQaaDh73yrb56sTW/RgVdi/mMqNeM2oBwubFHagc5BkixSpP1fvqF47mKzPGWYSSy4RwbBunrJBQ4Co8fRWA==" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks",
+        'slides' : "Slides"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/wowchemy.min.516d1df876a80aa80a06ab72f875bdd4.js"></script>
+
+    
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+
+
+
+</body>
+</html>
