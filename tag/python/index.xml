@@ -5,12 +5,377 @@
     <link>https://jueqingsizhe66.github.io/tag/python/</link>
       <atom:link href="https://jueqingsizhe66.github.io/tag/python/index.xml" rel="self" type="application/rss+xml" />
     <description>python</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>©2022</copyright><lastBuildDate>Mon, 07 Feb 2022 00:15:00 +0800</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>©2022</copyright><lastBuildDate>Mon, 07 Feb 2022 19:53:00 +0800</lastBuildDate>
     <image>
       <url>https://jueqingsizhe66.github.io/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
       <title>python</title>
       <link>https://jueqingsizhe66.github.io/tag/python/</link>
     </image>
+    
+    <item>
+      <title>SimpleHTTPServer-python3 可上传文件版本</title>
+      <link>https://jueqingsizhe66.github.io/post/simplehttpserver-python3-version/</link>
+      <pubDate>Mon, 07 Feb 2022 19:53:00 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/post/simplehttpserver-python3-version/</guid>
+      <description>&lt;p&gt;默认使用 &lt;code&gt;python3 -m http.server 8080 &lt;/code&gt;即可开启本地的http服务
+但是不具备上传下载功能，为了具备上传功能需要进行改造，且访问的时候，必须使用http开头，不能使用https，否则报错&lt;/p&gt;
+&lt;p&gt;最终效果如下：&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure &gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://jueqingsizhe66.github.io/ox-hugo/2022-02-07_19-53-44_image.png&#34; &gt;
+
+
+  &lt;img src=&#34;https://jueqingsizhe66.github.io/ox-hugo/2022-02-07_19-53-44_image.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+
+&lt;/figure&gt;
+
+&lt;h2 id=&#34;使用html-dot-escape代替cgi-dot-escape&#34;&gt;使用html.escape代替cgi.escape&lt;/h2&gt;
+&lt;p&gt;新版本需要&lt;/p&gt;
+&lt;h2 id=&#34;使用http访问-不要使用https&#34;&gt;使用http访问，不要使用https&lt;/h2&gt;
+&lt;p&gt;否则报错&lt;/p&gt;
+&lt;h2 id=&#34;html设置目标页面在新窗口打开&#34;&gt;HTML设置目标页面在新窗口打开&lt;/h2&gt;
+&lt;p&gt;在使用&amp;lt;a&amp;gt;&amp;lt;/a&amp;gt;标签进行超链接跳转时，目标页面默认在当前页面中打开。&lt;/p&gt;
+&lt;p&gt;如果希望当前页面中所有超链接跳转页面的时候,都在新窗口中打开,那么只需要在head标签中设置 base标签,给base标签设置target属性即可.&lt;/p&gt;
+&lt;p&gt;1
+&amp;lt;base href=&amp;quot;&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;&lt;/p&gt;
+&lt;p&gt;target属性：&lt;/p&gt;
+&lt;p&gt;_self：在当前页面中打开
+_blank：新窗口中打开&lt;/p&gt;
+&lt;p&gt;当前程序默认采用_blank形式&lt;/p&gt;
+&lt;h2 id=&#34;引入unicode小图标&#34;&gt;引入unicode小图标&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;引入meta&lt;/li&gt;
+&lt;li&gt;导入unicode标签&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;a href=&#34;http://xahlee.info/comp/unicode_transport_and_map_symbols.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;http://xahlee.info/comp/unicode_transport_and_map_symbols.html&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;Simple HTTP Server WiG
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;This module builds on BaseHTTPServer by implementing the standard GET
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;and HEAD requests in a fairly straightforward manner.
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;see: https://gist.github.com/UniIsland/3346170
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+
+
+__version__ &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;0.1&amp;#34;&lt;/span&gt;
+__all__ &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;SimpleHTTPRequestHandler&amp;#34;&lt;/span&gt;]
+__author__ &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;yzl&amp;#34;&lt;/span&gt;
+__edited_by___ &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;yzl&amp;#34;&lt;/span&gt;
+__home_page__ &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://jueqingsizhe66.github.io/&amp;#34;&lt;/span&gt;
+
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; os
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; posixpath
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; http.server
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; urllib.request&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; urllib.parse&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; urllib.error
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; html
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; shutil
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; mimetypes
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; re
+&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; io &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; BytesIO
+
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;SimpleHTTPRequestHandler&lt;/span&gt;(http&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;server&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;BaseHTTPRequestHandler):
+
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;Simple HTTP request handler with GET/HEAD/POST commands.
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    This serves files from the current directory and any of its
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    subdirectories.  The MIME type for files is determined by
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    calling the .guess_type() method. And can reveive file uploaded
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    by client.
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    The GET/HEAD/POST requests are identical except that the HEAD
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    request omits the actual contents of the file.
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    &amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+
+    server_version &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;SimpleHTTPWithUpload/&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; __version__
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;do_GET&lt;/span&gt;(self):
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;Serve a GET request.&amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+        f &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;send_head()
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; f:
+            self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;copyfile(f, self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;wfile)
+            f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;close()
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;do_HEAD&lt;/span&gt;(self):
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;Serve a HEAD request.&amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+        f &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;send_head()
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; f:
+            f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;close()
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;do_POST&lt;/span&gt;(self):
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;Serve a POST request.&amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+        r, info &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;deal_post_data()
+        print((r, info, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;by: &amp;#34;&lt;/span&gt;, self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;client_address))
+        f &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; BytesIO()
+        f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(&lt;span style=&#34;color:#e6db74&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;lt;!DOCTYPE html PUBLIC &amp;#34;-//W3C//DTD HTML 3.2 Final//EN&amp;#34;&amp;gt;&amp;#39;&lt;/span&gt;)
+        f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(&lt;span style=&#34;color:#e6db74&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;html&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;lt;title&amp;gt;Upload Result Page&amp;lt;/title&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+        f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(&lt;span style=&#34;color:#e6db74&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;head &amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; &amp;lt;meta http-equiv=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Content-Type&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; content=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;text/html; charset=utf-8&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; /&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+        f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(&lt;span style=&#34;color:#e6db74&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;body&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;lt;h2&amp;gt;Upload Result Page&amp;lt;/h2&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+        f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(&lt;span style=&#34;color:#e6db74&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;hr&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; r:
+            f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(&lt;span style=&#34;color:#e6db74&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;strong&amp;gt;Success:&amp;lt;/strong&amp;gt;&amp;#34;&lt;/span&gt;)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+            f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(&lt;span style=&#34;color:#e6db74&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;strong&amp;gt;Failed:&amp;lt;/strong&amp;gt;&amp;#34;&lt;/span&gt;)
+        f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(info&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;encode())
+        f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write((&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;br&amp;gt;&amp;lt;a href=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%s&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;gt;back&amp;lt;/a&amp;gt;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;headers[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;referer&amp;#39;&lt;/span&gt;])&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;encode())
+        f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(&lt;span style=&#34;color:#e6db74&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;hr&amp;gt;&amp;lt;small&amp;gt;Powerd By: yzl, check new version at &amp;#34;&lt;/span&gt;)
+        f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(&lt;span style=&#34;color:#e6db74&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;a href=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; https://github.com/debuggerx01/raw_assets/blob/master/scripts/share_server.py&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;gt;&amp;#34;&lt;/span&gt;)
+        f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(&lt;span style=&#34;color:#e6db74&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;here&amp;lt;/a&amp;gt;.&amp;lt;/small&amp;gt;&amp;lt;/body&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+        length &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;tell()
+        f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;seek(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;)
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;send_response(&lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;)
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;send_header(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Content-type&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;text/html;charset=UTF-8&amp;#34;&lt;/span&gt;)
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;send_header(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Content-Length&amp;#34;&lt;/span&gt;, str(length))
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;end_headers()
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; f:
+            self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;copyfile(f, self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;wfile)
+            f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;close()
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;deal_post_data&lt;/span&gt;(self):
+        content_type &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;headers[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;content-type&amp;#39;&lt;/span&gt;]
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; content_type:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;False&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Content-Type header doesn&amp;#39;t contain boundary&amp;#34;&lt;/span&gt;)
+        boundary &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; content_type&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;=&amp;#34;&lt;/span&gt;)[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;encode()
+        remainbytes &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; int(self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;headers[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;content-length&amp;#39;&lt;/span&gt;])
+        line &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;rfile&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;readline()
+        remainbytes &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; len(line)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; boundary &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; line:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;False&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Content NOT begin with boundary&amp;#34;&lt;/span&gt;)
+        line &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;rfile&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;readline()
+        remainbytes &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; len(line)
+        fn &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; re&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;findall(&lt;span style=&#34;color:#e6db74&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Content-Disposition.*name=&amp;#34;file&amp;#34;; filename=&amp;#34;(.*)&amp;#34;&amp;#39;&lt;/span&gt;, line&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;decode())
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; fn:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;False&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Can&amp;#39;t find out file name...&amp;#34;&lt;/span&gt;)
+        path &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;translate_path(self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path)
+        fn &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;join(path, fn[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;])
+        line &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;rfile&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;readline()
+        remainbytes &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; len(line)
+        line &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;rfile&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;readline()
+        remainbytes &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; len(line)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;try&lt;/span&gt;:
+            out &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; open(fn, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;wb&amp;#39;&lt;/span&gt;)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;except&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;IOError&lt;/span&gt;:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;False&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Can&amp;#39;t create file to write, do you have permission to write?&amp;#34;&lt;/span&gt;)
+
+        preline &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;rfile&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;readline()
+        remainbytes &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; len(preline)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; remainbytes &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+            line &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;rfile&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;readline()
+            remainbytes &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; len(line)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; boundary &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; line:
+                preline &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; preline[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; preline&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;endswith(&lt;span style=&#34;color:#e6db74&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\r&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;):
+                    preline &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; preline[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+                out&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(preline)
+                out&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;close()
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;File &amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%s&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39; upload success!&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; fn)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+                out&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(preline)
+                preline &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; line
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;False&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Unexpect Ends of data.&amp;#34;&lt;/span&gt;)
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;send_head&lt;/span&gt;(self):
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;Common code for GET and HEAD commands.
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        This sends the response code and MIME headers.
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        Return value is either a file object (which has to be copied
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        to the outputfile by the caller unless the command was HEAD,
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        and must be closed by the caller under all circumstances), or
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        None, in which case the caller has nothing further to do.
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        &amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+        path &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;translate_path(self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path)
+        f &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;None&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;isdir(path):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;endswith(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;/&amp;#39;&lt;/span&gt;):
+                &lt;span style=&#34;color:#75715e&#34;&gt;# redirect browser - doing basically what apache does&lt;/span&gt;
+                self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;send_response(&lt;span style=&#34;color:#ae81ff&#34;&gt;301&lt;/span&gt;)
+                self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;send_header(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Location&amp;#34;&lt;/span&gt;, self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/&amp;#34;&lt;/span&gt;)
+                self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;end_headers()
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;None&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; index &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;index.html&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;index.htm&amp;#34;&lt;/span&gt;:
+                index &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;join(path, index)
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;exists(index):
+                    path &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; index
+                    &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;list_directory(path)
+        ctype &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;guess_type(path)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;try&lt;/span&gt;:
+            &lt;span style=&#34;color:#75715e&#34;&gt;# Always read in binary mode. Opening files in text mode may cause&lt;/span&gt;
+            &lt;span style=&#34;color:#75715e&#34;&gt;# newline translations, making the actual size of the content&lt;/span&gt;
+            &lt;span style=&#34;color:#75715e&#34;&gt;# transmitted *less* than the content-length!&lt;/span&gt;
+            f &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; open(path, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;rb&amp;#39;&lt;/span&gt;)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;except&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;IOError&lt;/span&gt;:
+            self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;send_error(&lt;span style=&#34;color:#ae81ff&#34;&gt;404&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;File not found&amp;#34;&lt;/span&gt;)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;None&lt;/span&gt;
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;send_response(&lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;)
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;send_header(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Content-type&amp;#34;&lt;/span&gt;, ctype)
+        fs &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;fstat(f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;fileno())
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;send_header(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Content-Length&amp;#34;&lt;/span&gt;, str(fs[&lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;]))
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;send_header(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Last-Modified&amp;#34;&lt;/span&gt;, self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;date_time_string(fs&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;st_mtime))
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;end_headers()
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; f
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;list_directory&lt;/span&gt;(self, path):
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;Helper to produce a directory listing (absent index.html).
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        Return value is either a file object, or None (indicating an
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        error).  In either case, the headers are sent, making the
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        interface the same as for send_head().
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        &amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;try&lt;/span&gt;:
+            list &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;listdir(path)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;except&lt;/span&gt; os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;error:
+            self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;send_error(&lt;span style=&#34;color:#ae81ff&#34;&gt;404&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;No permission to list directory&amp;#34;&lt;/span&gt;)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;None&lt;/span&gt;
+        list&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sort(key&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;lambda&lt;/span&gt; a: a&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;lower())
+        f &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; BytesIO()
+        displaypath &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; html&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;escape(urllib&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;parse&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;unquote(self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path))
+        f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(&lt;span style=&#34;color:#e6db74&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;lt;!DOCTYPE html PUBLIC &amp;#34;-//W3C//DTD HTML 3.2 Final//EN&amp;#34;&amp;gt;&amp;#39;&lt;/span&gt;)
+        f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write((&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;html&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;lt;title&amp;gt;Directory listing for &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%s&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; displaypath)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;encode())
+        f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(&lt;span style=&#34;color:#e6db74&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;head &amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; &amp;lt;meta http-equiv=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Content-Type&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; content=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;text/html; charset=utf-8&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; /&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+        f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write((&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;body&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;lt;h2&amp;gt; &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%s&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; list files below:&amp;lt;/h2&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; displaypath)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;encode())
+        f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(&lt;span style=&#34;color:#e6db74&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;hr&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+        f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(&lt;span style=&#34;color:#e6db74&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;form ENCTYPE=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;multipart/form-data&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; method=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;post&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;gt;&amp;#34;&lt;/span&gt;)
+        f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(&lt;span style=&#34;color:#e6db74&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;input name=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;file&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; type=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;file&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;/&amp;gt;&amp;#34;&lt;/span&gt;)
+        f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(&lt;span style=&#34;color:#e6db74&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;input type=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;submit&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; value=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; UPLOAD &lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;/&amp;gt;&amp;lt;/form&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+        f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(&lt;span style=&#34;color:#e6db74&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;hr&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;lt;ul&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; name &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; list:
+            fullname &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;join(path, name)
+            displayname &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; linkname &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; name
+            &lt;span style=&#34;color:#75715e&#34;&gt;# Append / for directories or @ for symbolic links&lt;/span&gt;
+            &lt;span style=&#34;color:#75715e&#34;&gt;#shownname=html.escape(displayname)&lt;/span&gt;
+
+            &lt;span style=&#34;color:#75715e&#34;&gt;#shownname =&amp;#34; &amp;amp;#x1F5CE;&amp;#34;+ html.escape(displayname)&lt;/span&gt;
+            shownname &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34; &amp;amp;#x1F4C3;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; html&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;escape(displayname)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;isdir(fullname):
+                displayname &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; name &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/&amp;#34;&lt;/span&gt;
+                linkname &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; name &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/&amp;#34;&lt;/span&gt;
+                &lt;span style=&#34;color:#75715e&#34;&gt;## http://xahlee.info/comp/unicode_transport_and_map_symbols.html&lt;/span&gt;
+                &lt;span style=&#34;color:#75715e&#34;&gt;## 图标来源http://xahlee.info/comp/unicode_office_icons.html&lt;/span&gt;
+                shownname &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34; &amp;amp;#x1f4c1; &amp;lt;font color=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;green&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; html&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;escape(displayname) &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/ &amp;lt;/font&amp;gt;&amp;#34;&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;islink(fullname):
+                displayname &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; name &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;@&amp;#34;&lt;/span&gt;
+                shownname&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;html&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;escape(displayname)
+                &lt;span style=&#34;color:#75715e&#34;&gt;# Note: a link to a directory displays with @ and links with /&lt;/span&gt;
+            f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write((&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;lt;li&amp;gt;&amp;lt;a href=&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%s&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34; target=&amp;#34;_blank&amp;#34; rel=&amp;#34;external nofollow&amp;#34; &amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%s&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
+                    &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; (urllib&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;parse&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;quote(linkname), shownname))&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;encode())
+        f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(&lt;span style=&#34;color:#e6db74&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;/ul&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;lt;hr&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+        length &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;tell()
+        f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;seek(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;)
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;send_response(&lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;)
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;send_header(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Content-type&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;text/html;charset=UTF-8&amp;#34;&lt;/span&gt;)
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;send_header(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Content-Length&amp;#34;&lt;/span&gt;, str(length))
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;end_headers()
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; f
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;translate_path&lt;/span&gt;(self, path):
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;Translate a /-separated PATH to the local filename syntax.
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        Components that mean special things to the local file system
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        (e.g. drive or directory names) are ignored.  (XXX They should
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        probably be diagnosed.)
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        &amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;# abandon query parameters&lt;/span&gt;
+        path &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;?&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]
+        path &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;#&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]
+        path &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; posixpath&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;normpath(urllib&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;parse&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;unquote(path))
+        words &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;/&amp;#39;&lt;/span&gt;)
+        words &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [_f &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _f &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; words &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; _f]
+        path &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;getcwd()
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; word &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; words:
+            drive, word &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;splitdrive(word)
+            head, word &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split(word)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; word &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; (os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;curdir, os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;pardir): &lt;span style=&#34;color:#66d9ef&#34;&gt;continue&lt;/span&gt;
+            path &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;join(path, word)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; path
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;copyfile&lt;/span&gt;(self, source, outputfile):
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;Copy all data between two file objects.
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        The SOURCE argument is a file object open for reading
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        (or anything with a read() method) and the DESTINATION
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        argument is a file object open for writing (or
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        anything with a write() method).
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        The only reason for overriding this would be to change
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        the block size or perhaps to replace newlines by CRLF
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        -- note however that this the default server uses this
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        to copy binary data as well.
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        &amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+        shutil&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;copyfileobj(source, outputfile)
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;guess_type&lt;/span&gt;(self, path):
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;Guess the type of a file.
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        Argument is a PATH (a filename).
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        Return value is a string of the form type/subtype,
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        usable for a MIME Content-type header.
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        The default implementation looks the file&amp;#39;s extension
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        up in the table self.extensions_map, using application/octet-stream
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        as a default; however it would be permissible (if
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        slow) to look inside the data to make a better guess.
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        &amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+
+        base, ext &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; posixpath&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;splitext(path)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ext &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;extensions_map:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;extensions_map[ext]
+        ext &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ext&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;lower()
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ext &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;extensions_map:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;extensions_map[ext]
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;extensions_map[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;]
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; mimetypes&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;inited:
+        mimetypes&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;init() &lt;span style=&#34;color:#75715e&#34;&gt;# try to read system mime.types&lt;/span&gt;
+    extensions_map &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; mimetypes&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;types_map&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;copy()
+    extensions_map&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;update({
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;application/octet-stream&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#75715e&#34;&gt;# Default&lt;/span&gt;
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;.py&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;text/plain&amp;#39;&lt;/span&gt;,
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;.c&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;text/plain&amp;#39;&lt;/span&gt;,
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;.h&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;text/plain&amp;#39;&lt;/span&gt;,
+        })
+
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;test&lt;/span&gt;(HandlerClass &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; SimpleHTTPRequestHandler,
+         ServerClass &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; http&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;server&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;HTTPServer):
+    http&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;server&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;test(HandlerClass, ServerClass)
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; __name__ &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;__main__&amp;#39;&lt;/span&gt;:
+    test()&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>1米平方之python</title>
