@@ -762,7 +762,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    3 min read
+    4 min read
   </span>
   
 
@@ -803,7 +803,7 @@
 
 
 
-<span class="article-metadata" >Reading time: 6 minutes and    33 seconds with 1444 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+<span class="article-metadata" >Reading time: 7 minutes and    6 seconds with 1562 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
   <ul>
@@ -819,7 +819,16 @@
 
     <div class="article-style">
       <p>默认使用 <code>python3 -m http.server 8080 </code>即可开启本地的http服务
-但是不具备上传下载功能，为了具备上传功能需要进行改造，且访问的时候，必须使用http开头，不能使用https，否则报错</p>
+但是不具备上传下载功能，为了具备上传功能需要进行改造，且访问的时候，必须使用http开头，不能使用https，否则报错。</p>
+<p>下面进行改正，最终使用方式为</p>
+<pre><code class="language-python">
+C:\Users\yezhaoliang\AppData\Roaming\.emacs.d&gt;python shareServer2.py 8089  ## 自定义端口使用
+serving at port = 8089
+
+
+C:\Users\yezhaoliang\AppData\Roaming\.emacs.d&gt;python shareServer2.py   ##默认使用8000端口
+serving at port = 8000
+</code></pre>
 <p>最终效果如下：</p>
 
 
@@ -853,14 +862,13 @@
 </figure>
 
 <h2 id="使用html-dot-escape代替cgi-dot-escape">使用html.escape代替cgi.escape</h2>
-<p>新版本需要</p>
+<p>python3.x以上版本需要。</p>
 <h2 id="使用http访问-不要使用https">使用http访问，不要使用https</h2>
-<p>否则报错</p>
+<p>否则报错.</p>
 <h2 id="html设置目标页面在新窗口打开">HTML设置目标页面在新窗口打开</h2>
 <p>在使用&lt;a&gt;&lt;/a&gt;标签进行超链接跳转时，目标页面默认在当前页面中打开。</p>
 <p>如果希望当前页面中所有超链接跳转页面的时候,都在新窗口中打开,那么只需要在head标签中设置 base标签,给base标签设置target属性即可.</p>
-<p>1
-&lt;base href=&quot;&quot; target=&quot;_blank&quot;&gt;</p>
+<p>&lt;base href=&quot;&quot; target=&quot;_blank&quot;&gt;</p>
 <p>target属性：</p>
 <p>_self：在当前页面中打开
 _blank：新窗口中打开</p>
@@ -887,8 +895,10 @@ __edited_by___ <span style="color:#f92672">=</span> <span style="color:#e6db74">
 __home_page__ <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://jueqingsizhe66.github.io/&#34;</span>
 
 <span style="color:#f92672">import</span> os
+<span style="color:#f92672">import</span> sys
 <span style="color:#f92672">import</span> posixpath
 <span style="color:#f92672">import</span> http.server
+<span style="color:#f92672">import</span> socketserver
 <span style="color:#f92672">import</span> urllib.request<span style="color:#f92672">,</span> urllib.parse<span style="color:#f92672">,</span> urllib.error
 <span style="color:#f92672">import</span> html
 <span style="color:#f92672">import</span> shutil
@@ -932,14 +942,14 @@ __home_page__ <span style="color:#f92672">=</span> <span style="color:#e6db74">&
         print((r, info, <span style="color:#e6db74">&#34;by: &#34;</span>, self<span style="color:#f92672">.</span>client_address))
         f <span style="color:#f92672">=</span> BytesIO()
         f<span style="color:#f92672">.</span>write(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;&lt;!DOCTYPE html PUBLIC &#34;-//W3C//DTD HTML 3.2 Final//EN&#34;&gt;&#39;</span>)
-        f<span style="color:#f92672">.</span>write(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;&lt;html&gt;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&lt;title&gt;Upload Result Page&lt;/title&gt;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+        f<span style="color:#f92672">.</span>write(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;&lt;html&gt;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&lt;title&gt;&amp;#1F4AB;Upload Result Page &amp;#1F4AB;&lt;/title&gt;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
         f<span style="color:#f92672">.</span>write(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;&lt;head &gt;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74"> &lt;meta http-equiv=</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">Content-Type</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74"> content=</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">text/html; charset=utf-8</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74"> /&gt;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&lt;/head&gt;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
         f<span style="color:#f92672">.</span>write(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;&lt;body&gt;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&lt;h2&gt;Upload Result Page&lt;/h2&gt;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
         f<span style="color:#f92672">.</span>write(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;&lt;hr&gt;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
         <span style="color:#66d9ef">if</span> r:
-            f<span style="color:#f92672">.</span>write(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;&lt;strong&gt;Success:&lt;/strong&gt;&#34;</span>)
+            f<span style="color:#f92672">.</span>write(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;&lt;strong&gt;&amp;#x1F3C6; Success:&lt;/strong&gt;&#34;</span>)
         <span style="color:#66d9ef">else</span>:
-            f<span style="color:#f92672">.</span>write(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;&lt;strong&gt;Failed:&lt;/strong&gt;&#34;</span>)
+            f<span style="color:#f92672">.</span>write(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;&lt;strong&gt;&amp;#2620; Failed:&lt;/strong&gt;&#34;</span>)
         f<span style="color:#f92672">.</span>write(info<span style="color:#f92672">.</span>encode())
         f<span style="color:#f92672">.</span>write((<span style="color:#e6db74">&#34;&lt;br&gt;&lt;a href=</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">%s</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">&gt;back&lt;/a&gt;&#34;</span> <span style="color:#f92672">%</span> self<span style="color:#f92672">.</span>headers[<span style="color:#e6db74">&#39;referer&#39;</span>])<span style="color:#f92672">.</span>encode())
         f<span style="color:#f92672">.</span>write(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;&lt;hr&gt;&lt;small&gt;Powerd By: yzl, check new version at &#34;</span>)
@@ -967,9 +977,11 @@ __home_page__ <span style="color:#f92672">=</span> <span style="color:#e6db74">&
             <span style="color:#66d9ef">return</span> (<span style="color:#66d9ef">False</span>, <span style="color:#e6db74">&#34;Content NOT begin with boundary&#34;</span>)
         line <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>rfile<span style="color:#f92672">.</span>readline()
         remainbytes <span style="color:#f92672">-=</span> len(line)
+        <span style="color:#75715e">##  上传文件部分</span>
         fn <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>findall(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;Content-Disposition.*name=&#34;file&#34;; filename=&#34;(.*)&#34;&#39;</span>, line<span style="color:#f92672">.</span>decode())
         <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> fn:
             <span style="color:#66d9ef">return</span> (<span style="color:#66d9ef">False</span>, <span style="color:#e6db74">&#34;Can&#39;t find out file name...&#34;</span>)
+        <span style="color:#75715e">## 复制文件</span>
         path <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>translate_path(self<span style="color:#f92672">.</span>path)
         fn <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(path, fn[<span style="color:#ae81ff">0</span>])
         line <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>rfile<span style="color:#f92672">.</span>readline()
@@ -1061,11 +1073,12 @@ __home_page__ <span style="color:#f92672">=</span> <span style="color:#e6db74">&
         f<span style="color:#f92672">.</span>write(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;&lt;!DOCTYPE html PUBLIC &#34;-//W3C//DTD HTML 3.2 Final//EN&#34;&gt;&#39;</span>)
         f<span style="color:#f92672">.</span>write((<span style="color:#e6db74">&#34;&lt;html&gt;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&lt;title&gt;Directory listing for </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&lt;/title&gt;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> displaypath)<span style="color:#f92672">.</span>encode())
         f<span style="color:#f92672">.</span>write(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;&lt;head &gt;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74"> &lt;meta http-equiv=</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">Content-Type</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74"> content=</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">text/html; charset=utf-8</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74"> /&gt;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&lt;/head&gt;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
-        f<span style="color:#f92672">.</span>write((<span style="color:#e6db74">&#34;&lt;body&gt;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&lt;h2&gt; </span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> list files below:&lt;/h2&gt;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> displaypath)<span style="color:#f92672">.</span>encode())
+        f<span style="color:#f92672">.</span>write((<span style="color:#e6db74">&#34;&lt;body&gt;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&lt;h2&gt;&amp;#x1F42F; &amp;#x1F42F; &amp;#x1F42F;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> list files below:&lt;/h2&gt;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> displaypath)<span style="color:#f92672">.</span>encode())
         f<span style="color:#f92672">.</span>write(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;&lt;hr&gt;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
         f<span style="color:#f92672">.</span>write(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;&lt;form ENCTYPE=</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">multipart/form-data</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74"> method=</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">post</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">&gt;&#34;</span>)
+        <span style="color:#75715e">## upload file assets</span>
         f<span style="color:#f92672">.</span>write(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;&lt;input name=</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">file</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74"> type=</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">file</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">/&gt;&#34;</span>)
-        f<span style="color:#f92672">.</span>write(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;&lt;input type=</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">submit</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74"> value=</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74"> UPLOAD </span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">/&gt;&lt;/form&gt;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+        f<span style="color:#f92672">.</span>write(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;&lt;input type=</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">submit</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74"> value=</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74"> &amp;#x1FA90; UPLOAD </span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">/&gt;&lt;/form&gt;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
         f<span style="color:#f92672">.</span>write(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;&lt;hr&gt;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&lt;ul&gt;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
         <span style="color:#66d9ef">for</span> name <span style="color:#f92672">in</span> list:
             fullname <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(path, name)
@@ -1102,6 +1115,7 @@ __home_page__ <span style="color:#f92672">=</span> <span style="color:#e6db74">&
 </span><span style="color:#e6db74">        Components that mean special things to the local file system
 </span><span style="color:#e6db74">        (e.g. drive or directory names) are ignored.  (XXX They should
 </span><span style="color:#e6db74">        probably be diagnosed.)
+</span><span style="color:#e6db74">        上传文件相关
 </span><span style="color:#e6db74">
 </span><span style="color:#e6db74">        &#34;&#34;&#34;</span>
         <span style="color:#75715e"># abandon query parameters</span>
@@ -1163,18 +1177,27 @@ __home_page__ <span style="color:#f92672">=</span> <span style="color:#e6db74">&
     extensions_map <span style="color:#f92672">=</span> mimetypes<span style="color:#f92672">.</span>types_map<span style="color:#f92672">.</span>copy()
     extensions_map<span style="color:#f92672">.</span>update({
         <span style="color:#e6db74">&#39;&#39;</span>: <span style="color:#e6db74">&#39;application/octet-stream&#39;</span>, <span style="color:#75715e"># Default</span>
-        <span style="color:#e6db74">&#39;.py&#39;</span>: <span style="color:#e6db74">&#39;text/plain&#39;</span>,
-        <span style="color:#e6db74">&#39;.c&#39;</span>: <span style="color:#e6db74">&#39;text/plain&#39;</span>,
-        <span style="color:#e6db74">&#39;.h&#39;</span>: <span style="color:#e6db74">&#39;text/plain&#39;</span>,
+        <span style="color:#e6db74">&#39;.py&#39;</span>: <span style="color:#e6db74">&#39;text/plain;charset=utf-8&#39;</span>,
+        <span style="color:#e6db74">&#39;.c&#39;</span>: <span style="color:#e6db74">&#39;text/plain;charset=utf-8&#39;</span>,
+        <span style="color:#e6db74">&#39;.h&#39;</span>: <span style="color:#e6db74">&#39;text/plain;charset=utf-8&#39;</span>,
+        <span style="color:#e6db74">&#39;.sh&#39;</span>: <span style="color:#e6db74">&#39;text/plain;charset=utf-8&#39;</span>,
         })
 
 
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test</span>(HandlerClass <span style="color:#f92672">=</span> SimpleHTTPRequestHandler,
-         ServerClass <span style="color:#f92672">=</span> http<span style="color:#f92672">.</span>server<span style="color:#f92672">.</span>HTTPServer):
-    http<span style="color:#f92672">.</span>server<span style="color:#f92672">.</span>test(HandlerClass, ServerClass)
+<span style="color:#75715e"># def test(HandlerClass = SimpleHTTPRequestHandler,</span>
+<span style="color:#75715e">#          ServerClass = http.server.HTTPServer):</span>
+<span style="color:#75715e">#     http.server.test(HandlerClass, ServerClass)</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">run</span>(PORT<span style="color:#f92672">=</span><span style="color:#ae81ff">8000</span>,Handler <span style="color:#f92672">=</span> SimpleHTTPRequestHandler,):
+    <span style="color:#66d9ef">with</span> socketserver<span style="color:#f92672">.</span>TCPServer((<span style="color:#e6db74">&#34;&#34;</span>,PORT), Handler) <span style="color:#66d9ef">as</span> httpd:
+        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;serving at port = </span><span style="color:#e6db74">{</span>PORT<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+        httpd<span style="color:#f92672">.</span>serve_forever()
 
 <span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
-    test()</code></pre></div>
+    <span style="color:#75715e"># test()</span>
+    <span style="color:#66d9ef">if</span> len(sys<span style="color:#f92672">.</span>argv)<span style="color:#f92672">==</span><span style="color:#ae81ff">2</span>:
+        run(PORT<span style="color:#f92672">=</span>int(sys<span style="color:#f92672">.</span>argv[<span style="color:#ae81ff">1</span>]))
+    <span style="color:#66d9ef">else</span>:
+        run()</code></pre></div>
 
     </div>
  <div class="nav-links" style="padding:10;">
@@ -1183,6 +1206,10 @@ __home_page__ <span style="color:#f92672">=</span> <span style="color:#e6db74">&
         <a href="https://jueqingsizhe66.github.io/post/1%E7%B1%B3%E5%B9%B3%E6%96%B9%E4%B9%8Bpython/"><span class="arrow">←</span> <strong>上一篇:1米平方之python</strong></a>
         </div>
         
+        
+
+
+       <div align="right"> <a href="https://jueqingsizhe66.github.io/post/socket%E6%9D%A5%E6%BA%90/" ><strong>下一篇:Socket来源 </strong><span class="arrow">→</span></a></div>
         
       </div>
     
@@ -1408,6 +1435,8 @@ __home_page__ <span style="color:#f92672">=</span> <span style="color:#e6db74">&
     <h3>Related</h3>
     <ul>
       
+      <li><a href="/post/socket%E6%9D%A5%E6%BA%90/">Socket来源</a></li>
+      
       <li><a href="/post/1%E7%B1%B3%E5%B9%B3%E6%96%B9%E4%B9%8Bpython/">1米平方之python</a></li>
       
       <li><a href="/post/python%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">python常用函数学习总结</a></li>
@@ -1415,8 +1444,6 @@ __home_page__ <span style="color:#f92672">=</span> <span style="color:#e6db74">&
       <li><a href="/post/%E6%95%B0%E6%8D%AE%E8%AE%BE%E8%AE%A1%E7%A8%8B%E5%BA%8F/">数据设计程序-装饰者模式</a></li>
       
       <li><a href="/post/python%E6%8F%90%E5%8F%96%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E7%99%BD%E5%A4%A9%E5%92%8C%E9%BB%91%E5%A4%9C%E7%9A%84%E6%97%B6%E9%97%B4%E6%AE%B5/">python提取时间序列白天和黑夜的时间段</a></li>
-      
-      <li><a href="/post/python%E7%BB%95%E7%82%B9%E6%97%8B%E8%BD%AC/">python绕点旋转</a></li>
       
     </ul>
 

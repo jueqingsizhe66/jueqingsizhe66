@@ -5,7 +5,7 @@
     <link>https://jueqingsizhe66.github.io/post/</link>
       <atom:link href="https://jueqingsizhe66.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>©2022</copyright><lastBuildDate>Mon, 07 Feb 2022 19:53:00 +0800</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>©2022</copyright><lastBuildDate>Mon, 07 Feb 2022 23:56:00 +0800</lastBuildDate>
     <image>
       <url>https://jueqingsizhe66.github.io/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
       <title>Posts</title>
@@ -13,12 +13,244 @@
     </image>
     
     <item>
+      <title>Socket来源</title>
+      <link>https://jueqingsizhe66.github.io/post/socket%E6%9D%A5%E6%BA%90/</link>
+      <pubDate>Mon, 07 Feb 2022 23:56:00 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/post/socket%E6%9D%A5%E6%BA%90/</guid>
+      <description>&lt;ol&gt;
+&lt;li&gt;socket client和server的单人对话&lt;/li&gt;
+&lt;li&gt;socket client和server的单人无限对话&lt;/li&gt;
+&lt;li&gt;socket client和server的命令解析&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;以下程序在windows和ubuntu均有测试:&lt;/p&gt;
+&lt;h2 id=&#34;socket-client和server的单人对话&#34;&gt;socket client和server的单人对话&lt;/h2&gt;
+&lt;h3 id=&#34;server部分&#34;&gt;server部分&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;根据ip和port创建socket&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;监听(bind)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;等待(listen)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;接受&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;接收和发送&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;# *&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# *  @author Zhaoliang Ye 叶昭良(zl_ye@qny.chng.com.cn)&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# *  @version V0.1&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# *  @Title: socket_server.py&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# *  @Description: socket服务端代码&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;##   socket其实是tcp/ip 和udp的实现，包含着收发过程， 各种网络协议都基于socket，比如http ,mqtt等&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# *  @Time: 2022/2/6 21:28&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# *&lt;/span&gt;
+
+
+    &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; socket
+    server &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; socket&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;socket()
+    server&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;bind((&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;localhost&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;6969&lt;/span&gt;))  &lt;span style=&#34;color:#75715e&#34;&gt;##绑定本地6969端口&lt;/span&gt;
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;我要开始打电话&amp;#39;&lt;/span&gt;)
+    server&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;listen()  &lt;span style=&#34;color:#75715e&#34;&gt;##监听&lt;/span&gt;
+
+    &lt;span style=&#34;color:#75715e&#34;&gt;# server.accept() ## 等待电话打进来&lt;/span&gt;
+    conn,addr &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; server&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;accept() &lt;span style=&#34;color:#75715e&#34;&gt;## 等待电话打进来  重要知识点,返回一个独立connection和独立对方地址  谁跟我打电话 我就通过connection聊天&lt;/span&gt;
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;conn = &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;conn&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;  addr=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;addr&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;电话打进来了&amp;#39;&lt;/span&gt;)
+    &lt;span style=&#34;color:#75715e&#34;&gt;# data= server.recv(1024)  ##不能直接调用server来接听！  要让server的小秘来接听！&lt;/span&gt;
+    data&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; conn&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;recv(&lt;span style=&#34;color:#ae81ff&#34;&gt;1024&lt;/span&gt;)
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;recv &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;data&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;decode()&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+    conn&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;send(data&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;upper())  &lt;span style=&#34;color:#75715e&#34;&gt;## server改为conn&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# conn.send(b&amp;#34;Yes welcome to my world&amp;#34;)  ## server改为conn&lt;/span&gt;
+    server&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;close()
+    &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;client部分&#34;&gt;client部分&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;连接端口&lt;/li&gt;
+&lt;li&gt;接收和发送&lt;/li&gt;
+&lt;/ul&gt;
+&lt;!--listend--&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# *&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *  @author Zhaoliang Ye 叶昭良(zl_ye@qny.chng.com.cn)&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *  @version V0.1&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *  @Title: ssocket_client.py&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *  @Description: 建立socket客户端&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *  @Time: 2022/2/6 21:25&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *&lt;/span&gt;
+
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; socket
+
+
+client&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;socket&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;socket()
+client&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;connect((&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;localhost&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;6969&lt;/span&gt;))
+&lt;span style=&#34;color:#75715e&#34;&gt;# client.send(&amp;#34;hello&amp;#34;) ##py3必须发byte类型 否则错误&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# client.send(b&amp;#34;hello world&amp;#34;) ##py3必须发byte类型 否则错误 英文没有问题&lt;/span&gt;
+client&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;send(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;我要玩游戏lol&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;encode(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;utf-8&amp;#34;&lt;/span&gt;)) &lt;span style=&#34;color:#75715e&#34;&gt;##py3必须发byte类型 否则错误  中文需要encode一下&lt;/span&gt;
+data &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;client&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;recv(&lt;span style=&#34;color:#ae81ff&#34;&gt;1024&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;# 1kb数据 1024bit=1kb  1024kb=1mb&lt;/span&gt;
+print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39; recv data = &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;data&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;decode()&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+client&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;close()&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;socket-client和server的单人无限对话&#34;&gt;socket client和server的单人无限对话&lt;/h2&gt;
+&lt;p&gt;加入循环判断。&lt;/p&gt;
+&lt;h3 id=&#34;server-while部分&#34;&gt;server while部分&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# *&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *  @author Zhaoliang Ye 叶昭良(zl_ye@qny.chng.com.cn)&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *  @version V0.1&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *  @Title: socket_server.py&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *  @Description: 可以跟1个人说上无数话  但是暂时不支持多个人 一直说话，现在只能是多个人一句话&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;##   因为当前不支持异步 或者并发  区分异步和并发， 异步之后 就可以让其他人接入进来 其他人必须处于排队状态！&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;##   ubuntu20 测试通过 阻塞一人，其他人队列排队 ，异步支持多个人同时进行&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *  @Time: 2022/2/6 21:28&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *&lt;/span&gt;
+
+
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; socket
+server &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; socket&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;socket()
+server&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;bind((&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;localhost&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;6969&lt;/span&gt;))  &lt;span style=&#34;color:#75715e&#34;&gt;##绑定本地6969端口&lt;/span&gt;
+print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;我要开始打电话&amp;#39;&lt;/span&gt;)
+server&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;listen()  &lt;span style=&#34;color:#75715e&#34;&gt;##监听&lt;/span&gt;
+
+&lt;span style=&#34;color:#75715e&#34;&gt;# server.accept() ## 等待电话打进来&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;:
+    conn,addr &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; server&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;accept() &lt;span style=&#34;color:#75715e&#34;&gt;## 等待电话打进来  重要知识点,返回一个独立connection和独立对方地址  谁跟我打电话 我就通过connection聊天&lt;/span&gt;
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;conn = &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;conn&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;  addr=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;addr&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;电话打进来了&amp;#39;&lt;/span&gt;)
+    &lt;span style=&#34;color:#75715e&#34;&gt;# data= server.recv(1024)  ##不能直接调用server来接听！  要让server的小秘来接听！&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;:
+        data&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; conn&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;recv(&lt;span style=&#34;color:#ae81ff&#34;&gt;1024&lt;/span&gt;)
+        print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;recv &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;data&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;decode()&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+        msg&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;data&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;decode()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;strip()
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(msg&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;88&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; msg&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;bye&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; msg&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;byebye&amp;#34;&lt;/span&gt;):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(msg&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;):  &lt;span style=&#34;color:#75715e&#34;&gt;## 无法发空     这边的空带边 Ctrl+C   keyboard error&lt;/span&gt;
+            print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\033&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;[1;32m Client has been lost &lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\033&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;[0m&amp;#34;&lt;/span&gt;)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;
+        conn&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;send(data&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;upper())  &lt;span style=&#34;color:#75715e&#34;&gt;## server改为conn&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;# conn.send(b&amp;#34;Yes welcome to my world&amp;#34;)  ## server改为conn&lt;/span&gt;
+server&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;close()&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;client-while部分&#34;&gt;client  while部分&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# *&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *  @author Zhaoliang Ye 叶昭良(zl_ye@qny.chng.com.cn)&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *  @version V0.1&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *  @Title: ssocket_client.py&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *  @Description: 建立socket客户端&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *  @Time: 2022/2/6 21:25&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *&lt;/span&gt;
+
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; socket
+
+
+client&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;socket&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;socket()
+client&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;connect((&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;localhost&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;6969&lt;/span&gt;))
+&lt;span style=&#34;color:#75715e&#34;&gt;# client.send(&amp;#34;hello&amp;#34;) ##py3必须发byte类型 否则错误&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# client.send(b&amp;#34;hello world&amp;#34;) ##py3必须发byte类型 否则错误 英文没有问题&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;:
+    msg&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;input(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;gt;&amp;gt;:&amp;#34;&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;strip()
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(msg&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;): &lt;span style=&#34;color:#75715e&#34;&gt;## len(msg)==0&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;continue&lt;/span&gt;
+    client&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;send(msg&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;encode(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;utf-8&amp;#34;&lt;/span&gt;)) &lt;span style=&#34;color:#75715e&#34;&gt;##py3必须发byte类型 否则错误  中文需要encode一下&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;## send出去之后 再connect，告诉一下server，否则不礼貌, server也就直接退出，不send了&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(msg&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;88&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; msg&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;bye&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; msg&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;byebye&amp;#34;&lt;/span&gt;):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;
+   &lt;span style=&#34;color:#75715e&#34;&gt;# data =client.recv(1024) # 1kb数据 1024bit=1kb  1024kb=1mb&lt;/span&gt;
+    data &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;client&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;recv(&lt;span style=&#34;color:#ae81ff&#34;&gt;102400&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;# 1kb数据 1024bit=1kb  1024kb=1mb ## 加大数据传输&lt;/span&gt;
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39; recv data = &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;data&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;decode()&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+client&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;close()&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;socket-client和server的命令解析--ubuntu&#34;&gt;socket client和server的命令解析(ubuntu)&lt;/h2&gt;
+&lt;p&gt;在ubuntu系统中，客户端发送linux命令，服务器端解释输入的命令，并返回结果，一问一答，类似卢卡和小艾、小E&lt;/p&gt;
+&lt;h3 id=&#34;server-cmd部分&#34;&gt;Server cmd部分&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# *&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *  @author Zhaoliang Ye 叶昭良(zl_ye@qny.chng.com.cn)&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *  @version V0.1&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *  @Title: socket_server.py&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *  @Description: ubuntu 20测试通过  支持 客户端返回 pwd du  du -h    ls  &amp;#34;ls -lsha&amp;#34; 等命令+选项组合&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *  @Time: 2022/2/6 21:28&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *&lt;/span&gt;
+
+
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; socket
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; os
+&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; subprocess &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; Popen,PIPE
+server &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; socket&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;socket()
+server&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;bind((&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;localhost&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;6969&lt;/span&gt;))  &lt;span style=&#34;color:#75715e&#34;&gt;##绑定本地6969端口&lt;/span&gt;
+print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;我要开始打电话&amp;#39;&lt;/span&gt;)
+server&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;listen()  &lt;span style=&#34;color:#75715e&#34;&gt;##监听&lt;/span&gt;
+
+&lt;span style=&#34;color:#75715e&#34;&gt;# server.accept() ## 等待电话打进来&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;:
+    conn,addr &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; server&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;accept() &lt;span style=&#34;color:#75715e&#34;&gt;## 等待电话打进来  重要知识点,返回一个独立connection和独立对方地址  谁跟我打电话 我就通过connection聊天&lt;/span&gt;
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;conn = &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;conn&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;  addr=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;addr&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;电话打进来了&amp;#39;&lt;/span&gt;)
+    &lt;span style=&#34;color:#75715e&#34;&gt;# data= server.recv(1024)  ##不能直接调用server来接听！  要让server的小秘来接听！&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;:
+        data&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; conn&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;recv(&lt;span style=&#34;color:#ae81ff&#34;&gt;1024&lt;/span&gt;)
+        print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;recv &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;data&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;decode()&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+        &lt;span style=&#34;color:#75715e&#34;&gt;#msg=data.decode().strip()&lt;/span&gt;
+        msg&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;data&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;strip()
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(msg&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;88&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; msg&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;bye&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; msg&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;byebye&amp;#34;&lt;/span&gt;):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(msg&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;):
+            print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\033&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;[1;32m Client has been lost &lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\033&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;[0m&amp;#34;&lt;/span&gt;)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;# res = os.popen(data).read()&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;# https://www.jb51.net/article/200111.htm&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;# subprocess.Popen这个方法可以接受命令，命令可以写成一条，也可以把参数单独传递，如果参数单独传递的话，并且参数中包含反斜杠，那么很可能无法正常执行，把命令和参数写到一起传递过去 就是正常的了，当然前提是使用了shell=True&lt;/span&gt;
+        process&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;Popen([msg],stdout&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;PIPE,stderr&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;PIPE,shell&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;)
+        res,stderr&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;process&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;communicate()
+        conn&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;send(res)  &lt;span style=&#34;color:#75715e&#34;&gt;## server改为conn&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;# conn.send(b&amp;#34;Yes welcome to my world&amp;#34;)  ## server改为conn&lt;/span&gt;
+server&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;close()&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;client-cmd部分&#34;&gt;client cmd部分&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# *&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *  @author Zhaoliang Ye 叶昭良(zl_ye@qny.chng.com.cn)&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *  @version V0.1&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *  @Title: ssocket_client.py&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *  @Description: command客户端&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *  @Time: 2022/2/6 21:25&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *&lt;/span&gt;
+
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; socket
+
+
+client&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;socket&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;socket()
+client&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;connect((&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;localhost&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;6969&lt;/span&gt;))
+&lt;span style=&#34;color:#75715e&#34;&gt;# client.send(&amp;#34;hello&amp;#34;) ##py3必须发byte类型 否则错误&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# client.send(b&amp;#34;hello world&amp;#34;) ##py3必须发byte类型 否则错误 英文没有问题&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;:
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\033&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;[1;31m please input the command,  df ,top -bn 1, ls ,ls -lsha , fdisk -l等.....&amp;#39;&lt;/span&gt;)
+    msg&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;input(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;gt;&amp;gt;:&amp;#34;&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;strip()
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(msg&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;continue&lt;/span&gt;
+    client&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;send(msg&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;encode(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;utf-8&amp;#34;&lt;/span&gt;)) &lt;span style=&#34;color:#75715e&#34;&gt;##py3必须发byte类型 否则错误  中文需要encode一下&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;## send出去之后 再connect，告诉一下server，否则不礼貌, server也就直接退出，不send了&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(msg&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;88&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; msg&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;bye&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; msg&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;byebye&amp;#34;&lt;/span&gt;):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;
+    data &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;client&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;recv(&lt;span style=&#34;color:#ae81ff&#34;&gt;102400&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;# 1kb数据 1024bit=1kb  1024kb=1mb extend the data size , in order to get all the receive data at once&lt;/span&gt;
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39; recv data = &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;data&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;decode()&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+client&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;close()&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>SimpleHTTPServer-python3 可上传文件版本</title>
       <link>https://jueqingsizhe66.github.io/post/simplehttpserver-python3-version/</link>
       <pubDate>Mon, 07 Feb 2022 19:53:00 +0800</pubDate>
       <guid>https://jueqingsizhe66.github.io/post/simplehttpserver-python3-version/</guid>
       <description>&lt;p&gt;默认使用 &lt;code&gt;python3 -m http.server 8080 &lt;/code&gt;即可开启本地的http服务
-但是不具备上传下载功能，为了具备上传功能需要进行改造，且访问的时候，必须使用http开头，不能使用https，否则报错&lt;/p&gt;
+但是不具备上传下载功能，为了具备上传功能需要进行改造，且访问的时候，必须使用http开头，不能使用https，否则报错。&lt;/p&gt;
+&lt;p&gt;下面进行改正，最终使用方式为&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;
+C:\Users\yezhaoliang\AppData\Roaming\.emacs.d&amp;gt;python shareServer2.py 8089  ## 自定义端口使用
+serving at port = 8089
+
+
+C:\Users\yezhaoliang\AppData\Roaming\.emacs.d&amp;gt;python shareServer2.py   ##默认使用8000端口
+serving at port = 8000
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;最终效果如下：&lt;/p&gt;
 
 
@@ -52,14 +284,13 @@
 &lt;/figure&gt;
 
 &lt;h2 id=&#34;使用html-dot-escape代替cgi-dot-escape&#34;&gt;使用html.escape代替cgi.escape&lt;/h2&gt;
-&lt;p&gt;新版本需要&lt;/p&gt;
+&lt;p&gt;python3.x以上版本需要。&lt;/p&gt;
 &lt;h2 id=&#34;使用http访问-不要使用https&#34;&gt;使用http访问，不要使用https&lt;/h2&gt;
-&lt;p&gt;否则报错&lt;/p&gt;
+&lt;p&gt;否则报错.&lt;/p&gt;
 &lt;h2 id=&#34;html设置目标页面在新窗口打开&#34;&gt;HTML设置目标页面在新窗口打开&lt;/h2&gt;
 &lt;p&gt;在使用&amp;lt;a&amp;gt;&amp;lt;/a&amp;gt;标签进行超链接跳转时，目标页面默认在当前页面中打开。&lt;/p&gt;
 &lt;p&gt;如果希望当前页面中所有超链接跳转页面的时候,都在新窗口中打开,那么只需要在head标签中设置 base标签,给base标签设置target属性即可.&lt;/p&gt;
-&lt;p&gt;1
-&amp;lt;base href=&amp;quot;&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;&lt;/p&gt;
+&lt;p&gt;&amp;lt;base href=&amp;quot;&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;&lt;/p&gt;
 &lt;p&gt;target属性：&lt;/p&gt;
 &lt;p&gt;_self：在当前页面中打开
 _blank：新窗口中打开&lt;/p&gt;
@@ -86,8 +317,10 @@ __edited_by___ &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span
 __home_page__ &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://jueqingsizhe66.github.io/&amp;#34;&lt;/span&gt;
 
 &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; os
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; sys
 &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; posixpath
 &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; http.server
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; socketserver
 &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; urllib.request&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; urllib.parse&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; urllib.error
 &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; html
 &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; shutil
@@ -131,14 +364,14 @@ __home_page__ &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span 
         print((r, info, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;by: &amp;#34;&lt;/span&gt;, self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;client_address))
         f &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; BytesIO()
         f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(&lt;span style=&#34;color:#e6db74&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;lt;!DOCTYPE html PUBLIC &amp;#34;-//W3C//DTD HTML 3.2 Final//EN&amp;#34;&amp;gt;&amp;#39;&lt;/span&gt;)
-        f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(&lt;span style=&#34;color:#e6db74&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;html&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;lt;title&amp;gt;Upload Result Page&amp;lt;/title&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+        f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(&lt;span style=&#34;color:#e6db74&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;html&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;lt;title&amp;gt;&amp;amp;#1F4AB;Upload Result Page &amp;amp;#1F4AB;&amp;lt;/title&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
         f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(&lt;span style=&#34;color:#e6db74&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;head &amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; &amp;lt;meta http-equiv=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Content-Type&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; content=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;text/html; charset=utf-8&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; /&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
         f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(&lt;span style=&#34;color:#e6db74&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;body&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;lt;h2&amp;gt;Upload Result Page&amp;lt;/h2&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
         f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(&lt;span style=&#34;color:#e6db74&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;hr&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
         &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; r:
-            f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(&lt;span style=&#34;color:#e6db74&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;strong&amp;gt;Success:&amp;lt;/strong&amp;gt;&amp;#34;&lt;/span&gt;)
+            f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(&lt;span style=&#34;color:#e6db74&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;strong&amp;gt;&amp;amp;#x1F3C6; Success:&amp;lt;/strong&amp;gt;&amp;#34;&lt;/span&gt;)
         &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
-            f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(&lt;span style=&#34;color:#e6db74&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;strong&amp;gt;Failed:&amp;lt;/strong&amp;gt;&amp;#34;&lt;/span&gt;)
+            f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(&lt;span style=&#34;color:#e6db74&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;strong&amp;gt;&amp;amp;#2620; Failed:&amp;lt;/strong&amp;gt;&amp;#34;&lt;/span&gt;)
         f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(info&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;encode())
         f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write((&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;br&amp;gt;&amp;lt;a href=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%s&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;gt;back&amp;lt;/a&amp;gt;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;headers[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;referer&amp;#39;&lt;/span&gt;])&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;encode())
         f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(&lt;span style=&#34;color:#e6db74&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;hr&amp;gt;&amp;lt;small&amp;gt;Powerd By: yzl, check new version at &amp;#34;&lt;/span&gt;)
@@ -166,9 +399,11 @@ __home_page__ &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span 
             &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;False&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Content NOT begin with boundary&amp;#34;&lt;/span&gt;)
         line &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;rfile&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;readline()
         remainbytes &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; len(line)
+        &lt;span style=&#34;color:#75715e&#34;&gt;##  上传文件部分&lt;/span&gt;
         fn &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; re&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;findall(&lt;span style=&#34;color:#e6db74&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Content-Disposition.*name=&amp;#34;file&amp;#34;; filename=&amp;#34;(.*)&amp;#34;&amp;#39;&lt;/span&gt;, line&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;decode())
         &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; fn:
             &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;False&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Can&amp;#39;t find out file name...&amp;#34;&lt;/span&gt;)
+        &lt;span style=&#34;color:#75715e&#34;&gt;## 复制文件&lt;/span&gt;
         path &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;translate_path(self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path)
         fn &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;join(path, fn[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;])
         line &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;rfile&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;readline()
@@ -260,11 +495,12 @@ __home_page__ &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span 
         f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(&lt;span style=&#34;color:#e6db74&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;lt;!DOCTYPE html PUBLIC &amp;#34;-//W3C//DTD HTML 3.2 Final//EN&amp;#34;&amp;gt;&amp;#39;&lt;/span&gt;)
         f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write((&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;html&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;lt;title&amp;gt;Directory listing for &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%s&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; displaypath)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;encode())
         f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(&lt;span style=&#34;color:#e6db74&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;head &amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; &amp;lt;meta http-equiv=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Content-Type&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; content=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;text/html; charset=utf-8&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; /&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
-        f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write((&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;body&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;lt;h2&amp;gt; &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%s&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; list files below:&amp;lt;/h2&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; displaypath)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;encode())
+        f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write((&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;body&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;lt;h2&amp;gt;&amp;amp;#x1F42F; &amp;amp;#x1F42F; &amp;amp;#x1F42F;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%s&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; list files below:&amp;lt;/h2&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; displaypath)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;encode())
         f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(&lt;span style=&#34;color:#e6db74&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;hr&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
         f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(&lt;span style=&#34;color:#e6db74&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;form ENCTYPE=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;multipart/form-data&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; method=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;post&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;gt;&amp;#34;&lt;/span&gt;)
+        &lt;span style=&#34;color:#75715e&#34;&gt;## upload file assets&lt;/span&gt;
         f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(&lt;span style=&#34;color:#e6db74&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;input name=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;file&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; type=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;file&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;/&amp;gt;&amp;#34;&lt;/span&gt;)
-        f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(&lt;span style=&#34;color:#e6db74&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;input type=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;submit&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; value=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; UPLOAD &lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;/&amp;gt;&amp;lt;/form&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+        f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(&lt;span style=&#34;color:#e6db74&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;input type=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;submit&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; value=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; &amp;amp;#x1FA90; UPLOAD &lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;/&amp;gt;&amp;lt;/form&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
         f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(&lt;span style=&#34;color:#e6db74&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;hr&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;lt;ul&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
         &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; name &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; list:
             fullname &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;join(path, name)
@@ -301,6 +537,7 @@ __home_page__ &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span 
 &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        Components that mean special things to the local file system
 &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        (e.g. drive or directory names) are ignored.  (XXX They should
 &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        probably be diagnosed.)
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        上传文件相关
 &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        &amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
         &lt;span style=&#34;color:#75715e&#34;&gt;# abandon query parameters&lt;/span&gt;
@@ -362,18 +599,27 @@ __home_page__ &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span 
     extensions_map &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; mimetypes&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;types_map&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;copy()
     extensions_map&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;update({
         &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;application/octet-stream&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#75715e&#34;&gt;# Default&lt;/span&gt;
-        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;.py&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;text/plain&amp;#39;&lt;/span&gt;,
-        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;.c&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;text/plain&amp;#39;&lt;/span&gt;,
-        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;.h&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;text/plain&amp;#39;&lt;/span&gt;,
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;.py&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;text/plain;charset=utf-8&amp;#39;&lt;/span&gt;,
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;.c&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;text/plain;charset=utf-8&amp;#39;&lt;/span&gt;,
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;.h&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;text/plain;charset=utf-8&amp;#39;&lt;/span&gt;,
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;.sh&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;text/plain;charset=utf-8&amp;#39;&lt;/span&gt;,
         })
 
 
-&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;test&lt;/span&gt;(HandlerClass &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; SimpleHTTPRequestHandler,
-         ServerClass &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; http&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;server&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;HTTPServer):
-    http&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;server&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;test(HandlerClass, ServerClass)
+&lt;span style=&#34;color:#75715e&#34;&gt;# def test(HandlerClass = SimpleHTTPRequestHandler,&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#          ServerClass = http.server.HTTPServer):&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#     http.server.test(HandlerClass, ServerClass)&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;run&lt;/span&gt;(PORT&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;8000&lt;/span&gt;,Handler &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; SimpleHTTPRequestHandler,):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;with&lt;/span&gt; socketserver&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;TCPServer((&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;,PORT), Handler) &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; httpd:
+        print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;serving at port = &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;PORT&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+        httpd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;serve_forever()
 
 &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; __name__ &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;__main__&amp;#39;&lt;/span&gt;:
-    test()&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# test()&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; len(sys&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;argv)&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;:
+        run(PORT&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;int(sys&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;argv[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]))
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+        run()&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 </description>
     </item>
     
@@ -4182,7 +4428,7 @@ data.head()
 &lt;p&gt;Demo:&lt;/p&gt;
 
 
-&lt;div id=&#34;chart-516849237&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;div id=&#34;chart-284176593&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
 &lt;script&gt;
   (function() {
     let a = setInterval( function() {
@@ -4192,7 +4438,7 @@ data.head()
       clearInterval( a );
 
       Plotly.d3.json(&#34;./line-chart.json&#34;, function(chart) {
-        Plotly.plot(&#39;chart-516849237&#39;, chart.data, chart.layout, {responsive: true});
+        Plotly.plot(&#39;chart-284176593&#39;, chart.data, chart.layout, {responsive: true});
       });
     }, 500 );
   })();
