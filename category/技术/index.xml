@@ -5,12 +5,550 @@
     <link>https://jueqingsizhe66.github.io/category/%E6%8A%80%E6%9C%AF/</link>
       <atom:link href="https://jueqingsizhe66.github.io/category/%E6%8A%80%E6%9C%AF/index.xml" rel="self" type="application/rss+xml" />
     <description>技术</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>©2022</copyright><lastBuildDate>Thu, 10 Feb 2022 10:14:00 +0800</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>©2022</copyright><lastBuildDate>Sat, 12 Feb 2022 00:13:00 +0800</lastBuildDate>
     <image>
       <url>https://jueqingsizhe66.github.io/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
       <title>技术</title>
       <link>https://jueqingsizhe66.github.io/category/%E6%8A%80%E6%9C%AF/</link>
     </image>
+    
+    <item>
+      <title>openpyxl一键报告</title>
+      <link>https://jueqingsizhe66.github.io/post/openpyxl%E4%B8%80%E9%94%AE%E6%8A%A5%E5%91%8A/</link>
+      <pubDate>Sat, 12 Feb 2022 00:13:00 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/post/openpyxl%E4%B8%80%E9%94%AE%E6%8A%A5%E5%91%8A/</guid>
+      <description>&lt;ol&gt;
+&lt;li&gt;openpyxl一键汇总&lt;/li&gt;
+&lt;li&gt;openpyxl一键读取&lt;/li&gt;
+&lt;li&gt;openpyxl一键报告&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;a href=&#34;https://drive.google.com/drive/folders/1lZq01ZiXGHZ54fH9tLsxJ2_U0zHDK7TY?usp=sharing&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;源文件下载&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;文件格式：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;January 2020 Sales&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Global Sales Report&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Location&lt;/td&gt;
+&lt;td&gt;Oranges&lt;/td&gt;
+&lt;td&gt;Apples&lt;/td&gt;
+&lt;td&gt;Bananas&lt;/td&gt;
+&lt;td&gt;Blueberries&lt;/td&gt;
+&lt;td&gt;Total&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Toronto&lt;/td&gt;
+&lt;td&gt;$7,651.00&lt;/td&gt;
+&lt;td&gt;$4,422.00&lt;/td&gt;
+&lt;td&gt;$8,580.00&lt;/td&gt;
+&lt;td&gt;$3,679.00&lt;/td&gt;
+&lt;td&gt;$24,332.00&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Los Angeles&lt;/td&gt;
+&lt;td&gt;$273.00&lt;/td&gt;
+&lt;td&gt;$2,998.00&lt;/td&gt;
+&lt;td&gt;$9,890.00&lt;/td&gt;
+&lt;td&gt;$7,293.00&lt;/td&gt;
+&lt;td&gt;$20,454.00&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Atlanta&lt;/td&gt;
+&lt;td&gt;$3,758.00&lt;/td&gt;
+&lt;td&gt;$6,752.00&lt;/td&gt;
+&lt;td&gt;$4,599.00&lt;/td&gt;
+&lt;td&gt;$4,149.00&lt;/td&gt;
+&lt;td&gt;$19,258.00&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;New York&lt;/td&gt;
+&lt;td&gt;$4,019.00&lt;/td&gt;
+&lt;td&gt;$8,796.00&lt;/td&gt;
+&lt;td&gt;$8,486.00&lt;/td&gt;
+&lt;td&gt;$9,188.00&lt;/td&gt;
+&lt;td&gt;$30,489.00&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;openpyxl一键汇总&#34;&gt;openpyxl一键汇总&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;循环读取文件&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;汇总到一个表，减少打开次数&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;# *&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# *  @author Zhaoliang Ye 叶昭良(zl_ye@qny.chng.com.cn)&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# *  @version V0.1&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# *  @Title: assembleProducts.py&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# *  @Description: 吧products的excel组合起来&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# *  @Time: 2022/2/10 10:17&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# *&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; pandas &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; pd
+    &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; os
+
+    dir_path&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;dirname(os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;realpath(__file__))
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;当前路径: &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;dir_path&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+    pro_path&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;join(dir_path,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;products&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\\&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;当前路径: &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;pro_path&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+
+    combined&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;DataFrame()
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; file &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;listdir(pro_path):
+        print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;当前文件：&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;file&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; file&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;lower()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;endswith(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;.xlsx&amp;#34;&lt;/span&gt;):
+            df&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read_excel(os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;join(pro_path,file),engine&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;openpyxl&amp;#34;&lt;/span&gt;,skiprows&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;)
+            combined&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;combined&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(df,ignore_index&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;)
+    combined&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_excel(os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;join(dir_path,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;output&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\\&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;combined.xlsx&amp;#34;&lt;/span&gt;))
+    &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;openpyxl一键读取&#34;&gt;openpyxl一键读取&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;循环读取文件&lt;/li&gt;
+&lt;li&gt;读取特别字段，并在列表中显示&lt;/li&gt;
+&lt;/ol&gt;
+&lt;!--listend--&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# *&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *  @author Zhaoliang Ye 叶昭良(zl_ye@qny.chng.com.cn)&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *  @version V0.1&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *  @Title: readProducts.py&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *  @Description: 只读取每个文件F5数据&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *  @Time: 2022/2/10 10:37&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; os
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; openpyxl
+
+dir_path&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;dirname(os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;realpath(__file__))
+print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;根路径: &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;dir_path&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+pro_path&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;join(dir_path,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;products&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\\&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;当前路径: &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;pro_path&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+
+
+values&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[]
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; file &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;listdir(pro_path):
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;当前文件：&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;file&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; file&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;lower()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;endswith(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;.xlsx&amp;#34;&lt;/span&gt;):
+        wb&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;openpyxl&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;load_workbook(os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;join(pro_path,file))
+        sheet&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;wb[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Sheet1&amp;#34;&lt;/span&gt;]
+        value&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;sheet[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;F5&amp;#34;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;value
+        values&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(value)
+
+print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;All the excel F5 value is &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;values&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;openpyxl一键汇总&#34;&gt;openpyxl一键汇总&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;制作word模板,存为templates.docx,如下&lt;/li&gt;
+&lt;/ol&gt;
+&lt;!--listend--&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-org&#34; data-lang=&#34;org&#34;&gt;{{title}}
+{{author}}
+{{day}}&lt;span style=&#34;font-style:italic&#34;&gt;/{{month}}/&lt;/span&gt;{{year}}
+
+Index	Velocity	Cp	Ct
+{%tr for item in table_contents %}
+{{item.Index}}	{{item.Velocity}}	{{item.Cp}}	{{item.Ct}}
+{%tr endfor %}
+
+
+{{image}}
+Figure1: graph of power&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ol&gt;
+&lt;li&gt;制作excel表源数据&lt;/li&gt;
+&lt;/ol&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Velocity&lt;/th&gt;
+&lt;th&gt;Shaft power  [kW]&lt;/th&gt;
+&lt;th&gt;Rotor speed  [rpm]&lt;/th&gt;
+&lt;th&gt;Aerodynamic torque  [Nm]&lt;/th&gt;
+&lt;th&gt;Thrust force  [N]&lt;/th&gt;
+&lt;th&gt;Tip speed ratio  [.]&lt;/th&gt;
+&lt;th&gt;Cp&lt;/th&gt;
+&lt;th&gt;Ct&lt;/th&gt;
+&lt;th&gt;Torque coefficient  [.]&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;45.4557&lt;/td&gt;
+&lt;td&gt;8.25344&lt;/td&gt;
+&lt;td&gt;52592.7&lt;/td&gt;
+&lt;td&gt;37830.3&lt;/td&gt;
+&lt;td&gt;13.3825&lt;/td&gt;
+&lt;td&gt;0.405489&lt;/td&gt;
+&lt;td&gt;1.0124&lt;/td&gt;
+&lt;td&gt;0.0303&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;3.1&lt;/td&gt;
+&lt;td&gt;51.9009&lt;/td&gt;
+&lt;td&gt;8.25344&lt;/td&gt;
+&lt;td&gt;60049.8&lt;/td&gt;
+&lt;td&gt;39527&lt;/td&gt;
+&lt;td&gt;12.9508&lt;/td&gt;
+&lt;td&gt;0.419608&lt;/td&gt;
+&lt;td&gt;0.990659&lt;/td&gt;
+&lt;td&gt;0.0324&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;3.2&lt;/td&gt;
+&lt;td&gt;58.726&lt;/td&gt;
+&lt;td&gt;8.25344&lt;/td&gt;
+&lt;td&gt;67946.5&lt;/td&gt;
+&lt;td&gt;41248.5&lt;/td&gt;
+&lt;td&gt;12.5461&lt;/td&gt;
+&lt;td&gt;0.431653&lt;/td&gt;
+&lt;td&gt;0.970203&lt;/td&gt;
+&lt;td&gt;0.034405&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;3.3&lt;/td&gt;
+&lt;td&gt;65.9366&lt;/td&gt;
+&lt;td&gt;8.25344&lt;/td&gt;
+&lt;td&gt;76289.2&lt;/td&gt;
+&lt;td&gt;42994&lt;/td&gt;
+&lt;td&gt;12.1659&lt;/td&gt;
+&lt;td&gt;0.441915&lt;/td&gt;
+&lt;td&gt;0.950898&lt;/td&gt;
+&lt;td&gt;0.036324&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;3.4&lt;/td&gt;
+&lt;td&gt;73.5388&lt;/td&gt;
+&lt;td&gt;8.25344&lt;/td&gt;
+&lt;td&gt;85085.1&lt;/td&gt;
+&lt;td&gt;44767.1&lt;/td&gt;
+&lt;td&gt;11.8081&lt;/td&gt;
+&lt;td&gt;0.450645&lt;/td&gt;
+&lt;td&gt;0.932729&lt;/td&gt;
+&lt;td&gt;0.038164&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;3.5&lt;/td&gt;
+&lt;td&gt;81.5217&lt;/td&gt;
+&lt;td&gt;8.25344&lt;/td&gt;
+&lt;td&gt;94321.3&lt;/td&gt;
+&lt;td&gt;46560.4&lt;/td&gt;
+&lt;td&gt;11.4707&lt;/td&gt;
+&lt;td&gt;0.457955&lt;/td&gt;
+&lt;td&gt;0.915451&lt;/td&gt;
+&lt;td&gt;0.039924&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;3.6&lt;/td&gt;
+&lt;td&gt;89.9503&lt;/td&gt;
+&lt;td&gt;8.25344&lt;/td&gt;
+&lt;td&gt;104073&lt;/td&gt;
+&lt;td&gt;48384.4&lt;/td&gt;
+&lt;td&gt;11.1521&lt;/td&gt;
+&lt;td&gt;0.464354&lt;/td&gt;
+&lt;td&gt;0.899196&lt;/td&gt;
+&lt;td&gt;0.041638&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;3.7&lt;/td&gt;
+&lt;td&gt;98.7935&lt;/td&gt;
+&lt;td&gt;8.25344&lt;/td&gt;
+&lt;td&gt;114305&lt;/td&gt;
+&lt;td&gt;50225.3&lt;/td&gt;
+&lt;td&gt;10.8507&lt;/td&gt;
+&lt;td&gt;0.469761&lt;/td&gt;
+&lt;td&gt;0.883636&lt;/td&gt;
+&lt;td&gt;0.043293&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;ol&gt;
+&lt;li&gt;处理excel，绘图，报告&lt;/li&gt;
+&lt;/ol&gt;
+&lt;!--listend--&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# *&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *  @author Zhaoliang Ye 叶昭良(zl_ye@qny.chng.com.cn)&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *  @version V0.1&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *  @Title: autoMateReport.py&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *  @Description: 自动生成报告&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *  @Time: 2022/2/10 10:58&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *&lt;/span&gt;
+
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; os
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; openpyxl
+&lt;span style=&#34;color:#75715e&#34;&gt;#:https://stackoverflow.com/questions/15025978/win32com-client-error/15051499&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; win32com.client
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; PIL
+&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; PIL &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; ImageGrab,Image
+&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; openpyxl.chart &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; LineChart, Reference
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; time
+
+dir_path&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;dirname(os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;realpath(__file__))
+print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;根路径: &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;dir_path&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+file_path&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;join(dir_path,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;input&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\\&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;HZ93PowerCurves.xlsx&amp;#34;&lt;/span&gt;)
+file_out_path&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;join(dir_path,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;output&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\\&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;HZ93PowerCurvesout.xlsx&amp;#34;&lt;/span&gt;)
+print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;当前路径: &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;file_path&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+
+wb&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;openpyxl&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;load_workbook(file_path)
+&lt;span style=&#34;color:#75715e&#34;&gt;## wb.create_sheet(&amp;#34;newSheet&amp;#34;)&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#&lt;/span&gt;
+print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;wb.sheetnames=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;wb&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sheetnames&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+sheet&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;wb[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Sheet1&amp;#34;&lt;/span&gt;]
+&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; row &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;,sheet&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;max_row&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+    velocity&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;sheet&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;cell(row,&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+    speed&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;sheet&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;cell(row,&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;)
+    powerCp&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;sheet&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;cell(row,&lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt;)
+    &lt;span style=&#34;color:#75715e&#34;&gt;## powerCp.value=float(velocity.value)*float(speed.value)&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# https://www.osgeo.cn/openpyxl/charts/chart_layout.html&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#https://blog.csdn.net/hunter_wyh/article/details/78498323&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#values=Reference(sheet,min_row=2,max_row=sheet.max_row,min_col=7,max_col=7)&lt;/span&gt;
+x&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;Reference(sheet,min_row&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;,max_row&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;sheet&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;max_row,min_col&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+values&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;Reference(sheet,min_row&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,max_row&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;sheet&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;max_row,min_col&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt;,max_col&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;)
+print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;values=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;values&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+chart&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;LineChart()
+chart&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;y_axis&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;title&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Cp-Ct&amp;#34;&lt;/span&gt;
+chart&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;x_axis&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;title&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Velocity/(m/s)&amp;#34;&lt;/span&gt;
+chart&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_data(values)
+chart&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;set_categories(x)
+chart&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;varyColors&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;
+chart&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;legend&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;position&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;r&amp;#34;&lt;/span&gt;
+sheet&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_chart(chart,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;e2&amp;#34;&lt;/span&gt;)
+
+wb&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;save(file_out_path)
+
+&lt;span style=&#34;color:#75715e&#34;&gt;###  拷贝excel表中图片！&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;## OSError: failed to open clipboard&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#  pip install pillow --upgrade&lt;/span&gt;
+xlApp &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; win32com&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;client&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Dispatch(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Excel.Application&amp;#39;&lt;/span&gt;)
+&lt;span style=&#34;color:#75715e&#34;&gt;# for fname in filelist:&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#     xlbook = XlsClass(xlApp, fname)&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#     # do something with xlbook&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#     xlbook.close()&lt;/span&gt;
+output_image&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;output/chart.png&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# operation = win32com.client.Dispatch(&amp;#34;Excel.Application&amp;#34;)&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# operation.DisplayAlert=0&lt;/span&gt;
+
+&lt;span style=&#34;color:#75715e&#34;&gt;# 老写法 可运行&lt;/span&gt;
+workbook_2 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;  xlApp&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Workbooks&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Open(file_out_path)
+&lt;span style=&#34;color:#75715e&#34;&gt;# 新写法&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# workbook_2 =  XlsClass(xlApp,output_image)&lt;/span&gt;
+sheet_2&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;workbook_2&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Sheets(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; x,chart &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; enumerate(sheet_2&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Shapes):
+    chart&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Copy()
+    image&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;ImageGrab&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;grabclipboard()
+    image&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;save(output_image,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;png&amp;#39;&lt;/span&gt;)
+    &lt;span style=&#34;color:#75715e&#34;&gt;# time.sleep(1)&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;pass&lt;/span&gt;
+
+print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;type(workbook_2)=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;type(workbook_2)&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+workbook_2&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Close()
+&lt;span style=&#34;color:#75715e&#34;&gt;#workbook_2.Close(True)&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#xlApp.Quit()&lt;/span&gt;
+
+
+&lt;span style=&#34;color:#75715e&#34;&gt;## 导入word&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;##&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; docx.shared &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; Cm,Inches,Mm,Emu
+&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; docx &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; Document
+&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; docxtpl &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt;  DocxTemplate,InlineImage
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; datetime
+
+
+template &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;DocxTemplate(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;input/template.docx&amp;#34;&lt;/span&gt;)
+table_contents&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[]
+&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;,sheet&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;max_row&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+    table_contents&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(
+        {
+            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Index&amp;#34;&lt;/span&gt;:i&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,
+            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Velocity&amp;#34;&lt;/span&gt;: sheet&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;cell(i,&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;value,
+            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Cp&amp;#34;&lt;/span&gt;:sheet&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;cell(i,&lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;value,
+            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Ct&amp;#34;&lt;/span&gt;:sheet&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;cell(i,&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;value,
+        }
+    )
+
+&lt;span style=&#34;color:#75715e&#34;&gt;## import saved figure&lt;/span&gt;
+image&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;InlineImage(template,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;output/chart.png&amp;#34;&lt;/span&gt;,Cm(&lt;span style=&#34;color:#ae81ff&#34;&gt;16&lt;/span&gt;))
+
+&lt;span style=&#34;color:#75715e&#34;&gt;## Declare template variable&lt;/span&gt;
+context&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;{
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;title&amp;#34;&lt;/span&gt;:&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Automate report of HZ93&amp;#34;&lt;/span&gt;,
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;author&amp;#34;&lt;/span&gt;:&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;yzl&amp;#34;&lt;/span&gt;,
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;day&amp;#34;&lt;/span&gt;: datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;now()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;strftime(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%d&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;),
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;month&amp;#34;&lt;/span&gt;: datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;now()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;strftime(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;%b&amp;#34;&lt;/span&gt;),
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;year&amp;#34;&lt;/span&gt;: datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;now()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;strftime(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;%Y&amp;#34;&lt;/span&gt;),
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;table_contents&amp;#34;&lt;/span&gt;: table_contents,
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;image&amp;#34;&lt;/span&gt;: image,
+}
+
+
+&lt;span style=&#34;color:#75715e&#34;&gt;## Render automated report&lt;/span&gt;
+template&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;render(context)
+template&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;save(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;output/Automated_Report.docx&amp;#34;&lt;/span&gt;)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Watchdog实现文件下载自动转移</title>
+      <link>https://jueqingsizhe66.github.io/post/watchdog%E5%AE%9E%E7%8E%B0%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E8%87%AA%E5%8A%A8%E8%BD%AC%E7%A7%BB/</link>
+      <pubDate>Sat, 12 Feb 2022 00:05:00 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/post/watchdog%E5%AE%9E%E7%8E%B0%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E8%87%AA%E5%8A%A8%E8%BD%AC%E7%A7%BB/</guid>
+      <description>&lt;p&gt;一段时间观察某个文件夹，如果有新文件下载直接移动到新目录&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# *&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *  @author Zhaoliang Ye 叶昭良(zl_ye@qny.chng.com.cn)&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *  @version V0.1&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *  @Title: autoMoveFilesByWatchdog.py&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *  @Description: 自动移动某个指定文件夹 到新的目录下, 当有新文件进入后 直接复制过去&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;## 需要安装watchdog&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *  @Time: 2022/2/11 22:36&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *&lt;/span&gt;
+
+oldDirectory&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;d://test1&amp;#34;&lt;/span&gt;
+newDirectory&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;d://test2&amp;#34;&lt;/span&gt;
+
+&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; watchdog.events &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; FileSystemEventHandler
+&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; watchdog.observers &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; Observer
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; os
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; time
+&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;MyHandler&lt;/span&gt;(FileSystemEventHandler):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;on_modified&lt;/span&gt;(self,event):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; filename &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;listdir(oldDirectory):
+            src&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; oldDirectory&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;filename
+            target&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;newDirectory&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;filename
+            print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;oldFilename=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;src&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\t&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; newFilename=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;target&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; &amp;#39;&lt;/span&gt;)
+            os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;rename(src,target)
+            print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\033&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;[1;31m move file &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;filename&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; from &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;oldDirectory&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;  to &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;newDirectory&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+
+event_handler&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;MyHandler()
+observer&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;Observer()
+observer&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;schedule(event_handler,oldDirectory,recursive&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;)
+observer&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;start()
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;try&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;:
+&lt;span style=&#34;color:#75715e&#34;&gt;##间隔10s&lt;/span&gt;
+        time&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sleep(&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;except&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;KeyboardInterrupt&lt;/span&gt;:
+    observer&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;stop()
+observer&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;join()&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>文件自动分类</title>
+      <link>https://jueqingsizhe66.github.io/post/%E6%96%87%E4%BB%B6%E8%87%AA%E5%8A%A8%E5%88%86%E7%B1%BB/</link>
+      <pubDate>Sat, 12 Feb 2022 00:02:00 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/post/%E6%96%87%E4%BB%B6%E8%87%AA%E5%8A%A8%E5%88%86%E7%B1%BB/</guid>
+      <description>&lt;p&gt;根据文件类型创建模式，并实现自动分类&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# *&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *  @author Zhaoliang Ye 叶昭良(zl_ye@qny.chng.com.cn)&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *  @version V0.1&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *  @Title: autoClassifyDirectory.py&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *  @Description: 按文件类型自动分类  根据文件结尾类型创建模式，并实现自动分类&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *  @Time: 2022/2/11 23:12&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *&lt;/span&gt;
+
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; shutil
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; os
+
+
+processDir&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;d://test1&amp;#34;&lt;/span&gt;
+
+imageDir&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;join(processDir,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;images&amp;#34;&lt;/span&gt;)
+imagePattern&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;jpg&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;png&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;tif&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;tmp&amp;#34;&lt;/span&gt;)
+musicDir&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;join(processDir,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;music&amp;#34;&lt;/span&gt;)
+musicPattern&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;mp3&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;mov&amp;#34;&lt;/span&gt;)
+oaDir&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;join(processDir,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;oa&amp;#34;&lt;/span&gt;)
+oaPattern&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;xlsx&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;xls&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;docx&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;doc&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;pptx&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;ppt&amp;#34;&lt;/span&gt;)
+movieDir&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;join(processDir,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;movie&amp;#34;&lt;/span&gt;)
+moviePattern&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;AVI&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;mp4&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;flv&amp;#34;&lt;/span&gt;)
+
+logDir&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;join(processDir,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;log&amp;#34;&lt;/span&gt;)
+logPattern&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;txt&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;md&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;log&amp;#34;&lt;/span&gt;)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;moveFiles&lt;/span&gt;(fileWithPath,target):
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    :param filename:
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    :param pattern: (&amp;#34;jpg&amp;#34;,&amp;#34;png&amp;#34;,&amp;#34;tif&amp;#34;,&amp;#34;tmp&amp;#34;) a tuple
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    :param target:
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    :return:
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    &amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;exists(target):
+        os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;mkdir(target)
+    shutil&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;copy2(fileWithPath, target)
+    os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;remove(fileWithPath)
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\033&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;[1;34m &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;fileWithPath&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; has been moved to &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;target&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\033&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;[0m&amp;#39;&lt;/span&gt;)
+
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;try&lt;/span&gt;:
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\033&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;[1;32m 自动文件分类 &lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\033&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;[0m&amp;#39;&lt;/span&gt;)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; filename &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;listdir(processDir):
+        &lt;span style=&#34;color:#75715e&#34;&gt;# if os.path.isdir(filename):&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;#     print(f&amp;#39;\33[1;32m {filename} 是一个文件夹 不分类\033[0m&amp;#39;)&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;#     continue&lt;/span&gt;
+        fileWithPath &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;join(processDir, filename)
+        print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;filename= &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;fileWithPath&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; isfile? = &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;isfile(fileWithPath)&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;isfile(fileWithPath):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; fileWithPath&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;lower()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;endswith(imagePattern):
+                moveFiles(fileWithPath, imageDir)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; fileWithPath&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;lower()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;endswith(musicPattern):
+                moveFiles(fileWithPath, musicDir)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; fileWithPath&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;lower()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;endswith(oaPattern):
+                moveFiles(fileWithPath, oaDir)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; fileWithPath&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;lower()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;endswith(moviePattern):
+                moveFiles(fileWithPath,   movieDir)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; fileWithPath&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;lower()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;endswith(logPattern):
+                moveFiles(fileWithPath, logDir)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+                print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\33&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;[1;32m &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;fileWithPath&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; 还没有分好类&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\033&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;[0m&amp;#39;&lt;/span&gt;)
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;continue&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+            print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\033&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;[1;31m &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;filename&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; is a  directory  &lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\033&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;[0m&amp;#39;&lt;/span&gt;)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;continue&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;except&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;OSError&lt;/span&gt;:
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\033&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;[1;31m Error happened try again  &lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\033&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;[0m&amp;#39;&lt;/span&gt;)
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;finally&lt;/span&gt;:
+    os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;system(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;cls&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;name&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;nt&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;clear&amp;#34;&lt;/span&gt;)
+
+print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\033&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;[1;33m 文件自动分类结束 &lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\033&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;[0m&amp;#39;&lt;/span&gt;)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;结果：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;   自动文件分类
+  filename&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; d:&lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt;test1\combined&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;xlsx isfile&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;?&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;
+   d:&lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt;test1\combined&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;xlsx has been moved to d:&lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt;test1\oa
+  filename&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; d:&lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt;test1\images isfile&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;?&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;False&lt;/span&gt;
+   images &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; a  directory
+  filename&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; d:&lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt;test1\log isfile&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;?&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;False&lt;/span&gt;
+   log &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; a  directory
+  filename&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; d:&lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt;test1\oa isfile&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;?&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;False&lt;/span&gt;
+   oa &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; a  directory
+ 文件自动分类结束
+
+  进程已结束,退出代码0&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>openpyxl学习</title>
