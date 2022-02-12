@@ -5,12 +5,187 @@
     <link>https://jueqingsizhe66.github.io/category/%E6%8A%80%E6%9C%AF/</link>
       <atom:link href="https://jueqingsizhe66.github.io/category/%E6%8A%80%E6%9C%AF/index.xml" rel="self" type="application/rss+xml" />
     <description>技术</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>©2022</copyright><lastBuildDate>Sat, 12 Feb 2022 16:40:00 +0800</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>©2022</copyright><lastBuildDate>Sun, 13 Feb 2022 01:08:00 +0800</lastBuildDate>
     <image>
       <url>https://jueqingsizhe66.github.io/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
       <title>技术</title>
       <link>https://jueqingsizhe66.github.io/category/%E6%8A%80%E6%9C%AF/</link>
     </image>
+    
+    <item>
+      <title>socket分包粘包</title>
+      <link>https://jueqingsizhe66.github.io/post/socket%E5%88%86%E5%8C%85%E7%B2%98%E5%8C%85/</link>
+      <pubDate>Sun, 13 Feb 2022 01:08:00 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/post/socket%E5%88%86%E5%8C%85%E7%B2%98%E5%8C%85/</guid>
+      <description>&lt;p&gt;socket在发送数据的时候，如果数据返回过大，会分批次发送，所以设计循环发送(while True),有个问题什么时候才算发送结束？&lt;/p&gt;
+&lt;p&gt;解决办法：可以事先发送数据大小，然后按照数据大小判断结束时间&lt;/p&gt;
+&lt;p&gt;但是多次发送的过程有可能导致粘包的产生，即连续两次send时间过短，导致客户端收到粘包数据，为此你需要在每一次发送过程都跟客户端做一次握手，服务器发送给客户端，客户端会跟服务器说一声收到，然后服务器接着发送，客户端接着收到，这样一来一回、常来常往就不会出现问题。&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;timestamp-wrapper&#34;&gt;&lt;span class=&#34;timestamp&#34;&gt;&amp;lt;2022-02-13 周日 00:38&amp;gt;&lt;/span&gt;&lt;/span&gt;下面程序未测试，目测os.popen需要进行更换。&lt;/p&gt;
+&lt;h2 id=&#34;服务端实现&#34;&gt;服务端实现&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; socket &lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt;os&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt;time
+server &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; socket&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;socket()
+server&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;bind((&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;localhost&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;9999&lt;/span&gt;) )
+
+server&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;listen()
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;:
+    conn, addr &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; server&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;accept()
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;new conn:&amp;#34;&lt;/span&gt;,addr)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;:
+        print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;等待新指令&amp;#34;&lt;/span&gt;)
+        data &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; conn&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;recv(&lt;span style=&#34;color:#ae81ff&#34;&gt;1024&lt;/span&gt;)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; data:
+            print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;客户端已断开&amp;#34;&lt;/span&gt;)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;
+        print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;执行指令:&amp;#34;&lt;/span&gt;,data)
+&lt;span style=&#34;color:#75715e&#34;&gt;## 有可能高版本得使用subprocess实现， 未测试，只是讲原理！&lt;/span&gt;
+        cmd_res &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;popen(data&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;decode())&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read() &lt;span style=&#34;color:#75715e&#34;&gt;#接受字符串，执行结果也是字符串&lt;/span&gt;
+        print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;before send&amp;#34;&lt;/span&gt;,len(cmd_res))
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; len(cmd_res) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+            cmd_res &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;cmd has no output...&amp;#34;&lt;/span&gt;
+
+        conn&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;send( str(len(cmd_res&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;encode()))&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;encode(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;utf-8&amp;#34;&lt;/span&gt;)    )     &lt;span style=&#34;color:#75715e&#34;&gt;#先发大小给客户端&lt;/span&gt;
+        time&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sleep(&lt;span style=&#34;color:#ae81ff&#34;&gt;0.5&lt;/span&gt;)  &lt;span style=&#34;color:#75715e&#34;&gt;## 这不是一个好办法，需要改进，可以通过conn.recv()改进&lt;/span&gt;
+        conn&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;send(cmd_res&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;encode(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;utf-8&amp;#34;&lt;/span&gt;))
+        print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;send done&amp;#34;&lt;/span&gt;)
+        os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;isfile()
+        os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;stat(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;sock&amp;#34;&lt;/span&gt;)
+server&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;close()
+
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; hashlib
+m &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; hashlib&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;md5()&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;改进版本：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; socket &lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt;os&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt;time
+  server &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; socket&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;socket()
+&lt;span style=&#34;color:#75715e&#34;&gt;#服务器端0.0.0.0的话可以访问多个服务端的ip&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#如果只有一个网卡，那么0.0.0.0和指定ip一样&lt;/span&gt;
+
+  &lt;span style=&#34;color:#75715e&#34;&gt;#server.bind((&amp;#39;localhost&amp;#39;,9999) )&lt;/span&gt;
+  server&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;bind((&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;0.0.0.0&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;9999&lt;/span&gt;) )
+
+  server&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;listen()
+
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;:
+      conn, addr &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; server&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;accept()
+      print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;new conn:&amp;#34;&lt;/span&gt;,addr)
+      &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;:
+          print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;等待新指令&amp;#34;&lt;/span&gt;)
+          data &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; conn&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;recv(&lt;span style=&#34;color:#ae81ff&#34;&gt;1024&lt;/span&gt;)
+          &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; data:
+              print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;客户端已断开&amp;#34;&lt;/span&gt;)
+              &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;
+          print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;执行指令:&amp;#34;&lt;/span&gt;,data)
+  &lt;span style=&#34;color:#75715e&#34;&gt;## 有可能高版本得使用subprocess实现， 未测试，只是讲原理！&lt;/span&gt;
+          cmd_res &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;popen(data&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;decode())&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read() &lt;span style=&#34;color:#75715e&#34;&gt;#接受字符串，执行结果也是字符串&lt;/span&gt;
+          print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;before send&amp;#34;&lt;/span&gt;,len(cmd_res))
+          &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; len(cmd_res) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+              cmd_res &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;cmd has no output...&amp;#34;&lt;/span&gt;
+
+          conn&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;send( str(len(cmd_res&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;encode()))&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;encode(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;utf-8&amp;#34;&lt;/span&gt;)    )     &lt;span style=&#34;color:#75715e&#34;&gt;#先发大小给客户端&lt;/span&gt;
+          &lt;span style=&#34;color:#75715e&#34;&gt;##time.sleep(0.5)  ## 这不是一个好办法，需要改进，可以通过conn.recv()改进&lt;/span&gt;
+          client_ack&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;conn&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;recv(&lt;span style=&#34;color:#ae81ff&#34;&gt;1024&lt;/span&gt;)  &lt;span style=&#34;color:#75715e&#34;&gt;##收到客户端的响应！！很重要，不然两次send会存在粘包现象！&lt;/span&gt;
+          print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;from clinet ack &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;client_ack&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+          conn&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;send(cmd_res&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;encode(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;utf-8&amp;#34;&lt;/span&gt;))
+          print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;send done&amp;#34;&lt;/span&gt;)
+          os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;isfile()
+          os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;stat(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;sock&amp;#34;&lt;/span&gt;)
+  server&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;close()
+
+  &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; hashlib
+  m &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; hashlib&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;md5()&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;client客户端实现&#34;&gt;client客户端实现&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; socket
+client &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; socket&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;socket()
+
+&lt;span style=&#34;color:#75715e&#34;&gt;#client.connect((&amp;#39;192.168.16.200&amp;#39;,9999))&lt;/span&gt;
+client&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;connect((&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;localhost&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;9999&lt;/span&gt;))
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;:
+    cmd &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; input(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;gt;&amp;gt;:&amp;#34;&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;strip()
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; len(cmd) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;continue&lt;/span&gt;
+    client&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;send(cmd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;encode(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;utf-8&amp;#34;&lt;/span&gt;))
+    cmd_res_size &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; client&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;recv(&lt;span style=&#34;color:#ae81ff&#34;&gt;1024&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;##接受命令结果的长度&lt;/span&gt;
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;命令结果大小:&amp;#34;&lt;/span&gt;,cmd_res_size)
+    received_size &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    received_data &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; received_size &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; int(cmd_res_size&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;decode()) :
+        data &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; client&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;recv(&lt;span style=&#34;color:#ae81ff&#34;&gt;1024&lt;/span&gt;)
+        received_size &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; len(data) &lt;span style=&#34;color:#75715e&#34;&gt;#每次收到的有可能小于1024，所以必须用len判断&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;#print(data.decode())&lt;/span&gt;
+        received_data &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; data
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+        print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;cmd res receive done...&amp;#34;&lt;/span&gt;,received_size)
+        print(received_data&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;decode())
+
+
+client&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;close()&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;服务器端额外需要接受一条回复。&lt;/p&gt;
+&lt;p&gt;客户端程序改进：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; socket
+client &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; socket&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;socket()
+
+&lt;span style=&#34;color:#75715e&#34;&gt;#client.connect((&amp;#39;192.168.16.200&amp;#39;,9999))&lt;/span&gt;
+client&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;connect((&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;localhost&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;9999&lt;/span&gt;))
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;:
+    cmd &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; input(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;gt;&amp;gt;:&amp;#34;&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;strip()
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; len(cmd) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;continue&lt;/span&gt;
+    client&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;send(cmd&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;encode(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;utf-8&amp;#34;&lt;/span&gt;))
+    cmd_res_size &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; client&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;recv(&lt;span style=&#34;color:#ae81ff&#34;&gt;1024&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;##接受命令结果的长度&lt;/span&gt;
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;命令结果大小:&amp;#34;&lt;/span&gt;,cmd_res_size)
+    client&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;send(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;准备好接收了，服务器可以发送了&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;encode(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;utf-8&amp;#34;&lt;/span&gt;))
+    received_size &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    received_data &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; received_size &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; int(cmd_res_size&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;decode()) :
+        data &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; client&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;recv(&lt;span style=&#34;color:#ae81ff&#34;&gt;1024&lt;/span&gt;)
+        received_size &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; len(data) &lt;span style=&#34;color:#75715e&#34;&gt;#每次收到的有可能小于1024，所以必须用len判断&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;#print(data.decode())&lt;/span&gt;
+        received_data &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; data
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+        print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;cmd res receive done...&amp;#34;&lt;/span&gt;,received_size)
+        print(received_data&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;decode())
+
+
+client&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;close()&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;socketserver使用&#34;&gt;socketServer使用&lt;/h2&gt;
+&lt;p&gt;socketServer的最主要作用就是实现一个并发处理(socketserver.TCPServer改为socketserver.ThreadingTCPServer就可以变为并发程序！！ 很简单！ TCPServer依然是1对1程序，多个client链接服务器需要等待，而ThreadingTCPServer实现了真正的并发socket),参考下面的socketServer使用，然后再改造你的socket ssh和FTP
+&lt;a href=&#34;https://jueqingsizhe66.github.io/post/simplehttpserver-python3-version/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://jueqingsizhe66.github.io/post/simplehttpserver-python3-version/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;socketServer的感觉的有点类似于线程池&lt;/p&gt;
+&lt;p&gt;socketServer相对于socket，正如线程池相对于thread.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;MyTCPHandler&lt;/span&gt;(socketserver&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;BaseRequestHandler):
+      &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;handle&lt;/span&gt;(self):
+          &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;:
+              &lt;span style=&#34;color:#66d9ef&#34;&gt;try&lt;/span&gt;:
+                  self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;data &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;request&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;recv(&lt;span style=&#34;color:#ae81ff&#34;&gt;1024&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;strip()
+                  print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; wrote:&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;format(self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;client_address[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]))
+                  print(self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;data)
+                  self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;request&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;send(self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;data&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;upper())
+              &lt;span style=&#34;color:#66d9ef&#34;&gt;except&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;ConnectionResetError&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; e:
+                  print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;err&amp;#34;&lt;/span&gt;,e)
+                  &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; __name__ &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;__main__&amp;#34;&lt;/span&gt;:
+      HOST, PORT &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;localhost&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;9999&lt;/span&gt;
+      &lt;span style=&#34;color:#75715e&#34;&gt;# Create the server, binding to localhost on port 9999&lt;/span&gt;
+      server &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; socketserver&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ThreadingTCPServer((HOST, PORT), MyTCPHandler)
+  &lt;span style=&#34;color:#75715e&#34;&gt;## TCPHandler有点类似于工作线程，Server分派一个一个的Handler和客户端进行交互，&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;## 进而实现并发socket过程！&lt;/span&gt;
+      server&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;serve_forever()
+&lt;span style=&#34;color:#75715e&#34;&gt;## 注意ThreadingTCPServer&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;ThreadingTCPServer的默认实现：
+多并发实现指的是多个线程执行
+而还有多进程，指的是ForkTCPServer(linux有用）&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;process_request&lt;/span&gt;(self, request, client_address):
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;Start a new thread to process the request.&amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;block_on_close:
+        vars(self)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;setdefault(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;_threads&amp;#39;&lt;/span&gt;, _Threads())
+    t &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; threading&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Thread(target &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;process_request_thread,
+                         args &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (request, client_address))
+    t&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;daemon &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;daemon_threads
+    self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_threads&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(t)
+    t&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;start()&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;a href=&#34;https://jueqingsizhe66.github.io/post/socket%E6%9D%A5%E6%BA%90/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://jueqingsizhe66.github.io/post/socket%E6%9D%A5%E6%BA%90/&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>代理是什么？</title>
@@ -883,7 +1058,7 @@ wb&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;save(&lt;span style=&#
       <description>&lt;ol&gt;
 &lt;li&gt;socket client和server的单人对话&lt;/li&gt;
 &lt;li&gt;socket client和server的单人无限对话&lt;/li&gt;
-&lt;li&gt;socket client和server的命令解析&lt;/li&gt;
+&lt;li&gt;socket client和server的命令解析(socket实现ssh)&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;以下程序在windows和ubuntu均有测试:&lt;/p&gt;
 &lt;h2 id=&#34;socket-client和server的单人对话&#34;&gt;socket client和server的单人对话&lt;/h2&gt;
@@ -1025,6 +1200,7 @@ client&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;connect((&lt;span 
 client&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;close()&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&#34;socket-client和server的命令解析--ubuntu&#34;&gt;socket client和server的命令解析(ubuntu)&lt;/h2&gt;
 &lt;p&gt;在ubuntu系统中，客户端发送linux命令，服务器端解释输入的命令，并返回结果，一问一答，类似卢卡和小艾、小E&lt;/p&gt;
+&lt;p&gt;socket实现的ssh服务器和客户端&lt;/p&gt;
 &lt;h3 id=&#34;server-cmd部分&#34;&gt;Server cmd部分&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# *&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;# *  @author Zhaoliang Ye 叶昭良(zl_ye@qny.chng.com.cn)&lt;/span&gt;
