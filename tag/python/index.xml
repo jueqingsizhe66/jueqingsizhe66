@@ -5,12 +5,191 @@
     <link>https://jueqingsizhe66.github.io/tag/python/</link>
       <atom:link href="https://jueqingsizhe66.github.io/tag/python/index.xml" rel="self" type="application/rss+xml" />
     <description>python</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>©2022</copyright><lastBuildDate>Sat, 12 Feb 2022 00:46:00 +0800</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>©2022</copyright><lastBuildDate>Sat, 12 Feb 2022 16:20:00 +0800</lastBuildDate>
     <image>
       <url>https://jueqingsizhe66.github.io/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
       <title>python</title>
       <link>https://jueqingsizhe66.github.io/tag/python/</link>
     </image>
+    
+    <item>
+      <title>python起源反射一说</title>
+      <link>https://jueqingsizhe66.github.io/post/python%E8%B5%B7%E6%BA%90%E5%8F%8D%E5%B0%84%E4%B8%80%E8%AF%B4/</link>
+      <pubDate>Sat, 12 Feb 2022 16:20:00 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/post/python%E8%B5%B7%E6%BA%90%E5%8F%8D%E5%B0%84%E4%B8%80%E8%AF%B4/</guid>
+      <description>&lt;p&gt;python所有对象起源于type，由此开启了本篇blog的三个部分&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;type生成万事万物&lt;/li&gt;
+&lt;li&gt;类方法(只使用类变量)、静态方法(只使用实例变量)、属性方法（删除 修改）&lt;/li&gt;
+&lt;li&gt;反射注入&lt;/li&gt;
+&lt;/ol&gt;
+&lt;!--listend--&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# *&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *  @author Zhaoliang Ye 叶昭良(zl_ye@qny.chng.com.cn)&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *  @version V0.1&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *  @Title: tetReflect.py&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *  @Description: 测试反射&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *  @Time: 2022/2/12 15:20&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# *&lt;/span&gt;
+
+
+&lt;span style=&#34;color:#75715e&#34;&gt;##1 python的起源原子type&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;func&lt;/span&gt;(self):
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;hello &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%s&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt;self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;name)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; __init__(self,name,age):
+    self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;name &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; name
+    self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;age &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; age
+
+Foo &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; type(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Foo&amp;#39;&lt;/span&gt;, (object,), {&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;talk&amp;#39;&lt;/span&gt;: func,
+                              &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;__init__&amp;#39;&lt;/span&gt;:__init__})
+f &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Foo(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;python起源&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;22&lt;/span&gt;)
+f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;talk()
+print(type(Foo))
+
+
+&lt;span style=&#34;color:#75715e&#34;&gt;## 2 我们可以在type底下 设置静态方法 属性方法（属性方法可以通过setter修改值）&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Dragon&lt;/span&gt;(object):
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    使用__doc__方法可以调用我
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    &amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+    name&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;我是name类变量，我供给类方法调用，不能缺少我 如果类方法调用情况下 &amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; __init__(self,name):
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;name&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;name  &lt;span style=&#34;color:#75715e&#34;&gt;## 区分类变量&lt;/span&gt;
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;__food&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;None&lt;/span&gt;
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;__status&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+        print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\033&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;[1;31m 我被初始化了 &lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\033&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;[0m&amp;#39;&lt;/span&gt;)
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;getDoc&lt;/span&gt;(self):
+        print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\033&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;[1;33m 本类的说明是： &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;__doc__&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;@classmethod&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;iamClassMethod&lt;/span&gt;(self):
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        类方法只会调用类的类方法，比如name，只会调用类变量name，而不是实例化类的name方法
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        :return:
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        &amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+        print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;In class Method:&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\t\033&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;[1;34m &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;name&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;   注意我是类变量 &lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\033&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;[0m&amp;#39;&lt;/span&gt;)
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;@staticmethod&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;iamStaticMethod&lt;/span&gt;(self):
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        静态类方法 只调用对象name属性
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        :param self:
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        :return:
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        &amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+        print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;In static Method:&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\t&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\033&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;[1;33m &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;name&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;   注意我是实例变量 &lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\033&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;[0m&amp;#39;&lt;/span&gt;)
+
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;@property&lt;/span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;# attribute&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;eat&lt;/span&gt;(self):
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        吃的属性, 正在吃什么
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        :return:
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        &amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+        print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;name&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; is eating &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;__food&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+
+    &lt;span style=&#34;color:#75715e&#34;&gt;### 修改功能&lt;/span&gt;
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;@eat&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;setter
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;eat&lt;/span&gt;(self, food):
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        属性可以被设置
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        :param food:
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        :return:
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        &amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+        print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;set to food:&amp;#34;&lt;/span&gt;, food)
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;__food &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; food &lt;span style=&#34;color:#75715e&#34;&gt;## 真正修改的地方&lt;/span&gt;
+
+    &lt;span style=&#34;color:#75715e&#34;&gt;## 删除功能&lt;/span&gt;
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;@eat&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;deleter
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;eat&lt;/span&gt;(self):
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        属性可以被删除
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        :return:
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        &amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;del&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;__food
+        print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\033&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;[3;32m 删完了 &lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\033&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;[0m&amp;#39;&lt;/span&gt;)
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;checking_status&lt;/span&gt;(self):
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        开始检查飞行状态
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        :return:
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        &amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+        print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\033&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;[3;34m &lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\t&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;checking flight %s status =&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;__status&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\033&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;[0m&amp;#34;&lt;/span&gt;)
+
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;@property&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;flight_status&lt;/span&gt;(self):
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        根据当前的status值 返回飞行状态
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        :return:
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        &amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;#self.__status = self.checking_status()&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;__status &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; :
+            print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;flight got canceled...&amp;#34;&lt;/span&gt;)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;__status &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; :
+            print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;flight is arrived...&amp;#34;&lt;/span&gt;)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;__status &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;:
+            print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;flight has departured already...&amp;#34;&lt;/span&gt;)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+            print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;cannot confirm the flight status...,please check later&amp;#34;&lt;/span&gt;)
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;@flight_status&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;setter
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;flight_status&lt;/span&gt;(self,status):
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        obj.flight_status=3
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        obj.flight_status=2
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        obj.flight_status=1
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        &amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;__status&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;status &lt;span style=&#34;color:#75715e&#34;&gt;## 设置新状态&lt;/span&gt;
+        print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\033&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;[1;32m flight &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;name&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; has changed status to &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;status&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\033&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;[0m&amp;#39;&lt;/span&gt;)
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; __call__(self):
+        print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\033&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;[3;35m 我被调用了 &lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\033&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;[0m&amp;#39;&lt;/span&gt;)
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; __del__(self):
+        print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\033&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;[1;31m 我已经死去了 &lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\033&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;[0m&amp;#39;&lt;/span&gt;)
+
+&lt;span style=&#34;color:#75715e&#34;&gt;## 3. 我们可以通过反射给类增加新的方法&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;## 通过字符串映射或修改程序运行时的状态、属性、方法, 有以下4个方法&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#hasattr(obj, name_str), 判断一个对象obj里是否有对应的name_str字符串的方法&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#getattr(obj, name_str), 根据字符串去获取obj对象里的对应的方法的内存地址&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#setattr(obj, &amp;#39;y&amp;#39;, z), is equivalent&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#delattr&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;bulk&lt;/span&gt;(self):
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%s&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; is yelling....&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt;self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;name)
+
+&lt;span style=&#34;color:#a6e22e&#34;&gt;@property&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;bulkPro&lt;/span&gt;(self):
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%s&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; is numbbleing....&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt;self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;name)
+
+
+dragon1&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;Dragon(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;DragonFly&amp;#34;&lt;/span&gt;)
+
+&lt;span style=&#34;color:#75715e&#34;&gt;## 反射开始&lt;/span&gt;
+print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\033&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;[0m 请输入你希望调用函数 , 我给你变出来 &lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\033&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;[0m &lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+choice &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; input(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;gt;&amp;gt;:&amp;#34;&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;strip()
+&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; hasattr(dragon1,choice):
+    getattr(dragon1,choice)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+    setattr(dragon1,choice,bulk) &lt;span style=&#34;color:#75715e&#34;&gt;#d.talk = bulk&lt;/span&gt;
+    func &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; getattr(dragon1, choice)
+    func(dragon1) &lt;span style=&#34;color:#75715e&#34;&gt;## 类似静态方法 需要填入对象&lt;/span&gt;
+
+&lt;span style=&#34;color:#75715e&#34;&gt;## 属性方法为注入成功!!&lt;/span&gt;
+setattr(dragon1,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;newProBulk&amp;#34;&lt;/span&gt;,bulkPro)
+dragon1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;newProBulk
+print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;尝试调用注入的属性方法 &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;dragon1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;newProBulk&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+&lt;span style=&#34;color:#75715e&#34;&gt;## 反射结束&lt;/span&gt;
+print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;我正在调用类方法：&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; Dragon.iamClassMethod()=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;Dragon&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iamClassMethod()&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;我正在调用静态方法：&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; Dragon.iamStaticMethod()=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;Dragon&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;iamStaticMethod(dragon1)&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;我正在调用属性方法：&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; dragon1.eat=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;dragon1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;eat&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;我正在调用属性方法：&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; dragon1.flight_status=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;dragon1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;flight_status&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;我正在修改 eat属性方法：&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; &amp;#39;&lt;/span&gt;)
+dragon1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;eat&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;apple&amp;#34;&lt;/span&gt;
+print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;我正在修改flight_status的属性方法：&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; &amp;#39;&lt;/span&gt;)
+dragon1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;flight_status&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+
+print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;我正在调用修改后属性方法：&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; dragon1.eat=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;dragon1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;eat&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;我正在调用修改后属性方法：&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; dragon1.flight_status=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;dragon1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;flight_status&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>python遍历文件夹实现照片重命名</title>
