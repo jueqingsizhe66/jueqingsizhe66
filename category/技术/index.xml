@@ -5,12 +5,151 @@
     <link>https://jueqingsizhe66.github.io/category/%E6%8A%80%E6%9C%AF/</link>
       <atom:link href="https://jueqingsizhe66.github.io/category/%E6%8A%80%E6%9C%AF/index.xml" rel="self" type="application/rss+xml" />
     <description>技术</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>©2022</copyright><lastBuildDate>Sun, 13 Feb 2022 01:08:00 +0800</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>©2022</copyright><lastBuildDate>Sat, 19 Feb 2022 01:41:00 +0800</lastBuildDate>
     <image>
       <url>https://jueqingsizhe66.github.io/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
       <title>技术</title>
       <link>https://jueqingsizhe66.github.io/category/%E6%8A%80%E6%9C%AF/</link>
     </image>
+    
+    <item>
+      <title>perl diamond</title>
+      <link>https://jueqingsizhe66.github.io/post/perl-diamond/</link>
+      <pubDate>Sat, 19 Feb 2022 01:41:00 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/post/perl-diamond/</guid>
+      <description>&lt;h2 id=&#34;我的perl直觉&#34;&gt;我的perl直觉&lt;/h2&gt;
+&lt;p&gt;diamond &amp;ldquo;&amp;lt;&amp;gt;&amp;rdquo; is a very important operator in perl, which can input the file,such as &amp;ldquo;&amp;lt;STDIN&amp;gt;&amp;rdquo;,&amp;quot;&amp;lt;STDOUT&amp;gt;&amp;quot;,&amp;quot;&amp;lt;&amp;hellip;&amp;gt;&amp;quot; (源自intermediate perl)&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;$&amp;quot;,蛇杖,象征着权管，在perl所有操作最后都可以归结到reference, 包括subroutine reference, file reference, object reference, hash reference, array reference(源自intermediate perl)&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;%&amp;quot;,禅杖,一种hash散列字典，一种数据结构(源自唐玄奘)&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;[]&amp;rdquo;, 立方体，cube, &amp;ldquo;@&amp;ldquo;array对象的具体内容(源自黑客帝国)&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;{}&amp;rdquo;, 万花筒，，&amp;quot;%&amp;ldquo;禅杖对象的具体内容&lt;/p&gt;
+&lt;p&gt;perl万事万物模式的匹配均从&amp;rdquo;/ /&amp;ldquo;双斜杠开始(第一,首先)，python一般简化为字符串或者regex字符串(源自pattern胡晖)&lt;/p&gt;
+&lt;h2 id=&#34;所有语言的正则&#34;&gt;所有语言的正则&lt;/h2&gt;
+&lt;p&gt;正则在任何语言均有实现，他是一个内语言，具有自己的一套语法，perl中从双斜杠开始(源自Mr Wang)。&lt;/p&gt;
+&lt;p&gt;在双斜杠&amp;rdquo;//&amp;ldquo;内部包含五类对象：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;字符内容，比如 &amp;ldquo;\d&amp;quot;等效于[0-9] ,&amp;quot;\w&amp;rdquo; 等效于 [a-zA-Z0-9], &amp;ldquo;\s&amp;rdquo;, &amp;ldquo;\D&amp;quot;等效于[^0-9],&amp;quot;\W&amp;quot;等效于[^a-zA-Z0-9],&amp;quot;§&amp;rdquo;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;元字符，具备特殊意义, &amp;ldquo;\&amp;rdquo;,&amp;rdquo;.&amp;rdquo;,&amp;quot;*&amp;rdquo;,&amp;rdquo;?&amp;rdquo;,&amp;quot;{3,}&amp;quot;,&amp;quot;{3,12}&amp;quot;((?#注意:1和2可以组合))&lt;/p&gt;
+&lt;p&gt;为了获得真正的元字符需要转义,&amp;quot;\\&amp;quot;,&amp;quot;\.&amp;quot;,&amp;quot;\*&amp;quot;,&amp;quot;\?&amp;quot;,&amp;quot;\{&amp;quot;,&amp;quot;\(&amp;quot;,&amp;quot;\)&amp;quot;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;位置符，&amp;quot;^&amp;quot;,&amp;quot;$&amp;quot;,&amp;quot;(?&amp;lt;=&amp;hellip;)&amp;quot;, &amp;ldquo;(?&amp;lt;!&amp;hellip;)&amp;rdquo;, &amp;ldquo;\b&amp;rdquo;,&amp;quot;(?=&amp;hellip;)&amp;quot;, &amp;ldquo;(?!&amp;hellip;)&amp;rdquo;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;分组和反引用， &amp;ldquo;(?&amp;lt;=&amp;lt;(\w+)&amp;gt;).*(?=&amp;lt;\/\1&amp;gt;)&amp;rdquo;,&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;开始于左零宽断言(或者叫&amp;quot;^&amp;quot;),结束语右零宽断言(或者叫&amp;quot;\(&amp;quot;),经典应用囊括着1、2、3、4所有内容，隐含这所有正则表达式，最终归结于0！或者perl的&amp;quot;\)&amp;quot;(具备)&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;分支，&amp;quot;?(group)yes|no&amp;quot; 如果存在分组group，则继续执行yes，否则no
+&amp;ldquo;\w+|\d+&amp;rdquo; 分支&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&amp;ldquo;(?&amp;lt;groupname&amp;gt;\w+)\b\s+\k&amp;lt;groupname&amp;gt;\b&amp;rdquo;  其中groupname指定情况下，需要使用&amp;quot;\k&amp;quot;
+把捕获的内容命名为groupname中,并压入堆栈（以为着还可以弹出来），(?&amp;lt;-groupname&amp;gt;)弹出groupname捕获内容，如果groupname不存在则匹配失败（出错）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&amp;ldquo;(?&amp;lsquo;groupName&amp;rsquo;\w+)\b\s+\k&amp;rsquo;groupname&#39;\b&amp;rdquo;  其中groupname指定情况下，需要使用&amp;quot;\k&amp;quot;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;!--listend--&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-perl&#34; data-lang=&#34;perl&#34;&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;                   &lt;span style=&#34;color:#75715e&#34;&gt;#最外层的左括号&lt;/span&gt;
+    [&lt;span style=&#34;color:#f92672&#34;&gt;^&amp;lt;&amp;gt;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;            &lt;span style=&#34;color:#75715e&#34;&gt;#它后面非括号的内容&lt;/span&gt;
+    (
+        (
+          (?&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Open&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;)  &lt;span style=&#34;color:#75715e&#34;&gt;#左括号，压入&amp;#34;Open&amp;#34;&lt;/span&gt;
+          [&lt;span style=&#34;color:#f92672&#34;&gt;^&amp;lt;&amp;gt;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;      &lt;span style=&#34;color:#75715e&#34;&gt;#左括号后面的内容&lt;/span&gt;
+        )&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;
+        (
+          (?&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;-Open&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;#右括号，弹出一个&amp;#34;Open&amp;#34;&lt;/span&gt;
+          [&lt;span style=&#34;color:#f92672&#34;&gt;^&amp;lt;&amp;gt;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;      &lt;span style=&#34;color:#75715e&#34;&gt;#右括号后面的内容&lt;/span&gt;
+        )&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;
+    )&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;
+    (?(Open)(?&lt;span style=&#34;color:#f92672&#34;&gt;!&lt;/span&gt;))     &lt;span style=&#34;color:#75715e&#34;&gt;#最外层的右括号前检查&lt;/span&gt;
+                      &lt;span style=&#34;color:#75715e&#34;&gt;#若还有未弹出的&amp;#34;Open&amp;#34;&lt;/span&gt;
+                      &lt;span style=&#34;color:#75715e&#34;&gt;#则匹配失败&lt;/span&gt;
+
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;                &lt;span style=&#34;color:#75715e&#34;&gt;#最外层的右括号&lt;/span&gt;
+
+&lt;span style=&#34;color:#75715e&#34;&gt;#平衡组的一个最常见的应用就是匹配HTML,下面这个例子可以匹配嵌套的&amp;lt;div&amp;gt;标签：&amp;lt;div[^&amp;gt;]*&amp;gt;[^&amp;lt;&amp;gt;]*(((?&amp;#39;Open&amp;#39;&amp;lt;div[^&amp;gt;]*&amp;gt;)[^&amp;lt;&amp;gt;]*)+((?&amp;#39;-Open&amp;#39;&amp;lt;/div&amp;gt;)[^&amp;lt;&amp;gt;]*)+)*(?(Open)(?!))&amp;lt;/div&amp;gt;.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;例子&#34;&gt;例子&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-perl&#34; data-lang=&#34;perl&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/usr/bin/env perl&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#===============================================================================&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         FILE: testRegex.pl&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#        USAGE: ./testRegex.pl&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#  DESCRIPTION:&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#      OPTIONS: ---&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# REQUIREMENTS: ---&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         BUGS: ---&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#        NOTES: ---&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#       AUTHOR: Ye Zhaoliang (Ye Zhaoliang), zl_ye@qny.chng.com.cn&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# ORGANIZATION:&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#      VERSION: 1.0&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#      CREATED: 2022-02-19 0:36:50&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#     REVISION: ---&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#===============================================================================&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; strict;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; warnings;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; utf8;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;no&lt;/span&gt; warnings &lt;span style=&#34;color:#e6db74&#34;&gt;qw(experimental::vlb)&lt;/span&gt;;
+
+&lt;span style=&#34;color:#75715e&#34;&gt;## PerlSupport is very good vim pluasn&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;## \ra 可以设置命令行参数&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;## \rs 执行语法检查&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;## \ry 格式化程序&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;## \rr执行程序&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;## \rt save buffer to file with timestamp&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;## \rk显示配置信息&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#my  $arg=shift @_;&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;command line argument is $arg \n&amp;#34;&lt;/span&gt;;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt; $he &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;abc df jje&amp;#34;&lt;/span&gt;;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Hello regex\n&amp;#34;&lt;/span&gt;           &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; $he &lt;span style=&#34;color:#f92672&#34;&gt;=~&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;m/\b\d{2}\b/xm&lt;/span&gt;;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Hello regex \\w works\n&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; $he &lt;span style=&#34;color:#f92672&#34;&gt;=~&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;m/\b\w{2}\b/xm&lt;/span&gt;;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt; $html &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;head&amp;gt;nothing&amp;lt;/head&amp;gt;&amp;#34;&lt;/span&gt;;
+
+&lt;span style=&#34;color:#75715e&#34;&gt;#print &amp;#34;label is &amp;#34; if $html=~m/(?&amp;lt;=&amp;lt;(\w{0,20})&amp;gt;).{0,20}(?=&amp;lt;\/\1)/;&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;label is $1    content is $2\n&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; $html &lt;span style=&#34;color:#f92672&#34;&gt;=~&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;m/
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;                                                (?&amp;lt;=&amp;lt;(\w{0,20})&amp;gt;)
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;                                                (.{0,20})
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;                                                (?=&amp;lt;\/\1&amp;gt;)
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;                                                /x&lt;/span&gt;;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;labe2 is $1  content is $2\n&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; $html &lt;span style=&#34;color:#f92672&#34;&gt;=~&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;m/
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;                                                (?&amp;lt;=&amp;lt;(?&amp;lt;groupname&amp;gt;\w{0,20})&amp;gt;)
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;                                                (.{0,20})
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;                                                (?=&amp;lt;\/\k&amp;lt;groupname&amp;gt;&amp;gt;)
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;                                                /x&lt;/span&gt;;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt; $line1 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Score = 161 bits (409), Expect = 1e-43, Method: Compositional matrix adjust.&amp;#34;&lt;/span&gt;;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt; $line2 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Identities = 141/471 (29%), Positives = 227/471 (48%), Gaps =41/471 (8%)&amp;#34;&lt;/span&gt;;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ( $line1 &lt;span style=&#34;color:#f92672&#34;&gt;=~&lt;/span&gt;
+     &lt;span style=&#34;color:#e6db74&#34;&gt;m/Score\s*=\s*([\d\.\,]+)\s*(?:bits|Bits)\s*\(\d+\)\,\s*Expect\s*=\s*(\d+e-\d+)\.*/xm&lt;/span&gt;
+    )
+{
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;$1 \t $2\n&amp;#34;&lt;/span&gt;;
+}
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ( $line2 &lt;span style=&#34;color:#f92672&#34;&gt;=~&lt;/span&gt;
+     &lt;span style=&#34;color:#e6db74&#34;&gt;m/Identities\s*=\s*([\d\,\.]+)(?#141)\/([\d\,\.]+)\s*\((\S+)\%\).*/xm&lt;/span&gt; )
+{
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;$1 \t $2 \t $3\n&amp;#34;&lt;/span&gt;;
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>socket分包粘包</title>
