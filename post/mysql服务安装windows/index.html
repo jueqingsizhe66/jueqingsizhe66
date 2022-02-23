@@ -803,7 +803,7 @@
 
 
 
-<span class="article-metadata" >Reading time: 2 minutes and    45 seconds with 606 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+<span class="article-metadata" >Reading time: 2 minutes and    39 seconds with 584 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents"></nav>
     </aside>
@@ -821,20 +821,22 @@
 </ol>
 <p>##  下载mysql
 ###  <a href="https://dev.mysql.com/downloads/mysql/" target="_blank" rel="noopener">https://dev.mysql.com/downloads/mysql/</a>   解压到某个路径下！
-## 安装步骤
-###  1. 在mysql目录下 新建data目录，如果出错，重新配置，得删除data里头内容
-### 注意如果是拷贝到别人已配置的 到新机器，都得删掉data目录下的所有数据，所以得做好备份工作
-###  2. 新建my.cnf  拷贝本文件内容到cnf
-###  3. 修改basedir和datadir
-###  4. 添加mysql bin路径到path
-###  5、mysqld &ndash;initialize-insecure &ndash;console ## &ndash;initialize 是服务初始化准备的意思 console可以看到执行过程  -insecure 无密码 这样操作起来方便些   ##mysqld &ndash;remove 可以卸载服务
-###  6. mysqld &ndash;install  ## 安装服务
-###  6. net install mysql  ##安装好后就可以开启， 注意没有data文件夹和 my.cnf是无法配置启动成功的  net stop mysql
-###  7. mysql -uroot -p   ##不用输入密码
-###  8. mysqladmin -u root -p  password ## Enter password 敲回车即可(注意一定得有password字段)
-###  8.1  new Password 输入新密码
-###  8.2  Confirm new password 输入你的新密码
-###  9 mysql -uroot -p新密码  ## 就可以正常登录了</p>
+## 安装步骤</p>
+<ol>
+<li>在mysql目录下 新建data目录，如果出错，重新配置，得删除data里头内容
+注意如果是拷贝到别人已配置的 到新机器，都得删掉data目录下的所有数据，所以得做好备份工作</li>
+<li>新建my.cnf  拷贝本文件内容到cnf</li>
+<li>修改basedir和datadir</li>
+<li>添加mysql bin路径到path
+5、<code>mysqld --initialize-insecure --console</code> ## <code>--initialize</code> 是服务初始化准备的意思 console可以看到执行过程  <code>-insecure</code> 无密码 这样操作起来方便些   ##mysqld &ndash;remove 可以卸载服务</li>
+<li><code>mysqld --install</code>  ## 安装服务</li>
+<li><code>net install mysql</code>  ##安装好后就可以开启， 注意没有data文件夹和 my.cnf是无法配置启动成功的  net stop mysql</li>
+<li><code>mysql -uroot -p</code>   ##不用输入密码</li>
+<li><code>mysqladmin -u root -p  password</code> ## Enter password 敲回车即可(注意一定得有password字段)
+9.1  new Password 输入新密码
+9.2  Confirm new password 输入你的新密码</li>
+<li><code>mysql -uroot -p新密码 </code> ## 就可以正常登录了</li>
+</ol>
 <p>my.cnf</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">[mysqld]
 <span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">设置</span><span style="color:#ae81ff">3306</span><span style="color:#960050;background-color:#1e0010">端口</span>

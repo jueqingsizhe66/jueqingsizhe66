@@ -27,20 +27,22 @@
 &lt;/ol&gt;
 &lt;p&gt;##  下载mysql
 ###  &lt;a href=&#34;https://dev.mysql.com/downloads/mysql/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://dev.mysql.com/downloads/mysql/&lt;/a&gt;   解压到某个路径下！
-## 安装步骤
-###  1. 在mysql目录下 新建data目录，如果出错，重新配置，得删除data里头内容
-### 注意如果是拷贝到别人已配置的 到新机器，都得删掉data目录下的所有数据，所以得做好备份工作
-###  2. 新建my.cnf  拷贝本文件内容到cnf
-###  3. 修改basedir和datadir
-###  4. 添加mysql bin路径到path
-###  5、mysqld &amp;ndash;initialize-insecure &amp;ndash;console ## &amp;ndash;initialize 是服务初始化准备的意思 console可以看到执行过程  -insecure 无密码 这样操作起来方便些   ##mysqld &amp;ndash;remove 可以卸载服务
-###  6. mysqld &amp;ndash;install  ## 安装服务
-###  6. net install mysql  ##安装好后就可以开启， 注意没有data文件夹和 my.cnf是无法配置启动成功的  net stop mysql
-###  7. mysql -uroot -p   ##不用输入密码
-###  8. mysqladmin -u root -p  password ## Enter password 敲回车即可(注意一定得有password字段)
-###  8.1  new Password 输入新密码
-###  8.2  Confirm new password 输入你的新密码
-###  9 mysql -uroot -p新密码  ## 就可以正常登录了&lt;/p&gt;
+## 安装步骤&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在mysql目录下 新建data目录，如果出错，重新配置，得删除data里头内容
+注意如果是拷贝到别人已配置的 到新机器，都得删掉data目录下的所有数据，所以得做好备份工作&lt;/li&gt;
+&lt;li&gt;新建my.cnf  拷贝本文件内容到cnf&lt;/li&gt;
+&lt;li&gt;修改basedir和datadir&lt;/li&gt;
+&lt;li&gt;添加mysql bin路径到path
+5、&lt;code&gt;mysqld --initialize-insecure --console&lt;/code&gt; ## &lt;code&gt;--initialize&lt;/code&gt; 是服务初始化准备的意思 console可以看到执行过程  &lt;code&gt;-insecure&lt;/code&gt; 无密码 这样操作起来方便些   ##mysqld &amp;ndash;remove 可以卸载服务&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;mysqld --install&lt;/code&gt;  ## 安装服务&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;net install mysql&lt;/code&gt;  ##安装好后就可以开启， 注意没有data文件夹和 my.cnf是无法配置启动成功的  net stop mysql&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;mysql -uroot -p&lt;/code&gt;   ##不用输入密码&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;mysqladmin -u root -p  password&lt;/code&gt; ## Enter password 敲回车即可(注意一定得有password字段)
+9.1  new Password 输入新密码
+9.2  Confirm new password 输入你的新密码&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;mysql -uroot -p新密码 &lt;/code&gt; ## 就可以正常登录了&lt;/li&gt;
+&lt;/ol&gt;
 &lt;p&gt;my.cnf&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;[mysqld]
 &lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;设置&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3306&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;端口&lt;/span&gt;
@@ -5677,7 +5679,7 @@ data.head()
 &lt;p&gt;Demo:&lt;/p&gt;
 
 
-&lt;div id=&#34;chart-359187642&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;div id=&#34;chart-243689157&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
 &lt;script&gt;
   (function() {
     let a = setInterval( function() {
@@ -5687,7 +5689,7 @@ data.head()
       clearInterval( a );
 
       Plotly.d3.json(&#34;./line-chart.json&#34;, function(chart) {
-        Plotly.plot(&#39;chart-359187642&#39;, chart.data, chart.layout, {responsive: true});
+        Plotly.plot(&#39;chart-243689157&#39;, chart.data, chart.layout, {responsive: true});
       });
     }, 500 );
   })();
