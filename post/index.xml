@@ -13,6 +13,61 @@
     </image>
     
     <item>
+      <title>mysql服务安装windows</title>
+      <link>https://jueqingsizhe66.github.io/post/mysql%E6%9C%8D%E5%8A%A1%E5%AE%89%E8%A3%85windows/</link>
+      <pubDate>Thu, 24 Feb 2022 00:16:00 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/post/mysql%E6%9C%8D%E5%8A%A1%E5%AE%89%E8%A3%85windows/</guid>
+      <description>&lt;p&gt;记录一次windows手动安装mysql服务的过程&lt;/p&gt;
+&lt;p&gt;涉及的工具：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;mysqld 初始化和安装服务  删除服务&lt;/li&gt;
+&lt;li&gt;mysqladmin  修改密码&lt;/li&gt;
+&lt;li&gt;mysql 登录服务&lt;/li&gt;
+&lt;li&gt;net 启动windows服务&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;##  下载mysql
+###  &lt;a href=&#34;https://dev.mysql.com/downloads/mysql/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://dev.mysql.com/downloads/mysql/&lt;/a&gt;   解压到某个路径下！
+## 安装步骤
+###  1. 在mysql目录下 新建data目录，如果出错，重新配置，得删除data里头内容
+### 注意如果是拷贝到别人已配置的 到新机器，都得删掉data目录下的所有数据，所以得做好备份工作
+###  2. 新建my.cnf  拷贝本文件内容到cnf
+###  3. 修改basedir和datadir
+###  4. 添加mysql bin路径到path
+###  5、mysqld &amp;ndash;initialize-insecure &amp;ndash;console ## &amp;ndash;initialize 是服务初始化准备的意思 console可以看到执行过程  -insecure 无密码 这样操作起来方便些   ##mysqld &amp;ndash;remove 可以卸载服务
+###  6. mysqld &amp;ndash;install  ## 安装服务
+###  6. net install mysql  ##安装好后就可以开启， 注意没有data文件夹和 my.cnf是无法配置启动成功的  net stop mysql
+###  7. mysql -uroot -p   ##不用输入密码
+###  8. mysqladmin -u root -p  password ## Enter password 敲回车即可(注意一定得有password字段)
+###  8.1  new Password 输入新密码
+###  8.2  Confirm new password 输入你的新密码
+###  9 mysql -uroot -p新密码  ## 就可以正常登录了&lt;/p&gt;
+&lt;p&gt;my.cnf&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;[mysqld]
+&lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;设置&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3306&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;端口&lt;/span&gt;
+port&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3306&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;设置&lt;/span&gt;mysql的安装目录
+basedir&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;D:&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;\&lt;/span&gt;java&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;\&lt;/span&gt;mysql&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;28&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;winx64
+&lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;设置&lt;/span&gt;mysql数据库的数据的存放目录
+datadir&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;D:&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;\&lt;/span&gt;java&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;\&lt;/span&gt;mysql&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;28&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;winx64&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;\&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;data&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;允许最大连接数&lt;/span&gt;
+max_connections&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;允许连接失败的次数。这是为了防止有人从该主机试图攻击数据库系统&lt;/span&gt;
+max_connect_errors&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;服务端使用的字符集默认为&lt;/span&gt;UTF8
+character&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;server&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;utf8mb4
+&lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;创建新表时将使用的默认存储引擎&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;default&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;storage&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;engine&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;INNODB
+[mysql]
+&lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;设置&lt;/span&gt;mysql客户端默认字符集
+&lt;span style=&#34;color:#66d9ef&#34;&gt;default&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;character&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;utf8mb4
+[client]
+&lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;设置&lt;/span&gt;mysql客户端连接服务端时默认使用的端口
+port&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3306&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;default&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;character&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;utf8mb4&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>perl diamond</title>
       <link>https://jueqingsizhe66.github.io/post/perl-diamond/</link>
       <pubDate>Sat, 19 Feb 2022 01:41:00 +0800</pubDate>
@@ -5622,7 +5677,7 @@ data.head()
 &lt;p&gt;Demo:&lt;/p&gt;
 
 
-&lt;div id=&#34;chart-381652479&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;div id=&#34;chart-359187642&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
 &lt;script&gt;
   (function() {
     let a = setInterval( function() {
@@ -5632,7 +5687,7 @@ data.head()
       clearInterval( a );
 
       Plotly.d3.json(&#34;./line-chart.json&#34;, function(chart) {
-        Plotly.plot(&#39;chart-381652479&#39;, chart.data, chart.layout, {responsive: true});
+        Plotly.plot(&#39;chart-359187642&#39;, chart.data, chart.layout, {responsive: true});
       });
     }, 500 );
   })();
