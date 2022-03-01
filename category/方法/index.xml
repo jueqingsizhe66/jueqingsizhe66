@@ -7,7 +7,7 @@
     <description>方法</description>
     <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>©2022</copyright><lastBuildDate>Sat, 19 Feb 2022 01:41:00 +0800</lastBuildDate>
     <image>
-      <url>https://jueqingsizhe66.github.io/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
+      <url>https://jueqingsizhe66.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
       <title>方法</title>
       <link>https://jueqingsizhe66.github.io/category/%E6%96%B9%E6%B3%95/</link>
     </image>
@@ -22,7 +22,7 @@
 &lt;p&gt;&amp;ldquo;$&amp;quot;,蛇杖,象征着权管，在perl所有操作最后都可以归结到reference, 包括subroutine reference, file reference, object reference, hash reference, array reference(源自intermediate perl)&lt;/p&gt;
 &lt;p&gt;&amp;ldquo;%&amp;quot;,禅杖,一种hash散列字典，一种数据结构(源自唐玄奘)&lt;/p&gt;
 &lt;p&gt;&amp;ldquo;[]&amp;rdquo;, 立方体，cube, &amp;ldquo;@&amp;ldquo;array对象的具体内容(源自黑客帝国)&lt;/p&gt;
-&lt;p&gt;&amp;ldquo;{}&amp;rdquo;, 万花筒，，&amp;quot;%&amp;ldquo;禅杖对象的具体内容&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;{}&amp;rdquo;, 万花筒，，&amp;rdquo;%&amp;ldquo;禅杖对象的具体内容&lt;/p&gt;
 &lt;p&gt;perl万事万物模式的匹配均从&amp;rdquo;/ /&amp;ldquo;双斜杠开始(第一,首先)，python一般简化为字符串或者regex字符串(源自pattern胡晖)&lt;/p&gt;
 &lt;h2 id=&#34;所有语言的正则&#34;&gt;所有语言的正则&lt;/h2&gt;
 &lt;p&gt;正则在任何语言均有实现，他是一个内语言，具有自己的一套语法，perl中从双斜杠开始(源自Mr Wang)。&lt;/p&gt;
@@ -32,7 +32,7 @@
 &lt;p&gt;字符内容，比如 &amp;ldquo;\d&amp;quot;等效于[0-9] ,&amp;quot;\w&amp;rdquo; 等效于 [a-zA-Z0-9], &amp;ldquo;\s&amp;rdquo;, &amp;ldquo;\D&amp;quot;等效于[^0-9],&amp;quot;\W&amp;quot;等效于[^a-zA-Z0-9],&amp;quot;§&amp;rdquo;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;元字符，具备特殊意义, &amp;ldquo;\&amp;rdquo;,&amp;rdquo;.&amp;rdquo;,&amp;quot;*&amp;rdquo;,&amp;rdquo;?&amp;rdquo;,&amp;quot;{3,}&amp;quot;,&amp;quot;{3,12}&amp;quot;((?#注意:1和2可以组合))&lt;/p&gt;
+&lt;p&gt;元字符，具备特殊意义, &amp;ldquo;\&amp;rdquo;,&amp;rdquo;.&amp;rdquo;,&amp;rdquo;*&amp;rdquo;,&amp;quot;?&amp;quot;,&amp;quot;{3,}&amp;quot;,&amp;quot;{3,12}&amp;quot;((?#注意:1和2可以组合))&lt;/p&gt;
 &lt;p&gt;为了获得真正的元字符需要转义,&amp;quot;\\&amp;quot;,&amp;quot;\.&amp;quot;,&amp;quot;\*&amp;quot;,&amp;quot;\?&amp;quot;,&amp;quot;\{&amp;quot;,&amp;quot;\(&amp;quot;,&amp;quot;\)&amp;quot;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
@@ -53,101 +53,101 @@
 把捕获的内容命名为groupname中,并压入堆栈（以为着还可以弹出来），(?&amp;lt;-groupname&amp;gt;)弹出groupname捕获内容，如果groupname不存在则匹配失败（出错）&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&amp;ldquo;(?&amp;lsquo;groupName&amp;rsquo;\w+)\b\s+\k&amp;rsquo;groupname&#39;\b&amp;rdquo;  其中groupname指定情况下，需要使用&amp;quot;\k&amp;quot;&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;(?&amp;lsquo;groupName&amp;rsquo;\w+)\b\s+\k&amp;rsquo;groupname&amp;rsquo;\b&amp;rdquo;  其中groupname指定情况下，需要使用&amp;quot;\k&amp;quot;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;!--listend--&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-perl&#34; data-lang=&#34;perl&#34;&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;                   &lt;span style=&#34;color:#75715e&#34;&gt;#最外层的左括号&lt;/span&gt;
-    [&lt;span style=&#34;color:#f92672&#34;&gt;^&amp;lt;&amp;gt;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;            &lt;span style=&#34;color:#75715e&#34;&gt;#它后面非括号的内容&lt;/span&gt;
-    (
-        (
-          (?&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Open&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;)  &lt;span style=&#34;color:#75715e&#34;&gt;#左括号，压入&amp;#34;Open&amp;#34;&lt;/span&gt;
-          [&lt;span style=&#34;color:#f92672&#34;&gt;^&amp;lt;&amp;gt;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;      &lt;span style=&#34;color:#75715e&#34;&gt;#左括号后面的内容&lt;/span&gt;
-        )&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;
-        (
-          (?&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;-Open&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;#右括号，弹出一个&amp;#34;Open&amp;#34;&lt;/span&gt;
-          [&lt;span style=&#34;color:#f92672&#34;&gt;^&amp;lt;&amp;gt;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;      &lt;span style=&#34;color:#75715e&#34;&gt;#右括号后面的内容&lt;/span&gt;
-        )&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;
-    )&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;
-    (?(Open)(?&lt;span style=&#34;color:#f92672&#34;&gt;!&lt;/span&gt;))     &lt;span style=&#34;color:#75715e&#34;&gt;#最外层的右括号前检查&lt;/span&gt;
-                      &lt;span style=&#34;color:#75715e&#34;&gt;#若还有未弹出的&amp;#34;Open&amp;#34;&lt;/span&gt;
-                      &lt;span style=&#34;color:#75715e&#34;&gt;#则匹配失败&lt;/span&gt;
-
-  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;                &lt;span style=&#34;color:#75715e&#34;&gt;#最外层的右括号&lt;/span&gt;
-
-&lt;span style=&#34;color:#75715e&#34;&gt;#平衡组的一个最常见的应用就是匹配HTML,下面这个例子可以匹配嵌套的&amp;lt;div&amp;gt;标签：&amp;lt;div[^&amp;gt;]*&amp;gt;[^&amp;lt;&amp;gt;]*(((?&amp;#39;Open&amp;#39;&amp;lt;div[^&amp;gt;]*&amp;gt;)[^&amp;lt;&amp;gt;]*)+((?&amp;#39;-Open&amp;#39;&amp;lt;/div&amp;gt;)[^&amp;lt;&amp;gt;]*)+)*(?(Open)(?!))&amp;lt;/div&amp;gt;.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-perl&#34; data-lang=&#34;perl&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;                   &lt;span style=&#34;color:#75715e&#34;&gt;#最外层的左括号&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    [&lt;span style=&#34;color:#f92672&#34;&gt;^&amp;lt;&amp;gt;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;            &lt;span style=&#34;color:#75715e&#34;&gt;#它后面非括号的内容&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    (
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        (
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;          (?&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Open&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;)  &lt;span style=&#34;color:#75715e&#34;&gt;#左括号，压入&amp;#34;Open&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;          [&lt;span style=&#34;color:#f92672&#34;&gt;^&amp;lt;&amp;gt;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;      &lt;span style=&#34;color:#75715e&#34;&gt;#左括号后面的内容&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        )&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        (
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;          (?&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;-Open&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;#右括号，弹出一个&amp;#34;Open&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;          [&lt;span style=&#34;color:#f92672&#34;&gt;^&amp;lt;&amp;gt;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;      &lt;span style=&#34;color:#75715e&#34;&gt;#右括号后面的内容&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        )&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    )&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    (?(Open)(?&lt;span style=&#34;color:#f92672&#34;&gt;!&lt;/span&gt;))     &lt;span style=&#34;color:#75715e&#34;&gt;#最外层的右括号前检查&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                      &lt;span style=&#34;color:#75715e&#34;&gt;#若还有未弹出的&amp;#34;Open&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                      &lt;span style=&#34;color:#75715e&#34;&gt;#则匹配失败&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;                &lt;span style=&#34;color:#75715e&#34;&gt;#最外层的右括号&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#平衡组的一个最常见的应用就是匹配HTML,下面这个例子可以匹配嵌套的&amp;lt;div&amp;gt;标签：&amp;lt;div[^&amp;gt;]*&amp;gt;[^&amp;lt;&amp;gt;]*(((?&amp;#39;Open&amp;#39;&amp;lt;div[^&amp;gt;]*&amp;gt;)[^&amp;lt;&amp;gt;]*)+((?&amp;#39;-Open&amp;#39;&amp;lt;/div&amp;gt;)[^&amp;lt;&amp;gt;]*)+)*(?(Open)(?!))&amp;lt;/div&amp;gt;.&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&#34;例子&#34;&gt;例子&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-perl&#34; data-lang=&#34;perl&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/usr/bin/env perl&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;#===============================================================================&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;#&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;#         FILE: testRegex.pl&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;#&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;#        USAGE: ./testRegex.pl&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;#&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;#  DESCRIPTION:&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;#&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;#      OPTIONS: ---&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;# REQUIREMENTS: ---&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;#         BUGS: ---&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;#        NOTES: ---&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;#       AUTHOR: Ye Zhaoliang (Ye Zhaoliang), zl_ye@qny.chng.com.cn&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;# ORGANIZATION:&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;#      VERSION: 1.0&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;#      CREATED: 2022-02-19 0:36:50&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;#     REVISION: ---&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;#===============================================================================&lt;/span&gt;
-
-&lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; strict;
-&lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; warnings;
-&lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; utf8;
-&lt;span style=&#34;color:#66d9ef&#34;&gt;no&lt;/span&gt; warnings &lt;span style=&#34;color:#e6db74&#34;&gt;qw(experimental::vlb)&lt;/span&gt;;
-
-&lt;span style=&#34;color:#75715e&#34;&gt;## PerlSupport is very good vim pluasn&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;## \ra 可以设置命令行参数&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;## \rs 执行语法检查&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;## \ry 格式化程序&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;## \rr执行程序&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;## \rt save buffer to file with timestamp&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;## \rk显示配置信息&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;#&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;#my  $arg=shift @_;&lt;/span&gt;
-&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;command line argument is $arg \n&amp;#34;&lt;/span&gt;;
-&lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt; $he &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;abc df jje&amp;#34;&lt;/span&gt;;
-&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Hello regex\n&amp;#34;&lt;/span&gt;           &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; $he &lt;span style=&#34;color:#f92672&#34;&gt;=~&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;m/\b\d{2}\b/xm&lt;/span&gt;;
-&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Hello regex \\w works\n&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; $he &lt;span style=&#34;color:#f92672&#34;&gt;=~&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;m/\b\w{2}\b/xm&lt;/span&gt;;
-
-&lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt; $html &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;head&amp;gt;nothing&amp;lt;/head&amp;gt;&amp;#34;&lt;/span&gt;;
-
-&lt;span style=&#34;color:#75715e&#34;&gt;#print &amp;#34;label is &amp;#34; if $html=~m/(?&amp;lt;=&amp;lt;(\w{0,20})&amp;gt;).{0,20}(?=&amp;lt;\/\1)/;&lt;/span&gt;
-&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;label is $1    content is $2\n&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; $html &lt;span style=&#34;color:#f92672&#34;&gt;=~&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;m/
-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;                                                (?&amp;lt;=&amp;lt;(\w{0,20})&amp;gt;)
-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;                                                (.{0,20})
-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;                                                (?=&amp;lt;\/\1&amp;gt;)
-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;                                                /x&lt;/span&gt;;
-
-&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;labe2 is $1  content is $2\n&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; $html &lt;span style=&#34;color:#f92672&#34;&gt;=~&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;m/
-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;                                                (?&amp;lt;=&amp;lt;(?&amp;lt;groupname&amp;gt;\w{0,20})&amp;gt;)
-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;                                                (.{0,20})
-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;                                                (?=&amp;lt;\/\k&amp;lt;groupname&amp;gt;&amp;gt;)
-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;                                                /x&lt;/span&gt;;
-
-&lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt; $line1 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;
-    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Score = 161 bits (409), Expect = 1e-43, Method: Compositional matrix adjust.&amp;#34;&lt;/span&gt;;
-&lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt; $line2 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;
-    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Identities = 141/471 (29%), Positives = 227/471 (48%), Gaps =41/471 (8%)&amp;#34;&lt;/span&gt;;
-
-&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ( $line1 &lt;span style=&#34;color:#f92672&#34;&gt;=~&lt;/span&gt;
-     &lt;span style=&#34;color:#e6db74&#34;&gt;m/Score\s*=\s*([\d\.\,]+)\s*(?:bits|Bits)\s*\(\d+\)\,\s*Expect\s*=\s*(\d+e-\d+)\.*/xm&lt;/span&gt;
-    )
-{
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;$1 \t $2\n&amp;#34;&lt;/span&gt;;
-}
-
-&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ( $line2 &lt;span style=&#34;color:#f92672&#34;&gt;=~&lt;/span&gt;
-     &lt;span style=&#34;color:#e6db74&#34;&gt;m/Identities\s*=\s*([\d\,\.]+)(?#141)\/([\d\,\.]+)\s*\((\S+)\%\).*/xm&lt;/span&gt; )
-{
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;$1 \t $2 \t $3\n&amp;#34;&lt;/span&gt;;
-}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-perl&#34; data-lang=&#34;perl&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/usr/bin/env perl&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#===============================================================================&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#         FILE: testRegex.pl&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#        USAGE: ./testRegex.pl&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#  DESCRIPTION:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#      OPTIONS: ---&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# REQUIREMENTS: ---&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#         BUGS: ---&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#        NOTES: ---&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#       AUTHOR: Ye Zhaoliang (Ye Zhaoliang), zl_ye@qny.chng.com.cn&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# ORGANIZATION:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#      VERSION: 1.0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#      CREATED: 2022-02-19 0:36:50&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#     REVISION: ---&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#===============================================================================&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; strict;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; warnings;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;use&lt;/span&gt; utf8;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;no&lt;/span&gt; warnings &lt;span style=&#34;color:#e6db74&#34;&gt;qw(experimental::vlb)&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## PerlSupport is very good vim pluasn&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## \ra 可以设置命令行参数&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## \rs 执行语法检查&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## \ry 格式化程序&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## \rr执行程序&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## \rt save buffer to file with timestamp&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## \rk显示配置信息&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#my  $arg=shift @_;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;command line argument is $arg \n&amp;#34;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt; $he &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;abc df jje&amp;#34;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Hello regex\n&amp;#34;&lt;/span&gt;           &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; $he &lt;span style=&#34;color:#f92672&#34;&gt;=~&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;m/\b\d{2}\b/xm&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Hello regex \\w works\n&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; $he &lt;span style=&#34;color:#f92672&#34;&gt;=~&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;m/\b\w{2}\b/xm&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt; $html &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;head&amp;gt;nothing&amp;lt;/head&amp;gt;&amp;#34;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#print &amp;#34;label is &amp;#34; if $html=~m/(?&amp;lt;=&amp;lt;(\w{0,20})&amp;gt;).{0,20}(?=&amp;lt;\/\1)/;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;label is $1    content is $2\n&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; $html &lt;span style=&#34;color:#f92672&#34;&gt;=~&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;m/
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;                                                (?&amp;lt;=&amp;lt;(\w{0,20})&amp;gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;                                                (.{0,20})
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;                                                (?=&amp;lt;\/\1&amp;gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;                                                /x&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;labe2 is $1  content is $2\n&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; $html &lt;span style=&#34;color:#f92672&#34;&gt;=~&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;m/
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;                                                (?&amp;lt;=&amp;lt;(?&amp;lt;groupname&amp;gt;\w{0,20})&amp;gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;                                                (.{0,20})
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;                                                (?=&amp;lt;\/\k&amp;lt;groupname&amp;gt;&amp;gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;                                                /x&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt; $line1 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Score = 161 bits (409), Expect = 1e-43, Method: Compositional matrix adjust.&amp;#34;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;my&lt;/span&gt; $line2 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Identities = 141/471 (29%), Positives = 227/471 (48%), Gaps =41/471 (8%)&amp;#34;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ( $line1 &lt;span style=&#34;color:#f92672&#34;&gt;=~&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     &lt;span style=&#34;color:#e6db74&#34;&gt;m/Score\s*=\s*([\d\.\,]+)\s*(?:bits|Bits)\s*\(\d+\)\,\s*Expect\s*=\s*(\d+e-\d+)\.*/xm&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    )
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;$1 \t $2\n&amp;#34;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ( $line2 &lt;span style=&#34;color:#f92672&#34;&gt;=~&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     &lt;span style=&#34;color:#e6db74&#34;&gt;m/Identities\s*=\s*([\d\,\.]+)(?#141)\/([\d\,\.]+)\s*\((\S+)\%\).*/xm&lt;/span&gt; )
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;$1 \t $2 \t $3\n&amp;#34;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 </description>
     </item>
     
@@ -170,279 +170,279 @@
 &lt;li&gt;也就是函数名字作为函数参数，可以作为返回值&lt;/li&gt;
 &lt;/ol&gt;
 &lt;!--listend--&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;fun&lt;/span&gt;():
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;init&lt;/span&gt;():
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; init;
-letlei&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;fun();
-print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;hello,&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;letlei()&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;fibo&lt;/span&gt;(n):
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(n&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;):
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(n&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; fibo(n&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;fibo(n&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;)
-print(fibo(&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;))&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;fun&lt;/span&gt;():
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;init&lt;/span&gt;():
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; init;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;letlei&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;fun();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;hello,&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;letlei()&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;fibo&lt;/span&gt;(n):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(n&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(n&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; fibo(n&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;fibo(n&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(fibo(&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;))&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&#34;2-dot-python-filter的使用&#34;&gt;2. python filter的使用&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;结论：filter可以过滤一个容器的元素，但不会改变元素内容&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;迭代器批次把内容从容器放出来(使用一个，则倒出一个到内存)，列表全部把内容从容器倒出来（都放入内存中)&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;fun2filter&lt;/span&gt;(str):
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;( str &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;a&amp;#39;&lt;/span&gt;):
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; str
-ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; filter(fun2filter, [&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;a&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;b&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;c&amp;#39;&lt;/span&gt;])
-print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34; filter Object is &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;ret&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
-print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34; force change to list Object is &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;list(ret)&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;fun2filter&lt;/span&gt;(str):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;( str &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;a&amp;#39;&lt;/span&gt;):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; str
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; filter(fun2filter, [&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;a&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;b&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;c&amp;#39;&lt;/span&gt;])
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34; filter Object is &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;ret&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34; force change to list Object is &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;list(ret)&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&#34;3-dot-python-map的使用&#34;&gt;3. python map的使用&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;结论：map可以处理一个容器的数据,会改变元素内容&lt;/strong&gt;
 很关键，fitler只会过滤数据，而不会修改元素，map则可以逐个修改数据!&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;fun2map&lt;/span&gt;(str):
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; str&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;added&amp;#34;&lt;/span&gt;
-
-ret1 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; map(fun2map,[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;a&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;b&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;c&amp;#39;&lt;/span&gt;])
-&lt;span style=&#34;color:#75715e&#34;&gt;#ret1 = filter(fun2map,[&amp;#39;a&amp;#39;,&amp;#39;b&amp;#39;,&amp;#39;c&amp;#39;]) 不会起作用的！！！！他只会过滤，不会修改！&lt;/span&gt;
-
-print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;map object is &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;ret1&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;fun2map&lt;/span&gt;(str):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; str&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;added&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ret1 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; map(fun2map,[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;a&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;b&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;c&amp;#39;&lt;/span&gt;])
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#ret1 = filter(fun2map,[&amp;#39;a&amp;#39;,&amp;#39;b&amp;#39;,&amp;#39;c&amp;#39;]) 不会起作用的！！！！他只会过滤，不会修改！&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;map object is &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;ret1&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;span class=&#34;timestamp-wrapper&#34;&gt;&lt;span class=&#34;timestamp&#34;&gt;&amp;lt;2022-01-16 周日 22:38&amp;gt;&lt;/span&gt;&lt;/span&gt;测试通过&lt;/p&gt;
 &lt;h2 id=&#34;4-dot-python-reduce使用&#34;&gt;4. python reduce使用&lt;/h2&gt;
 &lt;p&gt;结论： reduce只返回序列（或者列表）的求和运算？ 把一个序列变为一个值，一个结论！
 reduce只会返回最终解！阶乘也很好用！&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;reduce本质就是斐波那契数列&lt;/strong&gt;
 计算阶乘也很方便&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; functools &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; reduce
-&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;fun2reduce&lt;/span&gt;(x,y):
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; x&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;y
-
-&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;funM2reduce&lt;/span&gt;(x,y):
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; x&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;y
-sum1&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;reduce(fun2reduce,[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;])
-sum2&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;reduce(&lt;span style=&#34;color:#66d9ef&#34;&gt;lambda&lt;/span&gt; x,y: x&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;y, [&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;])
-sum3&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;reduce(funM2reduce,[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;])
-sum3&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;reduce(funM2reduce,range(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;))
-print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;reduce function f is  &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;sum1&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;   pk  &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;sum2&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; pk &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;sum3&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; functools &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; reduce
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;fun2reduce&lt;/span&gt;(x,y):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; x&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;y
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;funM2reduce&lt;/span&gt;(x,y):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; x&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;y
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sum1&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;reduce(fun2reduce,[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;])
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sum2&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;reduce(&lt;span style=&#34;color:#66d9ef&#34;&gt;lambda&lt;/span&gt; x,y: x&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;y, [&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;])
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sum3&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;reduce(funM2reduce,[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;])
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sum3&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;reduce(funM2reduce,range(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;reduce function f is  &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;sum1&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;   pk  &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;sum2&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; pk &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;sum3&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;阶乘：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;print(reduce((&lt;span style=&#34;color:#66d9ef&#34;&gt;lambda&lt;/span&gt; x,y:x&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;y),range(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;)))
-&lt;span style=&#34;color:#ae81ff&#34;&gt;24&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(reduce((&lt;span style=&#34;color:#66d9ef&#34;&gt;lambda&lt;/span&gt; x,y:x&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;y),range(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;)))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;24&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&#34;5-dot-什么是闭包&#34;&gt;5. 什么是闭包?&lt;/h2&gt;
 &lt;p&gt;结论： inner是一个闭包,符合两个条件，1. inner是一个内部函数，2. inner调用外部环境的一个变量
 &lt;strong&gt;即 闭包=内部函数+内部函数定义时的环境变量&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;outer&lt;/span&gt;():
-    x&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;inner&lt;/span&gt;(): &lt;span style=&#34;color:#75715e&#34;&gt;## 1. 内部函数&lt;/span&gt;
-        print(x) &lt;span style=&#34;color:#75715e&#34;&gt;## 2. 调用内部函数外部环境变量x&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; inner
-
-outer()()
-fout2inner &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; outer()
-print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;测试闭包的功能 &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;fout2inner()&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;outer&lt;/span&gt;():
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    x&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;inner&lt;/span&gt;(): &lt;span style=&#34;color:#75715e&#34;&gt;## 1. 内部函数&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        print(x) &lt;span style=&#34;color:#75715e&#34;&gt;## 2. 调用内部函数外部环境变量x&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; inner
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;outer()()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;fout2inner &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; outer()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;测试闭包的功能 &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;fout2inner()&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;strong&gt;结论：基于闭包思想 及装饰器思想解决代码重复问题&lt;/strong&gt;&lt;/p&gt;
 &lt;h2 id=&#34;6-dot-python抽样&#34;&gt;6. python抽样&lt;/h2&gt;
 &lt;p&gt;结论：通过choice,sample,randrange,randint函数实现抽样功能&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; random
-
-print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;random.random() = &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;random()&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
-print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;随机生成1个值random.randint(1,8) = &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;randint(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;)&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
-print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;随机生成1个值random.randrange(1,8) = &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;randrange(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;)&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
-print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;随机选取序列1个值 choice(序列)=sampe(序列,1)：random.choice(&amp;#39;hello&amp;#39;) = &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;choice(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;hello&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
-print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;随机选取序列1个值：random.choice([&amp;#39;123&amp;#39;,4,[12,3,4]]) = &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;choice([&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;123&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;,[&lt;span style=&#34;color:#ae81ff&#34;&gt;12&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;]])&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
-&lt;span style=&#34;color:#75715e&#34;&gt;##&lt;/span&gt;
-print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;随机选取序列多个值,sampe(序列，个数)：random.sample([&amp;#39;123&amp;#39;,4,[12,3,4]],2,&amp;#39;34&amp;#39;) = &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sample([&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;123&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;,[&lt;span style=&#34;color:#ae81ff&#34;&gt;12&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;]],&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;)&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
-
-&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;v_code&lt;/span&gt;():
-    code&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;):
-        &lt;span style=&#34;color:#75715e&#34;&gt;## choice形成序列&lt;/span&gt;
-        &lt;span style=&#34;color:#75715e&#34;&gt;## choice很有用的&lt;/span&gt;
-       add&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;choice([random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;randrange(&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;),chr(random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;randrange(&lt;span style=&#34;color:#ae81ff&#34;&gt;65&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;90&lt;/span&gt;)),chr(random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;randrange(&lt;span style=&#34;color:#ae81ff&#34;&gt;97&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;122&lt;/span&gt;))])
-        &lt;span style=&#34;color:#75715e&#34;&gt;## 转换为string&lt;/span&gt;
-       code &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; str(add)
-    print(code)
-
-&lt;span style=&#34;color:#75715e&#34;&gt;# def v_codes(sampleNum):&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;# bug因为random出来的是一个结果&lt;/span&gt;
-    &lt;span style=&#34;color:#75715e&#34;&gt;# print(random.sample([random.randrange(10),chr(random.randrange(65,90)),chr(random.randrange(97,122))],sampleNum))&lt;/span&gt;
-
-v_code()&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; random
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;random.random() = &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;random()&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;随机生成1个值random.randint(1,8) = &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;randint(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;)&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;随机生成1个值random.randrange(1,8) = &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;randrange(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;)&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;随机选取序列1个值 choice(序列)=sampe(序列,1)：random.choice(&amp;#39;hello&amp;#39;) = &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;choice(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;hello&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;随机选取序列1个值：random.choice([&amp;#39;123&amp;#39;,4,[12,3,4]]) = &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;choice([&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;123&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;,[&lt;span style=&#34;color:#ae81ff&#34;&gt;12&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;]])&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;##&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;随机选取序列多个值,sampe(序列，个数)：random.sample([&amp;#39;123&amp;#39;,4,[12,3,4]],2,&amp;#39;34&amp;#39;) = &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sample([&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;123&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;,[&lt;span style=&#34;color:#ae81ff&#34;&gt;12&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;]],&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;)&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;v_code&lt;/span&gt;():
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    code&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;## choice形成序列&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;## choice很有用的&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       add&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;choice([random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;randrange(&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;),chr(random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;randrange(&lt;span style=&#34;color:#ae81ff&#34;&gt;65&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;90&lt;/span&gt;)),chr(random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;randrange(&lt;span style=&#34;color:#ae81ff&#34;&gt;97&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;122&lt;/span&gt;))])
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;## 转换为string&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       code &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; str(add)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    print(code)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# def v_codes(sampleNum):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# bug因为random出来的是一个结果&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;# print(random.sample([random.randrange(10),chr(random.randrange(65,90)),chr(random.randrange(97,122))],sampleNum))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;v_code()&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&#34;7-dot-什么是生成器-什么是迭代器&#34;&gt;7. 什么是生成器？ 什么是迭代器？&lt;/h2&gt;
 &lt;p&gt;结论：生成器(列表 list, tuple, string, dict)都是迭代器(满足两个条件：1. 有iter方法，2. 有next方法)，迭代器不一定是生成器&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 列表生成器 方式&lt;/span&gt;
-a&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[x&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;)]
-&lt;span style=&#34;color:#75715e&#34;&gt;# 迭代器&lt;/span&gt;
-b&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;(x&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt;  x &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;10000&lt;/span&gt;))
-print(next(b))
-print(next(b))
-print(next(b))&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 列表生成器 方式&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;a&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;[x&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;)]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 迭代器&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;b&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;(x&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt;  x &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;10000&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(next(b))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(next(b))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(next(b))&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&#34;8-dot-yield的作用&#34;&gt;8. yield的作用?&lt;/h2&gt;
 &lt;p&gt;结论： 只要有yield的都是迭代器函数对象 foo()(不加载到内存）,如果没有就是普通函数加载到内存了&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;foo&lt;/span&gt;():
-    print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;ok&amp;#34;&lt;/span&gt;)
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;yield&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
-    print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;ok2&amp;#34;&lt;/span&gt;)
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;yield&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
-
-g&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; foo()  &lt;span style=&#34;color:#75715e&#34;&gt;## foo() 带括号是生成器对象&lt;/span&gt;
-print(g)
-
-&lt;span style=&#34;color:#75715e&#34;&gt;## 调用生成器函数对象&lt;/span&gt;
-print(next(g))
-&lt;span style=&#34;color:#75715e&#34;&gt;## 可以控制执行次数！&lt;/span&gt;
-print(next(g))&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;foo&lt;/span&gt;():
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;ok&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;yield&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;ok2&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;yield&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;g&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; foo()  &lt;span style=&#34;color:#75715e&#34;&gt;## foo() 带括号是生成器对象&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(g)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## 调用生成器函数对象&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(next(g))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## 可以控制执行次数！&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(next(g))&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;结论：迭代写法和同时写法有所不同, 要注意一句话写完和两句话写完是不一样的，以为before的值已经发生了修改！&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## 0 1 1 2 3 5 8 13&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;## 同时和并行什么区别？ 同时就是同一条语句(有点并行线程的感觉，并发执行）, 保证before不更新&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;## 不同时就是分成两部执行,分成先后，有迭代顺序, 先后写before会更新&lt;/span&gt;
-&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;fib&lt;/span&gt;(max):
-    n,before,after&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; n&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;max:
-        print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;n=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;n&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;, before=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;before&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; after=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;after&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
-        &lt;span style=&#34;color:#75715e&#34;&gt;# before=after&lt;/span&gt;
-         &lt;span style=&#34;color:#66d9ef&#34;&gt;yield&lt;/span&gt;(before) &lt;span style=&#34;color:#75715e&#34;&gt;## 变成生成器对象函数&lt;/span&gt;
-       &lt;span style=&#34;color:#75715e&#34;&gt;# after=before+after  ## 实际上after ={before}+after before不能更新&lt;/span&gt;
-        before,after&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;after,before&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;after
-        n&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;n&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
-    print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;fib(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;max&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;) = &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;after&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
-
-fib(&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## 0 1 1 2 3 5 8 13&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## 同时和并行什么区别？ 同时就是同一条语句(有点并行线程的感觉，并发执行）, 保证before不更新&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## 不同时就是分成两部执行,分成先后，有迭代顺序, 先后写before会更新&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;fib&lt;/span&gt;(max):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    n,before,after&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; n&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;max:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;n=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;n&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;, before=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;before&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; after=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;after&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;# before=after&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;         &lt;span style=&#34;color:#66d9ef&#34;&gt;yield&lt;/span&gt;(before) &lt;span style=&#34;color:#75715e&#34;&gt;## 变成生成器对象函数&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       &lt;span style=&#34;color:#75715e&#34;&gt;# after=before+after  ## 实际上after ={before}+after before不能更新&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        before,after&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;after,before&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;after
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        n&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;n&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;fib(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;max&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;) = &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;after&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;fib(&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;结论：改造为生成器函数对象&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;fib&lt;/span&gt;(max):
-    n,before,after&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; n&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;max:
-        print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;n=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;n&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;, before=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;before&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; after=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;after&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
-        &lt;span style=&#34;color:#75715e&#34;&gt;# before=after&lt;/span&gt;
-        &lt;span style=&#34;color:#75715e&#34;&gt;# after=before+after  ## 实际上after ={before}+after before不能更新&lt;/span&gt;
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;yield&lt;/span&gt;(after) &lt;span style=&#34;color:#75715e&#34;&gt;## 变成生成器对象函数&lt;/span&gt;
-        before,after&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;after,before&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;after
-        n&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;n&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
-    print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;fib(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;max&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;) = &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;after&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
-
-g&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;fib(&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;)
-
-next(g)
-next(g)
-next(g)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;fib&lt;/span&gt;(max):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    n,before,after&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; n&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;max:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;n=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;n&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;, before=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;before&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; after=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;after&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;# before=after&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;# after=before+after  ## 实际上after ={before}+after before不能更新&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;yield&lt;/span&gt;(after) &lt;span style=&#34;color:#75715e&#34;&gt;## 变成生成器对象函数&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        before,after&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;after,before&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;after
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        n&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;n&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;fib(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;max&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;) = &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;after&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;g&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;fib(&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;next(g)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;next(g)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;next(g)&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;strong&gt;结论： yield可以通过send方法进行函数变量赋值控制，&lt;/strong&gt;
 第一次必须先进性赋值next(b) 或者通过b.send(None), b.send(None)等效于next(b)&lt;/p&gt;
 &lt;p&gt;一次send等效于一次next,即执行一次yield&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;far&lt;/span&gt;():
-      print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;ok1&amp;#39;&lt;/span&gt;)
-      count&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;yield&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
-      print(count)
-      count2&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;yield&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;count
-      print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;ok3&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;count2)
-      &lt;span style=&#34;color:#66d9ef&#34;&gt;yield&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;
-
-  df&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;far()
-  df&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;send(&lt;span style=&#34;color:#66d9ef&#34;&gt;None&lt;/span&gt;)
-&lt;span style=&#34;color:#75715e&#34;&gt;#df.send(None) ## 第一次必须是df.send(None) 或者先执行一次next(df)&lt;/span&gt;
-
-  df&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;send(&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;)
-  print(df&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;send(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;2----&amp;#39;&lt;/span&gt;))
-  &lt;span style=&#34;color:#75715e&#34;&gt;# next(df)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;far&lt;/span&gt;():
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;ok1&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      count&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;yield&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      print(count)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      count2&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;yield&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;count
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;ok3&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;count2)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#66d9ef&#34;&gt;yield&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  df&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;far()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  df&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;send(&lt;span style=&#34;color:#66d9ef&#34;&gt;None&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#df.send(None) ## 第一次必须是df.send(None) 或者先执行一次next(df)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  df&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;send(&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  print(df&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;send(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;2----&amp;#39;&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;# next(df)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&#34;9-dot-如何使用os模块&#34;&gt;9.如何使用OS模块&lt;/h2&gt;
 &lt;p&gt;结论： 文件目录相关操作可以参考OS模块&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; os
-print(os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;getcwd())
-print(os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;listdir())
-
-print(os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;stat(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;./&amp;#39;&lt;/span&gt;))
-print(os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;pathsep)
-print(os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sep) &lt;span style=&#34;color:#75715e&#34;&gt;## 路径分割附&lt;/span&gt;
-print(os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;environ)
-print(os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;dirname(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;c:/testRandom.py&amp;#39;&lt;/span&gt;))
-print(os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;basename(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;c:/testRandom.py&amp;#39;&lt;/span&gt;))&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; os
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;getcwd())
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;listdir())
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;stat(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;./&amp;#39;&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;pathsep)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sep) &lt;span style=&#34;color:#75715e&#34;&gt;## 路径分割附&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;environ)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;dirname(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;c:/testRandom.py&amp;#39;&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;basename(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;c:/testRandom.py&amp;#39;&lt;/span&gt;))&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&#34;10-dot-如何使用hashlib&#34;&gt;10. 如何使用hashlib&lt;/h2&gt;
 &lt;p&gt;&lt;em&gt;结论: 通过hashlib创建解密和加密&lt;/em&gt;
 1、什么叫hash:hash是一种算法（不同的hash算法只是复杂度不一样）（3.x里代替了md5模块和sha模块，主要提供 SHA1, SHA224, SHA256, SHA384, SHA512 ，MD5 算法），该算法接受传入的内容，经过运算得到一串hash值
 2、hash值的特点是(hash值/产品有三大特性：)&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;  md52&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;hashlib&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;md5()
-  print(md52)
-  md52&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;update(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;hell word&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;encode(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;utf-8&amp;#39;&lt;/span&gt;))
-  md52&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;update(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;hell word&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;encode(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;utf8&amp;#39;&lt;/span&gt;)) &lt;span style=&#34;color:#75715e&#34;&gt;## python3只有unicode和 ,默认不是utf-8&lt;/span&gt;
-  md52&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;digest()
-  md52&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;hexdigest()&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  md52&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;hashlib&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;md5()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  print(md52)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  md52&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;update(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;hell word&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;encode(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;utf-8&amp;#39;&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  md52&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;update(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;hell word&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;encode(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;utf8&amp;#39;&lt;/span&gt;)) &lt;span style=&#34;color:#75715e&#34;&gt;## python3只有unicode和 ,默认不是utf-8&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  md52&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;digest()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  md52&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;hexdigest()&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&#34;11-dot-如何扩平台编码&#34;&gt;11. 如何扩平台编码&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;结论： 扩平台运行可以参考sys模块&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34; sys.argv= &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;sys&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;argv&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
-print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;sys.path = &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;sys&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
-print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;sys.platform = &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;sys&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;platform&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; )
-print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;sys.maxsize = &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;sys&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;maxsize&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; )
-print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;sys.stdout.write(&amp;#39;Please:&amp;#39;) = &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;sys&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;stdout&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Please:&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; )
-&lt;span style=&#34;color:#75715e&#34;&gt;#正常退出，不执行下面代码&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;# print (sys.exit(0))&lt;/span&gt;
-
-&lt;span style=&#34;color:#75715e&#34;&gt;# if sys.platform==&amp;#39;win32&amp;#39;:&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;#     os.system(&amp;#39;dir&amp;#39;) ## 执行系统命令&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;# else:&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;#     os.system(&amp;#39;ls&amp;#39;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34; sys.argv= &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;sys&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;argv&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;sys.path = &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;sys&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;sys.platform = &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;sys&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;platform&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; )
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;sys.maxsize = &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;sys&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;maxsize&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; )
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;sys.stdout.write(&amp;#39;Please:&amp;#39;) = &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;sys&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;stdout&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Please:&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; )
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#正常退出，不执行下面代码&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# print (sys.exit(0))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# if sys.platform==&amp;#39;win32&amp;#39;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#     os.system(&amp;#39;dir&amp;#39;) ## 执行系统命令&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# else:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#     os.system(&amp;#39;ls&amp;#39;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&#34;12-dot-如何使用re模块&#34;&gt;12. 如何使用RE模块&lt;/h2&gt;
 &lt;p&gt;&lt;em&gt;结论:通过re模块进行正则匹配&lt;/em&gt;
 &lt;a href=&#34;https://docs.python.org/zh-cn/3/library/re.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://docs.python.org/zh-cn/3/library/re.html&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;需要明确常用的正则元素、字母、数值、元数据( * + ? \d{3,} [abA-Z] ||| . \d \s \S \w \W )等！
 要注意正则零宽断言和捕获方面的使用&lt;/p&gt;
 &lt;p&gt;如果在python中使用正则，想要直接使用正则语法则注意在模式表达式前面加小写r，如果不加小写r，表示先试用python解析字符串，然后再把解析后的内容传给正则表达式进行解析。&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; re
-
-  &lt;span style=&#34;color:#75715e&#34;&gt;## 返回所有匹配对象,并放在一个列表中&lt;/span&gt;
-  print(re&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;findall(&lt;span style=&#34;color:#e6db74&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\\&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;df&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\\&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;b&amp;#39;&lt;/span&gt;))
-  &lt;span style=&#34;color:#75715e&#34;&gt;## \元字符在python中有特殊用途&lt;/span&gt;
-  print(re&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;findall(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\\\\&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;df&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\\&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;b&amp;#39;&lt;/span&gt;))
-
-  &lt;span style=&#34;color:#75715e&#34;&gt;## search 返回第一个匹配对象，并且可以通过group进行调用&lt;/span&gt;
-  &lt;span style=&#34;color:#75715e&#34;&gt;#ret=re.search(r&amp;#39;(?P&amp;lt;id&amp;gt;\d{3})/(?P&amp;lt;name&amp;gt;\w{3})&amp;#39;,&amp;#39;weekdydtt123/ooo&amp;#39;)&lt;/span&gt;
-  ret&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;re&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;search(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;(?P&amp;lt;id&amp;gt;\d&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{3}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;)/(?P&amp;lt;name&amp;gt;\w&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{3}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;)&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;weekdydtt123/ooo&amp;#39;&lt;/span&gt;)
-  print(ret&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;group(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;id&amp;#39;&lt;/span&gt;))
-  print(ret&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;group(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;))
-  &lt;span style=&#34;color:#75715e&#34;&gt;## match 返回第一个匹配对象，并且可以通过group进行调用&lt;/span&gt;
-  &lt;span style=&#34;color:#75715e&#34;&gt;## 但是从第一个字符开始找, 如果第一个字符就不匹配就返回None, 不继续匹配. 用于判断字符串开头或整个字符串是否匹配,速度快。&lt;/span&gt;
-  &lt;span style=&#34;color:#75715e&#34;&gt;## match 自带^光环，所以速度很快&lt;/span&gt;
-  &lt;span style=&#34;color:#75715e&#34;&gt;# ret=re.match(r&amp;#39;(?P&amp;lt;id&amp;gt;\d{2})/(?P&amp;lt;name&amp;gt;\w{3})&amp;#39;,&amp;#39;weekdydtt123/ooo&amp;#39;)&lt;/span&gt;
-  &lt;span style=&#34;color:#75715e&#34;&gt;# print(ret.group(&amp;#39;id&amp;#39;))&lt;/span&gt;
-  &lt;span style=&#34;color:#75715e&#34;&gt;# print(ret.group(&amp;#39;name&amp;#39;))&lt;/span&gt;
-
-
-  &lt;span style=&#34;color:#75715e&#34;&gt;## re.compile 编译生成Pattern对象 可重复使用Pattern，pattern对象可调用findall, search and match&lt;/span&gt;
-  pat&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; re&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;compile(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;ab&amp;#39;&lt;/span&gt;)  &lt;span style=&#34;color:#75715e&#34;&gt;## 提出一般模式, 基于该模式可运用到不同的场景下！&lt;/span&gt;
-  ret1&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pat&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;findall(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;abcd abc gd&amp;#39;&lt;/span&gt;)
-  ret2&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pat&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;findall(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;acd abc gd&amp;#39;&lt;/span&gt;)
-  ret3&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pat&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;match(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;abc db ab&amp;#39;&lt;/span&gt;)
-  ret4&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pat&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;search(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;abc db ab&amp;#39;&lt;/span&gt;)
-  print(ret1)
-  print(ret2)
-  print(ret3&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;group())
-  print(ret4&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;group())
-  print(ret4&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;group())&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; re
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;## 返回所有匹配对象,并放在一个列表中&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  print(re&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;findall(&lt;span style=&#34;color:#e6db74&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\\&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;df&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\\&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;b&amp;#39;&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;## \元字符在python中有特殊用途&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  print(re&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;findall(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\\\\&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;df&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\\&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;b&amp;#39;&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;## search 返回第一个匹配对象，并且可以通过group进行调用&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;#ret=re.search(r&amp;#39;(?P&amp;lt;id&amp;gt;\d{3})/(?P&amp;lt;name&amp;gt;\w{3})&amp;#39;,&amp;#39;weekdydtt123/ooo&amp;#39;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ret&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;re&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;search(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;(?P&amp;lt;id&amp;gt;\d&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{3}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;)/(?P&amp;lt;name&amp;gt;\w&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{3}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;)&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;weekdydtt123/ooo&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  print(ret&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;group(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;id&amp;#39;&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  print(ret&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;group(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;## match 返回第一个匹配对象，并且可以通过group进行调用&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;## 但是从第一个字符开始找, 如果第一个字符就不匹配就返回None, 不继续匹配. 用于判断字符串开头或整个字符串是否匹配,速度快。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;## match 自带^光环，所以速度很快&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;# ret=re.match(r&amp;#39;(?P&amp;lt;id&amp;gt;\d{2})/(?P&amp;lt;name&amp;gt;\w{3})&amp;#39;,&amp;#39;weekdydtt123/ooo&amp;#39;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;# print(ret.group(&amp;#39;id&amp;#39;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;# print(ret.group(&amp;#39;name&amp;#39;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;## re.compile 编译生成Pattern对象 可重复使用Pattern，pattern对象可调用findall, search and match&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  pat&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; re&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;compile(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;ab&amp;#39;&lt;/span&gt;)  &lt;span style=&#34;color:#75715e&#34;&gt;## 提出一般模式, 基于该模式可运用到不同的场景下！&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ret1&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pat&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;findall(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;abcd abc gd&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ret2&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pat&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;findall(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;acd abc gd&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ret3&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pat&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;match(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;abc db ab&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ret4&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;pat&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;search(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;abc db ab&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  print(ret1)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  print(ret2)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  print(ret3&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;group())
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  print(ret4&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;group())
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  print(ret4&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;group())&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&#34;13-dot-如果有配置文件&#34;&gt;13. 如果有配置文件？&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;结论：通过configparser模块生成和读取配置文件&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;写入文件：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt;  configparser
-
-config&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;configparser&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ConfigParser()
-config[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;DEFAULT&amp;#34;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;{
-    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;ServerAliveInterval&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;45&amp;#39;&lt;/span&gt;,
-    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Compression&amp;#39;&lt;/span&gt;:&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;yes&amp;#39;&lt;/span&gt;,
-    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;CompressionLevel&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;9&amp;#39;&lt;/span&gt;
-}
-
-config[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;bitbucket.org&amp;#39;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;{}
-config[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;bitbucket.org&amp;#39;&lt;/span&gt;][&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;user&amp;#39;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;hg&amp;#39;&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;# config[&amp;#39;bitbucket.org&amp;#39;]={&amp;#39;user&amp;#39;:&amp;#39;hg&amp;#39;}&lt;/span&gt;
-config[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;topsecret.server.com&amp;#39;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;{}
-topsecret&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;config[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;topsecret.server.com&amp;#39;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;{}
-topsecret[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Host Port&amp;#39;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;50222&amp;#39;&lt;/span&gt;
-config[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;DEFAULT&amp;#39;&lt;/span&gt;][&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;ForwardX11&amp;#39;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;yes&amp;#39;&lt;/span&gt;
-
-&lt;span style=&#34;color:#66d9ef&#34;&gt;with&lt;/span&gt; open(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;example.ini&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;w&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; configfile:
-    config&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(configfile)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt;  configparser
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;config&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;configparser&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ConfigParser()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;config[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;DEFAULT&amp;#34;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;ServerAliveInterval&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;45&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Compression&amp;#39;&lt;/span&gt;:&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;yes&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;CompressionLevel&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;9&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;config[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;bitbucket.org&amp;#39;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;{}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;config[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;bitbucket.org&amp;#39;&lt;/span&gt;][&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;user&amp;#39;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;hg&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# config[&amp;#39;bitbucket.org&amp;#39;]={&amp;#39;user&amp;#39;:&amp;#39;hg&amp;#39;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;config[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;topsecret.server.com&amp;#39;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;{}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;topsecret&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;config[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;topsecret.server.com&amp;#39;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;{}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;topsecret[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Host Port&amp;#39;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;50222&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;config[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;DEFAULT&amp;#39;&lt;/span&gt;][&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;ForwardX11&amp;#39;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;yes&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;with&lt;/span&gt; open(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;example.ini&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;w&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; configfile:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    config&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(configfile)&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;读取文件：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt;  configparser
-config&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;configparser&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ConfigParser()
-
-config&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;example.ini&amp;#39;&lt;/span&gt;)
-
-print(config&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;defaults())
-print(config&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sections())
-print(config[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;bitbucket.org&amp;#39;&lt;/span&gt;])
-print(config[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;bitbucket.org&amp;#39;&lt;/span&gt;][&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;user&amp;#39;&lt;/span&gt;])
-print(config[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;DEFAULT&amp;#39;&lt;/span&gt;][&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Compression&amp;#39;&lt;/span&gt;])&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt;  configparser
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;config&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;configparser&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ConfigParser()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;config&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;example.ini&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(config&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;defaults())
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(config&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sections())
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(config[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;bitbucket.org&amp;#39;&lt;/span&gt;])
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(config[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;bitbucket.org&amp;#39;&lt;/span&gt;][&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;user&amp;#39;&lt;/span&gt;])
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(config[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;DEFAULT&amp;#39;&lt;/span&gt;][&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Compression&amp;#39;&lt;/span&gt;])&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 </description>
     </item>
     
@@ -464,9 +464,9 @@ print(config[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;DEFAULT&amp;#39;
     
     <item>
       <title>阅读source Code of My World</title>
-      <link>https://jueqingsizhe66.github.io/blog/2017/08/13/yue-du-source-code-of-my-world/</link>
+      <link>https://jueqingsizhe66.github.io/archives/yue-du-source-code-of-my-world/</link>
       <pubDate>Sun, 13 Aug 2017 22:15:41 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2017/08/13/yue-du-source-code-of-my-world/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/yue-du-source-code-of-my-world/</guid>
       <description>&lt;p&gt;识贤者，戒游戏，做贡献，时而等闲,工程化行之。&lt;/p&gt;
 &lt;h1 id=&#34;贤者&#34;&gt;贤者&lt;/h1&gt;
 &lt;ol&gt;
@@ -523,9 +523,9 @@ Nikola Tesla。他发现或者开发了一系列伟大创新的基础技术，�
     
     <item>
       <title>Ubuntu17.04 Install FAST8.16</title>
-      <link>https://jueqingsizhe66.github.io/blog/2017/05/19/ubuntu17-dot-04-install-fast8-dot-16/</link>
+      <link>https://jueqingsizhe66.github.io/archives/ubuntu17-dot-04-install-fast8-dot-16/</link>
       <pubDate>Fri, 19 May 2017 19:31:22 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2017/05/19/ubuntu17-dot-04-install-fast8-dot-16/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/ubuntu17-dot-04-install-fast8-dot-16/</guid>
       <description>&lt;p&gt;Something Noted in the process of installation FAST8.16 in the 32bit ubuntu17.04 system.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Download  &lt;a href=&#34;https://nwtc.nrel.gov/FAST8&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt; Fast8.16 &lt;/a&gt; and decompress&lt;/li&gt;
@@ -725,9 +725,9 @@ vim NRELOffshrBsline5MW_Onshore_ServoDyn.dat
     
     <item>
       <title>Physics and Maths</title>
-      <link>https://jueqingsizhe66.github.io/blog/2016/09/29/physics-and-maths/</link>
+      <link>https://jueqingsizhe66.github.io/archives/physics-and-maths/</link>
       <pubDate>Thu, 29 Sep 2016 03:27:34 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2016/09/29/physics-and-maths/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/physics-and-maths/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;http://baike.baidu.com/link?url=EAjClF31Nh45czy0-8dYscX-hkcI8qOxCzsmWWiXN6yDdhQh18-Avf_UAiwFBNk9F3vKh0dKTSBzitXzqYgmvn6w5e9hwmZ5_yvYP7g9ARnJbDG8vH9jEkSDwL7y8rIK&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;濮祖荫&lt;/a&gt;(歌手朴树的父亲):&amp;ldquo;数学背后有物理，物理需要通过数学来表达&amp;rdquo;。数学方程(表达式)需要你通过物理直觉去思考，去书写。&lt;/p&gt;
 &lt;p&gt;濮说做研究的过程都是提出一个模型，找到问题的本质，针对围绕本质的几个变量进行研究，来近似替代现实的复杂模型（这个简化的思想对我有帮助）&lt;/p&gt;
 &lt;p&gt;Only some links for physics and maths,&lt;/p&gt;
@@ -745,13 +745,53 @@ vim NRELOffshrBsline5MW_Onshore_ServoDyn.dat
     
     <item>
       <title>Jump Out of Ontology</title>
-      <link>https://jueqingsizhe66.github.io/blog/2016/09/28/jump-out-of-ontology/</link>
+      <link>https://jueqingsizhe66.github.io/archives/jump-out-of-ontology/</link>
       <pubDate>Wed, 28 Sep 2016 23:21:06 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2016/09/28/jump-out-of-ontology/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/jump-out-of-ontology/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Tool&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;工具&lt;/a&gt;(进一步可以参考&lt;a href=&#34;https://zhidao.baidu.com/share/4ee9bd642cdd8cc40d654d3e6096b35d.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;The design of everyday things&lt;/a&gt;)之内，讲究的是如何设计这个东西(制作者角度)，可能更多讲的是设计的东西，而不是完成的功能，更多用于写技术路线
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/ontology/inner.png&#34; alt=&#34;inner1&#34;&gt;&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/ontology/inner.png&#34; alt=&#34;inner1&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;p&gt;工具之外，讲究的是从工具的外头看这个东西（眼睛放在工具外面,使用者角度），从工具外看黑夹子的工具，看他在不同的工况下能够实现什么功能？ 所以更多用于写软件说明书。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/ontology/outer.png&#34; alt=&#34;outer&#34;&gt;&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/ontology/outer.png&#34; alt=&#34;outer&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Language&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;语言&lt;/a&gt;之内和语言之外（站在一个本不存在逻辑体之外）&lt;/p&gt;
 &lt;p&gt;语言之内 说的是语言如何创造出来，如何写一个解释器，怎么设计这门语言，添加那些语言特性&lt;a href=&#34;http://jueqingsizhe66.github.io/blog/2016/02/27/the-fourth-interpreter-about-the-traceproc/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;(参考EOPL语言特性)&lt;/a&gt;，语言的语法怎么样等等&lt;/p&gt;
 &lt;p&gt;语言之外是指运用这门语言 我能够解决某个工况问题，某个实际问题，某个数值问题，&lt;/p&gt;
@@ -760,7 +800,27 @@ vim NRELOffshrBsline5MW_Onshore_ServoDyn.dat
 &lt;p&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Domain&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;领域&lt;/a&gt;之内和领域之外， 领域之内是指从专业的角度进行介绍，领域之外是平民（不懂专业知识）的角度进行解释。&lt;/p&gt;
 &lt;p&gt;工具、语言、问题、领域等都可以归结为本体&lt;a href=&#34;https://en.wikipedia.org/wiki/Ontology&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;ontology&lt;/a&gt;论的&lt;a href=&#34;https://en.wikipedia.org/wiki/Knowledge&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;知识&lt;/a&gt;(进一步参考&lt;a href=&#34;https://en.wikipedia.org/wiki/Knowledge_Graph&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;knowledge_graph&lt;/a&gt;以及 &lt;a href=&#34;https://en.wikipedia.org/wiki/Knowledge_representation_and_reasoning&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;knowledge-presentation and reasoning&lt;/a&gt;)。
 &lt;a href=&#34;https://en.wikipedia.org/wiki/Ontology_%28information_science%29&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Ontology (information science)&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/ontology/ontology.jpg&#34; alt=&#34;ontology&#34;&gt;&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/ontology/ontology.jpg&#34; alt=&#34;ontology&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;p&gt;其中，亚里斯多德指出本体论&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;what it is (its &amp;lsquo;whatness&amp;rsquo;, quidditas or essence)&lt;/li&gt;
@@ -801,10 +861,90 @@ A是一种***技术，解决了***问题，帮助我们实现了***，帮助我�
 &lt;p&gt;由于存在体有很多个，于是需要确定他们的存在关系，于是选用了whereness(也就是空间维度，每加一层维度都可以确定一个y=ax+b的关系，可以参考&lt;a href=&#34;https://en.wikipedia.org/wiki/Support_vector_machine&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;SVM&lt;/a&gt;,
 所有的算法问题都最终可以归结为&lt;a href=&#34;https://en.wikipedia.org/wiki/Reduction_%28mathematics%29&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;降阶&lt;/a&gt;和&lt;a href=&#34;https://en.wikipedia.org/wiki/Mathematical_optimization&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;优化&lt;/a&gt;（优化只是一种思想）问题，而&lt;a href=&#34;https://en.wikipedia.org/wiki/Least_squares&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;最小二乘法&lt;/a&gt;却是贯穿始终，最小二乘法进一步其实original from y=ax+b)&lt;/p&gt;
 &lt;p&gt;关于最小二乘法的总结如下：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/ontology/leastSquare1.jpg&#34; alt=&#34;leastsquare1&#34;&gt;
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/ontology/leastSquare2.jpg&#34; alt=&#34;leastsquare2&#34;&gt;
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/ontology/leastSquare3.jpg&#34; alt=&#34;leastsquare3&#34;&gt;
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/ontology/leastSquare4.jpg&#34; alt=&#34;leastsquare4&#34;&gt;&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/ontology/leastSquare1.jpg&#34; alt=&#34;leastsquare1&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/ontology/leastSquare2.jpg&#34; alt=&#34;leastsquare2&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/ontology/leastSquare3.jpg&#34; alt=&#34;leastsquare3&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/ontology/leastSquare4.jpg&#34; alt=&#34;leastsquare4&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;p&gt;最小二乘法另外一些描述&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;a href=&#34;http://www.cnblogs.com/emanlee/archive/2011/08/03/2125712.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;最小二乘法 least square method &lt;/a&gt;&lt;/li&gt;
@@ -841,10 +981,30 @@ digraph G{
     
     <item>
       <title>prolog小游戏</title>
-      <link>https://jueqingsizhe66.github.io/blog/2016/07/19/prologxiao-you-xi/</link>
+      <link>https://jueqingsizhe66.github.io/archives/prologxiao-you-xi/</link>
       <pubDate>Tue, 19 Jul 2016 19:35:37 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2016/07/19/prologxiao-you-xi/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/prolog/games.png&#34; alt=&#34;games&#34;&gt;&lt;/p&gt;
+      <guid>https://jueqingsizhe66.github.io/archives/prologxiao-you-xi/</guid>
+      <description>&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/prolog/games.png&#34; alt=&#34;games&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;p&gt;prolog 作为一门logic programming language,逻辑推理是它的强项。游戏也是一个逻辑推理的过程，prolog照样可以，通过该游戏的写作可以让你熟悉&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;事实和规则。&lt;/li&gt;
@@ -1061,9 +1221,9 @@ merge(List1,[Y|List2],[Y|List3]) :- merge(List1,List,List3).
     
     <item>
       <title>能真正教会你编程能力的是重写</title>
-      <link>https://jueqingsizhe66.github.io/blog/2016/04/15/neng-zhen-zheng-jiao-hui-ni-bian-cheng-neng-li-de-shi-zhong-xie/</link>
+      <link>https://jueqingsizhe66.github.io/archives/neng-zhen-zheng-jiao-hui-ni-bian-cheng-neng-li-de-shi-zhong-xie/</link>
       <pubDate>Fri, 15 Apr 2016 21:50:10 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2016/04/15/neng-zhen-zheng-jiao-hui-ni-bian-cheng-neng-li-de-shi-zhong-xie/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/neng-zhen-zheng-jiao-hui-ni-bian-cheng-neng-li-de-shi-zhong-xie/</guid>
       <description>&lt;p&gt;写了很多的matlab，感觉就那样！
 编了那么多数值fortran代码，也不见自己编程有多厉害！
 练了那么多的java项目，也感觉自己的技术还不见飞涨！
@@ -1094,9 +1254,9 @@ merge(List1,[Y|List2],[Y|List3]) :- merge(List1,List,List3).
     
     <item>
       <title>Ubuntu15.10-32bit-安装FastV8.15</title>
-      <link>https://jueqingsizhe66.github.io/blog/2016/04/15/ubuntu15-dot-10-32bit-an-zhuang-fastv8-dot-15/</link>
+      <link>https://jueqingsizhe66.github.io/archives/ubuntu15-dot-10-32bit-an-zhuang-fastv8-dot-15/</link>
       <pubDate>Fri, 15 Apr 2016 14:46:04 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2016/04/15/ubuntu15-dot-10-32bit-an-zhuang-fastv8-dot-15/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/ubuntu15-dot-10-32bit-an-zhuang-fastv8-dot-15/</guid>
       <description>&lt;p&gt;Fast8.15在4-15又发布了新版本，增加了相关功能，具体参考&lt;a href=&#34;https://nwtc.nrel.gov/FAST8&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;FastV8.15&lt;/a&gt;.
 下面就32bit ubuntu机子的安装过程做简要记录。&lt;/p&gt;
 &lt;ol&gt;
@@ -1357,9 +1517,9 @@ NRELOffshrBsline5MW_Onshore_ServoDyn.dat 更改对应的DLL_FileName 为 ServoDa
     
     <item>
       <title>program-as-data</title>
-      <link>https://jueqingsizhe66.github.io/blog/2016/03/30/program-as-data/</link>
+      <link>https://jueqingsizhe66.github.io/archives/program-as-data/</link>
       <pubDate>Wed, 30 Mar 2016 13:23:21 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2016/03/30/program-as-data/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/program-as-data/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;http://www.ccs.neu.edu/home/matthias/HtDP2e/part_three.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;A program is like an essay. The first version is a draft, and drafts demand editing.&lt;/a&gt;
 Program is also can be seen as data.&lt;/p&gt;
 &lt;ol&gt;
@@ -1377,7 +1537,27 @@ Program is also can be seen as data.&lt;/p&gt;
 &lt;p&gt;函数其实也是expression，它可以被consume也可以被produce.凭着这个脑中的
 印象是否可以帮助你继续理解abstration和程序即数据的思想。&lt;/p&gt;
 &lt;p&gt;所有的函数和数据犹如花生的壳和仁的关系。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/lisp/peanut.jpeg&#34; alt=&#34;peanut&#34;&gt;&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/lisp/peanut.jpeg&#34; alt=&#34;peanut&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;p&gt;只有加壳就相当于是创建一层抽象，把类似的东西包裹起来，或者也可以换着一种思路
 （每个壳里面都包着类似的花生仁，只不过可能存在些许不同）&lt;/p&gt;
 &lt;h3 id=&#34;two-similar-functions&#34;&gt;Two similar functions&lt;/h3&gt;
@@ -1429,7 +1609,27 @@ Program is also can be seen as data.&lt;/p&gt;
 &lt;p&gt;这个典型的过程就是函数抽象。进一步可以参考&lt;a href=&#34;http://www.ccs.neu.edu/home/matthias/HtDP2e/part_three.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;HowToDesginProgram&lt;/a&gt;和&lt;a href=&#34;http://www.ccs.neu.edu/home/matthias/BTLS/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;TheLittleScheme&lt;/a&gt;.
 Note: 你需要解析的其实是花生仁，但是你不得不先把壳打开或者通过另外一种方式，比如红外线等技术把它识别出来。&lt;/p&gt;
 &lt;p&gt;也就是说进一步归纳的话，你首先得recognise识别出来，然后才能进行解析（提取其中的蛋白质、脂肪、热量等）。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/lisp/baby.png&#34; alt=&#34;mybaby&#34;&gt;&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/lisp/baby.png&#34; alt=&#34;mybaby&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;p&gt;保护它的壳，给它提供营养，防止它受到感染和伤害。&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;http://pressbin.com/tools/excel_to_html_table/index.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;表格转换链接&lt;/a&gt;.&lt;/p&gt;
 &lt;table&gt;
@@ -1477,9 +1677,9 @@ Note: 你需要解析的其实是花生仁，但是你不得不先把壳打开�
     
     <item>
       <title>Some notations in the design of the language</title>
-      <link>https://jueqingsizhe66.github.io/blog/2016/02/26/some-notations-in-the-design-of-the-language/</link>
+      <link>https://jueqingsizhe66.github.io/archives/some-notations-in-the-design-of-the-language/</link>
       <pubDate>Fri, 26 Feb 2016 15:35:17 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2016/02/26/some-notations-in-the-design-of-the-language/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/some-notations-in-the-design-of-the-language/</guid>
       <description>&lt;p&gt;What does it mean by Kleene star? What can it be used for?
 It is not so important,but a good tools to record the grammer
 of the language.目的就是如何更简洁地定义语法。&lt;/p&gt;
@@ -1862,9 +2062,9 @@ expression的具体定义是&lt;/p&gt;
     
     <item>
       <title>斯基摩斯的乐园schemers</title>
-      <link>https://jueqingsizhe66.github.io/blog/2016/02/14/si-ji-mo-si-de-le-yuan-schemers/</link>
+      <link>https://jueqingsizhe66.github.io/archives/si-ji-mo-si-de-le-yuan-schemers/</link>
       <pubDate>Sun, 14 Feb 2016 14:11:54 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2016/02/14/si-ji-mo-si-de-le-yuan-schemers/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/si-ji-mo-si-de-le-yuan-schemers/</guid>
       <description>&lt;p&gt;作为一个schemer，你得去学习，编程，社交，工作，保持畅通等,
 当然你最不该错过的是&lt;a href=&#34;http://www.schemers.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;斯基摩斯的乐园&lt;/a&gt;。&lt;/p&gt;
 &lt;h2 id=&#34;学习&#34;&gt;学习&lt;/h2&gt;
@@ -1939,9 +2139,9 @@ expression的具体定义是&lt;/p&gt;
     
     <item>
       <title>基于现实，抽象现实，模拟现实</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/10/05/ji-yu-xian-shi-chou-xiang-xian-shi-mo-ni-xian-shi/</link>
+      <link>https://jueqingsizhe66.github.io/archives/ji-yu-xian-shi-chou-xiang-xian-shi-mo-ni-xian-shi/</link>
       <pubDate>Mon, 05 Oct 2015 10:04:47 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/10/05/ji-yu-xian-shi-chou-xiang-xian-shi-mo-ni-xian-shi/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/ji-yu-xian-shi-chou-xiang-xian-shi-mo-ni-xian-shi/</guid>
       <description>&lt;p&gt;信息与知识的不同在于，信息是暂时不被理解的知识，而当它被理解，并被组织，他也就成了知识。&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;你的课题是什么&#34;&gt;你的课题是什么？&lt;/h2&gt;
@@ -1991,14 +2191,34 @@ SQCA原则，SQCA（situations&amp;mdash;conflict&amp;ndash;Questions&amp;mdash;
     
     <item>
       <title>TurbSim 8个湍流模型的对比</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/08/10/turbsim-8ge-tuan-liu-mo-xing-de-dui-bi/</link>
+      <link>https://jueqingsizhe66.github.io/archives/turbsim-8ge-tuan-liu-mo-xing-de-dui-bi/</link>
       <pubDate>Mon, 10 Aug 2015 01:00:47 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/08/10/turbsim-8ge-tuan-liu-mo-xing-de-dui-bi/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/turbsim-8ge-tuan-liu-mo-xing-de-dui-bi/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://nwtc.nrel.gov/TurbSim&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;TurbSim&lt;/a&gt;,是NREL提供的一个小的开源工具， 用于产生湍流风，设置的时候可能对于不同模型会有不同的参数，基于范本进行了一番分析。当然测试文件在TurbSim的Test文件下的inp文件夹下。&lt;/p&gt;
 &lt;p&gt;如果对那些湍流模型做一个对比，那样是否可以更加清晰的看出不同呢？
 于是就有了下面的shell分析脚本。&lt;/p&gt;
 &lt;p&gt;TurbSim产生的风力机一圈的入流截面模型（仅仅一个截面，全场是因为捕捉了很多个截面）&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/fast/turbsim.png&#34; alt=&#34;Turbsim&#34;&gt;&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/fast/turbsim.png&#34; alt=&#34;Turbsim&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;h2 id=&#34;shell解析脚本&#34;&gt;Shell解析脚本&lt;/h2&gt;
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;#!/bin/bash - 
 #===============================================================================
@@ -2148,7 +2368,6 @@ grep -n &amp;quot;GridWidth&amp;quot; *.inp|awk -F: &#39;{print $1,$3}&#39;|sed 
 &lt;ol start=&#34;3&#34;&gt;
 &lt;li&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2 id=&#34;shell产生的结果如下&#34;&gt;shell产生的结果如下：&lt;/h2&gt;
 &lt;pre&gt;&lt;code&gt;#################
 ## RandSeed1 ##
 #################
@@ -2626,9 +2845,9 @@ vonKarm      30.0
     
     <item>
       <title>Incompact3d的Makefile及DNS算法</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/06/22/incompact3dde-makefileji-dnssuan-fa/</link>
+      <link>https://jueqingsizhe66.github.io/archives/incompact3dde-makefileji-dnssuan-fa/</link>
       <pubDate>Mon, 22 Jun 2015 16:52:20 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/06/22/incompact3dde-makefileji-dnssuan-fa/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/incompact3dde-makefileji-dnssuan-fa/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://code.google.com/p/incompact3d&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Incompact3d&lt;/a&gt;是一个开源的基于fortran语言编写的DNS求解器，也是我研究生期间使用的开源源代码。
 Incompact3d整体框架的介绍可以参考软件的&lt;a href=&#34;https://code.google.com/p/incompact3d/downloads/detail?name=user_guide_incompact3d_V1-1.pdf&amp;amp;can=2&amp;amp;q=&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;user-guide&lt;/a&gt;和文献&lt;a href=&#34;http://www.imperial.ac.uk/media/imperial-college/research-centres-and-groups/turbulence-mixing-and-flow-control-group/2009_LAIZET_JCP.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;High-order-compact schemes for incompressible flows: a simple and effcient method with the quasi-spectral accuary&lt;/a&gt;,还可以搜索&lt;a href=&#34;http://www.imperial.ac.uk/tmfc&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;sylvain Laziet&lt;/a&gt; 相关的文章 ，只不过他并不是成熟的软件，很多的编译和后处理都可能出现问题，下面是我使用过程遇到的一些问题。
 当然主要过程是，通过makefile编译，然后运行incompact3d，最后处理计算结果。&lt;/p&gt;
@@ -2800,9 +3019,9 @@ realclean: clean
     
     <item>
       <title>Incompact3d如何通过结果处理出迹线</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/06/22/incompact3dru-he-tong-guo-jie-guo-chu-li-chu-ji-xian/</link>
+      <link>https://jueqingsizhe66.github.io/archives/incompact3dru-he-tong-guo-jie-guo-chu-li-chu-ji-xian/</link>
       <pubDate>Mon, 22 Jun 2015 16:20:48 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/06/22/incompact3dru-he-tong-guo-jie-guo-chu-li-chu-ji-xian/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/incompact3dru-he-tong-guo-jie-guo-chu-li-chu-ji-xian/</guid>
       <description>&lt;p&gt;Incompact3D获得的数据都是二进制的数据文件，为了获得内部的文件
 需要进一步通过编程获得，下面是一个获得pathline的源代码。&lt;/p&gt;
 &lt;p&gt;说明：&lt;/p&gt;
@@ -2902,9 +3121,9 @@ END PROGRAM b
     
     <item>
       <title>积累和重写对于程序员很重要</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/06/22/ji-lei-he-zhong-xie-dui-yu-cheng-xu-yuan-hen-zhong-yao/</link>
+      <link>https://jueqingsizhe66.github.io/archives/ji-lei-he-zhong-xie-dui-yu-cheng-xu-yuan-hen-zhong-yao/</link>
       <pubDate>Mon, 22 Jun 2015 15:35:19 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/06/22/ji-lei-he-zhong-xie-dui-yu-cheng-xu-yuan-hen-zhong-yao/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/ji-lei-he-zhong-xie-dui-yu-cheng-xu-yuan-hen-zhong-yao/</guid>
       <description>&lt;p&gt;积累，你才能厚积而薄发。
 重写，你才能进一步认识你的积累.
 重写有时候会带来对于知识的进一步深入的理解.&lt;/p&gt;
@@ -2920,16 +3139,36 @@ END PROGRAM b
     
     <item>
       <title>人的赌徒心理</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/06/18/ren-de-du-tu-xin-li/</link>
+      <link>https://jueqingsizhe66.github.io/archives/ren-de-du-tu-xin-li/</link>
       <pubDate>Thu, 18 Jun 2015 16:35:30 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/06/18/ren-de-du-tu-xin-li/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/ren-de-du-tu-xin-li/</guid>
       <description>&lt;p&gt;大多数人不会觉得自己的判断是错误的,他们觉得自己能够赢下不确定性。
 我们很多人对自己的行为真的无法做到清楚的解释,生活中的很多问题都是
 概率性问题，真品还是赝品？需要还是不需要？等。不确定性总是我们生活中
 不可缺少的自演，而很多赌徒却是相信自己的运气，而赌场却相信科学。见好就收
 能够舍军保帅的人永远是少数。所以很多情况下是，房价长的时候，好好地，房价
 跌的时候，经常就会有跳楼事件（股市也是如此）。
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/dubo.jpg&#34; alt=&#34;gambling&#34;&gt;&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/dubo.jpg&#34; alt=&#34;gambling&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;p&gt;参考 &lt;a href=&#34;http://blog.csdn.net/sw2wolf/article/details/7086230&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;孙惟微：《赌客信条：你不可不知的行为经济学》&lt;/a&gt;。这是一本相当有趣的人类行为学方面的书籍。
 　“固守现状”并非现状真的多么吸引人，根本原因在于人们害怕懊悔，厌恶悔恨。你觉得自己害怕懊悔和厌恶悔恨？&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;人生而需要面对未来，而未来总有诸多的不确定性。需要我们不断地作出选择。因而人生而为“赌客”。
@@ -3016,9 +3255,9 @@ END PROGRAM b
     
     <item>
       <title>阅读openfoam源代码的小工具</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/06/10/yue-du-openfoamyuan-dai-ma-de-xiao-gong-ju/</link>
+      <link>https://jueqingsizhe66.github.io/archives/yue-du-openfoamyuan-dai-ma-de-xiao-gong-ju/</link>
       <pubDate>Wed, 10 Jun 2015 23:19:42 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/06/10/yue-du-openfoamyuan-dai-ma-de-xiao-gong-ju/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/yue-du-openfoamyuan-dai-ma-de-xiao-gong-ju/</guid>
       <description>&lt;ul&gt;
 &lt;li&gt;当你阅读源代码你是否厌倦了cd来cd去，于是想把他们堆在一个文件内&lt;/li&gt;
 &lt;li&gt;而堆起来又不好看，于是想要打扮一下&lt;/li&gt;
@@ -3182,9 +3421,9 @@ PISO
     
     <item>
       <title>U&#43;-Y&#43;</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/05/31/u-plus-y-plus/</link>
+      <link>https://jueqingsizhe66.github.io/archives/u-plus-y-plus/</link>
       <pubDate>Sun, 31 May 2015 09:31:05 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/05/31/u-plus-y-plus/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/u-plus-y-plus/</guid>
       <description>&lt;p&gt;这个gnuplot脚本是我用于处理Incompact3d产生出来的统计结果(如何统计部分，暂时未写)的画图脚本。&lt;/p&gt;
 &lt;h2 id=&#34;数据段&#34;&gt;数据段&lt;/h2&gt;
 &lt;p&gt;注意gnuplot处理数据文件按照空行划分index部分。所以下面的部分总共有四个index，调用方式是&lt;/p&gt;
@@ -3304,7 +3543,27 @@ plot  [0:148][0:20]  &amp;quot;umfit.dat&amp;quot; index 0 w lp pt 1  t &amp;quo
 
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h2 id=&#34;处理结果&#34;&gt;处理结果&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/incompact3d/fit1.png&#34; alt=&#34;处理结果&#34;&gt;&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/incompact3d/fit1.png&#34; alt=&#34;处理结果&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;h2 id=&#34;一些实时监测部分&#34;&gt;一些实时监测部分&lt;/h2&gt;
 &lt;h3 id=&#34;执行部分&#34;&gt;执行部分：&lt;/h3&gt;
 &lt;p&gt;&lt;strong&gt;a.sh&lt;/strong&gt;&lt;/p&gt;
@@ -3453,9 +3712,9 @@ crontab -e
     
     <item>
       <title>Haskell在脑海里的踪迹</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/05/29/haskellzai-nao-hai-li-de-zong-ji/</link>
+      <link>https://jueqingsizhe66.github.io/archives/haskellzai-nao-hai-li-de-zong-ji/</link>
       <pubDate>Fri, 29 May 2015 14:59:44 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/05/29/haskellzai-nao-hai-li-de-zong-ji/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/haskellzai-nao-hai-li-de-zong-ji/</guid>
       <description>&lt;p&gt;基于范畴理论，在每一个范畴里面都包含一个objects和fmap关系，利用functor映射到不同的category。
 可以继续思考的是一个fmap:(*-&amp;gt;*)
 一个fmap是可以充当形参的，因为他正如在一个&lt;a href=&#34;https://www.haskell.org/onlinereport/list.html#sect17.3&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;List module&lt;/a&gt;中
@@ -3600,13 +3859,33 @@ Haskell类类似于java的interface，定义的是一个协议，而不是一个
     
     <item>
       <title>梁公-问题的专注者</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/05/28/liang-gong-wen-ti-de-zhuan-zhu-zhe/</link>
+      <link>https://jueqingsizhe66.github.io/archives/liang-gong-wen-ti-de-zhuan-zhu-zhe/</link>
       <pubDate>Thu, 28 May 2015 12:57:00 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/05/28/liang-gong-wen-ti-de-zhuan-zhu-zhe/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/liang-gong-wen-ti-de-zhuan-zhu-zhe/</guid>
       <description>&lt;p&gt;为什么要想到要写关于&lt;a href=&#34;http://zh.wikipedia.org/zh-cn/%E6%A2%81%E6%BC%B1%E6%BA%9F&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;梁公&lt;/a&gt;的故事和著作，因为他真的是以
 一个学者的心态在思考着社会、国家、学问等事情。从14岁起，
 他的脑袋就开始因为一个又一个问题链，有了问题就开始解决问题。
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/liang.jpg&#34; alt=&#34;梁簌溟&#34;&gt;&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/liang.jpg&#34; alt=&#34;梁簌溟&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;p&gt;梁公是一个哲学家、儒家大师、思想家，曾有一个外国人专程过来找他来讨论哲学问题，并著书。其实我本不该写这篇，因为我做的功课不够，写的没质感，也缺乏深度。
 我只是想把脑袋里对老先生的一点印象写出来，当然文章写出来不应该像是橡皮擦一样，就直接忘记了，而是当做一种回忆，也算一种传播。下面是梁公的基本著作：&lt;/p&gt;
 &lt;ul&gt;
@@ -3614,7 +3893,27 @@ Haskell类类似于java的interface，定义的是一个协议，而不是一个
 &lt;li&gt;&lt;a href=&#34;http://vdisk.weibo.com/s/CROEYjOwnFec&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;中国文化要义&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;http://vdisk.weibo.com/s/znhJhEISk7Wi3&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;人心与人生&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;http://vdisk.weibo.com/s/sVlSCa34QXkZ0&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;东西文化及其哲学&lt;/a&gt;
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/liangsu1.jpg&#34; alt=&#34;梁簌溟2&#34;&gt;&lt;/li&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/liangsu1.jpg&#34; alt=&#34;梁簌溟2&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;每一次，看到梁公一脸的严肃，都让我宁静了一些，多了一些思考。写得不多当作是一点回忆。&lt;/p&gt;
 &lt;p&gt;然而我倒是清楚一点，博客、微博、广告之类的作用，应该跟&lt;a href=&#34;http://www.ruanyifeng.com/blog/2013/08/influence_the_psychology_of_persuasion.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;公共的承认和承诺&lt;/a&gt;一样，能让人去遵守，所以当你写出来，你就会尽量想着去贴合他。&lt;/p&gt;
@@ -3641,14 +3940,34 @@ Haskell类类似于java的interface，定义的是一个协议，而不是一个
     
     <item>
       <title>给自己写作的提醒</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/05/27/gei-zi-ji-xie-zuo-de-ti-xing/</link>
+      <link>https://jueqingsizhe66.github.io/archives/gei-zi-ji-xie-zuo-de-ti-xing/</link>
       <pubDate>Wed, 27 May 2015 16:31:32 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/05/27/gei-zi-ji-xie-zuo-de-ti-xing/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/gei-zi-ji-xie-zuo-de-ti-xing/</guid>
       <description>&lt;ul&gt;
 &lt;li&gt;为什么写作？&lt;/li&gt;
 &lt;li&gt;该写什么？&lt;/li&gt;
 &lt;li&gt;还需要什么？
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/xinran/lake.png&#34; alt=&#34;湖泊给你宁静&#34;&gt;&lt;/li&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/xinran/lake.png&#34; alt=&#34;湖泊给你宁静&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h1 id=&#34;为什么写作&#34;&gt;为什么写作？&lt;/h1&gt;
 &lt;pre&gt;&lt;code&gt;反思自己的所作所为，记得有一个生活培训教程，提出了一个问题方案，来提醒自己每天的记录。
@@ -3660,10 +3979,50 @@ Haskell类类似于java的interface，定义的是一个协议，而不是一个
 - What will I do differently tomorrow?  明天我将做什么不同的？
 - Thought for the day
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/xinran/enjoy.png&#34; alt=&#34;享受&#34;&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/xinran/enjoy.png&#34; alt=&#34;享受&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
 写作的目的就是让你理解自己，理解问题，理解规律，理解科学，理解自然界。&lt;/p&gt;
 &lt;h1 id=&#34;该写什么&#34;&gt;该写什么？&lt;/h1&gt;
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/xinran/dance.png&#34; alt=&#34;银杏&#34;&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/xinran/dance.png&#34; alt=&#34;银杏&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
 问题分为很多种，暂时你可以知道的科学问题，关注的是某种事物关于某个因素的
 变化规律;而工艺问题则更加关注的我从几种方案中，选择一种比较符合生产需求和利益需求的方案，而不一定是科学问题;当然还有社会问题。
 给你自己的枷锁是从问题的角度触发,注重直观解释（也就是你对这个问题的看法）。 讲清楚采用这个方法的背景是什么，解决问题背后的思维过程是什么？
@@ -3675,13 +4034,53 @@ Haskell类类似于java的interface，定义的是一个协议，而不是一个
 这样你的文章才会是对别人的一种帮助。一定要写出方法背后的直观思想。
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h1 id=&#34;不该写什么&#34;&gt;不该写什么？&lt;/h1&gt;
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/xinran/cow.png&#34; alt=&#34;最终你会得到&#34;&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/xinran/cow.png&#34; alt=&#34;最终你会得到&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
 一上来扑上太多的细节，虽然刚接触新的东西都是一堆新的杂的东西，但是也会让人胆却。列出我定义什么？ 我们分为以下步骤,完全不提问题所在(这其实也是一个问题)。
 但是一开始的信息的爆炸性吸取还是必要的，一定要听过这一节（在你知道问题的情况下）。&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;一些引申的东西，能够体现出你对这个问题的理解和调研的深度，但是过于发散，彰显自己NB的时候，也在左2B的事情，抓不到重点，不要过于泛滥(当然一定要多加联想，这是大脑的本性，关系学)。
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h1 id=&#34;还需要什么&#34;&gt;还需要什么？&lt;/h1&gt;
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/xinran/jump.png&#34; alt=&#34;跳跃&#34;&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/xinran/jump.png&#34; alt=&#34;跳跃&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
 参考 &lt;a href=&#34;http://mindhacks.cn/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;刘未鹏&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -3719,14 +4118,34 @@ Haskell类类似于java的interface，定义的是一个协议，而不是一个
 &lt;/ul&gt;
 &lt;h2 id=&#34;把知识嚼碎httpmindhackscn20150127escape-from-your-shawshank-part5-2-platos-cave&#34;&gt;&lt;a href=&#34;http://mindhacks.cn/2015/01/27/escape-from-your-shawshank-part5-2-platos-cave/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;把知识嚼碎&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;别人的文章是一扇又一扇的窗户，通向外在的世界.
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/windows_thumb.jpg&#34; alt=&#34;窗户&#34;&gt;&lt;/p&gt;</description>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/windows_thumb.jpg&#34; alt=&#34;窗户&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Tecplot的云图</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/05/27/tecplotde-yun-tu/</link>
+      <link>https://jueqingsizhe66.github.io/archives/tecplotde-yun-tu/</link>
       <pubDate>Wed, 27 May 2015 15:55:21 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/05/27/tecplotde-yun-tu/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/tecplotde-yun-tu/</guid>
       <description>&lt;p&gt;Tecplot 是工程绘图的神器。 下面是一种格式，导入tecplot即可。
 前面三列是x y z后面分别是ux ，udx，一定要写好文件头。&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;TITLE=      qvalue 
@@ -3761,9 +4180,9 @@ ZONE I=  1000,J= 10,K= 20,F=POINT
     
     <item>
       <title>伟大的范畴理论</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/05/21/wei-da-de-fan-chou-li-lun/</link>
+      <link>https://jueqingsizhe66.github.io/archives/wei-da-de-fan-chou-li-lun/</link>
       <pubDate>Thu, 21 May 2015 20:56:51 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/05/21/wei-da-de-fan-chou-li-lun/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/wei-da-de-fan-chou-li-lun/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;http://yogsototh.github.io/Category-Theory-Presentation/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;范畴理论&lt;/a&gt;是数学上的一种新的语言和框架结构.
 对于程序员来说，它是另一种思考方式，一种极度有效的方式来提取规律(Extremely
 efficient for generalization)
@@ -3778,12 +4197,92 @@ Programming is doing Math.编成的工作其实就是数学的工作。&lt;/p&gt
 &lt;li&gt;a Composition law (∘)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Functor : (ob-&amp;gt;ob)
-&lt;img src=&#34;http://yogsototh.github.io/Category-Theory-Presentation/categories/img/mp/functor.png&#34; alt=&#34;Functor part1&#34;&gt;&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;http://yogsototh.github.io/Category-Theory-Presentation/categories/img/mp/functor.png&#34; alt=&#34;Functor part1&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;p&gt;Functor : (hom-&amp;gt;hom)
-&lt;img src=&#34;http://yogsototh.github.io/Category-Theory-Presentation/categories/img/mp/functor-morphism.png&#34; alt=&#34;Functor part2&#34;&gt;&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;http://yogsototh.github.io/Category-Theory-Presentation/categories/img/mp/functor-morphism.png&#34; alt=&#34;Functor part2&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;p&gt;Endofunctors:
-&lt;img src=&#34;http://yogsototh.github.io/Category-Theory-Presentation/categories/img/mp/functor-morphism.png&#34; alt=&#34;自指&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://yogsototh.github.io/Category-Theory-Presentation/categories/img/fractalcat.jpg&#34; alt=&#34;一只可爱的猫&#34;&gt;&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;http://yogsototh.github.io/Category-Theory-Presentation/categories/img/mp/functor-morphism.png&#34; alt=&#34;自指&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;http://yogsototh.github.io/Category-Theory-Presentation/categories/img/fractalcat.jpg&#34; alt=&#34;一只可爱的猫&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;h2 id=&#34;categories-and-functors-form-a-category-cat&#34;&gt;Categories and functors form a category: Cat&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;ob(Cat) are categories&lt;/li&gt;
@@ -3803,9 +4302,9 @@ fmap (f.g) x= (fmap f . fmap g) x
     
     <item>
       <title>HaskellModule</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/05/20/haskellmodule/</link>
+      <link>https://jueqingsizhe66.github.io/archives/haskellmodule/</link>
       <pubDate>Wed, 20 May 2015 13:49:57 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/05/20/haskellmodule/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/haskellmodule/</guid>
       <description>&lt;p&gt;Reference &lt;a href=&#34;http://www.shuklan.com/haskell/lec05.html#/0/21&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Here&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;模块化，这样才能方便构建较大型的项目，解决更加复杂的问题。
 其中MyData.hs是模块文件
@@ -3900,21 +4399,61 @@ reportMeasurement m =reportMeasurement (convert m)
     
     <item>
       <title>加法之后也需减法</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/05/17/jia-fa-zhi-hou-ye-xu-jian-fa/</link>
+      <link>https://jueqingsizhe66.github.io/archives/jia-fa-zhi-hou-ye-xu-jian-fa/</link>
       <pubDate>Sun, 17 May 2015 22:46:35 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/05/17/jia-fa-zhi-hou-ye-xu-jian-fa/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/jia-fa-zhi-hou-ye-xu-jian-fa/</guid>
       <description>&lt;p&gt;老子道德经说&lt;a href=&#34;http://www.jdon.com/46727&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;道生一，一生二，二生三，三生万物&lt;/a&gt;，这句话符合构造定律Constructal Law.&lt;/p&gt;
 &lt;p&gt;学习过&lt;a href=&#34;http://www.cnblogs.com/haippy/archive/2012/06/04/2535197.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;git&lt;/a&gt;的人知道(可以参考&lt;a href=&#34;http://www.berlinix.com/it/git.php&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;git入门&lt;/a&gt;)，git体现的本质其实就是分支的思想,他就像是一块一块的&lt;a href=&#34;http://www.programblings.com/2008/06/07/the-illustrated-guide-to-recovering-lost-commits-with-git/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;积木&lt;/a&gt;一样。&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;http://think-like-a-git.net/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Thinking like a git&lt;/a&gt;教会我们 Facebook其实也是范畴的集合&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/tree.png&#34; alt=&#34;十分漂亮的树形图&#34;&gt;
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/city.jpg&#34; alt=&#34;城市的树形图&#34;&gt;&lt;/p&gt;</description>
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/tree.png&#34; alt=&#34;十分漂亮的树形图&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/city.jpg&#34; alt=&#34;城市的树形图&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>The greatest weapons</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/05/17/the-greatest-weapons/</link>
+      <link>https://jueqingsizhe66.github.io/archives/the-greatest-weapons/</link>
       <pubDate>Sun, 17 May 2015 19:01:59 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/05/17/the-greatest-weapons/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/the-greatest-weapons/</guid>
       <description>&lt;p&gt;Everything in Haskell has a Type
 Here are some Type declarations.&lt;/p&gt;
 &lt;p&gt;These are your greatest weapons.&lt;/p&gt;
@@ -4004,9 +4543,9 @@ Prelude&amp;gt; takeFive [1..]
     
     <item>
       <title>Haskell几个基本概念--学而无用--无以为用</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/05/16/haskellji-ge-ji-ben-gai-nian-xue-er-wu-yong-wu-yi-wei-yong/</link>
+      <link>https://jueqingsizhe66.github.io/archives/haskellji-ge-ji-ben-gai-nian-xue-er-wu-yong-wu-yi-wei-yong/</link>
       <pubDate>Sat, 16 May 2015 21:11:50 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/05/16/haskellji-ge-ji-ben-gai-nian-xue-er-wu-yong-wu-yi-wei-yong/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/haskellji-ge-ji-ben-gai-nian-xue-er-wu-yong-wu-yi-wei-yong/</guid>
       <description>&lt;ol&gt;
 &lt;li&gt;模式匹配
 = +起着一种模式匹配，=不要翻译成等于 最好翻译为如果匹配前面+ 则他的值为后面.-&amp;gt; 也起着一种类型的模式匹配。&lt;/li&gt;
@@ -4061,7 +4600,27 @@ if-else  这其实是一种控制语句，不能说Haskell放掉了控制语句�
 &lt;p&gt;函数的context引入了时间的关系。&lt;a href=&#34;http://www.jdon.com/45608&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt; 我们思考逻辑的时候，定义已经是确定的了。也正因为是确定的，才可以逻辑思考&lt;/a&gt;。
 函数不存在状态，所以计算机加入了一个特殊的东西：时钟。值++时间=状态++，在可以忽视时序问题时，可以直接有值=状态。忽视时序问题，就相当于我们平时说的异步。若果单单使用锁，只是一种耗费资源手段。而我们看到无论是唤醒线程，还是延时读取，都是依赖时钟
 ##+ 小结：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/desk.jpg&#34; alt=&#34;桌子&#34;&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/desk.jpg&#34; alt=&#34;桌子&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
 一张桌子为案例，分解思维的人看到后首先想到这张桌子由什么构成，长宽高和材质，这些都是桌子的内部细节；而组合思维的人看到后，环顾四周，看看其处于什么环境，如果放在教室中，他判断这是一张课桌，如果放在食堂，他判断这是一张饭桌。&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;从这个例子可以看出组合是从行为（运动、变化、时间）角度看待 世界的，“课桌”、“饭桌”中的“课”和“饭”在这里是动词，意为“上课用”、“吃饭用”的意思，“用”是动词，同一个桌子出现在不同的环境中发挥不同的 作用。而分解思维只研究空间，只研究桌子的空间结构是什么，甚至不研究为什么是四条腿，为什么每条腿长度相同，分解思维根本不考虑这些，不用考虑任何桌子 之外的世界，在分解思维中没有万有引力、没有地面的水平、没有书房和餐厅，只有空间，分解只考虑空间的组成结构。看来分解和组合是相互依存的，分解时研究 的是空间，组合时研究的是行为，把桌子放进餐厅的意义是期待使用它吃饭这样一种运动[组合运动？]。 
 &lt;/code&gt;&lt;/pre&gt;
@@ -4076,9 +4635,9 @@ monad是从范畴论引入， 范畴其实就是一个集合，只不过对这�
     
     <item>
       <title>language limits the world of you</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/05/16/language-limits-the-world-of-you/</link>
+      <link>https://jueqingsizhe66.github.io/archives/language-limits-the-world-of-you/</link>
       <pubDate>Sat, 16 May 2015 16:17:39 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/05/16/language-limits-the-world-of-you/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/language-limits-the-world-of-you/</guid>
       <description>&lt;ol&gt;
 &lt;li&gt;语言可以削尖我们的思维[进行思维锐化：思维锐化工具有哪些？ 鱼骨图找因果]。&lt;/li&gt;
 &lt;li&gt;语言也会限制我们的世界。&lt;/li&gt;
@@ -4144,9 +4703,9 @@ Focuses on the low-level &lt;em&gt;&amp;ldquo;how&amp;rdquo;&lt;/em&gt;(Computer
     
     <item>
       <title>语言抽象</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/05/14/yu-yan-chou-xiang/</link>
+      <link>https://jueqingsizhe66.github.io/archives/yu-yan-chou-xiang/</link>
       <pubDate>Thu, 14 May 2015 10:21:48 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/05/14/yu-yan-chou-xiang/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/yu-yan-chou-xiang/</guid>
       <description>&lt;p&gt;我们每天都在做的事情
 1.打开电脑，找到我们要做的事情，保存我们做完的事情，提交,我们可能挨训，也可能加班
 2.我们可能去打球，我们可能跟朋友、亲人聊天
@@ -4174,9 +4733,9 @@ Focuses on the low-level &lt;em&gt;&amp;ldquo;how&amp;rdquo;&lt;/em&gt;(Computer
     
     <item>
       <title>找出函数的不动点--Navier-Stokes方程</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/05/12/zhao-chu-han-shu-de-bu-dong-dian-navier-stokesfang-cheng/</link>
+      <link>https://jueqingsizhe66.github.io/archives/zhao-chu-han-shu-de-bu-dong-dian-navier-stokesfang-cheng/</link>
       <pubDate>Tue, 12 May 2015 03:13:50 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/05/12/zhao-chu-han-shu-de-bu-dong-dian-navier-stokesfang-cheng/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/zhao-chu-han-shu-de-bu-dong-dian-navier-stokesfang-cheng/</guid>
       <description>&lt;p&gt;##Beautiful code!&lt;/p&gt;
 &lt;p&gt;数x为函数的f的不动点（f可以代表N-S方程），如果满足f(x)=x,则称x
 为函数f的不动点。
@@ -4262,9 +4821,9 @@ you found!&lt;/p&gt;
     
     <item>
       <title>JavaScript 7-11节笔记代码March28th</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/05/11/javascript-7-11jie-bi-ji-dai-ma-march28th/</link>
+      <link>https://jueqingsizhe66.github.io/archives/javascript-7-11jie-bi-ji-dai-ma-march28th/</link>
       <pubDate>Mon, 11 May 2015 14:58:43 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/05/11/javascript-7-11jie-bi-ji-dai-ma-march28th/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/javascript-7-11jie-bi-ji-dai-ma-march28th/</guid>
       <description>&lt;p&gt;function串讲笔记&lt;/p&gt;
 &lt;p&gt;1：function是什么？
 JS的function类似于java和.Net的方法&lt;/p&gt;
@@ -4384,9 +4943,9 @@ Window.document.getElementById(“btn”).onclick=function()
     
     <item>
       <title>模块分割--工厂机制</title>
-      <link>https://jueqingsizhe66.github.io/blog/2014/05/15/mo-kuai-fen-ge-gong-han-ji-zhi/</link>
+      <link>https://jueqingsizhe66.github.io/archives/mo-kuai-fen-ge-gong-han-ji-zhi/</link>
       <pubDate>Thu, 15 May 2014 22:27:07 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2014/05/15/mo-kuai-fen-ge-gong-han-ji-zhi/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/mo-kuai-fen-ge-gong-han-ji-zhi/</guid>
       <description>&lt;ol&gt;
 &lt;li&gt;map&lt;/li&gt;
 &lt;li&gt;reduce&lt;/li&gt;
@@ -4432,9 +4991,9 @@ done;
     
     <item>
       <title>poisson</title>
-      <link>https://jueqingsizhe66.github.io/blog/2014/05/14/poisson/</link>
+      <link>https://jueqingsizhe66.github.io/archives/poisson/</link>
       <pubDate>Wed, 14 May 2014 02:09:00 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2014/05/14/poisson/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/poisson/</guid>
       <description>&lt;pre&gt;&lt;code class=&#34;language-fortran&#34;&gt;
 module decomp_2d_poisson
 

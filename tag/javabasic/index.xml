@@ -7,27 +7,107 @@
     <description>JavaBasic</description>
     <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>©2022</copyright><lastBuildDate>Fri, 10 Feb 2017 00:04:33 +0800</lastBuildDate>
     <image>
-      <url>https://jueqingsizhe66.github.io/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
+      <url>https://jueqingsizhe66.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
       <title>JavaBasic</title>
       <link>https://jueqingsizhe66.github.io/tag/javabasic/</link>
     </image>
     
     <item>
       <title>java开发nexus私服搭建</title>
-      <link>https://jueqingsizhe66.github.io/blog/2017/02/10/javakai-fa-nexussi-fu-da-jian/</link>
+      <link>https://jueqingsizhe66.github.io/archives/javakai-fa-nexussi-fu-da-jian/</link>
       <pubDate>Fri, 10 Feb 2017 00:04:33 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2017/02/10/javakai-fa-nexussi-fu-da-jian/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/javakai-fa-nexussi-fu-da-jian/</guid>
       <description>&lt;p&gt;针对一台全新的电脑，安装java开发的maven私服，记录如下，并在IDEA中进行测试。&lt;/p&gt;
 &lt;p&gt;涉及到javase安装，maven安装，nexus私服安装，nexus本地配置，nexus界面介绍&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;安装JAVA jdk ,下载&lt;a href=&#34;http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;javaSE安装包&lt;/a&gt;,注意JDK和JRE不要放在同一文件夹下&lt;/li&gt;
 &lt;li&gt;配置JAVA_HOME为JDk目录，并添加JDK的bin目录(%JAVA_HOME%\bin)到path中
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nexus/java.png&#34; alt=&#34;java&#34;&gt;&lt;/li&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nexus/java.png&#34; alt=&#34;java&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/li&gt;
 &lt;li&gt;下载&lt;a href=&#34;http://maven.apache.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;maven&lt;/a&gt;,并解压缩，配置MAVEN_HOME为maven的根目录，并添加%MAVEN_HOME%\bin到path
 中
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nexus/home.png&#34; alt=&#34;home&#34;&gt;
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nexus/bin.png&#34; alt=&#34;bin&#34;&gt;
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nexus/java.png&#34; alt=&#34;mvn&#34;&gt;&lt;/li&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nexus/home.png&#34; alt=&#34;home&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nexus/bin.png&#34; alt=&#34;bin&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nexus/java.png&#34; alt=&#34;mvn&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;显示了&lt;code&gt;mvn -v&lt;/code&gt;,也就表示装完了maven
 4. 下载&lt;a href=&#34;https://www.sonatype.com/download-oss-sonatype&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;nexus2.14&lt;/a&gt;,在windows下使用管理员身份打开cmd，并cd到nexus的bin目录，进行安装&lt;/p&gt;
@@ -35,34 +115,254 @@
 nexus start
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;注意一定得配置bin\jsw\wrapper.conf的java bin信息，否则出错。
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nexus/wrapper.png&#34; alt=&#34;wrapper&#34;&gt;&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nexus/wrapper.png&#34; alt=&#34;wrapper&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;p&gt;出现的错误为无法启动，
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nexus/success.png&#34; alt=&#34;success&#34;&gt;&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nexus/success.png&#34; alt=&#34;success&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;hr/&gt;
 做完前面的几步之后只是，把配置环境弄完了，还得进行私服镜像配置。
 首先打开nexus私服页面，使用`http://localhost:8089/nexus/#welcome `
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nexus/nexus.png&#34; alt=&#34;nexus&#34;&gt;&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nexus/nexus.png&#34; alt=&#34;nexus&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;p&gt;默认的登陆密码是
 账号：admin
 密码：admin123&lt;/p&gt;
 &lt;p&gt;登陆完的界面
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nexus/repositories.png&#34; alt=&#34;login&#34;&gt;&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nexus/repositories.png&#34; alt=&#34;login&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;p&gt;配置中心仓库:&lt;/p&gt;
 &lt;p&gt;中心仓库设置download remote indexes为真，为设置本地私服提供源。
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nexus/central.png&#34; alt=&#34;central&#34;&gt;&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nexus/central.png&#34; alt=&#34;central&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;p&gt;配置了release和snapshot仓库
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nexus/release.png&#34; alt=&#34;release&#34;&gt;
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nexus/snapshot.png&#34; alt=&#34;snapshot&#34;&gt;&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nexus/release.png&#34; alt=&#34;release&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nexus/snapshot.png&#34; alt=&#34;snapshot&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;p&gt;然后配置了第三方插件
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nexus/third.png&#34; alt=&#34;third&#34;&gt;&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nexus/third.png&#34; alt=&#34;third&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;进入最关键的public Repositories设置&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nexus/public.png&#34; alt=&#34;public&#34;&gt;&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nexus/public.png&#34; alt=&#34;public&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;p&gt;有时候可以使用试用Scheduled Tasks观看库的index是否正常进行。
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nexus/schedule.png&#34; alt=&#34;scheduled&#34;&gt;&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nexus/schedule.png&#34; alt=&#34;scheduled&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;hr/&gt;
 &lt;h2 id=&#34;imp&#34;&gt;镜像私服配置&lt;/h2&gt;
 &lt;p&gt;maven中的settings.xml登陆私服的账户密码设置
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nexus/user.png&#34; alt=&#34;user&#34;&gt;&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nexus/user.png&#34; alt=&#34;user&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;  &amp;lt;servers&amp;gt;
     &amp;lt;server&amp;gt; 
         &amp;lt;id&amp;gt;nexus-release&amp;lt;/id&amp;gt;
@@ -154,7 +454,27 @@ nexus start
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;当然IDEA在导入项目或者新建项目的时候都会提醒Environment Variable,设置一下setting和local repository
 (类似的思路需要在myeclipse配置)
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nexus/setting.png&#34; alt=&#34;impo&#34;&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nexus/setting.png&#34; alt=&#34;impo&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
 而私服nexus的存放地点，在nexus界面的时候就已经设置好了，所以也得在每台电脑操作一遍(&lt;font color=&#34;red&#34;&gt;一定不能错&lt;/font&gt;)。&lt;/p&gt;
 &lt;p&gt;镜像的话，就不会执行maven的&lt;code&gt;mvn install&lt;/code&gt;等命令还一直向外部仓库访问链接，结果是访问的链接
 都是本地的，可看下节测试。&lt;/p&gt;
@@ -163,7 +483,27 @@ nexus start
 ![license][20]
 &lt;p&gt;测试结果如下:
 &lt;code&gt;mvn site&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nexus/idea.png&#34; alt=&#34;idea&#34;&gt;&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nexus/idea.png&#34; alt=&#34;idea&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;INFO] artifact org.springframework:spring-beans: checking for updates from nexus
 [INFO] artifact org.springframework:spring-context: checking for updates from nexus
 [INFO] artifact org.springframework:spring-context-support: checking for updates from nexus
@@ -194,9 +534,9 @@ maven系统的各个组成和集成测试环境的搭建。&lt;/p&gt;
     
     <item>
       <title>a little java note</title>
-      <link>https://jueqingsizhe66.github.io/blog/2016/10/09/a-little-java-note/</link>
+      <link>https://jueqingsizhe66.github.io/archives/a-little-java-note/</link>
       <pubDate>Sun, 09 Oct 2016 01:58:39 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2016/10/09/a-little-java-note/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/a-little-java-note/</guid>
       <description>&lt;div align=&#34;center&#34;&gt;目录&lt;/div&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#1&#34;&gt;1. 基础部分&lt;/a&gt;&lt;/li&gt;
@@ -247,7 +587,27 @@ This and that在对象间传递，而consume在函数间传递（Hangs over back
 12.	重载override 相同的名字带着不同的输入类型
 13.	点号可以读作 from   点号之前叫做from who  点号之后叫做service
 14.	解释的重点是什么？？？ 要点是什么&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/alittlejava/duichen.png&#34; alt=&#34;duichen&#34;&gt;&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/alittlejava/duichen.png&#34; alt=&#34;duichen&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;p&gt;什么是思考力的三要素，讲这个问题之前我们先来了解一下什么是思考思维，首先思考是思维的一种探索活动，而在思维过程中产生的一种具有积极性和创造性的作用力这种就是思考力。据物理学理解，思考力具有三个基本要素：分别为大小、方向、作用点。思考力同样也离不开三个基本要素：分别为大小、方向、作用点。&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;大小 ——思考力首先取决于思考者掌握的关于思考对象的知识和信息量（大小），如果没有相关的知识和信息，就不可能产生相关的思考活动。一般情况下，知识量和信息量越大，思考就越加具体、全面和完整，从而决定了思考的维度。&lt;/li&gt;
@@ -1286,16 +1646,36 @@ PieD
 &lt;li&gt;突破点，并按照一定的方向。。&lt;/li&gt;
 &lt;li&gt;关键点&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/alittlejava/closure.png&#34; alt=&#34;closure&#34;&gt;&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/alittlejava/closure.png&#34; alt=&#34;closure&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Closure(Closure(this))&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;具体java源代码参考&lt;a href=&#34;https://github.com/jueqingsizhe66/ALittleJava&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;the little java&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>java小结</title>
-      <link>https://jueqingsizhe66.github.io/blog/2016/07/19/javaxiao-jie/</link>
+      <link>https://jueqingsizhe66.github.io/archives/javaxiao-jie/</link>
       <pubDate>Tue, 19 Jul 2016 18:42:25 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2016/07/19/javaxiao-jie/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/javaxiao-jie/</guid>
       <description>&lt;p&gt;很长没有做java小结，把最近浏览的几个链接添上去。&lt;/p&gt;
 &lt;p&gt;java小结&lt;/p&gt;
 &lt;ol&gt;
@@ -1307,16 +1687,36 @@ PieD
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;sourceTree可以用来做软件开发跟踪，内核当然是git。
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/javaSourceTree.png&#34; alt=&#34;sourcetree&#34;&gt;&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/javaSourceTree.png&#34; alt=&#34;sourcetree&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;</description>
     </item>
     
     <item>
       <title>压缩文件IO流的使用和简单封装（0213）</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/05/11/ya-suo-wen-jian-ioliu-de-shi-yong-he-jian-dan-feng-zhuang-0213/</link>
+      <link>https://jueqingsizhe66.github.io/archives/ya-suo-wen-jian-ioliu-de-shi-yong-he-jian-dan-feng-zhuang-0213/</link>
       <pubDate>Mon, 11 May 2015 14:58:47 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/05/11/ya-suo-wen-jian-ioliu-de-shi-yong-he-jian-dan-feng-zhuang-0213/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/ya-suo-wen-jian-ioliu-de-shi-yong-he-jian-dan-feng-zhuang-0213/</guid>
       <description>&lt;p&gt;分为三个部分：
 第一部分 ，先是试用了zipinputstream的用法
 第二部分， 是进一步试用了压缩流zipoutputStream和加密的方法
@@ -2636,9 +3036,9 @@ public class TestZip {
     
     <item>
       <title>反射机制内省正则</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/05/11/fan-she-ji-zhi-nei-sheng-zheng-ze/</link>
+      <link>https://jueqingsizhe66.github.io/archives/fan-she-ji-zhi-nei-sheng-zheng-ze/</link>
       <pubDate>Mon, 11 May 2015 14:58:46 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/05/11/fan-she-ji-zhi-nei-sheng-zheng-ze/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/fan-she-ji-zhi-nei-sheng-zheng-ze/</guid>
       <description>&lt;p&gt;2：反射机制
 不行，则逆着来.
 类（Class）
@@ -3180,9 +3580,9 @@ System.out.println(&amp;quot;fdasfsd&amp;quot;.indexOf(&#39;d&#39;));
     
     <item>
       <title>简易的代码运行模拟窗口</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/05/11/jian-yi-de-dai-ma-yun-xing-mo-ni-chuang-kou/</link>
+      <link>https://jueqingsizhe66.github.io/archives/jian-yi-de-dai-ma-yun-xing-mo-ni-chuang-kou/</link>
       <pubDate>Mon, 11 May 2015 14:58:46 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/05/11/jian-yi-de-dai-ma-yun-xing-mo-ni-chuang-kou/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/jian-yi-de-dai-ma-yun-xing-mo-ni-chuang-kou/</guid>
       <description>&lt;p&gt;有时候，可能需要做一个动态的代码演示的窗口，当然用ppt也可以做，用其他的相关软件也可以做。然而自己写代码也是可以的。相信大家在听杨老师讲解treeview的时候，老杨秀的代码分析小程序，凭着印象，自己也琢磨着写了这一个简易的代码运行模拟窗口。代码涉及到的主要是treeview和textview以及按钮事件控制，另外加上cairo的画图处理，当然也可以直接利用GtkImage载入图片（可能需要隐藏控件，达到箭头下移的目的）
 这边的缺点是，暂时不知道怎么销毁掉Cairo之前绘制的图形，其他还有很多缺点.&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import com.rupeng.gtk4j.Cairo;
@@ -3871,16 +4271,76 @@ public class TestTeacher
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;复制代码&lt;/p&gt;
 &lt;p&gt;有什么意见，欢迎交流，有什么想法，欢迎交流。~-~&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/chushi.gif&#34; alt=&#34;初始时刻&#34;&gt;
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/diyici.gif&#34; alt=&#34;运行第一次&#34;&gt;
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/chengxujiesu.gif&#34; alt=&#34;程序结束&#34;&gt;&lt;/p&gt;</description>
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/chushi.gif&#34; alt=&#34;初始时刻&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/diyici.gif&#34; alt=&#34;运行第一次&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/chengxujiesu.gif&#34; alt=&#34;程序结束&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>网络编程8-12节笔记代码March18th</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/05/11/wang-luo-bian-cheng-8-12jie-bi-ji-dai-ma-march18th/</link>
+      <link>https://jueqingsizhe66.github.io/archives/wang-luo-bian-cheng-8-12jie-bi-ji-dai-ma-march18th/</link>
       <pubDate>Mon, 11 May 2015 14:58:46 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/05/11/wang-luo-bian-cheng-8-12jie-bi-ji-dai-ma-march18th/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/wang-luo-bian-cheng-8-12jie-bi-ji-dai-ma-march18th/</guid>
       <description>&lt;p&gt;复习目录
 1集合框架&amp;hellip; 2
 ArrayList: 2
@@ -4792,9 +5252,9 @@ LinkedHashSet可以当做HashSet来使用&lt;/p&gt;
     
     <item>
       <title>多线程March18th</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/05/11/duo-xian-cheng-march18th/</link>
+      <link>https://jueqingsizhe66.github.io/archives/duo-xian-cheng-march18th/</link>
       <pubDate>Mon, 11 May 2015 14:58:45 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/05/11/duo-xian-cheng-march18th/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/duo-xian-cheng-march18th/</guid>
       <description>&lt;p&gt;4:java多线程&lt;/p&gt;
 &lt;p&gt;新建状态(start)
 可运行状态(runnable)
@@ -6451,7 +6911,27 @@ System.exit(0);
 }
 }
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%9C%8D%E5%8A%A1%E7%AB%AF.png&#34; alt=&#34;服务器端和客户端的对话窗口&#34;&gt;&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/%e5%ae%a2%e6%88%b7%e7%ab%af%e6%9c%8d%e5%8a%a1%e7%ab%af.png&#34; alt=&#34;服务器端和客户端的对话窗口&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;p&gt;##重写TCPServer1 &amp;amp; TCPClient1 并加入了  String ip = s.getInetAddress().getHostAddress();
 并且调整了编写风格，把所有类使用的变量都放在类中，并把socket创建和连接  接受和发送都放在构造函数中。类似于OOGTK的编写风格http://www.rupeng.com/forum/forum.php?mod=viewthread&amp;amp;tid=44377。&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;/**
@@ -8170,7 +8650,27 @@ class TCPClient1
 &lt;p&gt;结果：&lt;/p&gt;
 &lt;p&gt;通过分析发现，的确是需要把socket.accept放在main中，而不是connection中！ 为什么？ 也许是connection会跳出？ 具体的不太清楚，如果有人知道求证明之。。。。&lt;/p&gt;
 &lt;p&gt;另外还存在一个问题，为什么服务器发出的数据只是放在第一个连接的地方？ 这是不是跟Client没有线程有关系，如果我也建个clientRead &amp;amp; clientWrite线程？
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/%E5%88%87%E6%8D%A2%E4%B8%8D%E6%88%90%E9%97%AE%E9%A2%98.png&#34; alt=&#34;现在的切换和传递都不成问题&#34;&gt;&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/%e5%88%87%e6%8d%a2%e4%b8%8d%e6%88%90%e9%97%ae%e9%a2%98.png&#34; alt=&#34;现在的切换和传递都不成问题&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;p&gt;1：增加了两个ClientRead &amp;amp; ClientWrite两个线程，尝试看一下是否可以群发，
 2： 并把socket的创建 提到main当中&lt;/p&gt;
 &lt;p&gt;Client的重写：&lt;/p&gt;
@@ -8405,7 +8905,27 @@ class TCPClient1
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;结果：
 结果分析发现，并没有丝毫的改进。what a pity.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/yiranmeiyou.png&#34; alt=&#34;结果还是跟上例的client没有线程一样&#34;&gt;&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/yiranmeiyou.png&#34; alt=&#34;结果还是跟上例的client没有线程一样&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;p&gt;参考此文进行修改：&lt;/p&gt;
 &lt;p&gt;1：加入了三个主要集合&lt;br&gt;
 用户   user_list
@@ -8894,7 +9414,27 @@ class TCPClient5
 
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;结果： 还有一问题待解决，运行多个界面，程序占用内存过大！！！！！！ 如何解决？？&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/jiben.png&#34; alt=&#34;服务器转发客户端实现局部聊天&#34;&gt;&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/jiben.png&#34; alt=&#34;服务器转发客户端实现局部聊天&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;p&gt;还有一个问题：服务器说的话只能发给一个人。&lt;/p&gt;
 &lt;p&gt;解决办法：
 修改TCPServerListener的实现：&lt;/p&gt;
@@ -9438,8 +9978,48 @@ class TCPClient5
 &lt;p&gt;结果：&lt;/p&gt;
 &lt;p&gt;1：之前的线程卡的问题，还没有解决，运行起来仍然感觉占用大量内存！！
 2：为什么 第一个进入聊天系统的杨中科，会打印出三次呢？ 当然后面的消息正常，当然三次的意思是聊天系统进入了三个人，都教授和Rocket. 所以肯定是那部分有问题待解决&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/%E6%9C%8D%E5%8A%A1%E5%99%A82.png&#34; alt=&#34;在这边有一个小问题，出现了三行打印&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/%E5%9F%BA%E6%9C%AC%E6%BB%A1%E8%B6%B3%E9%A2%98%E6%84%8F.png&#34; alt=&#34;群发效果OK,服务器也没问题了&#34;&gt;&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/%e6%9c%8d%e5%8a%a1%e5%99%a82.png&#34; alt=&#34;在这边有一个小问题，出现了三行打印&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/%e5%9f%ba%e6%9c%ac%e6%bb%a1%e8%b6%b3%e9%a2%98%e6%84%8f.png&#34; alt=&#34;群发效果OK,服务器也没问题了&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;http://www.cnblogs.com/linjiqin/archive/2013/05/30/3108188.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;http://www.cnblogs.com/linjiqin/archive/2013/05/30/3108188.html&lt;/a&gt;  欣赏了这篇佳作&lt;/p&gt;
 &lt;p&gt;基于上次的问题，打开的时候经常会出现多个打印的情况，
 尝试如下修改：
@@ -9767,8 +10347,48 @@ class TCPServer2
         }
 }
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/%E6%9C%8D%E5%8A%A1%E5%99%A83.png&#34; alt=&#34;有问题的版本（但是基本满足题意）&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/%E5%B1%85%E7%84%B6%E4%B8%8D%E5%8D%A1%E4%BA%86.png&#34; alt=&#34;不卡版本，且解决了登陆时候的多条打印问题&#34;&gt;&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/%e6%9c%8d%e5%8a%a1%e5%99%a83.png&#34; alt=&#34;有问题的版本（但是基本满足题意）&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/%e5%b1%85%e7%84%b6%e4%b8%8d%e5%8d%a1%e4%ba%86.png&#34; alt=&#34;不卡版本，且解决了登陆时候的多条打印问题&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;p&gt;1 动机是为了熟悉网络编程，于是重写了之前写过的代码。从TCPServer 1 2 3三个进行重新的改写
 2 发现TCPServer3有问题？&lt;br&gt;
 在客户端连接上后，客户端发送数据可以到服务器端，接着切换到服务器端，但是服务器的输入出现了问题，
@@ -9902,9 +10522,9 @@ f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     
     <item>
       <title>递归的简单阐述</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/05/11/di-gui-de-jian-dan-chan-shu/</link>
+      <link>https://jueqingsizhe66.github.io/archives/di-gui-de-jian-dan-chan-shu/</link>
       <pubDate>Mon, 11 May 2015 14:58:45 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/05/11/di-gui-de-jian-dan-chan-shu/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/di-gui-de-jian-dan-chan-shu/</guid>
       <description>&lt;p&gt;递归和迭代的区别：
 递归需要调用自己
 迭代不断修正自己的返回值&lt;/p&gt;
@@ -9922,7 +10542,7 @@ f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 * @param n          计算5！ 则n =5
 * @param product    一般是设置为1  比如 计算5! factail1(5,1)
 * @return           返回递归结果
-*/
+&lt;em&gt;/
 public static long facttail1(int n, int product)
 {
 if(n&amp;lt;0)
@@ -9935,7 +10555,7 @@ return product;
 }
 else
 {
-return  facttail1(n-1, product*n);
+return  facttail1(n-1, product&lt;/em&gt;n);
 }
 }&lt;/p&gt;
 &lt;p&gt;普通递归代码：
@@ -9943,7 +10563,7 @@ return  facttail1(n-1, product*n);
 *
 * @param n   5! 则 n = 5
 * @return    返回阶乘的计算结果
-*/
+&lt;em&gt;/
 public static long facttail1(int n)
 {
 long a = 0;// 用于调试，可注释
@@ -9952,7 +10572,7 @@ if(n==1)
 a = 1;// 用于调试，可注释
 return 1;
 }
-a =n*facttail1(n-1);  // 用于调试，可注释
+a =n&lt;/em&gt;facttail1(n-1);  // 用于调试，可注释
 return n*facttail1(n-1);
 }&lt;/p&gt;
 &lt;p&gt;无递归的阶乘：
@@ -9960,7 +10580,7 @@ return n*facttail1(n-1);
 *
 * @param n   计算 5！ 则n=5
 * @return
-*/
+&lt;em&gt;/
 public static int fact2(int n)
 {
 if(n &amp;lt; 0)
@@ -9970,7 +10590,7 @@ throw new IllegalArgumentException();
 int result = 1;
 for(int i = 1; i &amp;lt;= n; i++)
 {
-result = result*i;
+result = result&lt;/em&gt;i;
 }
 return result;
 }&lt;/p&gt;
@@ -9989,8 +10609,48 @@ System.out.println(&amp;ldquo;Banana get by 递归：&amp;quot;+Banana);
 看下图   [size=14.4444446563721px]普通的递归运行方式&lt;/p&gt;
 &lt;p&gt;通过上述调试发现，尾递归的确是比较快的。&lt;/p&gt;
 &lt;p&gt;另外不知道java中的大的数值范围该如何表示，比如 [size=14.4444446563721px]facttail(32,1); 就运行不出来结果？ long无法解决问题。估计java不适合进行大型的数值运算
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/%E5%B0%BE%E9%80%92%E5%BD%92.png&#34; alt=&#34;尾递归的调试过程&#34;&gt;
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/%E6%99%AE%E9%80%9A%E7%9A%84%E9%80%92%E5%BD%92.png&#34; alt=&#34;普通的递归运行方式&#34;&gt;&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/%e5%b0%be%e9%80%92%e5%bd%92.png&#34; alt=&#34;尾递归的调试过程&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/%e6%99%ae%e9%80%9a%e7%9a%84%e9%80%92%e5%bd%92.png&#34; alt=&#34;普通的递归运行方式&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;p&gt;利用BigInteger类型的改造版本：&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import java.math.BigInteger;
 
@@ -10218,8 +10878,48 @@ public abstract class TestChuangjian2
 }
 
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/%E8%AE%B2%E6%95%85%E4%BA%8B%E7%9A%84%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F.png&#34; alt=&#34;讲故事的顺序 先执行完红的 再反过来执行黄色的线&#34;&gt;
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/%E6%9D%A8%E8%80%81%E5%B8%88%E6%89%8B%E7%BB%98%E9%80%92%E5%BD%92%E5%9B%BE%E7%9A%84%E7%BC%BA%E9%99%B7%E5%8F%8D%E5%A4%8D%E8%AE%A1%E7%AE%97%E5%8D%A0%E7%94%A8%E7%A9%BA%E9%97%B4.png&#34; alt=&#34;普通递归的缺陷：重复计算 空间占用 （于是尾递归 和一些其他的非递归方法的引入）&#34;&gt;&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/%e8%ae%b2%e6%95%85%e4%ba%8b%e7%9a%84%e6%89%a7%e8%a1%8c%e9%a1%ba%e5%ba%8f.png&#34; alt=&#34;讲故事的顺序 先执行完红的 再反过来执行黄色的线&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/%e6%9d%a8%e8%80%81%e5%b8%88%e6%89%8b%e7%bb%98%e9%80%92%e5%bd%92%e5%9b%be%e7%9a%84%e7%bc%ba%e9%99%b7%e5%8f%8d%e5%a4%8d%e8%ae%a1%e7%ae%97%e5%8d%a0%e7%94%a8%e7%a9%ba%e9%97%b4.png&#34; alt=&#34;普通递归的缺陷：重复计算 空间占用 （于是尾递归 和一些其他的非递归方法的引入）&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;p&gt;一个反例：栈溢出 stackOverFlowError
 一般要求的StackSize是1MB&lt;/p&gt;
 &lt;p&gt;反例：&lt;/p&gt;
@@ -10243,9 +10943,9 @@ public abstract class TestChuangjian2
     
     <item>
       <title>Jar包打包成可安装的EXE文件</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/05/11/jarbao-da-bao-cheng-ke-an-zhuang-de-exewen-jian/</link>
+      <link>https://jueqingsizhe66.github.io/archives/jarbao-da-bao-cheng-ke-an-zhuang-de-exewen-jian/</link>
       <pubDate>Mon, 11 May 2015 14:58:43 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/05/11/jarbao-da-bao-cheng-ke-an-zhuang-de-exewen-jian/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/jarbao-da-bao-cheng-ke-an-zhuang-de-exewen-jian/</guid>
       <description>&lt;p&gt;学习java的人都知道，java执行class文件是需要在jvm的环境下。但是你写完一个软件难道非得叫人安装一个JRE嘛？！是的，必须。但是这样别人用起来会不爽，于是我们就事先把java的JRE给嵌入到我们的EXE安装包，这样不是很ok！ 于是就调研了一番，最后选择eclipse+exe4j+innosetup这三个软件配合使用
 附加的word文件分成三个部分进行，
 第一部分   eclipse生成可运行的jar包
@@ -10272,9 +10972,9 @@ innosetup打包程序&lt;/p&gt;
     
     <item>
       <title>Java班 1月24日</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/05/11/javaban-1yue-24ri/</link>
+      <link>https://jueqingsizhe66.github.io/archives/javaban-1yue-24ri/</link>
       <pubDate>Mon, 11 May 2015 14:58:43 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/05/11/javaban-1yue-24ri/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/javaban-1yue-24ri/</guid>
       <description>&lt;p&gt;第一题：合并图片&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;/**
 * @author 叶昭良
@@ -10665,9 +11365,9 @@ public class GetMessageofNameFromFile
     
     <item>
       <title>css7-14节笔记代码March25th</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/05/11/css7-14jie-bi-ji-dai-ma-march25th/</link>
+      <link>https://jueqingsizhe66.github.io/archives/css7-14jie-bi-ji-dai-ma-march25th/</link>
       <pubDate>Mon, 11 May 2015 14:58:42 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/05/11/css7-14jie-bi-ji-dai-ma-march25th/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/css7-14jie-bi-ji-dai-ma-march25th/</guid>
       <description>&lt;Link type=&#34;text/css&#34; rel=&#34;stylesheet&#34; href=&#34;&#34;&gt;
     &lt;Link type=&#34;javascript&#34; rel=&#34;stylesheet&#34; href=&#34;&#34;&gt;
     &lt;!--
@@ -10931,9 +11631,9 @@ onload=function(){&lt;/p&gt;
     
     <item>
       <title>email邮件发送&#43;OOGTK(0217)</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/05/11/emailyou-jian-fa-song-plus-oogtk-0217/</link>
+      <link>https://jueqingsizhe66.github.io/archives/emailyou-jian-fa-song-plus-oogtk-0217/</link>
       <pubDate>Mon, 11 May 2015 14:58:42 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/05/11/emailyou-jian-fa-song-plus-oogtk-0217/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/emailyou-jian-fa-song-plus-oogtk-0217/</guid>
       <description>&lt;p&gt;参考阅读：
 [commons.email的邮件使用：][http://commons.apache.org/proper/commons-email/userguide.html]
 [我的gtk的封装源代码： ][http://www.rupeng.com/forum/thread-44377-1-1.html]&lt;/p&gt;
@@ -11316,16 +12016,76 @@ public class MyEmailSend
 
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;小软件运行的效果:
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/email.png&#34; alt=&#34;EmialText的测试&#34;&gt;
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/chuangjiang.png&#34; alt=&#34;EmailAttachment附件的测试&#34;&gt;
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/file.png&#34; alt=&#34;文件选择框添加附件&#34;&gt;&lt;/p&gt;</description>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/email.png&#34; alt=&#34;EmialText的测试&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/chuangjiang.png&#34; alt=&#34;EmailAttachment附件的测试&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/file.png&#34; alt=&#34;文件选择框添加附件&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>hashmap本质March18</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/05/11/hashmapben-zhi-march18/</link>
+      <link>https://jueqingsizhe66.github.io/archives/hashmapben-zhi-march18/</link>
       <pubDate>Mon, 11 May 2015 14:58:42 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/05/11/hashmapben-zhi-march18/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/hashmapben-zhi-march18/</guid>
       <description>&lt;p&gt;HashMap:
 Hashmap本质：
 &amp;mdash;-&amp;gt; &amp;mdash;-&amp;gt; &amp;mdash;-&amp;gt; &amp;mdash;-&amp;gt;&amp;mdash;-&amp;gt; &amp;mdash;-&amp;gt; &amp;mdash;-&amp;gt; &amp;mdash;-&amp;gt; &amp;mdash;-&amp;gt;&amp;mdash;-&amp;gt;&amp;mdash;-&amp;gt; &amp;mdash;-&amp;gt; &amp;mdash;-&amp;gt; &amp;mdash;-&amp;gt;&amp;mdash;-&amp;gt;&amp;mdash;-&amp;gt; &amp;mdash;-&amp;gt; &amp;mdash;-&amp;gt; &amp;mdash;-&amp;gt;&amp;mdash;-&amp;gt;
@@ -12373,9 +13133,9 @@ public class TestMapMap
     
     <item>
       <title>2月1日Java班笔记作业</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/05/11/2yue-1ri-javaban-bi-ji-zuo-ye/</link>
+      <link>https://jueqingsizhe66.github.io/archives/2yue-1ri-javaban-bi-ji-zuo-ye/</link>
       <pubDate>Mon, 11 May 2015 14:58:41 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/05/11/2yue-1ri-javaban-bi-ji-zuo-ye/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/2yue-1ri-javaban-bi-ji-zuo-ye/</guid>
       <description>&lt;p&gt;第一部分 ：笔记
 FileChooserDialog&lt;/p&gt;
 &lt;p&gt;1、        创建：int gtk_file_chooser_dialog_new(String title,int parentWindow, int action, String first_button_text)：action可选值GTK_FILE_CHOOSER_ACTION_*：OPEN(打开文件)、SAVE(保存文件)、SELECT_FOLDER(选择文件夹)、CREATE_FOLDER(创建文件夹)
@@ -13814,16 +14574,76 @@ public class TestToolBar
         }
 }
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/MVC.gif&#34; alt=&#34;MVC交互图&#34;&gt;
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/jianyijishi.gif&#34; alt=&#34;简易记事本+工具栏&#34;&gt;
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/yang.gif&#34; alt=&#34;工具栏+menu+statusICON+prograssBar+switchOFF+calendar&#34;&gt;&lt;/p&gt;</description>
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/MVC.gif&#34; alt=&#34;MVC交互图&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/jianyijishi.gif&#34; alt=&#34;简易记事本&amp;#43;工具栏&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/yang.gif&#34; alt=&#34;工具栏&amp;#43;menu&amp;#43;statusICON&amp;#43;prograssBar&amp;#43;switchOFF&amp;#43;calendar&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>2月27日Java周末班试题</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/05/11/2yue-27ri-javazhou-mo-ban-shi-ti/</link>
+      <link>https://jueqingsizhe66.github.io/archives/2yue-27ri-javazhou-mo-ban-shi-ti/</link>
       <pubDate>Mon, 11 May 2015 14:58:41 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/05/11/2yue-27ri-javazhou-mo-ban-shi-ti/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/2yue-27ri-javazhou-mo-ban-shi-ti/</guid>
       <description>&lt;p&gt;0105班Java周末班试题（JDBC 9-16）
 阶段性考试（考试6个小时，讲评+重写6个小时）：
 记录完成每个题所需要的时长。
@@ -13843,7 +14663,27 @@ public class TestToolBar
 第三题
 编写手机号码查询归属地案例。并记录写完需要的时间&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;%E7%AC%AC%E4%B8%80%E9%A2%98%E8%A1%A8%E6%A0%BC.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;%e7%ac%ac%e4%b8%80%e9%a2%98%e8%a1%a8%e6%a0%bc.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;p&gt;考试未通过，中途出去，fail;&lt;/p&gt;
 &lt;p&gt;第一题：
 费时：4个小时左右
@@ -14687,9 +15527,9 @@ public class PhoneCheckUpdate
     
     <item>
       <title>2月4日Java班GTK</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/05/11/2yue-4ri-javaban-gtk/</link>
+      <link>https://jueqingsizhe66.github.io/archives/2yue-4ri-javaban-gtk/</link>
       <pubDate>Mon, 11 May 2015 14:58:41 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/05/11/2yue-4ri-javaban-gtk/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/2yue-4ri-javaban-gtk/</guid>
       <description>&lt;p&gt;第一部分：笔记&lt;/p&gt;
 &lt;p&gt;1：封装两个不需要Id的类，OORGB,OOCairo
 OORGB用于设置颜色值，并封装几个常见的颜色OORGB.RED OORGB.BLUE OORGB.GREEN..
@@ -14722,9 +15562,10 @@ Protected是指兄弟和儿子可以访问！！ 也就是不同包的不可以�
 也就是 比如OOEntry oe = new OOEntry();
 Oe.setId(GTK.gtk_label_new())的换心操作。 不要让entry变成了label而你却是不知道。&lt;/p&gt;
 &lt;p&gt;bug2：
-把OOWidget 标记为抽象类！ 这样防止用户&lt;/p&gt;
+把OOWidget 标记为抽象类！ 这样防止用户
+*                                   &lt;br&gt;
+直接OOWidget ow = new OOWidget() ; ow.show()&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;直接OOWidget ow = new OOWidget() ; ow.show()&lt;/li&gt;
 &lt;li&gt;
 &lt;pre&gt;&lt;code&gt;                                  这完全是无意义的工作
 &lt;/code&gt;&lt;/pre&gt;
@@ -14789,10 +15630,90 @@ GTKContainer是包含着GTKBin  GTKGrid GTKBox，GTKToolBar,OOTreeView,OOTextVie
 &lt;p&gt;第二部分 作业&lt;/p&gt;
 &lt;p&gt;源码V1.0版本.rar
 源码V2.0版本.rar
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/gtk%E7%BB%A7%E6%89%BF%E5%85%B3%E7%B3%BB%E5%9B%BE.png&#34; alt=&#34;gtk继承关系图&#34;&gt;
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/Container%E6%98%AF%E5%8F%AA%E5%A4%A7%E8%80%81%E8%99%8E&#34; alt=&#34;&#34;&gt;
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/Gtkbin%E6%98%AF%E5%8F%AA%E5%B0%8F%E8%80%81%E8%99%8E.png&#34; alt=&#34;Gtkbin是只小老虎&#34;&gt;
-&lt;img src=&#34;V2.0%E7%BB%A7%E6%89%BF%E5%9B%BE.png&#34; alt=&#34;v2.0的所有类文件&#34;&gt;&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/gtk%e7%bb%a7%e6%89%bf%e5%85%b3%e7%b3%bb%e5%9b%be.png&#34; alt=&#34;gtk继承关系图&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/Container%e6%98%af%e5%8f%aa%e5%a4%a7%e8%80%81%e8%99%8e&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/Gtkbin%e6%98%af%e5%8f%aa%e5%b0%8f%e8%80%81%e8%99%8e.png&#34; alt=&#34;Gtkbin是只小老虎&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;V2.0%e7%bb%a7%e6%89%bf%e5%9b%be.png&#34; alt=&#34;v2.0的所有类文件&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;Bug再修复1  menu的clicked事件改为activate(menu  item响应 activate事件），这个activate让我花费了至少两个小时，因为把所有的OOMenu的过程                  重新在书写了一遍，并拆成孤立的四个片段分别是： OOMenuBar.java（将包装添入包装条，菜单条）    OOSubMenu.java（把菜单包装）    OOSingleMenu.java （绘制菜单） OOMenuVegetable.java （绘制一盘菜）。具体的也在源代码第三个版本。
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Bug修复2    文件过滤器的 抽象方法的返回值从void变为 String[]，这样可以返回字符串（比如打开文件夹的文件名）
@@ -15409,9 +16330,69 @@ class SaveFileNew extends OOFileChooser
 &lt;pre&gt;&lt;code&gt;基本上两种封装方法的思路一样，就书写来说，第二种方法，更加的清晰些。
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;运行界面一样：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/filechooser1.png&#34; alt=&#34;软件的运行界面&#34;&gt;
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/filechooser2.png&#34; alt=&#34;利用工具栏打开一个文件&#34;&gt;
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/filechooser3.png&#34; alt=&#34;利用菜单栏保存一个文档&#34;&gt;&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/filechooser1.png&#34; alt=&#34;软件的运行界面&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/filechooser2.png&#34; alt=&#34;利用工具栏打开一个文件&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/filechooser3.png&#34; alt=&#34;利用菜单栏保存一个文档&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;p&gt;2月7号的笔记：
 再次介绍主要的控件的封装过程
 OOWindow的封装思路
@@ -17030,9 +18011,9 @@ public  class OOFileChooser extends OODialog
     
     <item>
       <title>3月21日Java周末班试题收集</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/05/11/3yue-21ri-javazhou-mo-ban-shi-ti-shou-ji/</link>
+      <link>https://jueqingsizhe66.github.io/archives/3yue-21ri-javazhou-mo-ban-shi-ti-shou-ji/</link>
       <pubDate>Mon, 11 May 2015 14:58:41 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/05/11/3yue-21ri-javazhou-mo-ban-shi-ti-shou-ji/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/3yue-21ri-javazhou-mo-ban-shi-ti-shou-ji/</guid>
       <description>&lt;p&gt;阶段性考试（考试6个小时，讲评+重写6个小时）
 题目1：简述LinkedList和ArrayList的区别是什么？
 题目2：简述Java 中Set有哪几种？区别是什么？
@@ -18278,14 +19259,34 @@ class TCPClient
 }
 
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/kehuduan.png&#34; alt=&#34;客户端读取服务器段数据库的学生信息&#34;&gt;&lt;/p&gt;</description>
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/kehuduan.png&#34; alt=&#34;客户端读取服务器段数据库的学生信息&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>1月25日Java班笔记试题</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/05/11/1yue-25ri-javaban-bi-ji-shi-ti/</link>
+      <link>https://jueqingsizhe66.github.io/archives/1yue-25ri-javaban-bi-ji-shi-ti/</link>
       <pubDate>Mon, 11 May 2015 14:58:40 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/05/11/1yue-25ri-javaban-bi-ji-shi-ti/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/1yue-25ri-javaban-bi-ji-shi-ti/</guid>
       <description>&lt;p&gt;一、IO基础
 1.File在Java中，既可以表示文件，也可以表示目录。可以通过File对象来判定文件是否可读，可写，存在等。
 2.File对象的mkdirs()推荐使用这个方法，此方法可以创建多层次的目录。而mkdir()只能一层一层创建。
@@ -18650,8 +19651,48 @@ TeeOutputStream：一个inputStream 一个OutputStream,在读取InputStream的�
 CommonsIO刚刚接触，只是一些浅显的知识，跟大家分享了,可以通过比较传统的IO流的实现，
 CommonsIO流的确为我们封装了很多有用而且快捷的类方法，当然前提是得对基本的IO流有一定的基础性认识。
 有问题的，求指教。
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/filename.gif&#34; alt=&#34;过滤器接口的说明&#34;&gt;
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/%E4%B8%BB%E8%A6%81%E4%BB%A3%E7%A0%81.gif&#34; alt=&#34;打印所有当前文件夹内的早于一天前创建的文件和文件夹&#34;&gt;&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/filename.gif&#34; alt=&#34;过滤器接口的说明&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/%e4%b8%bb%e8%a6%81%e4%bb%a3%e7%a0%81.gif&#34; alt=&#34;打印所有当前文件夹内的早于一天前创建的文件和文件夹&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;p&gt;另外的,WildcardFileFilter类似于RegexFileFilter可以模糊的定位当前文件夹下的所有符合模糊条件的文件，
 比如&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;WildcardFileFilter
@@ -18727,9 +19768,9 @@ RegexFileFilter ff = new RegexFileFilter(&amp;quot;.&lt;em&gt;test.&lt;/em&gt;\.
     
     <item>
       <title>1月26日Java班笔记</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/05/11/1yue-26ri-javaban-bi-ji/</link>
+      <link>https://jueqingsizhe66.github.io/archives/1yue-26ri-javaban-bi-ji/</link>
       <pubDate>Mon, 11 May 2015 14:58:40 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/05/11/1yue-26ri-javaban-bi-ji/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/1yue-26ri-javaban-bi-ji/</guid>
       <description>&lt;p&gt;进一步针对com.rupeng.gtk.GTK主类进行了分析
 第一部分：&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class GTK
@@ -19249,10 +20290,90 @@ clean:
 会得到hello.dll文件，并运行java hello&lt;/p&gt;
 &lt;p&gt;前提你得安装gnu make.&lt;/p&gt;
 &lt;p&gt;附上loadDLL的实现：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/4.png&#34; alt=&#34;loadDLL的注释&#34;&gt;
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/5.gif&#34; alt=&#34;hello.c hello.java Makefile&#34;&gt;
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/5.png&#34; alt=&#34;unZipShare&#34;&gt;
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/6.gif&#34; alt=&#34;unZip的注释&#34;&gt;&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/4.png&#34; alt=&#34;loadDLL的注释&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/5.gif&#34; alt=&#34;hello.c hello.java Makefile&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/5.png&#34; alt=&#34;unZipShare&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/6.gif&#34; alt=&#34;unZip的注释&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;p&gt;认识界面！
 控制台程序
 界面程序（GUI）
@@ -19333,28 +20454,65 @@ public class TestGtk
  e:  GTK.gtk_container_add（window,box) 并show一下。
  f:   GTK.gtk_main();   启动循环线程
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/1.png&#34; alt=&#34;GTK的冰封对话框&#34;&gt;&lt;/p&gt;
-&lt;p&gt;在使用com.rupeng.gtk4j.Utils遇到如下问题：
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/1.png&#34; alt=&#34;GTK的冰封对话框&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p class=&#34;..&#34;&gt;在使用com.rupeng.gtk4j.Utils遇到如下问题：
 import com.rupeng.gtk4j.Utils;  一直倒不进去(这也说明一点 我们在使用com.rupeng.gtk4j的时候，不需要使用Utils这个类)
 于是查了一下Utils类的实现
-class Utils
-{
-&amp;hellip;
-}
-复制代码&lt;/p&gt;
+class Utils&lt;/p&gt;
+&lt;p&gt;复制代码&lt;/p&gt;
 &lt;p&gt;原来不是公有类，并且不处于同一个包下，相互之间不能访问。默认的Utils是 default修饰符（default限制在同包内（同一山寨）），对于我们使用者需要管两个问题1：可否继承？ 2：可否访问   不管他们如何进行分包。如果站在更高的高度，就需要有座山雕的风范，统一东北18座山寨（假设座山雕拥有此技能，山寨之间如何访问，如何继承由他说了算）。&lt;/p&gt;
 &lt;p&gt;在使用类的时候，得问自己，“哪个山寨的？” “可否继承？” “可否访问”（只有public支持不同包的访问（访问是指直接可以new &amp;hellip;），protected是在不同包的情况允许继承(j继承是指可以extends)）&lt;/p&gt;
 &lt;p&gt;大部分情况我们是在不同包下进行调用，所以一般是public和protected。&lt;br&gt;
 小部分情况下 我们在自己建包的时候，使用 default或者private&lt;/p&gt;
 &lt;p&gt;在复习了一下包的机制，找到了一张好的总结图：
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/%E5%8C%85%E7%9A%84%E6%8E%A7%E5%88%B6%E6%9C%BA%E5%88%B6.png&#34; alt=&#34;包的控制机制&#34;&gt;&lt;/p&gt;</description>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/%e5%8c%85%e7%9a%84%e6%8e%a7%e5%88%b6%e6%9c%ba%e5%88%b6.png&#34; alt=&#34;包的控制机制&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>1月28日Java班笔记提交帖</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/05/11/1yue-28ri-javaban-bi-ji-ti-jiao-tie/</link>
+      <link>https://jueqingsizhe66.github.io/archives/1yue-28ri-javaban-bi-ji-ti-jiao-tie/</link>
       <pubDate>Mon, 11 May 2015 14:58:40 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/05/11/1yue-28ri-javaban-bi-ji-ti-jiao-tie/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/1yue-28ri-javaban-bi-ji-ti-jiao-tie/</guid>
       <description>&lt;p&gt;第一部分：笔记
 引用杨老师笔记，的确经典
 1、GTK命名规则
@@ -19874,18 +21032,118 @@ public class TestGtkCheckBox
 &lt;p&gt;}
 复制代码&lt;/p&gt;
 &lt;p&gt;通过上面的练习： 学习了GTK框架的编程方式，掌握了 label,entry,checkbox(继承toggle_button),Box Layout, Grid Layout , Fixed Layout的基本使用方法，包括clicked,destroy这两个信号的事件处理。  另外拓展的学习了匿名类 new IGCallback(){..}的使用方法。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/checkbox.gif&#34; alt=&#34;checkbox的结果&#34;&gt;
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/%E7%9B%92%E5%AD%90.gif&#34; alt=&#34;盒子布局的结果&#34;&gt;
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/%E5%9B%BA%E5%AE%9A.gif&#34; alt=&#34;固定布局的结果&#34;&gt;
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/%E7%BD%91%E6%A0%BC%E5%B8%83%E5%B1%80.gif&#34; alt=&#34;网格布局的结果&#34;&gt;
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/%E6%80%BB%E4%BD%93%E6%A1%86%E6%9E%B6%E5%9B%BE.gif&#34; alt=&#34;GTK的总体框架图&#34;&gt;&lt;/p&gt;</description>
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/checkbox.gif&#34; alt=&#34;checkbox的结果&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/%e7%9b%92%e5%ad%90.gif&#34; alt=&#34;盒子布局的结果&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/%e5%9b%ba%e5%ae%9a.gif&#34; alt=&#34;固定布局的结果&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/%e7%bd%91%e6%a0%bc%e5%b8%83%e5%b1%80.gif&#34; alt=&#34;网格布局的结果&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/%e6%80%bb%e4%bd%93%e6%a1%86%e6%9e%b6%e5%9b%be.gif&#34; alt=&#34;GTK的总体框架图&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>1月31日Java班笔记作业</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/05/11/1yue-31ri-javaban-bi-ji-zuo-ye/</link>
+      <link>https://jueqingsizhe66.github.io/archives/1yue-31ri-javaban-bi-ji-zuo-ye/</link>
       <pubDate>Mon, 11 May 2015 14:58:40 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/05/11/1yue-31ri-javaban-bi-ji-zuo-ye/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/1yue-31ri-javaban-bi-ji-zuo-ye/</guid>
       <description>&lt;p&gt;第一部分：笔记
 First: SpinBox
 背景：spinButton 控制了文本框的数字，所以不需要研究entry的数字限制形式&lt;/p&gt;
@@ -21984,17 +23242,237 @@ public class TestLine
 
 }
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/sanmao.gif&#34; alt=&#34;三毛的自画像&#34;&gt;
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/jianyi.gif&#34; alt=&#34;三毛+笑脸&#34;&gt;
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/ButtonImage.gif&#34; alt=&#34;图片按钮&#34;&gt;
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/calc2.gif&#34; alt=&#34;计算器v2.0 使用spinbox&#34;&gt;
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/spinbox1.gif&#34; alt=&#34;spinbox的数字范围&#34;&gt;
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nvshen2.gif&#34; alt=&#34;女神告白神器2 加入了迭代插入&#34;&gt;
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nvshen.gif&#34; alt=&#34;女神告白神奇 TextView的初次使用&#34;&gt;
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/shuiguo.gif&#34; alt=&#34;水果购买选择器&#34;&gt;
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/province.gif&#34; alt=&#34;省市联动器&#34;&gt;
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/huizhide.png&#34; alt=&#34;笑脸的绘制测量&#34;&gt;
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/symmetry.gif&#34; alt=&#34;对称折线图&#34;&gt;&lt;/p&gt;</description>
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/sanmao.gif&#34; alt=&#34;三毛的自画像&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/jianyi.gif&#34; alt=&#34;三毛&amp;#43;笑脸&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/ButtonImage.gif&#34; alt=&#34;图片按钮&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/calc2.gif&#34; alt=&#34;计算器v2.0 使用spinbox&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/spinbox1.gif&#34; alt=&#34;spinbox的数字范围&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nvshen2.gif&#34; alt=&#34;女神告白神器2 加入了迭代插入&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/nvshen.gif&#34; alt=&#34;女神告白神奇 TextView的初次使用&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/shuiguo.gif&#34; alt=&#34;水果购买选择器&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/province.gif&#34; alt=&#34;省市联动器&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/huizhide.png&#34; alt=&#34;笑脸的绘制测量&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/java/symmetry.gif&#34; alt=&#34;对称折线图&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;</description>
     </item>
     
   </channel>

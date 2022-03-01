@@ -1,0 +1,1949 @@
+<!DOCTYPE html><html lang="en-us" >
+
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  
+  
+    <meta name="generator" content="Wowchemy 5.4.0 for Hugo" />
+  
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+  
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="令狐冲" />
+
+  
+  
+  
+    
+  
+  <meta name="description" content="定义一个eternity函数，并尝试是否可以执行
+(define eternity
+(lambda (x)
+   (eternity x)))
+
+其实eternity永远在执行着，无法退出" />
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://jueqingsizhe66.github.io/archives/cong-lambdadao-simple-plus-complexjie-shi-qi-zai-dao-shu-xing-chou-xiang/" />
+
+  
+  
+  
+    <meta name="theme-color" content="#1565c0" />
+  
+
+  
+  
+    
+    <script src="/js/mathjax-config.js"></script>
+  
+
+  
+
+  <link rel="stylesheet" href="/css/vendor-bundle.min.f1ecf783c14edc00c9320c205831ad8e.css" media="print" onload="this.media='all'">
+
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css" integrity="sha512-W0xM4mr6dEP9nREo7Z9z+9X70wytKvMGeDsj7ps2+xg5QPrEBXC8tAW1IFnzjR6eoJ90JmCnFzerQJTLzIEHjA==" crossorigin="anonymous" media="print" onload="this.media='all'">
+    
+
+    
+    
+    
+    
+      
+      
+    
+    
+    
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/github.min.css" crossorigin="anonymous" title="hl-light" media="print" onload="this.media='all'">
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" media="print" onload="this.media='all'" disabled>
+        
+      
+    
+
+    
+    
+    
+
+    
+
+    
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.2a9113cdaa287c8aabad4aa82208fdf3.css" />
+
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+    <link rel="manifest" href="/manifest.webmanifest" />
+  
+
+  <link rel="icon" type="image/png" href="/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_32x32_fill_lanczos_center_3.png" />
+  <link rel="apple-touch-icon" type="image/png" href="/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_180x180_fill_lanczos_center_3.png" />
+
+  <link rel="canonical" href="https://jueqingsizhe66.github.io/archives/cong-lambdadao-simple-plus-complexjie-shi-qi-zai-dao-shu-xing-chou-xiang/" />
+
+  
+  
+  
+  
+  
+  
+  
+  
+    
+    
+  
+  
+
+  
+  
+    
+    
+  
+  <meta property="twitter:card" content="summary" />
+  
+    <meta property="twitter:site" content="@jueqingsihe66" />
+    <meta property="twitter:creator" content="@jueqingsihe66" />
+  
+  <meta property="og:site_name" content="30年磨一剑" />
+  <meta property="og:url" content="https://jueqingsizhe66.github.io/archives/cong-lambdadao-simple-plus-complexjie-shi-qi-zai-dao-shu-xing-chou-xiang/" />
+  <meta property="og:title" content="从lambda到simple&#43;complex解释器再到树形抽象 | 30年磨一剑" />
+  <meta property="og:description" content="定义一个eternity函数，并尝试是否可以执行
+(define eternity
+(lambda (x)
+   (eternity x)))
+
+其实eternity永远在执行着，无法退出" /><meta property="og:image" content="https://jueqingsizhe66.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" />
+    <meta property="twitter:image" content="https://jueqingsizhe66.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
+  
+    
+      <meta
+        property="article:published_time"
+        content="2015-05-17T11:32:07&#43;08:00"
+      />
+    
+    <meta property="article:modified_time" content="2015-05-17T11:32:07&#43;08:00">
+  
+
+  
+
+
+
+  
+
+  
+
+  
+
+
+
+
+
+  <title>从lambda到simple&#43;complex解释器再到树形抽象 | 30年磨一剑</title>
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="bb93fac03e7ab17680ac4c85f3cf6920" >
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.7e5427316d1b14a30f257ae3467b3e21.js"></script>
+
+  
+
+
+<aside class="search-modal" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="Search...">
+        
+      </div>
+
+      
+      
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="header--fixed">
+  <nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+    <div class="container-xl">
+
+      
+      <div class="d-none d-lg-inline-flex">
+        <a class="navbar-brand" href="/">30年磨一剑</a>
+      </div>
+      
+
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+      <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+      
+      <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+        <a class="navbar-brand" href="/">30年磨一剑</a>
+      </div>
+      
+
+      
+      
+      <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+        
+        <ul class="navbar-nav d-md-inline-flex">
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#hero"><span>概要</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#posts"><span>博文</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/about/"><span>About</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/categories/"><span>分类</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link  active" href="/archives"><span>归档</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#tags"><span>标签</span></a>
+          </li>
+
+          
+          
+
+        
+
+          
+        </ul>
+      </div>
+
+      <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+        
+        
+          
+        
+
+        
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+        
+        
+        <li class="nav-item dropdown theme-dropdown">
+          <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+            <i class="fas fa-moon" aria-hidden="true"></i>
+          </a>
+          <div class="dropdown-menu">
+            <a href="#" class="dropdown-item js-set-theme-light">
+              <span>Light</span>
+            </a>
+            <a href="#" class="dropdown-item js-set-theme-dark">
+              <span>Dark</span>
+            </a>
+            <a href="#" class="dropdown-item js-set-theme-auto">
+              <span>Automatic</span>
+            </a>
+          </div>
+        </li>
+        
+
+        
+        
+
+      </ul>
+
+    </div>
+  </nav>
+</header>
+
+
+  </div>
+
+  <div class="page-body">
+    
+    
+    
+
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+  
+ <script async src="//cdn.busuanzi.ibruce.info/cdn/busuanzi/2.3/busuanzi.pure.mini.js"></script> 
+ <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script> 
+ <script> 
+     $(document).ready(function() { 
+         var int = setInterval(fixCount, 100); 
+         var busuanziSiteOffset =  100000  
+         function fixCount() { 
+             if ($("#busuanzi_container_site_pv").css("display") != "none") { 
+                 clearInterval(int); 
+                 $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + busuanziSiteOffset); 
+             } 
+         } 
+     }); 
+ </script> 
+  
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>从lambda到simple&#43;complex解释器再到树形抽象</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    May 17, 2015
+  </span>
+  
+
+  
+
+  
+
+  
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/category/programme/">programme</a></span>
+  
+
+</div>
+
+    
+
+
+
+
+
+  
+</div>
+
+
+
+
+
+<span class="article-metadata" >Reading time: 13 minutes and    21 seconds with 2940 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+    <aside>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#定义一个eternity函数并尝试是否可以执行">定义一个eternity函数，并尝试是否可以执行</a>
+      <ul>
+        <li><a href="#1下面式子只能计算列表的长度0的且永远不会调用eternity">1.下面式子只能计算列表的长度&lt;=0的,且永远不会调用eternity</a></li>
+        <li><a href="#2下面式子只能计算列表的长度1的且永远不会调用eternity">2.下面式子只能计算列表的长度&lt;=1的,且永远不会调用eternity</a></li>
+        <li><a href="#3下面式子只能计算列表的长度2的且永远不会调用eternity">3.下面式子只能计算列表的长度&lt;=2的,且永远不会调用eternity</a></li>
+      </ul>
+    </li>
+    <li><a href="#如果我们进行一次变换">如果我们进行一次变换</a>
+      <ul>
+        <li><a href="#1把eternity替换成mk-length">1.把eternity替换成mk-length</a></li>
+        <li><a href="#然而我们对他进一步提取发现报错了">然而我们对他进一步提取发现报错了</a></li>
+        <li><a href="#为什么不行">为什么不行？</a></li>
+        <li><a href="#let宏">let宏</a></li>
+        <li><a href="#然而其实我的想法只不过是他的复制">然而其实我的想法只不过是他的复制</a></li>
+      </ul>
+    </li>
+    <li><a href="#简单计算器解释器">简单计算器解释器</a></li>
+    <li><a href="#复杂解释器">复杂解释器</a></li>
+    <li><a href="#树形抽象">树形抽象</a>
+      <ul>
+        <li><a href="#额外话题-insertleft-insertright-eventonly比较上面的rember理解col">额外话题 insertleft insertright eventonly比较上面的rember,理解col</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </aside>
+  <div class="article-container">
+
+
+    <div class="article-style">
+      <h2 id="定义一个eternity函数并尝试是否可以执行">定义一个eternity函数，并尝试是否可以执行</h2>
+<pre><code class="language-scheme">(define eternity
+(lambda (x)
+   (eternity x)))
+</code></pre>
+<p>其实eternity永远在执行着，无法退出</p>
+<h3 id="1下面式子只能计算列表的长度0的且永远不会调用eternity">1.下面式子只能计算列表的长度&lt;=0的,且永远不会调用eternity</h3>
+<p>; Function to calculate length of just empty list.
+;
+((lambda (len)
+(lambda (l)
+(cond
+((null? l) 0)
+(else (+ 1 (len (cdr l)))))))
+eternity)</p>
+<h3 id="2下面式子只能计算列表的长度1的且永远不会调用eternity">2.下面式子只能计算列表的长度&lt;=1的,且永远不会调用eternity</h3>
+<pre><code class="language-scheme">; For lists with length &lt;= 1
+;
+((lambda (mk-length)
+  (mk-length mk-length))
+ (lambda (mk-length)
+   (lambda (l)
+     (cond
+       ((null? l) 0)
+       (else (+ 1 ((mk-length eternity) (cdr l))))))))
+
+
+</code></pre>
+<h3 id="3下面式子只能计算列表的长度2的且永远不会调用eternity">3.下面式子只能计算列表的长度&lt;=2的,且永远不会调用eternity</h3>
+<pre><code class="language-scheme">; For lists with length &lt;= 2
+;
+((lambda (len)
+  (lambda (l)
+    (cond
+      ((null? l) 0)
+      (else (+ 1 (len (cdr l)))))))
+ ((lambda (len)
+   (lambda (l)
+     (cond
+       ((null? l) 0)
+       (else (+ 1 (len (cdr l)))))))
+  ((lambda (len)
+    (lambda (l)
+      (cond
+        ((null? l) 0)
+        (else (+ 1 (len (cdr l)))))))
+   eternity)))
+ 
+</code></pre>
+<h2 id="如果我们进行一次变换">如果我们进行一次变换</h2>
+<h3 id="1把eternity替换成mk-length">1.把eternity替换成mk-length</h3>
+<p>我们发现结果是它可以变成处理无限长度的列表了。</p>
+<pre><code>(((lambda (mk-length)
+  (mk-length mk-length))
+ (lambda (mk-length)
+   (lambda (l)
+     (cond
+       ((null? l) 0)
+       (else (+ 1 ((mk-length mk-length) (cdr l))))))))
+ '(a b c 1 g))  ; 5
+
+</code></pre>
+<h3 id="然而我们对他进一步提取发现报错了">然而我们对他进一步提取发现报错了</h3>
+<pre><code class="language-scheme">((lambda (mk-length)
+  (mk-length mk-length))
+ (lambda (mk-length)
+   ((lambda (len)
+     (lambda (l)
+       (cond
+         ((null? l) 0)
+         (else (+ 1 (len (cdr l)))))))
+    (mk-length mk-length)))) ; Aborting!: maximum recursion depth exceeded
+
+</code></pre>
+<h3 id="为什么不行">为什么不行？</h3>
+<p>原因在于 我们需要的是lambda类型的procedure才可以，而函数调用形式则是不行。
+然而有一种转换方式如下：</p>
+<p>(f x) ==&gt; (lambda (arg) (f arg) x)</p>
+<p>于是我们得到新的升级版的mk-length</p>
+<pre><code class="language-scheme">
+((lambda (mk-length)
+  (mk-length mk-length))
+ (lambda (mk-length)
+   ((lambda (len)
+     (lambda (l)
+       (cond
+         ((null? l) 0)
+         (else (+ 1 (len (cdr l)))))))
+    (lambda (x) ((mk-length mk-length) x)))))
+</code></pre>
+<p>我们发现还是不够满意，我们想把中间的一坨拿到后面去，于是再次抽象一层
+也就是我们需要 把(lambda (len) &hellip; (cdr l))部分 移到最外头</p>
+<pre><code class="language-scheme">((lambda (le)
+  ((lambda (mk-length)
+    (mk-length mk-length))
+   (lambda (mk-length)
+     (le (lambda (x) ((mk-length mk-length) x))))))
+ (lambda (len)
+   (lambda (l)
+     (cond
+       ((null? l) 0)
+       (else (+ 1 (len (cdr l))))))))
+
+</code></pre>
+<p>然而如果我们把后面的(lambda (len))部分去掉</p>
+<pre><code class="language-scheme">(lambda (le)
+  ((lambda (mk-length)
+    (mk-length mk-length))
+   (lambda (mk-length)
+     (le (lambda (x) ((mk-length mk-length) x))))))
+
+</code></pre>
+<p>他其实就是下面的骨架：</p>
+<pre><code class="language-scheme">(lambda (le)
+  ((lambda ()
+    ())
+   (lambda ()
+     (le (lambda (x) (() x))))))
+</code></pre>
+<p>如果我们使用f来填加：</p>
+<pre><code class="language-scheme">(lambda (le)
+    ((lambda (f)
+      (f f))
+     (lambda (f)
+       (le (lambda (x) ((f f) x))))))
+</code></pre>
+<p>他其实就是Y-lambda. 我们所谓的define，let,set!都可以从lambda 推出来。</p>
+<h3 id="let宏">let宏</h3>
+<pre><code class="language-scheme">
+(define-syntax
+    (syntax-rules ()
+        ((let ((var expr) ...) body ...) ((lambda (var ...) body ...) expr ...))))
+
+</code></pre>
+<p>也就是我们以后完全可以用</p>
+<pre><code class="language-scheme">
+(define Y
+  (lambda (le)
+    ((lambda (f) (f f))
+     (lambda (f)
+       (le (lambda (x) ((f f) x)))))))
+</code></pre>
+<p>Y-lambda 执行一个 代表lambda的函数子f。</p>
+<p>比如,求最大值(<em>注意：(lambda (func-arg) func-arg是可以不存在的部分,永远不会被执行</em>)):</p>
+<pre><code class="language-scheme">;; 求个数
+
+((Y (lambda (len)
+   (lambda (l)
+     (cond
+       ((null? l) 0)
+       (else (+ 1 (len (cdr l))))))))  '(3 2 3  6 1))
+
+;;; 求最大值
+ ((Y (lambda (func-arg)
+        (lambda (l)
+          (cond
+            ((null? l) 'no-list)
+            ((null? (cdr l)) (car l))
+            (else (max (car l) (func-arg (cdr l)))))))) '(3 2 5 3 425))
+</code></pre>
+<p>另外我们发现y-lambda可以写成更优雅、对称的形式:</p>
+<pre><code class="language-scheme">(define Y
+  (lambda (le)
+    ((lambda (f)
+      (le (f f))) ;;; 
+     (lambda (f)
+       (le (lambda (x) ((f f) x)))))))
+
+</code></pre>
+<p>Add le()  is not necessay
+But the code can be
+More beautiful and symmetry</p>
+<h3 id="然而其实我的想法只不过是他的复制">然而其实我的想法只不过是他的复制</h3>
+<pre><code class="language-scheme">(define Y1
+  (lambda (le)
+    ((lambda (fun)
+      (fun fun))  ;; 这是基于抽象的方式,也就是把后面的(lambda (f))  带入其中
+
+     (lambda (f)
+       (le (lambda (x) ((f f) x)))))))
+
+((Y1 
+ (lambda (fun-arg)
+   (lambda (l)
+     (cond
+       ((null? l) 0)
+       (else (+ 1 (fun-arg (cdr l)))))))) '(3 5 2 42))
+</code></pre>
+<h2 id="简单计算器解释器">简单计算器解释器</h2>
+<p>来自<a href="http://pythoner.org/wiki/774/" target="_blank" rel="noopener">wangyin</a></p>
+<pre><code class="language-scheme">#lang racket
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;; 以下三个定义 env0, ent-env, lookup 是对环境(environment)的基本操作:
+
+;; 空环境
+(define env0 '())
+
+;; 扩展。对环境 env 进行扩展，把 x 映射到 v，得到一个新的环境
+(define ext-env
+  (lambda (x v env)
+    (cons `(,x . ,v) env)))
+
+;; 查找。在环境中 env 中查找 x 的值
+(define lookup
+  (lambda (x env)
+    (let ([p (assq x env)])
+      (cond
+       [(not p) x]
+       [else (cdr p)]))))
+
+;; 闭包的数据结构定义，包含一个函数定义 f 和它定义时所在的环境
+(struct Closure (f env))
+
+;; 解释器的递归定义（接受两个参数，表达式 exp 和环境 env）
+;; 共 5 种情况（变量，函数，调用，数字，算术表达式）
+(define interp1
+  (lambda (exp env)
+    (match exp                                          ; 模式匹配 exp 的以下情况（分支）
+      [(? symbol? x) (lookup x env)]                    ; 变量
+      [(? number? x) x]                                 ; 数字
+      [`(lambda (,x) ,e)                                ; 函数
+       (Closure exp env)]
+      [`(,e1 ,e2)                                       ; 调用
+       (let ([v1 (interp1 e1 env)]
+             [v2 (interp1 e2 env)])
+         (match v1
+           [(Closure `(lambda (,x) ,e) env1)
+            (interp1 e (ext-env x v2 env1))]))]
+      [`(,op ,e1 ,e2)                                   ; 算术表达式
+       (let ([v1 (interp1 e1 env)]
+             [v2 (interp1 e2 env)])
+         (match op
+           ['+ (+ v1 v2)]
+           ['- (- v1 v2)]
+           ['* (* v1 v2)]
+           ['/ (/ v1 v2)]))])))
+
+;; 解释器的“用户界面”函数。它把 interp1 包装起来，掩盖第二个参数，初始值为 env0
+(define interp
+  (lambda (exp)
+    (interp1 exp env0)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(interp (+ 2 65))
+(interp (* 3 2))
+(interp (/ 3 23))
+
+
+
+</code></pre>
+<h2 id="复杂解释器">复杂解释器</h2>
+<p>分为五个部分</p>
+<ul>
+<li>*const</li>
+<li>*cond</li>
+<li>*identifier(loop-up-evironment)</li>
+<li>*quote</li>
+<li>*lambda</li>
+<li>*Aplication(Not Promitive)</li>
+</ul>
+<p>具体可以看<The little scheme></p>
+<pre><code class="language-scheme">#lang racket
+;;don't look down on it, it is the full interpretor!
+;;Take care to read it!
+(define atom?
+  (lambda (x)
+    (and (not (pair? x)) (not (null? x)))))
+  
+(define build
+  (lambda (s1 s2)
+    (cond
+      (else (cons s1
+                  (cons s2 (quote ())))))))
+((lambda (nothing)
+     (cond
+       (nothing (quote something))
+       (else (quote nothing))))
+   #t)
+
+(define lookup-in-entry
+  (lambda (name entry entry-f)
+    (lookup-in-entry-help name
+                          (first entry)
+                          (second entry)
+                          (entry-f))))
+(define lookup-in-entry-help
+  (lambda (name names values entry-f)
+    (cond
+      ((null? names) (entry-f name))
+      ((eq? (car names) name)
+       (car values))
+      (else (lookup-in-entry-help name
+                                  (cdr names)
+                                  (cdr values)
+                                  entry-f)))))
+(define lookup-in-table
+  (lambda (name table table-f)
+    (cond 
+      ((null? table) (table-f name))
+      (else (lookup-in-entry name
+                             (car table)
+                             (lambda (name)
+                                                (cdr table)
+                                                (table-f))))))))
+(lambda (name table table-f)
+    (lookup-in-table name
+                     (cdr table)
+                     (table-f)))
+(define expression-to-action
+  (lambda (e)
+    (cond
+      ((atom? e) (atom-to-action e))
+      (else (list-to-action e)))))
+(define *const
+  (lambda (e table)
+    (cond 
+      ((number? e) e)
+      ((eq? e #t) #t)
+      ((eq? e #f) #f)
+      (else (build (quote primitive) e)))))
+(define atom-to-action
+  (lambda (e)
+    (cond
+      ((number? e) *const)
+      ((eq? e #t) *const)
+      ((eq? e #f) *const)
+      ((eq? e (quote cons)) *const)
+      ((eq? e (quote car)) *const)
+      ((eq? e (quote cdr)) *const)
+      ((eq? e (quote null?)) *const)
+      ((eq? e (quote eq?)) *const)
+      ((eq? e (quote atom?)) *const)
+      ((eq? e (quote zero?)) *const)
+      ((eq? e (quote add1)) *const)
+      ((eq? e (quote sub1)) *const)
+      ((eq? e (quote number?)) *const)
+      (else *identifier))))
+(define list-to-action
+  (lambda (e)
+    (cond
+      ((atom? (car e))
+       (cond
+         ((eq? (car e) (quote quote))
+          *quote)
+         ((eq? (car e) (quote lambda))
+          *lambda)
+         ((eq? (car e) (quote cond))
+          *cond)
+         (else *application)))
+      (else *application))))
+
+(define *quote
+  (lambda (e table)
+    (text-of e)))
+(define first
+  (lambda (p)
+    (cond 
+      (else (car p)))))
+(define second
+  (lambda (p)
+    (cond
+      (else car (cdr p)))))
+(define third
+  (lambda (p)
+    (cond 
+      (else car (cdr (cdr p))))))
+(define text-of second)
+
+(define table-of first)
+(define formals-of second)
+(define body-of third)
+(define *identifier
+  (lambda (e table)
+    (lookup-in-table e table initial-table)))
+(define initial-table
+  (lambda (name)
+    (car (quote ()))))
+(define *lambda
+  (lambda (e table)
+    (build (quote non-primitive)
+           (cons table (cdr e)))))
+
+(define evcon
+  (lambda (lines table)
+    (cond 
+      ((else? (question-of (car lines)))
+       (meaning (answer-of (car lines))
+                table))
+      ((meaning (question-of (car lines))
+                table)
+       (meaning (answer-of (car lines))
+                table))
+      (else (evcon (cdr lines) table)))))
+
+(define else?
+  (lambda (x)
+    (cond
+      ((atom? x) (eq? x (quote else)))
+      (else #f))))
+(define question-of first)
+(define answer-of second)
+
+(define *cond
+  (lambda (e table)
+    (evcon (cond-lines-of e) table)))
+(define cond-lines-of cdr)
+
+(define evlis
+  (lambda (args table)
+    (cond
+      ((null? args) (quote ()))
+      (else
+       (cons (meaning (car args) table)
+             (evlis (cdr args) table))))))
+(define *application
+  (lambda (e table)
+    (apply
+     (meaning (function-of e) table)
+     (evlis (arguments-of e) table))))
+(define function-of car)
+(define arguments-of cdr)
+(define primitive?
+  (lambda (l)
+    (eq? (first l) (quote primitive))))
+(define non-primitive?
+  (lambda (l)
+    (eq? (first l) (quote non-primitive))))
+(define apply
+  (lambda (fun vals)
+    (cond
+      ((primitive? fun)
+       (apply-primitive
+        (second fun) vals))
+      ((non-primitive? fun)
+       (apply-closure
+        (second fun) vals)))))
+
+(define apply-primitive
+  (lambda (name vals)
+    (cond
+      ((eq? name (quote cons))
+       (cons (first vals) (second vals)))
+      ((eq? name (quote car))
+       (car (first vals)))
+      ((eq? name (quote cdr))
+      ((eq? name (quote cdr))
+       (cdr (first vals)))
+      ((eq? name (quote null?))
+       (null? (first vals)))
+      ((eq? name (quote eq?))
+       (eq? (first vals) (second vals)))
+      ((eq? name (quote atom?))
+       (:atom? (first vals)))
+      ((eq? name (quote zero?))
+       (zero? (first vals)))
+      ((eq? name (quote add1))
+       (add1 (first vals)))
+      ((eq? name (quote sub1))
+       (sub1 (first vals)))
+      ((eq? name (quote number?))
+       (number? (first vals))))))
+(define :atom?
+  (lambda (x)
+    (cond
+      ((atom? x) #t)
+      ((null? x) #f)
+      ((eq? (car x) (quote primitive))
+       #t)
+      ((eq? (car x) (quote non-primitive))
+       #t)
+      (else #f))))
+(define apply-closure
+  (lambda (closure vals)
+    (meaning (body-of closure)
+             (extend-table
+              (new-entry
+               (formals-of closure)
+               vals)
+              (table-of closure)))))
+(define new-entry build)
+(define extend-table cons)
+
+(define value
+  (lambda (e)
+    (meaning e (quote ()))))
+(define meaning
+  (lambda (e table)
+    ((expression-to-action e) e table)))
+
+(value (+ 3 4 (* 3 1)))
+
+</code></pre>
+<h2 id="树形抽象">树形抽象</h2>
+<ol>
+<li>一个lat 中的一个删除</li>
+</ol>
+<pre><code class="language-scheme">
+(define rember3
+  (lambda (s l)
+    (cond 
+      ((null? l) (quote ()))
+      ((equal? (car l) s) (cdr l))
+      (else (cons (car l)
+                  (rember3 s (cdr l)))))))
+
+</code></pre>
+<ol start="2">
+<li>一个list中的一个删除</li>
+</ol>
+<pre><code class="language-scheme">
+(define multirember
+  (lambda (a lat)
+    (cond
+      ((null? lat) (quote ()))
+      (else
+       (cond
+         ((eq? (car lat) a)
+          (multirember a (cdr lat)))
+         (else (cons (car lat)
+                     (multirember a (cdr lat)))))))))
+
+</code></pre>
+<ol start="3">
+<li>一个list中的全部删除</li>
+</ol>
+<pre><code class="language-scheme">
+
+(define rember*
+  (lambda (a l)
+    (cond
+      ((null? l) (quote ()))
+      ((atom? (car l))
+       (cond 
+         ((eq? (car l) a)
+          (rember* a (cdr l)))
+         (else (cons (car l)
+                     (rember* a (cdr l))))))
+     (else (cons (rember* a (car l))
+           (rember* a (cdr l)))))))
+
+
+</code></pre>
+<p>4 1中的rember升级
+加入谓词表达式的参数</p>
+<pre><code class="language-scheme">(define rember-f
+  (lambda (test? a l)
+    (cond 
+      ((null? l) (quote ()))
+      (else
+       (cond 
+         ((test? (car l) a) (cdr l));;I think here needs atom2function
+         (else (cons (car l)
+                     (rember-f test? a 
+                               (cdr l)))))))))
+
+</code></pre>
+<ol start="5">
+<li>2中的multirember升级</li>
+</ol>
+<pre><code class="language-scheme">
+(define multirember-f
+  (lambda (test?)
+    (lambda (a lat)
+      (cond 
+        ((null? lat) (quote ()))
+        ((test? a (car lat))
+         ((multirember-f test?) a
+                               (cdr lat)))
+        (else (cons (car lat)
+                    ((multirember test?)  a 
+                                          (cdr lat))))))))
+
+(define multirember-eq? (multirember-f 'eq?))
+
+</code></pre>
+<ol start="6">
+<li>5中的multirember-f进一步升级</li>
+</ol>
+<p>加入了可以处理的col,作为一个后处理小程序</p>
+<pre><code class="language-scheme">
+
+(define multiremberco
+  (lambda (a lat col)
+    (cond 
+      ((null? lat)
+       (col (quote ()) (quote ())))
+      ((eq? (car lat) a)
+       (multiremberco a 
+                      (cdr lat)
+                      (lambda (newlat seen) 
+                        (col newlat (cons (car lat) seen)))))
+      (else
+       (multiremberco a 
+                      (cdr lat)
+                      (lambda (newlat seen)
+                        (col (cons (car lat) newlat)
+                             seen)))))))
+
+(define a-friend
+  (lambda (x y)
+    (null? y)))
+;(multiremberco 'tuna '(sfds tuna fsd jif) a-friend)
+;#f
+;&gt; (multiremberco 'tuna '(sfds tuna1 fsd jif) a-friend)
+;#t
+;;how can  you get another value in the col
+(define new-friend
+  (lambda (newlat seen)
+    (a-friend newlat
+         (cons (quote tuna) seen))))
+
+</code></pre>
+<h3 id="额外话题-insertleft-insertright-eventonly比较上面的rember理解col">额外话题 insertleft insertright eventonly比较上面的rember,理解col</h3>
+<pre><code class="language-scheme">
+(define multiinsertLR
+  (lambda (new oldL oldR lat)
+    (cond
+      ((null? lat) (quote ()))
+      ((eq? (car lat) oldL)
+       (cons new 
+             (cons oldL
+                   (multiinsertLR new oldL oldR
+                                  (cdr lat)))))
+      ((eq? (car lat) oldR)
+       (cons oldR
+             (cons new
+                   (multiinsertLR new oldL oldR
+                                 (cdr lat))))))))
+
+(define multiinsertLRco
+  (lambda (new oldL oldR lat col)
+    (cond
+      ((null? lat)
+       (col (quote ()) 0 0))
+      ((eq? (car lat) oldL)
+       (multiinsertLRco new oldL oldR
+                        (cdr lat)
+                        (lambda (newlat L R)
+                          (col (cons new 
+                                     (cons oldL newlat))
+                               (+ 1 L) R))))
+      ((eq? (car lat) oldR)
+       (multiinsertLRco new oldL oldR
+                        (cdr lat)
+                        (lambda (newlat L R)
+                          (col (cons oldR
+                                     (cons new newlat))
+                               L (+ 1 R)))))
+      (else
+       (multiinsertLRco new oldL oldR 
+                        (cdr lat)
+                        (lambda (newlat L R)
+                          (col (cons (car lat) newlat)
+                               L R)))))))
+
+
+(define evens-only*co
+  (lambda (l col)
+    (cond
+      ((null? l)
+       (col (quote ()) 1 0))
+      ((atom? (car l))
+       (cond 
+         ((even? (car l))
+          (evens-only*co (cdr l)
+                         (lambda (newl p s)
+                           (col (cons (car l) newl);if it is evens ,so cons it into the newl
+                                (* (car l) p) s))))
+         (else (evens-only*co (cdr l)
+                              (lambda (newl p s)
+                                (col newl p (+ (car l) s)))))))
+       (else (evens-only*co (car l)
+                            (lambda (al ap as)
+                              (evens-only*co (cdr l)
+                                             (lambda (dl dp ds)
+                                               (col (cons al dl)
+                                                    (* ap dp)
+                                                    (+ as ds))))))))))
+;the fourth collector :: the last-last-friend
+(define the-last-last-friend
+  (lambda (newl product sum)
+    (cons sum 
+          (cons product 
+                newl))))
+;&gt; (evens-only*co '(45389 63 45 6 4 234  6 4 23 52 43) the-last-last-friend)
+;'(45563 7008768 6 4 234 6 4 52)
+
+
+</code></pre>
+<ol start="7">
+<li>进一步升级multirember 提取公共形式</li>
+</ol>
+<p>insert-g可以变幻出 rember
+insert-r insert-l  subset等</p>
+<pre><code class="language-scheme">
+(define rembern
+  (lambda (a l)
+    ((insert-g seqrem) #f a l)));;seqrem doesn't need (seqrem solve my ?.
+(define seqrem
+  (lambda (new old l) 
+    l))
+
+</code></pre>
+<p><em>那么insert-g到底是什么?</em></p>
+<pre><code class="language-scheme">
+(define insert-g
+  (lambda (seq)
+    (lambda (new old l)
+      (cond
+        ((null? l) (quote ()))
+        ((eq? (car l) old)
+         (seq new old (cdr l)))
+        (else (cons (car l)
+                    ((insert-g seq) new old
+                                    (cdr l))))))))
+
+</code></pre>
+<p>所以现在我们可以定义subst</p>
+<pre><code class="language-scheme">(define seqS
+  (lambda (new old l)
+    (cons new l)))
+
+(define seqL
+    (lambda (new old l)
+     (cons new (cons old l))))
+
+(define seqR
+    (lambda (new old l)
+        (cons (old (cons new l)))))
+
+(define subst1 (insert-g seqS))
+(define insertL (insert-g seqL))
+(define insertR (insert-g seqR))
+
+</code></pre>
+<p>经过这四个级别的抽象我们得到一般的具备公共模式的insert-g
+当然该函数还可以继续抽象。</p>
+    </div>
+ <div class="nav-links" style="padding:10;">
+        
+        <div align="left">
+        <a href="https://jueqingsizhe66.github.io/archives/haskellji-ge-ji-ben-gai-nian-xue-er-wu-yong-wu-yi-wei-yong/"><span class="arrow">←</span> <strong>上一篇:Haskell几个基本概念--学而无用--无以为用</strong></a>
+        </div>
+        
+        
+
+
+       <div align="right"> <a href="https://jueqingsizhe66.github.io/archives/the-greatest-weapons/" ><strong>下一篇:The greatest weapons </strong><span class="arrow">→</span></a></div>
+        
+      </div>
+    
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/scheme/">scheme</a>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="https://jueqingsizhe66.github.io/"><img class="avatar mr-3 avatar-circle" src="/author/%E4%BB%A4%E7%8B%90%E5%86%B2/avatar_huc99f1f2e739130747140db298bdd1890_46492_270x270_fill_q75_lanczos_center.jpg" alt="令狐冲"></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://jueqingsizhe66.github.io/">令狐冲</a></h5>
+      <h6 class="card-subtitle">Engineer of offshore wind turbine technique research</h6>
+      <p class="card-text">My research interests include distributed energy, wind turbine power generation technique , Computational fluid dynamic and programmable matter.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/jueqingsizhe66" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.co.uk/citations?user=7VyEMyQAAAAJ&amp;hl=zh-CN" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/jueqingsizhe66" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+         <span id="busuanzi_container_site_pv">
+             本站访问量：<span id="busuanzi_value_site_pv"></span>次
+         </span>
+         &nbsp;
+   </div>
+
+
+  </div>
+
+</article>
+<script src="https://utteranc.es/client.js"
+        repo="jueqingsizhe66/jueqingsizhe66.github.io"
+        issue-term="pathname"
+        theme="github-dark"
+        crossorigin="anonymous"
+        async>
+</script>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    ©2022 &middot; 
+
+    ^-^ LingHuChong ^-^ Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+      
+
+    
+    <script src="/js/vendor-bundle.min.3d946de2e8784a477845261d87025092.js"></script>
+
+    
+    
+    
+      
+      
+        <script src="https://cdn.jsdelivr.net/gh/desandro/imagesloaded@v4.1.4/imagesloaded.pkgd.min.js" integrity="sha512-S5PZ9GxJZO16tT9r3WJp/Safn31eu8uWrzglMahDT4dsmgqWonRY9grk3j+3tfuPr9WJNsfooOR7Gi7HL5W2jw==" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/gh/metafizzy/isotope@v3.0.6/dist/isotope.pkgd.min.js" integrity="sha512-Zq2BOxyhvnRFXu0+WE6ojpZLOU2jdnqbrM1hmVdGzyeCa1DgM3X5Q4A/Is9xA1IkbUeDd7755dNNI/PzSf2Pew==" crossorigin="anonymous"></script>
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/gh/mermaid-js/mermaid@v8.8.4/dist/mermaid.min.js" integrity="sha512-+TNmhaRJf3jyYHTpzEq/5I6b+aGyhzWb21mGdHAjxSGSYwxN9Grug3Y3B9qVxWfKKY8MscE/6mr9walWvFLFvQ==" crossorigin="anonymous" title="mermaid"></script>
+      
+
+      
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/highlight.min.js" integrity="sha512-Ypjm0o7jOxAd4hpdoppSEN0TQOC19UtPAqD+4s5AlXmUvbmmS/YMxYqAqarQYyxTnB6/rqip9qcxlNB/3U9Wdg==" crossorigin="anonymous"></script>
+        
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/r.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/latex.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/python.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/matlab.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/java.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/go.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/rust.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/c.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/perl.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/scheme.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/lisp.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/racket.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/awk.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/sed.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/bash.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/sql.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/vim.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/clojure.min.js" crossorigin="anonymous"></script>
+        
+      
+
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+      
+      <script id="search-hit-fuse-template" type="text/x-template">
+        <div class="search-hit" id="summary-{{key}}">
+          <div class="search-hit-content">
+            <div class="search-hit-name">
+              <a href="{{relpermalink}}">{{title}}</a>
+              <div class="article-metadata search-hit-type">{{type}}</div>
+              <p class="search-hit-description">{{snippet}}</p>
+            </div>
+          </div>
+        </div>
+      </script>
+      
+        <script src="https://cdn.jsdelivr.net/gh/krisk/Fuse@v3.2.1/dist/fuse.min.js" integrity="sha512-o38bmzBGX+hD3JHWUFCDA09btWaqrNmoJ3RXLlrysA7PP01Kgs4UlE4MhelE1v5dJR3+cxlR4qQlotsW7jKsnw==" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/gh/julmot/mark.js@8.11.1/dist/jquery.mark.min.js" integrity="sha512-mhbv5DqBMgrWL+32MmsDOt/OAvqr/cHimk6B8y/bx/xS88MVkYGPiVv2ixKVrkywF2qHplNRUvFsAHUdxZ3Krg==" crossorigin="anonymous"></script>
+      
+    
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+      
+      
+      
+      
+      
+      
+      
+    
+
+    
+
+    
+    
+    
+    <script id="page-data" type="application/json">{"use_headroom":true}</script>
+
+    
+    
+      <script src="/js/wowchemy-headroom.e8fd2d733eef6a8bbbe0539398fc0547.js" type="module"></script>
+    
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    <script src="/en/js/wowchemy.min.a2ed145159dd33ad55ff402163350b5d.js"></script>
+
+    
+    
+    
+    
+    
+    
+      
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      <script src="/js/wowchemy-publication.b0d291ed6d27eacec233e6cf5204f99a.js" type="module"></script>
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+
+
+
+</body>
+</html>

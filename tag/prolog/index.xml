@@ -7,16 +7,16 @@
     <description>prolog</description>
     <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>©2022</copyright><lastBuildDate>Wed, 21 Sep 2016 02:13:20 +0800</lastBuildDate>
     <image>
-      <url>https://jueqingsizhe66.github.io/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
+      <url>https://jueqingsizhe66.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
       <title>prolog</title>
       <link>https://jueqingsizhe66.github.io/tag/prolog/</link>
     </image>
     
     <item>
       <title>A tool to navigate the achivement in the source tree</title>
-      <link>https://jueqingsizhe66.github.io/blog/2016/09/21/a-tool-to-navigate-the-achivement-in-the-source-tree/</link>
+      <link>https://jueqingsizhe66.github.io/archives/a-tool-to-navigate-the-achivement-in-the-source-tree/</link>
       <pubDate>Wed, 21 Sep 2016 02:13:20 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2016/09/21/a-tool-to-navigate-the-achivement-in-the-source-tree/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/a-tool-to-navigate-the-achivement-in-the-source-tree/</guid>
       <description>&lt;p&gt;We go to &lt;a href=&#34;http://github.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;github&lt;/a&gt;, then download the souce code,
 go on looking into the code, dame it! So many codes ,so many branches,
 how to figure out the develop process?&lt;/p&gt;
@@ -34924,15 +34924,6 @@ build_export_graph(G, ExportG, []).&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;%! build_export_graph(
--%!   +Graph:compound,
-+%!   +Graph,
-%!   -ExportGraph:compound,
-%!   +Options:list(compound)
-%! ) is det.
-+% Graph is either:
-+%   * a coumpound term &lt;code&gt;graph(Vs,Es)&lt;/code&gt;, or
-+%   * an unlabeled graph as defined by &lt;code&gt;library(ugraph)&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;-build_export_graph(graph(Vs,Es), graph(VTerms,ETerms,GAttrs), Opts1):-
 +build_export_graph(G, graph(VTerms,ETerms,GAttrs), Opts1):-&lt;/p&gt;
 &lt;ul&gt;
@@ -34958,9 +34949,6 @@ graph_attributes(GAttrs, Opts2).&lt;/li&gt;
 &lt;ul&gt;
 &lt;li&gt;vertex_term(Vs, V, VTerm, Opts).&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;-edge_term0(Vs, Opts, E, ETerm):-&lt;/p&gt;
-&lt;ul&gt;
 &lt;li&gt;edge_term(Vs, E, ETerm, Opts).
 +graph_components(graph(Vs,Es), Vs, Es):- !.
 +graph_components(G, Vs, Es):-&lt;/li&gt;
@@ -38841,9 +38829,6 @@ s_graph_components(G, Vs, Es).&lt;/p&gt;
 &lt;li&gt;build_export_rank_terms(GroupedPairs, VRanks).
 +build_export_ranks(_, VTerms, [], VTerms, _).&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;+build_export_rank_terms([N-VTerms|T1], [vertex(Id,[label(Lbl)])-VTerms|T2]):- !,&lt;/p&gt;
-&lt;ul&gt;
 &lt;li&gt;format(atom(Id), &amp;lsquo;r~d&amp;rsquo;, [N]),&lt;/li&gt;
 &lt;li&gt;atom_number(Lbl, N),&lt;/li&gt;
 &lt;li&gt;build_export_rank_terms(T1, T2).
@@ -38855,7 +38840,7 @@ diff &amp;ndash;git a/prolog/gv/gv_graph.pl b/prolog/gv/gv_graph.pl
 index 5de2ff1..79c1be0 100644
 &amp;mdash; a/prolog/gv/gv_graph.pl
 +++ b/prolog/gv/gv_graph.pl
-@@ -52,7 +52,7 @@ In GraphViz vertices are called &amp;lsquo;nodes&amp;rsquo;.
+@@ -52,7 +52,7 @@ In GraphViz vertices are called &amp;rsquo;nodes&amp;rsquo;.
 %
 % &lt;code&gt;RankedVertexTerms&lt;/code&gt; is a list of compound terms of the following form:
 % &lt;code&gt;prolog -% rank(RankNode,ContentNodes) +% RankVertex-ContentVertices % &lt;/code&gt;
@@ -40843,7 +40828,7 @@ index 190b988..bcc7654 100644
 &lt;p&gt;-%! translate_default(+Default1:atom, -Default2:atom) is det.
 +%! translate_default(+Default1, -Default2) is det.&lt;/p&gt;
 &lt;p&gt;% The empty string is represented by the empty atom.
-translate_default(&#39;&amp;quot;&amp;quot;&amp;rsquo;, &amp;lsquo;&#39;):- !.
+translate_default(&amp;rsquo;&amp;quot;&amp;quot;&amp;rsquo;, &amp;lsquo;&amp;rsquo;):- !.
 diff &amp;ndash;git a/data/gv_color_scrape.pl b/data/gv_color_scrape.pl
 index 3ac5d44..102a02a 100644
 &amp;mdash; a/data/gv_color_scrape.pl
@@ -41084,15 +41069,7 @@ fca_export_graph(Context, ExportG, Opts2),&lt;/li&gt;
 &lt;li&gt;string_phrase(concept_label(Mode, OLbl_1, ALbl_1, Concept), Lbl).&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;---is-det&#34;&gt;-%! concept_label(
--%!   +Mode:oneof([attributes,both,objects]),
--%!   :ObjectLabel_1,
--%!   :AttributeLabel_1,
--%!   +Concept:compound
--%! )// is det.&lt;/h2&gt;
-&lt;p&gt;-concept_label(attributes, &lt;em&gt;, ALbl_1, concept(&lt;/em&gt;,As)) &amp;ndash;&amp;gt;&lt;/p&gt;
-&lt;ul&gt;
+&lt;li&gt;&lt;/li&gt;
 &lt;li&gt;set(ALbl_1, As).
 -concept_label(both, OLbl_1, ALbl_1, Concept) &amp;ndash;&amp;gt;&lt;/li&gt;
 &lt;li&gt;pair(&lt;/li&gt;
@@ -41145,7 +41122,7 @@ graph_attributes(GAttrs, Opts2).&lt;/li&gt;
 graph_components(graph(Vs,Es), Vs, Es):- !.
 graph_components(G, Vs, Es):-
 s_graph_components(G, Vs, Es).
-@@ -190,37 +194,29 @@ build_export_rank_term(N, vertex(Id,[label(&amp;quot;&amp;quot;),shape(none)])):-&lt;/p&gt;
+@@ -190,37 +194,29 @@ build_export_rank_term(N, vertex(Id,[label(&amp;rdquo;&amp;quot;),shape(none)])):-&lt;/p&gt;
 &lt;p&gt;edge_term(Vs, E, edge(FromId,ToId,EAttrs), Opts):-
 % Arrowhead&lt;/p&gt;
 &lt;ul&gt;
@@ -41219,7 +41196,7 @@ nth0chk(ToId, Vs, ToV)
 &lt;p&gt;exclude(
 option_has_var_value,
 @@ -274,7 +270,6 @@ graph_attributes(GAttrs, Opts):-
-option(graph_label(GLabel), Opts, &amp;lsquo;&amp;quot;&amp;quot;&#39;),
+option(graph_label(GLabel), Opts, &amp;lsquo;&amp;quot;&amp;quot;&amp;rsquo;),
 % Overlap.
 option(graph_overlap(Overlap), Opts, false),&lt;/p&gt;
 &lt;/li&gt;
@@ -41449,7 +41426,7 @@ ps, svg, fig, vmrl, and the bitmap formats.
 &lt;p&gt;color(rgb(Red,Green,Blue)) &amp;ndash;&amp;gt; !,
 &amp;ldquo;#&amp;rdquo;,&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&amp;lsquo;#&#39;(3, hex_color, [Red,Green,Blue]).&lt;/li&gt;
+&lt;li&gt;&amp;lsquo;#&amp;rsquo;(3, hex_color, [Red,Green,Blue]).&lt;/li&gt;
 &lt;/ul&gt;
 &lt;ul&gt;
 &lt;li&gt;#(3, hex_color, [Red,Green,Blue]).
@@ -41459,7 +41436,7 @@ hex_color(Alpha).
 color(hsv(Hue,Saturation,Value)) &amp;ndash;&amp;gt; !,&lt;/li&gt;
 &lt;/ul&gt;
 &lt;ul&gt;
-&lt;li&gt;&amp;lsquo;#&#39;(3, hsv_color, [Hue,Saturation,Value], []).&lt;/li&gt;
+&lt;li&gt;&amp;lsquo;#&amp;rsquo;(3, hsv_color, [Hue,Saturation,Value], []).&lt;/li&gt;
 &lt;/ul&gt;
 &lt;ul&gt;
 &lt;li&gt;#(3, hsv_color, [Hue,Saturation,Value]).
@@ -41471,10 +41448,10 @@ atom(Name).
 &lt;/ul&gt;
 &lt;p&gt;colorList(L) &amp;ndash;&amp;gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&amp;lsquo;+&#39;(wc, L, []).&lt;/li&gt;
+&lt;li&gt;&amp;lsquo;+&amp;rsquo;(wc, L, []).&lt;/li&gt;
 &lt;/ul&gt;
 &lt;ul&gt;
-&lt;li&gt;&amp;lsquo;+&#39;(wc, L).&lt;/li&gt;
+&lt;li&gt;&amp;lsquo;+&amp;rsquo;(wc, L).&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;wc(Color-Float) &amp;ndash;&amp;gt;
 color(Color),
@@ -41581,15 +41558,6 @@ pass_to(file_to_gv/3, 3)
 &lt;li&gt;&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;-%! gv_export(+ExportGraph:compound, ?File:atom, +Options:list(compound)) is det.
-+%! graph_viz(+ExportGraph:compound, ?File:atom) is det.
-+%! graph_viz(+ExportGraph:compound, ?File:atom, +Options:list(compound)) is det.
-% Returns a file containing a GraphViz visualization of the given graph.
-%
-% The following options are supported:
-@@ -60,7 +51,9 @@ gv_export(ExportG, File):-
-%     Default is &lt;code&gt;pdf&lt;/code&gt;.
-%     For possible values see gv_output_type/1.&lt;/p&gt;
 &lt;p&gt;-gv_export(ExportG, File, Opts):-
 +graph_viz(ExportG, File):-&lt;/p&gt;
 &lt;ul&gt;
@@ -41602,7 +41570,7 @@ diff &amp;ndash;git a/prolog/gv/gv_graph.pl b/prolog/gv/gv_graph.pl
 index 5c937ce..c95c9cc 100644
 &amp;mdash; a/prolog/gv/gv_graph.pl
 +++ b/prolog/gv/gv_graph.pl
-@@ -20,7 +20,6 @@ In GraphViz vertices are called &amp;lsquo;nodes&amp;rsquo;.&lt;/p&gt;
+@@ -20,7 +20,6 @@ In GraphViz vertices are called &amp;rsquo;nodes&amp;rsquo;.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;:- use_module(library(apply)).
@@ -41615,7 +41583,7 @@ diff &amp;ndash;git a/prolog/gv/gv_graph_comp.pl b/prolog/gv/gv_graph_comp.pl
 index aecbe07..30ea9c5 100644
 &amp;mdash; a/prolog/gv/gv_graph_comp.pl
 +++ b/prolog/gv/gv_graph_comp.pl
-@@ -24,12 +24,11 @@ a_list = ID &amp;ldquo;=&amp;rdquo; ID [&amp;rdquo;,&amp;quot;] [a_list]&lt;/p&gt;
+@@ -24,12 +24,11 @@ a_list = ID &amp;ldquo;=&amp;rdquo; ID [&amp;quot;,&amp;quot;] [a_list]&lt;/p&gt;
 &lt;p&gt;@author Wouter Beek
 @see &lt;a href=&#34;http://www.graphviz.org/content/dot-language&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;http://www.graphviz.org/content/dot-language&lt;/a&gt;
 -@version 2015/07-2015/08, 2015/10-2015/12
@@ -41671,12 +41639,11 @@ gv_id(Atom) &amp;ndash;&amp;gt;
 &lt;li&gt;&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;%! gv_port// is det.&lt;/p&gt;
-&lt;p&gt;gv_port &amp;ndash;&amp;gt; gv_port_location, (gv_port_angle ; &amp;ldquo;&amp;quot;).
+&lt;p&gt;gv_port &amp;ndash;&amp;gt; gv_port_location, (gv_port_angle ; &amp;ldquo;&amp;rdquo;).
 @@ -279,7 +294,7 @@ gv_port_location &amp;ndash;&amp;gt; &amp;ldquo;:[&amp;rdquo;, gv_id(&lt;em&gt;), &amp;ldquo;,&amp;rdquo;, gv_id(&lt;/em&gt;), &amp;ldquo;]&amp;rdquo;.&lt;/p&gt;
-&lt;p&gt;%! gv_compass_pt(+Direction:oneof([&#39;_&#39;,c,e,n,ne,nw,s,se,sw,w]))// .
-% &lt;code&gt;-% compass_pt : (n | ne | e | se | s | sw | w | nw | c | _) +% compass_pt : ( n | ne | e | se | s | sw | w | nw | c | _ ) % &lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;gv_compass_pt(&#39;&lt;em&gt;&#39;) &amp;ndash;&amp;gt; &amp;ldquo;&lt;/em&gt;&amp;rdquo;.
+&lt;p&gt;%! gv_compass_pt(+Direction:oneof([&amp;rsquo;_&amp;rsquo;,c,e,n,ne,nw,s,se,sw,w]))// .
+% &lt;code&gt;-% compass_pt : (n | ne | e | se | s | sw | w | nw | c | _) +% compass_pt : ( n | ne | e | se | s | sw | w | nw | c | _ ) %&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;gv_compass_pt(&amp;rsquo;&lt;em&gt;&amp;rsquo;) &amp;ndash;&amp;gt; &amp;ldquo;&lt;/em&gt;&amp;rdquo;.
 diff &amp;ndash;git a/prolog/gv/gv_html.pl b/prolog/gv/gv_html.pl
 index 3ee7de6..b5c1368 100644
 &amp;mdash; a/prolog/gv/gv_html.pl
@@ -41713,50 +41680,16 @@ index 4ba0d64..0000000
 &lt;li&gt;]
 -).&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;--module-graphviz-numeral&#34;&gt;-/** &lt;module&gt; GraphViz numeral&lt;/h2&gt;
-&lt;h2 id=&#34;-&#34;&gt;-@author Wouter Beek
--@version 2014/05-2014/06, 2015/01
--*/&lt;/h2&gt;
-&lt;h2 id=&#34;---use_modulelibrarymathrational_ext&#34;&gt;-:- use_module(library(dcg/dcg_abnf)).
--:- use_module(library(dcg/dcg_abnf_common)).
--:- use_module(library(dcg/dcg_ascii)).
--:- use_module(library(math/math_ext)).
--:- use_module(library(math/positional)).
--:- use_module(library(math/radconv)).
--:- use_module(library(math/rational_ext)).&lt;/h2&gt;
-&lt;ul&gt;
 &lt;li&gt;&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;------decimal-separator&#34;&gt;-%! gv_numeral(?Value:compound)// .
--%
--% # Syntax
--%
--% &lt;code&gt;bnf -% (&#39;-&#39;)? ( &#39;.&#39; [0-9]+ | [0-9]+ ( &#39;.&#39; [0-9]* )? ) -% &lt;/code&gt;
--%
--% ## Generation
--%
--% In the generative case, three notations are allowed (also see below):
--%   1. (non-zero integer-part)
--%   2. (decimal-separator) (non-zero fractional)
--%   3. (non-zero integer-part) (decimal-separator) (non-zero fractional)
--%
--% The following notations are explicitly excluded due to verbosity:
--%   - (non-zero integer-part) (decimal-separator)
--%   - (non-zero integer-part) (decimal-separator) (zero fractional)
--%   - (zero integer-part) (decimal-separator) (non-zero fractional)
--%
--% The following notations are also excluded, but since they violate
--%  well-formedness:
--%   - (non-zero integer-part) (non-zero fractional)
--%   - (decimal-separator)&lt;/h2&gt;
-&lt;p&gt;-gv_numeral(N) &amp;ndash;&amp;gt;&lt;/p&gt;
-&lt;ul&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
 &lt;li&gt;(   {ground(N)}&lt;/li&gt;
-&lt;li&gt;-&amp;gt;  &amp;lsquo;[-]?&#39;(N),&lt;/li&gt;
+&lt;li&gt;-&amp;gt;  &amp;lsquo;[-]?&amp;rsquo;(N),&lt;/li&gt;
 &lt;li&gt;
 &lt;pre&gt;&lt;code&gt; {N0 is abs(N)},
 &lt;/code&gt;&lt;/pre&gt;
@@ -41841,7 +41774,7 @@ index 4ba0d64..0000000
 &lt;pre&gt;&lt;code&gt; )
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/li&gt;
-&lt;li&gt;;   &amp;lsquo;[-]?&#39;(Sg),&lt;/li&gt;
+&lt;li&gt;;   &amp;lsquo;[-]?&amp;rsquo;(Sg),&lt;/li&gt;
 &lt;li&gt;
 &lt;pre&gt;&lt;code&gt; (   &amp;quot;.&amp;quot;,
 &lt;/code&gt;&lt;/pre&gt;
@@ -41905,23 +41838,10 @@ index 0000000..4382aa6
 &lt;li&gt;]
 +).&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;+/** &lt;module&gt; Tree visualization
-+
-+Export trees to GraphViz.
-+
-+@author Wouter Beek
-+@version 2016/01-2016/02
-+*/
-+
-+:- use_module(library(graph/build_export_graph)).
-+:- use_module(library(gv/gv_file)).
-+:- use_module(library(ordsets)).
-+:- use_module(library(tree/l_tree)).
-+:- use_module(library(tree/s_tree)).
-+
-+:- predicate_options(tree_export_graph/3, 3, [&lt;/p&gt;
-&lt;ul&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;pre&gt;&lt;code&gt;pass_to(build_export_graph/4, 4)
 &lt;/code&gt;&lt;/pre&gt;
@@ -41942,18 +41862,9 @@ index 0000000..4382aa6
 &lt;li&gt;&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;+%! tree_export_graph(+Tree, -ExportG) is det.
-+%! tree_export_graph(+Tree, -ExportG, +Opts) is det.
-+% Opts are passed to build_export_graph/4.
-+
-+tree_export_graph(Tree, ExportG) :-&lt;/p&gt;
-&lt;ul&gt;
+&lt;li&gt;&lt;/li&gt;
 &lt;li&gt;tree_export_graph(Tree, ExportG, []).&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;+tree_export_graph(Tree, ExportG, Opts) :-&lt;/p&gt;
-&lt;ul&gt;
 &lt;li&gt;(   is_s_tree(Tree)&lt;/li&gt;
 &lt;li&gt;-&amp;gt;  tree_to_graph(Tree, G)&lt;/li&gt;
 &lt;li&gt;;   is_l_tree(Tree)&lt;/li&gt;
@@ -41963,20 +41874,9 @@ index 0000000..4382aa6
 &lt;li&gt;&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;+%! tree_viz(+Tree, ?File) is det.
-+%! tree_viz(+Tree, ?File, +Opts) is det.
-+% Stores the given tree term into a GraphViz file.
-+%
-+% Options are passed to export_graph_to_gv_file/3, tree_to_graph/3.
-+
-+tree_viz(Tree, File) :-&lt;/p&gt;
-&lt;ul&gt;
+&lt;li&gt;&lt;/li&gt;
 &lt;li&gt;tree_viz(Tree, File, []).&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;+tree_viz(Tree, File, Opts) :-&lt;/p&gt;
-&lt;ul&gt;
 &lt;li&gt;tree_export_graph(Tree, ExportG, Opts),&lt;/li&gt;
 &lt;li&gt;graph_viz(ExportG, File, Opts).
 diff &amp;ndash;git a/test/test.pl b/test/test.pl
@@ -42079,7 +41979,7 @@ index bcc7654..190b988 100644
 &lt;p&gt;-%! translate_default(+Default1, -Default2) is det.
 +%! translate_default(+Default1:atom, -Default2:atom) is det.&lt;/p&gt;
 &lt;p&gt;% The empty string is represented by the empty atom.
-translate_default(&#39;&amp;quot;&amp;quot;&amp;rsquo;, &amp;lsquo;&#39;):- !.
+translate_default(&amp;rsquo;&amp;quot;&amp;quot;&amp;rsquo;, &amp;lsquo;&amp;rsquo;):- !.
 diff &amp;ndash;git a/data/gv_color_scrape.pl b/data/gv_color_scrape.pl
 index 102a02a..3ac5d44 100644
 &amp;mdash; a/data/gv_color_scrape.pl
@@ -42402,7 +42302,7 @@ ps, svg, fig, vmrl, and the bitmap formats.
 &lt;li&gt;#(3, hex_color, [Red,Green,Blue]).&lt;/li&gt;
 &lt;/ul&gt;
 &lt;ul&gt;
-&lt;li&gt;&amp;lsquo;#&#39;(3, hex_color, [Red,Green,Blue]).
+&lt;li&gt;&amp;lsquo;#&amp;rsquo;(3, hex_color, [Red,Green,Blue]).
 color(rgbs(Red,Green,Blue,Alpha)) &amp;ndash;&amp;gt; !,
 color(rgb(Red,Green,Blue)),
 hex_color(Alpha).
@@ -42412,7 +42312,7 @@ color(hsv(Hue,Saturation,Value)) &amp;ndash;&amp;gt; !,&lt;/li&gt;
 &lt;li&gt;#(3, hsv_color, [Hue,Saturation,Value]).&lt;/li&gt;
 &lt;/ul&gt;
 &lt;ul&gt;
-&lt;li&gt;&amp;lsquo;#&#39;(3, hsv_color, [Hue,Saturation,Value], []).
+&lt;li&gt;&amp;lsquo;#&amp;rsquo;(3, hsv_color, [Hue,Saturation,Value], []).
 color(Name) &amp;ndash;&amp;gt;
 {gv_color(_, Name)},
 atom(Name).
@@ -42421,10 +42321,10 @@ atom(Name).
 &lt;/ul&gt;
 &lt;p&gt;colorList(L) &amp;ndash;&amp;gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&amp;lsquo;+&#39;(wc, L).&lt;/li&gt;
+&lt;li&gt;&amp;lsquo;+&amp;rsquo;(wc, L).&lt;/li&gt;
 &lt;/ul&gt;
 &lt;ul&gt;
-&lt;li&gt;&amp;lsquo;+&#39;(wc, L, []).&lt;/li&gt;
+&lt;li&gt;&amp;lsquo;+&amp;rsquo;(wc, L, []).&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;wc(Color-Float) &amp;ndash;&amp;gt;
 color(Color),
@@ -42532,13 +42432,6 @@ pass_to(file_to_gv/3, 3)
 &lt;li&gt;&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;+%! gv_export(+ExportGraph:compound, ?File:atom, +Options:list(compound)) is det.
-% Returns a file containing a GraphViz visualization of the given graph.
-%
-% The following options are supported:
-@@ -51,9 +60,7 @@ user:module_uses(gv_file, program(dot)).
-%     Default is &lt;code&gt;pdf&lt;/code&gt;.
-%     For possible values see gv_output_type/1.&lt;/p&gt;
 &lt;p&gt;-graph_viz(ExportG, File):-&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -42551,7 +42444,7 @@ diff &amp;ndash;git a/prolog/gv/gv_graph.pl b/prolog/gv/gv_graph.pl
 index c95c9cc..5c937ce 100644
 &amp;mdash; a/prolog/gv/gv_graph.pl
 +++ b/prolog/gv/gv_graph.pl
-@@ -20,6 +20,7 @@ In GraphViz vertices are called &amp;lsquo;nodes&amp;rsquo;.&lt;/p&gt;
+@@ -20,6 +20,7 @@ In GraphViz vertices are called &amp;rsquo;nodes&amp;rsquo;.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;:- use_module(library(apply)).
@@ -42564,7 +42457,7 @@ diff &amp;ndash;git a/prolog/gv/gv_graph_comp.pl b/prolog/gv/gv_graph_comp.pl
 index 30ea9c5..aecbe07 100644
 &amp;mdash; a/prolog/gv/gv_graph_comp.pl
 +++ b/prolog/gv/gv_graph_comp.pl
-@@ -24,11 +24,12 @@ a_list = ID &amp;ldquo;=&amp;rdquo; ID [&amp;rdquo;,&amp;quot;] [a_list]&lt;/p&gt;
+@@ -24,11 +24,12 @@ a_list = ID &amp;ldquo;=&amp;rdquo; ID [&amp;quot;,&amp;quot;] [a_list]&lt;/p&gt;
 &lt;p&gt;@author Wouter Beek
 @see &lt;a href=&#34;http://www.graphviz.org/content/dot-language&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;http://www.graphviz.org/content/dot-language&lt;/a&gt;
 -@version 2015/07-2015/08, 2015/10-2016/01
@@ -42619,12 +42512,11 @@ gv_id(Atom) &amp;ndash;&amp;gt;
 &lt;li&gt;&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;%! gv_port// is det.&lt;/p&gt;
-&lt;p&gt;gv_port &amp;ndash;&amp;gt; gv_port_location, (gv_port_angle ; &amp;ldquo;&amp;quot;).
+&lt;p&gt;gv_port &amp;ndash;&amp;gt; gv_port_location, (gv_port_angle ; &amp;ldquo;&amp;rdquo;).
 @@ -294,7 +279,7 @@ gv_port_location &amp;ndash;&amp;gt; &amp;ldquo;:[&amp;rdquo;, gv_id(&lt;em&gt;), &amp;ldquo;,&amp;rdquo;, gv_id(&lt;/em&gt;), &amp;ldquo;]&amp;rdquo;.&lt;/p&gt;
-&lt;p&gt;%! gv_compass_pt(+Direction:oneof([&#39;_&#39;,c,e,n,ne,nw,s,se,sw,w]))// .
-% &lt;code&gt;-% compass_pt : ( n | ne | e | se | s | sw | w | nw | c | _ ) +% compass_pt : (n | ne | e | se | s | sw | w | nw | c | _) % &lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;gv_compass_pt(&#39;&lt;em&gt;&#39;) &amp;ndash;&amp;gt; &amp;ldquo;&lt;/em&gt;&amp;rdquo;.
+&lt;p&gt;%! gv_compass_pt(+Direction:oneof([&amp;rsquo;_&amp;rsquo;,c,e,n,ne,nw,s,se,sw,w]))// .
+% &lt;code&gt;-% compass_pt : ( n | ne | e | se | s | sw | w | nw | c | _ ) +% compass_pt : (n | ne | e | se | s | sw | w | nw | c | _) %&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;gv_compass_pt(&amp;rsquo;&lt;em&gt;&amp;rsquo;) &amp;ndash;&amp;gt; &amp;ldquo;&lt;/em&gt;&amp;rdquo;.
 diff &amp;ndash;git a/prolog/gv/gv_html.pl b/prolog/gv/gv_html.pl
 index b5c1368..3ee7de6 100644
 &amp;mdash; a/prolog/gv/gv_html.pl
@@ -42661,52 +42553,16 @@ index 0000000..4ba0d64
 &lt;li&gt;]
 +).&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;+/** &lt;module&gt; GraphViz numeral
-+
-+@author Wouter Beek
-+@version 2014/05-2014/06, 2015/01
-+*/
-+
-+:- use_module(library(dcg/dcg_abnf)).
-+:- use_module(library(dcg/dcg_abnf_common)).
-+:- use_module(library(dcg/dcg_ascii)).
-+:- use_module(library(math/math_ext)).
-+:- use_module(library(math/positional)).
-+:- use_module(library(math/radconv)).
-+:- use_module(library(math/rational_ext)).
-+
-+
-+
-+
-+
-+%! gv_numeral(?Value:compound)// .
-+%
-+% # Syntax
-+%
-+% &lt;code&gt;bnf +% (&#39;-&#39;)? ( &#39;.&#39; [0-9]+ | [0-9]+ ( &#39;.&#39; [0-9]* )? ) +% &lt;/code&gt;
-+%
-+% ## Generation
-+%
-+% In the generative case, three notations are allowed (also see below):
-+%   1. (non-zero integer-part)
-+%   2. (decimal-separator) (non-zero fractional)
-+%   3. (non-zero integer-part) (decimal-separator) (non-zero fractional)
-+%
-+% The following notations are explicitly excluded due to verbosity:
-+%   - (non-zero integer-part) (decimal-separator)
-+%   - (non-zero integer-part) (decimal-separator) (zero fractional)
-+%   - (zero integer-part) (decimal-separator) (non-zero fractional)
-+%
-+% The following notations are also excluded, but since they violate
-+%  well-formedness:
-+%   - (non-zero integer-part) (non-zero fractional)
-+%   - (decimal-separator)
-+
-+gv_numeral(N) &amp;ndash;&amp;gt;&lt;/p&gt;
-&lt;ul&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
 &lt;li&gt;(   {ground(N)}&lt;/li&gt;
-&lt;li&gt;-&amp;gt;  &amp;lsquo;[-]?&#39;(N),&lt;/li&gt;
+&lt;li&gt;-&amp;gt;  &amp;lsquo;[-]?&amp;rsquo;(N),&lt;/li&gt;
 &lt;li&gt;
 &lt;pre&gt;&lt;code&gt; {N0 is abs(N)},
 &lt;/code&gt;&lt;/pre&gt;
@@ -42791,7 +42647,7 @@ index 0000000..4ba0d64
 &lt;pre&gt;&lt;code&gt; )
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/li&gt;
-&lt;li&gt;;   &amp;lsquo;[-]?&#39;(Sg),&lt;/li&gt;
+&lt;li&gt;;   &amp;lsquo;[-]?&amp;rsquo;(Sg),&lt;/li&gt;
 &lt;li&gt;
 &lt;pre&gt;&lt;code&gt; (   &amp;quot;.&amp;quot;,
 &lt;/code&gt;&lt;/pre&gt;
@@ -42855,19 +42711,10 @@ index 4382aa6..0000000
 &lt;li&gt;]
 -).&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;--module-tree-visualization&#34;&gt;-/** &lt;module&gt; Tree visualization&lt;/h2&gt;
-&lt;h2 id=&#34;-export-trees-to-graphviz&#34;&gt;-Export trees to GraphViz.&lt;/h2&gt;
-&lt;h2 id=&#34;--1&#34;&gt;-@author Wouter Beek
--@version 2016/01-2016/02
--*/&lt;/h2&gt;
-&lt;h2 id=&#34;---use_modulelibrarytrees_tree&#34;&gt;-:- use_module(library(graph/build_export_graph)).
--:- use_module(library(gv/gv_file)).
--:- use_module(library(ordsets)).
--:- use_module(library(tree/l_tree)).
--:- use_module(library(tree/s_tree)).&lt;/h2&gt;
-&lt;p&gt;-:- predicate_options(tree_export_graph/3, 3, [&lt;/p&gt;
-&lt;ul&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;pre&gt;&lt;code&gt;pass_to(build_export_graph/4, 4)
 &lt;/code&gt;&lt;/pre&gt;
@@ -42888,17 +42735,9 @@ index 4382aa6..0000000
 &lt;li&gt;&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;--opts-are-passed-to-build_export_graph4&#34;&gt;-%! tree_export_graph(+Tree, -ExportG) is det.
--%! tree_export_graph(+Tree, -ExportG, +Opts) is det.
--% Opts are passed to build_export_graph/4.&lt;/h2&gt;
-&lt;p&gt;-tree_export_graph(Tree, ExportG) :-&lt;/p&gt;
-&lt;ul&gt;
+&lt;li&gt;&lt;/li&gt;
 &lt;li&gt;tree_export_graph(Tree, ExportG, []).&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;-tree_export_graph(Tree, ExportG, Opts) :-&lt;/p&gt;
-&lt;ul&gt;
 &lt;li&gt;(   is_s_tree(Tree)&lt;/li&gt;
 &lt;li&gt;-&amp;gt;  tree_to_graph(Tree, G)&lt;/li&gt;
 &lt;li&gt;;   is_l_tree(Tree)&lt;/li&gt;
@@ -42908,19 +42747,9 @@ index 4382aa6..0000000
 &lt;li&gt;&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;--options-are-passed-to-export_graph_to_gv_file3-tree_to_graph3&#34;&gt;-%! tree_viz(+Tree, ?File) is det.
--%! tree_viz(+Tree, ?File, +Opts) is det.
--% Stores the given tree term into a GraphViz file.
--%
--% Options are passed to export_graph_to_gv_file/3, tree_to_graph/3.&lt;/h2&gt;
-&lt;p&gt;-tree_viz(Tree, File) :-&lt;/p&gt;
-&lt;ul&gt;
+&lt;li&gt;&lt;/li&gt;
 &lt;li&gt;tree_viz(Tree, File, []).&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;-tree_viz(Tree, File, Opts) :-&lt;/p&gt;
-&lt;ul&gt;
 &lt;li&gt;tree_export_graph(Tree, ExportG, Opts),&lt;/li&gt;
 &lt;li&gt;graph_viz(ExportG, File, Opts).
 diff &amp;ndash;git a/test/test.pl b/test/test.pl
@@ -44068,7 +43897,7 @@ index 8730e13..bcc7654 100644
 &lt;p&gt;-%! translate_default(+Default1:atom, -Default2:atom) is det.
 +%! translate_default(+Default1, -Default2) is det.&lt;/p&gt;
 &lt;p&gt;% The empty string is represented by the empty atom.
-translate_default(&#39;&amp;quot;&amp;quot;&amp;rsquo;, &amp;lsquo;&#39;):- !.
+translate_default(&amp;rsquo;&amp;quot;&amp;quot;&amp;rsquo;, &amp;lsquo;&amp;rsquo;):- !.
 diff &amp;ndash;git a/data/gv_color_scrape.pl b/data/gv_color_scrape.pl
 index 7bfc290..102a02a 100644
 &amp;mdash; a/data/gv_color_scrape.pl
@@ -46182,24 +46011,144 @@ git log --stat|tac|awk -v count=1 &#39;{if(/^commit/){gsub(/$/,&amp;quot;](#&amp
     
     <item>
       <title>打印的书籍(prolog&#43;scheme&#43;空气动力学方面)</title>
-      <link>https://jueqingsizhe66.github.io/blog/2016/07/19/da-yin-de-shu-ji-prolog-plus-scheme-plus-kong-qi-dong-li-xue-fang-mian/</link>
+      <link>https://jueqingsizhe66.github.io/archives/da-yin-de-shu-ji-prolog-plus-scheme-plus-kong-qi-dong-li-xue-fang-mian/</link>
       <pubDate>Tue, 19 Jul 2016 20:52:17 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2016/07/19/da-yin-de-shu-ji-prolog-plus-scheme-plus-kong-qi-dong-li-xue-fang-mian/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/da-yin-de-shu-ji-prolog-plus-scheme-plus-kong-qi-dong-li-xue-fang-mian/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Edsger_W._Dijkstra&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Edsgar Dijkstar&lt;/a&gt;写过不少程序语言和逻辑编程的好书，比如&lt;a href=&#34;https://www.amazon.cn/A-Discipline-of-Programming-Dijkstra-E/dp/013215871X?ie=UTF8&amp;amp;*Version*=1&amp;amp;*entries*=0&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;A Discipline of programming&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;尾随之后的是David Gries写的&lt;a href=&#34;http://item.jd.com/1104449344.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;the science of programing. TSOP&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/books/logic.jpg&#34; alt=&#34;logic&#34;&gt;&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/books/logic.jpg&#34; alt=&#34;logic&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;p&gt;在空气动力学领域，生于1937年的&lt;a href=&#34;https://en.wikipedia.org/wiki/John_D._Anderson&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;John D. Anderson&lt;/a&gt;是一位航空领域多产的作家，其中&lt;a href=&#34;http://product.dangdang.com/23454699.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;空气动力学基础&lt;/a&gt;更是经典的经典。
 西门子之前根据Michel Geradim的&lt;a href=&#34;http://as.wiley.com/WileyCDA/WileyTitle/productCd-0471489905.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Flexible Multibody Dynamics: a finite element approach&lt;/a&gt;编写有限元多体分析软件系统（具体名字忘记）,与之类似的是绿皮书 Ahmed A. Shabana编写的&lt;a href=&#34;https://www.amazon.com/Dynamics-Multibody-Systems-Ahmed-Shabana/dp/1107042658?ie=UTF8&amp;amp;*Version*=1&amp;amp;*entries*=0&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Dynamics of Multibody Systems&lt;/a&gt;也是多体动力学领域不错的好书。
 J.Blazek写了一本计算流体动力学的好书Computational Fluid Dynamics:Principles and Applications]&lt;a href=&#34;http://www.sciencedirect.com/science/book/9780080445069&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;19&lt;/a&gt;.当然Pijush K. Kundu写的&lt;a href=&#34;https://www.amazon.com/dp/012405935X/ref=pd_lpo_sbs_dp_ss_1?pf_rd_p=1944687602&amp;amp;pf_rd_s=lpo-top-stripe-1&amp;amp;pf_rd_t=201&amp;amp;pf_rd_i=0123821002&amp;amp;pf_rd_m=ATVPDKIKX0DER&amp;amp;pf_rd_r=CX15VAHTQNHS6GGN3W1M&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Fluid Mechanic&lt;/a&gt;也是经典之著
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/books/pro1.jpg&#34; alt=&#34;pro1&#34;&gt; ,&lt;img src=&#34;https://jueqingsizhe66.github.io/images/books/pro2.jpg&#34; alt=&#34;pro2&#34;&gt;, &lt;img src=&#34;https://jueqingsizhe66.github.io/images/books/pro3.jpg&#34; alt=&#34;pro3&#34;&gt;&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/books/pro1.jpg&#34; alt=&#34;pro1&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+ ,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/books/pro2.jpg&#34; alt=&#34;pro2&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+, 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/books/pro3.jpg&#34; alt=&#34;pro3&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;hr&gt;
 &lt;p&gt;之前，提及了程序语言，在这个领域不得不说是Dan Friedman.这位老顽童曾经写过很多本大象书籍，比如 &lt;a href=&#34;http://www.ccs.neu.edu/home/matthias/BTLS/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;the little scheme,TLS&lt;/a&gt; , &lt;a href=&#34;http://www.ccs.neu.edu/home/matthias/BTSS/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;the season scheme,TSS&lt;/a&gt;, &lt;a href=&#34;http://www.ccs.neu.edu/home/matthias/BRS/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;the reason scheme,TRS&lt;/a&gt;,写完TRS之后最经常说的是&amp;quot;Can it run backward？&amp;quot;,
 &lt;a href=&#34;http://www.ccs.neu.edu/home/matthias/BALJ/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;a little java,ALJ&lt;/a&gt;, &lt;a href=&#34;http://www.ccs.neu.edu/home/matthias/BTML/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;the little mler,TLM&lt;/a&gt;, &lt;a href=&#34;http://www.eopl3.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Essential of programing language,EOPL&lt;/a&gt;,以及进一步
 像逻辑学领域进军的&lt;a href=&#34;http://the-little-prover.github.io/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;the little prover&lt;/a&gt;,立志要建一个类似于&lt;a href=&#34;https://coq.inria.fr/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;coq&lt;/a&gt;的证明式语言系统(法国人写的软件一般是动物，比如&lt;a href=&#34;https://ocaml.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;ocaml&lt;/a&gt;，coq),刚刚建了一个很bang的&lt;a href=&#34;https://github.com/the-little-prover/j-bob&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;J-Bob&lt;/a&gt;。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/books/dan-friedman.jpg&#34; alt=&#34;Dan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/books/dan-friedman.jpg&#34; alt=&#34;Dan&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;hr&gt;
 &lt;p&gt;关于函数式编程，还有一类是比较纯函数式编程比如Haskell，ML等。Haskell有很多不错的书籍比如Bryan O&amp;rsquo;Sullivan写的 &lt;a href=&#34;http://book.realworldhaskell.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Real World Haskell&lt;/a&gt;以及来自斯洛文尼亚的 Miran LipoVaca写的&lt;a href=&#34;http://learnyouahaskell.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Learn You a Haskell for Great Good&lt;/a&gt;(中文版为&lt;a href=&#34;http://fleurer-lee.com/lyah/introduction.htm#%E5%85%B3%E4%BA%8E%E8%BF%99%E4%B8%AA%E6%95%99%E7%A8%8B&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Haskell趣味指南&lt;/a&gt;) ,而Ml语言比如Ocaml也又不错的比如&lt;a href=&#34;https://realworldocaml.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Real World Ocaml&lt;/a&gt;, 特别是纯函数语言可以加深你对语言设计方面的理解。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/books/haskell.jpg&#34; alt=&#34;Haskell&#34;&gt;&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/books/haskell.jpg&#34; alt=&#34;Haskell&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;hr&gt;
 &lt;p&gt;万物都有其道，有其逻辑。当逻辑被质疑，不能成立，则得推翻，进而重构，关于logic programming，首先得认识的是Prolog。并以三个比较好的入门阶段式书籍&lt;/p&gt;
 &lt;ol&gt;
@@ -46209,15 +46158,55 @@ J.Blazek写了一本计算流体动力学的好书Computational Fluid Dynamics:P
 &lt;/ol&gt;
 &lt;p&gt;另外还有一些比较经典的书籍是 &lt;a href=&#34;http://learnprolognow.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;learn Prolog Now!&lt;/a&gt;,&lt;a href=&#34;http://www.springer.com/cn/book/9781447154860?token=prtst0416p&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Logic Programming with Prolog&lt;/a&gt;,&lt;a href=&#34;https://mitpress.mit.edu/books/art-prolog&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;the-art-of-prolog&lt;/a&gt; 这本书入门也不错,&lt;a href=&#34;http://link.springer.com/book/10.1007/978-1-4471-0401-8&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;prolog versue you&lt;/a&gt;.
 以及面向人工智能和图像处理的方面的prolog书籍, 比如&lt;a href=&#34;http://www.abebooks.com/PROLOG-Programming-Artificial-Intelligence-4th-Revised/5962501764/bd&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;PROLOG Programming for Artificial Intelligence (4th Revised edition) &lt;/a&gt;,&lt;a href=&#34;http://link.springer.com/book/10.1007/3-540-34336-9&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;An Introduction to Language Processing with Perl and Prolog &lt;/a&gt;,&lt;a href=&#34;http://link.springer.com/book/10.1007/978-3-642-41464-0&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Language Processing with Perl and Prolog &lt;/a&gt;,&lt;a href=&#34;http://link.springer.com/book/10.1007/978-1-4471-0401-8&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Intelligent Image Processing in Prolog&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/books/prolog.jpg&#34; alt=&#34;prolog&#34;&gt;&lt;/p&gt;</description>
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/books/prolog.jpg&#34; alt=&#34;prolog&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>prolog小游戏</title>
-      <link>https://jueqingsizhe66.github.io/blog/2016/07/19/prologxiao-you-xi/</link>
+      <link>https://jueqingsizhe66.github.io/archives/prologxiao-you-xi/</link>
       <pubDate>Tue, 19 Jul 2016 19:35:37 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2016/07/19/prologxiao-you-xi/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/prolog/games.png&#34; alt=&#34;games&#34;&gt;&lt;/p&gt;
+      <guid>https://jueqingsizhe66.github.io/archives/prologxiao-you-xi/</guid>
+      <description>&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/prolog/games.png&#34; alt=&#34;games&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;p&gt;prolog 作为一门logic programming language,逻辑推理是它的强项。游戏也是一个逻辑推理的过程，prolog照样可以，通过该游戏的写作可以让你熟悉&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;事实和规则。&lt;/li&gt;
@@ -46434,9 +46423,9 @@ merge(List1,[Y|List2],[Y|List3]) :- merge(List1,List,List3).
     
     <item>
       <title>prolog小结</title>
-      <link>https://jueqingsizhe66.github.io/blog/2016/07/19/prologxiao-jie/</link>
+      <link>https://jueqingsizhe66.github.io/archives/prologxiao-jie/</link>
       <pubDate>Tue, 19 Jul 2016 18:41:13 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2016/07/19/prologxiao-jie/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/prologxiao-jie/</guid>
       <description>&lt;p&gt;prolog编程工具: swi-prolog&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;a href=&#34;#1&#34;&gt; 1. cut-fail&lt;/a&gt;&lt;/li&gt;
@@ -46454,7 +46443,27 @@ merge(List1,[Y|List2],[Y|List3]) :- merge(List1,List,List3).
 &lt;p&gt;结合The Science Of programming 和 Learn prolog now,觉得cut-fail的直觉应该如下：&lt;/p&gt;
 &lt;p&gt;把proof development的过程和prolog的过程 结合起来！ 也就是cut-fail其实就是只进行内层的循环，而不跳出来，即内层执行完则结束。
 参考TSOP P52 some general hints on developping proofs.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/prolog/someGeneral.png&#34; alt=&#34;TSOP&#34;&gt;&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/prolog/someGeneral.png&#34; alt=&#34;TSOP&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
  &lt;h2 id=&#34;1&#34;&gt;2. prolog 相关链接&lt;/h2&gt;
 &lt;p&gt;a. &lt;a href=&#34;http://www.swi-prolog.org/pldoc/index.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;swi-prolog&lt;/a&gt; . 注意SWI-Prolog比较强大的地方是开源，而且提供较多的libraries,提供较多的predicates.
 b. &lt;a href=&#34;https://sicstus.sics.se/sicstus/docs/latest/html/sicstus.html/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;scisTus&lt;/a&gt; .   文档介绍得不错，不好的地方就是not free. 所以可以当作学习的地方。
@@ -46464,14 +46473,74 @@ e. &lt;a href=&#34;https://github.com/samer--/prolog&#34; target=&#34;_blank&#34
 f. &lt;a href=&#34;http://www2.hawaii.edu/~nreed/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;learn prolog now课程&lt;/a&gt;.  附带一个&lt;a href=&#34;http://www.cnblogs.com/seaman-h-zhang/p/4615097.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;中文翻译&lt;/a&gt;.
 g. &lt;a href=&#34;http://www.cse.unsw.edu.au/~billw/cs9414/notes/prolog/intro.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;cs9414&lt;/a&gt;. INTRODUCTION TO PROLOG PROGRAMMING. 刚开始入门的就是它。
 h. &lt;a href=&#34;http://www.cpp.edu/~jrfisher/www/prolog_tutorial/contents.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt; J.R.Fisher 教程&lt;/a&gt;
-j. 个人小介绍&lt;img src=&#34;https://jueqingsizhe66.github.io/images/prolog/introduction.png&#34; alt=&#34;introduction&#34;&gt;&lt;/p&gt;
+j. 个人小介绍
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/prolog/introduction.png&#34; alt=&#34;introduction&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
  &lt;h2 id=&#34;1&#34;&gt;3. prolog 调试&lt;/h2&gt;
 &lt;p&gt;a. trace  进行详细的跟踪，会call exit（正常退出） ，如果失败则fail，fail则会执行redo，直到exit或者fail退出。
 b. notrace 使用notrace退出详细的跟踪。 类似的debug,nodebug.&lt;/p&gt;
 &lt;p&gt;初始界面
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/prolog/swi-prolog-debug.png&#34; alt=&#34;initial&#34;&gt;&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/prolog/swi-prolog-debug.png&#34; alt=&#34;initial&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;p&gt;添加predicate的trace
-&lt;img src=&#34;https://jueqingsizhe66.github.io/images/prolog/debug.png&#34; alt=&#34;trace&#34;&gt;&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/prolog/debug.png&#34; alt=&#34;trace&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
  &lt;h2 id=&#34;1&#34;&gt;4. 可以尝试进行的主题阅读方式&lt;/h2&gt;
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;
 主题：Lists		Short Description: 一个经典的数据结构，其中的append/3将会用于differentiate lists中，进一步的运用于DCS(define clause statement)
@@ -46541,7 +46610,27 @@ conj --&amp;gt; [so].
 
 &lt;/code&gt;&lt;/pre&gt;
  &lt;h2 id=&#34;8&#34;&gt;8. [p99问题集][8].&lt;/h2&gt;
-&lt;p&gt;编程界面&lt;img src=&#34;https://jueqingsizhe66.github.io/images/prolog/view.png&#34; alt=&#34;view&#34;&gt;和编程想法:多文件多库编程，最好还是类似搭积木的过程。&lt;/p&gt;
+&lt;p&gt;编程界面
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/prolog/view.png&#34; alt=&#34;view&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+和编程想法:多文件多库编程，最好还是类似搭积木的过程。&lt;/p&gt;
  &lt;h2 id=&#34;9&#34;&gt;9. 几本不错的逻辑书籍&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;

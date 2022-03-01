@@ -1,0 +1,1928 @@
+<!DOCTYPE html><html lang="en-us" >
+
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  
+  
+    <meta name="generator" content="Wowchemy 5.4.0 for Hugo" />
+  
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+  
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="令狐冲" />
+
+  
+  
+  
+    
+  
+  <meta name="description" content="有时候，可能需要做一个动态的代码演示的窗口，当然用ppt也可以做，用其他的相关软件也可以做。然而自己写代码也是可以的。相信大家在听杨老师讲解treeview的时候，老杨秀的代码分析小程序，凭着印象，自己也琢磨着写了这一个简易的代码运行模拟窗口。代码涉及到的主要是treeview和textview以及按钮事件控制，另外加上cairo的画图处理，当然也可以直接利用GtkImage载入图片（可能需要隐藏控件，达到箭头下移的目的）
+这边的缺点是，暂时不知道怎么销毁掉Cairo之前绘制的图形，其他还有很多缺点." />
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://jueqingsizhe66.github.io/archives/jian-yi-de-dai-ma-yun-xing-mo-ni-chuang-kou/" />
+
+  
+  
+  
+    <meta name="theme-color" content="#1565c0" />
+  
+
+  
+  
+    
+    <script src="/js/mathjax-config.js"></script>
+  
+
+  
+
+  <link rel="stylesheet" href="/css/vendor-bundle.min.f1ecf783c14edc00c9320c205831ad8e.css" media="print" onload="this.media='all'">
+
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css" integrity="sha512-W0xM4mr6dEP9nREo7Z9z+9X70wytKvMGeDsj7ps2+xg5QPrEBXC8tAW1IFnzjR6eoJ90JmCnFzerQJTLzIEHjA==" crossorigin="anonymous" media="print" onload="this.media='all'">
+    
+
+    
+    
+    
+    
+      
+      
+    
+    
+    
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/github.min.css" crossorigin="anonymous" title="hl-light" media="print" onload="this.media='all'">
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" media="print" onload="this.media='all'" disabled>
+        
+      
+    
+
+    
+    
+    
+
+    
+
+    
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.2a9113cdaa287c8aabad4aa82208fdf3.css" />
+
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+    <link rel="manifest" href="/manifest.webmanifest" />
+  
+
+  <link rel="icon" type="image/png" href="/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_32x32_fill_lanczos_center_3.png" />
+  <link rel="apple-touch-icon" type="image/png" href="/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_180x180_fill_lanczos_center_3.png" />
+
+  <link rel="canonical" href="https://jueqingsizhe66.github.io/archives/jian-yi-de-dai-ma-yun-xing-mo-ni-chuang-kou/" />
+
+  
+  
+  
+  
+  
+  
+  
+  
+    
+    
+  
+  
+
+  
+  
+    
+    
+  
+  <meta property="twitter:card" content="summary" />
+  
+    <meta property="twitter:site" content="@jueqingsihe66" />
+    <meta property="twitter:creator" content="@jueqingsihe66" />
+  
+  <meta property="og:site_name" content="30年磨一剑" />
+  <meta property="og:url" content="https://jueqingsizhe66.github.io/archives/jian-yi-de-dai-ma-yun-xing-mo-ni-chuang-kou/" />
+  <meta property="og:title" content="简易的代码运行模拟窗口 | 30年磨一剑" />
+  <meta property="og:description" content="有时候，可能需要做一个动态的代码演示的窗口，当然用ppt也可以做，用其他的相关软件也可以做。然而自己写代码也是可以的。相信大家在听杨老师讲解treeview的时候，老杨秀的代码分析小程序，凭着印象，自己也琢磨着写了这一个简易的代码运行模拟窗口。代码涉及到的主要是treeview和textview以及按钮事件控制，另外加上cairo的画图处理，当然也可以直接利用GtkImage载入图片（可能需要隐藏控件，达到箭头下移的目的）
+这边的缺点是，暂时不知道怎么销毁掉Cairo之前绘制的图形，其他还有很多缺点." /><meta property="og:image" content="https://jueqingsizhe66.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" />
+    <meta property="twitter:image" content="https://jueqingsizhe66.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
+  
+    
+      <meta
+        property="article:published_time"
+        content="2015-05-11T14:58:46&#43;08:00"
+      />
+    
+    <meta property="article:modified_time" content="2015-05-11T14:58:46&#43;08:00">
+  
+
+  
+
+
+
+  
+
+  
+
+  
+
+
+
+
+
+  <title>简易的代码运行模拟窗口 | 30年磨一剑</title>
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="f2ecfe907c1433eb5d661e4ec3d6987c" >
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.7e5427316d1b14a30f257ae3467b3e21.js"></script>
+
+  
+
+
+<aside class="search-modal" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="Search...">
+        
+      </div>
+
+      
+      
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="header--fixed">
+  <nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+    <div class="container-xl">
+
+      
+      <div class="d-none d-lg-inline-flex">
+        <a class="navbar-brand" href="/">30年磨一剑</a>
+      </div>
+      
+
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+      <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+      
+      <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+        <a class="navbar-brand" href="/">30年磨一剑</a>
+      </div>
+      
+
+      
+      
+      <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+        
+        <ul class="navbar-nav d-md-inline-flex">
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#hero"><span>概要</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#posts"><span>博文</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/about/"><span>About</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/categories/"><span>分类</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link  active" href="/archives"><span>归档</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#tags"><span>标签</span></a>
+          </li>
+
+          
+          
+
+        
+
+          
+        </ul>
+      </div>
+
+      <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+        
+        
+          
+        
+
+        
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+        
+        
+        <li class="nav-item dropdown theme-dropdown">
+          <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+            <i class="fas fa-moon" aria-hidden="true"></i>
+          </a>
+          <div class="dropdown-menu">
+            <a href="#" class="dropdown-item js-set-theme-light">
+              <span>Light</span>
+            </a>
+            <a href="#" class="dropdown-item js-set-theme-dark">
+              <span>Dark</span>
+            </a>
+            <a href="#" class="dropdown-item js-set-theme-auto">
+              <span>Automatic</span>
+            </a>
+          </div>
+        </li>
+        
+
+        
+        
+
+      </ul>
+
+    </div>
+  </nav>
+</header>
+
+
+  </div>
+
+  <div class="page-body">
+    
+    
+    
+
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+  
+ <script async src="//cdn.busuanzi.ibruce.info/cdn/busuanzi/2.3/busuanzi.pure.mini.js"></script> 
+ <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script> 
+ <script> 
+     $(document).ready(function() { 
+         var int = setInterval(fixCount, 100); 
+         var busuanziSiteOffset =  100000  
+         function fixCount() { 
+             if ($("#busuanzi_container_site_pv").css("display") != "none") { 
+                 clearInterval(int); 
+                 $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + busuanziSiteOffset); 
+             } 
+         } 
+     }); 
+ </script> 
+  
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>简易的代码运行模拟窗口</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    May 11, 2015
+  </span>
+  
+
+  
+
+  
+
+  
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/category/programme/">programme</a></span>
+  
+
+</div>
+
+    
+
+
+
+
+
+  
+</div>
+
+
+
+
+
+<span class="article-metadata" >Reading time: 23 minutes and    48 seconds with 5237 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+    <aside>
+        <nav id="TableOfContents"></nav>
+    </aside>
+  <div class="article-container">
+
+
+    <div class="article-style">
+      <p>有时候，可能需要做一个动态的代码演示的窗口，当然用ppt也可以做，用其他的相关软件也可以做。然而自己写代码也是可以的。相信大家在听杨老师讲解treeview的时候，老杨秀的代码分析小程序，凭着印象，自己也琢磨着写了这一个简易的代码运行模拟窗口。代码涉及到的主要是treeview和textview以及按钮事件控制，另外加上cairo的画图处理，当然也可以直接利用GtkImage载入图片（可能需要隐藏控件，达到箭头下移的目的）
+这边的缺点是，暂时不知道怎么销毁掉Cairo之前绘制的图形，其他还有很多缺点.</p>
+<pre><code class="language-java">import com.rupeng.gtk4j.Cairo;
+import com.rupeng.gtk4j.GTK;
+import com.rupeng.gtk4j.IGCallBack;
+
+/**
+* @author    叶昭良
+* @time      2015年2月3日上午10:24:23
+* @version   TestTeacher V1.0   一个简易的代码运行模拟窗口，未加入代码的高亮，采用图片控制
+*                               主要采用textview  treeview    cairo三个技术关键点
+*/
+public class TestTeacher
+{
+
+        /**
+         * @param args
+         */
+        //部分类变量的定义
+        static int window;
+        static int gridHouse;
+
+        static int liststore;
+        static int listiter;
+        static int treeViewApple;
+        static int imagePosition = 0;
+        static int rowPosition = 0;
+        //static int dan ;
+        static int start = 0;
+        static int circlePointx = 200;
+        static int circlePointy = 45;
+        
+        static int circleRectangex = 200;
+        static int circleRectangey = 0;
+        
+        static int EndCirclex = 0;
+        static int EndCircley = 0;
+        static String note = &quot;指针下移&quot;;
+        static int labelResult;
+        
+        //static String loveWords;
+        public static void main(String[] args)
+        {
+                // TODO Auto-generated method stub
+                //GTK初始化
+                GTK.gtk_init();
+                //窗口对象标识的创建
+                window= GTK.gtk_window_new(GTK.GTK_WINDOW_TOPLEVEL);
+                //显示窗口
+                GTK.gtk_widget_show(window);
+                //安静关闭窗口
+                GTK.g_signal_connect(window, &quot;destroy&quot;, new IGCallBack()
+                {
+                        
+                        @Override
+                        public void execute(int instance, int eventData, Object object)
+                        {
+                                // TODO Auto-generated method stub
+                                GTK.gtk_main_quit();
+                        }
+                }, null);
+                
+                //设置网格布局
+                gridHouse = GTK.gtk_grid_new();
+                GTK.gtk_widget_show(gridHouse);
+                //添加网格布局到window中
+                GTK.gtk_container_add(window, gridHouse);
+                
+                //定义一些常用的控件
+                
+                //创建一个treeview 用于显示用户信息
+                createSingleTreeView(gridHouse,start);
+                //创建一个笑脸
+                createDrawLaughFace(window,gridHouse,start,circlePointx,circlePointy);
+                
+                start = 3;
+                //创建一个标签
+                createLabel(&quot;源代码------&gt;&quot;,gridHouse,start);
+                start = 4;
+                //创建一个源码的textview窗口，不可编辑
+                createSingleTextView(window,gridHouse,start);
+                createRectangleFace(window,gridHouse,3,circlePointx,circlePointy);
+
+                start = 4;
+                //创建一个按钮
+                int textViewOutput = GTK.gtk_text_view_new();
+                createNextButton(gridHouse,textViewOutput,start);
+                
+                start =3;
+                //创建一个标签
+                labelResult = GTK.gtk_label_new(&quot;输出结果：&quot;);
+                GTK.gtk_widget_show(labelResult);
+                GTK.gtk_grid_attach(gridHouse, labelResult,7, start, 1, 1);
+                start = 4;
+
+                //创建一个输出界面，用于显示源码输出地结果
+                createOutputTextView(window,gridHouse,start,textViewOutput);
+                //启动循环
+                GTK.gtk_main();
+        }
+        /**
+         * 
+         * @param labelName  标签显示的字符串
+         * @param gridHouse  网格对象标识
+         * @param start      标签在网格对象标识的起始位置
+         * @purpose          创建一个标签对象表示，并显示在窗口中
+         */
+        public static void createLabel(String labelName,int gridHouse,int start)
+        {
+                int labelTitle = GTK.gtk_label_new(labelName);
+                GTK.gtk_widget_show(labelTitle);
+                GTK.gtk_grid_attach(gridHouse, labelTitle, 0, start, 1, 1);
+
+        }
+        /**
+         * 
+         * @param scrolledBar    滚动条对象标识
+         * @param textview        textview的对象标识
+         * @param gridHouse       网格对象的对象标识
+         * @param start          textview在网格对象布局的起始位置
+         * @purpose              创建textView的滚动条
+         */
+        public static void createTextviewScrollBar(int scrolledBar,int textview,int gridHouse,int start)
+        {
+                scrolledBar = GTK.gtk_scrolled_window_new();
+                GTK.gtk_widget_show(scrolledBar);
+                GTK.gtk_grid_attach(gridHouse, scrolledBar, 0, start, 2, 2);
+                GTK.gtk_widget_set_size_request(scrolledBar, 400, 400);
+                GTK.gtk_container_add(scrolledBar,textview);
+        }
+        /**
+         * 
+         * @param scrolledBar     滚动条对象标识
+         * @param textview        textview的对象标识
+         * @param gridHouse       网格对象的对象标识
+         * @param start          textview在网格对象布局的起始位置
+         * @purpose               创建带滚动条的treeview对象标识,用于输出信息
+         */
+        public static void createTreeviewScrollBar(int scrolledBar,int textview,int gridHouse,int start)
+        {
+                scrolledBar = GTK.gtk_scrolled_window_new();
+                GTK.gtk_widget_show(scrolledBar);
+                GTK.gtk_grid_attach(gridHouse, scrolledBar, 0, start, 2, 3);
+                GTK.gtk_widget_set_size_request(scrolledBar, 200, 200);
+                GTK.gtk_container_add(scrolledBar,textview);
+        }
+        /**
+         * 
+         * @param scrolledBar    滚动条对象标识
+         * @param textview       textview的对象标识
+         * @param gridHouse      网格对象的对象标识
+         * @param start          textview在网格对象布局的起始位置
+         * @purpose              创建带滚动条的treeview对象标识，用于显示信息
+         */
+        public static void createTreeviewOutputScrollBar(int scrolledBar,int textview,int gridHouse,int start)
+        {
+                scrolledBar = GTK.gtk_scrolled_window_new();
+                GTK.gtk_widget_show(scrolledBar);
+                GTK.gtk_grid_attach(gridHouse, scrolledBar,8, start, 2, 3);
+                GTK.gtk_widget_set_size_request(scrolledBar, 200, 200);
+                GTK.gtk_container_add(scrolledBar,textview);
+        }
+        /**
+         * 
+         * @param window     窗口对象标识
+         * @param gridHouse  网格布局对象标识
+         * @param start       textview对象在网格布局对象中的起始位置
+         * @purpose          创建一个textview的源代码窗口对象
+         */
+        public static void createSingleTextView(int window, int gridHouse, int start)
+        {
+
+                final int tvGirl = GTK.gtk_text_view_new();
+                GTK.gtk_text_view_set_wrap_mode(tvGirl, GTK.GTK_WRAP_WORD);
+                int scrollBar = 0 ;
+                //添加控件
+                GTK.gtk_text_view_set_editable(tvGirl, false);
+                createTextviewScrollBar(scrollBar,tvGirl,gridHouse,start);
+                //GTK.gtk_grid_attach(gridHouse, tvGirl, 0, start+1, 1, 1);
+
+                //显示控件
+
+                GTK.gtk_widget_show(tvGirl);
+
+                String loveWords = &quot;if(!GTK.gtk_tree_model_get_iter_first(liststore.listiter))&quot;
+                                + &quot;\n{\n\tSystem.out.println(\&quot;100块钱都不给，真坏！\&quot;);\n}\nelse\n{\n\tdo&quot;
+                                + &quot;\n\t{\n\t\tSystem.out.println(\&quot;我在do循环里面\&quot;);\n\t}while(GTK.gtk_tree_model_iter_next(liststore, iter));&quot;
+                                + &quot;\n}\nGTK.gtk_text_iter_free(iter);&quot;;
+                //读取文本框里面的内容 ，只适用小量的文本，一般用迭代器
+                //方法1   先从TextView获取int TextBuffer 
+                    //    然后再从TextBuffer获取text
+                final int textbuffer= GTK.gtk_text_view_get_buffer(tvGirl);
+
+                
+                //可以直接通过缓冲区编号  设置信息
+                GTK.gtk_text_buffer_set_text(textbuffer, loveWords);
+                
+                
+        }
+        /**
+         * 
+         * @param window     窗口对象标识（可省略）
+         * @param gridHouse  网格对象标识
+         * @param start      网格对象的起始位置标识
+         * @param tvGirl     treeview对象标识
+         * @purpose          创建一个TextView对象标识，加入滚动条，并显示。
+         */
+        public static void createOutputTextView(int window, int gridHouse, int start,int tvGirl)
+        {
+
+                //tvGirl = GTK.gtk_text_view_new();
+                GTK.gtk_text_view_set_wrap_mode(tvGirl, GTK.GTK_WRAP_WORD);
+                int scrollBar = 0 ;
+                //添加控件
+                GTK.gtk_text_view_set_editable(tvGirl, false);
+                createTreeviewOutputScrollBar(scrollBar,tvGirl,gridHouse,start);
+                //GTK.gtk_grid_attach(gridHouse, tvGirl, 0, start+1, 1, 1);
+
+                //显示控件
+
+                GTK.gtk_widget_show(tvGirl);
+
+                String loveWords = &quot;&quot;;
+                //读取文本框里面的内容 ，只适用小量的文本，一般用迭代器
+                //方法1   先从TextView获取int TextBuffer 
+                    //    然后再从TextBuffer获取text
+                final int textbuffer= GTK.gtk_text_view_get_buffer(tvGirl);
+
+                
+                //可以直接通过缓冲区编号  设置信息
+                GTK.gtk_text_buffer_set_text(textbuffer, loveWords);
+                
+                
+        }
+        /**
+         * 
+         * @param gridHouse  网格对象标识
+         * @param start      网格对象的起始位置标识
+         * @purpose          创建一个TreeView对象标识，写入字段，添加记录，加入滚动条，并显示。
+         */
+        public static void createSingleTreeView(int gridHouse,int start)
+        {
+                //3  treeview   是一个界面，相当于是一个淘宝前台， V  V的作用
+                                treeViewApple = GTK.gtk_tree_view_new();
+                                //4 建立字段  比较费劲
+                                //4.1创建字段
+                                int columnID = GTK.gtk_tree_view_column_new_with_attributes(&quot;ID&quot;, GTK.gtk_cell_renderer_text_new(), 0);
+                                //4.2添加字段
+                                GTK.gtk_tree_view_append_column(treeViewApple, columnID);
+                                //4.3创建字段
+                                int columnName = GTK.gtk_tree_view_column_new_with_attributes(&quot;Names&quot;,GTK.gtk_cell_renderer_text_new(),1);
+                                //4.4添加字段
+                                GTK.gtk_tree_view_append_column(treeViewApple,columnName);
+                                //4.5创建字段
+                                int  columnAge = GTK.gtk_tree_view_column_new_with_attributes(&quot;Ages&quot;,GTK.gtk_cell_renderer_text_new(),2);
+                                GTK.gtk_tree_view_append_column(treeViewApple,columnAge);
+                                
+                                //创建控件
+                                //1  list_store  是一个数据结构库，相当于一个仓库  M model的作用
+                                liststore = GTK.gtk_list_store_new(3); //3代表三个字段：ID  Names   Age
+                        //        GTK.gtk_list_store_append(list_store, iter);
+                                //2  list_iter,list_iter是一个内部的数据迭代的控制过程，不需要显示 C的作用，控制
+                                listiter = GTK.gtk_tree_iter_new();
+
+                                //5  第五步 把 iter和listStore联系起来
+                                          //GTK.gtk_text_buffer_get_end_iter 类似于treeview的buffer和iter联系起来
+                                           // 以后就可以通过GTK.gtk_text_buffer_insert默认是一个一个iter的执行。
+                                GTK.gtk_list_store_append(liststore, listiter); //指针开始指到第一个位置
+                                // 6 逐个iter添加数据到liststore当中:每个iter的意思，就是逐行或者逐个记录。
+                                GTK.gtk_list_store_set_value(liststore, listiter, 0, &quot;001&quot;);
+                                GTK.gtk_list_store_set_value(liststore, listiter, 1, &quot;YinMuHuaDao&quot;);
+                                GTK.gtk_list_store_set_value(liststore, listiter, 2, &quot;35&quot;);
+                                GTK.gtk_list_store_append(liststore, listiter); //如果不加入，指针不下移，只会覆盖掉前面的数据
+                                GTK.gtk_list_store_set_value(liststore, listiter, 0, &quot;002&quot;);
+                                GTK.gtk_list_store_set_value(liststore, listiter, 1, &quot;Taiyanghua&quot;);
+                                GTK.gtk_list_store_set_value(liststore, listiter, 2, &quot;29&quot;);
+                                GTK.gtk_list_store_append(liststore, listiter);
+                                GTK.gtk_list_store_set_value(liststore, listiter, 0 ,&quot;003&quot;);
+                                GTK.gtk_list_store_set_value(liststore, listiter, 1 ,&quot;Xiaojun&quot;);
+                                GTK.gtk_list_store_set_value(liststore, listiter, 2 ,&quot;10&quot;);
+                                // 之所以添加9次是因为  3个字段*3条记录 == 9
+                                
+                                //7  使用完iter之后一定要记得 关掉它
+                                GTK.gtk_tree_iter_free(listiter);
+                                
+                                //8 关键的一步，把数字显示出来
+                                GTK.gtk_tree_view_set_model(treeViewApple, liststore);
+
+                                //并同时把它显示出来，前台必须显示
+                                GTK.gtk_widget_show(treeViewApple);
+                                
+                                //添加到滚动条中
+                                int scrolledbar2 = 0;
+                                createTreeviewScrollBar(scrolledbar2,treeViewApple,gridHouse,start);
+                                
+                                //设置部分参数
+                                int column =GTK.gtk_tree_view_get_column(treeViewApple, 1);
+                                GTK.gtk_tree_view_column_set_sort_column_id(column, 1);
+                                GTK.gtk_tree_view_column_set_resizable(column, true);
+                                GTK.gtk_tree_view_column_set_reorderable(column, true);
+        }
+        
+        /**
+         * 
+         * @param window          窗口的对象标识
+         * @param gridHouse       网格布局的对象标识
+         * @param start           对象所在的网格布局起始位置
+         * @param circlePointx    画笔的x轴位置
+         * @param circlePointy    画笔的y轴位置
+         * @purpose               绘制一个笑脸
+         */
+        public static void createDrawLaughFace(int window,int gridHouse,int start,final int circlePointx,final int circlePointy) 
+        {
+                //创建画图板 或者叫画布
+                int dan  = GTK.gtk_drawing_area_new();
+                
+                //创建源
+                //添加控件
+                start = 0;
+                GTK.gtk_grid_attach(gridHouse, dan, 1, start, 1, 1);
+                //显示画布
+                GTK.gtk_widget_show(dan);
+                
+
+                
+                //设置画布的大小
+                GTK.gtk_widget_set_size_request(dan, 300, 300);
+                
+                
+                //开始绘制  利用事件draw 来不断的绘制
+                
+                GTK.g_signal_connect(dan, &quot;draw&quot;,new IGCallBack() 
+                {
+                        @Override
+                        public void execute(int instance, int eventData, Object object)
+                        {
+                                // TODO 自动生成的方法存根
+                                //eventDate才是画布源
+                                //设置画笔的颜色
+                                //Cairo.cairo_destroy(eventData);
+                                Cairo.cairo_set_source_rgb(eventData, 1, 0, 0);
+                                //设置画笔的大小
+                                Cairo.cairo_set_line_width(eventData, 3);                        
+                                Cairo.cairo_move_to(eventData, circlePointx-20, circlePointy);
+                                Cairo.cairo_line_to(eventData, circlePointx-70, circlePointy);
+                                Cairo.cairo_line_to(eventData, circlePointx-60, circlePointy-5);
+                                Cairo.cairo_move_to(eventData, circlePointx-70, circlePointy);
+                                Cairo.cairo_line_to(eventData, circlePointx-60, circlePointy+5);
+                                Cairo.cairo_stroke(eventData);
+                                
+                                //画一个圆
+                                Cairo.cairo_arc(eventData, circlePointx, circlePointy, 10, 0, 2*3.1415926);
+                                //画一个圆弧
+                                //Cairo.cairo_arc(eventData, 200, 200, 70,1.5*3.1415925, 2*3.1415926);
+                                //显示画笔
+                                Cairo.cairo_stroke(eventData); //Cairo.cairo_fill(eventData)不同的效果
+                                
+                                
+                                //画一个圆弧  有下面实验知道是从x轴沿顺时针开始画图
+
+                                //嘴巴的绘制
+                                double Pi = 3.1415926;
+                                Cairo.cairo_arc(eventData, circlePointx, circlePointy, 5, 0.25*Pi, 0.75*Pi);
+                                Cairo.cairo_fill(eventData);
+                                
+                                //绘制两只眼睛
+                                Cairo.cairo_arc(eventData, circlePointx-5, circlePointy-5, 3, 0, 2*Pi);
+                                Cairo.cairo_arc(eventData, circlePointx+5, circlePointy-5, 3, 0, 2*Pi);
+                                Cairo.cairo_fill(eventData);
+                                
+                                
+
+                                //画文字
+                                Cairo.cairo_move_to(eventData, circlePointx+10, circlePointy+5);
+                                Cairo.cairo_set_source_rgb(eventData, 0.4, 0.3, 0.2);
+                                Cairo.cairo_set_font_size(eventData, 16);
+                                //选择文字类型
+                                Cairo.cairo_select_font_face(eventData, &quot;宋体&quot;, Cairo.CAIRO_FONT_SLANT_ITALIC, Cairo.CAIRO_FONT_WEIGHT_BOLD);
+                                Cairo.cairo_show_text(eventData,note);
+                                //Cairo.cairo_stroke(eventData);  //不需要这句话也可以
+                                
+                        }
+                }, null);
+                
+                
+        }
+        /**
+         * 
+         * @param window          窗口的对象标识
+         * @param gridHouse       网格布局的对象标识
+         * @param start           矩形对象所在的网格布局起始位置
+         * @param circlePointx    画笔的x轴位置
+         * @param circlePointy    画笔的y轴位置
+         * @purpose               绘制一个矩形图像
+         */
+        public static void createRectangleFace(int window,int gridHouse,int start,final int circlePointx,final int circlePointy) 
+        {
+                //创建画图板 或者叫画布
+                int dan  = GTK.gtk_drawing_area_new();
+                
+                //创建源
+                //添加控件
+                start = 4;
+                GTK.gtk_grid_attach(gridHouse, dan, 0, start, 1, 1);
+                //显示画布
+                GTK.gtk_widget_show(dan);
+                
+
+                
+                //设置画布的大小
+                GTK.gtk_widget_set_size_request(dan, 300, 300);
+                
+                
+                //开始绘制  利用事件draw 来不断的绘制
+                
+                GTK.g_signal_connect(dan, &quot;draw&quot;,new IGCallBack() 
+                {
+                        @Override
+                        public void execute(int instance, int eventData, Object object)
+                        {
+                                // TODO 自动生成的方法存根
+                                //eventDate才是画布源
+                                //设置画笔的颜色
+                                //Cairo.cairo_destroy(eventData);
+                                Cairo.cairo_set_source_rgb(eventData, 0, 1, 0);
+                                //设置画笔的大小
+                                Cairo.cairo_set_line_width(eventData, 3);                        
+                                //Cairo.cairo_move_to(eventData, circlePointx-20, circlePointy);
+
+                                
+                                //画一个矩形
+                                Cairo.cairo_rectangle(eventData, circleRectangex-150, circleRectangey+120, 250, 20);
+                                Cairo.cairo_stroke(eventData);
+                                //画文字
+                                Cairo.cairo_move_to(eventData, circleRectangex+10, circleRectangey+100);
+                                Cairo.cairo_set_source_rgb(eventData, 0, 0, 1);
+                                Cairo.cairo_set_font_size(eventData, 18);
+                                //选择文字类型
+                                Cairo.cairo_select_font_face(eventData, &quot;宋体&quot;, Cairo.CAIRO_FONT_SLANT_NORMAL, Cairo.CAIRO_FONT_WEIGHT_BOLD);
+                                Cairo.cairo_show_text(eventData,&quot;循环第&quot;+Integer.toString(rowPosition)+&quot;次&quot;);//
+                                //Cairo.cairo_stroke(eventData);  //不需要这句话也可以
+                                
+                        }
+                }, null);
+                
+                
+        }
+        /**
+         * 
+         * @param window          窗口的对象标识
+         * @param gridHouse       网格布局的对象标识
+         * @param start           矩形对象所在的网格布局起始位置
+         * @param circlePointx    画笔的x轴位置
+         * @param circlePointy    画笔的y轴位置
+         * @purpose               绘制一个圆圈图像 + 终止表示！
+         */
+        public static void createCircleFace(int window,int gridHouse,int start,final int circlePointx,final int circlePointy) 
+        {
+                //创建画图板 或者叫画布
+                int dan  = GTK.gtk_drawing_area_new();
+                
+                //创建源
+                //添加控件
+                start = 4;
+                GTK.gtk_grid_attach(gridHouse, dan, 0, start, 1, 1);
+                //显示画布
+                GTK.gtk_widget_show(dan);
+                
+
+                
+                //设置画布的大小
+                GTK.gtk_widget_set_size_request(dan, 300, 300);
+                
+                
+                //开始绘制  利用事件draw 来不断的绘制
+                
+                GTK.g_signal_connect(dan, &quot;draw&quot;,new IGCallBack() 
+                {
+                        @Override
+                        public void execute(int instance, int eventData, Object object)
+                        {
+                                // TODO 自动生成的方法存根
+                                //eventDate才是画布源
+                                //设置画笔的颜色
+                                //Cairo.cairo_destroy(eventData);
+                                Cairo.cairo_set_source_rgb(eventData, 1, 0, 1);
+                                //设置画笔的大小
+                                Cairo.cairo_set_line_width(eventData, 3);                        
+                                //Cairo.cairo_move_to(eventData, circlePointx-20, circlePointy);
+
+                                
+                                //画一个矩形
+                                Cairo.cairo_arc(eventData, EndCirclex+150, EndCircley+200, 100, 0, 6.28);
+                                Cairo.cairo_stroke(eventData);
+                                //画文字
+                                Cairo.cairo_move_to(eventData, EndCirclex+50, EndCircley+200);
+                                Cairo.cairo_set_source_rgb(eventData, 1, 0, 1);
+                                Cairo.cairo_set_font_size(eventData, 18);
+                                //选择文字类型
+                                Cairo.cairo_select_font_face(eventData, &quot;宋体&quot;, Cairo.CAIRO_FONT_SLANT_NORMAL, Cairo.CAIRO_FONT_WEIGHT_BOLD);
+                                Cairo.cairo_show_text(eventData,&quot;循环第&quot;+Integer.toString(rowPosition+1)+&quot;次,程序终止退出！&quot;);//
+                                //Cairo.cairo_stroke(eventData);  //不需要这句话也可以
+                                
+                        }
+                }, null);
+                
+                
+        }
+        /**
+         * 
+         * @param gridHouse         网格布局对象标识
+         * @param textViewOutput    textview的对象标识
+         * @param start             textview对象在网格布局的起始位置
+         * @purpose                 创建一个下一步button，并添加事件监听
+         */
+        public static void createNextButton(int gridHouse,int textViewOutput,int start)
+        {
+                int btnApple = GTK.gtk_button_new_with_label(&quot;下一步&quot;);
+                GTK.gtk_widget_show(btnApple);
+                GTK.gtk_grid_attach(gridHouse, btnApple, 6, start, 1, 1);
+                insertNextEvent(btnApple,textViewOutput);
+        }
+        /**
+         * 
+         * @param btnSin            button下一步的对象标识
+         * @param textViewOutput    textview的对象标识
+         * @purpose                 建立button下一步的事件监听
+         */
+        public static void insertNextEvent(final int btnSin,final int textViewOutput)
+        {
+                GTK.g_signal_connect(btnSin, &quot;clicked&quot;,new IGCallBack()
+                {
+                        @Override
+                        public void execute(int instance, int eventData, Object object)
+                        {
+                                
+                                // TODO 自动生成的方法存根
+                                //double sbValue = GTK.gtk_spin_button_get_value(spinbox);
+                                if(rowPosition &lt; getNumberOfListstore(liststore))
+                                {
+                                        circlePointy = circlePointy+20;
+                                        //创建笑脸
+                                        createDrawLaughFace(window,gridHouse,start,circlePointx,circlePointy);
+                                        //创建矩形框
+                                        createRectangleFace(window,gridHouse,start+1,circleRectangex,circleRectangey);
+                                        printRecord(liststore);
+                                        InsertStringToTextViewFunction(textViewOutput,&quot;我在do循环里面  \n&quot;);
+                                        rowPosition =  rowPosition +1;
+                                }
+                                else 
+                                {
+                                        
+                                        //note = &quot;指针无法下移&quot;;
+                                        circlePointy = circlePointy+20;
+                                        if(rowPosition &gt; getNumberOfListstore(liststore))
+                                        {
+                                                createDrawLaughFace(window,gridHouse,start,circlePointx,circlePointy);
+                                        }
+                                        
+                                        createRectangleFace(window,gridHouse,start+1,circleRectangex,circleRectangey);
+                                        createCircleFace(window,gridHouse,start,EndCirclex,EndCircley);
+                                        InsertStringToTextViewFunction(textViewOutput,&quot;别嗯了！程序没有数据了\n&quot;);
+                                        showInfo(&quot;没有数据了&quot;,&quot;指针无法下移&quot;);
+                                }
+
+                        }
+                }, null);
+        }
+        /**
+         * 
+         * @param liststore   liststore是treeview的原始数据
+         * @return            返回liststore的记录个数
+         */
+        public static int getNumberOfListstore(int liststore)
+        {
+                int sum = 0;
+                int iter = GTK.gtk_tree_iter_new();
+                if(!GTK.gtk_tree_model_get_iter_first(liststore, iter))
+                {
+                        return sum;
+                }
+                do
+                {
+                        sum++;
+                }while(GTK.gtk_tree_model_iter_next(liststore, iter));
+                return sum;
+        }
+        /**
+         * 
+         * @param liststore   liststore是treeview的原始数据
+         * @purpose           打印liststore的所有内容
+         */
+        public static void printRecord(int liststore)
+        {
+                //必须新建，不能利用原先的listiter,哪边需要用控制，就需要建一个控件。！！！否则报错！！不能用全局的 listiter
+                int iter = GTK.gtk_tree_iter_new();
+                int i  =0;
+/*                if(GTK.gtk_tree_model_get_iter_first(liststore, listiter))
+                {
+                        do
+                        {
+                                String ID = GTK.gtk_tree_model_get_value(liststore, listiter, 0);
+                                String Names = GTK.gtk_tree_model_get_value(liststore, listiter, 1);
+                                String Ages = GTK.gtk_tree_model_get_value(liststore, listiter, 2);
+                                //showInfo(&quot;这个员工的ID是&quot;+ID+&quot;,他的名字是&quot;+Names+&quot;,并且它的年龄是&quot;+Ages,&quot;显示员工信息&quot;);
+                                System.out.println(&quot;这个员工的ID是&quot;+ID+&quot;,他的名字是&quot;+Names+&quot;,并且它的年龄是&quot;+Ages);
+                                
+                        }while(GTK.gtk_tree_model_iter_next(liststore,listiter));
+                }else
+                {
+                        System.out.println(&quot;表中无数据&quot;);
+                }*/
+                // 减少代码的深度。
+                if(!GTK.gtk_tree_model_get_iter_first(liststore, iter))
+                {
+                        System.out.println(&quot;treeview没有数据  请添加记录&quot;);
+                        return;
+                }
+                do
+                {
+                        if(rowPosition == i)
+                        {
+                                String ID = GTK.gtk_tree_model_get_value(liststore, iter, 0);
+                                String Names = GTK.gtk_tree_model_get_value(liststore, iter, 1);
+                                String Ages = GTK.gtk_tree_model_get_value(liststore, iter, 2);
+                                showInfo(&quot;这个员工的ID是&quot;+ID+&quot;,他的名字是&quot;+Names+&quot;,并且它的年龄是&quot;+Ages,&quot;显示员工信息&quot;);
+                                //System.out.println(&quot;这个员工的ID是&quot;+ID+&quot;,他的名字是&quot;+Names+&quot;,并且它的年龄是&quot;+Ages);
+                                return;
+                        }
+                        i++;
+                        
+                }while(GTK.gtk_tree_model_iter_next(liststore,iter));
+                
+                GTK.gtk_tree_iter_free(iter);//释放了 还是有错误。。。
+        }
+        /**
+         * 
+         * @param message    输入一个消息，显示在消息框
+         * @param title      消息框的标题
+         * @purpose          创建一个消息提示对话框
+         */
+        public static void showInfo(  String  message,String title)
+        {
+                int msgDlg = GTK.gtk_message_dialog_new(0, GTK.GTK_DIALOG_DESTROY_WITH_PARENT|
+                                GTK.GTK_DIALOG_MODAL,GTK.GTK_MESSAGE_INFO, GTK.GTK_BUTTONS_OK,message);
+                GTK.gtk_window_set_title(msgDlg, title);
+                int ret = GTK.gtk_dialog_run(msgDlg);
+                 
+                if( ret == GTK.GTK_RESPONSE_OK)
+                {
+                        GTK.gtk_widget_destroy(msgDlg);
+                }else
+                {
+                        GTK.gtk_widget_destroy(msgDlg);
+                }
+
+        }
+        
+        public static void createSelection(int gridHouse,int start)
+        {
+                
+        }
+        /**
+         * 
+         * @param textview   textview对象标识
+         * @param temp       待插入textview的字符串
+         * @purpose          插入一行数据岛textview当中
+         */
+        public static void InsertStringToTextViewFunction(int textview,String temp)
+        {
+                //TextIter是一个TextView的迭代器。
+                int textBuffer =  GTK.gtk_text_view_get_buffer(textview);
+                int textIter = GTK.gtk_text_iter_new();  //这是一个空的iter，需要用textBuffer进行赋值
+                //GTK.gtk_text_iter_forward_to_end(textIter);
+                GTK.gtk_text_buffer_get_end_iter(textBuffer, textIter);// 或者textview的textBuffer的末尾！
+                GTK.gtk_text_buffer_insert(textBuffer, textIter, temp);
+                
+                //GTK.gtk_text_buffer_g
+                GTK.gtk_text_iter_free(textIter);
+                
+        }
+        
+        
+}
+
+</code></pre>
+<p>复制代码</p>
+<p>有什么意见，欢迎交流，有什么想法，欢迎交流。~-~</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="/images/java/chushi.gif" alt="初始时刻" loading="lazy" data-zoomable /></div>
+  </div></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="/images/java/diyici.gif" alt="运行第一次" loading="lazy" data-zoomable /></div>
+  </div></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="/images/java/chengxujiesu.gif" alt="程序结束" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+    </div>
+ <div class="nav-links" style="padding:10;">
+        
+        <div align="left">
+        <a href="https://jueqingsizhe66.github.io/archives/wang-luo-bian-cheng-8-12jie-bi-ji-dai-ma-march18th/"><span class="arrow">←</span> <strong>上一篇:网络编程8-12节笔记代码March18th</strong></a>
+        </div>
+        
+        
+
+
+       <div align="right"> <a href="https://jueqingsizhe66.github.io/archives/fan-she-ji-zhi-nei-sheng-zheng-ze/" ><strong>下一篇:反射机制内省正则 </strong><span class="arrow">→</span></a></div>
+        
+      </div>
+    
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/javabasic/">JavaBasic</a>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="https://jueqingsizhe66.github.io/"><img class="avatar mr-3 avatar-circle" src="/author/%E4%BB%A4%E7%8B%90%E5%86%B2/avatar_huc99f1f2e739130747140db298bdd1890_46492_270x270_fill_q75_lanczos_center.jpg" alt="令狐冲"></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://jueqingsizhe66.github.io/">令狐冲</a></h5>
+      <h6 class="card-subtitle">Engineer of offshore wind turbine technique research</h6>
+      <p class="card-text">My research interests include distributed energy, wind turbine power generation technique , Computational fluid dynamic and programmable matter.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/jueqingsizhe66" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.co.uk/citations?user=7VyEMyQAAAAJ&amp;hl=zh-CN" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/jueqingsizhe66" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+         <span id="busuanzi_container_site_pv">
+             本站访问量：<span id="busuanzi_value_site_pv"></span>次
+         </span>
+         &nbsp;
+   </div>
+
+
+  </div>
+
+</article>
+<script src="https://utteranc.es/client.js"
+        repo="jueqingsizhe66/jueqingsizhe66.github.io"
+        issue-term="pathname"
+        theme="github-dark"
+        crossorigin="anonymous"
+        async>
+</script>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    ©2022 &middot; 
+
+    ^-^ LingHuChong ^-^ Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+      
+
+    
+    <script src="/js/vendor-bundle.min.3d946de2e8784a477845261d87025092.js"></script>
+
+    
+    
+    
+      
+      
+        <script src="https://cdn.jsdelivr.net/gh/desandro/imagesloaded@v4.1.4/imagesloaded.pkgd.min.js" integrity="sha512-S5PZ9GxJZO16tT9r3WJp/Safn31eu8uWrzglMahDT4dsmgqWonRY9grk3j+3tfuPr9WJNsfooOR7Gi7HL5W2jw==" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/gh/metafizzy/isotope@v3.0.6/dist/isotope.pkgd.min.js" integrity="sha512-Zq2BOxyhvnRFXu0+WE6ojpZLOU2jdnqbrM1hmVdGzyeCa1DgM3X5Q4A/Is9xA1IkbUeDd7755dNNI/PzSf2Pew==" crossorigin="anonymous"></script>
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/gh/mermaid-js/mermaid@v8.8.4/dist/mermaid.min.js" integrity="sha512-+TNmhaRJf3jyYHTpzEq/5I6b+aGyhzWb21mGdHAjxSGSYwxN9Grug3Y3B9qVxWfKKY8MscE/6mr9walWvFLFvQ==" crossorigin="anonymous" title="mermaid"></script>
+      
+
+      
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/highlight.min.js" integrity="sha512-Ypjm0o7jOxAd4hpdoppSEN0TQOC19UtPAqD+4s5AlXmUvbmmS/YMxYqAqarQYyxTnB6/rqip9qcxlNB/3U9Wdg==" crossorigin="anonymous"></script>
+        
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/r.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/latex.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/python.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/matlab.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/java.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/go.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/rust.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/c.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/perl.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/scheme.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/lisp.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/racket.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/awk.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/sed.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/bash.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/sql.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/vim.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/clojure.min.js" crossorigin="anonymous"></script>
+        
+      
+
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+      
+      <script id="search-hit-fuse-template" type="text/x-template">
+        <div class="search-hit" id="summary-{{key}}">
+          <div class="search-hit-content">
+            <div class="search-hit-name">
+              <a href="{{relpermalink}}">{{title}}</a>
+              <div class="article-metadata search-hit-type">{{type}}</div>
+              <p class="search-hit-description">{{snippet}}</p>
+            </div>
+          </div>
+        </div>
+      </script>
+      
+        <script src="https://cdn.jsdelivr.net/gh/krisk/Fuse@v3.2.1/dist/fuse.min.js" integrity="sha512-o38bmzBGX+hD3JHWUFCDA09btWaqrNmoJ3RXLlrysA7PP01Kgs4UlE4MhelE1v5dJR3+cxlR4qQlotsW7jKsnw==" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/gh/julmot/mark.js@8.11.1/dist/jquery.mark.min.js" integrity="sha512-mhbv5DqBMgrWL+32MmsDOt/OAvqr/cHimk6B8y/bx/xS88MVkYGPiVv2ixKVrkywF2qHplNRUvFsAHUdxZ3Krg==" crossorigin="anonymous"></script>
+      
+    
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+      
+      
+      
+      
+      
+      
+      
+    
+
+    
+
+    
+    
+    
+    <script id="page-data" type="application/json">{"use_headroom":true}</script>
+
+    
+    
+      <script src="/js/wowchemy-headroom.e8fd2d733eef6a8bbbe0539398fc0547.js" type="module"></script>
+    
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    <script src="/en/js/wowchemy.min.a2ed145159dd33ad55ff402163350b5d.js"></script>
+
+    
+    
+    
+    
+    
+    
+      
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      <script src="/js/wowchemy-publication.b0d291ed6d27eacec233e6cf5204f99a.js" type="module"></script>
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,1336 @@
+<!DOCTYPE html><html lang="en-us" >
+
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  
+  
+    <meta name="generator" content="Wowchemy 5.4.0 for Hugo" />
+  
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+  
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="令狐冲" />
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Fortran：一门古老的计算机数值科学计算语言,1950.
+Fortran的强项就是数值计算，图形编程是一个鸡肋所在，但是有时候又需要做一些图形的展示，借助于GTK&#43; project可以方便我们达到目的.
+GTK是c语言编写的源程序，运用到fortran需要相应的库转换,在github上找到一个gtk-fortran库.下面是ubuntu上面的搭建过程(windows 未实现,可以参考 gtk&#43;makefile)" />
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://jueqingsizhe66.github.io/archives/ubuntu-gtk-fortran/" />
+
+  
+  
+  
+    <meta name="theme-color" content="#1565c0" />
+  
+
+  
+  
+    
+    <script src="/js/mathjax-config.js"></script>
+  
+
+  
+
+  <link rel="stylesheet" href="/css/vendor-bundle.min.f1ecf783c14edc00c9320c205831ad8e.css" media="print" onload="this.media='all'">
+
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css" integrity="sha512-W0xM4mr6dEP9nREo7Z9z+9X70wytKvMGeDsj7ps2+xg5QPrEBXC8tAW1IFnzjR6eoJ90JmCnFzerQJTLzIEHjA==" crossorigin="anonymous" media="print" onload="this.media='all'">
+    
+
+    
+    
+    
+    
+      
+      
+    
+    
+    
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/github.min.css" crossorigin="anonymous" title="hl-light" media="print" onload="this.media='all'">
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" media="print" onload="this.media='all'" disabled>
+        
+      
+    
+
+    
+    
+    
+
+    
+
+    
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.2a9113cdaa287c8aabad4aa82208fdf3.css" />
+
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+    <link rel="manifest" href="/manifest.webmanifest" />
+  
+
+  <link rel="icon" type="image/png" href="/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_32x32_fill_lanczos_center_3.png" />
+  <link rel="apple-touch-icon" type="image/png" href="/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_180x180_fill_lanczos_center_3.png" />
+
+  <link rel="canonical" href="https://jueqingsizhe66.github.io/archives/ubuntu-gtk-fortran/" />
+
+  
+  
+  
+  
+  
+  
+  
+  
+    
+    
+  
+  
+
+  
+  
+    
+    
+  
+  <meta property="twitter:card" content="summary" />
+  
+    <meta property="twitter:site" content="@jueqingsihe66" />
+    <meta property="twitter:creator" content="@jueqingsihe66" />
+  
+  <meta property="og:site_name" content="30年磨一剑" />
+  <meta property="og:url" content="https://jueqingsizhe66.github.io/archives/ubuntu-gtk-fortran/" />
+  <meta property="og:title" content="Ubuntu gtk-fortran | 30年磨一剑" />
+  <meta property="og:description" content="Fortran：一门古老的计算机数值科学计算语言,1950.
+Fortran的强项就是数值计算，图形编程是一个鸡肋所在，但是有时候又需要做一些图形的展示，借助于GTK&#43; project可以方便我们达到目的.
+GTK是c语言编写的源程序，运用到fortran需要相应的库转换,在github上找到一个gtk-fortran库.下面是ubuntu上面的搭建过程(windows 未实现,可以参考 gtk&#43;makefile)" /><meta property="og:image" content="https://jueqingsizhe66.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" />
+    <meta property="twitter:image" content="https://jueqingsizhe66.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
+  
+    
+      <meta
+        property="article:published_time"
+        content="2015-05-19T17:03:25&#43;08:00"
+      />
+    
+    <meta property="article:modified_time" content="2015-05-19T17:03:25&#43;08:00">
+  
+
+  
+
+
+
+  
+
+  
+
+  
+
+
+
+
+
+  <title>Ubuntu gtk-fortran | 30年磨一剑</title>
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="dba3c92b64f70f1cf01c382eadc2d50c" >
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.7e5427316d1b14a30f257ae3467b3e21.js"></script>
+
+  
+
+
+<aside class="search-modal" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="Search...">
+        
+      </div>
+
+      
+      
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="header--fixed">
+  <nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+    <div class="container-xl">
+
+      
+      <div class="d-none d-lg-inline-flex">
+        <a class="navbar-brand" href="/">30年磨一剑</a>
+      </div>
+      
+
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+      <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+      
+      <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+        <a class="navbar-brand" href="/">30年磨一剑</a>
+      </div>
+      
+
+      
+      
+      <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+        
+        <ul class="navbar-nav d-md-inline-flex">
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#hero"><span>概要</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#posts"><span>博文</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/about/"><span>About</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/categories/"><span>分类</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link  active" href="/archives"><span>归档</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#tags"><span>标签</span></a>
+          </li>
+
+          
+          
+
+        
+
+          
+        </ul>
+      </div>
+
+      <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+        
+        
+          
+        
+
+        
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+        
+        
+        <li class="nav-item dropdown theme-dropdown">
+          <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+            <i class="fas fa-moon" aria-hidden="true"></i>
+          </a>
+          <div class="dropdown-menu">
+            <a href="#" class="dropdown-item js-set-theme-light">
+              <span>Light</span>
+            </a>
+            <a href="#" class="dropdown-item js-set-theme-dark">
+              <span>Dark</span>
+            </a>
+            <a href="#" class="dropdown-item js-set-theme-auto">
+              <span>Automatic</span>
+            </a>
+          </div>
+        </li>
+        
+
+        
+        
+
+      </ul>
+
+    </div>
+  </nav>
+</header>
+
+
+  </div>
+
+  <div class="page-body">
+    
+    
+    
+
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+  
+ <script async src="//cdn.busuanzi.ibruce.info/cdn/busuanzi/2.3/busuanzi.pure.mini.js"></script> 
+ <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script> 
+ <script> 
+     $(document).ready(function() { 
+         var int = setInterval(fixCount, 100); 
+         var busuanziSiteOffset =  100000  
+         function fixCount() { 
+             if ($("#busuanzi_container_site_pv").css("display") != "none") { 
+                 clearInterval(int); 
+                 $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + busuanziSiteOffset); 
+             } 
+         } 
+     }); 
+ </script> 
+  
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>Ubuntu gtk-fortran</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    May 19, 2015
+  </span>
+  
+
+  
+
+  
+
+  
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/category/programme/">programme</a></span>
+  
+
+</div>
+
+    
+
+
+
+
+
+  
+</div>
+
+
+
+
+
+<span class="article-metadata" >Reading time: 5 minutes and    24 seconds with 1189 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+    <aside>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#ubuntu-搭建">Ubuntu 搭建</a>
+      <ul>
+        <li><a href="#环境搭建">环境搭建</a></li>
+        <li><a href="#测试文件">测试文件</a></li>
+        <li><a href="#编译">编译</a></li>
+        <li><a href="#运行">运行</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </aside>
+  <div class="article-container">
+
+
+    <div class="article-style">
+      <p>Fortran：一门古老的<a href="http://micro.ustc.edu.cn/Fortran/ZJDing/" target="_blank" rel="noopener">计算机数值科学计算语言</a>,1950.</p>
+<p>Fortran的强项就是数值计算，图形编程是一个鸡肋所在，但是有时候又需要做一些图形的展示，借助于<a href="http://www.gtk.org/" target="_blank" rel="noopener">GTK+ project</a>可以方便我们达到目的.</p>
+<p>GTK是c语言编写的源程序，运用到fortran需要相应的库转换,在github上找到一个<a href="https://github.com/jueqingsizhe66/gtk-fortran" target="_blank" rel="noopener">gtk-fortran库</a>.下面是ubuntu上面的搭建过程(windows 未实现,可以参考 gtk+makefile)</p>
+<h2 id="ubuntu-搭建">Ubuntu 搭建</h2>
+<h3 id="环境搭建">环境搭建</h3>
+<p>GTK3+是跨平台的，既可以在windows上使用，也可以在linux上使用
+下面的代码可以直接打包进一个gtk.sh文件，直接运行sh gtk.sh进行安装</p>
+<pre><code class="language-sh">#1 刚装好的Ubuntu系统中已经有GCC了，但是这个GCC几乎什么文件都不能编译，因为缺少一些必须的头文件，所以要安装build-essential这个软件包
+sudo apt-get install build-essential
+#2 安装GTK/GNOME开发环境  需要下载一系列的安装包，时间比较长
+sudo apt-get install gnome-devel gnome-devel-docs 
+#3 用于在编译GTK程序时自动找出头文件及库文件位置　　
+sudo apt-get install pkg-config
+#4安装 devhelp GTK文档查看程序 
+sudo apt-get install devhelp
+#5安装 gtk/glib 的API参考手册及其它帮助文档 
+sudo apt-get install libglib2.0-doc libgtk2.0-doc
+#6  安装基于GTK的界面GTK是开发Gnome窗口的c/c++语言图形库
+sudo apt-get install glade libglade2-dev
+##或者sudo apt-get install glade-gnome glade-common glade-doc 
+#7安装gtk3.0 或者 将gtk+3.0所需的所有文件统通下载安装完毕 (安装时间较长)
+sudo apt-get install libgtk3*
+
+## 查看信息
+# 查看 2.x 版本 
+#pkg-config --modversion gtk+-3.0 
+# 查看pkg-config的版本
+#$pkg-config -version 
+#查看是否安装了gtk 
+#pkg-config --list-all | grep gtk 
+</code></pre>
+<p>这个流程做完了，就可以进行gtk测试,当然仅仅是c语言的测试</p>
+<h3 id="测试文件">测试文件</h3>
+<pre><code class="language-c">//Helloworld.c
+
+#include &lt;gtk/gtk.h&gt;  
+
+int main(int argc,char *argv[])  
+{  
+    GtkWidget    *window;  
+    GtkWidget    *label;  
+
+    gtk_init(&amp;argc,&amp;argv);  
+
+    /* create the main, top level, window */  
+    window = gtk_window_new(GTK_WINDOW_TOPLEVEL);  
+
+    /* give it the title */  
+    gtk_window_set_title(GTK_WINDOW(window),&quot;Hello World&quot;);  
+
+    /* connect the destroy signal of the window to gtk_main_quit 
+     * when the window is about to be destroyed we get a notification and 
+     * stop the main GTK+ loop 
+     */  
+    g_signal_connect(window,&quot;destroy&quot;,G_CALLBACK(gtk_main_quit),NULL);  
+
+    /* create the &quot;Hello, World&quot; label */  
+    label = gtk_label_new(&quot;GTK可以运行了！&quot;);  
+
+    /* and insert it into the main window */  
+    gtk_container_add(GTK_CONTAINER(window),label);  
+
+    /* make sure that everything, window and label, are visible */  
+    gtk_widget_show_all(window);  
+
+    /* start the main loop, and let it rest until the application is closed */  
+    gtk_main();  
+
+    return 0;  
+}
+
+</code></pre>
+<h3 id="编译">编译</h3>
+<pre><code class="language-sh">gcc -o Helloworld Helloworld.c `pkg-config --cflags --libs gtk+-3.0`
+</code></pre>
+<h3 id="运行">运行</h3>
+<pre><code class="language-sh">./Helloworld
+
+</code></pre>
+<p>如果你得到一个小窗口&quot;GTK可以运行了&quot; 证明你的gtk环境是正确的。</p>
+<p>然后我们开始进一步配置gtk-fortran</p>
+<ol>
+<li>下载
+<a href="https://github.com/jueqingsizhe66/gtk-fortran" target="_blank" rel="noopener">https://github.com/jueqingsizhe66/gtk-fortran</a></li>
+<li>编译</li>
+</ol>
+<pre><code class="language-sh">mkdir build
+cd build
+
+在gtk-fortran目录下：/home/happycamp-of-fortran/gtk-fortran/build
+cmake ..
+make 
+make install
+
+</code></pre>
+<p>会得到如下结果:</p>
+<pre><code class="language-sh">Install the project...
+-- Install configuration: &quot;release&quot;
+-- Installing: /usr/local/lib/libgtk-2-fortran.a
+-- Installing: /usr/local/lib/libgtk-2-fortran.so.0.1
+-- Installing: /usr/local/lib/libgtk-2-fortran.so
+-- Installing: /usr/local/include/gtk-2-fortran/atk.mod
+-- Installing: /usr/local/include/gtk-2-fortran/cairo.mod
+-- Installing: /usr/local/include/gtk-2-fortran/gdk.mod
+-- Installing: /usr/local/include/gtk-2-fortran/gdk_pixbuf.mod
+-- Installing: /usr/local/include/gtk-2-fortran/g.mod
+-- Installing: /usr/local/include/gtk-2-fortran/gtk.mod
+-- Installing: /usr/local/include/gtk-2-fortran/gtk_hl.mod
+-- Installing: /usr/local/include/gtk-2-fortran/gtk_hl_container.mod
+-- Installing: /usr/local/include/gtk-2-fortran/gtk_hl_button.mod
+-- Installing: /usr/local/include/gtk-2-fortran/gtk_hl_entry.mod
+-- Installing: /usr/local/include/gtk-2-fortran/gtk_hl_tree.mod
+-- Installing: /usr/local/include/gtk-2-fortran/gtk_hl_menu.mod
+-- Installing: /usr/local/include/gtk-2-fortran/gtk_hl_combobox.mod
+-- Installing: /usr/local/include/gtk-2-fortran/gtk_hl_spin_slider.mod
+-- Installing: /usr/local/include/gtk-2-fortran/gtk_hl_chooser.mod
+-- Installing: /usr/local/include/gtk-2-fortran/gtk_hl_dialog.mod
+-- Installing: /usr/local/include/gtk-2-fortran/gtk_hl_progress.mod
+-- Installing: /usr/local/include/gtk-2-fortran/gtk_hl_accelerator.mod
+-- Installing: /usr/local/include/gtk-2-fortran/gtk_hl_infobar.mod
+-- Installing: /usr/local/include/gtk-2-fortran/gtk_hl_assistant.mod
+-- Installing: /usr/local/include/gtk-2-fortran/gtk_hl_misc.mod
+-- Installing: /usr/local/include/gtk-2-fortran/gtk_draw_hl.mod
+-- Installing: /usr/local/include/gtk-2-fortran/gdk_pixbuf_hl.mod
+-- Installing: /usr/local/include/gtk-2-fortran/gtk_sup.mod
+-- Installing: /usr/local/include/gtk-2-fortran/pango.mod
+-- Installing: /usr/local/include/gtk-2-fortran/gdk_events.mod
+-- Installing: /usr/local/include/gtk-2-fortran/gtk_os_dependent.mod
+-- Installing: /usr/local/bin/gtk-2-fortran-modscan
+-- Installing: /usr/local/share/gtk-fortran/gtk-2-fortran-index.csv
+-- Installing: /usr/local/share/gtk-fortran/gtk-2-enumerators.lis
+-- Installing: /usr/local/lib/pkgconfig/gtk-2-fortran.pc
+-- Installing: /usr/local/share/man/man1/gtk-2-fortran-modscan.1
+</code></pre>
+<p>3: 测试软件
+然后你就会发现
+cd 到 /home/happycamp-of-fortran/gtk-fortran/examples
+然后</p>
+<pre><code class="language-sh">root at javazhao-N53SM [19:27:20ä��午] in /home/happycamp-of-fortran/gtk-fortran/examples on git:master?
+$ gfortran gtkhello2.f90 -o gtkhello2 `pkg-config --cflags --libs gtk-2-fortran` 
+
+就可以了. 一定记住加入的是gtk-2-fortran 这个库。而不是gtk+-2.0或者gtk+-3.0,这两个库是针对c语言的。
+$ ./gtkhello2 
+
+
+</code></pre>
+    </div>
+ <div class="nav-links" style="padding:10;">
+        
+        <div align="left">
+        <a href="https://jueqingsizhe66.github.io/archives/vim-haskell/"><span class="arrow">←</span> <strong>上一篇:vim-haskell</strong></a>
+        </div>
+        
+        
+
+
+       <div align="right"> <a href="https://jueqingsizhe66.github.io/archives/haskellmodule/" ><strong>下一篇:HaskellModule </strong><span class="arrow">→</span></a></div>
+        
+      </div>
+    
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/fortran/">fortran</a>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="https://jueqingsizhe66.github.io/"><img class="avatar mr-3 avatar-circle" src="/author/%E4%BB%A4%E7%8B%90%E5%86%B2/avatar_huc99f1f2e739130747140db298bdd1890_46492_270x270_fill_q75_lanczos_center.jpg" alt="令狐冲"></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://jueqingsizhe66.github.io/">令狐冲</a></h5>
+      <h6 class="card-subtitle">Engineer of offshore wind turbine technique research</h6>
+      <p class="card-text">My research interests include distributed energy, wind turbine power generation technique , Computational fluid dynamic and programmable matter.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/jueqingsizhe66" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.co.uk/citations?user=7VyEMyQAAAAJ&amp;hl=zh-CN" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/jueqingsizhe66" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+         <span id="busuanzi_container_site_pv">
+             本站访问量：<span id="busuanzi_value_site_pv"></span>次
+         </span>
+         &nbsp;
+   </div>
+
+
+  </div>
+
+</article>
+<script src="https://utteranc.es/client.js"
+        repo="jueqingsizhe66/jueqingsizhe66.github.io"
+        issue-term="pathname"
+        theme="github-dark"
+        crossorigin="anonymous"
+        async>
+</script>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    ©2022 &middot; 
+
+    ^-^ LingHuChong ^-^ Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+      
+
+    
+    <script src="/js/vendor-bundle.min.3d946de2e8784a477845261d87025092.js"></script>
+
+    
+    
+    
+      
+      
+        <script src="https://cdn.jsdelivr.net/gh/desandro/imagesloaded@v4.1.4/imagesloaded.pkgd.min.js" integrity="sha512-S5PZ9GxJZO16tT9r3WJp/Safn31eu8uWrzglMahDT4dsmgqWonRY9grk3j+3tfuPr9WJNsfooOR7Gi7HL5W2jw==" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/gh/metafizzy/isotope@v3.0.6/dist/isotope.pkgd.min.js" integrity="sha512-Zq2BOxyhvnRFXu0+WE6ojpZLOU2jdnqbrM1hmVdGzyeCa1DgM3X5Q4A/Is9xA1IkbUeDd7755dNNI/PzSf2Pew==" crossorigin="anonymous"></script>
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/gh/mermaid-js/mermaid@v8.8.4/dist/mermaid.min.js" integrity="sha512-+TNmhaRJf3jyYHTpzEq/5I6b+aGyhzWb21mGdHAjxSGSYwxN9Grug3Y3B9qVxWfKKY8MscE/6mr9walWvFLFvQ==" crossorigin="anonymous" title="mermaid"></script>
+      
+
+      
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/highlight.min.js" integrity="sha512-Ypjm0o7jOxAd4hpdoppSEN0TQOC19UtPAqD+4s5AlXmUvbmmS/YMxYqAqarQYyxTnB6/rqip9qcxlNB/3U9Wdg==" crossorigin="anonymous"></script>
+        
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/r.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/latex.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/python.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/matlab.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/java.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/go.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/rust.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/c.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/perl.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/scheme.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/lisp.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/racket.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/awk.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/sed.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/bash.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/sql.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/vim.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/clojure.min.js" crossorigin="anonymous"></script>
+        
+      
+
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+      
+      <script id="search-hit-fuse-template" type="text/x-template">
+        <div class="search-hit" id="summary-{{key}}">
+          <div class="search-hit-content">
+            <div class="search-hit-name">
+              <a href="{{relpermalink}}">{{title}}</a>
+              <div class="article-metadata search-hit-type">{{type}}</div>
+              <p class="search-hit-description">{{snippet}}</p>
+            </div>
+          </div>
+        </div>
+      </script>
+      
+        <script src="https://cdn.jsdelivr.net/gh/krisk/Fuse@v3.2.1/dist/fuse.min.js" integrity="sha512-o38bmzBGX+hD3JHWUFCDA09btWaqrNmoJ3RXLlrysA7PP01Kgs4UlE4MhelE1v5dJR3+cxlR4qQlotsW7jKsnw==" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/gh/julmot/mark.js@8.11.1/dist/jquery.mark.min.js" integrity="sha512-mhbv5DqBMgrWL+32MmsDOt/OAvqr/cHimk6B8y/bx/xS88MVkYGPiVv2ixKVrkywF2qHplNRUvFsAHUdxZ3Krg==" crossorigin="anonymous"></script>
+      
+    
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+      
+      
+      
+      
+      
+      
+      
+    
+
+    
+
+    
+    
+    
+    <script id="page-data" type="application/json">{"use_headroom":true}</script>
+
+    
+    
+      <script src="/js/wowchemy-headroom.e8fd2d733eef6a8bbbe0539398fc0547.js" type="module"></script>
+    
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    <script src="/en/js/wowchemy.min.a2ed145159dd33ad55ff402163350b5d.js"></script>
+
+    
+    
+    
+    
+    
+    
+      
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      <script src="/js/wowchemy-publication.b0d291ed6d27eacec233e6cf5204f99a.js" type="module"></script>
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+
+
+
+</body>
+</html>

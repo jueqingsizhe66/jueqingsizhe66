@@ -1333,7 +1333,7 @@ mysql&gt; select * from banana;
 </code></pre>
 <p>可见在sql_mode=pad_char_to_full_length的情况下，char即使赋的值是abc三个字符，该类型也会填充到6个字符
 而varchar则是三个字符就三个字符
-而如果sql_mode = '' 呢？
+而如果sql_mode = &rsquo;&rsquo; 呢？
 sql_mode =&lsquo;strict_all_tables&rsquo;呢？</p>
 <p>如果是sql_mode= '&rsquo;</p>
 <pre><code class="language-mysql">mysql&gt; set sql_mode='';
@@ -1821,7 +1821,7 @@ year     1000-9999（这种解释有点不可靠）</p>
 1 row in set (0.00 sec)
 </code></pre>
 <p>&mdash;&ndash;总结sql_mode的8种风格
-SET sql_mode =''; &mdash;default style
+SET sql_mode =&rsquo;&rsquo;; &mdash;default style
 SET sql_mode=&lsquo;PAD_CHAR_TO_FULL_LENGTH&rsquo;;  &ndash; 会填充到一定的长度
 SET sql_mode  = &lsquo;STRICT_ALL_TABLES&rsquo;;  &ndash; 也就是当超过最大长度 会报错而不是截断
 SET sql_mode = &lsquo;STRICT_ALL_TABLES,ERROR_FOR_DIVISION_BY_ZERO&rsquo;;
@@ -1967,7 +1967,7 @@ mysql&gt; select * from apple;
 2 rows in set (0.00 sec)
 </code></pre>
 <p>&mdash;&mdash;&mdash;&ndash;默认为null时候添加  now()的值
-如果添加入不合适的值（再sql_mode = '&rsquo; 则是警告，如果是sql_mode=&lsquo;strict_all_tables&rsquo;则是错误提示 errors产生）</p>
+如果添加入不合适的值（再sql_mode = &rsquo;&rsquo; 则是警告，如果是sql_mode=&lsquo;strict_all_tables&rsquo;则是错误提示 errors产生）</p>
 <pre><code class="language-mysql">mysql&gt; insert into apple value(&quot;123&quot;,100);
 Query OK, 1 row affected, 1 warning (0.10 sec)
 
@@ -2027,12 +2027,12 @@ show current_user();
 show user();
 show columns from apple; &mdash;&gt;显示apple表结构，类似explain 和desc
 show variables like &lsquo;%sql_mode%&rsquo;   &mdash;-&gt;和显式相关，是mysql比较重要的参数
-show variables like &lsquo;log%&rsquo;              &mdash;-&gt;会显示日志相关信息
+show variables like &rsquo;log%&rsquo;              &mdash;-&gt;会显示日志相关信息
 show variables like &lsquo;max_connect%&rsquo;  &mdash;-&gt;显式mysql供用户的最大连接数
 show variables like &lsquo;%innodb%&rsquo;       &mdash;-&gt;显式innodb相关的信息
 show variables like &lsquo;%data%&rsquo;           &mdash;-&gt;显式mysql 数据的存储相关信息
 show variables like &lsquo;%time_zone%&rsquo;  &mdash;&ndash;&gt;显式时区相关信息
-show variables like &lsquo;%character%';   &mdash;-&gt;显式字符集和编码的相关信息
+show variables like &lsquo;%character%&rsquo;;   &mdash;-&gt;显式字符集和编码的相关信息
 一些不常用的show variables
 show variables like &lsquo;%query_cache%&rsquo;  &mdash;-&gt;查询缓存，不想深入，据说是跟优化有关，DBA选手可以深入，有一个工业标准。
 show variables like &lsquo;%key_buffer%&rsquo;   &mdash;&mdash;&gt;也和优化相关，也有工业标准值</p>
@@ -2040,7 +2040,7 @@ show variables like &lsquo;%key_buffer%&rsquo;   &mdash;&mdash;&gt;也和优化�
 另外还可以显示当前系统的状态的详细值
 show status;
 show status like &lsquo;%&hellip;%&rsquo;  &mdash;-&gt;显示某个值的信息
-mysql&gt; show status like &lsquo;%buffer%';</p>
+mysql&gt; show status like &lsquo;%buffer%&rsquo;;</p>
 <p>信息值不是特别了解。。。</p>
 <p>status 显式mysql当前库的使用情况：</p>
 <pre><code class="language-mysql">mysql&gt; status
@@ -3155,7 +3155,7 @@ Insert语句可以省略表名后的列名，但是强烈不推荐
     
     
     
-    <script src="/js/wowchemy.min.516d1df876a80aa80a06ab72f875bdd4.js"></script>
+    <script src="/js/wowchemy.min.bbce1786921b11de61ce2cf40ecf1421.js"></script>
 
     
   <script async defer src="https://buttons.github.io/buttons.js"></script>

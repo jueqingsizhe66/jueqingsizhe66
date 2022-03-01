@@ -7,25 +7,85 @@
     <description>graphviz</description>
     <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>©2022</copyright><lastBuildDate>Wed, 28 Sep 2016 17:14:53 +0800</lastBuildDate>
     <image>
-      <url>https://jueqingsizhe66.github.io/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
+      <url>https://jueqingsizhe66.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
       <title>graphviz</title>
       <link>https://jueqingsizhe66.github.io/tag/graphviz/</link>
     </image>
     
     <item>
       <title>graphviz notebook</title>
-      <link>https://jueqingsizhe66.github.io/blog/2016/09/28/graphviz-notebook/</link>
+      <link>https://jueqingsizhe66.github.io/archives/graphviz-notebook/</link>
       <pubDate>Wed, 28 Sep 2016 17:14:53 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2016/09/28/graphviz-notebook/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/graphviz-notebook/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;http://www.graphviz.org&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;graphviz&lt;/a&gt;可用于帮助你绘制工具之外和工具之内的想法。关于绘图的历史可以参看&lt;a href=&#34;http://www.merl.com/publications/TR2001-49&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;A short note of the graph drawing&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;http://graphviz.org/Download.php&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;graphviz下载链接&lt;/a&gt;, 安装很方便，一步一步进行即可，一般是在&lt;a href=&#34;http://graphviz.org/content/command-line-invocation&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;命令行使用&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;下面是我记录学习的一些graphviz的笔记。只用pdf输出&lt;code&gt;dot -Tpdf *.dot -o *.pdf&lt;/code&gt;，
 因为质量较好(矢量化输出)，但是特殊情况可以参考&lt;a href=&#34;http://graphviz.org/content/command-line-invocation&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;output format&lt;/a&gt;,
 因为不同的输出会在&lt;a href=&#34;http://graphviz.org/content/attrs&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Node, Edge and Graph Attributes&lt;/a&gt; 节点、边、图中表现出不同的样式出来。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/graphviz/main1.jpg&#34; alt=&#34;main1&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/graphviz/main2.jpg&#34; alt=&#34;main2&#34;&gt;&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/graphviz/main1.jpg&#34; alt=&#34;main1&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/graphviz/main2.jpg&#34; alt=&#34;main2&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;h2 id=&#34;cfd&#34;&gt;CFD&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/graphviz/CFD.jpg&#34; alt=&#34;CFD&#34;&gt;&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/graphviz/CFD.jpg&#34; alt=&#34;CFD&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-gnuplot&#34;&gt;digraph G{
     compound=true; // 这样lhead ltail指向cluster才有效
     edge [fontname=&amp;quot;SimSun&amp;quot;];
@@ -77,7 +137,27 @@
 &lt;p&gt;注意使用circo生成，需要有一个回环圆。&lt;/p&gt;
 &lt;p&gt;compound用于子图的lhead属性，不设置没效果。&lt;/p&gt;
 &lt;p&gt;concentrate这里没什么作用。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/graphviz/inner.jpg&#34; alt=&#34;inner&#34;&gt;&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/graphviz/inner.jpg&#34; alt=&#34;inner&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-gnuplot&#34;&gt;//circo -Tpdf inner.dot -o inner.pdf
 digraph G{
     fontname=&amp;quot;SimSun&amp;quot;;
@@ -171,7 +251,27 @@ digraph G{
 
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h2 id=&#34;outer图&#34;&gt;outer图&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/graphviz/outer.jpg&#34; alt=&#34;outer&#34;&gt;&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/graphviz/outer.jpg&#34; alt=&#34;outer&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-gnuplot&#34;&gt;//circo -Tpdf inner.dot -o inner.pdf
 digraph G{
     fontname=&amp;quot;SimSun&amp;quot;;
@@ -259,7 +359,27 @@ subgraph cluster_0{
 
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h2 id=&#34;算法绘制&#34;&gt;算法绘制&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/graphviz/binary.jpg&#34; alt=&#34;algo&#34;&gt;&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/graphviz/binary.jpg&#34; alt=&#34;algo&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-gnuplot&#34;&gt;digraph ast{
     size=&amp;quot;4,4&amp;quot;;
 fontname=&amp;quot;Microsoft YaHei&amp;quot;;
@@ -277,7 +397,27 @@ mul -&amp;gt; 5;
 
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h2 id=&#34;时序表制作&#34;&gt;时序表制作&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/graphviz/sequence.jpg&#34; alt=&#34;sequence&#34;&gt;&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/graphviz/sequence.jpg&#34; alt=&#34;sequence&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;p&gt;聪明的做法 是从图中隐藏了所有stepi（其实图像对象中是存在的，只不过打印不出来
 并同时使用了plaintext的风格。&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-gnuplot&#34;&gt;digraph G {

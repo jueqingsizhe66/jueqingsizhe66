@@ -7,16 +7,16 @@
     <description>JavaScript</description>
     <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>©2022</copyright><lastBuildDate>Mon, 11 May 2015 14:58:44 +0800</lastBuildDate>
     <image>
-      <url>https://jueqingsizhe66.github.io/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
+      <url>https://jueqingsizhe66.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
       <title>JavaScript</title>
       <link>https://jueqingsizhe66.github.io/tag/javascript/</link>
     </image>
     
     <item>
       <title>JQuery1-9April4th</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/05/11/jquery1-9april4th/</link>
+      <link>https://jueqingsizhe66.github.io/archives/jquery1-9april4th/</link>
       <pubDate>Mon, 11 May 2015 14:58:44 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/05/11/jquery1-9april4th/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/jquery1-9april4th/</guid>
       <description>&lt;p&gt;1: jquery的加载顺序&lt;/p&gt;
 &lt;p&gt;IE中会有不同点
 结论：jquery中使用$(function(){})即可！其他知道即可&lt;/p&gt;
@@ -329,10 +329,10 @@ html()类似于 innerHtml()&lt;/p&gt;
 $(&amp;lsquo;div&amp;rsquo;,&amp;lsquo;p&amp;rsquo;)  相对容器   所有在p标签中的 div
 参考点不一样&lt;/p&gt;
 &lt;p&gt;注意
-//$(&amp;lsquo;this&amp;rsquo;).siblings.css(&amp;lsquo;backgroundColor&amp;rsquo;,&#39;&#39;);//可不敢再犯这个错误
+//$(&amp;rsquo;this&amp;rsquo;).siblings.css(&amp;lsquo;backgroundColor&amp;rsquo;,&amp;rsquo;&amp;rsquo;);//可不敢再犯这个错误
 //this不需要加上单引号
 //为什么无法直接行t添加上 颜色？ 因为真正在表面显示的是td
-//$(this).siblings().css(&amp;lsquo;backgroundColor&amp;rsquo;,&#39;&#39;);&lt;/p&gt;
+//$(this).siblings().css(&amp;lsquo;backgroundColor&amp;rsquo;,&amp;rsquo;&amp;rsquo;);&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;
 &amp;lt;html&amp;gt;
   &amp;lt;head&amp;gt;
@@ -549,7 +549,7 @@ $(&amp;lsquo;div&amp;rsquo;,&amp;lsquo;p&amp;rsquo;)  相对容器   所有在p�
 &lt;p&gt;一个小练习： 东西部篮球队&lt;/p&gt;
 &lt;p&gt;注意：
 //可不敢再犯这个错误   1  逗号写成了句话   2： siblings后直接街上css的参数
-//$(this).css(&amp;lsquo;backgroundColor&amp;rsquo;.&amp;lsquo;red&amp;rsquo;).siblings()&amp;lsquo;backgroundColor&amp;rsquo;,&#39;&#39;);&lt;/p&gt;
+//$(this).css(&amp;lsquo;backgroundColor&amp;rsquo;.&amp;lsquo;red&amp;rsquo;).siblings()&amp;lsquo;backgroundColor&amp;rsquo;,&amp;rsquo;&amp;rsquo;);&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;      //由此错误可得到一个结论
       // jQuery分成两个部分一个是获得Dom对象  紧接着是设置CSS样式！
       // 也就是js其实就是把这两个部分按照链条一样一对一对的串起来了
@@ -1264,13 +1264,13 @@ trigger()
     
     <item>
       <title>jQuery10-18节笔记代码April5th</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/05/11/jquery10-18jie-bi-ji-dai-ma-april5th/</link>
+      <link>https://jueqingsizhe66.github.io/archives/jquery10-18jie-bi-ji-dai-ma-april5th/</link>
       <pubDate>Mon, 11 May 2015 14:58:44 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/05/11/jquery10-18jie-bi-ji-dai-ma-april5th/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/jquery10-18jie-bi-ji-dai-ma-april5th/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;http://www.rupeng.com/forum/thread-45422-1-1.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;http://www.rupeng.com/forum/thread-45422-1-1.html&lt;/a&gt; jquery1-9
 1：移除元素
 $(&amp;lsquo;div&amp;rsquo;).empty()  清空层中的元素
-$(&amp;lsquo;div&amp;rsquo;).remove(&#39;.cls&#39;)   清空层中运用cls样式的元素
+$(&amp;lsquo;div&amp;rsquo;).remove(&amp;rsquo;.cls&amp;rsquo;)   清空层中运用cls样式的元素
 $(&amp;lsquo;div&amp;rsquo;).remove()  自我删除
 2: select 下拉框的练习
 单选移到另一个框
@@ -2209,7 +2209,7 @@ b.鼠标点击后则把该只球队剔除，并放在退赛球队中&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;    //突然明白  cookie只不过是一堆hashmap  临时存储在浏览器当中哦 
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;定义：&lt;/p&gt;
-&lt;p&gt;$.cookie(&amp;lsquo;uName&amp;rsquo;, $(&#39;#YourName&#39;).val());&lt;/p&gt;
+&lt;p&gt;$.cookie(&amp;lsquo;uName&amp;rsquo;, $(&amp;rsquo;#YourName&amp;rsquo;).val());&lt;/p&gt;
 &lt;p&gt;使用：&lt;/p&gt;
 &lt;p&gt;$.cookie(&amp;lsquo;uName&amp;rsquo;)&lt;/p&gt;
 &lt;p&gt;作用：&lt;/p&gt;
@@ -2652,9 +2652,9 @@ no-repeat 不进行平铺&lt;/p&gt;
     
     <item>
       <title>JSDOM14-19节笔记代码April1th</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/05/11/jsdom14-19jie-bi-ji-dai-ma-april1th/</link>
+      <link>https://jueqingsizhe66.github.io/archives/jsdom14-19jie-bi-ji-dai-ma-april1th/</link>
       <pubDate>Mon, 11 May 2015 14:58:44 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/05/11/jsdom14-19jie-bi-ji-dai-ma-april1th/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/jsdom14-19jie-bi-ji-dai-ma-april1th/</guid>
       <description>&lt;p&gt;续先前的JSDOM1-15:http://www.rupeng.com/forum/thread-45297-1-1.html&lt;/p&gt;
 &lt;p&gt;21:图片移动，脱离文档流的案例&lt;/p&gt;
 &lt;p&gt;脱离文档流： 对象.style.position=&amp;lsquo;absolute&amp;rsquo;;
@@ -2717,7 +2717,7 @@ createElement 和appendChild的配合使用
 层的style.display=none;的意思是不显示该层
 案例4:   搜索框
 注意：onfocus  and onblur(鼠标焦点离开的事件）
-一般会使用设置为gray，文本框为&amp;rsquo;请输入搜索内容&#39;; 使用的时候设置为black，并且文本框为空。&lt;/p&gt;
+一般会使用设置为gray，文本框为&amp;rsquo;请输入搜索内容&amp;rsquo;; 使用的时候设置为black，并且文本框为空。&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;Html&amp;gt;
   &amp;lt;Head&amp;gt;
     &amp;lt;Title&amp;gt; When click the button ,then generate the div&amp;lt;/Title&amp;gt;
@@ -3307,9 +3307,9 @@ IE:attachEvent   FF:addEventListener   来绑定事件
     
     <item>
       <title>JSDOM7-13节笔记代码March31th</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/05/11/jsdom7-13jie-bi-ji-dai-ma-march31th/</link>
+      <link>https://jueqingsizhe66.github.io/archives/jsdom7-13jie-bi-ji-dai-ma-march31th/</link>
       <pubDate>Mon, 11 May 2015 14:58:44 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/05/11/jsdom7-13jie-bi-ji-dai-ma-march31th/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/jsdom7-13jie-bi-ji-dai-ma-march31th/</guid>
       <description>&lt;p&gt;连接到前文JavaScript 7-11节笔记代码&lt;/p&gt;
 &lt;p&gt;8: 注册和调用的不同：
 注册
@@ -3611,7 +3611,7 @@ alert(window.event.srcElement.id) 只记录最初加载完body第一次点击的
 &lt;p&gt;17：innerText和innerhtml&lt;/p&gt;
 &lt;p&gt;注意1：innerhtml 不要写成innerHtml 否则是undefined
 注意2：  var btnObjAgree=document.getElementsByName(&amp;lsquo;agree&amp;rsquo;);
-var timeControl=document.getElementById(&amp;lsquo;time&amp;rsquo;);
+var timeControl=document.getElementById(&amp;rsquo;time&amp;rsquo;);
 正因为Id没有s 所以他必然是唯一的， 而name TagName都是可以重复 所以他的Element是复数的
 案例1：四个按钮 分别显示 设置innerText 设置innerhtml  获取innerText 获取innerhtml
 注意：
@@ -3619,7 +3619,7 @@ var timeControl=document.getElementById(&amp;lsquo;time&amp;rsquo;);
 //2   在获取文本时候  Text模式是直接获得文本   而html是包含着标签信息
 另外//在firefox不行!!firefox and  Ie is a pair of enemy
 //In Firefox , You should use the statement below
-// dvObj.contentText=&#39;&#39;&lt;/p&gt;
+// dvObj.contentText=&amp;rsquo;&#39;&lt;/p&gt;
 &lt;p&gt;具体如下所示：&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;Html&amp;gt;
 
@@ -4384,9 +4384,9 @@ document.body.appendChild(tableObj);
     
     <item>
       <title>March15th</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/05/11/march15th/</link>
+      <link>https://jueqingsizhe66.github.io/archives/march15th/</link>
       <pubDate>Mon, 11 May 2015 14:58:44 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/05/11/march15th/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/march15th/</guid>
       <description>&lt;p&gt;一、练习总结
 1.利用jq插入节点有4个一致性很强的： append，prepend，after，before。其中append和prepend都是对于子节点的添加。after和befor是对于兄弟节点的添加。
 2.ChildNode和Childen是不同的，因为ChildNode会把空格远算进去。那么Each遍历的是啥？
@@ -4445,7 +4445,7 @@ $(&amp;quot;#panel .head&amp;quot;).mouseover(function () { }).mouseleave(functi
 10.slideUp()，slideDown()分别是改变所选的宽度。
 11.   :checked 被选中和  checked=&amp;ldquo;checked&amp;quot;是有区别的。个人理解：被选中不一定会有checked=&amp;ldquo;checked&amp;rdquo; 但是一定可以通过状态 :checked 来获取。
 12.总结 ：对于要获取处于某个状态的元素，可以使用  :状态   来获取。
-13.对于使用多个属性来取值，可以使用  $(&amp;ldquo;selector[id=123][name=lcf]&amp;quot;)
+13.对于使用多个属性来取值，可以使用  $(&amp;ldquo;selector[id=123][name=lcf]&amp;rdquo;)
 14.JQ中支持在Childen(&amp;quot;:checked&amp;rdquo;)来选取子元素中被选取了的元素。
 15.JQ中，只有要括号，就可以在括号里面写筛选条件。
 16.对于利用Jq添加上去的东西，可以为其添加一个id获取class，方便进行处理。
@@ -4475,7 +4475,7 @@ $(&amp;quot;#panel .head&amp;quot;).mouseover(function () { }).mouseleave(functi
 1.Jquery中属性可以通过[ name=bb]  来匹配，也可以通过  .attr(&amp;ldquo;bb&amp;rdquo;) 来获取，同时 .attr(&amp;ldquo;bb&amp;rdquo;,&amp;ldquo;love&amp;rdquo;)来赋值;。
 2.操作文本节点可以通过文本节点的父节点来操作。比如&lt;p id=&#34;mm&#34;&gt;我爱你&lt;/p&gt;。通过id为mm获取到p然后text()就可以了。
 3.在html中标签就是元素，元素就是标签，完全可以这么理解。
-4.对于属性的操作可以使用attr来，如果要取值使用    $(&amp;quot;#bb&amp;rdquo;).attr(&amp;ldquo;value&amp;rdquo;) 可以获取id为bb的value值。如果要赋值  $(&amp;quot;#bb&amp;quot;).attr(&amp;ldquo;value&amp;rdquo;,&amp;ldquo;我爱你&amp;rdquo;);
+4.对于属性的操作可以使用attr来，如果要取值使用    $(&amp;quot;#bb&amp;quot;).attr(&amp;ldquo;value&amp;rdquo;) 可以获取id为bb的value值。如果要赋值  $(&amp;quot;#bb&amp;quot;).attr(&amp;ldquo;value&amp;rdquo;,&amp;ldquo;我爱你&amp;rdquo;);
 5.对于value更有更简单的操作就是 val()。上面的等价于  $(&amp;quot;#bb&amp;quot;).val(&amp;ldquo;123&amp;rdquo;)这个赋值                 $(&amp;quot;#bb&amp;quot;).val();这个取值。
 6.append是在被选定节点的内部添加上XXX，prepend是在某个元素前（仍然在内部）添加子节点。
 7.after和append添加方式和6的append和prepend相同，但是这2个添加的是兄弟节点。
@@ -4674,9 +4674,9 @@ alert(nodes[i].nodeValue);    //改成  alert(this.nodeValue);
     
     <item>
       <title>JavaScript 7-11节笔记代码March28th</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/05/11/javascript-7-11jie-bi-ji-dai-ma-march28th/</link>
+      <link>https://jueqingsizhe66.github.io/archives/javascript-7-11jie-bi-ji-dai-ma-march28th/</link>
       <pubDate>Mon, 11 May 2015 14:58:43 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/05/11/javascript-7-11jie-bi-ji-dai-ma-march28th/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/javascript-7-11jie-bi-ji-dai-ma-march28th/</guid>
       <description>&lt;p&gt;function串讲笔记&lt;/p&gt;
 &lt;p&gt;1：function是什么？
 JS的function类似于java和.Net的方法&lt;/p&gt;
@@ -4796,9 +4796,9 @@ Window.document.getElementById(“btn”).onclick=function()
     
     <item>
       <title>JavaScript1-6节笔记代码March26th</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/05/11/javascript1-6jie-bi-ji-dai-ma-march26th/</link>
+      <link>https://jueqingsizhe66.github.io/archives/javascript1-6jie-bi-ji-dai-ma-march26th/</link>
       <pubDate>Mon, 11 May 2015 14:58:43 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/05/11/javascript1-6jie-bi-ji-dai-ma-march26th/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/javascript1-6jie-bi-ji-dai-ma-march26th/</guid>
       <description>&lt;p&gt;js 常见 Events
 属性        当以下情况发生时，出现此事件     &lt;br&gt;
 onabort        图像加载被中断        元素失去焦点     &lt;br&gt;
@@ -5210,8 +5210,8 @@ var str=&#39;&lt;Div class=&#34;global-notify&#34; id=&#34;global-message&#34;&g
 基本数据类型：
 Boolean
 Number   &amp;mdash;-&amp;gt;小数和整数
-&amp;mdash;-parseInt(&#39;&#39;)
-&amp;mdash;-parseFloat(&#39;&#39;)
+&amp;mdash;-parseInt(&amp;rsquo;&amp;rsquo;)
+&amp;mdash;-parseFloat(&amp;rsquo;&amp;rsquo;)
 String
 Null  &amp;mdash;-&amp;gt;
 Undefined &amp;mdash;&amp;gt;未定义(未初始化)
@@ -5238,7 +5238,7 @@ typeof(object) &amp;mdash;&amp;mdash;-&amp;gt;是什么类型的？&lt;/p&gt;
 &lt;p&gt;所以在运行时候会事先确定好函数，一般是最靠近调用函数的函数定义
 function f1()
 {
-alert(&amp;lsquo;ell&amp;rsquo;);
+alert(&amp;rsquo;ell&amp;rsquo;);
 }
 function f1(name)
 {
@@ -5335,7 +5335,7 @@ element.setAttribute()        把指定属性设置或更&lt;/p&gt;
 18. dvObj.style.width=&amp;lsquo;300px&amp;rsquo;;
 dvObj.style.height=&amp;lsquo;200px&amp;rsquo;;
 dvObj.style.border=&amp;lsquo;1px solid red&amp;rsquo;;
-加&#39;&amp;lsquo;的是因为给变量赋值必须是一个正确的类型&lt;/p&gt;
+加&amp;rsquo;&amp;lsquo;的是因为给变量赋值必须是一个正确的类型&lt;/p&gt;
 &lt;p&gt;。数字就是数字字符串就是字符串
 19.&lt;p&gt; 标签定义段落。
 border:1px solid green; 边框：1像素，实心&lt;/p&gt;
@@ -5414,9 +5414,9 @@ onsubmit 在提交表单之前调用。是一个事件&lt;/p&gt;
     
     <item>
       <title>javascript闭包训练</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/05/11/javascriptbi-bao-xun-lian/</link>
+      <link>https://jueqingsizhe66.github.io/archives/javascriptbi-bao-xun-lian/</link>
       <pubDate>Mon, 11 May 2015 14:58:43 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/05/11/javascriptbi-bao-xun-lian/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/javascriptbi-bao-xun-lian/</guid>
       <description>&lt;p&gt;javascript  闭包训练&lt;/p&gt;
 &lt;p&gt;闭包其实就是保存着内部定义函数的一张表，该表保存着函数头、函数变量（变量当前状态的值）、函数实现。&lt;/p&gt;
 &lt;p&gt;利用  一个outFun 和一个innerFun进行实验《Learning jQuery 4th edition》&lt;/p&gt;

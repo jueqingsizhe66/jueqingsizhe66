@@ -1,0 +1,1293 @@
+<!DOCTYPE html><html lang="en-us" >
+
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  
+  
+    <meta name="generator" content="Wowchemy 5.4.0 for Hugo" />
+  
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+  
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="令狐冲" />
+
+  
+  
+  
+    
+  
+  <meta name="description" content="
+模式匹配
+= &#43;起着一种模式匹配，=不要翻译成等于 最好翻译为如果匹配前面&#43; 则他的值为后面.-&gt; 也起着一种类型的模式匹配。
+分支
+|在创建函数的时候 体现着一种分支的效果。
+if-else  这其实是一种控制语句，不能说Haskell放掉了控制语句，而应该是循环语句。
+一切都是函数。
+根据monad的内置结构，函数可以组合生成类似于数学的组合函数（埋藏内部的lambda结构）
+" />
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://jueqingsizhe66.github.io/archives/haskellji-ge-ji-ben-gai-nian-xue-er-wu-yong-wu-yi-wei-yong/" />
+
+  
+  
+  
+    <meta name="theme-color" content="#1565c0" />
+  
+
+  
+  
+    
+    <script src="/js/mathjax-config.js"></script>
+  
+
+  
+
+  <link rel="stylesheet" href="/css/vendor-bundle.min.f1ecf783c14edc00c9320c205831ad8e.css" media="print" onload="this.media='all'">
+
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css" integrity="sha512-W0xM4mr6dEP9nREo7Z9z+9X70wytKvMGeDsj7ps2+xg5QPrEBXC8tAW1IFnzjR6eoJ90JmCnFzerQJTLzIEHjA==" crossorigin="anonymous" media="print" onload="this.media='all'">
+    
+
+    
+    
+    
+    
+      
+      
+    
+    
+    
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/github.min.css" crossorigin="anonymous" title="hl-light" media="print" onload="this.media='all'">
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" media="print" onload="this.media='all'" disabled>
+        
+      
+    
+
+    
+    
+    
+
+    
+
+    
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.2a9113cdaa287c8aabad4aa82208fdf3.css" />
+
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+    <link rel="manifest" href="/manifest.webmanifest" />
+  
+
+  <link rel="icon" type="image/png" href="/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_32x32_fill_lanczos_center_3.png" />
+  <link rel="apple-touch-icon" type="image/png" href="/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_180x180_fill_lanczos_center_3.png" />
+
+  <link rel="canonical" href="https://jueqingsizhe66.github.io/archives/haskellji-ge-ji-ben-gai-nian-xue-er-wu-yong-wu-yi-wei-yong/" />
+
+  
+  
+  
+  
+  
+  
+  
+  
+    
+    
+  
+  
+
+  
+  
+    
+    
+  
+  <meta property="twitter:card" content="summary" />
+  
+    <meta property="twitter:site" content="@jueqingsihe66" />
+    <meta property="twitter:creator" content="@jueqingsihe66" />
+  
+  <meta property="og:site_name" content="30年磨一剑" />
+  <meta property="og:url" content="https://jueqingsizhe66.github.io/archives/haskellji-ge-ji-ben-gai-nian-xue-er-wu-yong-wu-yi-wei-yong/" />
+  <meta property="og:title" content="Haskell几个基本概念--学而无用--无以为用 | 30年磨一剑" />
+  <meta property="og:description" content="
+模式匹配
+= &#43;起着一种模式匹配，=不要翻译成等于 最好翻译为如果匹配前面&#43; 则他的值为后面.-&gt; 也起着一种类型的模式匹配。
+分支
+|在创建函数的时候 体现着一种分支的效果。
+if-else  这其实是一种控制语句，不能说Haskell放掉了控制语句，而应该是循环语句。
+一切都是函数。
+根据monad的内置结构，函数可以组合生成类似于数学的组合函数（埋藏内部的lambda结构）
+" /><meta property="og:image" content="https://jueqingsizhe66.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" />
+    <meta property="twitter:image" content="https://jueqingsizhe66.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
+  
+    
+      <meta
+        property="article:published_time"
+        content="2015-05-16T21:11:50&#43;08:00"
+      />
+    
+    <meta property="article:modified_time" content="2015-05-16T21:11:50&#43;08:00">
+  
+
+  
+
+
+
+  
+
+  
+
+  
+
+
+
+
+
+  <title>Haskell几个基本概念--学而无用--无以为用 | 30年磨一剑</title>
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="9dcdb6687e4a00c3cb62fb60e1f75be4" >
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.7e5427316d1b14a30f257ae3467b3e21.js"></script>
+
+  
+
+
+<aside class="search-modal" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="Search...">
+        
+      </div>
+
+      
+      
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="header--fixed">
+  <nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+    <div class="container-xl">
+
+      
+      <div class="d-none d-lg-inline-flex">
+        <a class="navbar-brand" href="/">30年磨一剑</a>
+      </div>
+      
+
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+      <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+      
+      <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+        <a class="navbar-brand" href="/">30年磨一剑</a>
+      </div>
+      
+
+      
+      
+      <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+        
+        <ul class="navbar-nav d-md-inline-flex">
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#hero"><span>概要</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#posts"><span>博文</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/about/"><span>About</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/categories/"><span>分类</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link  active" href="/archives"><span>归档</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#tags"><span>标签</span></a>
+          </li>
+
+          
+          
+
+        
+
+          
+        </ul>
+      </div>
+
+      <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+        
+        
+          
+        
+
+        
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+        
+        
+        <li class="nav-item dropdown theme-dropdown">
+          <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+            <i class="fas fa-moon" aria-hidden="true"></i>
+          </a>
+          <div class="dropdown-menu">
+            <a href="#" class="dropdown-item js-set-theme-light">
+              <span>Light</span>
+            </a>
+            <a href="#" class="dropdown-item js-set-theme-dark">
+              <span>Dark</span>
+            </a>
+            <a href="#" class="dropdown-item js-set-theme-auto">
+              <span>Automatic</span>
+            </a>
+          </div>
+        </li>
+        
+
+        
+        
+
+      </ul>
+
+    </div>
+  </nav>
+</header>
+
+
+  </div>
+
+  <div class="page-body">
+    
+    
+    
+
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+  
+ <script async src="//cdn.busuanzi.ibruce.info/cdn/busuanzi/2.3/busuanzi.pure.mini.js"></script> 
+ <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script> 
+ <script> 
+     $(document).ready(function() { 
+         var int = setInterval(fixCount, 100); 
+         var busuanziSiteOffset =  100000  
+         function fixCount() { 
+             if ($("#busuanzi_container_site_pv").css("display") != "none") { 
+                 clearInterval(int); 
+                 $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + busuanziSiteOffset); 
+             } 
+         } 
+     }); 
+ </script> 
+  
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>Haskell几个基本概念--学而无用--无以为用</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    May 16, 2015
+  </span>
+  
+
+  
+
+  
+
+  
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/category/%E6%96%B9%E6%B3%95/">方法</a>, <a href="/category/%E6%95%B0%E5%AD%A6/">数学</a>, <a href="/category/programme/">programme</a></span>
+  
+
+</div>
+
+    
+
+
+
+
+
+  
+</div>
+
+
+
+
+
+<span class="article-metadata" >Reading time: 14 minutes and    3 seconds with 3091 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+    <aside>
+        <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#函数只是关系的表示可以说它是过程变换运动从泛函的角度解释">函数只是关系的表示，可以说它是过程、变换、运动（从泛函的角度解释）</a></li>
+        <li><a href="#树形结构抽象细节">树形结构抽象细节</a></li>
+      </ul>
+    </li>
+    <li><a href="#范畴理论-交际的互联网">范畴理论-交际的互联网</a></li>
+    <li><a href="#无以为用--组合思想">无以为用&ndash;组合思想</a>
+      <ul>
+        <li><a href="#从现实世界走入计算机经过计算机思考再从计算机走出并融入现实世界这就是-函数式思维httpwwwjdoncom45608">从现实世界走入计算机，经过计算机思考，再从计算机走出并融入现实世界，这就是<a href="http://www.jdon.com/45608"> 函数式思维</a>。</a></li>
+        <li><a href="#monad-隐藏lambda">monad 隐藏lambda</a></li>
+        <li><a href="#函数式替代sql">函数式替代sql？</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </aside>
+  <div class="article-container">
+
+
+    <div class="article-style">
+      <ol>
+<li>模式匹配
+= +起着一种模式匹配，=不要翻译成等于 最好翻译为如果匹配前面+ 则他的值为后面.-&gt; 也起着一种类型的模式匹配。</li>
+<li>分支
+|在创建函数的时候 体现着一种分支的效果。
+if-else  这其实是一种控制语句，不能说Haskell放掉了控制语句，而应该是循环语句。</li>
+<li>一切都是函数。
+根据monad的内置结构，函数可以组合生成类似于数学的组合函数（埋藏内部的lambda结构）</li>
+</ol>
+<h3 id="函数只是关系的表示可以说它是过程变换运动从泛函的角度解释">函数只是关系的表示，可以说它是过程、变换、运动（从泛函的角度解释）</h3>
+<p>本来函数式变成是不考虑空间的， 而面向对象则是引入不必要的空间问题，来挂上函数，最终都是为了实现函数变换或者函数过程，或者统称为运动。
+假如宇宙存在根节点，越靠近根节点的肯定越抽象，我们现在是工作在底层的具象节点下。</p>
+<blockquote>
+<p>面向对象属于分解，函数编程属于组合。有以为 利，通过面向对象我们将一分解为多个，数量多了，“有”，而函数编程则是将多个组合成一个，数量少了  ，“无”，无才能用，只有忽略事物内部的细节，我们才 能用它，否则陷入细节迷失方向。换句话说：数学分数考得好，不代表在实际中用数学用的好，牛    顿没有发明几何学，但是用了几何学，创造了微积分，用它们推导 出万有引力；爱因斯坦用了非几何学推导了相对论。</p>
+</blockquote>
+<p>简洁才能落地！</p>
+<p>###从有至无方为用，有乃分，无乃合，宇宙的起点源于无</p>
+<p>学习是一种分解能力，使用是一种组合能力，这是两种不同的能力。</p>
+<blockquote>
+<p>再看看老子道德经的一段：三十幅共一毂，当其无，有车之用。埏埴以为器，当其无，有器之用。凿户牖以为室，当其无，有室之用。故有之以为利，无之   以为用。
+这段话意思是：三十根棍子做成的圆轱辘，只有忽视圆轱辘内部这种结构，着眼于圆轱辘外部，才会发现它原来是可以做车的轮子这一用处，两个轱辘与车    架组合成一辆车。比如门窗，只有忽视其内部如何结构的构建，才会从外部想到用它在房间组合中。</p>
+</blockquote>
+<h3 id="树形结构抽象细节">树形结构抽象细节</h3>
+<p>我们之所以使用树形结构，用一个根节点代表其聚合群体，用组长代表所有组员，用名字代表人的全部，等等这些组合抽象的办法就是让我们大脑去除大量   对象内部的细节，用一个符号代替它们，这样我们才能基于这个树的根节点再组合成新的树形结构。</p>
+<h2 id="范畴理论-交际的互联网">范畴理论-交际的互联网</h2>
+<p>范畴理论(Category)总是鼓励我们从对象内部细节中转移开来，在范畴理论中 一个对象是一个抽象模糊的实体，你所有需要知道的只是它如何和其他对象交互(关系)，它是怎么使用箭头和其他对象连接的，这就是为什么互联网搜索引擎 Google Baidu等能够通过分析链入和链出的链接来排名网站一样。</p>
+<h2 id="无以为用--组合思想">无以为用&ndash;组合思想</h2>
+<p>归根到底，还是“无以为用”这个范畴的组合本质很多人都没有搞清楚。</p>
+<ul>
+<li>只有忘记对象的细节才能用好它。两个原因总结一下：
+<ul>
+<li>首先，首先人脑短时记忆有限，如果大量对象内部细节占据大脑，而我们需要从对象外部组合它们，    这些细节是干扰。</li>
+<li>其次，范畴也认为组合对象只要将对象看成模糊实体，注重它们之间关系。</li>
+</ul>
+</li>
+<li>忘记学习对象的细节才能用好它，无以为用，事物的制造者都不一定能用好它，除非事先有目标制造它。
+因此，学并不能致用，数理化学得好不一定用得好，博士给老板打工，老板赚大头。因为他把你的学问用处发挥了。自己学自己用因为智力限制也不可能。</li>
+<li>中国教育的典型
+在学生阶段,中国学生数理化很好，但是毕业后诺贝尔奖获得者几乎没有，世界自然科学领军人物很少，那些高考状元 学神都哪儿去了？学得好不      一定用得好，中国教育制度是以学习能力评价学生，各种考试充斥大量 知识细节，让学生耗费18年于这些可能以后无用的细节中，最终他们已经没有智力空间来思考如何使用这些大量的知识细节了。</li>
+</ul>
+<p>面向对象的分解能力是强，但是组合能力很弱！
+实际上从函数运算的角度，不存在单纯的“值”，1应该是=&amp; gt;1，或者说，所谓的常量值也是函数，只是每次不管输入什么都输出同样的结果。这样世界就只有运算，值是没必&gt;要的，更没有状态。但这是神的视角，而一 旦人开始思考时，由于不具备神的无限的能力，只能在每个瞬间试图去把握世界，就看到了值和状态以及状态呈现时的context/stage/&gt;舞台。但人希 望能像神一样去理解世界，就只好从这每个瞬间呈现的一切中去寻找变与不变的东西，当他们历尽艰辛找到“不变”的“变换”时就迫不及待地将之命名为定律。</p>
+<p>关于上述思想，计算机邀请Haskell带领领略（Haskell可以学习，但是需要投入很多时间，坚持&hellip;）</p>
+<ul>
+<li><a href="http://www.zhihu.com/question/20193745" target="_blank" rel="noopener">综合性帖子</a></li>
+<li><a href="http://www.jdon.com/47271" target="_blank" rel="noopener">这边也有一些课程介绍</a></li>
+<li><a href="dev.stephendiehl.com/hask/"> What I Wish I Knew When Learning Haskell 2.2 ( Stephen Diehl )</a></li>
+<li><a href="https://acm.wustl.edu/functional/haskell.php" target="_blank" rel="noopener">How to learn haskell</a></li>
+<li><a href="http://learnyouahaskell.com/chapters" target="_blank" rel="noopener">相当棒的趣味指南</a></li>
+</ul>
+<h3 id="从现实世界走入计算机经过计算机思考再从计算机走出并融入现实世界这就是-函数式思维httpwwwjdoncom45608">从现实世界走入计算机，经过计算机思考，再从计算机走出并融入现实世界，这就是<a href="http://www.jdon.com/45608" target="_blank" rel="noopener"> 函数式思维</a>。</h3>
+<p>函数的context引入了时间的关系。<a href="http://www.jdon.com/45608" target="_blank" rel="noopener"> 我们思考逻辑的时候，定义已经是确定的了。也正因为是确定的，才可以逻辑思考</a>。
+函数不存在状态，所以计算机加入了一个特殊的东西：时钟。值++时间=状态++，在可以忽视时序问题时，可以直接有值=状态。忽视时序问题，就相当于我们平时说的异步。若果单单使用锁，只是一种耗费资源手段。而我们看到无论是唤醒线程，还是延时读取，都是依赖时钟
+##+ 小结：</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="/images/desk.jpg" alt="桌子" loading="lazy" data-zoomable /></div>
+  </div></figure>
+
+一张桌子为案例，分解思维的人看到后首先想到这张桌子由什么构成，长宽高和材质，这些都是桌子的内部细节；而组合思维的人看到后，环顾四周，看看其处于什么环境，如果放在教室中，他判断这是一张课桌，如果放在食堂，他判断这是一张饭桌。</p>
+<pre><code class="language-sh">从这个例子可以看出组合是从行为（运动、变化、时间）角度看待 世界的，“课桌”、“饭桌”中的“课”和“饭”在这里是动词，意为“上课用”、“吃饭用”的意思，“用”是动词，同一个桌子出现在不同的环境中发挥不同的 作用。而分解思维只研究空间，只研究桌子的空间结构是什么，甚至不研究为什么是四条腿，为什么每条腿长度相同，分解思维根本不考虑这些，不用考虑任何桌子 之外的世界，在分解思维中没有万有引力、没有地面的水平、没有书房和餐厅，只有空间，分解只考虑空间的组成结构。看来分解和组合是相互依存的，分解时研究 的是空间，组合时研究的是行为，把桌子放进餐厅的意义是期待使用它吃饭这样一种运动[组合运动？]。 
+</code></pre>
+<p>范畴英文是Category，也是++分类++的意思，打个比喻，Google能根据哪些网站引用你的网站这个外部信息进行PageRank评分，从而对你的网站权重进行排序，这个道理和我们评价一个人有些类似，看一个不认识的人怎么样，那就看看他交往的什么朋友，什么环境，近墨者黑，人以群分，物以类聚，这些都是从事物所在的分类类别中判断其价值，而不是从事物内部细节。（评判个人的价值标准跟不同的人在一起，意味着你的价值不一样.）</p>
+<h3 id="monad-隐藏lambda">monad 隐藏lambda</h3>
+<p>Monad是一种结构，这种结构能够将一个值放入一个可计算的上下文中。因为Lambda是一个和上下文环境有关的表达式，所以，这里对Monad的上下文理解就比较容易。
+monad是从范畴论引入， 范畴其实就是一个集合，只不过对这个集合有一些约束定义，如果 熟悉业务建模的人可能对这种思维方式不陌生，经常我们会对抽象的事物进行定义，数学上基本就是用集合概念，实际上从罗素悖论拯救了数学开始，数学离不开集合，对于一个国家社会，个人与社会也是不同的概念，社会是一个++集合++概念，从++集合角度++考虑问题和从__个人元素角度__考虑问题是两种截然不同的思路，如果你平时注 重这种区别，你可能会有两种人生观。祝你脑洞大开。</p>
+<h3 id="函数式替代sql">函数式替代sql？</h3>
+<p><a href="http://www.jdon.com/44842" target="_blank" rel="noopener">函数的逻辑性</a>与关系数据库的是一致的，而逻辑在不同语言之间是自然贯穿的，也就是说若果所有都用函数来表达的，可以使sql消失，那么由于sql引发的问题自然就消失。
+数据库 = 一个集合,这就是面向集合，mongodb就是这样的思想</p>
+    </div>
+ <div class="nav-links" style="padding:10;">
+        
+        <div align="left">
+        <a href="https://jueqingsizhe66.github.io/archives/language-limits-the-world-of-you/"><span class="arrow">←</span> <strong>上一篇:language limits the world of you</strong></a>
+        </div>
+        
+        
+
+
+       <div align="right"> <a href="https://jueqingsizhe66.github.io/archives/cong-lambdadao-simple-plus-complexjie-shi-qi-zai-dao-shu-xing-chou-xiang/" ><strong>下一篇:从lambda到simple&#43;complex解释器再到树形抽象 </strong><span class="arrow">→</span></a></div>
+        
+      </div>
+    
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/haskell/">Haskell</a>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="https://jueqingsizhe66.github.io/"><img class="avatar mr-3 avatar-circle" src="/author/%E4%BB%A4%E7%8B%90%E5%86%B2/avatar_huc99f1f2e739130747140db298bdd1890_46492_270x270_fill_q75_lanczos_center.jpg" alt="令狐冲"></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://jueqingsizhe66.github.io/">令狐冲</a></h5>
+      <h6 class="card-subtitle">Engineer of offshore wind turbine technique research</h6>
+      <p class="card-text">My research interests include distributed energy, wind turbine power generation technique , Computational fluid dynamic and programmable matter.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/jueqingsizhe66" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.co.uk/citations?user=7VyEMyQAAAAJ&amp;hl=zh-CN" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/jueqingsizhe66" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+         <span id="busuanzi_container_site_pv">
+             本站访问量：<span id="busuanzi_value_site_pv"></span>次
+         </span>
+         &nbsp;
+   </div>
+
+
+  </div>
+
+</article>
+<script src="https://utteranc.es/client.js"
+        repo="jueqingsizhe66/jueqingsizhe66.github.io"
+        issue-term="pathname"
+        theme="github-dark"
+        crossorigin="anonymous"
+        async>
+</script>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    ©2022 &middot; 
+
+    ^-^ LingHuChong ^-^ Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+      
+
+    
+    <script src="/js/vendor-bundle.min.3d946de2e8784a477845261d87025092.js"></script>
+
+    
+    
+    
+      
+      
+        <script src="https://cdn.jsdelivr.net/gh/desandro/imagesloaded@v4.1.4/imagesloaded.pkgd.min.js" integrity="sha512-S5PZ9GxJZO16tT9r3WJp/Safn31eu8uWrzglMahDT4dsmgqWonRY9grk3j+3tfuPr9WJNsfooOR7Gi7HL5W2jw==" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/gh/metafizzy/isotope@v3.0.6/dist/isotope.pkgd.min.js" integrity="sha512-Zq2BOxyhvnRFXu0+WE6ojpZLOU2jdnqbrM1hmVdGzyeCa1DgM3X5Q4A/Is9xA1IkbUeDd7755dNNI/PzSf2Pew==" crossorigin="anonymous"></script>
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/gh/mermaid-js/mermaid@v8.8.4/dist/mermaid.min.js" integrity="sha512-+TNmhaRJf3jyYHTpzEq/5I6b+aGyhzWb21mGdHAjxSGSYwxN9Grug3Y3B9qVxWfKKY8MscE/6mr9walWvFLFvQ==" crossorigin="anonymous" title="mermaid"></script>
+      
+
+      
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/highlight.min.js" integrity="sha512-Ypjm0o7jOxAd4hpdoppSEN0TQOC19UtPAqD+4s5AlXmUvbmmS/YMxYqAqarQYyxTnB6/rqip9qcxlNB/3U9Wdg==" crossorigin="anonymous"></script>
+        
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/r.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/latex.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/python.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/matlab.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/java.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/go.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/rust.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/c.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/perl.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/scheme.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/lisp.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/racket.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/awk.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/sed.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/bash.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/sql.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/vim.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/clojure.min.js" crossorigin="anonymous"></script>
+        
+      
+
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+      
+      <script id="search-hit-fuse-template" type="text/x-template">
+        <div class="search-hit" id="summary-{{key}}">
+          <div class="search-hit-content">
+            <div class="search-hit-name">
+              <a href="{{relpermalink}}">{{title}}</a>
+              <div class="article-metadata search-hit-type">{{type}}</div>
+              <p class="search-hit-description">{{snippet}}</p>
+            </div>
+          </div>
+        </div>
+      </script>
+      
+        <script src="https://cdn.jsdelivr.net/gh/krisk/Fuse@v3.2.1/dist/fuse.min.js" integrity="sha512-o38bmzBGX+hD3JHWUFCDA09btWaqrNmoJ3RXLlrysA7PP01Kgs4UlE4MhelE1v5dJR3+cxlR4qQlotsW7jKsnw==" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/gh/julmot/mark.js@8.11.1/dist/jquery.mark.min.js" integrity="sha512-mhbv5DqBMgrWL+32MmsDOt/OAvqr/cHimk6B8y/bx/xS88MVkYGPiVv2ixKVrkywF2qHplNRUvFsAHUdxZ3Krg==" crossorigin="anonymous"></script>
+      
+    
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+      
+      
+      
+      
+      
+      
+      
+    
+
+    
+
+    
+    
+    
+    <script id="page-data" type="application/json">{"use_headroom":true}</script>
+
+    
+    
+      <script src="/js/wowchemy-headroom.e8fd2d733eef6a8bbbe0539398fc0547.js" type="module"></script>
+    
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    <script src="/en/js/wowchemy.min.a2ed145159dd33ad55ff402163350b5d.js"></script>
+
+    
+    
+    
+    
+    
+    
+      
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      <script src="/js/wowchemy-publication.b0d291ed6d27eacec233e6cf5204f99a.js" type="module"></script>
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+
+
+
+</body>
+</html>

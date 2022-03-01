@@ -1,0 +1,1770 @@
+<!DOCTYPE html><html lang="en-us" >
+
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  
+  
+    <meta name="generator" content="Wowchemy 5.4.0 for Hugo" />
+  
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+  
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="令狐冲" />
+
+  
+  
+  
+    
+  
+  <meta name="description" content="语言的表现力，简洁性，有效性。
+2001年，出生于荷兰的计算机大师、图灵奖获得者__EdsgerW.Dijkstra__给德州大学预算委员会写信，力劝不要将计算机入门课程改为Java。不幸的是，学校最终还是用Java课程替换了Haskell。Haskell真的不行了？国内有些人的评论
+
+Haskell:函数式编程语言
+Java  : 命令编程语言
+尽管Haskell不完美，但仍然比Java好几个数量级，Java就是一个大杂烩(它是通过大范围的广告和销售员夸张的宣传才达到它的商业接受)。
+
+
+
+如果别人问你Haskell能够做什么？
+一个能够编程的编程语言，高级函数编程语言
+
+
+如果别人问你Haskell和scheme有什么区别？
+比scheme更强调类型理论，但是相对scheme由于对于type theory的过度追求
+反而更加难于编程
+
+" />
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://jueqingsizhe66.github.io/archives/haskellbi-ji/" />
+
+  
+  
+  
+    <meta name="theme-color" content="#1565c0" />
+  
+
+  
+  
+    
+    <script src="/js/mathjax-config.js"></script>
+  
+
+  
+
+  <link rel="stylesheet" href="/css/vendor-bundle.min.f1ecf783c14edc00c9320c205831ad8e.css" media="print" onload="this.media='all'">
+
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css" integrity="sha512-W0xM4mr6dEP9nREo7Z9z+9X70wytKvMGeDsj7ps2+xg5QPrEBXC8tAW1IFnzjR6eoJ90JmCnFzerQJTLzIEHjA==" crossorigin="anonymous" media="print" onload="this.media='all'">
+    
+
+    
+    
+    
+    
+      
+      
+    
+    
+    
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/github.min.css" crossorigin="anonymous" title="hl-light" media="print" onload="this.media='all'">
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" media="print" onload="this.media='all'" disabled>
+        
+      
+    
+
+    
+    
+    
+
+    
+
+    
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.2a9113cdaa287c8aabad4aa82208fdf3.css" />
+
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+    <link rel="manifest" href="/manifest.webmanifest" />
+  
+
+  <link rel="icon" type="image/png" href="/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_32x32_fill_lanczos_center_3.png" />
+  <link rel="apple-touch-icon" type="image/png" href="/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_180x180_fill_lanczos_center_3.png" />
+
+  <link rel="canonical" href="https://jueqingsizhe66.github.io/archives/haskellbi-ji/" />
+
+  
+  
+  
+  
+  
+  
+  
+  
+    
+    
+  
+  
+
+  
+  
+    
+    
+  
+  <meta property="twitter:card" content="summary" />
+  
+    <meta property="twitter:site" content="@jueqingsihe66" />
+    <meta property="twitter:creator" content="@jueqingsihe66" />
+  
+  <meta property="og:site_name" content="30年磨一剑" />
+  <meta property="og:url" content="https://jueqingsizhe66.github.io/archives/haskellbi-ji/" />
+  <meta property="og:title" content="Haskell笔记 | 30年磨一剑" />
+  <meta property="og:description" content="语言的表现力，简洁性，有效性。
+2001年，出生于荷兰的计算机大师、图灵奖获得者__EdsgerW.Dijkstra__给德州大学预算委员会写信，力劝不要将计算机入门课程改为Java。不幸的是，学校最终还是用Java课程替换了Haskell。Haskell真的不行了？国内有些人的评论
+
+Haskell:函数式编程语言
+Java  : 命令编程语言
+尽管Haskell不完美，但仍然比Java好几个数量级，Java就是一个大杂烩(它是通过大范围的广告和销售员夸张的宣传才达到它的商业接受)。
+
+
+
+如果别人问你Haskell能够做什么？
+一个能够编程的编程语言，高级函数编程语言
+
+
+如果别人问你Haskell和scheme有什么区别？
+比scheme更强调类型理论，但是相对scheme由于对于type theory的过度追求
+反而更加难于编程
+
+" /><meta property="og:image" content="https://jueqingsizhe66.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" />
+    <meta property="twitter:image" content="https://jueqingsizhe66.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
+  
+    
+      <meta
+        property="article:published_time"
+        content="2015-05-16T14:30:22&#43;08:00"
+      />
+    
+    <meta property="article:modified_time" content="2015-05-16T14:30:22&#43;08:00">
+  
+
+  
+
+
+
+  
+
+  
+
+  
+
+
+
+
+
+  <title>Haskell笔记 | 30年磨一剑</title>
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="4b33b56ed4bc2ce642f45204b1098a47" >
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.7e5427316d1b14a30f257ae3467b3e21.js"></script>
+
+  
+
+
+<aside class="search-modal" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="Search...">
+        
+      </div>
+
+      
+      
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="header--fixed">
+  <nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+    <div class="container-xl">
+
+      
+      <div class="d-none d-lg-inline-flex">
+        <a class="navbar-brand" href="/">30年磨一剑</a>
+      </div>
+      
+
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+      <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+      
+      <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+        <a class="navbar-brand" href="/">30年磨一剑</a>
+      </div>
+      
+
+      
+      
+      <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+        
+        <ul class="navbar-nav d-md-inline-flex">
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#hero"><span>概要</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#posts"><span>博文</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/about/"><span>About</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/categories/"><span>分类</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link  active" href="/archives"><span>归档</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#tags"><span>标签</span></a>
+          </li>
+
+          
+          
+
+        
+
+          
+        </ul>
+      </div>
+
+      <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+        
+        
+          
+        
+
+        
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+        
+        
+        <li class="nav-item dropdown theme-dropdown">
+          <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+            <i class="fas fa-moon" aria-hidden="true"></i>
+          </a>
+          <div class="dropdown-menu">
+            <a href="#" class="dropdown-item js-set-theme-light">
+              <span>Light</span>
+            </a>
+            <a href="#" class="dropdown-item js-set-theme-dark">
+              <span>Dark</span>
+            </a>
+            <a href="#" class="dropdown-item js-set-theme-auto">
+              <span>Automatic</span>
+            </a>
+          </div>
+        </li>
+        
+
+        
+        
+
+      </ul>
+
+    </div>
+  </nav>
+</header>
+
+
+  </div>
+
+  <div class="page-body">
+    
+    
+    
+
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+  
+ <script async src="//cdn.busuanzi.ibruce.info/cdn/busuanzi/2.3/busuanzi.pure.mini.js"></script> 
+ <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script> 
+ <script> 
+     $(document).ready(function() { 
+         var int = setInterval(fixCount, 100); 
+         var busuanziSiteOffset =  100000  
+         function fixCount() { 
+             if ($("#busuanzi_container_site_pv").css("display") != "none") { 
+                 clearInterval(int); 
+                 $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + busuanziSiteOffset); 
+             } 
+         } 
+     }); 
+ </script> 
+  
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>Haskell笔记</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    May 16, 2015
+  </span>
+  
+
+  
+
+  
+
+  
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/category/programme/">programme</a>, <a href="/category/%E8%AF%AD%E8%A8%80/">语言</a></span>
+  
+
+</div>
+
+    
+
+
+
+
+
+  
+</div>
+
+
+
+
+
+<span class="article-metadata" >Reading time: 24 minutes and    52 seconds with 5471 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+    <aside>
+        <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#如果别人问你haskell-如何实现冒泡法--直接排序--快速排序">如果别人问你Haskell 如何实现冒泡法  直接排序  快速排序？</a></li>
+        <li><a href="#如果别人问你递归是如何实现的">如果别人问你递归是如何实现的？</a></li>
+        <li><a href="#如果别人问你如何构造fibonaaci数">如果别人问你如何构造Fibonaaci数？</a></li>
+        <li><a href="#如果别人问你----是什么意思">如果别人问你::  =&gt; -&gt;是什么意思？</a></li>
+        <li><a href="#如果有人问你如何用haskell编写函数">如果有人问你如何用haskell编写函数？</a></li>
+        <li><a href="#如果别人叫你简化上面的maximum程序">如果别人叫你简化上面的maximum程序</a></li>
+        <li><a href="#如果别人问你haskell到底长成啥子样子">如果别人问你Haskell到底长成啥子样子？</a></li>
+        <li><a href="#如果有人问你replicate-3-5是如何实现的">如果有人问你replicate 3 5是如何实现的？</a></li>
+        <li><a href="#如果有人问你take是如何实现的呢-drop">如果有人问你take是如何实现的呢？ drop?</a></li>
+        <li><a href="#如果有人问你_-下划线表示什么意思">如果有人问你_ 下划线表示什么意思？</a></li>
+        <li><a href="#如果有人问你reverse如何实现">如果有人问你reverse如何实现？</a></li>
+        <li><a href="#如果有人问你repeat如何实现">如果有人问你repeat如何实现？</a></li>
+        <li><a href="#如果有人做了一个tuple-想要用zip产生更多tuples">如果有人做了一个tuple ，想要用zip产生更多tuples？</a></li>
+        <li><a href="#如果有人问你mod的类似函数--elem的实现">如果有人问你mod的类似函数  elem的实现？</a></li>
+        <li><a href="#如果有人问你typeclass有哪里类">如果有人问你typeclass有哪里类？</a></li>
+        <li><a href="#如果有人问你haskell有没有类似scheme的lambda函数">如果有人问你Haskell有没有类似scheme的lambda函数？</a></li>
+        <li><a href="#18如果有人问haskell有没有存在高阶函数">18.如果有人问haskell有没有存在高阶函数？</a></li>
+        <li><a href="#19如果有人问你flip有什么含义">19.如果有人问你flip有什么含义？</a></li>
+        <li><a href="#20-如何有人问-如何运行-2048">20. 如何有人问 如何运行 2048</a></li>
+        <li><a href="#21-如果有人问haskell实现递归的自然表达式">21. 如果有人问haskell实现递归的自然表达式？</a></li>
+        <li><a href="#22-如果有人问如何写出阶乘形式">22. 如果有人问如何写出阶乘形式？</a></li>
+        <li><a href="#23-如果别人问你haskell如何新建一中类型">23. 如果别人问你Haskell如何新建一中类型？</a></li>
+        <li><a href="#24-如果别人问你monads-是什么玩意">24. 如果别人问你monads 是什么玩意？</a></li>
+        <li><a href="#25-如果别人问你如何学习haskell">25. 如果别人问你如何学习haskell？</a></li>
+        <li><a href="#26-如果别人问你--有什么意义">26. 如果别人问你 | 有什么意义？</a></li>
+        <li><a href="#27-如果别人叫你简化bmitell函数">27. 如果别人叫你简化bmiTell函数</a></li>
+        <li><a href="#28-如果别人问你-where可以跟多少个变量-">28. 如果别人问你 where可以跟多少个变量 ？</a></li>
+        <li><a href="#29-如果有人问你-where当中可以使用模式匹配吗">29. 如果有人问你 where当中可以使用模式匹配吗？</a></li>
+        <li><a href="#30-如果别人叫你写一个show类型的函数">30. 如果别人叫你写一个show类型的函数？</a></li>
+        <li><a href="#31-如果别人问你int-和integer的区别">31. 如果别人问你Int 和Integer的区别？</a></li>
+        <li><a href="#32-如果别人问你char-and-char-的区别">32. 如果别人问你char and [char] 的区别？</a></li>
+        <li><a href="#33-如果别人问你变量有类型那么函数是不是也有类型">33. 如果别人问你变量有类型，那么函数是不是也有类型？</a></li>
+        <li><a href="#34-如果别人问你有没有比较好用的编程工具">34. 如果别人问你有没有比较好用的编程工具？</a></li>
+        <li><a href="#35-如果别人问你高阶函数是如何定义">35. 如果别人问你高阶函数是如何定义？</a></li>
+        <li><a href="#36-如果别人问你如何使用-brower-提供的函数类型">36. 如果别人问你如何使用 :brower 提供的函数类型？</a></li>
+        <li><a href="#37--如果别人问你如何切断一个数组在某个位置">37.  如果别人问你如何切断一个数组在某个位置？</a></li>
+        <li><a href="#38--如果别人问你为什么你这样使用subtract">38.  如果别人问你为什么你这样使用subtract?</a></li>
+        <li><a href="#39--如果别人问你-zip相关的函数">39.  如果别人问你 zip相关的函数？</a></li>
+        <li><a href="#40-如果别人问你un相关的函数">40. 如果别人问你un相关的函数？</a></li>
+        <li><a href="#41-如果比人问你如何使用-sin等三角函数">41. 如果比人问你如何使用 sin等三角函数？</a></li>
+        <li><a href="#42-如果别人问你haskell针对字符的函数">42. 如果别人问你Haskell针对字符的函数？</a></li>
+        <li><a href="#43-如果别人问你构造数组的几种方式">43. 如果别人问你构造数组的几种方式？</a></li>
+        <li><a href="#433-描述法">43.3 描述法</a></li>
+        <li><a href="#44-如果别人跟你说haskell可以write-poet">44. 如果别人跟你说Haskell可以write poet?</a></li>
+        <li><a href="#46-如果别人问你haskell的cabal是什么">46. 如果别人问你Haskell的cabal是什么？</a></li>
+        <li><a href="#47-如果别人问你有几个基本的typeclass">47. 如果别人问你有几个基本的TypeClass?</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </aside>
+  <div class="article-container">
+
+
+    <div class="article-style">
+      <p>语言的表现力，简洁性，有效性。</p>
+<p>2001年，出生于荷兰的计算机大师、图灵奖获得者__EdsgerW.Dijkstra__给德州大学预算委员会写信，力劝不要将计算机入门课程改为Java。不幸的是，学校最终还是用Java课程替换了Haskell。Haskell真的不行了？国内有些人的<a href="http://www.vaikan.com/why-haskell-is-worth-learning/" target="_blank" rel="noopener">评论</a></p>
+<ul>
+<li>Haskell:函数式编程语言</li>
+<li>Java  : 命令编程语言
+尽管Haskell不完美，但仍然比Java好几个数量级，Java就是一个大杂烩(它是通过大范围的广告和销售员夸张的宣传才达到它的商业接受)。</li>
+</ul>
+<ol>
+<li>
+<p>如果别人问你Haskell能够做什么？
+一个能够编程的编程语言，高级函数编程语言</p>
+</li>
+<li>
+<p>如果别人问你Haskell和scheme有什么区别？
+比scheme更强调类型理论，但是相对scheme由于对于type theory的过度追求
+反而更加难于编程</p>
+</li>
+</ol>
+<h3 id="如果别人问你haskell-如何实现冒泡法--直接排序--快速排序">如果别人问你Haskell 如何实现冒泡法  直接排序  快速排序？</h3>
+<h4 id="冒泡排序">冒泡排序</h4>
+<pre><code class="language-haskell">
+sort1 [x] = [x]
+sort1 (x:x1:xs)  {-选取了一个x1temp 值  x当做首数，x1:temp-}
+    | x&gt;x1 = x1:sort1 (x:xs)
+    | otherwise = x:sort1 (x1:xs)
+mpsort [] = []
+mpsort x = let tmp = sort1 x in
+           mpsort (init tmp) ++ [(last tmp)] 
+</code></pre>
+<h4 id="直接排序">直接排序</h4>
+<pre><code class="language-haskell">import Data.List
+selectsort::[Int] -&gt; [Int]
+selectsort [] = []
+selectsort [x] = [x]
+selectsort xs = minimum xs : selectsort ( delete ( minimum xs )  xs) 
+
+</code></pre>
+<h4 id="快速排序1">快速排序1</h4>
+<pre><code class="language-haskell">
+quicksort :: (Ord a) =&gt; [a] -&gt; [a]   
+quicksort [] = []   
+quicksort (x:xs) =   
+  let smallerSorted = quicksort [a | a &lt;- xs, a &lt;= x]  
+      biggerSorted = quicksort [a | a &lt;- xs, a &gt; x]   
+  in smallerSorted ++ [x] ++ biggerSorted
+</code></pre>
+<h4 id="快速排序2">快速排序2</h4>
+<pre><code class="language-haskell">quicksort :: (Ord a) =&gt; [a] -&gt; [a]     
+quicksort [] = []     
+quicksort (x:xs) =      
+    let smallerSorted = quicksort (filter (&lt;=x) xs) 
+        biggerSorted = quicksort (filter (&gt;x) xs)    
+    in  smallerSorted ++ [x] ++ biggerSorted
+</code></pre>
+<h3 id="如果别人问你递归是如何实现的">如果别人问你递归是如何实现的？</h3>
+<h3 id="如果别人问你如何构造fibonaaci数">如果别人问你如何构造Fibonaaci数？</h3>
+<h3 id="如果别人问你----是什么意思">如果别人问你::  =&gt; -&gt;是什么意思？</h3>
+<p>(==) :: Eq a =&gt; a -&gt; a -&gt; Bool
+可以这样阅读：  相当函数的两个相同的类型值作为参数并返回一个bool值，而这两个参数的类型同在Eq类之中(即类型约束）
+eq这一类型 提供了判断相等性的接口，凡是可以比较相等性的类型嗯必属于Eq类
+（=&gt;左边的部分叫做类型约束）
+a表示人意的类型 &mdash;&mdash;&mdash;泛形 &mdash;多态函数挂钩。。。。</p>
+<p>::  读作他的类型为   （类似 !! 从list去除 第几个元素   &lt;- 属于  <code>elem</code>是什么的元素   <code>mod</code> 可以和什么除。。</p>
+<h3 id="如果有人问你如何用haskell编写函数">如果有人问你如何用haskell编写函数？</h3>
+<p>他和scheme有很大的不同，scheme用的是(define)
+而haskell用的是模式匹配，比如下面的求最大值的程序</p>
+<pre><code>maximum' :: (Ord a) =&gt; [a] -&gt; a   
+maximum' [] = error &quot;maximum of empty list&quot;   
+maximum' [x] = x   
+maximum' (x:xs)    
+    | x &gt; maxTail = x   
+    | otherwise = maxTail   
+    where maxTail = maximum' xs
+</code></pre>
+<h3 id="如果别人叫你简化上面的maximum程序">如果别人叫你简化上面的maximum程序</h3>
+<pre><code>maximum' :: (Ord a) =&gt; [a] -&gt; a   
+maximum' [] = error &quot;maximum of empty list&quot;   
+maximum' [x] = x   
+maximum' (x:xs) = max x (maximum' xs) 
+</code></pre>
+<h3 id="如果别人问你haskell到底长成啥子样子">如果别人问你Haskell到底长成啥子样子？</h3>
+<p>你会告诉他他涨起来真的是一节一节的，一段一段的，有棱有角</p>
+<h3 id="如果有人问你replicate-3-5是如何实现的">如果有人问你replicate 3 5是如何实现的？</h3>
+<pre><code>replicate' :: (Num i, Ord i) =&gt; i -&gt; a -&gt; [a]   
+replicate' n x   
+| n &lt;= 0    = []   
+| otherwise = x:replicate' (n-1) x
+</code></pre>
+<h3 id="如果有人问你take是如何实现的呢-drop">如果有人问你take是如何实现的呢？ drop?</h3>
+<pre><code>take' :: (Num i, Ord i) =&gt; i -&gt; [a] -&gt; [a]   
+take' n _   
+| n &lt;= 0   = []   
+take' _ []     = []   
+take' n (x:xs) = x : take' (n-1) xs
+</code></pre>
+<h3 id="如果有人问你_-下划线表示什么意思">如果有人问你_ 下划线表示什么意思？</h3>
+<p>_ 代表任意东西</p>
+<h3 id="如果有人问你reverse如何实现">如果有人问你reverse如何实现？</h3>
+<pre><code>reverse' :: [a] -&gt; [a]   
+reverse' [] = []   
+reverse' (x:xs) = reverse' xs ++ [x]
+</code></pre>
+<h3 id="如果有人问你repeat如何实现">如果有人问你repeat如何实现？</h3>
+<pre><code>repeat' :: a -&gt; [a]   
+repeat' x = x:repeat' x
+</code></pre>
+<h3 id="如果有人做了一个tuple-想要用zip产生更多tuples">如果有人做了一个tuple ，想要用zip产生更多tuples？</h3>
+<pre><code>zip' :: [a] -&gt; [b] -&gt; [(a,b)]   
+zip' _ [] = []   
+zip' [] _ = []   
+zip' (x:xs) (y:ys) = (x,y):zip' xs ys
+</code></pre>
+<h3 id="如果有人问你mod的类似函数--elem的实现">如果有人问你mod的类似函数  elem的实现？</h3>
+<pre><code>elem' :: (Eq a) =&gt; a -&gt; [a] -&gt; Bool   
+elem' a [] = False   
+elem' a (x:xs)   
+| a == x    = True   
+| otherwise = a `elem'` xs
+</code></pre>
+<h3 id="如果有人问你typeclass有哪里类">如果有人问你typeclass有哪里类？</h3>
+<p>利用 type 自己查去</p>
+<h3 id="如果有人问你haskell有没有类似scheme的lambda函数">如果有人问你Haskell有没有类似scheme的lambda函数？</h3>
+<p>告诉他有，而且更加直接，虽然刚开始书写起来不方便</p>
+<p>scheme版的lambda:</p>
+<pre><code>    (lambda (x y)
+       (+ x y))
+</code></pre>
+<p>Haskell版的lambda:</p>
+<pre><code>    (\y -&gt; y + 3）
+    其中\后面跟着参数  -&gt;后面跟着函数体
+</code></pre>
+<h3 id="18如果有人问haskell有没有存在高阶函数">18.如果有人问haskell有没有存在高阶函数？</h3>
+<p>有 。 map ,filter</p>
+<pre><code>map (\y-&gt; y+3) [3,5,6]
+</code></pre>
+<h3 id="19如果有人问你flip有什么含义">19.如果有人问你flip有什么含义？</h3>
+<pre><code>let f x  y = x / y
+Prelude&gt; map (f 2) [1,2,3]
+[2.0,1.0,0.6666666666666666]
+Prelude&gt; map (flip f 2) [1,2,3]
+[0.5,1.0,1.5]
+</code></pre>
+<h3 id="20-如何有人问-如何运行-2048">20. 如何有人问 如何运行 2048</h3>
+<pre><code>$ runhaskell putchar_test.hs 
+use runhaskell to run the *.hs programme
+</code></pre>
+<h3 id="21-如果有人问haskell实现递归的自然表达式">21. 如果有人问haskell实现递归的自然表达式？</h3>
+<pre><code>quicksort (x:xs) =
+elem' a (x:xs) 
+
+zip' (x:xs) (y:ys) = (x,y):zip' xs ys
+reverse' (x:xs) = reverse' xs ++ [x]
+
+take' n (x:xs) = x : take' (n-1) xs
+maximum' (x:xs) = max x (maximum' xs)
+maximum' (x:xs)   
+</code></pre>
+<p>你可以看见每一个形式都有函数名,函数使用方式,函数的参数表 <br>
+这是一种__模式__,因为Haskell使用函数的时候，先写出函数，然后空格 写出变量 紧接着其他可选变量
+所以你也函数匹配模式 也应该是这样来写
+基于这种思想，你重新回过头看函数定义，你会发现还真的是这样额？！
+从函数的定义知道他的用法，这就是Haskell与众不同的一点。</p>
+<h3 id="22-如果有人问如何写出阶乘形式">22. 如果有人问如何写出阶乘形式？</h3>
+<p>告诉他用函数，告诉他用函数匹配，告诉他用递归。。。。。</p>
+<pre><code>factorial :: (Integral a) =&gt; a -&gt; a   
+factorial 0 = 1   
+factorial n = n * factorial (n - 1) 
+</code></pre>
+<h3 id="23-如果别人问你haskell如何新建一中类型">23. 如果别人问你Haskell如何新建一中类型？</h3>
+<p>暂时不太懂
+但是我知道 Haskell使用 data来定义类别
+julia使用type来定义</p>
+<h3 id="24-如果别人问你monads-是什么玩意">24. 如果别人问你monads 是什么玩意？</h3>
+<p>其实这个是更加深层次的运用Haskell,在scheme也有. 比如IO monad,可以想象为一种抽象数据类型。</p>
+<h3 id="25-如果别人问你如何学习haskell">25. 如果别人问你如何学习haskell？</h3>
+<p>告诉他有一篇文章叫做 如此有趣的学习Haskell
+Haskell趣學指南   <a href="http://learnyouahaskell-zh-tw.csie.org/zh-cn/chapters.html" target="_blank" rel="noopener">http://learnyouahaskell-zh-tw.csie.org/zh-cn/chapters.html</a>
+还不错 ，这个教程</p>
+<p>学习Haskell ，要是你能够对于空格特别敏感，会对你有所好处，因为很多地方都是用空格分开
+而不是（）  [] 之类的。空格有实际意义，分开不同的字段</p>
+<h3 id="26-如果别人问你--有什么意义">26. 如果别人问你 | 有什么意义？</h3>
+<p>分类说明</p>
+<pre><code>bmiTell :: (RealFloat a) =&gt; a -&gt; a -&gt; String   
+bmiTell weight height   
+    | weight / height ^ 2 &lt;= 18.5 = &quot;You're underweight, you emo, you!&quot;   
+    | weight / height ^ 2 &lt;= 25.0 = &quot;You're supposedly normal. Pffft, I bet you're ugly!&quot;   
+    | weight / height ^ 2 &lt;= 30.0 = &quot;You're fat! Lose some weight, fatty!&quot;   
+    | otherwise                   = &quot;You're a whale, congratulations!&quot;
+
+</code></pre>
+<p>每一个函数定义的时候，在Haskell看来只是其中的一种模式，一个模式下可以有很多的分类，如果他找不到模式
+就说找不到，所以定义的时候，尽可能的完善定义。
+比如下面的lucky函数 和sayMe 函数
+lucky函数:</p>
+<pre><code>lucky :: (Integral a) =&gt; a -&gt; String   
+lucky 7 = &quot;LUCKY NUMBER SEVEN!&quot;   
+lucky x = &quot;Sorry, you're out of luck, pal!&quot; 
+
+</code></pre>
+<p>sayme函数:</p>
+<pre><code>sayMe :: (Integral a) =&gt; a -&gt; String   
+sayMe 1 = &quot;One!&quot;   
+sayMe 2 = &quot;Two!&quot;   
+sayMe 3 = &quot;Three!&quot;   
+sayMe 4 = &quot;Four!&quot;   
+sayMe 5 = &quot;Five!&quot;   
+sayMe x = &quot;Not between 1 and 5&quot;
+</code></pre>
+<h3 id="27-如果别人叫你简化bmitell函数">27. 如果别人叫你简化bmiTell函数</h3>
+<p>使用where</p>
+<pre><code>bmiTell :: (RealFloat a) =&gt; a -&gt; a -&gt; String   
+bmiTell weight height   
+    | bmi &lt;= 18.5 = &quot;You're underweight, you emo, you!&quot;   
+    | bmi &lt;= 25.0 = &quot;You're supposedly normal. Pffft, I bet you're ugly!&quot;   
+    | bmi &lt;= 30.0 = &quot;You're fat! Lose some weight, fatty!&quot;   
+    | otherwise   = &quot;You're a whale, congratulations!&quot;   
+    where bmi = weight / height ^ 2
+</code></pre>
+<h3 id="28-如果别人问你-where可以跟多少个变量-">28. 如果别人问你 where可以跟多少个变量 ？</h3>
+<p>跟他说 很多个。</p>
+<pre><code>bmiTell :: (RealFloat a) =&gt; a -&gt; a -&gt; String   
+bmiTell weight height   
+    | bmi &lt;= skinny = &quot;You're underweight, you emo, you!&quot;   
+    | bmi &lt;= normal = &quot;You're supposedly normal. Pffft, I bet you're ugly!&quot;   
+    | bmi &lt;= fat    = &quot;You're fat! Lose some weight, fatty!&quot;   
+    | otherwise     = &quot;You're a whale, congratulations!&quot;   
+    where bmi = weight / height ^ 2   
+          skinny = 18.5   
+          normal = 25.0   
+          fat = 30.0
+</code></pre>
+<p>函数在 where 绑定中定义的名字只对本函数可见，因此我们不必担心它会污染其他函数的命名空间。注意，其中的名字
+都是一列垂直排开，如果不这样规范，Haskell 就搞不清楚它们在哪个地方了</p>
+<h3 id="29-如果有人问你-where当中可以使用模式匹配吗">29. 如果有人问你 where当中可以使用模式匹配吗？</h3>
+<p>可以。</p>
+<pre><code>where bmi = weight / height ^ 2   
+(skinny, normal, fat) = (18.5, 25.0, 30.0) 
+
+</code></pre>
+<h3 id="30-如果别人叫你写一个show类型的函数">30. 如果别人叫你写一个show类型的函数？</h3>
+<pre><code>tell :: (Show a) =&gt; [a] -&gt; String   
+tell [] = &quot;The list is empty&quot;   
+tell (x:[]) = &quot;The list has one element: &quot; ++ show x   
+tell (x:y:[]) = &quot;The list has two elements: &quot; ++ show x ++ &quot; and &quot; ++ show y   
+tell (x:y:_) = &quot;This list is long. The first two elements are: &quot; ++ show x ++ &quot; and &quot; ++ show y  
+</code></pre>
+<p>这个函数顾及了空 List，单元素 List，双元素 List 以及较长的 List，所以这个函数很安全。(x:[]) 与 (x:y:[]) 也可以写作 [x] 和 [x,y] (有了语法糖，我们不必多加括号)。不过 (x:y:_)这样的模式就不行了，因为它匹配的 List 长度不固定。</p>
+<h3 id="31-如果别人问你int-和integer的区别">31. 如果别人问你Int 和Integer的区别？</h3>
+<p>Int 有上下线  Integer没有</p>
+<pre><code>Prelude&gt; minBound :: Int
+-9223372036854775808
+Prelude&gt; min
+min       minBound  minimum
+Prelude&gt; minBound  :: Integer 
+
+&lt;interactive&gt;:247:1:
+    No instance for (Bounded Integer) arising from a use of `minBound'
+
+</code></pre>
+<h3 id="32-如果别人问你char-and-char-的区别">32. 如果别人问你char and [char] 的区别？</h3>
+<pre><code>Prelude&gt; :t 'a'
+'a' :: Char
+Prelude&gt; :t &quot;a&quot;
+&quot;a&quot; :: [Char]
+Prelude&gt; :t &quot;dfasdf&quot;
+&quot;dfasdf&quot; :: [Char]
+Prelude&gt; 
+</code></pre>
+<h3 id="33-如果别人问你变量有类型那么函数是不是也有类型">33. 如果别人问你变量有类型，那么函数是不是也有类型？</h3>
+<pre><code>removeNonUppercase :: [Char] -&gt; [Char]   
+removeNonUppercase st = [ c | c &lt;- st, c `elem` ['A'..'Z']]
+</code></pre>
+<p>removeNonUppercase 的类型为 [Char]-&gt;[Char]，从它的参数和回传值的类型上可以看出，
+它将一个字串映射为另一个字串。[Char] 与 String 是等价的，但使用 String 会更清晰：
+removeNonUppercase :: String -&gt; String。编译器会自动检测出它的类型，我们还是标明了
+它的类型声明。要是多个参数的函数该怎样？如下便是一个将三个整数相加的简单函数
+参数之间由 -&gt; 分隔，而与回传值之间并无特殊差异</p>
+<h3 id="34-如果别人问你有没有比较好用的编程工具">34. 如果别人问你有没有比较好用的编程工具？</h3>
+<p>告诉他Haskell！</p>
+<p>该如何学习？
+告诉他安装 ghci,并且在软件中输入 :brower  就能观察到很多的类型
+并且支持tab键。
+:brower 会列出内置函数的 类型，以及他的基本使用方法</p>
+<h3 id="35-如果别人问你高阶函数是如何定义">35. 如果别人问你高阶函数是如何定义？</h3>
+<p>高阶函数</p>
+<pre><code>map f lst --将lst按照函数f映射得到一个新的数列
+map :: (a-&gt;b) -&gt; [a] -&gt;
+map f [] = []
+map f (x:xs) = f x : map f xs
+
+</code></pre>
+<h3 id="36-如果别人问你如何使用-brower-提供的函数类型">36. 如果别人问你如何使用 :brower 提供的函数类型？</h3>
+<p>比如：</p>
+<pre><code>36.1
+Prelude&gt; :t product 
+product :: Num a =&gt; [a] -&gt; a
+Prelude&gt; product [3,5,2]
+30
+36.2
+readFile :: FilePath -&gt; IO String
+
+Prelude&gt; readFile &quot;/tmp/a.txt&quot;
+&quot;fdsf&quot;
+Prelude&gt; let  d=readFile &quot;/tmp/a.txt&quot;
+Prelude&gt; d
+&quot;fdsf&quot;
+
+</code></pre>
+<h3 id="37--如果别人问你如何切断一个数组在某个位置">37.  如果别人问你如何切断一个数组在某个位置？</h3>
+<pre><code>splitAt :: Int -&gt; [a] -&gt; ([a], [a])
+Prelude&gt; splitAt 3 [3,5,6,2,3,6,3]
+([3,5,6],[2,3,6,3])
+
+</code></pre>
+<h3 id="38--如果别人问你为什么你这样使用subtract">38.  如果别人问你为什么你这样使用subtract?</h3>
+<p>告诉他，我是看着定义来使用的。</p>
+<pre><code>subtract :: Num a =&gt; a -&gt; a -&gt; a
+Prelude&gt; subtract 20 3
+-17
+Prelude&gt; subtract [30,3] [3,3]
+</code></pre>
+<h3 id="39--如果别人问你-zip相关的函数">39.  如果别人问你 zip相关的函数？</h3>
+<pre><code>    Prelude&gt; unzip [(3,4)]
+    ([3],[4])
+    Prelude&gt; unzip [(3,4),(3,7)]
+    ([3,3],[4,7])
+    Prelude&gt; unzip [(3,4),(3,7),(7,4)]
+    ([3,3,7],[4,7,4])
+    Prelude&gt; unzip [(3,4),(3,7),(7,4),(8,9)]
+    ([3,3,7,8],[4,7,4,9])
+    Prelude&gt; unzip [((3,4),(3,7)),((7,4),(8,9))]
+    ([(3,4),(7,4)],[(3,7),(8,9)])
+
+    unzip3 :: [(a, b, c)] -&gt; ([a], [b], [c])
+
+    Prelude&gt; unzip3 [(3,6,3)]
+    ([3],[6],[3])
+    Prelude&gt; unzip3 [(3,6,3),(3,5,9)]
+    ([3,3],[6,5],[3,9])
+    Prelude&gt; unzip3 [(3,6,3),(3,5,9),(8,9,0)]
+    ([3,3,8],[6,5,9],[3,9,0])
+    Prelude&gt; unzip3 [(3,6,3,5),(3,5,9,3),(8,9,0,6)]
+
+    &lt;interactive&gt;:172:9:
+        Couldn't match expected type `(a0, b0, c0)'
+                    with actual type `(t0, t1, t2, t3)'
+
+</code></pre>
+<h3 id="40-如果别人问你un相关的函数">40. 如果别人问你un相关的函数？</h3>
+<pre><code>Prelude&gt; unlines [&quot;ds&quot;,&quot;dfsf&quot;]
+&quot;ds\ndfsf\n&quot;
+until :: (a -&gt; Bool) -&gt; (a -&gt; a) -&gt; a -&gt; a
+unwords :: [String] -&gt; String
+Prelude&gt; unwords [&quot;dsf&quot;,&quot;fdsf&quot;]
+&quot;dsf fdsf&quot;
+</code></pre>
+<h3 id="41-如果比人问你如何使用-sin等三角函数">41. 如果比人问你如何使用 sin等三角函数？</h3>
+<p>转换为弧度制</p>
+<pre><code>Prelude&gt; sin (45/180*pi)
+0.7071067811865475
+Prelude&gt; sin (45*pi/180)
+0.7071067811865475
+
+</code></pre>
+<h3 id="42-如果别人问你haskell针对字符的函数">42. 如果别人问你Haskell针对字符的函数？</h3>
+<p>Haskell中预定义的针对字符的函数有:</p>
+<pre><code>   isAscii, isLatin1, isControl, isPrint, isSpace, isUpper, isLower,
+   isAlpha, isDigit, isOctDigit, isHexDigit, isAlphaNum,
+   digitToInt, intToDigit,
+   toUpper, toLower,
+   ord, chr,等
+   
+</code></pre>
+<p>ord将字母转换为数字, chr反之.</p>
+<h3 id="43-如果别人问你构造数组的几种方式">43. 如果别人问你构造数组的几种方式？</h3>
+<p>数列是通过[]来进行描述的</p>
+<h4 id="431-数组构造">43.1 数组构造</h4>
+<p>数列是用[]和(:)构造的, []是一个空的数列, x:xs的含义是元素x附加到数列xs的前面组成一个更长的数列.
+比如, 1:[] 等于[1], 2:3:1:[]等于[2,3,1], 运算符(:)是从右向左运算的. 所有的数列都可以看作是从[]开始,
+将各元素用(:)附到上面形成的. 在实际编程中有一些简记法可以快速地构造数列.</p>
+<h4 id="432-列举法">43.2 列举法</h4>
+<p>将数列的元素一一列举, 比如: [1,2,3], [&lsquo;A&rsquo;,&lsquo;B&rsquo;,&rsquo;d&rsquo;], [[1,2], [4,5,6]]等等,
+数列的类型用&quot;[元素类型]&ldquo;来表示, 这几个例子的类型依次为: [Int], [Char], [[Int]].</p>
+<h4 id="433-范围法">43.3 范围法</h4>
+<p>适用于构造等差数列, 比如: [1..5]等于[1,2,3,4,5], [&lsquo;a&rsquo;..&rsquo;d&rsquo;]等于[&lsquo;a&rsquo;,&lsquo;b&rsquo;,&lsquo;c&rsquo;,&rsquo;d&rsquo;]等于&quot;abcd&quot;因为type String=[Char].
+默认的等差为1, 也可以给出前两个元素指定等差, 比如: [2,4..8]等于[2,4,6,8], [2,4..7]等于[2,4,6], [2.5,4..9.5]等于
+[2.5,4.0,5.5,7.0,8.5,10.0].</p>
+<h3 id="433-描述法">43.3 描述法</h3>
+<p>描述法给出数列中元素取值的范围以及所满足的条件, 与数学中集合的描述法是一样的. 例如:
+[3*x+2| x&lt;-[3,6,9]] &ndash;记号&rdquo;&lt;-&ldquo;表示属于,x依次取3,6,9,代入3*x+2,得到数列[11,20,29]
+[x*x| x&lt;-[1..9], x `rem` 3==1] &ndash;给出x的范围,还限定x除3余1
+[(x,y)|x&lt;-[1,2,3],y&lt;-[x..3]] &ndash;等于 [(1,1),(1,2),(1,3),(2,2),(2,3),(3,3)]</p>
+<h3 id="44-如果别人跟你说haskell可以write-poet">44. 如果别人跟你说Haskell可以write poet?</h3>
+<p>第一次语文  数学   计算机的结合</p>
+<pre><code>Prelude&gt;  let nouns = [&quot;he&quot;,&quot;she&quot;,&quot;I&quot;]
+Prelude&gt; let adjectives=[&quot;lazy&quot;,&quot;handsome&quot;,&quot;something&quot;]
+Prelude&gt; [adjective ++ &quot; &quot; ++ noun | adjective &lt;-adjectives ,noun&lt;-nouns]
+[&quot;lazy he&quot;,&quot;lazy she&quot;,&quot;lazy I&quot;,&quot;handsome he&quot;,&quot;handsome she&quot;,&quot;handsome I&quot;,&quot;something he&quot;,&quot;something she&quot;,&quot;something I&quot;]
+
+*Main&gt; let nouns = [&quot;he&quot;,&quot;she&quot;,&quot;I&quot;]
+*Main&gt; let adjectives=[&quot;lazy&quot;,&quot;handsome&quot;,&quot;something&quot;]
+*Main&gt; [adjective ++ &quot; &quot; ++ noun | adjective &lt;-adjectives ,noun&lt;-nouns]
+[&quot;lazy he&quot;,&quot;lazy she&quot;,&quot;lazy I&quot;,&quot;handsome he&quot;,&quot;handsome she&quot;,&quot;handsome I&quot;,&quot;something he&quot;,&quot;something she&quot;,&quot;something I&quot;]
+</code></pre>
+<p>###45. 如果别人跟你说Haskell可以跟几何并轨？
+第一次和几何的触碰</p>
+<pre><code>Prelude&gt;  let triangels=[(a,b,c)|c&lt;-[1..10],b&lt;-[1..c],a&lt;-[1..b],c^2==a^2+b^2,a+b+c==24]
+Prelude&gt; triangels 
+[(6,8,10)]
+
+</code></pre>
+<h3 id="46-如果别人问你haskell的cabal是什么">46. 如果别人问你Haskell的cabal是什么？</h3>
+<p>类似于ubuntu的apt-get<br>
+scilab  的atoms
+python的 easy_install  或者pip
+redhat 的yum</p>
+<h3 id="47-如果别人问你有几个基本的typeclass">47. 如果别人问你有几个基本的TypeClass?</h3>
+<p>类型类是haskell中站在较高位置的语言认识。几种基本的类型类包括Eq,Ord,Show,Read,Enum等。</p>
+<h4 id="471-eq">47.1 Eq</h4>
+<p>包含可判断相等性的类型。提供实现的函数是 == 和 /=。所以，
+只要一个函数有Eq类的类型限制，那么它就必定在定义中用到了 == 和 /=</p>
+<h4 id="472-ord">47.2 Ord</h4>
+<p>包含可比较大小的类型。除了函数以外，我们目前所谈到的所有类型都属于 Ord 类。Ord 包中包含了
+&lt;, &gt;, &lt;=, &gt;= 之类用于比较大小的函数。compare 函数取两个
+Ord 类中的相同类型的值作参数，回传比较的结果。这个结果是如下三种类型之一：GT, LT, EQ。</p>
+<h4 id="473-show">47.3 Show</h4>
+<p>的成员为可用字串表示的类型。目前为止，除函数以外的所有类型都是 Show 的成员。
+操作 Show Typeclass，最常用的函数表示 show。它可以取任一Show的成员类型并将其转为字串</p>
+<h4 id="474-read">47.4 Read</h4>
+<p>是与 Show 相反的 Typeclass。read 函数可以将一个字串转为 Read 的某成员类型。</p>
+<h4 id="475-enum">47.5 Enum</h4>
+<p>的成员都是连续的类型 &ndash; 也就是可枚举。Enum 类存在的主要好处就在于我们可以在 Range 中用到它的成员类型：
+每个值都有后继子 (successer) 和前置子 (predecesor)，分别可以通过 succ 函数和 pred 函数得到。
+该 Typeclass 包含的类型有：(), Bool, Char, Ordering, Int, Integer, Float 和 Double。</p>
+<h4 id="476-bounded">47.6 Bounded</h4>
+<p>的成员都有一个上限和下限。</p>
+<h4 id="477-num">47.7 Num</h4>
+<p>Num 是表示数字的 Typeclass，它的成员类型都具有数字的特征。检查一个数字的类型：</p>
+<h4 id="478-integral">47.8 Integral</h4>
+<p>同样是表示数字的 Typeclass。Num 包含所有的数字：实数和整数。而 Integral 仅包含整数，其中的成员类型有 Int 和 Integer。</p>
+<h4 id="479-floating">47.9 Floating</h4>
+<p>仅包含浮点类型：Float 和 Double。
+可以用一张图来表示：
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="/images/classes.gif" alt="类图" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<h4 id="48-我想用haskell产生一个三角形">48. 我想用Haskell产生一个三角形</h4>
+<pre><code>let triangels=[(a,b,c)|c&lt;-[1..10],b&lt;-[1..10],a&lt;-[1..10]]
+let righttriangels=[(a,b,c)|c&lt;-[1..10],b&lt;-[1..c],a&lt;-[1..b],a^2+b^2==c^2]
+let righttriangelsc=[(a,b,c)|c&lt;-[1..10],b&lt;-[1..c],a&lt;-[1..b],a^2+b^2==c^2,a+b+c==24]
+
+</code></pre>
+<h4 id="49-如果别人问你如何表示数学的集合">49. 如果别人问你如何表示数学的集合？</h4>
+<pre><code>Prelude&gt; [x*2|x &lt;- [1..10]]
+[2,4,6,8,10,12,14,16,18,20]
+Prelude&gt; [x*2|x&lt;- [1..10],x*2 &gt;=12 ]
+[12,14,16,18,20]
+Prelude&gt; [x | x &lt;- [50..100], x `mod` 7 ==3]
+[52,59,66,73,80,87,94]
+
+</code></pre>
+<h4 id="50-如果别人问你-代表什么东西">50. 如果别人问你!! 代表什么东西？</h4>
+<pre><code>[3, 5,6] !!2
+*Main&gt; [3, 5,6] !!2
+6
+</code></pre>
+<h4 id="51-几个常用的数组提取函数">51. 几个常用的数组提取函数？</h4>
+<p>并且是从0开始的
+常用几个list函数</p>
+<pre><code>*Main&gt; head [5,6,4]
+5
+*Main&gt; last [5,6,4]
+4
+*Main&gt; tail [5,6,4]
+[6,4]
+*Main&gt; init [5,6,6,43,6]
+[5,6,6,43]
+
+
+</code></pre>
+<p>length  null  reverse  take等函数  具体说一下take</p>
+<pre><code>*Main&gt; take 4 [5,6,7,4,3,8]
+[5,6,7,4]
+*Main&gt; take 3 [5,6,7,4,3,8]
+[5,6,7]
+*Main&gt; take 2 [5,6,7,4,3,8]
+[5,6]
+*Main&gt; 
+</code></pre>
+<p>同理类似的drop</p>
+    </div>
+ <div class="nav-links" style="padding:10;">
+        
+        <div align="left">
+        <a href="https://jueqingsizhe66.github.io/archives/yu-yan-chou-xiang/"><span class="arrow">←</span> <strong>上一篇:语言抽象</strong></a>
+        </div>
+        
+        
+
+
+       <div align="right"> <a href="https://jueqingsizhe66.github.io/archives/language-limits-the-world-of-you/" ><strong>下一篇:language limits the world of you </strong><span class="arrow">→</span></a></div>
+        
+      </div>
+    
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/haskell/">Haskell</a>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="https://jueqingsizhe66.github.io/"><img class="avatar mr-3 avatar-circle" src="/author/%E4%BB%A4%E7%8B%90%E5%86%B2/avatar_huc99f1f2e739130747140db298bdd1890_46492_270x270_fill_q75_lanczos_center.jpg" alt="令狐冲"></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://jueqingsizhe66.github.io/">令狐冲</a></h5>
+      <h6 class="card-subtitle">Engineer of offshore wind turbine technique research</h6>
+      <p class="card-text">My research interests include distributed energy, wind turbine power generation technique , Computational fluid dynamic and programmable matter.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/jueqingsizhe66" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.co.uk/citations?user=7VyEMyQAAAAJ&amp;hl=zh-CN" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/jueqingsizhe66" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+         <span id="busuanzi_container_site_pv">
+             本站访问量：<span id="busuanzi_value_site_pv"></span>次
+         </span>
+         &nbsp;
+   </div>
+
+
+  </div>
+
+</article>
+<script src="https://utteranc.es/client.js"
+        repo="jueqingsizhe66/jueqingsizhe66.github.io"
+        issue-term="pathname"
+        theme="github-dark"
+        crossorigin="anonymous"
+        async>
+</script>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    ©2022 &middot; 
+
+    ^-^ LingHuChong ^-^ Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+      
+
+    
+    <script src="/js/vendor-bundle.min.3d946de2e8784a477845261d87025092.js"></script>
+
+    
+    
+    
+      
+      
+        <script src="https://cdn.jsdelivr.net/gh/desandro/imagesloaded@v4.1.4/imagesloaded.pkgd.min.js" integrity="sha512-S5PZ9GxJZO16tT9r3WJp/Safn31eu8uWrzglMahDT4dsmgqWonRY9grk3j+3tfuPr9WJNsfooOR7Gi7HL5W2jw==" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/gh/metafizzy/isotope@v3.0.6/dist/isotope.pkgd.min.js" integrity="sha512-Zq2BOxyhvnRFXu0+WE6ojpZLOU2jdnqbrM1hmVdGzyeCa1DgM3X5Q4A/Is9xA1IkbUeDd7755dNNI/PzSf2Pew==" crossorigin="anonymous"></script>
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/gh/mermaid-js/mermaid@v8.8.4/dist/mermaid.min.js" integrity="sha512-+TNmhaRJf3jyYHTpzEq/5I6b+aGyhzWb21mGdHAjxSGSYwxN9Grug3Y3B9qVxWfKKY8MscE/6mr9walWvFLFvQ==" crossorigin="anonymous" title="mermaid"></script>
+      
+
+      
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/highlight.min.js" integrity="sha512-Ypjm0o7jOxAd4hpdoppSEN0TQOC19UtPAqD+4s5AlXmUvbmmS/YMxYqAqarQYyxTnB6/rqip9qcxlNB/3U9Wdg==" crossorigin="anonymous"></script>
+        
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/r.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/latex.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/python.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/matlab.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/java.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/go.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/rust.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/c.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/perl.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/scheme.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/lisp.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/racket.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/awk.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/sed.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/bash.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/sql.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/vim.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/clojure.min.js" crossorigin="anonymous"></script>
+        
+      
+
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+      
+      <script id="search-hit-fuse-template" type="text/x-template">
+        <div class="search-hit" id="summary-{{key}}">
+          <div class="search-hit-content">
+            <div class="search-hit-name">
+              <a href="{{relpermalink}}">{{title}}</a>
+              <div class="article-metadata search-hit-type">{{type}}</div>
+              <p class="search-hit-description">{{snippet}}</p>
+            </div>
+          </div>
+        </div>
+      </script>
+      
+        <script src="https://cdn.jsdelivr.net/gh/krisk/Fuse@v3.2.1/dist/fuse.min.js" integrity="sha512-o38bmzBGX+hD3JHWUFCDA09btWaqrNmoJ3RXLlrysA7PP01Kgs4UlE4MhelE1v5dJR3+cxlR4qQlotsW7jKsnw==" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/gh/julmot/mark.js@8.11.1/dist/jquery.mark.min.js" integrity="sha512-mhbv5DqBMgrWL+32MmsDOt/OAvqr/cHimk6B8y/bx/xS88MVkYGPiVv2ixKVrkywF2qHplNRUvFsAHUdxZ3Krg==" crossorigin="anonymous"></script>
+      
+    
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+      
+      
+      
+      
+      
+      
+      
+    
+
+    
+
+    
+    
+    
+    <script id="page-data" type="application/json">{"use_headroom":true}</script>
+
+    
+    
+      <script src="/js/wowchemy-headroom.e8fd2d733eef6a8bbbe0539398fc0547.js" type="module"></script>
+    
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    <script src="/en/js/wowchemy.min.a2ed145159dd33ad55ff402163350b5d.js"></script>
+
+    
+    
+    
+    
+    
+    
+      
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      <script src="/js/wowchemy-publication.b0d291ed6d27eacec233e6cf5204f99a.js" type="module"></script>
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+
+
+
+</body>
+</html>

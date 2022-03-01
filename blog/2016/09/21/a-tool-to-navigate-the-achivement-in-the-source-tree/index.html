@@ -779,7 +779,7 @@ and compare with each other continually.
 
 
 
-<span class="article-metadata" >Reading time: 543 minutes and    42 seconds with 119617 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+<span class="article-metadata" >Reading time: 540 minutes and    54 seconds with 118998 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
   <ul>
@@ -799,47 +799,8 @@ and compare with each other continually.
       </ul>
     </li>
     <li><a href="#--517-517--vertex-coordinates">@@ -51,7 +51,7 @@ Vertex coordinates:</a></li>
-    <li><a href="#---is-det">-%! concept_label(
--%!   +Mode:oneof([attributes,both,objects]),
--%!   :ObjectLabel_1,
--%!   :AttributeLabel_1,
--%!   +Concept:compound
--%! )// is det.</a></li>
     <li><a href="#--wrapper-around-gv_export3-with-default-options">-%! gv_export(+ExportGraph:compound, ?File:atom) is det.
 -% Wrapper around gv_export/3 with default options.</a></li>
-    <li><a href="#--module-graphviz-numeral">-/** <module> GraphViz numeral</a></li>
-    <li><a href="#-">-@author Wouter Beek
--@version 2014/05-2014/06, 2015/01
--*/</a></li>
-    <li><a href="#---use_modulelibrarymathrational_ext">-:- use_module(library(dcg/dcg_abnf)).
--:- use_module(library(dcg/dcg_abnf_common)).
--:- use_module(library(dcg/dcg_ascii)).
--:- use_module(library(math/math_ext)).
--:- use_module(library(math/positional)).
--:- use_module(library(math/radconv)).
--:- use_module(library(math/rational_ext)).</a></li>
-    <li><a href="#------decimal-separator">-%! gv_numeral(?Value:compound)// .
--%
--% # Syntax
--%
--% <code>bnf -% ('-')? ( '.' [0-9]+ | [0-9]+ ( '.' [0-9]* )? ) -% </code>
--%
--% ## Generation
--%
--% In the generative case, three notations are allowed (also see below):
--%   1. (non-zero integer-part)
--%   2. (decimal-separator) (non-zero fractional)
--%   3. (non-zero integer-part) (decimal-separator) (non-zero fractional)
--%
--% The following notations are explicitly excluded due to verbosity:
--%   - (non-zero integer-part) (decimal-separator)
--%   - (non-zero integer-part) (decimal-separator) (zero fractional)
--%   - (zero integer-part) (decimal-separator) (non-zero fractional)
--%
--% The following notations are also excluded, but since they violate
--%  well-formedness:
--%   - (non-zero integer-part) (non-zero fractional)
--%   - (decimal-separator)</a></li>
     <li><a href="#--5012-5014--vertex-coordinates">diff &ndash;git a/prolog/graph/build_export_graph.pl b/prolog/graph/build_export_graph.pl
 index 5134069..caabaa0 100644
 &mdash; a/prolog/graph/build_export_graph.pl
@@ -849,24 +810,6 @@ index 5134069..caabaa0 100644
     <li><a href="#-edge_term0vs-opts-e-eterm---edge_termvs-e-eterm-opts">-edge_term0(Vs, Opts, E, ETerm) :- edge_term(Vs, E, ETerm, Opts).</a></li>
     <li><a href="#--">-%! gv_numeral(-Number)// is det.
 -% <code>bnf -% ('-')? ( '.' [0-9]+ | [0-9]+ ( '.' [0-9]* )? ) -% </code></a></li>
-    <li><a href="#--module-tree-visualization">-/** <module> Tree visualization</a></li>
-    <li><a href="#-export-trees-to-graphviz">-Export trees to GraphViz.</a></li>
-    <li><a href="#--1">-@author Wouter Beek
--@version 2016/01-2016/02
--*/</a></li>
-    <li><a href="#---use_modulelibrarytrees_tree">-:- use_module(library(graph/build_export_graph)).
--:- use_module(library(gv/gv_file)).
--:- use_module(library(ordsets)).
--:- use_module(library(tree/l_tree)).
--:- use_module(library(tree/s_tree)).</a></li>
-    <li><a href="#--opts-are-passed-to-build_export_graph4">-%! tree_export_graph(+Tree, -ExportG) is det.
--%! tree_export_graph(+Tree, -ExportG, +Opts) is det.
--% Opts are passed to build_export_graph/4.</a></li>
-    <li><a href="#--options-are-passed-to-export_graph_to_gv_file3-tree_to_graph3">-%! tree_viz(+Tree, ?File) is det.
--%! tree_viz(+Tree, ?File, +Opts) is det.
--% Stores the given tree term into a GraphViz file.
--%
--% Options are passed to export_graph_to_gv_file/3, tree_to_graph/3.</a></li>
   </ul>
 </nav>
     </aside>
@@ -35781,15 +35724,6 @@ build_export_graph(G, ExportG, []).</p>
 <ul>
 <li></li>
 </ul>
-<p>%! build_export_graph(
--%!   +Graph:compound,
-+%!   +Graph,
-%!   -ExportGraph:compound,
-%!   +Options:list(compound)
-%! ) is det.
-+% Graph is either:
-+%   * a coumpound term <code>graph(Vs,Es)</code>, or
-+%   * an unlabeled graph as defined by <code>library(ugraph)</code>.</p>
 <p>-build_export_graph(graph(Vs,Es), graph(VTerms,ETerms,GAttrs), Opts1):-
 +build_export_graph(G, graph(VTerms,ETerms,GAttrs), Opts1):-</p>
 <ul>
@@ -35815,9 +35749,6 @@ graph_attributes(GAttrs, Opts2).</li>
 <ul>
 <li>vertex_term(Vs, V, VTerm, Opts).</li>
 <li></li>
-</ul>
-<p>-edge_term0(Vs, Opts, E, ETerm):-</p>
-<ul>
 <li>edge_term(Vs, E, ETerm, Opts).
 +graph_components(graph(Vs,Es), Vs, Es):- !.
 +graph_components(G, Vs, Es):-</li>
@@ -39698,9 +39629,6 @@ s_graph_components(G, Vs, Es).</p>
 <li>build_export_rank_terms(GroupedPairs, VRanks).
 +build_export_ranks(_, VTerms, [], VTerms, _).</li>
 <li></li>
-</ul>
-<p>+build_export_rank_terms([N-VTerms|T1], [vertex(Id,[label(Lbl)])-VTerms|T2]):- !,</p>
-<ul>
 <li>format(atom(Id), &lsquo;r~d&rsquo;, [N]),</li>
 <li>atom_number(Lbl, N),</li>
 <li>build_export_rank_terms(T1, T2).
@@ -39712,7 +39640,7 @@ diff &ndash;git a/prolog/gv/gv_graph.pl b/prolog/gv/gv_graph.pl
 index 5de2ff1..79c1be0 100644
 &mdash; a/prolog/gv/gv_graph.pl
 +++ b/prolog/gv/gv_graph.pl
-@@ -52,7 +52,7 @@ In GraphViz vertices are called &lsquo;nodes&rsquo;.
+@@ -52,7 +52,7 @@ In GraphViz vertices are called &rsquo;nodes&rsquo;.
 %
 % <code>RankedVertexTerms</code> is a list of compound terms of the following form:
 % <code>prolog -% rank(RankNode,ContentNodes) +% RankVertex-ContentVertices % </code>
@@ -41700,7 +41628,7 @@ index 190b988..bcc7654 100644
 <p>-%! translate_default(+Default1:atom, -Default2:atom) is det.
 +%! translate_default(+Default1, -Default2) is det.</p>
 <p>% The empty string is represented by the empty atom.
-translate_default('&quot;&quot;&rsquo;, &lsquo;'):- !.
+translate_default(&rsquo;&quot;&quot;&rsquo;, &lsquo;&rsquo;):- !.
 diff &ndash;git a/data/gv_color_scrape.pl b/data/gv_color_scrape.pl
 index 3ac5d44..102a02a 100644
 &mdash; a/data/gv_color_scrape.pl
@@ -41941,15 +41869,7 @@ fca_export_graph(Context, ExportG, Opts2),</li>
 <li>string_phrase(concept_label(Mode, OLbl_1, ALbl_1, Concept), Lbl).</li>
 <li></li>
 <li></li>
-</ul>
-<h2 id="---is-det">-%! concept_label(
--%!   +Mode:oneof([attributes,both,objects]),
--%!   :ObjectLabel_1,
--%!   :AttributeLabel_1,
--%!   +Concept:compound
--%! )// is det.</h2>
-<p>-concept_label(attributes, <em>, ALbl_1, concept(</em>,As)) &ndash;&gt;</p>
-<ul>
+<li></li>
 <li>set(ALbl_1, As).
 -concept_label(both, OLbl_1, ALbl_1, Concept) &ndash;&gt;</li>
 <li>pair(</li>
@@ -42002,7 +41922,7 @@ graph_attributes(GAttrs, Opts2).</li>
 graph_components(graph(Vs,Es), Vs, Es):- !.
 graph_components(G, Vs, Es):-
 s_graph_components(G, Vs, Es).
-@@ -190,37 +194,29 @@ build_export_rank_term(N, vertex(Id,[label(&quot;&quot;),shape(none)])):-</p>
+@@ -190,37 +194,29 @@ build_export_rank_term(N, vertex(Id,[label(&rdquo;&quot;),shape(none)])):-</p>
 <p>edge_term(Vs, E, edge(FromId,ToId,EAttrs), Opts):-
 % Arrowhead</p>
 <ul>
@@ -42076,7 +41996,7 @@ nth0chk(ToId, Vs, ToV)
 <p>exclude(
 option_has_var_value,
 @@ -274,7 +270,6 @@ graph_attributes(GAttrs, Opts):-
-option(graph_label(GLabel), Opts, &lsquo;&quot;&quot;'),
+option(graph_label(GLabel), Opts, &lsquo;&quot;&quot;&rsquo;),
 % Overlap.
 option(graph_overlap(Overlap), Opts, false),</p>
 </li>
@@ -42306,7 +42226,7 @@ ps, svg, fig, vmrl, and the bitmap formats.
 <p>color(rgb(Red,Green,Blue)) &ndash;&gt; !,
 &ldquo;#&rdquo;,</p>
 <ul>
-<li>&lsquo;#'(3, hex_color, [Red,Green,Blue]).</li>
+<li>&lsquo;#&rsquo;(3, hex_color, [Red,Green,Blue]).</li>
 </ul>
 <ul>
 <li>#(3, hex_color, [Red,Green,Blue]).
@@ -42316,7 +42236,7 @@ hex_color(Alpha).
 color(hsv(Hue,Saturation,Value)) &ndash;&gt; !,</li>
 </ul>
 <ul>
-<li>&lsquo;#'(3, hsv_color, [Hue,Saturation,Value], []).</li>
+<li>&lsquo;#&rsquo;(3, hsv_color, [Hue,Saturation,Value], []).</li>
 </ul>
 <ul>
 <li>#(3, hsv_color, [Hue,Saturation,Value]).
@@ -42328,10 +42248,10 @@ atom(Name).
 </ul>
 <p>colorList(L) &ndash;&gt;</p>
 <ul>
-<li>&lsquo;+'(wc, L, []).</li>
+<li>&lsquo;+&rsquo;(wc, L, []).</li>
 </ul>
 <ul>
-<li>&lsquo;+'(wc, L).</li>
+<li>&lsquo;+&rsquo;(wc, L).</li>
 </ul>
 <p>wc(Color-Float) &ndash;&gt;
 color(Color),
@@ -42438,15 +42358,6 @@ pass_to(file_to_gv/3, 3)
 <li></li>
 <li></li>
 </ul>
-<p>-%! gv_export(+ExportGraph:compound, ?File:atom, +Options:list(compound)) is det.
-+%! graph_viz(+ExportGraph:compound, ?File:atom) is det.
-+%! graph_viz(+ExportGraph:compound, ?File:atom, +Options:list(compound)) is det.
-% Returns a file containing a GraphViz visualization of the given graph.
-%
-% The following options are supported:
-@@ -60,7 +51,9 @@ gv_export(ExportG, File):-
-%     Default is <code>pdf</code>.
-%     For possible values see gv_output_type/1.</p>
 <p>-gv_export(ExportG, File, Opts):-
 +graph_viz(ExportG, File):-</p>
 <ul>
@@ -42459,7 +42370,7 @@ diff &ndash;git a/prolog/gv/gv_graph.pl b/prolog/gv/gv_graph.pl
 index 5c937ce..c95c9cc 100644
 &mdash; a/prolog/gv/gv_graph.pl
 +++ b/prolog/gv/gv_graph.pl
-@@ -20,7 +20,6 @@ In GraphViz vertices are called &lsquo;nodes&rsquo;.</p>
+@@ -20,7 +20,6 @@ In GraphViz vertices are called &rsquo;nodes&rsquo;.</p>
 </li>
 </ul>
 <p>:- use_module(library(apply)).
@@ -42472,7 +42383,7 @@ diff &ndash;git a/prolog/gv/gv_graph_comp.pl b/prolog/gv/gv_graph_comp.pl
 index aecbe07..30ea9c5 100644
 &mdash; a/prolog/gv/gv_graph_comp.pl
 +++ b/prolog/gv/gv_graph_comp.pl
-@@ -24,12 +24,11 @@ a_list = ID &ldquo;=&rdquo; ID [&rdquo;,&quot;] [a_list]</p>
+@@ -24,12 +24,11 @@ a_list = ID &ldquo;=&rdquo; ID [&quot;,&quot;] [a_list]</p>
 <p>@author Wouter Beek
 @see <a href="http://www.graphviz.org/content/dot-language" target="_blank" rel="noopener">http://www.graphviz.org/content/dot-language</a>
 -@version 2015/07-2015/08, 2015/10-2015/12
@@ -42528,12 +42439,11 @@ gv_id(Atom) &ndash;&gt;
 <li></li>
 <li></li>
 </ul>
-<p>%! gv_port// is det.</p>
-<p>gv_port &ndash;&gt; gv_port_location, (gv_port_angle ; &ldquo;&quot;).
+<p>gv_port &ndash;&gt; gv_port_location, (gv_port_angle ; &ldquo;&rdquo;).
 @@ -279,7 +294,7 @@ gv_port_location &ndash;&gt; &ldquo;:[&rdquo;, gv_id(<em>), &ldquo;,&rdquo;, gv_id(</em>), &ldquo;]&rdquo;.</p>
-<p>%! gv_compass_pt(+Direction:oneof(['_',c,e,n,ne,nw,s,se,sw,w]))// .
-% <code>-% compass_pt : (n | ne | e | se | s | sw | w | nw | c | _) +% compass_pt : ( n | ne | e | se | s | sw | w | nw | c | _ ) % </code></p>
-<p>gv_compass_pt('<em>') &ndash;&gt; &ldquo;</em>&rdquo;.
+<p>%! gv_compass_pt(+Direction:oneof([&rsquo;_&rsquo;,c,e,n,ne,nw,s,se,sw,w]))// .
+% <code>-% compass_pt : (n | ne | e | se | s | sw | w | nw | c | _) +% compass_pt : ( n | ne | e | se | s | sw | w | nw | c | _ ) %</code></p>
+<p>gv_compass_pt(&rsquo;<em>&rsquo;) &ndash;&gt; &ldquo;</em>&rdquo;.
 diff &ndash;git a/prolog/gv/gv_html.pl b/prolog/gv/gv_html.pl
 index 3ee7de6..b5c1368 100644
 &mdash; a/prolog/gv/gv_html.pl
@@ -42570,50 +42480,16 @@ index 4ba0d64..0000000
 <li>]
 -).</li>
 <li></li>
-</ul>
-<h2 id="--module-graphviz-numeral">-/** <module> GraphViz numeral</h2>
-<h2 id="-">-@author Wouter Beek
--@version 2014/05-2014/06, 2015/01
--*/</h2>
-<h2 id="---use_modulelibrarymathrational_ext">-:- use_module(library(dcg/dcg_abnf)).
--:- use_module(library(dcg/dcg_abnf_common)).
--:- use_module(library(dcg/dcg_ascii)).
--:- use_module(library(math/math_ext)).
--:- use_module(library(math/positional)).
--:- use_module(library(math/radconv)).
--:- use_module(library(math/rational_ext)).</h2>
-<ul>
 <li></li>
 <li></li>
 <li></li>
 <li></li>
-</ul>
-<h2 id="------decimal-separator">-%! gv_numeral(?Value:compound)// .
--%
--% # Syntax
--%
--% <code>bnf -% ('-')? ( '.' [0-9]+ | [0-9]+ ( '.' [0-9]* )? ) -% </code>
--%
--% ## Generation
--%
--% In the generative case, three notations are allowed (also see below):
--%   1. (non-zero integer-part)
--%   2. (decimal-separator) (non-zero fractional)
--%   3. (non-zero integer-part) (decimal-separator) (non-zero fractional)
--%
--% The following notations are explicitly excluded due to verbosity:
--%   - (non-zero integer-part) (decimal-separator)
--%   - (non-zero integer-part) (decimal-separator) (zero fractional)
--%   - (zero integer-part) (decimal-separator) (non-zero fractional)
--%
--% The following notations are also excluded, but since they violate
--%  well-formedness:
--%   - (non-zero integer-part) (non-zero fractional)
--%   - (decimal-separator)</h2>
-<p>-gv_numeral(N) &ndash;&gt;</p>
-<ul>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
 <li>(   {ground(N)}</li>
-<li>-&gt;  &lsquo;[-]?'(N),</li>
+<li>-&gt;  &lsquo;[-]?&rsquo;(N),</li>
 <li>
 <pre><code> {N0 is abs(N)},
 </code></pre>
@@ -42698,7 +42574,7 @@ index 4ba0d64..0000000
 <pre><code> )
 </code></pre>
 </li>
-<li>;   &lsquo;[-]?'(Sg),</li>
+<li>;   &lsquo;[-]?&rsquo;(Sg),</li>
 <li>
 <pre><code> (   &quot;.&quot;,
 </code></pre>
@@ -42762,23 +42638,10 @@ index 0000000..4382aa6
 <li>]
 +).</li>
 <li></li>
-</ul>
-<p>+/** <module> Tree visualization
-+
-+Export trees to GraphViz.
-+
-+@author Wouter Beek
-+@version 2016/01-2016/02
-+*/
-+
-+:- use_module(library(graph/build_export_graph)).
-+:- use_module(library(gv/gv_file)).
-+:- use_module(library(ordsets)).
-+:- use_module(library(tree/l_tree)).
-+:- use_module(library(tree/s_tree)).
-+
-+:- predicate_options(tree_export_graph/3, 3, [</p>
-<ul>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
 <li>
 <pre><code>pass_to(build_export_graph/4, 4)
 </code></pre>
@@ -42799,18 +42662,9 @@ index 0000000..4382aa6
 <li></li>
 <li></li>
 <li></li>
-</ul>
-<p>+%! tree_export_graph(+Tree, -ExportG) is det.
-+%! tree_export_graph(+Tree, -ExportG, +Opts) is det.
-+% Opts are passed to build_export_graph/4.
-+
-+tree_export_graph(Tree, ExportG) :-</p>
-<ul>
+<li></li>
 <li>tree_export_graph(Tree, ExportG, []).</li>
 <li></li>
-</ul>
-<p>+tree_export_graph(Tree, ExportG, Opts) :-</p>
-<ul>
 <li>(   is_s_tree(Tree)</li>
 <li>-&gt;  tree_to_graph(Tree, G)</li>
 <li>;   is_l_tree(Tree)</li>
@@ -42820,20 +42674,9 @@ index 0000000..4382aa6
 <li></li>
 <li></li>
 <li></li>
-</ul>
-<p>+%! tree_viz(+Tree, ?File) is det.
-+%! tree_viz(+Tree, ?File, +Opts) is det.
-+% Stores the given tree term into a GraphViz file.
-+%
-+% Options are passed to export_graph_to_gv_file/3, tree_to_graph/3.
-+
-+tree_viz(Tree, File) :-</p>
-<ul>
+<li></li>
 <li>tree_viz(Tree, File, []).</li>
 <li></li>
-</ul>
-<p>+tree_viz(Tree, File, Opts) :-</p>
-<ul>
 <li>tree_export_graph(Tree, ExportG, Opts),</li>
 <li>graph_viz(ExportG, File, Opts).
 diff &ndash;git a/test/test.pl b/test/test.pl
@@ -42936,7 +42779,7 @@ index bcc7654..190b988 100644
 <p>-%! translate_default(+Default1, -Default2) is det.
 +%! translate_default(+Default1:atom, -Default2:atom) is det.</p>
 <p>% The empty string is represented by the empty atom.
-translate_default('&quot;&quot;&rsquo;, &lsquo;'):- !.
+translate_default(&rsquo;&quot;&quot;&rsquo;, &lsquo;&rsquo;):- !.
 diff &ndash;git a/data/gv_color_scrape.pl b/data/gv_color_scrape.pl
 index 102a02a..3ac5d44 100644
 &mdash; a/data/gv_color_scrape.pl
@@ -43259,7 +43102,7 @@ ps, svg, fig, vmrl, and the bitmap formats.
 <li>#(3, hex_color, [Red,Green,Blue]).</li>
 </ul>
 <ul>
-<li>&lsquo;#'(3, hex_color, [Red,Green,Blue]).
+<li>&lsquo;#&rsquo;(3, hex_color, [Red,Green,Blue]).
 color(rgbs(Red,Green,Blue,Alpha)) &ndash;&gt; !,
 color(rgb(Red,Green,Blue)),
 hex_color(Alpha).
@@ -43269,7 +43112,7 @@ color(hsv(Hue,Saturation,Value)) &ndash;&gt; !,</li>
 <li>#(3, hsv_color, [Hue,Saturation,Value]).</li>
 </ul>
 <ul>
-<li>&lsquo;#'(3, hsv_color, [Hue,Saturation,Value], []).
+<li>&lsquo;#&rsquo;(3, hsv_color, [Hue,Saturation,Value], []).
 color(Name) &ndash;&gt;
 {gv_color(_, Name)},
 atom(Name).
@@ -43278,10 +43121,10 @@ atom(Name).
 </ul>
 <p>colorList(L) &ndash;&gt;</p>
 <ul>
-<li>&lsquo;+'(wc, L).</li>
+<li>&lsquo;+&rsquo;(wc, L).</li>
 </ul>
 <ul>
-<li>&lsquo;+'(wc, L, []).</li>
+<li>&lsquo;+&rsquo;(wc, L, []).</li>
 </ul>
 <p>wc(Color-Float) &ndash;&gt;
 color(Color),
@@ -43389,13 +43232,6 @@ pass_to(file_to_gv/3, 3)
 <li></li>
 <li></li>
 </ul>
-<p>+%! gv_export(+ExportGraph:compound, ?File:atom, +Options:list(compound)) is det.
-% Returns a file containing a GraphViz visualization of the given graph.
-%
-% The following options are supported:
-@@ -51,9 +60,7 @@ user:module_uses(gv_file, program(dot)).
-%     Default is <code>pdf</code>.
-%     For possible values see gv_output_type/1.</p>
 <p>-graph_viz(ExportG, File):-</p>
 <ul>
 <li>
@@ -43408,7 +43244,7 @@ diff &ndash;git a/prolog/gv/gv_graph.pl b/prolog/gv/gv_graph.pl
 index c95c9cc..5c937ce 100644
 &mdash; a/prolog/gv/gv_graph.pl
 +++ b/prolog/gv/gv_graph.pl
-@@ -20,6 +20,7 @@ In GraphViz vertices are called &lsquo;nodes&rsquo;.</p>
+@@ -20,6 +20,7 @@ In GraphViz vertices are called &rsquo;nodes&rsquo;.</p>
 </li>
 </ul>
 <p>:- use_module(library(apply)).
@@ -43421,7 +43257,7 @@ diff &ndash;git a/prolog/gv/gv_graph_comp.pl b/prolog/gv/gv_graph_comp.pl
 index 30ea9c5..aecbe07 100644
 &mdash; a/prolog/gv/gv_graph_comp.pl
 +++ b/prolog/gv/gv_graph_comp.pl
-@@ -24,11 +24,12 @@ a_list = ID &ldquo;=&rdquo; ID [&rdquo;,&quot;] [a_list]</p>
+@@ -24,11 +24,12 @@ a_list = ID &ldquo;=&rdquo; ID [&quot;,&quot;] [a_list]</p>
 <p>@author Wouter Beek
 @see <a href="http://www.graphviz.org/content/dot-language" target="_blank" rel="noopener">http://www.graphviz.org/content/dot-language</a>
 -@version 2015/07-2015/08, 2015/10-2016/01
@@ -43476,12 +43312,11 @@ gv_id(Atom) &ndash;&gt;
 <li></li>
 <li></li>
 </ul>
-<p>%! gv_port// is det.</p>
-<p>gv_port &ndash;&gt; gv_port_location, (gv_port_angle ; &ldquo;&quot;).
+<p>gv_port &ndash;&gt; gv_port_location, (gv_port_angle ; &ldquo;&rdquo;).
 @@ -294,7 +279,7 @@ gv_port_location &ndash;&gt; &ldquo;:[&rdquo;, gv_id(<em>), &ldquo;,&rdquo;, gv_id(</em>), &ldquo;]&rdquo;.</p>
-<p>%! gv_compass_pt(+Direction:oneof(['_',c,e,n,ne,nw,s,se,sw,w]))// .
-% <code>-% compass_pt : ( n | ne | e | se | s | sw | w | nw | c | _ ) +% compass_pt : (n | ne | e | se | s | sw | w | nw | c | _) % </code></p>
-<p>gv_compass_pt('<em>') &ndash;&gt; &ldquo;</em>&rdquo;.
+<p>%! gv_compass_pt(+Direction:oneof([&rsquo;_&rsquo;,c,e,n,ne,nw,s,se,sw,w]))// .
+% <code>-% compass_pt : ( n | ne | e | se | s | sw | w | nw | c | _ ) +% compass_pt : (n | ne | e | se | s | sw | w | nw | c | _) %</code></p>
+<p>gv_compass_pt(&rsquo;<em>&rsquo;) &ndash;&gt; &ldquo;</em>&rdquo;.
 diff &ndash;git a/prolog/gv/gv_html.pl b/prolog/gv/gv_html.pl
 index b5c1368..3ee7de6 100644
 &mdash; a/prolog/gv/gv_html.pl
@@ -43518,52 +43353,16 @@ index 0000000..4ba0d64
 <li>]
 +).</li>
 <li></li>
-</ul>
-<p>+/** <module> GraphViz numeral
-+
-+@author Wouter Beek
-+@version 2014/05-2014/06, 2015/01
-+*/
-+
-+:- use_module(library(dcg/dcg_abnf)).
-+:- use_module(library(dcg/dcg_abnf_common)).
-+:- use_module(library(dcg/dcg_ascii)).
-+:- use_module(library(math/math_ext)).
-+:- use_module(library(math/positional)).
-+:- use_module(library(math/radconv)).
-+:- use_module(library(math/rational_ext)).
-+
-+
-+
-+
-+
-+%! gv_numeral(?Value:compound)// .
-+%
-+% # Syntax
-+%
-+% <code>bnf +% ('-')? ( '.' [0-9]+ | [0-9]+ ( '.' [0-9]* )? ) +% </code>
-+%
-+% ## Generation
-+%
-+% In the generative case, three notations are allowed (also see below):
-+%   1. (non-zero integer-part)
-+%   2. (decimal-separator) (non-zero fractional)
-+%   3. (non-zero integer-part) (decimal-separator) (non-zero fractional)
-+%
-+% The following notations are explicitly excluded due to verbosity:
-+%   - (non-zero integer-part) (decimal-separator)
-+%   - (non-zero integer-part) (decimal-separator) (zero fractional)
-+%   - (zero integer-part) (decimal-separator) (non-zero fractional)
-+%
-+% The following notations are also excluded, but since they violate
-+%  well-formedness:
-+%   - (non-zero integer-part) (non-zero fractional)
-+%   - (decimal-separator)
-+
-+gv_numeral(N) &ndash;&gt;</p>
-<ul>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
 <li>(   {ground(N)}</li>
-<li>-&gt;  &lsquo;[-]?'(N),</li>
+<li>-&gt;  &lsquo;[-]?&rsquo;(N),</li>
 <li>
 <pre><code> {N0 is abs(N)},
 </code></pre>
@@ -43648,7 +43447,7 @@ index 0000000..4ba0d64
 <pre><code> )
 </code></pre>
 </li>
-<li>;   &lsquo;[-]?'(Sg),</li>
+<li>;   &lsquo;[-]?&rsquo;(Sg),</li>
 <li>
 <pre><code> (   &quot;.&quot;,
 </code></pre>
@@ -43712,19 +43511,10 @@ index 4382aa6..0000000
 <li>]
 -).</li>
 <li></li>
-</ul>
-<h2 id="--module-tree-visualization">-/** <module> Tree visualization</h2>
-<h2 id="-export-trees-to-graphviz">-Export trees to GraphViz.</h2>
-<h2 id="--1">-@author Wouter Beek
--@version 2016/01-2016/02
--*/</h2>
-<h2 id="---use_modulelibrarytrees_tree">-:- use_module(library(graph/build_export_graph)).
--:- use_module(library(gv/gv_file)).
--:- use_module(library(ordsets)).
--:- use_module(library(tree/l_tree)).
--:- use_module(library(tree/s_tree)).</h2>
-<p>-:- predicate_options(tree_export_graph/3, 3, [</p>
-<ul>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
 <li>
 <pre><code>pass_to(build_export_graph/4, 4)
 </code></pre>
@@ -43745,17 +43535,9 @@ index 4382aa6..0000000
 <li></li>
 <li></li>
 <li></li>
-</ul>
-<h2 id="--opts-are-passed-to-build_export_graph4">-%! tree_export_graph(+Tree, -ExportG) is det.
--%! tree_export_graph(+Tree, -ExportG, +Opts) is det.
--% Opts are passed to build_export_graph/4.</h2>
-<p>-tree_export_graph(Tree, ExportG) :-</p>
-<ul>
+<li></li>
 <li>tree_export_graph(Tree, ExportG, []).</li>
 <li></li>
-</ul>
-<p>-tree_export_graph(Tree, ExportG, Opts) :-</p>
-<ul>
 <li>(   is_s_tree(Tree)</li>
 <li>-&gt;  tree_to_graph(Tree, G)</li>
 <li>;   is_l_tree(Tree)</li>
@@ -43765,19 +43547,9 @@ index 4382aa6..0000000
 <li></li>
 <li></li>
 <li></li>
-</ul>
-<h2 id="--options-are-passed-to-export_graph_to_gv_file3-tree_to_graph3">-%! tree_viz(+Tree, ?File) is det.
--%! tree_viz(+Tree, ?File, +Opts) is det.
--% Stores the given tree term into a GraphViz file.
--%
--% Options are passed to export_graph_to_gv_file/3, tree_to_graph/3.</h2>
-<p>-tree_viz(Tree, File) :-</p>
-<ul>
+<li></li>
 <li>tree_viz(Tree, File, []).</li>
 <li></li>
-</ul>
-<p>-tree_viz(Tree, File, Opts) :-</p>
-<ul>
 <li>tree_export_graph(Tree, ExportG, Opts),</li>
 <li>graph_viz(ExportG, File, Opts).
 diff &ndash;git a/test/test.pl b/test/test.pl
@@ -44925,7 +44697,7 @@ index 8730e13..bcc7654 100644
 <p>-%! translate_default(+Default1:atom, -Default2:atom) is det.
 +%! translate_default(+Default1, -Default2) is det.</p>
 <p>% The empty string is represented by the empty atom.
-translate_default('&quot;&quot;&rsquo;, &lsquo;'):- !.
+translate_default(&rsquo;&quot;&quot;&rsquo;, &lsquo;&rsquo;):- !.
 diff &ndash;git a/data/gv_color_scrape.pl b/data/gv_color_scrape.pl
 index 7bfc290..102a02a 100644
 &mdash; a/data/gv_color_scrape.pl
@@ -47487,7 +47259,7 @@ git log --stat|tac|awk -v count=1 '{if(/^commit/){gsub(/$/,&quot;](#&quot;count&
     
     
     
-    <script src="/js/wowchemy.min.516d1df876a80aa80a06ab72f875bdd4.js"></script>
+    <script src="/js/wowchemy.min.bbce1786921b11de61ce2cf40ecf1421.js"></script>
 
     
   <script async defer src="https://buttons.github.io/buttons.js"></script>

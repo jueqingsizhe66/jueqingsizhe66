@@ -1,0 +1,1770 @@
+<!DOCTYPE html><html lang="en-us" >
+
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  
+  
+    <meta name="generator" content="Wowchemy 5.4.0 for Hugo" />
+  
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+  
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="令狐冲" />
+
+  
+  
+  
+    
+  
+  <meta name="description" content="在[First Interpreter From EOPL][1]中我们定义了一个最为基本的解释器，包含解释以下解释部分
+
+const-exp
+diff-exp
+zero?-exp
+if-exp
+var-exp
+let-exp
+
+这六种是比较基础的形式，在此基础上我们可以增加四则运算，加入list操作，加入逻辑比较" />
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://jueqingsizhe66.github.io/archives/the-second-interpreter-from-one/" />
+
+  
+  
+  
+    <meta name="theme-color" content="#1565c0" />
+  
+
+  
+  
+    
+    <script src="/js/mathjax-config.js"></script>
+  
+
+  
+
+  <link rel="stylesheet" href="/css/vendor-bundle.min.f1ecf783c14edc00c9320c205831ad8e.css" media="print" onload="this.media='all'">
+
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css" integrity="sha512-W0xM4mr6dEP9nREo7Z9z+9X70wytKvMGeDsj7ps2+xg5QPrEBXC8tAW1IFnzjR6eoJ90JmCnFzerQJTLzIEHjA==" crossorigin="anonymous" media="print" onload="this.media='all'">
+    
+
+    
+    
+    
+    
+      
+      
+    
+    
+    
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/github.min.css" crossorigin="anonymous" title="hl-light" media="print" onload="this.media='all'">
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" media="print" onload="this.media='all'" disabled>
+        
+      
+    
+
+    
+    
+    
+
+    
+
+    
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.2a9113cdaa287c8aabad4aa82208fdf3.css" />
+
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+    <link rel="manifest" href="/manifest.webmanifest" />
+  
+
+  <link rel="icon" type="image/png" href="/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_32x32_fill_lanczos_center_3.png" />
+  <link rel="apple-touch-icon" type="image/png" href="/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_180x180_fill_lanczos_center_3.png" />
+
+  <link rel="canonical" href="https://jueqingsizhe66.github.io/archives/the-second-interpreter-from-one/" />
+
+  
+  
+  
+  
+  
+  
+  
+  
+    
+    
+  
+  
+
+  
+  
+    
+    
+  
+  <meta property="twitter:card" content="summary" />
+  
+    <meta property="twitter:site" content="@jueqingsihe66" />
+    <meta property="twitter:creator" content="@jueqingsihe66" />
+  
+  <meta property="og:site_name" content="30年磨一剑" />
+  <meta property="og:url" content="https://jueqingsizhe66.github.io/archives/the-second-interpreter-from-one/" />
+  <meta property="og:title" content="The Second Interpreter from One | 30年磨一剑" />
+  <meta property="og:description" content="在[First Interpreter From EOPL][1]中我们定义了一个最为基本的解释器，包含解释以下解释部分
+
+const-exp
+diff-exp
+zero?-exp
+if-exp
+var-exp
+let-exp
+
+这六种是比较基础的形式，在此基础上我们可以增加四则运算，加入list操作，加入逻辑比较" /><meta property="og:image" content="https://jueqingsizhe66.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" />
+    <meta property="twitter:image" content="https://jueqingsizhe66.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
+  
+    
+      <meta
+        property="article:published_time"
+        content="2016-02-27T01:04:52&#43;08:00"
+      />
+    
+    <meta property="article:modified_time" content="2016-02-27T01:04:52&#43;08:00">
+  
+
+  
+
+
+
+  
+
+  
+
+  
+
+
+
+
+
+  <title>The Second Interpreter from One | 30年磨一剑</title>
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="84b7ca5e180acf43197c90859f1066e0" >
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.7e5427316d1b14a30f257ae3467b3e21.js"></script>
+
+  
+
+
+<aside class="search-modal" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="Search...">
+        
+      </div>
+
+      
+      
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="header--fixed">
+  <nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+    <div class="container-xl">
+
+      
+      <div class="d-none d-lg-inline-flex">
+        <a class="navbar-brand" href="/">30年磨一剑</a>
+      </div>
+      
+
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+      <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+      
+      <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+        <a class="navbar-brand" href="/">30年磨一剑</a>
+      </div>
+      
+
+      
+      
+      <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+        
+        <ul class="navbar-nav d-md-inline-flex">
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#hero"><span>概要</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#posts"><span>博文</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/about/"><span>About</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/categories/"><span>分类</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link  active" href="/archives"><span>归档</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#tags"><span>标签</span></a>
+          </li>
+
+          
+          
+
+        
+
+          
+        </ul>
+      </div>
+
+      <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+        
+        
+          
+        
+
+        
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+        
+        
+        <li class="nav-item dropdown theme-dropdown">
+          <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+            <i class="fas fa-moon" aria-hidden="true"></i>
+          </a>
+          <div class="dropdown-menu">
+            <a href="#" class="dropdown-item js-set-theme-light">
+              <span>Light</span>
+            </a>
+            <a href="#" class="dropdown-item js-set-theme-dark">
+              <span>Dark</span>
+            </a>
+            <a href="#" class="dropdown-item js-set-theme-auto">
+              <span>Automatic</span>
+            </a>
+          </div>
+        </li>
+        
+
+        
+        
+
+      </ul>
+
+    </div>
+  </nav>
+</header>
+
+
+  </div>
+
+  <div class="page-body">
+    
+    
+    
+
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+  
+ <script async src="//cdn.busuanzi.ibruce.info/cdn/busuanzi/2.3/busuanzi.pure.mini.js"></script> 
+ <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script> 
+ <script> 
+     $(document).ready(function() { 
+         var int = setInterval(fixCount, 100); 
+         var busuanziSiteOffset =  100000  
+         function fixCount() { 
+             if ($("#busuanzi_container_site_pv").css("display") != "none") { 
+                 clearInterval(int); 
+                 $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + busuanziSiteOffset); 
+             } 
+         } 
+     }); 
+ </script> 
+  
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>The Second Interpreter from One</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Feb 27, 2016
+  </span>
+  
+
+  
+
+  
+
+  
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/category/programme/">programme</a></span>
+  
+
+</div>
+
+    
+
+
+
+
+
+  
+</div>
+
+
+
+
+
+<span class="article-metadata" >Reading time: 16 minutes and    34 seconds with 3645 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+    <aside>
+        <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#注意操作符后面不是必须直接跟上括号空格会被直接忽略-而是应该保证括号的对称性">注意操作符后面不是必须直接跟上括号(空格会被直接忽略) 而是应该保证括号的对称性。</a></li>
+        <li><a href="#一个问题">一个问题</a></li>
+      </ul>
+    </li>
+    <li><a href="#结论">结论</a></li>
+  </ul>
+</nav>
+    </aside>
+  <div class="article-container">
+
+
+    <div class="article-style">
+      <p>在[First Interpreter From EOPL][1]中我们定义了一个最为基本的解释器，包含解释以下解释部分</p>
+<ol>
+<li>const-exp</li>
+<li>diff-exp</li>
+<li>zero?-exp</li>
+<li>if-exp</li>
+<li>var-exp</li>
+<li>let-exp</li>
+</ol>
+<p>这六种是比较基础的形式，在此基础上我们可以增加四则运算，加入list操作，加入逻辑比较</p>
+<ul>
+<li><a href="#1">1. 增加四则运算</a>
+<ul>
+<li><a href="#1.1">1.1 lang.scm修改四则运算</a></li>
+<li><a href="#1.2">1.2 interp.scm修改四则运算</a></li>
+<li><a href="#1.3">1.3 测试四则运算结果</a></li>
+</ul>
+</li>
+<li><a href="#2">2. 增加逻辑比较</a>
+<ul>
+<li><a href="#2.1">2.1 lang.scm修改逻辑比较</a></li>
+<li><a href="#2.2">2.2 interp.scm修改逻辑比较</a></li>
+<li><a href="#2.3">2.3 测试逻辑比较结果</a></li>
+</ul>
+</li>
+<li><a href="#3">3. 加入列表操作</a>
+<ul>
+<li><a href="#3.1">3.1 lang.scm修改列表操作</a></li>
+<li><a href="#3.2">3.2 interp.scm修改列表操作</a></li>
+<li><a href="#3.3">3.3 data-structures.scm增加了expval值类型和4个操作</a></li>
+<li><a href="#3.4">3.4 测试修改列表操作结果</a></li>
+</ul>
+</li>
+<li><a href="#4">4. list具体实现</a>
+<ul>
+<li><a href="#4.1">4.1 lang.scm修改list具体实现</a></li>
+<li><a href="#4.2">4.2 interp.scm修改list具体实现</a></li>
+<li><a href="#4.3">4.3 data-structures.scm修改list的具体实现</a></li>
+<li><a href="#4.4">4.3 测试list具体实现结果</a></li>
+</ul>
+</li>
+<li><a href="#5">5. cond条件比较</a>
+<ul>
+<li><a href="#5.1">5.1 lang.scm修改cond条件比较</a></li>
+<li><a href="#5.2">5.2 interp.scm修改cond条件比较</a></li>
+<li><a href="#5.3">5.3 测试cond条件比较结果</a></li>
+</ul>
+</li>
+<li><a href="#6">6. print显示</a>
+<ul>
+<li><a href="#6.1">6.1 lang.scm修改print显示</a></li>
+<li><a href="#6.2">6.2 interp.scm修改print显示</a></li>
+<li><a href="#6.3">6.3 测试print显示结果</a></li>
+</ul>
+</li>
+<li><a href="#7">7. let的改进和let*的加入</a>
+<ul>
+<li><a href="#7.1">7.1 let改进之interp.scm</a></li>
+<li><a href="#7.2">7.2 let改进之lang.scm</a></li>
+<li><a href="#7.3">7.3 let改进结果</a></li>
+<li><a href="#7.4">7.4 let*的lang.scm具体实现</a></li>
+<li><a href="#7.5">7.5 let*的interp.scm具体实现</a></li>
+<li><a href="#7.6">7.6 let*的测试结果</a></li>
+</ul>
+</li>
+<li><a href="#8">8. unpack列表赋值</a>
+<ul>
+<li><a href="#8.1">8.1 unpack的interp.scm修改</a></li>
+<li><a href="#8.2">8.2 unpack的lang.scm修改</a></li>
+<li><a href="#8.3">8.3 测试unpack修改结果</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="1"> 1. 增加四则运算  </h2>
+<h3 id="1.1"> 1.1 lang.scm修改四则运算</h3>
+<p>在the-grammer增加如下expressions</p>
+<pre><code class="language-scheme">      ;;;new add + * /
+    (expression (&quot;+&quot; &quot;(&quot; expression &quot;,&quot; expression &quot;)&quot;) add-exp)
+    (expression (&quot;*&quot; &quot;(&quot; expression &quot;,&quot; expression &quot;)&quot;) mult-exp)
+    (expression (&quot;/&quot; &quot;(&quot; expression &quot;,&quot; expression &quot;)&quot;) div-exp)
+</code></pre>
+<h3 id="1.2"> 1.2 interp.scm修改四则运算</h3>
+<p>在value-of增加如下expressions</p>
+<pre><code class="language-scheme">           (add-exp (exp1 exp2)
+		    (let ((val1 (value-of exp1 env))
+			  (val2 (value-of exp2 env)))
+		      (let ((num1 (expval-&gt;num val1))
+			    (num2 (expval-&gt;num val2)))
+			(num-val
+			 (+ num1 num2)))))
+           (mult-exp (exp1 exp2)
+                     (let ((val1 (value-of exp1 env))
+                           (val2 (value-of exp2 env)))
+                       (let ((num1 (expval-&gt;num val1))
+                             (num2 (expval-&gt;num val2)))
+                         (num-val
+                          (* num1 num2)))))
+           (div-exp (exp1 exp2)
+		    (let ((val1 (value-of exp1 env))
+			  (val2 (value-of exp2 env)))
+		      (let ((num1 (expval-&gt;num val1))
+			    (num2 (expval-&gt;num val2)))
+			(num-val
+			 (/ num1 num2)))))
+</code></pre>
+<h3 id="1.3"> 1.3 测试四则运算结果</h3>
+<p>在原先减法的基础上增加了乘法、加法和除法。</p>
+<pre><code class="language-scheme">(run &quot;let x = -(4,1) in +(x,1)&quot;)
+(run &quot;let x = -(4,1) in *(x,2)&quot;)
+(run &quot;let x = -(4,1) in /(x,2)&quot;)
+
+结果:
+    (num-val 4)
+    (num-val 6)
+    (num-val 1 1/2)
+</code></pre>
+<h2 id="2"> 2. 增加逻辑比较  </h2>
+<h3 id="2.1"> 2.1 lang.scm修改逻辑比较</h3>
+<pre><code class="language-scheme"> ;;增加逻辑比较
+    (expression (&quot;equal?&quot; &quot;(&quot; expression &quot;,&quot; expression &quot;)&quot;) equal?-exp)
+    (expression (&quot;less?&quot; &quot;(&quot; expression &quot;,&quot; expression &quot;)&quot;) less?-exp)
+    (expression (&quot;greater?&quot; &quot;(&quot; expression &quot;,&quot; expression &quot;)&quot;) greater?-exp)
+    (expression (&quot;minus&quot; &quot;(&quot; expression &quot;)&quot;) minus-exp)
+</code></pre>
+<h3 id="2.2"> 2.2 interp.scm修改逻辑比较</h3>
+``` scheme
+           (equal?-exp (exp1 exp2)
+                    (let ((val1 (value-of exp1 env))
+                          (val2 (value-of exp2 env)))
+                      (let ((num1 (expval->num val1))
+                            (num2 (expval->num val2)))
+                        (bool-val
+                         (= num1 num2)))))
+<pre><code>       (less?-exp (exp1 exp2)
+                (let ((val1 (value-of exp1 env))
+                      (val2 (value-of exp2 env)))
+                  (let ((num1 (expval-&gt;num val1))
+                        (num2 (expval-&gt;num val2)))
+                    (bool-val
+                     (&lt; num1 num2)))))
+
+       (greater?-exp (exp1 exp2)
+                (let ((val1 (value-of exp1 env))
+                      (val2 (value-of exp2 env)))
+                  (let ((num1 (expval-&gt;num val1))
+                        (num2 (expval-&gt;num val2)))
+                    (bool-val
+                     (&gt; num1 num2)))))
+    (minus-exp (body-exp)
+              (let ((val1 (value-of body-exp env)))
+                (let ((num (expval-&gt;num val1)))
+                  (num-val (- 0 num)))))
+</code></pre>
+<pre><code>
+&lt;h3 id=&quot;2.3&quot;&gt; 2.3 测试增加逻辑比较结果&lt;/h3&gt;
+
+``` scheme
+(run &quot;if less?(1, 2) then 1 else 2&quot;)
+(run &quot;if greater?(2, 1) then minus(1) else minus(2)&quot;)
+
+    (num-val 1)
+    (num-val -1)
+</code></pre>
+<h2 id="3"> 3. 加入列表操作  </h2>
+<h3 id="3.1"> 3.1 lang.scm修改列表操作</h3>
+<pre><code class="language-scheme">;;; 增加list比较
+        ;;new stuff
+    (expression (&quot;cons&quot; &quot;(&quot; expression &quot;,&quot; expression &quot;)&quot;) cons-exp)
+    (expression (&quot;car&quot; &quot;(&quot; expression &quot;)&quot;) car-exp)
+    (expression (&quot;cdr&quot; &quot;(&quot; expression &quot;)&quot;) cdr-exp)
+    (expression (&quot;emptylist&quot;) emptylist-exp)
+    (expression (&quot;null?&quot; &quot;(&quot; expression &quot;)&quot;) null?-exp)
+</code></pre>
+<h3 id="3.2"> 3.2 interp.scm修改列表操作</h3>
+<pre><code class="language-scheme">        ;;;增加了list操作
+        (emptylist-exp ()
+                      (emptylist-val))
+        (cons-exp (exp1 exp2)
+                 (let ((val1 (value-of exp1 env))
+                       (val2 (value-of exp2 env)))
+                   (pair-val val1 val2)))
+        (car-exp (body)
+                (expval-car (value-of body env)))
+        (cdr-exp (body)
+                (expval-cdr (value-of body env)))
+        (null?-exp (exp)
+                  (expval-null? (value-of exp env)))
+</code></pre>
+<h3 id="3.3"> 3.3 data-structures.scm增加了expval值类型和4个操作</h3>
+<ul>
+<li>修改expval部分</li>
+</ul>
+<p>增加了<code>pair-val</code>和<code>emptylist-val</code> 两个语言的新值，这也是区分之前的<a href="#1">四则运算</a>和<a href="#2">逻辑比较</a>的过程</p>
+<pre><code class="language-scheme">    (pair-val
+     (car expval?)
+     (cdr expval?))
+    (emptylist-val)
+</code></pre>
+<ul>
+<li>增加了4个expval类型变换操作</li>
+</ul>
+<pre><code class="language-scheme">
+;;增加4个expval-&gt;操作
+(define expval-&gt;pair
+  (lambda (v)
+    (cases expval v
+	   (pair-val (car cdr)
+		     (cons car cdr))
+	   (else (expval-extractor-error 'pair v)))))
+
+(define expval-car
+  (lambda (v)
+    (cases expval v
+	   (pair-val (car cdr) car)
+	   (else (expval-extractor-error 'car v)))))
+
+(define expval-cdr
+  (lambda (v)
+    (cases expval v
+	   (pair-val (car cdr) cdr)
+	   (else (expval-extractor-error 'cdr v)))))
+
+(define expval-null?
+  (lambda (v)
+    (cases expval v
+	   (emptylist-val () (bool-val #t))
+	   (else (bool-val #f)))))
+
+</code></pre>
+<h3 id="3.4"> 3.4 测试修改列表操作结果</h3>
+<pre><code class="language-scheme">(run &quot;cons(1, 2)&quot;)
+(run &quot;car (cons (1, 2))&quot;)
+(run &quot;cdr (cons (1, 2))&quot;)
+(run &quot;null? (emptylist)&quot;)
+(run &quot;null? (cons (1, 2))&quot;)
+
+(run &quot;let x = 4
+        in cons(x,
+          cons(cons(-(x,1),
+                    emptylist),
+                   emptylist))&quot;)
+
+    (pair-val (num-val 1) (num-val 2))
+    (num-val 1)
+    (num-val 2)
+    (bool-val #t)
+    (bool-val #f)
+    (pair-val (num-val 4) (pair-val (pair-val (num-val 3) (emptylist-val)) (emptylist-val)))
+</code></pre>
+<p>错误的测试：</p>
+<pre><code class="language-scheme">&gt; (run &quot;car (3 5 3)&quot;)
+. . parsing: at line 1: looking for &quot;)&quot;, found number 5 in production
+((string &quot;car&quot;) (string &quot;(&quot;) (non-term expression) (string &quot;)&quot;) (reduce #&lt;procedure:car-exp&gt;))
+&gt; (run &quot;car (3,5)&quot;)
+. . parsing: at line 1: looking for &quot;)&quot;, found literal-string111 &quot;,&quot; in production
+((string &quot;car&quot;) (string &quot;(&quot;) (non-term expression) (string &quot;)&quot;) (reduce #&lt;procedure:car-exp&gt;))
+&gt; (run &quot;null? ()&quot;)
+. . parsing: at line 1: nonterminal &lt;expression&gt; can't begin with literal-string111 &quot;)&quot;
+&gt; (run &quot;car (cons (3,5))&quot;)
+(num-val 3)
+</code></pre>
+<p>具体原因是car-exp的定义是通过expval-car的实现，而expval-car接受的是cons创造的数据结构，所以出现了问题。</p>
+<pre><code class="language-scheme">  (car-exp (body) (expval-car (value-of body env)))
+
+
+(pair-val
+ (car expval?)
+ (cdr expval?))
+(emptylist-val)
+
+
+(define expval-car
+  (lambda (v)
+    (cases expval v
+     (pair-val (car cdr) car)   ;;v在这边是expval类型,更具体来说是pair-val,其他类型没有对应的操作
+                                ;;而在当前的情况细 pair-val只能通过cons创建！！
+     (else (expval-extractor-error 'car v)))))
+
+
+并需要增加pair-var?的数据类型
+
+  (define-datatype expval expval?
+    (num-val
+     (value number?))
+    (bool-val
+     (boolean boolean?))
+    (pair-val
+     (car expval?)
+     (cdr expval?))
+    (emptylist-val))
+
+
+可以参考value-of中关于cons-exp的定义：
+    (cons-exp (exp1 exp2)
+             (let ((val1 (value-of exp1 env))
+                   (val2 (value-of exp2 env)))
+               (pair-val val1 val2)))
+</code></pre>
+<h3 id="注意操作符后面不是必须直接跟上括号空格会被直接忽略-而是应该保证括号的对称性">注意操作符后面不是必须直接跟上括号(空格会被直接忽略) 而是应该保证括号的对称性。</h3>
+<pre><code class="language-scheme">&gt; (run &quot;* (3,4&quot;)
+. . parsing: at line 1: looking for &quot;)&quot;, found end-marker #f in production
+((string &quot;*&quot;) (string &quot;(&quot;) (non-term expression) (string &quot;,&quot;) (non-term expression) (string &quot;)&quot;) (reduce #&lt;procedure:mult-exp&gt;))
+&gt; (run &quot;+(3,4)&quot;)
+(num-val 7)
+&gt; (run &quot;*(3,4)&quot;)
+(num-val 12)
+</code></pre>
+<h2 id="4"> 4.list的具体实现 </h2>
+<h3 id="4.1"> 4.1 lang.scm修改list具体实现</h3>
+<pre><code class="language-scheme">
+    (expression (&quot;list&quot; &quot;(&quot; (separated-list expression &quot;,&quot;) &quot;)&quot; ) list-exp)
+</code></pre>
+<h3 id="4.2"> 4.2 interp.scm修改list具体实现</h3> 
+<ol>
+<li>增加一个apply-elm用于list操作。</li>
+</ol>
+<pre><code class="language-scheme">  ;; used as map for the list
+(define apply-elm
+  (lambda (env)
+    (lambda (elem)
+      (value-of elem env))))
+</code></pre>
+<ol start="2">
+<li>增加了list类型</li>
+</ol>
+<pre><code class="language-scheme">  ;;; 增加了list操作
+  (list-exp (args)
+           (list-val (map (apply-elm env) args)))
+</code></pre>
+<h3 id="4.3"> 4.3 data-structures.scm修改list的具体实现 </h3>
+<p>增加了list-val的实现:</p>
+<pre><code class="language-scheme">
+;;;增加了list的具体实现
+  (define list-val
+  (lambda (args)
+    (if (null? args)
+	(emptylist-val)
+	(pair-val (car args)
+		  (list-val (cdr args))))))
+
+</code></pre>
+<h3 id="4.4"> 4.4 测试list具体实现的结果</h3>
+<pre><code class="language-scheme">(run &quot;list(1, 2, 3)&quot;)
+(run &quot;car(cdr(list(1, 2, 3)))&quot;)
+(run &quot;let x = 4
+      in list(x, -(x,1), -(x,3))&quot;)
+
+    (pair-val (num-val 1) (pair-val (num-val 2) (pair-val (num-val 3) (emptylist-val))))
+    (num-val 2)
+    (pair-val (num-val 4) (pair-val (num-val 3) (pair-val (num-val 1) (emptylist-val))))
+
+</code></pre>
+<h2 id="5">5. cond条件比较 </h2>
+<h3 id="5.1"> 5.1 lang.scm修改cond条件比较 </h3>
+<pre><code class="language-scheme">;;增加了cond具体语法
+;; new stuff
+(expression (&quot;cond&quot; (arbno expression &quot;==&gt;&quot; expression) &quot;end&quot;) cond-exp)
+
+</code></pre>
+<h3 id="5.2"> 5.2 interp.scm修改cond条件比较 </h3>
+<ol>
+<li>增加一个cond-val，之所以不在类似<a href="#3">加入列表实现</a>和<a href="#4">list具体实现</a>添加val转换，是因为cond-val涉及到value-of
+程序，所以需要放在interp.scm中,放在apply-elm之后即可.</li>
+</ol>
+<pre><code class="language-scheme">;;增加了cond-val的处理
+;;new stuff
+(define cond-val
+  (lambda (conds acts env)
+    (cond ((null? conds)
+	   (error 'cond-val &quot;No conditions got into #t&quot;))
+	  ((expval-&gt;bool (value-of (car conds) env))
+	   (value-of (car acts) env))
+	  (else
+	   (cond-val (cdr conds) (cdr acts) env)))))
+</code></pre>
+<ol start="2">
+<li>在value-of中增加了具体的实现</li>
+</ol>
+<pre><code class="language-scheme">        ;;;增加了cond操作
+        	   (cond-exp (conds acts)
+		     (cond-val conds acts env))
+</code></pre>
+<h3 id="5.3"> 5.3 测试cond条件比较结果</h3>
+<pre><code class="language-scheme">(run &quot;less?(1, 2)&quot;)
+(run &quot;cond less?(1, 2) ==&gt; 2 end&quot;)
+(run &quot;cond less?(2, 1) ==&gt; 1 greater?(2, 2) ==&gt; 2  greater?(3, 2) ==&gt; 3 end&quot;)
+
+    (bool-val #t)
+    (num-val 2)
+    (num-val 3)
+</code></pre>
+<h2 id="6"> 6. print显示 </h2>
+<h3 id="6.1"> 6.1 lang.scm修改print显示</h3>
+<pre><code class="language-scheme">  ;; new stuff
+    (expression (&quot;print&quot; &quot;(&quot; expression &quot;)&quot;) print-exp)
+</code></pre>
+<h3 id="6.2"> 6.2 interp.scm修改print显示</h3>
+<pre><code class="language-scheme">        ;;;增加了print
+        (print-exp (arg)
+                  (let ((val (value-of arg env)))
+                    ;(print val)  ;;编译不通过 改为display
+                    (display val) ;
+                    (num-val 1)))
+</code></pre>
+<h3 id="6.3"> 6.3 测试print显示结果</h3>
+<pre><code class="language-scheme">(run &quot;print( less? (1, 2))&quot;)
+    #(struct:bool-val #t)(num-val 1)
+</code></pre>
+<h2 id="7"> 7. let的改进和let*的加入 </h2>
+<h3 id="一个问题">一个问题</h3>
+<p>怎么会有问题？</p>
+<pre><code> (run &quot;let x = 30
+      in let x = -(x,1)
+             y = -(x,2)
+         in -(x, y)&quot;)
+. . parsing: at line 3: looking for &quot;in&quot;, found identifier y in production
+((string &quot;let&quot;) (term identifier) (string &quot;=&quot;) (non-term expression) (string &quot;in&quot;) (non-term expression) (reduce #&lt;procedure:let-exp&gt;))
+</code></pre>
+<p>分析原先的let设计程序</p>
+<pre><code>        (let-exp (var exp1 body)       
+                (let ((val1 (value-of exp1 env)))
+                  (value-of body
+                           (extend-env var val1 env))))
+</code></pre>
+<p>在这个具体实现其实并没有实现多重let的过程，所以导致有问题，所以下一步的关键问题是如何实现嵌套的let-exp解析。</p>
+<h3 id="7.1"> let改进之interp.scm 修改 </h3>
+<ol>
+<li>增加两个let-exp的辅助程序</li>
+</ol>
+<pre><code class="language-scheme">  ;; let-exp的嵌套实现
+  
+  (define value-of-vals
+    (lambda (vals env)
+      (if (null? vals)
+         '()
+         (cons (value-of (car vals) env)
+              (value-of-vals (cdr vals) env)))))
+  
+  (define extend-env-list
+    (lambda (vars vals env)
+      (if (null? vars)
+         env
+         (let ((var1 (car vars))
+               (val1 (car vals)))
+           (extend-env-list (cdr vars) (cdr vals) (extend-env var1 val1 env))))))
+</code></pre>
+<ol start="2">
+<li>改变letexp的具体实现</li>
+</ol>
+<pre><code class="language-scheme">
+ ;       (let-exp (var exp1 body)       
+ ;               (let ((val1 (value-of exp1 env)))
+ ;                (value-of body
+ ;                          (extend-env var val1 env))))
+        
+        (let-exp (vars vals body)
+                (let ((_vals (value-of-vals vals env)))
+                  (value-of body (extend-env-list vars _vals env))))
+</code></pre>
+<h3 id="7.2"> 7.2 let改进之lang.scm  </h3>
+<pre><code class="language-scheme">  ;    (expression
+  ;     (&quot;let&quot; identifier &quot;=&quot; expression &quot;in&quot; expression)
+  ;     let-exp)
+      (expression 
+        (&quot;let&quot; (arbno identifier &quot;=&quot; expression) &quot;in&quot; expression) 
+        let-exp)
+</code></pre>
+<p>还是没改好？</p>
+<pre><code>link: bad variable linkage;
+ reference to a variable that is uninitialized
+  reference phase level: 0
+  variable module: &quot;/home/canbetter/let-lang/lang.scm&quot;
+  variable phase: 0
+  reference in module: &quot;/home/canbetter/let-lang/interp.scm&quot; in: a-program?
+</code></pre>
+<p>原因出现在let语法中增加了 <code>(arbno ...)</code>操作。</p>
+<p>这个问题可以赘述到cond-exp的实现,其中也涉及到arbno的第一次键入。但是为什么会出现未初始化变量的情况？</p>
+<p>但是主要还是因为保存得不彻底！！导致了并未初始化，重新保存即可。</p>
+<h3 id="7.3"> 7.3 let改进结果 </h3>
+<pre><code class="language-scheme">(run &quot;let x = -(4,1) in let x =+(x,1) in -(x,10)&quot;)
+
+    (num-val -6)
+(run &quot;let x = -(4,1) in let x =+(x,1)  y=-(x,10) in -(x,y)&quot;)
+
+    (num-val 11) ;; x=4 y=-(3,10)=-7  所以-(x,y)=11而不是 10
+</code></pre>
+<p>那么如何实现一个let*，使得let中的x变化的值立即反映到y中。</p>
+<h3 id="7.4"> 7.4 let*的lang.scm具体实现 </h3>
+<p>该实现方式基本上和<a href="#7.2">let的语法</a>一样</p>
+<pre><code class="language-scheme">      (expression (&quot;let*&quot; (arbno identifier &quot;=&quot; expression) &quot;in&quot; expression) let*-exp)
+      
+</code></pre>
+<h3 id="7.5"> 7.5 let*的interp.scm具体实现 </h3>
+<ol>
+<li>增加了一个extend-env-list-iter操作,由于也是存在value-of所以放入interp.scm中。</li>
+</ol>
+<pre><code class="language-scheme">  (define extend-env-list-iter
+    (lambda(vars vals env)
+      (if (null? vars)
+         env
+         (let ((var1 (car vars))
+               (val1 (value-of (car vals) env)))
+           (extend-env-list-iter (cdr vars) (cdr vals)
+                                (extend-env var1 val1 env))))))
+</code></pre>
+<ol start="2">
+<li>let*的类型定义</li>
+</ol>
+<pre><code class="language-scheme">
+        (let*-exp (vars vals body)
+                 (value-of body (extend-env-list-iter vars vals env)))
+</code></pre>
+<h3 id="7.6"> 7.6 let*的测试结果 </h3>
+<pre><code class="language-scheme">(run &quot;let x = 30
+      in let x = -(x,1)
+             y = -(x,2)
+         in -(x, y)&quot;)
+
+(run &quot;let x = 30
+      in let* x = -(x,1)
+             y = -(x,2)
+         in -(x, y)&quot;)
+
+
+    (num-val 1)
+    (num-val 2)
+</code></pre>
+<h2 id="8"> 8. unpack列表赋值 </h2>
+<h3 id="8.1"> 8.1 unpack的interp.scm修改 </h3>
+<ol>
+<li>增加了extend-env-list-exp的操作，用于针对unpack的特殊的环境拓展,当然可以把它放在data-structures.scm中</li>
+</ol>
+<pre><code class="language-scheme">  ;;; 关于unpack的操作
+  (define extend-env-list-exp
+    (lambda (vars vals env)
+      (if (null? vars)
+         env
+         (let ((var1 (car vars))
+               (val1 (expval-car vals)))
+           (extend-env-list-exp (cdr vars)
+                               (expval-cdr vals)
+                               (extend-env var1 val1 env))))))
+</code></pre>
+<ol start="2">
+<li>unpack-exp的具体实现:</li>
+</ol>
+<pre><code class="language-scheme">        (unpack-exp (vars vals body)
+                   (let ((_vals (value-of vals env)))
+                     (value-of body (extend-env-list-exp vars _vals env))))
+</code></pre>
+<h3 id="8.2"> 8.2 unpack的lang.scm修改   </h3>
+<pre><code class="language-scheme">;;new stuff
+    (expression (&quot;unpack&quot; (arbno identifier) &quot;=&quot; expression &quot;in&quot; expression) unpack-exp)
+</code></pre>
+<h3 id="8.3"> 8.3 测试unpack修改结果  </h3>
+<pre><code class="language-scheme">;; new testcase
+(run &quot;let u = 7
+      in unpack x y = cons(u, cons(3,emptylist))
+      in -(x,y)&quot;)
+
+
+(num-val 4)  ;;;(x y)= (7 3)  -(7,3)=4
+</code></pre>
+<h2 id="结论">结论</h2>
+<p>这是这对[First Interpreter From EOPL][1] 的8个方面的拓展，对于认识语言的设计有很大的帮助。</p>
+<p>1[]:http://jueqingsizhe66.github.io/blog/2016/02/25/first-interpreter-from-eopl/</p>
+    </div>
+ <div class="nav-links" style="padding:10;">
+        
+        <div align="left">
+        <a href="https://jueqingsizhe66.github.io/archives/ydiffdan-wen-jian-jia-de-suo-you-scmwen-jian-bi-jiao/"><span class="arrow">←</span> <strong>上一篇:Ydiff单文件夹的所有scm文件比较</strong></a>
+        </div>
+        
+        
+
+
+       <div align="right"> <a href="https://jueqingsizhe66.github.io/archives/the-third-interpreter-implementing-proc/" ><strong>下一篇:The third Interpreter implementing Proc </strong><span class="arrow">→</span></a></div>
+        
+      </div>
+    
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/scheme/">scheme</a>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="https://jueqingsizhe66.github.io/"><img class="avatar mr-3 avatar-circle" src="/author/%E4%BB%A4%E7%8B%90%E5%86%B2/avatar_huc99f1f2e739130747140db298bdd1890_46492_270x270_fill_q75_lanczos_center.jpg" alt="令狐冲"></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://jueqingsizhe66.github.io/">令狐冲</a></h5>
+      <h6 class="card-subtitle">Engineer of offshore wind turbine technique research</h6>
+      <p class="card-text">My research interests include distributed energy, wind turbine power generation technique , Computational fluid dynamic and programmable matter.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/jueqingsizhe66" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.co.uk/citations?user=7VyEMyQAAAAJ&amp;hl=zh-CN" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/jueqingsizhe66" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+         <span id="busuanzi_container_site_pv">
+             本站访问量：<span id="busuanzi_value_site_pv"></span>次
+         </span>
+         &nbsp;
+   </div>
+
+
+  </div>
+
+</article>
+<script src="https://utteranc.es/client.js"
+        repo="jueqingsizhe66/jueqingsizhe66.github.io"
+        issue-term="pathname"
+        theme="github-dark"
+        crossorigin="anonymous"
+        async>
+</script>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    ©2022 &middot; 
+
+    ^-^ LingHuChong ^-^ Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+      
+
+    
+    <script src="/js/vendor-bundle.min.3d946de2e8784a477845261d87025092.js"></script>
+
+    
+    
+    
+      
+      
+        <script src="https://cdn.jsdelivr.net/gh/desandro/imagesloaded@v4.1.4/imagesloaded.pkgd.min.js" integrity="sha512-S5PZ9GxJZO16tT9r3WJp/Safn31eu8uWrzglMahDT4dsmgqWonRY9grk3j+3tfuPr9WJNsfooOR7Gi7HL5W2jw==" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/gh/metafizzy/isotope@v3.0.6/dist/isotope.pkgd.min.js" integrity="sha512-Zq2BOxyhvnRFXu0+WE6ojpZLOU2jdnqbrM1hmVdGzyeCa1DgM3X5Q4A/Is9xA1IkbUeDd7755dNNI/PzSf2Pew==" crossorigin="anonymous"></script>
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/gh/mermaid-js/mermaid@v8.8.4/dist/mermaid.min.js" integrity="sha512-+TNmhaRJf3jyYHTpzEq/5I6b+aGyhzWb21mGdHAjxSGSYwxN9Grug3Y3B9qVxWfKKY8MscE/6mr9walWvFLFvQ==" crossorigin="anonymous" title="mermaid"></script>
+      
+
+      
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/highlight.min.js" integrity="sha512-Ypjm0o7jOxAd4hpdoppSEN0TQOC19UtPAqD+4s5AlXmUvbmmS/YMxYqAqarQYyxTnB6/rqip9qcxlNB/3U9Wdg==" crossorigin="anonymous"></script>
+        
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/r.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/latex.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/python.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/matlab.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/java.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/go.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/rust.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/c.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/perl.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/scheme.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/lisp.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/racket.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/awk.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/sed.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/bash.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/sql.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/vim.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/clojure.min.js" crossorigin="anonymous"></script>
+        
+      
+
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+      
+      <script id="search-hit-fuse-template" type="text/x-template">
+        <div class="search-hit" id="summary-{{key}}">
+          <div class="search-hit-content">
+            <div class="search-hit-name">
+              <a href="{{relpermalink}}">{{title}}</a>
+              <div class="article-metadata search-hit-type">{{type}}</div>
+              <p class="search-hit-description">{{snippet}}</p>
+            </div>
+          </div>
+        </div>
+      </script>
+      
+        <script src="https://cdn.jsdelivr.net/gh/krisk/Fuse@v3.2.1/dist/fuse.min.js" integrity="sha512-o38bmzBGX+hD3JHWUFCDA09btWaqrNmoJ3RXLlrysA7PP01Kgs4UlE4MhelE1v5dJR3+cxlR4qQlotsW7jKsnw==" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/gh/julmot/mark.js@8.11.1/dist/jquery.mark.min.js" integrity="sha512-mhbv5DqBMgrWL+32MmsDOt/OAvqr/cHimk6B8y/bx/xS88MVkYGPiVv2ixKVrkywF2qHplNRUvFsAHUdxZ3Krg==" crossorigin="anonymous"></script>
+      
+    
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+      
+      
+      
+      
+      
+      
+      
+    
+
+    
+
+    
+    
+    
+    <script id="page-data" type="application/json">{"use_headroom":true}</script>
+
+    
+    
+      <script src="/js/wowchemy-headroom.e8fd2d733eef6a8bbbe0539398fc0547.js" type="module"></script>
+    
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    <script src="/en/js/wowchemy.min.a2ed145159dd33ad55ff402163350b5d.js"></script>
+
+    
+    
+    
+    
+    
+    
+      
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      <script src="/js/wowchemy-publication.b0d291ed6d27eacec233e6cf5204f99a.js" type="module"></script>
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+
+
+
+</body>
+</html>

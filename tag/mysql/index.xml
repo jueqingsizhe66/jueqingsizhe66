@@ -7,7 +7,7 @@
     <description>Mysql</description>
     <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>©2022</copyright><lastBuildDate>Thu, 24 Feb 2022 00:16:00 +0800</lastBuildDate>
     <image>
-      <url>https://jueqingsizhe66.github.io/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
+      <url>https://jueqingsizhe66.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
       <title>Mysql</title>
       <link>https://jueqingsizhe66.github.io/tag/mysql/</link>
     </image>
@@ -44,38 +44,58 @@
 &lt;li&gt;&lt;code&gt;mysql -uroot -p新密码 &lt;/code&gt; ## 就可以正常登录了&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;my.cnf&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;[mysqld]
-&lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;设置&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3306&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;端口&lt;/span&gt;
-port&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3306&lt;/span&gt;
-&lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;设置&lt;/span&gt;mysql的安装目录
-basedir&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;D:&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;\&lt;/span&gt;java&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;\&lt;/span&gt;mysql&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;28&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;winx64
-&lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;设置&lt;/span&gt;mysql数据库的数据的存放目录
-datadir&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;D:&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;\&lt;/span&gt;java&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;\&lt;/span&gt;mysql&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;28&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;winx64&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;\&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;data&lt;/span&gt;
-&lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;允许最大连接数&lt;/span&gt;
-max_connections&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;
-&lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;允许连接失败的次数。这是为了防止有人从该主机试图攻击数据库系统&lt;/span&gt;
-max_connect_errors&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;
-&lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;服务端使用的字符集默认为&lt;/span&gt;UTF8
-character&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;server&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;utf8mb4
-&lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;创建新表时将使用的默认存储引擎&lt;/span&gt;
-&lt;span style=&#34;color:#66d9ef&#34;&gt;default&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;storage&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;engine&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;INNODB
-[mysql]
-&lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;设置&lt;/span&gt;mysql客户端默认字符集
-&lt;span style=&#34;color:#66d9ef&#34;&gt;default&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;character&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;utf8mb4
-[client]
-&lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;设置&lt;/span&gt;mysql客户端连接服务端时默认使用的端口
-port&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3306&lt;/span&gt;
-&lt;span style=&#34;color:#66d9ef&#34;&gt;default&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;character&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;utf8mb4&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[mysqld]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;设置&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3306&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;端口&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;port&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3306&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;设置&lt;/span&gt;mysql的安装目录
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;basedir&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;D:&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;\&lt;/span&gt;java&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;\&lt;/span&gt;mysql&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;28&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;winx64
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;设置&lt;/span&gt;mysql数据库的数据的存放目录
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;datadir&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;D:&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;\&lt;/span&gt;java&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;\&lt;/span&gt;mysql&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;28&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;winx64&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;\&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;data&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;允许最大连接数&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;max_connections&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;允许连接失败的次数。这是为了防止有人从该主机试图攻击数据库系统&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;max_connect_errors&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;服务端使用的字符集默认为&lt;/span&gt;UTF8
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;character&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;server&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;utf8mb4
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;创建新表时将使用的默认存储引擎&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;default&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;storage&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;engine&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;INNODB
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[mysql]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;设置&lt;/span&gt;mysql客户端默认字符集
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;default&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;character&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;utf8mb4
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[client]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;设置&lt;/span&gt;mysql客户端连接服务端时默认使用的端口
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;port&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3306&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;default&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;character&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;utf8mb4&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 </description>
     </item>
     
     <item>
       <title>Mysql乱码回顾</title>
-      <link>https://jueqingsizhe66.github.io/blog/2017/02/13/mysqlluan-ma-hui-gu/</link>
+      <link>https://jueqingsizhe66.github.io/archives/mysqlluan-ma-hui-gu/</link>
       <pubDate>Mon, 13 Feb 2017 10:04:33 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2017/02/13/mysqlluan-ma-hui-gu/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/mysqlluan-ma-hui-gu/</guid>
       <description>&lt;p&gt;mysql是一个中型的数据库操作系统平台,他的&lt;a href=&#34;http://www.linuxidc.com/Linux/2013-04/83581.htm&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;基本组成&lt;/a&gt;由存储引擎、各个命令模块、优化器、缓存器、解析器、用户模块、链接器(connector)等组成，&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/mysql/mysql-archetype.png&#34; alt=&#34;mysql architect&#34;&gt;&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/images/mysql/mysql-archetype.png&#34; alt=&#34;mysql architect&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;p&gt;其中存储引擎现在一般选用innodb居多(具体可以查看&lt;a href=&#34;http://c.biancheng.net/cpp/html/1465.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;各个存储引擎的区别&lt;/a&gt;)&lt;/p&gt;
 &lt;p&gt;mysql操作级别：&lt;/p&gt;
 &lt;ol&gt;
@@ -133,9 +153,9 @@ system    为数据库系统使用的字符集设定。
     
     <item>
       <title>perl读取mysql数据库</title>
-      <link>https://jueqingsizhe66.github.io/blog/2017/02/08/perldu-qu-mysqlshu-ju-ku/</link>
+      <link>https://jueqingsizhe66.github.io/archives/perldu-qu-mysqlshu-ju-ku/</link>
       <pubDate>Wed, 08 Feb 2017 17:25:49 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2017/02/08/perldu-qu-mysqlshu-ju-ku/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/perldu-qu-mysqlshu-ju-ku/</guid>
       <description>&lt;p&gt;perl中常见的文件打开关闭有open和IO模块等，而有时候涉及大量的
 数据保存和打开的时候，就得借助数据库的使用，提供缓存的功能，并
 使得保存的数据占用量最少，访问更快捷。下面就perl的mysql数据库访问
@@ -336,9 +356,9 @@ print table ({-border =&amp;gt; &amp;quot;1&amp;quot;}, @rows);
     
     <item>
       <title>mysql2月15日Java班作业笔记</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/05/11/mysql2yue-15ri-javaban-zuo-ye-bi-ji/</link>
+      <link>https://jueqingsizhe66.github.io/archives/mysql2yue-15ri-javaban-zuo-ye-bi-ji/</link>
       <pubDate>Mon, 11 May 2015 14:58:45 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/05/11/mysql2yue-15ri-javaban-zuo-ye-bi-ji/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/mysql2yue-15ri-javaban-zuo-ye-bi-ji/</guid>
       <description>&lt;p&gt;1、MYSQL官方版下载地址（不推荐初学者使用）：http://www.mysql.com/downloads/
 如鹏网版绿色免安装版MYSQL（推荐初学者使用）：http://pan.baidu.com/s/1c0COfGc
 2、 常用概念
@@ -909,7 +929,7 @@ mysql&amp;gt; select * from banana;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;可见在sql_mode=pad_char_to_full_length的情况下，char即使赋的值是abc三个字符，该类型也会填充到6个字符
 而varchar则是三个字符就三个字符
-而如果sql_mode = &#39;&#39; 呢？
+而如果sql_mode = &amp;rsquo;&amp;rsquo; 呢？
 sql_mode =&amp;lsquo;strict_all_tables&amp;rsquo;呢？&lt;/p&gt;
 &lt;p&gt;如果是sql_mode= &#39;&amp;rsquo;&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; set sql_mode=&#39;&#39;;
@@ -1397,7 +1417,7 @@ year     1000-9999（这种解释有点不可靠）&lt;/p&gt;
 1 row in set (0.00 sec)
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&amp;mdash;&amp;ndash;总结sql_mode的8种风格
-SET sql_mode =&#39;&#39;; &amp;mdash;default style
+SET sql_mode =&amp;rsquo;&amp;rsquo;; &amp;mdash;default style
 SET sql_mode=&amp;lsquo;PAD_CHAR_TO_FULL_LENGTH&amp;rsquo;;  &amp;ndash; 会填充到一定的长度
 SET sql_mode  = &amp;lsquo;STRICT_ALL_TABLES&amp;rsquo;;  &amp;ndash; 也就是当超过最大长度 会报错而不是截断
 SET sql_mode = &amp;lsquo;STRICT_ALL_TABLES,ERROR_FOR_DIVISION_BY_ZERO&amp;rsquo;;
@@ -1543,7 +1563,7 @@ mysql&amp;gt; select * from apple;
 2 rows in set (0.00 sec)
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&amp;mdash;&amp;mdash;&amp;mdash;&amp;ndash;默认为null时候添加  now()的值
-如果添加入不合适的值（再sql_mode = &#39;&amp;rsquo; 则是警告，如果是sql_mode=&amp;lsquo;strict_all_tables&amp;rsquo;则是错误提示 errors产生）&lt;/p&gt;
+如果添加入不合适的值（再sql_mode = &amp;rsquo;&amp;rsquo; 则是警告，如果是sql_mode=&amp;lsquo;strict_all_tables&amp;rsquo;则是错误提示 errors产生）&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; insert into apple value(&amp;quot;123&amp;quot;,100);
 Query OK, 1 row affected, 1 warning (0.10 sec)
 
@@ -1603,12 +1623,12 @@ show current_user();
 show user();
 show columns from apple; &amp;mdash;&amp;gt;显示apple表结构，类似explain 和desc
 show variables like &amp;lsquo;%sql_mode%&amp;rsquo;   &amp;mdash;-&amp;gt;和显式相关，是mysql比较重要的参数
-show variables like &amp;lsquo;log%&amp;rsquo;              &amp;mdash;-&amp;gt;会显示日志相关信息
+show variables like &amp;rsquo;log%&amp;rsquo;              &amp;mdash;-&amp;gt;会显示日志相关信息
 show variables like &amp;lsquo;max_connect%&amp;rsquo;  &amp;mdash;-&amp;gt;显式mysql供用户的最大连接数
 show variables like &amp;lsquo;%innodb%&amp;rsquo;       &amp;mdash;-&amp;gt;显式innodb相关的信息
 show variables like &amp;lsquo;%data%&amp;rsquo;           &amp;mdash;-&amp;gt;显式mysql 数据的存储相关信息
 show variables like &amp;lsquo;%time_zone%&amp;rsquo;  &amp;mdash;&amp;ndash;&amp;gt;显式时区相关信息
-show variables like &amp;lsquo;%character%&#39;;   &amp;mdash;-&amp;gt;显式字符集和编码的相关信息
+show variables like &amp;lsquo;%character%&amp;rsquo;;   &amp;mdash;-&amp;gt;显式字符集和编码的相关信息
 一些不常用的show variables
 show variables like &amp;lsquo;%query_cache%&amp;rsquo;  &amp;mdash;-&amp;gt;查询缓存，不想深入，据说是跟优化有关，DBA选手可以深入，有一个工业标准。
 show variables like &amp;lsquo;%key_buffer%&amp;rsquo;   &amp;mdash;&amp;mdash;&amp;gt;也和优化相关，也有工业标准值&lt;/p&gt;
@@ -1616,7 +1636,7 @@ show variables like &amp;lsquo;%key_buffer%&amp;rsquo;   &amp;mdash;&amp;mdash;&
 另外还可以显示当前系统的状态的详细值
 show status;
 show status like &amp;lsquo;%&amp;hellip;%&amp;rsquo;  &amp;mdash;-&amp;gt;显示某个值的信息
-mysql&amp;gt; show status like &amp;lsquo;%buffer%&#39;;&lt;/p&gt;
+mysql&amp;gt; show status like &amp;lsquo;%buffer%&amp;rsquo;;&lt;/p&gt;
 &lt;p&gt;信息值不是特别了解。。。&lt;/p&gt;
 &lt;p&gt;status 显式mysql当前库的使用情况：&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; status
@@ -2283,9 +2303,9 @@ Insert语句可以省略表名后的列名，但是强烈不推荐
     
     <item>
       <title>2月14日Java班mysql</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/05/11/2yue-14ri-javaban-mysql/</link>
+      <link>https://jueqingsizhe66.github.io/archives/2yue-14ri-javaban-mysql/</link>
       <pubDate>Mon, 11 May 2015 14:58:41 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/05/11/2yue-14ri-javaban-mysql/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/2yue-14ri-javaban-mysql/</guid>
       <description>&lt;p&gt;第一部分 笔记&lt;/p&gt;
 &lt;p&gt;1：关于事务在命令窗口的练习：
 事务  就是一连串命令的集合，只要这部命令都执行完毕，才能更新到数据库中，否则退出！！即使有一行比如 null.length()的存在空指针，则不成功。
@@ -2331,31 +2351,22 @@ ps.clearParameters()的作用是清空上一次数据的值，不影响到下一
 &lt;ol start=&#34;3&#34;&gt;
 &lt;li&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;mysql获取最后一次插入的id号函数，在java中也可以实现。&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; select last_insert_id();
-+------------------+
+&lt;p&gt;mysql&amp;gt; select last_insert_id();
++&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;+
 | last_insert_id() |
-+------------------+
-|                0 |
-+------------------+
-1 row in set (0.17 sec)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;有没有发现是0 ，即使是我最新插入也是这样；调查后发现是：&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; insert into t_person(Name,Age,Gender) values (&#39;悟空&#39;,30,1);
-Query OK, 1 row affected (0.04 sec)
-
-mysql&amp;gt; select last_insert_id();
-+------------------+
-| last_insert_id() |
-+------------------+
++&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;+
 |            11317 |
-+------------------+
-1 row in set (0.00 sec)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;如果你添加的时候，不要写上主键的值，则是可以！如果直接加上主键的值，则显示的是0！&lt;/p&gt;
-&lt;p&gt;第二部分 练习
-1.一个比较戳版本的JDBCUtils的版本，虽然没有错误，但是未关闭连接，且整体逻辑性不强，并多次加载驱动&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;/**
++&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;+
+1 row in set (0.00 sec)&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;如果你添加的时候，不要写上主键的值，则是可以！如果直接加上主键的值，则显示的是0！
+
+
+
+第二部分 练习
+1.一个比较戳版本的JDBCUtils的版本，虽然没有错误，但是未关闭连接，且整体逻辑性不强，并多次加载驱动
+
+```java
+/**
 * 
 */
 package com.jdbc.test;
@@ -3827,9 +3838,9 @@ JDBCUtils 第四遍重写：&lt;/li&gt;
     
     <item>
       <title>2月27日Java周末班试题</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/05/11/2yue-27ri-javazhou-mo-ban-shi-ti/</link>
+      <link>https://jueqingsizhe66.github.io/archives/2yue-27ri-javazhou-mo-ban-shi-ti/</link>
       <pubDate>Mon, 11 May 2015 14:58:41 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/05/11/2yue-27ri-javazhou-mo-ban-shi-ti/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/2yue-27ri-javazhou-mo-ban-shi-ti/</guid>
       <description>&lt;p&gt;0105班Java周末班试题（JDBC 9-16）
 阶段性考试（考试6个小时，讲评+重写6个小时）：
 记录完成每个题所需要的时长。
@@ -3849,7 +3860,27 @@ JDBCUtils 第四遍重写：&lt;/li&gt;
 第三题
 编写手机号码查询归属地案例。并记录写完需要的时间&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;%E7%AC%AC%E4%B8%80%E9%A2%98%E8%A1%A8%E6%A0%BC.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;%e7%ac%ac%e4%b8%80%e9%a2%98%e8%a1%a8%e6%a0%bc.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
 &lt;p&gt;考试未通过，中途出去，fail;&lt;/p&gt;
 &lt;p&gt;第一题：
 费时：4个小时左右

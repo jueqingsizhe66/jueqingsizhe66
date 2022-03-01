@@ -7,16 +7,16 @@
     <description>jQuery</description>
     <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>©2022</copyright><lastBuildDate>Mon, 11 May 2015 14:58:44 +0800</lastBuildDate>
     <image>
-      <url>https://jueqingsizhe66.github.io/images/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
+      <url>https://jueqingsizhe66.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
       <title>jQuery</title>
       <link>https://jueqingsizhe66.github.io/tag/jquery/</link>
     </image>
     
     <item>
       <title>JQuery1-9April4th</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/05/11/jquery1-9april4th/</link>
+      <link>https://jueqingsizhe66.github.io/archives/jquery1-9april4th/</link>
       <pubDate>Mon, 11 May 2015 14:58:44 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/05/11/jquery1-9april4th/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/jquery1-9april4th/</guid>
       <description>&lt;p&gt;1: jquery的加载顺序&lt;/p&gt;
 &lt;p&gt;IE中会有不同点
 结论：jquery中使用$(function(){})即可！其他知道即可&lt;/p&gt;
@@ -329,10 +329,10 @@ html()类似于 innerHtml()&lt;/p&gt;
 $(&amp;lsquo;div&amp;rsquo;,&amp;lsquo;p&amp;rsquo;)  相对容器   所有在p标签中的 div
 参考点不一样&lt;/p&gt;
 &lt;p&gt;注意
-//$(&amp;lsquo;this&amp;rsquo;).siblings.css(&amp;lsquo;backgroundColor&amp;rsquo;,&#39;&#39;);//可不敢再犯这个错误
+//$(&amp;rsquo;this&amp;rsquo;).siblings.css(&amp;lsquo;backgroundColor&amp;rsquo;,&amp;rsquo;&amp;rsquo;);//可不敢再犯这个错误
 //this不需要加上单引号
 //为什么无法直接行t添加上 颜色？ 因为真正在表面显示的是td
-//$(this).siblings().css(&amp;lsquo;backgroundColor&amp;rsquo;,&#39;&#39;);&lt;/p&gt;
+//$(this).siblings().css(&amp;lsquo;backgroundColor&amp;rsquo;,&amp;rsquo;&amp;rsquo;);&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;
 &amp;lt;html&amp;gt;
   &amp;lt;head&amp;gt;
@@ -549,7 +549,7 @@ $(&amp;lsquo;div&amp;rsquo;,&amp;lsquo;p&amp;rsquo;)  相对容器   所有在p�
 &lt;p&gt;一个小练习： 东西部篮球队&lt;/p&gt;
 &lt;p&gt;注意：
 //可不敢再犯这个错误   1  逗号写成了句话   2： siblings后直接街上css的参数
-//$(this).css(&amp;lsquo;backgroundColor&amp;rsquo;.&amp;lsquo;red&amp;rsquo;).siblings()&amp;lsquo;backgroundColor&amp;rsquo;,&#39;&#39;);&lt;/p&gt;
+//$(this).css(&amp;lsquo;backgroundColor&amp;rsquo;.&amp;lsquo;red&amp;rsquo;).siblings()&amp;lsquo;backgroundColor&amp;rsquo;,&amp;rsquo;&amp;rsquo;);&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;      //由此错误可得到一个结论
       // jQuery分成两个部分一个是获得Dom对象  紧接着是设置CSS样式！
       // 也就是js其实就是把这两个部分按照链条一样一对一对的串起来了
@@ -1264,13 +1264,13 @@ trigger()
     
     <item>
       <title>jQuery10-18节笔记代码April5th</title>
-      <link>https://jueqingsizhe66.github.io/blog/2015/05/11/jquery10-18jie-bi-ji-dai-ma-april5th/</link>
+      <link>https://jueqingsizhe66.github.io/archives/jquery10-18jie-bi-ji-dai-ma-april5th/</link>
       <pubDate>Mon, 11 May 2015 14:58:44 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/blog/2015/05/11/jquery10-18jie-bi-ji-dai-ma-april5th/</guid>
+      <guid>https://jueqingsizhe66.github.io/archives/jquery10-18jie-bi-ji-dai-ma-april5th/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;http://www.rupeng.com/forum/thread-45422-1-1.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;http://www.rupeng.com/forum/thread-45422-1-1.html&lt;/a&gt; jquery1-9
 1：移除元素
 $(&amp;lsquo;div&amp;rsquo;).empty()  清空层中的元素
-$(&amp;lsquo;div&amp;rsquo;).remove(&#39;.cls&#39;)   清空层中运用cls样式的元素
+$(&amp;lsquo;div&amp;rsquo;).remove(&amp;rsquo;.cls&amp;rsquo;)   清空层中运用cls样式的元素
 $(&amp;lsquo;div&amp;rsquo;).remove()  自我删除
 2: select 下拉框的练习
 单选移到另一个框
@@ -2209,7 +2209,7 @@ b.鼠标点击后则把该只球队剔除，并放在退赛球队中&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;    //突然明白  cookie只不过是一堆hashmap  临时存储在浏览器当中哦 
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;定义：&lt;/p&gt;
-&lt;p&gt;$.cookie(&amp;lsquo;uName&amp;rsquo;, $(&#39;#YourName&#39;).val());&lt;/p&gt;
+&lt;p&gt;$.cookie(&amp;lsquo;uName&amp;rsquo;, $(&amp;rsquo;#YourName&amp;rsquo;).val());&lt;/p&gt;
 &lt;p&gt;使用：&lt;/p&gt;
 &lt;p&gt;$.cookie(&amp;lsquo;uName&amp;rsquo;)&lt;/p&gt;
 &lt;p&gt;作用：&lt;/p&gt;

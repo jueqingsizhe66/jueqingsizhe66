@@ -1,0 +1,1643 @@
+<!DOCTYPE html><html lang="en-us" >
+
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  
+  
+    <meta name="generator" content="Wowchemy 5.4.0 for Hugo" />
+  
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+  
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="令狐冲" />
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Scheme解释器的好处是可以不断的拓展自己语言的能力，
+
+通过The First-interpreter-from-eopl创建了一个较为简单let-language，实现了较为简单的减法运算和let局部变量赋值等功能。
+The Second Interpreter from on第一次扩展了基础的let-language，实现了四则运算，逻辑判断，列表操作,列表赋值等。
+这个版本的解释器进一步拓展了过程定义和过程调用的功能。
+" />
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://jueqingsizhe66.github.io/archives/the-third-interpreter-implementing-proc/" />
+
+  
+  
+  
+    <meta name="theme-color" content="#1565c0" />
+  
+
+  
+  
+    
+    <script src="/js/mathjax-config.js"></script>
+  
+
+  
+
+  <link rel="stylesheet" href="/css/vendor-bundle.min.f1ecf783c14edc00c9320c205831ad8e.css" media="print" onload="this.media='all'">
+
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css" integrity="sha512-W0xM4mr6dEP9nREo7Z9z+9X70wytKvMGeDsj7ps2+xg5QPrEBXC8tAW1IFnzjR6eoJ90JmCnFzerQJTLzIEHjA==" crossorigin="anonymous" media="print" onload="this.media='all'">
+    
+
+    
+    
+    
+    
+      
+      
+    
+    
+    
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/github.min.css" crossorigin="anonymous" title="hl-light" media="print" onload="this.media='all'">
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" media="print" onload="this.media='all'" disabled>
+        
+      
+    
+
+    
+    
+    
+
+    
+
+    
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.2a9113cdaa287c8aabad4aa82208fdf3.css" />
+
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+    <link rel="manifest" href="/manifest.webmanifest" />
+  
+
+  <link rel="icon" type="image/png" href="/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_32x32_fill_lanczos_center_3.png" />
+  <link rel="apple-touch-icon" type="image/png" href="/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_180x180_fill_lanczos_center_3.png" />
+
+  <link rel="canonical" href="https://jueqingsizhe66.github.io/archives/the-third-interpreter-implementing-proc/" />
+
+  
+  
+  
+  
+  
+  
+  
+  
+    
+    
+  
+  
+
+  
+  
+    
+    
+  
+  <meta property="twitter:card" content="summary" />
+  
+    <meta property="twitter:site" content="@jueqingsihe66" />
+    <meta property="twitter:creator" content="@jueqingsihe66" />
+  
+  <meta property="og:site_name" content="30年磨一剑" />
+  <meta property="og:url" content="https://jueqingsizhe66.github.io/archives/the-third-interpreter-implementing-proc/" />
+  <meta property="og:title" content="The third Interpreter implementing Proc | 30年磨一剑" />
+  <meta property="og:description" content="Scheme解释器的好处是可以不断的拓展自己语言的能力，
+
+通过The First-interpreter-from-eopl创建了一个较为简单let-language，实现了较为简单的减法运算和let局部变量赋值等功能。
+The Second Interpreter from on第一次扩展了基础的let-language，实现了四则运算，逻辑判断，列表操作,列表赋值等。
+这个版本的解释器进一步拓展了过程定义和过程调用的功能。
+" /><meta property="og:image" content="https://jueqingsizhe66.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" />
+    <meta property="twitter:image" content="https://jueqingsizhe66.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
+  
+    
+      <meta
+        property="article:published_time"
+        content="2016-02-27T14:35:50&#43;08:00"
+      />
+    
+    <meta property="article:modified_time" content="2016-02-27T14:35:50&#43;08:00">
+  
+
+  
+
+
+
+  
+
+  
+
+  
+
+
+
+
+
+  <title>The third Interpreter implementing Proc | 30年磨一剑</title>
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="7af182e9b300b7d814bbc0c9e806cd72" >
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.7e5427316d1b14a30f257ae3467b3e21.js"></script>
+
+  
+
+
+<aside class="search-modal" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="Search...">
+        
+      </div>
+
+      
+      
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="header--fixed">
+  <nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+    <div class="container-xl">
+
+      
+      <div class="d-none d-lg-inline-flex">
+        <a class="navbar-brand" href="/">30年磨一剑</a>
+      </div>
+      
+
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+      <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+      
+      <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+        <a class="navbar-brand" href="/">30年磨一剑</a>
+      </div>
+      
+
+      
+      
+      <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+        
+        <ul class="navbar-nav d-md-inline-flex">
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#hero"><span>概要</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#posts"><span>博文</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/about/"><span>About</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/categories/"><span>分类</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link  active" href="/archives"><span>归档</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#tags"><span>标签</span></a>
+          </li>
+
+          
+          
+
+        
+
+          
+        </ul>
+      </div>
+
+      <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+        
+        
+          
+        
+
+        
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+        
+        
+        <li class="nav-item dropdown theme-dropdown">
+          <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+            <i class="fas fa-moon" aria-hidden="true"></i>
+          </a>
+          <div class="dropdown-menu">
+            <a href="#" class="dropdown-item js-set-theme-light">
+              <span>Light</span>
+            </a>
+            <a href="#" class="dropdown-item js-set-theme-dark">
+              <span>Dark</span>
+            </a>
+            <a href="#" class="dropdown-item js-set-theme-auto">
+              <span>Automatic</span>
+            </a>
+          </div>
+        </li>
+        
+
+        
+        
+
+      </ul>
+
+    </div>
+  </nav>
+</header>
+
+
+  </div>
+
+  <div class="page-body">
+    
+    
+    
+
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+  
+ <script async src="//cdn.busuanzi.ibruce.info/cdn/busuanzi/2.3/busuanzi.pure.mini.js"></script> 
+ <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script> 
+ <script> 
+     $(document).ready(function() { 
+         var int = setInterval(fixCount, 100); 
+         var busuanziSiteOffset =  100000  
+         function fixCount() { 
+             if ($("#busuanzi_container_site_pv").css("display") != "none") { 
+                 clearInterval(int); 
+                 $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + busuanziSiteOffset); 
+             } 
+         } 
+     }); 
+ </script> 
+  
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>The third Interpreter implementing Proc</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Feb 27, 2016
+  </span>
+  
+
+  
+
+  
+
+  
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/category/programme/">programme</a></span>
+  
+
+</div>
+
+    
+
+
+
+
+
+  
+</div>
+
+
+
+
+
+<span class="article-metadata" >Reading time: 11 minutes and    11 seconds with 2461 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+    <aside>
+        <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#langscm增加了过程定义和调用">lang.scm增加了过程定义和调用</a></li>
+        <li><a href="#interpscm增加了过程定义和调用">interp.scm增加了过程定义和调用</a></li>
+      </ul>
+    </li>
+    <li><a href="#data-structuresscm增加了过程定义和调用">data-structures.scm增加了过程定义和调用</a></li>
+    <li><a href="#增加过程定义和调用的测试结果">增加过程定义和调用的测试结果</a>
+      <ul>
+        <li><a href="#错误2">错误2</a></li>
+        <li><a href="#正确的测试结果">正确的测试结果</a></li>
+        <li><a href="#y-comb基本思想">Y-comb基本思想</a></li>
+      </ul>
+    </li>
+    <li><a href="#结论">结论</a></li>
+  </ul>
+</nav>
+    </aside>
+  <div class="article-container">
+
+
+    <div class="article-style">
+      <p>Scheme解释器的好处是可以不断的拓展自己语言的能力，</p>
+<ol>
+<li>通过<a href="http://jueqingsizhe66.github.io/blog/2016/02/25/first-interpreter-from-eopl/" target="_blank" rel="noopener">The First-interpreter-from-eopl</a>创建了一个较为简单let-language，实现了较为简单的减法运算和let局部变量赋值等功能。</li>
+<li><a href="http://jueqingsizhe66.github.io/blog/2016/02/27/the-second-interpreter-from-one/" target="_blank" rel="noopener">The Second Interpreter from on</a>第一次扩展了基础的let-language，实现了四则运算，逻辑判断，列表操作,列表赋值等。</li>
+<li>这个版本的解释器进一步拓展了过程定义和过程调用的功能。</li>
+</ol>
+<ul>
+<li><a href="#1">1. proc-language 的实现</a></li>
+<li><a href="#2">2. Y-comb 的实现过程</a></li>
+<li><a href="#3">3. 新语言的Y+实现</a></li>
+</ul>
+<h2 id = "1"> 1. proc-language 的实现 </h2>
+<h3 id="langscm增加了过程定义和调用">lang.scm增加了过程定义和调用</h3>
+<pre><code class="language-scheme">    ;;;new stuff
+      (expression
+       (&quot;proc&quot; &quot;(&quot; identifier &quot;)&quot; expression)
+       proc-exp)
+      
+      (expression
+       (&quot;(&quot; expression expression &quot;)&quot;)
+       call-exp)
+</code></pre>
+<h3 id="interpscm增加了过程定义和调用">interp.scm增加了过程定义和调用</h3>
+<ul>
+<li>value-of 增加了proc-exp和call-exp的内部语言形式</li>
+</ul>
+<pre><code class="language-scheme">      ;;;新增的proc-exp 和call-exp
+        (proc-exp (var body)
+                 (proc-val (procedure var body env)))
+        
+        (call-exp (rator rand)
+                 (let ((proc (expval-&gt;proc (value-of rator env)))
+                       (arg (value-of rand env)))
+                   (apply-procedure proc arg)))
+</code></pre>
+<ul>
+<li>apply-procedure 用于proc的实现</li>
+</ul>
+<pre><code class="language-scheme"> ;; proc-exp
+ ;; apply-procedure : Proc * ExpVal -&gt; ExpVal
+  ;; Page: 79
+  (define apply-procedure
+    (lambda (proc1 val)
+      (cases proc proc1
+        (procedure (var body saved-env)
+          (value-of body (extend-env var val saved-env))))))
+</code></pre>
+<h2 id="data-structuresscm增加了过程定义和调用">data-structures.scm增加了过程定义和调用</h2>
+<ul>
+<li>在expval中拓展了proc?的判断</li>
+</ul>
+<pre><code class="language-scheme">  (define-datatype expval expval?
+    (num-val
+     (value number?))
+    (bool-val
+     (boolean boolean?))
+    (pair-val
+     (car expval?)
+     (cdr expval?))
+    (emptylist-val)
+    ;;新增的proc-exp
+    (proc-val 
+     (proc proc?))
+    )
+  
+</code></pre>
+<ul>
+<li>增加expval-&gt;proc类型转换的过程</li>
+</ul>
+<p>proc其实就是一个closure的具体实现。</p>
+<pre><code class="language-scheme">  ;;;新增的expval-&gt;proc 和proc类
+  ;; expval-&gt;proc : ExpVal -&gt; Proc
+  (define expval-&gt;proc
+    (lambda (v)
+      (cases expval v
+        (proc-val (proc) proc)
+        (else (expval-extractor-error 'proc v)))))
+  
+  ;; proc? : SchemeVal -&gt; Bool
+  ;; procedure : Var * Exp * Env -&gt; Proc
+  (define-datatype proc proc?
+    (procedure
+     (var symbol?)
+     (body expression?)
+     (env environment?)))
+</code></pre>
+<h2 id="增加过程定义和调用的测试结果">增加过程定义和调用的测试结果</h2>
+<h3 id="error1"> 错误1 </h3>
+<pre><code>. data-structures.scm:102:11: expression?: unbound identifier in module in: expression?
+</code></pre>
+<h3 id="错误2">错误2</h3>
+<p>如果按照错误1,把具体的expression?实现放入<code>data-structures.scm</code>中，则会出现<a href="#error1">错误1</a>的问题。</p>
+<p>expression?现在定义如下,具体参考<a href="http://jueqingsizhe66.github.io/blog/2016/02/26/some-notations-in-the-design-of-the-language/" target="_blank" rel="noopener">Some notations</a>:</p>
+<pre><code>expression ::= (var-exp ())
+           ::= (const-exp ())
+           ::= (zero?-exp ())
+           ::= (if-exp ())
+           ::= (diff-exp ())
+           ::= (cons-exp ())
+           ::= (car-exp ())
+           ::= (cdr-exp ())
+           ::= (null?-exp ())
+           ::= (emptylist-exp)
+           ::= (list-exp ())
+           ::= (let-exp ())
+           ::= (proc-exp ())
+           ::= (call-exp ())
+           ::= (letrec-exp ())  ;;并未再此体现
+
+           ::= (less?-exp ())
+           ::= (greater?-exp ())
+           ::= (equal?-exp ())
+
+           ::= (print-exp ())
+           ::= (unpack-exp ())
+           ::= (cond-exp ())
+
+           ::= (add-exp ())
+           ::= (mult-exp ())
+           ::= (div-exp ())
+
+           ::= (let*-exp ())
+
+</code></pre>
+<p>expression?实现如下:</p>
+<pre><code>  ;; datatype ;;;
+  (define-datatype expression expression?
+    (var-exp
+     (id symbol?))
+    (const-exp
+     (num number?))
+    (zero?-exp
+     (expr expression?))
+    (if-exp
+     (predicate-exp expression?)
+     (true-exp expression?)
+     (false-exp expression?))
+    ;;四则运算
+    (minus-exp
+     (body-exp expression?))
+    (diff-exp
+     (exp1 expression?)
+     (exp2 expression?))
+    (add-exp
+     (exp1 expression?)
+     (exp2 expression?))
+    (mult-exp
+     (exp1 expression?)
+     (exp2 expression?))
+    (div-exp
+     (exp1 expression?)
+     (exp2 expression?))
+    
+    ;;逻辑比较
+    (equal?-exp
+     (exp1 expression?)
+     (exp2 expression?))
+    (less?-exp
+     (exp1 expression?)
+     (exp2 expression?))
+    (greater?-exp
+     (exp1 expression?)
+     (exp2 expression?))
+    
+    ;;列表操作
+    (emptylist-exp)
+    (cons-exp
+     (exp1 expression?)
+     (exp2 expression?))
+    (car-exp
+     (body expression?))
+    (cdr-exp
+     (body expression?))
+    (null?-exp
+     (body expression?))
+    ;;list实现
+    (list-exp
+     (args (list-of expression?)))
+    
+    ;; cond实现
+    (cond-exp
+     (conds (list-of expression?))
+     (acts (list-of expression?)))
+  
+    ;;let let*
+    (let-exp
+     (vars (list-of symbol?))  ;;;symbol不能写成symbols
+     (vals (list-of expression?))
+     (body expression?))
+    
+    (let*-exp
+     (vars (list-of symbol?)) ;(vars (list-of symbols?))
+     (vals (list-of expression?))
+     (body expression?))
+    
+    ;;print实现
+    (print-exp
+     (arg expression?))
+    ;;unpack实现
+    (unpack-exp
+     (args (list-of symbol?));(args (list-of identifier?))
+     (vals expression?)
+     (body expression?))
+    
+    ;;proc
+    (proc-exp
+     (var (list-of symbol?))
+     (body expression?))
+    (call-exp
+     (rator expression?)
+     (rand (list-of expression?)))
+    
+    )
+  
+</code></pre>
+<p>为什么添加上expression？反而出现如下的错误？</p>
+<pre><code>(require &quot;data-structures.scm&quot;)
+(require &quot;lang.scm&quot;)  =》 There are some problems here.
+top.scm:8:11: module: identifier already imported from: &quot;data-structures.scm&quot; at: expression in: &quot;lang.scm&quot;
+  #(174 21)
+  #(235 10)
+module: identifier already imported from a different source in:
+  expression
+  &quot;lang.scm&quot;
+  &quot;data-structures.scm&quot;
+</code></pre>
+<p>分析发现是因为lang.scm其实已经定义了expression?, <code>sllgen:make-define-datatypes</code>中通过the grammer定义了所有的expression?的实现。
+所以如果在<code>top.scm</code>中同时导入<code>lang.scm</code> 和<code>data-structures.scm</code>则会报错，重复定义。
+<strong><code>于是仅仅在data-structures.scm中增加require &quot;lang.scm&quot;即可</code></strong>,
+<font size="10" color="red">结果通过！</font></p>
+<h3 id="正确的测试结果">正确的测试结果</h3>
+<pre><code class="language-scheme">(run &quot;proc(x) -(x, 1)&quot;)
+(run &quot;(proc(x) -(x,1)  30)&quot;)
+(run &quot;(proc(f)(f 30)  proc(x)-(x,1))&quot;)
+(run &quot;let x = 3 in -(x,1)&quot;)
+;;new stuff, the Currying
+(run &quot;let f = proc (x) proc (y) -(x, -(0, y)) in ((f 10) 20)&quot;)
+
+    (proc-val (procedure 'x (diff-exp (var-exp 'x) (const-exp 1)) (list (list 'i (num-val 1)) (list 'v (num-val 5)) (list 'x (num-val 10)))))
+    (num-val 29)
+    (num-val 29)
+    (num-val 2)
+    (num-val 30)
+</code></pre>
+<h2 id="2"> 2. 一个y-combination的实现 </h2>
+<p>关于y-combination可以参考<a href="http://jueqingsizhe66.github.io/blog/2015/05/17/cong-lambdadao-simple-plus-complexjie-shi-qi-zai-dao-shu-xing-chou-xiang/" target="_blank" rel="noopener">从lambda到simple+complex解释器再到树形抽象</a>疑问关于y-comb的实现。
+进一步可以参考:</p>
+<ul>
+<li>[Fixed-point combinator] <a href="https://en.wikipedia.org/wiki/Fixed-point_combinator#Fixed_point_combinators_in_lambda_calculus" target="_blank" rel="noopener">5</a></li>
+<li>[Church and Turing] <a href="http://www.yinwang.org/blog-cn/2013/07/13/church-turing/" target="_blank" rel="noopener">6</a></li>
+<li>[Neil Jones的computation and complexity,使用一种while语言] <a href="http://www.diku.dk/~neil/comp2book2007/book-whole.pdf" target="_blank" rel="noopener">7</a></li>
+<li>Matthias Felleisen 和 Matthew Flatt 的[《Programming Languages and Lambda Calculi》] <a href="http://www.cs.utah.edu/~mflatt/past-courses/cs7520/public_html/s06/notes.pdf" target="_blank" rel="noopener">8</a> 教你认识lambda</li>
+<li>[最经典的Y combinator] <a href="http://www.ece.uc.edu/~franco/C511/html/Scheme/ycomb.html" target="_blank" rel="noopener">9</a> 看了10遍以上</li>
+</ul>
+<h3 id="y-comb基本思想">Y-comb基本思想</h3>
+<ol>
+<li>通过增加一层lambda表达式，进行更高一级抽象</li>
+<li>beta规约原则</li>
+</ol>
+<p>比如</p>
+<pre><code class="language-scheme">(define fact 
+ (lambda (op)
+   (lambda ( x y) (op  x y))))
+
+</code></pre>
+<p>比如</p>
+<pre><code class="language-scheme">(f arg) ==  (lambda (arg) (f arg))
+
+</code></pre>
+<p>最为基本的fact实现是(构建与已经存在的fact)</p>
+<pre><code class="language-scheme">(define fact
+ (lambda (x)
+   (if (zero? x)
+      0
+      (fact (- x 1)))))
+
+(fact 5)
+
+120
+</code></pre>
+<p>而如果运用思想1(也就是隐藏fact的调用，而使用局部过程变量procedure),则变换为</p>
+<pre><code class="language-scheme">
+(define fact
+   (lambda (procedure)
+     (lambda (x)
+        (if (zero? x)
+           0
+           (procedure (- x 1))))))
+
+
+((fact fact) 5)
+
+120
+</code></pre>
+<p>于是有了下面的推导过程(把fact的表达式多给他还原 ，可以参考<a href="http://jueqingsizhe66.github.io/blog/2016/02/26/some-notations-in-the-design-of-the-language/" target="_blank" rel="noopener">还原方法Some-notations</a>)</p>
+<pre><code class="language-scheme"> (define fact
+    ((lambda (procedure)
+       ((lambda (func-arg)  ;;吸收5
+          (lambda (n)
+            (if (zero? n)
+                1
+                (* n (func-arg (- n 1))))))
+        (lambda (arg) ((procedure procedure) arg))))
+     (lambda (procedure)
+       ((lambda (func-arg) ;;吸收5
+          (lambda (n)
+            (if (zero? n)
+                1
+                (* n (func-arg (- n 1))))))
+        (lambda (arg) ((procedure procedure) arg))))))
+
+
+  (((lambda (procedure)
+      (lambda (n)
+        (if (zero? n)
+            1
+            (* n ((procedure procedure) (- n 1))))))
+    (lambda (procedure)
+      (lambda (n)
+        (if (zero? n)
+            1
+            (* n ((procedure procedure) (- n 1)))))))
+   5)
+
+ (define fact1
+   (lambda (x)
+   (letrec ((F (lambda (procedure)
+       ((lambda (func-arg)  ;;吸收5
+          (lambda (n)
+            (if (zero? n)
+                1
+                (* n (func-arg (- n 1))))))
+        (lambda (arg) ((procedure procedure) arg))))))
+     ((F F) x))))
+
+
+  (define Y
+    (lambda (X)
+      ((lambda (procedure)
+         (X (lambda (arg) ((procedure procedure) arg))))
+       (lambda (procedure)
+         (X (lambda (arg) ((procedure procedure) arg)))))))
+
+  (((lambda (X)
+      ((lambda (procedure)
+         (X (lambda (arg) ((procedure procedure) arg))))
+       (lambda (procedure)
+         (X (lambda (arg) ((procedure procedure) arg))))))
+    (lambda (func-arg)
+      (lambda (n)
+        (if (zero? n)
+            1
+            (* n (func-arg (- n 1)))))))
+   5)
+
+;;如何吸收F 形成(F F)的形式 产生循环的调用过程
+;; 只能是通过lambda 算子 构造proc 从而获得完整的表达式
+  (((lambda (X)
+      ((lambda (F)
+         (lambda (arg) ((F F) arg)))  ;;一定要保证lambda封闭  
+       (lambda (procedure)
+         (X (lambda (arg) ((procedure procedure) arg))))))
+    (lambda (func-arg)
+      (lambda (n)
+        (if (zero? n)
+            1
+            (* n (func-arg (- n 1)))))))
+   5)
+
+(define Y 
+  (lambda (X)
+      ((lambda (F)
+         (lambda (arg) ((F F) arg)))  ;;一定要保证lambda封闭
+       (lambda (procedure)
+         (X (lambda (arg) ((procedure procedure) arg)))))))
+
+((Y   (lambda (func-arg)
+      (lambda (n)
+        (if (zero? n)
+            1
+            (* n (func-arg (- n 1))))))) 5)
+</code></pre>
+<p>可以看到每增加一层(lambada (arg) &hellip;) ，也就是(lambda (arg) (lambda (arg2)  (lambda (arg) &hellip; )))，
+也就是  <code>&lt;procedure&gt;::= (lambda (arg) (&lt;expression&gt; |&lt;procedure&gt;)) | &lt;procedure&gt;</code>。</p>
+<h2 id="3">新语言的Y+实现</h2>
+<pre><code class="language-scheme">(run &quot;let makemult = proc (maker) proc (x)
+      if zero?(x)
+            then 0
+      else
+            -(((maker maker) -(x,1)), -4)
+      in let times4 = proc (x) ((makemult makemult) x) in (times4 3)&quot;)
+
+;; ==&gt; (num-val 12)
+
+;;times
+(run &quot;let makemult = proc (maker) proc (x) proc(y)
+      if zero?(x) then 0
+      else -((((maker maker) -(x, 1)) y), -(0, y))
+      in let times = proc(x) proc(y)
+                    (((makemult makemult) x) y)
+      in ((times 3) 8)&quot;)
+
+;; -&gt; (num-val 24)
+
+(run &quot;let makemult = proc (maker) proc (x) proc(y)
+      if zero?(x) then 0
+      else -((((maker maker) -(x, 1)) y), -(0, y))
+      in let times = proc(x) proc(y)
+                    (((makemult makemult) x) y)
+      in let f = proc(func) proc(num)
+        if zero?(num)
+           then 1
+        else
+           ((times ((func func) -(num, 1))) num)
+      in let fact = proc (x) ((f f) x)
+      in (fact 5)&quot;)
+
+
+(num-val 12)
+(num-val 24)
+(num-val 120)
+</code></pre>
+<p>最终提取一个更为精简的y-comb</p>
+<pre><code class="language-scheme">
+
+(run &quot;let makerec = proc (f)
+        let d = proc (x)
+          proc (z) ((f (x x)) z)
+        in proc (n) ((f (d d)) n)
+     in let maketimes4 = proc (f) proc (x)
+          if zero?(x)
+             then 0
+          else -((f -(x,1)), -4)
+      in let times4 = (makerec maketimes4) in (times4 3)&quot;)
+
+    (num-val 12)
+</code></pre>
+<h2 id="结论">结论</h2>
+<p>Y-comb是一个痛苦和希望的承载者(持保留意见)，韵味十足.又像一个走过岁月年轮，在家等待着归家儿女的思妇，祈祷，承担。
+Y-Comb需要丝丝宁静,雨夜飘过。</p>
+    </div>
+ <div class="nav-links" style="padding:10;">
+        
+        <div align="left">
+        <a href="https://jueqingsizhe66.github.io/archives/the-second-interpreter-from-one/"><span class="arrow">←</span> <strong>上一篇:The Second Interpreter from One</strong></a>
+        </div>
+        
+        
+
+
+       <div align="right"> <a href="https://jueqingsizhe66.github.io/archives/the-fourth-interpreter-about-the-traceproc/" ><strong>下一篇:The Fourth Interpreter about the traceproc </strong><span class="arrow">→</span></a></div>
+        
+      </div>
+    
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/scheme/">scheme</a>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="https://jueqingsizhe66.github.io/"><img class="avatar mr-3 avatar-circle" src="/author/%E4%BB%A4%E7%8B%90%E5%86%B2/avatar_huc99f1f2e739130747140db298bdd1890_46492_270x270_fill_q75_lanczos_center.jpg" alt="令狐冲"></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://jueqingsizhe66.github.io/">令狐冲</a></h5>
+      <h6 class="card-subtitle">Engineer of offshore wind turbine technique research</h6>
+      <p class="card-text">My research interests include distributed energy, wind turbine power generation technique , Computational fluid dynamic and programmable matter.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/jueqingsizhe66" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.co.uk/citations?user=7VyEMyQAAAAJ&amp;hl=zh-CN" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/jueqingsizhe66" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+         <span id="busuanzi_container_site_pv">
+             本站访问量：<span id="busuanzi_value_site_pv"></span>次
+         </span>
+         &nbsp;
+   </div>
+
+
+  </div>
+
+</article>
+<script src="https://utteranc.es/client.js"
+        repo="jueqingsizhe66/jueqingsizhe66.github.io"
+        issue-term="pathname"
+        theme="github-dark"
+        crossorigin="anonymous"
+        async>
+</script>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    ©2022 &middot; 
+
+    ^-^ LingHuChong ^-^ Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+      
+
+    
+    <script src="/js/vendor-bundle.min.3d946de2e8784a477845261d87025092.js"></script>
+
+    
+    
+    
+      
+      
+        <script src="https://cdn.jsdelivr.net/gh/desandro/imagesloaded@v4.1.4/imagesloaded.pkgd.min.js" integrity="sha512-S5PZ9GxJZO16tT9r3WJp/Safn31eu8uWrzglMahDT4dsmgqWonRY9grk3j+3tfuPr9WJNsfooOR7Gi7HL5W2jw==" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/gh/metafizzy/isotope@v3.0.6/dist/isotope.pkgd.min.js" integrity="sha512-Zq2BOxyhvnRFXu0+WE6ojpZLOU2jdnqbrM1hmVdGzyeCa1DgM3X5Q4A/Is9xA1IkbUeDd7755dNNI/PzSf2Pew==" crossorigin="anonymous"></script>
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/gh/mermaid-js/mermaid@v8.8.4/dist/mermaid.min.js" integrity="sha512-+TNmhaRJf3jyYHTpzEq/5I6b+aGyhzWb21mGdHAjxSGSYwxN9Grug3Y3B9qVxWfKKY8MscE/6mr9walWvFLFvQ==" crossorigin="anonymous" title="mermaid"></script>
+      
+
+      
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/highlight.min.js" integrity="sha512-Ypjm0o7jOxAd4hpdoppSEN0TQOC19UtPAqD+4s5AlXmUvbmmS/YMxYqAqarQYyxTnB6/rqip9qcxlNB/3U9Wdg==" crossorigin="anonymous"></script>
+        
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/r.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/latex.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/python.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/matlab.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/java.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/go.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/rust.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/c.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/perl.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/scheme.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/lisp.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/racket.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/awk.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/sed.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/bash.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/sql.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/vim.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/clojure.min.js" crossorigin="anonymous"></script>
+        
+      
+
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+      
+      <script id="search-hit-fuse-template" type="text/x-template">
+        <div class="search-hit" id="summary-{{key}}">
+          <div class="search-hit-content">
+            <div class="search-hit-name">
+              <a href="{{relpermalink}}">{{title}}</a>
+              <div class="article-metadata search-hit-type">{{type}}</div>
+              <p class="search-hit-description">{{snippet}}</p>
+            </div>
+          </div>
+        </div>
+      </script>
+      
+        <script src="https://cdn.jsdelivr.net/gh/krisk/Fuse@v3.2.1/dist/fuse.min.js" integrity="sha512-o38bmzBGX+hD3JHWUFCDA09btWaqrNmoJ3RXLlrysA7PP01Kgs4UlE4MhelE1v5dJR3+cxlR4qQlotsW7jKsnw==" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/gh/julmot/mark.js@8.11.1/dist/jquery.mark.min.js" integrity="sha512-mhbv5DqBMgrWL+32MmsDOt/OAvqr/cHimk6B8y/bx/xS88MVkYGPiVv2ixKVrkywF2qHplNRUvFsAHUdxZ3Krg==" crossorigin="anonymous"></script>
+      
+    
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+      
+      
+      
+      
+      
+      
+      
+    
+
+    
+
+    
+    
+    
+    <script id="page-data" type="application/json">{"use_headroom":true}</script>
+
+    
+    
+      <script src="/js/wowchemy-headroom.e8fd2d733eef6a8bbbe0539398fc0547.js" type="module"></script>
+    
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    <script src="/en/js/wowchemy.min.a2ed145159dd33ad55ff402163350b5d.js"></script>
+
+    
+    
+    
+    
+    
+    
+      
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      <script src="/js/wowchemy-publication.b0d291ed6d27eacec233e6cf5204f99a.js" type="module"></script>
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+
+
+
+</body>
+</html>
