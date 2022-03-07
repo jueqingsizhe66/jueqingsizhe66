@@ -189,11 +189,11 @@
     </item>
     
     <item>
-      <title>mysql服务安装windows</title>
-      <link>https://jueqingsizhe66.github.io/post/mysql%E6%9C%8D%E5%8A%A1%E5%AE%89%E8%A3%85windows/</link>
+      <title>windows下手动安装mysql服务</title>
+      <link>https://jueqingsizhe66.github.io/post/windows%E4%B8%8B%E5%AE%89%E8%A3%85mysql%E6%9C%8D%E5%8A%A1/</link>
       <pubDate>Thu, 24 Feb 2022 00:16:00 +0800</pubDate>
-      <guid>https://jueqingsizhe66.github.io/post/mysql%E6%9C%8D%E5%8A%A1%E5%AE%89%E8%A3%85windows/</guid>
-      <description>&lt;p&gt;记录一次windows手动安装mysql服务的过程&lt;/p&gt;
+      <guid>https://jueqingsizhe66.github.io/post/windows%E4%B8%8B%E5%AE%89%E8%A3%85mysql%E6%9C%8D%E5%8A%A1/</guid>
+      <description>&lt;p&gt;&lt;font color=&#34;red&#34;&gt;记录一次windows系统手动安装mysql服务的过程。&lt;/font&gt;&lt;/p&gt;
 &lt;p&gt;涉及的工具：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;mysqld 初始化和安装服务  删除服务&lt;/li&gt;
@@ -201,25 +201,65 @@
 &lt;li&gt;mysql 登录服务&lt;/li&gt;
 &lt;li&gt;net 启动windows服务&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;##  下载mysql
-###  &lt;a href=&#34;https://dev.mysql.com/downloads/mysql/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://dev.mysql.com/downloads/mysql/&lt;/a&gt;   解压到某个路径下！
-## 安装步骤&lt;/p&gt;
+&lt;h2 id=&#34;下载mysql&#34;&gt;下载mysql&lt;/h2&gt;
+&lt;p&gt;下载链接：  &lt;a href=&#34;https://dev.mysql.com/downloads/mysql/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://dev.mysql.com/downloads/mysql/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;解压到某个路径下,目录结构如下:&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://jueqingsizhe66.github.io/ox-hugo/mysqlDir.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;h2 id=&#34;安装步骤&#34;&gt;安装步骤&lt;/h2&gt;
 &lt;ol&gt;
-&lt;li&gt;在mysql目录下 新建data目录，如果出错，重新配置，得删除data里头内容
-注意如果是拷贝到别人已配置的 到新机器，都得删掉data目录下的所有数据，所以得做好备份工作&lt;/li&gt;
-&lt;li&gt;新建my.cnf  拷贝本文件内容到cnf&lt;/li&gt;
-&lt;li&gt;修改basedir和datadir&lt;/li&gt;
-&lt;li&gt;添加mysql bin路径到path
-5、&lt;code&gt;mysqld --initialize-insecure --console&lt;/code&gt; ## &lt;code&gt;--initialize&lt;/code&gt; 是服务初始化准备的意思 console可以看到执行过程  &lt;code&gt;-insecure&lt;/code&gt; 无密码 这样操作起来方便些   ##mysqld &amp;ndash;remove 可以卸载服务&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;mysqld --install&lt;/code&gt;  ## 安装服务&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;net install mysql&lt;/code&gt;  ##安装好后就可以开启， 注意没有data文件夹和 my.cnf是无法配置启动成功的  net stop mysql&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;mysql -uroot -p&lt;/code&gt;   ##不用输入密码&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;mysqladmin -u root -p  password&lt;/code&gt; ## Enter password 敲回车即可(注意一定得有password字段)
-9.1  new Password 输入新密码
-9.2  Confirm new password 输入你的新密码&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;mysql -uroot -p新密码 &lt;/code&gt; ## 就可以正常登录了&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在mysql目录下 新建data目录。   如果出错，重新配置，得删除data里头内容;
+特别地，如果拷贝别人已配置的mysql包到新机器，得删掉data目录下的所有数据，事先必须做好备份工作。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;新建&lt;code&gt;my.cnf&lt;/code&gt; , 然后拷贝本文件末尾的内容到该文件。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;修改my.cnf中的&lt;code&gt;basedir&lt;/code&gt;和&lt;code&gt;datadir&lt;/code&gt;字段。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;添加&lt;code&gt;mysql bin&lt;/code&gt;路径到path。 如果是一键安装的时候，安装文件会自动配置到path路径下。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;mysqld --initialize-insecure --console&lt;/code&gt; ## &lt;code&gt;--initialize-insecure&lt;/code&gt; 是服务初始化准备的意思， &lt;code&gt;--console&lt;/code&gt;可以看到执行过程  &lt;code&gt;-insecure&lt;/code&gt; 无密码 这样操作起来方便些。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;mysqld --install&lt;/code&gt;  ## 安装服务  ##mysqld &amp;ndash;remove 可以卸载服务。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;net install mysql&lt;/code&gt;  ##安装好后就可以开启， &lt;font color=&#34;green&#34;&gt;注意没有data文件夹和 my.cnf是无法配置启动成功的&lt;/font&gt;  &lt;code&gt;net stop mysql&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;mysql -uroot -p&lt;/code&gt;   ##不用输入密码,只是为了登陆测试一下是否可以安装&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;mysqladmin -u root -p  password&lt;/code&gt; ## Enter password 敲回车即可(注意一定得有password字段), 修改密码阶段&lt;/p&gt;
+&lt;p&gt;9.1  new Password 输入新密码&lt;/p&gt;
+&lt;p&gt;9.2  Confirm new password 输入你的新密码&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;mysql -uroot -p新密码 &lt;/code&gt; ## 就可以正常登录了&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;my.cnf&lt;/p&gt;
+&lt;hr/&gt;
+------------------------------------------------- my.cnf ------------------------------------------------
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[mysqld]
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;设置&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3306&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;端口&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;port&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3306&lt;/span&gt;
@@ -242,6 +282,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;设置&lt;/span&gt;mysql客户端连接服务端时默认使用的端口
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;port&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3306&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;default&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;character&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;utf8mb4&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;hr/&gt;
 </description>
     </item>
     
