@@ -1,0 +1,1381 @@
+<!DOCTYPE html><html lang="en-us" >
+
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  
+  
+    <meta name="generator" content="Wowchemy 5.4.0 for Hugo" />
+  
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+  
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="叶昭良" />
+
+  
+  
+  
+    
+  
+  <meta name="description" content="如何处理9G级别文件，直接导入性价比不高，那就按照流处理器进" />
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://jueqingsizhe66.github.io/post/awk%E5%A4%84%E7%90%868g%E7%BA%A7%E5%88%AB%E6%96%87%E4%BB%B6/" />
+
+  
+  
+  
+    <meta name="theme-color" content="#1565c0" />
+  
+
+  
+  
+    
+    <script src="/js/mathjax-config.js"></script>
+  
+
+  
+
+  <link rel="stylesheet" href="/css/vendor-bundle.min.f1ecf783c14edc00c9320c205831ad8e.css" media="print" onload="this.media='all'">
+
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css" integrity="sha512-W0xM4mr6dEP9nREo7Z9z+9X70wytKvMGeDsj7ps2+xg5QPrEBXC8tAW1IFnzjR6eoJ90JmCnFzerQJTLzIEHjA==" crossorigin="anonymous" media="print" onload="this.media='all'">
+    
+
+    
+    
+    
+    
+      
+      
+    
+    
+    
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/github.min.css" crossorigin="anonymous" title="hl-light" media="print" onload="this.media='all'">
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" media="print" onload="this.media='all'" disabled>
+        
+      
+    
+
+    
+    
+    
+
+    
+
+    
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.2a9113cdaa287c8aabad4aa82208fdf3.css" />
+
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+    <link rel="manifest" href="/manifest.webmanifest" />
+  
+
+  <link rel="icon" type="image/png" href="/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_32x32_fill_lanczos_center_3.png" />
+  <link rel="apple-touch-icon" type="image/png" href="/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_180x180_fill_lanczos_center_3.png" />
+
+  <link rel="canonical" href="https://jueqingsizhe66.github.io/post/awk%E5%A4%84%E7%90%868g%E7%BA%A7%E5%88%AB%E6%96%87%E4%BB%B6/" />
+
+  
+  
+  
+  
+  
+  
+  
+  
+    
+    
+  
+  
+
+  
+  
+    
+    
+  
+  <meta property="twitter:card" content="summary" />
+  
+    <meta property="twitter:site" content="@jueqingsihe66" />
+    <meta property="twitter:creator" content="@jueqingsihe66" />
+  
+  <meta property="og:site_name" content="30年磨一剑" />
+  <meta property="og:url" content="https://jueqingsizhe66.github.io/post/awk%E5%A4%84%E7%90%868g%E7%BA%A7%E5%88%AB%E6%96%87%E4%BB%B6/" />
+  <meta property="og:title" content="awk处理9G级别文件 | 30年磨一剑" />
+  <meta property="og:description" content="如何处理9G级别文件，直接导入性价比不高，那就按照流处理器进" /><meta property="og:image" content="https://jueqingsizhe66.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" />
+    <meta property="twitter:image" content="https://jueqingsizhe66.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
+  
+    
+      <meta
+        property="article:published_time"
+        content="2022-03-14T14:34:00&#43;08:00"
+      />
+    
+    <meta property="article:modified_time" content="2022-03-14T14:35:07&#43;08:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://jueqingsizhe66.github.io/post/awk%E5%A4%84%E7%90%868g%E7%BA%A7%E5%88%AB%E6%96%87%E4%BB%B6/"
+  },
+  "headline": "awk处理9G级别文件",
+  
+  "datePublished": "2022-03-14T14:34:00+08:00",
+  "dateModified": "2022-03-14T14:35:07+08:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "叶昭良"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "30年磨一剑",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://jueqingsizhe66.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_192x192_fill_lanczos_center_3.png"
+    }
+  },
+  "description": "如何处理9G级别文件，直接导入性价比不高，那就按照流处理器进"
+}
+</script>
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+  <title>awk处理9G级别文件 | 30年磨一剑</title>
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="9e8e01c4dfca698054454b7700c4d3d9" >
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.7e5427316d1b14a30f257ae3467b3e21.js"></script>
+
+  
+
+
+<aside class="search-modal" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="Search...">
+        
+      </div>
+
+      
+      
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="header--fixed">
+  <nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+    <div class="container-xl">
+
+      
+      <div class="d-none d-lg-inline-flex">
+        <a class="navbar-brand" href="/">30年磨一剑</a>
+      </div>
+      
+
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+      <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+      
+      <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+        <a class="navbar-brand" href="/">30年磨一剑</a>
+      </div>
+      
+
+      
+      
+      <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+        
+        <ul class="navbar-nav d-md-inline-flex">
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#hero"><span>概要</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#posts"><span>博文</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/about/"><span>About</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/categories/"><span>分类</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/archives"><span>归档</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#tags"><span>标签</span></a>
+          </li>
+
+          
+          
+
+        
+
+          
+        </ul>
+      </div>
+
+      <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+        
+        
+          
+        
+
+        
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+        
+        
+        <li class="nav-item dropdown theme-dropdown">
+          <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+            <i class="fas fa-moon" aria-hidden="true"></i>
+          </a>
+          <div class="dropdown-menu">
+            <a href="#" class="dropdown-item js-set-theme-light">
+              <span>Light</span>
+            </a>
+            <a href="#" class="dropdown-item js-set-theme-dark">
+              <span>Dark</span>
+            </a>
+            <a href="#" class="dropdown-item js-set-theme-auto">
+              <span>Automatic</span>
+            </a>
+          </div>
+        </li>
+        
+
+        
+        
+
+      </ul>
+
+    </div>
+  </nav>
+</header>
+
+
+  </div>
+
+  <div class="page-body">
+    
+    
+    
+
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+  
+ <script async src="//cdn.busuanzi.ibruce.info/cdn/busuanzi/2.3/busuanzi.pure.mini.js"></script> 
+ <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script> 
+ <script> 
+     $(document).ready(function() { 
+         var int = setInterval(fixCount, 100); 
+         var busuanziSiteOffset =  100000  
+         function fixCount() { 
+             if ($("#busuanzi_container_site_pv").css("display") != "none") { 
+                 clearInterval(int); 
+                 $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + busuanziSiteOffset); 
+             } 
+         } 
+     }); 
+ </script> 
+  
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>awk处理9G级别文件</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+          Last updated on
+      
+    
+    Mar 14, 2022
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    3 min read
+  </span>
+  
+
+  
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/category/programme/">programme</a>, <a href="/category/%E6%8A%80%E6%9C%AF/">技术</a></span>
+  
+
+</div>
+
+    
+
+
+
+
+
+  
+</div>
+
+
+
+
+
+<span class="article-metadata" >Reading time: 6 minutes and    46 seconds with 1490 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+    <aside>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#awk处理单文件级别">awk处理单文件级别</a></li>
+    <li><a href="#seq等宽输出">seq等宽输出</a>
+      <ul>
+        <li><a href="#错误的命令">错误的命令</a></li>
+      </ul>
+    </li>
+    <li><a href="#bash包装awk可执行语句">bash包装awk可执行语句</a>
+      <ul>
+        <li><a href="#我的awk命令封装测试代码--重大突破">我的awk命令封装测试代码(重大突破)</a></li>
+        <li><a href="#最终的成品">最终的成品</a></li>
+        <li><a href="#sed存在的意义">sed存在的意义</a></li>
+        <li><a href="#awk获取机组台数信息">awk获取机组台数信息</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </aside>
+  <div class="article-container">
+
+
+    <div class="article-style">
+      <p>如何处理9G级别文件，直接导入性价比不高，那就按照流处理器进行
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="/ox-hugo/2022-03-13_22-05-51_image.png" alt="" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<h2 id="awk处理单文件级别">awk处理单文件级别</h2>
+<p>awk轻松解决大文件级别的遍历问题，并提取需要的字段。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-awk" data-lang="awk"><span style="display:flex;"><span>  <span style="color:#a6e22e">awk</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">F</span><span style="color:#e6db74">&#34;,&#34;</span> <span style="color:#e6db74">&#39;/_028\./{print $1,&#34;,&#34;,$3,&#34;,&#34;,$4;}&#39;</span> <span style="color:#a6e22e">js_df_20220309</span>.<span style="color:#a6e22e">csv</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">20220309</span><span style="color:#a6e22e">_28</span>.<span style="color:#a6e22e">csv</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## /_028\./ 的28表示第28台风电机组，$1,$3,$4 分别为时间、物理量、值</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## /_029\./ 的29表示第29台风电机组，$1,$3,$4 分别为时间、物理量、值</span></span></span></code></pre></div>
+<p>那如何提取所有机组信息，每个机组都变换一下
+那如何解决一个文件夹内的所有文件问题？ 每个文件名字都包含年月日信息，另外awk的模式不能包含变量，那么只能说awk解析的时候，我们必须把字面值提供给awk了</p>
+<p>第一步：尝试解析2级循环，循环91台机组</p>
+<h2 id="seq等宽输出">seq等宽输出</h2>
+<p>seq等宽输出可以采用-w option，这样输出就是相同长度，可以提供模式匹配需要</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>seq -w <span style="color:#ae81ff">001</span> <span style="color:#ae81ff">091</span></span></span></code></pre></div>
+<p>我的测试代码:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-awk" data-lang="awk"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> <span style="color:#a6e22e">day</span> <span style="color:#f92672">in</span> <span style="color:#960050;background-color:#1e0010">`</span><span style="color:#a6e22e">ls</span> <span style="color:#f92672">*</span>.<span style="color:#a6e22e">csv</span><span style="color:#960050;background-color:#1e0010">`</span>;<span style="color:#66d9ef">do</span> <span style="color:#a6e22e">day1</span><span style="color:#f92672">=$</span>{<span style="color:#a6e22e">day</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">6</span>};<span style="color:#a6e22e">realDay</span><span style="color:#f92672">=$</span>{<span style="color:#a6e22e">day1</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#f92672">-</span><span style="color:#ae81ff">4</span>};<span style="color:#a6e22e">echo</span> <span style="color:#f92672">$</span><span style="color:#a6e22e">realDay</span>; <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">turbine</span> <span style="color:#f92672">in</span> <span style="color:#960050;background-color:#1e0010">`</span><span style="color:#a6e22e">seq</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">w</span> <span style="color:#ae81ff">003</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">91</span><span style="color:#960050;background-color:#1e0010">`</span>; <span style="color:#66d9ef">do</span> <span style="color:#a6e22e">turbinePattern</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;_$turbine\.&#34;</span>; <span style="color:#a6e22e">outputFilename</span><span style="color:#f92672">=$</span><span style="color:#a6e22e">realDay</span><span style="color:#e6db74">&#34;_&#34;</span><span style="color:#f92672">$</span><span style="color:#a6e22e">turbine</span><span style="color:#e6db74">&#34;.csv&#34;</span>;<span style="color:#a6e22e">echo</span> <span style="color:#f92672">$</span><span style="color:#a6e22e">turbinePattern</span>,<span style="color:#f92672">$</span><span style="color:#a6e22e">turbine</span>,<span style="color:#f92672">$</span><span style="color:#a6e22e">outputFilename</span>;<span style="color:#a6e22e">done</span>;<span style="color:#a6e22e">done</span></span></span></code></pre></div>
+<h3 id="错误的命令">错误的命令</h3>
+<p>下面命令无法获得你想要单台机组信息，因为$turbinePattern根本就不会解析为`_028.`的 模式，因为//不能解析变量，所以解决办法是我们提供斜杠号之间变量值</p>
+<p>但是perl的模式匹配中确实可以，参考<a href="https://jueqingsizhe66.github.io/post/perl%e6%8b%86%e5%88%86%e5%a4%a7%e6%96%87%e4%bb%b6%e5%88%b0excel%e8%a1%a8/" target="_blank" rel="noopener">perl拆分大文件</a> 可见perl正则的强大。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-awk" data-lang="awk"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> <span style="color:#a6e22e">day</span> <span style="color:#f92672">in</span> <span style="color:#960050;background-color:#1e0010">`</span><span style="color:#a6e22e">ls</span> <span style="color:#f92672">*</span>.<span style="color:#a6e22e">csv</span><span style="color:#960050;background-color:#1e0010">`</span>;<span style="color:#66d9ef">do</span> <span style="color:#a6e22e">day1</span><span style="color:#f92672">=$</span>{<span style="color:#a6e22e">day</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">6</span>};<span style="color:#a6e22e">realDay</span><span style="color:#f92672">=$</span>{<span style="color:#a6e22e">day1</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#f92672">-</span><span style="color:#ae81ff">4</span>};<span style="color:#a6e22e">echo</span> <span style="color:#f92672">$</span><span style="color:#a6e22e">realDay</span>; <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">turbine</span> <span style="color:#f92672">in</span> <span style="color:#960050;background-color:#1e0010">`</span><span style="color:#a6e22e">seq</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">w</span> <span style="color:#ae81ff">003</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">91</span><span style="color:#960050;background-color:#1e0010">`</span>; <span style="color:#66d9ef">do</span> <span style="color:#a6e22e">turbinePattern</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;_$turbine\.&#34;</span>; <span style="color:#a6e22e">outputFilename</span><span style="color:#f92672">=$</span><span style="color:#a6e22e">realDay</span><span style="color:#e6db74">&#34;_&#34;</span><span style="color:#f92672">$</span><span style="color:#a6e22e">turbine</span><span style="color:#e6db74">&#34;.csv&#34;</span>;<span style="color:#a6e22e">awk</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">F</span><span style="color:#e6db74">&#34;,&#34;</span> <span style="color:#e6db74">&#39;/$turbinePattern/{print}&#39;</span> <span style="color:#a6e22e">echo</span> <span style="color:#f92672">$</span><span style="color:#a6e22e">turbinePattern</span>,<span style="color:#f92672">$</span><span style="color:#a6e22e">turbine</span>,<span style="color:#f92672">$</span><span style="color:#a6e22e">outputFilename</span>;<span style="color:#a6e22e">done</span>;<span style="color:#a6e22e">done</span></span></span></code></pre></div>
+<h2 id="bash包装awk可执行语句">bash包装awk可执行语句</h2>
+<p>我们可以包装awk命令，最后交给bash执行(很重要的bash命令)</p>
+<h3 id="我的awk命令封装测试代码--重大突破">我的awk命令封装测试代码(重大突破)</h3>
+<p>注意双引号要用反斜杠去引用！（去引用是一个基本的业务操作）</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-awk" data-lang="awk"><span style="display:flex;"><span><span style="color:#ae81ff">86151</span><span style="color:#a6e22e">@DESKTOP</span><span style="color:#f92672">-</span><span style="color:#a6e22e">O9MPS4C</span> <span style="color:#f92672">/</span><span style="color:#a6e22e">cygdrive</span><span style="color:#f92672">/</span><span style="color:#a6e22e">f</span><span style="color:#f92672">/</span><span style="color:#a6e22e">js_df</span><span style="color:#f92672">/</span><span style="color:#a6e22e">ceshi</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">$</span> <span style="color:#a6e22e">echo</span> <span style="color:#e6db74">&#34;awk -F\&#34;,\&#34; &#39;{print $2}&#39; 20200109_28.csv &gt;heklo.csv&#34;</span><span style="color:#f92672">|</span><span style="color:#a6e22e">bash</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">86151</span><span style="color:#a6e22e">@DESKTOP</span><span style="color:#f92672">-</span><span style="color:#a6e22e">O9MPS4C</span> <span style="color:#f92672">/</span><span style="color:#a6e22e">cygdrive</span><span style="color:#f92672">/</span><span style="color:#a6e22e">f</span><span style="color:#f92672">/</span><span style="color:#a6e22e">js_df</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">$</span>  <span style="color:#a6e22e">d1</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;_001\.&#34;</span>;<span style="color:#a6e22e">cmd</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;awk -F\&#34;,\&#34; &#39;/$d1/{print \$1,\&#34;,\&#34;,\$3,\&#34;,\&#34;,\$4;}&#39; js_df_20220109.csv &gt; 20220009_001.csv&#34;</span> ;<span style="color:#a6e22e">echo</span> <span style="color:#f92672">$</span><span style="color:#a6e22e">cmd</span><span style="color:#f92672">|</span><span style="color:#a6e22e">bash</span></span></span></code></pre></div>
+<h3 id="最终的成品">最终的成品</h3>
+<ol>
+<li>遍历文件</li>
+<li>文件名字截取重要部分</li>
+<li>生成所有机组的匹配模式</li>
+<li>生成awk命令字符串，包装机组模式变量</li>
+<li>bash执行</li>
+</ol>
+<!--listend-->
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-awk" data-lang="awk"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> <span style="color:#a6e22e">day</span> <span style="color:#f92672">in</span> <span style="color:#960050;background-color:#1e0010">`</span><span style="color:#a6e22e">ls</span> <span style="color:#f92672">*</span>.<span style="color:#a6e22e">csv</span><span style="color:#960050;background-color:#1e0010">`</span>;<span style="color:#66d9ef">do</span> <span style="color:#a6e22e">day1</span><span style="color:#f92672">=$</span>{<span style="color:#a6e22e">day</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">6</span>};<span style="color:#a6e22e">realDay</span><span style="color:#f92672">=$</span>{<span style="color:#a6e22e">day1</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#f92672">-</span><span style="color:#ae81ff">4</span>};<span style="color:#a6e22e">echo</span> <span style="color:#f92672">$</span><span style="color:#a6e22e">realDay</span>; <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">turbine</span> <span style="color:#f92672">in</span> <span style="color:#960050;background-color:#1e0010">`</span><span style="color:#a6e22e">seq</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">w</span> <span style="color:#ae81ff">001</span> <span style="color:#ae81ff">091</span><span style="color:#960050;background-color:#1e0010">`</span>; <span style="color:#66d9ef">do</span> <span style="color:#a6e22e">turbinePattern</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;_$turbine\.&#34;</span>; <span style="color:#a6e22e">outputFilename</span><span style="color:#f92672">=</span><span style="color:#a6e22e">output</span><span style="color:#f92672">/$</span><span style="color:#a6e22e">realDay</span><span style="color:#e6db74">&#34;_&#34;</span><span style="color:#f92672">$</span><span style="color:#a6e22e">turbine</span><span style="color:#e6db74">&#34;.csv&#34;</span>;<span style="color:#a6e22e">cmd</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;awk -F\&#34;,\&#34; &#39;/$turbinePattern/{print \$1,\&#34;,\&#34;,\$3,\&#34;,\&#34;,\$4;}&#39; $day &gt;$outputFilename&#34;</span>;<span style="color:#a6e22e">echo</span> <span style="color:#f92672">$</span><span style="color:#a6e22e">cmd</span><span style="color:#f92672">|</span><span style="color:#a6e22e">bash</span>;<span style="color:#a6e22e">done</span>;<span style="color:#a6e22e">done</span></span></span></code></pre></div>
+<h3 id="sed存在的意义">sed存在的意义</h3>
+<p>awk于1977年出生，现在46岁了，sed比awk大2-3岁。</p>
+<ul>
+<li>
+<p>快速读取前面几行</p>
+</li>
+<li>
+<p>最后一行或者中间行快速插入相关信息</p>
+</li>
+<li>
+<p>最流行的替换功能`sed &rsquo;s/hell//&rsquo; file`, 如果加入&quot;-i&quot;选项则表示直接在文件中修改;</p>
+<p>还可以指定行进行修改，比如&quot;sed &lsquo;3,6s/my/yours/g&rsquo; file&quot;</p>
+<p>每行匹配可能有多个，还可以指定每行第几个匹配进行修改，比如第二个匹配修改&quot;sed &lsquo;3,6s/my/yours/2&rsquo; file&quot;
+比如第三个匹配修改&quot;sed &lsquo;3,6s/my/yours/3&rsquo; file&quot;</p>
+<p>还比如第三个以后的所有匹配都修改,加入g即可，&ldquo;sed &lsquo;3,6s/my/yours/3g&rsquo; file&rdquo;</p>
+<p>还比如匹配位置后面连续3行， &ldquo;$ sed &lsquo;<em>dog</em>,+3s/^/# /g&rsquo; pets.txt&rdquo; +3代表匹配后的连续3行</p>
+<p>命令还可以打包 # 对3行到第6行，匹配_This_成功后，再匹配_fish_，成功后执行d命令
+$ sed &lsquo;3,6 {/This/{/fish/d}}&rsquo; pets.txt</p>
+<p>参考<a href="https://coolshell.cn/articles/9104.html" target="_blank" rel="noopener">cool sed</a></p>
+<p>sed &rsquo;s/my/[&amp;]/g&rsquo; my.txt  ,&amp;代表匹配的my</p>
+<p>sed &lsquo;N;s/\n/,/&rsquo; pets.txt  N命令快速合并前后两行(1,2行合并为1行，3，4行合并为1行)</p>
+</li>
+</ul>
+<p>可以学习一下<a href="https://coolshell.cn/articles/author/haoel" target="_blank" rel="noopener">陈浩的酷壳博客</a>
+sed很关键的几个概念是地址(行或者模式指定),!是否执行，cmd命令流(增删查找)</p>
+<p>10q,代表读到第十行则quit！</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ sed <span style="color:#e6db74">&#39;10q&#39;</span> js_df_20220109.csv
+</span></span><span style="display:flex;"><span>2022-01-09 00:00:01,1641657601032,JS_DF_1_008.1.DD,0.0,,tenant_system,,1641657600,1
+</span></span><span style="display:flex;"><span>2022-01-09 00:00:01,1641657601032,JS_DF_1_008.1.DE,34.7,,tenant_system,,1641657600,1</span></span></code></pre></div>
+<ul>
+<li>最后一行或者中间行快速插入相关信息</li>
+</ul>
+<!--listend-->
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#f92672">[</span>root@www ~<span style="color:#f92672">]</span><span style="color:#75715e"># sed -i &#39;$a # This is a test&#39; regular_express.txt</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>root@www ~<span style="color:#f92672">]</span><span style="color:#75715e"># cat regular_express.txt</span>
+</span></span><span style="display:flex;"><span>runoob!
+</span></span><span style="display:flex;"><span>google!
+</span></span><span style="display:flex;"><span>taobao!
+</span></span><span style="display:flex;"><span>facebook!
+</span></span><span style="display:flex;"><span>zhihu-
+</span></span><span style="display:flex;"><span>weibo-
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># This is a test</span>
+</span></span><span style="display:flex;"><span>由於 $ 代表的是最后一行，而 a 的动作是新增，因此该文件最后新增 <span style="color:#75715e"># This is a test！</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sed 的 -i 选项可以直接修改文件内容，这功能非常有帮助！举例来说，如果你有一个 <span style="color:#ae81ff">100</span> 万行的文件，你要在第 <span style="color:#ae81ff">100</span> 行加某些文字，此时使用 vim 可能会疯掉！因为文件太大了！那怎办？就利用 sed 啊！透过 sed 直接修改/取代的功能，你甚至不需要使用 vim 去修订</span></span></code></pre></div>
+<h3 id="awk获取机组台数信息">awk获取机组台数信息</h3>
+<p>awk字符串分割（多个分割模式） uniq去重</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-awk" data-lang="awk"><span style="display:flex;"><span><span style="color:#a6e22e">awk</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">F</span><span style="color:#e6db74">&#34;,&#34;</span> <span style="color:#e6db74">&#39;{split($3,a,&#34;[_.]&#34;);print a[4];}&#39;</span> <span style="color:#f92672">/</span><span style="color:#a6e22e">tmp</span><span style="color:#f92672">/</span><span style="color:#a6e22e">test</span>.<span style="color:#a6e22e">csv</span><span style="color:#f92672">|</span><span style="color:#a6e22e">uniq</span></span></span></code></pre></div>
+<p>当然也可以使用 <code>substr</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-awk" data-lang="awk"><span style="display:flex;"><span><span style="color:#a6e22e">awk</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">F</span> <span style="color:#e6db74">&#39;,&#39;</span> <span style="color:#e6db74">&#39;{print substr($3,6)}&#39;</span>  <span style="color:#75715e">#  ---&gt;  表示是从第3个字段里的第6个字符开始，一直到设定的分隔符&#34;,&#34;结束.</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">substr</span>(<span style="color:#f92672">$</span><span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">8</span>)  <span style="color:#75715e">#---&gt;  表示是从第3个字段里的第10个字符开始，截取8个字符结束.</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">substr</span>(<span style="color:#f92672">$</span><span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">6</span>)     <span style="color:#75715e">#---&gt;  表示是从第3个字段里的第6个字符开始，一直到结尾</span></span></span></code></pre></div>
+
+    </div>
+ <div class="nav-links" style="padding:10;">
+        
+        <div align="left">
+        <a href="https://jueqingsizhe66.github.io/post/%E8%BD%BB%E9%87%8F%E5%BF%AB%E9%80%9F%E5%A4%84%E7%90%86txt%E6%96%87%E6%9C%AC%E6%95%B0%E6%8D%AE%E5%88%B0sql/"><span class="arrow">←</span> <strong>上一篇:轻量快速处理txt文本数据到sql</strong></a>
+        </div>
+        
+        
+
+
+       <div align="right"> <a href="https://jueqingsizhe66.github.io/post/ubuntu%E6%8C%82%E5%9C%A88t%E7%BA%A7%E5%88%AB%E7%A1%AC%E7%9B%98/" ><strong>下一篇:ubuntu挂在8T级别硬盘 </strong><span class="arrow">→</span></a></div>
+        
+      </div>
+
+    <div class="pagination__title">
+      <span class="pagination__title-h">Related</span>
+      <hr />
+    </div>
+
+    
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+
+    
+
+    
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/awk/">awk</a>
+  
+  <a class="badge badge-light" href="/tag/bash/">bash</a>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="https://jueqingsizhe66.github.io/"><img class="avatar mr-3 avatar-circle" src="/author/%E5%8F%B6%E6%98%AD%E8%89%AF/avatar_huc99f1f2e739130747140db298bdd1890_46492_270x270_fill_q75_lanczos_center.jpg" alt="叶昭良"></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://jueqingsizhe66.github.io/">叶昭良</a></h5>
+      <h6 class="card-subtitle">Engineer of offshore wind turbine technique research</h6>
+      <p class="card-text">My research interests include distributed energy, wind turbine power generation technique , Computational fluid dynamic and programmable matter.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/jueqingsizhe66" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.com/citations?user=7VyEMyQAAAAJ&amp;hl=zh-CN" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/jueqingsizhe66" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+         
+         
+         
+         
+         
+         
+   </div>
+
+  </div>
+
+</article>
+<script src="https://utteranc.es/client.js"
+        repo="jueqingsizhe66/jueqingsizhe66.github.io"
+        issue-term="pathname"
+        theme="github-dark"
+        crossorigin="anonymous"
+        async>
+</script>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    ©2022 &middot; 
+
+    ^-^ Ye Zhaoliang ^-^ Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+      
+
+    
+    <script src="/js/vendor-bundle.min.3d946de2e8784a477845261d87025092.js"></script>
+
+    
+    
+    
+      
+      
+        <script src="https://cdn.jsdelivr.net/gh/desandro/imagesloaded@v4.1.4/imagesloaded.pkgd.min.js" integrity="sha512-S5PZ9GxJZO16tT9r3WJp/Safn31eu8uWrzglMahDT4dsmgqWonRY9grk3j+3tfuPr9WJNsfooOR7Gi7HL5W2jw==" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/gh/metafizzy/isotope@v3.0.6/dist/isotope.pkgd.min.js" integrity="sha512-Zq2BOxyhvnRFXu0+WE6ojpZLOU2jdnqbrM1hmVdGzyeCa1DgM3X5Q4A/Is9xA1IkbUeDd7755dNNI/PzSf2Pew==" crossorigin="anonymous"></script>
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/gh/mermaid-js/mermaid@v8.8.4/dist/mermaid.min.js" integrity="sha512-+TNmhaRJf3jyYHTpzEq/5I6b+aGyhzWb21mGdHAjxSGSYwxN9Grug3Y3B9qVxWfKKY8MscE/6mr9walWvFLFvQ==" crossorigin="anonymous" title="mermaid"></script>
+      
+
+      
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/highlight.min.js" integrity="sha512-Ypjm0o7jOxAd4hpdoppSEN0TQOC19UtPAqD+4s5AlXmUvbmmS/YMxYqAqarQYyxTnB6/rqip9qcxlNB/3U9Wdg==" crossorigin="anonymous"></script>
+        
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/r.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/latex.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/python.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/matlab.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/java.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/go.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/rust.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/c.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/perl.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/scheme.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/lisp.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/racket.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/awk.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/sed.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/bash.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/sql.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/vim.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/clojure.min.js" crossorigin="anonymous"></script>
+        
+      
+
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+      
+      <script id="search-hit-fuse-template" type="text/x-template">
+        <div class="search-hit" id="summary-{{key}}">
+          <div class="search-hit-content">
+            <div class="search-hit-name">
+              <a href="{{relpermalink}}">{{title}}</a>
+              <div class="article-metadata search-hit-type">{{type}}</div>
+              <p class="search-hit-description">{{snippet}}</p>
+            </div>
+          </div>
+        </div>
+      </script>
+      
+        <script src="https://cdn.jsdelivr.net/gh/krisk/Fuse@v3.2.1/dist/fuse.min.js" integrity="sha512-o38bmzBGX+hD3JHWUFCDA09btWaqrNmoJ3RXLlrysA7PP01Kgs4UlE4MhelE1v5dJR3+cxlR4qQlotsW7jKsnw==" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/gh/julmot/mark.js@8.11.1/dist/jquery.mark.min.js" integrity="sha512-mhbv5DqBMgrWL+32MmsDOt/OAvqr/cHimk6B8y/bx/xS88MVkYGPiVv2ixKVrkywF2qHplNRUvFsAHUdxZ3Krg==" crossorigin="anonymous"></script>
+      
+    
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+      
+      
+      
+      
+      
+      
+      
+    
+
+    
+
+    
+    
+    
+    <script id="page-data" type="application/json">{"use_headroom":true}</script>
+
+    
+    
+      <script src="/js/wowchemy-headroom.e8fd2d733eef6a8bbbe0539398fc0547.js" type="module"></script>
+    
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    <script src="/en/js/wowchemy.min.a2ed145159dd33ad55ff402163350b5d.js"></script>
+
+    
+    
+    
+    
+    
+    
+      
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      <script src="/js/wowchemy-publication.b0d291ed6d27eacec233e6cf5204f99a.js" type="module"></script>
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+
+
+
+</body>
+</html>

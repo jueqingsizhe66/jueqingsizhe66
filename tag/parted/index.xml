@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>parted | 30年磨一剑</title>
+    <link>https://jueqingsizhe66.github.io/tag/parted/</link>
+      <atom:link href="https://jueqingsizhe66.github.io/tag/parted/index.xml" rel="self" type="application/rss+xml" />
+    <description>parted</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>©2022</copyright><lastBuildDate>Mon, 14 Mar 2022 14:35:00 +0800</lastBuildDate>
+    <image>
+      <url>https://jueqingsizhe66.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
+      <title>parted</title>
+      <link>https://jueqingsizhe66.github.io/tag/parted/</link>
+    </image>
+    
+    <item>
+      <title>ubuntu挂在8T级别硬盘</title>
+      <link>https://jueqingsizhe66.github.io/post/ubuntu%E6%8C%82%E5%9C%A88t%E7%BA%A7%E5%88%AB%E7%A1%AC%E7%9B%98/</link>
+      <pubDate>Mon, 14 Mar 2022 14:35:00 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/post/ubuntu%E6%8C%82%E5%9C%A88t%E7%BA%A7%E5%88%AB%E7%A1%AC%E7%9B%98/</guid>
+      <description>&lt;p&gt;Ubuntu挂在不同容量硬盘有所区别，使用命令有所不同，小容量用fdisk,大容量用parted&lt;/p&gt;
+&lt;h2 id=&#34;普通情况下-挂载小于等于2t磁盘&#34;&gt;普通情况下，挂载小于等于2T磁盘&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;fdisk -l       &lt;span style=&#34;color:#75715e&#34;&gt;##（查看当前分区的情况）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;fdisk /dev/vdd
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;m
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;p
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;n
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;p
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;空格
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;空格
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;w
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mkfs -text4 /dev/vdb1  &lt;span style=&#34;color:#75715e&#34;&gt;## 初始化磁盘&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;vim /etc/fstab  &lt;span style=&#34;color:#75715e&#34;&gt;##打开fstab写下下面内容，其中/minio/data就是挂在的路径，后面内容默认即可&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/dev/vdc1 /minio/data              ext4     defaults        &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mount -a&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;挂在8t硬盘的方法&#34;&gt;挂在8T硬盘的方法&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1.parted /dev/vdc  &lt;span style=&#34;color:#75715e&#34;&gt;## 一般大于2T，需要用parted命令  fdisk -l 可以查看所有设备信息&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;2.print &lt;span style=&#34;color:#75715e&#34;&gt;##（查看一下）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;3.mklabel gpt &lt;span style=&#34;color:#75715e&#34;&gt;##（设置分区类型为gpt）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;unit TB  &lt;span style=&#34;color:#75715e&#34;&gt;##(设置单位为TB)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;4.mkpart extended 0% 100% &lt;span style=&#34;color:#75715e&#34;&gt;## 划分分区大小， 建立拓展分区。表示所有扇区都用于当前分区）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;##mkpart primary 0 3 ## 划分一个主分区,大小为3TB，开始是0，结束是3  目前清能院得是 mkpart primary 0  表示8T)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;5.print &lt;span style=&#34;color:#75715e&#34;&gt;##(显示设置的分区大小）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;6.quit
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;##Information: You may need to update /etc/fstab.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;7.mkfs.ext4 /dev/vdc  &lt;span style=&#34;color:#75715e&#34;&gt;##格式化新硬盘 与2T以下有所不同   &amp;lt;-----------------------&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;8. vim /etc/fstab  &lt;span style=&#34;color:#75715e&#34;&gt;##写入一行信息：(涉及到硬盘和文件夹的关系)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;```&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/dev/sdb         /tempo     ext4     defaults        &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    &amp;lt;-------------/tempo代表挂载的目录&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;mkdir /tempo&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;```&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;9. mount  /dec/sdb  &lt;span style=&#34;color:#75715e&#34;&gt;## &amp;lt;------------或者mount -a  如果有多快盘,可以全部挂载上&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
