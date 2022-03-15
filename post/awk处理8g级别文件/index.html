@@ -814,7 +814,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    3 min read
+    4 min read
   </span>
   
 
@@ -845,7 +845,7 @@
 
 
 
-<span class="article-metadata" >Reading time: 6 minutes and    46 seconds with 1490 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+<span class="article-metadata" >Reading time: 6 minutes and    51 seconds with 1510 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
   <ul>
@@ -909,6 +909,7 @@
 <h3 id="错误的命令">错误的命令</h3>
 <p>下面命令无法获得你想要单台机组信息，因为$turbinePattern根本就不会解析为`_028.`的 模式，因为//不能解析变量，所以解决办法是我们提供斜杠号之间变量值</p>
 <p>但是perl的模式匹配中确实可以，参考<a href="https://jueqingsizhe66.github.io/post/perl%e6%8b%86%e5%88%86%e5%a4%a7%e6%96%87%e4%bb%b6%e5%88%b0excel%e8%a1%a8/" target="_blank" rel="noopener">perl拆分大文件</a> 可见perl正则的强大。</p>
+<p>单行执行程序：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-awk" data-lang="awk"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> <span style="color:#a6e22e">day</span> <span style="color:#f92672">in</span> <span style="color:#960050;background-color:#1e0010">`</span><span style="color:#a6e22e">ls</span> <span style="color:#f92672">*</span>.<span style="color:#a6e22e">csv</span><span style="color:#960050;background-color:#1e0010">`</span>;<span style="color:#66d9ef">do</span> <span style="color:#a6e22e">day1</span><span style="color:#f92672">=$</span>{<span style="color:#a6e22e">day</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">6</span>};<span style="color:#a6e22e">realDay</span><span style="color:#f92672">=$</span>{<span style="color:#a6e22e">day1</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#f92672">-</span><span style="color:#ae81ff">4</span>};<span style="color:#a6e22e">echo</span> <span style="color:#f92672">$</span><span style="color:#a6e22e">realDay</span>; <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">turbine</span> <span style="color:#f92672">in</span> <span style="color:#960050;background-color:#1e0010">`</span><span style="color:#a6e22e">seq</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">w</span> <span style="color:#ae81ff">003</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">91</span><span style="color:#960050;background-color:#1e0010">`</span>; <span style="color:#66d9ef">do</span> <span style="color:#a6e22e">turbinePattern</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;_$turbine\.&#34;</span>; <span style="color:#a6e22e">outputFilename</span><span style="color:#f92672">=$</span><span style="color:#a6e22e">realDay</span><span style="color:#e6db74">&#34;_&#34;</span><span style="color:#f92672">$</span><span style="color:#a6e22e">turbine</span><span style="color:#e6db74">&#34;.csv&#34;</span>;<span style="color:#a6e22e">awk</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">F</span><span style="color:#e6db74">&#34;,&#34;</span> <span style="color:#e6db74">&#39;/$turbinePattern/{print}&#39;</span> <span style="color:#a6e22e">echo</span> <span style="color:#f92672">$</span><span style="color:#a6e22e">turbinePattern</span>,<span style="color:#f92672">$</span><span style="color:#a6e22e">turbine</span>,<span style="color:#f92672">$</span><span style="color:#a6e22e">outputFilename</span>;<span style="color:#a6e22e">done</span>;<span style="color:#a6e22e">done</span></span></span></code></pre></div>
 <h2 id="bash包装awk可执行语句">bash包装awk可执行语句</h2>
 <p>我们可以包装awk命令，最后交给bash执行(很重要的bash命令)</p>
@@ -975,7 +976,7 @@ sed很关键的几个概念是地址(行或者模式指定),!是否执行，cmd�
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>sed 的 -i 选项可以直接修改文件内容，这功能非常有帮助！举例来说，如果你有一个 <span style="color:#ae81ff">100</span> 万行的文件，你要在第 <span style="color:#ae81ff">100</span> 行加某些文字，此时使用 vim 可能会疯掉！因为文件太大了！那怎办？就利用 sed 啊！透过 sed 直接修改/取代的功能，你甚至不需要使用 vim 去修订</span></span></code></pre></div>
 <h3 id="awk获取机组台数信息">awk获取机组台数信息</h3>
-<p>awk字符串分割（多个分割模式） uniq去重</p>
+<p>awk字符串分割（多个分割模式） uniq去重(uniq -c 加上统计功能）</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-awk" data-lang="awk"><span style="display:flex;"><span><span style="color:#a6e22e">awk</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">F</span><span style="color:#e6db74">&#34;,&#34;</span> <span style="color:#e6db74">&#39;{split($3,a,&#34;[_.]&#34;);print a[4];}&#39;</span> <span style="color:#f92672">/</span><span style="color:#a6e22e">tmp</span><span style="color:#f92672">/</span><span style="color:#a6e22e">test</span>.<span style="color:#a6e22e">csv</span><span style="color:#f92672">|</span><span style="color:#a6e22e">uniq</span></span></span></code></pre></div>
 <p>当然也可以使用 <code>substr</code></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-awk" data-lang="awk"><span style="display:flex;"><span><span style="color:#a6e22e">awk</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">F</span> <span style="color:#e6db74">&#39;,&#39;</span> <span style="color:#e6db74">&#39;{print substr($3,6)}&#39;</span>  <span style="color:#75715e">#  ---&gt;  表示是从第3个字段里的第6个字符开始，一直到设定的分隔符&#34;,&#34;结束.</span>
