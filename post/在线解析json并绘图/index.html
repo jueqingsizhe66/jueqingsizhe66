@@ -1,0 +1,1369 @@
+<!DOCTYPE html><html lang="en-us" >
+
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  
+  
+    <meta name="generator" content="Wowchemy 5.4.0 for Hugo" />
+  
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+  
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="叶昭良" />
+
+  
+  
+  
+    
+  
+  <meta name="description" content="根据经纬度坐标&#43;token处理json请求（只能http解析" />
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://jueqingsizhe66.github.io/post/%E5%9C%A8%E7%BA%BF%E8%A7%A3%E6%9E%90json%E5%B9%B6%E7%BB%98%E5%9B%BE/" />
+
+  
+  
+  
+    <meta name="theme-color" content="#1565c0" />
+  
+
+  
+  
+    
+    <script src="/js/mathjax-config.js"></script>
+  
+
+  
+
+  <link rel="stylesheet" href="/css/vendor-bundle.min.f1ecf783c14edc00c9320c205831ad8e.css" media="print" onload="this.media='all'">
+
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css" integrity="sha512-W0xM4mr6dEP9nREo7Z9z+9X70wytKvMGeDsj7ps2+xg5QPrEBXC8tAW1IFnzjR6eoJ90JmCnFzerQJTLzIEHjA==" crossorigin="anonymous" media="print" onload="this.media='all'">
+    
+
+    
+    
+    
+    
+      
+      
+    
+    
+    
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/github.min.css" crossorigin="anonymous" title="hl-light" media="print" onload="this.media='all'">
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" media="print" onload="this.media='all'" disabled>
+        
+      
+    
+
+    
+    
+    
+
+    
+
+    
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.2a9113cdaa287c8aabad4aa82208fdf3.css" />
+
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+    <link rel="manifest" href="/manifest.webmanifest" />
+  
+
+  <link rel="icon" type="image/png" href="/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_32x32_fill_lanczos_center_3.png" />
+  <link rel="apple-touch-icon" type="image/png" href="/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_180x180_fill_lanczos_center_3.png" />
+
+  <link rel="canonical" href="https://jueqingsizhe66.github.io/post/%E5%9C%A8%E7%BA%BF%E8%A7%A3%E6%9E%90json%E5%B9%B6%E7%BB%98%E5%9B%BE/" />
+
+  
+  
+  
+  
+  
+  
+  
+  
+    
+    
+  
+  
+
+  
+  
+    
+    
+  
+  <meta property="twitter:card" content="summary" />
+  
+    <meta property="twitter:site" content="@jueqingsihe66" />
+    <meta property="twitter:creator" content="@jueqingsihe66" />
+  
+  <meta property="og:site_name" content="30年磨一剑" />
+  <meta property="og:url" content="https://jueqingsizhe66.github.io/post/%E5%9C%A8%E7%BA%BF%E8%A7%A3%E6%9E%90json%E5%B9%B6%E7%BB%98%E5%9B%BE/" />
+  <meta property="og:title" content="在线解析json并绘图 | 30年磨一剑" />
+  <meta property="og:description" content="根据经纬度坐标&#43;token处理json请求（只能http解析" /><meta property="og:image" content="https://jueqingsizhe66.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" />
+    <meta property="twitter:image" content="https://jueqingsizhe66.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
+  
+    
+      <meta
+        property="article:published_time"
+        content="2022-03-18T00:23:00&#43;08:00"
+      />
+    
+    <meta property="article:modified_time" content="2022-03-18T00:23:06&#43;08:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://jueqingsizhe66.github.io/post/%E5%9C%A8%E7%BA%BF%E8%A7%A3%E6%9E%90json%E5%B9%B6%E7%BB%98%E5%9B%BE/"
+  },
+  "headline": "在线解析json并绘图",
+  
+  "datePublished": "2022-03-18T00:23:00+08:00",
+  "dateModified": "2022-03-18T00:23:06+08:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "叶昭良"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "30年磨一剑",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://jueqingsizhe66.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_192x192_fill_lanczos_center_3.png"
+    }
+  },
+  "description": "根据经纬度坐标+token处理json请求（只能http解析"
+}
+</script>
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+  <title>在线解析json并绘图 | 30年磨一剑</title>
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="33bb1e1a77c14e137c2aee3817f800eb" >
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.7e5427316d1b14a30f257ae3467b3e21.js"></script>
+
+  
+
+
+<aside class="search-modal" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="Search...">
+        
+      </div>
+
+      
+      
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="header--fixed">
+  <nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+    <div class="container-xl">
+
+      
+      <div class="d-none d-lg-inline-flex">
+        <a class="navbar-brand" href="/">30年磨一剑</a>
+      </div>
+      
+
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+      <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+      
+      <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+        <a class="navbar-brand" href="/">30年磨一剑</a>
+      </div>
+      
+
+      
+      
+      <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+        
+        <ul class="navbar-nav d-md-inline-flex">
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#hero"><span>概要</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#posts"><span>博文</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/about/"><span>About</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/categories/"><span>分类</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/archives"><span>归档</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#tags"><span>标签</span></a>
+          </li>
+
+          
+          
+
+        
+
+          
+        </ul>
+      </div>
+
+      <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+        
+        
+          
+        
+
+        
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+        
+        
+        <li class="nav-item dropdown theme-dropdown">
+          <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+            <i class="fas fa-moon" aria-hidden="true"></i>
+          </a>
+          <div class="dropdown-menu">
+            <a href="#" class="dropdown-item js-set-theme-light">
+              <span>Light</span>
+            </a>
+            <a href="#" class="dropdown-item js-set-theme-dark">
+              <span>Dark</span>
+            </a>
+            <a href="#" class="dropdown-item js-set-theme-auto">
+              <span>Automatic</span>
+            </a>
+          </div>
+        </li>
+        
+
+        
+        
+
+      </ul>
+
+    </div>
+  </nav>
+</header>
+
+
+  </div>
+
+  <div class="page-body">
+    
+    
+    
+
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+  
+ <script async src="//cdn.busuanzi.ibruce.info/cdn/busuanzi/2.3/busuanzi.pure.mini.js"></script> 
+ <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script> 
+ <script> 
+     $(document).ready(function() { 
+         var int = setInterval(fixCount, 100); 
+         var busuanziSiteOffset =  100000  
+         function fixCount() { 
+             if ($("#busuanzi_container_site_pv").css("display") != "none") { 
+                 clearInterval(int); 
+                 $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + busuanziSiteOffset); 
+             } 
+         } 
+     }); 
+ </script> 
+  
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>在线解析json并绘图</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+          Last updated on
+      
+    
+    Mar 18, 2022
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    3 min read
+  </span>
+  
+
+  
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/category/programme/">programme</a>, <a href="/category/%E6%8A%80%E6%9C%AF/">技术</a></span>
+  
+
+</div>
+
+    
+
+
+
+
+
+  
+</div>
+
+
+
+
+
+<span class="article-metadata" >Reading time: 6 minutes and    37 seconds with 1456 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+    <aside>
+        <nav id="TableOfContents"></nav>
+    </aside>
+  <div class="article-container">
+
+
+    <div class="article-style">
+      <ol>
+<li>根据经纬度坐标+token处理json请求（只能http解析)</li>
+<li>pandas处理接受来的数据，中间涉及字段转换处理</li>
+<li>matplotlib绘图,时间轴，网格线，suptitle</li>
+</ol>
+<!--listend-->
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># *</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># *  @author Zhaoliang Ye 叶昭良(zl_ye@qny.chng.com.cn)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># *  @version V0.1</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># *  @Title: testJSON163.py</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># *  @Description: (用一句话描述该文件做什么?)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># *  @Time: 2022/3/17 21:09</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##  https://www.cnblogs.com/BlueSkyyj/p/7594533.html  获取https的坑</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># *</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> json
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> requests
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> time
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> jsonpath
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.dates <span style="color:#66d9ef">as</span> mdates
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> datetime
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>headers <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;User-Agent&#39;</span>: <span style="color:#e6db74">&#39;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36&#39;</span>}
+</span></span><span style="display:flex;"><span>format <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;%Y-%m-</span><span style="color:#e6db74">%d</span><span style="color:#e6db74"> %H:%M:%S&#39;</span> <span style="color:#75715e">### 日期格式</span>
+</span></span><span style="display:flex;"><span>request_https_headers <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;authority&#39;</span>: <span style="color:#e6db74">&#34;data.nba.net&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;method&#39;</span>: <span style="color:#e6db74">&#34;GET&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;path&#39;</span>: <span style="color:#e6db74">&#34;/10s/prod/v3/today.json&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;scheme&#39;</span>: <span style="color:#e6db74">&#34;https&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;accept&#39;</span>: <span style="color:#e6db74">&#34;application/json, text/plain, */*&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;accept-encoding&#39;</span>: <span style="color:#e6db74">&#34;gzip, deflate, br&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;accept-language&#39;</span>: <span style="color:#e6db74">&#34;en,en-US&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;origin&#39;</span>: <span style="color:#e6db74">&#34;https://www.nba.com&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;sec-fetch-dest&#39;</span>: <span style="color:#e6db74">&#34;empty&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;sec-fetch-mode&#39;</span>: <span style="color:#e6db74">&#34;cors&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;sec-fetch-site&#39;</span>: <span style="color:#e6db74">&#34;cross-site&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;user-agent&#39;</span>: <span style="color:#e6db74">&#34;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_json</span>(url):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>        response <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(url, headers<span style="color:#f92672">=</span>headers)
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># response = requests.get(url, headers=request_https_headers)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">#response = requests.get(url)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> response<span style="color:#f92672">.</span>status_code <span style="color:#f92672">==</span> <span style="color:#ae81ff">200</span>:
+</span></span><span style="display:flex;"><span>            json_text <span style="color:#f92672">=</span> response<span style="color:#f92672">.</span>json()
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> json_text
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span>:
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#39;此页有问题！&#39;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">None</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">stampToTime</span>(stamp):  <span style="color:#75715e"># 时间转换</span>
+</span></span><span style="display:flex;"><span>    year <span style="color:#f92672">=</span> stamp[<span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">4</span>]
+</span></span><span style="display:flex;"><span>    month <span style="color:#f92672">=</span> stamp[<span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">6</span>]
+</span></span><span style="display:flex;"><span>    day <span style="color:#f92672">=</span> stamp[<span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">8</span>]
+</span></span><span style="display:flex;"><span>    hour<span style="color:#f92672">=</span> stamp[<span style="color:#ae81ff">8</span>:<span style="color:#ae81ff">10</span>]
+</span></span><span style="display:flex;"><span>    minute<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    second<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    currentDateTime <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>strptime(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{</span>year<span style="color:#e6db74">}</span><span style="color:#e6db74">-</span><span style="color:#e6db74">{</span>month<span style="color:#e6db74">}</span><span style="color:#e6db74">-</span><span style="color:#e6db74">{</span>day<span style="color:#e6db74">}</span><span style="color:#e6db74"> </span><span style="color:#e6db74">{</span>hour<span style="color:#e6db74">}</span><span style="color:#e6db74">:</span><span style="color:#e6db74">{</span>minute<span style="color:#e6db74">}</span><span style="color:#e6db74">:</span><span style="color:#e6db74">{</span>second<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>,format)  <span style="color:#75715e">###起始时间</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> currentDateTime
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_comments</span>(url):
+</span></span><span style="display:flex;"><span>    data <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>    doc <span style="color:#f92672">=</span> get_json(url)
+</span></span><span style="display:flex;"><span>    jobs<span style="color:#f92672">=</span>doc[<span style="color:#e6db74">&#39;result&#39;</span>][<span style="color:#e6db74">&#39;sea&#39;</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> job <span style="color:#f92672">in</span> jobs:
+</span></span><span style="display:flex;"><span>        dic <span style="color:#f92672">=</span> {}
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">#从根节点开始，匹配content节点</span>
+</span></span><span style="display:flex;"><span>        dic[<span style="color:#e6db74">&#39;seaSwellDirection(deg)&#39;</span>]<span style="color:#f92672">=</span>jsonpath<span style="color:#f92672">.</span>jsonpath(job,<span style="color:#e6db74">&#39;$..seaSwellDirection&#39;</span>)[<span style="color:#ae81ff">0</span>] <span style="color:#75715e"># 海浪向</span>
+</span></span><span style="display:flex;"><span>        dic[<span style="color:#e6db74">&#39;seaSwellHeight(m)&#39;</span>]<span style="color:#f92672">=</span> jsonpath<span style="color:#f92672">.</span>jsonpath(job,<span style="color:#e6db74">&#39;$..seaSwellHeight&#39;</span>)[<span style="color:#ae81ff">0</span>] <span style="color:#75715e"># 海浪高</span>
+</span></span><span style="display:flex;"><span>        dic[<span style="color:#e6db74">&#39;seaWaveDirection(deg)&#39;</span>]<span style="color:#f92672">=</span>jsonpath<span style="color:#f92672">.</span>jsonpath(job,<span style="color:#e6db74">&#39;$..seaWaveDirection&#39;</span>)[<span style="color:#ae81ff">0</span>]  <span style="color:#75715e"># 涌浪向</span>
+</span></span><span style="display:flex;"><span>        dic[<span style="color:#e6db74">&#39;seaWaveHeight(m)&#39;</span>]<span style="color:#f92672">=</span>jsonpath<span style="color:#f92672">.</span>jsonpath(job,<span style="color:#e6db74">&#39;$..seaWaveHeight&#39;</span>)[<span style="color:#ae81ff">0</span>]<span style="color:#75715e">#涌浪高</span>
+</span></span><span style="display:flex;"><span>        dic[<span style="color:#e6db74">&#39;wind100Direction(deg)&#39;</span>]<span style="color:#f92672">=</span>jsonpath<span style="color:#f92672">.</span>jsonpath(job,<span style="color:#e6db74">&#39;$..wind100Direction&#39;</span>)[<span style="color:#ae81ff">0</span>] <span style="color:#75715e"># 百米风向</span>
+</span></span><span style="display:flex;"><span>        dic[<span style="color:#e6db74">&#39;wind100Speed(m/s)&#39;</span>]<span style="color:#f92672">=</span>jsonpath<span style="color:#f92672">.</span>jsonpath(job,<span style="color:#e6db74">&#39;$..wind100Speed&#39;</span>)[<span style="color:#ae81ff">0</span>] <span style="color:#75715e">#百米风速</span>
+</span></span><span style="display:flex;"><span>        dic[<span style="color:#e6db74">&#39;visibility(%)&#39;</span>]<span style="color:#f92672">=</span>jsonpath<span style="color:#f92672">.</span>jsonpath(job,<span style="color:#e6db74">&#39;$..visibility&#39;</span>)[<span style="color:#ae81ff">0</span>] <span style="color:#75715e">#能见度</span>
+</span></span><span style="display:flex;"><span>        dic[<span style="color:#e6db74">&#39;temp(℃)&#39;</span>]<span style="color:#f92672">=</span>jsonpath<span style="color:#f92672">.</span>jsonpath(job,<span style="color:#e6db74">&#39;$..temp&#39;</span>)[<span style="color:#ae81ff">0</span>] <span style="color:#75715e">#温度</span>
+</span></span><span style="display:flex;"><span>        dic[<span style="color:#e6db74">&#39;prate(mm)&#39;</span>]<span style="color:#f92672">=</span>jsonpath<span style="color:#f92672">.</span>jsonpath(job,<span style="color:#e6db74">&#39;$..prate&#39;</span>)[<span style="color:#ae81ff">0</span>] <span style="color:#75715e">#降水</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">#dic[&#39;time&#39;]=jsonpath.jsonpath(job,&#39;$..time&#39;)[0] #UTC时间</span>
+</span></span><span style="display:flex;"><span>        dic[<span style="color:#e6db74">&#39;time&#39;</span>]<span style="color:#f92672">=</span>stampToTime(jsonpath<span style="color:#f92672">.</span>jsonpath(job,<span style="color:#e6db74">&#39;$..time&#39;</span>)[<span style="color:#ae81ff">0</span>]) <span style="color:#75715e">#UTC时间</span>
+</span></span><span style="display:flex;"><span>        data<span style="color:#f92672">.</span>append(dic)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> pd<span style="color:#f92672">.</span>DataFrame(data)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#final_result = get_comments(&#39;http://data.nba.net/10s/prod/v3/today.json&#39;)</span>
+</span></span><span style="display:flex;"><span>final_result <span style="color:#f92672">=</span> get_comments(<span style="color:#e6db74">&#39;http://api.caiyunapp.com/v1/sea?token=VfgcXoLW7utFit&amp;lng=121.50&amp;lat=32.72&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># final_result.plot(subplots=True,figsize=(10,12),layout=(5,2),x_compat=True)</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>rcParams[<span style="color:#e6db74">&#39;font.sans-serif&#39;</span>]<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;SimHei&#39;</span>]
+</span></span><span style="display:flex;"><span>fig<span style="color:#f92672">=</span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">20</span>,<span style="color:#ae81ff">10</span>))
+</span></span><span style="display:flex;"><span>fig<span style="color:#f92672">.</span>suptitle(<span style="color:#e6db74">&#34;如东H3风电场实时气象图 东经121°30&#39; 北纬32°45&#39;&#34;</span>)
+</span></span><span style="display:flex;"><span>x<span style="color:#f92672">=</span>pd<span style="color:#f92672">.</span>to_datetime(final_result[<span style="color:#e6db74">&#39;time&#39;</span>])
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>gca()<span style="color:#f92672">.</span>xaxis<span style="color:#f92672">.</span>set_major_formatter(mdates<span style="color:#f92672">.</span>DateFormatter(<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">-%h&#39;</span>))  <span style="color:#75715e">#To turn off Pandas Datetime tick adjustment,</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>gca()<span style="color:#f92672">.</span>xaxis<span style="color:#f92672">.</span>set_major_locator(mdates<span style="color:#f92672">.</span>HourLocator())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">createFig</span>(subplotI,ydata,mycolor,mymarker,ylabel):  <span style="color:#75715e"># 时间转换</span>
+</span></span><span style="display:flex;"><span>    ax1 <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">2</span>, subplotI)
+</span></span><span style="display:flex;"><span>    p1 <span style="color:#f92672">=</span> ax1<span style="color:#f92672">.</span>scatter(x, final_result[ydata], color<span style="color:#f92672">=</span>mycolor, s<span style="color:#f92672">=</span><span style="color:#ae81ff">25</span>, marker<span style="color:#f92672">=</span>mymarker)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>legend([p1], [ydata])
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>ylabel(ylabel)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>grid(color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;grey&#39;</span>, linestyle<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;--&#39;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>createFig(<span style="color:#ae81ff">1</span>,<span style="color:#e6db74">&#39;seaSwellDirection(deg)&#39;</span>,<span style="color:#e6db74">&#39;r&#39;</span>,<span style="color:#e6db74">&#39;o&#39;</span>,<span style="color:#e6db74">&#39;海浪向(°)&#39;</span>)
+</span></span><span style="display:flex;"><span>createFig(<span style="color:#ae81ff">2</span>,<span style="color:#e6db74">&#39;seaSwellHeight(m)&#39;</span>,<span style="color:#e6db74">&#39;g&#39;</span>,<span style="color:#e6db74">&#39;*&#39;</span>,<span style="color:#e6db74">&#39;海浪高(m)&#39;</span>)
+</span></span><span style="display:flex;"><span>createFig(<span style="color:#ae81ff">3</span>,<span style="color:#e6db74">&#39;seaWaveDirection(deg)&#39;</span>,<span style="color:#e6db74">&#39;r&#39;</span>,<span style="color:#e6db74">&#39;o&#39;</span>,<span style="color:#e6db74">&#39;涌浪向(°)&#39;</span>)
+</span></span><span style="display:flex;"><span>createFig(<span style="color:#ae81ff">4</span>,<span style="color:#e6db74">&#39;seaWaveHeight(m)&#39;</span>,<span style="color:#e6db74">&#39;g&#39;</span>,<span style="color:#e6db74">&#39;*&#39;</span>,<span style="color:#e6db74">&#39;涌浪高(m)&#39;</span>)
+</span></span><span style="display:flex;"><span>createFig(<span style="color:#ae81ff">5</span>,<span style="color:#e6db74">&#39;wind100Direction(deg)&#39;</span>,<span style="color:#e6db74">&#39;r&#39;</span>,<span style="color:#e6db74">&#39;o&#39;</span>,<span style="color:#e6db74">&#39;百米风向(°)&#39;</span>)
+</span></span><span style="display:flex;"><span>createFig(<span style="color:#ae81ff">6</span>,<span style="color:#e6db74">&#39;wind100Speed(m/s)&#39;</span>,<span style="color:#e6db74">&#39;g&#39;</span>,<span style="color:#e6db74">&#39;*&#39;</span>,<span style="color:#e6db74">&#39;百米风速(m/s)&#39;</span>)
+</span></span><span style="display:flex;"><span>createFig(<span style="color:#ae81ff">7</span>,<span style="color:#e6db74">&#39;visibility(%)&#39;</span>,<span style="color:#e6db74">&#39;r&#39;</span>,<span style="color:#e6db74">&#39;o&#39;</span>,<span style="color:#e6db74">&#39;能见度(%)&#39;</span>)
+</span></span><span style="display:flex;"><span>createFig(<span style="color:#ae81ff">8</span>,<span style="color:#e6db74">&#39;temp(℃)&#39;</span>,<span style="color:#e6db74">&#39;g&#39;</span>,<span style="color:#e6db74">&#39;*&#39;</span>,<span style="color:#e6db74">&#39;温度(℃)&#39;</span>)
+</span></span><span style="display:flex;"><span>createFig(<span style="color:#ae81ff">9</span>,<span style="color:#e6db74">&#39;prate(mm)&#39;</span>,<span style="color:#e6db74">&#39;b&#39;</span>,<span style="color:#e6db74">&#39;o&#39;</span>,<span style="color:#e6db74">&#39;降水量(mm)&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 2</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ax2=plt.subplot(5,2,2)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># p2=ax2.scatter(x,final_result[&#39;seaSwellHeight(m)&#39;],color=&#39;g&#39;,s=25,marker=&#34;.&#34;)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># plt.legend([p2],[&#39;seaSwellHeight(m)&#39;])</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># plt.ylabel(&#39;海浪高(m)&#39;)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># #final_result.plot()</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># plt.grid(color=&#39;grey&#39;,linestyle=&#39;--&#39;,linewidth=0.5)</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span><span style="display:flex;"><span>print(final_result)
+</span></span><span style="display:flex;"><span>print(final_result<span style="color:#f92672">.</span>head())
+</span></span><span style="display:flex;"><span>print(final_result[<span style="color:#e6db74">&#39;seaSwellHeight(m)&#39;</span>])</span></span></code></pre></div>
+
+    </div>
+ <div class="nav-links" style="padding:10;">
+        
+        <div align="left">
+        <a href="https://jueqingsizhe66.github.io/post/%E5%A0%A1%E5%9E%92%E6%9C%BA/"><span class="arrow">←</span> <strong>上一篇:堡垒机</strong></a>
+        </div>
+        
+        
+      </div>
+
+    <div class="pagination__title">
+      <span class="pagination__title-h">Related</span>
+      <hr />
+    </div>
+
+    
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+
+    
+
+    
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/python/">python</a>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="https://jueqingsizhe66.github.io/"><img class="avatar mr-3 avatar-circle" src="/author/%E5%8F%B6%E6%98%AD%E8%89%AF/avatar_huc99f1f2e739130747140db298bdd1890_46492_270x270_fill_q75_lanczos_center.jpg" alt="叶昭良"></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://jueqingsizhe66.github.io/">叶昭良</a></h5>
+      <h6 class="card-subtitle">Engineer of offshore wind turbine technique research</h6>
+      <p class="card-text">My research interests include distributed energy, wind turbine power generation technique , Computational fluid dynamic and programmable matter.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/jueqingsizhe66" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.com/citations?user=7VyEMyQAAAAJ&amp;hl=zh-CN" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/jueqingsizhe66" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+         
+         
+         
+         
+         
+         
+   </div>
+
+  </div>
+
+</article>
+<script src="https://utteranc.es/client.js"
+        repo="jueqingsizhe66/jueqingsizhe66.github.io"
+        issue-term="pathname"
+        theme="github-dark"
+        crossorigin="anonymous"
+        async>
+</script>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    ©2022 &middot; 
+
+    ^-^ Ye Zhaoliang ^-^ Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+      
+
+    
+    <script src="/js/vendor-bundle.min.3d946de2e8784a477845261d87025092.js"></script>
+
+    
+    
+    
+      
+      
+        <script src="https://cdn.jsdelivr.net/gh/desandro/imagesloaded@v4.1.4/imagesloaded.pkgd.min.js" integrity="sha512-S5PZ9GxJZO16tT9r3WJp/Safn31eu8uWrzglMahDT4dsmgqWonRY9grk3j+3tfuPr9WJNsfooOR7Gi7HL5W2jw==" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/gh/metafizzy/isotope@v3.0.6/dist/isotope.pkgd.min.js" integrity="sha512-Zq2BOxyhvnRFXu0+WE6ojpZLOU2jdnqbrM1hmVdGzyeCa1DgM3X5Q4A/Is9xA1IkbUeDd7755dNNI/PzSf2Pew==" crossorigin="anonymous"></script>
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/gh/mermaid-js/mermaid@v8.8.4/dist/mermaid.min.js" integrity="sha512-+TNmhaRJf3jyYHTpzEq/5I6b+aGyhzWb21mGdHAjxSGSYwxN9Grug3Y3B9qVxWfKKY8MscE/6mr9walWvFLFvQ==" crossorigin="anonymous" title="mermaid"></script>
+      
+
+      
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/highlight.min.js" integrity="sha512-Ypjm0o7jOxAd4hpdoppSEN0TQOC19UtPAqD+4s5AlXmUvbmmS/YMxYqAqarQYyxTnB6/rqip9qcxlNB/3U9Wdg==" crossorigin="anonymous"></script>
+        
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/r.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/latex.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/python.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/matlab.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/java.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/go.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/rust.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/c.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/perl.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/scheme.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/lisp.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/racket.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/awk.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/sed.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/bash.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/sql.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/vim.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/clojure.min.js" crossorigin="anonymous"></script>
+        
+      
+
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+      
+      <script id="search-hit-fuse-template" type="text/x-template">
+        <div class="search-hit" id="summary-{{key}}">
+          <div class="search-hit-content">
+            <div class="search-hit-name">
+              <a href="{{relpermalink}}">{{title}}</a>
+              <div class="article-metadata search-hit-type">{{type}}</div>
+              <p class="search-hit-description">{{snippet}}</p>
+            </div>
+          </div>
+        </div>
+      </script>
+      
+        <script src="https://cdn.jsdelivr.net/gh/krisk/Fuse@v3.2.1/dist/fuse.min.js" integrity="sha512-o38bmzBGX+hD3JHWUFCDA09btWaqrNmoJ3RXLlrysA7PP01Kgs4UlE4MhelE1v5dJR3+cxlR4qQlotsW7jKsnw==" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/gh/julmot/mark.js@8.11.1/dist/jquery.mark.min.js" integrity="sha512-mhbv5DqBMgrWL+32MmsDOt/OAvqr/cHimk6B8y/bx/xS88MVkYGPiVv2ixKVrkywF2qHplNRUvFsAHUdxZ3Krg==" crossorigin="anonymous"></script>
+      
+    
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+      
+      
+      
+      
+      
+      
+      
+    
+
+    
+
+    
+    
+    
+    <script id="page-data" type="application/json">{"use_headroom":true}</script>
+
+    
+    
+      <script src="/js/wowchemy-headroom.e8fd2d733eef6a8bbbe0539398fc0547.js" type="module"></script>
+    
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    <script src="/en/js/wowchemy.min.a2ed145159dd33ad55ff402163350b5d.js"></script>
+
+    
+    
+    
+    
+    
+    
+      
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      <script src="/js/wowchemy-publication.b0d291ed6d27eacec233e6cf5204f99a.js" type="module"></script>
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+
+
+
+</body>
+</html>
