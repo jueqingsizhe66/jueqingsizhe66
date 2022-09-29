@@ -34924,6 +34924,15 @@ build_export_graph(G, ExportG, []).&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;/li&gt;
 &lt;/ul&gt;
+&lt;p&gt;%! build_export_graph(
+-%!   +Graph:compound,
++%!   +Graph,
+%!   -ExportGraph:compound,
+%!   +Options:list(compound)
+%! ) is det.
++% Graph is either:
++%   * a coumpound term &lt;code&gt;graph(Vs,Es)&lt;/code&gt;, or
++%   * an unlabeled graph as defined by &lt;code&gt;library(ugraph)&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;-build_export_graph(graph(Vs,Es), graph(VTerms,ETerms,GAttrs), Opts1):-
 +build_export_graph(G, graph(VTerms,ETerms,GAttrs), Opts1):-&lt;/p&gt;
 &lt;ul&gt;
@@ -34949,6 +34958,9 @@ graph_attributes(GAttrs, Opts2).&lt;/li&gt;
 &lt;ul&gt;
 &lt;li&gt;vertex_term(Vs, V, VTerm, Opts).&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;-edge_term0(Vs, Opts, E, ETerm):-&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;edge_term(Vs, E, ETerm, Opts).
 +graph_components(graph(Vs,Es), Vs, Es):- !.
 +graph_components(G, Vs, Es):-&lt;/li&gt;
@@ -38829,6 +38841,9 @@ s_graph_components(G, Vs, Es).&lt;/p&gt;
 &lt;li&gt;build_export_rank_terms(GroupedPairs, VRanks).
 +build_export_ranks(_, VTerms, [], VTerms, _).&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;+build_export_rank_terms([N-VTerms|T1], [vertex(Id,[label(Lbl)])-VTerms|T2]):- !,&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;format(atom(Id), &amp;lsquo;r~d&amp;rsquo;, [N]),&lt;/li&gt;
 &lt;li&gt;atom_number(Lbl, N),&lt;/li&gt;
 &lt;li&gt;build_export_rank_terms(T1, T2).
@@ -41069,7 +41084,15 @@ fca_export_graph(Context, ExportG, Opts2),&lt;/li&gt;
 &lt;li&gt;string_phrase(concept_label(Mode, OLbl_1, ALbl_1, Concept), Lbl).&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
-&lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;---is-det&#34;&gt;-%! concept_label(
+-%!   +Mode:oneof([attributes,both,objects]),
+-%!   :ObjectLabel_1,
+-%!   :AttributeLabel_1,
+-%!   +Concept:compound
+-%! )// is det.&lt;/h2&gt;
+&lt;p&gt;-concept_label(attributes, &lt;em&gt;, ALbl_1, concept(&lt;/em&gt;,As)) &amp;ndash;&amp;gt;&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;set(ALbl_1, As).
 -concept_label(both, OLbl_1, ALbl_1, Concept) &amp;ndash;&amp;gt;&lt;/li&gt;
 &lt;li&gt;pair(&lt;/li&gt;
@@ -41558,6 +41581,15 @@ pass_to(file_to_gv/3, 3)
 &lt;li&gt;&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
 &lt;/ul&gt;
+&lt;p&gt;-%! gv_export(+ExportGraph:compound, ?File:atom, +Options:list(compound)) is det.
++%! graph_viz(+ExportGraph:compound, ?File:atom) is det.
++%! graph_viz(+ExportGraph:compound, ?File:atom, +Options:list(compound)) is det.
+% Returns a file containing a GraphViz visualization of the given graph.
+%
+% The following options are supported:
+@@ -60,7 +51,9 @@ gv_export(ExportG, File):-
+%     Default is &lt;code&gt;pdf&lt;/code&gt;.
+%     For possible values see gv_output_type/1.&lt;/p&gt;
 &lt;p&gt;-gv_export(ExportG, File, Opts):-
 +graph_viz(ExportG, File):-&lt;/p&gt;
 &lt;ul&gt;
@@ -41639,6 +41671,7 @@ gv_id(Atom) &amp;ndash;&amp;gt;
 &lt;li&gt;&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
 &lt;/ul&gt;
+&lt;p&gt;%! gv_port// is det.&lt;/p&gt;
 &lt;p&gt;gv_port &amp;ndash;&amp;gt; gv_port_location, (gv_port_angle ; &amp;ldquo;&amp;rdquo;).
 @@ -279,7 +294,7 @@ gv_port_location &amp;ndash;&amp;gt; &amp;ldquo;:[&amp;rdquo;, gv_id(&lt;em&gt;), &amp;ldquo;,&amp;rdquo;, gv_id(&lt;/em&gt;), &amp;ldquo;]&amp;rdquo;.&lt;/p&gt;
 &lt;p&gt;%! gv_compass_pt(+Direction:oneof([&amp;rsquo;_&amp;rsquo;,c,e,n,ne,nw,s,se,sw,w]))// .
@@ -41680,14 +41713,48 @@ index 4ba0d64..0000000
 &lt;li&gt;]
 -).&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;--module-graphviz-numeral&#34;&gt;-/** &lt;module&gt; GraphViz numeral&lt;/h2&gt;
+&lt;h2 id=&#34;-&#34;&gt;-@author Wouter Beek
+-@version 2014/05-2014/06, 2015/01
+-*/&lt;/h2&gt;
+&lt;h2 id=&#34;---use_modulelibrarymathrational_ext&#34;&gt;-:- use_module(library(dcg/dcg_abnf)).
+-:- use_module(library(dcg/dcg_abnf_common)).
+-:- use_module(library(dcg/dcg_ascii)).
+-:- use_module(library(math/math_ext)).
+-:- use_module(library(math/positional)).
+-:- use_module(library(math/radconv)).
+-:- use_module(library(math/rational_ext)).&lt;/h2&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
-&lt;li&gt;&lt;/li&gt;
-&lt;li&gt;&lt;/li&gt;
-&lt;li&gt;&lt;/li&gt;
-&lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;------decimal-separator&#34;&gt;-%! gv_numeral(?Value:compound)// .
+-%
+-% # Syntax
+-%
+-% &lt;code&gt;bnf -% (&#39;-&#39;)? ( &#39;.&#39; [0-9]+ | [0-9]+ ( &#39;.&#39; [0-9]* )? ) -% &lt;/code&gt;
+-%
+-% ## Generation
+-%
+-% In the generative case, three notations are allowed (also see below):
+-%   1. (non-zero integer-part)
+-%   2. (decimal-separator) (non-zero fractional)
+-%   3. (non-zero integer-part) (decimal-separator) (non-zero fractional)
+-%
+-% The following notations are explicitly excluded due to verbosity:
+-%   - (non-zero integer-part) (decimal-separator)
+-%   - (non-zero integer-part) (decimal-separator) (zero fractional)
+-%   - (zero integer-part) (decimal-separator) (non-zero fractional)
+-%
+-% The following notations are also excluded, but since they violate
+-%  well-formedness:
+-%   - (non-zero integer-part) (non-zero fractional)
+-%   - (decimal-separator)&lt;/h2&gt;
+&lt;p&gt;-gv_numeral(N) &amp;ndash;&amp;gt;&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;(   {ground(N)}&lt;/li&gt;
 &lt;li&gt;-&amp;gt;  &amp;lsquo;[-]?&amp;rsquo;(N),&lt;/li&gt;
 &lt;li&gt;
@@ -41838,10 +41905,23 @@ index 0000000..4382aa6
 &lt;li&gt;]
 +).&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
-&lt;li&gt;&lt;/li&gt;
-&lt;li&gt;&lt;/li&gt;
-&lt;li&gt;&lt;/li&gt;
-&lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;+/** &lt;module&gt; Tree visualization
++
++Export trees to GraphViz.
++
++@author Wouter Beek
++@version 2016/01-2016/02
++*/
++
++:- use_module(library(graph/build_export_graph)).
++:- use_module(library(gv/gv_file)).
++:- use_module(library(ordsets)).
++:- use_module(library(tree/l_tree)).
++:- use_module(library(tree/s_tree)).
++
++:- predicate_options(tree_export_graph/3, 3, [&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;
 &lt;pre&gt;&lt;code&gt;pass_to(build_export_graph/4, 4)
 &lt;/code&gt;&lt;/pre&gt;
@@ -41862,9 +41942,18 @@ index 0000000..4382aa6
 &lt;li&gt;&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
-&lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;+%! tree_export_graph(+Tree, -ExportG) is det.
++%! tree_export_graph(+Tree, -ExportG, +Opts) is det.
++% Opts are passed to build_export_graph/4.
++
++tree_export_graph(Tree, ExportG) :-&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;tree_export_graph(Tree, ExportG, []).&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;+tree_export_graph(Tree, ExportG, Opts) :-&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;(   is_s_tree(Tree)&lt;/li&gt;
 &lt;li&gt;-&amp;gt;  tree_to_graph(Tree, G)&lt;/li&gt;
 &lt;li&gt;;   is_l_tree(Tree)&lt;/li&gt;
@@ -41874,9 +41963,20 @@ index 0000000..4382aa6
 &lt;li&gt;&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
-&lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;+%! tree_viz(+Tree, ?File) is det.
++%! tree_viz(+Tree, ?File, +Opts) is det.
++% Stores the given tree term into a GraphViz file.
++%
++% Options are passed to export_graph_to_gv_file/3, tree_to_graph/3.
++
++tree_viz(Tree, File) :-&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;tree_viz(Tree, File, []).&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;+tree_viz(Tree, File, Opts) :-&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;tree_export_graph(Tree, ExportG, Opts),&lt;/li&gt;
 &lt;li&gt;graph_viz(ExportG, File, Opts).
 diff &amp;ndash;git a/test/test.pl b/test/test.pl
@@ -42432,6 +42532,13 @@ pass_to(file_to_gv/3, 3)
 &lt;li&gt;&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
 &lt;/ul&gt;
+&lt;p&gt;+%! gv_export(+ExportGraph:compound, ?File:atom, +Options:list(compound)) is det.
+% Returns a file containing a GraphViz visualization of the given graph.
+%
+% The following options are supported:
+@@ -51,9 +60,7 @@ user:module_uses(gv_file, program(dot)).
+%     Default is &lt;code&gt;pdf&lt;/code&gt;.
+%     For possible values see gv_output_type/1.&lt;/p&gt;
 &lt;p&gt;-graph_viz(ExportG, File):-&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -42512,6 +42619,7 @@ gv_id(Atom) &amp;ndash;&amp;gt;
 &lt;li&gt;&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
 &lt;/ul&gt;
+&lt;p&gt;%! gv_port// is det.&lt;/p&gt;
 &lt;p&gt;gv_port &amp;ndash;&amp;gt; gv_port_location, (gv_port_angle ; &amp;ldquo;&amp;rdquo;).
 @@ -294,7 +279,7 @@ gv_port_location &amp;ndash;&amp;gt; &amp;ldquo;:[&amp;rdquo;, gv_id(&lt;em&gt;), &amp;ldquo;,&amp;rdquo;, gv_id(&lt;/em&gt;), &amp;ldquo;]&amp;rdquo;.&lt;/p&gt;
 &lt;p&gt;%! gv_compass_pt(+Direction:oneof([&amp;rsquo;_&amp;rsquo;,c,e,n,ne,nw,s,se,sw,w]))// .
@@ -42553,14 +42661,50 @@ index 0000000..4ba0d64
 &lt;li&gt;]
 +).&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
-&lt;li&gt;&lt;/li&gt;
-&lt;li&gt;&lt;/li&gt;
-&lt;li&gt;&lt;/li&gt;
-&lt;li&gt;&lt;/li&gt;
-&lt;li&gt;&lt;/li&gt;
-&lt;li&gt;&lt;/li&gt;
-&lt;li&gt;&lt;/li&gt;
-&lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;+/** &lt;module&gt; GraphViz numeral
++
++@author Wouter Beek
++@version 2014/05-2014/06, 2015/01
++*/
++
++:- use_module(library(dcg/dcg_abnf)).
++:- use_module(library(dcg/dcg_abnf_common)).
++:- use_module(library(dcg/dcg_ascii)).
++:- use_module(library(math/math_ext)).
++:- use_module(library(math/positional)).
++:- use_module(library(math/radconv)).
++:- use_module(library(math/rational_ext)).
++
++
++
++
++
++%! gv_numeral(?Value:compound)// .
++%
++% # Syntax
++%
++% &lt;code&gt;bnf +% (&#39;-&#39;)? ( &#39;.&#39; [0-9]+ | [0-9]+ ( &#39;.&#39; [0-9]* )? ) +% &lt;/code&gt;
++%
++% ## Generation
++%
++% In the generative case, three notations are allowed (also see below):
++%   1. (non-zero integer-part)
++%   2. (decimal-separator) (non-zero fractional)
++%   3. (non-zero integer-part) (decimal-separator) (non-zero fractional)
++%
++% The following notations are explicitly excluded due to verbosity:
++%   - (non-zero integer-part) (decimal-separator)
++%   - (non-zero integer-part) (decimal-separator) (zero fractional)
++%   - (zero integer-part) (decimal-separator) (non-zero fractional)
++%
++% The following notations are also excluded, but since they violate
++%  well-formedness:
++%   - (non-zero integer-part) (non-zero fractional)
++%   - (decimal-separator)
++
++gv_numeral(N) &amp;ndash;&amp;gt;&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;(   {ground(N)}&lt;/li&gt;
 &lt;li&gt;-&amp;gt;  &amp;lsquo;[-]?&amp;rsquo;(N),&lt;/li&gt;
 &lt;li&gt;
@@ -42711,10 +42855,19 @@ index 4382aa6..0000000
 &lt;li&gt;]
 -).&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
-&lt;li&gt;&lt;/li&gt;
-&lt;li&gt;&lt;/li&gt;
-&lt;li&gt;&lt;/li&gt;
-&lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;--module-tree-visualization&#34;&gt;-/** &lt;module&gt; Tree visualization&lt;/h2&gt;
+&lt;h2 id=&#34;-export-trees-to-graphviz&#34;&gt;-Export trees to GraphViz.&lt;/h2&gt;
+&lt;h2 id=&#34;--1&#34;&gt;-@author Wouter Beek
+-@version 2016/01-2016/02
+-*/&lt;/h2&gt;
+&lt;h2 id=&#34;---use_modulelibrarytrees_tree&#34;&gt;-:- use_module(library(graph/build_export_graph)).
+-:- use_module(library(gv/gv_file)).
+-:- use_module(library(ordsets)).
+-:- use_module(library(tree/l_tree)).
+-:- use_module(library(tree/s_tree)).&lt;/h2&gt;
+&lt;p&gt;-:- predicate_options(tree_export_graph/3, 3, [&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;
 &lt;pre&gt;&lt;code&gt;pass_to(build_export_graph/4, 4)
 &lt;/code&gt;&lt;/pre&gt;
@@ -42735,9 +42888,17 @@ index 4382aa6..0000000
 &lt;li&gt;&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
-&lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;--opts-are-passed-to-build_export_graph4&#34;&gt;-%! tree_export_graph(+Tree, -ExportG) is det.
+-%! tree_export_graph(+Tree, -ExportG, +Opts) is det.
+-% Opts are passed to build_export_graph/4.&lt;/h2&gt;
+&lt;p&gt;-tree_export_graph(Tree, ExportG) :-&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;tree_export_graph(Tree, ExportG, []).&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;-tree_export_graph(Tree, ExportG, Opts) :-&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;(   is_s_tree(Tree)&lt;/li&gt;
 &lt;li&gt;-&amp;gt;  tree_to_graph(Tree, G)&lt;/li&gt;
 &lt;li&gt;;   is_l_tree(Tree)&lt;/li&gt;
@@ -42747,9 +42908,19 @@ index 4382aa6..0000000
 &lt;li&gt;&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
-&lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;--options-are-passed-to-export_graph_to_gv_file3-tree_to_graph3&#34;&gt;-%! tree_viz(+Tree, ?File) is det.
+-%! tree_viz(+Tree, ?File, +Opts) is det.
+-% Stores the given tree term into a GraphViz file.
+-%
+-% Options are passed to export_graph_to_gv_file/3, tree_to_graph/3.&lt;/h2&gt;
+&lt;p&gt;-tree_viz(Tree, File) :-&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;tree_viz(Tree, File, []).&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;-tree_viz(Tree, File, Opts) :-&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;tree_export_graph(Tree, ExportG, Opts),&lt;/li&gt;
 &lt;li&gt;graph_viz(ExportG, File, Opts).
 diff &amp;ndash;git a/test/test.pl b/test/test.pl

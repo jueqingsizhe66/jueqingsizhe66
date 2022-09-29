@@ -397,7 +397,7 @@
   
   
   
-  <script src="/js/wowchemy-init.min.7e5427316d1b14a30f257ae3467b3e21.js"></script>
+  <script src="/js/wowchemy-init.min.9e9fa4b2ccd29f9edfae161d14d2effd.js"></script>
 
   
 
@@ -899,14 +899,13 @@
 <ol start="2">
 <li>
 <p>建立机位风速、风向信息,即excel表行信息</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>    indexMe<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#34;T12_Velocity&#34;</span>, <span style="color:#e6db74">&#34;T12_Angle&#34;</span>, <span style="color:#e6db74">&#34;T11_Velocity&#34;</span>, <span style="color:#e6db74">&#34;T11_Angle&#34;</span>, <span style="color:#e6db74">&#34;T10_Velocity&#34;</span>, <span style="color:#e6db74">&#34;T10_Angle&#34;</span>, <span style="color:#e6db74">&#34;T1_Velocity&#34;</span>, <span style="color:#e6db74">&#34;T1_Angle&#34;</span>,
-</span></span><span style="display:flex;"><span>     <span style="color:#e6db74">&#34;T3_Velocity&#34;</span>, <span style="color:#e6db74">&#34;T3_Angle&#34;</span>, <span style="color:#e6db74">&#34;T2_Velocity&#34;</span>, <span style="color:#e6db74">&#34;T2_Angle&#34;</span>, <span style="color:#e6db74">&#34;T4_Velocity&#34;</span>, <span style="color:#e6db74">&#34;T4_Angle&#34;</span>, <span style="color:#e6db74">&#34;T5_Velocity&#34;</span>, <span style="color:#e6db74">&#34;T5_Angle&#34;</span>,
-</span></span><span style="display:flex;"><span>     <span style="color:#e6db74">&#34;T9_Velocity&#34;</span>, <span style="color:#e6db74">&#34;T9_Angle&#34;</span>, <span style="color:#e6db74">&#34;T8_Velocity&#34;</span>, <span style="color:#e6db74">&#34;T8_Angle&#34;</span>, <span style="color:#e6db74">&#34;T7_Velocity&#34;</span>, <span style="color:#e6db74">&#34;T7_Angle&#34;</span>, <span style="color:#e6db74">&#34;T6_Velocity&#34;</span>, <span style="color:#e6db74">&#34;T6_Angle&#34;</span>,
-</span></span><span style="display:flex;"><span>     <span style="color:#e6db74">&#34;T13_Velocity&#34;</span>, <span style="color:#e6db74">&#34;T13_Angle&#34;</span>, <span style="color:#e6db74">&#34;T14_Velocity&#34;</span>, <span style="color:#e6db74">&#34;T14_Angle&#34;</span>, <span style="color:#e6db74">&#34;T15_Velocity&#34;</span>, <span style="color:#e6db74">&#34;T15_Angle&#34;</span>, <span style="color:#e6db74">&#34;T16_Velocity&#34;</span>, <span style="color:#e6db74">&#34;T16_Angle&#34;</span>,
-</span></span><span style="display:flex;"><span>     <span style="color:#e6db74">&#34;T17_Velocity&#34;</span>, <span style="color:#e6db74">&#34;T17_Angle&#34;</span>, <span style="color:#e6db74">&#34;T23_Velocity&#34;</span>, <span style="color:#e6db74">&#34;T23_Angle&#34;</span>, <span style="color:#e6db74">&#34;T22_Velocity&#34;</span>, <span style="color:#e6db74">&#34;T22_Angle&#34;</span>, <span style="color:#e6db74">&#34;T21_Velocity&#34;</span>, <span style="color:#e6db74">&#34;T21_Angle&#34;</span>,
-</span></span><span style="display:flex;"><span>     <span style="color:#e6db74">&#34;T20_Velocity&#34;</span>, <span style="color:#e6db74">&#34;T20_Angle&#34;</span>, <span style="color:#e6db74">&#34;T19_Velocity&#34;</span>, <span style="color:#e6db74">&#34;T19_Angle&#34;</span>, <span style="color:#e6db74">&#34;T18_Velocity&#34;</span>, <span style="color:#e6db74">&#34;T18_Angle&#34;</span>, <span style="color:#e6db74">&#34;HL387_24035001_Velocity&#34;</span>,
-</span></span><span style="display:flex;"><span>     <span style="color:#e6db74">&#34;HL387_24035001_Angle&#34;</span>]
-</span></span><span style="display:flex;"><span>    </span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>indexMe<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#34;T12_Velocity&#34;</span>, <span style="color:#e6db74">&#34;T12_Angle&#34;</span>, <span style="color:#e6db74">&#34;T11_Velocity&#34;</span>, <span style="color:#e6db74">&#34;T11_Angle&#34;</span>, <span style="color:#e6db74">&#34;T10_Velocity&#34;</span>, <span style="color:#e6db74">&#34;T10_Angle&#34;</span>, <span style="color:#e6db74">&#34;T1_Velocity&#34;</span>, <span style="color:#e6db74">&#34;T1_Angle&#34;</span>,
+</span></span><span style="display:flex;"><span> <span style="color:#e6db74">&#34;T3_Velocity&#34;</span>, <span style="color:#e6db74">&#34;T3_Angle&#34;</span>, <span style="color:#e6db74">&#34;T2_Velocity&#34;</span>, <span style="color:#e6db74">&#34;T2_Angle&#34;</span>, <span style="color:#e6db74">&#34;T4_Velocity&#34;</span>, <span style="color:#e6db74">&#34;T4_Angle&#34;</span>, <span style="color:#e6db74">&#34;T5_Velocity&#34;</span>, <span style="color:#e6db74">&#34;T5_Angle&#34;</span>,
+</span></span><span style="display:flex;"><span> <span style="color:#e6db74">&#34;T9_Velocity&#34;</span>, <span style="color:#e6db74">&#34;T9_Angle&#34;</span>, <span style="color:#e6db74">&#34;T8_Velocity&#34;</span>, <span style="color:#e6db74">&#34;T8_Angle&#34;</span>, <span style="color:#e6db74">&#34;T7_Velocity&#34;</span>, <span style="color:#e6db74">&#34;T7_Angle&#34;</span>, <span style="color:#e6db74">&#34;T6_Velocity&#34;</span>, <span style="color:#e6db74">&#34;T6_Angle&#34;</span>,
+</span></span><span style="display:flex;"><span> <span style="color:#e6db74">&#34;T13_Velocity&#34;</span>, <span style="color:#e6db74">&#34;T13_Angle&#34;</span>, <span style="color:#e6db74">&#34;T14_Velocity&#34;</span>, <span style="color:#e6db74">&#34;T14_Angle&#34;</span>, <span style="color:#e6db74">&#34;T15_Velocity&#34;</span>, <span style="color:#e6db74">&#34;T15_Angle&#34;</span>, <span style="color:#e6db74">&#34;T16_Velocity&#34;</span>, <span style="color:#e6db74">&#34;T16_Angle&#34;</span>,
+</span></span><span style="display:flex;"><span> <span style="color:#e6db74">&#34;T17_Velocity&#34;</span>, <span style="color:#e6db74">&#34;T17_Angle&#34;</span>, <span style="color:#e6db74">&#34;T23_Velocity&#34;</span>, <span style="color:#e6db74">&#34;T23_Angle&#34;</span>, <span style="color:#e6db74">&#34;T22_Velocity&#34;</span>, <span style="color:#e6db74">&#34;T22_Angle&#34;</span>, <span style="color:#e6db74">&#34;T21_Velocity&#34;</span>, <span style="color:#e6db74">&#34;T21_Angle&#34;</span>,
+</span></span><span style="display:flex;"><span> <span style="color:#e6db74">&#34;T20_Velocity&#34;</span>, <span style="color:#e6db74">&#34;T20_Angle&#34;</span>, <span style="color:#e6db74">&#34;T19_Velocity&#34;</span>, <span style="color:#e6db74">&#34;T19_Angle&#34;</span>, <span style="color:#e6db74">&#34;T18_Velocity&#34;</span>, <span style="color:#e6db74">&#34;T18_Angle&#34;</span>, <span style="color:#e6db74">&#34;HL387_24035001_Velocity&#34;</span>,
+</span></span><span style="display:flex;"><span> <span style="color:#e6db74">&#34;HL387_24035001_Angle&#34;</span>]</span></span></code></pre></div>
 </li>
 </ol>
 <p>如果换了个风电场该信息得重新编排，按照实际风电场需求</p>
@@ -1204,7 +1203,7 @@
       
 
     
-    <script src="/js/vendor-bundle.min.3d946de2e8784a477845261d87025092.js"></script>
+    <script src="/js/vendor-bundle.min.9592335d574f7a97010f99b90ad0f310.js"></script>
 
     
     
@@ -1323,7 +1322,7 @@
 
     
     
-      <script src="/js/wowchemy-headroom.e8fd2d733eef6a8bbbe0539398fc0547.js" type="module"></script>
+      <script src="/js/wowchemy-headroom.c251366b4128fd5e6b046d4c97a62a51.js" type="module"></script>
     
     
     
@@ -1335,7 +1334,7 @@
       
     
     
-    <script src="/en/js/wowchemy.min.a2ed145159dd33ad55ff402163350b5d.js"></script>
+    <script src="/en/js/wowchemy.min.d8ba8ef9e70daa8a4497ddcdfeccb171.js"></script>
 
     
     

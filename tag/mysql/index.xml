@@ -2568,22 +2568,31 @@ ps.clearParameters()的作用是清空上一次数据的值，不影响到下一
 &lt;ol start=&#34;3&#34;&gt;
 &lt;li&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;mysql&amp;gt; select last_insert_id();
-+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;+
+&lt;p&gt;mysql获取最后一次插入的id号函数，在java中也可以实现。&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; select last_insert_id();
++------------------+
 | last_insert_id() |
-+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;+
++------------------+
+|                0 |
++------------------+
+1 row in set (0.17 sec)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;有没有发现是0 ，即使是我最新插入也是这样；调查后发现是：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; insert into t_person(Name,Age,Gender) values (&#39;悟空&#39;,30,1);
+Query OK, 1 row affected (0.04 sec)
+
+mysql&amp;gt; select last_insert_id();
++------------------+
+| last_insert_id() |
++------------------+
 |            11317 |
-+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;+
-1 row in set (0.00 sec)&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;如果你添加的时候，不要写上主键的值，则是可以！如果直接加上主键的值，则显示的是0！
-
-
-
-第二部分 练习
-1.一个比较戳版本的JDBCUtils的版本，虽然没有错误，但是未关闭连接，且整体逻辑性不强，并多次加载驱动
-
-```java
-/**
++------------------+
+1 row in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;如果你添加的时候，不要写上主键的值，则是可以！如果直接加上主键的值，则显示的是0！&lt;/p&gt;
+&lt;p&gt;第二部分 练习
+1.一个比较戳版本的JDBCUtils的版本，虽然没有错误，但是未关闭连接，且整体逻辑性不强，并多次加载驱动&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;/**
 * 
 */
 package com.jdbc.test;

@@ -354,7 +354,7 @@
   
   
   
-  <script src="/js/wowchemy-init.min.7e5427316d1b14a30f257ae3467b3e21.js"></script>
+  <script src="/js/wowchemy-init.min.9e9fa4b2ccd29f9edfae161d14d2effd.js"></script>
 
   
 
@@ -795,7 +795,7 @@
 
 
 
-<span class="article-metadata" >Reading time: 48 minutes and    30 seconds with 10670 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+<span class="article-metadata" >Reading time: 48 minutes and    57 seconds with 10771 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents"></nav>
     </aside>
@@ -848,22 +848,31 @@ ps.clearParameters()的作用是清空上一次数据的值，不影响到下一
 <ol start="3">
 <li></li>
 </ol>
-<p>mysql&gt; select last_insert_id();
-+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+
+<p>mysql获取最后一次插入的id号函数，在java中也可以实现。</p>
+<pre><code class="language-mysql">mysql&gt; select last_insert_id();
++------------------+
 | last_insert_id() |
-+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+
++------------------+
+|                0 |
++------------------+
+1 row in set (0.17 sec)
+</code></pre>
+<p>有没有发现是0 ，即使是我最新插入也是这样；调查后发现是：</p>
+<pre><code class="language-mysql">mysql&gt; insert into t_person(Name,Age,Gender) values ('悟空',30,1);
+Query OK, 1 row affected (0.04 sec)
+
+mysql&gt; select last_insert_id();
++------------------+
+| last_insert_id() |
++------------------+
 |            11317 |
-+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+
-1 row in set (0.00 sec)</p>
-<pre><code>如果你添加的时候，不要写上主键的值，则是可以！如果直接加上主键的值，则显示的是0！
-
-
-
-第二部分 练习
-1.一个比较戳版本的JDBCUtils的版本，虽然没有错误，但是未关闭连接，且整体逻辑性不强，并多次加载驱动
-
-```java
-/**
++------------------+
+1 row in set (0.00 sec)
+</code></pre>
+<p>如果你添加的时候，不要写上主键的值，则是可以！如果直接加上主键的值，则显示的是0！</p>
+<p>第二部分 练习
+1.一个比较戳版本的JDBCUtils的版本，虽然没有错误，但是未关闭连接，且整体逻辑性不强，并多次加载驱动</p>
+<pre><code class="language-java">/**
 * 
 */
 package com.jdbc.test;
@@ -2553,7 +2562,7 @@ JDBCUtils 第四遍重写：</li>
       
 
     
-    <script src="/js/vendor-bundle.min.3d946de2e8784a477845261d87025092.js"></script>
+    <script src="/js/vendor-bundle.min.9592335d574f7a97010f99b90ad0f310.js"></script>
 
     
     
@@ -2672,7 +2681,7 @@ JDBCUtils 第四遍重写：</li>
 
     
     
-      <script src="/js/wowchemy-headroom.e8fd2d733eef6a8bbbe0539398fc0547.js" type="module"></script>
+      <script src="/js/wowchemy-headroom.c251366b4128fd5e6b046d4c97a62a51.js" type="module"></script>
     
     
     
@@ -2684,7 +2693,7 @@ JDBCUtils 第四遍重写：</li>
       
     
     
-    <script src="/en/js/wowchemy.min.a2ed145159dd33ad55ff402163350b5d.js"></script>
+    <script src="/en/js/wowchemy.min.d8ba8ef9e70daa8a4497ddcdfeccb171.js"></script>
 
     
     

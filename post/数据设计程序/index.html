@@ -397,7 +397,7 @@
   
   
   
-  <script src="/js/wowchemy-init.min.7e5427316d1b14a30f257ae3467b3e21.js"></script>
+  <script src="/js/wowchemy-init.min.9e9fa4b2ccd29f9edfae161d14d2effd.js"></script>
 
   
 
@@ -995,30 +995,29 @@
 <ul>
 <li>
 <p>思路： 再增加一层函数，考虑参数authtype，并返回showtime函数</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>    <span style="color:#75715e">## &lt;2022-01-16 22:15&gt; 测试通过</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">import</span> time
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">logger</span>(flag<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>):
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">showtime</span>(func):
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wrapper</span>(<span style="color:#f92672">*</span>args,<span style="color:#f92672">**</span>kwargs):
-</span></span><span style="display:flex;"><span>                start<span style="color:#f92672">=</span>time<span style="color:#f92672">.</span>time()
-</span></span><span style="display:flex;"><span>                func(<span style="color:#f92672">*</span>args,<span style="color:#f92672">**</span>kwargs)
-</span></span><span style="display:flex;"><span>                end<span style="color:#f92672">=</span>time<span style="color:#f92672">.</span>time()
-</span></span><span style="display:flex;"><span>                print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;end-start  is  </span><span style="color:#e6db74">{</span>end<span style="color:#f92672">-</span>start<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> flag<span style="color:#f92672">==</span><span style="color:#ae81ff">2</span>:
-</span></span><span style="display:flex;"><span>                    print(<span style="color:#e6db74">&#34;已将上述操作操作录入文件&#34;</span>)
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> wrapper
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> showtime
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## &lt;2022-01-16 22:15&gt; 测试通过</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> time
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">logger</span>(flag<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">showtime</span>(func):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wrapper</span>(<span style="color:#f92672">*</span>args,<span style="color:#f92672">**</span>kwargs):
+</span></span><span style="display:flex;"><span>            start<span style="color:#f92672">=</span>time<span style="color:#f92672">.</span>time()
+</span></span><span style="display:flex;"><span>            func(<span style="color:#f92672">*</span>args,<span style="color:#f92672">**</span>kwargs)
+</span></span><span style="display:flex;"><span>            end<span style="color:#f92672">=</span>time<span style="color:#f92672">.</span>time()
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;end-start  is  </span><span style="color:#e6db74">{</span>end<span style="color:#f92672">-</span>start<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> flag<span style="color:#f92672">==</span><span style="color:#ae81ff">2</span>:
+</span></span><span style="display:flex;"><span>                print(<span style="color:#e6db74">&#34;已将上述操作操作录入文件&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> wrapper
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> showtime
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@logger</span>(flag<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add</span>(<span style="color:#f92672">*</span>a,<span style="color:#f92672">**</span>b):
-</span></span><span style="display:flex;"><span>        time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>        sum<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> a:
-</span></span><span style="display:flex;"><span>            sum<span style="color:#f92672">+=</span>i
-</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;sum of </span><span style="color:#e6db74">{</span>a<span style="color:#e6db74">}</span><span style="color:#e6db74"> is equal to </span><span style="color:#e6db74">{</span>sum<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@logger</span>(flag<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add</span>(<span style="color:#f92672">*</span>a,<span style="color:#f92672">**</span>b):
+</span></span><span style="display:flex;"><span>    time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    sum<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> a:
+</span></span><span style="display:flex;"><span>        sum<span style="color:#f92672">+=</span>i
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;sum of </span><span style="color:#e6db74">{</span>a<span style="color:#e6db74">}</span><span style="color:#e6db74"> is equal to </span><span style="color:#e6db74">{</span>sum<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    add(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>)
-</span></span><span style="display:flex;"><span>    </span></span></code></pre></div>
+</span></span><span style="display:flex;"><span>add(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>)</span></span></code></pre></div>
 </li>
 </ul>
 <p>至此，我们完成了一种完美的添加时间的日志记录功能，支持初始函数的多参数功能，支持日志记录的参数类型指定,三层函数嵌套实现装饰者模式。</p>
@@ -1283,7 +1282,7 @@
       
 
     
-    <script src="/js/vendor-bundle.min.3d946de2e8784a477845261d87025092.js"></script>
+    <script src="/js/vendor-bundle.min.9592335d574f7a97010f99b90ad0f310.js"></script>
 
     
     
@@ -1402,7 +1401,7 @@
 
     
     
-      <script src="/js/wowchemy-headroom.e8fd2d733eef6a8bbbe0539398fc0547.js" type="module"></script>
+      <script src="/js/wowchemy-headroom.c251366b4128fd5e6b046d4c97a62a51.js" type="module"></script>
     
     
     
@@ -1414,7 +1413,7 @@
       
     
     
-    <script src="/en/js/wowchemy.min.a2ed145159dd33ad55ff402163350b5d.js"></script>
+    <script src="/en/js/wowchemy.min.d8ba8ef9e70daa8a4497ddcdfeccb171.js"></script>
 
     
     
