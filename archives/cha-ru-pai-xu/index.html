@@ -816,7 +816,7 @@
       <p>排序算法是一种比较常见的算法，一般包括冒泡排序，插入排序，快速排序等。
 本文主要是关于插入排序。</p>
 <h2 id="如何把一个数字插入到一个列表中">如何把一个数字插入到一个列表中</h2>
-<pre><code>;; using insert sort here
+<pre><code class="language-scheme">;; using insert sort here
 
 (define insert
   (lambda (lst elem)
@@ -840,7 +840,7 @@
 </code></pre>
 <h2 id="提取出判断条件">提取出判断条件</h2>
 <p>利用pred代表小于号</p>
-<pre><code>(define insert
+<pre><code class="language-scheme">(define insert
   (lambda (lst elem pred)
      (cond
         ((null? lst) (list elem))
@@ -850,7 +850,7 @@
                     (insert (cdr lst) elem pred))))))
 </code></pre>
 <p>结果：</p>
-<pre><code>(insert '(1 2 3) '4 &lt;)
+<pre><code class="language-scheme">(insert '(1 2 3) '4 &lt;)
     (1 2 3 4)
 (insert '(1 2 3) '0 &lt;)
     (0 1 2 3)
@@ -867,7 +867,7 @@
 <li>sort-rec 逐个判断最新的元素和新的临时列表的比较</li>
 <li>sort-predicate 仅仅是选择判断的标准。</li>
 </ul>
-<pre><code>(define sort-rec
+<pre><code class="language-scheme">(define sort-rec
   (lambda (prev now pred)
     (if (null? now)
         prev
@@ -884,8 +884,7 @@
 <li>sort-rec的prev在逐渐的变大，而now的部分在不断的变小</li>
 <li>也就是 sort-rec 的第一号位置不断变大，第二号位由于cdr作用不断变小。</li>
 </ul>
-<pre><code class="language-scheme">
-(sort/predicate &lt; '(1 6 5 7))
+<pre><code class="language-scheme">(sort/predicate &lt; '(1 6 5 7))
 
     prev          now
 1.  ()         (1 6 5 7)
@@ -897,7 +896,7 @@
 计算结束，返回prev的值
 </code></pre>
 <p>于是我们就可以获得正确的结果</p>
-<pre><code>(sort/predicate &lt; '(1 6 5 7))
+<pre><code class="language-scheme">(sort/predicate &lt; '(1 6 5 7))
     (1 5 6 7)
 </code></pre>
 <h2 id="利用内部define和letrec改写程序">利用内部define和letrec改写程序</h2>
@@ -1157,7 +1156,7 @@
   
 
   <p class="powered-by">
-    ©2022 &middot; 
+    ©2023 &middot; 
 
     ^-^ Ye Zhaoliang ^-^ Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
