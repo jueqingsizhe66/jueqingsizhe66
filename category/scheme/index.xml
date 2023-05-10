@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Scheme | 突然的~自我~</title>
+    <link>https://jueqingsizhe66.github.io/category/scheme/</link>
+      <atom:link href="https://jueqingsizhe66.github.io/category/scheme/index.xml" rel="self" type="application/rss+xml" />
+    <description>Scheme</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>©2023</copyright><lastBuildDate>Wed, 10 May 2023 23:22:19 +0800</lastBuildDate>
+    <image>
+      <url>https://jueqingsizhe66.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
+      <title>Scheme</title>
+      <link>https://jueqingsizhe66.github.io/category/scheme/</link>
+    </image>
+    
+    <item>
+      <title>What&#39;s the Same</title>
+      <link>https://jueqingsizhe66.github.io/post/whats-the-same/</link>
+      <pubDate>Wed, 10 May 2023 23:22:19 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/post/whats-the-same/</guid>
+      <description>&lt;p&gt;什么是公平？
+没有人知道公平是什么，all atoms create equal!&lt;/p&gt;
+&lt;h1&gt; eq? &lt;/h1&gt;
+比较两个字符是否相等
+&lt;h1&gt; = &lt;/h1&gt;
+比较两个数字是否相等
+&lt;h1&gt; eqan? &lt;/h1&gt;
+比较两个字符或者数字是否相等,需要借用`eq?`和`=`
+&lt;pre&gt;&lt;code class=&#34;language-scheme&#34;&gt;(define eqan?
+   ;; only evaluate atoms of number and character
+  (lambda (n1 n2)
+    (cond
+      ((and (number? n1) (number? n2))
+       (= n1 n2))
+      ((or (number? n1) (number? n2))
+       #f)
+      (else
+       (eq? n1 n2)))))
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1&gt; eqlist? &lt;/h1&gt;
+&lt;p&gt;比较两个list是否相等，需要借用&lt;code&gt;eqan?&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-scheme&#34;&gt;(define eqlist?
+  ;; only anlysis list argument
+  (lambda (l1 l2)
+    (letrec ((atom? (lambda (a1)
+                      (and (not (pair? a1)) (not (null? a1))))))
+      (cond
+        ((and (null? l1) (null? l2)) #t)
+        ((or (null? l1) (null? l2)) #f)
+        ((and (atom? (car l1)) (atom? (car l2)))
+         (and (eqan? (car l1) (car l2)) (eqlist? (cdr l1) (cdr l2))))
+        ((or (atom? (car l1)) (atom? (car l2))) #f)
+        (else
+         (and (eqlist? (car l1) (car l2))
+              (eqlist? (cdr l1) (cdr l2))))))))
+
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1&gt; equal? &lt;/h1&gt;
+&lt;p&gt;比较两个字符或者数字或者list是否相等，更加普遍些&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-scheme&#34;&gt;(define equal?
+  ;; accept s-expressions as arguments( atoms 、lat  and  lists)
+  (lambda (s1 s2)
+    (letrec ((atom? (lambda (x)
+                      (and (not (null? x)) (not (pair? x))))))
+      (cond
+        ((and (atom? s1) (atom? s2))
+         (eqan? s1 s2))
+        ((or (atom? s1) (atom? s2))
+         #f)
+        (else
+         (eqlist? s1 s2))))))
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1&gt; 过去的yzl和现在的yzl是否相同&lt;/h1&gt;
+&lt;pre&gt;&lt;code class=&#34;language-scheme&#34;&gt;(define yzl
+  (lambda (things)
+    (letrec ((atom? (lambda (thing)
+                      (and (not (pair? thing)) (not (null? thing))))))
+    (cond ((null? things) (quote &#39;nervous))
+          ((atom? (car things))
+             (cons (quote &#39;done) (yzl (cdr things))))
+          (else
+            (cons (yzl (car things)) (yzl (cdr things))))))))
+;;; (yzl &#39;(get learn study buy travel do wash eat create))
+;;; &#39;(&#39;done &#39;done &#39;done &#39;done &#39;done &#39;done &#39;done &#39;done quote nervous)  
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;Are we finish?&lt;/li&gt;
+&lt;li&gt;Do you have any other questions?&lt;/li&gt;
+&lt;li&gt;what&amp;rsquo;s the meaning of that?&lt;/li&gt;
+&lt;li&gt;I regret that I cannot recall who remarked the computation is the art of carefully throwing away information, while Computer science deals with information and with complexity: give an overwhelming collection of data, you reduce it to
+useable result by discarding most of its content(进行边缘计算，只取回特征值)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;抽象很重要。计算科学面临的最大的问题就是计算复杂度；随着程序变大的，计算复杂度极具增大，abstraction is the primary tool
+or technique for managing complexity. 因为An abstraction hides unnecessary detail and allow recurring patterns to be
+expressed concisely(递归表达), less is more(少就是多)
+我们面临的最大的挑战就是how to convey the necessary details without losing the overall structure(不失全局)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Abstract mean you give sth a name; Abstraction is the most important concept in all of the computer science
+Abstraction consists in treating sth complex as if they were simpler, throwing away details.&lt;/li&gt;
+&lt;li&gt;Reference means you call sth by name&lt;/li&gt;
+&lt;li&gt;While Synthesis means you combine two of the things(Abstract and Reference) From 《scheme and art of programming》(抽象的反义词 合成  抽象为简单、合成为复杂)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Solve problems not only for their solutions but also or an understanding of how the solutions were obtained(也许背后的求解思路更重要)&lt;/p&gt;
+&lt;p&gt;The task that confronts you is not only to learn a programming language but to learn to think as a computer scientist and develop an aesthetic about computer programs( make them become elegant&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
