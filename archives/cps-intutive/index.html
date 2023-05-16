@@ -805,7 +805,7 @@
     <div class="article-style">
       <p>通过deep&amp;coB 和deepB的不同CPS实现，说明letcc版本是直接跳出surrounding，而不管周边的其他计算。 并且可以这样认为所有的scheme lambda表达式都可以理解为kn表达式的过程(好处1)，这种直观的解释方便理解 绕来绕去的过程。并且cps style尾巴的k既可以是变量也可以是函数 (好处2)。</p>
 <h1 id="1-普通形式">1. 普通形式</h1>
-<pre><code class="language-racket">;; Normal Form
+<pre><code class="language-scheme">;; Normal Form
 (define append2
   (lambda (lisa lisb)
     (cond
@@ -824,7 +824,7 @@
 
 </code></pre>
 <h1 id="2-tail-form">2. Tail form</h1>
-<pre><code class="language-racket">(define append3
+<pre><code class="language-scheme">(define append3
   (lambda (lisa lisb)
     (letrec ((ap2
               (lambda (a b)
@@ -843,8 +843,8 @@
 (fact2 4)
 
 </code></pre>
-<p>#3. deep&amp;coB</p>
-<pre><code class="language-racket">(define deep&amp;coB
+<h1 id="3-deepcob">3. deep&amp;coB</h1>
+<pre><code class="language-scheme">(define deep&amp;coB
   (lambda (m k)
     (cond
       ((zero? m)
@@ -861,9 +861,9 @@
 
 </code></pre>
 <p>cps风格 lambda(x) x ,可以使用k1 k2 k3 的风格进行替换,cps风格仅仅是编程的风格，letcc是其中的一种体现.</p>
-<p>#4. deepB</p>
+<h1 id="4-deepb">4. deepB</h1>
 <p>letcc风格 直接跳出！！（也就是不管其他计算，直接他就是返回值！！）</p>
-<pre><code class="language-racket">(define toppings 0)
+<pre><code class="language-scheme">(define toppings 0)
 (define deepB
   (lambda (m)
     (cond
@@ -876,9 +876,9 @@
        (cons (deepB (sub1 m)) '())))))
 
 </code></pre>
-<p>#5. bons and kons</p>
+<h1 id="5-bons-and-kons">5. bons and kons</h1>
 <p>进一步理解cps风格也可以看看kons和bons的实现</p>
-<pre><code class="language-racket">#lang racket
+<pre><code class="language-scheme">#lang racket
 ; kons the magnificent
 ;
 (define kons

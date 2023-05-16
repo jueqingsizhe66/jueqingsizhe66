@@ -5,12 +5,623 @@
     <link>https://jueqingsizhe66.github.io/post/</link>
       <atom:link href="https://jueqingsizhe66.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>©2023</copyright><lastBuildDate>Wed, 10 May 2023 23:22:19 +0800</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>©2023</copyright><lastBuildDate>Tue, 16 May 2023 23:20:13 +0800</lastBuildDate>
     <image>
       <url>https://jueqingsizhe66.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
       <title>Posts</title>
       <link>https://jueqingsizhe66.github.io/post/</link>
     </image>
+    
+    <item>
+      <title>What Is Y</title>
+      <link>https://jueqingsizhe66.github.io/post/what-is-y/</link>
+      <pubDate>Tue, 16 May 2023 23:20:13 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/post/what-is-y/</guid>
+      <description>&lt;h2 id=&#34;evens-only-and-its-collector&#34;&gt;evens-only and its collector&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&#34;language-scheme&#34;&gt;(define evens-only*
+  (lambda (l)
+    (letrec ((atom? (lambda (a)
+                      (and (not (pair? a)) (not (null? a)))))
+            ;; error definition of even
+            ;; (even? (lambda (n)
+            ;;          (= (* (/ n 2) 2) n)))
+             )
+      (cond
+        ((null? l) (quote ()))
+        ((atom? (car l))
+         (let ((evencdr (evens-only* (cdr l))))
+           (cond
+             ((even? (car l))
+              (cons (car l) evencdr))
+             (else evencdr))))
+        (else (cons (evens-only* (car l))
+                    (evens-only* (cdr l))))))))
+ (evens-only* &#39;(1 3 4 6 3 (3 6 3 (3 6 21 3))))
+
+
+
+(define evens-only*col
+  (lambda (l col)
+    (letrec ((atom? (lambda (a)
+                      (and (not (pair? a)) (not (null? a))))))
+      (cond
+        ((null? l) (col (quote ()) 1 0))
+        ((atom? (car l))
+           (cond
+             ((even? (car l))
+              (evens-only*col (cdr l)
+                              (lambda (newl p s)
+                                (col (cons (car l) newl)
+                                     (* (car l) p)
+                                     s))))
+             (else
+              (evens-only*col (cdr l)
+                              (lambda (newl p s)
+                                (col newl p
+                                     (+  (car l) s)))))))
+        (else
+         (evens-only*col (car l)
+                         (lambda (al ap as)
+                           (evens-only*col (cdr l)
+                                           (lambda (dl dp ds)
+                                             (col (cons al dl)
+                                                  (* ap dp)
+                                                  (+ as ds)))))))))))
+
+(define the-last-friend
+  (lambda (newl product sum)
+    (cons sum
+          (cons product
+               (cons newl &#39;())))))
+
+ (evens-only*col &#39;(1 3 4 6 3 (3 6 3 (3 6 21 3))) the-last-friend)
+
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;last-forever-and-will-stop&#34;&gt;last forever and will stop?&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&#34;language-scheme&#34;&gt;;; will you become 隽永 forever?
+;; will the program run always?
+
+;; the function eternity we wan&#39;t execute it, because it will not stop, it don&#39;t know how to stop it
+;; just like the life in the earth
+(define eternity
+  (lambda (x)
+    (eternity x)))
+;; what does shift do? the function shift takes a pair whose first component is a pair and builds a pair
+;; by shifting the second part of the first component into the second componnent
+(define shift
+  (lambda (pair)
+    (let ((first car)
+          (second cdr)
+          (build cons))
+      (build (first (first pair))
+             (build (second (first pair))
+                    (second pair))))))
+(shift &#39;((a b) c))
+(shift &#39;((a b) (c d)))
+(define weight*
+  (lambda (para)
+    (letrec ((atom? (lambda (a)
+                      (and (not (null? a)) (not (pair? a)))))
+             (first car)
+             (second cdr))
+      (cond
+        ((atom? para) 1)
+        (else (+ (* (weight* (first para)) 2)
+                 (weight* (second para))))))))
+;;(weight* &#39;((a b) c))
+;;(weight* &#39;(q (c d)))
+
+;;length0
+((lambda (l)
+   (cond
+     ((null? l) 0)
+     (else
+      (add1 (eternity (cdr l))))))
+ &#39;())
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;many-length-first-typerepeted&#34;&gt;many length first type(repeted)&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-scheme&#34;&gt;;;length0
+((lambda (l)
+   (cond
+     ((null? l) 0)
+     (else
+      (add1 (eternity (cdr l))))))
+ &#39;())
+;;length1
+((lambda (l)
+   (cond
+     ((null? l) 0)
+     (else
+      (add1
+       ((lambda (l)
+          (cond
+            ((null? l) 0)
+            (else (add1 (eternity (cdr l))))))
+        (cdr l))))))
+ &#39;(1))
+
+
+;;length2
+((lambda (l)
+   (cond
+     ((null? l) 0)
+     (else
+      (add1
+       ((lambda (l)
+          (cond
+            ((null? l) 0)
+            (else (add1
+                   ((lambda (l)
+                           (cond
+                             ((null? l) 0)
+                             (else (add1 (eternity (cdr l))))))
+                         (cdr l))))))
+        (cdr l))))))
+ &#39;(1 2))
+
+
+
+;;; length3
+((lambda (l)
+   (cond
+     ((null? l) 0)
+     (else
+      (add1
+       ((lambda (l)
+          (cond
+            ((null? l) 0)
+            (else (add1
+                   ((lambda (l)
+                           (cond
+                             ((null? l) 0)
+                             (else (add1
+                                    ((lambda (l)
+                                       (cond
+                                         ((null? l) 0)
+                                         (else (add1 (eternity (cdr l))))))
+                                     (cdr l))))))
+                         (cdr l))))))
+        (cdr l))))))
+ &#39;(1 2 3))
+
+
+
+;;; length4
+((lambda (l)
+   (cond
+     ((null? l) 0)
+     (else
+      (add1
+       ((lambda (l)
+          (cond
+            ((null? l) 0)
+            (else (add1
+                   ((lambda (l)
+                           (cond
+                             ((null? l) 0)
+                             (else (add1
+                                    ((lambda (l)
+                                       (cond
+                                         ((null? l) 0)
+                                         (else (add1
+                                                ((lambda (l)
+                                                   (cond
+                                                     ((null? l) 0)
+                                                     (else (add1 (eternity (cdr l))))));; we don&#39;t want to execute eternity function
+                                                 (cdr l))))))
+                                     (cdr l))))))
+                         (cdr l))))))
+        (cdr l))))))
+ &#39;(1 2 3 4))
+
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;many-length-second-typerepeated&#34;&gt;many length second type(repeated)&lt;/h3&gt;
+&lt;p&gt;识别你的模式
+recognize the pattern!!!
+All the function or programs contain a function looks just like length but start with (lambda (length &amp;hellip;)&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-scheme&#34;&gt;;;length0
+(((lambda (length)
+    (lambda (l)
+      (cond
+        ((null? l) 0)
+        (else (add1
+               (length (cdr l)))))))
+  eternity)
+ &#39;())
+
+;;;length1
+
+(((lambda (f)
+    (lambda (l)
+      (cond
+        ((null? l) 0)
+        (else (add1
+               (f (cdr l)))))))
+  ((lambda (g)
+     (lambda (l)
+       (cond
+         ((null? l) 0)
+         (else
+          (add1 (g (cdr l)))))))
+   eternity))
+ &#39;(1))
+
+
+;;;length2
+
+(((lambda (f)
+    (lambda (l)
+      (cond
+        ((null? l) 0)
+        (else (add1
+               (f (cdr l)))))))
+  ((lambda (g)
+     (lambda (l)
+       (cond
+         ((null? l) 0)
+         (else
+          (add1 (g (cdr l)))))))
+   ((lambda (h)
+      (lambda (l)
+        (cond
+          ((null? l) 0)
+          (else
+           (add1 (h (cdr l)))))))
+   eternity)))
+ &#39;(1 2))
+
+
+;;;length3
+
+(((lambda (f)
+    (lambda (l)
+      (cond
+        ((null? l) 0)
+        (else (add1
+               (f (cdr l)))))))
+  ((lambda (g)
+     (lambda (l)
+       (cond
+         ((null? l) 0)
+         (else
+          (add1 (g (cdr l)))))))
+   ((lambda (h)
+      (lambda (l)
+        (cond
+          ((null? l) 0)
+          (else
+           (add1 (h (cdr l)))))))
+    ((lambda (k)
+       (lambda (l)
+         (cond
+           ((null? l) 0)
+           (else (add1 (k (cdr l)))))))
+     eternity))))
+ &#39;(1 2 3))
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;more-better-lengthwith-less-repeated-part&#34;&gt;more better length(With less repeated part)&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-scheme&#34;&gt;(((lambda (mk-length)
+    (mk-length eternity))
+  (lambda (length)
+    (lambda (l)
+      (cond
+        ((null? l) 0)
+        (else (add1 (length (cdr l))))))))
+ &#39;())
+
+
+;; length1
+(((lambda (mk-length)
+    (mk-length
+     (mk-length eternity)))
+  (lambda (length)
+    (lambda (l)
+      (cond
+        ((null? l) 0)
+        (else (add1 (length (cdr l))))))))
+ &#39;(1))
+
+
+
+;; length2
+(((lambda (mk-length)
+    (mk-length
+     (mk-length
+      (mk-length eternity))))
+  (lambda (length)
+    (lambda (l)
+      (cond
+        ((null? l) 0)
+        (else (add1 (length (cdr l))))))))
+ &#39;(1 2))
+
+;; length3
+
+(((lambda (mk-length)
+    (mk-length 
+     (mk-length
+      (mk-length
+       (mk-length eternity)))))
+  (lambda (length)
+    (lambda (l)
+      (cond
+        ((null? l) 0)
+        (else (add1 (length (cdr l))))))))
+ &#39;(1 2 3))
+
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;we-dont-care-eternity-just-use-mk-length-or-others-instead-&#34;&gt;we don&amp;rsquo;t care eternity, just use mk-length or others instead ,&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-scheme&#34;&gt;;;; We don&#39;t care what eternity does, so let&#39;s use mk-length instead eternity
+
+;;length0
+((lambda (mk-length)
+   (mk-length mk-length))
+ (lambda (length)
+   (lambda (l)
+     (cond
+       ((null? l) 0)
+       (else
+        (add1 (length (cdr l))))))))
+
+;;length0  instead length with mk-length
+(((lambda (mk-length)
+   (mk-length mk-length))
+ (lambda (mk-length)
+   (lambda (l)
+     (cond
+       ((null? l) 0)
+       (else
+        (add1 (mk-length (cdr l))))))))
+ &#39;())
+
+;; we could use (mk-length eternity) to make them run once
+
+(((lambda (mk-length)
+    (mk-length mk-length))
+  (lambda (mk-length)
+    (lambda (l)
+      (cond
+        ((null? l) 0)
+        (else
+         (add1 ((mk-length eternity) (cdr l))))))))
+ &#39;(1))
+
+
+;;; function we could use mk-length instead eternity , to let them execute one by one
+;;; just length
+
+(((lambda (mk-length)
+    (mk-length mk-length))
+  (lambda (mk-length)
+    (lambda (l)
+      (cond
+        ((null? l) 0)
+        (else
+         (add1 ((mk-length mk-length) (cdr l))))))))
+ &#39;(1 3 5 2))
+
+;; funny (lambda (x) ((f f) x) =(f x)
+
+(((lambda (mk-length)
+    (mk-length mk-length))
+  (lambda (mk-length)
+    (lambda (l)
+      (cond
+        ((null? l) 0)
+        (else
+         (add1 ((lambda (x)
+                  ((mk-length mk-length) x))
+                  (cdr l))))))))
+ &#39;(1 3 5 2))
+
+;;; give the pattern (lambda (x) ((mk-length mk-length) x))  a name , le or length
+(((lambda (mk-length)
+    (mk-length mk-length))
+  (lambda (mk-length)
+    ((lambda (length)
+       (lambda (l)
+         (cond
+           ((null? l) 0)
+           (else (add1 (length (cdr l)))))))
+     (lambda (x)
+       ((mk-length mk-length) x)))))
+ &#39;(1 2 3 3))
+;; move length pattern behind
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;funny-y&#34;&gt;funny Y&lt;/h2&gt;
+&lt;p&gt;what is Y! Hard to figure out!&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-scheme&#34;&gt;(((lambda (le)
+   ((lambda (mk-length)
+      (mk-length mk-length))
+    (lambda (mk-length)
+      (le (lambda (x)
+            ((mk-length mk-length) x))))))
+  (lambda (length)
+    (lambda (l)
+      (cond
+        ((null? l) 0)
+        (else (add1 (length (cdr l))))))))
+ &#39;(1 2 3 4 5 7 8))
+
+(define Y
+  (lambda (le)
+    ((lambda (mk-length)
+       (mk-length mk-length))
+     (lambda (mk-length)
+       (le (lambda (x)
+             ((mk-length mk-length) x)))))))
+
+((Y (lambda (length)
+      (lambda (l)
+        (cond
+          ((null? l) 0)
+          (else (add1 (length (cdr l))))))))
+ &#39;(1 3 6 5))
+
+(define Y2
+  (lambda (fun)
+    ((lambda (f)
+       (f f))
+     (lambda (f)
+       (fun (lambda (x)
+              ((f f) x)))))))
+
+((Y2 (lambda (length)
+       (lambda (l)
+         (cond
+           ((null? l) 0)
+           (else (add1 (length (cdr l))))))))
+ &#39;(3 6 8 3 20 94 ))
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Good Story Makeup Behind</title>
+      <link>https://jueqingsizhe66.github.io/post/good-story-makeup-behind/</link>
+      <pubDate>Tue, 16 May 2023 08:54:52 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/post/good-story-makeup-behind/</guid>
+      <description>&lt;h2 id=&#34;pattern&#34;&gt;pattern&lt;/h2&gt;
+&lt;p&gt;Be sure you know and understand them better than if we had written each definition for you.
+The key to programming is recognizing patterns in data and processes. The Commandments
+Highlight the patterns.&lt;/p&gt;
+&lt;p&gt;Early in the book, some concepts are narrowed for simplicity; later, they are expanded and qualified.&lt;/p&gt;
+&lt;p&gt;What should we do with the dots in the second line and the terminate line?
+(or can you fill the dots in the following definition of two-in-a-row-b?)&amp;mdash;-&amp;gt;&lt;/p&gt;
+&lt;p&gt;the actually ideal method for make a theis, make what you wanna do into structural story!(Structural Copy of saying)&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-scheme&#34;&gt;(define sum-of-prefix-b_
+  (lambda (ss tup)
+    (cond
+      ((null? tup) ...)
+      (else (cons  ... 
+                  (sum-of-prefix-b_ ... 
+                                    (cdr tup)))))))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;What should we do with the dots in the second line and the terminate line?
+&amp;ndash;&amp;gt; which means  you know what to do  when the special pattern has been hit(when (car lat) is not equal of preceding , or lat is not null)&amp;ndash;yeah, you must understand what the functions work!&lt;/p&gt;
+&lt;h2 id=&#34;the-trick&#34;&gt;The trick&lt;/h2&gt;
+&lt;p&gt;Explain precisely what it does! it means function.&lt;/p&gt;
+&lt;p&gt;Whether continuing the search is useful to find the answer for you! Or not?&lt;/p&gt;
+&lt;p&gt;We must know the job or meaning for every function, in order to arrange them into structure or pattern.&lt;/p&gt;
+&lt;p&gt;The trick of two-in-a-row-b? receives two arguments and one tells it something about the other,
+That is, the first argument, preceding, always occurs just before the second argument, lat, int the original list, while the trick is also applied int  the sum-of-prefixs-b and tail recursion method.&lt;/p&gt;
+&lt;p&gt;(Commandants: Use the additional arguments when a function needs to know what other arguments to the function have been like so far.)&lt;/p&gt;
+&lt;h2 id=&#34;difference&#34;&gt;difference&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&#34;language-scheme&#34;&gt;(define sum-of-prefix-b_
+  (lambda (ss tup)
+    (cond
+      ((null? tup) (quote ()))
+      (else (cons (+ ss (car tup))
+                  (sum-of-prefix-b_ (+ ss (car tup))
+                                    (cdr tup)))))))
+(define sum-of-prefix_
+  (lambda (tup)
+    (sum-of-prefix-b_ 0 tup)))
+
+
+(define sum-of-prefix2_
+  (lambda (tup)
+    (letrec ((sum-of-prefix-b2_ (lambda (ss tup)
+                                  (cond
+                                    ((null? tup) (quote ()))
+                                    (else (cons (+ ss (car tup))
+                                                (sum-of-prefix-b2_ (+ ss (car tup))
+                                                                   (cdr tup))))))))
+      (sum-of-prefix-b2_ 0 tup))))
+
+(sum-of-prefix2_ &#39;(1 2 3 4 5))
+
+
+(define sum-of-prefix3_
+  (lambda (tup)
+    (letrec ((sum-of-prefix-b3_ (lambda (ss tup)
+                                  (cond
+                                    ((null? tup) (quote ()))
+                                    (else
+                                     (let ((left_thing (+ ss (car tup))))
+                                       (cons left_thing
+                                             (sum-of-prefix-b3_ left_thing (cdr tup)))))))))
+      (sum-of-prefix-b3_ 0 tup))))
+
+
+(sum-of-prefix3_ &#39;(1 2 3 4 5))
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;What is the difference between scramble and sum-of-prefix?
+We know that scramble takes a non-empty tup in which no number is greater than its own index(要求), and returns a tup of the same length. Eatch number in the argument is treated as a backward index from its own position to a point earliere in the tup.
+The result at each position is found by counting backward from the current position according to this index. That is,, scramble needs to know that entire prefix of each element so that it can use the first element of tup as a backward index to pick the corresponding number from this prefix(Here subjection or mean to us that the additional function definition for what most of the work for scramble, to collect information about the prefix of each element in the same manner as sum-of-prefixes)&lt;/p&gt;
+&lt;p&gt;The former needs to know the actual prefix(瞬时值), the latter(sum-of-prefix) needs to know the sum of the numbers in the prefix(特征值)&lt;/p&gt;
+&lt;h2 id=&#34;good-story-maker&#34;&gt;good story maker&lt;/h2&gt;
+&lt;p&gt;每一个好的故事背后都有好的故事设计者
+注意rember8的形式&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-scheme&#34;&gt;
+(define rember8
+  (lambda (a lat)
+    (cond
+      ((null? lat) (quote ()))
+      ((eq? (car lat) a) (cdr lat))
+      (else (cons (car lat)
+                  (rember8 a (cdr lat)))))))
+
+(define rember8b
+  (lambda (a lat)
+    (letrec ((rem? (lambda (lat)
+                     (cond
+                       ((null? lat)(quote ()))
+                       ((eq? (car lat) a) (cdr lat))
+                       (else (cons (car lat)
+                                   (rem? a (cdr lat))))))))
+      (rem? lat))))
+
+(define rember8k
+  (lambda (a lat tail)
+    (letrec ((rem? (lambda (lat)
+                     (cond
+                       ((null? lat)(tail (quote ())))
+                       ((eq? (car lat) a) (tail (cdr lat)))
+                       (else (rem? a (cdr lat)
+                                         (lambda (x) (cons (car lat) x)))))))) ;;; 漏了一个最核心的tail，无法进行函数递归
+      (rem? lat))))
+
+(rember8k &#39;a &#39;(a b c d a) (lambda (x) x))
+
+
+(define rember8k
+  (lambda (a lat tail)
+    (letrec ((rem? (lambda (lat)
+                     (cond
+                       ((null? lat)(tail (quote ())))
+                       ((eq? (car lat) a) (tail (cdr lat)))
+                       (else (rem? a (cdr lat)
+                                         (lambda (x) (tail (cons (car lat) x)))))))))
+      (rem? lat))))
+
+(rember8k &#39;a &#39;(a b c d a) (lambda (x) x))
+
+
+
+(define multi-rember8k
+  (lambda (a lat tail)
+    (letrec ((rem? (lambda (lat tail)
+                     (cond
+                       ((null? lat)(tail (quote ())))
+                       ((eq? (car lat) a) (rem? (cdr lat) tail)) ;; (tail x) =tail
+                       (else (rem? (cdr lat)
+                                   (lambda (x) (tail (cons (car lat) x)))))))))
+      (rem? lat tail))))
+
+
+(multi-rember8k &#39;a &#39;(a b c d a) (lambda (x) x))
+
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
     
     <item>
       <title>What&#39;s the Same</title>
@@ -6972,7 +7583,7 @@ data.head()
 &lt;p&gt;Demo:&lt;/p&gt;
 
 
-&lt;div id=&#34;chart-761543982&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;div id=&#34;chart-794682315&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
 &lt;script&gt;
   (function() {
     let a = setInterval( function() {
@@ -6982,7 +7593,7 @@ data.head()
       clearInterval( a );
 
       Plotly.d3.json(&#34;./line-chart.json&#34;, function(chart) {
-        Plotly.plot(&#39;chart-761543982&#39;, chart.data, chart.layout, {responsive: true});
+        Plotly.plot(&#39;chart-794682315&#39;, chart.data, chart.layout, {responsive: true});
       });
     }, 500 );
   })();

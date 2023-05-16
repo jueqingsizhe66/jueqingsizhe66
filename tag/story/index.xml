@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>story | 突然的~自我~</title>
+    <link>https://jueqingsizhe66.github.io/tag/story/</link>
+      <atom:link href="https://jueqingsizhe66.github.io/tag/story/index.xml" rel="self" type="application/rss+xml" />
+    <description>story</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>©2023</copyright><lastBuildDate>Tue, 16 May 2023 08:54:52 +0800</lastBuildDate>
+    <image>
+      <url>https://jueqingsizhe66.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
+      <title>story</title>
+      <link>https://jueqingsizhe66.github.io/tag/story/</link>
+    </image>
+    
+    <item>
+      <title>Good Story Makeup Behind</title>
+      <link>https://jueqingsizhe66.github.io/post/good-story-makeup-behind/</link>
+      <pubDate>Tue, 16 May 2023 08:54:52 +0800</pubDate>
+      <guid>https://jueqingsizhe66.github.io/post/good-story-makeup-behind/</guid>
+      <description>&lt;h2 id=&#34;pattern&#34;&gt;pattern&lt;/h2&gt;
+&lt;p&gt;Be sure you know and understand them better than if we had written each definition for you.
+The key to programming is recognizing patterns in data and processes. The Commandments
+Highlight the patterns.&lt;/p&gt;
+&lt;p&gt;Early in the book, some concepts are narrowed for simplicity; later, they are expanded and qualified.&lt;/p&gt;
+&lt;p&gt;What should we do with the dots in the second line and the terminate line?
+(or can you fill the dots in the following definition of two-in-a-row-b?)&amp;mdash;-&amp;gt;&lt;/p&gt;
+&lt;p&gt;the actually ideal method for make a theis, make what you wanna do into structural story!(Structural Copy of saying)&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-scheme&#34;&gt;(define sum-of-prefix-b_
+  (lambda (ss tup)
+    (cond
+      ((null? tup) ...)
+      (else (cons  ... 
+                  (sum-of-prefix-b_ ... 
+                                    (cdr tup)))))))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;What should we do with the dots in the second line and the terminate line?
+&amp;ndash;&amp;gt; which means  you know what to do  when the special pattern has been hit(when (car lat) is not equal of preceding , or lat is not null)&amp;ndash;yeah, you must understand what the functions work!&lt;/p&gt;
+&lt;h2 id=&#34;the-trick&#34;&gt;The trick&lt;/h2&gt;
+&lt;p&gt;Explain precisely what it does! it means function.&lt;/p&gt;
+&lt;p&gt;Whether continuing the search is useful to find the answer for you! Or not?&lt;/p&gt;
+&lt;p&gt;We must know the job or meaning for every function, in order to arrange them into structure or pattern.&lt;/p&gt;
+&lt;p&gt;The trick of two-in-a-row-b? receives two arguments and one tells it something about the other,
+That is, the first argument, preceding, always occurs just before the second argument, lat, int the original list, while the trick is also applied int  the sum-of-prefixs-b and tail recursion method.&lt;/p&gt;
+&lt;p&gt;(Commandants: Use the additional arguments when a function needs to know what other arguments to the function have been like so far.)&lt;/p&gt;
+&lt;h2 id=&#34;difference&#34;&gt;difference&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&#34;language-scheme&#34;&gt;(define sum-of-prefix-b_
+  (lambda (ss tup)
+    (cond
+      ((null? tup) (quote ()))
+      (else (cons (+ ss (car tup))
+                  (sum-of-prefix-b_ (+ ss (car tup))
+                                    (cdr tup)))))))
+(define sum-of-prefix_
+  (lambda (tup)
+    (sum-of-prefix-b_ 0 tup)))
+
+
+(define sum-of-prefix2_
+  (lambda (tup)
+    (letrec ((sum-of-prefix-b2_ (lambda (ss tup)
+                                  (cond
+                                    ((null? tup) (quote ()))
+                                    (else (cons (+ ss (car tup))
+                                                (sum-of-prefix-b2_ (+ ss (car tup))
+                                                                   (cdr tup))))))))
+      (sum-of-prefix-b2_ 0 tup))))
+
+(sum-of-prefix2_ &#39;(1 2 3 4 5))
+
+
+(define sum-of-prefix3_
+  (lambda (tup)
+    (letrec ((sum-of-prefix-b3_ (lambda (ss tup)
+                                  (cond
+                                    ((null? tup) (quote ()))
+                                    (else
+                                     (let ((left_thing (+ ss (car tup))))
+                                       (cons left_thing
+                                             (sum-of-prefix-b3_ left_thing (cdr tup)))))))))
+      (sum-of-prefix-b3_ 0 tup))))
+
+
+(sum-of-prefix3_ &#39;(1 2 3 4 5))
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;What is the difference between scramble and sum-of-prefix?
+We know that scramble takes a non-empty tup in which no number is greater than its own index(要求), and returns a tup of the same length. Eatch number in the argument is treated as a backward index from its own position to a point earliere in the tup.
+The result at each position is found by counting backward from the current position according to this index. That is,, scramble needs to know that entire prefix of each element so that it can use the first element of tup as a backward index to pick the corresponding number from this prefix(Here subjection or mean to us that the additional function definition for what most of the work for scramble, to collect information about the prefix of each element in the same manner as sum-of-prefixes)&lt;/p&gt;
+&lt;p&gt;The former needs to know the actual prefix(瞬时值), the latter(sum-of-prefix) needs to know the sum of the numbers in the prefix(特征值)&lt;/p&gt;
+&lt;h2 id=&#34;good-story-maker&#34;&gt;good story maker&lt;/h2&gt;
+&lt;p&gt;每一个好的故事背后都有好的故事设计者
+注意rember8的形式&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-scheme&#34;&gt;
+(define rember8
+  (lambda (a lat)
+    (cond
+      ((null? lat) (quote ()))
+      ((eq? (car lat) a) (cdr lat))
+      (else (cons (car lat)
+                  (rember8 a (cdr lat)))))))
+
+(define rember8b
+  (lambda (a lat)
+    (letrec ((rem? (lambda (lat)
+                     (cond
+                       ((null? lat)(quote ()))
+                       ((eq? (car lat) a) (cdr lat))
+                       (else (cons (car lat)
+                                   (rem? a (cdr lat))))))))
+      (rem? lat))))
+
+(define rember8k
+  (lambda (a lat tail)
+    (letrec ((rem? (lambda (lat)
+                     (cond
+                       ((null? lat)(tail (quote ())))
+                       ((eq? (car lat) a) (tail (cdr lat)))
+                       (else (rem? a (cdr lat)
+                                         (lambda (x) (cons (car lat) x)))))))) ;;; 漏了一个最核心的tail，无法进行函数递归
+      (rem? lat))))
+
+(rember8k &#39;a &#39;(a b c d a) (lambda (x) x))
+
+
+(define rember8k
+  (lambda (a lat tail)
+    (letrec ((rem? (lambda (lat)
+                     (cond
+                       ((null? lat)(tail (quote ())))
+                       ((eq? (car lat) a) (tail (cdr lat)))
+                       (else (rem? a (cdr lat)
+                                         (lambda (x) (tail (cons (car lat) x)))))))))
+      (rem? lat))))
+
+(rember8k &#39;a &#39;(a b c d a) (lambda (x) x))
+
+
+
+(define multi-rember8k
+  (lambda (a lat tail)
+    (letrec ((rem? (lambda (lat tail)
+                     (cond
+                       ((null? lat)(tail (quote ())))
+                       ((eq? (car lat) a) (rem? (cdr lat) tail)) ;; (tail x) =tail
+                       (else (rem? (cdr lat)
+                                   (lambda (x) (tail (cons (car lat) x)))))))))
+      (rem? lat tail))))
+
+
+(multi-rember8k &#39;a &#39;(a b c d a) (lambda (x) x))
+
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -19,7 +19,7 @@
       <guid>https://jueqingsizhe66.github.io/archives/cps-intutive/</guid>
       <description>&lt;p&gt;通过deep&amp;amp;coB 和deepB的不同CPS实现，说明letcc版本是直接跳出surrounding，而不管周边的其他计算。 并且可以这样认为所有的scheme lambda表达式都可以理解为kn表达式的过程(好处1)，这种直观的解释方便理解 绕来绕去的过程。并且cps style尾巴的k既可以是变量也可以是函数 (好处2)。&lt;/p&gt;
 &lt;h1 id=&#34;1-普通形式&#34;&gt;1. 普通形式&lt;/h1&gt;
-&lt;pre&gt;&lt;code class=&#34;language-racket&#34;&gt;;; Normal Form
+&lt;pre&gt;&lt;code class=&#34;language-scheme&#34;&gt;;; Normal Form
 (define append2
   (lambda (lisa lisb)
     (cond
@@ -38,7 +38,7 @@
 
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h1 id=&#34;2-tail-form&#34;&gt;2. Tail form&lt;/h1&gt;
-&lt;pre&gt;&lt;code class=&#34;language-racket&#34;&gt;(define append3
+&lt;pre&gt;&lt;code class=&#34;language-scheme&#34;&gt;(define append3
   (lambda (lisa lisb)
     (letrec ((ap2
               (lambda (a b)
@@ -57,8 +57,8 @@
 (fact2 4)
 
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;#3. deep&amp;amp;coB&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-racket&#34;&gt;(define deep&amp;amp;coB
+&lt;h1 id=&#34;3-deepcob&#34;&gt;3. deep&amp;amp;coB&lt;/h1&gt;
+&lt;pre&gt;&lt;code class=&#34;language-scheme&#34;&gt;(define deep&amp;amp;coB
   (lambda (m k)
     (cond
       ((zero? m)
@@ -75,9 +75,9 @@
 
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;cps风格 lambda(x) x ,可以使用k1 k2 k3 的风格进行替换,cps风格仅仅是编程的风格，letcc是其中的一种体现.&lt;/p&gt;
-&lt;p&gt;#4. deepB&lt;/p&gt;
+&lt;h1 id=&#34;4-deepb&#34;&gt;4. deepB&lt;/h1&gt;
 &lt;p&gt;letcc风格 直接跳出！！（也就是不管其他计算，直接他就是返回值！！）&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-racket&#34;&gt;(define toppings 0)
+&lt;pre&gt;&lt;code class=&#34;language-scheme&#34;&gt;(define toppings 0)
 (define deepB
   (lambda (m)
     (cond
@@ -90,9 +90,9 @@
        (cons (deepB (sub1 m)) &#39;())))))
 
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;#5. bons and kons&lt;/p&gt;
+&lt;h1 id=&#34;5-bons-and-kons&#34;&gt;5. bons and kons&lt;/h1&gt;
 &lt;p&gt;进一步理解cps风格也可以看看kons和bons的实现&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-racket&#34;&gt;#lang racket
+&lt;pre&gt;&lt;code class=&#34;language-scheme&#34;&gt;#lang racket
 ; kons the magnificent
 ;
 (define kons
