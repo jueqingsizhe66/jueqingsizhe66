@@ -1,0 +1,1333 @@
+<!DOCTYPE html><html lang="en-us" >
+
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  
+  
+    <meta name="generator" content="Wowchemy 5.4.0 for Hugo" />
+  
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+  
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="叶昭良" />
+
+  
+  
+  
+    
+  
+  <meta name="description" content="为了快速阅读源码，一方面我们可能需要通过 fd 快速查找文件，另一" />
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://jueqingsizhe66.github.io/post/a-new-reading-code-method/" />
+
+  
+  
+  
+    <meta name="theme-color" content="#1565c0" />
+  
+
+  
+  
+    
+    <script src="/js/mathjax-config.js"></script>
+  
+
+  
+
+  <link rel="stylesheet" href="/css/vendor-bundle.min.f1ecf783c14edc00c9320c205831ad8e.css" media="print" onload="this.media='all'">
+
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css" integrity="sha512-W0xM4mr6dEP9nREo7Z9z+9X70wytKvMGeDsj7ps2+xg5QPrEBXC8tAW1IFnzjR6eoJ90JmCnFzerQJTLzIEHjA==" crossorigin="anonymous" media="print" onload="this.media='all'">
+    
+
+    
+    
+    
+    
+      
+      
+    
+    
+    
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/github.min.css" crossorigin="anonymous" title="hl-light" media="print" onload="this.media='all'">
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" media="print" onload="this.media='all'" disabled>
+        
+      
+    
+
+    
+    
+    
+
+    
+
+    
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.2a9113cdaa287c8aabad4aa82208fdf3.css" />
+
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+    <link rel="manifest" href="/manifest.webmanifest" />
+  
+
+  <link rel="icon" type="image/png" href="/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_32x32_fill_lanczos_center_3.png" />
+  <link rel="apple-touch-icon" type="image/png" href="/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_180x180_fill_lanczos_center_3.png" />
+
+  <link rel="canonical" href="https://jueqingsizhe66.github.io/post/a-new-reading-code-method/" />
+
+  
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+
+  
+  
+    
+    
+  
+  <meta property="twitter:card" content="summary_large_image" />
+  
+    <meta property="twitter:site" content="@jueqingsihe66" />
+    <meta property="twitter:creator" content="@jueqingsihe66" />
+  
+  <meta property="og:site_name" content="突然的~自我~" />
+  <meta property="og:url" content="https://jueqingsizhe66.github.io/post/a-new-reading-code-method/" />
+  <meta property="og:title" content="A New Reading Code Method | 突然的~自我~" />
+  <meta property="og:description" content="为了快速阅读源码，一方面我们可能需要通过 fd 快速查找文件，另一" /><meta property="og:image" content="https://jueqingsizhe66.github.io/post/a-new-reading-code-method/featured.jpg" />
+    <meta property="twitter:image" content="https://jueqingsizhe66.github.io/post/a-new-reading-code-method/featured.jpg" /><meta property="og:locale" content="en-us" />
+  
+    
+      <meta
+        property="article:published_time"
+        content="2023-06-04T23:23:35&#43;08:00"
+      />
+    
+    <meta property="article:modified_time" content="2023-06-04T23:23:35&#43;08:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://jueqingsizhe66.github.io/post/a-new-reading-code-method/"
+  },
+  "headline": "A New Reading Code Method",
+  
+  "image": [
+    "https://jueqingsizhe66.github.io/post/a-new-reading-code-method/featured.jpg"
+  ],
+  
+  "datePublished": "2023-06-04T23:23:35+08:00",
+  "dateModified": "2023-06-04T23:23:35+08:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "yzl"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "突然的~自我~",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://jueqingsizhe66.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_192x192_fill_lanczos_center_3.png"
+    }
+  },
+  "description": "为了快速阅读源码，一方面我们可能需要通过 fd 快速查找文件，另一"
+}
+</script>
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+  <title>A New Reading Code Method | 突然的~自我~</title>
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="6a80b3e88dba48803d3f96ad0fc42d8e" >
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.9e9fa4b2ccd29f9edfae161d14d2effd.js"></script>
+
+  
+
+
+<aside class="search-modal" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="Search...">
+        
+      </div>
+
+      
+      
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="header--fixed">
+  <nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+    <div class="container-xl">
+
+      
+      <div class="d-none d-lg-inline-flex">
+        <a class="navbar-brand" href="/">突然的~自我~</a>
+      </div>
+      
+
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+      <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+      
+      <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+        <a class="navbar-brand" href="/">突然的~自我~</a>
+      </div>
+      
+
+      
+      
+      <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+        
+        <ul class="navbar-nav d-md-inline-flex">
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#hero"><span>概要</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#posts"><span>博文</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/about/"><span>About</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/categories/"><span>分类</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/archives"><span>归档</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#tags"><span>标签</span></a>
+          </li>
+
+          
+          
+
+        
+
+          
+        </ul>
+      </div>
+
+      <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+        
+        
+          
+        
+
+        
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+        
+        
+        <li class="nav-item dropdown theme-dropdown">
+          <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+            <i class="fas fa-moon" aria-hidden="true"></i>
+          </a>
+          <div class="dropdown-menu">
+            <a href="#" class="dropdown-item js-set-theme-light">
+              <span>Light</span>
+            </a>
+            <a href="#" class="dropdown-item js-set-theme-dark">
+              <span>Dark</span>
+            </a>
+            <a href="#" class="dropdown-item js-set-theme-auto">
+              <span>Automatic</span>
+            </a>
+          </div>
+        </li>
+        
+
+        
+        
+
+      </ul>
+
+    </div>
+  </nav>
+</header>
+
+
+  </div>
+
+  <div class="page-body">
+    
+    
+    
+
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+  
+ <script async src="//cdn.busuanzi.ibruce.info/cdn/busuanzi/2.3/busuanzi.pure.mini.js"></script> 
+ <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script> 
+ <script> 
+     $(document).ready(function() { 
+         var int = setInterval(fixCount, 100); 
+         var busuanziSiteOffset =  100000  
+         function fixCount() { 
+             if ($("#busuanzi_container_site_pv").css("display") != "none") { 
+                 clearInterval(int); 
+                 $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + busuanziSiteOffset); 
+             } 
+         } 
+     }); 
+ </script> 
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+
+<div class="article-container pt-3">
+  <h1>A New Reading Code Method</h1>
+
+  
+  <p class="page-subtitle">一个源代码查阅记录方法</p>
+  
+
+  
+
+
+<div class="article-metadata">
+
+  
+  
+  
+  
+  <div>
+    
+
+  <span >
+      <a href="/author/yzl/">yzl</a></span>
+  </div>
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Jun 4, 2023
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    2 min read
+  </span>
+  
+
+  
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/category/programming/">programming</a></span>
+  
+
+</div>
+
+  
+
+
+
+
+<div class="btn-links mb-3">
+  
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+  
+    
+  
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+</div>
+
+
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 720px; max-height: 474px;">
+  <div style="position: relative">
+    <img src="/post/a-new-reading-code-method/featured_huf7deafd419a87f2386bf9f711194e9e4_143433_720x0_resize_q75_lanczos.jpg" alt="" class="featured-image">
+    <span class="article-header-caption">ripgrep</span>
+  </div>
+</div>
+
+
+
+
+
+<span class="article-metadata" >Reading time: 4 minutes and    25 seconds with 972 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+    <aside>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-rg执行步骤">1. RG执行步骤</a></li>
+    <li><a href="#2-rg执行原则">2. RG执行原则</a></li>
+    <li><a href="#3-fg执行步骤">3. FG执行步骤</a></li>
+    <li><a href="#4-ctags执行步骤">4. ctags执行步骤</a></li>
+  </ul>
+</nav>
+    </aside>
+  <div class="article-container">
+
+
+    <div class="article-style">
+      <p>为了快速阅读源码，一方面我们可能需要通过<a href="https://github.com/sharkdp/fd" target="_blank" rel="noopener"> fd </a>快速查找文件，另一方面我们需要通过<a href="https://github.com/BurntSushi/ripgrep" target="_blank" rel="noopener"> rg </a>快速查找文件内容，最重要我们也需要跳转定义，
+跳转定义一般有两种方式可以去执行,一是通过<a href="https://github.com/universal-ctags/ctags" target="_blank" rel="noopener"> ctags </a>精确查找，亦或者通过<a href="https://github.com/Yggdroot/LeaderF" target="_blank" rel="noopener"> leaderf </a>或者<a href="https://github.com/BurntSushi/ripgrep" target="_blank" rel="noopener"> rg </a>进行模糊查找。</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img alt="image" srcset="
+               /post/a-new-reading-code-method/coding_hu340dca722e96fdbe158d0ac6aabfee93_122504_31a8c0fa597a52126c09e381b2a289ca.webp 400w,
+               /post/a-new-reading-code-method/coding_hu340dca722e96fdbe158d0ac6aabfee93_122504_80ee0e58226050cb5956c21d6f8d9988.webp 760w,
+               /post/a-new-reading-code-method/coding_hu340dca722e96fdbe158d0ac6aabfee93_122504_1200x1200_fit_q75_h2_lanczos_3.webp 1200w"
+               src="/post/a-new-reading-code-method/coding_hu340dca722e96fdbe158d0ac6aabfee93_122504_31a8c0fa597a52126c09e381b2a289ca.webp"
+               width="760"
+               height="260"
+               loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<h2 id="1-rg执行步骤">1. RG执行步骤</h2>
+<ul>
+<li>在vim中打开每个项目根目录的<a href="https://github.com/vimwiki/vimwiki" target="_blank" rel="noopener"> vimwiki </a>文件(需要自建);注意可以把你每一个关注的目录添加到<a href="https://github.com/preservim/nerdtree" target="_blank" rel="noopener"> nerdtree </a>中<code>:Bookmark</code></li>
+<li>通过<code>rg</code>搜索你要搜索的内容, 你可以给每次你的搜索主题，写上你的理解，你的认识，这样你的每次阅读都是有记录的</li>
+<li>把搜索的文件路径，黏贴到wiki文件内，通过<code>gf</code>定位到文件进行查阅(注意在你的vim系统中，也开始使用<code>,cp</code>获取绝对路径，然后把路径放到你的helpwiki文件中,保证vim系统也能记录上)</li>
+</ul>
+<pre><code class="language-vim">rg &quot;:call GotoFile\(&quot;
+yzl\my_plugins\open_file_under_cursor.vim\plugin\open_file_under_cursor.vim
+39:nnoremap gf :call GotoFile(&quot;&quot;)&lt;CR&gt;
+40:nnoremap &lt;C-W&gt;f :call GotoFile(&quot;new&quot;)&lt;CR&gt;
+41:nnoremap &lt;C-W&gt;&lt;C-F&gt; :call GotoFile(&quot;new&quot;)&lt;CR&gt;
+</code></pre>
+<h2 id="2-rg执行原则">2. RG执行原则</h2>
+<ul>
+<li>你的每一次查找都有一个搜索主题</li>
+<li>没得每一个搜索主题都包含若干链接</li>
+<li>你的每一次查找都可以被记录，并被快速追溯,并被归纳在一个主题下</li>
+</ul>
+<p>下面是一些记录的不错rg操作命令</p>
+<ul>
+<li>命令行下使用rg
+<ul>
+<li><code>rg &quot;支持&quot;</code></li>
+<li><code>rg injectDependency</code></li>
+<li><code>rg -tpy foo</code> 将搜索限制为 Python 文件，</li>
+<li><code>rg -Tjs foo</code> 不包括 JavaScript 你搜索的文件</li>
+<li>rg 注意使用双引号（cmd和ubuntu有所不一，需要测试）</li>
+<li><code>rg -g &quot;*.java&quot; </code>可以glob所有java文件，并对他们进行其他搜索(类似<code>-tjava</code>或者<code>--type java</code>)</li>
+<li><code>rg -g &quot;!*.java&quot;</code>   !排除所有java文件结尾的文件（该结果可能会更多些）</li>
+<li><code>rg --replace or -r </code> : 替换！</li>
+<li><code>rg --type-add ‘web:*.{html,css,js}&quot; -tweb &quot;hello&quot;</code>  自定义类型(<code>rg --type-list</code> 可以看到所有type)</li>
+<li><code>rg &quot;addSharedFunction\(.*\)&quot; </code>  所有addSharedFunction函数
+注意记住上述搜素的画面中的行号，这样在vim窗口中，可以直接定位到对应行</li>
+<li><code>rg --files . |rg &quot;文件名字&quot;</code> 搜索当前目录下的文件名字小技巧</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-sh">  D:\codeRoom\java\jfinal&gt;rg &quot;setInjectDependency\(&quot;
+  src\main\java\com\jfinal\config\Constants.java
+  206:            controllerFactory.setInjectDependency(getInjectDependency());
+  219:    public void setInjectDependency(boolean injectDependency) {
+  220:            AopManager.me().setInjectDependency(injectDependency);
+
+  src\main\java\com\jfinal\core\ControllerFactory.java
+  26:     public void setInjectDependency(boolean injectDependency) {
+
+  src\main\java\com\jfinal\aop\AopManager.java
+  48:     public void setInjectDependency(boolean injectDependency) {
+  
+</code></pre>
+<h2 id="3-fg执行步骤">3. FG执行步骤</h2>
+<p>有时候我们也可以通过<a href="https://github.com/sharkdp/fd" target="_blank" rel="noopener">fg</a> 进行文件的搜索。</p>
+<ul>
+<li>fd &ldquo;app&rdquo; 搜索带app字符的文件</li>
+<li>fd -e jpg  搜索所有jpg文件结尾的文件</li>
+<li>fd -E jpg  搜索所有文件,并排除jpg文件结尾</li>
+<li>fd -e jpg  -a 搜索所有jpg文件结尾的文件，并以绝对路径输出</li>
+<li>fd -e jpg &ndash;exec</li>
+</ul>
+<h2 id="4-ctags执行步骤">4. ctags执行步骤</h2>
+<p><a href="https://github.com/universal-ctags/ctags" target="_blank" rel="noopener"> Universe ctags </a>可以生成一定源码文件的函数、字段标识符。</p>
+<ul>
+<li>ctags -R *</li>
+<li>ctags -R &ndash;force-language=java -R ./src</li>
+<li>ctags &ndash;list-languages</li>
+</ul>
+<p>配置方法：</p>
+<pre><code class="language-vim">set tags+=./tags
+set tags+=D;/java/tags  
+</code></pre>
+<p>可以添加多个tags路径，自动支持绝对路径,即其他代码库的tags可以添加到被引用库中，只要在vim配置添加好该tags绝对路径。</p>
+
+    </div>
+ <div class="nav-links" style="padding:10;">
+        
+        <div align="left">
+        <a href="https://jueqingsizhe66.github.io/post/what-is-y/"><span class="arrow">←</span> <strong>上一篇:What Is Y</strong></a>
+        </div>
+        
+        
+      </div>
+
+    <div class="pagination__title">
+      <span class="pagination__title-h">Related</span>
+      <hr />
+    </div>
+
+    
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+
+    
+
+    
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/programming/">programming</a>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+         
+         
+         
+         
+         
+         
+   </div>
+
+  </div>
+
+</article>
+<script src="https://utteranc.es/client.js"
+        repo="jueqingsizhe66/jueqingsizhe66.github.io"
+        issue-term="pathname"
+        theme="github-dark"
+        crossorigin="anonymous"
+        async>
+</script>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    ©2023 &middot; 
+
+    ^-^ Ye Zhaoliang ^-^ Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+      
+
+    
+    <script src="/js/vendor-bundle.min.9592335d574f7a97010f99b90ad0f310.js"></script>
+
+    
+    
+    
+      
+      
+        <script src="https://cdn.jsdelivr.net/gh/desandro/imagesloaded@v4.1.4/imagesloaded.pkgd.min.js" integrity="sha512-S5PZ9GxJZO16tT9r3WJp/Safn31eu8uWrzglMahDT4dsmgqWonRY9grk3j+3tfuPr9WJNsfooOR7Gi7HL5W2jw==" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/gh/metafizzy/isotope@v3.0.6/dist/isotope.pkgd.min.js" integrity="sha512-Zq2BOxyhvnRFXu0+WE6ojpZLOU2jdnqbrM1hmVdGzyeCa1DgM3X5Q4A/Is9xA1IkbUeDd7755dNNI/PzSf2Pew==" crossorigin="anonymous"></script>
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/gh/mermaid-js/mermaid@v8.8.4/dist/mermaid.min.js" integrity="sha512-+TNmhaRJf3jyYHTpzEq/5I6b+aGyhzWb21mGdHAjxSGSYwxN9Grug3Y3B9qVxWfKKY8MscE/6mr9walWvFLFvQ==" crossorigin="anonymous" title="mermaid"></script>
+      
+
+      
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/highlight.min.js" integrity="sha512-Ypjm0o7jOxAd4hpdoppSEN0TQOC19UtPAqD+4s5AlXmUvbmmS/YMxYqAqarQYyxTnB6/rqip9qcxlNB/3U9Wdg==" crossorigin="anonymous"></script>
+        
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/r.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/latex.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/python.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/matlab.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/java.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/go.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/rust.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/c.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/perl.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/scheme.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/lisp.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/racket.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/awk.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/sed.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/bash.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/sql.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/vim.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/clojure.min.js" crossorigin="anonymous"></script>
+        
+      
+
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+      
+      <script id="search-hit-fuse-template" type="text/x-template">
+        <div class="search-hit" id="summary-{{key}}">
+          <div class="search-hit-content">
+            <div class="search-hit-name">
+              <a href="{{relpermalink}}">{{title}}</a>
+              <div class="article-metadata search-hit-type">{{type}}</div>
+              <p class="search-hit-description">{{snippet}}</p>
+            </div>
+          </div>
+        </div>
+      </script>
+      
+        <script src="https://cdn.jsdelivr.net/gh/krisk/Fuse@v3.2.1/dist/fuse.min.js" integrity="sha512-o38bmzBGX+hD3JHWUFCDA09btWaqrNmoJ3RXLlrysA7PP01Kgs4UlE4MhelE1v5dJR3+cxlR4qQlotsW7jKsnw==" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/gh/julmot/mark.js@8.11.1/dist/jquery.mark.min.js" integrity="sha512-mhbv5DqBMgrWL+32MmsDOt/OAvqr/cHimk6B8y/bx/xS88MVkYGPiVv2ixKVrkywF2qHplNRUvFsAHUdxZ3Krg==" crossorigin="anonymous"></script>
+      
+    
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+      
+      
+      
+      
+      
+      
+      
+    
+
+    
+
+    
+    
+    
+    <script id="page-data" type="application/json">{"use_headroom":true}</script>
+
+    
+    
+      <script src="/js/wowchemy-headroom.c251366b4128fd5e6b046d4c97a62a51.js" type="module"></script>
+    
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    <script src="/en/js/wowchemy.min.d8ba8ef9e70daa8a4497ddcdfeccb171.js"></script>
+
+    
+    
+    
+    
+    
+    
+      
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      <script src="/js/wowchemy-publication.b0d291ed6d27eacec233e6cf5204f99a.js" type="module"></script>
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+
+
+
+</body>
+</html>
