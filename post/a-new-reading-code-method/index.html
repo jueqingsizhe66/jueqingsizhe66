@@ -911,7 +911,7 @@
 
 
 
-<span class="article-metadata" >Reading time: 4 minutes and    35 seconds with 1011 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+<span class="article-metadata" >Reading time: 4 minutes and    49 seconds with 1062 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
   <ul>
@@ -920,6 +920,7 @@
     <li><a href="#3-fg执行步骤">3. FG执行步骤</a></li>
     <li><a href="#4-ctags执行步骤">4. ctags执行步骤</a></li>
     <li><a href="#5-接口rg查阅">5. 接口rg查阅</a></li>
+    <li><a href="#6-copy-file-name-absolute-path">6. copy file name absolute path</a></li>
   </ul>
 </nav>
     </aside>
@@ -1049,10 +1050,10 @@ set tags+=D;/java/tags
 <figure  >
   <div class="d-flex justify-content-center">
     <div class="w-100" ><img alt="func" srcset="
-               /post/a-new-reading-code-method/Interface-rg1_hud6d86b99ff5c5259d170155cb3688051_49597_df56d64cb59bc077afc87445c0395cd8.webp 400w,
+               /post/a-new-reading-code-method/Interface-rg1_hud6d86b99ff5c5259d170155cb3688051_49597_9cc8c569f1b28510ccd86df7d3df4f7e.webp 400w,
                /post/a-new-reading-code-method/Interface-rg1_hud6d86b99ff5c5259d170155cb3688051_49597_b8f782d8c7a32172549e81120206fb7b.webp 760w,
                /post/a-new-reading-code-method/Interface-rg1_hud6d86b99ff5c5259d170155cb3688051_49597_1200x1200_fit_q75_h2_lanczos_3.webp 1200w"
-               src="/post/a-new-reading-code-method/Interface-rg1_hud6d86b99ff5c5259d170155cb3688051_49597_df56d64cb59bc077afc87445c0395cd8.webp"
+               src="/post/a-new-reading-code-method/Interface-rg1_hud6d86b99ff5c5259d170155cb3688051_49597_9cc8c569f1b28510ccd86df7d3df4f7e.webp"
                width="760"
                height="749"
                loading="lazy" data-zoomable /></div>
@@ -1077,15 +1078,28 @@ set tags+=D;/java/tags
 <figure  >
   <div class="d-flex justify-content-center">
     <div class="w-100" ><img alt="echarts" srcset="
-               /post/a-new-reading-code-method/Interface-rg2echarts_hu20dc6beceaf10f3729c765d7d588b93e_50180_ba40fe2a21f026e4026e64344f6b9975.webp 400w,
+               /post/a-new-reading-code-method/Interface-rg2echarts_hu20dc6beceaf10f3729c765d7d588b93e_50180_19b5bccc65332da3d6d7eaaa01b91de1.webp 400w,
                /post/a-new-reading-code-method/Interface-rg2echarts_hu20dc6beceaf10f3729c765d7d588b93e_50180_91adcf686bb7309a16a0dbd6056521b3.webp 760w,
                /post/a-new-reading-code-method/Interface-rg2echarts_hu20dc6beceaf10f3729c765d7d588b93e_50180_1200x1200_fit_q75_h2_lanczos_3.webp 1200w"
-               src="/post/a-new-reading-code-method/Interface-rg2echarts_hu20dc6beceaf10f3729c765d7d588b93e_50180_ba40fe2a21f026e4026e64344f6b9975.webp"
+               src="/post/a-new-reading-code-method/Interface-rg2echarts_hu20dc6beceaf10f3729c765d7d588b93e_50180_19b5bccc65332da3d6d7eaaa01b91de1.webp"
                width="760"
                height="677"
                loading="lazy" data-zoomable /></div>
   </div></figure>
 </p>
+<h2 id="6-copy-file-name-absolute-path">6. copy file name absolute path</h2>
+<p>配合上<code>,cp</code>也可以获得对应文件的绝对路径，很方便</p>
+<pre><code class="language-vim">&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;Copy file name&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
+&quot;&quot; for vim-copy-filename
+nmap &lt;leader&gt;cP :CopyRelativePath&lt;CR&gt;
+nmap &lt;leader&gt;cl :CopyRelativePathAndLine&lt;CR&gt;
+nmap &lt;leader&gt;cp :CopyAbsolutePath&lt;CR&gt;
+nmap &lt;leader&gt;cf :CopyFileName&lt;CR&gt;
+
+nmap &lt;leader&gt;cd :CopyDirectoryPath&lt;CR&gt;
+
+
+</code></pre>
 
     </div>
  <div class="nav-links" style="padding:10;">
