@@ -911,7 +911,7 @@
 
 
 
-<span class="article-metadata" >Reading time: 4 minutes and    49 seconds with 1062 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
+<span class="article-metadata" >Reading time: 4 minutes and    52 seconds with 1074 words. 本文总阅读量<span id="busuanzi_value_page_pv"></span>次 </span>
     <aside>
         <nav id="TableOfContents">
   <ul>
@@ -921,6 +921,7 @@
     <li><a href="#4-ctags执行步骤">4. ctags执行步骤</a></li>
     <li><a href="#5-接口rg查阅">5. 接口rg查阅</a></li>
     <li><a href="#6-copy-file-name-absolute-path">6. copy file name absolute path</a></li>
+    <li><a href="#7-ignore-file">7. ignore-file</a></li>
   </ul>
 </nav>
     </aside>
@@ -1097,8 +1098,17 @@ nmap &lt;leader&gt;cp :CopyAbsolutePath&lt;CR&gt;
 nmap &lt;leader&gt;cf :CopyFileName&lt;CR&gt;
 
 nmap &lt;leader&gt;cd :CopyDirectoryPath&lt;CR&gt;
-
-
+</code></pre>
+<h2 id="7-ignore-file">7. ignore-file</h2>
+<pre><code class="language-sh">    rg  &quot;email&quot;  --ignore-file .gitignore
+</code></pre>
+<p>.gitignore</p>
+<pre><code class="language-sh">
+target/
+*.map
+*.json
+*.min.css
+*.min.js
 </code></pre>
 
     </div>
@@ -1206,7 +1216,7 @@ nmap &lt;leader&gt;cd :CopyDirectoryPath&lt;CR&gt;
   
 
   <p class="powered-by">
-    ©2023 &middot; 
+    ©2024 &middot; 
 
     ^-^ Ye Zhaoliang ^-^ Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
